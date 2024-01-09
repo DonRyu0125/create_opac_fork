@@ -3,16 +3,22 @@ import { Input } from '@/components/ui/input';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 
-export interface SearchInputProps extends React.ComponentProps<'form'> {
+export interface SearchFormProps extends React.ComponentProps<'form'> {
   searchURL: string;
   inputName: string;
 }
-const SearchInput = ({ className, searchURL, inputName }: SearchInputProps) => {
+const SearchForm = ({
+  className,
+  searchURL,
+  inputName,
+  ...props
+}: SearchFormProps) => {
   return (
     <form
       method='POST'
       action={searchURL}
       className={cn('mt-8 w-full max-w-md mx-auto', className)}
+      {...props}
     >
       <div className='relative'>
         <Input
@@ -29,4 +35,4 @@ const SearchInput = ({ className, searchURL, inputName }: SearchInputProps) => {
   );
 };
 
-export default SearchInput;
+export default SearchForm;

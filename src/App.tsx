@@ -1,12 +1,12 @@
 import './App.css';
 import Hero from './components/common/Hero';
-import SearchInput from './components/common/SearchInput';
+import SearchForm from './components/common/SearchForm';
 
 function App() {
   return (
     <>
       <Hero title={'Search'} description={'Lorem ipsum'} backgroundImage={''}>
-        <SearchInput searchURL={'/action'} inputName={'KEYWORD_CL'} />
+        <SearchForm searchURL={'/action'} inputName={'KEYWORD_CL'} />
       </Hero>
     </>
   );
