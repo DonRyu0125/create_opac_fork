@@ -27,24 +27,19 @@ const Detail = (props: Props) => {
             },
           ]}
         >
-          <SearchForm searchURL={''} inputName={''} className='my-0 w-full mx-0 min-w-80' />
+          <SearchForm
+            searchURL={''}
+            inputName={''}
+            className='my-0 w-full mx-0 min-w-80'
+          />
         </PageAction>
         <section>
           <div className='mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8'>
             <div className='grid md:grid-cols-2 gap-6 lg:gap-12 items-start max-w-6xl px-4 mx-auto py-6'>
               <div className='grid md:grid-cols-5 gap-3 items-start'>
-                <div className='md:col-span-4'>
-                  <img
-                    alt='Book Cover'
-                    className='aspect-[2/3] object-cover border border-gray-200 w-full rounded-lg overflow-hidden dark:border-gray-800'
-                    height={900}
-                    src='/placeholder.svg'
-                    width={600}
-                  />
+                <div className='col-span-4'>
+                  <ImageCarousel />
                 </div>
-                <div className="col-span-4">
-                    <ImageCarousel />
-              </div>
               </div>
               <div className='grid gap-4 md:gap-10 items-start'>
                 <RecordDetail
@@ -97,27 +92,6 @@ const Detail = (props: Props) => {
                 </RecordDetail>
 
                 <Button size='lg'>Add to Cart</Button>
-              </div>
-              <div className='grid gap-4 md:gap-10 items-start'>
-                <h2 className='font-bold text-2xl lg:text-3xl'>Reviews</h2>
-                <div className='grid gap-4'>
-                  <div className='border rounded-lg p-4'>
-                    <h3 className='font-bold'>Jane Smith</h3>
-                    <p>
-                      This book was a great read! I couldn't put it down and
-                      finished it in two days. Highly recommend for anyone who
-                      enjoys a good mystery.
-                    </p>
-                  </div>
-                  <div className='border rounded-lg p-4'>
-                    <h3 className='font-bold'>John Doe</h3>
-                    <p>
-                      One of the best books I've read this year. The characters
-                      were well-developed and the plot was intriguing. Can't
-                      wait for the sequel!
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

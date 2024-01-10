@@ -4,7 +4,7 @@ import Summary from './components/page-template/Summary';
 import Detail from './components/page-template/Detail';
 
 function App() {
-  return <Home />;
+  return <Detail />;
 }
 
 export default App;
