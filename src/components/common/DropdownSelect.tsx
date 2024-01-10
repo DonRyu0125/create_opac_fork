@@ -6,22 +6,41 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-import React from 'react';
+type DropdownOption = {
+  label: string;
+  value: string;
+};
+export interface DropdownSelectProps {
+  title: string;
+  options: DropdownOption[];
+}
 
-type Props = {};
-
-const DropdownSelect = (props: Props) => {
+const DropdownSelect = ({ title, options }: DropdownSelectProps) => {
   return (
-    <Select>
-      <SelectTrigger className='w-[180px]'>
-        <SelectValue placeholder='Theme' />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value='light'>Light</SelectItem>
-        <SelectItem value='dark'>Dark</SelectItem>
-        <SelectItem value='system'>System</SelectItem>
-      </SelectContent>
-    </Select>
+    <div className='flex flex-col space-y-2'>
+      <label
+        htmlFor='SortBy'
+        className='block text-xs font-medium text-gray-700'
+      >
+        {title}
+      </label>
+      <Select>
+        <SelectTrigger className=''>
+          <SelectValue placeholder={title} />
+        </SelectTrigger>
+        <SelectContent>
+          {options?.length > 0 ? (
+            options.map((option, i) => (
+              <SelectItem key={i} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))
+          ) : (
+            <SelectItem value='none'>No options available</SelectItem>
+          )}
+        </SelectContent>
+      </Select>
+    </div>
   );
 };
 
