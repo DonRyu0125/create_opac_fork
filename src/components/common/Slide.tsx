@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import Autoplay from 'embla-carousel-autoplay';
 import {
   Carousel,
   CarouselContent,
@@ -24,10 +24,26 @@ export interface SlideProps<T> {
   items: T[];
   className?: string;
   renderItem: (item: T, index: number) => React.ReactNode;
+  auto?: boolean;
+  delay?: number;
 }
-const Slide = <T,>({ items, className, renderItem }: SlideProps<T>) => {
+const Slide = <T,>({
+  items,
+  className,
+  renderItem,
+  auto = false,
+  delay = 2000,
+}: SlideProps<T>) => {
   return (
-    <Carousel className={cn('w-full', className)}>
+    <Carousel
+      plugins={[
+        auto &&
+          Autoplay({
+            delay,
+          }),
+      ]}
+      className={cn('w-full', className)}
+    >
       <CarouselContent>
         {items.map((item, index) => (
           <CarouselItem
