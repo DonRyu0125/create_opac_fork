@@ -3,20 +3,46 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 import React from 'react';
 
-type Props = {};
+export interface CollapseListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  label?: string;
+  title: string;
+}
 
-const CollapseList = (props: Props) => {
+const CollapseList = ({ label, title, children }: CollapseListProps) => {
+  const [isOpen, setIsOpen] = React.useState(false);
   return (
-    <Collapsible>
-      <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
-      <CollapsibleContent>
-        Yes. Free to use for personal and commercial projects. No attribution
-        required.
-      </CollapsibleContent>
-    </Collapsible>
+    <div className=' w-full space-y-2'>
+      {label && (
+        <label
+          htmlFor='SortBy'
+          className='block text-xs font-medium text-gray-700'
+        >
+          {label}
+        </label>
+      )}
+      <Collapsible
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        className='overflow-hidden rounded-md border border-input  [&_summary::-webkit-details-marker]:hidden'
+      >
+        <CollapsibleTrigger className='flex cursor-pointer items-center justify-between py-2 px-2.5 text-gray-900 transition w-full'>
+          <span className='text-sm '> {title} </span>
+          <span>
+            {isOpen ? (
+              <ChevronUp className='w-4 h-4 opacity-50' />
+            ) : (
+              <ChevronDown className='w-4 h-4 opacity-50' />
+            )}
+          </span>
+        </CollapsibleTrigger>
+        <CollapsibleContent>{children}</CollapsibleContent>
+      </Collapsible>
+    </div>
   );
 };
 

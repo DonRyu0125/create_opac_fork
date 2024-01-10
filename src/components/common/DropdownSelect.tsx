@@ -11,22 +11,24 @@ type DropdownOption = {
   value: string;
 };
 export interface DropdownSelectProps {
-  title: string;
+  title?: string;
   options: DropdownOption[];
 }
 
 const DropdownSelect = ({ title, options }: DropdownSelectProps) => {
   return (
     <div className='flex flex-col space-y-2'>
-      <label
-        htmlFor='SortBy'
-        className='block text-xs font-medium text-gray-700'
-      >
-        {title}
-      </label>
+      {title && (
+        <label
+          htmlFor='SortBy'
+          className='block text-xs font-medium text-gray-700'
+        >
+          {title}
+        </label>
+      )}
       <Select>
         <SelectTrigger className=''>
-          <SelectValue placeholder={title} />
+          <SelectValue placeholder={title || 'Select'} />
         </SelectTrigger>
         <SelectContent>
           {options?.length > 0 ? (
