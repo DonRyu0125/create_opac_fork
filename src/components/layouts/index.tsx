@@ -7,7 +7,7 @@ const Layout = ({ children, className }: React.ComponentProps<'div'>) => {
   return (
     <div className={cn('mx-auto', className)}>
       <Header />
-      <main className='container'>{children}</main>
+      <main className='min-w-screen'>{children}</main>
       <Footer />
     </div>
   );
