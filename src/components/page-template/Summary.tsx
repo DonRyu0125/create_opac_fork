@@ -13,6 +13,8 @@ import { useAtom } from 'jotai';
 import DetailInfoCard from '../common/DetailInfoCard';
 import DataWithLabel from '../common/DataWithLabel';
 import ViewToggle from '../common/ViewToggle';
+import PagePagination from '../common/PagePagination';
+import { ReactNode } from 'react';
 type Props = {};
 
 const Summary = (props: Props) => {
@@ -90,7 +92,7 @@ const Summary = (props: Props) => {
               </div>
               <div className='col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                 {view === 'grid' &&
-                  new Array(20)
+                  new Array(1)
                     .fill('')
                     .map((e, i) => (
                       <InfoCard
@@ -102,7 +104,7 @@ const Summary = (props: Props) => {
                     ))}
 
                 {view === 'list' &&
-                  new Array(20).fill('').map((e, i) => (
+                  new Array(1).fill('').map((e, i) => (
                     <DetailInfoCard
                       key={i}
                       title={<Link href='/'>'A test record'</Link>}
@@ -120,6 +122,18 @@ const Summary = (props: Props) => {
                       </div>
                     </DetailInfoCard>
                   ))}
+              </div>
+              <div className='col-span-4'>
+                <PagePagination
+                  items={[
+                    { url: '12', active: true },
+                    { url: '12' },
+                    { url: '41' },
+                  ]}
+                  renderItem={(item, index) => (
+                    <span key={index}>{index + 1}</span>
+                  )}
+                />
               </div>
             </div>
           </div>
