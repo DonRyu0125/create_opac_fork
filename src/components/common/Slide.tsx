@@ -1,3 +1,6 @@
+import * as React from 'react';
+
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
   CarouselContent,
@@ -6,21 +9,24 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 
-import React from 'react';
-
-type Props = {};
-
-const Slide = (props: Props) => {
+export function CarouselDemo() {
   return (
-    // 50% on small screens and 33% on larger screens.
-    <Carousel>
+    <Carousel className='w-full max-w-xs'>
       <CarouselContent>
-        <CarouselItem className='md:basis-1/2 lg:basis-1/3'>...</CarouselItem>
-        <CarouselItem className='md:basis-1/2 lg:basis-1/3'>...</CarouselItem>
-        <CarouselItem className='md:basis-1/2 lg:basis-1/3'>...</CarouselItem>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index}>
+            <div className='p-1'>
+              <Card>
+                <CardContent className='flex aspect-square items-center justify-center p-6'>
+                  <span className='text-4xl font-semibold'>{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))}
       </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
     </Carousel>
   );
-};
-
-export default Slide;
+}
