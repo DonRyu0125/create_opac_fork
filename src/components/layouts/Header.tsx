@@ -1,7 +1,7 @@
-import { useConfig } from '@/hooks/useConfig';
-
+import { config } from '@/constants';
+import { getTypeJSON } from '@/lib/utils';
 const Header = () => {
-  const { logo, navigations } = useConfig();
+  const { logo, navigations } = getTypeJSON(config);
   return (
     <header className=' bg-red-50 mx-auto px-4 sm:px-6 lg:px-8'>
       <div className='flex h-16 items-center justify-between'>

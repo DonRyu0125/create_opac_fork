@@ -1,8 +1,9 @@
-import { useConfig } from '@/hooks/useConfig';
-import React from 'react';
+import { config } from '@/constants';
+import { getTypeJSON } from '@/lib/utils';
 
 const Footer = () => {
-  const { logo } = useConfig();
+  const { logo } = getTypeJSON(config);
+
   return (
     <footer className='bg-red-50 mx-auto  px-4 py-8 sm:px-6 lg:px-8'>
       <div className='sm:flex sm:items-center sm:justify-between'>
