@@ -10,6 +10,7 @@ import PageAction from '../common/PageAction';
 import Link from '../common/Link';
 import { viewAtom } from '../store';
 import { useAtom } from 'jotai';
+import DetailInfoCard from '../common/DetailInfoCard';
 type Props = {};
 
 const Summary = (props: Props) => {
@@ -75,14 +76,29 @@ const Summary = (props: Props) => {
                 </div>
               </div>
               <div className='col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
-                {new Array(20).fill('').map((e, i) => (
-                  <InfoCard
-                    key={i}
-                    title={<Link href='/'>'A test record'</Link>}
-                    description={'ID: F12.4.1.2512'}
-                    thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                  />
-                ))}
+                {view === 'grid' &&
+                  new Array(20)
+                    .fill('')
+                    .map((e, i) => (
+                      <InfoCard
+                        key={i}
+                        title={<Link href='/'>'A test record'</Link>}
+                        description={'ID: F12.4.1.2512'}
+                        thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                      />
+                    ))}
+
+                {view === 'list' &&
+                  new Array(20)
+                    .fill('')
+                    .map((e, i) => (
+                      <DetailInfoCard
+                        title={<Link href='/'>'A test record'</Link>}
+                        description={'ID: F12.4.1.2512'}
+                        className='col-span-3'
+                        thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                      />
+                    ))}
               </div>
             </div>
           </div>

@@ -31,13 +31,6 @@ const SplitSection = ({
             <h2 className='text-3xl font-bold sm:text-4xl'>{title}</h2>
 
             {description && <p className='mt-4 text-gray-600'>{description}</p>}
-
-            <a
-              href='#'
-              className='mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400'
-            >
-              Get Started Today
-            </a>
           </div>
         </div>
       </div>
