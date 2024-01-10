@@ -1,8 +1,9 @@
 import './App.css';
-import Home from './components/page-template/Home';
+import Home from '@/components/page-template/home';
+import Summary from './components/page-template/Summary';
 
 function App() {
-  return <Home />;
+  return <Summary />;
 }
 
 export default App;

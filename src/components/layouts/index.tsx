@@ -7,7 +7,7 @@ const Layout = ({ children, className }: React.ComponentProps<'div'>) => {
   return (
     <div className={cn('max-w-screen-2xl', className)}>
       <Header />
-      <main>{children}</main>
+      <main className='container'>{children}</main>
       <Footer />
     </div>
   );
