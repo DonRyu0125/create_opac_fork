@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 
-export interface SearchFormProps extends React.ComponentProps<'form'> {
+export interface SearchFormProps extends React.HTMLAttributes<HTMLFormElement> {
   searchURL: string;
   inputName: string;
 }

@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 
-export interface HeroProps extends React.ComponentProps<'section'> {
+export interface HeroProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   description: string;
   backgroundImage: string;
