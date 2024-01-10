@@ -68,8 +68,8 @@ const Summary = (props: Props) => {
                   <DropdownSelect title={'Sort by'} options={[]} />
                 </div>
 
-                <div>
-                  <CollapseList label='Filter' title='Date'>
+                <div className='flex flex-col space-y-4'>
+                  <CollapseList label='Filter' title='Date' expand={true}>
                     <div className='space-y-3  border-t p-4'>
                       <CheckboxWithLabel label='1994' checked />
                       <CheckboxWithLabel label='1995' />
