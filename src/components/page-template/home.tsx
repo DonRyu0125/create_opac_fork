@@ -27,8 +27,8 @@ const Home = () => {
         />
       </Section>
       <Section heading={'Browse by area'} subHeading='Area Cateogry'></Section>
-      <Section heading={'Recent Addition'}>{/* <Masonry /> */}</Section>
-      <Section heading='Featured Collection'></Section>
+          <Section heading={'Recent Addition'}>{/* <Masonry /> */}</Section>
+          
     </Layout>
   );
 };
