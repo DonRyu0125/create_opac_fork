@@ -1,8 +1,5 @@
-import React from 'react';
 import Layout from '../layouts';
-import { Button } from '../ui/button';
-import { Separator } from '../ui/separator';
-import Breadcrumb from '../common/Breadcrumb';
+
 import PageHeader from '../common/PageHeader';
 import DropdownSelect from '../common/DropdownSelect';
 import CollapseList from '../common/CollapseList';
@@ -11,10 +8,12 @@ import { Label } from '../ui/label';
 import InfoCard from '../common/InfoCard';
 import PageAction from '../common/PageAction';
 import Link from '../common/Link';
-
+import { viewAtom } from '../store';
+import { useAtom } from 'jotai';
 type Props = {};
 
 const Summary = (props: Props) => {
+  const [view] = useAtom(viewAtom);
   return (
     <Layout>
       <div className='rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12'>
