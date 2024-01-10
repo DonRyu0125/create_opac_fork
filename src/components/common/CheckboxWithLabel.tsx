@@ -17,7 +17,7 @@ const CheckboxWithLabel = ({
 }: CheckboxWithLabelProps) => {
   return (
     <div className={cn('flex items-center space-x-2', className)} {...props}>
-      <Checkbox id={labelId || label} checked={checked} />
+      <Checkbox id={labelId || label} defaultChecked={checked} />
       <Label
         htmlFor={labelId || label}
         className='text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
