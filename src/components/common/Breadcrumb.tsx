@@ -12,9 +12,9 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
   items: BreadcrumbItem[];
 }
 
-const Breadcrumb = ({ items }: BreadcrumbProps) => {
+const Breadcrumb = ({ items ,className, ...props}: BreadcrumbProps) => {
   return (
-    <nav aria-label='Breadcrumb' className='p-4 w-72'>
+    <nav aria-label='Breadcrumb' className={cn('w-72',className)} {...props}>
       <ol className='flex w-full items-center flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400'>
         {items.map((e, i) => (
           <React.Fragment key={i}>
