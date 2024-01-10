@@ -5,7 +5,7 @@ import Header from './Header';
 
 const Layout = ({ children, className }: React.ComponentProps<'div'>) => {
   return (
-    <div className={cn('container', className)}>
+    <div className={cn('max-w-screen-2xl', className)}>
       <Header />
       <main>{children}</main>
       <Footer />
