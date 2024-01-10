@@ -170,6 +170,8 @@ const Summary = (props: Props) => {
                       </div>
                     </details>
 
+                                      
+                                      
                     <details className='overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden'>
                       <summary className='flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition'>
                         <span className='text-sm font-medium'> Price </span>
