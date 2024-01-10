@@ -65,6 +65,9 @@ const Summary = (props: Props) => {
             <div className='mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8'>
               <div className='hidden space-y-4 lg:block'>
                 <div>
+                  <DropdownSelect title={'Records per page'} options={[]} />
+                </div>
+                <div>
                   <DropdownSelect title={'Sort by'} options={[]} />
                 </div>
 
