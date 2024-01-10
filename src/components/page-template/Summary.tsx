@@ -64,8 +64,8 @@ const Summary = (props: Props) => {
               </button>
             </div>
 
-            <div className='mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 grid-rows-2 '>
-              <div className='hidden space-y-4 lg:block row-span-2'>
+            <div className='mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 '>
+              <div className='hidden space-y-4 lg:block col-span-1'>
                 <div>
                   <Label>Record per page</Label>
                   <DropdownSelect
@@ -92,14 +92,16 @@ const Summary = (props: Props) => {
                   </div>
                 </div>
               </div>
-
-              {new Array(20).fill(
-                <InfoCard
-                  title={'A test record'}
-                  description={'ID: F12.4.1.2512'}
-                  thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                />
-              )}
+              <div className='col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
+                {new Array(20).fill('').map((e, i) => (
+                  <InfoCard
+                    key={i}
+                    title={'A test record'}
+                    description={'ID: F12.4.1.2512'}
+                    thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </section>
