@@ -1,3 +1,4 @@
+import AccordionList from '../common/AccordionList';
 import Hero from '../common/Hero';
 import SearchForm from '../common/SearchForm';
 import Section from '../common/Section';
@@ -27,8 +28,10 @@ const Home = () => {
         />
       </Section>
       <Section heading={'Browse by area'} subHeading='Area Cateogry'></Section>
-          <Section heading={'Recent Addition'}>{/* <Masonry /> */}</Section>
-          
+      <Section heading={'Recent Addition'}>{/* <Masonry /> */}</Section>
+      <Section heading='FAQ'>
+        <AccordionList />
+      </Section>
     </Layout>
   );
 };
