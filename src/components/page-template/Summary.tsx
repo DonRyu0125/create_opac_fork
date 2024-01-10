@@ -12,6 +12,7 @@ import { viewAtom } from '../store';
 import { useAtom } from 'jotai';
 import DetailInfoCard from '../common/DetailInfoCard';
 import DataWithLabel from '../common/DataWithLabel';
+import ViewToggle from '../common/ViewToggle';
 type Props = {};
 
 const Summary = (props: Props) => {
@@ -19,7 +20,18 @@ const Summary = (props: Props) => {
   return (
     <Layout>
       <div className='rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12'>
-        <PageAction />
+        <PageAction
+          breadcrumbs={[
+            { label: 'Home', url: '/' },
+            {
+              label: 'Summary',
+              url: '/summary',
+              active: true,
+            },
+          ]}
+        >
+          <ViewToggle />
+        </PageAction>
 
         <section>
           <div className='mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8'>
