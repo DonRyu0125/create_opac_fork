@@ -14,9 +14,10 @@ export interface PageLink extends Record<string, string | boolean | undefined> {
 }
 
 export type PagePaginationProps = {
-  next: string;
-  previous: string;
+  next?: string;
+  previous?: string;
   items: PageLink[];
+  maxItem?: number;
   renderItem: (item: PageLink, index: number) => string | React.ReactNode;
 };
 
@@ -24,25 +25,32 @@ const PagePagination = ({
   previous,
   next,
   items,
+  maxItem = 10,
   renderItem,
 }: PagePaginationProps) => {
   return (
     <Pagination>
       <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious href={previous} />
-        </PaginationItem>
-        {items.map((item, index) => (
+        {previous && (
           <PaginationItem>
-            <PaginationLink isActive={item.active} href={item.url}>
-              {renderItem(item, index)}
-            </PaginationLink>
+            <PaginationPrevious href={previous} />
           </PaginationItem>
-        ))}
+        )}
+        {items
+          .filter((e, i) => i < maxItem)
+          .map((item, index) => (
+            <PaginationItem>
+              <PaginationLink isActive={item.active} href={item.url}>
+                {renderItem(item, index)}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
 
-        <PaginationItem>
-          <PaginationNext href={next} />
-        </PaginationItem>
+        {next && (
+          <PaginationItem>
+            <PaginationNext href={next} />
+          </PaginationItem>
+        )}
       </PaginationContent>
     </Pagination>
   );

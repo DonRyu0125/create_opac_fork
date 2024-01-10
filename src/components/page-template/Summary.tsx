@@ -125,6 +125,8 @@ const Summary = (props: Props) => {
               </div>
               <div className='col-span-4'>
                 <PagePagination
+                  previous='/'
+                  next={'/'}
                   items={[
                     { url: '12', active: true },
                     { url: '12' },
