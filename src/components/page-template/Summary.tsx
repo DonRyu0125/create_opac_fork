@@ -7,6 +7,7 @@ import PageHeader from '../common/PageHeader';
 import DropdownSelect from '../common/DropdownSelect';
 import CollapseList from '../common/CollapseList';
 import CheckboxWithLabel from '../common/CheckboxWithLabel';
+import { Label } from '../ui/label';
 
 type Props = {};
 
@@ -65,21 +66,29 @@ const Summary = (props: Props) => {
             <div className='mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8'>
               <div className='hidden space-y-4 lg:block'>
                 <div>
-                  <DropdownSelect title={'Records per page'} options={[]} />
+                  <Label>Record per page</Label>
+                  <DropdownSelect
+                    title={'Select records number'}
+                    options={[]}
+                  />
                 </div>
                 <div>
+                  <Label>Sort by</Label>
                   <DropdownSelect title={'Sort by'} options={[]} />
                 </div>
 
-                <div className='flex flex-col space-y-4'>
-                  <CollapseList label='Filter' title='Date' expand={true}>
-                    <div className='space-y-3  border-t p-4'>
-                      <CheckboxWithLabel label='1994' checked />
-                      <CheckboxWithLabel label='1995' />
-                      <CheckboxWithLabel label='1996' />
-                      <CheckboxWithLabel label='1997' />
-                    </div>
-                  </CollapseList>
+                <div>
+                  <Label>Filter by</Label>
+                  <div className='flex flex-col space-y-4'>
+                    <CollapseList title='Date' expand={true}>
+                      <div className='space-y-3  border-t p-4'>
+                        <CheckboxWithLabel label='1994' checked />
+                        <CheckboxWithLabel label='1995' />
+                        <CheckboxWithLabel label='1996' />
+                        <CheckboxWithLabel label='1997' />
+                      </div>
+                    </CollapseList>
+                  </div>
                 </div>
               </div>
 

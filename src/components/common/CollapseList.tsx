@@ -9,28 +9,18 @@ import React from 'react';
 
 export interface CollapseListProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  label?: string;
   title: string;
   expand?: boolean;
 }
 
 const CollapseList = ({
-  label,
   title,
   children,
   expand = false,
 }: CollapseListProps) => {
   const [isOpen, setIsOpen] = React.useState(expand);
   return (
-    <div className=' w-full space-y-2'>
-      {label && (
-        <label
-          htmlFor='SortBy'
-          className='block text-xs font-medium text-gray-700'
-        >
-          {label}
-        </label>
-      )}
+    <div className='w-full space-y-2'>
       <Collapsible
         open={isOpen}
         onOpenChange={setIsOpen}
