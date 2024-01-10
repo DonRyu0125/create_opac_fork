@@ -6,6 +6,7 @@ import Section from './components/common/Section';
 import Slide from './components/common/Slide';
 import Layout from './components/layouts';
 import { Card, CardTitle } from './components/ui/card';
+import Masonry from './components/common/Masonry';
 
 const MOCK_SLIDE = new Array(12).fill('category').map((e) => ({ title: e }));
 function App() {
@@ -29,7 +30,7 @@ function App() {
         />
       </Section>
       <Section heading={'Browse by area'} subHeading='Area Cateogry'></Section>
-      <Section heading={'Recent Addition'}></Section>
+      <Section heading={'Recent Addition'}>{/* <Masonry /> */}</Section>
     </Layout>
   );
 }
