@@ -20,14 +20,17 @@ function App() {
         subHeading='Lorep ipsum 12h16M4'
       >
         <Slide
+          
           items={MOCK_SLIDE}
           renderItem={(item: { title: string }, index) => (
-            <Card key={index}>
+            <Card className='h-48' key={index}>
               <CardTitle>{item.title}</CardTitle>
             </Card>
           )}
         />
       </Section>
+      <Section heading={'Browse by area'} subHeading='Area Cateogry'></Section>
+      <Section heading={'Recent Addition'}></Section>
     </Layout>
   );
 }
