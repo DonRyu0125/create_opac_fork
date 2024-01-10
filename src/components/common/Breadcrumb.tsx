@@ -5,7 +5,7 @@ import React from 'react';
 export type BreadcrumbItem = {
   label: string;
   url: string;
-  active?: string;
+  active?: boolean;
 };
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
   items: BreadcrumbItem[];
