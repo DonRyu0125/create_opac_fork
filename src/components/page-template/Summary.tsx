@@ -8,6 +8,7 @@ import DropdownSelect from '../common/DropdownSelect';
 import CollapseList from '../common/CollapseList';
 import CheckboxWithLabel from '../common/CheckboxWithLabel';
 import { Label } from '../ui/label';
+import InfoCard from '../common/InfoCard';
 
 type Props = {};
 
@@ -63,8 +64,8 @@ const Summary = (props: Props) => {
               </button>
             </div>
 
-            <div className='mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8'>
-              <div className='hidden space-y-4 lg:block'>
+            <div className='mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 grid-rows-2 '>
+              <div className='hidden space-y-4 lg:block row-span-2'>
                 <div>
                   <Label>Record per page</Label>
                   <DropdownSelect
@@ -92,84 +93,13 @@ const Summary = (props: Props) => {
                 </div>
               </div>
 
-              <div className='lg:col-span-3'>
-                <ul className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-                  <li>
-                    <a href='#' className='group block overflow-hidden'>
-                      <img
-                        src='https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-                        alt=''
-                        className='h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]'
-                      />
-
-                      <div className='relative bg-white pt-3'>
-                        <h3 className='text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4'>
-                          Basic Tee
-                        </h3>
-
-                        <p className='mt-2'>
-                          <span className='sr-only'> Regular Price </span>
-
-                          <span className='tracking-wider text-gray-900'>
-                            {' '}
-                            £24.00 GBP{' '}
-                          </span>
-                        </p>
-                      </div>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href='#' className='group block overflow-hidden'>
-                      <img
-                        src='https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-                        alt=''
-                        className='h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]'
-                      />
-
-                      <div className='relative bg-white pt-3'>
-                        <h3 className='text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4'>
-                          Basic Tee
-                        </h3>
-
-                        <p className='mt-2'>
-                          <span className='sr-only'> Regular Price </span>
-
-                          <span className='tracking-wider text-gray-900'>
-                            {' '}
-                            £24.00 GBP{' '}
-                          </span>
-                        </p>
-                      </div>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href='#' className='group block overflow-hidden'>
-                      <img
-                        src='https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-                        alt=''
-                        className='h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]'
-                      />
-
-                      <div className='relative bg-white pt-3'>
-                        <h3 className='text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4'>
-                          Basic Tee
-                        </h3>
-
-                        <p className='mt-2'>
-                          <span className='sr-only'> Regular Price </span>
-
-                          <span className='tracking-wider text-gray-900'>
-                            {' '}
-                            £24.00 GBP{' '}
-                          </span>
-                        </p>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              {new Array(20).fill(
+                <InfoCard
+                  title={'A test record'}
+                  description={'ID: F12.4.1.2512'}
+                  thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                />
+              )}
             </div>
           </div>
         </section>
