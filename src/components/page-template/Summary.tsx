@@ -3,13 +3,14 @@ import Layout from '../layouts';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
 import Breadcrumb from '../common/Breadcrumb';
+import PageHeader from '../common/PageHeader';
 
 type Props = {};
 
 const Summary = (props: Props) => {
   return (
     <Layout>
-      <div className='rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full'>
+      <div className='rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12'>
         <div className='container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16'>
           <Breadcrumb
             items={[
@@ -33,18 +34,10 @@ const Summary = (props: Props) => {
 
         <section>
           <div className='mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8'>
-            <header>
-              <h2 className='text-xl font-bold text-gray-900 sm:text-3xl'>
-                Product Collection
-              </h2>
-
-              <p className='mt-4 max-w-md text-gray-500'>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
-                praesentium cumque iure dicta incidunt est ipsam, officia dolor
-                fugit natus?
-              </p>
-            </header>
-
+            <PageHeader
+              heading={'240 results for "Test"'}
+              subHeading='Displaying 1-40 of 240'
+            />
             <div className='mt-8 block lg:hidden'>
               <button className='flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600'>
                 <span className='text-sm font-medium'> Filters & Sorting </span>
