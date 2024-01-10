@@ -22,7 +22,7 @@ const DetailInfoCard = ({
 }: DetailInfoCardrops) => {
   return (
     <div className={cn('', className)}>
-      <article className='flex bg-white transition hover:shadow-xl'>
+      <article className='border shadow-md flex transition hover:shadow-xl'>
         <div className='hidden sm:block sm:basis-56'>
           <img
             src={thumbnail}

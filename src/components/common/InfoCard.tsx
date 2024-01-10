@@ -29,7 +29,7 @@ const InfoCard = ({
   alt,
 }: InfoCardProps) => {
   return (
-    <Card className={cn('', className)}>
+    <Card className={cn('cursor-pointer shadow-md hover:shadow-xl', className)}>
       <CardHeader>
         <CardTitle className='text-2xl font-bold'>{title}</CardTitle>
         {description && (
