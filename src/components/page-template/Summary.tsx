@@ -4,6 +4,7 @@ import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
 import Breadcrumb from '../common/Breadcrumb';
 import PageHeader from '../common/PageHeader';
+import DropdownSelect from '../common/DropdownSelect';
 
 type Props = {};
 
@@ -69,7 +70,7 @@ const Summary = (props: Props) => {
                     {' '}
                     Sort By{' '}
                   </label>
-
+                  <DropdownSelect />
                   <select
                     id='SortBy'
                     className='mt-1 rounded border-gray-300 text-sm'
