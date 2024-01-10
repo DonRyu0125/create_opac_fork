@@ -6,7 +6,6 @@ import Section from './components/common/Section';
 import Slide from './components/common/Slide';
 import Layout from './components/layouts';
 import { Card, CardTitle } from './components/ui/card';
-import React from 'react';
 
 const MOCK_SLIDE = new Array(12).fill('category').map((e) => ({ title: e }));
 function App() {
@@ -20,7 +19,7 @@ function App() {
         subHeading='Lorep ipsum 12h16M4'
       >
         <Slide
-          
+          itemsPerSlide={{ lg: 4 }}
           items={MOCK_SLIDE}
           renderItem={(item: { title: string }, index) => (
             <Card className='h-48' key={index}>
