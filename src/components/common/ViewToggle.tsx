@@ -11,7 +11,7 @@ const ViewToggle = (props: Props) => {
     setView(view === 'grid' ? 'list' : 'grid');
   };
   return (
-    <div>
+    <div className="flex flex-row">
       <Button
         onClick={toggleView}
         variant={view === 'grid' ? 'default' : 'outline'}

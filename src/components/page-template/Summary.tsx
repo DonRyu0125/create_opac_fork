@@ -14,7 +14,8 @@ import DetailInfoCard from '../common/DetailInfoCard';
 import DataWithLabel from '../common/DataWithLabel';
 import ViewToggle from '../common/ViewToggle';
 import PagePagination from '../common/PagePagination';
-import { ReactNode } from 'react';
+import SearchForm from '../common/SearchForm';
+import { Separator } from '../ui/separator';
 type Props = {};
 
 const Summary = (props: Props) => {
@@ -32,7 +33,10 @@ const Summary = (props: Props) => {
             },
           ]}
         >
-          <ViewToggle />
+          <div className="flex flex-row space-x-2">
+            <SearchForm searchURL={''} inputName={''} className='my-0 w-full mx-0 min-w-80' />
+<Separator  orientation='vertical'/>
+          <ViewToggle /></div>
         </PageAction>
 
         <section>
