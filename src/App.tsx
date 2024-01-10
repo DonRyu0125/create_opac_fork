@@ -1,10 +1,14 @@
+import { ReactDOM } from 'react';
 import './App.css';
 import Hero from './components/common/Hero';
 import SearchForm from './components/common/SearchForm';
 import Section from './components/common/Section';
 import Slide from './components/common/Slide';
 import Layout from './components/layouts';
+import { Card, CardTitle } from './components/ui/card';
+import React from 'react';
 
+const MOCK_SLIDE = new Array(12).fill('category').map((e) => ({ title: e }));
 function App() {
   return (
     <Layout>
@@ -15,7 +19,14 @@ function App() {
         heading={'Kickstart your marketing'}
         subHeading='Lorep ipsum 12h16M4'
       >
-        <Slide />
+        <Slide
+          items={MOCK_SLIDE}
+          renderItem={(item: { title: string }, index) => (
+            <Card key={index}>
+              <CardTitle>{item.title}</CardTitle>
+            </Card>
+          )}
+        />
       </Section>
     </Layout>
   );

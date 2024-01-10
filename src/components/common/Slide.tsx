@@ -8,20 +8,20 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { cn } from '@/lib/utils';
 
-export function CarouselDemo() {
+export interface SlideProps<T> {
+  items: T[];
+  className?: string;
+  renderItem: (item: T, index: number) => React.ReactNode;
+}
+const Slide = <T,>({ items, className, renderItem }: SlideProps<T>) => {
   return (
-    <Carousel className='w-full max-w-xs'>
+    <Carousel className={cn('w-full', className)}>
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className='p-1'>
-              <Card>
-                <CardContent className='flex aspect-square items-center justify-center p-6'>
-                  <span className='text-4xl font-semibold'>{index + 1}</span>
-                </CardContent>
-              </Card>
-            </div>
+        {items.map((item, index) => (
+          <CarouselItem className='"md:basis-1/2 lg:basis-1/3' key={index}>
+            {renderItem(item, index)}
           </CarouselItem>
         ))}
       </CarouselContent>
@@ -29,4 +29,6 @@ export function CarouselDemo() {
       <CarouselNext />
     </Carousel>
   );
-}
+};
+
+export default Slide;
