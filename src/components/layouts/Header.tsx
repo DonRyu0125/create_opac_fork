@@ -5,7 +5,7 @@ import Link from '../common/Link';
 const Header = () => {
   const { logo, navigations } = getTypeJSON(config);
   return (
-    <header className=' bg-red-50 mx-auto px-4 sm:px-6 lg:px-8'>
+    <header className=' bg-primary/20 mx-auto px-4 sm:px-6 lg:px-8'>
       <div className='flex h-16 items-center justify-between'>
         <div className='flex-1 md:flex md:items-center md:gap-12'>
           <a className='block text-teal-600' href='/'>

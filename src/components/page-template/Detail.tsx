@@ -5,6 +5,7 @@ import { StarIcon } from 'lucide-react';
 import { Button } from '../ui/button';
 import RecordDetail from '../common/RecordDetail';
 import SearchForm from '../common/SearchForm';
+import ImageCarousel from '../common/ImageCarousel';
 
 type Props = {};
 
@@ -41,6 +42,9 @@ const Detail = (props: Props) => {
                     width={600}
                   />
                 </div>
+                <div className="col-span-4">
+                    <ImageCarousel />
+              </div>
               </div>
               <div className='grid gap-4 md:gap-10 items-start'>
                 <RecordDetail
