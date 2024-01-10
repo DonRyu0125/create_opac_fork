@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
+import Link from './Link';
 
 export type BreadcrumbItem = {
   label: string;
@@ -23,16 +24,12 @@ const Breadcrumb = ({ items }: BreadcrumbProps) => {
               </li>
             )}
             <li>
-              <a
-                className={cn(
-                  `hover:text-gray-900 dark:hover:text-gray-50
-                `,
-                  e.active && 'text-gray-900'
-                )}
+              <Link
+                className={cn('no-underline', !e.active && 'text-gray-900')}
                 href={e.url}
               >
                 {e.label}
-              </a>
+              </Link>
             </li>
           </React.Fragment>
         ))}

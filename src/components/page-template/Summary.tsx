@@ -9,6 +9,8 @@ import CollapseList from '../common/CollapseList';
 import CheckboxWithLabel from '../common/CheckboxWithLabel';
 import { Label } from '../ui/label';
 import InfoCard from '../common/InfoCard';
+import PageAction from '../common/PageAction';
+import Link from '../common/Link';
 
 type Props = {};
 
@@ -16,26 +18,7 @@ const Summary = (props: Props) => {
   return (
     <Layout>
       <div className='rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12'>
-        <div className='container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16'>
-          <Breadcrumb
-            items={[
-              { label: 'home', url: '/' },
-              {
-                label: 'summary',
-                url: '/summary',
-                active: true,
-              },
-            ]}
-          />
-
-          <div>
-            <Button>12</Button>
-            <Button>12</Button>
-            <Button>12</Button>
-          </div>
-        </div>
-
-        <Separator />
+        <PageAction />
 
         <section>
           <div className='mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8'>
@@ -96,15 +79,7 @@ const Summary = (props: Props) => {
                 {new Array(20).fill('').map((e, i) => (
                   <InfoCard
                     key={i}
-                    title={
-                      <a
-                        className='underline 
-                        cursor-pointer text-primary hover:text-primary/90'
-                        href='/'
-                      >
-                        'A test record'
-                      </a>
-                    }
+                    title={<Link href='/'>'A test record'</Link>}
                     description={'ID: F12.4.1.2512'}
                     thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
                   />
