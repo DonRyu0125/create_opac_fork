@@ -20,6 +20,34 @@ import { Button } from '../ui/button';
 import { ChevronRight, Copy, Heart, Mail } from 'lucide-react';
 type Props = {};
 
+const SummaryPageAction = () => {
+  return (
+    <div>
+      <div>
+        <Label>Record per page</Label>
+        <DropdownSelect title={'Select records number'} options={[]} />
+      </div>
+      <div>
+        <Label>Sort by</Label>
+        <DropdownSelect title={'Sort by'} options={[]} />
+      </div>
+
+      <div>
+        <Label>Filter by</Label>
+        <div className='flex flex-col space-y-4'>
+          <CollapseList title='Date' expand={true}>
+            <div className='space-y-3  border-t p-4'>
+              <CheckboxWithLabel label='1994' checked />
+              <CheckboxWithLabel label='1995' />
+              <CheckboxWithLabel label='1996' />
+              <CheckboxWithLabel label='1997' />
+            </div>
+          </CollapseList>
+        </div>
+      </div>
+    </div>
+  );
+};
 const Summary = (props: Props) => {
   const [view] = useAtom(viewAtom);
   return (
@@ -62,31 +90,7 @@ const Summary = (props: Props) => {
 
             <div className='mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 '>
               <div className='hidden space-y-4 lg:block col-span-1'>
-                <div>
-                  <Label>Record per page</Label>
-                  <DropdownSelect
-                    title={'Select records number'}
-                    options={[]}
-                  />
-                </div>
-                <div>
-                  <Label>Sort by</Label>
-                  <DropdownSelect title={'Sort by'} options={[]} />
-                </div>
-
-                <div>
-                  <Label>Filter by</Label>
-                  <div className='flex flex-col space-y-4'>
-                    <CollapseList title='Date' expand={true}>
-                      <div className='space-y-3  border-t p-4'>
-                        <CheckboxWithLabel label='1994' checked />
-                        <CheckboxWithLabel label='1995' />
-                        <CheckboxWithLabel label='1996' />
-                        <CheckboxWithLabel label='1997' />
-                      </div>
-                    </CollapseList>
-                  </div>
-                </div>
+                <SummaryPageAction />
               </div>
               <div className='col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                 {view === 'grid' &&
