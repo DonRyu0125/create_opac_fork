@@ -7,7 +7,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { AspectRatio } from '../ui/aspect-ratio';
 
 export interface InfoCardProps {
   title: string | React.ReactNode;

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from '@/components/ui/carousel';
-import { Card, CardContent } from '../ui/card';
+
 import Slide from './Slide';
 
 export type ImageProps = {

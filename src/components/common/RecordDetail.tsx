@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-import { StarIcon } from 'lucide-react';
 import React from 'react';
 
 export interface RecordDetailProps
