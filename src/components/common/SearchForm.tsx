@@ -17,7 +17,7 @@ const SearchForm = ({
     <form
       method='POST'
       action={searchURL}
-      className={cn(' w-full max-w-md mx-auto', className)}
+      className={cn('w-full mx-auto', className)}
       {...props}
     >
       <div className='relative'>

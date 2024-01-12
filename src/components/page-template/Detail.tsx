@@ -32,16 +32,14 @@ const Detail = (props: Props) => {
           <SearchForm
             searchURL={''}
             inputName={''}
-            className='my-0 w-full mx-0 min-w-80'
+            className='my-0 w-full mx-0 min-w-80 md:max-w-md'
           />
         </PageAction>
         <section>
           <div className='mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8'>
             <div className='grid md:grid-cols-2 gap-6 lg:gap-12 items-start max-w-6xl px-4 mx-auto py-6'>
               <div className='grid md:grid-cols-5 gap-3 items-start'>
-                <div className='col-span-4'>
-                  <ImageCarousel />
-                </div>
+                <div className='col-span-4'>{/* <ImageCarousel /> */}</div>
               </div>
               <div className='grid gap-4 md:gap-10 items-start'>
                 <RecordDetail
