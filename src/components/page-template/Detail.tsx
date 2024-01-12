@@ -5,12 +5,29 @@ import { StarIcon } from 'lucide-react';
 import { Button } from '../ui/button';
 import RecordDetail from '../common/RecordDetail';
 import SearchForm from '../common/SearchForm';
-import ImageCarousel from '../common/ImageCarousel';
+import ImageCarousel, { ImageProps } from '../common/ImageCarousel';
 import InfoTable from '../common/InfoTable';
 import RecordActions from '../common/RecordActions';
 
 type Props = {};
 
+const images = [
+  {
+    src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_10/6_16/9a192748_4e41_4f04_a2de_a3bc0114cb3f/preview_00433935_001.jpg',
+  },
+  {
+    src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_10/6_16/ae91ce34_b9b4_44a4_9f0e_a3bc011460e8/preview_00433892_001.jpg',
+  },
+  {
+    src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_11/2_1/5bcca073_26c7_4e0f_bb70_a3d7001a1c24/preview_01081548_001.jpg',
+  },
+  {
+    src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_10/11_3/8dc66e9f_43e1_4170_956b_a3c1003d49ec/preview_00595099_001.jpg',
+  },
+  {
+    src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_11/9_19/c4b282ba_d905_4cff_adcb_a3de0144bc78/preview_01466623_001.jpg',
+  },
+];
 const Detail = (props: Props) => {
   return (
     <Layout>
@@ -38,9 +55,12 @@ const Detail = (props: Props) => {
         <section>
           <div className='mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8'>
             <div className='grid md:grid-cols-2 gap-6 lg:gap-12 items-start max-w-6xl px-4 mx-auto py-6'>
-              <div className='grid md:grid-cols-5 gap-3 items-start'>
-                <div className='col-span-4'>{/* <ImageCarousel /> */}</div>
-              </div>
+              <ImageCarousel
+                items={images}
+                renderItems={(image) => (
+                  <img src={image.src} className='h-36 border-6 object-cover' />
+                )}
+              />
               <div className='grid gap-4 md:gap-10 items-start'>
                 <RecordDetail
                   heading={'A test record'}
