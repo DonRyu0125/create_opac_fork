@@ -33,14 +33,19 @@ const Summary = (props: Props) => {
             },
           ]}
         >
-          <div className="flex flex-row space-x-2">
-            <SearchForm searchURL={''} inputName={''} className='my-0 w-full mx-0 min-w-80' />
-<Separator  orientation='vertical'/>
-          <ViewToggle /></div>
+          <div className='flex w-full flex-row space-x-2'>
+            <SearchForm
+              searchURL={''}
+              inputName={''}
+              className='my-0 w-full mx-0 min-w-80'
+            />
+            <Separator orientation='vertical' />
+            <ViewToggle />
+          </div>
         </PageAction>
 
         <section>
-          <div className='mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8'>
+          <div className='mx-auto  py-4   sm:py-12  container flex flex-col'>
             <PageHeader
               heading={'240 results for "Test"'}
               subHeading='Displaying 1-40 of 240'
