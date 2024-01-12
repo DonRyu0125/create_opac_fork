@@ -12,6 +12,7 @@ const ViewToggle = (props: Props) => {
   return (
     <div className='flex flex-row'>
       <Button
+        className='rounded-r-none'
         onClick={toggleView}
         variant={view === 'grid' ? 'default' : 'outline'}
         size='icon'
@@ -19,6 +20,7 @@ const ViewToggle = (props: Props) => {
         <LayoutGrid className='h-4 w-4' />
       </Button>
       <Button
+        className='rounded-l-none'
         onClick={toggleView}
         variant={view === 'list' ? 'default' : 'outline'}
         size='icon'

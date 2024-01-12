@@ -16,6 +16,8 @@ import ViewToggle from '../common/ViewToggle';
 import PagePagination from '../common/PagePagination';
 import SearchForm from '../common/SearchForm';
 import { Separator } from '../ui/separator';
+import { Button } from '../ui/button';
+import { Copy, Heart, Mail } from 'lucide-react';
 type Props = {};
 
 const Summary = (props: Props) => {
@@ -101,19 +103,32 @@ const Summary = (props: Props) => {
               </div>
               <div className='col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                 {view === 'grid' &&
-                  new Array(1)
-                    .fill('')
-                    .map((e, i) => (
-                      <InfoCard
-                        key={i}
-                        title={<Link href='/'>'A test record'</Link>}
-                        description={'ID: F12.4.1.2512'}
-                        thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                      />
-                    ))}
+                  new Array(15).fill('').map((e, i) => (
+                    <InfoCard
+                      key={i}
+                      title={<Link href='/'>'A test record'</Link>}
+                      description={'ID: F12.4.1.2512'}
+                      thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                      footer={
+                        <div className='flex h-4 items-center space-x-4 w-full justify-evenly '>
+                          <Button variant='ghost' size='icon'>
+                            <Heart className='h-4 w-4 text-primary' />
+                          </Button>
+                          <Separator orientation='vertical' />
+                          <Button variant='ghost' size='icon'>
+                            <Copy className='h-4 w-4 text-primary' />
+                          </Button>
+                          <Separator orientation='vertical' />
+                          <Button variant='ghost' size='icon'>
+                            <Mail className='h-4 w-4 text-primary' />
+                          </Button>
+                        </div>
+                      }
+                    />
+                  ))}
 
                 {view === 'list' &&
-                  new Array(1).fill('').map((e, i) => (
+                  new Array(15).fill('').map((e, i) => (
                     <DetailInfoCard
                       key={i}
                       title={<Link href='/'>'A test record'</Link>}
@@ -132,7 +147,8 @@ const Summary = (props: Props) => {
                     </DetailInfoCard>
                   ))}
               </div>
-              <div className='col-span-4'>
+
+              <div className='col-span-4 mt-4'>
                 <PagePagination
                   previous='/'
                   next={'/'}
