@@ -22,7 +22,11 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
   const currentImage = items[current];
   return (
     <div className='flex flex-col space-y-4'>
-      <Slide items={items} renderItem={renderItems} />
+      <Slide
+        items={items}
+        renderItem={(item, index) => renderItems(item, index)}
+        auto={false}
+      />
 
       <div>
         <img {...currentImage} />

@@ -13,7 +13,12 @@ export type ItemsPerSlide = {
   lg?: number;
   xl?: number;
 };
-
+// const DEFAULT_ITEM_PER_SLIDE: ItemsPerSlide = {
+//   sm: 1,
+//   md: 3,
+//   lg: 3,
+//   xl: 3,
+// };
 export interface SlideProps<T> {
   itemsPerSlide?: ItemsPerSlide;
   items: T[];
