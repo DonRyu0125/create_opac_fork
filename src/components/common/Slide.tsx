@@ -36,11 +36,15 @@ const Slide = <T,>({
 }: SlideProps<T>) => {
   return (
     <Carousel
-      plugins={[
-        Autoplay({
-          delay,
-        }),
-      ]}
+      plugins={
+        auto
+          ? [
+              Autoplay({
+                delay,
+              }),
+            ]
+          : undefined
+      }
       className={cn('w-full', className)}
     >
       <CarouselContent>

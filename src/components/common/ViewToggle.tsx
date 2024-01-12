@@ -1,4 +1,3 @@
-import React from 'react';
 import { viewAtom } from '../store';
 import { LayoutGrid, List } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -11,7 +10,7 @@ const ViewToggle = (props: Props) => {
     setView(view === 'grid' ? 'list' : 'grid');
   };
   return (
-    <div className="flex flex-row">
+    <div className='flex flex-row'>
       <Button
         onClick={toggleView}
         variant={view === 'grid' ? 'default' : 'outline'}

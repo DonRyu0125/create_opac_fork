@@ -58,7 +58,10 @@ const Detail = (props: Props) => {
               <ImageCarousel
                 items={images}
                 renderItems={(image) => (
-                  <img src={image.src} className='h-36 border-6 object-cover' />
+                  <img
+                    src={image.src}
+                    className='h-36 cursor-pointer object-cover border-4 hover:border-primary'
+                  />
                 )}
               />
               <div className='grid gap-4 md:gap-10 items-start'>

@@ -24,7 +24,11 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
     <div className='flex flex-col space-y-4'>
       <Slide
         items={items}
-        renderItem={(item, index) => renderItems(item, index)}
+        renderItem={(item, index) => (
+          <div className='cursor-pointer ' onClick={() => setCurrent(index)}>
+            {renderItems(item, index)}
+          </div>
+        )}
         auto={false}
       />
 
