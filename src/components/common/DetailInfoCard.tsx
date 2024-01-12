@@ -22,12 +22,12 @@ const DetailInfoCard = ({
 }: DetailInfoCardrops) => {
   return (
     <div className={cn('', className)}>
-      <article className='border shadow-md flex transition hover:shadow-xl'>
-        <div className='hidden sm:block sm:basis-56'>
+      <article className='border shadow-md flex flex-col md:flex-row transition hover:shadow-xl'>
+        <div className='basis-56'>
           <img
             src={thumbnail}
             alt={alt || 'image thumbnail'}
-            className='aspect-square h-full w-full object-cover'
+            className='aspect-square h-full w-full object-fit max-w-sm md:max-w-lg  mx-auto'
           />
         </div>
 
@@ -43,9 +43,7 @@ const DetailInfoCard = ({
             <div>{children}</div>
           </div>
 
-          {footer && (
-            <div className='sm:flex sm:items-end sm:justify-end'>{footer}</div>
-          )}
+          {footer && <div className=''>{footer}</div>}
         </div>
       </article>
     </div>

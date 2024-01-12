@@ -134,6 +134,24 @@ const Summary = (props: Props) => {
                       title={<Link href='/'>'A test record'</Link>}
                       className='col-span-3'
                       thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                      footer={
+                        <div>
+                          <Separator />
+                          <div className='flex h-12 items-center space-x-4 w-full justify-evenly '>
+                            <Button variant='ghost' size='icon'>
+                              <Heart className='h-4 w-4 text-primary' />
+                            </Button>
+                            <Separator orientation='vertical' />
+                            <Button variant='ghost' size='icon'>
+                              <Copy className='h-4 w-4 text-primary' />
+                            </Button>
+                            <Separator orientation='vertical' />
+                            <Button variant='ghost' size='icon'>
+                              <Mail className='h-4 w-4 text-primary' />
+                            </Button>
+                          </div>
+                        </div>
+                      }
                     >
                       <div className='mt-4'>
                         <DataWithLabel label={'Date'} items={['1242']} />
