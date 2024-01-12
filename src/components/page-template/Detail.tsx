@@ -7,6 +7,7 @@ import RecordDetail from '../common/RecordDetail';
 import SearchForm from '../common/SearchForm';
 import ImageCarousel from '../common/ImageCarousel';
 import InfoTable from '../common/InfoTable';
+import RecordActions from '../common/RecordActions';
 
 type Props = {};
 
@@ -47,24 +48,29 @@ const Detail = (props: Props) => {
                   heading={'A test record'}
                   subHeading='by Author Jane'
                 >
-                  <InfoTable
-                    rowsData={[
-                      {
-                        label: 'Title',
-                        value: 'The Adventures of Fictional Book',
-                      },
-                      { label: 'Author', value: 'John Authorson' },
-                      { label: 'Genre', value: 'Fantasy' },
-                      { label: 'Published Year', value: 2022 },
-                      { label: 'ISBN', value: '978-1-2345-6789-0' },
-                      { label: 'Available Copies', value: 10 },
-                      {
-                        label: 'Description',
-                        value: 'A captivating tale of imagination and wonder.',
-                      },
-                    ]}
-                    renderRow={(row) => row.value}
-                  />
+                  <div className='flex flex-col space-y-4'>
+                    <InfoTable
+                      rowsData={[
+                        {
+                          label: 'Title',
+                          value: 'The Adventures of Fictional Book',
+                        },
+                        { label: 'Author', value: 'John Authorson' },
+                        { label: 'Genre', value: 'Fantasy' },
+                        { label: 'Published Year', value: 2022 },
+                        { label: 'ISBN', value: '978-1-2345-6789-0' },
+                        { label: 'Available Copies', value: 10 },
+                        {
+                          label: 'Description',
+                          value:
+                            'A captivating tale of imagination and wonder.',
+                        },
+                      ]}
+                      renderRow={(row) => row.value}
+                    />
+
+                    <RecordActions />
+                  </div>
                 </RecordDetail>
 
                 <Button size='lg'>Add to Cart</Button>
