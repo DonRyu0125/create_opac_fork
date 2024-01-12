@@ -72,8 +72,6 @@ const Detail = (props: Props) => {
                     <RecordActions />
                   </div>
                 </RecordDetail>
-
-                <Button size='lg'>Add to Cart</Button>
               </div>
             </div>
           </div>

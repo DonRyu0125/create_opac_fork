@@ -1,12 +1,20 @@
 import React from 'react';
 import { Button } from '../ui/button';
-import { Heart, Link } from 'lucide-react';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  BookMarked,
+  Heart,
+  Link,
+  Printer,
+  Undo,
+} from 'lucide-react';
 
 type Props = {};
 
 const RecordActions = (props: Props) => {
   return (
-    <div className='flex flex-col border rounded p-2'>
+    <div className='flex flex-col space-y-4'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-x-4'>
         <Button className=''>
           <Heart className='w-4 h-4 mr-2' /> Save
@@ -15,8 +23,25 @@ const RecordActions = (props: Props) => {
           <Link className='w-4 h-4 mr-2' /> Copy
         </Button>
       </div>
-      <div>
-        <Button variant='ghost'></Button>
+      <div className='flex flex-row justify-between'>
+        <Button variant='secondary'>
+          <ArrowLeftIcon />
+        </Button>
+
+        <div className='flex flex-row space-x-1'>
+          <Button variant='outline'>
+            <Undo />
+          </Button>
+          <Button variant='outline'>
+            <BookMarked />
+          </Button>
+          <Button variant='outline'>
+            <Printer />
+          </Button>
+        </div>
+        <Button variant='secondary'>
+          <ArrowRightIcon />
+        </Button>
       </div>
     </div>
   );
