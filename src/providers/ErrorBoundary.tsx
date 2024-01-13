@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 interface ErrorBoundaryProps {
   children: React.ReactNode;
 }
@@ -8,14 +8,14 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
 
   useEffect(() => {
     const errorHandler = (error: Event | string, errorInfo?: object) => {
-      console.error('Error caught by error boundary:', error, errorInfo);
+      console.error("Error caught by error boundary:", error, errorInfo);
       setHasError(true);
     };
 
-    window.addEventListener('error', errorHandler);
+    window.addEventListener("error", errorHandler);
 
     return () => {
-      window.removeEventListener('error', errorHandler);
+      window.removeEventListener("error", errorHandler);
     };
   }, []);
 
