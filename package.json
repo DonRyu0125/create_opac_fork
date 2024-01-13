@@ -29,8 +29,10 @@
     "embla-carousel-react": "8.0.0-rc19",
     "jotai": "^2.6.1",
     "lucide-react": "^0.308.0",
+    "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sonner": "^1.3.1",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7"
   },
