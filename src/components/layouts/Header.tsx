@@ -2,7 +2,6 @@ import { config } from "@/constants";
 import { getTypeJSON } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Link from "../common/Link";
-import { ThemeToggler } from "../common/ThemeToggler";
 const Header = () => {
   const { logo, navigations } = getTypeJSON(config);
   return (

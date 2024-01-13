@@ -1,15 +1,11 @@
-import React from "react";
 import Layout from "../layouts";
 import PageAction from "../common/PageAction";
-import { StarIcon } from "lucide-react";
-import { Button } from "../ui/button";
 import RecordDetail from "../common/RecordDetail";
 import SearchForm from "../common/SearchForm";
-import ImageCarousel, { ImageProps } from "../common/ImageCarousel";
+import ImageCarousel from "../common/ImageCarousel";
 import InfoTable from "../common/InfoTable";
 import RecordAction from "../common/RecordAction";
 
-type Props = {};
 
 const images = [
   {
@@ -28,7 +24,7 @@ const images = [
     src: "https://media.britishmuseum.org/media/Repository/Documents/2014_11/9_19/c4b282ba_d905_4cff_adcb_a3de0144bc78/preview_01466623_001.jpg",
   },
 ];
-const Detail = (props: Props) => {
+const Detail = () => {
   return (
     <Layout>
       <div className="rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
