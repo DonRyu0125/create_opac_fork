@@ -18,11 +18,21 @@ import SearchForm from '../common/SearchForm';
 import { Separator } from '../ui/separator';
 import { Button } from '../ui/button';
 import { ChevronRight, Copy, Heart, Mail } from 'lucide-react';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { useState } from 'react';
+
 type Props = {};
 
 const SummaryPageAction = () => {
   return (
-    <div>
+    <div className='flex flex-col space-y-4'>
       <div>
         <Label>Record per page</Label>
         <DropdownSelect title={'Select records number'} options={[]} />
@@ -50,6 +60,7 @@ const SummaryPageAction = () => {
 };
 const Summary = (props: Props) => {
   const [view] = useAtom(viewAtom);
+  const [mobileFilter, setMobileFilter] = useState(false);
   return (
     <Layout>
       <div className='rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12'>
@@ -81,11 +92,23 @@ const Summary = (props: Props) => {
               subHeading='Displaying 1-40 of 240'
             />
             <div className='mt-8 block lg:hidden'>
-              <Button className='flex cursor-pointer items-center gap-2 border-b '>
+              <Button
+                className='flex cursor-pointer items-center gap-2 border-b '
+                onClick={() => setMobileFilter(true)}
+              >
                 <span className='font-medium'> Filters & Sorting </span>
-
                 <ChevronRight className='h-4 w-4' />
               </Button>
+              <Sheet open={mobileFilter} onOpenChange={setMobileFilter}>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>Filters & Sorting</SheetTitle>
+                  </SheetHeader>
+                  <div className='mt-6'>
+                    <SummaryPageAction />
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
 
             <div className='mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 '>
