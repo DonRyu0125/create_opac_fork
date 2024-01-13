@@ -12,7 +12,9 @@ const PageAction = ({ children, breadcrumbs }: PageActionProps) => {
       <div className="container flex flex-col items-start justify-between space-y-2 py-4 md:items-center md:space-y-0 md:h-16 md:flex-row">
         <Breadcrumb items={breadcrumbs} />
 
-        <div className="w-full flex justify-start md:justify-end">{children}</div>
+        <div className="w-full flex justify-start md:justify-end">
+          {children}
+        </div>
       </div>
 
       <Separator />

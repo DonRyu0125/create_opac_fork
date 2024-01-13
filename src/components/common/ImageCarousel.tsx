@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import Slide from './Slide';
+import Slide from "./Slide";
 
 export type ImageProps = {
   src: string;
@@ -16,11 +16,11 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
   const [current, setCurrent] = React.useState(0);
   const currentImage = items[current];
   return (
-    <div className='flex flex-col space-y-4'>
+    <div className="flex flex-col space-y-4">
       <Slide
         items={items}
         renderItem={(item, index) => (
-          <div className='cursor-pointer ' onClick={() => setCurrent(index)}>
+          <div className="cursor-pointer " onClick={() => setCurrent(index)}>
             {renderItems(item, index)}
           </div>
         )}

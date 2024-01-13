@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils';
-import { ChevronRightIcon } from 'lucide-react';
-import React from 'react';
-import Link from './Link';
+import { cn } from "@/lib/utils";
+import { ChevronRightIcon } from "lucide-react";
+import React from "react";
+import Link from "./Link";
 
 export type BreadcrumbItem = {
   label: string;
@@ -12,20 +12,20 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
   items: BreadcrumbItem[];
 }
 
-const Breadcrumb = ({ items ,className, ...props}: BreadcrumbProps) => {
+const Breadcrumb = ({ items, className, ...props }: BreadcrumbProps) => {
   return (
-    <nav aria-label='Breadcrumb' className={cn('w-72',className)} {...props}>
-      <ol className='flex w-full items-center flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400'>
+    <nav aria-label="Breadcrumb" className={cn("w-72", className)} {...props}>
+      <ol className="flex w-full items-center flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
         {items.map((e, i) => (
           <React.Fragment key={i}>
             {i !== 0 && (
               <li>
-                <ChevronRightIcon className='w-4 h-4' />
+                <ChevronRightIcon className="w-4 h-4" />
               </li>
             )}
             <li>
               <Link
-                className={cn('no-underline', !e.active && 'text-gray-900')}
+                className={cn("no-underline", !e.active && "text-gray-900")}
                 href={e.url}
               >
                 {e.label}

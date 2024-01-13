@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
-import React from 'react';
+import { cn } from "@/lib/utils";
+import React from "react";
 
 export interface RecordDetailProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -17,9 +17,9 @@ const RecordDetail = ({
   ...props
 }: RecordDetailProps) => {
   return (
-    <div className={cn('grid gap-4', className)} {...props}>
-      <h2 className='font-bold text-3xl lg:text-4xl'>{heading}</h2>
-      <h3 className='text-xl text-primary/80'>{subHeading}</h3>
+    <div className={cn("grid gap-4", className)} {...props}>
+      <h2 className="font-bold text-3xl lg:text-4xl">{heading}</h2>
+      <h3 className="text-xl text-primary/80">{subHeading}</h3>
       {description && (
         <div>
           <p>{description}</p>
@@ -38,7 +38,7 @@ const RecordDetail = ({
         </div>
         <p className='text-gray-500'>(120 reviews)</p>
       </div> */}
-      <div className='w-full'>{children}</div>
+      <div className="w-full">{children}</div>
     </div>
   );
 };

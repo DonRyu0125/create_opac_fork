@@ -4,7 +4,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
 type DropdownOption = {
   label: string;
@@ -17,10 +17,10 @@ export interface DropdownSelectProps {
 
 const DropdownSelect = ({ title, options }: DropdownSelectProps) => {
   return (
-    <div className='flex flex-col space-y-2'>
+    <div className="flex flex-col space-y-2">
       <Select>
-        <SelectTrigger className=''>
-          <SelectValue placeholder={title || 'Select'} />
+        <SelectTrigger className="">
+          <SelectValue placeholder={title || "Select"} />
         </SelectTrigger>
         <SelectContent>
           {options?.length > 0 ? (
@@ -30,7 +30,7 @@ const DropdownSelect = ({ title, options }: DropdownSelectProps) => {
               </SelectItem>
             ))
           ) : (
-            <SelectItem value='none'>No options available</SelectItem>
+            <SelectItem value="none">No options available</SelectItem>
           )}
         </SelectContent>
       </Select>

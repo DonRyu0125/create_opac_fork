@@ -1,6 +1,6 @@
-import { Checkbox } from '@/components/ui/checkbox';
-import { cn } from '@/lib/utils';
-import { Label } from '../ui/label';
+import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from "@/lib/utils";
+import { Label } from "../ui/label";
 
 export interface CheckboxWithLabelProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,11 +16,11 @@ const CheckboxWithLabel = ({
   ...props
 }: CheckboxWithLabelProps) => {
   return (
-    <div className={cn('flex items-center space-x-2', className)} {...props}>
+    <div className={cn("flex items-center space-x-2", className)} {...props}>
       <Checkbox id={labelId || label} defaultChecked={checked} />
       <Label
         htmlFor={labelId || label}
-        className='text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+        className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
       >
         {label}
       </Label>
