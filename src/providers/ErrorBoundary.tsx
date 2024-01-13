@@ -28,7 +28,6 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
     );
   }
 
-  // If there's no error, render the children as usual
   return children;
 };
 
