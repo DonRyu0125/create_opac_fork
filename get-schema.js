@@ -1,12 +1,15 @@
 import fs from 'fs';
+import path from 'path';
 const filePath = './src/constants/config.json';
 // eslint-disable-next-line no-undef
 try {
   const fileContent = fs.readFileSync(filePath, 'utf8');
   try {
+    const fileName = path.basename(filePath);
+
     const json = JSON.parse(fileContent)
     const rootType = getType(json)
-    const root = getStructure(rootType);
+    const root = getStructure(rootType, fileName);
     traverseObject(json, root)
     const metadata = {
       "$schema": "http://json-schema.org/draft-07/schema#",
@@ -55,15 +58,19 @@ function isPrimitive(type) {
 /**
  * Return the structure based on type
  * @param {string} type 
+ * @param {string} key 
  * @returns {Map<string, any>}
  */
-function getStructure(type) {
+function getStructure(type, key) {
   const struct = {
     "type": type,
-    "title": "",
+    title: isNaN(key) ? camelCaseToRegularString(key) : ""
+
   }
   if (isPrimitive(type)) {
-    return struct
+    return {
+      ...struct
+    }
   }
   if (type === 'object') {
     return { ...struct, "properties": {} }
@@ -105,11 +112,11 @@ function insertStructure(root, prop, struct) {
  * @param {Map<string,any>} root 
  */
 function traverseObject(object, root) {
+
   for (let key in object) {
     const value = object[key];
     const type = getType(value);
-    const structure = getStructure(type);
-    structure.title = camelCaseToRegularString(key)
+    const structure = getStructure(type, key);
     if (!isPrimitive(type)) {
       traverseObject(value, structure)
     }
