@@ -1,35 +1,61 @@
 import fs from 'fs';
 import path from 'path';
-const filePath = './src/constants/config.json';
+const inputDir = './src/constants';
+const outDir = './src/schema';
 // eslint-disable-next-line no-undef
+
+
 try {
-  const fileContent = fs.readFileSync(filePath, 'utf8');
-  try {
-    const fileName = path.basename(filePath);
 
-    const json = JSON.parse(fileContent)
-    const rootType = getType(json)
-    const root = getStructure(rootType, fileName);
-    traverseObject(json, root)
-    const metadata = {
-      "$schema": "http://json-schema.org/draft-07/schema#",
+  const files = fs.readdirSync(inputDir);
+
+
+  files.forEach(file => {
+    if (path.extname(file) == ".json") {
+      const filePath = `${inputDir}/${file}`;
+      generateSchema(filePath, outDir);
     }
-    const schemaContent = { ...metadata, ...root }
-    const schemaPath = filePath.replace('constants', `schema`);
 
-    if (fs.existsSync(schemaPath)) {
-      fs.unlinkSync(schemaPath);
-    }
-    fs.writeFileSync(schemaPath, JSON.stringify(schemaContent));
-
-
-  } catch (error) {
-    throw new Error("File can't be parsed into JSON Object");
-  }
-} catch (err) {
-  throw new Error('File not found');
+  })
+  console.log("Schemas successfully generated!");
+} catch (error) {
+  console.log(error)
 }
 
+/**
+ * 
+ * @param {string} filePath 
+ */
+function generateSchema(filePath = './', outDir = './schema') {
+  try {
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    try {
+      const fileName = path.basename(filePath);
+
+      const json = JSON.parse(fileContent)
+      const rootType = getType(json)
+      const root = getStructure(rootType, fileName);
+      traverseObject(json, root)
+      const metadata = {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+      }
+      const schemaContent = { ...metadata, ...root }
+      const schemaPath = `${outDir}/${fileName}`;
+
+      if (fs.existsSync(schemaPath)) {
+        fs.unlinkSync(schemaPath);
+      }
+      fs.writeFileSync(schemaPath, JSON.stringify(schemaContent));
+
+
+    } catch (error) {
+      throw new Error("File can't be parsed into JSON Object");
+    }
+  } catch (err) {
+    throw new Error('File not found');
+  }
+
+}
 
 
 
