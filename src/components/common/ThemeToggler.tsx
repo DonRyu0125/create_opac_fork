@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { theme } from '@/constants';
 
 export function ThemeToggler() {
   const { setTheme, setCustomTheme } = useTheme();
@@ -25,7 +26,7 @@ export function ThemeToggler() {
         <DropdownMenuItem onClick={() => setCustomTheme(``)}>
           default
         </DropdownMenuItem>
-        {['dracula', 'gold', 'nord'].map((e) => (
+        {theme.map((e) => (
           <DropdownMenuItem
             key={e}
             onClick={() => setCustomTheme(`theme-${e}`)}

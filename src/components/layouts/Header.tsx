@@ -13,6 +13,7 @@ import {
 const Header = () => {
   const { logo, navigations, siteName } = config;
   const [mobileMenu, setMobileMenu] = useState(false);
+  
   return (
     <header className=' bg-primary/20 mx-auto px-4 sm:px-6 lg:px-8'>
       <div className='flex h-16 items-center justify-between'>

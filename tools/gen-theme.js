@@ -50,6 +50,6 @@ function getImportedCSS(file) {
  * @returns {string}
  */
 function getStyleMapObject(file) {
-    return file;
+    return file.replace('.css', '');
 }
 main();
