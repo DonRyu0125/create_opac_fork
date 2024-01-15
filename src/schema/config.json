@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for config.json",
+  "type": "object",
+  "properties": {
+    "children": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "recordIds": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "component": { "type": "string" }
+        }
+      }
+    },
+    "component": { "type": "string" },
+    "data": {
+      "type": "object",
+      "properties": { "heading": { "type": "string" } }
+    }
+  }
+}

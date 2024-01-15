@@ -1,21 +1,27 @@
 import fs from 'fs';
-
-const filePath = 'src/constants/config.json';
-
+import path from 'path';
+const filePath = './src/constants/config.json';
+// eslint-disable-next-line no-undef
 try {
   const fileContent = fs.readFileSync(filePath, 'utf8');
   try {
-    const jsObject = JSON.parse(fileContent);
-
-    const root = getStructure({});
-    for (let key in jsObject) {
-      const value = jsObject[key];
-      const type = getType(value);
-      const structure = getStructure(type);
-      insertStructure(root, key, structure)
+    const fileName = path.basename(filePath);
+    const json = JSON.parse(fileContent)
+    const rootType = getType(json)
+    const root = getStructure(rootType);
+    traverseObject(json, root)
+    const metadata = {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": `Generated schema for ${fileName}`,
     }
+    const schemaContent = { ...metadata, ...root }
+    const schemaPath = filePath.replace('constants', `schema`);
 
-    console.log(root);
+    if (fs.existsSync(schemaPath)) {
+      fs.unlinkSync(schemaPath);
+    }
+    fs.writeFileSync(schemaPath, JSON.stringify(schemaContent));
+
 
   } catch (error) {
     throw new Error("File can't be parsed into JSON Object");
@@ -36,8 +42,8 @@ function getType(object) {
   if (Array.isArray(object)) {
     return "array";
   }
-
-  return typeof obj;
+  const type = typeof object;
+  return type;
 }
 
 /**
@@ -68,7 +74,7 @@ function getStructure(type) {
     return { ...struct, "items": {} }
   }
 
-  throw new Error('Unknown type')
+  // throw new Error('Unknown type')
 }
 
 /**
@@ -88,8 +94,21 @@ function insertStructure(root, prop, struct) {
   }
 
   if (type === 'array') {
-    root['items'][prop] = struct
+    root['items'] = struct
   }
 
   return root;
+}
+
+
+function traverseObject(object, root) {
+  for (let key in object) {
+    const value = object[key];
+    const type = getType(value);
+    const structure = getStructure(type);
+    if (!isPrimitive(type)) {
+      traverseObject(value, structure)
+    }
+    insertStructure(root, key, structure)
+  }
 }

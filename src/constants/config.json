@@ -1,21 +1,12 @@
 {
-  "logo": "https://s3-alpha.figma.com/hub/file/1913095808/a7bdc469-cd70-4ea1-bb57-b59204ad8182-cover.png",
-  "navigations": [
+  "children": [
     {
-      "url": "/",
-      "title": "Home"
-    },
-    {
-      "url": "/archive",
-      "title": "Archive"
-    },
-    {
-      "url": "/artifact",
-      "title": "Artifact"
-    },
-    {
-      "url": "/library",
-      "title": "Library"
+      "data": {
+        "recordIds": ["OEXID12", "OEXID11", "OEXID17", "OEXID16"]
+      },
+      "component": "PhotoCoverCard"
     }
-  ]
+  ],
+  "component": "Section",
+  "data": { "heading": "Featured Collections" }
 }
