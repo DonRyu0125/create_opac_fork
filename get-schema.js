@@ -1,18 +1,15 @@
 import fs from 'fs';
-import path from 'path';
 const filePath = './src/constants/config.json';
 // eslint-disable-next-line no-undef
 try {
   const fileContent = fs.readFileSync(filePath, 'utf8');
   try {
-    const fileName = path.basename(filePath);
     const json = JSON.parse(fileContent)
     const rootType = getType(json)
     const root = getStructure(rootType);
     traverseObject(json, root)
     const metadata = {
       "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": `Generated schema for ${fileName}`,
     }
     const schemaContent = { ...metadata, ...root }
     const schemaPath = filePath.replace('constants', `schema`);
