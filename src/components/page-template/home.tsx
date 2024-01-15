@@ -10,14 +10,14 @@ import { Card, CardTitle } from '../ui/card';
 const MOCK_SLIDE = new Array(12).fill('category').map((e) => ({ title: e }));
 
 const Home = () => {
-  const { heading, subHeading } = home;
+  const { heading, subHeading, heroBanner } = home;
   return (
     <Layout>
       <Hero
         className=''
         title={heading}
         description={subHeading}
-        backgroundImage={''}
+        backgroundImage={heroBanner}
       >
         <SearchForm
           className='w-full mt-6 max-w-2xl'
