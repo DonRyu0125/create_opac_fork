@@ -1,4 +1,3 @@
-import fs from 'fs';
 
 import { getFiles, setFileContent } from './index.js';
 import { EOL } from 'os';
