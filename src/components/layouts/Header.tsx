@@ -1,6 +1,7 @@
 import { config } from '@/constants';
 import { Button } from '../ui/button';
 import Link from '../common/Link';
+import { ThemeToggler } from '../common/ThemeToggler';
 const Header = () => {
   const { logo, navigations } = config;
 
@@ -31,14 +32,8 @@ const Header = () => {
           </nav>
 
           <div className='flex items-center gap-4'>
-            {/* <div className="sm:flex sm:gap-4">
-              <Button className="">Login</Button>
-
-              <div className="hidden sm:flex">
-                <Button variant="outline">Register</Button>
-              </div>
-            </div> */}
-
+         
+            <ThemeToggler />
             <div className='block md:hidden'>
               <button className='rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75'>
                 <svg

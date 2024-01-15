@@ -22,12 +22,15 @@ export function ThemeToggler() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
+        <DropdownMenuItem onClick={() => setCustomTheme(``)}>
+          default
+        </DropdownMenuItem>
         {['dracula', 'gold', 'nord'].map((e) => (
           <DropdownMenuItem
             key={e}
             onClick={() => setCustomTheme(`theme-${e}`)}
           >
-            Light
+            {e}
           </DropdownMenuItem>
         ))}
         <DropdownMenuItem onClick={() => setTheme('light')}>
@@ -35,9 +38,6 @@ export function ThemeToggler() {
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('dark')}>
           Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
