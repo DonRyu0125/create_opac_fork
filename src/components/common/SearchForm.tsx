@@ -1,7 +1,8 @@
-import React from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
+import React from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '../ui/button';
+import { cn } from '@/lib/utils';
+import { Search } from 'lucide-react';
 
 export interface SearchFormProps extends React.HTMLAttributes<HTMLFormElement> {
   searchURL: string;
@@ -15,20 +16,23 @@ const SearchForm = ({
 }: SearchFormProps) => {
   return (
     <form
-      method="POST"
+      method='POST'
       action={searchURL}
-      className={cn("w-full mx-auto", className)}
+      className={cn('w-full mx-auto', className)}
       {...props}
     >
-      <div className="relative">
+      <div className='relative'>
         <Input
           name={inputName}
-          className="w-full pl-10 pr-16 py-3 rounded-lg "
-          placeholder="Search for content..."
-          type="search"
+          className='w-full pl-10 pr-16 py-3 rounded-lg '
+          placeholder='Search for content...'
+          type='search'
         />
-        <Button className="absolute right-0 top-0 h-full px-5" type="submit">
-          Search
+        <Button className='absolute right-0 top-0 h-full px-4' type='submit'>
+          <span className='hidden md:block'> Search</span>
+          <span className='md:hidden block'>
+            <Search className='w-4 h-4' />
+          </span>
         </Button>
       </div>
     </form>
