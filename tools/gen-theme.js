@@ -1,7 +1,7 @@
 import fs from 'fs';
 
-import path from 'path';
 import { getFiles, setFileContent } from './index.js';
+import { EOL } from 'os';
 
 
 const inputDir = './src/themes';
@@ -16,11 +16,11 @@ function main() {
         console.log('gen-theme')
         const files = getFiles(inputDir, 'css');
 
-        const mainCSSContent = files.map((file) => getImportedCSS(file)).join('\n');
+        const mainCSSContent = files.map((file) => getImportedCSS(file)).join(EOL);
         const styleMapContent = files.map((file) => getStyleMapObject(file))
         console.log("Generating index.css content .......");
 
-        setFileContent(mainCSSPath, JSON.stringify(mainCSSContent))
+        setFileContent(mainCSSPath, mainCSSContent)
         setFileContent(styleMapPath, JSON.stringify(styleMapContent))
 
         console.log("Themes successfully generated!");
