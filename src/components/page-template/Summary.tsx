@@ -42,7 +42,7 @@ const SummaryPageAction = () => {
         <Label>Filter by</Label>
         <div className='flex flex-col space-y-4'>
           <CollapseList title='Date' expand={true}>
-            <div className='space-y-3 border-primary  border-t p-4'>
+            <div className='space-y-3  border-t p-4'>
               <CheckboxWithLabel label='1994' checked />
               <CheckboxWithLabel label='1995' />
               <CheckboxWithLabel label='1996' />
@@ -115,6 +115,7 @@ const Summary = () => {
                 {view === 'grid' &&
                   new Array(15).fill('').map((e, i) => (
                     <InfoCard
+                      className='border-primary'
                       key={i}
                       title={<Link href='/'>'A test record'</Link>}
                       description={'ID: F12.4.1.2512'}
@@ -142,7 +143,7 @@ const Summary = () => {
                     <DetailInfoCard
                       key={i}
                       title={<Link href='/'>'A test record'</Link>}
-                      className='col-span-3'
+                      className='col-span-3 border-primary'
                       thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
                       footer={
                         <div>

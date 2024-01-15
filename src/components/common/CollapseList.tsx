@@ -24,7 +24,7 @@ const CollapseList = ({
       <Collapsible
         open={isOpen}
         onOpenChange={setIsOpen}
-        className='overflow-hidden rounded-md border border-primary  [&_summary::-webkit-details-marker]:hidden'
+        className='overflow-hidden rounded-md border border-input  [&_summary::-webkit-details-marker]:hidden'
       >
         <CollapsibleTrigger className='flex cursor-pointer items-center justify-between py-2 px-2.5 text-gray-900 transition w-full'>
           <span className='text-sm '> {title} </span>

@@ -101,6 +101,3 @@ p {
 	text-wrap: pretty;
 }
 
-.border-colored {
-  @apply border border-primary
-}
