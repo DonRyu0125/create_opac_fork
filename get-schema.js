@@ -4,23 +4,28 @@ const inputDir = './src/constants';
 const outDir = './src/schema';
 // eslint-disable-next-line no-undef
 
+function main() {
+  try {
+    console.log("Generating schemas .......");
+    console.time('get-schema');
+    const files = fs.readdirSync(inputDir);
 
-try {
+    files.forEach(file => {
+      if (path.extname(file) == ".json") {
+        const filePath = `${inputDir}/${file}`;
+        generateSchema(filePath, outDir);
+      }
 
-  const files = fs.readdirSync(inputDir);
-
-
-  files.forEach(file => {
-    if (path.extname(file) == ".json") {
-      const filePath = `${inputDir}/${file}`;
-      generateSchema(filePath, outDir);
-    }
-
-  })
-  console.log("Schemas successfully generated!");
-} catch (error) {
-  console.log(error)
+    })
+    console.log("Schemas successfully generated!");
+    console.timeEnd('get-schema');
+  } catch (error) {
+    console.log(error)
+  }
 }
+
+main();
+
 
 /**
  * 
