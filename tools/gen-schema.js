@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { getFiles } from ".";
+import { getFiles } from './index.js';
 const inputDir = "./src/constants";
 const outDir = "./src/schema";
 
