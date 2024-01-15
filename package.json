@@ -10,7 +10,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --plugin-search-dir=. --write .",
     "preview": "vite preview",
-    "schema": "typescript-json-schema --resolveJsonModule './src/constants/index.ts' *"
+    "schema": "node get-schema.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
@@ -52,9 +52,7 @@
     "postcss": "^8.4.33",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.4.1",
-    "ts-json-schema-generator": "^1.5.0",
     "typescript": "^5.3.3",
-    "typescript-json-schema": "^0.62.0",
     "vite": "^5.0.8"
   }
 }

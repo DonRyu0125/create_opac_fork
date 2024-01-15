@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 const inputDir = './src/constants';
 const outDir = './src/schema';
-// eslint-disable-next-line no-undef
 
 function main() {
   try {
