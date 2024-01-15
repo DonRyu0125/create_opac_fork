@@ -1,11 +1,11 @@
-import * as React from "react";
-import Autoplay from "embla-carousel-autoplay";
+import * as React from 'react';
+import Autoplay from 'embla-carousel-autoplay';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/carousel';
+import { cn } from '@/lib/utils';
 
 export type ItemsPerSlide = {
   sm?: number;
@@ -45,12 +45,12 @@ const Slide = <T,>({
             ]
           : undefined
       }
-      className={cn("w-full", className)}
+      className={cn('w-full', className)}
     >
-      <CarouselContent>
+      <CarouselContent className='ml-0 md:-ml-4'>
         {items.map((item, index) => (
           <CarouselItem
-            className={"sm:basis-1/1 md:basis-1/2 lg:basis-1/3 xl:basis-1/3"}
+            className={'sm:basis-1/1 md:basis-1/2 lg:basis-1/3 xl:basis-1/3 '}
             key={index}
           >
             {renderItem(item, index)}
