@@ -19,3 +19,21 @@ export function getFiles(inputDir, ext = '') {
         console.log(err)
     }
 }
+
+
+
+/**
+ * 
+ * @param {string} fp 
+ * @param {string} content 
+ */
+export function setFileContent(fp, content) {
+    try {
+        if (fs.existsSync(fp)) {
+            fs.unlinkSync(fp)
+        }
+        fs.writeFileSync(fp, content)
+    } catch (error) {
+        console.log(error)
+    }
+}
