@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { getFiles } from ".";
 const inputDir = "./src/constants";
 const outDir = "./src/schema";
 
@@ -7,14 +8,13 @@ function main() {
   try {
     console.log("Generating schemas .......");
     console.time("gen-schema");
-    const files = fs.readdirSync(inputDir);
+    const files = getFiles(inputDir, 'json');
 
     files.forEach((file) => {
-      if (path.extname(file) == ".json") {
-        const filePath = `${inputDir}/${file}`;
-        generateSchema(filePath, outDir);
-      }
+      const filePath = `${inputDir}/${file}`;
+      generateSchema(filePath, outDir);
     });
+
     console.log("Schemas successfully generated!");
     console.timeEnd("gen-schema");
   } catch (error) {
