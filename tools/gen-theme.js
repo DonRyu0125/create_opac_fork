@@ -6,7 +6,7 @@ import { getFiles, setFileContent } from './index.js';
 
 const inputDir = './src/themes';
 
-const outFile = './src/themes/index.json';
+const styleMapPath = './src/themes/index.json';
 
 const mainCSSPath = './src/index.css'
 
@@ -17,12 +17,16 @@ function main() {
         const files = getFiles(inputDir, 'css');
 
         const mainCSSContent = files.map((file) => getImportedCSS(file)).join('\n');
+        const styleMapContent = files.map((file) => getStyleMapObject(file))
         console.log("Generating index.css content .......");
 
-        setFileContent(mainCSSPath, mainCSSContent)
+        setFileContent(mainCSSPath, JSON.stringify(mainCSSContent))
+        setFileContent(styleMapPath, JSON.stringify(styleMapContent))
 
         console.log("Themes successfully generated!");
         console.timeEnd('gen-theme')
+
+
 
     } catch (error) {
         console.log(error)
@@ -39,5 +43,14 @@ function main() {
  */
 function getImportedCSS(file) {
     return `@import './themes/${file}';`
+}
+
+/**
+ * 
+ * @param {string} file 
+ * @returns {string}
+ */
+function getStyleMapObject(file) {
+    return file;
 }
 main();
