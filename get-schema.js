@@ -6,7 +6,7 @@ const outDir = "./src/schema";
 function main() {
   try {
     console.log("Generating schemas .......");
-    console.time("get-schema");
+    console.time("gen-schema");
     const files = fs.readdirSync(inputDir);
 
     files.forEach((file) => {
@@ -16,7 +16,7 @@ function main() {
       }
     });
     console.log("Schemas successfully generated!");
-    console.timeEnd("get-schema");
+    console.timeEnd("gen-schema");
   } catch (error) {
     console.log(error);
   }
