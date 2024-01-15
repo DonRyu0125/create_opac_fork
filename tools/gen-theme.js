@@ -14,6 +14,7 @@ function main() {
         const files = getFiles(inputDir, 'css');
         files.forEach((file) => {
             console.log(file)
+            
         })
     } catch (error) {
         console.log(error)
