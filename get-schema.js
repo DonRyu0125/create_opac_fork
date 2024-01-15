@@ -62,7 +62,8 @@ function isPrimitive(type) {
  */
 function getStructure(type) {
   const struct = {
-    "type": type
+    "type": type,
+    "title": "",
   }
   if (isPrimitive(type)) {
     return struct
@@ -101,14 +102,31 @@ function insertStructure(root, prop, struct) {
 }
 
 
+/**
+ * 
+ * @param {Map<string,any>} object 
+ * @param {Map<string,any>} root 
+ */
 function traverseObject(object, root) {
   for (let key in object) {
     const value = object[key];
     const type = getType(value);
     const structure = getStructure(type);
+    structure.title = camelCaseToRegularString(key)
     if (!isPrimitive(type)) {
       traverseObject(value, structure)
     }
     insertStructure(root, key, structure)
   }
+}
+
+/**
+ * 
+ * @param {string} camelCaseString 
+ * @returns string
+ */
+function camelCaseToRegularString(camelCaseString) {
+  const regularString = camelCaseString.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+  return regularString.charAt(0).toUpperCase() + regularString.slice(1);
 }
