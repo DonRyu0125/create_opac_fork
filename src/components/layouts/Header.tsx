@@ -2,9 +2,17 @@ import { config } from '@/constants';
 import { Button } from '../ui/button';
 import Link from '../common/Link';
 import { ThemeToggler } from '../common/ThemeToggler';
+import { MenuIcon } from 'lucide-react';
+import { useState } from 'react';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
 const Header = () => {
-  const { logo, navigations } = config;
-
+  const { logo, navigations, siteName } = config;
+  const [mobileMenu, setMobileMenu] = useState(false);
   return (
     <header className=' bg-primary/20 mx-auto px-4 sm:px-6 lg:px-8'>
       <div className='flex h-16 items-center justify-between'>
@@ -32,25 +40,35 @@ const Header = () => {
           </nav>
 
           <div className='flex items-center gap-4'>
-         
             <ThemeToggler />
             <div className='block md:hidden'>
-              <button className='rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                  strokeWidth='2'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M4 6h16M4 12h16M4 18h16'
-                  />
-                </svg>
-              </button>
+              <Button size='icon' onClick={() => setMobileMenu(true)}>
+                <MenuIcon />
+              </Button>
+              <Sheet open={mobileMenu} onOpenChange={setMobileMenu}>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>{siteName}</SheetTitle>
+                  </SheetHeader>
+                  <nav className=''>
+                    <ul className='flex flex-col items-center  text-md'>
+                      {navigations.map((nav) => (
+                        <li
+                          key={nav.title}
+                          className='flex items-center text-left h-12 w-full px-2 bg-secondary/90 hover:text-white hover:bg-primary/60 border-l-4 border-primary'
+                        >
+                          <Link
+                            className='transition no-underline text-md'
+                            href={nav.url}
+                          >
+                            {nav.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>
