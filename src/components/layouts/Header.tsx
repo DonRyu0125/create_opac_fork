@@ -31,12 +31,12 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <div className="sm:flex sm:gap-4">
+            {/* <div className="sm:flex sm:gap-4">
               <Button className="">Login</Button>
 
               <div className="hidden sm:flex">
                 <Button variant="outline">Register</Button>
-              </div>
+              </div> */}
             </div>
 
             <div className="block md:hidden">
