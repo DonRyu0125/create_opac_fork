@@ -6,7 +6,6 @@ import ImageCarousel from "../common/ImageCarousel";
 import InfoTable from "../common/InfoTable";
 import RecordAction from "../common/RecordAction";
 
-
 const images = [
   {
     src: "https://media.britishmuseum.org/media/Repository/Documents/2014_10/6_16/9a192748_4e41_4f04_a2de_a3bc0114cb3f/preview_00433935_001.jpg",

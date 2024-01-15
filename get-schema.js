@@ -1,71 +1,64 @@
-import fs from 'fs';
-import path from 'path';
-const inputDir = './src/constants';
-const outDir = './src/schema';
+import fs from "fs";
+import path from "path";
+const inputDir = "./src/constants";
+const outDir = "./src/schema";
 
 function main() {
   try {
     console.log("Generating schemas .......");
-    console.time('get-schema');
+    console.time("get-schema");
     const files = fs.readdirSync(inputDir);
 
-    files.forEach(file => {
+    files.forEach((file) => {
       if (path.extname(file) == ".json") {
         const filePath = `${inputDir}/${file}`;
         generateSchema(filePath, outDir);
       }
-
-    })
+    });
     console.log("Schemas successfully generated!");
-    console.timeEnd('get-schema');
+    console.timeEnd("get-schema");
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 
 main();
 
-
 /**
- * 
- * @param {string} filePath 
+ *
+ * @param {string} filePath
  */
-function generateSchema(filePath = './', outDir = './schema') {
+function generateSchema(filePath = "./", outDir = "./schema") {
   try {
-    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const fileContent = fs.readFileSync(filePath, "utf8");
     try {
       const fileName = path.basename(filePath);
 
-      const json = JSON.parse(fileContent)
-      const rootType = getType(json)
+      const json = JSON.parse(fileContent);
+      const rootType = getType(json);
       const root = getStructure(rootType, fileName);
-      traverseObject(json, root)
+      traverseObject(json, root);
       const metadata = {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-      }
-      const schemaContent = { ...metadata, ...root }
+        $schema: "http://json-schema.org/draft-07/schema#",
+      };
+      const schemaContent = { ...metadata, ...root };
       const schemaPath = `${outDir}/${fileName}`;
 
       if (fs.existsSync(schemaPath)) {
         fs.unlinkSync(schemaPath);
       }
       fs.writeFileSync(schemaPath, JSON.stringify(schemaContent));
-
-
     } catch (error) {
       throw new Error("File can't be parsed into JSON Object");
     }
   } catch (err) {
-    throw new Error('File not found');
+    throw new Error("File not found");
   }
-
 }
-
-
 
 /**
  * Simple bare minimum getType
- * @param {any} object 
+ * @param {any} object
  * @returns {string}
  */
 function getType(object) {
@@ -78,89 +71,86 @@ function getType(object) {
 
 /**
  * Check if type is primitive
- * @param {string} type 
+ * @param {string} type
  * @returns {boolean}
  */
 function isPrimitive(type) {
-  return type === 'string' || type === 'number' || type === 'boolean'
+  return type === "string" || type === "number" || type === "boolean";
 }
 
 /**
  * Return the structure based on type
- * @param {string} type 
- * @param {string} key 
+ * @param {string} type
+ * @param {string} key
  * @returns {Map<string, any>}
  */
 function getStructure(type, key) {
   const struct = {
-    "type": type,
-    title: isNaN(key) ? camelCaseToRegularString(key) : ""
-
-  }
+    type: type,
+    title: isNaN(key) ? camelCaseToRegularString(key) : "",
+  };
   if (isPrimitive(type)) {
     return {
-      ...struct
-    }
+      ...struct,
+    };
   }
-  if (type === 'object') {
-    return { ...struct, "properties": {} }
+  if (type === "object") {
+    return { ...struct, properties: {} };
   }
-  if (type === 'array') {
-    return { ...struct, "items": {} }
+  if (type === "array") {
+    return { ...struct, items: {} };
   }
 
   // throw new Error('Unknown type')
 }
 
 /**
- * 
- * @param {Map<string,any>} root 
- * @param {string} prop 
- * @param {Map<string,any>} struct 
+ *
+ * @param {Map<string,any>} root
+ * @param {string} prop
+ * @param {Map<string,any>} struct
  * @returns {Map<string,any>}
  */
 function insertStructure(root, prop, struct) {
-  const type = root.type
+  const type = root.type;
   if (isPrimitive(type)) {
     return;
   }
-  if (type === 'object') {
-    root['properties'][prop] = struct;
+  if (type === "object") {
+    root["properties"][prop] = struct;
   }
 
-  if (type === 'array') {
-    root['items'] = struct
+  if (type === "array") {
+    root["items"] = struct;
   }
 
   return root;
 }
 
-
 /**
- * 
- * @param {Map<string,any>} object 
- * @param {Map<string,any>} root 
+ *
+ * @param {Map<string,any>} object
+ * @param {Map<string,any>} root
  */
 function traverseObject(object, root) {
-
   for (let key in object) {
     const value = object[key];
     const type = getType(value);
     const structure = getStructure(type, key);
     if (!isPrimitive(type)) {
-      traverseObject(value, structure)
+      traverseObject(value, structure);
     }
-    insertStructure(root, key, structure)
+    insertStructure(root, key, structure);
   }
 }
 
 /**
- * 
- * @param {string} camelCaseString 
+ *
+ * @param {string} camelCaseString
  * @returns string
  */
 function camelCaseToRegularString(camelCaseString) {
-  const regularString = camelCaseString.replace(/([a-z])([A-Z])/g, '$1 $2');
+  const regularString = camelCaseString.replace(/([a-z])([A-Z])/g, "$1 $2");
 
   return regularString.charAt(0).toUpperCase() + regularString.slice(1);
 }
