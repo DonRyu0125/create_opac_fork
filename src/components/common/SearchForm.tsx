@@ -24,7 +24,7 @@ const SearchForm = ({
       <div className='relative'>
         <Input
           name={inputName}
-          className='w-full pl-10 pr-16 py-3 rounded-lg '
+          className='w-full  py-3 rounded-lg '
           placeholder='Search for content...'
           type='search'
         />
