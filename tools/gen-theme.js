@@ -12,7 +12,7 @@ const mainCSSPath = './src/index.css'
 function main() {
     try {
         console.log("Generating theme .......");
-        console.log('gen-theme')
+        console.time('gen-theme')
         const files = getFiles(inputDir, 'css');
 
         const mainCSSContent = files.map((file) => getImportedCSS(file)).join(EOL);
