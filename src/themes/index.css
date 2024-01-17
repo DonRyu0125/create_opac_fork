@@ -56,6 +56,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    @apply bg-primary
+  }
 }
 
 /* Masonry styling  */
