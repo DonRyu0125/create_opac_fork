@@ -1,8 +1,6 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 @layer base {
   :root {
@@ -52,55 +50,51 @@
 }
 
 @layer base {
-
   body {
     @apply bg-background text-foreground;
   }
   html {
-    @apply bg-primary
+    @apply bg-primary;
   }
 }
 
 /* Masonry styling  */
 @layer utilities {
-
-    .masonry {
-      column-gap: 1.5em;
-      column-count: 1;
-    }
-    .masonry-sm {
-      column-gap: 1.5em;
-      column-count: 2;
-    }
-    .masonry-md {
-      column-gap: 1.5em;
-      column-count: 3;
-    }
-    .break-inside {
-      break-inside: avoid;
-    }
-  
+  .masonry {
+    column-gap: 1.5em;
+    column-count: 1;
+  }
+  .masonry-sm {
+    column-gap: 1.5em;
+    column-count: 2;
+  }
+  .masonry-md {
+    column-gap: 1.5em;
+    column-count: 3;
+  }
+  .break-inside {
+    break-inside: avoid;
+  }
 }
 
 /* CSS Reset */
 * {
-	box-sizing: border-box;
-	position: relative;
-	min-width: 0;
+  box-sizing: border-box;
+  position: relative;
+  min-width: 0;
 }
 
 body {
-	min-height: 100dvh;
+  min-height: 100dvh;
 }
 
 h1,
 h2,
 h3,
 h4 {
-	text-wrap: balance;
+  text-wrap: balance;
 }
 
 p {
-	text-wrap: pretty;
+  text-wrap: pretty;
 }
-

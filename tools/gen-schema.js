@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { getFiles } from './index.js';
+import { getFiles } from "./index.js";
 const inputDir = "./src/constants";
 const outDir = "./src/schema";
 
@@ -8,7 +8,7 @@ function main() {
   try {
     console.log("Generating schemas .......");
     console.time("gen-schema");
-    const files = getFiles(inputDir, 'json');
+    const files = getFiles(inputDir, "json");
 
     files.forEach((file) => {
       const filePath = `${inputDir}/${file}`;

@@ -1,6 +1,6 @@
-import configjson from './config.json';
-import homejson from './home.json';
-import themejson from '@/themes/index.json';
+import configjson from "./config.json";
+import homejson from "./home.json";
+import themejson from "@/themes/index.json";
 type Type<T> = {
   [K in keyof T]: T[K];
 };
