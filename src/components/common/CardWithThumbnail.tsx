@@ -26,7 +26,7 @@ const CardWithThumbnail = ({
       </div>
 
       <div className='absolute inset-0 flex flex-col items-start justify-end p-6'>
-        <span className='mt-3 inline-block bg-primary px-5 py-3 text-xs font-medium uppercase tracking-wide text-white'>
+        <span className='mt-3 inline-block bg-primary px-5 py-3 text-md  font-medium uppercase tracking-wide text-white'>
           {title}
         </span>
         {children}

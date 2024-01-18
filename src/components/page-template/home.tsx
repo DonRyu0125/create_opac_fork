@@ -49,7 +49,11 @@ const Home = () => {
           )}
         />
       </Section>
-      <Section heading={'Browse by area'} subHeading='Area Cateogry'></Section>
+      <Section
+        className='bg-secondary'
+        heading={'Browse by area'}
+        subHeading='Area Cateogry'
+      ></Section>
       <Section heading={'Recent Addition'}>{/* <Masonry /> */}</Section>
       <Section heading='FAQ'>
         <AccordionList />
