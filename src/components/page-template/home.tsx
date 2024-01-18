@@ -10,7 +10,13 @@ import { Card, CardTitle } from '../ui/card';
 const MOCK_SLIDE = new Array(12).fill('category').map((e) => ({ title: e }));
 
 const Home = () => {
-  const { heading, subHeading, heroBanner } = home;
+  const {
+    heading,
+    subHeading,
+    heroBanner,
+    browseByCategoryTitle,
+    categoriesItems,
+  } = home;
   return (
     <Layout>
       <Hero
@@ -25,15 +31,13 @@ const Home = () => {
           inputName={'KEYWORD_CL'}
         />
       </Hero>
-      <Section
-        heading={'Kickstart your marketing'}
-        subHeading='Lorep ipsum 12h16M4'
-      >
+      <Section heading={browseByCategoryTitle}>
         <Slide
+          // auto
           itemsPerSlide={{ lg: 4 }}
-          items={MOCK_SLIDE}
+          items={categoriesItems}
           renderItem={(item: { title: string }, index) => (
-            <Card className='h-48' key={index}>
+            <Card className='h-48 border border-primary shadow-xl ' key={index}>
               <CardTitle>{item.title}</CardTitle>
             </Card>
           )}
