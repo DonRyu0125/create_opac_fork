@@ -7,6 +7,7 @@ import Slide from '../common/Slide';
 import SplitSection from '../common/SplitSection';
 import Layout from '../layouts';
 import { Card, CardTitle } from '../ui/card';
+import CardWithThumbnail from '../common/CardWithThumbnail';
 const MOCK_SLIDE = new Array(12).fill('category').map((e) => ({ title: e }));
 
 const Home = () => {
@@ -37,8 +38,9 @@ const Home = () => {
           itemsPerSlide={{ lg: 4 }}
           items={categoriesItems}
           renderItem={(item: { title: string }, index) => (
-            <Card className='h-48 border border-primary shadow-xl ' key={index}>
-              <CardTitle>{item.title}</CardTitle>
+            <Card className=' border border-primary shadow-xl ' key={index}>
+              {/* <CardTitle>{item.title}</CardTitle> */}
+              <CardWithThumbnail />
             </Card>
           )}
         />
