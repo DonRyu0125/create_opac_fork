@@ -1,63 +1,13 @@
-import { home } from '@/constants';
+import { Layout } from 'lucide-react';
 import AccordionList from '../common/AccordionList';
-import Hero from '../common/Hero';
-import SearchForm from '../common/SearchForm';
 import Section from '../common/Section';
-import Slide from '../common/Slide';
 import SplitSection from '../common/SplitSection';
-import Layout from '../layouts';
-import { Card, CardTitle } from '../ui/card';
-import CardWithThumbnail from '../common/CardWithThumbnail';
-import Map from '../common/Map';
-const MOCK_SLIDE = new Array(12).fill('category').map((e) => ({ title: e }));
 
-const Home = () => {
-  const {
-    heading,
-    subHeading,
-    heroBanner,
-    browseByCategoryTitle,
-    categoriesItems,
-  } = home;
+type Props = {};
+
+const FAQ = (props: Props) => {
   return (
     <Layout>
-      <Hero
-        className=''
-        title={heading}
-        description={subHeading}
-        backgroundImage={heroBanner}
-      >
-        <SearchForm
-          className='w-full mt-6 max-w-2xl'
-          searchURL={'/action'}
-          inputName={'KEYWORD_CL'}
-        />
-      </Hero>
-      <Section heading={browseByCategoryTitle}>
-        <Slide
-          // auto
-          itemsPerSlide={{ lg: 4 }}
-          items={categoriesItems}
-          renderItem={(item, index) => (
-            <Card className='max-w-md mx-auto shadow-xl ' key={index}>
-              {/* <CardTitle>{item.title}</CardTitle> */}
-              <CardWithThumbnail
-                title={item.title}
-                url={item.url}
-                thumbnail={item.thumbnail}
-              />
-            </Card>
-          )}
-        />
-      </Section>
-      <Section
-        className='bg-secondary'
-        heading={'Browse by area'}
-        subHeading='Area Cateogry'
-      >
-        <Map />
-      </Section>
-      <Section heading={'Recent Addition'}>{/* <Masonry /> */}</Section>
       <Section heading='FAQ'>
         <AccordionList />
       </Section>
@@ -96,4 +46,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default FAQ;

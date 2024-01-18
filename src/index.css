@@ -1,9 +1,8 @@
-@import "./themes/dracula.css";
-@import "./themes/gold.css";
-@import "./themes/index.css";
-@import "./themes/laracon.css";
-@import "./themes/nature.css";
-@import "./themes/netflix.css";
-@import "./themes/nord.css";
-@import "./themes/test.css";
-@import "./themes/vintage.css";
+@import './themes/dracula.css';
+@import './themes/gold.css';
+@import './themes/index.css';
+@import './themes/laracon.css';
+@import './themes/nature.css';
+@import './themes/netflix.css';
+@import './themes/nord.css';
+@import './themes/vintage.css';
