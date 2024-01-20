@@ -9,7 +9,29 @@ import Layout from '../layouts';
 import { Card, CardTitle } from '../ui/card';
 import CardWithThumbnail from '../common/CardWithThumbnail';
 import Map from '../common/Map';
-const MOCK_SLIDE = new Array(12).fill('category').map((e) => ({ title: e }));
+import Masonry from '../common/Masonry';
+[
+  'https://picsum.photos/800/600/?random=123',
+  'https://picsum.photos/800/600/?random=456',
+  'https://picsum.photos/800/600/?random=789',
+  'https://picsum.photos/800/600/?random=321',
+  'https://picsum.photos/800/600/?random=654',
+  'https://picsum.photos/800/600/?random=987',
+  'https://picsum.photos/800/600/?random=123',
+  'https://picsum.photos/800/600/?random=234',
+  'https://picsum.photos/800/600/?random=567',
+  'https://picsum.photos/800/600/?random=890',
+  'https://picsum.photos/800/600/?random=123',
+  'https://picsum.photos/800/600/?random=456',
+  'https://picsum.photos/800/600/?random=789',
+  'https://picsum.photos/800/600/?random=321',
+  'https://picsum.photos/800/600/?random=654',
+  'https://picsum.photos/800/600/?random=987',
+  'https://picsum.photos/800/600/?random=123',
+  'https://picsum.photos/800/600/?random=234',
+  'https://picsum.photos/800/600/?random=567',
+  'https://picsum.photos/800/600/?random=890',
+];
 
 const Home = () => {
   const {
@@ -57,7 +79,9 @@ const Home = () => {
       >
         <Map />
       </Section>
-      <Section heading={'Recent Addition'}>{/* <Masonry /> */}</Section>
+      <Section heading={'Recent Addition'}>
+        <Masonry />
+      </Section>
       <Section heading='FAQ'>
         <AccordionList />
       </Section>
