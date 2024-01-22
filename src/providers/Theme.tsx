@@ -1,6 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { styles } from '@/constants';
+import { createContext, useEffect, useState } from 'react';
 
-type Theme = "dark" | "light" | "system";
+type Theme = 'dark' | 'light' | 'system';
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: 'system',
   setTheme: () => null,
   setCustomTheme: () => null,
 };
@@ -25,23 +26,23 @@ export const ThemeProviderContext =
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
-  storageKey = "vite-ui-theme",
+  defaultTheme = 'light',
+  storageKey = 'vite-ui-theme',
   ...props
 }: ThemeProviderProps) {
-  const defaultCustomKey = "theme";
+  const defaultCustomKey = styles.theme;
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
   );
 
   const [custom, setCustom] = useState<string>(
-    () => (localStorage.getItem(defaultCustomKey) as string) || "",
+    () => (localStorage.getItem(defaultCustomKey) as string) || ''
   );
 
   useEffect(() => {
     const root = window.document.documentElement;
 
-    root.classList.remove("light", "dark");
+    root.classList.remove('light', 'dark');
 
     root.classList.add(theme);
   }, [theme]);
@@ -49,10 +50,8 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove(...root.classList);
-    root.classList.remove("light", "dark");
-
     root.classList.add(theme);
-    if (custom !== "") {
+    if (custom !== '') {
       root.classList.add(custom);
     }
   }, [theme, custom]);
