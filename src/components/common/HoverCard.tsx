@@ -19,32 +19,31 @@ const HoverCard = ({
 }: HoverCardProps) => {
   return (
     <Card
-      className={cn('group relative block', className)}
+      className={cn('group relative block cursor-pointer', className)}
       onClick={() => (window.location.href = url)}
     >
-      <a href='#' className='group relative block bg-black'>
+      <div className="relative mb-4 before:content-[''] before:rounded-md before:absolute before:inset-0 before:bg-black before:bg-opacity-20">
         <img
+          className='w-full brightness-75 group-hover:opacity-90'
           alt={title}
           src={thumbnail}
-          className='absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50'
         />
-
-        <div className='relative p-4 sm:p-6 lg:p-8'>
-          <p className='text-sm font-medium uppercase tracking-widest text-pink-500'>
-            {title}
-          </p>
-
-          <p className='text-xl font-bold text-white sm:text-2xl'>Tony Wayne</p>
-
-          {description && (
-            <div className='mt-32 sm:mt-48 lg:mt-64'>
-              <div className='translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100'>
-                <p className='text-sm text-white'>{description}</p>
-              </div>
-            </div>
-          )}
+        <div className='test__body absolute inset-0 p-8 text-white flex flex-col'>
+          <div className='relative'>
+            <a
+              className='test__link absolute inset-0'
+              target='_blank'
+              href='/'
+            ></a>
+          </div>
+          <div className='absolute inset-0 flex flex-col items-start justify-end p-6'>
+            <span className='mt-3 inline-block bg-primary px-3 py-1 text-md  font-medium  tracking-wide max-w-full break-words  text-white'>
+              {title}
+            </span>
+            {children}
+          </div>
         </div>
-      </a>
+      </div>
     </Card>
   );
 };
