@@ -1,6 +1,6 @@
-import React from 'react';
-import { Card } from '../ui/card';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { Card } from "../ui/card";
+import { cn } from "@/lib/utils";
 
 export interface ThumbnailCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,19 +18,19 @@ const ThumbnailCard = ({
 }: ThumbnailCardProps) => {
   return (
     <Card
-      className={cn('group relative block', className)}
+      className={cn("group relative block", className)}
       onClick={() => (window.location.href = url)}
     >
-      <div className='relative h-[350px] sm:h-[450px]'>
+      <div className="relative h-[350px] sm:h-[450px]">
         <img
           src={thumbnail}
           alt={title}
-          className='brightness-75 absolute inset-0 h-full w-full object-cover '
+          className="brightness-75 absolute inset-0 h-full w-full object-cover "
         />
       </div>
 
-      <div className='absolute inset-0 flex flex-col items-start justify-end p-6'>
-        <span className='mt-3 inline-block bg-primary px-5 py-3 text-md  font-medium uppercase tracking-wide text-white'>
+      <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
+        <span className="mt-3 inline-block bg-primary px-5 py-3 text-md  font-medium uppercase tracking-wide text-white">
           {title}
         </span>
         {children}

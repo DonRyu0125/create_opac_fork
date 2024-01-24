@@ -1,7 +1,7 @@
-import Detail from '@/components/page-template/Detail';
-import Home from '@/components/page-template/Home';
-import NotFoundPage from '@/components/page-template/NotFoundPage';
-import Summary from '@/components/page-template/Summary';
+import Detail from "@/components/page-template/Detail";
+import Home from "@/components/page-template/Home";
+import NotFoundPage from "@/components/page-template/NotFoundPage";
+import Summary from "@/components/page-template/Summary";
 
 export type TRoute = Record<string, () => React.ReactNode>;
 

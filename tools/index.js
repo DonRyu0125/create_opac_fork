@@ -20,7 +20,7 @@ export function getFiles(inputDir, ext = "") {
 /**
  *
  * @param {string} fp: file path
- * @param {string} content: file content 
+ * @param {string} content: file content
  */
 export function setFileContent(fp, content) {
   try {
