@@ -88,6 +88,7 @@ const Home = () => {
           items={pics}
           renderItem={(item, index) => (
             <HoverCard
+              description='More than 100,000 archival photos, maps, documents, and oral histories, as well as over 5,000 artifacts are at your fingertips. Browse the categories, neighbourhoods, '
               key={index}
               title={truncateWords('Test', 10)}
               thumbnail={item}
