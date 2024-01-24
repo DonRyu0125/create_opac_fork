@@ -22,7 +22,7 @@ const DetailInfoCard = ({
 }: DetailInfoCardrops) => {
   return (
     <div className={cn("border", className)}>
-      <article className="border shadow-md flex flex-col md:flex-row transition hover:shadow-xl">
+      <article className="border shadow-md flex  md:flex-row transition hover:shadow-xl">
         <div className="basis-56">
           <img
             src={thumbnail}

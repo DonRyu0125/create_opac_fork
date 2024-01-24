@@ -33,7 +33,7 @@ function main() {
  * @returns {string}
  */
 function getImportedCSS(file) {
-  return `@import './themes/${file}';`;
+  return `@import '@/themes/${file}';`;
 }
 
 /**
