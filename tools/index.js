@@ -3,9 +3,9 @@ import path from "path";
 
 /**
  *
- * @param {string} inputDir
- * @param {string} ext
- * @returns string[]
+ * @param {string} inputDir: path to input file
+ * @param {string | undefined} ext: file extension
+ * @returns string[] all the files in the directory
  */
 export function getFiles(inputDir, ext = "") {
   try {
@@ -19,8 +19,8 @@ export function getFiles(inputDir, ext = "") {
 
 /**
  *
- * @param {string} fp
- * @param {string} content
+ * @param {string} fp: file path
+ * @param {string} content: file content 
  */
 export function setFileContent(fp, content) {
   try {

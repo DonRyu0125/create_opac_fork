@@ -4,7 +4,7 @@ type Props = {};
 
 const Map = (props: Props) => {
   return (
-    <div className='w-1/2 h-1/2'>
+    <div className='w-[300px] h-[300px]'>
       <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
