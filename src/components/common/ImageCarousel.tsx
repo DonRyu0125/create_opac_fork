@@ -1,7 +1,8 @@
 import React from 'react';
 
 import Slide from './Slide';
-import { ArrowLeftIcon, ChevronLeft, ChevronRight, Scan } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Scan } from 'lucide-react';
+import LightboxImage from './LightboxImage';
 
 export type ImageProps = {
   src: string;
@@ -15,7 +16,9 @@ export interface ImageCarouselProps {
 
 const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
   const [current, setCurrent] = React.useState(0);
+  const [openLightbox, setOpenLightbox] = React.useState(false);
   const currentImage = items[current];
+
   return (
     <div className='flex flex-col space-y-4'>
       <Slide
@@ -33,12 +36,31 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
         <img className='mx-auto' {...currentImage} />
         <Scan
           strokeWidth={'3px'}
-          className='absolute bg-primary-foreground/20 w-8 h-8 text-white hover:text-primary bottom-2 right-2 transition-all ease-in duration-400 '
+          className='cursor-pointer absolute bg-gray-400 bg-opacity-30  w-8 h-8 text-white hover:text-primary bottom-2 right-2 transition-all ease-in duration-400 '
+          onClick={() => setOpenLightbox(true)}
         />
 
-        {/* <ChevronLeft className='absolute bg-primary-foreground/20 w-8 h-8 text-red-500 hover:text-primary left-2 top-1/2  transition-all ease-in duration-400 ' />
+        <ChevronLeft
+          strokeWidth={'3px'}
+          className='cursor-pointer absolute bg-gray-400 bg-opacity-30 w-8 h-8 text-white hover:text-primary left-2 top-1/2  transition-all ease-in duration-400 '
+          onClick={() => setCurrent(current - 1 < 0 ? 0 : current - 1)}
+        />
 
-        <ChevronRight className='absolute bg-primary-foreground/20 w-8 h-8 text-white hover:text-primary right-2 top-1/2 transition-all ease-in duration-400 ' /> */}
+        <ChevronRight
+          strokeWidth={'3px'}
+          className='cursor-pointer absolute bg-gray-400 bg-opacity-30  w-8 h-8 text-white hover:text-primary right-2 top-1/2 transition-all ease-in duration-400 '
+          onClick={() =>
+            setCurrent(
+              current + 1 === items.length ? items.length - 1 : current + 1
+            )
+          }
+        />
+
+        <LightboxImage
+          onOpen={setOpenLightbox}
+          open={openLightbox}
+          items={items}
+        />
       </div>
     </div>
   );
