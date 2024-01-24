@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+export interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
   heading: string;
   subHeading?: string;
 }
@@ -12,7 +12,7 @@ const Section = ({
   heading,
   subHeading,
   ...props
-}: Props) => {
+}: SectionProps) => {
   return (
     <section className={cn("", className)} {...props}>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">

@@ -1,16 +1,14 @@
 import configjson from "./config.json";
 import homejson from "./home.json";
 import themejson from "@/themes/index.json";
+import stylesjson from "./styles.json";
 type Type<T> = {
   [K in keyof T]: T[K];
 };
 
-export type TConfig = Type<typeof configjson>;
-export type THome = Type<typeof homejson>;
-export type TTheme = Type<typeof themejson>;
+const config: Type<typeof configjson> = configjson;
+const home: Type<typeof homejson> = homejson;
+const theme: Type<typeof themejson> = themejson;
+const styles: Type<typeof stylesjson> = stylesjson;
 
-const config: TConfig = configjson;
-const home: THome = homejson;
-const theme: TTheme = themejson;
-
-export { config, home, theme };
+export { config, home, theme, styles };

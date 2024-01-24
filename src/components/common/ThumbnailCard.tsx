@@ -1,22 +1,26 @@
 import React from "react";
 import { Card } from "../ui/card";
+import { cn } from "@/lib/utils";
 
-export interface CardWithThumbnailProps
+export interface ThumbnailCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   url: string;
   thumbnail: string;
 }
 
-const CardWithThumbnail = ({
+const ThumbnailCard = ({
   title,
   url,
   thumbnail,
   className,
   children,
-}: CardWithThumbnailProps) => {
+}: ThumbnailCardProps) => {
   return (
-    <Card className="group relative block">
+    <Card
+      className={cn("group relative block", className)}
+      onClick={() => (window.location.href = url)}
+    >
       <div className="relative h-[350px] sm:h-[450px]">
         <img
           src={thumbnail}
@@ -35,4 +39,4 @@ const CardWithThumbnail = ({
   );
 };
 
-export default CardWithThumbnail;
+export default ThumbnailCard;

@@ -23,9 +23,6 @@ export function ThemeToggler() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setCustomTheme(``)}>
-          default
-        </DropdownMenuItem>
         {theme.map((e) => (
           <DropdownMenuItem
             key={e}

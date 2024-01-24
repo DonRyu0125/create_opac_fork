@@ -1,3 +1,4 @@
+import { styles } from "@/constants";
 import { createContext, useEffect, useState } from "react";
 
 type Theme = "dark" | "light" | "system";
@@ -25,11 +26,11 @@ export const ThemeProviderContext =
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "light",
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const defaultCustomKey = "theme";
+  const defaultCustomKey = styles.theme;
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
   );
@@ -49,8 +50,6 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove(...root.classList);
-    root.classList.remove("light", "dark");
-
     root.classList.add(theme);
     if (custom !== "") {
       root.classList.add(custom);

@@ -7,30 +7,32 @@ import Slide from "../common/Slide";
 import SplitSection from "../common/SplitSection";
 import Layout from "../layouts";
 import { Card, CardTitle } from "../ui/card";
-import CardWithThumbnail from "../common/CardWithThumbnail";
+import ThumbnailCard from "../common/ThumbnailCard";
 import Map from "../common/Map";
 import Masonry from "../common/Masonry";
-[
-  "https://picsum.photos/800/600/?random=123",
-  "https://picsum.photos/800/600/?random=456",
-  "https://picsum.photos/800/600/?random=789",
-  "https://picsum.photos/800/600/?random=321",
-  "https://picsum.photos/800/600/?random=654",
-  "https://picsum.photos/800/600/?random=987",
-  "https://picsum.photos/800/600/?random=123",
-  "https://picsum.photos/800/600/?random=234",
-  "https://picsum.photos/800/600/?random=567",
+import HoverCard from "../common/HoverCard";
+import { truncateWords } from "@/lib/utils";
+const pics = [
+  "https://picsum.photos/1000/800/?random=123",
+  "https://picsum.photos/500/600/?random=456",
+  "https://picsum.photos/900/700/?random=789",
+  "https://picsum.photos/600/400/?random=321",
+  "https://picsum.photos/1200/900/?random=654",
+  "https://picsum.photos/800/500/?random=987",
+  "https://picsum.photos/1000/700/?random=123",
+  "https://picsum.photos/700/800/?random=234",
+  "https://picsum.photos/450/600/?random=567",
   "https://picsum.photos/800/600/?random=890",
-  "https://picsum.photos/800/600/?random=123",
-  "https://picsum.photos/800/600/?random=456",
-  "https://picsum.photos/800/600/?random=789",
-  "https://picsum.photos/800/600/?random=321",
-  "https://picsum.photos/800/600/?random=654",
-  "https://picsum.photos/800/600/?random=987",
-  "https://picsum.photos/800/600/?random=123",
-  "https://picsum.photos/800/600/?random=234",
+  "https://picsum.photos/550/450/?random=123",
+  "https://picsum.photos/1000/600/?random=456",
+  "https://picsum.photos/400/300/?random=789",
+  "https://picsum.photos/900/800/?random=321",
+  "https://picsum.photos/1200/900/?random=654",
+  "https://picsum.photos/700/400/?random=987",
+  "https://picsum.photos/800/700/?random=123",
+  "https://picsum.photos/600/500/?random=234",
   "https://picsum.photos/800/600/?random=567",
-  "https://picsum.photos/800/600/?random=890",
+  "https://picsum.photos/500/800/?random=890",
 ];
 
 const Home = () => {
@@ -61,9 +63,11 @@ const Home = () => {
           itemsPerSlide={{ lg: 4 }}
           items={categoriesItems}
           renderItem={(item, index) => (
-            <Card className="max-w-md mx-auto shadow-xl " key={index}>
-              {/* <CardTitle>{item.title}</CardTitle> */}
-              <CardWithThumbnail
+            <Card
+              className="max-w-md mx-auto shadow-xl border-none cursor-pointer"
+              key={index}
+            >
+              <ThumbnailCard
                 title={item.title}
                 url={item.url}
                 thumbnail={item.thumbnail}
@@ -72,49 +76,26 @@ const Home = () => {
           )}
         />
       </Section>
-      <Section
-        className="bg-secondary"
-        heading={"Browse by area"}
-        subHeading="Area Cateogry"
+      {/* <Section
+        className='bg-secondary'
+        heading={'Browse by area'}
+        subHeading='Area Category'
       >
         <Map />
-      </Section>
+      </Section> */}
       <Section heading={"Recent Addition"}>
-        <Masonry />
-      </Section>
-      <Section heading="FAQ">
-        <AccordionList />
-      </Section>
-      <Section heading="How to order">
-        <div className="flex flex-col w-full">
-          <SplitSection reverse title={"test title"}>
-            <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
-              <img
-                alt="Party"
-                src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </div>
-          </SplitSection>
-          <SplitSection title={"test title"}>
-            <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
-              <img
-                alt="Party"
-                src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </div>
-          </SplitSection>
-          <SplitSection reverse title={"test title"}>
-            <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
-              <img
-                alt="Party"
-                src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </div>
-          </SplitSection>
-        </div>
+        <Masonry
+          items={pics}
+          renderItem={(item, index) => (
+            <HoverCard
+              description="More than 100,000 archival photos, maps, documents, and oral histories, as well as over 5,000 artifacts are at your fingertips. Browse the categories, neighbourhoods, "
+              key={index}
+              title={truncateWords("Test", 10)}
+              thumbnail={item}
+              url={""}
+            />
+          )}
+        />
       </Section>
     </Layout>
   );

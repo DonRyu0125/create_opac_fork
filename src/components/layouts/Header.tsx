@@ -10,9 +10,9 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import MobileMenu from "./MobileMenu";
 const Header = () => {
   const { logo, navigations, siteName } = config;
-  const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
     <header className=" bg-primary/20 mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,35 +42,7 @@ const Header = () => {
 
           <div className="flex items-center gap-4">
             <ThemeToggler />
-            <div className="block md:hidden">
-              <Button size="icon" onClick={() => setMobileMenu(true)}>
-                <MenuIcon />
-              </Button>
-              <Sheet open={mobileMenu} onOpenChange={setMobileMenu}>
-                <SheetContent>
-                  <SheetHeader>
-                    <SheetTitle>{siteName}</SheetTitle>
-                  </SheetHeader>
-                  <nav className="">
-                    <ul className="flex flex-col items-center  text-md">
-                      {navigations.map((nav) => (
-                        <li
-                          key={nav.title}
-                          className="flex items-center text-left h-12 w-full px-2 bg-secondary/90 hover:text-white hover:bg-primary/60 border-l-4 border-primary"
-                        >
-                          <Link
-                            className="transition no-underline text-md"
-                            href={nav.url}
-                          >
-                            {nav.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                </SheetContent>
-              </Sheet>
-            </div>
+            <MobileMenu />
           </div>
         </div>
       </div>
