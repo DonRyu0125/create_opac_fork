@@ -1,9 +1,6 @@
-import React from 'react';
 import Layout from '../layouts';
 
-type Props = {};
-
-const NotFoundPage = (props: Props) => {
+const NotFoundPage = () => {
   return (
     <Layout>
       <div className='flex h-screen flex-col bg-white'>
