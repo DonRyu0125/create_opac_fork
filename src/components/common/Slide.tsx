@@ -13,14 +13,10 @@ export type ItemsPerSlide = {
   lg?: number;
   xl?: number;
 };
-// const DEFAULT_ITEM_PER_SLIDE: ItemsPerSlide = {
-//   sm: 1,
-//   md: 3,
-//   lg: 3,
-//   xl: 3,
-// };
+
 export interface SlideProps<T> {
   itemsPerSlide?: ItemsPerSlide;
+  carouselStyle?: string;
   items: T[];
   className?: string;
   renderItem: (item: T, index: number) => React.ReactNode;
@@ -31,6 +27,7 @@ const Slide = <T,>({
   items,
   className,
   renderItem,
+  carouselStyle,
   auto = false,
   delay = 2000,
 }: SlideProps<T>) => {
@@ -50,7 +47,10 @@ const Slide = <T,>({
       <CarouselContent className="ml-0 md:-ml-4">
         {items.map((item, index) => (
           <CarouselItem
-            className={"sm:basis-1/1 md:basis-1/2 lg:basis-1/3 xl:basis-1/3 "}
+            className={cn(
+              "sm:basis-1/1 md:basis-1/2 lg:basis-1/3 xl:basis-1/3",
+              carouselStyle,
+            )}
             key={index}
           >
             {renderItem(item, index)}
