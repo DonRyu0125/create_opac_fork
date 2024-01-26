@@ -2,7 +2,7 @@ name: Format and Lint
 
 on:
   pull_request:
-    branches: ["*"]
+    branches: ['*']
 
 jobs:
   format-and-lint:
@@ -13,17 +13,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Node lts
-        uses: actions/setup-node@v3
-        with:
-          node-version: "latest"
-
       - uses: pnpm/action-setup@v2.2.4
         name: Install pnpm
         id: pnpm-install
         with:
           version: 8.6.1
           run_install: false
+
+      - name: Install Dependencies
+        run: pnpm install
 
       - name: Format Code
         run: pnpm run format
