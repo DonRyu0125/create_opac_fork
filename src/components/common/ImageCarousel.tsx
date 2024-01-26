@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import Slide from './Slide';
-import { ChevronLeft, ChevronRight, Scan } from 'lucide-react';
-import LightboxImage from './LightboxImage';
+import Slide from "./Slide";
+import { ChevronLeft, ChevronRight, Scan } from "lucide-react";
+import LightboxImage from "./LightboxImage";
 
 export type ImageProps = {
   src: string;
@@ -20,38 +20,38 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
   const currentImage = items[current];
 
   return (
-    <div className='flex flex-col space-y-4'>
+    <div className="flex flex-col space-y-4">
       <Slide
-        carouselStyle='sm:basis-1/4'
+        carouselStyle="sm:basis-1/4"
         items={items}
         renderItem={(item, index) => (
-          <div className='cursor-pointer' onClick={() => setCurrent(index)}>
+          <div className="cursor-pointer" onClick={() => setCurrent(index)}>
             {renderItems(item, index)}
           </div>
         )}
         auto={false}
       />
 
-      <div className='flex w-full group cursor-pointer relative'>
-        <img className='mx-auto' {...currentImage} />
+      <div className="flex w-full group cursor-pointer relative">
+        <img className="mx-auto" {...currentImage} />
         <Scan
-          strokeWidth={'3px'}
-          className='cursor-pointer absolute bg-gray-400 bg-opacity-30  w-8 h-8 text-white hover:text-primary bottom-2 right-2 transition-all ease-in duration-400 '
+          strokeWidth={"3px"}
+          className="cursor-pointer absolute bg-gray-400 bg-opacity-30  w-8 h-8 text-white hover:text-primary bottom-2 right-2 transition-all ease-in duration-400 "
           onClick={() => setOpenLightbox(true)}
         />
 
         <ChevronLeft
-          strokeWidth={'3px'}
-          className='cursor-pointer absolute bg-gray-400 bg-opacity-30 w-8 h-8 text-white hover:text-primary left-2 top-1/2  transition-all ease-in duration-400 '
+          strokeWidth={"3px"}
+          className="cursor-pointer absolute bg-gray-400 bg-opacity-30 w-8 h-8 text-white hover:text-primary left-2 top-1/2  transition-all ease-in duration-400 "
           onClick={() => setCurrent(current - 1 < 0 ? 0 : current - 1)}
         />
 
         <ChevronRight
-          strokeWidth={'3px'}
-          className='cursor-pointer absolute bg-gray-400 bg-opacity-30  w-8 h-8 text-white hover:text-primary right-2 top-1/2 transition-all ease-in duration-400 '
+          strokeWidth={"3px"}
+          className="cursor-pointer absolute bg-gray-400 bg-opacity-30  w-8 h-8 text-white hover:text-primary right-2 top-1/2 transition-all ease-in duration-400 "
           onClick={() =>
             setCurrent(
-              current + 1 === items.length ? items.length - 1 : current + 1
+              current + 1 === items.length ? items.length - 1 : current + 1,
             )
           }
         />
