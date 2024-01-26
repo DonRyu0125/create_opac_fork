@@ -41,6 +41,9 @@ dependencies:
   '@sentry/react':
     specifier: ^7.98.0
     version: 7.98.0(react@18.2.0)
+  '@sentry/tracing':
+    specifier: ^7.98.0
+    version: 7.98.0
   chalk:
     specifier: ^5.3.0
     version: 5.3.0
@@ -1755,6 +1758,13 @@ packages:
       '@sentry/core': 7.98.0
       '@sentry/types': 7.98.0
       '@sentry/utils': 7.98.0
+    dev: false
+
+  /@sentry/tracing@7.98.0:
+    resolution: {integrity: sha512-O5lKcxkeNxoChJI0b/sX3N1TA5TjQuFwH9fMS00xWUFY0ei9HewBZbbx9c9aye2aRIWF2EHMsASZ+GCWGOZTlQ==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry-internal/tracing': 7.98.0
     dev: false
 
   /@sentry/types@7.98.0:
