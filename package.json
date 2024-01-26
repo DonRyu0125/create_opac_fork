@@ -59,6 +59,7 @@
     "fs": "0.0.1-security",
     "leaflet": "^1.9.4",
     "postcss": "^8.4.33",
+    "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "react-leaflet": "^4.2.1",
     "tailwindcss": "^3.4.1",
