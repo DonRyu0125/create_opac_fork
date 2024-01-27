@@ -1,17 +1,14 @@
 import { home } from "@/constants";
-import AccordionList from "../common/AccordionList";
+import { truncateWords } from "@/lib/utils";
 import Hero from "../common/Hero";
+import HoverCard from "../common/HoverCard";
+import Masonry from "../common/Masonry";
 import SearchForm from "../common/SearchForm";
 import Section from "../common/Section";
 import Slide from "../common/Slide";
-import SplitSection from "../common/SplitSection";
-import Layout from "../layouts";
-import { Card, CardTitle } from "../ui/card";
 import ThumbnailCard from "../common/ThumbnailCard";
-import Map from "../common/Map";
-import Masonry from "../common/Masonry";
-import HoverCard from "../common/HoverCard";
-import { truncateWords } from "@/lib/utils";
+import Layout from "../layouts";
+import { Card } from "../ui/card";
 const pics = [
   "https://picsum.photos/1000/800/?random=123",
   "https://picsum.photos/500/600/?random=456",
@@ -43,6 +40,8 @@ const Home = () => {
     browseByCategoryTitle,
     categoriesItems,
   } = home;
+
+
   return (
     <Layout>
       <Hero

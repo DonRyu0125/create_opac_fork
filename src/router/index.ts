@@ -6,6 +6,7 @@ import Summary from '@/components/page-template/Summary';
 
 export type TRoute = Record<string, () => React.ReactNode>;
 
+
 export const ROUTES: TRoute = {
   home: Home,
   summary: Summary,
@@ -13,6 +14,14 @@ export const ROUTES: TRoute = {
   faq: FAQ,
 };
 
+
+
+
+/**
+ * Return the Component for the corresponding key
+ * @param key
+ * @returns
+ */
 export const getComponentFromKey = (key: string): (() => React.ReactNode) => {
   if (key in ROUTES) {
     return ROUTES[key];
