@@ -16,7 +16,6 @@ export const ROUTES: TRoute = {
 
 
 
-
 /**
  * Return the Component for the corresponding key
  * @param key
