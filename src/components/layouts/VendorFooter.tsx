@@ -14,7 +14,7 @@ const VendorFooter = ({ logo }: VendorFooterProps) => {
     <section id='footer'>
       <div
         id='license'
-        className='bg-primary text-center text-white py-[50px] px-[8px] sm:px-[200px]'
+        className='bg-ford-darkblue text-center text-white py-[50px] px-[8px] sm:px-[200px]'
       >
         <p className='text-[16px] sm:text-[18px] font-medium leading-[21px]'>
           Please read carefully
