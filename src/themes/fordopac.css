@@ -30,8 +30,9 @@
 --radius: 20px;
 
 --ford-white: 0 0% 95.7%;
+
 --ford-grey:0 0% 61.2%;
---ford-dark-blue:213.9 100% 9%;
+
 }
 
 .theme-fordopac.dark {
@@ -63,4 +64,9 @@
   --destructive-foreground: 0, 0%, 100%;
 
   --ring: 0, 100%, 44%;
+}
+
+
+#footer a:hover {
+ text-decoration: underline;
 }
