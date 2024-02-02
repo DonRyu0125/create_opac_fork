@@ -5,7 +5,7 @@ const inputDir = "./src/themes";
 
 const styleMapPath = "./src/themes/index.json";
 
-const mainCSSPath = "./src/index.css";
+const mainCSSPath = "./src/styles/index.css";
 
 function main() {
   try {
