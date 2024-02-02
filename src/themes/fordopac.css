@@ -1,5 +1,5 @@
 .theme-fordopac.light {
-  --background: 240.00 17.65% 96.67%;
+--background: 240.00 17.65% 96.67%;
 --foreground: 233.33 100.00% 1.76%;
 
 --primary: 234.07 100.00% 17.84%;
@@ -28,6 +28,10 @@
 --ring: 234.07 100.00% 17.84%;
 
 --radius: 20px;
+
+--ford-white: 0 0% 95.7%;
+
+--ford-grey:0 0% 61.2%;
 }
 
 .theme-fordopac.dark {
