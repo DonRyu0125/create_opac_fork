@@ -1,13 +1,13 @@
+import { SiTwitter } from '@icons-pack/react-simple-icons';
 
+type VendorFooterProps = { logo: string };
 
-type Props = {};
-
-const VendorFooter = (props: Props) => {
+const VendorFooter = ({ logo }: VendorFooterProps) => {
   return (
     <section id='footer'>
       <div
         id='license'
-        className='bg-[#00142E] text-center text-white py-[50px] px-[8px] sm:px-[200px]'
+        className='bg-dark-blue text-center text-white py-[50px] px-[8px] sm:px-[200px]'
       >
         <p className='text-[16px] sm:text-[18px] font-medium leading-[21px]'>
           Please read carefully
@@ -243,7 +243,7 @@ const VendorFooter = (props: Props) => {
 
       <div
         id=''
-        className='h-[170px] sm:h-[80px] bg-[#00095B] text-white flex flex-col sm:flex-row justify-evenly sm:justify-between py-[25px] px-[15px] sm:px-[100px] space-y-[25px] sm:space-y-0'
+        className='h-[170px] sm:h-[80px] bg-primary text-white flex flex-col sm:flex-row justify-evenly sm:justify-between py-[25px] px-[15px] sm:px-[100px] space-y-[25px] sm:space-y-0'
       >
         <div className='flex space-x-[15px]' id='surveyButton'></div>
         <div className='flex flex-col sm:flex-row justify-around sm:space-x-[30px]'>
@@ -255,6 +255,7 @@ const VendorFooter = (props: Props) => {
           <div className='sm:self-center footerSocialLink'>
             <a href='https://twitter.com/Ford' aria-label='Twitter Link'>
               <i className='fa-brands fa-twitter-square' aria-hidden='true'></i>
+              <SiTwitter color='default' size={24} />
             </a>
             <a
               href='https://www.linkedin.com/company/ford-motor-company'
@@ -283,7 +284,7 @@ const VendorFooter = (props: Props) => {
 
       <div
         id='fordLinks'
-        className='bg-ford-white text-center text-[#4D4D4D] py-[50px] px-[15px] sm:px-[100px]'
+        className='bg-ford-white text-center  py-[50px] px-[15px] sm:px-[100px]'
       >
         <div className='flex flex-col lg:flex-row justify-evenly mt-[15px] '>
           <a
@@ -291,12 +292,8 @@ const VendorFooter = (props: Props) => {
             href='https://corporate.ford.com/about/copyright.html'
             target='_blank'
           >
-            <img
-              alt='Ford Logo'
-              className='h-[30px] mx-1'
-              src='/assets/images/ford-logo.png'
-            />
-            © {new Date().getFullYear()} The Ford Motor Company <p></p>
+            <img alt='Ford Logo' className='h-[30px] mx-1' src={logo} />©{' '}
+            {new Date().getFullYear()} The Ford Motor Company <p></p>
           </a>
         </div>
         <a
