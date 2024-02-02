@@ -1,4 +1,11 @@
-import { SiTwitter } from '@icons-pack/react-simple-icons';
+import {
+  SiTwitter,
+  SiLinkedin,
+  SiFacebook,
+  SiInstagram,
+} from '@icons-pack/react-simple-icons';
+import { Button } from '../ui/button';
+import Link from '../common/Link';
 
 type VendorFooterProps = { logo: string };
 
@@ -246,38 +253,40 @@ const VendorFooter = ({ logo }: VendorFooterProps) => {
         className='h-[170px] sm:h-[80px] bg-primary text-white flex flex-col sm:flex-row justify-evenly sm:justify-between py-[25px] px-[15px] sm:px-[100px] space-y-[25px] sm:space-y-0'
       >
         <div className='flex space-x-[15px]' id='surveyButton'></div>
-        <div className='flex flex-col sm:flex-row justify-around sm:space-x-[30px]'>
-          <div className='sm:self-center'>
+        <div className='flex flex-col sm:flex-row justify-around space-y-2 sm:space-y-0 sm:space-x-4'>
+          <div className='flex items-center'>
             <p className='text-[16px] text-ford-white leading-[19px]'>
               Connect with us
             </p>
           </div>
-          <div className='sm:self-center footerSocialLink'>
-            <a href='https://twitter.com/Ford' aria-label='Twitter Link'>
-              <i className='fa-brands fa-twitter-square' aria-hidden='true'></i>
-              <SiTwitter color='default' size={24} />
-            </a>
-            <a
-              href='https://www.linkedin.com/company/ford-motor-company'
-              aria-label='LinkedIn Link'
-            >
-              <i className='fa-brands fa-linkedin' aria-hidden='true'></i>
-            </a>
-            <a href='https://www.facebook.com/ford' aria-label='Ford Link'>
-              <i
-                className='fa-brands fa-facebook-square'
-                aria-hidden='true'
-              ></i>
-            </a>
-            <a
-              href='https://www.instagram.com/accounts/login/?next=/ford/'
-              aria-label='Instagram Link'
-            >
-              <i
-                className='fa-brands fa-instagram-square'
-                aria-hidden='true'
-              ></i>
-            </a>
+          <div className='footerSocialLink flex flex-row space-x-2 items-center'>
+            <div className='bg-white text-primary p-1 rounded'>
+              <Link href='https://twitter.com/Ford' aria-label='Twitter Link'>
+                <SiTwitter />
+              </Link>
+            </div>
+            <div className='bg-white text-primary p-1 rounded'>
+              <Link
+                href='https://www.linkedin.com/company/ford-motor-company'
+                aria-label='LinkedIn Link'
+              >
+                <SiLinkedin />
+              </Link>
+            </div>
+            <div className='bg-white text-primary p-1 rounded'>
+              <Link href='https://www.facebook.com/ford' aria-label='Ford Link'>
+                <SiFacebook />
+              </Link>
+            </div>
+            <div className='bg-white text-primary p-1 rounded'>
+              <Link
+                href='https://www.instagram.com/accounts/login/?next=/ford/'
+                aria-label='Instagram Link'
+                s
+              >
+                <SiInstagram />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
