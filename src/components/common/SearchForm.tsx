@@ -3,7 +3,6 @@ import { Input } from '@/components/ui/input';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { Search } from 'lucide-react';
-
 export interface SearchFormProps extends React.HTMLAttributes<HTMLFormElement> {
   searchURL: string;
   inputName: string;

@@ -54,7 +54,7 @@
     @apply bg-background text-foreground;
   }
   html {
-    @apply bg-primary;
+    @apply bg-ford-darkblue;
   }
 }
 
