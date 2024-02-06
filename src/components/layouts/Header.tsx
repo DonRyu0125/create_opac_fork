@@ -15,7 +15,7 @@ const Header = () => {
   const { logo, navigations, siteName } = config;
 
   return (
-    <header className=' bg-primary/20 mx-auto px-4 sm:px-6 lg:px-8'>
+    <header className=' bg-primary  mx-auto px-4 sm:px-6 lg:px-8'>
       <div className='flex h-16 items-center justify-between'>
         <div className='flex-1 md:flex md:items-center md:gap-12'>
           <a className='block text-teal-600' href='/'>
@@ -26,11 +26,11 @@ const Header = () => {
 
         <div className='md:flex md:items-center md:gap-12'>
           <nav aria-label='Global' className='hidden md:block'>
-            <ul className='flex items-center gap-6 text-sm'>
+            <ul className='flex items-center gap-6 text-sm '>
               {navigations.map((nav) => (
                 <li key={nav.title}>
                   <Link
-                    className='transition no-underline text-md'
+                    className='transition no-underline text-md text-ford-white hover:text-ford-grey'
                     href={nav.url}
                   >
                     {nav.title}
