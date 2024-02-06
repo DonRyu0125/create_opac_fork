@@ -17,7 +17,13 @@ import PagePagination from '../common/PagePagination';
 import SearchForm from '../common/SearchForm';
 import { Separator } from '../ui/separator';
 import { Button } from '../ui/button';
-import { ChevronRight, Copy, Heart, Mail } from 'lucide-react';
+import {
+  ChevronRight,
+  Copy,
+  Heart,
+  Mail,
+  SlidersHorizontal,
+} from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -71,11 +77,10 @@ const Summary = () => {
           ]}
         >
           <div className='flex w-full flex-row space-x-2 justify-end'>
-            <SearchForm
-              searchURL={''}
-              inputName={''}
-              className='my-0 w-full md:max-w-md mx-0 min-w-80'
-            />
+            <Button>
+              <SlidersHorizontal className='mr-2 h-4 w-4' />
+              Advanced Search
+            </Button>
             <Separator orientation='vertical' />
             <ViewToggle />
           </div>
