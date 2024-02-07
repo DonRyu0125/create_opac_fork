@@ -31,7 +31,29 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 import { useState } from 'react';
+import { cn } from '@/lib/utils';
 
+const RecordAction = () => {
+  const [like, setLike] = useState(false);
+  return (
+    <>
+      <Button variant='ghost' size='icon' onClick={() => setLike(!like)}>
+        <Heart
+          className={cn('h-4 w-4 text-primary')}
+          fill={like ? 'hsl(var(--primary))' : 'rgb(0,0,0,0)'}
+        />
+      </Button>
+      <Separator orientation='vertical' />
+      <Button variant='ghost' size='icon'>
+        <Copy className='h-4 w-4 text-primary' />
+      </Button>
+      <Separator orientation='vertical' />
+      <Button variant='ghost' size='icon'>
+        <Mail className='h-4 w-4 text-primary' />
+      </Button>
+    </>
+  );
+};
 const SummaryPageAction = () => {
   return (
     <div className='flex flex-col space-y-4'>
@@ -127,17 +149,7 @@ const Summary = () => {
                       thumbnail='https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
                       footer={
                         <div className='flex h-4 items-center space-x-4 w-full justify-evenly '>
-                          <Button variant='ghost' size='icon'>
-                            <Heart className='h-4 w-4 text-primary' />
-                          </Button>
-                          <Separator orientation='vertical' />
-                          <Button variant='ghost' size='icon'>
-                            <Copy className='h-4 w-4 text-primary' />
-                          </Button>
-                          <Separator orientation='vertical' />
-                          <Button variant='ghost' size='icon'>
-                            <Mail className='h-4 w-4 text-primary' />
-                          </Button>
+                          <RecordAction />
                         </div>
                       }
                     />
@@ -154,17 +166,7 @@ const Summary = () => {
                         <div>
                           <Separator />
                           <div className='flex h-12 items-center space-x-4 w-full justify-evenly '>
-                            <Button variant='ghost' size='icon'>
-                              <Heart className='h-4 w-4 text-primary' />
-                            </Button>
-                            <Separator orientation='vertical' />
-                            <Button variant='ghost' size='icon'>
-                              <Copy className='h-4 w-4 text-primary' />
-                            </Button>
-                            <Separator orientation='vertical' />
-                            <Button variant='ghost' size='icon'>
-                              <Mail className='h-4 w-4 text-primary' />
-                            </Button>
+                            <RecordAction />
                           </div>
                         </div>
                       }
