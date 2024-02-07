@@ -5,7 +5,45 @@ This is the React repository for a OPAC Template. Although it's possible, please
 
 
 ## Getting Started
-To install the repository, please make sure your environment has the latest version of Node
+To install the repository, please make sure your environment has the latest version of Node or at least version 21.x
+
+You will also need to have these following:
+
+- git: [website](https://git-scm.com/downloads)
+- docsify: `npm i docsify-cli -g`
+
+
+To clone the repository, simply run the following from your command line:
+```shell
+git clone --depth 3 -b main https://github.com/gitminisis/create_opac  
+```
+
+Under the root directory, run npm install
+```shell
+cd create_opac
+```
+
+```shell
+npm install
+```
+
+Once everything is installed, you have a couple of options to choose here
+
+- `npm run start`: To run project in development without needing to connect to the SMA side. This also supports HMR while making changes to the code base
+
+- `npm run dev`: Similarly to `start` but this one will create a `/dist` folder (development mode) which will serve as bundled js files that will be used for the SMA reports and your OPAC. This also supports HMR.
+
+- `npm run build`: Build a production output folder for the project.
+
+- `npm run lint`: Run ESLint to check for any unused imports, potential errors, type mismatching, etc.
+
+- `npm run format`: Format the whole repo
+
+- `npm run theme`: To generate the `index.css` which is required when a new css theme file is added. 
+
+- `npm run schema`: To generate JSON schema for every file in `/constants` folder which are required for the CMS dashboard 
+
+- `npm run doc`: To view the docs on a webpage
 
 ## Project Structure
 Explanation of the directory structure of the project and the purpose of each folder/file. This may include folders like `src` (source code), `public` (static assets), `node_modules` (dependencies), etc.
