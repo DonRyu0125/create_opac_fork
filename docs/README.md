@@ -13,10 +13,22 @@ You will also need to have these following:
 - docsify: `npm i docsify-cli -g`
 
 
-To clone the repository, simply run the following from your command line:
+To clone the repository, simply run the following from your command line. This one will clone the project without having the existing history commits.
+
 ```shell
 git clone --depth 3 -b main https://github.com/gitminisis/create_opac  
 ```
+
+Another approach is to do a regular clone and checkout to a new branch
+
+```shell
+git clone https://github.com/gitminisis/create_opac  
+```
+
+```shell
+git checkout -b new_branch
+```
+
 
 Under the root directory, run npm install
 ```shell
@@ -47,6 +59,26 @@ Once everything is installed, you have a couple of options to choose here
 
 ## Project Structure
 Explanation of the directory structure of the project and the purpose of each folder/file. This may include folders like `src` (source code), `public` (static assets), `node_modules` (dependencies), etc.
+
+```
+── src                          Repository source code
+│   ├── assets                  Media files
+│   ├── components              React components
+│   │   ├── common              Custom components that are built from ui components
+│   │   ├── layouts             Page layout 
+│   │   ├── page-template       Pages for the OPAC
+│   │   └── ui                  shadcn-ui components
+│   ├── constants               JSON files that store the pages data
+│   ├── hooks                   Custom hooks
+│   ├── lib                     External libraries, helper functions, etc.
+│   ├── providers               Providers for any React.Context 
+│   ├── router                  Routes handler for the project
+│   ├── schema                  Generated JSON schema from /constants folder
+│   ├── store                   State management library store
+│   ├── styles                  Styling
+│   └── themes                  Custom theme
+└── tools                       Code generation tools
+```
 
 ## Components
 Documentation on the components used in the project, including functional components, class components, and any custom or third-party components. This may include details on props, state, lifecycle methods, and how to use them.
