@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "schema": "node ./tools/gen-schema.js",
     "theme": "node ./tools/gen-theme.js",
-    "page": "node ./tools/gen-page.js -h test"
+    "doc" :"docsify serve docs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
