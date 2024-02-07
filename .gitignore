@@ -27,3 +27,7 @@ dist-ssr
 */themes/index.json
 */schema/*.json
 .vite
+
+.env
+
+pnpm-lock.yaml

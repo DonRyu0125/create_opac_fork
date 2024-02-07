@@ -1,13 +1,20 @@
-import { Layout } from "lucide-react";
+import { faq } from "@/constants";
 import AccordionList from "../common/AccordionList";
+import Hero from "../common/Hero";
 import Section from "../common/Section";
 import SplitSection from "../common/SplitSection";
+import Layout from "../layouts";
 
-type Props = {};
-
-const FAQ = (props: Props) => {
+const FAQ = () => {
+  const { heading, subHeading, heroBanner } = faq;
   return (
     <Layout>
+      <Hero
+        className=""
+        title={heading}
+        description={subHeading}
+        backgroundImage={heroBanner}
+      ></Hero>
       <Section heading="FAQ">
         <AccordionList />
       </Section>
