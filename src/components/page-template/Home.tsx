@@ -56,6 +56,7 @@ const Home = () => {
           inputName={"KEYWORD_CL"}
         />
       </Hero>
+      
       <Section heading={browseByCategoryTitle}>
         <Slide
           // auto
