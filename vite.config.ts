@@ -7,15 +7,17 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": resolve(__dirname, "./src"),
+      '@': resolve(__dirname, './src'),
     },
   },
   build: {
+    sourcemap: false,
+    minify: false,
     rollupOptions: {
       output: {
         inlineDynamicImports: true,
-        entryFileNames: "[name].js", // currently does not work for the legacy bundle
-        assetFileNames: "[name].[ext]", // currently does not work for images
+        entryFileNames: '[name].js', // currently does not work for the legacy bundle
+        assetFileNames: '[name].[ext]', // currently does not work for images
       },
     },
   },
