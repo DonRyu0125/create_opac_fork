@@ -83,7 +83,7 @@ const Home = () => {
       {/* <Map /> */}
       {/* </Section> */}
       <Section heading={'Recent Addition'}>
-        <Masonry
+        {/* <Masonry
           items={pics}
           renderItem={(item, index) => (
             <HoverCard
@@ -94,7 +94,7 @@ const Home = () => {
               url={''}
             />
           )}
-        />
+        /> */}
       </Section>
     </Layout>
   );
