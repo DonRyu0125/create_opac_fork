@@ -1,17 +1,21 @@
 import fs from "fs";
-import path from "path";
+import path, { resolve } from "path";
 import { getFiles } from "./index.mjs";
-const inputDir = "./src/constants";
-const outDir = "./src/schema";
+
+// eslint-disable-next-line no-undef
+const base = process.cwd()
+
+const inputDir = resolve(base, 'src/constants')
+const outDir = resolve(base, 'src/schema')
+
 
 function main() {
   try {
     console.log("Generating schemas .......");
     console.time("gen-schema");
     const files = getFiles(inputDir, "json");
-
     files.forEach((file) => {
-      const filePath = `${inputDir}/${file}`;
+      const filePath = resolve(inputDir, file)
       generateSchema(filePath, outDir);
     });
 
@@ -43,6 +47,9 @@ function generateSchema(filePath = "./", outDir = "./schema") {
       };
       const schemaContent = { ...metadata, ...root };
       const schemaPath = `${outDir}/${fileName}`;
+      if (!fs.existsSync(outDir)) {
+        fs.mkdirSync(outDir);
+      }
 
       if (fs.existsSync(schemaPath)) {
         fs.unlinkSync(schemaPath);

@@ -21,7 +21,8 @@ export const ROUTES: TRoute = {
  * @param key
  * @returns
  */
-export const getComponentFromKey = (key: string): (() => React.ReactNode) => {
+export const getComponentFromKey = (key: string | undefined): (() => React.ReactNode) => {
+  if(!key) return NotFoundPage
   if (key in ROUTES) {
     return ROUTES[key];
   }
