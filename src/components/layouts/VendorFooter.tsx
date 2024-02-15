@@ -4,7 +4,6 @@ import {
   SiFacebook,
   SiInstagram,
 } from '@icons-pack/react-simple-icons';
-import { Button } from '../ui/button';
 import Link from '../common/Link';
 
 type VendorFooterProps = { logo: string };

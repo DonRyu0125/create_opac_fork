@@ -1,4 +1,4 @@
-import { getFiles, setFileContent } from "./index.js";
+import { getFiles, setFileContent } from "./index.mjs";
 import { EOL } from "os";
 
 const inputDir = "./src/themes";
