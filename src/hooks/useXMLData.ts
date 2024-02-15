@@ -1,4 +1,4 @@
-import { GenericObject, deepSearchKey, getDataFromXML } from '@/lib/record';
+import { deepSearchKey, getDataFromXML } from '@/lib/record';
 import { pageData } from '@/store';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';

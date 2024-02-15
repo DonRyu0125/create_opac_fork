@@ -7,13 +7,12 @@ import { Label } from '../ui/label';
 import InfoCard from '../common/InfoCard';
 import PageAction from '../common/PageAction';
 import Link from '../common/Link';
-import { pageData, setPageDataAtom, viewAtom } from '../../store';
+import { pageData, viewAtom } from '../../store';
 import { useAtom } from 'jotai';
 import DetailInfoCard from '../common/DetailInfoCard';
 import DataWithLabel from '../common/DataWithLabel';
 import ViewToggle from '../common/ViewToggle';
 import PagePagination from '../common/PagePagination';
-import SearchForm from '../common/SearchForm';
 import { Separator } from '../ui/separator';
 import { Button } from '../ui/button';
 import {
@@ -29,9 +28,9 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { deepSearchKey, getDataFromXML } from '@/lib/record';
+import { deepSearchKey } from '@/lib/record';
 import useXMLData from '@/hooks/useXMLData';
 
 const RecordAction = () => {
@@ -59,16 +58,16 @@ const SummaryPageAction = () => {
   const [data] = useAtom(pageData);
   return (
     <div className='flex flex-col space-y-4'>
-      <div>
+      <div className='flex flex-col space-y-2'>
         <Label>Record per page</Label>
         <DropdownSelect title={'Select records number'} options={[]} />
       </div>
-      <div>
+      <div className='flex flex-col space-y-2'>
         <Label>Sort by</Label>
         <DropdownSelect title={'Sort by'} options={[]} />
       </div>
 
-      <div>
+      <div className='flex flex-col space-y-2'>
         <Label>Filter by</Label>
         <div className='flex flex-col space-y-4'>
           <CollapseList title='Date' expand={true}>
@@ -147,6 +146,7 @@ const Summary = () => {
   const [mobileFilter, setMobileFilter] = useState(false);
 
   const { data, common } = useXMLData({ selector: '#xml_record' });
+  if (!data) return <></>;
   return (
     <Layout>
       <div className='rounded-sm border border-primary bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12'>
@@ -173,8 +173,8 @@ const Summary = () => {
         <section>
           <div className='mx-auto  py-4   sm:py-12  container flex flex-col'>
             <PageHeader
-              heading={'240 results for "Test"'}
-              subHeading='Displaying 1-40 of 240'
+              heading={`${common.total_record} results for "${common.search_statement}"`}
+              subHeading={`Displaying ${common.first_record_seq}-${common.last_record_seq} of ${common.total_record}`}
             />
             <div className='mt-8 block lg:hidden'>
               <Button

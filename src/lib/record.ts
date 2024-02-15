@@ -33,6 +33,7 @@ export function deepSearchKey<T extends GenericObject>(
   obj: T,
   targetKey: string
 ): unknown[] | string[] {
+    
   const result: unknown[] | string[] = [];
 
   function search(obj: GenericObject, targetKey: string) {
