@@ -1,5 +1,5 @@
-import chalk from "chalk";
-import { Command } from "commander";
+const chalk = require("chalk");
+const { Command } = require("commander");
 
 function main() {
   const program = new Command();
