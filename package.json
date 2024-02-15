@@ -13,7 +13,6 @@
     "doc": "docsify serve docs"
   },
   "dependencies": {
-    "@hendt/xml2json": "^1.0.3",
     "@icons-pack/react-simple-icons": "^9.3.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -47,7 +46,6 @@
     "typescript": "^4.9.5",
     "vite-plugin-css-injected-by-js": "^3.4.0",
     "x2js": "^3.4.4",
-    "xml2js": "^0.6.2",
     "yet-another-react-lightbox": "^3.17.0"
   },
   "eslintConfig": {
