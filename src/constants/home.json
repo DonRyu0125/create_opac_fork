@@ -1,6 +1,7 @@
 {
   "heading": "Ford Library",
   "heroBanner": "https://www.ford.ca/is/image/content/dam/brand_ford/en_ca/brand/trucks/f-150/reveal_f-150_raptorR/dm/23_FRD_F15_Raptor_R_58620.tif?croppathe=1_21x9&wid=900",
+  "searchURL": "/scripts/mwimain.dll?UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]374.htm&KEEP=Y&APPLICATION=UNION_VIEW&language=144&REPORT=WEB_UNION_SUM",
   "browseByCategoryTitle": "Browse by Category",
   "categoriesItems": [
     {

@@ -41,7 +41,7 @@ const Header = () => {
           </nav>
 
           <div className='flex items-center gap-4'>
-            {/* <ThemeToggler /> */}
+            <ThemeToggler />
             <MobileMenu />
           </div>
         </div>

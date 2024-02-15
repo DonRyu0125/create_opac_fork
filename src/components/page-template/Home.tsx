@@ -33,14 +33,20 @@ const pics = [
 ];
 
 const Home = () => {
-  const { heading, heroBanner, browseByCategoryTitle, categoriesItems } = home;
+  const {
+    heading,
+    heroBanner,
+    browseByCategoryTitle,
+    categoriesItems,
+    searchURL,
+  } = home;
 
   return (
     <Layout>
       <Hero className='' title={heading} backgroundImage={heroBanner}>
         <SearchForm
           className='w-full mt-6 max-w-2xl'
-          searchURL={'/action'}
+          searchURL={searchURL}
           inputName={'KEYWORD_CL'}
         />
       </Hero>
@@ -83,7 +89,7 @@ const Home = () => {
               url={''}
             />
           )}
-        /> 
+        />
       </Section>
     </Layout>
   );
