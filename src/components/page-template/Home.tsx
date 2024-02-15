@@ -44,6 +44,7 @@ const Home = () => {
           inputName={'KEYWORD_CL'}
         />
       </Hero>
+
       <Section heading={browseByCategoryTitle}>
         <Slide
           // auto
@@ -82,7 +83,7 @@ const Home = () => {
               url={''}
             />
           )}
-        />
+        /> 
       </Section>
     </Layout>
   );
