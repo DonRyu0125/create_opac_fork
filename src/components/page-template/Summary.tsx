@@ -32,6 +32,7 @@ import {
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { deepSearchKey, getDataFromXML } from '@/lib/record';
+import useXMLData from '@/hooks/useXMLData';
 
 const RecordAction = () => {
   const [like, setLike] = useState(false);
@@ -86,11 +87,9 @@ const SummaryPageAction = () => {
 
 const RecordView = ({ record }) => {
   const [view] = useAtom(viewAtom);
-  console.log(record);
   const title = deepSearchKey(record, 'legal_title');
   const description = deepSearchKey(record, 'obj_description');
   const id = deepSearchKey(record, 'accession_number');
-  console.log({ title, description });
   if (view === 'grid') {
     return (
       <InfoCard
@@ -145,15 +144,9 @@ export const SummaryRecords = ({ records }) => {
   );
 };
 const Summary = () => {
-  const [data, setData] = useAtom(pageData);
   const [mobileFilter, setMobileFilter] = useState(false);
 
-  const jsonData = getDataFromXML('#xml_record');
-
-  useEffect(() => {
-    setData(jsonData);
-  }, []);
-
+  const { data, common } = useXMLData({ selector: '#xml_record' });
   return (
     <Layout>
       <div className='rounded-sm border border-primary bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12'>
