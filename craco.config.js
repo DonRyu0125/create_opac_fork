@@ -1,8 +1,9 @@
 const path = require("path");
 
-const overrideWebpackConfig = ({ webpackConfig, context }) => {
+const overrideWebpackConfig = ({ webpackConfig }) => {
   webpackConfig.output.path = path.resolve("dist");
   webpackConfig.output.filename = "main.js";
+  webpackConfig.output.clean = true;
   webpackConfig.resolve.alias = {
     "@": path.resolve(__dirname, "src"),
   };
@@ -14,6 +15,7 @@ module.exports = {
     devMiddleware: {
       writeToDisk: true,
     },
+
   },
   eslint: {
     enable: false,
