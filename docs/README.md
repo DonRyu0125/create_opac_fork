@@ -4,6 +4,18 @@
 
 This is the React repository for a OPAC Template. Although it's possible, please use this repository as a boilerplate/guideline rather than a final version of your application. This project is designed with the intention to be highly customizable and extensible and for that reason, everything was built to be generic and easy to modify.
 
+## Feature
+- ✅Search (Union, single)
+- ✅Advanced search
+- ✅Bookmark record
+- ✅Permanent record URL
+- ✅Email bookmark
+- ✅User authentication
+- ✅Request
+- ✅Enquiry
+
+
+
 ## Getting Started
 
 To install the repository, please make sure your environment has the latest version of Node or at least version 21.x
@@ -12,7 +24,7 @@ You will also need to have these following:
 
 - [git](https://git-scm.com/downloads): Version control
 - [pnpm](https://pnpm.io/installation): Package manager
-- docsify:
+- [docsify](https://docsify.js.org/): Document generator
 
 To clone the repository, simply run the following from your command line. This one will clone the project without having the existing history commits.
 
@@ -58,6 +70,15 @@ Once everything is installed, you have a couple of options to choose here
 
 - `pnpm run doc`: To view the docs on a webpage
 
+
+## Setup the backend
+
+### IIS
+
+### MWI
+
+
+
 ## Project Structure
 
 Explanation of the directory structure of the project and the purpose of each folder/file. This may include folders like `src` (source code), `public` (static assets), `node_modules` (dependencies), etc.
@@ -85,6 +106,7 @@ Explanation of the directory structure of the project and the purpose of each fo
 ## Components
 
 Every building block components for the UI will be put inside the `components/` folder. As you continue to add more components to the OPAC, keep in mind each of the sub folders serve a different purpose. Please refer to this diagram below while deciding where your React component lives.
+
 <span style="height:200px">![Components Decision](./images/folder-decision.png)</span>
 
 
