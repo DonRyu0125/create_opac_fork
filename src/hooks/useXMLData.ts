@@ -31,7 +31,7 @@ const useXMLData = ({ selector }: Props) => {
 
 	useEffect(() => {
 		setData(jsonData)
-	}, [jsonData, setData])
+	}, [])
 
 	const getCommonFields = () => {
 		const object: COMMON_FIELDS_OBJECT = {}
