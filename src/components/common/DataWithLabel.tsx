@@ -1,20 +1,20 @@
-import React from "react";
-import { Label } from "../ui/label";
-import { cn } from "@/lib/utils";
+import React from 'react'
+import { Label } from '../ui/label'
+import { cn } from '@/lib/utils'
 
 type DataWithLabelProps = {
-  className?: string;
-  label: string;
-  items: string[] | React.ReactNode[];
-};
+	className?: string
+	label: string
+	items: string[] | React.ReactNode[]
+}
 
 const DataWithLabel = ({ className, label, items }: DataWithLabelProps) => {
-  return (
-    <div className={cn("flex flex-row items-center space-x-2", className)}>
-      <Label className="text-sm">{label}:</Label>
-      <div className="text-sm font-normal">{items.map((item) => item)}</div>
-    </div>
-  );
-};
+	return (
+		<div className={cn('flex flex-row items-center space-x-2', className)}>
+			<Label className="text-sm">{label}:</Label>
+			<div className="text-sm font-normal">{items.map((item) => item)}</div>
+		</div>
+	)
+}
 
-export default DataWithLabel;
+export default DataWithLabel

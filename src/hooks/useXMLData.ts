@@ -1,64 +1,64 @@
-import { deepSearchKey, getDataFromXML } from "@/lib/record";
-import { pageData } from "@/store";
-import { useAtom } from "jotai";
-import { useEffect } from "react";
+import { deepSearchKey, getDataFromXML } from '@/lib/record'
+import { pageData } from '@/store'
+import { useAtom } from 'jotai'
+import { useEffect } from 'react'
 
 type Props = {
-  selector: string;
-};
+	selector: string
+}
 
 const COMMON_FIELDS = [
-  "session",
-  "bookmark_count",
-  "query_statement",
-  "search_statement",
-  "first_record_seq",
-  "last_record_seq",
-  "bookmark_url",
-  "total_record",
-] as const;
+	'session',
+	'bookmark_count',
+	'query_statement',
+	'search_statement',
+	'first_record_seq',
+	'last_record_seq',
+	'bookmark_url',
+	'total_record',
+] as const
 
-type COMMON_FIELDS_TYPE = (typeof COMMON_FIELDS)[number];
+type COMMON_FIELDS_TYPE = (typeof COMMON_FIELDS)[number]
 
 type COMMON_FIELDS_OBJECT = {
-  [key in COMMON_FIELDS_TYPE]?: string | number;
-};
+	[key in COMMON_FIELDS_TYPE]?: string | number
+}
 
 const useXMLData = ({ selector }: Props) => {
-  const [data, setData] = useAtom(pageData);
+	const [data, setData] = useAtom(pageData)
 
-  const jsonData = getDataFromXML(selector);
+	const jsonData = getDataFromXML(selector)
 
-  useEffect(() => {
-    setData(jsonData);
-  }, []);
+	useEffect(() => {
+		setData(jsonData)
+	}, [jsonData, setData])
 
-  const getCommonFields = () => {
-    const object: COMMON_FIELDS_OBJECT = {};
-    if (!data) return object;
-    COMMON_FIELDS.map((key) => {
-      const value = deepSearchKey(data, key);
-      if (value?.length > 0) {
-        object[key] = value[0] as string;
-      }
-    });
+	const getCommonFields = () => {
+		const object: COMMON_FIELDS_OBJECT = {}
+		if (!data) return object
+		COMMON_FIELDS.map((key) => {
+			const value = deepSearchKey(data, key)
+			if (value?.length > 0) {
+				object[key] = value[0] as string
+			}
+		})
 
-    return object;
-  };
+		return object
+	}
 
-  const getPaginations = () => {
-    if (!data) return null;
+	const getPaginations = () => {
+		if (!data) return null
 
-    const value = deepSearchKey(data, "pagination");
-    console.log(value);
-    if (value?.length > 0) {
-      return value;
-    }
-  };
-  const common = getCommonFields();
-  const paginations = getPaginations();
+		const value = deepSearchKey(data, 'pagination')
+		console.log(value)
+		if (value?.length > 0) {
+			return value
+		}
+	}
+	const common = getCommonFields()
+	const paginations = getPaginations()
 
-  return { data, common, paginations };
-};
+	return { data, common, paginations }
+}
 
-export default useXMLData;
+export default useXMLData

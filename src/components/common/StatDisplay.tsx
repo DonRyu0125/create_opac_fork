@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-type Props = {};
+type Props = {}
 
 const StatDisplay = (props: Props) => {
-  return <div>StatDisplay</div>;
-};
+	return <div>StatDisplay</div>
+}
 
-export default StatDisplay;
+export default StatDisplay
