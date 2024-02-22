@@ -1,21 +1,21 @@
-import { deepSearchKey, getDataFromXML } from '@/lib/record';
-import { pageData } from '@/store';
-import { useAtom } from 'jotai';
-import { useEffect } from 'react';
+import { deepSearchKey, getDataFromXML } from "@/lib/record";
+import { pageData } from "@/store";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
 
 type Props = {
   selector: string;
 };
 
 const COMMON_FIELDS = [
-  'session',
-  'bookmark_count',
-  'query_statement',
-  'search_statement',
-  'first_record_seq',
-  'last_record_seq',
-  'bookmark_url',
-  'total_record',
+  "session",
+  "bookmark_count",
+  "query_statement",
+  "search_statement",
+  "first_record_seq",
+  "last_record_seq",
+  "bookmark_url",
+  "total_record",
 ] as const;
 
 type COMMON_FIELDS_TYPE = (typeof COMMON_FIELDS)[number];
@@ -38,7 +38,7 @@ const useXMLData = ({ selector }: Props) => {
     if (!data) return object;
     COMMON_FIELDS.map((key) => {
       const value = deepSearchKey(data, key);
-      if (value && value.length > 0) {
+      if (value?.length > 0) {
         object[key] = value[0] as string;
       }
     });
@@ -46,8 +46,19 @@ const useXMLData = ({ selector }: Props) => {
     return object;
   };
 
+  const getPaginations = () => {
+    if (!data) return null;
+
+    const value = deepSearchKey(data, "pagination");
+    console.log(value);
+    if (value?.length > 0) {
+      return value;
+    }
+  };
   const common = getCommonFields();
-  return { data, common };
+  const paginations = getPaginations();
+
+  return { data, common, paginations };
 };
 
 export default useXMLData;

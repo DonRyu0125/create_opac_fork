@@ -22,8 +22,7 @@ module.exports = {
           white: "hsl(var(--ford-white))",
           grey: "hsl(var(--ford-grey))",
           darkblue: "hsl(var(--ford-darkblue))",
-        }
-        ,
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "setup": "pnpm install && pnpm add -g docsify",
     "start": "pnpm schema && pnpm theme && craco start",
     "dev": "craco start",
     "build": "vite build",

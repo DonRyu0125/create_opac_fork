@@ -1,4 +1,4 @@
-import X2JS from 'x2js';
+import X2JS from "x2js";
 export const getRecordXML = (id: string) => {
   return document.querySelector(id) || null;
 };
@@ -9,7 +9,7 @@ export const getDataFromXML = (id: string) => {
   if (xml) {
     try {
       const x2js = new X2JS({
-        arrayAccessFormPaths: ['xml_record'],
+        arrayAccessFormPaths: ["xml_record"],
       });
 
       const xmlString = new XMLSerializer().serializeToString(xml);
@@ -31,16 +31,15 @@ export type GenericObject = {
 
 export function deepSearchKey<T extends GenericObject>(
   obj: T,
-  targetKey: string
+  targetKey: string,
 ): unknown[] | string[] {
-    
   const result: unknown[] | string[] = [];
 
   function search(obj: GenericObject, targetKey: string) {
     for (const key in obj) {
       if (key === targetKey) {
         result.push(obj[key]);
-      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+      } else if (typeof obj[key] === "object" && obj[key] !== null) {
         search(obj[key], targetKey);
       }
     }

@@ -2,7 +2,7 @@ name: Format and Lint
 
 on:
   pull_request:
-    branches: ['*']
+    branches: ["*"]
 
 jobs:
   format-and-lint:

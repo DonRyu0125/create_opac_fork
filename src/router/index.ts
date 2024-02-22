@@ -1,8 +1,8 @@
-import Detail from '@/components/page-template/Detail';
-import FAQ from '@/components/page-template/FAQ';
-import Home from '@/components/page-template/Home';
-import NotFoundPage from '@/components/page-template/NotFoundPage';
-import Summary from '@/components/page-template/Summary';
+import Detail from "@/components/page-template/Detail";
+import FAQ from "@/components/page-template/FAQ";
+import Home from "@/components/page-template/Home";
+import NotFoundPage from "@/components/page-template/NotFoundPage";
+import Summary from "@/components/page-template/Summary";
 
 export type TRoute = Record<string, () => React.ReactNode>;
 
@@ -19,7 +19,7 @@ export const ROUTES: TRoute = {
  * @returns
  */
 export const getComponentFromKey = (
-  key: string | undefined
+  key: string | undefined,
 ): (() => React.ReactNode) => {
   if (!key) return NotFoundPage;
   if (key in ROUTES) {

@@ -3,11 +3,10 @@ import path, { resolve } from "path";
 import { getFiles } from "./index.mjs";
 
 // eslint-disable-next-line no-undef
-const base = process.cwd()
+const base = process.cwd();
 
-const inputDir = resolve(base, 'src/constants')
-const outDir = resolve(base, 'src/schema')
-
+const inputDir = resolve(base, "src/constants");
+const outDir = resolve(base, "src/schema");
 
 function main() {
   try {
@@ -15,7 +14,7 @@ function main() {
     console.time("gen-schema");
     const files = getFiles(inputDir, "json");
     files.forEach((file) => {
-      const filePath = resolve(inputDir, file)
+      const filePath = resolve(inputDir, file);
       generateSchema(filePath, outDir);
     });
 
