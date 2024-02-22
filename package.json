@@ -9,8 +9,10 @@
     "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --plugin-search-dir=. --write .",
-    "schema": "node ./tools/gen-schema.mjs",
-    "theme": "node ./tools/gen-theme.mjs",
+    "gen:schema": "node ./tools/gen-schema.mjs",
+    "gen:theme": "node ./tools/gen-theme.mjs",
+    "gen:types": "node ./tools/gen-types.mjs",
+    "gen": "pnpm run gen:schema && pnpm run gen:theme && pnpm run gen:types",
     "doc": "docsify serve docs"
   },
   "dependencies": {
@@ -78,6 +80,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "fs": "0.0.1-security",
+    "json-schema-to-typescript": "^13.1.2",
     "leaflet": "^1.9.4",
     "path": "^0.12.7",
     "postcss": "^8.4.35",

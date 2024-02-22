@@ -26,6 +26,8 @@ dist-ssr
 
 */themes/index.json
 */schema/*.json
+*/types/*
+
 .vite
 
 .env

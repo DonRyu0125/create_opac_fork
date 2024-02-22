@@ -1,0 +1,38 @@
+    [
+        {
+            "database": "COLLECTIONS",
+            "items": [
+                {
+                    "label": "Title",
+                    "name": "LEGAL_TITLE",
+                    "grid": true,
+                    "list": true,
+                    "detail": true
+                },
+                {
+                    "label": "Date",
+                    "name": "EARLY",
+                    "summary": true,
+                    "grid": true,
+                    "list": true,
+                    "detail": true
+                },
+                {
+                    "label": "ID",
+                    "name": "ACCESSION_NUMBER",
+                    "summary": true,
+                    "grid": true,
+                    "list": true,
+                    "detail": true
+                },
+                {
+                    "label": "Description",
+                    "name": "OBJ_DESCRIPTION",
+                    "summary": true,
+                    "grid": true,
+                    "list": true,
+                    "detail": true
+                }
+            ]
+        }
+    ]
