@@ -1,12 +1,12 @@
-import Layout from '../layouts'
-import PageAction from '../common/PageAction'
-import RecordDetail from '../common/RecordDetail'
-import SearchForm from '../common/SearchForm'
-import ImageCarousel from '../common/ImageCarousel'
-import InfoTable from '../common/InfoTable'
-import RecordAction from '../common/RecordAction'
+import Layout from '../components/layouts'
+import PageAction from '../components/common/PageAction'
+import RecordDetail from '../components/common/RecordDetail'
+import SearchForm from '../components/common/SearchForm'
+import ImageCarousel from '../components/common/ImageCarousel'
+import InfoTable from '../components/common/InfoTable'
+import RecordAction from '../components/common/RecordAction'
 import { SlidersHorizontal } from 'lucide-react'
-import { Button } from '../ui/button'
+import { Button } from '../components/ui/button'
 
 const images = [
 	{

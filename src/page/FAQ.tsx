@@ -1,9 +1,9 @@
 import { faq } from '@/constants'
-import AccordionList from '../common/AccordionList'
-import Hero from '../common/Hero'
-import Section from '../common/Section'
-import SplitSection from '../common/SplitSection'
-import Layout from '../layouts'
+import AccordionList from '../components/common/AccordionList'
+import Hero from '../components/common/Hero'
+import Section from '../components/common/Section'
+import SplitSection from '../components/common/SplitSection'
+import Layout from '../components/layouts'
 
 const FAQ = () => {
 	const { heading, subHeading, heroBanner } = faq

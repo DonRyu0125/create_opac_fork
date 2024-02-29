@@ -1,8 +1,8 @@
-import Detail from '@/components/page-template/Detail'
-import FAQ from '@/components/page-template/FAQ'
-import Home from '@/components/page-template/Home'
-import NotFoundPage from '@/components/page-template/NotFoundPage'
-import Summary from '@/components/page-template/Summary'
+import Detail from '@/page/Detail'
+import FAQ from '@/page/FAQ'
+import Home from '@/page/Home'
+import NotFoundPage from '@/page/NotFoundPage'
+import Summary from '@/page/Summary'
 
 export type TRoute = Record<string, () => React.ReactNode>
 

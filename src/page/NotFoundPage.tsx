@@ -1,4 +1,4 @@
-import Layout from '../layouts'
+import Layout from '../components/layouts'
 
 const NotFoundPage = () => {
 	return (

@@ -1,9 +1,9 @@
 import { getComponentFromKey } from './router'
 
 function App() {
-	const curPage = document?.querySelector('#root')?.getAttribute('data-id') || undefined
+	const curPage = 'summary'
+	// const curPage = document?.querySelector('#root')?.getAttribute('data-id') || undefined
 
-	console.log(curPage)
 	// look at ROUTES object to find matching key /
 	// component to be render.E.G if curPage === home then render Home component and so one
 	const Component = getComponentFromKey(curPage)
