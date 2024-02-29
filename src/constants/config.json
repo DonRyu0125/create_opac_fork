@@ -1,22 +1,22 @@
 {
-  "siteName": "MINISIS Inc.",
-  "logo": "https://www.ford.ca/cmslibs/etc/designs/common/skin/ford/img/shared/favicon-1024x1024.png",
-  "navigations": [
-    {
-      "url": "/",
-      "title": "Home"
-    },
-    {
-      "url": "/archive",
-      "title": "Archive"
-    },
-    {
-      "url": "/artifact",
-      "title": "Artifact"
-    },
-    {
-      "url": "/library",
-      "title": "Library"
-    }
-  ]
+	"siteName": "MINISIS Inc.",
+	"logo": "https://www.ford.ca/cmslibs/etc/designs/common/skin/ford/img/shared/favicon-1024x1024.png",
+	"navigations": [
+		{
+			"url": "/",
+			"title": "Home"
+		},
+		{
+			"url": "/archive",
+			"title": "Archive"
+		},
+		{
+			"url": "/artifact",
+			"title": "Artifact"
+		},
+		{
+			"url": "/library",
+			"title": "Library"
+		}
+	]
 }

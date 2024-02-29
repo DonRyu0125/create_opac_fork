@@ -1,8 +1,8 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+	return twMerge(clsx(inputs))
 }
 
 /**
@@ -10,20 +10,20 @@ export function cn(...inputs: ClassValue[]) {
  * @returns
  */
 export const getJSONType = <T>(json: T): typeof json => {
-  return json;
-};
+	return json
+}
 
 /**
  * Copy text to clipboard
  * @param text
  */
 export const copyToClipboard = (text: string): void => {
-  try {
-    Promise.resolve(navigator.clipboard.writeText(text));
-  } catch (err) {
-    console.error('Failed to copy: ', err);
-  }
-};
+	try {
+		Promise.resolve(navigator.clipboard.writeText(text))
+	} catch (err) {
+		console.error('Failed to copy: ', err)
+	}
+}
 
 /**
  *
@@ -33,38 +33,11 @@ export const copyToClipboard = (text: string): void => {
  * @returns truncated word
  */
 export const truncateWords = (
-  text: string,
-  maxLength: number = 20,
-  appendText: string = '...'
+	text: string,
+	maxLength: number = 20,
+	appendText: string = '...'
 ): string => {
-  if (text.length <= maxLength) return text;
+	if (text.length <= maxLength) return text
 
-  return `${text.substring(0, maxLength)}${appendText}`;
-};
-
-type GenericObject = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-};
-
-export function deepSearchKey<T extends GenericObject>(
-  obj: T,
-  targetKey: string
-): unknown[] {
-  const result: unknown[] = [];
-
-  function search(obj: GenericObject, targetKey: string) {
-    for (const key in obj) {
-      if (key === targetKey) {
-        result.push(obj[key]);
-      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-        search(obj[key], targetKey);
-      }
-    }
-  }
-
-  search(obj, targetKey);
-  return result;
+	return `${text.substring(0, maxLength)}${appendText}`
 }
-
-

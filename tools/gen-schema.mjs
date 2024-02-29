@@ -1,59 +1,65 @@
-import fs from "fs";
-import path from "path";
-import { getFiles } from "./index.mjs";
-const inputDir = "./src/constants";
-const outDir = "./src/schema";
+import fs from 'fs'
+import path, { resolve } from 'path'
+import { getFiles } from './index.mjs'
+
+// eslint-disable-next-line no-undef
+const base = process.cwd()
+
+const inputDir = resolve(base, 'src/constants')
+const outDir = resolve(base, 'src/schema')
 
 function main() {
-  try {
-    console.log("Generating schemas .......");
-    console.time("gen-schema");
-    const files = getFiles(inputDir, "json");
+	try {
+		console.log('Generating schemas .......')
+		console.time('gen-schema')
+		const files = getFiles(inputDir, 'json')
+		files.forEach((file) => {
+			const filePath = resolve(inputDir, file)
+			generateSchema(filePath, outDir)
+		})
 
-    files.forEach((file) => {
-      const filePath = `${inputDir}/${file}`;
-      generateSchema(filePath, outDir);
-    });
-
-    console.log("Schemas successfully generated!");
-    console.timeEnd("gen-schema");
-  } catch (error) {
-    console.log(error);
-  }
+		console.log('Schemas successfully generated!')
+		console.timeEnd('gen-schema')
+	} catch (error) {
+		console.log(error)
+	}
 }
 
-main();
+main()
 
 /**
  *
  * @param {string} filePath
  */
-function generateSchema(filePath = "./", outDir = "./schema") {
-  try {
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    try {
-      const fileName = path.basename(filePath);
+function generateSchema(filePath = './', outDir = './schema') {
+	try {
+		const fileContent = fs.readFileSync(filePath, 'utf8')
+		try {
+			const fileName = path.basename(filePath)
 
-      const json = JSON.parse(fileContent);
-      const rootType = getType(json);
-      const root = getStructure(rootType, fileName);
-      traverseObject(json, root);
-      const metadata = {
-        $schema: "http://json-schema.org/draft-07/schema#",
-      };
-      const schemaContent = { ...metadata, ...root };
-      const schemaPath = `${outDir}/${fileName}`;
+			const json = JSON.parse(fileContent)
+			const rootType = getType(json)
+			const root = getStructure(rootType, fileName)
+			traverseObject(json, root)
+			const metadata = {
+				$schema: 'http://json-schema.org/draft-07/schema#',
+			}
+			const schemaContent = { ...metadata, ...root }
+			const schemaPath = `${outDir}/${fileName}`
+			if (!fs.existsSync(outDir)) {
+				fs.mkdirSync(outDir)
+			}
 
-      if (fs.existsSync(schemaPath)) {
-        fs.unlinkSync(schemaPath);
-      }
-      fs.writeFileSync(schemaPath, JSON.stringify(schemaContent));
-    } catch (error) {
-      throw new Error("File can't be parsed into JSON Object");
-    }
-  } catch (err) {
-    throw new Error("File not found");
-  }
+			if (fs.existsSync(schemaPath)) {
+				fs.unlinkSync(schemaPath)
+			}
+			fs.writeFileSync(schemaPath, JSON.stringify(schemaContent))
+		} catch (error) {
+			throw new Error("File can't be parsed into JSON Object")
+		}
+	} catch (err) {
+		throw new Error('File not found')
+	}
 }
 
 /**
@@ -62,11 +68,11 @@ function generateSchema(filePath = "./", outDir = "./schema") {
  * @returns {string}
  */
 function getType(object) {
-  if (Array.isArray(object)) {
-    return "array";
-  }
-  const type = typeof object;
-  return type;
+	if (Array.isArray(object)) {
+		return 'array'
+	}
+	const type = typeof object
+	return type
 }
 
 /**
@@ -75,7 +81,7 @@ function getType(object) {
  * @returns {boolean}
  */
 function isPrimitive(type) {
-  return type === "string" || type === "number" || type === "boolean";
+	return type === 'string' || type === 'number' || type === 'boolean'
 }
 
 /**
@@ -85,23 +91,23 @@ function isPrimitive(type) {
  * @returns {Map<string, any>}
  */
 function getStructure(type, key) {
-  const struct = {
-    type: type,
-    title: isNaN(key) ? camelCaseToRegularString(key) : "",
-  };
-  if (isPrimitive(type)) {
-    return {
-      ...struct,
-    };
-  }
-  if (type === "object") {
-    return { ...struct, properties: {} };
-  }
-  if (type === "array") {
-    return { ...struct, items: {} };
-  }
+	const struct = {
+		type: type,
+		title: isNaN(key) ? camelCaseToRegularString(key) : '',
+	}
+	if (isPrimitive(type)) {
+		return {
+			...struct,
+		}
+	}
+	if (type === 'object') {
+		return { ...struct, properties: {} }
+	}
+	if (type === 'array') {
+		return { ...struct, items: {} }
+	}
 
-  // throw new Error('Unknown type')
+	// throw new Error('Unknown type')
 }
 
 /**
@@ -112,19 +118,19 @@ function getStructure(type, key) {
  * @returns {Map<string,any>}
  */
 function insertStructure(root, prop, struct) {
-  const type = root.type;
-  if (isPrimitive(type)) {
-    return;
-  }
-  if (type === "object") {
-    root["properties"][prop] = struct;
-  }
+	const type = root.type
+	if (isPrimitive(type)) {
+		return
+	}
+	if (type === 'object') {
+		root['properties'][prop] = struct
+	}
 
-  if (type === "array") {
-    root["items"] = struct;
-  }
+	if (type === 'array') {
+		root['items'] = struct
+	}
 
-  return root;
+	return root
 }
 
 /**
@@ -133,15 +139,15 @@ function insertStructure(root, prop, struct) {
  * @param {Map<string,any>} root
  */
 function traverseObject(object, root) {
-  for (let key in object) {
-    const value = object[key];
-    const type = getType(value);
-    const structure = getStructure(type, key);
-    if (!isPrimitive(type)) {
-      traverseObject(value, structure);
-    }
-    insertStructure(root, key, structure);
-  }
+	for (let key in object) {
+		const value = object[key]
+		const type = getType(value)
+		const structure = getStructure(type, key)
+		if (!isPrimitive(type)) {
+			traverseObject(value, structure)
+		}
+		insertStructure(root, key, structure)
+	}
 }
 
 /**
@@ -150,7 +156,7 @@ function traverseObject(object, root) {
  * @returns string
  */
 function camelCaseToRegularString(camelCaseString) {
-  const regularString = camelCaseString.replace(/([a-z])([A-Z])/g, "$1 $2");
+	const regularString = camelCaseString.replace(/([a-z])([A-Z])/g, '$1 $2')
 
-  return regularString.charAt(0).toUpperCase() + regularString.slice(1);
+	return regularString.charAt(0).toUpperCase() + regularString.slice(1)
 }

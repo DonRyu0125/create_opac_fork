@@ -1,0 +1,236 @@
+<xml id="xml_record" hidden="">
+    <xml_record hidden="">
+        <media>
+            <image_caption>1996.0018.0003</image_caption>
+            <m_im_access_link>
+https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Museum/Images/LOW%20RES/996.18.3_R.
+JPG</m_im_access_link>
+            <image_caption>1996.0018.0003</image_caption>
+            <m_im_access_link>
+https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Museum/Images/LOW%20RES/996.18.3_R.
+JPG</m_im_access_link>
+        </media>
+        <is_bookmarked>false</is_bookmarked>
+        <database_name>COLLECTIONS</database_name>
+        <record_link> https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/438318172/2/1/6178?RECORD&amp;UN ION=Y</record_link>
+
+        <record>
+            <sisn>6178</sisn>
+            <accession_number>1996.0018.0003</accession_number>
+            <collection>Human History</collection>
+            <on_display>Not on display</on_display>
+            <date_notes>n.d.</date_notes>
+            <legal_title>Book, First Class Tests and How to Pass Them</legal_title>
+            <object_name_grp>
+                <object_name_grp_occurrence occ="1">
+                    <object_name>instruction book</object_name>
+                    <obj_name_id>300426522</obj_name_id>
+                </object_name_grp_occurrence>
+            </object_name_grp>
+            <legal_status>Permanent Collection</legal_status>
+            <object_status>Permanent Collection</object_status>
+            <category>8: Communication Objects</category>
+            <classification>Documentary Objects</classification>
+            <sub_classify>Instructional Documents</sub_classify>
+            <primary>Book, Instruction</primary>
+            <cur_grp>
+                <cur_grp_occurrence occ="1">
+                    <cur_grp_date>1997-07-18</cur_grp_date>
+                    <cur_grp_curator>Curator</cur_grp_curator>
+                </cur_grp_occurrence>
+                <cur_grp_occurrence occ="2">
+                    <cur_grp_date>1997-07-18</cur_grp_date>
+                    <cur_grp_curator>Demeulemeester, John</cur_grp_curator>
+                </cur_grp_occurrence>
+            </cur_grp>
+            <obj_description>Yellowed paper covered boyscout test instruction book with
+black and navy text and image of a boyscout on the cover. The cover is signed
+by Bill Hulbert who was part of a Cloverdale boyscout troop.
+            </obj_description>
+            <assoc_person_grp>
+                <assoc_person_grp_occurrence occ="1">
+                    <assoc_full_id>P5468</assoc_full_id>
+                    <assoc_fullname>Hulbert, William</assoc_fullname>
+                </assoc_person_grp_occurrence>
+            </assoc_person_grp>
+            <assoc_notes>Bill Hulbert belonged to a CLoverdale boyscout troop led by
+reverend Ashby</assoc_notes>
+            <dimensions_info>
+                <dimensions_info_occurrence occ="1">
+                    <width_imp>7 2/16 in</width_imp>
+                    <width_metric>18.0 cm</width_metric>
+                    <depth_imp>4 12/16 in</depth_imp>
+                    <depth_metric>12.0 cm</depth_metric>
+                    <dimension_notes>Book, Boy Scouts; Title: "FIRST CLASS TESTS AND HOW
+TO PASS THEM"; Content: How to pass boy scout tests; Cover is black with
+navy blue printing that shows a boy scout looking at a map with teepees and
+the Union Jack in the background, printed words read: "Approved
+publication, Issued under agreement with the boy scouts Association, London /
+James Brown &amp; Son / Official Scout Publishers. Glasgow";
+hand-written name in ink reads "BILL HULBERT"; back page has
+written in pencil which tests were passed; 45+ pages.</dimension_notes>
+                    <dim_source>Object Dimensions</dim_source>
+                </dimensions_info_occurrence>
+                <dimensions_info_occurrence occ="2">
+                    <height_imp>7.0</height_imp>
+                    <height_metric>17.8</height_metric>
+                    <width_imp>4.5</width_imp>
+                    <width_metric>11.5</width_metric>
+                    <depth_imp>2/16</depth_imp>
+                    <depth_metric>0.25</depth_metric>
+                    <dim_source>Primary Support</dim_source>
+                    <obj_date>2014-06-26</obj_date>
+                </dimensions_info_occurrence>
+            </dimensions_info>
+            <other_num_group>
+                <other_num_group_occurrence occ="1">
+                    <other_number>1996.18.3</other_number>
+                </other_num_group_occurrence>
+            </other_num_group>
+            <research_grp>
+                <research_grp_occurrence occ="1">
+                    <research_notes>Subject: Boy Scouts Test Instruction
+Scouting</research_notes>
+                </research_grp_occurrence>
+            </research_grp>
+            <label_txt_group>
+                <label_txt_group_occurrence occ="1">
+                    <public>Y</public>
+                </label_txt_group_occurrence>
+            </label_txt_group>
+            <acq_date>1996-04-12</acq_date>
+            <acq_method>Gift</acq_method>
+            <acq_source_grp>
+                <acq_source_grp_occurrence occ="1">
+                    <acq_source>Hulbert (nee Lomas), Marie Hope, Mrs., b. 1921</acq_source>
+                    <acq_source_id>P1327</acq_source_id>
+                </acq_source_grp_occurrence>
+            </acq_source_grp>
+            <planned_loc_grp>
+                <planned_loc_grp_occurrence occ="1">
+                    <moved_flag>0</moved_flag>
+                    <plnd_cur_code>A-21.c4</plnd_cur_code>
+                    <plnd_bldg>Surrey Museum</plnd_bldg>
+                    <pland_remov_date>2014-07-15</pland_remov_date>
+                </planned_loc_grp_occurrence>
+                <planned_loc_grp_occurrence occ="2">
+                    <moved_flag>0</moved_flag>
+                    <plnd_access>Private</plnd_access>
+                    <plnd_cur_code>M-20.c4</plnd_cur_code>
+                    <plnd_bldg>Museum of Surrey
+                    </plnd_bldg>
+                    <plnd_loc_type>Permanent</plnd_loc_type>
+                    <pland_remov_date>2018-11-29</pland_remov_date>
+                    <plnd_move_ex>Louisa Smith</plnd_move_ex>
+                </planned_loc_grp_occurrence>
+            </planned_loc_grp>
+            <current_loc_info>
+                <current_loc_info_occurrence occ="1">
+                    <curators_code>A-21.c5</curators_code>
+                    <building>Surrey Museum</building>
+                </current_loc_info_occurrence>
+                <current_loc_info_occurrence occ="2">
+                    <movement_ref_num>2014-07-15-01444</movement_ref_num>
+                    <curators_code>A-21.c4</curators_code>
+                    <building>Surrey Museum</building>
+                    <location_date>2014-07-15</location_date>
+                </current_loc_info_occurrence>
+                <current_loc_info_occurrence occ="3">
+                    <movement_ref_num>2018-11-29-11200</movement_ref_num>
+                    <curators_code>M-20.c4</curators_code>
+                    <building>Museum of Surrey
+                    </building>
+                    <loc_access>Private</loc_access>
+                    <location_type>Permanent</location_type>
+                    <location_date>2018-11-29</location_date>
+                    <move_ex>Louisa Smith</move_ex>
+                </current_loc_info_occurrence>
+            </current_loc_info>
+            <conserve_info>
+                <conserve_info_occurrence occ="1">
+                    <condition_status>Stable</condition_status>
+                    <exam_treat>Examination</exam_treat>
+                    <cond_comments>Cover is detached at front and back.</cond_comments>
+                    <condition>Fair/Poor</condition>
+                    <condtion_chk_dte>2014-06-26</condtion_chk_dte>
+                    <condn_chk_person>Jessie McLean</condn_chk_person>
+                    <cond_chk_notes>fragile; pages bent and dog-eared</cond_chk_notes>
+                    <nxt_condit_chk>2019-06-26</nxt_condit_chk>
+                </conserve_info_occurrence>
+            </conserve_info>
+            <m_im_ref_grp>
+                <m_im_ref_grp_occurrence occ="1">
+                    <m_im_access>[IMAGES]Museum\Images\LOW RES\996.18.3_R.JPG</m_im_access>
+                    <m_im_opac>Yes</m_im_opac>
+                </m_im_ref_grp_occurrence>
+            </m_im_ref_grp>
+            <c_bldg>Museum of Surrey
+            </c_bldg>
+            <c_loc_date>2018-11-29</c_loc_date>
+            <c_move_ex>Louisa Smith</c_move_ex>
+            <p_cur_code>A-21.c4</p_cur_code>
+            <p_bldg>A-21.c4</p_bldg>
+            <p_flr>A-21.c4</p_flr>
+            <p_bu>A-21.c4</p_bu>
+            <p_ma>A-21.c4</p_ma>
+            <p_r_date>2018-11-29</p_r_date>
+            <p_move_ex>Louisa Smith</p_move_ex>
+            <tree_id>252585</tree_id>
+            <medium_group>
+                <medium_group_occurrence occ="1">
+                    <medium>Printed</medium>
+                </medium_group_occurrence>
+            </medium_group>
+            <material_group>
+                <material_group_occurrence occ="1">
+                    <material>Paper</material>
+                </material_group_occurrence>
+            </material_group>
+            <discipline>Museum</discipline>
+            <c_cur_code>M-20.c4</c_cur_code>
+            <web_display>Ready</web_display>
+            <what_keyword>
+                <what_keyword_occurrence occ="1">instruction book</what_keyword_occurrence>
+                <what_keyword_occurrence occ="2">Yellowed paper covered boyscout test
+instruction book with black and navy text and image of a boyscout on the
+cover. The cover is signed by Bill Hulbert who was part of a Cloverdale
+boyscout troop. </what_keyword_occurrence>
+            </what_keyword>
+            <who_keyword>
+                <who_keyword_occurrence occ="1">Hulbert, William</who_keyword_occurrence>
+            </who_keyword>
+            <old_sisn>6183</old_sisn>
+            <record_number>6172</record_number>
+            <assoc_whole>
+                <assoc_whole_occurrence occ="1">Hulbert, Marie</assoc_whole_occurrence>
+            </assoc_whole>
+            <mform>Artifact</mform>
+        </record>
+    </xml_record>
+    <session>https://surrey.minisisinc.com/scripts/mwimain.dll/438318172</session>
+    <bookmark_count>0</bookmark_count>
+    <search_statement>test</search_statement>
+    <query_statement>KEYWORD_CL test</query_statement>
+    <pagesize_25> https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/438318171/2/1?RECLIST&amp;DATABA SE=UNION_VIEW&amp;TM=1709184843.860&amp;PAGESIZE=25</pagesize_25>
+    <pagesize_50> https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/438318171/2/1?RECLIST&amp;DATABA SE=UNION_VIEW&amp;TM=1709184843.860&amp;PAGESIZE=50</pagesize_50>
+    <pagesize_100> https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/438318171/2/1?RECLIST&amp;DATABA SE=UNION_VIEW&amp;TM=1709184843.860&amp;PAGESIZE=100</pagesize_100>
+    <first_record_seq>1</first_record_seq>
+    <last_record_seq>25</last_record_seq>
+    <bookmark_url>https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/438318171/2/1
+    </bookmark_url>
+    <back_to_summary>
+        <a href="https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/438318171/2/1?RECLIST&amp; DATABASE=UNION_VIEW&amp;TM=1709184843.860">CURRENT_PAGE_URL</a>
+    </back_to_summary>
+    <next_record>
+        <a href="https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/438318172/2/1/6178?NEX TREC&amp;UNION=Y">NEXT_RECORD_URL</a>
+    </next_record>
+    <pagination>
+        <a href="https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/438318171/2/1?RECLIST&amp; DATABASE=UNION_VIEW&amp;TM=1709184843.860">
+            <b>1</b>
+        </a>&nbsp;&nbsp;
+        <a href="https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/438318171/2/26?RECLIST &amp;DATABASE=UNION_VIEW&amp;TM=1709184843.860">2</a>
+    </pagination>
+    <total_record>40</total_record>
+    <sort> https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/438318171/2/1/WEB_UNION_SUM? RECLIST&amp;DATABASE=UNION_VIEW&amp;TM=1709184843.860
+    </sort>
+</xml>
