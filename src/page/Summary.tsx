@@ -135,7 +135,7 @@ export const SummaryRecords = ({ records }) => {
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 
-	const { data, common, paginations } = useXMLData({ selector: '#xml_record' })
+	const { data, common } = useXMLData({ selector: '#xml_record' })
 
 	if (!data) return <></>
 	return (

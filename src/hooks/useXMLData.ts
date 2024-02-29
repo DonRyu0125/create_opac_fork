@@ -1,7 +1,6 @@
-import { deepSearchKey, getDataFromXML } from '@/lib/record'
-import { pageData } from '@/store'
-import { useAtom } from 'jotai'
-import { useEffect } from 'react'
+import { GenericObject, deepSearchKey } from '@/lib/record'
+import { useEffect, useState } from 'react'
+import X2JS from 'x2js'
 
 type Props = {
 	selector: string
@@ -24,8 +23,30 @@ type COMMON_FIELDS_OBJECT = {
 	[key in COMMON_FIELDS_TYPE]?: string | number
 }
 
+export const getRecordXML = (id: string) => {
+	return document.querySelector(id) || null
+}
+
+export const getDataFromXML = (id: string) => {
+	const xml = getRecordXML(id)
+	if (xml) {
+		try {
+			const x2js = new X2JS({
+				arrayAccessFormPaths: ['xml_record'],
+			})
+			const xmlString = new XMLSerializer().serializeToString(xml)
+			const json = x2js.xml2js(xmlString) as GenericObject
+
+			return json
+		} catch (error) {
+			console.log(error)
+		}
+	}
+	return null
+}
+
 const useXMLData = ({ selector }: Props) => {
-	const [data, setData] = useAtom(pageData)
+	const [data, setData] = useState<GenericObject | null>(null)
 
 	const jsonData = getDataFromXML(selector)
 
@@ -50,7 +71,6 @@ const useXMLData = ({ selector }: Props) => {
 		if (!data) return null
 
 		const value = deepSearchKey(data, 'pagination')
-		console.log(value)
 		if (value?.length > 0) {
 			return value
 		}
