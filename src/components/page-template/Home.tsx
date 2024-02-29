@@ -32,17 +32,21 @@ const pics = [
 	'https://picsum.photos/500/800/?random=890',
 ]
 
+
+
 const Home = () => {
 	const { heading, heroBanner, browseByCategoryTitle, categoriesItems, searchURL } = home
 
 	return (
 		<Layout>
 			<Hero className="" title={heading} backgroundImage={heroBanner}>
-				<SearchForm
+				{/* <SearchForm
 					className="w-full mt-6 max-w-2xl"
 					searchURL={searchURL}
 					inputName={'KEYWORD_CL'}
-				/>
+				/> */}
+
+				<CommandDemo />
 			</Hero>
 
 			<Section heading={browseByCategoryTitle}>
