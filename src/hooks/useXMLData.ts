@@ -18,6 +18,7 @@ const COMMON_FIELDS = [
 	'last_record_seq',
 	'bookmark_url',
 	'total_record',
+
 ] as const
 
 type COMMON_FIELDS_TYPE = (typeof COMMON_FIELDS)[number]
@@ -35,7 +36,11 @@ export const getDataFromXML = (id: string) => {
 	if (xml) {
 		try {
 			const x2js = new X2JS({
-				arrayAccessFormPaths: ['xml.xml_record', 'xml.div.xml.filter.item_group'],
+				arrayAccessFormPaths:[
+					'xml.xml_record',
+					'xml.div.xml.filter.item_group',
+				
+				],
 			})
 			const xmlString = new XMLSerializer().serializeToString(xml)
 			const json = x2js.xml2js(xmlString) as GenericObject
@@ -97,12 +102,21 @@ const useXMLData = ({ selector }: Props) => {
 		return records
 	}
 
+	const getBackToSummary = ():string => {
+		if (!data) return ""
+		const url = deepSearchKey(data, 'back_to_summary')[0]
+		if (!url) return "";
+
+		return url.a.__href
+	}
+
 	const common = getCommonFields()
 	const pagination = getPaginations()
 	const filter = getFilter()
 	const records = getRecords()
+	const backToSummary = getBackToSummary();
 
-	return { data, common, pagination, filter, records }
+	return { data, common, pagination, filter, records,backToSummary }
 }
 
 export default useXMLData

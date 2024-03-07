@@ -1,6 +1,6 @@
 export interface Media {
-	image_caption: string[]
-	m_im_access_link: string[]
+	im: string[]
+	im_access_link: string[]
 }
 
 export interface FieldData {

@@ -108,6 +108,7 @@ const SummaryPageAction = () => {
 const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
 	const database = record.database_name
+	const recordLink = record.record_link
 	const listOfFields = getListOfFields(database)
 	const { name } = getTitleField(database)
 	const title = name ? deepSearchKey(record, name)[0] : 'Untitled'
@@ -146,7 +147,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		return (
 			<InfoCard
 				className="border-primary"
-				title={<Link href="/">{truncateString(title)}</Link>}
+				title={<Link href={recordLink}>{truncateString(title)}</Link>}
 				description={getGridFields()}
 				thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 				footer={
@@ -160,7 +161,7 @@ const RecordView = ({ record }: { record: Record }) => {
 
 	return (
 		<DetailInfoCard
-			title={<Link href="/">{title}</Link>}
+			title={<Link href={recordLink}>{title}</Link>}
 			className="col-span-3 border-primary"
 			thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 			footer={
