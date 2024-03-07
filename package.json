@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "setup": "pnpm install && pnpm add -g docsify",
-    "start": "pnpm gen && craco start",
+    "setup": "npm install && npm add -g docsify",
+    "start": "npm run gen && craco start",
     "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --plugin-search-dir=. --write .",
     "gen:schema": "node ./tools/gen-schema.mjs",
     "gen:theme": "node ./tools/gen-theme.mjs",
     "gen:types": "node ./tools/gen-types.mjs",
-    "gen": "pnpm run gen:schema && pnpm run gen:theme && pnpm run gen:types",
+    "gen": "npm run gen:schema && npm run gen:theme && npm run gen:types",
     "doc": "docsify serve docs"
   },
   "dependencies": {
@@ -47,7 +47,6 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^4.9.5",
     "vite-plugin-css-injected-by-js": "^3.4.0",
     "x2js": "^3.4.4",
     "yet-another-react-lightbox": "^3.17.0"
@@ -89,7 +88,7 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "react-leaflet": "^4.2.1",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3",
+    "typescript": "^4.9.5",
     "vite": "^5.1.1"
   }
 }
