@@ -21,21 +21,44 @@ import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { deepSearchKey, getListOfFields, getTitleField, truncateString } from '@/lib/record'
 import useXMLData from '@/hooks/useXMLData'
-import { useMetadata } from '@/hooks/useMetadata'
 import { Record } from '@/types/record'
+import { useToast } from '@/components/ui/use-toast'
+import { ToastAction } from '@/components/ui/toast'
+import SkeletonCard from '@/components/common/SkeletonCard'
 
 const RecordAction = () => {
 	const [like, setLike] = useState(false)
+	const { toast } = useToast()
+
 	return (
 		<>
-			<Button variant="ghost" size="icon" onClick={() => setLike(!like)}>
+			<Button
+				variant="ghost"
+				size="icon"
+				onClick={() => {
+					setLike(true)
+					toast({
+						title: like
+							? 'This record has already been marked'
+							: 'Record has been bookmarked',
+						action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
+					})
+				}}>
 				<Heart
 					className={cn('h-4 w-4 text-primary')}
-					fill={like ? 'hsl(var(--primary))' : 'rgb(0,0,0,0)'}
+					fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
+					stroke={like ? 'hsl(var(--opac-blue))' : 'hsl(var(--primary'}
 				/>
 			</Button>
 			<Separator orientation="vertical" />
-			<Button variant="ghost" size="icon">
+			<Button
+				variant="ghost"
+				size="icon"
+				onClick={() => {
+					toast({
+						title: 'Record URL is copied',
+					})
+				}}>
 				<Copy className="h-4 w-4 text-primary" />
 			</Button>
 			<Separator orientation="vertical" />
@@ -89,16 +112,6 @@ const RecordView = ({ record }: { record: Record }) => {
 	const { name } = getTitleField(database)
 	const title = name ? deepSearchKey(record, name)[0] : 'Untitled'
 
-	const commonFields = ({ grid }: { grid: boolean }) => {
-		return listOfFields?.items?.map((item) => {
-			if (!item.name || !item.label) return null
-			if (grid && !item.grid) return null
-			const data = deepSearchKey(record, item.name)
-			if (data && data.length > 0 && item.label !== 'Title')
-				return <DataWithLabel key={item.name} label={item.label} items={data} />
-		})
-	}
-
 	const getGridFields = () => {
 		return listOfFields?.items
 			?.filter((item) => item.grid === true)
@@ -107,6 +120,24 @@ const RecordView = ({ record }: { record: Record }) => {
 				const data = deepSearchKey(record, name)
 				if (data?.length > 0 && item.label !== 'Title')
 					return <DataWithLabel key={item.name} label={item.label} items={data} />
+			})
+			.filter((item) => item)
+	}
+
+	const getListFields = () => {
+		return listOfFields?.items
+			?.map((item) => {
+				const name = item.name || 'TITLE'
+				const data = deepSearchKey(record, name)
+				if (data?.length > 0 && item.label !== 'Title')
+					return (
+						<DataWithLabel
+							className="flex-col items-start justify-start my-1"
+							key={item.name}
+							label={item.label}
+							items={data}
+						/>
+					)
 			})
 			.filter((item) => item)
 	}
@@ -140,14 +171,14 @@ const RecordView = ({ record }: { record: Record }) => {
 					</div>
 				</div>
 			}>
-			<div className="mt-4">{commonFields({ grid: false })}</div>
+			<div className="mt-4">{getListFields()}</div>
 		</DetailInfoCard>
 	)
 }
 export const SummaryRecords = () => {
 	const { records } = useXMLData({ selector: '#xml_record' })
 
-	if (!records) return null
+	if (!records) return new Array(24).fill(1).map((_, i) => <SkeletonCard key={i} />)
 	return (
 		<>
 			{records.map((e, i) => (

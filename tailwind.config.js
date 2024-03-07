@@ -24,6 +24,7 @@ module.exports = {
 					grey: 'hsl(var(--opac-grey))',
 					darkblue: 'hsl(var(--opac-darkblue))',
 					green: 'hsl(var(--opac-green))',
+					blue: 'hsl(var(--opac-blue))',
 				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

@@ -27,7 +27,7 @@ const DetailInfoCard = ({
 					<img
 						src={thumbnail}
 						alt={alt || 'image thumbnail'}
-						className="aspect-square h-full w-full object-fit max-w-sm md:max-w-lg  mx-auto"
+						className="aspect-square h-full w-full object-cover max-w-sm md:max-w-lg  mx-auto "
 					/>
 				</div>
 
