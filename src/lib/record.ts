@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldsJson } from '@/types/fields.json'
 
 import { fields } from '@/constants/index'
@@ -6,8 +7,8 @@ export type GenericObject = {
 	[key: string]: any
 }
 
-export function deepSearchKey<T extends GenericObject>(obj: T, targetKey: string): string[] {
-	const result: string[] = []
+export function deepSearchKey<T extends GenericObject>(obj: T, targetKey: string): any[] {
+	const result: any[] = []
 
 	function search(obj: GenericObject, targetKey: string) {
 		for (const key in obj) {

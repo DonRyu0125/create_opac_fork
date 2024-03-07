@@ -145,7 +145,8 @@ export const SummaryRecords = ({ records }) => {
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 
-	const { data, common } = useXMLData({ selector: '#xml_record' })
+	const { data, common, pagination } = useXMLData({ selector: '#xml_record' })
+	console.log(pagination)
 
 	if (!data) return <></>
 	return (
@@ -203,18 +204,19 @@ const Summary = () => {
 								<SummaryRecords records={deepSearchKey(data, 'xml_record')[0]} />
 							</div>
 
-							<div className="col-span-4 mt-4">
-								<PagePagination
-									previous="/"
-									next={'/'}
-									items={[
-										{ url: '12', active: true },
-										{ url: '12' },
-										{ url: '41' },
-									]}
-									renderItem={(_, index) => <span key={index}>{index + 1}</span>}
-								/>
-							</div>
+							{pagination?.a && pagination.a.length > 0 && (
+								<div className="col-span-4 mt-4">
+									<PagePagination
+										items={pagination.a.map((item) => ({
+											url: item._href,
+											active: item.b !== undefined,
+										}))}
+										renderItem={(_, index) => (
+											<span key={index}>{index + 1}</span>
+										)}
+									/>
+								</div>
+							)}
 						</div>
 					</div>
 				</section>

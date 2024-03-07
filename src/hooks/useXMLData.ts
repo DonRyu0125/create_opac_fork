@@ -2,6 +2,8 @@ import { GenericObject, deepSearchKey } from '@/lib/record'
 import { useEffect, useState } from 'react'
 import X2JS from 'x2js'
 import summary from '../samples/summary.json'
+import { FilterItem } from '@/types/filter'
+import { Pagination } from '@/types/pagination'
 type Props = {
 	selector: string
 }
@@ -68,18 +70,32 @@ const useXMLData = ({ selector }: Props) => {
 		return object
 	}
 
-	const getPaginations = () => {
+	const getPaginations = (): Pagination | null => {
 		if (!data) return null
 
-		const value = deepSearchKey(data, 'pagination')
-		if (value?.length > 0) {
-			return value
+		const pagination: Pagination = deepSearchKey(data, 'pagination')[0]
+		if (!pagination) {
+			return null
 		}
-	}
-	const common = getCommonFields()
-	const paginations = getPaginations()
 
-	return { data, common, paginations }
+		return pagination
+	}
+
+	const getFilter = (): FilterItem[] => {
+		if (!data) return []
+
+		const filterList: FilterItem[] = deepSearchKey(data, 'filter')[0]
+		if (!filterList) {
+			return []
+		}
+		return filterList
+	}
+
+	const common = getCommonFields()
+	const pagination = getPaginations()
+	const filter = getFilter()
+
+	return { data, common, pagination, filter }
 }
 
 export default useXMLData

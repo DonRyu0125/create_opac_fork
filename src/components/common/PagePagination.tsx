@@ -20,19 +20,15 @@ export type PagePaginationProps = {
 	renderItem: (item: PageLink, index: number) => string | React.ReactNode
 }
 
-const PagePagination = ({
-	previous,
-	next,
-	items,
-	maxItem = 10,
-	renderItem,
-}: PagePaginationProps) => {
+const PagePagination = ({ items, maxItem = 10, renderItem }: PagePaginationProps) => {
+	const activeIndex = items.findIndex((item) => item.active)
+
 	return (
 		<Pagination>
 			<PaginationContent>
-				{previous && (
+				{activeIndex > 0 && (
 					<PaginationItem>
-						<PaginationPrevious href={previous} />
+						<PaginationPrevious href={items[activeIndex - 1].url} />
 					</PaginationItem>
 				)}
 				{items
@@ -45,9 +41,9 @@ const PagePagination = ({
 						</PaginationItem>
 					))}
 
-				{next && (
+				{activeIndex < items.length - 1 && (
 					<PaginationItem>
-						<PaginationNext href={next} />
+						<PaginationNext href={items[activeIndex + 1].url} />
 					</PaginationItem>
 				)}
 			</PaginationContent>
