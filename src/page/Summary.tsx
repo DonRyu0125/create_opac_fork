@@ -45,7 +45,8 @@ const RecordAction = () => {
 	)
 }
 const SummaryPageAction = () => {
-	const [data] = useAtom(pageData)
+	const { filter } = useXMLData({ selector: '#xml_record' })
+	console.log(filter)
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-col space-y-2">
@@ -57,19 +58,25 @@ const SummaryPageAction = () => {
 				<DropdownSelect title={'Sort by'} options={[]} />
 			</div>
 
-			<div className="flex flex-col space-y-2">
-				<Label>Filter by</Label>
-				<div className="flex flex-col space-y-4">
-					<CollapseList title="Date" expand={true}>
-						<div className="space-y-3  border-t p-4">
-							<CheckboxWithLabel label="1994" checked />
-							<CheckboxWithLabel label="1995" />
-							<CheckboxWithLabel label="1996" />
-							<CheckboxWithLabel label="1997" />
-						</div>
-					</CollapseList>
+			{filter && filter.length > 0 && (
+				<div className="flex flex-col space-y-2">
+					<Label>Filter by</Label>
+					<div className="flex flex-col space-y-4">
+						{filter.map((item, index) => (
+							<CollapseList title={item._title} expand={index === 0} key={item._name}>
+								<div className="space-y-3  border-t p-4">
+									{item.item_group.map((option) => (
+										<CheckboxWithLabel
+											label={`${option.item_value} (${option.item_frequency})`}
+											checked={option.item_selected === 'Y'}
+										/>
+									))}
+								</div>
+							</CollapseList>
+						))}
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	)
 }
@@ -78,8 +85,6 @@ const RecordView = ({ record }) => {
 	const [view] = useAtom(viewAtom)
 	const database = deepSearchKey(record, 'database_name')[0]
 	const listOfFields = getListOfFields(database)
-
-	console.log({ database, record, listOfFields })
 
 	const titleField = (label = 'Title') => {
 		return listOfFields?.items
@@ -146,7 +151,6 @@ const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 
 	const { data, common, pagination } = useXMLData({ selector: '#xml_record' })
-	console.log(pagination)
 
 	if (!data) return <></>
 	return (

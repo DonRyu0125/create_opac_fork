@@ -737,12 +737,14 @@
                     "_title": "Town Centre"
                 },
                 {
-                    "item_group": {
-                        "item_value": "Image",
-                        "item_frequency": "34",
-                        "item_link": "https://surrey.minisisinc.com/scripts/mwimain.dll/138317283?UNIONSEARCH&APPLICATION=UNION_VIEW&LANGUAGE=1\n44&DATABASE=UNION_VIEW&REPORT=WEB_UNION_SUM&KEEP=Y&EXP=KEYWORD_CL~\n20~1Dtest~1D~20*~20(IMAGE_READY~20Yes)",
-                        "item_selected": "N"
-                    },
+                    "item_group": [
+                        {
+                            "item_value": "Image",
+                            "item_frequency": "34",
+                            "item_link": "https://surrey.minisisinc.com/scripts/mwimain.dll/138317283?UNIONSEARCH&APPLICATION=UNION_VIEW&LANGUAGE=1\n44&DATABASE=UNION_VIEW&REPORT=WEB_UNION_SUM&KEEP=Y&EXP=KEYWORD_CL~\n20~1Dtest~1D~20*~20(IMAGE_READY~20Yes)",
+                            "item_selected": "N"
+                        }
+                    ],
                     "_name": "MEDIA_CL",
                     "_title": "Media"
                 }
