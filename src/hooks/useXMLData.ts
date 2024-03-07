@@ -4,6 +4,7 @@ import X2JS from 'x2js'
 import summary from '../samples/summary.json'
 import { FilterItem } from '@/types/filter'
 import { Pagination } from '@/types/pagination'
+import { Record } from '@/types/record'
 type Props = {
 	selector: string
 }
@@ -91,11 +92,22 @@ const useXMLData = ({ selector }: Props) => {
 		return filterList
 	}
 
+	const getRecords = (): Record[] => {
+		if (!data) return []
+
+		const records: Record[] = deepSearchKey(data, 'xml_record')[0]
+		if (!records) {
+			return []
+		}
+		return records
+	}
+
 	const common = getCommonFields()
 	const pagination = getPaginations()
 	const filter = getFilter()
+	const records = getRecords()
 
-	return { data, common, pagination, filter }
+	return { data, common, pagination, filter, records }
 }
 
 export default useXMLData

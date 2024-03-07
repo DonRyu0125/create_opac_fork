@@ -19,9 +19,10 @@ import { ChevronRight, Copy, Heart, Mail, SlidersHorizontal } from 'lucide-react
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { deepSearchKey, getListOfFields } from '@/lib/record'
+import { deepSearchKey, getListOfFields, getTitleField, truncateString } from '@/lib/record'
 import useXMLData from '@/hooks/useXMLData'
 import { useMetadata } from '@/hooks/useMetadata'
+import { Record } from '@/types/record'
 
 const RecordAction = () => {
 	const [like, setLike] = useState(false)
@@ -81,20 +82,14 @@ const SummaryPageAction = () => {
 	)
 }
 
-const RecordView = ({ record }) => {
+const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
-	const database = deepSearchKey(record, 'database_name')[0]
+	const database = record.database_name
 	const listOfFields = getListOfFields(database)
+	const { name } = getTitleField(database)
+	const title = name ? deepSearchKey(record, name)[0] : 'Untitled'
 
-	const titleField = (label = 'Title') => {
-		return listOfFields?.items
-			?.filter((e) => e.label === label)
-			.map((item) => {
-				return item.name
-			})[0]
-	}
-
-	const commonFields = ({ grid = true }) => {
+	const commonFields = ({ grid }: { grid: boolean }) => {
 		return listOfFields?.items?.map((item) => {
 			if (!item.name || !item.label) return null
 			if (grid && !item.grid) return null
@@ -103,12 +98,25 @@ const RecordView = ({ record }) => {
 				return <DataWithLabel key={item.name} label={item.label} items={data} />
 		})
 	}
+
+	const getGridFields = () => {
+		return listOfFields?.items
+			?.filter((item) => item.grid === true)
+			.map((item) => {
+				const name = item.name || 'TITLE'
+				const data = deepSearchKey(record, name)
+				if (data?.length > 0 && item.label !== 'Title')
+					return <DataWithLabel key={item.name} label={item.label} items={data} />
+			})
+			.filter((item) => item)
+	}
+
 	if (view === 'grid') {
 		return (
 			<InfoCard
 				className="border-primary"
-				title={titleField() && <Link href="/">{titleField()}</Link>}
-				description={commonFields({ grid: true })}
+				title={<Link href="/">{truncateString(title)}</Link>}
+				description={getGridFields()}
 				thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 				footer={
 					<div className="flex h-4 items-center space-x-4 w-full justify-evenly ">
@@ -121,7 +129,7 @@ const RecordView = ({ record }) => {
 
 	return (
 		<DetailInfoCard
-			title={titleField && <Link href="/">{titleField()}</Link>}
+			title={<Link href="/">{title}</Link>}
 			className="col-span-3 border-primary"
 			thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 			footer={
@@ -136,7 +144,9 @@ const RecordView = ({ record }) => {
 		</DetailInfoCard>
 	)
 }
-export const SummaryRecords = ({ records }) => {
+export const SummaryRecords = () => {
+	const { records } = useXMLData({ selector: '#xml_record' })
+
 	if (!records) return null
 	return (
 		<>
@@ -205,7 +215,7 @@ const Summary = () => {
 								<SummaryPageAction />
 							</div>
 							<div className="col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-								<SummaryRecords records={deepSearchKey(data, 'xml_record')[0]} />
+								<SummaryRecords />
 							</div>
 
 							{pagination?.a && pagination.a.length > 0 && (

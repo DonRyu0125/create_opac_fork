@@ -28,3 +28,11 @@ export const getListOfFields = (database: string) => {
 	const databaseFields = (fields as FieldsJson).find((f) => f.database === database)
 	return databaseFields
 }
+
+export const getTitleField = (database: string, label = 'Title') => {
+	return getListOfFields(database)?.items?.filter((e) => e.label === label)[0]
+}
+
+export const truncateString = (text: string, maxChars = 50, postfix = '...') => {
+	return text.length < maxChars ? text : text.substring(0, maxChars) + postfix
+}

@@ -30,7 +30,7 @@ const InfoCard = ({
 	return (
 		<Card className={cn('cursor-pointer shadow-md hover:shadow-xl', className)}>
 			<CardHeader className="h-32">
-				<CardTitle className="text-2xl font-bold">{title}</CardTitle>
+				<CardTitle className="text-lg font-bold">{title}</CardTitle>
 				{description && (
 					<CardDescription className="text-sm text-gray-500 dark:text-gray-400">
 						{description}
