@@ -177,8 +177,6 @@ const RecordView = ({ record }: { record: Record }) => {
 }
 export const SummaryRecords = () => {
 	const { records } = useXMLData({ selector: '#xml_record' })
-
-	if (!records) return new Array(24).fill(1).map((_, i) => <SkeletonCard key={i} />)
 	return (
 		<>
 			{records.map((e, i) => (
@@ -191,9 +189,8 @@ export const SummaryRecords = () => {
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 
-	const { data, common, pagination } = useXMLData({ selector: '#xml_record' })
-
-	if (!data) return <></>
+	const {common, pagination } = useXMLData({ selector: '#xml_record' })
+	if(!common ||!pagination) return <></>
 	return (
 		<Layout>
 			<div className="rounded-sm border border-primary bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">

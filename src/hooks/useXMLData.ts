@@ -49,14 +49,9 @@ export const getDataFromXML = (id: string) => {
 }
 
 const useXMLData = ({ selector }: Props) => {
-	const [data, setData] = useState<GenericObject | null>(null)
+	const [data] = useState<GenericObject | null>(getDataFromXML(selector))
 
-	const jsonData = getDataFromXML(selector)
-	// const jsonData = summary
 
-	useEffect(() => {
-		setData(jsonData)
-	}, [])
 
 	const getCommonFields = () => {
 		const object: COMMON_FIELDS_OBJECT = {}
