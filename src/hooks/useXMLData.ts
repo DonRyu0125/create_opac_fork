@@ -35,11 +35,11 @@ export const getDataFromXML = (id: string) => {
 	if (xml) {
 		try {
 			const x2js = new X2JS({
-				arrayAccessFormPaths: ['xml_record'],
+				arrayAccessFormPaths: ['xml.xml_record', 'xml.div.xml.filter.item_group'],
 			})
 			const xmlString = new XMLSerializer().serializeToString(xml)
 			const json = x2js.xml2js(xmlString) as GenericObject
-
+			console.log(json)
 			return json
 		} catch (error) {
 			console.log(error)
@@ -51,8 +51,8 @@ export const getDataFromXML = (id: string) => {
 const useXMLData = ({ selector }: Props) => {
 	const [data, setData] = useState<GenericObject | null>(null)
 
-	// const jsonData = getDataFromXML(selector)
-	const jsonData = summary
+	const jsonData = getDataFromXML(selector)
+	// const jsonData = summary
 
 	useEffect(() => {
 		setData(jsonData)

@@ -42,10 +42,10 @@ const Detail = () => {
 							active: true,
 						},
 					]}>
-					<Button>
+					{/* <Button>
 						<SlidersHorizontal className="mr-2 h-4 w-4" />
 						Advanced Search
-					</Button>
+					</Button> */}
 				</PageAction>
 				<section>
 					<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
