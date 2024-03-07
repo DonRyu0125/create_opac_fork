@@ -1,0 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FieldsJson } from '@/types/fields.json'
+
+import { fields } from '@/constants/index'
+export type GenericObject = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	[key: string]: any
+}
+
+export function deepSearchKey<T extends GenericObject>(obj: T, targetKey: string): any[] {
+	const result: any[] = []
+
+	function search(obj: GenericObject, targetKey: string) {
+		for (const key in obj) {
+			if (key.toLowerCase() === targetKey.toLowerCase()) {
+				result.push(obj[key])
+			} else if (typeof obj[key] === 'object' && obj[key] !== null) {
+				search(obj[key], targetKey)
+			}
+		}
+	}
+
+	search(obj, targetKey)
+	return result
+}
+
+export const getListOfFields = (database: string) => {
+	const databaseFields = (fields as FieldsJson).find((f) => f.database === database)
+	return databaseFields
+}
+
+export const getTitleField = (database: string, label = 'Title') => {
+	return getListOfFields(database)?.items?.filter((e) => e.label === label)[0]
+}
+
+export const truncateString = (text: string, maxChars = 50, postfix = '...') => {
+	return text.length < maxChars ? text : text.substring(0, maxChars) + postfix
+}

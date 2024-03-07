@@ -1,16 +1,8 @@
-import configjson from "./config.json";
-import homejson from "./home.json";
-import themejson from "@/themes/index.json";
-import stylesjson from "./styles.json";
-import faqjson from "./faq.json";
-type Type<T> = {
-  [K in keyof T]: T[K];
-};
+import config from './config.json'
+import home from './home.json'
+import theme from '@/themes/index.json'
+import styles from './styles.json'
+import faq from './faq.json'
+import fields from './fields.json'
 
-const config: Type<typeof configjson> = configjson;
-const home: Type<typeof homejson> = homejson;
-const theme: Type<typeof themejson> = themejson;
-const styles: Type<typeof stylesjson> = stylesjson;
-const faq: Type<typeof faqjson> = faqjson;
-
-export { config, home, theme, styles, faq };
+export { config, home, theme, styles, faq, fields }

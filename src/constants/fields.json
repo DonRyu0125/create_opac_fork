@@ -1,0 +1,87 @@
+[
+	{
+		"database": "COLLECTIONS",
+		"items": [
+			{
+				"label": "Title",
+				"name": "LEGAL_TITLE",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "ID",
+				"name": "ACCESSION_NUMBER",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Date",
+				"name": "EARLY",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			}
+		]
+	},
+	{
+		"database": "DESCRIPTION",
+		"items": [
+			{
+				"label": "Title",
+				"name": "TITLE",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "ID",
+				"name": "REFD",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Date",
+				"name": "date_cr_inc",
+				"summary": true,
+				"grid": false,
+				"detail": true
+			}
+		]
+	},
+	{
+		"database": "BIBLIO",
+		"items": [
+			{
+				"label": "Title",
+				"name": "LEGAL_TITLE",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "ID",
+				"name": "ACCESSION_NUMBER",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Date",
+				"name": "EARLY",
+				"summary": true,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Description",
+				"name": "OBJ_DESCRIPTION",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			}
+		]
+	}
+]
