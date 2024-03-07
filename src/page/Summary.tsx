@@ -81,9 +81,9 @@ const RecordView = ({ record }) => {
 
 	console.log({ database, record, listOfFields })
 
-	const titleField = ({ match = 'Title' }) => {
+	const titleField = (label = 'Title') => {
 		return listOfFields?.items
-			?.filter((e) => e.label === match)
+			?.filter((e) => e.label === label)
 			.map((item) => {
 				return item.name
 			})[0]
@@ -161,11 +161,11 @@ const Summary = () => {
 						},
 					]}>
 					<div className="flex w-full flex-row space-x-2 justify-end">
-						<Button>
+						{/* <Button>
 							<SlidersHorizontal className="mr-2 h-4 w-4" />
 							Advanced Search
-						</Button>
-						<Separator orientation="vertical" />
+						</Button> */}
+						{/* <Separator orientation="vertical" /> */}
 						<ViewToggle />
 					</div>
 				</PageAction>

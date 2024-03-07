@@ -37,7 +37,7 @@ const Home = () => {
 
 	return (
 		<Layout>
-			<Hero className="" title={heading} backgroundImage={heroBanner} description=''>
+			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
 				<SearchForm
 					className="w-full mt-6 max-w-2xl"
 					searchURL={searchURL}
@@ -72,7 +72,7 @@ const Home = () => {
       >
         <Map />
       </Section> */}
-			<Section heading={'Recent Addition'}>
+			{/* <Section heading={'Recent Addition'}>
 				<Masonry
 					items={pics}
 					renderItem={(item, index) => (
@@ -85,7 +85,7 @@ const Home = () => {
 						/>
 					)}
 				/>
-			</Section>
+			</Section> */}
 		</Layout>
 	)
 }
