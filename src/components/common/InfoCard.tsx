@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils'
 export interface InfoCardProps {
 	title: string | React.ReactNode
 	className?: string
-	description?: string
+	description?: string | React.ReactNode
 	footer?: React.ReactNode
 	children?: React.ReactNode
 	thumbnail?: string

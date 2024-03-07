@@ -19,7 +19,7 @@ import { ChevronRight, Copy, Heart, Mail, SlidersHorizontal } from 'lucide-react
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { deepSearchKey } from '@/lib/record'
+import { deepSearchKey, getListOfFields } from '@/lib/record'
 import useXMLData from '@/hooks/useXMLData'
 import { useMetadata } from '@/hooks/useMetadata'
 
@@ -76,17 +76,34 @@ const SummaryPageAction = () => {
 
 const RecordView = ({ record }) => {
 	const [view] = useAtom(viewAtom)
-	const title = deepSearchKey(record, 'legal_title')
-	const description = deepSearchKey(record, 'obj_description')
-	const id = deepSearchKey(record, 'accession_number')
+	const database = deepSearchKey(record, 'database_name')[0]
+	const listOfFields = getListOfFields(database)
+
+	console.log({ database, record, listOfFields })
+
+	const titleField = ({ match = 'Title' }) => {
+		return listOfFields?.items
+			?.filter((e) => e.label === match)
+			.map((item) => {
+				return item.name
+			})[0]
+	}
+
+	const commonFields = ({ grid = true }) => {
+		return listOfFields?.items?.map((item) => {
+			if (!item.name || !item.label) return null
+			if (grid && !item.grid) return null
+			const data = deepSearchKey(record, item.name)
+			if (data && data.length > 0 && item.label !== 'Title')
+				return <DataWithLabel key={item.name} label={item.label} items={data} />
+		})
+	}
 	if (view === 'grid') {
 		return (
 			<InfoCard
 				className="border-primary"
-				title={title.map((e) => (
-					<Link href="/">{e}</Link>
-				))}
-				description={`ID:${id[0]}`}
+				title={titleField() && <Link href="/">{titleField()}</Link>}
+				description={commonFields({ grid: true })}
 				thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 				footer={
 					<div className="flex h-4 items-center space-x-4 w-full justify-evenly ">
@@ -99,9 +116,7 @@ const RecordView = ({ record }) => {
 
 	return (
 		<DetailInfoCard
-			title={title.map((e) => (
-				<Link href="/">{e}</Link>
-			))}
+			title={titleField && <Link href="/">{titleField()}</Link>}
 			className="col-span-3 border-primary"
 			thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 			footer={
@@ -112,12 +127,7 @@ const RecordView = ({ record }) => {
 					</div>
 				</div>
 			}>
-			<div className="mt-4">
-				<DataWithLabel label={'Date'} items={['1242']} />
-				<DataWithLabel label={'Reference Code'} items={[id[0]]} />
-				<DataWithLabel label={'Level'} items={['Item']} />
-				<DataWithLabel label={'Scope'} items={['1242']} />
-			</div>
+			<div className="mt-4">{commonFields({ grid: false })}</div>
 		</DetailInfoCard>
 	)
 }
@@ -190,7 +200,7 @@ const Summary = () => {
 								<SummaryPageAction />
 							</div>
 							<div className="col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-								<SummaryRecords records={deepSearchKey(data, 'record')} />
+								<SummaryRecords records={deepSearchKey(data, 'xml_record')[0]} />
 							</div>
 
 							<div className="col-span-4 mt-4">

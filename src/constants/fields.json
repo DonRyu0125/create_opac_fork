@@ -27,7 +27,7 @@
 				"label": "Description",
 				"name": "OBJ_DESCRIPTION",
 				"summary": true,
-				"grid": true,
+				"grid": false,
 				"detail": true
 			}
 		]
@@ -37,30 +37,30 @@
 		"items": [
 			{
 				"label": "Title",
-				"name": "LEGAL_TITLE",
+				"name": "TITLE",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
 				"label": "Date",
-				"name": "EARLY",
+				"name": "date_cr_inc",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
 				"label": "ID",
-				"name": "ACCESSION_NUMBER",
+				"name": "REFD",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
 				"label": "Description",
-				"name": "OBJ_DESCRIPTION",
+				"name": "SCOPE",
 				"summary": true,
-				"grid": true,
+				"grid": false,
 				"detail": true
 			}
 		]

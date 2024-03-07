@@ -1,7 +1,7 @@
 import { GenericObject, deepSearchKey } from '@/lib/record'
 import { useEffect, useState } from 'react'
 import X2JS from 'x2js'
-
+import summary from '../samples/summary.json'
 type Props = {
 	selector: string
 }
@@ -48,7 +48,8 @@ export const getDataFromXML = (id: string) => {
 const useXMLData = ({ selector }: Props) => {
 	const [data, setData] = useState<GenericObject | null>(null)
 
-	const jsonData = getDataFromXML(selector)
+	// const jsonData = getDataFromXML(selector)
+	const jsonData = summary
 
 	useEffect(() => {
 		setData(jsonData)
