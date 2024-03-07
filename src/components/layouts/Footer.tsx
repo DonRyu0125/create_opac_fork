@@ -2,17 +2,13 @@ import { config } from '@/constants'
 import { getJSONType } from '@/lib/utils'
 
 const Footer = () => {
-	const { logo } = getJSONType(config)
+	const { logo, siteName } = getJSONType(config)
 
 	return (
-		<footer className="bg-primary/20 mx-auto  px-4 py-8 sm:px-6 lg:px-8">
+		<footer className="bg-black mx-auto  px-4 py-8 sm:px-6 lg:px-8">
 			<div className="sm:flex sm:items-center sm:justify-between">
-				<div className="flex justify-center text-teal-600 sm:justify-start">
-					<img className=" h-12" src={logo} alt="logo" />
-				</div>
-
-				<p className="mt-4 text-center text-sm text-gray-500 lg:mt-0 lg:text-right">
-					Copyright &copy; {new Date().getFullYear()}. All rights reserved.
+				<p className="text-center text-white mx-auto">
+					{siteName} &copy; {new Date().getFullYear()}
 				</p>
 			</div>
 		</footer>

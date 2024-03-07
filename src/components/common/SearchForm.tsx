@@ -17,13 +17,16 @@ const SearchForm = ({ className, searchURL, inputName, ...props }: SearchFormPro
 			<div className="w-3/4 relative">
 				<Input
 					name={inputName}
-					className="w-full rounded-none pl-8 border-2 py-3 bg-transparent text-white"
-					placeholder="What are you looking for"
+					className="w-full rounded-none pl-8 border-2 py-3 bg-transparent border-opac-green text-white"
+					placeholder="Enter your search"
 					type="search"
 				/>
 				<SearchIcon className="absolute w-4 h-5 left-2 my-auto  mx-0 right-0 top-0 bottom-0 text-white" />
 			</div>
-			<Button variant={'default'} className="right-0 top-0 h-full" type="submit">
+			<Button
+				variant={'default'}
+				className="right-0 top-0 h-full bg-opac-green"
+				type="submit">
 				<span className="hidden md:block"> Search</span>
 				<span className="md:hidden block">
 					<Search className="w-4 h-4" />

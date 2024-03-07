@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Francois+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Francois+One&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -78,6 +79,7 @@
 	box-sizing: border-box;
 	position: relative;
 	min-width: 0;
+	font-family: 'Istok Web', sans-serif;
 }
 
 body {
@@ -87,10 +89,16 @@ body {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5 {
 	text-wrap: balance;
+	font-family: 'Francois One', sans-serif;
 }
 
-p {
+p,
+a,
+li,
+span {
 	text-wrap: pretty;
+	font-family: 'Istok Web', sans-serif;
 }
