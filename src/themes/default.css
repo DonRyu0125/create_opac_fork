@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Francois+One&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -52,9 +54,6 @@
 @layer base {
 	body {
 		@apply bg-background text-foreground;
-	}
-	html {
-		@apply bg-ford-darkblue;
 	}
 }
 

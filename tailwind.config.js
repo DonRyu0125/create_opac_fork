@@ -9,6 +9,9 @@ module.exports = {
 	],
 	prefix: '',
 	theme: {
+		fontFamily: {
+			sans: ['"Francois One"', 'sans-serif']
+		},
 		container: {
 			center: true,
 			padding: '2rem',
@@ -18,10 +21,11 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				ford: {
-					white: 'hsl(var(--ford-white))',
-					grey: 'hsl(var(--ford-grey))',
-					darkblue: 'hsl(var(--ford-darkblue))',
+				opac: {
+					white: 'hsl(var(--opac-white))',
+					grey: 'hsl(var(--opac-grey))',
+					darkblue: 'hsl(var(--opac-darkblue))',
+					green: 'hsl(var(--opac-green))',
 				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

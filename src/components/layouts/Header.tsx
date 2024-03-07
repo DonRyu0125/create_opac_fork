@@ -15,7 +15,7 @@ const Header = () => {
 				<div className="flex-1 md:flex md:items-center md:gap-12">
 					<a className="block text-teal-600" href="/">
 						<span className="sr-only">Home</span>
-						<img className="w-16 h-16" src={logo} alt="logo" />
+						<img className="h-12" src={logo} alt="logo" />
 					</a>
 				</div>
 
@@ -25,7 +25,7 @@ const Header = () => {
 							{navigations.map((nav) => (
 								<li key={nav.title}>
 									<Link
-										className="transition no-underline text-md text-ford-white hover:text-ford-grey"
+										className="transition no-underline text-md text-opac-white hover:text-opac-green"
 										href={nav.url}>
 										{nav.title}
 									</Link>
@@ -35,7 +35,7 @@ const Header = () => {
 					</nav>
 
 					<div className="flex items-center gap-4">
-						<ThemeToggler />
+						{/* <ThemeToggler /> */}
 						<MobileMenu />
 					</div>
 				</div>

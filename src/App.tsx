@@ -1,7 +1,7 @@
 import { getComponentFromKey } from './router'
 
 function App() {
-	const curPage = 'summary'
+	const curPage = 'home'
 	// const curPage = document?.querySelector('#root')?.getAttribute('data-id') || undefined
 
 	// look at ROUTES object to find matching key /
