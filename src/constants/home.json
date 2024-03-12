@@ -1,7 +1,7 @@
 {
 	"heading": "Société franco-ontarienne du patrimoine et de l'histoire d'Orléans",
 	"heroBanner": "https://www.sfopho.com/wp-content/uploads/2019/11/banner_ancien_orleansJPG.jpg",
-	"searchURL": "/scripts/mwimain.dll?UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]374.htm&KEEP=Y&APPLICATION=UNION_VIEW&language=144&REPORT=WEB_UNION_SUM",
+	"searchURL": "/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]374.htm&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&KEEP=Y",
 	"browseByCategoryTitle": "Browse by Category",
 	"categoriesItems": [
 		{
