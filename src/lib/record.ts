@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldsJson } from '@/types/fields.json'
-
 import { fields } from '@/constants/index'
+import axios, { AxiosResponse } from 'axios'
+import copy from 'copy-to-clipboard'
+const DEFAULT_DETAIL_REPORT = 'WEB_UNION_DETAIL'
+const DEFAULT_SUM_REPORT = 'WEB_UNION_SUM'
+
 export type GenericObject = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	[key: string]: any
@@ -35,4 +39,29 @@ export const getTitleField = (database: string, label = 'Title') => {
 
 export const truncateString = (text: string, maxChars = 50, postfix = '...') => {
 	return text.length < maxChars ? text : text.substring(0, maxChars) + postfix
+}
+
+export const bookmarkRecord = async (sessionId: string, database: string, sisn: string) => {
+	return axios({
+		method: 'post',
+		url: `${sessionId}?ADDSELECTION&COOKIE=BOOKMARK`,
+		data: `mcheckbox_${sisn}=${sisn}-${database}`,
+	})
+		.then((res) => res)
+		.catch((err) => {
+			console.error('Error while bookmarking record', err)
+		})
+}
+
+export const getRecordPermalink = (
+	database: string,
+	sisn: string,
+	report = DEFAULT_DETAIL_REPORT
+) => {
+	return `/scripts/mwimain.dll/144/${database}/${report}?sessionsearch&exp=SISN ${sisn}`
+}
+
+export const copyRecordURL = (database: string, sisn: string, report = DEFAULT_DETAIL_REPORT) => {
+	const url = getRecordPermalink(sisn, database, report)
+	copy(url)
 }
