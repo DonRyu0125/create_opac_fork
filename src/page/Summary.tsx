@@ -119,6 +119,7 @@ const SummaryPageAction = () => {
 const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
 	const database = record.database_name
+	const recordLink = record.record_link
 	const listOfFields = getListOfFields(database)
 	const { name } = getTitleField(database)
 	const title = name ? deepSearchKey(record, name)[0] : 'Untitled'
@@ -157,7 +158,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		return (
 			<InfoCard
 				className="border-primary"
-				title={<Link href="/">{truncateString(title)}</Link>}
+				title={<Link href={recordLink}>{truncateString(title)}</Link>}
 				description={getGridFields()}
 				thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 				footer={
@@ -171,7 +172,7 @@ const RecordView = ({ record }: { record: Record }) => {
 
 	return (
 		<DetailInfoCard
-			title={<Link href="/">{title}</Link>}
+			title={<Link href={recordLink}>{title}</Link>}
 			className="col-span-3 border-primary"
 			thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 			footer={
@@ -188,8 +189,6 @@ const RecordView = ({ record }: { record: Record }) => {
 }
 export const SummaryRecords = () => {
 	const { records } = useXMLData({ selector: '#xml_record' })
-
-	if (!records) return new Array(24).fill(1).map((_, i) => <SkeletonCard key={i} />)
 	return (
 		<>
 			{records.map((e, i) => (
@@ -202,9 +201,8 @@ export const SummaryRecords = () => {
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 
-	const { data, common, pagination } = useXMLData({ selector: '#xml_record' })
-
-	if (!data) return <></>
+	const {common, pagination } = useXMLData({ selector: '#xml_record' })
+	if(!common ||!pagination) return <></>
 	return (
 		<Layout>
 			<div className="rounded-sm border border-primary bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">

@@ -7,6 +7,7 @@ import InfoTable from '../components/common/InfoTable'
 import RecordAction from '../components/common/RecordAction'
 import { SlidersHorizontal } from 'lucide-react'
 import { Button } from '../components/ui/button'
+import useXMLData from '@/hooks/useXMLData'
 
 const images = [
 	{
@@ -26,6 +27,8 @@ const images = [
 	},
 ]
 const Detail = () => {
+	const { common, backToSummary } = useXMLData({ selector: '#xml_record' })
+	
 	return (
 		<Layout>
 			<div className="rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
@@ -34,18 +37,17 @@ const Detail = () => {
 						{ label: 'Home', url: '/' },
 						{
 							label: 'Summary',
-							url: '/summary',
+							url: backToSummary
 						},
 						{
 							label: 'Detail',
-							url: '/detail',
 							active: true,
 						},
 					]}>
-					<Button>
+					{/* <Button>
 						<SlidersHorizontal className="mr-2 h-4 w-4" />
 						Advanced Search
-					</Button>
+					</Button> */}
 				</PageAction>
 				<section>
 					<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">

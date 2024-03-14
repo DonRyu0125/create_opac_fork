@@ -22,13 +22,6 @@
 				"summary": true,
 				"grid": true,
 				"detail": true
-			},
-			{
-				"label": "Description",
-				"name": "OBJ_DESCRIPTION",
-				"summary": true,
-				"grid": false,
-				"detail": true
 			}
 		]
 	},
@@ -52,13 +45,6 @@
 			{
 				"label": "Date",
 				"name": "date_cr_inc",
-				"summary": true,
-				"grid": false,
-				"detail": true
-			},
-			{
-				"label": "Description",
-				"name": "SCOPE",
 				"summary": true,
 				"grid": false,
 				"detail": true
