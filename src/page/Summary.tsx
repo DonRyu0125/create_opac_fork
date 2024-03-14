@@ -68,6 +68,14 @@ const RecordAction = () => {
 		</>
 	)
 }
+
+/**
+ * This component contains:
+ * - Filter
+ * - Number of records per page
+ * - Sort
+ * - Bookmark
+ */
 const SummaryPageAction = () => {
 	const { filter } = useXMLData({ selector: '#xml_record' })
 	console.log(filter)
@@ -91,6 +99,9 @@ const SummaryPageAction = () => {
 								<div className="space-y-3  border-t p-4">
 									{item.item_group.map((option) => (
 										<CheckboxWithLabel
+											callback={() => {
+												window.location = option.item_link
+											}}
 											label={`${option.item_value} (${option.item_frequency})`}
 											checked={option.item_selected === 'Y'}
 										/>

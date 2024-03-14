@@ -6,17 +6,25 @@ export interface CheckboxWithLabelProps extends React.HTMLAttributes<HTMLDivElem
 	label: string
 	labelId?: string
 	checked?: boolean
+	callback: () => void
 }
 const CheckboxWithLabel = ({
 	className,
 	label,
 	labelId,
 	checked = false,
+	callback,
 	...props
 }: CheckboxWithLabelProps) => {
 	return (
 		<div className={cn('flex items-center space-x-2', className)} {...props}>
-			<Checkbox id={labelId || label} defaultChecked={checked} />
+			<Checkbox
+				id={labelId || label}
+				defaultChecked={checked}
+				onClick={() => {
+					callback()
+				}}
+			/>
 			<Label
 				htmlFor={labelId || label}
 				className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
