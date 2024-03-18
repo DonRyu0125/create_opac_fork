@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Cal_event, EVENT_COLORS, FILTER_TYPE, FILTER_TYPE_COLORS } from './EventCalendar'
+import { Cal_event, FILTER_TYPE_COLORS } from './EventCalendar'
 
 interface MyComponentProps {
 	setCurrentFilter: React.Dispatch<React.SetStateAction<string[]>>

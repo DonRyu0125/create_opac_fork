@@ -18,20 +18,10 @@ export interface Day_obj {
 	year: number
 }
 
+const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const FILTER_TYPE = 'event-loc'
 export const EVENT_DATE = 'event-date'
 export const EVENT_NAME = 'event-name'
-export const EVENT_COLORS = [
-	'red',
-	'yellow',
-	'green',
-	'orange',
-	'purple',
-	'grey',
-	'CadetBlue',
-	'DarkKhaki',
-	'DeepPink',
-]
 export const MON_REPORT_TYPES = [
 	'MONTHLY_CALENDAR',
 	'NEXT_MONTH_CALENDAR',
@@ -80,11 +70,9 @@ export const FILTER_TYPE_COLORS = [
 ]
 
 const EventCalendar = () => {
-	const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 	const [currentDate, setCurrentDate] = useState(new Date())
 	const [currentEvent, setCurrentEvent] = useState<Cal_event[]>([])
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
-	const [filterColorType, setFilterColorType] = useState()
 
 	useEffect(() => {
 		getData()
