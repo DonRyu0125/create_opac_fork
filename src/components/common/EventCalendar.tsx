@@ -58,7 +58,7 @@ export const FILTER_TYPE_COLORS = [
 		icon: 'circle',
 	},
 	{
-		type: 'Simcore',
+		type: 'SIMCOE',
 		color: 'orange',
 		icon: 'circle',
 	},
@@ -171,7 +171,7 @@ const EventCalendar = () => {
 			return currentEvent.map((item: Cal_event) => {
 				return currentFilter.map((type) => {
 					if (
-						type === item[FILTER_TYPE] &&
+						convertLower(type) === convertLower(item[FILTER_TYPE]) &&
 						changeStrToDate(item[EVENT_DATE]).day == dayObj.day &&
 						changeStrToDate(item[EVENT_DATE]).month == dayObj.month
 					) {
@@ -191,11 +191,16 @@ const EventCalendar = () => {
 		}
 	}
 
-	const getColor = (event_type: String) => {
+	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
-			return item.type == event_type
+			return convertLower(item.type) === convertLower(event_type)
 		})
 		return result[0]?.color
+	}
+
+	const convertLower = (type:string)=>{
+		let trimed = type.trim();
+		return trimed.toLowerCase();
 	}
 
 	return (
