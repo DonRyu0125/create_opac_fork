@@ -6,13 +6,13 @@
                     "1996.0018.0003",
                     "1996.0018.0003"
                 ],
-                "m_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Museum/Images/LOW%20RES/996.18.3_R.\nJPG",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Museum/Images/LOW%20RES/996.18.3_R.\nJPG"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "COLLECTIONS",
+            "database_name": "COLLECTIONS_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317284/2/1/6178?RECORD&UN\nION=Y",
             "record": {
                 "sisn": "6178",
@@ -27,13 +27,13 @@
                     "OS166",
                     "OS166"
                 ],
-                "m_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Museum/Images/Spencer/2.5.1%20Trade\ns/OS-166%2001.JPG",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Museum/Images/Spencer/2.5.1%20Trade\ns/OS-166%2001.JPG"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "COLLECTIONS",
+            "database_name": "COLLECTIONS_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317284/2/2/16998?RECORD&U\nNION=Y",
             "record": {
                 "sisn": "16998",
@@ -44,13 +44,13 @@
         },
         {
             "media": {
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.2063.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.2064.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/3/1147?RECORD&UN\nION=Y",
             "record": {
                 "sisn": "1147",
@@ -61,14 +61,14 @@
         },
         {
             "media": {
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.3478.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.3479.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.3480.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/4/1591?RECORD&UN\nION=Y",
             "record": {
                 "sisn": "1591",
@@ -79,14 +79,14 @@
         },
         {
             "media": {
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.4716.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.4717.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.4718.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/5/2030?RECORD&UN\nION=Y",
             "record": {
                 "sisn": "2030",
@@ -98,7 +98,7 @@
         },
         {
             "media": {
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.6756.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.6757.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.6758.jpg",
@@ -110,7 +110,7 @@
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/6/2700?RECORD&UN\nION=Y",
             "record": {
                 "sisn": "2700",
@@ -123,10 +123,10 @@
         {
             "media": {
                 "image_caption": "NC766",
-                "a_im_access_link": "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Neville%20Curtis/NC766.jpg"
+                "im_access_link": "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Neville%20Curtis/NC766.jpg"
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/7/4238?RECORD&UN\nION=Y",
             "record": {
                 "sisn": "4238",
@@ -140,7 +140,7 @@
         {
             "media": "",
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/8/8030?RECORD&UN\nION=Y",
             "record": {
                 "sisn": "8030",
@@ -153,7 +153,7 @@
         {
             "media": "",
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/9/8051?RECORD&UN\nION=Y",
             "record": {
                 "sisn": "8051",
@@ -166,7 +166,7 @@
         {
             "media": {
                 "image_caption": "NC1339A-D",
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Neville%20Curtis/NC1339A.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Neville%20Curtis/NC1339B.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Neville%20Curtis/NC1339C.jpg",
@@ -174,7 +174,7 @@
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/10/16563?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "16563",
@@ -188,7 +188,7 @@
         {
             "media": {
                 "image_caption": "SA1992.036.7288-7293",
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.7288.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.7289.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.7290.jpg",
@@ -198,7 +198,7 @@
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/11/17681?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "17681",
@@ -216,14 +216,14 @@
                     "SM. 960B",
                     "SM. 960C"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Stan%20McKinnon%20Photographs/SM.960A.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Stan%20McKinnon%20Photographs/SM.960B.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Stan%20McKinnon%20Photographs/SM.960C.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/12/18922?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "18922",
@@ -245,14 +245,14 @@
                     "NC2093B",
                     "NC2093C"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Neville%20Curtis/NC2093A.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Neville%20Curtis/NC2093B.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Photo%20Collections\n/Neville%20Curtis/NC2093C.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/13/23537?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "23537",
@@ -277,7 +277,7 @@
                     "SA1992.036.10455",
                     "SA1992.036.10456"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.10451.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.10452.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.10453.jpg",
@@ -287,7 +287,7 @@
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/14/28367?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "28367",
@@ -311,13 +311,13 @@
                     "SA1992.036.11538",
                     "SA1992.036.11539"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.11538.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.11539.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/15/29475?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "29475",
@@ -337,13 +337,13 @@
                     "SA1992.036.115645",
                     "SA1992.036.11646"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.11645.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.11646.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/16/29672?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "29672",
@@ -363,13 +363,13 @@
                     "SA1992.036.115653",
                     "SA1992.036.11654"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.11653.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.11654.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/17/29675?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "29675",
@@ -392,7 +392,7 @@
                     "SA1992.036.12394",
                     "SA1992.036.12395"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.12391.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.12392.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.12393.jpg",
@@ -401,7 +401,7 @@
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/18/30490?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "30490",
@@ -424,13 +424,13 @@
                     "SA1992.036.14822",
                     "SA1992.036.14823"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.14822.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.14823.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/19/34000?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "34000",
@@ -450,13 +450,13 @@
                     "SA1992.036.14828",
                     "SA1992.036.14829"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.14828.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.14829.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/20/34004?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "34004",
@@ -476,13 +476,13 @@
                     "SA1992.036.15278",
                     "SA1992.036.15279"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.15278.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.15279.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/21/34427?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "34427",
@@ -502,13 +502,13 @@
                     "SA1992.036.17308",
                     "SA1992.036.17309"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.17308.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.17309.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/22/36088?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "36088",
@@ -532,7 +532,7 @@
                     "SA1992.036.17614",
                     "SA1992.036.17615"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.17610.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.17611.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.17612.jpg",
@@ -542,7 +542,7 @@
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/23/36156?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "36156",
@@ -566,13 +566,13 @@
                     "SA1992.036.17950",
                     "SA1992.036.17951"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.17950.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.17951.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/24/36262?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "36262",
@@ -592,13 +592,13 @@
                     "SA1992.036.20834",
                     "SA1992.036.20835"
                 ],
-                "a_im_access_link": [
+                "im_access_link": [
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.20834.jpg",
                     "https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Archives/Images/Barber%20Grant%20Im\nages/SA1992.036.20835.jpg"
                 ]
             },
             "is_bookmarked": "false",
-            "database_name": "DESCRIPTION",
+            "database_name": "DESCRIPTION_WEB",
             "record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/138317285/2/25/38024?RECORD&\nUNION=Y",
             "record": {
                 "sisn": "38024",

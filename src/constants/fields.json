@@ -52,7 +52,7 @@
 		]
 	},
 	{
-		"database": "BIBLIO",
+		"database": "BIBLIO_WEB",
 		"items": [
 			{
 				"label": "Title",
