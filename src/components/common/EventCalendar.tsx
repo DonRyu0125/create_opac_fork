@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import X2JS from 'x2js'
 import response from '../../samples/fetch_calendar.json'
 import EventCalendarFilter from './EventCalendarFilter'
+import { Button } from '../ui/button'
 
 export interface Cal_event {
 	'event-date': string
@@ -186,27 +187,23 @@ const EventCalendar = () => {
 		return result[0]?.color
 	}
 
-	const convertLower = (type:string)=>{
-		let trimed = type.trim();
-		return trimed.toLowerCase();
+	const convertLower = (type: string) => {
+		let trimed = type.trim()
+		return trimed.toLowerCase()
 	}
 
 	return (
-		<div style={{ display: 'flex', flexDirection: 'column' }}>
-			<div style={{ display: 'flex' }}>
-				<button className="border-2 border-black-500 w-10" onClick={prevMonth}>
-					&lt;
-				</button>
+		<div className={'mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16'} >
+			<div className={'flex justify-center items-center'}>
+				<Button onClick={prevMonth}>&lt;</Button>
 				<h2 className="text-xl ">
 					{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
 				</h2>
-				<button className="border-2 border-black-500  w-10" onClick={nextMonth}>
-					&gt;
-				</button>
-				<EventCalendarFilter setCurrentFilter={setCurrentFilter} currentEvent={currentEvent} />
+				<Button onClick={nextMonth}>&gt;</Button>
 			</div>
-			<div style={{ width: 630 }}>
-				<div style={{ display: 'flex' }}>
+			<EventCalendarFilter setCurrentFilter={setCurrentFilter} currentEvent={currentEvent} />
+			<div className={'w-full'}>
+				<div className={'flex'}>
 					{daysOfWeek.map((item, key) => {
 						return (
 							<div key={key} style={{ textAlign: 'right', width: 90 }}>
@@ -215,14 +212,12 @@ const EventCalendar = () => {
 						)
 					})}
 				</div>
-
 				{weeks().map((week, weekIndex) => (
-					<div key={weekIndex} style={{ display: 'flex' }}>
+					<div key={weekIndex} className={'flex'}>
 						{week.map((dayObj: any, dayIndex) => (
 							<div
 								key={dayIndex}
-								style={{ width: 90, height: 100, textAlign: 'center' }}
-								className="border-2 border-black-500">
+								className="border-2 border-black-500 w-screen max-w-40 min-h-40">
 								<div>{dayObj.day}</div>
 								<div>{eventTag(dayObj)}</div>
 							</div>

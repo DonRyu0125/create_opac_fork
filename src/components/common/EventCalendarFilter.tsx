@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Cal_event, FILTER_TYPE_COLORS } from './EventCalendar'
+import { cn } from '@/lib/utils'
+import { Button, buttonVariants } from '../ui/button'
 
 interface MyComponentProps {
 	setCurrentFilter: React.Dispatch<React.SetStateAction<string[]>>
@@ -22,16 +24,23 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter, cur
 	}
 
 	const showFilter = () => {
-		return FILTER_TYPE_COLORS.map((item,key) => {
+		return FILTER_TYPE_COLORS.map((item, key) => {
 			return (
-				<label key={key} style={{ display: 'flex' }}>
+				<label
+					key={key}
+					className="flex items-center text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 					<input
+						className={cn(
+							'peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground'
+						)}
 						type="checkbox"
 						checked={selectType[item.type] === 1}
 						onChange={(e) => handleChange(e)}
 						name={item.type}
 					/>
-					<div style={{ backgroundColor: `${item.color}` }}>{item.type}</div>
+					<div className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+						{item.type}
+					</div>
 				</label>
 			)
 		})
@@ -46,9 +55,9 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter, cur
 	}
 
 	return (
-		<div>
-			<div>{showFilter()}</div>
-			<button onClick={resetFilter}>Reset</button>
+		<div className={'flex w-100 justify-evenly'}>
+			<div className={cn('flex items-center space-x-2')}>{showFilter()}</div>
+			<Button onClick={resetFilter}>Reset</Button>
 		</div>
 	)
 }

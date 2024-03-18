@@ -34,7 +34,14 @@ const pics = [
 ]
 
 const Home = () => {
-	const { heading, heroBanner, browseByCategoryTitle, categoriesItems, searchURL,eventCalendar } = home
+	const {
+		heading,
+		heroBanner,
+		browseByCategoryTitle,
+		categoriesItems,
+		searchURL,
+		eventCalendar,
+	} = home
 
 	return (
 		<Layout>
@@ -65,10 +72,9 @@ const Home = () => {
 						</Card>
 					)}
 				/>
-				
 			</Section>
 			<Section heading={eventCalendar}>
-			<EventCalendar />
+				<EventCalendar />
 			</Section>
 			{/* <Section
         className='bg-secondary'
