@@ -75,6 +75,12 @@ const RecordView = ({ record }: { record: Record }) => {
 	const { name } = getTitleField(database)
 	const title = name ? deepSearchKey(record, name)[0] : 'Untitled'
 
+	const thumbnail =
+		record.media &&
+		Array.isArray(record.media.im_access_link) &&
+		record.media.im_access_link.length > 0 &&
+		record.media.im_access_link[0]
+
 	const getGridFields = () => {
 		return listOfFields?.items
 			?.filter((item) => item.grid === true)
@@ -111,7 +117,7 @@ const RecordView = ({ record }: { record: Record }) => {
 				className="border-primary"
 				title={<Link href={recordLink}>{truncateString(title)}</Link>}
 				description={getGridFields()}
-				thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+				thumbnail={thumbnail || 'https://www.svgrepo.com/show/451131/no-image.svg'}
 				footer={
 					<div className="flex h-4 items-center space-x-4 w-full justify-evenly ">
 						<RecordAction record={record} />
@@ -125,12 +131,12 @@ const RecordView = ({ record }: { record: Record }) => {
 		<DetailInfoCard
 			title={<Link href={recordLink}>{title}</Link>}
 			className="col-span-3 border-primary"
-			thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+			thumbnail={thumbnail || 'https://www.svgrepo.com/show/451131/no-image.svg'}
 			footer={
 				<div>
 					<Separator />
 					<div className="flex h-12 items-center space-x-4 w-full justify-evenly ">
-						<RecordAction />
+						<RecordAction record={record} />
 					</div>
 				</div>
 			}>
