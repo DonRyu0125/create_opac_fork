@@ -9,6 +9,7 @@ import Slide from '../components/common/Slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
+import Calendar from '@/components/common/Calendar'
 const pics = [
 	'https://picsum.photos/1000/800/?random=123',
 	'https://picsum.photos/500/600/?random=456',
@@ -65,6 +66,7 @@ const Home = () => {
 					)}
 				/>
 			</Section>
+			<Calendar/>
 			{/* <Section
         className='bg-secondary'
         heading={'Browse by area'}
