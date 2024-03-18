@@ -4,19 +4,28 @@ import InfoCard from '@/components/common/InfoCard'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import useXMLData from '@/hooks/useXMLData'
-import { getListOfFields, getTitleField, deepSearchKey, truncateString } from '@/lib/record'
+import {
+	getListOfFields,
+	getTitleField,
+	deepSearchKey,
+	truncateString,
+	copyRecordURL,
+} from '@/lib/record'
 import { cn } from '@/lib/utils'
 import { viewAtom } from '@/store'
-import { Separator } from '@radix-ui/react-dropdown-menu'
+import { Separator } from '@/components/ui/separator'
 import { ToastAction } from '@radix-ui/react-toast'
 import { useAtom } from 'jotai'
 import { Heart, Copy, Mail } from 'lucide-react'
 import { useState } from 'react'
 import Link from '@/components/common/Link'
+import { Record } from '@/types/record'
 
-const RecordAction = () => {
+const RecordAction = ({ record }: { record: Record }) => {
 	const [like, setLike] = useState(false)
 	const { toast } = useToast()
+	const sisn = deepSearchKey(record, 'sisn')[0] as string
+	const database = record.database_name
 
 	return (
 		<>
@@ -43,6 +52,7 @@ const RecordAction = () => {
 				variant="ghost"
 				size="icon"
 				onClick={() => {
+					copyRecordURL(database, sisn)
 					toast({
 						title: 'Record URL is copied',
 					})
@@ -72,7 +82,7 @@ const RecordView = ({ record }: { record: Record }) => {
 				const name = item.name || 'TITLE'
 				const data = deepSearchKey(record, name)
 				if (data?.length > 0 && item.label !== 'Title')
-					return <DataWithLabel key={item.name} label={item.label} items={data} />
+					return <DataWithLabel key={item.name} label={item.label || ''} items={data} />
 			})
 			.filter((item) => item)
 	}
@@ -87,7 +97,7 @@ const RecordView = ({ record }: { record: Record }) => {
 						<DataWithLabel
 							className="flex-col items-start justify-start my-1"
 							key={item.name}
-							label={item.label}
+							label={item.label || ''}
 							items={data}
 						/>
 					)
@@ -104,7 +114,7 @@ const RecordView = ({ record }: { record: Record }) => {
 				thumbnail="https://images.unsplash.com/photo-1554907984-15263bfd63bd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 				footer={
 					<div className="flex h-4 items-center space-x-4 w-full justify-evenly ">
-						<RecordAction />
+						<RecordAction record={record} />
 					</div>
 				}
 			/>

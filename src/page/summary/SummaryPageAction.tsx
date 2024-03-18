@@ -13,7 +13,6 @@ import { Label } from '@radix-ui/react-dropdown-menu'
  */
 const SummaryPageAction = () => {
 	const { filter } = useXMLData({ selector: '#xml_record' })
-	console.log(filter)
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-col space-y-2">
