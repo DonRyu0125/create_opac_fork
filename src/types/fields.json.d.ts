@@ -5,22 +5,22 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Database = string;
-export type Label = string;
-export type Name = string;
-export type Summary = boolean;
-export type Grid = boolean;
-export type Detail = boolean;
+export type Database = string
+export type Label = string
+export type Name = string
+export type Summary = boolean
+export type Grid = boolean
+export type Detail = boolean
 export type Items = {
-  label?: Label;
-  name?: Name;
-  summary?: Summary;
-  grid?: Grid;
-  detail?: Detail;
-  [k: string]: unknown;
-}[];
+	label?: Label
+	name?: Name
+	summary?: Summary
+	grid?: Grid
+	detail?: Detail
+	[k: string]: unknown
+}[]
 export type FieldsJson = {
-  database?: Database;
-  items?: Items;
-  [k: string]: unknown;
-}[];
+	database?: Database
+	items?: Items
+	[k: string]: unknown
+}[]
