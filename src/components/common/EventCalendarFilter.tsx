@@ -8,10 +8,15 @@ interface MyComponentProps {
 	setCurrentFilter: React.Dispatch<React.SetStateAction<string[]>>
 }
 
+type SelectType = {
+	[key: string]: number
+}
+
 const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) => {
-	const [selectType, setSelectedType] = useState<any>({})
+	const [selectType, setSelectedType] = useState<SelectType>({})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (!e.target.id) return
 		let map = selectType
 		if (map[e.target.id] > 0) {
 			delete map[e.target.id]
