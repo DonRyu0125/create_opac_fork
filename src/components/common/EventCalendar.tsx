@@ -32,41 +32,56 @@ export const MON_REPORT_TYPES = [
 	'NEXT_FIVE_MONTH_CALENDAR',
 ]
 
+export const COLORS_MAP ={
+	RED:'bg-red-500 border-red-500',
+	YELLOW:'bg-yellow-500 border-yellow-500',
+	GREEN:'bg-green-500 border-green-500',
+	ORANGE:'bg-orange-500 border-orange-500',
+	PURPLE:'bg-purple-500 border-purple-500',
+	GREY:'bg-neutral-500 border-neutral-500',
+	PINK:'bg-pink-500 border-pink-500'
+}
+
+export const ICON_SHAPE_MAP ={
+	SQUARE:'rounded',
+	CIRCLE:'rounded-full'
+}
+
 export const FILTER_TYPE_COLORS = [
 	{
 		type: 'Delhi',
-		color: 'red',
-		icon: 'square',
+		color: COLORS_MAP['RED'],
+		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
 		type: 'Port Dover',
-		color: 'yellow',
-		icon: 'square',
+		color: COLORS_MAP['YELLOW'],
+		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
 		type: 'Port Rowan',
-		color: 'green',
-		icon: 'circle',
+		color: COLORS_MAP['GREEN'],
+		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
 		type: 'SIMCOE',
-		color: 'orange',
-		icon: 'circle',
+		color: COLORS_MAP['ORANGE'],
+		icon: ICON_SHAPE_MAP['CIRCLE'],
 	},
 	{
 		type: 'Waterford',
-		color: 'purple',
-		icon: 'circle',
+		color: COLORS_MAP['PURPLE'],
+		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
 		type: 'All',
-		color: 'grey',
-		icon: 'square',
+		color:  COLORS_MAP['GREY'],
+		icon: ICON_SHAPE_MAP['CIRCLE'],
 	},
 	{
 		type: 'Norview Lodge',
-		color: 'pink',
-		icon: 'square',
+		color:  COLORS_MAP['PINK'],
+		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 ]
 
@@ -201,7 +216,7 @@ const EventCalendar = () => {
 				</h2>
 				<Button onClick={nextMonth}>&gt;</Button>
 			</div>
-			<EventCalendarFilter setCurrentFilter={setCurrentFilter} currentEvent={currentEvent} />
+			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
 			<div className={'w-full'}>
 				<div className={'flex'}>
 					{daysOfWeek.map((item, key) => {

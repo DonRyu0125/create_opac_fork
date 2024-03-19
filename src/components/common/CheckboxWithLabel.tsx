@@ -18,12 +18,12 @@ const CheckboxWithLabel = ({
 }: CheckboxWithLabelProps) => {
 	return (
 		<div
-			className={cn('flex items-center space-x-2', className)}
+			className={cn('flex items-center space-x-2')}
 			onClick={(e) => {
 				callback(e)
 			}}
 			{...props}>
-			<Checkbox id={labelId || label} defaultChecked={checked} checked={checked} />
+			<Checkbox id={labelId || label} defaultChecked={checked} checked={checked} className={className} />
 			<Label
 				htmlFor={labelId || label}
 				className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
