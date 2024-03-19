@@ -18,7 +18,6 @@ const Header = () => {
 						<img className="h-12" src={logo} alt="logo" />
 					</a>
 				</div>
-
 				<div className="md:flex md:items-center md:gap-12">
 					<nav aria-label="Global" className="hidden md:block">
 						<ul className="flex items-center gap-6 text-sm ">
@@ -33,7 +32,6 @@ const Header = () => {
 							))}
 						</ul>
 					</nav>
-
 					<div className="flex items-center gap-4">
 						{/* <ThemeToggler /> */}
 						<MobileMenu />
