@@ -1,7 +1,8 @@
 import CheckboxWithLabel from '@/components/common/CheckboxWithLabel'
 import CollapseList from '@/components/common/CollapseList'
 import DropdownSelect from '@/components/common/DropdownSelect'
-import useXMLData from '@/hooks/useXMLData'
+import getJSONData from '@/hooks/getJSONData'
+import { SummarySample } from '@/samples'
 import { Label } from '@radix-ui/react-dropdown-menu'
 
 /**
@@ -12,7 +13,9 @@ import { Label } from '@radix-ui/react-dropdown-menu'
  * - Bookmark
  */
 const SummaryPageAction = () => {
-	const { filter } = useXMLData({ selector: '#xml_record' })
+	// const { filter } = getJSONData({ selector: '#xml_record' })
+	const { filter } = getJSONData({ defaultData: SummarySample })
+
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-col space-y-2">

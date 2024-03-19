@@ -3,7 +3,7 @@ import DetailInfoCard from '@/components/common/DetailInfoCard'
 import InfoCard from '@/components/common/InfoCard'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
-import useXMLData from '@/hooks/useXMLData'
+import getJSONData from '@/hooks/getJSONData'
 import {
 	getListOfFields,
 	getTitleField,
@@ -20,6 +20,20 @@ import { Heart, Copy, Mail } from 'lucide-react'
 import { useState } from 'react'
 import Link from '@/components/common/Link'
 import { Record } from '@/types/record'
+import { SummarySample } from '@/samples'
+
+const SummaryRecords = () => {
+	// const { records } = getJSONData({ selector: '#xml_record' })
+	const { records } = getJSONData({ defaultData: SummarySample })
+
+	return (
+		<>
+			{records.map((e, i) => (
+				<RecordView record={e} key={i} />
+			))}
+		</>
+	)
+}
 
 const RecordAction = ({ record }: { record: Record }) => {
 	const [like, setLike] = useState(false)
@@ -142,17 +156,6 @@ const RecordView = ({ record }: { record: Record }) => {
 			}>
 			<div className="mt-4">{getListFields()}</div>
 		</DetailInfoCard>
-	)
-}
-
-const SummaryRecords = () => {
-	const { records } = useXMLData({ selector: '#xml_record' })
-	return (
-		<>
-			{records.map((e, i) => (
-				<RecordView record={e} key={i} />
-			))}
-		</>
 	)
 }
 

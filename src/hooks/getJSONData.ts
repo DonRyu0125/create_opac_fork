@@ -6,7 +6,8 @@ import { FilterItem } from '@/types/filter'
 import { Pagination } from '@/types/pagination'
 import { Record } from '@/types/record'
 type Props = {
-	selector: string
+	selector?: string
+	defaultData?: GenericObject
 }
 
 const COMMON_FIELDS = [
@@ -31,6 +32,7 @@ export const getRecordXML = (id: string) => {
 }
 
 export const getDataFromXML = (id: string) => {
+	if (!id) return null
 	const xml = getRecordXML(id)
 	if (xml) {
 		try {
@@ -48,9 +50,10 @@ export const getDataFromXML = (id: string) => {
 	return null
 }
 
-const useXMLData = ({ selector }: Props) => {
-	// const [data] = useState<GenericObject | null>(getDataFromXML(selector))
-	const [data] = useState<GenericObject | null>(summary)
+const getJSONData = ({ selector, defaultData }: Props) => {
+	const [data] = useState<GenericObject | null>(
+		defaultData && !selector ? defaultData : selector ? getDataFromXML(selector) : null
+	)
 
 	const getCommonFields = () => {
 		const object: COMMON_FIELDS_OBJECT = {}
@@ -113,4 +116,4 @@ const useXMLData = ({ selector }: Props) => {
 	return { data, common, pagination, filter, records, backToSummary }
 }
 
-export default useXMLData
+export default getJSONData

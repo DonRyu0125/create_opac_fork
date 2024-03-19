@@ -1,7 +1,7 @@
-import Detail from '@/page/Detail'
 import FAQ from '@/page/FAQ'
 import Home from '@/page/Home'
 import NotFoundPage from '@/page/NotFoundPage'
+import Detail from '@/page/detail'
 import Summary from '@/page/summary'
 
 export type TRoute = Record<string, () => React.ReactNode>
