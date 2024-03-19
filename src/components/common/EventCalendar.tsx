@@ -3,6 +3,16 @@ import X2JS from 'x2js'
 import response from '../../samples/fetch_calendar.json'
 import EventCalendarFilter from './EventCalendarFilter'
 import { Button } from '../ui/button'
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '../ui/dialog'
+import { cn } from '@/lib/utils'
 
 export interface Cal_event {
 	'event-date': string
@@ -23,6 +33,7 @@ const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const FILTER_TYPE = 'event-loc'
 export const EVENT_DATE = 'event-date'
 export const EVENT_NAME = 'event-name'
+export const EVENT_TAG_WORD_LENGTH = 18
 export const MON_REPORT_TYPES = [
 	'MONTHLY_CALENDAR',
 	'NEXT_MONTH_CALENDAR',
@@ -152,37 +163,53 @@ const EventCalendar = () => {
 		setCurrentDate(newDate)
 	}
 
+	return (
+		<div className={'mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16'}>
+			<div className={'flex justify-center items-center'}>
+				<Button onClick={prevMonth}>&lt;</Button>
+				<h2 className="text-xl ">
+					{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+				</h2>
+				<Button onClick={nextMonth}>&gt;</Button>
+			</div>
+			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
+			<div className={'w-full mt-1'}>
+				<div className={'flex'}></div>
+				<div className={'grid grid-cols-7 gap-1'}>
+					{daysOfWeek.map((item, key) => {
+						return (
+							<div key={key} className={'text-center'}>
+								{item}
+							</div>
+						)
+					})}
+					{generateMonth().map((item: any, key: number) => {
+						return (
+							<div
+								key={key}
+								className="rounded-lg border border-black cursor-pointer w-screen max-w-40 min-h-40">
+								<div className={'bg-slate-200'}>{item.day}</div>
+								<EventTag
+									dayObj={item}
+									currentFilter={currentFilter}
+									currentEvent={currentEvent}
+								/>
+							</div>
+						)
+					})}
+				</div>
+			</div>
+		</div>
+	)
+}
+
+const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 	const changeStrToDate = (dateString: string) => {
 		const dateObject = new Date(dateString)
 		const month = dateObject.getMonth() + 1
 		const day = dateObject.getDate()
 
 		return { month, day }
-	}
-
-	const eventTag = (dayObj: Day_obj) => {
-		if (currentFilter.length > 0) {
-			return currentEvent.map((item: Cal_event) => {
-				return currentFilter.map((type) => {
-					if (
-						convertLower(type) === convertLower(item[FILTER_TYPE]) &&
-						changeStrToDate(item[EVENT_DATE]).day == dayObj.day &&
-						changeStrToDate(item[EVENT_DATE]).month == dayObj.month
-					) {
-						return `${item[EVENT_NAME]?.substring(0, 10)} ${item[FILTER_TYPE]} ${getColor(item[FILTER_TYPE])}`
-					}
-				})
-			})
-		} else {
-			return currentEvent.map((item: Cal_event) => {
-				if (
-					changeStrToDate(item[EVENT_DATE]).day == dayObj.day &&
-					changeStrToDate(item[EVENT_DATE]).month == dayObj.month
-				) {
-					return `${item[EVENT_NAME]?.substring(0, 10)} ${item[FILTER_TYPE]} ${getColor(item[FILTER_TYPE])} `
-				}
-			})
-		}
 	}
 
 	const getColor = (event_type: string) => {
@@ -197,40 +224,54 @@ const EventCalendar = () => {
 		return trimed.toLowerCase()
 	}
 
-	return (
-		<div className={'mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16'}>
-			<div className={'flex justify-center items-center'}>
-				<Button onClick={prevMonth}>&lt;</Button>
-				<h2 className="text-xl ">
-					{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-				</h2>
-				<Button onClick={nextMonth}>&gt;</Button>
-			</div>
-			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />{' '}
-			<div className={'w-full mt-1'}>
-				<div className={'flex'}></div>
-				<div className={'grid grid-cols-7 gap-1'}>
-					{daysOfWeek.map((item, key) => {
-						return (
-							<div key={key} style={{ textAlign: 'right', width: 90 }}>
-								{item}
-							</div>
-						)
-					})}
-					{generateMonth().map((item: any, key: number) => {
-						return (
-							<div
-								key={key}
-								className="rounded-lg border border-black  cursor-pointer  w-screen max-w-40 min-h-40">
-								<div>{item.day}</div>
-								<div>{eventTag(item)}</div>
-							</div>
-						)
-					})}
-				</div>
-			</div>
-		</div>
-	)
+	const showEvent = () => {
+		const filteredEvents = currentEvent.filter((item: Cal_event) => {
+			const { day, month } = changeStrToDate(item[EVENT_DATE])
+			const isMatchingDayMonth = day === dayObj.day && month === dayObj.month
+
+			if (currentFilter.length > 0) {
+				return (
+					isMatchingDayMonth &&
+					currentFilter.some(
+						(type:string) => convertLower(type) === convertLower(item[FILTER_TYPE])
+					)
+				)
+			}
+
+			return isMatchingDayMonth
+		})
+
+		return filteredEvents.map((item: Cal_event, key: number) => (
+			<Dialog key={key}>
+				<DialogTrigger asChild>
+					<Button
+						className={'w-full h-[20px] border-hidden flex p-0 justify-start'}
+						variant="outline">
+						<div
+							className={cn(
+								'h-4 w-4 border rounded',
+								getColor(item[FILTER_TYPE])
+							)}></div>
+						<div>{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}</div>
+					</Button>
+				</DialogTrigger>
+				<DialogContent>
+					<DialogHeader>
+						<DialogTitle>Edit profile</DialogTitle>
+						<DialogDescription>
+							Make changes to your profile here. Click save when you're done.
+						</DialogDescription>
+					</DialogHeader>
+					<div className="grid gap-4 py-4"></div>
+					<DialogFooter>
+						<Button type="submit">Save changes</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+		))
+	}
+
+	return showEvent()
 }
 
 export default EventCalendar
