@@ -33,9 +33,8 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) =
 	}
 
 	return (
-		<div className={'flex w-100 justify-evenly'}>
+		<div className={'flex w-100 justify-evenly items-center my-2 h-40'}>
 			{FILTER_TYPE_COLORS.map((item, key) => {
-				console.log('`${item.color}${item.icon}`',`${item.color} ${item.icon}`)
 				return (
 					<CheckboxWithLabel
 						key={key}

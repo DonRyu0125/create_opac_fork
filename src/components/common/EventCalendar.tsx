@@ -32,19 +32,19 @@ export const MON_REPORT_TYPES = [
 	'NEXT_FIVE_MONTH_CALENDAR',
 ]
 
-export const COLORS_MAP ={
-	RED:'bg-red-500 border-red-500',
-	YELLOW:'bg-yellow-500 border-yellow-500',
-	GREEN:'bg-green-500 border-green-500',
-	ORANGE:'bg-orange-500 border-orange-500',
-	PURPLE:'bg-purple-500 border-purple-500',
-	GREY:'bg-neutral-500 border-neutral-500',
-	PINK:'bg-pink-500 border-pink-500'
+export const COLORS_MAP = {
+	RED: 'bg-red-500 border-red-500',
+	YELLOW: 'bg-yellow-500 border-yellow-500',
+	GREEN: 'bg-green-500 border-green-500',
+	ORANGE: 'bg-orange-500 border-orange-500',
+	PURPLE: 'bg-purple-500 border-purple-500',
+	GREY: 'bg-neutral-500 border-neutral-500',
+	PINK: 'bg-pink-500 border-pink-500',
 }
 
-export const ICON_SHAPE_MAP ={
-	SQUARE:'rounded',
-	CIRCLE:'rounded-full'
+export const ICON_SHAPE_MAP = {
+	SQUARE: 'rounded',
+	CIRCLE: 'rounded-full',
 }
 
 export const FILTER_TYPE_COLORS = [
@@ -75,12 +75,12 @@ export const FILTER_TYPE_COLORS = [
 	},
 	{
 		type: 'All',
-		color:  COLORS_MAP['GREY'],
+		color: COLORS_MAP['GREY'],
 		icon: ICON_SHAPE_MAP['CIRCLE'],
 	},
 	{
 		type: 'Norview Lodge',
-		color:  COLORS_MAP['PINK'],
+		color: COLORS_MAP['PINK'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 ]
@@ -152,16 +152,6 @@ const EventCalendar = () => {
 		setCurrentDate(newDate)
 	}
 
-	const weeks = () => {
-		const daysArray = generateMonth()
-		const weeksArray = []
-
-		for (let i = 0; i < daysArray.length; i += 7) {
-			weeksArray.push(daysArray.slice(i, i + 7))
-		}
-		return weeksArray
-	}
-
 	const changeStrToDate = (dateString: string) => {
 		const dateObject = new Date(dateString)
 		const month = dateObject.getMonth() + 1
@@ -208,7 +198,7 @@ const EventCalendar = () => {
 	}
 
 	return (
-		<div className={'mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16'} >
+		<div className={'mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16'}>
 			<div className={'flex justify-center items-center'}>
 				<Button onClick={prevMonth}>&lt;</Button>
 				<h2 className="text-xl ">
@@ -216,9 +206,10 @@ const EventCalendar = () => {
 				</h2>
 				<Button onClick={nextMonth}>&gt;</Button>
 			</div>
-			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
-			<div className={'w-full'}>
-				<div className={'flex'}>
+			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />{' '}
+			<div className={'w-full mt-1'}>
+				<div className={'flex'}></div>
+				<div className={'grid grid-cols-7 gap-1'}>
 					{daysOfWeek.map((item, key) => {
 						return (
 							<div key={key} style={{ textAlign: 'right', width: 90 }}>
@@ -226,19 +217,17 @@ const EventCalendar = () => {
 							</div>
 						)
 					})}
-				</div>
-				{weeks().map((week, weekIndex) => (
-					<div key={weekIndex} className={'flex'}>
-						{week.map((dayObj: any, dayIndex) => (
+					{generateMonth().map((item: any, key: number) => {
+						return (
 							<div
-								key={dayIndex}
-								className="border-2 border-black-500 w-screen max-w-40 min-h-40">
-								<div>{dayObj.day}</div>
-								<div>{eventTag(dayObj)}</div>
+								key={key}
+								className="rounded-lg border border-black  cursor-pointer  w-screen max-w-40 min-h-40">
+								<div>{item.day}</div>
+								<div>{eventTag(item)}</div>
 							</div>
-						))}
-					</div>
-				))}
+						)
+					})}
+				</div>
 			</div>
 		</div>
 	)
