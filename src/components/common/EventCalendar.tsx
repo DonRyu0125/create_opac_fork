@@ -165,7 +165,7 @@ const EventCalendar = () => {
 	}
 
 	return (
-		<div className={'mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16'}>
+		<div className={'mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
 			<div className={'flex justify-center items-center bg-primary h-40'}>
 				<button onClick={prevMonth} className={'text-4xl text-primary-foreground mx-5'}>&lt;</button>
 				<div className="text-3xl text-primary-foreground">
@@ -179,7 +179,7 @@ const EventCalendar = () => {
 				<div className={'grid grid-cols-7 gap-1'}>
 					{daysOfWeek.map((item, key) => {
 						return (
-							<div key={key} className={'text-center'}>
+							<div key={key} className={'text-center text-xl bg-primary text-primary-foreground'}>
 								{item}
 							</div>
 						)
