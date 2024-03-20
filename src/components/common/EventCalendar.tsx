@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils'
 
 export interface Cal_event {
 	'event-date': string
-	'event-start'?: string
+	'event-start': string
 	'event-end'?: string
 	'event-name': string
 	'event-desc'?: string
@@ -33,6 +33,7 @@ const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const FILTER_TYPE = 'event-loc'
 export const EVENT_DATE = 'event-date'
 export const EVENT_NAME = 'event-name'
+export const EVENT_START_TIME = 'event-start'
 export const EVENT_TAG_WORD_LENGTH = 18
 export const MON_REPORT_TYPES = [
 	'MONTHLY_CALENDAR',
@@ -207,7 +208,7 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 	const changeStrToDate = (dateString: string) => {
 		const dateObject = new Date(dateString)
 		const month = dateObject.getMonth() + 1
-		const day = dateObject.getDate()
+		const day = dateObject.getDate() + 1
 
 		return { month, day }
 	}
@@ -224,21 +225,47 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 		return trimed.toLowerCase()
 	}
 
+	function parseTimeString(timeString: string) {
+		if (timeString) {
+			const [time, meridian] = timeString?.split(' ')
+			const [hours, minutes] = time?.split(':').map(Number)
+
+			let hours24 = hours
+			if (meridian === 'PM' && hours !== 12) {
+				hours24 += 12
+			} else if (meridian === 'AM' && hours === 12) {
+				hours24 = 0
+			}
+			const dateObject = new Date()
+			dateObject.setHours(hours24, minutes, 0, 0)
+			return dateObject
+		}
+
+		return;
+	}
+
 	const showEvent = () => {
+		//Filtered events by types
 		const filteredEvents = currentEvent.filter((item: Cal_event) => {
 			const { day, month } = changeStrToDate(item[EVENT_DATE])
 			const isMatchingDayMonth = day === dayObj.day && month === dayObj.month
-
 			if (currentFilter.length > 0) {
 				return (
 					isMatchingDayMonth &&
 					currentFilter.some(
-						(type:string) => convertLower(type) === convertLower(item[FILTER_TYPE])
+						(type: string) => convertLower(type) === convertLower(item[FILTER_TYPE])
 					)
 				)
 			}
-
 			return isMatchingDayMonth
+		})
+
+		filteredEvents.sort((a: Cal_event, b: Cal_event) => {
+			const timeA:Date |undefined = parseTimeString(a[EVENT_START_TIME]);
+			const timeB:Date |undefined = parseTimeString(b[EVENT_START_TIME]);
+			if(timeA && timeB){
+				return timeA.getTime() - timeB.getTime();
+			}
 		})
 
 		return filteredEvents.map((item: Cal_event, key: number) => (
