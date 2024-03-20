@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import X2JS from 'x2js'
+import { config } from '@/constants'
 import response from '../../samples/fetch_calendar.json'
 import EventCalendarFilter from './EventCalendarFilter'
 import { Button } from '../ui/button'
@@ -33,7 +34,9 @@ const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const FILTER_TYPE = 'event-loc'
 export const EVENT_DATE = 'event-date'
 export const EVENT_NAME = 'event-name'
+export const EVENT_END_TIME = 'event-end'
 export const EVENT_START_TIME = 'event-start'
+export const EVENT_DESC = 'event-desc'
 export const EVENT_TAG_WORD_LENGTH = 18
 export const MON_REPORT_TYPES = [
 	'MONTHLY_CALENDAR',
@@ -108,7 +111,7 @@ const EventCalendar = () => {
 
 	const getData = async () => {
 		// const currE = await fetch_get("MONTHLY_CALENDAR");
-		const currE:any = response
+		const currE: any = response
 		setCurrentEvent(currE)
 	}
 
@@ -155,23 +158,28 @@ const EventCalendar = () => {
 	}
 
 	const prevMonth = () => {
-		const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
-		setCurrentDate(newDate);
+		const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
+		setCurrentDate(newDate)
 	}
 
 	const nextMonth = () => {
-		const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
-		setCurrentDate(newDate);
+		const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+		setCurrentDate(newDate)
 	}
 
 	return (
-		<div className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
+		<div
+			className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
 			<div className={'flex justify-center items-center bg-primary h-40'}>
-				<button onClick={prevMonth} className={'text-4xl text-primary-foreground mx-5'}>&lt;</button>
+				<button onClick={prevMonth} className={'text-4xl text-primary-foreground mx-5'}>
+					&lt;
+				</button>
 				<div className="text-3xl text-primary-foreground">
 					{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
 				</div>
-				<button onClick={nextMonth} className={'text-4xl text-primary-foreground mx-5'}>&gt;</button>
+				<button onClick={nextMonth} className={'text-4xl text-primary-foreground mx-5'}>
+					&gt;
+				</button>
 			</div>
 			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
 			<div className={'w-full mt-1'}>
@@ -179,7 +187,11 @@ const EventCalendar = () => {
 				<div className={'grid grid-cols-7 gap-1'}>
 					{daysOfWeek.map((item, key) => {
 						return (
-							<div key={key} className={'text-center text-xl bg-primary text-primary-foreground'}>
+							<div
+								key={key}
+								className={
+									'text-center text-xl bg-primary text-primary-foreground'
+								}>
 								{item}
 							</div>
 						)
@@ -190,11 +202,13 @@ const EventCalendar = () => {
 								key={key}
 								className="rounded-lg border border-black cursor-pointer max-w-40 min-h-40 w-full ">
 								<div className={'bg-slate-200'}>{item.day}</div>
-								<EventTag
-									dayObj={item}
-									currentFilter={currentFilter}
-									currentEvent={currentEvent}
-								/>
+								<div className={'h-28 overflow-auto'}>
+									<EventTag
+										dayObj={item}
+										currentFilter={currentFilter}
+										currentEvent={currentEvent}
+									/>
+								</div>
 							</div>
 						)
 					})}
@@ -205,6 +219,8 @@ const EventCalendar = () => {
 }
 
 const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
+	const { logo } = config
+
 	const changeStrToDate = (dateString: string) => {
 		const dateObject = new Date(dateString)
 		const month = dateObject.getMonth() + 1
@@ -241,7 +257,7 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 			return dateObject
 		}
 
-		return;
+		return
 	}
 
 	const showEvent = () => {
@@ -261,10 +277,10 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 		})
 
 		filteredEvents.sort((a: Cal_event, b: Cal_event) => {
-			const timeA:Date |undefined = parseTimeString(a[EVENT_START_TIME]);
-			const timeB:Date |undefined = parseTimeString(b[EVENT_START_TIME]);
-			if(timeA && timeB){
-				return timeA.getTime() - timeB.getTime();
+			const timeA: Date | undefined = parseTimeString(a[EVENT_START_TIME])
+			const timeB: Date | undefined = parseTimeString(b[EVENT_START_TIME])
+			if (timeA && timeB) {
+				return timeA.getTime() - timeB.getTime()
 			}
 		})
 
@@ -272,24 +288,42 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 			<Dialog key={key}>
 				<DialogTrigger asChild>
 					<Button
-						className={'overflow-hidden w-full h-[20px] border-hidden flex p-0 justify-start'}
+						className={
+							'overflow-hidden w-full h-[20px] border-hidden flex p-0 justify-start'
+						}
 						variant="outline">
 						<div
 							className={cn(
-								'h-4 w-1 border rounded sm:w-4',
-								getColor(item[FILTER_TYPE]) 
+								'h-4 w-1 border rounded sm:w-[16px]',
+								getColor(item[FILTER_TYPE])
 							)}></div>
-						<div>{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}</div>
+						<div className={'w-full text-left'}>
+							{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
+						</div>
 					</Button>
 				</DialogTrigger>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>Edit profile</DialogTitle>
-						<DialogDescription>
-							Make changes to your profile here. Click save when you're done.
-						</DialogDescription>
+						<DialogTitle
+							className={
+								'bg-primary text-primary-foreground h-10 flex justify-around items-center'
+							}>
+							<div className="h-8">
+								<img className="h-full" src={logo} alt="logo" />
+							</div>
+							<div>{item[EVENT_NAME]}</div>
+							<div>{item[FILTER_TYPE]}</div>
+						</DialogTitle>
 					</DialogHeader>
-					<div className="grid gap-4 py-4"></div>
+					<div className="grid grid-cols-2 gap-2 ">
+						<div className="text-xl">{item[EVENT_DATE]}</div>
+						<div className="text-xl">
+							@{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+						</div>
+					</div>
+					<DialogDescription className={'h-24 overflow-auto'}>
+						{item[EVENT_DESC]}
+					</DialogDescription>
 					<DialogFooter>
 						<Button type="submit">Close</Button>
 					</DialogFooter>

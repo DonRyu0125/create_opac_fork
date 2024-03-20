@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import MobileMenu from './MobileMenu'
 const Header = () => {
-	const { logo, navigations, siteName } = config
+	const { logo, navigations } = config
 
 	return (
 		<header className=" bg-primary  mx-auto px-4 sm:px-6 lg:px-8">
