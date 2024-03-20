@@ -14,6 +14,7 @@ import {
 	DialogTrigger,
 } from '../ui/dialog'
 import { cn } from '@/lib/utils'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
 
 export interface Cal_event {
 	'event-date': string
@@ -302,7 +303,7 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 						</div>
 					</Button>
 				</DialogTrigger>
-				<DialogContent>
+				<DialogContent hideClose={'invisible'}>
 					<DialogHeader>
 						<DialogTitle
 							className={
@@ -325,7 +326,9 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 						{item[EVENT_DESC]}
 					</DialogDescription>
 					<DialogFooter>
-						<Button type="submit">Close</Button>
+						<DialogPrimitive.Close>
+							<Button type="submit">Close</Button>
+						</DialogPrimitive.Close>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
