@@ -108,7 +108,7 @@ const EventCalendar = () => {
 
 	const getData = async () => {
 		// const currE = await fetch_get("MONTHLY_CALENDAR");
-		const currE = response
+		const currE:any = response
 		setCurrentEvent(currE)
 	}
 
@@ -155,23 +155,23 @@ const EventCalendar = () => {
 	}
 
 	const prevMonth = () => {
-		const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
-		setCurrentDate(newDate)
+		const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+		setCurrentDate(newDate);
 	}
 
 	const nextMonth = () => {
-		const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
-		setCurrentDate(newDate)
+		const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+		setCurrentDate(newDate);
 	}
 
 	return (
 		<div className={'mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16'}>
-			<div className={'flex justify-center items-center'}>
-				<Button onClick={prevMonth}>&lt;</Button>
-				<h2 className="text-xl ">
+			<div className={'flex justify-center items-center bg-primary h-40'}>
+				<button onClick={prevMonth} className={'text-4xl text-primary-foreground mx-5'}>&lt;</button>
+				<div className="text-3xl text-primary-foreground">
 					{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-				</h2>
-				<Button onClick={nextMonth}>&gt;</Button>
+				</div>
+				<button onClick={nextMonth} className={'text-4xl text-primary-foreground mx-5'}>&gt;</button>
 			</div>
 			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
 			<div className={'w-full mt-1'}>
@@ -291,7 +291,7 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 					</DialogHeader>
 					<div className="grid gap-4 py-4"></div>
 					<DialogFooter>
-						<Button type="submit">Save changes</Button>
+						<Button type="submit">Close</Button>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
