@@ -197,19 +197,18 @@ const EventCalendar = () => {
 							</div>
 						)
 					})}
+					{/* item : number| Day_obj */}
 					{generateMonth().map((item: any, key: number) => {
 						return (
 							<div
 								key={key}
-								className="rounded-lg border border-black cursor-pointer max-w-40 min-h-40 w-full ">
-								<div className={'bg-slate-200'}>{item.day}</div>
-								<div className={'h-28 overflow-auto'}>
-									<EventTag
-										dayObj={item}
-										currentFilter={currentFilter}
-										currentEvent={currentEvent}
-									/>
-								</div>
+								className="rounded-lg border border-black cursor-pointer max-w-40 h-40 w-full">
+								<div className={'bg-slate-200'}>{item?.day}</div>
+								<CombinedEventsDialog
+									dayObj={item}
+									currentFilter={currentFilter}
+									currentEvent={currentEvent}
+								/>
 							</div>
 						)
 					})}
@@ -219,8 +218,17 @@ const EventCalendar = () => {
 	)
 }
 
-const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
+// no 0
+// events > 3
+
+const CombinedEventsDialog = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any) => {
 	const { logo } = config
+	const getColor = (event_type: string) => {
+		let result = FILTER_TYPE_COLORS?.filter((item) => {
+			return convertLower(item.type) === convertLower(event_type)
+		})
+		return result[0]?.color
+	}
 
 	const changeStrToDate = (dateString: string) => {
 		const dateObject = new Date(dateString)
@@ -230,16 +238,9 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 		return { month, day }
 	}
 
-	const getColor = (event_type: string) => {
-		let result = FILTER_TYPE_COLORS?.filter((item) => {
-			return convertLower(item.type) === convertLower(event_type)
-		})
-		return result[0]?.color
-	}
-
 	const convertLower = (type: string) => {
-		let trimed = type.trim()
-		return trimed.toLowerCase()
+		let trimmed = type.trim()
+		return trimmed.toLowerCase()
 	}
 
 	function parseTimeString(timeString: string) {
@@ -261,81 +262,120 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 		return
 	}
 
-	const showEvent = () => {
-		//Filtered events by types
-		const filteredEvents = currentEvent.filter((item: Cal_event) => {
-			const { day, month } = changeStrToDate(item[EVENT_DATE])
-			const isMatchingDayMonth = day === dayObj.day && month === dayObj.month
-			if (currentFilter.length > 0) {
-				return (
-					isMatchingDayMonth &&
-					currentFilter.some(
-						(type: string) => convertLower(type) === convertLower(item[FILTER_TYPE])
-					)
+	const filteredEvents = currentEvent.filter((item: Cal_event) => {
+		const { day, month } = changeStrToDate(item[EVENT_DATE])
+		const isMatchingDayMonth = day === dayObj.day && month === dayObj.month
+		if (currentFilter.length > 0) {
+			return (
+				isMatchingDayMonth &&
+				currentFilter.some(
+					(type: string) => convertLower(type) === convertLower(item[FILTER_TYPE])
 				)
-			}
-			return isMatchingDayMonth
-		})
+			)
+		}
+		return isMatchingDayMonth
+	})
 
-		filteredEvents.sort((a: Cal_event, b: Cal_event) => {
-			const timeA: Date | undefined = parseTimeString(a[EVENT_START_TIME])
-			const timeB: Date | undefined = parseTimeString(b[EVENT_START_TIME])
-			if (timeA && timeB) {
-				return timeA.getTime() - timeB.getTime()
-			}
-		})
+	filteredEvents.sort((a: Cal_event, b: Cal_event) => {
+		const timeA: Date | undefined = parseTimeString(a[EVENT_START_TIME])
+		const timeB: Date | undefined = parseTimeString(b[EVENT_START_TIME])
+		if (timeA && timeB) {
+			return timeA.getTime() - timeB.getTime()
+		}
+	})
 
-		return filteredEvents.map((item: Cal_event, key: number) => (
-			<Dialog key={key}>
-				<DialogTrigger asChild>
-					<Button
-						className={
-							'overflow-hidden w-full h-[20px] border-hidden flex p-0 justify-start'
-						}
-						variant="outline">
-						<div
-							className={cn(
-								'h-4 w-1 border rounded sm:w-[16px]',
-								getColor(item[FILTER_TYPE])
-							)}></div>
-						<div className={'w-full text-left'}>
-							{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
-						</div>
-					</Button>
-				</DialogTrigger>
-				<DialogContent hideClose={'invisible'}>
-					<DialogHeader>
-						<DialogTitle
-							className={
-								'bg-primary text-primary-foreground h-10 flex justify-around items-center'
-							}>
-							<div className="h-8">
-								<img className="h-full" src={logo} alt="logo" />
+	return (
+		<div className={'h-[136px] relative'}>
+			<div className={'h-full overflow-auto'}>
+				{filteredEvents.map((item: Cal_event, key: number) => (
+					<Dialog key={key}>
+						<DialogTrigger asChild>
+							<Button
+								className={
+									'overflow-hidden w-full h-[20px] border-hidden flex p-0 justify-start'
+								}
+								variant="outline">
+								<div
+									className={cn(
+										'h-4 w-1 border rounded sm:w-[16px]',
+										getColor(item[FILTER_TYPE])
+									)}></div>
+								<div className={'w-full text-left'}>
+									{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
+								</div>
+							</Button>
+						</DialogTrigger>
+						<DialogContent hideClose={'invisible'}>
+							<DialogHeader>
+								<DialogTitle
+									className={
+										'bg-primary text-primary-foreground h-10 flex justify-around items-center'
+									}>
+									<div className="h-8">
+										<img className="h-full" src={logo} alt="logo" />
+									</div>
+									<div>{item[EVENT_NAME]}</div>
+									<div>{item[FILTER_TYPE]}</div>
+								</DialogTitle>
+							</DialogHeader>
+							<div className="grid grid-cols-2 gap-2 ">
+								<div className="text-xl">{item[EVENT_DATE]}</div>
+								<div className="text-xl">
+									{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+								</div>
 							</div>
-							<div>{item[EVENT_NAME]}</div>
-							<div>{item[FILTER_TYPE]}</div>
-						</DialogTitle>
-					</DialogHeader>
-					<div className="grid grid-cols-2 gap-2 ">
-						<div className="text-xl">{item[EVENT_DATE]}</div>
-						<div className="text-xl">
-							@{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
-						</div>
-					</div>
-					<DialogDescription className={'h-24 overflow-auto'}>
-						{item[EVENT_DESC]}
-					</DialogDescription>
-					<DialogFooter>
-						<DialogPrimitive.Close>
-							<Button type="submit">Close</Button>
-						</DialogPrimitive.Close>
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
-		))
-	}
-
-	return showEvent()
+							<DialogDescription className={'h-24 overflow-auto'}>
+								{item[EVENT_DESC]}
+							</DialogDescription>
+							<DialogFooter>
+								<DialogPrimitive.Close>
+									<Button type="submit">Close</Button>
+								</DialogPrimitive.Close>
+							</DialogFooter>
+						</DialogContent>
+					</Dialog>
+				))}
+			</div>
+			{filteredEvents.length > 3 && (
+				<Dialog>
+					<DialogTrigger asChild>
+						<Button className={'h-[20px] w-full px-0 absolute bottom-0'}>
+							Show All {filteredEvents.length} Events
+						</Button>
+					</DialogTrigger>
+					<DialogContent className={'h-[500px] overflow-auto'}>
+						{filteredEvents.map((item: Cal_event, key: number) => (
+							<div key={key}>
+								<DialogHeader>
+									<DialogTitle
+										className={
+											'bg-primary text-primary-foreground h-10 flex justify-around items-center'
+										}>
+										<div>{item[EVENT_NAME]}</div>
+										<div>{item[FILTER_TYPE]}</div>
+									</DialogTitle>
+								</DialogHeader>
+								<div className="grid grid-cols-2 gap-2 ">
+									<div className="text-xl">{item[EVENT_DATE]}</div>
+									<div className="text-xl">
+										{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+									</div>
+								</div>
+								<DialogDescription className={'h-24 overflow-auto'}>
+									{item[EVENT_DESC]}
+								</DialogDescription>
+							</div>
+						))}
+						<DialogFooter>
+							<DialogPrimitive.Close>
+								<Button type="submit">Close</Button>
+							</DialogPrimitive.Close>
+						</DialogFooter>
+					</DialogContent>
+				</Dialog>
+			)}
+		</div>
+	)
 }
 
 export default EventCalendar
