@@ -165,7 +165,7 @@ const EventCalendar = () => {
 	}
 
 	return (
-		<div className={'mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
+		<div className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
 			<div className={'flex justify-center items-center bg-primary h-40'}>
 				<button onClick={prevMonth} className={'text-4xl text-primary-foreground mx-5'}>&lt;</button>
 				<div className="text-3xl text-primary-foreground">
@@ -188,7 +188,7 @@ const EventCalendar = () => {
 						return (
 							<div
 								key={key}
-								className="rounded-lg border border-black cursor-pointer w-screen max-w-40 min-h-40">
+								className="rounded-lg border border-black cursor-pointer max-w-40 min-h-40 w-full ">
 								<div className={'bg-slate-200'}>{item.day}</div>
 								<EventTag
 									dayObj={item}
@@ -272,12 +272,12 @@ const EventTag = ({ dayObj, currentFilter, currentEvent }: any) => {
 			<Dialog key={key}>
 				<DialogTrigger asChild>
 					<Button
-						className={'w-full h-[20px] border-hidden flex p-0 justify-start'}
+						className={'overflow-hidden w-full h-[20px] border-hidden flex p-0 justify-start'}
 						variant="outline">
 						<div
 							className={cn(
-								'h-4 w-4 border rounded',
-								getColor(item[FILTER_TYPE])
+								'h-4 w-1 border rounded sm:w-4',
+								getColor(item[FILTER_TYPE]) 
 							)}></div>
 						<div>{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}</div>
 					</Button>

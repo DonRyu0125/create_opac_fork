@@ -16,7 +16,7 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) =
 	const [selectType, setSelectedType] = useState<SelectType>({})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (!e.target.id) return;
+		if (!e.target.id) return
 		let map = selectType
 		if (map[e.target.id] > 0) {
 			delete map[e.target.id]
@@ -33,19 +33,23 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) =
 	}
 
 	return (
-		<div className={'flex w-100 justify-evenly items-center my-2 h-40'}>
+		<div className={'flex flex-wrap w-100 justify-evenly items-center my-2 h-24'}>
 			{FILTER_TYPE_COLORS.map((item, key) => {
 				return (
-					<CheckboxWithLabel
-						key={key}
-						label={item.type}
-						callback={handleChange}
-						checked={selectType[item.type] === 1}
-						className={`${item.color} ${item.icon}`}
-					/>
+					<div className={'mx-1'}>
+						<CheckboxWithLabel
+							key={key}
+							label={item.type}
+							callback={handleChange}
+							checked={selectType[item.type] === 1}
+							className={`${item.color} ${item.icon}`}
+						/>
+					</div>
 				)
 			})}
-			<Button className={'w-5'} onClick={resetFilter}>Reset</Button>
+			<Button className={'w-5'} onClick={resetFilter}>
+				Reset
+			</Button>
 		</div>
 	)
 }
