@@ -8,6 +8,7 @@ import RecordAction from '@/components/common/RecordAction'
 import { SlidersHorizontal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import getJSONData from '@/hooks/getJSONData'
+import DetailRecord from './DetailRecord'
 
 const images = [
 	{
@@ -27,8 +28,10 @@ const images = [
 	},
 ]
 const Detail = () => {
-	const { common, backToSummary } = getJSONData({ selector: '#xml_record' })
+	const { common, backToSummary,records } = getJSONData({ selector: '#xml_record' })
 
+    // TODO: create placeholder component when there is no data
+    if (!records || records.length === 0) return <></>
 	return (
 		<Layout>
 			<div className="rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
@@ -63,7 +66,9 @@ const Detail = () => {
 									/>
 								)}
 							/>
-							<div className=" grid gap-4 md:gap-10 items-start"></div>
+							<div className=" grid gap-4 md:gap-10 items-start">
+								<DetailRecord />
+							</div>
 						</div>
 					</div>
 				</section>

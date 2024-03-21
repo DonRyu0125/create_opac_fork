@@ -1,0 +1,245 @@
+{
+	"xml_record": [
+		{
+			"media": {
+				"__text": ""
+			},
+			"is_bookmarked": "false",
+			"database_name": "COLLECTIONS",
+			"record_link": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321014/1/18/11483?RE\nCORD&UNION=Y",
+			"record": {
+				"sisn": "11483",
+				"accession_number": "2002.0012.0017",
+				"collection": "Human History",
+				"on_display": "Not on display",
+				"early": "c. 1976-1985",
+				"legal_title": "watch spring bars",
+				"number_of_parts": "1",
+				"object_name_grp": {
+					"object_name_grp_occurrence": {
+						"object_name": "watch spring bars",
+						"_occ": "1"
+					}
+				},
+				"object_status": "Permanent Collection",
+				"primary": "box of watch spring bars",
+				"cur_grp": {
+					"cur_grp_occurrence": {
+						"cur_grp_curator": "VOLUNTEER - ANDREA RAFUSE",
+						"_occ": "1"
+					}
+				},
+				"obj_description": "-rectangular clear plastic box with hinged lid - 6\ncompartments in box.\n-\"Berkley\" marked on top of lid. One end of box has sticker marked\n\"Trilene, 100 Yd. Spools, No. 141T, 14LB. Test\"\n-box contains assorted sizes of watch spring bars",
+				"assoc_person_grp": {
+					"assoc_person_grp_occurrence": [
+						{
+							"assoc_forename": "Margaret",
+							"assoc_full_id": "P1932",
+							"assoc_surname": "Selzer",
+							"assoc_title": "Mrs.",
+							"assoc_fullname": "Selzer, Margaret, Mrs.",
+							"_occ": "1"
+						},
+						{
+							"assoc_full_id": "P1529",
+							"assoc_fullname": "Selzer, Carl",
+							"_occ": "2"
+						}
+					]
+				},
+				"assoc_org_grp": {
+					"assoc_org_grp_occurrence": {
+						"org_assoc": "W. C. Wood Jewellers",
+						"assoc_org_id": "O130",
+						"_occ": "1"
+					}
+				},
+				"dimensions_info": {
+					"dimensions_info_occurrence": {
+						"dimension_notes": "length: 8.75\", width: 3\", height:\n1.5\"",
+						"dim_source": "Object Dimensions",
+						"_occ": "1"
+					}
+				},
+				"other_num_group": {
+					"other_num_group_occurrence": {
+						"other_number": "002.12.17",
+						"_occ": "1"
+					}
+				},
+				"label_txt_group": {
+					"label_txt_group_occurrence": {
+						"public": "Y",
+						"_occ": "1"
+					}
+				},
+				"acq_date": "2002-08-23",
+				"acq_method": "Gift",
+				"acq_source_grp": {
+					"acq_source_grp_occurrence": [
+						{
+							"acq_source": "Selzer, Carl",
+							"acq_source_id": "P1529",
+							"_occ": "1"
+						},
+						{
+							"acq_org_id": "O130",
+							"acq_source_org": "W. C. Wood Jewellers",
+							"_occ": "2"
+						}
+					]
+				},
+				"planned_loc_grp": {
+					"planned_loc_grp_occurrence": [
+						{
+							"plnd_cur_code": "A-17.f4",
+							"plnd_bldg": "Surrey Museum",
+							"_occ": "1"
+						},
+						{
+							"moved_flag": "0",
+							"plnd_access": "Private",
+							"plnd_cur_code": "M-24.f4",
+							"plnd_bldg": "Museum of Surrey",
+							"plnd_loc_type": "Permanent",
+							"pland_remov_date": "2018-11-27",
+							"plnd_move_ex": "Louisa Smith",
+							"_occ": "2"
+						}
+					]
+				},
+				"current_loc_info": {
+					"current_loc_info_occurrence": [
+						{
+							"curators_code": "E-T.H",
+							"building": "Surrey Museum",
+							"floor": "Exhibit",
+							"room": "Temporary",
+							"position": "1881 Hall",
+							"location_date": "2003-07-19",
+							"movement_author": "LP",
+							"_occ": "1"
+						},
+						{
+							"curators_code": "A-17.f4",
+							"building": "Surrey Museum",
+							"_occ": "2"
+						},
+						{
+							"movement_ref_num": "2018-11-27-10954",
+							"curators_code": "M-24.f4",
+							"building": "Museum of Surrey",
+							"loc_access": "Private",
+							"location_type": "Permanent",
+							"location_date": "2018-11-27",
+							"move_ex": "Louisa Smith",
+							"_occ": "3"
+						}
+					]
+				},
+				"conserve_info": {
+					"conserve_info_occurrence": {
+						"exam_treat": "Examination",
+						"condition": "Good",
+						"condn_chk_person": "VOLUNTEER - ANDREA RAFUSE",
+						"cond_chk_notes": "-box lid detaches from box base (hinges broken)\n-round ring on top of lid on right side. appears melted.",
+						"_occ": "1"
+					}
+				},
+				"c_bldg": "Museum of Surrey",
+				"c_loc_date": "2018-11-27",
+				"c_move_ex": "Louisa Smith",
+				"p_cur_code": "A-17.f4",
+				"p_bldg": "A-17.f4",
+				"p_flr": "A-17.f4",
+				"p_bu": "A-17.f4",
+				"p_ma": "A-17.f4",
+				"p_r_date": "2018-11-27",
+				"p_move_ex": "Louisa Smith",
+				"tree_id": "256421",
+				"material_group": {
+					"material_group_occurrence": [
+						{
+							"material": "Plastic",
+							"_occ": "1"
+						},
+						{
+							"material": "Metal",
+							"_occ": "2"
+						}
+					]
+				},
+				"discipline": "Museum",
+				"c_cur_code": "M-24.f4",
+				"old_sisn": "11493",
+				"record_number": "11471",
+				"assoc_whole": {
+					"assoc_whole_occurrence": [
+						{
+							"_occ": "1",
+							"__text": "Selzer, Carl"
+						},
+						{
+							"_occ": "2",
+							"__text": "W. C. Wood\nJewellers"
+						}
+					]
+				}
+			},
+			"_hidden": ""
+		}
+	],
+	"session": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321014",
+	"bookmark_count": "0",
+	"query_statement": "KEYWORD_CL test",
+	"search_statement": "test",
+	"pagesize_25": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321013/1/1?RECLIST&D\nATABASE=UNION_VIEW&TM=1711039956.923&PAGESIZE=25",
+	"pagesize_50": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321013/1/1?RECLIST&D\nATABASE=UNION_VIEW&TM=1711039956.923&PAGESIZE=50",
+	"pagesize_100": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321013/1/1?RECLIST&D\nATABASE=UNION_VIEW&TM=1711039956.923&PAGESIZE=100",
+	"first_record_seq": "1",
+	"last_record_seq": "25",
+	"bookmark_url": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321013/1/1",
+	"back_to_summary": {
+		"a": {
+			"_href": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321013/1/1?REC\nLIST&DATABASE=UNION_VIEW&TM=1711039956.925",
+			"__text": "CURRENT_PAGE_URL"
+		}
+	},
+	"previous_record": {
+		"a": {
+			"_href": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321014/1/18/11\n483?PREVREC&UNION=Y",
+			"__text": "PREV_RECORD_URL"
+		}
+	},
+	"next_record": {
+		"a": {
+			"_href": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321014/1/18/11\n483?NEXTREC&UNION=Y",
+			"__text": "NEXT_RECORD_URL"
+		}
+	},
+	"pagination": {
+		"a": [
+			{
+				"b": "1",
+				"_href": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321013/1/1?REC\nLIST&DATABASE=UNION_VIEW&TM=1711039956.926"
+			},
+			{
+				"_href": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321013/1/26?RE\nCLIST&DATABASE=UNION_VIEW&TM=1711039956.926",
+				"__text": "2"
+			},
+			{
+				"_href": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321013/1/51?RE\nCLIST&DATABASE=UNION_VIEW&TM=1711039956.926",
+				"__text": "3"
+			},
+			{
+				"_href": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321013/1/76?RE\nCLIST&DATABASE=UNION_VIEW&TM=1711039956.926",
+				"__text": "4"
+			}
+		]
+	},
+	"total_record": "92",
+	"sort": "http://OPACTEMPLATE.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/157321013/1/1/WEB_UNION\n_SUM?RECLIST&DATABASE=UNION_VIEW&TM=1711039956.926",
+	"_xmlns": "http://www.w3.org/1999/xhtml",
+	"_id": "xml_record",
+	"_hidden": ""
+}

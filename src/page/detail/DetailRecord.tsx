@@ -1,20 +1,29 @@
 import InfoTable from '@/components/common/InfoTable'
 import RecordAction from '@/components/common/RecordAction'
 import RecordDetail from '@/components/common/RecordDetail'
+import getJSONData from '@/hooks/getJSONData'
+import { getTitle } from '@/lib/record'
+import { DBFields } from '@/types/dbfields'
 import React from 'react'
 
 type Props = {}
 
 const DetailRecord = (props: Props) => {
+    const { records } = getJSONData({ selector: '#xml_record' })
+    const record = records[0]
+    const database = record.database_name
+    const title = getTitle(record, database) || 'Untitled'
+    const recordData: DBFields< "COLLECTIONS"> = record.record
+
 	return (
 		<>
-			<RecordDetail heading={'A test record'} subHeading="by Author Jane">
+			<RecordDetail heading={title} subHeading="by Author Jane">
 				<div className="flex flex-col space-y-4">
 					<InfoTable
 						rowsData={[
 							{
 								label: 'Title',
-								value: 'The Adventures of Fictional Book',
+								value: recordData.sisn,
 							},
 							{ label: 'Author', value: 'John Authorson' },
 							{ label: 'Genre', value: 'Fantasy' },
