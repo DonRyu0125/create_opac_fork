@@ -25,7 +25,7 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
 				carouselStyle="sm:basis-1/4"
 				items={items}
 				renderItem={(item, index) => (
-					<div className="cursor-pointer" onClick={() => setCurrent(index)}>
+					<div className="cursor-pointer w-fit" onClick={() => setCurrent(index)}>
 						{renderItems(item, index)}
 					</div>
 				)}

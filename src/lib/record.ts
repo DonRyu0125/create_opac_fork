@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FieldsJson, Items } from '@/types/fieldsjson.d.ts'
+import { FieldsJson, Items } from '@/types/fields.json'
 import { fields } from '@/constants/index'
 import axios, { AxiosResponse } from 'axios'
 import copy from 'copy-to-clipboard'
@@ -31,24 +31,25 @@ export function deepSearchKey<T extends GenericObject>(obj: T, targetKey: string
 }
 
 export const getListOfFields = (database: string) => {
-	const databaseFields = (fields as FieldsJson).find((f) => f.database === database)
+	const databaseFields = (fields as FieldsJson).find((f: any) => f.database === database)
 	return databaseFields
 }
 
-
-export const getFieldsFromRecord = (record: Record, filterFn: (e:Items) => boolean, componentFn: (data: any[], item:Items)=>React.ReactNode | object | null ) => {
-	const database = record.database_name;
+export const getFieldsFromRecord = (
+	record: Record,
+	filterFn: (e: Items) => boolean,
+	componentFn: (data: any[], item) => React.ReactNode | object | null
+) => {
+	const database = record.database_name
 	const listOfFields = getListOfFields(database)
 	return listOfFields?.items
-			?.filter((item:Items)=>filterFn(item))
-			.map((item:Items) => {
-				const name = item.name || 'TITLE'
-				const data = deepSearchKey(record, name)
-				if (data?.length > 0 && item.label !== 'Title')
-					return componentFn(data,item)
-			})
-			.filter((item:Items) => item)
-	
+		?.filter((item: Items) => filterFn(item))
+		.map((item: Items) => {
+			const name = item.name || 'TITLE'
+			const data = deepSearchKey(record, name)
+			if (data?.length > 0 && item.label !== 'Title') return componentFn(data, item)
+		})
+		.filter((item: Items) => item)
 }
 export const getFieldDataByLabel = (record: Record, database: string, label = 'Title') => {
 	const fieldLabel = getListOfFields(database)?.items?.filter((e) => e.label === label)[0]?.name

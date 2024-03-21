@@ -28,10 +28,10 @@ const images = [
 	},
 ]
 const Detail = () => {
-	const { common, backToSummary,records } = getJSONData({ selector: '#xml_record' })
+	const { common, backToSummary, records } = getJSONData({ selector: '#xml_record' })
 
-    // TODO: create placeholder component when there is no data
-    if (!records || records.length === 0) return <></>
+	// TODO: create placeholder component when there is no data
+	if (!records || records.length === 0) return <></>
 	return (
 		<Layout>
 			<div className="rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
@@ -55,18 +55,20 @@ const Detail = () => {
 				</PageAction>
 				<section>
 					<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-						<div className="grid md:grid-cols-2 gap-6 lg:gap-12 items-start max-w-6xl px-4 mx-auto py-6">
-							<ImageCarousel
-								items={images}
-								renderItems={(image) => (
-									<img
-										alt="test"
-										src={image.src}
-										className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
-									/>
-								)}
-							/>
-							<div className=" grid gap-4 md:gap-10 items-start">
+						<div className="flex flex-col lg:flex-row space-y-12 lg:space-y-0 lg:space-x-8 items-start max-w-6xl p-4 mx-auto ">
+							<div className="max-w-[700px] mx-auto">
+								<ImageCarousel
+									items={images}
+									renderItems={(image) => (
+										<img
+											alt="test"
+											src={image.src}
+											className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+										/>
+									)}
+								/>
+							</div>
+							<div className="grid gap-4 md:gap-10 items-start">
 								<DetailRecord />
 							</div>
 						</div>

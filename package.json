@@ -11,7 +11,7 @@
 		"gen:schema": "node ./tools/gen-schema.mjs",
 		"gen:theme": "node ./tools/gen-theme.mjs",
 		"gen:types": "node ./tools/gen-types.mjs",
-		"gen": "pnpm run gen:schema && pnpm run gen:theme && pnpm run gen:types",
+		"gen": " pnpm run gen:theme && pnpm run gen:types",
 		"doc": "docsify serve docs"
 	},
 	"dependencies": {

@@ -8,7 +8,7 @@ const RecordAction = () => {
 				<Button className="">
 					<Heart className="w-4 h-4 mr-2" /> Save
 				</Button>
-				<Button variant={'secondary'}>
+				<Button variant="default">
 					<Link className="w-4 h-4 mr-2" /> Copy
 				</Button>
 			</div>

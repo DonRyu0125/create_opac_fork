@@ -22,7 +22,7 @@ const DetailRecord = (props: Props) => {
 
 	return (
 		<>
-			<RecordDetail heading={title} subHeading="by Author Jane">
+			<RecordDetail heading={title} subHeading={recordData.collection}>
 				<div className="flex flex-col space-y-4">
 					<InfoTable
 						rowsData={detailFields}
