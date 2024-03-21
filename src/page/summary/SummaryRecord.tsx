@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import useJSONData from '@/hooks/useJSONData'
 import {
-	getListOfFields,
 	getFieldDataByLabel,
 	deepSearchKey,
 	truncateString,
@@ -98,7 +97,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		record,
 		(item) => item.grid === true,
 		(data, item) => <DataWithLabel key={item.name} label={item.label || ''} items={data} />
-	)
+	) as React.ReactNode
 
 	const listFields = getFieldsFromRecord(
 		record,
@@ -111,7 +110,7 @@ const RecordView = ({ record }: { record: Record }) => {
 				items={data}
 			/>
 		)
-	)
+	) as React.ReactNode
 
 	if (view === 'grid') {
 		return (

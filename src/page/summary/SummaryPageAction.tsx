@@ -37,7 +37,7 @@ const SummaryPageAction = () => {
 									{item.item_group.map((option) => (
 										<CheckboxWithLabel
 											callback={() => {
-												window.location = option.item_link
+												window.location.href = option.item_link
 											}}
 											label={`${option.item_value} (${option.item_frequency})`}
 											checked={option.item_selected === 'Y'}

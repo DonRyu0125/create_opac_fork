@@ -106,13 +106,40 @@ const useJSONData = ({ selector, defaultData }: Props) => {
 		return url.a._href
 	}
 
+	const getNextRecord = (): string | null => {
+		if (!data) return null
+		const url = deepSearchKey(data, 'next_record')[0]
+		if (!url) return null
+
+		return url.a._href
+	}
+
+	const getPreviousRecord = (): string | null => {
+		if (!data) return null
+		const url = deepSearchKey(data, 'previous_record')[0]
+		if (!url) return null
+
+		return url.a._href
+	}
+
 	const common = getCommonFields()
 	const pagination = getPaginations()
 	const filter = getFilter()
 	const records = getRecords()
 	const backToSummary = getBackToSummary()
+	const nextRecord = getNextRecord()
+	const previousRecord = getPreviousRecord()
 
-	return { data, common, pagination, filter, records, backToSummary }
+	return {
+		data,
+		common,
+		pagination,
+		filter,
+		records,
+		backToSummary,
+		nextRecord,
+		previousRecord,
+	}
 }
 
 export default useJSONData
