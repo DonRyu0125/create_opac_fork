@@ -28,9 +28,8 @@ const images = [
 	},
 ]
 const Detail = () => {
-	const { common, backToSummary, records } = useJSONData({ selector: '#xml_record' })
+	const { backToSummary, records } = useJSONData({ selector: '#xml_record' })
 
-	console.log({ backToSummary })
 	// TODO: create placeholder component when there is no data
 	if (!records || records.length === 0) return <></>
 	return (

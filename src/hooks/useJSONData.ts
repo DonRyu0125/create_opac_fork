@@ -101,7 +101,6 @@ const useJSONData = ({ selector, defaultData }: Props) => {
 	const getBackToSummary = (): string => {
 		if (!data) return ''
 		const url = deepSearchKey(data, 'back_to_summary')[0]
-		console.log(url)
 		if (!url) return ''
 
 		return url.a._href
