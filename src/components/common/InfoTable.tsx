@@ -1,6 +1,6 @@
 import React from 'react'
 
-type TableRow = {
+export type TableRow = {
 	label: string
 	value: number | string | string[] | React.ReactNode
 }

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { ChevronRight } from 'lucide-react'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { useEffect, useState } from 'react'
-import getJSONData from '@/hooks/getJSONData'
+import useJSONData from '@/hooks/useJSONData'
 import SummaryPageAction from './SummaryPageAction'
 import SummaryRecords from './SummaryRecord'
 import PageAction from '@/components/common/PageAction'
@@ -15,8 +15,8 @@ import { SummarySample } from '@/samples'
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 
-	// const { common, pagination } = getJSONData({ defaultData: SummarySample })
-	const { common, pagination } = getJSONData({ selector: '#xml_record' })
+	// const { common, pagination } = useJSONData({ defaultData: SummarySample })
+	const { common, pagination } = useJSONData({ selector: '#xml_record' })
 
 	if (!common || !pagination) return <></>
 	return (

@@ -8,6 +8,8 @@ const DEFAULT_DETAIL_REPORT = 'WEB_UNION_DETAIL'
 const DEFAULT_SUM_REPORT = 'WEB_UNION_SUM'
 const WEB_DNS = 'http://opactemplate.minisisinc.com'
 
+export type RENDERED_COMPONENT = React.ReactNode | object | null
+
 export type GenericObject = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	[key: string]: any
@@ -37,19 +39,19 @@ export const getListOfFields = (database: string) => {
 
 export const getFieldsFromRecord = (
 	record: Record,
-	filterFn: (e: Items) => boolean,
-	componentFn: (data: any[], item) => React.ReactNode | object | null
+	filterFn: (e: any) => boolean,
+	componentFn: (data: any[], item: any) => RENDERED_COMPONENT
 ) => {
 	const database = record.database_name
 	const listOfFields = getListOfFields(database)
 	return listOfFields?.items
-		?.filter((item: Items) => filterFn(item))
-		.map((item: Items) => {
+		?.filter((item) => filterFn(item))
+		.map((item) => {
 			const name = item.name || 'TITLE'
 			const data = deepSearchKey(record, name)
 			if (data?.length > 0 && item.label !== 'Title') return componentFn(data, item)
 		})
-		.filter((item: Items) => item)
+		.filter((item: any) => item)
 }
 export const getFieldDataByLabel = (record: Record, database: string, label = 'Title') => {
 	const fieldLabel = getListOfFields(database)?.items?.filter((e) => e.label === label)[0]?.name

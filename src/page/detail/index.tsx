@@ -7,7 +7,7 @@ import InfoTable from '@/components/common/InfoTable'
 import RecordAction from '@/components/common/RecordAction'
 import { SlidersHorizontal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import getJSONData from '@/hooks/getJSONData'
+import useJSONData from '@/hooks/useJSONData'
 import DetailRecord from './DetailRecord'
 
 const images = [
@@ -28,8 +28,9 @@ const images = [
 	},
 ]
 const Detail = () => {
-	const { common, backToSummary, records } = getJSONData({ selector: '#xml_record' })
+	const { common, backToSummary, records } = useJSONData({ selector: '#xml_record' })
 
+	console.log({ backToSummary })
 	// TODO: create placeholder component when there is no data
 	if (!records || records.length === 0) return <></>
 	return (

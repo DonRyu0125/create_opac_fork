@@ -3,7 +3,7 @@ import DetailInfoCard from '@/components/common/DetailInfoCard'
 import InfoCard from '@/components/common/InfoCard'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
-import getJSONData from '@/hooks/getJSONData'
+import useJSONData from '@/hooks/useJSONData'
 import {
 	getListOfFields,
 	getFieldDataByLabel,
@@ -24,8 +24,8 @@ import { Record } from '@/types/record'
 import { SummarySample } from '@/samples'
 
 const SummaryRecords = () => {
-	const { records } = getJSONData({ selector: '#xml_record' })
-	// const { records } = getJSONData({ defaultData: SummarySample })
+	const { records } = useJSONData({ selector: '#xml_record' })
+	// const { records } = useJSONData({ defaultData: SummarySample })
 
 	return (
 		<>
@@ -86,7 +86,7 @@ const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
 	const database = record.database_name
 	const recordLink = record.record_link
-	const title = getFieldDataByLabel(record, database, "Title") || 'Untitled'
+	const title = getFieldDataByLabel(record, database, 'Title') || 'Untitled'
 
 	const thumbnail =
 		record.media &&
@@ -94,20 +94,24 @@ const RecordView = ({ record }: { record: Record }) => {
 		record.media.im_access_link.length > 0 &&
 		record.media.im_access_link[0]
 
-
-	const gridFields = getFieldsFromRecord(record,
+	const gridFields = getFieldsFromRecord(
+		record,
 		(item) => item.grid === true,
-		(data, item) => <DataWithLabel key={item.name} label={item.label || ''} items={data} />)
-	
-	
-		const listFields = getFieldsFromRecord(record,
-			() => true,
-			(data, item) => <DataWithLabel
-							className="flex-col items-start justify-start my-1"
-							key={item.name}
-							label={item.label || ''}
-							items={data} />)
+		(data, item) => <DataWithLabel key={item.name} label={item.label || ''} items={data} />
+	)
 
+	const listFields = getFieldsFromRecord(
+		record,
+		() => true,
+		(data, item) => (
+			<DataWithLabel
+				className="flex-col items-start justify-start my-1"
+				key={item.name}
+				label={item.label || ''}
+				items={data}
+			/>
+		)
+	)
 
 	if (view === 'grid') {
 		return (

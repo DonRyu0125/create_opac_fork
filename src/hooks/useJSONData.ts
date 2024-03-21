@@ -41,16 +41,15 @@ export const getDataFromXML = (id: string) => {
 			})
 			const xmlString = new XMLSerializer().serializeToString(xml)
 			const json = x2js.xml2js(xmlString) as GenericObject
-			console.log(json)
 			return json
 		} catch (error) {
-			console.log(error)
+			console.error(error)
 		}
 	}
 	return null
 }
 
-const getJSONData = ({ selector, defaultData }: Props) => {
+const useJSONData = ({ selector, defaultData }: Props) => {
 	const [data] = useState<GenericObject | null>(
 		defaultData && !selector ? defaultData : selector ? getDataFromXML(selector) : null
 	)
@@ -102,9 +101,10 @@ const getJSONData = ({ selector, defaultData }: Props) => {
 	const getBackToSummary = (): string => {
 		if (!data) return ''
 		const url = deepSearchKey(data, 'back_to_summary')[0]
+		console.log(url)
 		if (!url) return ''
 
-		return url.a.__href
+		return url.a._href
 	}
 
 	const common = getCommonFields()
@@ -116,4 +116,4 @@ const getJSONData = ({ selector, defaultData }: Props) => {
 	return { data, common, pagination, filter, records, backToSummary }
 }
 
-export default getJSONData
+export default useJSONData

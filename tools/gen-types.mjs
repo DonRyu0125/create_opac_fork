@@ -39,7 +39,7 @@ function generateTypeFile(filePath = './', outDir = './types') {
 		const fileName = path.basename(filePath)
 
 		const typedPath = resolve(outDir, `${fileName}.d.ts`)
-		compileFromFile(filePath, { ignoreMinAndMaxItems: true }).then((ts) => fs.writeFileSync(typedPath, ts))
+		compileFromFile(filePath).then((ts) => fs.writeFileSync(typedPath, ts))
 	} catch (err) {
 		throw new Error('File not found')
 	}
