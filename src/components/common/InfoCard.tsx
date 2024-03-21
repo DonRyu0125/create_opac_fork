@@ -29,7 +29,7 @@ const InfoCard = ({
 }: InfoCardProps) => {
 	return (
 		<Card className={cn('cursor-pointer shadow-md hover:shadow-xl', className)}>
-			<CardHeader className="h-32">
+			<CardHeader className="h-32 pb-0">
 				<CardTitle className="text-lg font-bold">{title}</CardTitle>
 				{description && (
 					<CardDescription className="text-sm text-gray-500 dark:text-gray-400">
@@ -43,7 +43,7 @@ const InfoCard = ({
 					<img
 						src={thumbnail}
 						alt={alt || 'image thumbnail'}
-						className="rounded-md object-cover"
+						className=" rounded-md h-64 md:h-48 lg:h-52 object-cover mx-auto"
 					/>
 				)}
 			</CardContent>

@@ -6,7 +6,8 @@ import { FilterItem } from '@/types/filter'
 import { Pagination } from '@/types/pagination'
 import { Record } from '@/types/record'
 type Props = {
-	selector: string
+	selector?: string
+	defaultData?: GenericObject
 }
 
 const COMMON_FIELDS = [
@@ -18,7 +19,6 @@ const COMMON_FIELDS = [
 	'last_record_seq',
 	'bookmark_url',
 	'total_record',
-
 ] as const
 
 type COMMON_FIELDS_TYPE = (typeof COMMON_FIELDS)[number]
@@ -32,15 +32,12 @@ export const getRecordXML = (id: string) => {
 }
 
 export const getDataFromXML = (id: string) => {
+	if (!id) return null
 	const xml = getRecordXML(id)
 	if (xml) {
 		try {
 			const x2js = new X2JS({
-				arrayAccessFormPaths:[
-					'xml.xml_record',
-					'xml.div.xml.filter.item_group',
-				
-				],
+				arrayAccessFormPaths: ['xml.xml_record', 'xml.div.xml.filter.item_group'],
 			})
 			const xmlString = new XMLSerializer().serializeToString(xml)
 			const json = x2js.xml2js(xmlString) as GenericObject
@@ -53,10 +50,10 @@ export const getDataFromXML = (id: string) => {
 	return null
 }
 
-const useXMLData = ({ selector }: Props) => {
-	const [data] = useState<GenericObject | null>(getDataFromXML(selector))
-
-
+const getJSONData = ({ selector, defaultData }: Props) => {
+	const [data] = useState<GenericObject | null>(
+		defaultData && !selector ? defaultData : selector ? getDataFromXML(selector) : null
+	)
 
 	const getCommonFields = () => {
 		const object: COMMON_FIELDS_OBJECT = {}
@@ -102,10 +99,10 @@ const useXMLData = ({ selector }: Props) => {
 		return records
 	}
 
-	const getBackToSummary = ():string => {
-		if (!data) return ""
+	const getBackToSummary = (): string => {
+		if (!data) return ''
 		const url = deepSearchKey(data, 'back_to_summary')[0]
-		if (!url) return "";
+		if (!url) return ''
 
 		return url.a.__href
 	}
@@ -114,9 +111,9 @@ const useXMLData = ({ selector }: Props) => {
 	const pagination = getPaginations()
 	const filter = getFilter()
 	const records = getRecords()
-	const backToSummary = getBackToSummary();
+	const backToSummary = getBackToSummary()
 
-	return { data, common, pagination, filter, records,backToSummary }
+	return { data, common, pagination, filter, records, backToSummary }
 }
 
-export default useXMLData
+export default getJSONData

@@ -1,13 +1,13 @@
-import Layout from '../components/layouts'
-import PageAction from '../components/common/PageAction'
-import RecordDetail from '../components/common/RecordDetail'
-import SearchForm from '../components/common/SearchForm'
-import ImageCarousel from '../components/common/ImageCarousel'
-import InfoTable from '../components/common/InfoTable'
-import RecordAction from '../components/common/RecordAction'
+import Layout from '@/components/layouts'
+import PageAction from '@/components/common/PageAction'
+import RecordDetail from '@/components/common/RecordDetail'
+import SearchForm from '@/components/common/SearchForm'
+import ImageCarousel from '@/components/common/ImageCarousel'
+import InfoTable from '@/components/common/InfoTable'
+import RecordAction from '@/components/common/RecordAction'
 import { SlidersHorizontal } from 'lucide-react'
-import { Button } from '../components/ui/button'
-import useXMLData from '@/hooks/useXMLData'
+import { Button } from '@/components/ui/button'
+import getJSONData from '@/hooks/getJSONData'
 
 const images = [
 	{
@@ -27,8 +27,8 @@ const images = [
 	},
 ]
 const Detail = () => {
-	const { common, backToSummary } = useXMLData({ selector: '#xml_record' })
-	
+	const { common, backToSummary } = getJSONData({ selector: '#xml_record' })
+
 	return (
 		<Layout>
 			<div className="rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
@@ -37,7 +37,7 @@ const Detail = () => {
 						{ label: 'Home', url: '/' },
 						{
 							label: 'Summary',
-							url: backToSummary
+							url: backToSummary,
 						},
 						{
 							label: 'Detail',
