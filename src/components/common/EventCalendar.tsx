@@ -286,8 +286,8 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 	})
 
 	return (
-		<div className={'h-[88px] relative'}>
-			<div className={'h-[70px] overflow-auto mb-[2px]'}>
+		<div className={'h-full relative'}>
+			<div className={'h-3/5 overflow-auto mb-[2px]'}>
 				{filteredEvents.map((item: Cal_event, key: number) => (
 					<Dialog key={key}>
 						<DialogTrigger asChild>
@@ -352,65 +352,69 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 					</Dialog>
 				))}
 			</div>
-			{filteredEvents.length > 3 && (
-				// All events button
-				<Dialog>
-					<DialogTrigger asChild>
-						<Button
-							className={
-								'h-[20px] w-full px-0 absolute bottom-0 flex items-center justify-center overflow-hidden'
-							}>
-							All {filteredEvents.length} events
-						</Button>
-					</DialogTrigger>
-					<DialogContent
-						className={'h-[500px] overflow-auto p-1 flex flex-col items-center'}
-						hideClose={'invisible'}>
-						<DialogHeader className={'w-full'}>
-							<DialogTitle
+			<div className={'h-[20px]'}>
+				{filteredEvents.length > 3 && (
+					// All events button
+					<Dialog>
+						<DialogTrigger asChild>
+							<Button
 								className={
-									' bg-primary text-primary-foreground h-10 flex items-center justify-around'
+									' h-full w-full px-0 absolute bottom-0 flex items-center justify-center overflow-hidden'
 								}>
-								<div className="h-8">
-									<img className="h-full" src={logo} alt="logo" />
-								</div>
-								<div>All Events</div>
-								<DialogPrimitive.Close>
-									<Button type="submit">
-										<X className={'h-6 w-6'} />
-									</Button>
-								</DialogPrimitive.Close>
-							</DialogTitle>
-						</DialogHeader>
-						{filteredEvents.map((item: Cal_event, key: number) => (
-							<div key={key} className={'w-11/12 border-2'}>
+								All {filteredEvents.length} events
+							</Button>
+						</DialogTrigger>
+						<DialogContent
+							className={'h-[500px] overflow-auto p-1 flex flex-col items-center'}
+							hideClose={'invisible'}>
+							<DialogHeader className={'w-full'}>
 								<DialogTitle
 									className={
-										'bg-primary text-primary-foreground h-10 flex justify-around items-center'
+										' bg-primary text-primary-foreground h-10 flex items-center justify-around'
 									}>
-									<div className={'w-[160px] overflow-hidden'}>{item[EVENT_NAME]}</div>
-									<div>{item[FILTER_TYPE]}</div>
-								</DialogTitle>
-
-								<div className="grid grid-cols-2 gap-2 ">
-									<div className="text-xl">{item[EVENT_DATE]}</div>
-									<div className="text-xl">
-										{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+									<div className="h-8">
+										<img className="h-full" src={logo} alt="logo" />
 									</div>
+									<div>All Events</div>
+									<DialogPrimitive.Close>
+										<Button type="submit">
+											<X className={'h-6 w-6'} />
+										</Button>
+									</DialogPrimitive.Close>
+								</DialogTitle>
+							</DialogHeader>
+							{filteredEvents.map((item: Cal_event, key: number) => (
+								<div key={key} className={'w-11/12 border-2'}>
+									<DialogTitle
+										className={
+											'bg-primary text-primary-foreground h-10 flex justify-around items-center'
+										}>
+										<div className={'w-[160px] overflow-hidden'}>
+											{item[EVENT_NAME]}
+										</div>
+										<div>{item[FILTER_TYPE]}</div>
+									</DialogTitle>
+
+									<div className="grid grid-cols-2 gap-2 ">
+										<div className="text-xl">{item[EVENT_DATE]}</div>
+										<div className="text-xl">
+											{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+										</div>
+									</div>
+									<DialogDescription className={'h-24 overflow-auto'}>
+										{item[EVENT_DESC]}
+									</DialogDescription>
 								</div>
-								<DialogDescription className={'h-24 overflow-auto'}>
-									{item[EVENT_DESC]}
-								</DialogDescription>
-							</div>
-						))}
-						<DialogFooter>
-							<DialogPrimitive.Close>
-								<Button type="submit">Close</Button>
-							</DialogPrimitive.Close>
-						</DialogFooter>
-					</DialogContent>
-				</Dialog>
-			)}
+							))}
+							<DialogFooter>
+								<DialogPrimitive.Close>
+									<Button type="submit">Close</Button>
+								</DialogPrimitive.Close>
+							</DialogFooter>
+						</DialogContent>
+					</Dialog>
+				)}
+			</div>
 		</div>
 	)
 }
