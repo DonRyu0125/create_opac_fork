@@ -15,6 +15,7 @@ import {
 } from '../ui/dialog'
 import { cn } from '@/lib/utils'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { X } from 'lucide-react'
 
 export interface Cal_event {
 	'event-date': string
@@ -309,13 +310,13 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 							<DialogHeader>
 								<DialogTitle
 									className={
-										'bg-primary text-primary-foreground h-10 flex justify-around items-center'
+										'bg-primary text-primary-foreground h-11 flex justify-around items-center'
 									}>
-									<div className="h-8">
+									<div className={'w-[130px] h-[40px] overflow-hidden flex items-center justify-center '}>
 										<img className="h-full" src={logo} alt="logo" />
 									</div>
-									<div>{item[EVENT_NAME]}</div>
-									<div>{item[FILTER_TYPE]}</div>
+									<div className={'w-[170px] h-[40px] overflow-hidden flex items-center justify-center'}>{item[EVENT_NAME]}</div>
+									<div className={'w-[140px] h-[40px] overflow-hidden flex items-center justify-center'}>{item[FILTER_TYPE]}</div>
 								</DialogTitle>
 							</DialogHeader>
 							<div className="grid grid-cols-2 gap-2 ">
@@ -324,8 +325,8 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 									{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
 								</div>
 							</div>
-							<DialogDescription className={'h-24 overflow-auto'}>
-								{item[EVENT_DESC]}
+							<DialogDescription className={'h-24 overflow-hidden'}>
+							<span className={'font-bold'}>{item[EVENT_NAME]}</span>: {item[EVENT_DESC]}
 							</DialogDescription>
 							<DialogFooter>
 								<DialogPrimitive.Close>
@@ -339,22 +340,42 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 			{filteredEvents.length > 3 && (
 				<Dialog>
 					<DialogTrigger asChild>
-						<Button className={'h-[20px] w-full px-0 absolute bottom-0 flex items-center justify-center overflow-hidden'}>
-						All {filteredEvents.length} events
-						</Button>						
+						<Button
+							className={
+								'h-[20px] w-full px-0 absolute bottom-0 flex items-center justify-center overflow-hidden'
+							}>
+							All {filteredEvents.length} events
+						</Button>
 					</DialogTrigger>
-					<DialogContent className={'h-[500px] overflow-auto'}>
+					<DialogContent
+						className={'h-[500px] overflow-auto p-5 flex flex-col items-center'}
+						hideClose={'invisible'}>
+						<DialogHeader className={'w-full'}>
+							<DialogTitle
+								className={
+									' bg-primary text-primary-foreground h-10 flex items-center justify-around'
+								}>
+								<div className="h-8">
+									<img className="h-full" src={logo} alt="logo" />
+								</div>
+								<div>All Events</div>
+								<DialogPrimitive.Close>
+									<Button type="submit">
+										<X className={'h-6 w-6'} />
+									</Button>
+								</DialogPrimitive.Close>
+							</DialogTitle>
+						</DialogHeader>
 						{filteredEvents.map((item: Cal_event, key: number) => (
-							<div key={key}>
-								<DialogHeader>
-									<DialogTitle
-										className={
-											'bg-primary text-primary-foreground h-10 flex justify-around items-center'
-										}>
-										<div>{item[EVENT_NAME]}</div>
-										<div>{item[FILTER_TYPE]}</div>
-									</DialogTitle>
-								</DialogHeader>
+							<div key={key} className={'w-11/12 border-2'}>
+								<DialogTitle
+									className={
+										'bg-primary text-primary-foreground h-10 flex justify-around items-center'
+									}>
+									<div>{item[EVENT_NAME]}</div>
+									<div>{item[FILTER_TYPE]}</div>
+								</DialogTitle>
+
 								<div className="grid grid-cols-2 gap-2 ">
 									<div className="text-xl">{item[EVENT_DATE]}</div>
 									<div className="text-xl">
