@@ -204,7 +204,7 @@ const EventCalendar = () => {
 								key={key}
 								className="rounded-lg border border-black cursor-pointer max-w-40 h-40 w-full">
 								<div className={'bg-slate-200'}>{item?.day}</div>
-								<CombinedEventsDialog
+								<EventList
 									dayObj={item}
 									currentFilter={currentFilter}
 									currentEvent={currentEvent}
@@ -221,7 +221,7 @@ const EventCalendar = () => {
 // no 0
 // events > 3
 
-const CombinedEventsDialog = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any) => {
+const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any) => {
 	const { logo } = config
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
@@ -339,9 +339,9 @@ const CombinedEventsDialog = ({ dayObj, currentFilter, currentEvent, isShowAllEv
 			{filteredEvents.length > 3 && (
 				<Dialog>
 					<DialogTrigger asChild>
-						<Button className={'h-[20px] w-full px-0 absolute bottom-0'}>
-							Show All {filteredEvents.length} Events
-						</Button>
+						<Button className={'h-[20px] w-full px-0 absolute bottom-0 flex items-center justify-center overflow-hidden'}>
+						All {filteredEvents.length} events
+						</Button>						
 					</DialogTrigger>
 					<DialogContent className={'h-[500px] overflow-auto'}>
 						{filteredEvents.map((item: Cal_event, key: number) => (
