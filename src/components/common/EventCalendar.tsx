@@ -83,7 +83,7 @@ export const FILTER_TYPE_COLORS = [
 	{
 		type: 'Simcoe',
 		color: COLORS_MAP['ORANGE'],
-		icon: ICON_SHAPE_MAP['CIRCLE'],
+		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
 		type: 'Waterford',
@@ -173,7 +173,7 @@ const EventCalendar = () => {
 	return (
 		<div
 			className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
-			<div className={'flex justify-center items-center bg-primary h-[100px]'}>
+			<div className={'flex justify-center items-center bg-primary h-[100px] rounded'}>
 				<button onClick={prevMonth} className={'text-4xl text-primary-foreground mx-5'}>
 					&lt;
 				</button>
@@ -193,7 +193,7 @@ const EventCalendar = () => {
 							<div
 								key={key}
 								className={
-									'text-center text-xl bg-primary text-primary-foreground'
+									'text-center text-xl bg-primary text-primary-foreground rounded'
 								}>
 								{item}
 							</div>
@@ -228,7 +228,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
 			return convertLower(item.type) === convertLower(event_type)
 		})
-		return result[0]?.color
+		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 
 	const changeStrToDate = (dateString: string) => {
@@ -301,7 +301,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 									)}></div>
 								<div
 									className={
-										'invisible w-2 text-left overflow-hidden sm:w-full sm:visible'
+										'invisible max-w-[126px] text-left overflow-hidden sm:w-full sm:visible'
 									}>
 									{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
 								</div>

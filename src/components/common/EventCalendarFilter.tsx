@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Cal_event, FILTER_TYPE_COLORS } from './EventCalendar'
-import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from '../ui/button'
 import CheckboxWithLabel from './CheckboxWithLabel'
+import { RefreshCw } from 'lucide-react'
 
 interface MyComponentProps {
 	setCurrentFilter: React.Dispatch<React.SetStateAction<string[]>>
@@ -36,7 +36,7 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) =
 		<div className={'flex flex-wrap w-100 justify-evenly items-center my-2 h-16 overflow-auto'}>
 			{FILTER_TYPE_COLORS.map((item, key) => {
 				return (
-					<div className={'mx-1'}key={key}>
+					<div className={'mx-1'} key={key}>
 						<CheckboxWithLabel
 							label={item.type}
 							callback={handleChange}
@@ -46,9 +46,13 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) =
 					</div>
 				)
 			})}
-			<Button className={'w-5'} onClick={resetFilter}>
-				Reset All
-			</Button>
+			<button
+				className={
+					'bg-primary h-8 w-8 text-white flex justify-center items-center rounded'
+				}
+				onClick={resetFilter}>
+				<RefreshCw />
+			</button>
 		</div>
 	)
 }
