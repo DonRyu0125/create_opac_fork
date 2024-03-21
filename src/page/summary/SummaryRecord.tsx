@@ -6,11 +6,10 @@ import { useToast } from '@/components/ui/use-toast'
 import getJSONData from '@/hooks/getJSONData'
 import {
 	getListOfFields,
-	getTitleField,
+	getFieldDataByLabel,
 	deepSearchKey,
 	truncateString,
 	copyRecordURL,
-	getTitle,
 } from '@/lib/record'
 import { cn } from '@/lib/utils'
 import { viewAtom } from '@/store'
@@ -87,7 +86,7 @@ const RecordView = ({ record }: { record: Record }) => {
 	const database = record.database_name
 	const recordLink = record.record_link
 	const listOfFields = getListOfFields(database)
-	const title = getTitle(record, database) || 'Untitled'
+	const title = getFieldDataByLabel(record, database, "Title") || 'Untitled'
 
 	const thumbnail =
 		record.media &&

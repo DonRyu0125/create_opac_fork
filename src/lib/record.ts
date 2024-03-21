@@ -35,13 +35,9 @@ export const getListOfFields = (database: string) => {
 	return databaseFields
 }
 
-export const getTitleField = (database: string, label = 'Title') => {
-	return getListOfFields(database)?.items?.filter((e) => e.label === label)[0]
-}
-
-export const getTitle = (record: Record, database: string, label = 'Title') => {
-	const titleField = getTitleField(database, label)?.name as string
-	return titleField ? deepSearchKey(record, titleField)[0] : null
+export const getFieldDataByLabel = (record: Record, database: string, label = 'Title') => {
+	const fieldLabel = getListOfFields(database)?.items?.filter((e) => e.label === label)[0]?.name
+	return fieldLabel ? deepSearchKey(record, fieldLabel)[0] : null
 }
 
 export const truncateString = (text: string, maxChars = 50, postfix = '...') => {

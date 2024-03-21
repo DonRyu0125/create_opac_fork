@@ -3,7 +3,6 @@ import { M3Fields } from "./m3fields";
 import { M2AFields } from './m2afields';
 import { M2LFields } from "./m2lfields";
 
-export const database: 'COLLECTIONS' | 'DESCRIPTION' | 'BIBLIO' = 'COLLECTIONS';
 
 type DBFields<T extends string> = 
     T extends 'DESCRIPTION' ? M2AFields :
@@ -15,13 +14,13 @@ export interface Media {
 	im_access_link: string[]
 }
 
-export interface FieldData {
-	[key: string]: string | number | FieldData | FieldData[]
+export interface FieldData<T extends string> {
+	[key: string]: string | number | DBFields<T> | FieldData[]
 }
 interface Record {
 	media?: Media
 	is_bookmarked: string
 	database_name: string
 	record_link: string
-	record: DBFields<typeof database>
+	record: FieldData
 }
