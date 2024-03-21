@@ -47,7 +47,7 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) =
 				)
 			})}
 			<Button className={'w-5'} onClick={resetFilter}>
-				Reset
+				Reset All
 			</Button>
 		</div>
 	)

@@ -89,14 +89,6 @@
         "event-loc": "Delhi"
     },
     {
-        "event-date": "2024-03-15",
-        "event-start": "9:00 AM",
-        "event-end": "10:30 AM",
-        "event-name": "all event",
-        "event-desc": "This is all eveny for all loc",
-        "event-loc": "All"
-    },
-    {
         "event-date": "2024-03-21",
         "event-start": "10:00 AM",
         "event-end": "11:00 PM",
@@ -122,6 +114,22 @@
     },
     {
         "event-date": "2024-03-24",
+        "event-start": "7:00 AM",
+        "event-end": "9:00 AM",
+        "event-name": "Cooking class test event",
+        "event-desc": "this is desc for port dover",
+        "event-loc": "Port Dover"
+    },
+    {
+        "event-date": "2024-04-24",
+        "event-start": "7:00 AM",
+        "event-end": "9:00 AM",
+        "event-name": "Cooking class test event",
+        "event-desc": "this is desc for port dover",
+        "event-loc": "Port Dover"
+    },
+    {
+        "event-date": "2024-04-24",
         "event-start": "7:00 AM",
         "event-end": "9:00 AM",
         "event-name": "Cooking class test event",

@@ -81,7 +81,7 @@ export const FILTER_TYPE_COLORS = [
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
-		type: 'SIMCOE',
+		type: 'Simcoe',
 		color: COLORS_MAP['ORANGE'],
 		icon: ICON_SHAPE_MAP['CIRCLE'],
 	},
@@ -90,11 +90,11 @@ export const FILTER_TYPE_COLORS = [
 		color: COLORS_MAP['PURPLE'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
-	{
-		type: 'All',
-		color: COLORS_MAP['GREY'],
-		icon: ICON_SHAPE_MAP['CIRCLE'],
-	},
+	// {
+	// 	type: 'All',
+	// 	color: COLORS_MAP['GREY'],
+	// 	icon: ICON_SHAPE_MAP['CIRCLE'],
+	// },
 	{
 		type: 'Norview Lodge',
 		color: COLORS_MAP['PINK'],
