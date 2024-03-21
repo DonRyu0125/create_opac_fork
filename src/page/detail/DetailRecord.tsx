@@ -30,7 +30,7 @@ const DetailRecord = (props: Props) => {
 						renderRow={(row) => <div>{row.value}</div>}
 					/>
 
-					<RecordAction />
+					<RecordAction record={record} />
 				</div>
 			</RecordDetail>
 		</>

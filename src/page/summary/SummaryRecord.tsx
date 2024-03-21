@@ -35,51 +35,7 @@ const SummaryRecords = () => {
 	)
 }
 
-const RecordAction = ({ record }: { record: Record }) => {
-	const [like, setLike] = useState(false)
-	const { toast } = useToast()
-	const sisn = deepSearchKey(record, 'sisn')[0] as string
-	const database = record.database_name
 
-	return (
-		<>
-			<Button
-				variant="ghost"
-				size="icon"
-				onClick={() => {
-					setLike(true)
-					toast({
-						title: like
-							? 'This record has already been marked'
-							: 'Record has been bookmarked',
-						action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
-					})
-				}}>
-				<Heart
-					className={cn('h-4 w-4 text-primary')}
-					fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
-					stroke={like ? 'hsl(var(--opac-blue))' : 'hsl(var(--primary'}
-				/>
-			</Button>
-			<Separator orientation="vertical" />
-			<Button
-				variant="ghost"
-				size="icon"
-				onClick={() => {
-					copyRecordURL(database, sisn)
-					toast({
-						title: 'Record URL is copied',
-					})
-				}}>
-				<Copy className="h-4 w-4 text-primary" />
-			</Button>
-			<Separator orientation="vertical" />
-			<Button variant="ghost" size="icon">
-				<Mail className="h-4 w-4 text-primary" />
-			</Button>
-		</>
-	)
-}
 
 const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
@@ -146,4 +102,50 @@ const RecordView = ({ record }: { record: Record }) => {
 	)
 }
 
+
+const RecordAction = ({ record }: { record: Record }) => {
+	const [like, setLike] = useState(false)
+	const { toast } = useToast()
+	const sisn = deepSearchKey(record, 'sisn')[0] as string
+	const database = record.database_name
+
+	return (
+		<>
+			<Button
+				variant="ghost"
+				size="icon"
+				onClick={() => {
+					setLike(true)
+					toast({
+						title: like
+							? 'This record has already been marked'
+							: 'Record has been bookmarked',
+						action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
+					})
+				}}>
+				<Heart
+					className={cn('h-4 w-4 text-primary')}
+					fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
+					stroke={like ? 'hsl(var(--opac-blue))' : 'hsl(var(--primary'}
+				/>
+			</Button>
+			<Separator orientation="vertical" />
+			<Button
+				variant="ghost"
+				size="icon"
+				onClick={() => {
+					copyRecordURL(database, sisn)
+					toast({
+						title: 'Record URL is copied',
+					})
+				}}>
+				<Copy className="h-4 w-4 text-primary" />
+			</Button>
+			<Separator orientation="vertical" />
+			<Button variant="ghost" size="icon">
+				<Mail className="h-4 w-4 text-primary" />
+			</Button>
+		</>
+	)
+}
 export default SummaryRecords
