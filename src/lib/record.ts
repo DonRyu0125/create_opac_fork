@@ -3,9 +3,10 @@ import { FieldsJson } from '@/types/fields.json'
 import { fields } from '@/constants/index'
 import axios, { AxiosResponse } from 'axios'
 import copy from 'copy-to-clipboard'
+import { Record } from '@/types/record'
 const DEFAULT_DETAIL_REPORT = 'WEB_UNION_DETAIL'
 const DEFAULT_SUM_REPORT = 'WEB_UNION_SUM'
-const WEB_DNS = 'http://create-opac.minisisinc.com'
+const WEB_DNS = 'http://opactemplate.minisisinc.com'
 
 export type GenericObject = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,6 +37,11 @@ export const getListOfFields = (database: string) => {
 
 export const getTitleField = (database: string, label = 'Title') => {
 	return getListOfFields(database)?.items?.filter((e) => e.label === label)[0]
+}
+
+export const getTitle = (record: Record, database: string, label = 'Title') => {
+	const titleField = getTitleField(database, label)?.name as string
+	return titleField ? deepSearchKey(record, titleField)[0] : null
 }
 
 export const truncateString = (text: string, maxChars = 50, postfix = '...') => {

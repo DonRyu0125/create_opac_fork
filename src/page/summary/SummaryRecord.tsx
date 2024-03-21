@@ -10,6 +10,7 @@ import {
 	deepSearchKey,
 	truncateString,
 	copyRecordURL,
+	getTitle,
 } from '@/lib/record'
 import { cn } from '@/lib/utils'
 import { viewAtom } from '@/store'
@@ -23,8 +24,8 @@ import { Record } from '@/types/record'
 import { SummarySample } from '@/samples'
 
 const SummaryRecords = () => {
-	// const { records } = getJSONData({ selector: '#xml_record' })
-	const { records } = getJSONData({ defaultData: SummarySample })
+	const { records } = getJSONData({ selector: '#xml_record' })
+	// const { records } = getJSONData({ defaultData: SummarySample })
 
 	return (
 		<>
@@ -86,8 +87,7 @@ const RecordView = ({ record }: { record: Record }) => {
 	const database = record.database_name
 	const recordLink = record.record_link
 	const listOfFields = getListOfFields(database)
-	const { name } = getTitleField(database)
-	const title = name ? deepSearchKey(record, name)[0] : 'Untitled'
+	const title = getTitle(record, database) || 'Untitled'
 
 	const thumbnail =
 		record.media &&

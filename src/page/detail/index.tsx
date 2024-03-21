@@ -42,6 +42,7 @@ const Detail = () => {
 						{
 							label: 'Detail',
 							active: true,
+							url: '#',
 						},
 					]}>
 					{/* <Button>
@@ -56,37 +57,13 @@ const Detail = () => {
 								items={images}
 								renderItems={(image) => (
 									<img
+										alt="test"
 										src={image.src}
 										className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
 									/>
 								)}
 							/>
-							<div className=" grid gap-4 md:gap-10 items-start">
-								<RecordDetail heading={'A test record'} subHeading="by Author Jane">
-									<div className="flex flex-col space-y-4">
-										<InfoTable
-											rowsData={[
-												{
-													label: 'Title',
-													value: 'The Adventures of Fictional Book',
-												},
-												{ label: 'Author', value: 'John Authorson' },
-												{ label: 'Genre', value: 'Fantasy' },
-												{ label: 'Published Year', value: 2022 },
-												{ label: 'ISBN', value: '978-1-2345-6789-0' },
-												{ label: 'Available Copies', value: 10 },
-												{
-													label: 'Description',
-													value: 'A captivating tale of imagination and wonder.',
-												},
-											]}
-											renderRow={(row) => row.value}
-										/>
-
-										<RecordAction />
-									</div>
-								</RecordDetail>
-							</div>
+							<div className=" grid gap-4 md:gap-10 items-start"></div>
 						</div>
 					</div>
 				</section>
