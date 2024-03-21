@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Cal_event, FILTER_TYPE_COLORS } from './EventCalendar'
-import { Button, buttonVariants } from '../ui/button'
-import CheckboxWithLabel from './CheckboxWithLabel'
+import { Button, buttonVariants } from '../../ui/button'
+import CheckboxWithLabel from '../CheckboxWithLabel'
 import { RefreshCw } from 'lucide-react'
 
 interface MyComponentProps {

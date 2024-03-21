@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import X2JS from 'x2js'
 import { config } from '@/constants'
-import response from '../../samples/fetch_calendar.json'
+import response from '../../../samples/fetch_calendar.json'
 import EventCalendarFilter from './EventCalendarFilter'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import {
 	Dialog,
 	DialogContent,
@@ -12,7 +12,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from '../ui/dialog'
+} from '../../ui/dialog'
 import { cn } from '@/lib/utils'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
