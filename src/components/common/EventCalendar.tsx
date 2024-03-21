@@ -203,7 +203,7 @@ const EventCalendar = () => {
 						return (
 							<div
 								key={key}
-								className="rounded-lg border border-black cursor-pointer max-w-40 h-24 w-full">
+								className="rounded-lg border border-black cursor-pointer max-w-40 h-28 w-full">
 								<div className={'bg-slate-200'}>{item?.day}</div>
 								<EventList
 									dayObj={item}
@@ -286,8 +286,8 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 	})
 
 	return (
-		<div className={'h-[70px] relative'}>
-			<div className={'h-full overflow-auto mb-[2px]'}>
+		<div className={'h-[88px] relative'}>
+			<div className={'h-[70px] overflow-auto mb-[2px]'}>
 				{filteredEvents.map((item: Cal_event, key: number) => (
 					<Dialog key={key}>
 						<DialogTrigger asChild>

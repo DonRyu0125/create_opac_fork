@@ -33,7 +33,7 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) =
 	}
 
 	return (
-		<div className={'flex flex-wrap w-100 justify-evenly items-center my-2 h-24 overflow-auto'}>
+		<div className={'flex flex-wrap w-100 justify-evenly items-center my-2 h-16 overflow-auto'}>
 			{FILTER_TYPE_COLORS.map((item, key) => {
 				return (
 					<div className={'mx-1'}key={key}>
