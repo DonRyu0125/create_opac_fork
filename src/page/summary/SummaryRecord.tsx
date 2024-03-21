@@ -10,6 +10,7 @@ import {
 	deepSearchKey,
 	truncateString,
 	copyRecordURL,
+	getFieldsFromRecord,
 } from '@/lib/record'
 import { cn } from '@/lib/utils'
 import { viewAtom } from '@/store'
@@ -85,7 +86,6 @@ const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
 	const database = record.database_name
 	const recordLink = record.record_link
-	const listOfFields = getListOfFields(database)
 	const title = getFieldDataByLabel(record, database, "Title") || 'Untitled'
 
 	const thumbnail =
@@ -94,42 +94,27 @@ const RecordView = ({ record }: { record: Record }) => {
 		record.media.im_access_link.length > 0 &&
 		record.media.im_access_link[0]
 
-	const getGridFields = () => {
-		return listOfFields?.items
-			?.filter((item) => item.grid === true)
-			.map((item) => {
-				const name = item.name || 'TITLE'
-				const data = deepSearchKey(record, name)
-				if (data?.length > 0 && item.label !== 'Title')
-					return <DataWithLabel key={item.name} label={item.label || ''} items={data} />
-			})
-			.filter((item) => item)
-	}
 
-	const getListFields = () => {
-		return listOfFields?.items
-			?.map((item) => {
-				const name = item.name || 'TITLE'
-				const data = deepSearchKey(record, name)
-				if (data?.length > 0 && item.label !== 'Title')
-					return (
-						<DataWithLabel
+	const gridFields = getFieldsFromRecord(record,
+		(item) => item.grid === true,
+		(data, item) => <DataWithLabel key={item.name} label={item.label || ''} items={data} />)
+	
+	
+		const listFields = getFieldsFromRecord(record,
+			() => true,
+			(data, item) => <DataWithLabel
 							className="flex-col items-start justify-start my-1"
 							key={item.name}
 							label={item.label || ''}
-							items={data}
-						/>
-					)
-			})
-			.filter((item) => item)
-	}
+							items={data} />)
+
 
 	if (view === 'grid') {
 		return (
 			<InfoCard
 				className="border-primary"
 				title={<Link href={recordLink}>{truncateString(title)}</Link>}
-				description={getGridFields()}
+				description={gridFields}
 				thumbnail={thumbnail || 'https://www.svgrepo.com/show/451131/no-image.svg'}
 				footer={
 					<div className="flex h-4 items-center space-x-4 w-full justify-evenly ">
@@ -153,7 +138,7 @@ const RecordView = ({ record }: { record: Record }) => {
 					</div>
 				</div>
 			}>
-			<div className="mt-4">{getListFields()}</div>
+			<div className="mt-4">{listFields}</div>
 		</DetailInfoCard>
 	)
 }

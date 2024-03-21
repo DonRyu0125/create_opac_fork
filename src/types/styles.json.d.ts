@@ -5,11 +5,11 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Theme = string
-export type FontFamily = string
+export type Theme = string;
+export type FontFamily = string;
 
 export interface StylesJson {
-	theme?: Theme
-	fontFamily?: FontFamily
-	[k: string]: unknown
+  theme?: Theme;
+  fontFamily?: FontFamily;
+  [k: string]: unknown;
 }
