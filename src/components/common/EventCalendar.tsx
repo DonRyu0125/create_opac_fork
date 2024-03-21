@@ -296,7 +296,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 								variant="outline">
 								<div
 									className={cn(
-										'h-4 w-[16px] border rounded ',
+										'h-4 w-[16px] border rounded',
 										getColor(item[FILTER_TYPE])
 									)}></div>
 								<div
@@ -311,41 +311,37 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 							<DialogHeader>
 								<DialogTitle
 									className={
-										'bg-primary text-primary-foreground h-full flex justify-around items-center'
+										' bg-primary text-primary-foreground h-10 flex items-center justify-around rounded'
 									}>
-									<div
-										className={
-											'w-[130px] h-[40px] overflow-hidden flex items-center justify-center '
-										}>
+									<div className="h-8">
 										<img className="h-full" src={logo} alt="logo" />
 									</div>
-									<div
-										className={
-											'w-[170px] overflow-hidden flex items-center justify-center'
-										}>
-										{item[EVENT_NAME]}
-									</div>
-									<div
-										className={
-											'w-[140px]  overflow-hidden flex items-center justify-center'
-										}>
-										{item[FILTER_TYPE]}
-									</div>
+									<div>{item[FILTER_TYPE]}</div>
+									<DialogPrimitive.Close>
+										<X className={'h-6 w-6'} />
+									</DialogPrimitive.Close>
 								</DialogTitle>
 							</DialogHeader>
-							<div className="grid grid-cols-2 gap-2 ">
+							<div
+								className={
+									'w-full text-xl w-full flex justify-center items-center font-bold px-2 '
+								}>
+								<div className={'overflow-hidden'}>{item[EVENT_NAME]}</div>
+							</div>
+							<div className="flex justify-around ">
 								<div className="text-xl">{item[EVENT_DATE]}</div>
 								<div className="text-xl">
 									{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
 								</div>
 							</div>
-							<DialogDescription className={'h-24 overflow-hidden'}>
-								<span className={'font-bold'}>{item[EVENT_NAME]}</span>:{' '}
+							<DialogDescription className={'h-24 overflow-auto p-2'}>
 								{item[EVENT_DESC]}
 							</DialogDescription>
 							<DialogFooter>
 								<DialogPrimitive.Close>
-									<Button type="submit">Close</Button>
+									<Button className={'rounded'} type="submit">
+										Close
+									</Button>
 								</DialogPrimitive.Close>
 							</DialogFooter>
 						</DialogContent>
@@ -370,45 +366,47 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 							<DialogHeader className={'w-full'}>
 								<DialogTitle
 									className={
-										' bg-primary text-primary-foreground h-10 flex items-center justify-around'
+										' bg-primary text-primary-foreground h-10 flex items-center justify-around rounded'
 									}>
 									<div className="h-8">
 										<img className="h-full" src={logo} alt="logo" />
 									</div>
 									<div>All Events</div>
 									<DialogPrimitive.Close>
-										<Button type="submit">
-											<X className={'h-6 w-6'} />
-										</Button>
+										<X className={'h-6 w-6'} />
 									</DialogPrimitive.Close>
 								</DialogTitle>
 							</DialogHeader>
 							{filteredEvents.map((item: Cal_event, key: number) => (
-								<div key={key} className={'w-11/12 border-2'}>
+								<div key={key} className={'w-11/12 border-2 rounded'}>
 									<DialogTitle
 										className={
-											'bg-primary text-primary-foreground h-10 flex justify-around items-center'
+											'bg-primary text-primary-foreground h-10 flex justify-center items-center rounded'
 										}>
-										<div className={'w-[160px] overflow-hidden'}>
-											{item[EVENT_NAME]}
-										</div>
 										<div>{item[FILTER_TYPE]}</div>
 									</DialogTitle>
-
-									<div className="grid grid-cols-2 gap-2 ">
+									<div
+										className={
+											'w-full text-xl w-full flex justify-center items-center font-bold px-2 '
+										}>
+										<div className={'overflow-hidden'}>{item[EVENT_NAME]}</div>
+									</div>
+									<div className="flex justify-around ">
 										<div className="text-xl">{item[EVENT_DATE]}</div>
 										<div className="text-xl">
 											{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
 										</div>
 									</div>
-									<DialogDescription className={'h-24 overflow-auto'}>
+									<DialogDescription className={'h-24 overflow-auto p-2'}>
 										{item[EVENT_DESC]}
 									</DialogDescription>
 								</div>
 							))}
 							<DialogFooter>
 								<DialogPrimitive.Close>
-									<Button type="submit">Close</Button>
+									<Button className={'rounded'} type="submit">
+										Close
+									</Button>
 								</DialogPrimitive.Close>
 							</DialogFooter>
 						</DialogContent>
