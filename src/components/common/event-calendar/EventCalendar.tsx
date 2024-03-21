@@ -219,9 +219,6 @@ const EventCalendar = () => {
 	)
 }
 
-// no 0
-// events > 3
-
 const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any) => {
 	const { logo } = config
 	const getColor = (event_type: string) => {
@@ -287,6 +284,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 
 	return (
 		<div className={'h-full relative'}>
+			{/* Event button */}
 			<div className={'h-3/5 overflow-auto mb-[2px]'}>
 				{filteredEvents.map((item: Cal_event, key: number) => (
 					<Dialog key={key}>
@@ -324,14 +322,15 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 							</DialogHeader>
 							<div
 								className={
-									'w-full text-xl w-full flex justify-center items-center font-bold px-2 '
+									'w-full text-l w-full flex flex-col justify-center items-left font-bold px-2 '
 								}>
-								<div className={'overflow-hidden'}>{item[EVENT_NAME]}</div>
-							</div>
-							<div className="flex justify-around ">
-								<div className="text-xl">{item[EVENT_DATE]}</div>
-								<div className="text-xl">
-									{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+								<div className={'overflow-hidden text-lg'}>{item[EVENT_NAME]}</div>
+								<div className={'flex'}>
+									<div className="text-md text-gray-600">{item[EVENT_DATE]}</div>
+									<div className="mx-2 text-gray-600">&#x2022;</div>
+									<div className="text-md text-gray-600">
+										{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+									</div>
 								</div>
 							</div>
 							<DialogDescription className={'h-24 overflow-auto p-2'}>
@@ -348,9 +347,9 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 					</Dialog>
 				))}
 			</div>
+			{/* All events button */}
 			<div className={'h-[20px]'}>
 				{filteredEvents.length > 3 && (
-					// All events button
 					<Dialog>
 						<DialogTrigger asChild>
 							<Button
@@ -387,14 +386,17 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 									</DialogTitle>
 									<div
 										className={
-											'w-full text-xl w-full flex justify-center items-center font-bold px-2 '
+											'w-full text-l w-full flex flex-col justify-center items-left font-bold px-2 '
 										}>
-										<div className={'overflow-hidden'}>{item[EVENT_NAME]}</div>
-									</div>
-									<div className="flex justify-around ">
-										<div className="text-xl">{item[EVENT_DATE]}</div>
-										<div className="text-xl">
-											{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+										<div className={'overflow-hidden text-lg'}>
+											{item[EVENT_NAME]}
+										</div>
+										<div className={'flex'}>
+											<div className="text-md text-gray-600">{item[EVENT_DATE]}</div>
+											<div className="mx-2 text-gray-600">&#x2022;</div>
+											<div className="text-md text-gray-600">
+												{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+											</div>
 										</div>
 									</div>
 									<DialogDescription className={'h-24 overflow-auto p-2'}>
