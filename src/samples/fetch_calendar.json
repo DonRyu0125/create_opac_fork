@@ -1,5 +1,5 @@
 [
-    
+  
     {
         "event-date": "2024-03-05",
         "event-start": "1:00 PM",
@@ -34,6 +34,14 @@
         "event-end": "6:30 PM",
         "event-name": "T99999999",
         "event-desc": "Delhi test don 13 35",
+        "event-loc": "Delhi"
+    },
+    {
+        "event-date": "2024-03-05",
+        "event-start": "6:00 AM",
+        "event-end": "6:30 PM",
+        "event-name": "START WITH 6 AM",
+        "event-desc": "Delhi test don 13   35 Delhi esesest don 13 35 Delhi test don 13 35Delhi test don  35 Delhi esesest don 13 35 Delhi test don 13 35Delhi test don  35 Delhi esesest don 13 35 Delhi test don 13 35Delhi test don  35 Delhi esesest don 13 35 Delhi test don 13 35Delhi test don 35 Delhi esesest don 13 35 Delhi test don 13 35Delhi test don 35 Delhi esesest don 13 35 Delhi test don 13 35Delhi test don 13 35Delhi test don 13t don 13 35 Delhi test don 13 35Delhi test don 13 35Delhi test don 13t don 13 35 Delhi test don 13 35Delhi test don 13 35Delhi test don 13test don 13 35 Delhi test don 13 35Delhi test don 13 35Delhi test don 13 35Delhi test don 13 35Delhi test don 13 35Delhi test don 13 35Delhi test don 13 35",
         "event-loc": "Delhi"
     },
     {
@@ -100,7 +108,7 @@
         "event-date": "2024-03-23",
         "event-start": "8:00 AM",
         "event-end": "9:00 PM",
-        "event-name": "Chinese cooking class",
+        "event-name": "Chinese cooking class by Emily Wang",
         "event-desc": "this is desc for Norview Lodge",
         "event-loc": "Norview Lodge"
     },
@@ -108,8 +116,8 @@
         "event-date": "2024-03-23",
         "event-start": "7:00 AM",
         "event-end": "9:00 PM",
-        "event-name": "Chinese histroy",
-        "event-desc": "this is desc for Norview Lodge",
+        "event-name": "Chinese histroy by Jin Cheng",
+        "event-desc": "this is desc for Norview Lodge volunteer workshop",
         "event-loc": "Norview Lodge"
     },
     {

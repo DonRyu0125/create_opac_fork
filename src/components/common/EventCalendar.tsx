@@ -27,9 +27,9 @@ export interface Cal_event {
 }
 
 export interface Day_obj {
-	day: number
-	month: number
-	year: number
+	day: number | null
+	month?: number
+	year?: number
 }
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
@@ -144,8 +144,9 @@ const EventCalendar = () => {
 		const startingDay = firstDayOfMonth.getDay() // show the date thorugh number ex) mon => 1
 		const calendarArray = []
 
+		//Calculate the starting day of the month
 		for (let i = 0; i < startingDay; i++) {
-			calendarArray.push(0)
+			calendarArray.push({ day: null })
 		}
 
 		for (let i = 1; i <= days; i++) {
@@ -172,7 +173,7 @@ const EventCalendar = () => {
 	return (
 		<div
 			className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
-			<div className={'flex justify-center items-center bg-primary h-40'}>
+			<div className={'flex justify-center items-center bg-primary h-[100px]'}>
 				<button onClick={prevMonth} className={'text-4xl text-primary-foreground mx-5'}>
 					&lt;
 				</button>
@@ -198,12 +199,11 @@ const EventCalendar = () => {
 							</div>
 						)
 					})}
-					{/* item : number| Day_obj */}
-					{generateMonth().map((item: any, key: number) => {
+					{generateMonth().map((item: Day_obj, key: number) => {
 						return (
 							<div
 								key={key}
-								className="rounded-lg border border-black cursor-pointer max-w-40 h-40 w-full">
+								className="rounded-lg border border-black cursor-pointer max-w-40 h-24 w-full">
 								<div className={'bg-slate-200'}>{item?.day}</div>
 								<EventList
 									dayObj={item}
@@ -286,37 +286,51 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 	})
 
 	return (
-		<div className={'h-[136px] relative'}>
-			<div className={'h-full overflow-auto'}>
+		<div className={'h-[70px] relative'}>
+			<div className={'h-full overflow-auto mb-[2px]'}>
 				{filteredEvents.map((item: Cal_event, key: number) => (
 					<Dialog key={key}>
 						<DialogTrigger asChild>
 							<Button
-								className={
-									'overflow-hidden w-full h-[20px] border-hidden flex p-0 justify-start'
-								}
+								className={'w-full h-[20px] border-hidden flex p-0 justify-start'}
 								variant="outline">
 								<div
 									className={cn(
-										'h-4 w-1 border rounded sm:w-[16px]',
+										'h-4 w-[16px] border rounded ',
 										getColor(item[FILTER_TYPE])
 									)}></div>
-								<div className={'w-full text-left'}>
+								<div
+									className={
+										'invisible w-2 text-left overflow-hidden sm:w-full sm:visible'
+									}>
 									{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
 								</div>
 							</Button>
 						</DialogTrigger>
-						<DialogContent hideClose={'invisible'}>
+						<DialogContent hideClose={'invisible'} className={'p-1'}>
 							<DialogHeader>
 								<DialogTitle
 									className={
 										'bg-primary text-primary-foreground h-11 flex justify-around items-center'
 									}>
-									<div className={'w-[130px] h-[40px] overflow-hidden flex items-center justify-center '}>
+									<div
+										className={
+											'w-[130px] h-[40px] overflow-hidden flex items-center justify-center '
+										}>
 										<img className="h-full" src={logo} alt="logo" />
 									</div>
-									<div className={'w-[170px] h-[40px] overflow-hidden flex items-center justify-center'}>{item[EVENT_NAME]}</div>
-									<div className={'w-[140px] h-[40px] overflow-hidden flex items-center justify-center'}>{item[FILTER_TYPE]}</div>
+									<div
+										className={
+											'w-[170px] h-[40px] overflow-hidden flex items-center justify-center'
+										}>
+										{item[EVENT_NAME]}
+									</div>
+									<div
+										className={
+											'w-[140px] h-[40px] overflow-hidden flex items-center justify-center'
+										}>
+										{item[FILTER_TYPE]}
+									</div>
 								</DialogTitle>
 							</DialogHeader>
 							<div className="grid grid-cols-2 gap-2 ">
@@ -326,7 +340,8 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 								</div>
 							</div>
 							<DialogDescription className={'h-24 overflow-hidden'}>
-							<span className={'font-bold'}>{item[EVENT_NAME]}</span>: {item[EVENT_DESC]}
+								<span className={'font-bold'}>{item[EVENT_NAME]}</span>:{' '}
+								{item[EVENT_DESC]}
 							</DialogDescription>
 							<DialogFooter>
 								<DialogPrimitive.Close>
@@ -338,6 +353,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 				))}
 			</div>
 			{filteredEvents.length > 3 && (
+				// All events button
 				<Dialog>
 					<DialogTrigger asChild>
 						<Button
@@ -348,7 +364,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 						</Button>
 					</DialogTrigger>
 					<DialogContent
-						className={'h-[500px] overflow-auto p-5 flex flex-col items-center'}
+						className={'h-[500px] overflow-auto p-1 flex flex-col items-center'}
 						hideClose={'invisible'}>
 						<DialogHeader className={'w-full'}>
 							<DialogTitle
@@ -372,7 +388,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 									className={
 										'bg-primary text-primary-foreground h-10 flex justify-around items-center'
 									}>
-									<div>{item[EVENT_NAME]}</div>
+									<div className={'w-[160px] overflow-hidden'}>{item[EVENT_NAME]}</div>
 									<div>{item[FILTER_TYPE]}</div>
 								</DialogTitle>
 
