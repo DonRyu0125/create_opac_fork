@@ -311,7 +311,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 							<DialogHeader>
 								<DialogTitle
 									className={
-										'bg-primary text-primary-foreground h-11 flex justify-around items-center'
+										'bg-primary text-primary-foreground h-full flex justify-around items-center'
 									}>
 									<div
 										className={
@@ -321,13 +321,13 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 									</div>
 									<div
 										className={
-											'w-[170px] h-[40px] overflow-hidden flex items-center justify-center'
+											'w-[170px] overflow-hidden flex items-center justify-center'
 										}>
 										{item[EVENT_NAME]}
 									</div>
 									<div
 										className={
-											'w-[140px] h-[40px] overflow-hidden flex items-center justify-center'
+											'w-[140px]  overflow-hidden flex items-center justify-center'
 										}>
 										{item[FILTER_TYPE]}
 									</div>
