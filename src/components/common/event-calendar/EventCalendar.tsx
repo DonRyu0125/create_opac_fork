@@ -421,13 +421,14 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 											</div>
 										</div>
 									</div>
-									<DialogDescription className={'h-24 overflow-auto p-2'}>
+									<DialogDescription
+										className={`${showFullStr[idx] ? 'h-24' : 'h-10'} overflow-auto p-2`}>
 										<>
 											{showFullStr[idx] ? (
 												<>
 													{item[EVENT_DESC]}
 													<button
-														className={'text-neutral-400'}
+														className={'text-stone-800'}
 														onClick={() => showStrToggle(idx)}>
 														....Close
 													</button>
@@ -436,7 +437,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 												<>
 													{item[EVENT_DESC]?.substring(0, 10)}
 													<button
-														className={'text-neutral-400'}
+														className={'text-stone-800'}
 														onClick={() => showStrToggle(idx)}>
 														....More
 													</button>
