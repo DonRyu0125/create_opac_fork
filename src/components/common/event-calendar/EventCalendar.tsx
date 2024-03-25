@@ -226,6 +226,42 @@ type showStrObj = {
 const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 	const { logo } = config
 	const [showFullStr, setShowFullStr] = useState<showStrObj>({})
+	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
+
+	useEffect(() => {
+		const updatedFilteredEvents = currentEvent.filter((item: Cal_event) => {
+			const { day, month } = changeStrToDate(item[EVENT_DATE])
+			const isMatchingDayMonth = day === dayObj.day && month === dayObj.month
+			if (currentFilter.length > 0) {
+				return (
+					isMatchingDayMonth &&
+					currentFilter.some(
+						(type: string) => convertLower(type) === convertLower(item[FILTER_TYPE])
+					)
+				)
+			}
+			return isMatchingDayMonth
+		})
+
+		updatedFilteredEvents.sort((a: Cal_event, b: Cal_event) => {
+			const timeA: Date | undefined = parseTimeString(a[EVENT_START_TIME])
+			const timeB: Date | undefined = parseTimeString(b[EVENT_START_TIME])
+			if (timeA && timeB) {
+				return timeA.getTime() - timeB.getTime()
+			}
+			return 0
+		})
+
+		setFilteredEvents(updatedFilteredEvents)
+	}, [currentEvent, currentFilter, dayObj])
+
+	const showStrToggle = (key: number) => {
+		setShowFullStr((prevShowFullStr) => {
+			const updatedShowFullStr = { ...prevShowFullStr }
+			updatedShowFullStr[key] = !updatedShowFullStr[key]
+			return updatedShowFullStr
+		})
+	}
 
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
@@ -264,41 +300,6 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 		}
 		return
 	}
-
-	const showStrToggle = (key: number) => {
-		// console.log('key',key)
-
-		let obj: showStrObj = showFullStr
-
-		if (obj[key]) {
-			obj[key] = false
-		} else {
-			obj[key] = true
-		}
-		setShowFullStr(obj)
-	}
-
-	const filteredEvents = currentEvent.filter((item: Cal_event) => {
-		const { day, month } = changeStrToDate(item[EVENT_DATE])
-		const isMatchingDayMonth = day === dayObj.day && month === dayObj.month
-		if (currentFilter.length > 0) {
-			return (
-				isMatchingDayMonth &&
-				currentFilter.some(
-					(type: string) => convertLower(type) === convertLower(item[FILTER_TYPE])
-				)
-			)
-		}
-		return isMatchingDayMonth
-	})
-
-	filteredEvents.sort((a: Cal_event, b: Cal_event) => {
-		const timeA: Date | undefined = parseTimeString(a[EVENT_START_TIME])
-		const timeB: Date | undefined = parseTimeString(b[EVENT_START_TIME])
-		if (timeA && timeB) {
-			return timeA.getTime() - timeB.getTime()
-		}
-	})
 
 	return (
 		<div className={'h-full relative'}>
@@ -421,20 +422,27 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 										</div>
 									</div>
 									<DialogDescription className={'h-24 overflow-auto p-2'}>
-										<div>
+										<>
 											{showFullStr[idx] ? (
-												<p>{item[EVENT_DESC]}</p>
-											) : (
-												<p>
-													{item[EVENT_DESC]?.substring(0, 10)}...
+												<>
+													{item[EVENT_DESC]}
 													<button
 														className={'text-neutral-400'}
 														onClick={() => showStrToggle(idx)}>
-														More
+														....Close
 													</button>
-												</p>
+												</>
+											) : (
+												<>
+													{item[EVENT_DESC]?.substring(0, 10)}
+													<button
+														className={'text-neutral-400'}
+														onClick={() => showStrToggle(idx)}>
+														....More
+													</button>
+												</>
 											)}
-										</div>
+										</>
 									</DialogDescription>
 								</div>
 							))}
