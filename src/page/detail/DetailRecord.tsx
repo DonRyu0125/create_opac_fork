@@ -5,26 +5,26 @@ import useJSONData from '@/hooks/useJSONData'
 import { getFieldDataByLabel, getFieldsFromRecord, getListOfFields } from '@/lib/record'
 import React from 'react'
 import { DBFields } from '../../types/record'
+import DetailSample from '@/samples/detail-m3.json'
 
 type Props = {}
 
 const DetailRecord = (props: Props) => {
-	const { records } = useJSONData({ selector: '#xml_record' })
+	// const { records } = useJSONData({ selector: '#xml_record' })
+	const { records } = useJSONData({ defaultData: DetailSample })
 	const record = records[0]
 	const database = record.database_name
-	const title = getFieldDataByLabel(record, database, 'Title') || 'Untitled'
 	const recordData: DBFields<'COLLECTIONS'> = record.record
-
+	const title = getFieldDataByLabel(record, database, 'Title') || 'Untitled'
 	const detailFields = getFieldsFromRecord(
 		record,
 		(item) => item.detail,
 		(data, item) => ({ label: item.label, value: data })
 	) as TableRow[]
-
 	return (
 		<>
 			<RecordDetail heading={title} subHeading={recordData.collection}>
-				<div className="flex flex-col space-y-4">
+				<div className="flex flex-col space-y-12">
 					<InfoTable
 						rowsData={detailFields || []}
 						renderRow={(row) => <div>{row.value}</div>}

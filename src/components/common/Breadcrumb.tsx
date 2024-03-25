@@ -26,7 +26,11 @@ const Breadcrumb = ({ items, className, ...props }: BreadcrumbProps) => {
 						)}
 						<li>
 							<Link
-								className={cn('no-underline', !e.active && 'text-gray-900')}
+								className={cn(
+									'no-underline',
+									!e.active && 'text-gray-900',
+									e.active && 'font-bold'
+								)}
 								href={e.url}>
 								{e.label}
 							</Link>

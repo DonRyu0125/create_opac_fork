@@ -95,6 +95,7 @@ const useJSONData = ({ selector, defaultData }: Props) => {
 		if (!records) {
 			return []
 		}
+
 		return records
 	}
 
@@ -122,6 +123,14 @@ const useJSONData = ({ selector, defaultData }: Props) => {
 		return url.a._href
 	}
 
+	const getMedia = (
+		record: Record,
+		type: 'im_access_link' | 'vd_access_link' | 'ad_access_link' | 'tx_access_link'
+	) => {
+		if (!record.media || !record.media[type] || !Array.isArray(record.media[type])) return []
+		return record.media[type]
+	}
+
 	const common = getCommonFields()
 	const pagination = getPaginations()
 	const filter = getFilter()
@@ -139,6 +148,7 @@ const useJSONData = ({ selector, defaultData }: Props) => {
 		backToSummary,
 		nextRecord,
 		previousRecord,
+		getMedia,
 	}
 }
 
