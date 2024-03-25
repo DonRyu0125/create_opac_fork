@@ -1,13 +1,14 @@
 /**
  * Calendar with event filtering function
  * 
+ * EventCalendar: Main
+ * EventCalendarFilter: Filter option list at the EventCalendar
+ * EventCalendarEventList: Event list dialog(modal at radix) and all event show button(Show if there are more than 3 event at the date)
  */
 import React, { useEffect, useState } from 'react'
 import X2JS from 'x2js'
-
 import response from '../../../samples/fetch_calendar.json'
 import EventCalendarFilter from './EventCalendarFilter'
-
 import EventCalendarEventList from './EventCalendarEventList'
 
 export interface Cal_event {

@@ -24,6 +24,7 @@ import {
 	FILTER_TYPE,
 	FILTER_TYPE_COLORS,
 } from './EventCalendar'
+import { convertLowerTrim } from '@/lib/utils'
 
 type showStrObj = {
 	[key: number]: boolean
@@ -42,7 +43,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 				return (
 					isMatchingDayMonth &&
 					currentFilter.some(
-						(type: string) => convertLower(type) === convertLower(item[FILTER_TYPE])
+						(type: string) => convertLowerTrim(type) === convertLowerTrim(item[FILTER_TYPE])
 					)
 				)
 			}
@@ -50,22 +51,22 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 		})
 
 		updatedFilteredEvents.sort((a: Cal_event, b: Cal_event) => {
-			const timeA: Date | undefined = parseTimeString(a[EVENT_START_TIME])
-			const timeB: Date | undefined = parseTimeString(b[EVENT_START_TIME])
+			const timeA: Date | undefined = parseTimeString(a[EVENT_START_TIME]);
+			const timeB: Date | undefined = parseTimeString(b[EVENT_START_TIME]);
 			if (timeA && timeB) {
-				return timeA.getTime() - timeB.getTime()
+				return timeA.getTime() - timeB.getTime();
 			}
-			return 0
+			return 0;
 		})
 
-		setFilteredEvents(updatedFilteredEvents)
+		setFilteredEvents(updatedFilteredEvents);
 	}, [currentEvent, currentFilter, dayObj])
 
 	const showStrToggle = (key: number) => {
 		setShowFullStr((prevShowFullStr) => {
-			const updatedShowFullStr = { ...prevShowFullStr }
-			updatedShowFullStr[key] = !updatedShowFullStr[key]
-			return updatedShowFullStr
+			const updatedShowFullStr = { ...prevShowFullStr };
+			updatedShowFullStr[key] = !updatedShowFullStr[key];
+			return updatedShowFullStr;
 		})
 	}
 
@@ -75,38 +76,34 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
-			return convertLower(item.type) === convertLower(event_type)
+			return convertLowerTrim(item.type) === convertLowerTrim(event_type);
 		})
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 
 	const changeStrToDate = (dateString: string) => {
-		const dateObject = new Date(dateString)
-		const month = dateObject.getMonth() + 1
-		const day = dateObject.getDate() + 1
+		const dateObject = new Date(dateString);
+		const month = dateObject.getMonth() + 1;
+		const day = dateObject.getDate() + 1;
 
-		return { month, day }
+		return { month, day };
 	}
 
-	const convertLower = (type: string) => {
-		let trimmed = type.trim()
-		return trimmed.toLowerCase()
-	}
 
 	const parseTimeString = (timeString: string) => {
 		if (timeString) {
-			const [time, meridian] = timeString?.split(' ')
-			const [hours, minutes] = time?.split(':').map(Number)
+			const [time, meridian] = timeString?.split(' ');
+			const [hours, minutes] = time?.split(':').map(Number);
 
 			let hours24 = hours
 			if (meridian === 'PM' && hours !== 12) {
-				hours24 += 12
+				hours24 += 12;
 			} else if (meridian === 'AM' && hours === 12) {
-				hours24 = 0
+				hours24 = 0;
 			}
-			const dateObject = new Date()
-			dateObject.setHours(hours24, minutes, 0, 0)
-			return dateObject
+			const dateObject = new Date();
+			dateObject.setHours(hours24, minutes, 0, 0);
+			return dateObject;
 		}
 		return
 	}
