@@ -433,7 +433,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 												<>
 													{item[EVENT_DESC]}
 													<button
-														className={'text-stone-800'}
+														className={'text-slate-950 font-semibold'}
 														onClick={() => showStrToggle(idx)}>
 														....Close
 													</button>
@@ -442,7 +442,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 												<>
 													{item[EVENT_DESC]?.substring(0, 10)}
 													<button
-														className={'text-stone-800'}
+														className={'text-slate-950 font-semibold'}
 														onClick={() => showStrToggle(idx)}>
 														....More
 													</button>
