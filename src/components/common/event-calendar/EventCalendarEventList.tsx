@@ -145,7 +145,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 						</DialogTrigger>
 						<DialogContent
 							hideClose={'invisible'}
-							className={'p-1 max-w-lg md:max-w-3xl'}>
+							className={'p-1 min-h-96 max-w-lg md:max-w-3xl'}>
 							<DialogHeader>
 								<DialogTitle
 									className={
@@ -173,7 +173,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 									</div>
 								</div>
 							</div>
-							<DialogDescription className={'h-24 overflow-auto p-2'}>
+							<DialogDescription className={'h-full min-h-80 overflow-auto p-2'}>
 								{item[EVENT_DESC]}
 							</DialogDescription>
 							<DialogFooter>
