@@ -384,6 +384,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 							</Button>
 						</DialogTrigger>
 						<DialogContent
+							onPointerDownOutside={resetToggleSetting}
 							className={'h-[500px] overflow-auto p-1 flex flex-col items-center'}
 							hideClose={'invisible'}>
 							<DialogHeader className={'w-full'}>
