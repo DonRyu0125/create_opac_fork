@@ -40,13 +40,15 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 
 	useEffect(() => {
 		const updatedFilteredEvents = currentEvent.filter((item: Cal_event) => {
-			const { day, month } = changeStrToDate(item[EVENT_DATE])
-			const isMatchingDayMonth = day === dayObj.day && month === dayObj.month
+			const { day, month, year } = changeStrToDate(item[EVENT_DATE])
+			const isMatchingDayMonth =
+				day === dayObj.day && month === dayObj.month && year === dayObj.year
 			if (currentFilter.length > 0) {
 				return (
 					isMatchingDayMonth &&
 					currentFilter.some(
-						(type: string) => convertLowerTrim(type) === convertLowerTrim(item[FILTER_TYPE])
+						(type: string) =>
+							convertLowerTrim(type) === convertLowerTrim(item[FILTER_TYPE])
 					)
 				)
 			}
@@ -54,22 +56,22 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 		})
 
 		updatedFilteredEvents.sort((a: Cal_event, b: Cal_event) => {
-			const timeA: Date | undefined = parseTimeString(a[EVENT_START_TIME]);
-			const timeB: Date | undefined = parseTimeString(b[EVENT_START_TIME]);
+			const timeA: Date | undefined = parseTimeString(a[EVENT_START_TIME])
+			const timeB: Date | undefined = parseTimeString(b[EVENT_START_TIME])
 			if (timeA && timeB) {
-				return timeA.getTime() - timeB.getTime();
+				return timeA.getTime() - timeB.getTime()
 			}
-			return 0;
+			return 0
 		})
 
-		setFilteredEvents(updatedFilteredEvents);
+		setFilteredEvents(updatedFilteredEvents)
 	}, [currentEvent, currentFilter, dayObj])
 
 	const showStrToggle = (key: number) => {
 		setShowFullStr((prevShowFullStr) => {
-			const updatedShowFullStr = { ...prevShowFullStr };
-			updatedShowFullStr[key] = !updatedShowFullStr[key];
-			return updatedShowFullStr;
+			const updatedShowFullStr = { ...prevShowFullStr }
+			updatedShowFullStr[key] = !updatedShowFullStr[key]
+			return updatedShowFullStr
 		})
 	}
 
@@ -77,42 +79,43 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 		setShowFullStr({})
 	}
 
-    /**
-     * 
-     * @param event_type 
-     * @returns color, filtering icon type
-     */
+	/**
+	 *
+	 * @param event_type
+	 * @returns color, filtering icon type
+	 */
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
-			return convertLowerTrim(item.type) === convertLowerTrim(event_type);
+			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 
 	const changeStrToDate = (dateString: string) => {
-		const dateObject = new Date(dateString);
-		const month = dateObject.getMonth() + 1;
-		const day = dateObject.getDate() + 1;
+		const dateObject = new Date(dateString)
+		const month = dateObject.getMonth() + 1
+		const day = dateObject.getDate() + 1
+		const year = dateObject.getFullYear()
 
-		return { month, day };
+		return { month, day,year }
 	}
 
-    // SMA's time format is 00:00 PM/AM
-    // To sort the time shift
+	// SMA's time format is 00:00 PM/AM
+	// To sort the time shift
 	const parseTimeString = (timeString: string) => {
 		if (timeString) {
-			const [time, meridian] = timeString?.split(' ');
-			const [hours, minutes] = time?.split(':').map(Number);
+			const [time, meridian] = timeString?.split(' ')
+			const [hours, minutes] = time?.split(':').map(Number)
 
 			let hours24 = hours
 			if (meridian === 'PM' && hours !== 12) {
-				hours24 += 12;
+				hours24 += 12
 			} else if (meridian === 'AM' && hours === 12) {
-				hours24 = 0;
+				hours24 = 0
 			}
-			const dateObject = new Date();
-			dateObject.setHours(hours24, minutes, 0, 0);
-			return dateObject;
+			const dateObject = new Date()
+			dateObject.setHours(hours24, minutes, 0, 0)
+			return dateObject
 		}
 		return
 	}
@@ -242,7 +245,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 											</div>
 										</div>
 									</div>
-                                    {/* 'More' button to toggle description of the event */}
+									{/* 'More' button to toggle description of the event */}
 									<DialogDescription
 										className={`${showFullStr[idx] ? 'h-24' : 'h-10'} overflow-auto p-2`}>
 										<>
