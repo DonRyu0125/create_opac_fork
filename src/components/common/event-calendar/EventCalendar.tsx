@@ -310,65 +310,71 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 			{/* Event button */}
 			<div className={'h-3/5 overflow-auto mb-[2px]'}>
 				{filteredEvents.map((item: Cal_event, key: number) => (
-					<Dialog key={key}>
-						<DialogTrigger asChild>
-							<Button
-								className={'w-full h-[20px] border-hidden flex p-0 justify-start'}
-								variant="outline">
-								<div
-									className={cn(
-										'h-4 w-[16px] border rounded',
-										getColor(item[FILTER_TYPE])
-									)}></div>
-								<div
+						<Dialog key={key}>
+							<DialogTrigger asChild>
+								<Button
 									className={
-										'invisible max-w-[126px] text-left overflow-hidden sm:w-full sm:visible'
-									}>
-									{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
-								</div>
-							</Button>
-						</DialogTrigger>
-						<DialogContent hideClose={'invisible'} className={'p-1'}>
-							<DialogHeader>
-								<DialogTitle
-									className={
-										' bg-primary text-primary-foreground h-10 flex items-center justify-around rounded'
-									}>
-									<div className="h-8">
-										<img className="h-full" src={logo} alt="logo" />
+										'w-full h-[20px] border-hidden flex p-0 justify-start'
+									}
+									variant="outline">
+									<div
+										className={cn(
+											'h-4 w-[16px] border rounded',
+											getColor(item[FILTER_TYPE])
+										)}></div>
+									<div
+										className={
+											'invisible max-w-[126px] text-left overflow-hidden sm:w-full sm:visible'
+										}>
+										{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
 									</div>
-									<div>{item[FILTER_TYPE]}</div>
-									<DialogPrimitive.Close>
-										<X className={'h-6 w-6'} />
+								</Button>
+							</DialogTrigger>
+							<DialogContent hideClose={'invisible'} className={'p-1 max-w-lg md:max-w-3xl'}>
+								<DialogHeader>
+									<DialogTitle
+										className={
+											' bg-primary text-primary-foreground h-10 flex items-center justify-around rounded'
+										}>
+										<div className="h-8">
+											<img className="h-full" src={logo} alt="logo" />
+										</div>
+										<div>{item[FILTER_TYPE]}</div>
+										<DialogPrimitive.Close>
+											<X className={'h-6 w-6'} />
+										</DialogPrimitive.Close>
+									</DialogTitle>
+								</DialogHeader>
+								<div
+									className={
+										'w-full text-l w-full flex flex-col justify-center items-left font-bold px-2 '
+									}>
+									<div className={'overflow-hidden text-lg'}>
+										{item[EVENT_NAME]}
+									</div>
+									<div className={'flex'}>
+										<div className="text-md text-gray-600">
+											{item[EVENT_DATE]}
+										</div>
+										<div className="mx-2 text-gray-600">&#x2022;</div>
+										<div className="text-md text-gray-600">
+											{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+										</div>
+									</div>
+								</div>
+								<DialogDescription className={'h-24 overflow-auto p-2'}>
+									{item[EVENT_DESC]}
+								</DialogDescription>
+								<DialogFooter>
+									<DialogPrimitive.Close
+										className={
+											'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+										}>
+										Close
 									</DialogPrimitive.Close>
-								</DialogTitle>
-							</DialogHeader>
-							<div
-								className={
-									'w-full text-l w-full flex flex-col justify-center items-left font-bold px-2 '
-								}>
-								<div className={'overflow-hidden text-lg'}>{item[EVENT_NAME]}</div>
-								<div className={'flex'}>
-									<div className="text-md text-gray-600">{item[EVENT_DATE]}</div>
-									<div className="mx-2 text-gray-600">&#x2022;</div>
-									<div className="text-md text-gray-600">
-										{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
-									</div>
-								</div>
-							</div>
-							<DialogDescription className={'h-24 overflow-auto p-2'}>
-								{item[EVENT_DESC]}
-							</DialogDescription>
-							<DialogFooter>
-								<DialogPrimitive.Close
-									className={
-										'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
-									}>
-									Close
-								</DialogPrimitive.Close>
-							</DialogFooter>
-						</DialogContent>
-					</Dialog>
+								</DialogFooter>
+							</DialogContent>
+						</Dialog>
 				))}
 			</div>
 			{/* All events button */}
@@ -385,7 +391,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 						</DialogTrigger>
 						<DialogContent
 							onPointerDownOutside={resetToggleSetting}
-							className={'h-[500px] overflow-auto p-1 flex flex-col items-center'}
+							className={'max-w-lg h-[500px] overflow-auto p-1 flex flex-col items-center max-w-l md:max-w-3xl'}
 							hideClose={'invisible'}>
 							<DialogHeader className={'w-full'}>
 								<DialogTitle
