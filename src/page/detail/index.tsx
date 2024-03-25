@@ -29,8 +29,8 @@ const images = [
 	},
 ]
 const Detail = () => {
-	// const { backToSummary, records } = useJSONData({ selector: '#xml_record' })
-	const { backToSummary, records, getMedia } = useJSONData({ defaultData: DetailM3Sample })
+	const { backToSummary, records, getMedia } = useJSONData({ selector: '#xml_record' })
+	// const { backToSummary, records, getMedia } = useJSONData({ defaultData: DetailM3Sample })
 	const images = getMedia(records[0], 'im_access_link')?.map((e) => ({ src: e })) || []
 
 	// TODO: create placeholder component when there is no data
@@ -60,16 +60,20 @@ const Detail = () => {
 					<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
 						<div className="flex flex-col lg:flex-row space-y-12 lg:space-y-0 lg:space-x-8 items-start max-w-6xl p-4 mx-auto ">
 							<div className="max-w-[700px]  mx-auto">
-								<ImageCarousel
-									items={images}
-									renderItems={(image) => (
-										<img
-											alt="test"
-											src={image.src}
-											className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
-										/>
-									)}
-								/>
+								{images && images.length > 0 ? (
+									<ImageCarousel
+										items={images}
+										renderItems={(image) => (
+											<img
+												alt="test"
+												src={image.src}
+												className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+											/>
+										)}
+									/>
+								) : (
+									<span>No Media Found</span>
+								)}
 							</div>
 							<div className="grid gap-4 md:gap-10 items-start">
 								<DetailRecord />

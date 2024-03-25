@@ -23,8 +23,8 @@ import { Record } from '@/types/record'
 import { SummarySample } from '@/samples'
 
 const SummaryRecords = () => {
-	// const { records } = useJSONData({ selector: '#xml_record' })
-	const { records } = useJSONData({ defaultData: SummarySample })
+	const { records } = useJSONData({ selector: '#xml_record' })
+	// const { records } = useJSONData({ defaultData: SummarySample })
 
 	return (
 		<>

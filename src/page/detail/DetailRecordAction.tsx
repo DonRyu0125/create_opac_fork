@@ -8,8 +8,8 @@ import { DetailM3Sample } from '@/samples'
 const DetailRecordAction = () => {
 	const { toast } = useToast()
 
-	const { nextRecord, previousRecord, records } = useJSONData({ defaultData: DetailM3Sample })
-	// const { nextRecord, previousRecord, records } = useJSONData({ selector: '#xml_record' })
+	// const { nextRecord, previousRecord, records } = useJSONData({ defaultData: DetailM3Sample })
+	const { nextRecord, previousRecord, records } = useJSONData({ selector: '#xml_record' })
 	console.log({ records })
 
 	const record = records[0]

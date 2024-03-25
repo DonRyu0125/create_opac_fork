@@ -15,8 +15,8 @@ import { SummarySample } from '@/samples'
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 
-	const { common, pagination } = useJSONData({ defaultData: SummarySample })
-	// const { common, pagination } = useJSONData({ selector: '#xml_record' })
+	// const { common, pagination } = useJSONData({ defaultData: SummarySample })
+	const { common, pagination } = useJSONData({ selector: '#xml_record' })
 
 	if (!common || !pagination) return <></>
 	return (

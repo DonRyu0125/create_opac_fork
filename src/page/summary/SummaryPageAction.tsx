@@ -13,8 +13,8 @@ import { Label } from '@radix-ui/react-dropdown-menu'
  * - Bookmark
  */
 const SummaryPageAction = () => {
-	// const { filter } = useJSONData({ selector: '#xml_record' })
-	const { filter } = useJSONData({ defaultData: SummarySample })
+	const { filter } = useJSONData({ selector: '#xml_record' })
+	// const { filter } = useJSONData({ defaultData: SummarySample })
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-col space-y-2">
