@@ -5,13 +5,13 @@ import useJSONData from '@/hooks/useJSONData'
 import { getFieldDataByLabel, getFieldsFromRecord, getListOfFields } from '@/lib/record'
 import React from 'react'
 import { DBFields } from '../../types/record'
-import DetailSample from '@/samples/detail-m3.json'
+import { DetailM3Sample } from '@/samples'
 
 type Props = {}
 
 const DetailRecord = (props: Props) => {
 	// const { records } = useJSONData({ selector: '#xml_record' })
-	const { records } = useJSONData({ defaultData: DetailSample })
+	const { records } = useJSONData({ defaultData: DetailM3Sample })
 	const record = records[0]
 	const database = record.database_name
 	const recordData: DBFields<'COLLECTIONS'> = record.record
@@ -21,6 +21,7 @@ const DetailRecord = (props: Props) => {
 		(item) => item.detail,
 		(data, item) => ({ label: item.label, value: data })
 	) as TableRow[]
+
 	return (
 		<>
 			<RecordDetail heading={title} subHeading={recordData.collection}>

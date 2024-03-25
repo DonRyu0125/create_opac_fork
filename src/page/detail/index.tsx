@@ -9,7 +9,7 @@ import { SlidersHorizontal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useJSONData from '@/hooks/useJSONData'
 import DetailRecord from './DetailRecord'
-import DetailSample from '@/samples/detail-m3.json'
+import { DetailM3Sample } from '@/samples'
 
 const images = [
 	{
@@ -30,7 +30,7 @@ const images = [
 ]
 const Detail = () => {
 	// const { backToSummary, records } = useJSONData({ selector: '#xml_record' })
-	const { backToSummary, records, getMedia } = useJSONData({ defaultData: DetailSample })
+	const { backToSummary, records, getMedia } = useJSONData({ defaultData: DetailM3Sample })
 	const images = getMedia(records[0], 'im_access_link')?.map((e) => ({ src: e }))
 
 	// TODO: create placeholder component when there is no data

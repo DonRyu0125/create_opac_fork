@@ -23,8 +23,8 @@ import { Record } from '@/types/record'
 import { SummarySample } from '@/samples'
 
 const SummaryRecords = () => {
-	const { records } = useJSONData({ selector: '#xml_record' })
-	// const { records } = useJSONData({ defaultData: SummarySample })
+	// const { records } = useJSONData({ selector: '#xml_record' })
+	const { records } = useJSONData({ defaultData: SummarySample })
 
 	return (
 		<>
@@ -34,8 +34,6 @@ const SummaryRecords = () => {
 		</>
 	)
 }
-
-
 
 const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
@@ -101,7 +99,6 @@ const RecordView = ({ record }: { record: Record }) => {
 		</DetailInfoCard>
 	)
 }
-
 
 const RecordAction = ({ record }: { record: Record }) => {
 	const [like, setLike] = useState(false)
