@@ -452,11 +452,11 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 									</DialogDescription>
 								</div>
 							))}
-							<DialogFooter>
+							<DialogFooter className={'w-full flex justify-end'}>
 								<DialogPrimitive.Close
 									onClick={resetToggleSetting}
 									className={
-										'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+										'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-center rounded'
 									}>
 									Close
 								</DialogPrimitive.Close>
