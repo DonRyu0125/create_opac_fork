@@ -263,6 +263,10 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 		})
 	}
 
+	const resetToggleSetting = () => {
+		setShowFullStr({})
+	}
+
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
 			return convertLower(item.type) === convertLower(event_type)
@@ -391,7 +395,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 										<img className="h-full" src={logo} alt="logo" />
 									</div>
 									<div>All Events</div>
-									<DialogPrimitive.Close>
+									<DialogPrimitive.Close onClick={resetToggleSetting}>
 										<X className={'h-6 w-6'} />
 									</DialogPrimitive.Close>
 								</DialogTitle>
@@ -449,6 +453,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 							))}
 							<DialogFooter>
 								<DialogPrimitive.Close
+									onClick={resetToggleSetting}
 									className={
 										'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
 									}>
