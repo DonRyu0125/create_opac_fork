@@ -1,11 +1,10 @@
 import InfoTable, { TableRow } from '@/components/common/InfoTable'
-import RecordAction from '@/components/common/RecordAction'
 import RecordDetail from '@/components/common/RecordDetail'
 import useJSONData from '@/hooks/useJSONData'
-import { getFieldDataByLabel, getFieldsFromRecord, getListOfFields } from '@/lib/record'
-import React from 'react'
+import { getFieldDataByLabel, getFieldsFromRecord } from '@/lib/record'
 import { DBFields } from '../../types/record'
 import { DetailM3Sample } from '@/samples'
+import DetailRecordAction from '@/page/detail/DetailRecordAction'
 
 type Props = {}
 
@@ -31,7 +30,7 @@ const DetailRecord = (props: Props) => {
 						renderRow={(row) => <div>{row.value}</div>}
 					/>
 
-					<RecordAction record={record} />
+					<DetailRecordAction record={record} />
 				</div>
 			</RecordDetail>
 		</>

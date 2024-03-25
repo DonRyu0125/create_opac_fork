@@ -4,7 +4,7 @@ import RecordDetail from '@/components/common/RecordDetail'
 import SearchForm from '@/components/common/SearchForm'
 import ImageCarousel from '@/components/common/ImageCarousel'
 import InfoTable from '@/components/common/InfoTable'
-import RecordAction from '@/components/common/RecordAction'
+import RecordAction from '@/page/detail/DetailRecordAction'
 import { SlidersHorizontal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useJSONData from '@/hooks/useJSONData'
@@ -31,7 +31,7 @@ const images = [
 const Detail = () => {
 	// const { backToSummary, records } = useJSONData({ selector: '#xml_record' })
 	const { backToSummary, records, getMedia } = useJSONData({ defaultData: DetailM3Sample })
-	const images = getMedia(records[0], 'im_access_link')?.map((e) => ({ src: e }))
+	const images = getMedia(records[0], 'im_access_link')?.map((e) => ({ src: e })) || []
 
 	// TODO: create placeholder component when there is no data
 	if (!records || records.length === 0) return <></>
@@ -59,7 +59,7 @@ const Detail = () => {
 				<section>
 					<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
 						<div className="flex flex-col lg:flex-row space-y-12 lg:space-y-0 lg:space-x-8 items-start max-w-6xl p-4 mx-auto ">
-							<div className="max-w-[700px] min-w-[450px] mx-auto">
+							<div className="max-w-[700px]  mx-auto">
 								<ImageCarousel
 									items={images}
 									renderItems={(image) => (

@@ -40,7 +40,6 @@ const RecordView = ({ record }: { record: Record }) => {
 	const database = record.database_name
 	const recordLink = record.record_link
 	const title = getFieldDataByLabel(record, database, 'Title') || 'Untitled'
-
 	const thumbnail =
 		record.media &&
 		Array.isArray(record.media.im_access_link) &&

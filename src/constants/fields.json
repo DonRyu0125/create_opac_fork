@@ -1,6 +1,6 @@
 [
 	{
-		"database": "COLLECTIONS",
+		"database": "COLLECTIONS_WEB",
 		"items": [
 			{
 				"label": "Title",
@@ -89,7 +89,7 @@
 		]
 	},
 	{
-		"database": "DESCRIPTION",
+		"database": "DESCRIPTION_WEB",
 		"items": [
 			{
 				"label": "Title",
