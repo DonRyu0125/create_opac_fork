@@ -1,3 +1,6 @@
+/**
+ * EventCalendarFilter: Filter option list buttons at the EventCalendar
+ */
 import React, { useState } from 'react'
 import { Cal_event, FILTER_TYPE_COLORS } from './EventCalendar'
 import { Button, buttonVariants } from '../../ui/button'
@@ -15,6 +18,11 @@ type SelectType = {
 const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) => {
 	const [selectType, setSelectedType] = useState<SelectType>({})
 
+	/**
+	 * 
+	 * @param e 
+	 * @returns user filter event map
+	 */
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (!e.target.id) return
 		let map = selectType

@@ -1,9 +1,8 @@
 /**
  * Calendar with event filtering function
  * 
- * EventCalendar: Main
- * EventCalendarFilter: Filter option list at the EventCalendar
- * EventCalendarEventList: Event list dialog(modal at radix) and all event show button(Show if there are more than 3 event at the date)
+ * EventCalendar: Main Calendar component
+ * Draw the calendar using Date js object
  */
 import React, { useEffect, useState } from 'react'
 import X2JS from 'x2js'
@@ -126,12 +125,20 @@ const EventCalendar = () => {
 		// }
 	}
 
+	/**
+	 * 
+	 * @param date 
+	 * @returns Date objects by the month
+	 */
 	const daysInMonth = (date: Date) => {
 		const year = date.getFullYear()
 		const month = date.getMonth() + 1
 		return new Date(year, month, 0).getDate() // get the last date.getMonth() + 1's last date
 	}
-
+	/**
+ 	* 
+ 	* @returns date objects by month
+ 	*/
 	const generateMonth = () => {
 		const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
 		const days = daysInMonth(currentDate)
@@ -139,6 +146,7 @@ const EventCalendar = () => {
 		const calendarArray = []
 
 		//Calculate the starting day of the month
+		//2024 Mar start with Friday so before the staring date store null to not show the date at the calendar
 		for (let i = 0; i < startingDay; i++) {
 			calendarArray.push({ day: null })
 		}

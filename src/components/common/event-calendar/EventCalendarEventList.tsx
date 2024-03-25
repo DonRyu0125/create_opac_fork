@@ -1,3 +1,6 @@
+/**
+ * EventCalendarEventList: Event list modal button (more than three events, it shows the all event buttons)
+ */
 import { useEffect, useState } from 'react'
 import { Button } from '../../ui/button'
 import {
@@ -74,6 +77,11 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 		setShowFullStr({})
 	}
 
+    /**
+     * 
+     * @param event_type 
+     * @returns color, filtering icon type
+     */
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type);
@@ -89,7 +97,8 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 		return { month, day };
 	}
 
-
+    // SMA's time format is 00:00 PM/AM
+    // To sort the time shift
 	const parseTimeString = (timeString: string) => {
 		if (timeString) {
 			const [time, meridian] = timeString?.split(' ');
@@ -233,6 +242,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 											</div>
 										</div>
 									</div>
+                                    {/* 'More' button to toggle description of the event */}
 									<DialogDescription
 										className={`${showFullStr[idx] ? 'h-24' : 'h-10'} overflow-auto p-2`}>
 										<>
