@@ -219,8 +219,14 @@ const EventCalendar = () => {
 	)
 }
 
-const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any) => {
+type showStrObj = {
+	[key: number]: boolean
+}
+
+const EventList = ({ dayObj, currentFilter, currentEvent }: any) => {
 	const { logo } = config
+	const [showFullStr, setShowFullStr] = useState<showStrObj>({})
+
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
 			return convertLower(item.type) === convertLower(event_type)
@@ -241,7 +247,7 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 		return trimmed.toLowerCase()
 	}
 
-	function parseTimeString(timeString: string) {
+	const parseTimeString = (timeString: string) => {
 		if (timeString) {
 			const [time, meridian] = timeString?.split(' ')
 			const [hours, minutes] = time?.split(':').map(Number)
@@ -256,8 +262,20 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 			dateObject.setHours(hours24, minutes, 0, 0)
 			return dateObject
 		}
-
 		return
+	}
+
+	const showStrToggle = (key: number) => {
+		// console.log('key',key)
+
+		let obj: showStrObj = showFullStr
+
+		if (obj[key]) {
+			obj[key] = false
+		} else {
+			obj[key] = true
+		}
+		setShowFullStr(obj)
 	}
 
 	const filteredEvents = currentEvent.filter((item: Cal_event) => {
@@ -337,10 +355,11 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 								{item[EVENT_DESC]}
 							</DialogDescription>
 							<DialogFooter>
-								<DialogPrimitive.Close>
-									<Button className={'rounded'} type="submit">
-										Close
-									</Button>
+								<DialogPrimitive.Close
+									className={
+										'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+									}>
+									Close
 								</DialogPrimitive.Close>
 							</DialogFooter>
 						</DialogContent>
@@ -376,8 +395,8 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 									</DialogPrimitive.Close>
 								</DialogTitle>
 							</DialogHeader>
-							{filteredEvents.map((item: Cal_event, key: number) => (
-								<div key={key} className={'w-11/12 border-2 rounded'}>
+							{filteredEvents.map((item: Cal_event, idx: number) => (
+								<div key={idx} className={'w-11/12 border-2 rounded'}>
 									<DialogTitle
 										className={
 											'bg-primary text-primary-foreground h-10 flex justify-center items-center rounded'
@@ -392,7 +411,9 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 											{item[EVENT_NAME]}
 										</div>
 										<div className={'flex'}>
-											<div className="text-md text-gray-600">{item[EVENT_DATE]}</div>
+											<div className="text-md text-gray-600">
+												{item[EVENT_DATE]}
+											</div>
 											<div className="mx-2 text-gray-600">&#x2022;</div>
 											<div className="text-md text-gray-600">
 												{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
@@ -400,15 +421,29 @@ const EventList = ({ dayObj, currentFilter, currentEvent, isShowAllEvents }: any
 										</div>
 									</div>
 									<DialogDescription className={'h-24 overflow-auto p-2'}>
-										{item[EVENT_DESC]}
+										<div>
+											{showFullStr[idx] ? (
+												<p>{item[EVENT_DESC]}</p>
+											) : (
+												<p>
+													{item[EVENT_DESC]?.substring(0, 10)}...
+													<button
+														className={'text-neutral-400'}
+														onClick={() => showStrToggle(idx)}>
+														More
+													</button>
+												</p>
+											)}
+										</div>
 									</DialogDescription>
 								</div>
 							))}
 							<DialogFooter>
-								<DialogPrimitive.Close>
-									<Button className={'rounded'} type="submit">
-										Close
-									</Button>
+								<DialogPrimitive.Close
+									className={
+										'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+									}>
+									Close
 								</DialogPrimitive.Close>
 							</DialogFooter>
 						</DialogContent>
