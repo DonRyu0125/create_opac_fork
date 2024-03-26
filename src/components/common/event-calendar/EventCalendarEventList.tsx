@@ -149,7 +149,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 							<DialogHeader>
 								<DialogTitle
 									className={
-										' bg-primary text-primary-foreground h-10 flex items-center justify-around rounded'
+										' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
 									}>
 									<div className="h-8">
 										<img className="h-full" src={logo} alt="logo" />
@@ -209,7 +209,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 							<DialogHeader className={'w-full'}>
 								<DialogTitle
 									className={
-										' bg-primary text-primary-foreground h-10 flex items-center justify-around rounded'
+										' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
 									}>
 									<div className="h-8">
 										<img className="h-full" src={logo} alt="logo" />
