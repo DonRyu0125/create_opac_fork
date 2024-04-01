@@ -48,5 +48,5 @@ export const truncateWords = (
  * @returns {string} The processed string with leading and trailing spaces removed and converted to lowercase.
  */
 export const convertLowerTrim = (type: string): string => {
-    return type.replace(/\s+/g, '').toLowerCase();
+    return type?.replace(/\s+/g, '')?.toLowerCase();
 };

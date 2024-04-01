@@ -1,6 +1,6 @@
 /**
  * Calendar with event filtering function
- * 
+ *
  * EventCalendar: Main Calendar component
  * Draw the calendar using Date js object
  */
@@ -9,6 +9,7 @@ import X2JS from 'x2js'
 import response from '../../../samples/fetch_calendar.json'
 import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
+import axios from 'axios'
 
 export interface Cal_event {
 	'event-date': string
@@ -83,11 +84,6 @@ export const FILTER_TYPE_COLORS = [
 		color: COLORS_MAP['PURPLE'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
-	// {
-	// 	type: 'All',
-	// 	color: COLORS_MAP['GREY'],
-	// 	icon: ICON_SHAPE_MAP['CIRCLE'],
-	// },
 	{
 		type: 'Norview Lodge',
 		color: COLORS_MAP['PINK'],
@@ -101,33 +97,55 @@ const EventCalendar = () => {
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
 
 	useEffect(() => {
-		getData()
-	}, [])
+		getData(currentDate)
+	}, [currentDate])
 
-	const getData = async () => {
-		// const currE = await fetch_get("MONTHLY_CALENDAR");
-		const currE: any = response
+	const getData = async (currentDate: Date) => {
+		const currE = await fetch_get(currentDate)
+		// const splitObjects = [];
+
+		// currE?.forEach((elm) => {
+		// 	if(typeof elm['event-loc'] !== 'string'){
+		// 		elm['event-loc']?.forEach((location) => {
+		// 			const newObj = { ...elm }
+		// 			newObj['event-loc'] = location
+		// 			splitObjects.push(newObj)
+		// 		})
+		// 	}
+		// })
+
+		//  console.log('currE',currE)
 		setCurrentEvent(currE)
 	}
 
-	const fetch_get = async (monthReport: string) => {
-		// try {
-		//   const response = await axios.get(`${base_url}/scripts/mwimain.dll/144/M2L_TAG/${monthReport}?commandsearch&exp=tag_type calendar`, {
-		//     headers: {
-		//       "Content-Type": "text/xml",
-		//     },
-		//   });
-		//   const x2js = new X2JS();
-		//   const jsonData: any = x2js.xml2js(response);
-		//   return jsonData.div.xml.event;
-		// } catch (error) {
-		//   throw error;
-		// }
+	const fetch_get = async (currentDate: Date) => {
+		const BASE_URL = 'http://norfolk_test.minisisinc.com';
+		const MONTH_REPORT = 'MONTHLY_CALENDAR_TEST02';
+		const DATE_FIELD = 'EV_START_DATE';
+		const DATE_WILDCARD = `${currentDate.getFullYear()}-0${currentDate.getMonth() + 1}-*`;
+
+		try {
+			const response = await axios.get(
+				`${BASE_URL}/scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} ${DATE_WILDCARD}`,
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
+				}
+			)
+			const x2js = new X2JS()
+			const jsonData: any = x2js.xml2js(response.data)
+			if (jsonData) {
+				return jsonData?.div?.xml?.event ?? []
+			}
+		} catch (error) {
+			throw error
+		}
 	}
 
 	/**
-	 * 
-	 * @param date 
+	 *
+	 * @param date
 	 * @returns Date objects by the month
 	 */
 	const daysInMonth = (date: Date) => {
@@ -136,9 +154,9 @@ const EventCalendar = () => {
 		return new Date(year, month, 0).getDate() // get the last date.getMonth() + 1's last date
 	}
 	/**
- 	* 
- 	* @returns date objects by month
- 	*/
+	 *
+	 * @returns date objects by month
+	 */
 	const generateMonth = () => {
 		const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
 		const days = daysInMonth(currentDate)
