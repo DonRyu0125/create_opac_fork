@@ -247,7 +247,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 									</div>
 									{/* 'More' button to toggle description of the event */}
 									<DialogDescription
-										className={`${showFullStr[idx] ? 'h-24' : 'h-10'} overflow-auto p-2`}>
+										className={`${showFullStr[idx] ? 'h-24' : 'h-10'} overflow-auto p-2 `}>
 										<>
 											{showFullStr[idx] ? (
 												<>
@@ -261,11 +261,15 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 											) : (
 												<>
 													{item[EVENT_DESC]?.substring(0, 10)}
-													<button
-														className={'text-slate-950 font-semibold'}
-														onClick={() => showStrToggle(idx)}>
-														....More
-													</button>
+													{item[EVENT_DESC]?.length > 10 && (
+														<button
+															className={
+																'text-slate-950 font-semibold'
+															}
+															onClick={() => showStrToggle(idx)}>
+															....More
+														</button>
+													)}
 												</>
 											)}
 										</>
