@@ -10,6 +10,7 @@ import response from '../../../samples/fetch_calendar.json'
 import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
 import axios from 'axios'
+import { Button } from '@/components/ui/button'
 
 export interface Cal_event {
 	'event-date': string
@@ -27,6 +28,7 @@ export interface Day_obj {
 }
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+export const CALENDAR_START_MONTH = 1
 export const FILTER_TYPE = 'event-loc'
 export const EVENT_DATE = 'event-date'
 export const EVENT_NAME = 'event-name'
@@ -95,34 +97,24 @@ const EventCalendar = () => {
 	const [currentDate, setCurrentDate] = useState(new Date())
 	const [currentEvent, setCurrentEvent] = useState<Cal_event[]>([])
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
+	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
+	const [isClickableNext, setisClickableNext] = useState<boolean>(false)
 
 	useEffect(() => {
 		getData(currentDate)
+		isMonthBtnClick()
 	}, [currentDate])
 
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate)
-		// const splitObjects = [];
-
-		// currE?.forEach((elm) => {
-		// 	if(typeof elm['event-loc'] !== 'string'){
-		// 		elm['event-loc']?.forEach((location) => {
-		// 			const newObj = { ...elm }
-		// 			newObj['event-loc'] = location
-		// 			splitObjects.push(newObj)
-		// 		})
-		// 	}
-		// })
-
-		//  console.log('currE',currE)
 		setCurrentEvent(currE)
 	}
 
 	const fetch_get = async (currentDate: Date) => {
-		const BASE_URL = 'http://norfolk_test.minisisinc.com';
-		const MONTH_REPORT = 'MONTHLY_CALENDAR_TEST02';
-		const DATE_FIELD = 'EV_START_DATE';
-		const DATE_WILDCARD = `${currentDate.getFullYear()}-0${currentDate.getMonth() + 1}-*`;
+		const BASE_URL = 'http://norfolk_test.minisisinc.com'
+		const MONTH_REPORT = 'MONTHLY_CALENDAR_TEST02'
+		const DATE_FIELD = 'EV_START_DATE'
+		const DATE_WILDCARD = `${currentDate.getFullYear()}-0${currentDate.getMonth() + 1}-*`
 
 		try {
 			const response = await axios.get(
@@ -140,6 +132,20 @@ const EventCalendar = () => {
 			}
 		} catch (error) {
 			throw error
+		}
+	}
+
+	const isMonthBtnClick = () => {
+		const currentYear = new Date().getFullYear()
+		let next_next_year = currentYear + 2
+
+		if (currentDate.getFullYear() >= next_next_year) {
+			setisClickableNext(true)
+		} else if (currentDate.getMonth() + 1 === CALENDAR_START_MONTH && currentDate.getFullYear() === currentYear ) {
+			setisClickablePrev(true)
+		} else {
+			setisClickablePrev(false)
+			setisClickableNext(false)
 		}
 	}
 
@@ -194,15 +200,21 @@ const EventCalendar = () => {
 		<div
 			className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
 			<div className={'flex justify-center items-center bg-primary h-[100px] rounded'}>
-				<button onClick={prevMonth} className={'text-4xl text-primary-foreground mx-5'}>
-					&lt;
-				</button>
+				<Button
+					onClick={prevMonth}
+					className={'text-4xl text-primary-foreground mx-5'}
+					disabled={isClickablePrev}>
+					<div className="mt-2">&lt;</div>
+				</Button>
 				<div className="text-3xl text-primary-foreground">
 					{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
 				</div>
-				<button onClick={nextMonth} className={'text-4xl text-primary-foreground mx-5'}>
-					&gt;
-				</button>
+				<Button
+					onClick={nextMonth}
+					className={'text-4xl text-primary-foreground mx-5'}
+					disabled={isClickableNext}>
+					<div className="mt-2">&gt;</div>
+				</Button>
 			</div>
 			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
 			<div className={'w-full mt-1'}>
