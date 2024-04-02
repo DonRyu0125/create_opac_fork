@@ -33,7 +33,7 @@ type showStrObj = {
 	[key: number]: boolean
 }
 
-const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) => {
+const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: any) => {
 	const { logo } = config
 	const [showFullStr, setShowFullStr] = useState<showStrObj>({})
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])

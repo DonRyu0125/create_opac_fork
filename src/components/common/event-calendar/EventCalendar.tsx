@@ -127,9 +127,13 @@ const EventCalendar = () => {
 			)
 			const x2js = new X2JS()
 			const jsonData: any = x2js.xml2js(response.data)
-			if (jsonData) {
-				return jsonData?.div?.xml?.event ?? []
+			const event = jsonData?.div?.xml?.event
+
+			if (!event) return []
+			if (Array.isArray(event)) {
+				return event
 			}
+			return [event]
 		} catch (error) {
 			throw error
 		}
@@ -141,7 +145,10 @@ const EventCalendar = () => {
 
 		if (currentDate.getFullYear() >= next_next_year) {
 			setisClickableNext(true)
-		} else if (currentDate.getMonth() + 1 === CALENDAR_START_MONTH && currentDate.getFullYear() === currentYear ) {
+		} else if (
+			currentDate.getMonth() + 1 === CALENDAR_START_MONTH &&
+			currentDate.getFullYear() === currentYear
+		) {
 			setisClickablePrev(true)
 		} else {
 			setisClickablePrev(false)
