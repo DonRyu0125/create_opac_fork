@@ -206,7 +206,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 								'max-w-lg h-[500px] overflow-auto p-1 flex flex-col items-center max-w-l md:max-w-3xl'
 							}
 							hideClose={'invisible'}>
-							<DialogHeader className={'w-full'}>
+							<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
 								<DialogTitle
 									className={
 										' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'

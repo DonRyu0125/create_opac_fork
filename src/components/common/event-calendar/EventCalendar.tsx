@@ -94,11 +94,11 @@ export const FILTER_TYPE_COLORS = [
 ]
 
 const EventCalendar = () => {
-	const [currentDate, setCurrentDate] = useState(new Date())
-	const [currentEvent, setCurrentEvent] = useState<Cal_event[]>([])
-	const [currentFilter, setCurrentFilter] = useState<string[]>([])
-	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
-	const [isClickableNext, setisClickableNext] = useState<boolean>(false)
+	const [currentDate, setCurrentDate] = useState(new Date());
+	const [currentEvent, setCurrentEvent] = useState<Cal_event[]>([]);
+	const [currentFilter, setCurrentFilter] = useState<string[]>([]);
+	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false);
+	const [isClickableNext, setisClickableNext] = useState<boolean>(false);
 
 	useEffect(() => {
 		getData(currentDate)
