@@ -261,7 +261,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 											) : (
 												<>
 													{item[EVENT_DESC]?.substring(0, 10)}
-													{item[EVENT_DESC]?.length > 10 && (
+													{(item[EVENT_DESC]?.length ?? 0) > 10 && (
 														<button
 															className={
 																'text-slate-950 font-semibold'
