@@ -22,6 +22,69 @@
 				"summary": true,
 				"grid": true,
 				"detail": true
+			},
+			{
+				"label": "Category",
+				"name": "CATEGORY",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"name": "OBJ_DESCRIPTION",
+				"label": "Description",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"name": "SUB_CLASSIFY",
+				"label": "Sub-Classification",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"name": "PRIMARY",
+				"label": "Primary",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"name": "ASSOC_FULLNAME",
+				"label": "Associated Person",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"name": "ORG_ASSOC",
+				"label": "Associated Organization",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"name": "ASSOC_EVENT",
+				"label": "Associated Event",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"name": "PLACE_ASSOC_NAME",
+				"label": "Associated Place",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"name": "SITE_NAME",
+				"label": "Associated Place",
+				"summary": false,
+				"grid": false,
+				"detail": true
 			}
 		]
 	},
@@ -52,7 +115,7 @@
 		]
 	},
 	{
-		"database": "BIBLIO",
+		"database": "BIBLIO_WEB",
 		"items": [
 			{
 				"label": "Title",

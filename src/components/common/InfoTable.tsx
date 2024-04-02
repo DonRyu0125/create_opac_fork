@@ -1,6 +1,6 @@
 import React from 'react'
 
-type TableRow = {
+export type TableRow = {
 	label: string
 	value: number | string | string[] | React.ReactNode
 }
@@ -17,7 +17,7 @@ const InfoTable = ({ rowsData, renderRow = (row) => row.value }: InfoTable) => {
 					<div
 						key={row.label}
 						className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-						<dt className="font-medium  text-gray-900">{row.label}</dt>
+						<dt className="font-bold  text-gray-900">{row.label}</dt>
 						<dd className="text-gray-700  sm:col-span-2">{renderRow(row, index)}</dd>
 					</div>
 				))}

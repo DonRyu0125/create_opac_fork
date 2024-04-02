@@ -43,7 +43,7 @@ const Slide = <T,>({
 				{items.map((item, index) => (
 					<CarouselItem
 						className={cn(
-							'sm:basis-1/1 md:basis-1/2 lg:basis-1/3 xl:basis-1/3',
+							'sm:basis-1/1 md:basis-1/2 lg:basis-1/3 xl:basis-1/3 max-w-max',
 							carouselStyle
 						)}
 						key={index}>

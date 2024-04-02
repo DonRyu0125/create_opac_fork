@@ -6,8 +6,6 @@ export interface HeroProps extends React.HTMLAttributes<HTMLDivElement> {
 	backgroundImage: string
 }
 
-
-
 const Hero: React.FC<HeroProps> = ({
 	children,
 	className,

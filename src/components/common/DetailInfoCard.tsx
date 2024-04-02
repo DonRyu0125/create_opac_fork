@@ -22,12 +22,12 @@ const DetailInfoCard = ({
 }: DetailInfoCardrops) => {
 	return (
 		<div className={cn('border rounded-lg rounded-l-none', className)}>
-			<article className="shadow-md flex rounded-lg rounded-l-none  md:flex-row transition hover:shadow-xl">
+			<article className="shadow-md flex rounded-lg rounded-l-none flex-col md:flex-row transition hover:shadow-xl">
 				<div className="basis-56">
 					<img
 						src={thumbnail}
 						alt={alt || 'image thumbnail'}
-						className="aspect-square h-full w-full object-cover max-w-sm md:max-w-lg  mx-auto "
+						className=" h-full w-full  max-w-sm md:max-w-lg  mx-auto "
 					/>
 				</div>
 
