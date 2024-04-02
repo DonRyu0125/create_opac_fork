@@ -39,7 +39,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 
 	useEffect(() => {
-		const updatedFilteredEvents = currentEvent.filter((item: Cal_event) => {
+		const updatedFilteredEvents = currentEvent?.filter((item: Cal_event) => {
 			const { day, month, year } = changeStrToDate(item[EVENT_DATE])
 			const isMatchingDayMonth =
 				day === dayObj.day && month === dayObj.month && year === dayObj.year
@@ -104,8 +104,8 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 	// To sort the time shift
 	const parseTimeString = (timeString: string) => {
 		if (timeString) {
-			const [time, meridian] = timeString?.split(' ')
-			const [hours, minutes] = time?.split(':').map(Number)
+			const [time, meridian] = timeString?.split(' ');
+			const [hours, minutes] = time?.split(':').map(Number);
 
 			let hours24 = hours
 			if (meridian === 'PM' && hours !== 12) {
@@ -173,7 +173,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 									</div>
 								</div>
 							</div>
-							<DialogDescription className={'h-full min-h-80 overflow-auto p-2'}>
+							<DialogDescription className={'h-full min-h-80 p-2 break-all overflow-x-hidden overflow-y-auto'}>
 								{item[EVENT_DESC]}
 							</DialogDescription>
 							<DialogFooter>
@@ -247,7 +247,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter, currentEvent }: any) =>
 									</div>
 									{/* 'More' button to toggle description of the event */}
 									<DialogDescription
-										className={`${showFullStr[idx] ? 'h-24' : 'h-10'} overflow-auto p-2 `}>
+										className={`${showFullStr[idx] ? 'h-24' : 'h-10'} p-2 break-all overflow-x-hidden overflow-y-auto`}>
 										<>
 											{showFullStr[idx] ? (
 												<>
