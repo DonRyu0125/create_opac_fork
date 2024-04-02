@@ -123,7 +123,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 	return (
 		<div className={'h-full relative'}>
 			{/* Event button */}
-			<div className={'h-3/5 overflow-y-auto mb-[2px]'}>
+			<div className={'h-3/5 overflow-y-auto mb-[2px] overflow-x-hidden sm:overflow-x-auto'}>
 				{filteredEvents.map((item: Cal_event, key: number) => (
 					<Dialog key={key}>
 						<DialogTrigger asChild>
