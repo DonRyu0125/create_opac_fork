@@ -123,12 +123,12 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 	return (
 		<div className={'h-full relative'}>
 			{/* Event button */}
-			<div className={'h-3/5 overflow-auto mb-[2px]'}>
+			<div className={'h-3/5 overflow-y-auto mb-[2px]'}>
 				{filteredEvents.map((item: Cal_event, key: number) => (
 					<Dialog key={key}>
 						<DialogTrigger asChild>
 							<Button
-								className={'w-full h-[20px] border-hidden flex p-0 justify-start'}
+								className={'h-[20px] border-hidden flex p-0 justify-start'}
 								variant="outline">
 								<div
 									className={cn(
@@ -137,7 +137,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 									)}></div>
 								<div
 									className={
-										'invisible max-w-[126px] text-left overflow-hidden sm:w-full sm:visible'
+										'invisible sm:visible max-w-[126px] text-left '
 									}>
 									{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
 								</div>
