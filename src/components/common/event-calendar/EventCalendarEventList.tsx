@@ -28,6 +28,7 @@ import {
 	FILTER_TYPE_COLORS,
 } from './EventCalendar'
 import { convertLowerTrim } from '@/lib/utils'
+import EventRSVPForm from './EventRSVPForm'
 
 type showStrObj = {
 	[key: number]: boolean
@@ -104,8 +105,8 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 	// To sort the time shift
 	const parseTimeString = (timeString: string) => {
 		if (timeString) {
-			const [time, meridian] = timeString?.split(' ');
-			const [hours, minutes] = time?.split(':').map(Number);
+			const [time, meridian] = timeString?.split(' ')
+			const [hours, minutes] = time?.split(':').map(Number)
 
 			let hours24 = hours
 			if (meridian === 'PM' && hours !== 12) {
@@ -135,10 +136,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 										'h-4 w-[16px] border rounded',
 										getColor(item[FILTER_TYPE])
 									)}></div>
-								<div
-									className={
-										'invisible sm:visible max-w-[126px] text-left '
-									}>
+								<div className={'invisible sm:visible max-w-[126px] text-left '}>
 									{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
 								</div>
 							</Button>
@@ -160,22 +158,32 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 									</DialogPrimitive.Close>
 								</DialogTitle>
 							</DialogHeader>
-							<div
-								className={
-									'w-full text-l w-full flex flex-col justify-center items-left font-bold px-2 '
-								}>
-								<div className={'overflow-hidden text-lg'}>{item[EVENT_NAME]}</div>
-								<div className={'flex'}>
-									<div className="text-md text-gray-600">{item[EVENT_DATE]}</div>
-									<div className="mx-2 text-gray-600">&#x2022;</div>
-									<div className="text-md text-gray-600">
-										{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+							<div className={'w-full text-l flex font-bold px-2'}>
+								<div className={'w-8/12'}>
+									<div className={'overflow-hidden text-lg'}>
+										{item[EVENT_NAME]}
 									</div>
+									<div className={'flex'}>
+										<div className="text-md text-gray-600">
+											{item[EVENT_DATE]}
+										</div>
+										<div className="mx-2 text-gray-600">&#x2022;</div>
+										<div className="text-md text-gray-600">
+											{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+										</div>
+									</div>
+									<DialogDescription
+										className={
+											'h-full min-h-80 break-all overflow-x-hidden overflow-y-auto'
+										}>
+										{item[EVENT_DESC]}
+									</DialogDescription>
+								</div>
+								<div className={'w-4/12'}>
+									<EventRSVPForm />
 								</div>
 							</div>
-							<DialogDescription className={'h-full min-h-80 p-2 break-all overflow-x-hidden overflow-y-auto'}>
-								{item[EVENT_DESC]}
-							</DialogDescription>
+
 							<DialogFooter>
 								<DialogPrimitive.Close
 									className={
