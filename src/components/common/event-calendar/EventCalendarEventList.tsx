@@ -158,8 +158,8 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 									</DialogPrimitive.Close>
 								</DialogTitle>
 							</DialogHeader>
-							<div className={'w-full text-l flex font-bold px-2'}>
-								<div className={'w-8/12'}>
+							<div className={'w-full text-l sm:flex font-bold px-2'}>
+								<div className={'w-full sm:w-8/12'}>
 									<div className={'overflow-hidden text-lg'}>
 										{item[EVENT_NAME]}
 									</div>
@@ -174,12 +174,12 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 									</div>
 									<DialogDescription
 										className={
-											'h-full min-h-80 break-all overflow-x-hidden overflow-y-auto'
+											'h-full sm:min-h-80 break-all overflow-x-hidden overflow-y-auto'
 										}>
 										{item[EVENT_DESC]}
 									</DialogDescription>
 								</div>
-								<div className={'w-4/12'}>
+								<div className={'w-full sm:w-4/12'}>
 									<EventRSVPForm />
 								</div>
 							</div>

@@ -1,10 +1,12 @@
 import { Button } from '@/components/ui/button'
+import { Label } from '@radix-ui/react-label'
 import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 type Inputs = {
-	example: string
-	exampleRequired: string
+	first_name: string
+	last_name: string
+	email: string
 }
 
 const EventRSVPForm = () => {
@@ -22,16 +24,45 @@ const EventRSVPForm = () => {
 	}
 
 	return (
-		<div className={'flex flex-col '}>
+		<div className={'flex justify-center w-full'}>
 			{!showForm && <Button onClick={onClick}>Register</Button>}
 			{showForm && (
-				<form onSubmit={handleSubmit(onSubmit)} className={'flex flex-col items-center'}>
-					<input defaultValue="test" {...register('example')} />
-					<input {...register('exampleRequired', { required: true })} />
-					{errors.exampleRequired && <span>This field is required</span>}
-					<Button type="submit">Register</Button>
-                    <div onClick={onClick}>Go Back</div>
-				</form>
+				<div className={'h-full w-full'}>
+					<div className={'bg-primary p-1 text-white'}>
+						Did you <span className={'text-gray-400'}>Log In?</span>
+					</div>
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className={'h-full w-full flex flex-col justify-evenly items-center'}>
+						<div className={'flex w-full flex-col my-1'}>
+							<Label>First Name</Label>
+							<input
+								className={'border-2 border-grey-500'}
+								{...register('first_name', { required: true })}
+							/>
+						</div>
+						<div className={'flex w-full flex-col my-1'}>
+							<Label>Last Name</Label>
+							<input
+								className={'border-2 border-grey-500'}
+								{...register('last_name', { required: true })}
+							/>
+						</div>
+						<div className={'flex w-full flex-col my-1'}>
+							<Label>Email</Label>
+							<input
+								className={'border-2 border-grey-500'}
+								{...register('email', { required: true })}
+							/>
+						</div>
+						<Button className={'w-full'} type="submit">
+							Register
+						</Button>
+						<div onClick={onClick} className="text-center border-b-4">
+							Go Back
+						</div>
+					</form>
+				</div>
 			)}
 		</div>
 	)

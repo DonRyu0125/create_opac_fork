@@ -112,7 +112,7 @@ const EventCalendar = () => {
 
 	const fetch_get = async (currentDate: Date) => {
 		const BASE_URL = 'http://norfolk_test.minisisinc.com'
-		const MONTH_REPORT = 'MONTHLY_CALENDAR_TEST02'
+		const MONTH_REPORT = 'MONTHLY_CALENDAR_TEST04'
 		const DATE_FIELD = 'EV_START_DATE'
 		const DATE_WILDCARD = `${currentDate.getFullYear()}-0${currentDate.getMonth() + 1}-*`
 
