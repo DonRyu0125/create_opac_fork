@@ -152,7 +152,14 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 									<div className="h-8">
 										<img className="h-full" src={logo} alt="logo" />
 									</div>
-									<div>{item[FILTER_TYPE]}</div>
+									<div className={'flex'}>
+										<div
+											className={cn(
+												'h-4 w-[16px] border rounded mr-1',
+												getColor(item[FILTER_TYPE])
+											)}></div>
+										{item[FILTER_TYPE]}
+									</div>
 									<DialogPrimitive.Close>
 										<X className={'h-6 w-6'} />
 									</DialogPrimitive.Close>
@@ -174,7 +181,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 									</div>
 									<DialogDescription
 										className={
-											'h-full sm:min-h-80 break-all overflow-x-hidden overflow-y-auto'
+											'h-full max-h-80 break-all overflow-x-hidden overflow-y-auto'
 										}>
 										{item[EVENT_DESC]}
 									</DialogDescription>
@@ -234,7 +241,14 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 										className={
 											'bg-primary text-primary-foreground h-10 flex justify-center items-center rounded'
 										}>
-										<div>{item[FILTER_TYPE]}</div>
+										<div className={'flex'}>
+											<div
+												className={cn(
+													'h-4 w-[16px] border rounded mr-1',
+													getColor(item[FILTER_TYPE])
+												)}></div>
+											{item[FILTER_TYPE]}
+										</div>
 									</DialogTitle>
 									<div
 										className={

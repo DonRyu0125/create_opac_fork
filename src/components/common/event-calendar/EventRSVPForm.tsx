@@ -9,6 +9,7 @@ type Inputs = {
 	email: string
 }
 
+
 const EventRSVPForm = () => {
 	const [showForm, setShowForm] = useState(false)
 	const {
@@ -50,6 +51,13 @@ const EventRSVPForm = () => {
 						</div>
 						<div className={'flex w-full flex-col my-1'}>
 							<Label>Email</Label>
+							<input
+								className={'border-2 border-grey-500'}
+								{...register('email', { required: true })}
+							/>
+						</div>
+						<div className={'flex w-full flex-col my-1'}>
+							<Label>Attendee</Label>
 							<input
 								className={'border-2 border-grey-500'}
 								{...register('email', { required: true })}
