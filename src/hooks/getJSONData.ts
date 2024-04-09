@@ -41,7 +41,6 @@ export const getDataFromXML = (id: string) => {
 			})
 			const xmlString = new XMLSerializer().serializeToString(xml)
 			const json = x2js.xml2js(xmlString) as GenericObject
-			console.log(json)
 			return json
 		} catch (error) {
 			console.log(error)
