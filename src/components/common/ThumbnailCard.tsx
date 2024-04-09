@@ -13,7 +13,7 @@ const ThumbnailCard = ({ title, url, thumbnail, className, children }: Thumbnail
 		<Card
 			className={cn('group relative block', className)}
 			onClick={() => (window.location.href = url)}>
-			<div className="relative h-[350px] sm:h-[450px]">
+			<div className="relative h-[350px] sm:h-[450px] w-[350px] sm:h-[450px]">
 				<img
 					src={thumbnail}
 					alt={title}

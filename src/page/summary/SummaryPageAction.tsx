@@ -1,7 +1,8 @@
 import CheckboxWithLabel from '@/components/common/CheckboxWithLabel'
 import CollapseList from '@/components/common/CollapseList'
 import DropdownSelect from '@/components/common/DropdownSelect'
-import useXMLData from '@/hooks/useXMLData'
+import useJSONData from '@/hooks/useJSONData'
+import { SummarySample } from '@/samples'
 import { Label } from '@radix-ui/react-dropdown-menu'
 
 /**
@@ -12,7 +13,8 @@ import { Label } from '@radix-ui/react-dropdown-menu'
  * - Bookmark
  */
 const SummaryPageAction = () => {
-	const { filter } = useXMLData({ selector: '#xml_record' })
+	const { filter } = useJSONData({ selector: '#xml_record' })
+	// const { filter } = useJSONData({ defaultData: SummarySample })
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-col space-y-2">
@@ -34,7 +36,7 @@ const SummaryPageAction = () => {
 									{item.item_group.map((option) => (
 										<CheckboxWithLabel
 											callback={() => {
-												window.location = option.item_link
+												window.location.href = option.item_link
 											}}
 											label={`${option.item_value} (${option.item_frequency})`}
 											checked={option.item_selected === 'Y'}

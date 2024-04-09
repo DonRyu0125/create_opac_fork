@@ -21,17 +21,6 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
 
 	return (
 		<div className="flex flex-col space-y-4">
-			<Slide
-				carouselStyle="sm:basis-1/4"
-				items={items}
-				renderItem={(item, index) => (
-					<div className="cursor-pointer" onClick={() => setCurrent(index)}>
-						{renderItems(item, index)}
-					</div>
-				)}
-				auto={false}
-			/>
-
 			<div className="flex w-full group cursor-pointer relative">
 				<img className="mx-auto" {...currentImage} />
 				<Scan
@@ -56,6 +45,17 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
 
 				<LightboxImage onOpen={setOpenLightbox} open={openLightbox} items={items} />
 			</div>
+
+			<Slide
+				carouselStyle="sm:basis-1/4"
+				items={items}
+				renderItem={(item, index) => (
+					<div className="cursor-pointer w-fit" onClick={() => setCurrent(index)}>
+						{renderItems(item, index)}
+					</div>
+				)}
+				auto={false}
+			/>
 		</div>
 	)
 }

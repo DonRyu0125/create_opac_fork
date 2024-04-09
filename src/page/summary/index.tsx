@@ -1,21 +1,23 @@
-import Layout from '../../components/layouts'
-import PageHeader from '../../components/common/PageHeader'
-import Link from '../../components/common/Link'
-import ViewToggle from '../../components/common/ViewToggle'
-import PagePagination from '../../components/common/PagePagination'
-import { Button } from '../../components/ui/button'
+import Layout from '@/components/layouts'
+import PageHeader from '@/components/common/PageHeader'
+import ViewToggle from '@/components/common/ViewToggle'
+import PagePagination from '@/components/common/PagePagination'
+import { Button } from '@/components/ui/button'
 import { ChevronRight } from 'lucide-react'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { useEffect, useState } from 'react'
-import useXMLData from '@/hooks/useXMLData'
+import useJSONData from '@/hooks/useJSONData'
 import SummaryPageAction from './SummaryPageAction'
 import SummaryRecords from './SummaryRecord'
 import PageAction from '@/components/common/PageAction'
+import { SummarySample } from '@/samples'
 
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 
-	const { common, pagination } = useXMLData({ selector: '#xml_record' })
+	// const { common, pagination } = useJSONData({ defaultData: SummarySample })
+	const { common, pagination } = useJSONData({ selector: '#xml_record' })
+
 	if (!common || !pagination) return <></>
 	return (
 		<Layout>
