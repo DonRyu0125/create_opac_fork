@@ -1,32 +1,29 @@
-import React from "react";
+import React from 'react'
 
 type TableRow = {
-  label: string;
-  value: number | string | string[] | React.ReactNode;
-};
+	label: string
+	value: number | string | string[] | React.ReactNode
+}
 
 export interface InfoTable {
-  rowsData: TableRow[];
-  renderRow: (row: TableRow, index: number) => string | React.ReactNode;
+	rowsData: TableRow[]
+	renderRow: (row: TableRow, index: number) => string | React.ReactNode
 }
 const InfoTable = ({ rowsData, renderRow = (row) => row.value }: InfoTable) => {
-  return (
-    <div className="flow-root">
-      <dl className="-my-3 divide-y divide-gray-100 text-sm">
-        {rowsData.map((row, index) => (
-          <div
-            key={row.label}
-            className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4"
-          >
-            <dt className="font-medium  text-gray-900">{row.label}</dt>
-            <dd className="text-gray-700  sm:col-span-2">
-              {renderRow(row, index)}
-            </dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  );
-};
+	return (
+		<div className="flow-root">
+			<dl className="-my-3 divide-y divide-gray-100 text-sm">
+				{rowsData.map((row, index) => (
+					<div
+						key={row.label}
+						className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+						<dt className="font-medium  text-gray-900">{row.label}</dt>
+						<dd className="text-gray-700  sm:col-span-2">{renderRow(row, index)}</dd>
+					</div>
+				))}
+			</dl>
+		</div>
+	)
+}
 
-export default InfoTable;
+export default InfoTable

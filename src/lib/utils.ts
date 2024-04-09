@@ -1,8 +1,8 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
+import { type ClassValue, clsx } from 'clsx'
+import 
+{ twMerge } from 'tailwind-merge'
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+	return twMerge(clsx(inputs))
 }
 
 /**
@@ -10,20 +10,20 @@ export function cn(...inputs: ClassValue[]) {
  * @returns
  */
 export const getJSONType = <T>(json: T): typeof json => {
-  return json;
-};
+	return json
+}
 
 /**
  * Copy text to clipboard
  * @param text
  */
 export const copyToClipboard = (text: string): void => {
-  try {
-    Promise.resolve(navigator.clipboard.writeText(text));
-  } catch (err) {
-    console.error("Failed to copy: ", err);
-  }
-};
+	try {
+		Promise.resolve(navigator.clipboard.writeText(text))
+	} catch (err) {
+		console.error('Failed to copy: ', err)
+	}
+}
 
 /**
  *
@@ -33,11 +33,20 @@ export const copyToClipboard = (text: string): void => {
  * @returns truncated word
  */
 export const truncateWords = (
-  text: string,
-  maxLength: number = 20,
-  appendText: string = "...",
+	text: string,
+	maxLength: number = 20,
+	appendText: string = '...'
 ): string => {
-  if (text.length <= maxLength) return text;
+	if (text.length <= maxLength) return text
 
-  return `${text.substring(0, maxLength)}${appendText}`;
+	return `${text.substring(0, maxLength)}${appendText}`
+}
+
+/**
+ * Removes leading and trailing spaces from a string and converts it to lowercase.
+ * @param {string} type The input string to be processed.
+ * @returns {string} The processed string with leading and trailing spaces removed and converted to lowercase.
+ */
+export const convertLowerTrim = (type: string): string => {
+    return type?.replace(/\s+/g, '')?.toLowerCase();
 };

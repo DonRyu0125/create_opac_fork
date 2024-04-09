@@ -8,7 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+dist/
 dist-ssr
 *.local
 
@@ -26,8 +26,14 @@ dist-ssr
 
 */themes/index.json
 */schema/*.json
+
 .vite
 
 .env
 
 pnpm-lock.yaml
+
+
+scripts/
+
+dist

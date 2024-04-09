@@ -1,0 +1,314 @@
+{
+	"xml_record": {
+		"media": {
+			"image_caption": ["OS166", "OS166"],
+			"im_access_link": [
+				"https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Museum/Images/Spencer/2.5.1%20Trade\ns/OS-166%2001.JPG",
+				"https://SURREY.MINISISINC.COM/SAMOA_IMAGES/Museum/Images/Spencer/2.5.1%20Trade\ns/OS-166%2001.JPG"
+			]
+		},
+		"is_bookmarked": "false",
+		"database_name": "COLLECTIONS",
+		"record_link": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/401173359/2/2/16998?RECORD&U\nNION=Y",
+		"record": {
+			"sisn": "16998",
+			"accession_number": "OS166",
+			"collection": "Human History",
+			"on_display": "On display",
+			"legal_title": "Try Square",
+			"number_of_parts": "1",
+			"object_name_grp": {
+				"object_name_grp_occurrence": {
+					"object_name": "try squares",
+					"obj_name_id": "300024268"
+				}
+			},
+			"object_status": "Permanent Collection",
+			"category": "4: Tools & Equipment for Materials",
+			"classification": "Woodworking T&E",
+			"primary": "Square",
+			"secondary": "Square, Try",
+			"obj_description": "Thin steel blade set in a wood stock, used to lay out\nright angle lines and test squareness of edges.",
+			"other_num_group": {
+				"other_num_group_occurrence": [
+					{
+						"other_num_type": "Tracking Number",
+						"other_number": "T2012.113"
+					},
+					{
+						"other_number": "OS-166"
+					}
+				]
+			},
+			"research_grp": {
+				"research_grp_occurrence": {
+					"research_date": "2012-08-11",
+					"researcher": "Jamieson, Spencer",
+					"researcher_id": "P1733",
+					"research_notes": "Horner, Ken \n2007 Essential Guide to the Steel Square: Facts, Short-Cuts, and\nProblem-Solving Secrets for Carpenters, Woodworkers & Builders.  Fox\nChapel Publishing: East Petersburg, PA.\n\nSalaman, R.A.\n1975 Dictionary of Tools: used in wood working and allied trades c.1700-1970.\nCharles Schribner's Sons: New York."
+				}
+			},
+			"label_txt_group": {
+				"label_txt_group_occurrence": {
+					"label_text": "Try squares like this are very tools in wood working shops. \nThey are used to mark lines perpendicularly to an edge, and to check the\nsquareness of corners.  The blade is attached beyond the edge of the stock\nfor more accurate marking.  This tool is sometimes mislabelled as a “tri\nsquare”; it is called a “try square” because they were originally designed to\ntest or “try” square corners.\nHistorically, many of these tools were made by a tradesman himself, but since\nthe 18th century the vast majority are factory produced.",
+					"label_txt_author": "Jamieson, Spencer",
+					"public": "Y"
+				}
+			},
+			"acq_reference_no": "T2012.113",
+			"acq_source_grp": {
+				"acq_source_grp_occurrence": {
+					"acq_source": "Unknown",
+					"acq_source_id": "P1171"
+				}
+			},
+			"planned_loc_grp": {
+				"planned_loc_grp_occurrence": [
+					{
+						"moved_flag": "0",
+						"plnd_move_author": "Peter Johnson",
+						"plnd_cur_code": "Exhibit-Gallery-2.5.1",
+						"plnd_rack_unit": "2.5.1",
+						"plnd_bldg": "Surrey Museum",
+						"plnd_floor": "Exhibit",
+						"plnd_room": "Gallery",
+						"plnd_loc_type": "Exhibition",
+						"pland_remov_date": "2012-08-11",
+						"plnd_move_ex": "Spencer Jamieson"
+					},
+					{
+						"moved_flag": "0",
+						"plnd_access": "Public",
+						"plnd_move_author": "Kristin Hardie",
+						"plnd_cur_code": "MoS-SG-Workshop",
+						"plnd_rack_unit": "Workshop",
+						"plnd_bldg": "Museum of Surrey",
+						"plnd_floor": "Second Floor",
+						"plnd_room": "Surrey Stories Gallery",
+						"plnd_loc_type": "Exhibition",
+						"pland_remov_date": "2018-12-05",
+						"plnd_mov_conct": "Sharpe, Colleen",
+						"plnd_mov_note": "Changing old location code EXHIBIT GALLERY-2.5.1 to new\ncode MoS-SG-Workshop",
+						"plnd_move_ex": "Jessie McLean"
+					}
+				]
+			},
+			"current_loc_info": {
+				"current_loc_info_occurrence": [
+					{
+						"movement_ref_num": "2012-08-11-00297",
+						"curators_code": "Exhibit-Gallery-2.5.1",
+						"building": "Surrey Museum",
+						"rack_unit": "2.5.1",
+						"floor": "Exhibit",
+						"room": "Gallery",
+						"location_type": "Exhibition",
+						"location_date": "2012-08-11",
+						"movement_author": "Peter Johnson",
+						"move_ex": "Spencer Jamieson"
+					},
+					{
+						"movement_ref_num": "2018-12-05-11482",
+						"curators_code": "MoS-SG-Workshop",
+						"building": "Museum of Surrey",
+						"rack_unit": "Workshop",
+						"loc_access": "Public",
+						"floor": "Second Floor",
+						"room": "Surrey Stories Gallery",
+						"location_type": "Exhibition",
+						"location_date": "2018-12-05",
+						"movement_contact": "Sharpe, Colleen",
+						"movement_author": "Kristin Hardie",
+						"move_ex": "Jessie McLean",
+						"movement_note": "Changing old location code EXHIBIT GALLERY-2.5.1 to new\ncode MoS-SG-Workshop"
+					}
+				]
+			},
+			"m_im_ref_grp": {
+				"m_im_ref_grp_occurrence": {
+					"m_im_access": "[IMAGES]Museum\\Images\\Spencer\\2.5.1 Trades\\OS-166\n01.JPG",
+					"m_im_opac": "Yes"
+				}
+			},
+			"c_bldg": "Museum of Surrey",
+			"c_flr": "Second Floor",
+			"c_rm": "Surrey Stories Gallery",
+			"c_loc_date": "2018-12-05",
+			"c_move_ex": "Spencer Jamieson",
+			"p_cur_code": "Exhibit-Gallery-2.5.1",
+			"p_bldg": "Exhibit-Gallery-2.5.1",
+			"p_flr": "Exhibit-Gallery-2.5.1",
+			"p_rm": "Surrey Stories Gallery",
+			"p_bu": "Exhibit-Gallery-2.5.1",
+			"p_ma": "Exhibit-Gallery-2.5.1",
+			"p_r_date": "2018-12-05",
+			"p_move_ex": "Spencer Jamieson",
+			"tree_id": "265295",
+			"relat_obj_group": {
+				"relat_obj_group_occurrence": [
+					{
+						"related_acc_num": "1975.0032.0001",
+						"rela_mkr_group": {
+							"rela_mkr_group_occurrence": {
+								"rela_mkr_org_id": "O301",
+								"rela_maker_org": "Simonds Manufacturing Company"
+							}
+						},
+						"date_execution": "c. 1800-1830",
+						"related_title": "Lathe"
+					},
+					{
+						"related_acc_num": "OF0699",
+						"rela_mkr_group": {
+							"rela_mkr_group_occurrence": {
+								"rela_maker_org": "W.F.& J. Barnes Co."
+							}
+						},
+						"date_execution": "1892",
+						"related_title": "Mortiser"
+					},
+					{
+						"related_acc_num": "OS-19",
+						"rela_mkr_group": {
+							"rela_mkr_group_occurrence": {
+								"rela_maker_org": "Champion Blower and Forge Co."
+							}
+						},
+						"date_execution": "1902",
+						"related_title": "Blower, Blacksmith's"
+					},
+					{
+						"related_acc_num": "1987.0183.0001",
+						"related_title": "Bellows, Blacksmith's"
+					},
+					{
+						"related_acc_num": "1962.0084.0001",
+						"related_title": "Bellows, Blacksmith's"
+					},
+					{
+						"related_acc_num": "1987.0053.0001",
+						"related_title": "Wedge"
+					},
+					{
+						"related_acc_num": "1991.0018.0002",
+						"related_title": "Saw"
+					},
+					{
+						"related_acc_num": "1965.0161.0001",
+						"rela_mkr_group": {
+							"rela_mkr_group_occurrence": {
+								"rela_maker_org": "Surrey Shingle Manufacturing Co."
+							}
+						},
+						"date_execution": "1908",
+						"related_title": "Shingle"
+					},
+					{
+						"related_acc_num": "OS-98",
+						"related_title": "Chisel"
+					},
+					{
+						"related_acc_num": "1970.0187.0001",
+						"related_title": "Plane"
+					},
+					{
+						"related_acc_num": "OS-99",
+						"related_title": "Plumb Bob"
+					},
+					{
+						"related_acc_num": "1983.0140.0001",
+						"related_title": "Brace"
+					},
+					{
+						"related_acc_num": "1973.0131.0001",
+						"related_title": "Pincer tongs"
+					},
+					{
+						"related_acc_num": "OS-334",
+						"related_title": "Shaving Horse"
+					},
+					{
+						"related_acc_num": "OS-38",
+						"related_title": "Drawknife"
+					},
+					{
+						"related_acc_num": "2012.1017.0001",
+						"related_title": "Mallet"
+					},
+					{
+						"related_acc_num": "2009.0059.0001",
+						"related_title": "Nails"
+					},
+					{
+						"related_acc_num": "NN2166",
+						"date_execution": "1901",
+						"related_title": "Hand Saw"
+					},
+					{
+						"related_acc_num": "NN1857",
+						"related_title": "Tool Box"
+					},
+					{
+						"related_acc_num": "1986.0053.0001",
+						"related_title": "Set square"
+					},
+					{
+						"related_acc_num": "NN1880",
+						"related_title": "gouge"
+					}
+				]
+			},
+			"material_group": {
+				"material_group_occurrence": [
+					{
+						"material": "Steel"
+					},
+					{
+						"material": "Wood"
+					}
+				]
+			},
+			"discipline": "Museum",
+			"c_cur_code": "MoS-SG-Workshop",
+			"web_display": "Ready",
+			"online_feat_grp": {
+				"online_feat_grp_occurrence": {
+					"m3_oef_title": "On Display in Surrey Stories Gallery",
+					"m3_oef_type": "Online Exhibition"
+				}
+			},
+			"what_keyword": {
+				"what_keyword_occurrence": [
+					"try squares",
+					"Thin steel blade set in a wood stock,\nused to lay out right angle lines and test squareness of edges.",
+					"Try Square"
+				]
+			},
+			"mform": "Artifact"
+		}
+	},
+	"session": "https://surrey.minisisinc.com/scripts/mwimain.dll/401173359",
+	"bookmark_count": "0",
+	"search_statement": "test",
+	"query_statement": "KEYWORD_CL test",
+	"pagesize_25": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/401173358/2/1?RECLIST&DATABA\nSE=UNION_VIEW&TM=1710834733.770&PAGESIZE=25",
+	"pagesize_50": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/401173358/2/1?RECLIST&DATABA\nSE=UNION_VIEW&TM=1710834733.770&PAGESIZE=50",
+	"pagesize_100": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/401173358/2/1?RECLIST&DATABA\nSE=UNION_VIEW&TM=1710834733.770&PAGESIZE=100",
+	"first_record_seq": "1",
+	"last_record_seq": "2",
+	"bookmark_url": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/401173358/2/1",
+	"back_to_summary": {
+		"a": {
+			"_href": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/401173358/2/1?RECLIST&\nDATABASE=UNION_VIEW&TM=1710834733.770",
+			"__text": "CURRENT_PAGE_URL"
+		}
+	},
+	"previous_record": {
+		"a": {
+			"_href": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/401173359/2/2/16998?PR\nEVREC&UNION=Y",
+			"__text": "PREV_RECORD_URL"
+		}
+	},
+	"total_record": "2",
+	"sort": "https://SURREY.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL/401173358/2/1/WEB_UNION_SUM?\nRECLIST&DATABASE=UNION_VIEW&TM=1710834733.770"
+}
