@@ -190,7 +190,6 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 									<EventRSVPForm />
 								</div>
 							</div>
-
 							<DialogFooter>
 								<DialogPrimitive.Close
 									className={
