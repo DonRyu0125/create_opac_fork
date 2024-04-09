@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import MobileMenu from './MobileMenu'
 const Header = () => {
-	const { logo, navigations, siteName } = config
+	const { logo, navigations } = config
 
 	return (
 		<header className=" bg-primary  mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,9 +18,8 @@ const Header = () => {
 						<img className="h-12" src={logo} alt="logo" />
 					</a>
 				</div>
-
-				<div className="">
-					<nav className="hidden md:block">
+				<div className="md:flex md:items-center md:gap-12">
+					<nav aria-label="Global" className="hidden md:block">
 						<ul className="flex items-center gap-6 text-sm ">
 							{navigations.map((nav) => (
 								<li key={nav.title} className="hover:border-b-opac-green">
@@ -33,8 +32,7 @@ const Header = () => {
 							))}
 						</ul>
 					</nav>
-
-					<div className="flex md:hidden items-center gap-4">
+					<div className="flex items-center gap-4">
 						{/* <ThemeToggler /> */}
 						<MobileMenu />
 					</div>

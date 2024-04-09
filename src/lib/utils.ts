@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-
+import 
+{ twMerge } from 'tailwind-merge'
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
@@ -41,3 +41,12 @@ export const truncateWords = (
 
 	return `${text.substring(0, maxLength)}${appendText}`
 }
+
+/**
+ * Removes leading and trailing spaces from a string and converts it to lowercase.
+ * @param {string} type The input string to be processed.
+ * @returns {string} The processed string with leading and trailing spaces removed and converted to lowercase.
+ */
+export const convertLowerTrim = (type: string): string => {
+    return type?.replace(/\s+/g, '')?.toLowerCase();
+};
