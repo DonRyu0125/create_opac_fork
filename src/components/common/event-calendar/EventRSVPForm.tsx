@@ -9,7 +9,26 @@ type Inputs = {
 	first_name: string
 	last_name: string
 	email: string
-	attendee:number
+	attendee: number
+}
+
+type EventInput = {
+	label: string
+	keyname: string
+	register: Function
+	required: boolean
+}
+
+const EventInput = ({ label, keyname, register, required }: EventInput) => {
+	return (
+		<div className={'flex w-full flex-col my-1'}>
+			<Label>{label}</Label>
+			<Input
+				className={'border-2 border-grey-500'}
+				{...register(keyname, { required: required })}
+			/>
+		</div>
+	)
 }
 
 const EventRSVPForm = () => {
@@ -37,40 +56,31 @@ const EventRSVPForm = () => {
 					<form
 						onSubmit={handleSubmit(onSubmit)}
 						className={'h-full w-full flex flex-col justify-evenly items-center'}>
-						<div className={'flex w-full flex-col my-1'}>
-							<Label>First Name</Label>
-							<Input
-								className={'border-2 border-grey-500'}
-								{...register('first_name', { required: true })}
-							/>
-						</div>
-						<div className={'flex w-full flex-col my-1'}>
-							<Label>Last Name</Label>
-							<Input
-								className={'border-2 border-grey-500'}
-								{...register('last_name', { required: true })}
-							/>
-						</div>
-						<div className={'flex w-full flex-col my-1'}>
-							<Label>Email</Label>
-							<Input
-								className={'border-2 border-grey-500'}
-								{...register('email', { required: true })}
-							/>
-						</div>
+						<EventInput
+							label={'First Name'}
+							keyname={'first_name'}
+							register={register}
+							required={true}
+						/>
+						<EventInput
+							label={'Last Name'}
+							keyname={'last_name'}
+							register={register}
+							required={true}
+						/>
+						<EventInput
+							label={'Email'}
+							keyname={'email'}
+							register={register}
+							required={true}
+						/>
 						<div className={'flex w-full flex-col my-1'}>
 							<Label>Attendee</Label>
-							{/* <DropdownSelect
-								title={'Select Attendee'}
-								options={[
-									...Array.from({ length: 6 }, (_, index) => ({
-										value: index + 1,
-										label: index + 1,
-									})),
-								]}
-								register={register('attendee')}
-							/> */}
-							<select {...register("attendee")}>
+							<select
+								{...register('attendee')}
+								className={
+									'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2'
+								}>
 								<option value={'asd'}>asd</option>
 							</select>
 						</div>
