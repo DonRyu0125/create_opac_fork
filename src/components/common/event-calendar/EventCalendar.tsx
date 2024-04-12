@@ -6,19 +6,26 @@
  */
 import React, { useEffect, useState } from 'react'
 import X2JS from 'x2js'
-import response from '../../../samples/fetch_calendar.json'
 import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
 
 export interface Cal_event {
-	'event-date': string
-	'event-start': string
-	'event-end'?: string
-	'event-name': string
-	'event-desc'?: string
-	'event-loc': string
+	[EVENT_NAME]: string
+	[EVENT_DESC]: string
+	[FILTER_TYPE]: string
+	[FILTER_TYPE_ID]:string
+	[EVENT_FEE]:string
+	[EVENT_DATE]: string
+	[EVENT_BANNER_TYPE]:string
+	[EVENT_AGE]:string
+	[EVENT_CAPACITY]:string
+	[EVENT_RSVP]:string
+	[EVENT_START_TIME]: string
+	[EVENT_END_TIME]: string
+	[EVENT_ROOM]:string
+	[EVENT_LANG]:string
 }
 
 export interface Day_obj {
@@ -27,14 +34,42 @@ export interface Day_obj {
 	year?: number
 }
 
+const dummy = [
+	{
+		'tag-name': 'Chinese cooking class',
+		'tag-func-desc':
+			'Chow mein is a dish of Chinese stir-fried noodles with vegetables and sometimes meat or tofu. Over the centuries, variations of chǎomiàn were developed in many regions of China; there are several methods of frying the noodles and a range of toppings can be used.[1][failed verification] It was introduced in other countries by Chinese immigrants.[1] The dish is popular throughout the Chinese diaspora and appears on the menus of most Chinese restaurants abroad.[2] It is particularly popular in India,[3] Nepal,[4] the UK,[5] and the US.',
+		'tag-func-loc': 'Delhi',
+		'tag-func-loc-id': 'Delhi',
+		'tag-func-loc-fee': 22,
+		'tag-func-loc-banner': 'banner1',
+		'tag-func-loc-age': 'Young Adult',
+		'tag-func-loc-cap': 40,
+		'tag-func-loc-rsvp': 'X',
+		'tag-func-loc-date': '2024-04-22',
+		'tag-func-loc-start-t': '9:00 am',
+		'tag-func-loc-end-t': '10:00 am',
+		'room':'105'
+	}
+]
+
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const CALENDAR_START_MONTH = 1
-export const FILTER_TYPE = 'event-loc'
-export const EVENT_DATE = 'event-date'
-export const EVENT_NAME = 'event-name'
-export const EVENT_END_TIME = 'event-end'
-export const EVENT_START_TIME = 'event-start'
-export const EVENT_DESC = 'event-desc'
+export const EVENT_NAME = 'tag-name'
+export const EVENT_DESC = 'tag-func-desc'
+export const FILTER_TYPE = 'tag-func-loc'
+export const FILTER_TYPE_ID = 'tag-func-loc-id'
+export const EVENT_FEE = 'tag-func-loc-fee'
+export const EVENT_BANNER_TYPE = 'tag-func-loc-banner'
+export const EVENT_AGE = 'tag-func-loc-aud'
+export const EVENT_DATE = 'tag-func-date'
+export const EVENT_START_TIME = 'tag-func-start-t'
+export const EVENT_END_TIME = 'tag-func-end-t'
+export const EVENT_RSVP = 'tag-func-rsvp'
+export const EVENT_CAPACITY = 'tag-func-cap'
+export const EVENT_ROOM = 'tag-func-room'
+export const EVENT_LANG = 'tag-func-lang'
+
 export const EVENT_TAG_WORD_LENGTH = 18
 export const MON_REPORT_TYPES = [
 	'MONTHLY_CALENDAR',
@@ -94,11 +129,11 @@ export const FILTER_TYPE_COLORS = [
 ]
 
 const EventCalendar = () => {
-	const [currentDate, setCurrentDate] = useState(new Date());
-	const [currentEvent, setCurrentEvent] = useState<Cal_event[]>([]);
-	const [currentFilter, setCurrentFilter] = useState<string[]>([]);
-	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false);
-	const [isClickableNext, setisClickableNext] = useState<boolean>(false);
+	const [currentDate, setCurrentDate] = useState(new Date())
+	const [currentEvent, setCurrentEvent] = useState<Cal_event[]>([])
+	const [currentFilter, setCurrentFilter] = useState<string[]>([])
+	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
+	const [isClickableNext, setisClickableNext] = useState<boolean>(false)
 
 	useEffect(() => {
 		getData(currentDate)
@@ -107,7 +142,8 @@ const EventCalendar = () => {
 
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate)
-		setCurrentEvent(currE)
+		console.log('dummy',dummy)
+		setCurrentEvent(dummy)
 	}
 
 	const fetch_get = async (currentDate: Date) => {

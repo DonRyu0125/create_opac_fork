@@ -22,10 +22,13 @@ import {
 	EVENT_DESC,
 	EVENT_END_TIME,
 	EVENT_NAME,
+	EVENT_ROOM,
+	EVENT_AGE,
 	EVENT_START_TIME,
 	EVENT_TAG_WORD_LENGTH,
 	FILTER_TYPE,
 	FILTER_TYPE_COLORS,
+	EVENT_CAPACITY,
 } from './EventCalendar'
 import { convertLowerTrim } from '@/lib/utils'
 import EventRSVPForm from './EventRSVPForm'
@@ -141,9 +144,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 								</div>
 							</Button>
 						</DialogTrigger>
-						<DialogContent
-							hideClose={'invisible'}
-							className={'p-1 min-h-96 max-w-lg md:max-w-3xl'}>
+						<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl'}>
 							<DialogHeader>
 								<DialogTitle
 									className={
@@ -165,8 +166,8 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 									</DialogPrimitive.Close>
 								</DialogTitle>
 							</DialogHeader>
-							<div className={'w-full text-l sm:flex font-bold px-2'}>
-								<div className={'w-full sm:w-8/12'}>
+							<div className={'w-full min-h-[390px] text-l sm:flex font-bold'}>
+								<div className={'w-full sm:w-8/12 '}>
 									<div className={'overflow-hidden text-lg'}>
 										{item[EVENT_NAME]}
 									</div>
@@ -177,6 +178,19 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 										<div className="mx-2 text-gray-600">&#x2022;</div>
 										<div className="text-md text-gray-600">
 											{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+										</div>
+										<div className="mx-2 text-gray-600">&#x2022;</div>
+										<div className="text-md text-gray-600">
+											Room: {item[EVENT_ROOM]}
+										</div>
+									</div>
+									<div className={'flex'}>
+										<div className="text-md text-gray-600">
+											Suitable for: {item[EVENT_AGE]}
+										</div>
+										<div className="mx-2 text-gray-600">&#x2022;</div>
+										<div className="text-md text-gray-600">
+											Seats: {item[EVENT_CAPACITY]}
 										</div>
 									</div>
 									<DialogDescription
@@ -204,7 +218,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 			</div>
 			{/* All events button */}
 			<div className={'h-[20px]'}>
-				{filteredEvents.length > 3 && (
+				{filteredEvents.length > 2 && (
 					<Dialog>
 						<DialogTrigger asChild>
 							<Button
@@ -256,13 +270,24 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 										<div className={'overflow-hidden text-lg'}>
 											{item[EVENT_NAME]}
 										</div>
-										<div className={'flex'}>
+										<div className={'sm:flex'}>
 											<div className="text-md text-gray-600">
-												{item[EVENT_DATE]}
+												&#x2022;{item[EVENT_DATE]}
 											</div>
-											<div className="mx-2 text-gray-600">&#x2022;</div>
+											<div className="ml-[10px] text-md text-gray-600">
+												&#x2022;{item[EVENT_START_TIME]} -
+												{item[EVENT_END_TIME]}
+											</div>
+											<div className="ml-[10px] text-md text-gray-600">
+												&#x2022;Room: {item[EVENT_ROOM]}
+											</div>
+										</div>
+										<div className={'sm:flex'}>
 											<div className="text-md text-gray-600">
-												{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
+												&#x2022;Suitable for: {item[EVENT_AGE]}
+											</div>
+											<div className="ml-[10px] text-md text-gray-600">
+												&#x2022;Seats: {item[EVENT_CAPACITY]}
 											</div>
 										</div>
 									</div>
