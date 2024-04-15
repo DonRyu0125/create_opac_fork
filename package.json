@@ -40,7 +40,6 @@
     "lucide-react": "^0.308.0",
     "next-themes": "^0.2.1",
     "postcss": "^8.4.35",
-    "postcss-cli": "^9.1.0",
     "postcss-preset-env": "^7.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -69,6 +68,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.1.0",
     "@types/leaflet": "^1.9.8",
     "@types/node": "^20.11.17",
@@ -79,8 +79,6 @@
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
     "fs": "0.0.1-security",
     "json-schema-to-typescript": "^13.1.2",
     "leaflet": "^1.9.4",
