@@ -32,7 +32,8 @@ import {
 	EVENT_LANG,
 } from './EventCalendar'
 import { convertLowerTrim } from '@/lib/utils'
-import EventRSVPForm from './EventRSVPForm'
+import EventDialog from './EventDialog'
+
 
 type showStrObj = {
 	[key: number]: boolean
@@ -45,7 +46,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 
 	useEffect(() => {
 		const updatedFilteredEvents = currentEvent?.filter((item: Cal_event) => {
-			const { day, month, year } = changeStrToDate(item[EVENT_DATE]);
+			const { day, month, year } = changeStrToDate(item[EVENT_DATE])
 			const isMatchingDayMonth =
 				day === dayObj.day && month === dayObj.month && year === dayObj.year
 			if (currentFilter.length > 0) {
@@ -84,18 +85,6 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 		setShowFullStr({})
 	}
 
-	/**
-	 *
-	 * @param event_type
-	 * @returns color, filtering icon type
-	 */
-	const getColor = (event_type: string) => {
-		let result = FILTER_TYPE_COLORS?.filter((item) => {
-			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
-		})
-		return `${result[0]?.color} ${result[0]?.icon}`
-	}
-
 	const changeStrToDate = (dateString: string) => {
 		const dateObject = new Date(dateString)
 		const month = dateObject.getMonth() + 1
@@ -125,102 +114,17 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 		return
 	}
 
+	const getColor = (event_type: string) => {
+		let result = FILTER_TYPE_COLORS?.filter((item) => {
+			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
+		})
+		return `${result[0]?.color} ${result[0]?.icon}`
+	}
+
 	return (
 		<div className={'h-full relative'}>
 			{/* Event button */}
-			<div className={'h-3/5 overflow-y-auto mb-[2px] overflow-x-hidden sm:overflow-x-auto'}>
-				{filteredEvents.map((item: Cal_event, key: number) => (
-					<Dialog key={key}>
-						<DialogTrigger asChild>
-							<Button
-								className={'h-[20px] border-hidden flex p-0 justify-start'}
-								variant="outline">
-								<div
-									className={cn(
-										'h-4 w-[16px] border rounded',
-										getColor(item[FILTER_TYPE])
-									)}></div>
-								<div className={'invisible sm:visible max-w-[126px] text-left '}>								
-									{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
-								</div>
-							</Button>
-						</DialogTrigger>
-						<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl'}>
-							<DialogHeader>
-								<DialogTitle
-									className={
-										' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
-									}>
-									<div className="h-8">
-										<img className="h-full" src={logo} alt="logo" />
-									</div>
-									<div className={'flex'}>
-										<div
-											className={cn(
-												'h-4 w-[16px] border rounded mr-1',
-												getColor(item[FILTER_TYPE])
-											)}></div>
-										{item[FILTER_TYPE]}
-									</div>
-									<DialogPrimitive.Close>
-										<X className={'h-6 w-6'} />
-									</DialogPrimitive.Close>
-								</DialogTitle>
-							</DialogHeader>
-							<div className={'w-full min-h-[390px] text-l sm:flex font-bold'}>
-								<div className={'w-full sm:w-8/12 '}>
-									<div className={'overflow-hidden text-lg'}>
-										{item[EVENT_NAME]}
-									</div>
-									<div className={'flex'}>
-										<div className="text-md text-gray-600">
-											{item[EVENT_DATE]}
-										</div>
-										<div className="mx-2 text-gray-600">&#x2022;</div>
-										<div className="text-md text-gray-600">
-											{item[EVENT_START_TIME]} - {item[EVENT_END_TIME]}
-										</div>
-										<div className="mx-2 text-gray-600">&#x2022;</div>
-										<div className="text-md text-gray-600">
-											Room: {item[EVENT_ROOM]}
-										</div>
-									</div>
-									<div className={'flex'}>
-										<div className="text-md text-gray-600">
-											Suitable for: {item[EVENT_AGE]}
-										</div>
-										<div className="mx-2 text-gray-600">&#x2022;</div>
-										<div className="text-md text-gray-600">
-											Seats: {item[EVENT_CAPACITY]}
-										</div>
-										<div className="mx-2 text-gray-600">&#x2022;</div>
-										<div className="text-md text-gray-600">
-											Language: {item[EVENT_LANG]}
-										</div>
-									</div>
-									<DialogDescription
-										className={
-											'h-full max-h-80 break-all overflow-x-hidden overflow-y-auto'
-										}>
-										{item[EVENT_DESC]}
-									</DialogDescription>
-								</div>
-								<div className={'w-full sm:w-4/12'}>
-									<EventRSVPForm />
-								</div>
-							</div>
-							<DialogFooter>
-								<DialogPrimitive.Close
-									className={
-										'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
-									}>
-									Close
-								</DialogPrimitive.Close>
-							</DialogFooter>
-						</DialogContent>
-					</Dialog>
-				))}
-			</div>
+			<EventDialog filteredEvents={filteredEvents}/>
 			{/* All events button */}
 			<div className={'h-[20px]'}>
 				{filteredEvents.length > 2 && (
@@ -276,7 +180,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 											{item[EVENT_NAME]}
 										</div>
 										<div className={'sm:flex'}>
-											<div className="text-md text-gray-600">
+											<div className="ml-[10px] sm:ml-0 text-md text-gray-600">
 												&#x2022;{item[EVENT_DATE]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600">
@@ -288,7 +192,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 											</div>
 										</div>
 										<div className={'sm:flex'}>
-											<div className="text-md text-gray-600">
+											<div className="sm:ml-0 ml-[10px] text-md text-gray-600">
 												&#x2022;Suitable for: {item[EVENT_AGE]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600">
