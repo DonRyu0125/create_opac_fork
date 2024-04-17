@@ -29,6 +29,7 @@ import {
 	FILTER_TYPE,
 	FILTER_TYPE_COLORS,
 	EVENT_CAPACITY,
+	EVENT_LANG,
 } from './EventCalendar'
 import { convertLowerTrim } from '@/lib/utils'
 import EventRSVPForm from './EventRSVPForm'
@@ -44,7 +45,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 
 	useEffect(() => {
 		const updatedFilteredEvents = currentEvent?.filter((item: Cal_event) => {
-			const { day, month, year } = changeStrToDate(item[EVENT_DATE])
+			const { day, month, year } = changeStrToDate(item[EVENT_DATE]);
 			const isMatchingDayMonth =
 				day === dayObj.day && month === dayObj.month && year === dayObj.year
 			if (currentFilter.length > 0) {
@@ -139,7 +140,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 										'h-4 w-[16px] border rounded',
 										getColor(item[FILTER_TYPE])
 									)}></div>
-								<div className={'invisible sm:visible max-w-[126px] text-left '}>
+								<div className={'invisible sm:visible max-w-[126px] text-left '}>								
 									{item[EVENT_NAME]?.substring(0, EVENT_TAG_WORD_LENGTH)}
 								</div>
 							</Button>
@@ -191,6 +192,10 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 										<div className="mx-2 text-gray-600">&#x2022;</div>
 										<div className="text-md text-gray-600">
 											Seats: {item[EVENT_CAPACITY]}
+										</div>
+										<div className="mx-2 text-gray-600">&#x2022;</div>
+										<div className="text-md text-gray-600">
+											Language: {item[EVENT_LANG]}
 										</div>
 									</div>
 									<DialogDescription

@@ -34,25 +34,6 @@ export interface Day_obj {
 	year?: number
 }
 
-const dummy = [
-	{
-		'tag-name': 'Chinese cooking class',
-		'tag-func-desc':
-			'Chow mein is a dish of Chinese stir-fried noodles with vegetables and sometimes meat or tofu. Over the centuries, variations of chǎomiàn were developed in many regions of China; there are several methods of frying the noodles and a range of toppings can be used.[1][failed verification] It was introduced in other countries by Chinese immigrants.[1] The dish is popular throughout the Chinese diaspora and appears on the menus of most Chinese restaurants abroad.[2] It is particularly popular in India,[3] Nepal,[4] the UK,[5] and the US.',
-		'tag-func-loc': 'Delhi',
-		'tag-func-loc-id': 'Delhi',
-		'tag-func-loc-fee': 22,
-		'tag-func-loc-banner': 'banner1',
-		'tag-func-loc-age': 'Young Adult',
-		'tag-func-loc-cap': 40,
-		'tag-func-loc-rsvp': 'X',
-		'tag-func-loc-date': '2024-04-22',
-		'tag-func-loc-start-t': '9:00 am',
-		'tag-func-loc-end-t': '10:00 am',
-		'room':'105'
-	}
-]
-
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const CALENDAR_START_MONTH = 1
 export const EVENT_NAME = 'tag-name'
@@ -69,6 +50,25 @@ export const EVENT_RSVP = 'tag-func-rsvp'
 export const EVENT_CAPACITY = 'tag-func-cap'
 export const EVENT_ROOM = 'tag-func-room'
 export const EVENT_LANG = 'tag-func-lang'
+
+const dummy = [
+	{
+		[EVENT_NAME]: 'Chinese cooking class',
+		[EVENT_DESC]:
+			'Chow mein is a dish of Chinese stir-fried noodles with vegetables and sometimes meat or tofu. Over the centuries, variations of chǎomiàn were developed in many regions of China; there are several methods of frying the noodles and a range of toppings can be used.[1][failed verification] It was introduced in other countries by Chinese immigrants.[1] The dish is popular throughout the Chinese diaspora and appears on the menus of most Chinese restaurants abroad.[2] It is particularly popular in India,[3] Nepal,[4] the UK,[5] and the US.',
+		[FILTER_TYPE]: 'Delhi',
+		[FILTER_TYPE_ID]: 'Delhi',
+		[EVENT_FEE]: 22,
+		[EVENT_BANNER_TYPE]: 'banner1',
+		[EVENT_AGE]: 'Young Adult',
+		[EVENT_CAPACITY]: 40,
+		[EVENT_RSVP]: 'X',
+		[EVENT_DATE]: '2024-04-22',
+		[EVENT_START_TIME]: '9:00 am',
+		[EVENT_END_TIME]: '10:00 am',
+		[EVENT_ROOM]:'105'
+	}
+]
 
 export const EVENT_TAG_WORD_LENGTH = 18
 export const MON_REPORT_TYPES = [
@@ -97,12 +97,12 @@ export const ICON_SHAPE_MAP = {
 
 export const FILTER_TYPE_COLORS = [
 	{
-		type: 'Delhi',
+		type: 'Delhi BRANCH',
 		color: COLORS_MAP['RED'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
-		type: 'Port Dover',
+		type: 'PORT DOVER BRANCH',
 		color: COLORS_MAP['YELLOW'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
@@ -142,19 +142,20 @@ const EventCalendar = () => {
 
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate)
-		console.log('dummy',dummy)
-		setCurrentEvent(dummy)
+		console.log('currE',currE)
+		setCurrentEvent(currE)
 	}
 
 	const fetch_get = async (currentDate: Date) => {
 		const BASE_URL = 'http://norfolk_test.minisisinc.com'
-		const MONTH_REPORT = 'MONTHLY_CALENDAR_TEST04'
-		const DATE_FIELD = 'EV_START_DATE'
-		const DATE_WILDCARD = `${currentDate.getFullYear()}-0${currentDate.getMonth() + 1}-*`
-
+		const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
+		const DATE_FIELD = 'TAG_FUNC_DATE'
+		const DATE_WILDCARD = '%222024-04-%2A%22'
+		//`${currentDate.getFullYear()}%2D0${currentDate.getMonth() + 1}%2D%2A`
+		
 		try {
 			const response = await axios.get(
-				`${BASE_URL}/scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} ${DATE_WILDCARD}`,
+				`${BASE_URL}/scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} 2024-04-`,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
