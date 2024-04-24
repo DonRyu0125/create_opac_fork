@@ -9,6 +9,7 @@ import Slide from '../components/common/Slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
+import EventCalendar from '@/components/common/event-calendar/EventCalendar'
 const pics = [
 	'https://picsum.photos/1000/800/?random=123',
 	'https://picsum.photos/500/600/?random=456',
@@ -33,7 +34,14 @@ const pics = [
 ]
 
 const Home = () => {
-	const { heading, heroBanner, browseByCategoryTitle, categoriesItems, searchURL } = home
+	const {
+		heading,
+		heroBanner,
+		browseByCategoryTitle,
+		categoriesItems,
+		searchURL,
+		eventCalendar,
+	} = home
 
 	return (
 		<Layout>
@@ -52,7 +60,7 @@ const Home = () => {
 					// auto
 					itemsPerSlide={{ lg: 4 }}
 					items={categoriesItems}
-					renderItem={(item, index) => (
+					renderItem={(item: { title: any; url: any; thumbnail: any }, index: any) => (
 						<Card
 							className="max-w-md mx-auto shadow-xl border-none cursor-pointer"
 							key={index}>
@@ -65,6 +73,9 @@ const Home = () => {
 					)}
 				/>
 			</Section>
+			{/* <Section heading={eventCalendar}>
+				<EventCalendar />
+			</Section> */}
 			{/* <Section
         className='bg-secondary'
         heading={'Browse by area'}

@@ -42,7 +42,7 @@ const Summary = () => {
 				</PageAction>
 
 				<section>
-					<div className="mx-auto  py-4   sm:py-12  container flex flex-col">
+					<div className="mx-auto py-4 sm:py-12  container flex flex-col">
 						<PageHeader
 							heading={`${common.total_record} results for "${common.search_statement}"`}
 							subHeading={`Displaying ${common.first_record_seq}-${common.last_record_seq} of ${common.total_record}`}
