@@ -50,6 +50,7 @@ export const EVENT_RSVP = 'tag-func-rsvp'
 export const EVENT_CAPACITY = 'tag-func-cap'
 export const EVENT_ROOM = 'tag-func-room'
 export const EVENT_LANG = 'tag-func-lang'
+export const EVENT_LIST = 'list'
 
 const dummy = [
 	{
@@ -115,9 +116,26 @@ const dummy = [
 		[EVENT_START_TIME]: '9:00 am',
 		[EVENT_END_TIME]: '10:00 am',
 		[EVENT_ROOM]:'105'
+	},
+	{
+		[EVENT_NAME]: 'Korean5 cooking class',
+		[EVENT_DESC]:
+			'Chow mein is a dish of Chinese stir-fried noodles with vegetables and sometimes meat or tofu. Over the centuries, variations of chǎomiàn were developed in many regions of China; there are several methods of frying the noodles and a range of toppings can be used.[1][failed verification] It was introduced in other countries by Chinese immigrants.[1] The dish is popular throughout the Chinese diaspora and appears on the menus of most Chinese restaurants abroad.[2] It is particularly popular in India,[3] Nepal,[4] the UK,[5] and the US.',
+		[FILTER_TYPE]: 'Port Rowan',
+		[FILTER_TYPE_ID]: 'Port Rowan',
+		[EVENT_FEE]: 22,
+		[EVENT_BANNER_TYPE]: 'banner1',
+		[EVENT_AGE]: 'Young Adult',
+		[EVENT_CAPACITY]: 40,
+		[EVENT_RSVP]: 'X',
+		[EVENT_DATE]: '2024-04-20',
+		[EVENT_START_TIME]: '9:00 am',
+		[EVENT_END_TIME]: '10:00 am',
+		[EVENT_ROOM]:'105'
 	}
 ]
 
+export const EVENT_BRANCH_NAME_LENGTH = -7
 export const EVENT_TAG_WORD_LENGTH = 18
 export const MON_REPORT_TYPES = [
 	'MONTHLY_CALENDAR',
