@@ -63,7 +63,7 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 			<DialogTrigger asChild>
 				<Button
 					className={
-						' h-full w-full px-0 absolute bottom-0 flex items-center justify-center overflow-hidden'
+						' h-full w-full px-0 flex items-center justify-center overflow-hidden'
 					}>
 					All {filteredEvents.length} events
 				</Button>

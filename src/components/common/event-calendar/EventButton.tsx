@@ -33,7 +33,6 @@ import { config } from '@/constants'
 import { X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 
-
 const EventButton = ({ elm, key }: { elm: Cal_event; key: number }) => {
 	const { logo } = config
 
@@ -55,9 +54,9 @@ const EventButton = ({ elm, key }: { elm: Cal_event; key: number }) => {
 							'h-4 w-[16px] border rounded',
 							getColor(elm[FILTER_TYPE])
 						)}></div>
-					
+					<div className={'invisible sm:visible text-left '}>
 						{elm[EVENT_NAME]}
-			
+					</div>
 				</Button>
 			</DialogTrigger>
 			<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl'}>

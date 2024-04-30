@@ -64,9 +64,9 @@ const EventSumButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 	}
 
 	return (
-		<div className={'h-3/5 overflow-y-auto mb-[2px] overflow-x-hidden sm:overflow-x-auto'}>
+		<>
 			{filteredEvents.length > 3 ? (
-				<>
+				<div className={'h-full mb-[2px] break-normal overflow-x-hidden'}>
 					{groupedByLocation(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>
 							<DialogTrigger asChild>
@@ -112,8 +112,10 @@ const EventSumButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 											</DialogPrimitive.Close>
 										</DialogTitle>
 									</DialogHeader>
-									{item[EVENT_LIST]?.map((elm:any, key: number) => (
-										<div key={key} className={'w-full text-l sm:flex font-bold p-3'}>
+									{item[EVENT_LIST]?.map((elm: any, key: number) => (
+										<div
+											key={key}
+											className={'w-full text-l sm:flex font-bold p-3'}>
 											<div className={'w-full sm:w-8/12 '}>
 												<div className={'overflow-hidden text-lg'}>
 													{elm[EVENT_NAME]}
@@ -153,7 +155,6 @@ const EventSumButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 											</div>
 										</div>
 									))}
-
 									<DialogFooter>
 										<DialogPrimitive.Close
 											className={
@@ -166,15 +167,15 @@ const EventSumButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 							</DialogContent>
 						</Dialog>
 					))}
-				</>
+				</div>
 			) : (
-				<>
+				<div className={'h-full mb-[2px] break-normal overflow-x-hidden sm:overflow-x-auto'}>
 					{filteredEvents.map((item: any, key: number) => (
-						<EventButton elm={item} key={key}/>
+						<EventButton elm={item} key={key} />
 					))}
-				</>
+				</div>
 			)}
-		</div>
+		</>
 	)
 }
 

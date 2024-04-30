@@ -22,8 +22,6 @@ import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'
 
 const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: any) => {
-
-
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 
 	useEffect(() => {
@@ -85,13 +83,15 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 	}
 
 	return (
-		<div className={'h-full relative'}>
+		<div className={'h-4/5 relative'}>
 			{/* Event button */}
 			<EventSumButton filteredEvents={filteredEvents} />
 			{/* All events button */}
-			<div className={'h-[20px]'}>
-				{filteredEvents.length > 2 && <EventAllButton filteredEvents={filteredEvents} />}
-			</div>
+			{filteredEvents.length > 2 && (
+				<div className={'h-[20px] absolute bottom-0 w-full'}>
+					<EventAllButton filteredEvents={filteredEvents} />{' '}
+				</div>
+			)}
 		</div>
 	)
 }
