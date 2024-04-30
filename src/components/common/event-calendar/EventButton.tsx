@@ -47,16 +47,15 @@ const EventButton = ({ elm, key }: { elm: Cal_event; key: number }) => {
 		<Dialog key={key}>
 			<DialogTrigger asChild>
 				<Button
-					className={'h-[20px] border-hidden flex p-0 justify-start whitespace-normal'}
+					className={'w-full h-[95%] border-hidden flex p-0 justify-start '}
 					variant="outline">
 					<div
 						className={cn(
 							'h-4 w-[16px] border rounded',
 							getColor(elm[FILTER_TYPE])
-						)}></div>
-					<div className={'invisible sm:visible text-left '}>
-						{elm[EVENT_NAME]}
+						)}>
 					</div>
+                    <p className={'w-full h-full hidden sm:block break-all'}>{elm[EVENT_NAME]}</p>
 				</Button>
 			</DialogTrigger>
 			<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl'}>
@@ -74,7 +73,7 @@ const EventButton = ({ elm, key }: { elm: Cal_event; key: number }) => {
 									'h-4 w-[16px] border rounded mr-1',
 									getColor(elm[FILTER_TYPE])
 								)}></div>
-							{elm[FILTER_TYPE]}
+							<div>{elm[FILTER_TYPE]}</div>
 						</div>
 						<DialogPrimitive.Close>
 							<X className={'h-6 w-6'} />

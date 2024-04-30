@@ -66,7 +66,7 @@ const EventSumButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 	return (
 		<>
 			{filteredEvents.length > 3 ? (
-				<div className={'h-full mb-[2px] break-normal overflow-x-hidden'}>
+				<div className={'h-full mb-[2px] overflow-x-hidden'}>
 					{groupedByLocation(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>
 							<DialogTrigger asChild>
@@ -79,11 +79,11 @@ const EventSumButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 											getColor(item[FILTER_TYPE])
 										)}></div>
 									<div
-										className={'invisible sm:visible max-w-[126px] text-left '}>
+										className={'hidden sm:block max-w-[126px] text-left '}>
 										{item[FILTER_TYPE]?.slice(0, EVENT_BRANCH_NAME_LENGTH)}
 									</div>
-									<div className={'flex'}>
-										<CalendarCheck height={18} />: {item[EVENT_LIST].length}
+									<div className={'flex items-center justify-center'}>
+										<CalendarCheck height={18} className={'hidden sm:block'}/>: <div>{item[EVENT_LIST].length}</div>
 									</div>
 								</Button>
 							</DialogTrigger>
@@ -169,7 +169,7 @@ const EventSumButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 					))}
 				</div>
 			) : (
-				<div className={'h-full mb-[2px] break-normal overflow-x-hidden sm:overflow-x-auto'}>
+				<div className={'h-[95%] mb-[2px] w-full overflow-y-auto'}>
 					{filteredEvents.map((item: any, key: number) => (
 						<EventButton elm={item} key={key} />
 					))}

@@ -83,7 +83,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 	}
 
 	return (
-		<div className={'h-4/5 relative'}>
+		<div className={'h-4/5 relative w-full'}>
 			{/* Event button */}
 			<EventSumButton filteredEvents={filteredEvents} />
 			{/* All events button */}
