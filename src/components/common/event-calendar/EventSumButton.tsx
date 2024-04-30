@@ -170,8 +170,8 @@ const EventSumButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 				</div>
 			) : (
 				<div className={'h-[95%] mb-[2px] w-full overflow-y-auto'}>
-					{filteredEvents.map((item: any, key: number) => (
-						<EventButton elm={item} key={key} />
+					{filteredEvents.map((item: any, idx: number) => (
+						<EventButton elm={item} key={idx} id={idx} />
 					))}
 				</div>
 			)}
