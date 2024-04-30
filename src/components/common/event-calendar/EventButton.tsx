@@ -55,7 +55,7 @@ const EventButton = ({ elm, key }: { elm: Cal_event; key: number }) => {
 							getColor(elm[FILTER_TYPE])
 						)}>
 					</div>
-                    <p className={'w-full h-full hidden sm:block break-all'}>{elm[EVENT_NAME]}</p>
+                    <p className={'w-full h-full hidden sm:block break-all text-left'}>{elm[EVENT_NAME]}</p>
 				</Button>
 			</DialogTrigger>
 			<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl'}>
