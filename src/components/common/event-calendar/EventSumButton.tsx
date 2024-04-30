@@ -58,10 +58,8 @@ const EventSumButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 		})
 
 		result = Object.keys(locatoionArr).map((loc) => {
-			return { 'tag-func-loc': loc, list: locatoionArr[loc] }
+			return { [FILTER_TYPE]: loc, [EVENT_LIST]: locatoionArr[loc] }
 		})
-
-		console.log('result', result)
 		return result ?? []
 	}
 
