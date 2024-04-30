@@ -33,7 +33,7 @@ import { config } from '@/constants'
 import { X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 
-const EventButton = ({ elm, key }: { elm: Cal_event; key: number }) => {
+const EventButton = ({ elm, id }: { elm: Cal_event; id: number; }) => {
 	const { logo } = config
 
 	const getColor = (event_type: string) => {
@@ -44,7 +44,7 @@ const EventButton = ({ elm, key }: { elm: Cal_event; key: number }) => {
 	}
 
 	return (
-		<Dialog key={key}>
+		<Dialog key={id}>
 			<DialogTrigger asChild>
 				<Button
 					className={'w-full h-[95%] border-hidden flex p-0 justify-start '}
