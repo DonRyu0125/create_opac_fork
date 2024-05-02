@@ -241,8 +241,6 @@ const EventCalendar = () => {
 		setMonthType(false)
 	}
 
-
-
 	const fetch_get = async (currentDate: Date) => {
 		const BASE_URL = 'http://norfolk_test.minisisinc.com'
 		const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
@@ -329,7 +327,7 @@ const EventCalendar = () => {
 
 	const generateWeek = () => {
 		const weekArray = []
-		let firstDayOfWeek = new Date()
+		let firstDayOfWeek = new Date(currentDate)
 		firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay())
 
 		for (let i = 0; i < 7; i++) {
@@ -399,7 +397,8 @@ const EventCalendar = () => {
 					<div className="mt-2">&lt;</div>
 				</Button>
 				<div className="text-3xl text-primary-foreground">
-					{monthType && currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+					{monthType &&
+						currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
 					{weekType && showWeek()}
 				</div>
 				<Button
@@ -409,15 +408,20 @@ const EventCalendar = () => {
 					<div className="mt-2">&gt;</div>
 				</Button>
 				<div className={'sm:absolute bottom-2 sm:right-10'}>
-					<Button className={'bg-black text-primary-foreground rounded mx-1 hover:bg-black'} onClick={showMonthView}>
+					<Button
+						className={'bg-black text-primary-foreground rounded mx-1 hover:bg-black'}
+						onClick={showMonthView}>
 						Month
 					</Button>
-					<Button className={'bg-black text-primary-foreground rounded hover:bg-black'} onClick={showWeekView}>Week</Button>
+					<Button
+						className={'bg-black text-primary-foreground rounded hover:bg-black'}
+						onClick={showWeekView}>
+						Week
+					</Button>
 				</div>
 			</div>
 			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
 			<div className={'w-full mt-1'}>
-				<div className={'flex'}></div>
 				<div className={'grid grid-cols-7 gap-1'}>
 					{daysOfWeek.map((item, key) => {
 						return (
@@ -430,38 +434,40 @@ const EventCalendar = () => {
 							</div>
 						)
 					})}
-					{monthType && generateMonth().map((item: Day_obj, key: number) => {
-						return (
-							<div
-								key={key}
-								className="rounded-lg border border-black cursor-pointer max-w-40 h-28 w-full">
-								<div className={'bg-slate-200'}>{item?.day}</div>
-								<EventCalendarEventList
-									dayObj={item}
-									currentFilter={currentFilter}
-									currentEvent={currentEvent}
-									monthType={monthType}
-									weekType={weekType}
-								/>
-							</div>
-						)
-					})}
-					{weekType && generateWeek().map((item: Day_obj, key: number) => {
-						return (
-							<div
-								key={key}
-								className="rounded-lg border border-black cursor-pointer max-w-40 h-96 w-full">
-								<div className={'bg-slate-200'}>{item?.day}</div>
-								<EventCalendarEventList
-									dayObj={item}
-									currentFilter={currentFilter}
-									currentEvent={currentEvent}
-									monthType={monthType}
-									weekType={weekType}
-								/>
-							</div>
-						)
-					})}
+					{monthType &&
+						generateMonth().map((item: Day_obj, key: number) => {
+							return (
+								<div
+									key={key}
+									className="rounded-lg border border-black cursor-pointer max-w-40 h-28 w-full">
+									<div className={'bg-slate-200'}>{item?.day}</div>
+									<EventCalendarEventList
+										dayObj={item}
+										currentFilter={currentFilter}
+										currentEvent={currentEvent}
+										monthType={monthType}
+										weekType={weekType}
+									/>
+								</div>
+							)
+						})}
+					{weekType &&
+						generateWeek().map((item: Day_obj, key: number) => {
+							return (
+								<div
+									key={key}
+									className="rounded-lg border border-black cursor-pointer max-w-40 h-96 w-full">
+									<div className={'bg-slate-200'}>{item?.day}</div>
+									<EventCalendarEventList
+										dayObj={item}
+										currentFilter={currentFilter}
+										currentEvent={currentEvent}
+										monthType={monthType}
+										weekType={weekType}
+									/>
+								</div>
+							)
+						})}
 				</div>
 			</div>
 		</div>
