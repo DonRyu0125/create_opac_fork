@@ -231,6 +231,18 @@ const EventCalendar = () => {
 		setCurrentEvent(dummy)
 	}
 
+	const showMonthView = () => {
+		setMonthType(true)
+		setWeekType(false)
+	}
+
+	const showWeekView = () => {
+		setWeekType(true)
+		setMonthType(false)
+	}
+
+
+
 	const fetch_get = async (currentDate: Date) => {
 		const BASE_URL = 'http://norfolk_test.minisisinc.com'
 		const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
@@ -361,7 +373,7 @@ const EventCalendar = () => {
 		setCurrentDate(newDate)
 	}
 
-	const showMonth = () => {
+	const showWeek = () => {
 		let firstDayOfWeek = new Date(currentDate)
 		firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay())
 		let nextDay = new Date(
@@ -376,29 +388,31 @@ const EventCalendar = () => {
 	return (
 		<div
 			className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
-			<div className={'flex justify-center items-center bg-primary h-[100px] rounded relative'}>
-				
-					<Button
-						onClick={prevWeek}
-						className={'text-4xl text-primary-foreground mx-5'}
-						disabled={isClickablePrev}>
-						<div className="mt-2">&lt;</div>
-					</Button>
-					<div className="text-3xl text-primary-foreground">
-						{/* {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })} */}
-						{showMonth()}
-					</div>
-					<Button
-						onClick={nextWeek}
-						className={'text-4xl text-primary-foreground mx-5'}
-						disabled={isClickableNext}>
-						<div className="mt-2">&gt;</div>
-					</Button>
-			
-
+			<div
+				className={
+					'flex justify-center items-center bg-primary h-[100px] rounded relative'
+				}>
+				<Button
+					onClick={weekType ? prevWeek : prevMonth}
+					className={'text-4xl text-primary-foreground mx-5'}
+					disabled={isClickablePrev}>
+					<div className="mt-2">&lt;</div>
+				</Button>
+				<div className="text-3xl text-primary-foreground">
+					{monthType && currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+					{weekType && showWeek()}
+				</div>
+				<Button
+					onClick={weekType ? nextWeek : nextMonth}
+					className={'text-4xl text-primary-foreground mx-5'}
+					disabled={isClickableNext}>
+					<div className="mt-2">&gt;</div>
+				</Button>
 				<div className={'sm:absolute bottom-2 sm:right-10'}>
-					<Button className={'bg-black text-primary-foreground rounded'}>Month</Button>
-					<Button className={'bg-black text-primary-foreground rounded'}>Week</Button>
+					<Button className={'bg-black text-primary-foreground rounded mx-1 hover:bg-black'} onClick={showMonthView}>
+						Month
+					</Button>
+					<Button className={'bg-black text-primary-foreground rounded hover:bg-black'} onClick={showWeekView}>Week</Button>
 				</div>
 			</div>
 			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
@@ -416,7 +430,21 @@ const EventCalendar = () => {
 							</div>
 						)
 					})}
-					{generateWeek().map((item: Day_obj, key: number) => {
+					{monthType && generateMonth().map((item: Day_obj, key: number) => {
+						return (
+							<div
+								key={key}
+								className="rounded-lg border border-black cursor-pointer max-w-40 h-28 w-full">
+								<div className={'bg-slate-200'}>{item?.day}</div>
+								<EventCalendarEventList
+									dayObj={item}
+									currentFilter={currentFilter}
+									currentEvent={currentEvent}
+								/>
+							</div>
+						)
+					})}
+					{weekType && generateWeek().map((item: Day_obj, key: number) => {
 						return (
 							<div
 								key={key}
