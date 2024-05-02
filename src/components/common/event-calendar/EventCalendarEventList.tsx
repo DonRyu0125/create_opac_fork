@@ -5,23 +5,27 @@ import { useEffect, useState } from 'react'
 import {
 	Cal_event,
 	EVENT_DATE,
-	EVENT_DESC,
-	EVENT_END_TIME,
-	EVENT_NAME,
-	EVENT_ROOM,
-	EVENT_AGE,
 	EVENT_START_TIME,
 	EVENT_TAG_WORD_LENGTH,
 	FILTER_TYPE,
 	FILTER_TYPE_COLORS,
 	EVENT_CAPACITY,
 	EVENT_LANG,
+	Day_obj,
 } from './EventCalendar'
 import { convertLowerTrim } from '@/lib/utils'
 import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'
 
-const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: any) => {
+export interface Event_list {
+	dayObj: Day_obj
+	currentFilter: string[]
+	currentEvent: Cal_event[]
+	weekType:boolean
+	monthType:boolean
+}
+
+const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent, weekType, monthType}: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 
 	useEffect(() => {
@@ -85,11 +89,11 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent }: an
 	return (
 		<div className={'h-4/5 relative w-full'}>
 			{/* Event button */}
-			<EventSumButton filteredEvents={filteredEvents} />
+			<EventSumButton filteredEvents={filteredEvents} weekType={weekType} monthType={monthType} />
 			{/* All events button */}
-			{filteredEvents.length > 2 && (
+			{(monthType && filteredEvents.length > 2) && (
 				<div className={'h-[20px] absolute bottom-0 w-full'}>
-					<EventAllButton filteredEvents={filteredEvents} />{' '}
+					<EventAllButton filteredEvents={filteredEvents} />
 				</div>
 			)}
 		</div>

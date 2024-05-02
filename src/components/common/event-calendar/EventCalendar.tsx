@@ -440,6 +440,8 @@ const EventCalendar = () => {
 									dayObj={item}
 									currentFilter={currentFilter}
 									currentEvent={currentEvent}
+									monthType={monthType}
+									weekType={weekType}
 								/>
 							</div>
 						)
@@ -448,12 +450,14 @@ const EventCalendar = () => {
 						return (
 							<div
 								key={key}
-								className="rounded-lg border border-black cursor-pointer max-w-40 h-28 w-full">
+								className="rounded-lg border border-black cursor-pointer max-w-40 h-96 w-full">
 								<div className={'bg-slate-200'}>{item?.day}</div>
 								<EventCalendarEventList
 									dayObj={item}
 									currentFilter={currentFilter}
 									currentEvent={currentEvent}
+									monthType={monthType}
+									weekType={weekType}
 								/>
 							</div>
 						)
