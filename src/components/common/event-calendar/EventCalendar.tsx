@@ -15,17 +15,17 @@ export interface Cal_event {
 	[EVENT_NAME]: string
 	[EVENT_DESC]: string
 	[FILTER_TYPE]: string
-	[FILTER_TYPE_ID]:string
-	[EVENT_FEE]:string
+	[FILTER_TYPE_ID]: string
+	[EVENT_FEE]: string
 	[EVENT_DATE]: string
-	[EVENT_BANNER_TYPE]:string
-	[EVENT_AGE]:string
-	[EVENT_CAPACITY]:string
-	[EVENT_RSVP]:string
+	[EVENT_BANNER_TYPE]: string
+	[EVENT_AGE]: string
+	[EVENT_CAPACITY]: string
+	[EVENT_RSVP]: string
 	[EVENT_START_TIME]: string
 	[EVENT_END_TIME]: string
-	[EVENT_ROOM]:string
-	[EVENT_LANG]:string
+	[EVENT_ROOM]: string
+	[EVENT_LANG]: string
 }
 
 export interface Day_obj {
@@ -67,7 +67,7 @@ const dummy = [
 		[EVENT_DATE]: '2024-04-22',
 		[EVENT_START_TIME]: '9:00 am',
 		[EVENT_END_TIME]: '10:00 am',
-		[EVENT_ROOM]:'105'
+		[EVENT_ROOM]: '105',
 	},
 	{
 		[EVENT_NAME]: 'Korean2 cooking class',
@@ -83,7 +83,7 @@ const dummy = [
 		[EVENT_DATE]: '2024-04-22',
 		[EVENT_START_TIME]: '9:00 am',
 		[EVENT_END_TIME]: '10:00 am',
-		[EVENT_ROOM]:'105'
+		[EVENT_ROOM]: '105',
 	},
 	{
 		[EVENT_NAME]: 'Korean4 cooking class',
@@ -99,7 +99,7 @@ const dummy = [
 		[EVENT_DATE]: '2024-04-22',
 		[EVENT_START_TIME]: '9:00 am',
 		[EVENT_END_TIME]: '10:00 am',
-		[EVENT_ROOM]:'105'
+		[EVENT_ROOM]: '105',
 	},
 	{
 		[EVENT_NAME]: 'Korean5 cooking class',
@@ -115,7 +115,7 @@ const dummy = [
 		[EVENT_DATE]: '2024-04-22',
 		[EVENT_START_TIME]: '9:00 am',
 		[EVENT_END_TIME]: '10:00 am',
-		[EVENT_ROOM]:'105'
+		[EVENT_ROOM]: '105',
 	},
 	{
 		[EVENT_NAME]: 'Korean5 cooking class sadasgsd32re32e this ie kimchi soy sauce beef',
@@ -131,7 +131,7 @@ const dummy = [
 		[EVENT_DATE]: '2024-04-20',
 		[EVENT_START_TIME]: '9:00 am',
 		[EVENT_END_TIME]: '10:00 am',
-		[EVENT_ROOM]:'105'
+		[EVENT_ROOM]: '105',
 	},
 	{
 		[EVENT_NAME]: 'Korean5 cooking class sadasgsd32re32e this ie kimchi soy sauce beef',
@@ -147,8 +147,8 @@ const dummy = [
 		[EVENT_DATE]: '2024-04-20',
 		[EVENT_START_TIME]: '9:00 am',
 		[EVENT_END_TIME]: '10:00 am',
-		[EVENT_ROOM]:'105'
-	}
+		[EVENT_ROOM]: '105',
+	},
 ]
 
 export const EVENT_BRANCH_NAME_LENGTH = -7
@@ -211,6 +211,8 @@ export const FILTER_TYPE_COLORS = [
 ]
 
 const EventCalendar = () => {
+	const [monthType, setMonthType] = useState<boolean>(true)
+	const [weekType, setWeekType] = useState<boolean>(false)
 	const [currentDate, setCurrentDate] = useState(new Date())
 	const [currentEvent, setCurrentEvent] = useState<Cal_event[]>([])
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
@@ -225,7 +227,7 @@ const EventCalendar = () => {
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate)
 		// console.log('currE',currE)
-		
+
 		setCurrentEvent(dummy)
 	}
 
@@ -235,7 +237,7 @@ const EventCalendar = () => {
 		const DATE_FIELD = 'TAG_FUNC_DATE'
 		const DATE_WILDCARD = '%222024-04-%2A%22'
 		//`${currentDate.getFullYear()}%2D0${currentDate.getMonth() + 1}%2D%2A`
-		
+
 		try {
 			const response = await axios.get(
 				`${BASE_URL}/scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} 2024-04-`,
@@ -313,6 +315,42 @@ const EventCalendar = () => {
 		return calendarArray
 	}
 
+	const generateWeek = () => {
+		const weekArray = []
+		let firstDayOfWeek = new Date()
+		firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay())
+
+		for (let i = 0; i < 7; i++) {
+			const day = new Date(firstDayOfWeek)
+			day.setDate(day.getDate() + i)
+			weekArray.push({
+				day: day.getDate(),
+				month: currentDate.getMonth() + 1,
+				year: currentDate.getFullYear(),
+			})
+		}
+
+		return weekArray
+	}
+
+	const nextWeek = () => {
+		const newDate = new Date(
+			currentDate.getFullYear(),
+			currentDate.getMonth(),
+			currentDate.getDate() + 7
+		)
+		setCurrentDate(newDate)
+	}
+
+	const prevWeek = () => {
+		const newDate = new Date(
+			currentDate.getFullYear(),
+			currentDate.getMonth(),
+			currentDate.getDate() - 7
+		)
+		setCurrentDate(newDate)
+	}
+
 	const prevMonth = () => {
 		const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
 		setCurrentDate(newDate)
@@ -323,25 +361,45 @@ const EventCalendar = () => {
 		setCurrentDate(newDate)
 	}
 
+	const showMonth = () => {
+		let firstDayOfWeek = new Date(currentDate)
+		firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay())
+		let nextDay = new Date(
+			firstDayOfWeek.getFullYear(),
+			firstDayOfWeek.getMonth(),
+			firstDayOfWeek.getDate() + 6
+		)
+
+		return `${currentDate.getFullYear()} ${firstDayOfWeek.toLocaleString('default', { month: 'short' })} ${firstDayOfWeek.getDate()}th ~  ${nextDay.toLocaleString('default', { month: 'short' })} ${nextDay.getDate()}th`
+	}
+
 	return (
 		<div
 			className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
-			<div className={'flex justify-center items-center bg-primary h-[100px] rounded'}>
-				<Button
-					onClick={prevMonth}
-					className={'text-4xl text-primary-foreground mx-5'}
-					disabled={isClickablePrev}>
-					<div className="mt-2">&lt;</div>
-				</Button>
-				<div className="text-3xl text-primary-foreground">
-					{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+			<div className={'flex justify-center items-center bg-primary h-[100px] rounded relative'}>
+				
+					<Button
+						onClick={prevWeek}
+						className={'text-4xl text-primary-foreground mx-5'}
+						disabled={isClickablePrev}>
+						<div className="mt-2">&lt;</div>
+					</Button>
+					<div className="text-3xl text-primary-foreground">
+						{/* {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })} */}
+						{showMonth()}
+					</div>
+					<Button
+						onClick={nextWeek}
+						className={'text-4xl text-primary-foreground mx-5'}
+						disabled={isClickableNext}>
+						<div className="mt-2">&gt;</div>
+					</Button>
+			
+
+				<div className={'sm:absolute bottom-2 sm:right-10'}>
+					<Button className={'bg-black text-primary-foreground rounded'}>Month</Button>
+					<Button className={'bg-black text-primary-foreground rounded'}>Week</Button>
 				</div>
-				<Button
-					onClick={nextMonth}
-					className={'text-4xl text-primary-foreground mx-5'}
-					disabled={isClickableNext}>
-					<div className="mt-2">&gt;</div>
-				</Button>
 			</div>
 			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
 			<div className={'w-full mt-1'}>
@@ -358,7 +416,7 @@ const EventCalendar = () => {
 							</div>
 						)
 					})}
-					{generateMonth().map((item: Day_obj, key: number) => {
+					{generateWeek().map((item: Day_obj, key: number) => {
 						return (
 							<div
 								key={key}
