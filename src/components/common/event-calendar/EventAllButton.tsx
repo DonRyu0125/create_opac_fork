@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { convertLowerTrim } from '@/lib/utils'
 import { cn } from '@/lib/utils'
+import * as Accordion from '@radix-ui/react-accordion'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 import {
@@ -29,12 +30,15 @@ import {
 	EVENT_LANG,
 } from './EventCalendar'
 import { config } from '@/constants'
+import EventRSVPForm from './EventRSVPForm'
+import { AccordionTrigger } from '@radix-ui/react-accordion'
+import { AccordionContent } from '@/components/ui/accordion'
 type showStrObj = {
 	[key: number]: boolean
 }
 
 const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => {
-    const { logo } = config
+	const { logo } = config
 	const [showFullStr, setShowFullStr] = useState<showStrObj>({})
 	const showStrToggle = (key: number) => {
 		setShowFullStr((prevShowFullStr) => {
@@ -54,9 +58,6 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 		})
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
-
-    
-
 
 	return (
 		<Dialog>
@@ -88,83 +89,103 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 						</DialogPrimitive.Close>
 					</DialogTitle>
 				</DialogHeader>
-				{filteredEvents.map((item: Cal_event, idx: number) => (
-					<div key={idx} className={'w-11/12 border-2 rounded'}>
-						<DialogTitle
-							className={
-								'bg-primary text-primary-foreground h-10 flex justify-center items-center rounded'
-							}>
-							<div className={'flex'}>
-								<div
-									className={cn(
-										'h-4 w-[16px] border rounded mr-1',
-										getColor(item[FILTER_TYPE])
-									)}></div>
-								{item[FILTER_TYPE]}
-							</div>
-						</DialogTitle>
-						<div
-							className={
-								'w-full text-l w-full flex flex-col justify-center items-left font-bold px-2 '
-							}>
-							<div className={'overflow-hidden text-lg'}>{item[EVENT_NAME]}</div>
-							<div className={'sm:flex'}>
-								<div className="ml-[10px] sm:ml-0 text-md text-gray-600">
-									&#x2022;{item[EVENT_DATE]}
+				<Accordion.Root type="multiple" className={'AccordionRoot w-full px-2'}>
+					{filteredEvents.map((item: Cal_event, idx: number) => (
+						<Accordion.Item className="AccordionItem" value={`${idx}`} key={idx}>
+							<AccordionTrigger className={'w-full'}>
+								<div key={idx} className={'w-full border-2 rounded'}>
+									<DialogTitle
+										className={
+											'bg-primary text-primary-foreground h-10 flex justify-center items-center rounded'
+										}>
+										<div className={'flex'}>
+											<div
+												className={cn(
+													'h-4 w-[16px] border rounded mr-1',
+													getColor(item[FILTER_TYPE])
+												)}></div>
+											{item[FILTER_TYPE]}
+										</div>
+									</DialogTitle>
 								</div>
-								<div className="ml-[10px] text-md text-gray-600">
-									&#x2022;{item[EVENT_START_TIME]} -{item[EVENT_END_TIME]}
+							</AccordionTrigger>
+							<AccordionContent>
+								<div className={'flex'}>
+									<div
+										className={
+											'w-full text-l w-full flex flex-col justify-center items-left font-bold px-2 '
+										}>
+										<div className={'overflow-hidden text-lg font-bold'}>
+											{item[EVENT_NAME]}
+										</div>
+										<div className={'sm:flex'}>
+											<div className="ml-[10px] sm:ml-0 text-md text-gray-600 font-bold">
+												&#x2022;{item[EVENT_DATE]}
+											</div>
+											<div className="ml-[10px] text-md text-gray-600 font-bold">
+												<span>&#x2022;{item[EVENT_START_TIME]}</span>
+												<span className={'mx-2'}>-</span>
+												<span>{item[EVENT_END_TIME]}</span>
+											</div>
+											<div className="ml-[10px] text-md text-gray-600 font-bold">
+												&#x2022;Room: {item[EVENT_ROOM]}
+											</div>
+										</div>
+										<div className={'sm:flex'}>
+											<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
+												&#x2022;Suitable for: {item[EVENT_AGE]}
+											</div>
+											<div className="ml-[10px] text-md text-gray-600 font-bold">
+												&#x2022;Seats: {item[EVENT_CAPACITY]}
+											</div>
+										</div>
+									</div>
+									{/* <div>{console.log('item', item)}</div> */}
 								</div>
-								<div className="ml-[10px] text-md text-gray-600">
-									&#x2022;Room: {item[EVENT_ROOM]}
-								</div>
-							</div>
-							<div className={'sm:flex'}>
-								<div className="sm:ml-0 ml-[10px] text-md text-gray-600">
-									&#x2022;Suitable for: {item[EVENT_AGE]}
-								</div>
-								<div className="ml-[10px] text-md text-gray-600">
-									&#x2022;Seats: {item[EVENT_CAPACITY]}
-								</div>
-							</div>
-						</div>
-						{/* 'More' button to toggle description of the event */}
-						<DialogDescription
-							className={`${showFullStr[idx] ? 'h-24' : 'h-10'} p-2 break-all overflow-x-hidden overflow-y-auto`}>
-							<>
-								{showFullStr[idx] ? (
+
+								{/* 'More' button to toggle description of the event */}
+								<DialogDescription
+									className={`h-72 p-2 break-all overflow-x-hidden overflow-y-auto`}>
+									{item[EVENT_DESC]}
+								</DialogDescription>
+								{/* <DialogDescription
+									className={`${showFullStr[idx] ? 'h-72' : 'h-10'} p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									<>
-										{item[EVENT_DESC]}
-										<button
-											className={'text-slate-950 font-semibold'}
-											onClick={() => showStrToggle(idx)}>
-											....Close
-										</button>
-									</>
-								) : (
-									<>
-										{item[EVENT_DESC]?.substring(0, 10)}
-										{(item[EVENT_DESC]?.length ?? 0) > 10 && (
-											<button
-												className={'text-slate-950 font-semibold'}
-												onClick={() => showStrToggle(idx)}>
-												....More
-											</button>
+										{showFullStr[idx] ? (
+											<>
+												{item[EVENT_DESC]}
+												<button
+													className={'text-slate-950 font-semibold'}
+													onClick={() => showStrToggle(idx)}>
+													....Close
+												</button>
+											</>
+										) : (
+											<>
+												{item[EVENT_DESC]?.substring(0, 10)}
+												{(item[EVENT_DESC]?.length ?? 0) > 10 && (
+													<button
+														className={'text-slate-950 font-semibold'}
+														onClick={() => showStrToggle(idx)}>
+														....More
+													</button>
+												)}
+											</>
 										)}
 									</>
-								)}
-							</>
-						</DialogDescription>
-					</div>
-				))}
-				<DialogFooter className={'w-full flex justify-end'}>
-					<DialogPrimitive.Close
+								</DialogDescription> */}
+							</AccordionContent>
+						</Accordion.Item>
+					))}
+				</Accordion.Root>
+				<DialogFooter className={'w-full flex absolute bottom-1 relative'}>
+					{/* <DialogPrimitive.Close
 						onClick={resetToggleSetting}
 						className={
-							'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-center rounded'
+							'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-center rounded absolute bottom-1'
 						}>
 						Close
-					</DialogPrimitive.Close>
+					</DialogPrimitive.Close> */}
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

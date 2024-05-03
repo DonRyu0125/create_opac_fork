@@ -33,7 +33,7 @@ import { config } from '@/constants'
 import { X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 
-const EventButton = ({ elm, id }: { elm: Cal_event; id: number; }) => {
+const EventButton = ({ elm, id }: { elm: Cal_event; id: number }) => {
 	const { logo } = config
 
 	const getColor = (event_type: string) => {
@@ -53,9 +53,10 @@ const EventButton = ({ elm, id }: { elm: Cal_event; id: number; }) => {
 						className={cn(
 							'h-4 w-[16px] border rounded',
 							getColor(elm[FILTER_TYPE])
-						)}>
-					</div>
-                    <p className={'w-full h-full hidden sm:block break-all text-left'}>{elm[EVENT_NAME]}</p>
+						)}></div>
+					<p className={'w-full h-full hidden sm:block break-all text-left'}>
+						{elm[EVENT_NAME]}
+					</p>
 				</Button>
 			</DialogTrigger>
 			<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl'}>
@@ -84,24 +85,26 @@ const EventButton = ({ elm, id }: { elm: Cal_event; id: number; }) => {
 					<div className={'w-full sm:w-8/12 '}>
 						<div className={'overflow-hidden text-lg'}>{elm[EVENT_NAME]}</div>
 						<div className={'sm:flex'}>
-							<div className="ml-[10px] sm:ml-0 text-md text-gray-600">
+							<div className="ml-[10px] sm:ml-0 text-md  text-gray-600 font-bold">
 								&#x2022;{elm[EVENT_DATE]}
 							</div>
-							<div className="ml-[10px] text-md text-gray-600">
-								&#x2022;{elm[EVENT_START_TIME]} -{elm[EVENT_END_TIME]}
+							<div className="ml-[10px] text-md text-gray-600 font-bold">
+								<span>&#x2022;{elm[EVENT_START_TIME]}</span>
+								<span className={'mx-2'}>-</span>
+								<span>{elm[EVENT_END_TIME]}</span>
 							</div>
-							<div className="ml-[10px] text-md text-gray-600">
+							<div className="ml-[10px] text-md text-gray-600 font-bold">
 								&#x2022;Room: {elm[EVENT_ROOM]}
 							</div>
 						</div>
 						<div className={'sm:flex'}>
-							<div className="sm:ml-0 ml-[10px] text-md text-gray-600">
+							<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
 								&#x2022;Suitable for: {elm[EVENT_AGE]}
 							</div>
-							<div className="ml-[10px] text-md text-gray-600">
+							<div className="ml-[10px] text-md text-gray-600 font-bold">
 								&#x2022;Seats: {elm[EVENT_CAPACITY]}
 							</div>
-							<div className="ml-[10px] text-md text-gray-600">
+							<div className="ml-[10px] text-md text-gray-600 font-bold">
 								&#x2022;Language: {elm[EVENT_LANG]}
 							</div>
 						</div>
