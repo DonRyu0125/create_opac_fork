@@ -27,6 +27,7 @@ import {
 	EVENT_LANG,
 	EVENT_BRANCH_NAME_LENGTH,
 	EVENT_LIST,
+	EVENT_RSVP,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
@@ -95,7 +96,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 							</DialogTrigger>
 							<DialogContent
 								hideClose={'invisible'}
-								className={'max-w-lg h-[500px] overflow-auto p-1 md:max-w-3xl'}>
+								className={'max-w-lg h-[500px] overflow-auto p-4 md:max-w-3xl'}>
 								<>
 									<DialogHeader>
 										<DialogTitle
@@ -121,8 +122,10 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 									{item[EVENT_LIST]?.map((elm: any, key: number) => (
 										<div
 											key={key}
-											className={'w-full text-l sm:flex font-bold p-3'}>
-											<div className={'w-full sm:w-8/12 '}>
+											className={
+												'w-full text-l sm:flex font-bold p-2 border-2 rounded '
+											}>
+											<div className={`w-full ${elm[EVENT_RSVP] && 'sm:w-8/12'}`}>
 												<div className={'overflow-hidden text-lg'}>
 													{elm[EVENT_NAME]}
 												</div>
@@ -157,9 +160,12 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 													{elm[EVENT_DESC]}
 												</DialogDescription>
 											</div>
-											<div className={'w-full sm:w-4/12'}>
-												<EventRSVPForm />
-											</div>
+											{console.log('elm',elm)}
+											{elm[EVENT_RSVP] && (
+												<div className={'w-full sm:w-4/12'}>
+													<EventRSVPForm capacity={elm[EVENT_CAPACITY]} />
+												</div>
+											)}
 										</div>
 									))}
 									<DialogFooter>

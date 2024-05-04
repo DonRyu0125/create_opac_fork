@@ -36,6 +36,7 @@ export interface Day_obj {
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const CALENDAR_START_MONTH = 1
+export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const EVENT_NAME = 'tag-name'
 export const EVENT_DESC = 'tag-func-desc'
 export const FILTER_TYPE = 'tag-func-loc'
@@ -53,6 +54,13 @@ export const EVENT_LANG = 'tag-func-lang'
 export const EVENT_LIST = 'list'
 export const EVENT_BRANCH_NAME_LENGTH = -7
 export const EVENT_TAG_WORD_LENGTH = 18
+export const EVENT_PATRON_ID = 'tag-func-pat-id'
+export const EVENT_PATRON_FIRST_NAME = 'tag-func-p-first'
+export const EVENT_PATRON_LAST_NAME = 'tag-func-p-last'
+export const EVENT_PATRON_EMAIL = 'tag-func-p-email'
+export const EVENT_PATRON_PAID = 'tag-func-p-paid'
+export const EVENT_PATRON_ATTND = 'tag-func-p-attnd'
+export const EVENT_RSVP_YES = 'X'
 export const MON_REPORT_TYPES = [
 	'MONTHLY_CALENDAR',
 	'NEXT_MONTH_CALENDAR',
@@ -140,14 +148,13 @@ const EventCalendar = () => {
 	}
 
 	const fetch_get = async (currentDate: Date) => {
-		const BASE_URL = 'http://norfolk_test.minisisinc.com'
 		const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
 		const DATE_FIELD = 'TAG_FUNC_DATE'
 		const DATE_WILDCARD = `${currentDate.getFullYear()}%2D0${currentDate.getMonth() + 1}%2D%2A`
 
 		try {
 			const response = await axios.get(
-				`${BASE_URL}/scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} ${DATE_WILDCARD}`,
+				`/scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} ${DATE_WILDCARD}`,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
@@ -159,9 +166,15 @@ const EventCalendar = () => {
 			const event = jsonData?.div?.xml?.event
 
 			if (!event) return []
+			if (event.patron?.length  === 1) {
+				event.patron  = [event.patron];
+			} 
 			if (Array.isArray(event)) {
 				return event
 			}
+
+			console.log('event',event)
+		
 			return [event]
 		} catch (error) {
 			throw error
@@ -227,7 +240,7 @@ const EventCalendar = () => {
 		let firstDayOfWeek = new Date(currentDate)
 		firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay())
 
-		for (let i = 0; i < 7; i++) {
+		for (let i = 0; i < CALENDAR_WEEK_VIEW_DAYS; i++) {
 			const day = new Date(firstDayOfWeek)
 			day.setDate(day.getDate() + i)
 			weekArray.push({
