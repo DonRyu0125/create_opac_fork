@@ -164,16 +164,11 @@ const EventCalendar = () => {
 			const x2js = new X2JS()
 			const jsonData: any = x2js.xml2js(response.data)
 			const event = jsonData?.div?.xml?.event
-
 			if (!event) return []
-			if (event.patron?.length  === 1) {
-				event.patron  = [event.patron];
-			} 
 			if (Array.isArray(event)) {
 				return event
 			}
 
-			console.log('event',event)
 		
 			return [event]
 		} catch (error) {
