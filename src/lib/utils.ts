@@ -50,3 +50,15 @@ export const truncateWords = (
 export const convertLowerTrim = (type: string): string => {
     return type?.replace(/\s+/g, '')?.toLowerCase();
 };
+
+/**
+ * 
+ * @param elm 
+ * @returns Array
+ */
+export const convertToArr = (elm:Object | Array<any>) =>{
+	if (Array.isArray(elm)) {
+		return elm
+	}
+	return [elm]
+}
