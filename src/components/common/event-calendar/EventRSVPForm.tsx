@@ -7,11 +7,13 @@ import DropdownSelect from '../DropdownSelect'
 import axios from 'axios'
 import {
 	Cal_event,
+	EVENT_PATRON,
 	EVENT_PATRON_ATTND,
 	EVENT_PATRON_EMAIL,
 	EVENT_PATRON_FIRST_NAME,
 	EVENT_PATRON_ID,
 	EVENT_PATRON_LAST_NAME,
+	EVENT_PATRON_PAID,
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 
@@ -31,28 +33,26 @@ type EventInput = {
 
 type EventRSVPForm = {
 	capacity: number
-	patrons: any
+	patrons: patron[]
 }
 
-// patron-attnd
-// :
-// "22"
-// patron-email
-// :
-// "donryu1031@gmail.com"
-// patron-frist-name
-// :
-// "Don"
-// patron-last-name
-// :
-// "Ryu"
-// patron-paid
-// :
-// "X"
-// patron-pat-id
-// :
-// "22"
-//
+type patron = {
+	[EVENT_PATRON]: string
+	[EVENT_PATRON_ID]: string
+	[EVENT_PATRON_FIRST_NAME]: string
+	[EVENT_PATRON_LAST_NAME]: string
+	[EVENT_PATRON_EMAIL]: string
+	[EVENT_PATRON_PAID]: string
+	[EVENT_PATRON_ATTND]: string
+}
+
+{
+	/* <patron-pat-id>33</patron-pat-id>
+<patron-frist-name>Alice</patron-frist-name>
+<patron-last-name>Kim</patron-last-name>
+<patron-email>don102@gmail.com</patron-email>
+<patron-attnd>22</patron-attnd> */
+}
 
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	return (
@@ -74,6 +74,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 		watch,
 		formState: { errors },
 	} = useForm<Inputs>()
+
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		const BASE_URL = 'http://norfolk_test.minisisinc.com'
 		const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
@@ -131,6 +132,17 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 	const onClick = () => {
 		setShowForm((prev) => !prev)
 	}
+
+	const calNumOfPatron = (patrons: patron[]) => {
+		const totalPatronAttnd = patrons?.reduce((total:number, entry: patron) => {
+			if (entry && entry[EVENT_PATRON_ATTND] !== undefined) {
+				return total + parseInt(entry[EVENT_PATRON_ATTND], 10);
+			}
+			return total;
+		}, 0)
+		return totalPatronAttnd ?? 0;
+	}
+
 	return (
 		<div className={`flex justify-center w-full h-full`}>
 			{!showForm && (
@@ -143,17 +155,17 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 							<SquareUserRound /> Registration Required
 						</div>
 						<Button
-							disabled={capacity - patrons?.length === 0 ? true : false}
+							disabled={capacity - calNumOfPatron(patrons) === 0 ? true : false}
 							className={'w-full '}
 							onClick={onClick}>{`Register`}</Button>
 						<div className={'flex items-center justify-center'}>
-							{capacity - patrons?.length === 0 ? (
+							{capacity - calNumOfPatron(patrons) === 0 ? (
 								<div className={'flex text-red-600 items-center'}>
 									No Seats are remaining
 								</div>
 							) : (
 								<div className={'flex text-lime-800 items-center'}>
-									<BadgeCheck /> {`${capacity - patrons?.length} seats remaining`}
+									<BadgeCheck /> {`${capacity - calNumOfPatron(patrons)} seats remaining`}
 								</div>
 							)}
 						</div>
@@ -166,7 +178,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 				</div>
 			)}
 			{showForm && (
-				<div className={'h-full w-full p-1'}>
+				<div className={'h-5/6 w-full p-1'}>
 					<div className={'bg-primary p-1 text-white'}>
 						Did you <span className={'text-gray-400'}>Log In?</span>
 					</div>
@@ -194,6 +206,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 						<div className={'flex w-full flex-col my-1'}>
 							<Label>Attendee</Label>
 							<Input
+								defaultValue={1}
 								type="number"
 								step="1"
 								className={'border-2 border-grey-500 w-[30%]'}

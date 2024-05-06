@@ -67,7 +67,6 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 									<div>{elm[EVENT_END_TIME]}</div>
 								</div>
 								{elm[EVENT_RSVP] && <SquareUserRound /> }
-								
 							</div>
 						)}
 					</div>
@@ -95,7 +94,7 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 						</DialogPrimitive.Close>
 					</DialogTitle>
 				</DialogHeader>
-				<div className={'w-full min-h-[390px] text-l sm:flex font-bold'}>
+				<div className={'w-full min-h-[400px] text-l sm:flex font-bold'}>
 					<div className={'w-full sm:w-8/12 '}>
 						<div className={'overflow-hidden text-lg'}>{elm[EVENT_NAME]}</div>
 						<div className={'sm:flex'}>
