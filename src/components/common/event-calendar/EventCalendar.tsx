@@ -10,6 +10,7 @@ import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
+import { convertToArr } from '@/lib/utils'
 
 export interface Cal_event {
 	[EVENT_NAME]: string
@@ -20,13 +21,13 @@ export interface Cal_event {
 	[EVENT_DATE]: string
 	[EVENT_BANNER_TYPE]: string
 	[EVENT_AGE]: string
-	[EVENT_CAPACITY]: string
+	[EVENT_CAPACITY]: number
 	[EVENT_RSVP]: string
 	[EVENT_START_TIME]: string
 	[EVENT_END_TIME]: string
 	[EVENT_ROOM]: string
 	[EVENT_LANG]: string
-	patron:any
+	patron: any
 }
 
 export interface Day_obj {
@@ -166,13 +167,9 @@ const EventCalendar = () => {
 			const x2js = new X2JS()
 			const jsonData: any = x2js.xml2js(response.data)
 			const event = jsonData?.div?.xml?.event
-			if (!event) return []
-			if (Array.isArray(event)) {
-				return event
-			}
 
-		
-			return [event]
+			if (!event) return []
+			return convertToArr(event)
 		} catch (error) {
 			throw error
 		}

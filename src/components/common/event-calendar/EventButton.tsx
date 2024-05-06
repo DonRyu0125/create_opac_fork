@@ -9,7 +9,7 @@ import {
 	DialogTrigger,
 } from '../../ui/dialog'
 import { Button } from '../../ui/button'
-import { cn } from '@/lib/utils'
+import { cn, convertToArr } from '@/lib/utils'
 import { convertLowerTrim } from '@/lib/utils'
 import {
 	Cal_event,
@@ -27,6 +27,7 @@ import {
 	EVENT_LANG,
 	EVENT_BRANCH_NAME_LENGTH,
 	EVENT_LIST,
+	EVENT_PATRON,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
@@ -116,7 +117,7 @@ const EventButton = ({ elm, id }: { elm: Cal_event; id: number }) => {
 						</DialogDescription>
 					</div>
 					<div className={'w-full sm:w-4/12'}>
-						<EventRSVPForm capacity={elm.patron}/>
+					<EventRSVPForm capacity={elm[EVENT_CAPACITY]} patrons={convertToArr(elm[EVENT_PATRON])} />
 					</div>
 				</div>
 				<DialogFooter>

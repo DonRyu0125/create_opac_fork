@@ -13,6 +13,7 @@ import {
 	EVENT_PATRON_ID,
 	EVENT_PATRON_LAST_NAME,
 } from './EventCalendar'
+import { BadgeCheck } from 'lucide-react'
 
 type Inputs = {
 	[EVENT_PATRON_FIRST_NAME]: string
@@ -29,8 +30,28 @@ type EventInput = {
 }
 
 type EventRSVPForm = {
-	capacity: any
+	capacity: number
+	patrons: any
 }
+
+// patron-attnd
+// :
+// "22"
+// patron-email
+// :
+// "donryu1031@gmail.com"
+// patron-frist-name
+// :
+// "Don"
+// patron-last-name
+// :
+// "Ryu"
+// patron-paid
+// :
+// "X"
+// patron-pat-id
+// :
+// "22"
 
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	return (
@@ -44,7 +65,7 @@ const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	)
 }
 
-const EventRSVPForm = ({ capacity }: EventRSVPForm) => {
+const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 	const [showForm, setShowForm] = useState(false)
 	const {
 		register,
@@ -108,14 +129,41 @@ const EventRSVPForm = ({ capacity }: EventRSVPForm) => {
 
 	const onClick = () => {
 		setShowForm((prev) => !prev)
-
-		
 	}
-
 	console.log('capacity',capacity)
+	console.log('patrons',patrons)
 	return (
-		<div className={'flex justify-center w-full'}>
-			{!showForm && <Button onClick={onClick}>Register ({capacity})</Button>}
+		<div className={`flex justify-center w-full h-full`}>
+			{!showForm && (
+				<div className={'w-full p-2'}>
+					<div
+						className={
+							'w-full h-3/6 flex flex-col items-center justify-evenly space-evenly border-b-4'
+						}>
+						<div>Registration Required</div>
+						<Button
+							disabled={capacity - patrons?.length === 0 ? true : false}
+							className={'w-full '}
+							onClick={onClick}>{`Register`}</Button>
+						<div className={'flex items-center justify-center'}>
+							{capacity - patrons?.length === 0 ? (
+								<div className={'flex text-red-600 items-center'}>
+									No Seats are remaining
+								</div>
+							) : (
+								<div className={'flex text-lime-800 items-center'}>
+									<BadgeCheck /> {`${capacity - patrons?.length} seats remaining`}
+								</div>
+							)}
+						</div>
+					</div>
+					<div className={'h-3/6 flex flex-col items-center justify-center border-b-4 '}>
+						<div>Contact Info</div>
+						<div>Telephone:000-000-0000</div>
+						<div>Email:test@gmail.com</div>
+					</div>
+				</div>
+			)}
 			{showForm && (
 				<div className={'h-full w-full p-1'}>
 					<div className={'bg-primary p-1 text-white'}>

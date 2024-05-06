@@ -9,7 +9,7 @@ import {
 	DialogTrigger,
 } from '../../ui/dialog'
 import { Button } from '../../ui/button'
-import { cn } from '@/lib/utils'
+import { cn, convertToArr } from '@/lib/utils'
 import { convertLowerTrim } from '@/lib/utils'
 import {
 	Cal_event,
@@ -69,18 +69,6 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 			return { [FILTER_TYPE]: loc, [EVENT_LIST]: locationArr[loc] }
 		})
 		return result ?? []
-	}
-
-	// if there is one patron, item[EVENT_LIST] return Cal_event object
-	// if there are more than on patron, item[EVENT_LIST] return Cal_event array
-	// This func always return Cal_event array
-	const convertToArr = (elm:Object | Array<any>) =>{
-		if (Array.isArray(elm)) {
-			return elm
-		}
-
-	
-		return [elm]
 	}
 
 	return (
@@ -173,11 +161,10 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 													{elm[EVENT_DESC]}
 												</DialogDescription>
 											</div>
-											{console.log('elm',elm[EVENT_PATRON])}
-											{/*  */}
+
 											{elm[EVENT_RSVP] && (
 												<div className={'w-full sm:w-4/12'}>
-													<EventRSVPForm capacity={1} />
+													<EventRSVPForm capacity={elm[EVENT_CAPACITY]} patrons={convertToArr(elm[EVENT_PATRON])} />
 												</div>
 											)}
 										</div>
