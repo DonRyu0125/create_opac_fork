@@ -28,13 +28,14 @@ import {
 	EVENT_BRANCH_NAME_LENGTH,
 	EVENT_LIST,
 	EVENT_PATRON,
+	EVENT_RSVP,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
-import { X } from 'lucide-react'
+import { SquareUserRound, X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 
-const EventButton = ({ elm, id }: { elm: Cal_event; id: number }) => {
+const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekType: boolean }) => {
 	const { logo } = config
 
 	const getColor = (event_type: string) => {
@@ -47,17 +48,29 @@ const EventButton = ({ elm, id }: { elm: Cal_event; id: number }) => {
 	return (
 		<Dialog key={id}>
 			<DialogTrigger asChild>
-				<Button
-					className={'w-full h-[95%] border-hidden flex p-0 justify-start '}
-					variant="outline">
-					<div
-						className={cn(
-							'h-4 w-[16px] border rounded',
-							getColor(elm[FILTER_TYPE])
-						)}></div>
-					<p className={'w-full h-full hidden sm:block break-all text-left'}>
-						{elm[EVENT_NAME]}
-					</p>
+				<Button className={'w-full h-[95%] border-hidden p-0 '} variant="outline">
+					<div className={'w-full text-left'}>
+						<div className={'flex'}>
+							<div
+								className={cn(
+									'h-4 w-[16px] border rounded',
+									getColor(elm[FILTER_TYPE])
+								)}></div>
+							<p className={'w-full h-full hidden sm:block break-all text-left'}>
+								{elm[EVENT_NAME]}
+							</p>
+						</div>
+						{weekType && (
+							<div className={'flex items-center justify-around w-full'}>
+								<div>
+									<div>{elm[EVENT_START_TIME]}-</div>
+									<div>{elm[EVENT_END_TIME]}</div>
+								</div>
+								{elm[EVENT_RSVP] && <SquareUserRound /> }
+								
+							</div>
+						)}
+					</div>
 				</Button>
 			</DialogTrigger>
 			<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl'}>
@@ -117,7 +130,10 @@ const EventButton = ({ elm, id }: { elm: Cal_event; id: number }) => {
 						</DialogDescription>
 					</div>
 					<div className={'w-full sm:w-4/12'}>
-					<EventRSVPForm capacity={elm[EVENT_CAPACITY]} patrons={convertToArr(elm[EVENT_PATRON])} />
+						<EventRSVPForm
+							capacity={elm[EVENT_CAPACITY]}
+							patrons={convertToArr(elm[EVENT_PATRON])}
+						/>
 					</div>
 				</div>
 				<DialogFooter>

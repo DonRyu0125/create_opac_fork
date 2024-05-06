@@ -115,7 +115,7 @@ export const FILTER_TYPE_COLORS = [
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
-		type: 'Norview Lodge',
+		type: 'NORVIEW LODGE SITE',
 		color: COLORS_MAP['PINK'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},

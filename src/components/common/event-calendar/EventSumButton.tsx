@@ -161,7 +161,6 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 													{elm[EVENT_DESC]}
 												</DialogDescription>
 											</div>
-
 											{elm[EVENT_RSVP] && (
 												<div className={'w-full sm:w-4/12'}>
 													<EventRSVPForm capacity={elm[EVENT_CAPACITY]} patrons={convertToArr(elm[EVENT_PATRON])} />
@@ -185,7 +184,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 			) : (
 				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto'}>
 					{filteredEvents.map((item: any, idx: number) => (
-						<EventButton elm={item} key={idx} id={idx} />
+						<EventButton elm={item} key={idx} id={idx} weekType={weekType}/>
 					))}
 				</div>
 			)}

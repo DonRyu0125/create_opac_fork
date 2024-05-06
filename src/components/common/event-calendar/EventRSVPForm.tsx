@@ -13,7 +13,7 @@ import {
 	EVENT_PATRON_ID,
 	EVENT_PATRON_LAST_NAME,
 } from './EventCalendar'
-import { BadgeCheck } from 'lucide-react'
+import { BadgeCheck, SquareUserRound } from 'lucide-react'
 
 type Inputs = {
 	[EVENT_PATRON_FIRST_NAME]: string
@@ -52,6 +52,7 @@ type EventRSVPForm = {
 // patron-pat-id
 // :
 // "22"
+//
 
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	return (
@@ -130,8 +131,6 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 	const onClick = () => {
 		setShowForm((prev) => !prev)
 	}
-	console.log('capacity',capacity)
-	console.log('patrons',patrons)
 	return (
 		<div className={`flex justify-center w-full h-full`}>
 			{!showForm && (
@@ -140,7 +139,9 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 						className={
 							'w-full h-3/6 flex flex-col items-center justify-evenly space-evenly border-b-4'
 						}>
-						<div>Registration Required</div>
+						<div className={'flex'}>
+							<SquareUserRound /> Registration Required
+						</div>
 						<Button
 							disabled={capacity - patrons?.length === 0 ? true : false}
 							className={'w-full '}
