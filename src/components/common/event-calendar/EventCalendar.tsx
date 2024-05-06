@@ -26,6 +26,7 @@ export interface Cal_event {
 	[EVENT_END_TIME]: string
 	[EVENT_ROOM]: string
 	[EVENT_LANG]: string
+	patron:any
 }
 
 export interface Day_obj {
@@ -54,6 +55,7 @@ export const EVENT_LANG = 'tag-func-lang'
 export const EVENT_LIST = 'list'
 export const EVENT_BRANCH_NAME_LENGTH = -7
 export const EVENT_TAG_WORD_LENGTH = 18
+export const EVENT_PATRON = 'patron'
 export const EVENT_PATRON_ID = 'tag-func-pat-id'
 export const EVENT_PATRON_FIRST_NAME = 'tag-func-p-first'
 export const EVENT_PATRON_LAST_NAME = 'tag-func-p-last'

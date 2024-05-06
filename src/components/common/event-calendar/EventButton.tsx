@@ -116,7 +116,7 @@ const EventButton = ({ elm, id }: { elm: Cal_event; id: number }) => {
 						</DialogDescription>
 					</div>
 					<div className={'w-full sm:w-4/12'}>
-						<EventRSVPForm />
+						<EventRSVPForm capacity={elm.patron}/>
 					</div>
 				</div>
 				<DialogFooter>

@@ -28,6 +28,7 @@ import {
 	EVENT_BRANCH_NAME_LENGTH,
 	EVENT_LIST,
 	EVENT_RSVP,
+	EVENT_PATRON,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
@@ -53,21 +54,33 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 	}
 
 	const groupedByLocation = (filteredEvents: Cal_event[]) => {
-		let locatoionArr: any = {}
+		let locationArr: any = {}
 		let result = []
 
 		filteredEvents.forEach((classInfo) => {
 			const location = classInfo['tag-func-loc']
-			if (!locatoionArr[location]) {
-				locatoionArr[location] = []
+			if (!locationArr[location]) {
+				locationArr[location] = []
 			}
-			locatoionArr[location].push(classInfo)
+			locationArr[location].push(classInfo)
 		})
 
-		result = Object.keys(locatoionArr).map((loc) => {
-			return { [FILTER_TYPE]: loc, [EVENT_LIST]: locatoionArr[loc] }
+		result = Object.keys(locationArr).map((loc) => {
+			return { [FILTER_TYPE]: loc, [EVENT_LIST]: locationArr[loc] }
 		})
 		return result ?? []
+	}
+
+	// if there is one patron, item[EVENT_LIST] return Cal_event object
+	// if there are more than on patron, item[EVENT_LIST] return Cal_event array
+	// This func always return Cal_event array
+	const convertToArr = (elm:Object | Array<any>) =>{
+		if (Array.isArray(elm)) {
+			return elm
+		}
+
+	
+		return [elm]
 	}
 
 	return (
@@ -160,10 +173,11 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 													{elm[EVENT_DESC]}
 												</DialogDescription>
 											</div>
-											{console.log('elm',elm)}
+											{console.log('elm',elm[EVENT_PATRON])}
+											{/*  */}
 											{elm[EVENT_RSVP] && (
 												<div className={'w-full sm:w-4/12'}>
-													<EventRSVPForm capacity={elm[EVENT_CAPACITY]} />
+													<EventRSVPForm capacity={1} />
 												</div>
 											)}
 										</div>

@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import DropdownSelect from '../DropdownSelect'
 import axios from 'axios'
 import {
+	Cal_event,
 	EVENT_PATRON_ATTND,
 	EVENT_PATRON_EMAIL,
 	EVENT_PATRON_FIRST_NAME,
@@ -28,7 +29,7 @@ type EventInput = {
 }
 
 type EventRSVPForm = {
-	capacity: number
+	capacity: any
 }
 
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
@@ -107,8 +108,11 @@ const EventRSVPForm = ({ capacity }: EventRSVPForm) => {
 
 	const onClick = () => {
 		setShowForm((prev) => !prev)
+
+		
 	}
 
+	console.log('capacity',capacity)
 	return (
 		<div className={'flex justify-center w-full'}>
 			{!showForm && <Button onClick={onClick}>Register ({capacity})</Button>}
