@@ -71,19 +71,12 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 	} = useForm<Inputs>()
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+
 		const BASE_URL = 'http://norfolk_test.minisisinc.com'
 		const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
 		const FIELD = 'TAG_FUNC_DATE'
 		const WILDCARD = ''
 
-		// http request ?logon command
-		// check if HOME_SESSID exist in cookie
-		// create const variable for SESSID
-		// optional: check if sessid exist. if exist, apply to url variable
-		// Q
-		// Is it possible to store to triple nested group field?
-
-		let url = `http://norfolk_test.minisisinc.com/x1QMIWF2EHIJK3?manipxmlrecord&database=M2L_TAG`
 		let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
 		<RECORD>
 			<${TAG_FUNC_LOC_GRP} op="chg">
@@ -111,11 +104,20 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 			</${FUNC_LOC_P_GRP}>
 		</RECORD>`
 
-		// https://rmg.minisisinc.com/scripts/mwimain.dll/282975215-1458443181L
-		//?manipxmlrecord&database=client_info_view&key=C_CLIENT_NUMBER&value=20230003&READ=N
-		
+		let urlForSessionID = '/scripts/mwimain.dll?logon&application=M2L_TAG_TO_BIBLIO&file=[WWW_NF]home.html#home'
+
+		// http request ?logon command
+		// check if HOME_SESSID exist in cookie
+		// create const variable for SESSID
+		// optional: check if sessid exist. if exist, apply to url variable
+		// Q
+		// Is it possible to store to triple nested group field?
+
+		let url = `http://norfolk_test.minisisinc.com/x1QMIWF2EHIJK3?manipxmlrecord&database=M2L_TAG`
+
+
 		axios
-			.post(url, xmlFormAdd, {
+			.post(urlForSessionID,  {
 				headers: {
 					'Content-Type': 'text/xml',
 				},
@@ -124,6 +126,21 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 			.then((response) => {
 			
 			})
+
+
+		// https://rmg.minisisinc.com/scripts/mwimain.dll/282975215-1458443181L
+		//?manipxmlrecord&database=client_info_view&key=C_CLIENT_NUMBER&value=20230003&READ=N
+		
+		// axios
+		// 	.post(url, xmlFormAdd, {
+		// 		headers: {
+		// 			'Content-Type': 'text/xml',
+		// 		},
+		// 		timeout: 300000,
+		// 	})
+		// 	.then((response) => {
+			
+		// 	})
 	}
 
 	const onClick = () => {
