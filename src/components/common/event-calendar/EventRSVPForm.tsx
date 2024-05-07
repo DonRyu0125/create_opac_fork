@@ -7,7 +7,10 @@ import DropdownSelect from '../DropdownSelect'
 import axios from 'axios'
 import {
 	Cal_event,
+	FUNC_LOC_P_GRP,
 	PATRON,
+	TAG_FUNC_DTE_GRP,
+	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_P_ATTND,
 	TAG_FUNC_P_EMAIL,
 	TAG_FUNC_P_FIRST,
@@ -73,68 +76,54 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 		const FIELD = 'TAG_FUNC_DATE'
 		const WILDCARD = ''
 
-		// $.ajax({
-		//   async: false,
-		//   type: "POST",
-		//   url: url,
-		//   contentType: "text/xml",
-		//   dataType: "xml",
-		//   data: xmlForm,
-		//   processData: false,
-		//   cache: false,
-		//   timeout: 300000,
-		//   success: function (data, textStatus, xhr) {
-		//     if (jQuery.isXMLDoc(data)) {
-		//       var xml_value = getXmlFieldValue(data, "error");
-		//       if (xml_value != '' && parseInt(xml_value, 10) == 0) {
-		//         // alert ('Status is changed');
-		//         getClientInfo(patronId)
-		//         window.location.reload();
-		//       }
-		//     }
-		//   },
-		//   error: function (e) {
-		//     console.error(e);
-		//   }
-		// });
-
 		// http request ?logon command
 		// check if HOME_SESSID exist in cookie
 		// create const variable for SESSID
 		// optional: check if sessid exist. if exist, apply to url variable
-
 		// Q
 		// Is it possible to store to triple nested group field?
 
-
-		let url = `http://norfolk_test.minisisinc.com/x1QMIWF2EHIJK3?manipxmlrecord&database=M2L_TAG&key=${TAG_FUNC_P_ID}&value=99999999&READ=N`
-
-
+		let url = `http://norfolk_test.minisisinc.com/x1QMIWF2EHIJK3?manipxmlrecord&database=M2L_TAG`
 		let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
 		<RECORD>
-			<${TAG_FUNC_P_FIRST} op="chg">test_first</${TAG_FUNC_P_FIRST}>
-			<${TAG_FUNC_P_LAST} op="chg">test_last</${TAG_FUNC_P_LAST}>
+			<${TAG_FUNC_LOC_GRP} op="chg">
+				<${TAG_FUNC_DTE_GRP} op="chg">
+					<${FUNC_LOC_P_GRP} op="chg">
+						<${TAG_FUNC_P_ID}></${TAG_FUNC_P_ID}>
+						<${TAG_FUNC_P_FIRST}></${TAG_FUNC_P_FIRST}>
+						<${TAG_FUNC_P_LAST}></${TAG_FUNC_P_LAST}>
+						<${TAG_FUNC_P_EMAIL}></${TAG_FUNC_P_EMAIL}>
+						<${TAG_FUNC_P_PAID}></${TAG_FUNC_P_PAID}>
+						<${TAG_FUNC_P_ATTND}></${TAG_FUNC_P_ATTND}>
+					</${TAG_FUNC_LOC_GRP}>
+				</${TAG_FUNC_DTE_GRP}>
+			</${FUNC_LOC_P_GRP}>
 		</RECORD>`
 
 		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
 		<RECORD>
-			<${TAG_FUNC_P_FIRST} op="chg">test_first</${TAG_FUNC_P_FIRST}>
-			<${TAG_FUNC_P_LAST} op="chg">test_last</${TAG_FUNC_P_LAST}>
+			<${TAG_FUNC_LOC_GRP} op="chg">
+				<${TAG_FUNC_DTE_GRP} op="chg">
+					<${FUNC_LOC_P_GRP} op="delete">
+
+					</${TAG_FUNC_LOC_GRP}>
+				</${TAG_FUNC_DTE_GRP}>
+			</${FUNC_LOC_P_GRP}>
 		</RECORD>`
 
-		// https://rmg.minisisinc.com/scripts/mwimain.dll/282975215-1458443181L?manipxmlrecord&database=client_info_view&key=C_CLIENT_NUMBER&value=20230003&READ=N
-		try {
-			const response = await axios.get(
-				`${BASE_URL}/scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${FIELD} ${WILDCARD}`,
-				{
-					headers: {
-						'Content-Type': 'text/xml',
-					},
-				}
-			)
-		} catch (error) {
-			throw error
-		}
+		// https://rmg.minisisinc.com/scripts/mwimain.dll/282975215-1458443181L
+		//?manipxmlrecord&database=client_info_view&key=C_CLIENT_NUMBER&value=20230003&READ=N
+		
+		axios
+			.post(url, xmlFormAdd, {
+				headers: {
+					'Content-Type': 'text/xml',
+				},
+				timeout: 300000,
+			})
+			.then((response) => {
+			
+			})
 	}
 
 	const onClick = () => {
@@ -142,13 +131,13 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 	}
 
 	const calNumOfPatron = (patrons: patron[]) => {
-		const totalPatronAttnd = patrons?.reduce((total:number, entry: patron) => {
+		const totalPatronAttnd = patrons?.reduce((total: number, entry: patron) => {
 			if (entry && entry[TAG_FUNC_P_ATTND] !== undefined) {
-				return total + parseInt(entry[TAG_FUNC_P_ATTND], 10);
+				return total + parseInt(entry[TAG_FUNC_P_ATTND], 10)
 			}
-			return total;
+			return total
 		}, 0)
-		return totalPatronAttnd ?? 0;
+		return totalPatronAttnd ?? 0
 	}
 
 	return (
@@ -173,7 +162,8 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 								</div>
 							) : (
 								<div className={'flex text-lime-800 items-center'}>
-									<BadgeCheck /> {`${capacity - calNumOfPatron(patrons)} seats remaining`}
+									<BadgeCheck />{' '}
+									{`${capacity - calNumOfPatron(patrons)} seats remaining`}
 								</div>
 							)}
 						</div>
