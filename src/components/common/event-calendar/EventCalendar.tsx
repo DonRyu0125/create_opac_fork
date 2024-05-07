@@ -67,20 +67,10 @@ export const TAG_FUNC_P_EMAIL = 'TAG_FUNC_P_EMAIL'
 export const TAG_FUNC_P_PAID = 'TAG_FUNC_P_PAID'
 export const TAG_FUNC_P_ATTND = 'TAG_FUNC_P_ATTND'
 export const EVENT_RSVP_YES = 'X'
-
+//others
 export const TAG_FUNC_DTE_LIST = 'list'
 export const TAG_FUNC_LOC_LENGTH = -7
 export const TAG_NAME_LENGTH = 18
-
-export const MON_REPORT_TYPES = [
-	'MONTHLY_CALENDAR',
-	'NEXT_MONTH_CALENDAR',
-	'NEXT_TWO_MONTH_CALENDAR',
-	'NEXT_THREE_MONTH_CALENDAR',
-	'NEXT_FOUR_MONTH_CALENDAR',
-	'NEXT_FIVE_MONTH_CALENDAR',
-]
-
 export const COLORS_MAP = {
 	RED: 'bg-red-500 border-red-500',
 	YELLOW: 'bg-yellow-500 border-yellow-500',
