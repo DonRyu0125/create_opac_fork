@@ -13,22 +13,22 @@ import { cn, convertToArr } from '@/lib/utils'
 import { convertLowerTrim } from '@/lib/utils'
 import {
 	Cal_event,
-	EVENT_DATE,
-	EVENT_DESC,
-	EVENT_END_TIME,
-	EVENT_NAME,
-	EVENT_ROOM,
-	EVENT_AGE,
-	EVENT_START_TIME,
+	TAG_FUNC_DATE,
+	TAG_FUNC_DESCIPT,
+	TAG_FUNC_END_T,
+	TAG_NAME,
+	TAG_FUNC_ROOM,
+	TAG_FUNC_LOC_AUD,
+	TAG_FUNC_START_T,
 	EVENT_TAG_WORD_LENGTH,
-	FILTER_TYPE,
+	TAG_FUNC_LOC,
 	FILTER_TYPE_COLORS,
-	EVENT_CAPACITY,
-	EVENT_LANG,
+	TAG_FUNC_CAP,
+	TAG_FUNC_LANG,
 	EVENT_BRANCH_NAME_LENGTH,
 	EVENT_LIST,
-	EVENT_RSVP,
-	EVENT_PATRON,
+	TAG_FUNC_RSVP,
+	PATRON,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
@@ -66,7 +66,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 		})
 
 		result = Object.keys(locationArr).map((loc) => {
-			return { [FILTER_TYPE]: loc, [EVENT_LIST]: locationArr[loc] }
+			return { [TAG_FUNC_LOC]: loc, [EVENT_LIST]: locationArr[loc] }
 		})
 		return result ?? []
 	}
@@ -84,10 +84,10 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 									<div
 										className={cn(
 											'h-4 w-[16px] border rounded',
-											getColor(item[FILTER_TYPE])
+											getColor(item[TAG_FUNC_LOC])
 										)}></div>
 									<div className={'hidden sm:block max-w-[126px] text-left '}>
-										{item[FILTER_TYPE]?.slice(0, EVENT_BRANCH_NAME_LENGTH)}
+										{item[TAG_FUNC_LOC]?.slice(0, EVENT_BRANCH_NAME_LENGTH)}
 									</div>
 									<div className={'flex items-center justify-center'}>
 										<CalendarCheck height={18} className={'hidden sm:block'} />:{' '}
@@ -111,9 +111,9 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 												<div
 													className={cn(
 														'h-4 w-[16px] border rounded mr-1',
-														getColor(item[FILTER_TYPE])
+														getColor(item[TAG_FUNC_LOC])
 													)}></div>
-												{item[FILTER_TYPE]}
+												{item[TAG_FUNC_LOC]}
 											</div>
 											<DialogPrimitive.Close>
 												<X className={'h-6 w-6'} />
@@ -126,44 +126,44 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 											className={
 												'w-full text-l sm:flex font-bold p-2 border-2 rounded '
 											}>
-											<div className={`w-full ${elm[EVENT_RSVP] && 'sm:w-8/12'}`}>
+											<div className={`w-full ${elm[TAG_FUNC_RSVP] && 'sm:w-8/12'}`}>
 												<div className={'overflow-hidden text-lg'}>
-													{elm[EVENT_NAME]}
+													{elm[TAG_NAME]}
 												</div>
 												<div className={'sm:flex'}>
 													<div className="ml-[10px] sm:ml-0 text-md text-gray-600 font-bold">
-														&#x2022;{elm[EVENT_DATE]}
+														&#x2022;{elm[TAG_FUNC_DATE]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														<span>&#x2022;{elm[EVENT_START_TIME]}</span>
+														<span>&#x2022;{elm[TAG_FUNC_START_T]}</span>
 														<span className={'mx-2'}>-</span>
-														<span>{elm[EVENT_END_TIME]}</span>
+														<span>{elm[TAG_FUNC_END_T]}</span>
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;Room: {elm[EVENT_ROOM]}
+														&#x2022;Room: {elm[TAG_FUNC_ROOM]}
 													</div>
 												</div>
 												<div className={'sm:flex'}>
 													<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;Suitable for: {elm[EVENT_AGE]}
+														&#x2022;Suitable for: {elm[TAG_FUNC_LOC_AUD]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;Seats: {elm[EVENT_CAPACITY]}
+														&#x2022;Seats: {elm[TAG_FUNC_CAP]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;Language: {elm[EVENT_LANG]}
+														&#x2022;Language: {elm[TAG_FUNC_LANG]}
 													</div>
 												</div>
 												<DialogDescription
 													className={
 														'h-[320px] break-all overflow-y-auto'
 													}>
-													{elm[EVENT_DESC]}
+													{elm[TAG_FUNC_DESCIPT]}
 												</DialogDescription>
 											</div>
-											{elm[EVENT_RSVP] && (
+											{elm[TAG_FUNC_RSVP] && (
 												<div className={'w-full sm:w-4/12'}>
-													<EventRSVPForm capacity={elm[EVENT_CAPACITY]} patrons={convertToArr(elm[EVENT_PATRON])} />
+													<EventRSVPForm capacity={elm[TAG_FUNC_CAP]} patrons={convertToArr(elm[PATRON])} />
 												</div>
 											)}
 										</div>

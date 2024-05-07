@@ -13,20 +13,20 @@ import { Button } from '@/components/ui/button'
 import { convertToArr } from '@/lib/utils'
 
 export interface Cal_event {
-	[EVENT_NAME]: string
-	[EVENT_DESC]: string
-	[FILTER_TYPE]: string
-	[FILTER_TYPE_ID]: string
-	[EVENT_FEE]: string
-	[EVENT_DATE]: string
-	[EVENT_BANNER_TYPE]: string
-	[EVENT_AGE]: string
-	[EVENT_CAPACITY]: number
-	[EVENT_RSVP]: string
-	[EVENT_START_TIME]: string
-	[EVENT_END_TIME]: string
-	[EVENT_ROOM]: string
-	[EVENT_LANG]: string
+	[TAG_NAME]: string
+	[TAG_FUNC_DESCIPT]: string
+	[TAG_FUNC_LOC]: string
+	[TAG_FUNC_LOC_ID]: string
+	[TAG_FUNC_LOC_FEE]: string
+	[TAG_FUNC_DATE]: string
+	[TAG_FUNC_LOC_BAN]: string
+	[TAG_FUNC_LOC_AUD]: string
+	[TAG_FUNC_CAP]: number
+	[TAG_FUNC_RSVP]: string
+	[TAG_FUNC_START_T]: string
+	[TAG_FUNC_END_T]: string
+	[TAG_FUNC_ROOM]: string
+	[TAG_FUNC_LANG]: string
 	patron: any
 }
 
@@ -39,31 +39,40 @@ export interface Day_obj {
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
-export const EVENT_NAME = 'tag-name'
-export const EVENT_DESC = 'tag-func-desc'
-export const FILTER_TYPE = 'tag-func-loc'
-export const FILTER_TYPE_ID = 'tag-func-loc-id'
-export const EVENT_FEE = 'tag-func-loc-fee'
-export const EVENT_BANNER_TYPE = 'tag-func-loc-banner'
-export const EVENT_AGE = 'tag-func-loc-aud'
-export const EVENT_DATE = 'tag-func-date'
-export const EVENT_START_TIME = 'tag-func-start-t'
-export const EVENT_END_TIME = 'tag-func-end-t'
-export const EVENT_RSVP = 'tag-func-rsvp'
-export const EVENT_CAPACITY = 'tag-func-cap'
-export const EVENT_ROOM = 'tag-func-room'
-export const EVENT_LANG = 'tag-func-lang'
+export const TAG_NAME = 'TAG_NAME'
+//Location group
+export const TAG_FUNC_LOC_GRP = 'TAG_FUNC_LOC_GRP'
+export const TAG_FUNC_DESCIPT = 'TAG_FUNC_DESCIPT'
+export const TAG_FUNC_LOC = 'TAG_FUNC_LOC'
+export const TAG_FUNC_LOC_ID = 'TAG_FUNC_LOC_ID'
+export const TAG_FUNC_LOC_FEE = 'TAG_FUNC_LOC_FEE'
+export const TAG_FUNC_LOC_BAN = 'TAG_FUNC_LOC_BAN'
+export const TAG_FUNC_LOC_AUD = 'TAG_FUNC_LOC_AUD'
+//Event group by location
+export const TAG_FUNC_DTE_GRP = 'TAG_FUNC_DTE_GRP'
+export const TAG_FUNC_DATE = 'TAG_FUNC_DATE'
+export const TAG_FUNC_START_T = 'TAG_FUNC_START_T'
+export const TAG_FUNC_END_T = 'TAG_FUNC_END_T'
+export const TAG_FUNC_RSVP = 'TAG_FUNC_RSVP'
+export const TAG_FUNC_CAP = 'TAG_FUNC_CAP'
+export const TAG_FUNC_ROOM = 'TAG_FUNC_ROOM'
+export const TAG_FUNC_LANG = 'TAG_FUNC_LANG'
+//Patron group by event
+export const FUNC_LOC_P_GRP = 'FUNC_LOC_P_GRP' 
+export const PATRON = 'PATRON'
+export const TAG_FUNC_P_ID = 'TAG_FUNC_P_ID'
+export const TAG_FUNC_P_FIRST = 'TAG_FUNC_P_FIRST'
+export const TAG_FUNC_P_LAST = 'TAG_FUNC_P_LAST'
+export const TAG_FUNC_P_EMAIL = 'TAG_FUNC_P_EMAIL'
+export const TAG_FUNC_P_PAID = 'TAG_FUNC_P_PAID'
+export const TAG_FUNC_P_ATTND = 'TAG_FUNC_P_ATTND'
+export const EVENT_RSVP_YES = 'X'
+
+
 export const EVENT_LIST = 'list'
 export const EVENT_BRANCH_NAME_LENGTH = -7
 export const EVENT_TAG_WORD_LENGTH = 18
-export const EVENT_PATRON = 'patron'
-export const EVENT_PATRON_ID = 'patron-pat-id'
-export const EVENT_PATRON_FIRST_NAME = 'patron-frist-name'
-export const EVENT_PATRON_LAST_NAME = 'patron-last-name'
-export const EVENT_PATRON_EMAIL = 'patron-email'
-export const EVENT_PATRON_PAID = 'patron-paid'
-export const EVENT_PATRON_ATTND = 'patron-attnd'
-export const EVENT_RSVP_YES = 'X'
+
 export const MON_REPORT_TYPES = [
 	'MONTHLY_CALENDAR',
 	'NEXT_MONTH_CALENDAR',

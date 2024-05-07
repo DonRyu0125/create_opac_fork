@@ -4,13 +4,13 @@
 import { useEffect, useState } from 'react'
 import {
 	Cal_event,
-	EVENT_DATE,
-	EVENT_START_TIME,
+	TAG_FUNC_DATE,
+	TAG_FUNC_START_T,
 	EVENT_TAG_WORD_LENGTH,
-	FILTER_TYPE,
+	TAG_FUNC_LOC,
 	FILTER_TYPE_COLORS,
-	EVENT_CAPACITY,
-	EVENT_LANG,
+	TAG_FUNC_CAP,
+	TAG_FUNC_LANG,
 	Day_obj,
 } from './EventCalendar'
 import { convertLowerTrim } from '@/lib/utils'
@@ -30,7 +30,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent, week
 
 	useEffect(() => {
 		const updatedFilteredEvents = currentEvent?.filter((item: Cal_event) => {
-			const { day, month, year } = changeStrToDate(item[EVENT_DATE])
+			const { day, month, year } = changeStrToDate(item[TAG_FUNC_DATE])
 			const isMatchingDayMonth =
 				day === dayObj.day && month === dayObj.month && year === dayObj.year
 			if (currentFilter.length > 0) {
@@ -38,7 +38,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent, week
 					isMatchingDayMonth &&
 					currentFilter.some(
 						(type: string) =>
-							convertLowerTrim(type) === convertLowerTrim(item[FILTER_TYPE])
+							convertLowerTrim(type) === convertLowerTrim(item[TAG_FUNC_LOC])
 					)
 				)
 			}
@@ -46,8 +46,8 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent, week
 		})
 
 		updatedFilteredEvents.sort((a: Cal_event, b: Cal_event) => {
-			const timeA: Date | undefined = parseTimeString(a[EVENT_START_TIME])
-			const timeB: Date | undefined = parseTimeString(b[EVENT_START_TIME])
+			const timeA: Date | undefined = parseTimeString(a[TAG_FUNC_START_T])
+			const timeB: Date | undefined = parseTimeString(b[TAG_FUNC_START_T])
 			if (timeA && timeB) {
 				return timeA.getTime() - timeB.getTime()
 			}

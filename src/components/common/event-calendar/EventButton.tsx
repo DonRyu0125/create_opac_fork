@@ -13,22 +13,22 @@ import { cn, convertToArr } from '@/lib/utils'
 import { convertLowerTrim } from '@/lib/utils'
 import {
 	Cal_event,
-	EVENT_DATE,
-	EVENT_DESC,
-	EVENT_END_TIME,
-	EVENT_NAME,
-	EVENT_ROOM,
-	EVENT_AGE,
-	EVENT_START_TIME,
+	TAG_FUNC_DATE,
+	TAG_FUNC_DESCIPT,
+	TAG_FUNC_END_T,
+	TAG_NAME,
+	TAG_FUNC_ROOM,
+	TAG_FUNC_LOC_AUD,
+	TAG_FUNC_START_T,
 	EVENT_TAG_WORD_LENGTH,
-	FILTER_TYPE,
+	TAG_FUNC_LOC,
 	FILTER_TYPE_COLORS,
-	EVENT_CAPACITY,
-	EVENT_LANG,
+	TAG_FUNC_CAP,
+	TAG_FUNC_LANG,
 	EVENT_BRANCH_NAME_LENGTH,
 	EVENT_LIST,
-	EVENT_PATRON,
-	EVENT_RSVP,
+	PATRON,
+	TAG_FUNC_RSVP,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
@@ -54,19 +54,19 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded',
-									getColor(elm[FILTER_TYPE])
+									getColor(elm[TAG_FUNC_LOC])
 								)}></div>
 							<p className={'w-full h-full hidden sm:block break-all text-left'}>
-								{elm[EVENT_NAME]}
+								{elm[TAG_NAME]}
 							</p>
 						</div>
 						{weekType && (
 							<div className={'flex items-center justify-around w-full'}>
 								<div>
-									<div>{elm[EVENT_START_TIME]}-</div>
-									<div>{elm[EVENT_END_TIME]}</div>
+									<div>{elm[TAG_FUNC_START_T]}-</div>
+									<div>{elm[TAG_FUNC_END_T]}</div>
 								</div>
-								{elm[EVENT_RSVP] && <SquareUserRound /> }
+								{elm[TAG_FUNC_RSVP] && <SquareUserRound /> }
 							</div>
 						)}
 					</div>
@@ -85,9 +85,9 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded mr-1',
-									getColor(elm[FILTER_TYPE])
+									getColor(elm[TAG_FUNC_LOC])
 								)}></div>
-							<div>{elm[FILTER_TYPE]}</div>
+							<div>{elm[TAG_FUNC_LOC]}</div>
 						</div>
 						<DialogPrimitive.Close>
 							<X className={'h-6 w-6'} />
@@ -96,42 +96,42 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 				</DialogHeader>
 				<div className={'w-full min-h-[400px] text-l sm:flex font-bold'}>
 					<div className={'w-full sm:w-8/12 '}>
-						<div className={'overflow-hidden text-lg'}>{elm[EVENT_NAME]}</div>
+						<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
 						<div className={'sm:flex'}>
 							<div className="ml-[10px] sm:ml-0 text-md  text-gray-600 font-bold">
-								&#x2022;{elm[EVENT_DATE]}
+								&#x2022;{elm[TAG_FUNC_DATE]}
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								<span>&#x2022;{elm[EVENT_START_TIME]}</span>
+								<span>&#x2022;{elm[TAG_FUNC_START_T]}</span>
 								<span className={'mx-2'}>-</span>
-								<span>{elm[EVENT_END_TIME]}</span>
+								<span>{elm[TAG_FUNC_END_T]}</span>
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;Room: {elm[EVENT_ROOM]}
+								&#x2022;Room: {elm[TAG_FUNC_ROOM]}
 							</div>
 						</div>
 						<div className={'sm:flex'}>
 							<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;Suitable for: {elm[EVENT_AGE]}
+								&#x2022;Suitable for: {elm[TAG_FUNC_LOC_AUD]}
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;Seats: {elm[EVENT_CAPACITY]}
+								&#x2022;Seats: {elm[TAG_FUNC_CAP]}
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;Language: {elm[EVENT_LANG]}
+								&#x2022;Language: {elm[TAG_FUNC_LANG]}
 							</div>
 						</div>
 						<DialogDescription
 							className={
 								'h-full max-h-80 break-all overflow-x-hidden overflow-y-auto'
 							}>
-							{elm[EVENT_DESC]}
+							{elm[TAG_FUNC_DESCIPT]}
 						</DialogDescription>
 					</div>
 					<div className={'w-full sm:w-4/12'}>
 						<EventRSVPForm
-							capacity={elm[EVENT_CAPACITY]}
-							patrons={convertToArr(elm[EVENT_PATRON])}
+							capacity={elm[TAG_FUNC_CAP]}
+							patrons={convertToArr(elm[PATRON])}
 						/>
 					</div>
 				</div>

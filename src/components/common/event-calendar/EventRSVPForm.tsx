@@ -7,21 +7,21 @@ import DropdownSelect from '../DropdownSelect'
 import axios from 'axios'
 import {
 	Cal_event,
-	EVENT_PATRON,
-	EVENT_PATRON_ATTND,
-	EVENT_PATRON_EMAIL,
-	EVENT_PATRON_FIRST_NAME,
-	EVENT_PATRON_ID,
-	EVENT_PATRON_LAST_NAME,
-	EVENT_PATRON_PAID,
+	PATRON,
+	TAG_FUNC_P_ATTND,
+	TAG_FUNC_P_EMAIL,
+	TAG_FUNC_P_FIRST,
+	TAG_FUNC_P_ID,
+	TAG_FUNC_P_LAST,
+	TAG_FUNC_P_PAID,
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 
 type Inputs = {
-	[EVENT_PATRON_FIRST_NAME]: string
-	[EVENT_PATRON_LAST_NAME]: string
-	[EVENT_PATRON_EMAIL]: string
-	[EVENT_PATRON_ATTND]: number
+	[TAG_FUNC_P_FIRST]: string
+	[TAG_FUNC_P_LAST]: string
+	[TAG_FUNC_P_EMAIL]: string
+	[TAG_FUNC_P_ATTND]: number
 }
 
 type EventInput = {
@@ -37,21 +37,13 @@ type EventRSVPForm = {
 }
 
 type patron = {
-	[EVENT_PATRON]: string
-	[EVENT_PATRON_ID]: string
-	[EVENT_PATRON_FIRST_NAME]: string
-	[EVENT_PATRON_LAST_NAME]: string
-	[EVENT_PATRON_EMAIL]: string
-	[EVENT_PATRON_PAID]: string
-	[EVENT_PATRON_ATTND]: string
-}
-
-{
-	/* <patron-pat-id>33</patron-pat-id>
-<patron-frist-name>Alice</patron-frist-name>
-<patron-last-name>Kim</patron-last-name>
-<patron-email>don102@gmail.com</patron-email>
-<patron-attnd>22</patron-attnd> */
+	[PATRON]: string
+	[TAG_FUNC_P_ID]: string
+	[TAG_FUNC_P_FIRST]: string
+	[TAG_FUNC_P_LAST]: string
+	[TAG_FUNC_P_EMAIL]: string
+	[TAG_FUNC_P_PAID]: string
+	[TAG_FUNC_P_ATTND]: string
 }
 
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
@@ -106,12 +98,28 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 		//   }
 		// });
 
-		let url = `http://norfolk_test.minisisinc.com/x1QMIWF2EHIJK3?manipxmlrecord&database=M2L_TAG&key=${EVENT_PATRON_ID}&value=99999999&READ=N`
+		// http request ?logon command
+		// check if HOME_SESSID exist in cookie
+		// create const variable for SESSID
+		// optional: check if sessid exist. if exist, apply to url variable
 
-		var xmlForm = `<?xml version="1.0" encoding="UTF-8"?>
+		// Q
+		// Is it possible to store to triple nested group field?
+
+
+		let url = `http://norfolk_test.minisisinc.com/x1QMIWF2EHIJK3?manipxmlrecord&database=M2L_TAG&key=${TAG_FUNC_P_ID}&value=99999999&READ=N`
+
+
+		let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
 		<RECORD>
-			<${EVENT_PATRON_FIRST_NAME} op="chg">test_first</${EVENT_PATRON_FIRST_NAME}>
-			<${EVENT_PATRON_LAST_NAME} op="chg">test_last</${EVENT_PATRON_LAST_NAME}>
+			<${TAG_FUNC_P_FIRST} op="chg">test_first</${TAG_FUNC_P_FIRST}>
+			<${TAG_FUNC_P_LAST} op="chg">test_last</${TAG_FUNC_P_LAST}>
+		</RECORD>`
+
+		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
+		<RECORD>
+			<${TAG_FUNC_P_FIRST} op="chg">test_first</${TAG_FUNC_P_FIRST}>
+			<${TAG_FUNC_P_LAST} op="chg">test_last</${TAG_FUNC_P_LAST}>
 		</RECORD>`
 
 		// https://rmg.minisisinc.com/scripts/mwimain.dll/282975215-1458443181L?manipxmlrecord&database=client_info_view&key=C_CLIENT_NUMBER&value=20230003&READ=N
@@ -135,8 +143,8 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 
 	const calNumOfPatron = (patrons: patron[]) => {
 		const totalPatronAttnd = patrons?.reduce((total:number, entry: patron) => {
-			if (entry && entry[EVENT_PATRON_ATTND] !== undefined) {
-				return total + parseInt(entry[EVENT_PATRON_ATTND], 10);
+			if (entry && entry[TAG_FUNC_P_ATTND] !== undefined) {
+				return total + parseInt(entry[TAG_FUNC_P_ATTND], 10);
 			}
 			return total;
 		}, 0)
@@ -187,19 +195,19 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 						className={'h-full w-full flex flex-col justify-start items-center'}>
 						<EventInput
 							label={'First Name'}
-							keyname={EVENT_PATRON_FIRST_NAME}
+							keyname={TAG_FUNC_P_FIRST}
 							register={register}
 							required={true}
 						/>
 						<EventInput
 							label={'Last Name'}
-							keyname={EVENT_PATRON_LAST_NAME}
+							keyname={TAG_FUNC_P_LAST}
 							register={register}
 							required={true}
 						/>
 						<EventInput
 							label={'Email'}
-							keyname={EVENT_PATRON_EMAIL}
+							keyname={TAG_FUNC_P_EMAIL}
 							register={register}
 							required={true}
 						/>
@@ -210,7 +218,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 								type="number"
 								step="1"
 								className={'border-2 border-grey-500 w-[30%]'}
-								{...register(EVENT_PATRON_ATTND)}
+								{...register(TAG_FUNC_P_ATTND)}
 							/>
 						</div>
 						<Button className={'w-full'} type="submit">

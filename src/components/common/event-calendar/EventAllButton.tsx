@@ -16,18 +16,18 @@ import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 import {
 	Cal_event,
-	EVENT_DATE,
-	EVENT_DESC,
-	EVENT_END_TIME,
-	EVENT_NAME,
-	EVENT_ROOM,
-	EVENT_AGE,
-	EVENT_START_TIME,
+	TAG_FUNC_DATE,
+	TAG_FUNC_DESCIPT,
+	TAG_FUNC_END_T,
+	TAG_NAME,
+	TAG_FUNC_ROOM,
+	TAG_FUNC_LOC_AUD,
+	TAG_FUNC_START_T,
 	EVENT_TAG_WORD_LENGTH,
-	FILTER_TYPE,
+	TAG_FUNC_LOC,
 	FILTER_TYPE_COLORS,
-	EVENT_CAPACITY,
-	EVENT_LANG,
+	TAG_FUNC_CAP,
+	TAG_FUNC_LANG,
 } from './EventCalendar'
 import { config } from '@/constants'
 import EventRSVPForm from './EventRSVPForm'
@@ -102,9 +102,9 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 											<div
 												className={cn(
 													'h-4 w-[16px] border rounded mr-1',
-													getColor(item[FILTER_TYPE])
+													getColor(item[TAG_FUNC_LOC])
 												)}></div>
-											{item[FILTER_TYPE]}
+											{item[TAG_FUNC_LOC]}
 										</div>
 									</DialogTitle>
 								</div>
@@ -116,27 +116,27 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 											'w-full text-l w-full flex flex-col justify-center items-left font-bold px-2 '
 										}>
 										<div className={'overflow-hidden text-lg font-bold'}>
-											{item[EVENT_NAME]}
+											{item[TAG_NAME]}
 										</div>
 										<div className={'sm:flex'}>
 											<div className="ml-[10px] sm:ml-0 text-md text-gray-600 font-bold">
-												&#x2022;{item[EVENT_DATE]}
+												&#x2022;{item[TAG_FUNC_DATE]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												<span>&#x2022;{item[EVENT_START_TIME]}</span>
+												<span>&#x2022;{item[TAG_FUNC_START_T]}</span>
 												<span className={'mx-2'}>-</span>
-												<span>{item[EVENT_END_TIME]}</span>
+												<span>{item[TAG_FUNC_END_T]}</span>
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;Room: {item[EVENT_ROOM]}
+												&#x2022;Room: {item[TAG_FUNC_ROOM]}
 											</div>
 										</div>
 										<div className={'sm:flex'}>
 											<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;Suitable for: {item[EVENT_AGE]}
+												&#x2022;Suitable for: {item[TAG_FUNC_LOC_AUD]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;Seats: {item[EVENT_CAPACITY]}
+												&#x2022;Seats: {item[TAG_FUNC_CAP]}
 											</div>
 										</div>
 									</div>
@@ -146,14 +146,14 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 								{/* 'More' button to toggle description of the event */}
 								<DialogDescription
 									className={`h-72 p-2 break-all overflow-x-hidden overflow-y-auto`}>
-									{item[EVENT_DESC]}
+									{item[TAG_FUNC_DESCIPT]}
 								</DialogDescription>
 								{/* <DialogDescription
 									className={`${showFullStr[idx] ? 'h-72' : 'h-10'} p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									<>
 										{showFullStr[idx] ? (
 											<>
-												{item[EVENT_DESC]}
+												{item[TAG_FUNC_DESCIPT]}
 												<button
 													className={'text-slate-950 font-semibold'}
 													onClick={() => showStrToggle(idx)}>
@@ -162,8 +162,8 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 											</>
 										) : (
 											<>
-												{item[EVENT_DESC]?.substring(0, 10)}
-												{(item[EVENT_DESC]?.length ?? 0) > 10 && (
+												{item[TAG_FUNC_DESCIPT]?.substring(0, 10)}
+												{(item[TAG_FUNC_DESCIPT]?.length ?? 0) > 10 && (
 													<button
 														className={'text-slate-950 font-semibold'}
 														onClick={() => showStrToggle(idx)}>
