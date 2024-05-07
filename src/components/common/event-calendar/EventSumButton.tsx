@@ -20,13 +20,13 @@ import {
 	TAG_FUNC_ROOM,
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
-	EVENT_TAG_WORD_LENGTH,
+	TAG_NAME_LENGTH,
 	TAG_FUNC_LOC,
 	FILTER_TYPE_COLORS,
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
-	EVENT_BRANCH_NAME_LENGTH,
-	EVENT_LIST,
+	TAG_FUNC_LOC_LENGTH,
+	TAG_FUNC_DTE_LIST,
 	TAG_FUNC_RSVP,
 	PATRON,
 } from './EventCalendar'
@@ -58,7 +58,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 		let result = []
 
 		filteredEvents.forEach((classInfo) => {
-			const location = classInfo['tag-func-loc']
+			const location = classInfo[TAG_FUNC_LOC]
 			if (!locationArr[location]) {
 				locationArr[location] = []
 			}
@@ -66,7 +66,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 		})
 
 		result = Object.keys(locationArr).map((loc) => {
-			return { [TAG_FUNC_LOC]: loc, [EVENT_LIST]: locationArr[loc] }
+			return { [TAG_FUNC_LOC]: loc, [TAG_FUNC_DTE_LIST]: locationArr[loc] }
 		})
 		return result ?? []
 	}
@@ -87,11 +87,11 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 											getColor(item[TAG_FUNC_LOC])
 										)}></div>
 									<div className={'hidden sm:block max-w-[126px] text-left '}>
-										{item[TAG_FUNC_LOC]?.slice(0, EVENT_BRANCH_NAME_LENGTH)}
+										{item[TAG_FUNC_LOC]?.slice(0, TAG_FUNC_LOC_LENGTH)}
 									</div>
 									<div className={'flex items-center justify-center'}>
 										<CalendarCheck height={18} className={'hidden sm:block'} />:{' '}
-										<div>{item[EVENT_LIST].length}</div>
+										<div>{item[TAG_FUNC_DTE_LIST].length}</div>
 									</div>
 								</Button>
 							</DialogTrigger>
@@ -120,7 +120,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 											</DialogPrimitive.Close>
 										</DialogTitle>
 									</DialogHeader>
-									{item[EVENT_LIST]?.map((elm: any, key: number) => (
+									{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
 										<div
 											key={key}
 											className={

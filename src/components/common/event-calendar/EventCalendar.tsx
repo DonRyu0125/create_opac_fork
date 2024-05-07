@@ -68,10 +68,9 @@ export const TAG_FUNC_P_PAID = 'TAG_FUNC_P_PAID'
 export const TAG_FUNC_P_ATTND = 'TAG_FUNC_P_ATTND'
 export const EVENT_RSVP_YES = 'X'
 
-
-export const EVENT_LIST = 'list'
-export const EVENT_BRANCH_NAME_LENGTH = -7
-export const EVENT_TAG_WORD_LENGTH = 18
+export const TAG_FUNC_DTE_LIST = 'list'
+export const TAG_FUNC_LOC_LENGTH = -7
+export const TAG_NAME_LENGTH = 18
 
 export const MON_REPORT_TYPES = [
 	'MONTHLY_CALENDAR',
