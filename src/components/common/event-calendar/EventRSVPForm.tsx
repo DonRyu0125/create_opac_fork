@@ -1,9 +1,10 @@
 import { Button } from '@/components/ui/button'
 import { Label } from '@radix-ui/react-label'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import DropdownSelect from '../DropdownSelect'
+import { useCookies } from 'react-cookie'
 import axios from 'axios'
 import {
 	Cal_event,
@@ -66,12 +67,17 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 	const {
 		register,
 		handleSubmit,
-		watch,
 		formState: { errors },
 	} = useForm<Inputs>()
+	const [cookies] = useCookies(['HOME_SESSID'])
+	const [test, setTest] = useState(false)
+
+	useEffect(() => {
+		if (test) {
+		}
+	}, [test, cookies])
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
-
 		const BASE_URL = 'http://norfolk_test.minisisinc.com'
 		const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
 		const FIELD = 'TAG_FUNC_DATE'
@@ -104,8 +110,6 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 			</${FUNC_LOC_P_GRP}>
 		</RECORD>`
 
-		let urlForSessionID = '/scripts/mwimain.dll?logon&application=M2L_TAG_TO_BIBLIO&file=[WWW_NF]home.html#home'
-
 		// http request ?logon command
 		// check if HOME_SESSID exist in cookie
 		// create const variable for SESSID
@@ -114,23 +118,25 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 		// Is it possible to store to triple nested group field?
 
 		let url = `http://norfolk_test.minisisinc.com/x1QMIWF2EHIJK3?manipxmlrecord&database=M2L_TAG`
+		let urlForSessionID = '/scripts/mwimain.dll?logon&application=M2L_TAG_TO_BIBLIO'
 
+		axios.post(urlForSessionID, {}, {
+			headers: {
+			  'Content-Type': 'text/xml',
+			},
+		  })
+		  .then(() => {
+			const cookies = document.cookie;
+			console.log('cookies',cookies)
 
-		axios
-			.post(urlForSessionID,  {
-				headers: {
-					'Content-Type': 'text/xml',
-				},
-				timeout: 300000,
-			})
-			.then((response) => {
-			
-			})
-
+		  })
+		  .catch(error => {
+			console.error('Error fetching session ID:', error);
+		  });
 
 		// https://rmg.minisisinc.com/scripts/mwimain.dll/282975215-1458443181L
 		//?manipxmlrecord&database=client_info_view&key=C_CLIENT_NUMBER&value=20230003&READ=N
-		
+
 		// axios
 		// 	.post(url, xmlFormAdd, {
 		// 		headers: {
@@ -139,7 +145,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 		// 		timeout: 300000,
 		// 	})
 		// 	.then((response) => {
-			
+
 		// 	})
 	}
 
@@ -200,7 +206,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 					<form
 						onSubmit={handleSubmit(onSubmit)}
 						className={'h-full w-full flex flex-col justify-start items-center'}>
-						<EventInput
+						{/* <EventInput
 							label={'First Name'}
 							keyname={TAG_FUNC_P_FIRST}
 							register={register}
@@ -217,7 +223,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 							keyname={TAG_FUNC_P_EMAIL}
 							register={register}
 							required={true}
-						/>
+						/> */}
 						<div className={'flex w-full flex-col my-1'}>
 							<Label>Attendee</Label>
 							<Input
