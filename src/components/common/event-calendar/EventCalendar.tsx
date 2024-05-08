@@ -27,8 +27,19 @@ export interface Cal_event {
 	[TAG_FUNC_END_T]: string
 	[TAG_FUNC_ROOM]: string
 	[TAG_FUNC_LANG]: string
-	patron: any
+	[PATRON]: patron[]
 }
+
+export interface patron {
+	[PATRON]: string
+	[TAG_FUNC_P_ID]: string
+	[TAG_FUNC_P_FIRST]: string
+	[TAG_FUNC_P_LAST]: string
+	[TAG_FUNC_P_EMAIL]: string
+	[TAG_FUNC_P_PAID]: string
+	[TAG_FUNC_P_ATTND]: string
+}
+
 
 export interface Day_obj {
 	day: number | null
