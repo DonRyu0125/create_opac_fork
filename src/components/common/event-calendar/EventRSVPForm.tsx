@@ -180,7 +180,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 							)}
 						</div>
 					</div>
-					<div className={'h-3/6 flex flex-col items-center justify-center border-b-4 '}>
+					<div className={'h-3/6 flex flex-col items-center justify-center '}>
 						<div>Contact Info</div>
 						<div>Telephone:000-000-0000</div>
 						<div>Email:test@gmail.com</div>

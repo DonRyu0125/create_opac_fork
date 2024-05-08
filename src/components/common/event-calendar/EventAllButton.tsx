@@ -146,7 +146,7 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 									className={`h-72 p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									{item[TAG_FUNC_DESCIPT]}
 								</DialogDescription>
-								<div className={'h-[300px] rounded border-2'}>
+								<div className={'h-[300px] rounded border-2 font-bold'}>
 									<EventRSVPForm capacity={0} patrons={[]}/>
 								</div>
 								
