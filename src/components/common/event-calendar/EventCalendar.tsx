@@ -78,7 +78,9 @@ export const TAG_FUNC_P_EMAIL = 'TAG_FUNC_P_EMAIL'
 export const TAG_FUNC_P_PAID = 'TAG_FUNC_P_PAID'
 export const TAG_FUNC_P_ATTND = 'TAG_FUNC_P_ATTND'
 export const EVENT_RSVP_YES = 'X'
-//others
+//Others
+export const TAG_FUNC_P_ATTND_DEFAULT = 1
+export const TAG_FUNC_P_ATTND_MAX = 4
 export const TAG_FUNC_DTE_LIST = 'list'
 export const TAG_FUNC_LOC_LENGTH = -7
 export const TAG_NAME_LENGTH = 18

@@ -13,12 +13,13 @@ type DropdownOption = {
 export interface DropdownSelectProps {
 	title?: string
 	options: DropdownOption[]
+	register?:any
 }
 
-const DropdownSelect = ({ title, options }: DropdownSelectProps) => {
+const DropdownSelect = ({ title, options, register }: DropdownSelectProps) => {
 	return (
 		<div className="flex flex-col space-y-2">
-			<Select>
+			<Select {...register}>
 				<SelectTrigger className="">
 					<SelectValue placeholder={title || 'Select'} />
 				</SelectTrigger>

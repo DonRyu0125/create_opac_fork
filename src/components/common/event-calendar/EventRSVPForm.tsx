@@ -11,6 +11,8 @@ import {
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_P_ATTND,
+	TAG_FUNC_P_ATTND_DEFAULT,
+	TAG_FUNC_P_ATTND_MAX,
 	TAG_FUNC_P_EMAIL,
 	TAG_FUNC_P_FIRST,
 	TAG_FUNC_P_ID,
@@ -20,6 +22,7 @@ import {
 	patron,
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
+import DropdownSelect from '../DropdownSelect'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -57,20 +60,19 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		reset,
 	} = useForm<Inputs>()
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		let urlForSessionID = '/scripts/mwimain.dll?logon&application=M2L_TAG_TO_BIBLIO'
-
-		//TAG_NAME
-
-		let test = `<?xml version="1.0" encoding="UTF-8"?>
-		<RECORD>
-			<${TAG_NAME} op="chg">
-				99999999999999999
-			</${TAG_NAME}>
-		</RECORD>`
+		console.log('data', data)
+		//test
+		// let test = `<?xml version="1.0" encoding="UTF-8"?>
+		// <RECORD>
+		// 	<${TAG_NAME} op="chg">
+		// 		99999999999999999
+		// 	</${TAG_NAME}>
+		// </RECORD>`
 
 		let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
 		<RECORD>
@@ -88,9 +90,6 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 			</${FUNC_LOC_P_GRP}>
 		</RECORD>`
 
-
-
-
 		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
 		<RECORD>
 			<${TAG_FUNC_LOC_GRP} op="chg">
@@ -101,7 +100,6 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 				</${TAG_FUNC_DTE_GRP}>
 			</${FUNC_LOC_P_GRP}>
 		</RECORD>`
-
 
 		if (!document.cookie) {
 			console.log('asd')
@@ -120,9 +118,9 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 				})
 				.catch((error) => {
 					console.error('Error fetching session ID:', error)
-				});
+				})
 		}
-		return storePatron(xmlFormAdd);
+		return storePatron(xmlFormAdd)
 	}
 
 	const storePatron = (xmlFormAdd: string) => {
@@ -141,6 +139,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 
 	const onClick = () => {
 		setShowForm((prev) => !prev)
+		reset();
 	}
 
 	const calNumOfPatron = (patrons: patron[]) => {
@@ -216,13 +215,20 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 						/>
 						<div className={'flex w-full flex-col my-1'}>
 							<Label>Attendee</Label>
-							<Input
-								defaultValue={1}
-								type="number"
-								step="1"
-								className={'border-2 border-grey-500 w-[30%]'}
+							<select
+								defaultValue={TAG_FUNC_P_ATTND_DEFAULT}
 								{...register(TAG_FUNC_P_ATTND)}
-							/>
+								className={'border-2 border-grey-500 w-1/4'}>
+								{Array(TAG_FUNC_P_ATTND_MAX)
+									.fill(0)
+									.map((_, index) => {
+										return (
+											<option key={index} value={index + 1}>
+												{index + 1}
+											</option>
+										)
+									})}
+							</select>
 						</div>
 						<Button className={'w-full'} type="submit">
 							Register
