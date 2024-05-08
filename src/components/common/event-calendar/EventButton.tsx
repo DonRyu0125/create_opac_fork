@@ -129,7 +129,6 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 						</DialogDescription>
 					</div>
 					<div className={'w-full sm:w-4/12'}>
-					
 						<EventRSVPForm
 							capacity={elm[TAG_FUNC_CAP]}
 							patrons={convertToArr(elm[PATRON])}

@@ -140,14 +140,16 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 											</div>
 										</div>
 									</div>
-									{/* <div>{console.log('item', item)}</div> */}
 								</div>
-
 								{/* 'More' button to toggle description of the event */}
 								<DialogDescription
 									className={`h-72 p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									{item[TAG_FUNC_DESCIPT]}
 								</DialogDescription>
+								<div className={'h-[300px] rounded border-2'}>
+									<EventRSVPForm capacity={0} patrons={[]}/>
+								</div>
+								
 								{/* <DialogDescription
 									className={`${showFullStr[idx] ? 'h-72' : 'h-10'} p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									<>

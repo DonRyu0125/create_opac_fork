@@ -99,7 +99,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 								hideClose={'invisible'}
 								className={'max-w-lg h-[500px] overflow-auto p-4 md:max-w-3xl'}>
 								<>
-									<DialogHeader>
+									<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
 										<DialogTitle
 											className={
 												' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
