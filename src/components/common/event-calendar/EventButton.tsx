@@ -29,6 +29,7 @@ import {
 	TAG_FUNC_DTE_LIST,
 	PATRON,
 	TAG_FUNC_RSVP,
+	SISN,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
@@ -130,6 +131,7 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 					</div>
 					<div className={'w-full sm:w-4/12'}>
 						<EventRSVPForm
+							sisnNumber={elm[SISN]}
 							capacity={elm[TAG_FUNC_CAP]}
 							patrons={convertToArr(elm[PATRON])}
 						/>

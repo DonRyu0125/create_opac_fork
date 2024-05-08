@@ -29,6 +29,7 @@ import {
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
 	PATRON,
+	SISN,
 } from './EventCalendar'
 import { config } from '@/constants'
 import EventRSVPForm from './EventRSVPForm'
@@ -148,7 +149,7 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 									{item[TAG_FUNC_DESCIPT]}
 								</DialogDescription>
 								<div className={'h-[350px] rounded border-2 font-bold'}>
-									<EventRSVPForm capacity={item[TAG_FUNC_CAP]} patrons={convertToArr(item[PATRON])} />
+									<EventRSVPForm capacity={item[TAG_FUNC_CAP]} patrons={convertToArr(item[PATRON])} sisnNumber={item[SISN]}/>
 								</div>
 								
 								{/* <DialogDescription

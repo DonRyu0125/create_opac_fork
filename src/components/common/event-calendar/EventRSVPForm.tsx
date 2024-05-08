@@ -8,6 +8,7 @@ import {
 	Cal_event,
 	FUNC_LOC_P_GRP,
 	PATRON,
+	SISN,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_P_ATTND,
@@ -41,6 +42,7 @@ type EventInput = {
 type EventRSVPForm = {
 	capacity: number
 	patrons: patron[]
+	sisnNumber:number
 }
 
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
@@ -55,24 +57,26 @@ const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	)
 }
 
-const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
+const EventRSVPForm = ({ capacity, patrons, sisnNumber }: EventRSVPForm) => {
 	const [showForm, setShowForm] = useState(false)
-	const {
-		register,
-		handleSubmit,
-		reset,
-	} = useForm<Inputs>()
+	const { register, handleSubmit, reset } = useForm<Inputs>()
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		let urlForSessionID = '/scripts/mwimain.dll?logon&application=M2L_TAG_TO_BIBLIO'
-		console.log('data', data)
-		//test
-		// let test = `<?xml version="1.0" encoding="UTF-8"?>
-		// <RECORD>
-		// 	<${TAG_NAME} op="chg">
-		// 		99999999999999999
-		// 	</${TAG_NAME}>
-		// </RECORD>`
+		let test = `<?xml version="1.0" encoding="UTF-8"?><RECORD><TAG_TYPE>Calendar</TAG_TYPE><TAG_ID>898989</TAG_ID><${TAG_NAME}>99999999999999999</${TAG_NAME}><TAG_CREATOR>NORFOLK_M2L_MGR</TAG_CREATOR><TAG_CREATE_DAT>2024-05-08</TAG_CREATE_DAT><TAG_CATALOGUE>Juvenile</TAG_CATALOGUE></RECORD>`
+
+		// TAG_ID                    :	T00002218
+		// TAG_NAME                  :	korean food
+		// TAG_CREATOR               :	NORFOLK_M2L_MGR
+
+		// <TAG_TYPE>Calendar</TAG_TYPE>
+		// <TAG_ID op="chg">T00002218</TAG_ID>
+		// <TAG_NAME>korean food</TAG_NAME>
+		// <TAG_CREATOR op="chg">NORFOLK_M2L_MGR</TAG_CREATOR>
+		// <TAG_CREATE_DAT op="chg">2024-05-08</TAG_CREATE_DAT>
+		// <TAG_CATALOGUE>Juvenile</TAG_CATALOGUE>
+
+
 
 		let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
 		<RECORD>
@@ -83,63 +87,65 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 						<${TAG_FUNC_P_FIRST}>${data[TAG_FUNC_P_FIRST]}</${TAG_FUNC_P_FIRST}>
 						<${TAG_FUNC_P_LAST}>${data[TAG_FUNC_P_LAST]}</${TAG_FUNC_P_LAST}>
 						<${TAG_FUNC_P_EMAIL}>${data[TAG_FUNC_P_EMAIL]}</${TAG_FUNC_P_EMAIL}>
-						<${TAG_FUNC_P_PAID}>X</${TAG_FUNC_P_PAID}>
 						<${TAG_FUNC_P_ATTND}>${data[TAG_FUNC_P_ATTND]}</${TAG_FUNC_P_ATTND}>
-					</${TAG_FUNC_LOC_GRP}>
+					</${FUNC_LOC_P_GRP}>
 				</${TAG_FUNC_DTE_GRP}>
-			</${FUNC_LOC_P_GRP}>
+			</${TAG_FUNC_LOC_GRP}>
 		</RECORD>`
 
 		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
 		<RECORD>
 			<${TAG_FUNC_LOC_GRP} op="chg">
 				<${TAG_FUNC_DTE_GRP} op="chg">
-					<${FUNC_LOC_P_GRP} op="delete">
-
-					</${TAG_FUNC_LOC_GRP}>
+					<${FUNC_LOC_P_GRP} op="chg" search="1">
+						
+					</${FUNC_LOC_P_GRP}>
 				</${TAG_FUNC_DTE_GRP}>
-			</${FUNC_LOC_P_GRP}>
+			</${TAG_FUNC_LOC_GRP}>
 		</RECORD>`
 
-		if (!document.cookie) {
-			console.log('asd')
-			return axios
-				.post(
-					urlForSessionID,
-					{},
-					{
-						headers: {
-							'Content-Type': 'text/xml',
-						},
-					}
-				)
-				.then((res) => {
-					storePatron(xmlFormAdd)
-				})
-				.catch((error) => {
-					console.error('Error fetching session ID:', error)
-				})
-		}
-		return storePatron(xmlFormAdd)
+		// if (!document.cookie) {
+		return axios
+			.post(
+				urlForSessionID,
+				{},
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
+				}
+			)
+			.then(async (res) => {
+				await storePatron(xmlFormAdd)
+			})
+			.catch((error) => {
+				console.error('Error fetching session ID:', error)
+			})
+		// }
+		// return storePatron(test);
 	}
 
-	const storePatron = (xmlFormAdd: string) => {
+	const storePatron = async (xmlFormAdd: string) => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
-		let session_id = match[1]?.split('/')[5]
+		let HOME_SESSID = match[0]?.split('=')[1]
 
-		axios
-			.post(`/${session_id}?manipxmlrecord&database=M2L_TAG&CREATE=Y`, xmlFormAdd, {
-				headers: {
-					'Content-Type': 'text/xml',
-				},
-				timeout: 5000,
-			})
+		await axios
+			.post(
+				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N&KEY=${SISN}&VALUE=${sisnNumber}`,
+				xmlFormAdd,
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
+					timeout: 5000,
+				}
+			)
 			.then((response) => {})
 	}
 
 	const onClick = () => {
 		setShowForm((prev) => !prev)
-		reset();
+		reset()
 	}
 
 	const calNumOfPatron = (patrons: patron[]) => {
@@ -195,7 +201,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 					<form
 						onSubmit={handleSubmit(onSubmit)}
 						className={'h-full w-full flex flex-col justify-start items-center'}>
-						<EventInput
+						 <EventInput
 							label={'First Name'}
 							keyname={TAG_FUNC_P_FIRST}
 							register={register}
@@ -229,7 +235,7 @@ const EventRSVPForm = ({ capacity, patrons }: EventRSVPForm) => {
 										)
 									})}
 							</select>
-						</div>
+						</div> 
 						<Button className={'w-full'} type="submit">
 							Register
 						</Button>

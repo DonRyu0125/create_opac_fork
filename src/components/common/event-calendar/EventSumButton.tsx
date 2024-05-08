@@ -29,6 +29,7 @@ import {
 	TAG_FUNC_DTE_LIST,
 	TAG_FUNC_RSVP,
 	PATRON,
+	SISN,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
@@ -163,7 +164,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 											</div>
 											{elm[TAG_FUNC_RSVP] && (
 												<div className={'w-full sm:w-4/12'}>
-													<EventRSVPForm capacity={elm[TAG_FUNC_CAP]} patrons={convertToArr(elm[PATRON])} />
+													<EventRSVPForm capacity={elm[TAG_FUNC_CAP]} patrons={convertToArr(elm[PATRON])} sisnNumber={elm[SISN]} />
 												</div>
 											)}
 										</div>

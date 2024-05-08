@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button'
 import { convertToArr } from '@/lib/utils'
 
 export interface Cal_event {
+	[SISN]:number
 	[TAG_NAME]: string
 	[TAG_FUNC_DESCIPT]: string
 	[TAG_FUNC_LOC]: string
@@ -51,6 +52,7 @@ const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const TAG_NAME = 'TAG_NAME'
+export const SISN = 'SISN'
 //Location group
 export const TAG_FUNC_LOC_GRP = 'TAG_FUNC_LOC_GRP'
 export const TAG_FUNC_DESCIPT = 'TAG_FUNC_DESCIPT'
