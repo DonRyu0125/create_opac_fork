@@ -9,7 +9,7 @@ import {
 	DialogTrigger,
 } from '../../ui/dialog'
 import { Button } from '@/components/ui/button'
-import { convertLowerTrim } from '@/lib/utils'
+import { convertLowerTrim, convertToArr } from '@/lib/utils'
 import { cn } from '@/lib/utils'
 import * as Accordion from '@radix-ui/react-accordion'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
@@ -28,6 +28,7 @@ import {
 	FILTER_TYPE_COLORS,
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
+	PATRON,
 } from './EventCalendar'
 import { config } from '@/constants'
 import EventRSVPForm from './EventRSVPForm'
@@ -146,8 +147,8 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 									className={`h-72 p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									{item[TAG_FUNC_DESCIPT]}
 								</DialogDescription>
-								<div className={'h-[300px] rounded border-2 font-bold'}>
-									<EventRSVPForm capacity={0} patrons={[]}/>
+								<div className={'h-[350px] rounded border-2 font-bold'}>
+									<EventRSVPForm capacity={item[TAG_FUNC_CAP]} patrons={convertToArr(item[PATRON])} />
 								</div>
 								
 								{/* <DialogDescription
