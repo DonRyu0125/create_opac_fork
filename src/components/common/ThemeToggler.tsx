@@ -8,10 +8,11 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { theme } from '@/constants'
+import useConstants from '@/hooks/useConstants'
 
 export function ThemeToggler() {
 	const { setTheme, setCustomTheme } = useTheme()
+	const theme = useConstants().theme
 
 	return (
 		<DropdownMenu>

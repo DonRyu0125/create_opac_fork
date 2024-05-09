@@ -21,6 +21,7 @@ import { useState } from 'react'
 import Link from '@/components/common/Link'
 import { Record } from '@/types/record'
 import { SummarySample } from '@/samples'
+import useConstants from '@/hooks/useConstants'
 
 const SummaryRecords = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -37,6 +38,7 @@ const SummaryRecords = () => {
 
 const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
+	const fields = useConstants().fields
 	const database = record.database_name
 	const recordLink = record.record_link
 	const title = getFieldDataByLabel(record, database, 'Title') || 'Untitled'
@@ -48,12 +50,14 @@ const RecordView = ({ record }: { record: Record }) => {
 
 	const gridFields = getFieldsFromRecord(
 		record,
+		fields,
 		(item) => item.grid === true,
 		(data, item) => <DataWithLabel key={item.name} label={item.label || ''} items={data} />
 	) as React.ReactNode
 
 	const listFields = getFieldsFromRecord(
 		record,
+		fields,
 		() => true,
 		(data, item) => (
 			<DataWithLabel

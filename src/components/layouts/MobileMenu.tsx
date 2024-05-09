@@ -1,15 +1,16 @@
 import { MenuIcon } from 'lucide-react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Button } from '../ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../ui/sheet'
-import { config } from '@/constants'
+
+import useConstants from '@/hooks/useConstants'
 import Link from '../common/Link'
 
 type Props = {}
 
 const MobileMenu = (props: Props) => {
 	const [mobileMenu, setMobileMenu] = useState<boolean>(false)
-	const { logo, navigations, siteName } = config
+	const { logo, navigations, siteName } = useConstants().config
 	return (
 		<div className="block md:hidden">
 			<Button size="icon" onClick={() => setMobileMenu(true)}>

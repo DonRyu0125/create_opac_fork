@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FieldsJson, Items } from '@/types/fields.json'
-import { fields } from '@/constants/index'
-import axios, { AxiosResponse } from 'axios'
-import copy from 'copy-to-clipboard'
+import { FieldsJson } from '@/types/fields.json'
 import { Record } from '@/types/record'
+import axios from 'axios'
+import copy from 'copy-to-clipboard'
 const DEFAULT_DETAIL_REPORT = 'WEB_UNION_DETAIL'
 const DEFAULT_SUM_REPORT = 'WEB_UNION_SUM'
 const WEB_DNS = 'http://opactemplate.minisisinc.com'
@@ -32,18 +31,19 @@ export function deepSearchKey<T extends GenericObject>(obj: T, targetKey: string
 	return result
 }
 
-export const getListOfFields = (database: string) => {
-	const databaseFields = (fields as FieldsJson).find((f: any) => f.database === database)
+export const getListOfFields = (fields: FieldsJson, database: string) => {
+	const databaseFields = fields.find((f: any) => f.database === database)
 	return databaseFields
 }
 
 export const getFieldsFromRecord = (
 	record: Record,
+	fields: FieldsJson,
 	filterFn: (e: any) => boolean,
 	componentFn: (data: any[], item: any) => RENDERED_COMPONENT
 ) => {
 	const database = record.database_name
-	const listOfFields = getListOfFields(database)
+	const listOfFields = getListOfFields(fields, database)
 	return listOfFields?.items
 		?.filter((item) => filterFn(item))
 		.map((item) => {

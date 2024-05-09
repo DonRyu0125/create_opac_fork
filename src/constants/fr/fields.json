@@ -3,23 +3,30 @@
 		"database": "COLLECTIONS_WEB",
 		"items": [
 			{
-				"label": "Title",
+				"label": "Titre",
 				"name": "LEGAL_TITLE",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
-				"label": "ID",
+				"label": "Numéro d'accession",
 				"name": "ACCESSION_NUMBER",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
-				"label": "Collection Type:",
-				"name": "collect_typ_lan1",
+				"label": "Nom de l'objet",
+				"name": "OBJECT_NAME",
 				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Type de collection",
+				"name": "collect_typ_lan1",
+				"summary": false,
 				"grid": true,
 				"detail": true
 			},

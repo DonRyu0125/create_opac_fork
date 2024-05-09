@@ -10,16 +10,23 @@
 				"detail": true
 			},
 			{
-				"label": "ID",
+				"label": "Accession Number",
 				"name": "ACCESSION_NUMBER",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
-				"label": "Collection Type:",
-				"name": "collect_typ_lan1",
+				"label": "Object Name",
+				"name": "OBJECT_NAME",
 				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Collection Type",
+				"name": "collect_typ_lan1",
+				"summary": false,
 				"grid": true,
 				"detail": true
 			},

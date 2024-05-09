@@ -1,8 +1,22 @@
-import config from './en/config.json'
-import home from './en/home.json'
+import en from './en'
+import fr from './fr'
 import theme from '@/themes/index.json'
-import styles from './en/styles.json'
-import faq from './en/faq.json'
-import fields from './en/fields.json'
 
-export { config, home, theme, styles, faq, fields }
+export const CONSTANTS = {
+	EN: {
+		config: en.config,
+		home: en.home,
+		theme: theme,
+		styles: en.styles,
+		faq: en.faq,
+		fields: en.fields,
+	},
+	FR: {
+		config: fr.config,
+		home: fr.home,
+		theme: theme,
+		styles: fr.styles,
+		faq: fr.faq,
+		fields: fr.fields,
+	},
+}
