@@ -1,6 +1,6 @@
 [
 	{
-		"database": "COLLECTIONS",
+		"database": "COLLECTIONS_WEB",
 		"items": [
 			{
 				"label": "Title",
@@ -17,22 +17,22 @@
 				"detail": true
 			},
 			{
-				"label": "Date",
-				"name": "EARLY",
+				"label": "Collection Type:",
+				"name": "collect_typ_lan1",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
-				"label": "Category",
-				"name": "CATEGORY",
+				"label": "Author",
+				"name": "Author",
 				"summary": false,
 				"grid": false,
 				"detail": true
 			},
 			{
-				"name": "OBJ_DESCRIPTION",
-				"label": "Description",
+				"name": "l_publisher",
+				"label": "Publisher",
 				"summary": false,
 				"grid": false,
 				"detail": true
@@ -89,7 +89,7 @@
 		]
 	},
 	{
-		"database": "DESCRIPTION",
+		"database": "DESCRIPTION_WEB",
 		"items": [
 			{
 				"label": "Title",

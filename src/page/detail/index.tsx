@@ -75,7 +75,7 @@ const Detail = () => {
 									<span>No Media Found</span>
 								)}
 							</div>
-							<div className="grid gap-4 md:gap-10 items-start">
+							<div className="grid gap-4 md:gap-10 items-start w-1/2">
 								<DetailRecord />
 							</div>
 						</div>

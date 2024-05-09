@@ -16,7 +16,7 @@ const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 
 	// const { common, pagination } = useJSONData({ defaultData: SummarySample })
-	const { common, pagination } = useJSONData({ selector: '#xml_record' })
+	const { common, pagination,backToSummary } = useJSONData({ selector: '#xml_record' })
 
 	if (!common || !pagination) return <></>
 	return (
@@ -27,7 +27,7 @@ const Summary = () => {
 						{ label: 'Home', url: '/' },
 						{
 							label: 'Summary',
-							url: '/summary',
+							url: backToSummary,
 							active: true,
 						},
 					]}>

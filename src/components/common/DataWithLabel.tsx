@@ -12,7 +12,7 @@ type DataWithLabelProps = {
 const DataWithLabel = ({ className, label, items }: DataWithLabelProps) => {
 	return (
 		<div className={cn('flex flex-row text-black', className)}>
-			<Label className="text-sm font-bold ">{label}:</Label>
+			<Label className="text-sm font-bold ">{label}: </Label>
 			<div className="text-sm font-normal">
 				{items.map((item) => truncateString(item, 250))}
 			</div>

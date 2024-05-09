@@ -49,7 +49,7 @@ const Home = () => {
 				<SearchForm
 					className="w-full mt-6 max-w-2xl"
 					searchURL={searchURL}
-					inputName={'KEYWORD_CL'}
+					inputName={'KEYWORD_CLUSTER'}
 				/>
 
 				{/* <CommandDemo /> */}

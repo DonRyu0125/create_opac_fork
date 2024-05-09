@@ -71,7 +71,7 @@ const RecordView = ({ record }: { record: Record }) => {
 				className="border-primary"
 				title={<Link href={recordLink}>{truncateString(title)}</Link>}
 				description={gridFields}
-				thumbnail={thumbnail || 'https://www.svgrepo.com/show/451131/no-image.svg'}
+				thumbnail={thumbnail || 'https://placehold.co/250x250'}
 				footer={
 					<div className="flex h-4 items-center space-x-4 w-full justify-evenly ">
 						<RecordAction record={record} />
@@ -85,7 +85,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		<DetailInfoCard
 			title={<Link href={recordLink}>{title}</Link>}
 			className="col-span-3 border-primary"
-			thumbnail={thumbnail || 'https://www.svgrepo.com/show/451131/no-image.svg'}
+			thumbnail={thumbnail || 'https://placehold.co/250x250'}
 			footer={
 				<div>
 					<Separator />
