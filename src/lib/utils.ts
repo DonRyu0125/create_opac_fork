@@ -62,3 +62,44 @@ export const convertToArr = (elm:Object | Array<any>) =>{
 	}
 	return [elm]
 }
+
+/**
+ * Cookie 
+ */
+
+function deleteCookie(cname:string) {
+    document.cookie = cname + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+}
+function deleteAllCookies(){
+    var cookies = document.cookie.split(";");
+    var cookie = "";
+    for (var i = 0; i < cookies.length; i++) {
+      deleteCookie(cookies[i].split("=")[0]);
+    }
+}
+
+function getCookie(cname:string) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+        c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function setCookie(name:string, value:string, days:string) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}

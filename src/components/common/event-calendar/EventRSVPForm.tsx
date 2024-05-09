@@ -82,7 +82,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber }: EventRSVPForm) => {
 		<RECORD>
 			<${TAG_FUNC_LOC_GRP} op="chg">
 				<${TAG_FUNC_DTE_GRP} op="chg">
-					<${FUNC_LOC_P_GRP} op="chg">
+					<${FUNC_LOC_P_GRP} op="add">
 						<${TAG_FUNC_P_ID}>11</${TAG_FUNC_P_ID}>
 						<${TAG_FUNC_P_FIRST}>${data[TAG_FUNC_P_FIRST]}</${TAG_FUNC_P_FIRST}>
 						<${TAG_FUNC_P_LAST}>${data[TAG_FUNC_P_LAST]}</${TAG_FUNC_P_LAST}>
