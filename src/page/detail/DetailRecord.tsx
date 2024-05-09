@@ -16,7 +16,7 @@ const DetailRecord = (props: Props) => {
 	const record = records[0]
 	const database = record.database_name
 	const recordData: DBFields<'COLLECTIONS'> = record.record
-	const title = getFieldDataByLabel(record, database, 'Title') || 'Untitled'
+	const title = getFieldDataByLabel(record, fields, database, 'Title') || 'Untitled'
 	const detailFields = getFieldsFromRecord(
 		record,
 		fields,

@@ -53,8 +53,14 @@ export const getFieldsFromRecord = (
 		})
 		.filter((item: any) => item)
 }
-export const getFieldDataByLabel = (record: Record, database: string, label = 'Title') => {
-	const fieldLabel = getListOfFields(database)?.items?.filter((e) => e.label === label)[0]?.name
+export const getFieldDataByLabel = (
+	record: Record,
+	fields: FieldsJson,
+	database: string,
+	label = 'Title'
+) => {
+	const fieldLabel = getListOfFields(fields, database)?.items?.filter((e) => e.label === label)[0]
+		?.name
 	return fieldLabel ? deepSearchKey(record, fieldLabel)[0] : null
 }
 
