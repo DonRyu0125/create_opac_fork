@@ -6,6 +6,16 @@ import { MenuIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import MobileMenu from './MobileMenu'
+
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select'
+import { LanguageSelect } from '../common/LanguageSelect'
+
 const Header = () => {
 	const { logo, navigations } = config
 
@@ -32,7 +42,7 @@ const Header = () => {
 							))}
 						</ul>
 					</nav>
-
+					<LanguageSelect />
 					<div className="flex md:hidden items-center gap-4">
 						{/* <ThemeToggler /> */}
 						<MobileMenu />
