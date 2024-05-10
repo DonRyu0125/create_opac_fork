@@ -54,6 +54,7 @@ type EventRSVPForm = {
 const MWI_RESFUL_RES = 'MWI-RESTful-response'
 const SUCCESS_RES_CODE = 0
 const MWI_XML_DATA_INDEX = 0
+const NON_LOGIN_USER_TYPE = 'NOLOGIN'
 
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	return (
@@ -154,7 +155,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 						<${TAG_FUNC_LOC_GRP} occ="${TAG_FUNC_LOC_OCC}" op="chg">
 							<${TAG_FUNC_DTE_GRP} occ="${TAG_FUNC_DTE_OCC}" op="chg">
 								<${FUNC_LOC_P_GRP} op="add">
-									<${TAG_FUNC_P_ID}>11</${TAG_FUNC_P_ID}>
+									<${TAG_FUNC_P_ID}>${NON_LOGIN_USER_TYPE}${uuidv4()}</${TAG_FUNC_P_ID}>
 									<${TAG_FUNC_P_FIRST}>${data[TAG_FUNC_P_FIRST]}</${TAG_FUNC_P_FIRST}>
 									<${TAG_FUNC_P_LAST}>${data[TAG_FUNC_P_LAST]}</${TAG_FUNC_P_LAST}>
 									<${TAG_FUNC_P_EMAIL}>${data[TAG_FUNC_P_EMAIL]}</${TAG_FUNC_P_EMAIL}>
