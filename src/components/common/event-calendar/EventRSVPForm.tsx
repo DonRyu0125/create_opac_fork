@@ -86,21 +86,20 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 					},
 				}
 			)
-			.then((res) => {
+			.then(() => {
 				return getRecord(data)
 					.then((res) => storePatron(res))
 					.then((res) => {
-						console.log('res',res)
 						if (!res) {
-							console.log('this is error!!!!')
+							console.log('this is error')
 						}
 						if (res === SUCCESS_RES_CODE) {
 							console.log('this is success')
 						}
-						onReset()
+						onReset();
 					})
 					.catch((error) => {
-						console.log('this is error!!!!')
+						console.log('this is error')
 						onReset()
 					})
 			})
