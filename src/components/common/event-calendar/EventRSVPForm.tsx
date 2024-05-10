@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import X2JS from 'x2js'
+import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios'
 import {
 	Cal_event,
@@ -75,7 +76,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 		let urlForSessionID = '/scripts/mwimain.dll?logon&application=M2L_TAG_TO_BIBLIO'
 		// mwi logon function
 		// 20240510 Richard said, calendar can't be the stand alone function so it will required the logon before using it
-		// 20240510 optimization is not ready
+		// 20240510 logon => storing data process optimization is not developed
 		return axios
 			.post(
 				urlForSessionID,
