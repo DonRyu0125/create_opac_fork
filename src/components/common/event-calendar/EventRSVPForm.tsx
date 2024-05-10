@@ -50,6 +50,10 @@ type EventRSVPForm = {
 	event: Cal_event
 }
 
+const MWI_RESFUL_RES = 'MWI-RESTful-response'
+const SUCCESS_RES_CODE = 0
+const MWI_XML_DATA_INDEX = 0
+
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	return (
 		<div className={'flex w-full flex-col my-1'}>
@@ -65,6 +69,7 @@ const EventInput = ({ label, keyname, register, required }: EventInput) => {
 const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) => {
 	const [showForm, setShowForm] = useState(false)
 	const { register, handleSubmit, reset } = useForm<Inputs>()
+	const x2js = new X2JS()
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		let urlForSessionID = '/scripts/mwimain.dll?logon&application=M2L_TAG_TO_BIBLIO'
@@ -82,19 +87,33 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 				}
 			)
 			.then((res) => {
-				getRecord(data)
-				// await storePatron(xmlFormDelete)
+				return getRecord(data)
+					.then((res) => storePatron(res))
+					.then((res) => {
+						console.log('res',res)
+						if (!res) {
+							console.log('this is error!!!!')
+						}
+						if (res === SUCCESS_RES_CODE) {
+							console.log('this is success')
+						}
+						onReset()
+					})
+					.catch((error) => {
+						console.log('this is error!!!!')
+						onReset()
+					})
 			})
 			.catch((error) => {
 				console.error('Error fetching session ID:', error)
 			})
 	}
 
-	const getRecord = async (data) => {
+	const getRecord = async (data:Inputs) => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 		let HOME_SESSID = match[0]?.split('=')[1]
 
-		await axios
+		return await axios
 			.post(
 				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=Y&KEY=${SISN}&VALUE=${sisnNumber}`,
 				{
@@ -105,28 +124,28 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 				}
 			)
 			.then((res) => {
-				const x2js = new X2JS()
 				const conToJson: any = x2js.xml2js(res.data)
-				const jsonObj = conToJson['MWI-RESTful-response'].record
-				const loc_group = convertToArr(jsonObj.TAG_FUNC_LOC_GRP)
-				const dte_group = convertToArr(jsonObj.TAG_FUNC_LOC_GRP.TAG_FUNC_DTE_GRP)
+				const jsonObj = conToJson[MWI_RESFUL_RES].record
+				const loc_group = convertToArr(jsonObj.TAG_FUNC_LOC_GRP[MWI_XML_DATA_INDEX])
+				const dte_group = convertToArr(jsonObj.TAG_FUNC_LOC_GRP[MWI_XML_DATA_INDEX].TAG_FUNC_DTE_GRP)
 				let TAG_FUNC_LOC_OCC = 0
 				let TAG_FUNC_DTE_OCC = 0
 
-				loc_group?.forEach((elm, index) => {
+				loc_group?.forEach((elm) => {
 					const funcLoc = elm?.TAG_FUNC_LOC
 					if (funcLoc === event[TAG_FUNC_LOC]) {
-						TAG_FUNC_LOC_OCC = index + 1 // regards as Occurence number of the repeating field
+						TAG_FUNC_LOC_OCC = elm._occ // regards as Occurence number of the repeating field
 					}
 				})
-				dte_group?.forEach((elm, index) => {
+
+				dte_group?.forEach((elm) => {
 					const funcDate = elm?.TAG_FUNC_DATE
 					const funcTimeStart = elm?.TAG_FUNC_START_T
 					if (
 						funcDate === event[TAG_FUNC_DATE] &&
 						funcTimeStart === event[TAG_FUNC_START_T]
 					) {
-						TAG_FUNC_DTE_OCC = index + 1
+						TAG_FUNC_DTE_OCC = elm._occ
 					}
 				})
 
@@ -145,16 +164,18 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 						</${TAG_FUNC_LOC_GRP}>
 					</RECORD>`
 
-				return storePatron(xmlFormAdd)
-			}).catch((error) => {
+				return xmlFormAdd
+			})
+			.catch((error) => {
 				console.error('Getting record error', error)
+				return false
 			})
 	}
 
-	const storePatron = async (xmlFormAdd: string) => {
+	const storePatron = async (xmlFormAdd: string | Boolean) => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 		let HOME_SESSID = match[0]?.split('=')[1]
-		await axios
+		return await axios
 			.post(
 				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N&KEY=${SISN}&VALUE=${sisnNumber}`,
 				xmlFormAdd,
@@ -165,12 +186,18 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 					timeout: 5000,
 				}
 			)
-			.then((res) => {})
+			.then((res) => {
+				const errJson: any = x2js.xml2js(res.data)
+				return errJson[MWI_RESFUL_RES].error ?? false
+			})
+			.catch((error) => {
+				return false
+			})
 	}
 
-	const onClick = () => {
-		setShowForm((prev) => !prev);
-		reset();
+	const onReset = () => {
+		setShowForm((prev) => !prev)
+		reset()
 	}
 
 	const calNumOfPatron = (patrons: patron[]) => {
@@ -197,7 +224,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 						<Button
 							disabled={capacity - calNumOfPatron(patrons) === 0 ? true : false}
 							className={'w-full '}
-							onClick={onClick}>{`Register`}</Button>
+							onClick={onReset}>{`Register`}</Button>
 						<div className={'flex items-center justify-center'}>
 							{capacity - calNumOfPatron(patrons) === 0 ? (
 								<div className={'flex text-red-600 items-center'}>
@@ -264,7 +291,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 						<Button className={'w-full'} type="submit">
 							Register
 						</Button>
-						<div onClick={onClick} className="text-center border-b-4">
+						<div onClick={onReset} className="text-center border-b-4">
 							Go Back
 						</div>
 					</form>
