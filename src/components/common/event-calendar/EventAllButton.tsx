@@ -125,9 +125,9 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 												&#x2022;{item[TAG_FUNC_DATE]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												<span>&#x2022;{item[TAG_FUNC_START_T]}</span>
+												<span>&#x2022;{item[TAG_FUNC_START_T].toUpperCase()}</span>
 												<span className={'mx-2'}>-</span>
-												<span>{item[TAG_FUNC_END_T]}</span>
+												<span>{item[TAG_FUNC_END_T].toUpperCase()}</span>
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
 												&#x2022;Room: {item[TAG_FUNC_ROOM]}

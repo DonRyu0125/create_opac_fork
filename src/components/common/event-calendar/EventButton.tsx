@@ -49,7 +49,7 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 	return (
 		<Dialog key={id}>
 			<DialogTrigger asChild>
-				<Button className={'w-full h-[95%] border-hidden p-0 '} variant="outline">
+				<Button className={`w-full h-[95%] border-hidden p-0 `} variant="outline">
 					<div className={'w-full text-left'}>
 						<div className={'flex'}>
 							<div
@@ -64,8 +64,8 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 						{weekType && (
 							<div className={'flex items-center justify-around w-full'}>
 								<div>
-									<div>{elm[TAG_FUNC_START_T]}-</div>
-									<div>{elm[TAG_FUNC_END_T]}</div>
+									<div>{elm[TAG_FUNC_START_T].toUpperCase()}-</div>
+									<div>{elm[TAG_FUNC_END_T].toUpperCase()}</div>
 								</div>
 								{elm[TAG_FUNC_RSVP] && <SquareUserRound /> }
 							</div>
@@ -103,9 +103,9 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 								&#x2022;{elm[TAG_FUNC_DATE]}
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								<span>&#x2022;{elm[TAG_FUNC_START_T]}</span>
+								<span>&#x2022;{elm[TAG_FUNC_START_T].toUpperCase()}</span>
 								<span className={'mx-2'}>-</span>
-								<span>{elm[TAG_FUNC_END_T]}</span>
+								<span>{elm[TAG_FUNC_END_T].toUpperCase()}</span>
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
 								&#x2022;Room: {elm[TAG_FUNC_ROOM]}

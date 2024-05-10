@@ -70,13 +70,14 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent, week
 	// To sort the time shift
 	const parseTimeString = (timeString: string) => {
 		if (timeString) {
-			const [time, meridian] = timeString?.split(' ')
-			const [hours, minutes] = time?.split(':').map(Number)
+			const [time, meridian] = timeString?.split(' ');
+			const [hours, minutes] = time?.split(':').map(Number);
+			const meridianUpper = meridian.toUpperCase();
 
 			let hours24 = hours
-			if (meridian === 'PM' && hours !== 12) {
+			if (meridianUpper === 'PM' && hours !== 12) {
 				hours24 += 12
-			} else if (meridian === 'AM' && hours === 12) {
+			} else if (meridianUpper === 'AM' && hours === 12) {
 				hours24 = 0
 			}
 			const dateObject = new Date()
@@ -87,7 +88,7 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent, week
 	}
 
 	return (
-		<div className={'h-4/5 relative w-full'}>
+		<div className={`${monthType?'h-4/5':'h-[98%]'} relative w-full`}>
 			{/* Event button */}
 			<EventSumButton filteredEvents={filteredEvents} weekType={weekType} monthType={monthType} />
 			{/* All events button */}
