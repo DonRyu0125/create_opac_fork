@@ -100,13 +100,21 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 										className={
 											'bg-primary text-primary-foreground h-10 flex justify-center items-center rounded'
 										}>
-										<div className={'flex'}>
-											<div
-												className={cn(
-													'h-4 w-[16px] border rounded mr-1',
-													getColor(item[TAG_FUNC_LOC])
-												)}></div>
-											{item[TAG_FUNC_LOC]}
+										<div className={'flex justify-between w-[400px]'}>
+											<div className={'flex'}>
+												<div
+													className={cn(
+														'h-4 w-[16px] border rounded mr-1',
+														getColor(item[TAG_FUNC_LOC])
+													)}></div>
+												{item[TAG_FUNC_LOC]}
+											</div>
+
+											<div className={'mx-2'}>
+												<span>{item[TAG_FUNC_START_T].toUpperCase()}</span>
+												<span className={'mx-2'}>-</span>
+												<span>{item[TAG_FUNC_END_T].toUpperCase()}</span>
+											</div>
 										</div>
 									</DialogTitle>
 								</div>
@@ -125,7 +133,9 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 												&#x2022;{item[TAG_FUNC_DATE]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												<span>&#x2022;{item[TAG_FUNC_START_T].toUpperCase()}</span>
+												<span>
+													&#x2022;{item[TAG_FUNC_START_T].toUpperCase()}
+												</span>
 												<span className={'mx-2'}>-</span>
 												<span>{item[TAG_FUNC_END_T].toUpperCase()}</span>
 											</div>
@@ -149,9 +159,14 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 									{item[TAG_FUNC_DESCIPT]}
 								</DialogDescription>
 								<div className={'h-[350px] rounded border-2 font-bold'}>
-									<EventRSVPForm capacity={item[TAG_FUNC_CAP]} patrons={convertToArr(item[PATRON])} sisnNumber={item[SISN]} event={item}/>
+									<EventRSVPForm
+										capacity={item[TAG_FUNC_CAP]}
+										patrons={convertToArr(item[PATRON])}
+										sisnNumber={item[SISN]}
+										event={item}
+									/>
 								</div>
-								
+
 								{/* <DialogDescription
 									className={`${showFullStr[idx] ? 'h-72' : 'h-10'} p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									<>
