@@ -149,7 +149,7 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 									{item[TAG_FUNC_DESCIPT]}
 								</DialogDescription>
 								<div className={'h-[350px] rounded border-2 font-bold'}>
-									<EventRSVPForm capacity={item[TAG_FUNC_CAP]} patrons={convertToArr(item[PATRON])} sisnNumber={item[SISN]}/>
+									<EventRSVPForm capacity={item[TAG_FUNC_CAP]} patrons={convertToArr(item[PATRON])} sisnNumber={item[SISN]} event={item}/>
 								</div>
 								
 								{/* <DialogDescription

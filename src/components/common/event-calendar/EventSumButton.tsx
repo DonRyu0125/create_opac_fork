@@ -164,7 +164,8 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 											</div>
 											{elm[TAG_FUNC_RSVP] && (
 												<div className={'w-full sm:w-4/12'}>
-													<EventRSVPForm capacity={elm[TAG_FUNC_CAP]} patrons={convertToArr(elm[PATRON])} sisnNumber={elm[SISN]} />
+													<EventRSVPForm capacity={elm[TAG_FUNC_CAP]} patrons={convertToArr(elm[PATRON])} event={elm}
+													sisnNumber={elm[SISN]} />
 												</div>
 											)}
 										</div>

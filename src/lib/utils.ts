@@ -94,7 +94,7 @@ function getCookie(cname:string) {
     return "";
 }
 
-function setCookie(name:string, value:string, days:string) {
+function setCookie(name:string, value:string, days:number) {
     var expires = "";
     if (days) {
         var date = new Date();

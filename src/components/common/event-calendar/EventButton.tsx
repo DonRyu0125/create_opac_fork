@@ -134,6 +134,7 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 							sisnNumber={elm[SISN]}
 							capacity={elm[TAG_FUNC_CAP]}
 							patrons={convertToArr(elm[PATRON])}
+							event={elm}
 						/>
 					</div>
 				</div>
