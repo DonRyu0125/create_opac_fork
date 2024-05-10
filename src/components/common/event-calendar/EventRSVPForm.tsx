@@ -127,8 +127,8 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 			.then((res) => {
 				const conToJson: any = x2js.xml2js(res.data)
 				const jsonObj = conToJson[MWI_RESFUL_RES].record
-				const loc_group = convertToArr(jsonObj.TAG_FUNC_LOC_GRP[MWI_XML_DATA_INDEX])
-				const dte_group = convertToArr(jsonObj.TAG_FUNC_LOC_GRP[MWI_XML_DATA_INDEX].TAG_FUNC_DTE_GRP)
+				const loc_group = convertToArr(jsonObj.TAG_FUNC_LOC_GRP)
+				const dte_group = convertToArr(loc_group[MWI_XML_DATA_INDEX].TAG_FUNC_DTE_GRP)
 				let TAG_FUNC_LOC_OCC = 0
 				let TAG_FUNC_DTE_OCC = 0
 
@@ -149,13 +149,14 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 						TAG_FUNC_DTE_OCC = elm._occ
 					}
 				})
+				console.log(`${NON_LOGIN_USER_TYPE}${uuidv4()}`)
 
 				let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
 					<RECORD>
 						<${TAG_FUNC_LOC_GRP} occ="${TAG_FUNC_LOC_OCC}" op="chg">
 							<${TAG_FUNC_DTE_GRP} occ="${TAG_FUNC_DTE_OCC}" op="chg">
 								<${FUNC_LOC_P_GRP} op="add">
-									<${TAG_FUNC_P_ID}>${NON_LOGIN_USER_TYPE}${uuidv4()}</${TAG_FUNC_P_ID}>
+									<${TAG_FUNC_P_ID}>${NON_LOGIN_USER_TYPE}${uuidv4().substring(15)}</${TAG_FUNC_P_ID}>
 									<${TAG_FUNC_P_FIRST}>${data[TAG_FUNC_P_FIRST]}</${TAG_FUNC_P_FIRST}>
 									<${TAG_FUNC_P_LAST}>${data[TAG_FUNC_P_LAST]}</${TAG_FUNC_P_LAST}>
 									<${TAG_FUNC_P_EMAIL}>${data[TAG_FUNC_P_EMAIL]}</${TAG_FUNC_P_EMAIL}>
