@@ -49,6 +49,11 @@ export interface Day_obj {
 }
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
+export const LIBRARY_LOCATION_VIEW = 'LIBRARY_LOCATION_VIEW'
+export const BRANCH_NAME = 'BRANCH_NAME'
+export const BRANCH_ADDRESS = 'BRANCH_ADDRESS'
+export const BRANCH_PHONE = 'BRANCH_PHONE'
 export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const TAG_NAME = 'TAG_NAME'
@@ -164,7 +169,6 @@ const EventCalendar = () => {
 	}
 
 	const fetch_get = async (currentDate: Date) => {
-		const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
 		const DATE_FIELD = 'TAG_FUNC_DATE'
 		const DATE_WILDCARD = `${currentDate.getFullYear()}%2D0${currentDate.getMonth() + 1}%2D%2A`
 

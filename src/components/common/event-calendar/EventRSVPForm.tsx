@@ -4,11 +4,12 @@ import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import X2JS from 'x2js'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import {
 	Cal_event,
 	FUNC_LOC_P_GRP,
+	LIBRARY_LOCATION_VIEW,
 	PATRON,
 	SISN,
 	TAG_FUNC_DATE,
@@ -72,8 +73,32 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 	const [showForm, setShowForm] = useState(false)
 	const { register, handleSubmit, reset } = useForm<Inputs>()
 	const x2js = new X2JS()
+	const [formData, setFormData] = useState({
+		MAIL_TO: '',
+	})
+
+	useEffect(() => {
+		console.log('=====>', LIBRARY_LOCATION_VIEW)
+	}, [])
+
+	//${DATE_FIELD} ${DATE_WILDCARD}
+
+	const getLibraryLocation = async () => {
+		const response = await axios.get(
+			`/scripts/mwimain.dll/144/M2L_TAG/${LIBRARY_LOCATION_VIEW}?commandsearch&exp=`,
+			{
+				headers: {
+					'Content-Type': 'text/xml',
+				},
+			}
+		)
+		const x2js = new X2JS()
+		const jsonData: any = x2js.xml2js(response.data)
+		const event = jsonData?.div?.xml?.event
+	}
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+		console.log('formData', formData)
 		let urlForSessionID = '/scripts/mwimain.dll?logon&application=M2L_TAG_TO_BIBLIO'
 		// mwi logon function
 		// 20240510 Richard said, calendar can't be the stand alone function so it will required the logon before using it
@@ -89,28 +114,41 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 				}
 			)
 			.then(() => {
-				return getRecord(data)
-					.then((res) => storePatron(res))
-					.then((res) => {
-						if (!res) {
-							console.log('this is error')
-						}
-						if (res === SUCCESS_RES_CODE) {
-							console.log('this is success')
-						}
-						onReset();
-					})
-					.catch((error) => {
-						console.log('this is error')
-						onReset()
-					})
+				return sendEmail()
+				// return getRecord(data)
+				// 	.then((res) => storePatron(res))
+				// 	.then((res) => {
+				// 		if (!res) {
+				// 			console.log('this is error')
+				// 		}
+				// 		if (res === SUCCESS_RES_CODE) {
+				// 			console.log('this is success')
+				// 		}
+				// 		onReset()
+				// 	})
+				// 	.catch((error) => {
+				// 		console.log('this is error')
+				// 		onReset()
+				// 	})
 			})
 			.catch((error) => {
 				console.error('Error fetching session ID:', error)
 			})
 	}
 
-	const getRecord = async (data:Inputs) => {
+	const sendEmail = async () => {
+		// let url = `${homesessid}?SENDMAIL&PARM=[RMG_ROOT]feedback.txt`
+		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
+		let HOME_SESSID = match[0]?.split('=')[1]
+
+		return await axios.post(`${HOME_SESSID}?SENDMAIL&PARM=[CALENDAR]RsvpForm.txt`, formData, {
+			headers: {
+				'Content-Type': 'text/xml',
+			},
+		})
+	}
+
+	const getRecord = async (data: Inputs) => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 		let HOME_SESSID = match[0]?.split('=')[1]
 
@@ -212,6 +250,14 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 		return totalPatronAttnd ?? 0
 	}
 
+	const handleChange = (e) => {
+		const { name, value } = e.target
+		setFormData({
+			...formData,
+			[name]: value,
+		})
+	}
+
 	return (
 		<div className={`flex justify-center w-full h-full`}>
 			{!showForm && (
@@ -248,56 +294,91 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 				</div>
 			)}
 			{showForm && (
-				<div className={'h-5/6 w-full p-1'}>
-					<div className={'bg-primary p-1 text-white'}>
-						Did you <span className={'text-gray-400'}>Log In?</span>
+				<form method="POST" id="feedback-form" action="" onSubmit={handleSubmit(onSubmit)}>
+					<div id="feedback-inputs">
+						{/* <input
+						id="feedback-id"
+						type="text"
+						name="MAIL_ID"
+						aria-label="User ID number"
+						placeholder=""
+						disabled />
+					<input
+						id="feedback-name"
+						type="text"
+						name="MAIL_NAME"
+						aria-label="Username"
+						placeholder="Name *" />
+					<div  hidden>This value is required</div> */}
+						<input
+							onChange={handleChange}
+							type="text"
+							name="MAIL_TO"
+							aria-label="User email"
+							placeholder="Email *"
+						/>
+						<div hidden>This value is required</div>
+						{/* <textarea
+						id="feedback-detail"
+						placeholder="Please give details of your feedback *"
+						aria-label="User feedback"
+						name="MAIL_FEEDBACK"></textarea>
+					<div hidden>This value is required</div> */}
 					</div>
-					<form
-						onSubmit={handleSubmit(onSubmit)}
-						className={'h-full w-full flex flex-col justify-start items-center'}>
-						<EventInput
-							label={'First Name'}
-							keyname={TAG_FUNC_P_FIRST}
-							register={register}
-							required={true}
-						/>
-						<EventInput
-							label={'Last Name'}
-							keyname={TAG_FUNC_P_LAST}
-							register={register}
-							required={true}
-						/>
-						<EventInput
-							label={'Email'}
-							keyname={TAG_FUNC_P_EMAIL}
-							register={register}
-							required={true}
-						/>
-						<div className={'flex w-full flex-col my-1'}>
-							<Label>Attendee</Label>
-							<select
-								defaultValue={TAG_FUNC_P_ATTND_DEFAULT}
-								{...register(TAG_FUNC_P_ATTND)}
-								className={'border-2 border-grey-500 w-1/4'}>
-								{Array(TAG_FUNC_P_ATTND_MAX)
-									.fill(0)
-									.map((_, index) => {
-										return (
-											<option key={index} value={index + 1}>
-												{index + 1}
-											</option>
-										)
-									})}
-							</select>
-						</div>
-						<Button className={'w-full'} type="submit">
-							Register
-						</Button>
-						<div onClick={onReset} className="text-center border-b-4">
-							Go Back
-						</div>
-					</form>
-				</div>
+					<div>
+						<button id="feedback-submit-btn">Submit form</button>
+					</div>
+				</form>
+				// <div className={'h-5/6 w-full p-1'}>
+				// 	<div className={'bg-primary p-1 text-white'}>
+				// 		Did you <span className={'text-gray-400'}>Log In?</span>
+				// 	</div>
+				// 	<form
+				// 		onSubmit={handleSubmit(onSubmit)}
+				// 		className={'h-full w-full flex flex-col justify-start items-center'}>
+				// 		<EventInput
+				// 			label={'First Name'}
+				// 			keyname={TAG_FUNC_P_FIRST}
+				// 			register={register}
+				// 			required={true}
+				// 		/>
+				// 		<EventInput
+				// 			label={'Last Name'}
+				// 			keyname={TAG_FUNC_P_LAST}
+				// 			register={register}
+				// 			required={true}
+				// 		/>
+				// 		<EventInput
+				// 			label={'Email'}
+				// 			keyname={TAG_FUNC_P_EMAIL}
+				// 			register={register}
+				// 			required={true}
+				// 		/>
+				// 		<div className={'flex w-full flex-col my-1'}>
+				// 			<Label>Attendee</Label>
+				// 			<select
+				// 				defaultValue={TAG_FUNC_P_ATTND_DEFAULT}
+				// 				{...register(TAG_FUNC_P_ATTND)}
+				// 				className={'border-2 border-grey-500 w-1/4'}>
+				// 				{Array(TAG_FUNC_P_ATTND_MAX)
+				// 					.fill(0)
+				// 					.map((_, index) => {
+				// 						return (
+				// 							<option key={index} value={index + 1}>
+				// 								{index + 1}
+				// 							</option>
+				// 						)
+				// 					})}
+				// 			</select>
+				// 		</div>
+				// 		<Button className={'w-full'} type="submit">
+				// 			Register
+				// 		</Button>
+				// 		<div onClick={onReset} className="text-center border-b-4">
+				// 			Go Back
+				// 		</div>
+				// 	</form>
+				// </div>
 			)}
 		</div>
 	)
