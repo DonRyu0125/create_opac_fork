@@ -7,6 +7,7 @@ import X2JS from 'x2js'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import {
+	BRANCH_NAME,
 	Cal_event,
 	FUNC_LOC_P_GRP,
 	LIBRARY_LOCATION_VIEW,
@@ -78,14 +79,13 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 	})
 
 	useEffect(() => {
-		console.log('=====>', LIBRARY_LOCATION_VIEW)
+		// getLibraryLocation(event)
 	}, [])
+	///scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} ${DATE_WILDCARD}
 
-	//${DATE_FIELD} ${DATE_WILDCARD}
-
-	const getLibraryLocation = async () => {
+	const getLibraryLocation = async (event:Cal_event) => {
 		const response = await axios.get(
-			`/scripts/mwimain.dll/144/M2L_TAG/${LIBRARY_LOCATION_VIEW}?commandsearch&exp=`,
+			`/scripts/mwimain.dll/144/LIBRARY_LOCATION/${LIBRARY_LOCATION_VIEW}?commandsearch&exp=${BRANCH_NAME} ${event[TAG_FUNC_LOC]}`,
 			{
 				headers: {
 					'Content-Type': 'text/xml',
@@ -94,7 +94,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 		)
 		const x2js = new X2JS()
 		const jsonData: any = x2js.xml2js(response.data)
-		const event = jsonData?.div?.xml?.event
+		console.log('jsonData',jsonData)
 	}
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -135,6 +135,8 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 				console.error('Error fetching session ID:', error)
 			})
 	}
+
+
 
 	const sendEmail = async () => {
 		// let url = `${homesessid}?SENDMAIL&PARM=[RMG_ROOT]feedback.txt`

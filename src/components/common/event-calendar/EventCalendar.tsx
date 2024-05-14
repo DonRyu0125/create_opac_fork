@@ -17,7 +17,6 @@ export interface Cal_event {
 	[TAG_NAME]: string
 	[TAG_FUNC_DESCIPT]: string
 	[TAG_FUNC_LOC]: string
-	[TAG_FUNC_LOC_ID]: string
 	[TAG_FUNC_LOC_FEE]: string
 	[TAG_FUNC_DATE]: string
 	[TAG_FUNC_LOC_BAN]: string
@@ -62,7 +61,6 @@ export const SISN = 'SISN'
 export const TAG_FUNC_LOC_GRP = 'TAG_FUNC_LOC_GRP'
 export const TAG_FUNC_DESCIPT = 'TAG_FUNC_DESCIPT'
 export const TAG_FUNC_LOC = 'TAG_FUNC_LOC'
-export const TAG_FUNC_LOC_ID = 'TAG_FUNC_LOC_ID'
 export const TAG_FUNC_LOC_FEE = 'TAG_FUNC_LOC_FEE'
 export const TAG_FUNC_LOC_BAN = 'TAG_FUNC_LOC_BAN'
 export const TAG_FUNC_LOC_AUD = 'TAG_FUNC_LOC_AUD'
@@ -108,7 +106,7 @@ export const ICON_SHAPE_MAP = {
 
 export const FILTER_TYPE_COLORS = [
 	{
-		type: 'Delhi BRANCH',
+		type: 'Delhi Branch',
 		color: COLORS_MAP['RED'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
