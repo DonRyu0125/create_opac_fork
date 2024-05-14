@@ -83,7 +83,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 	}, [])
 	///scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} ${DATE_WILDCARD}
 
-	const getLibraryLocation = async (event:Cal_event) => {
+	const getLibraryLocation = async (event: Cal_event) => {
 		const response = await axios.get(
 			`/scripts/mwimain.dll/144/LIBRARY_LOCATION/${LIBRARY_LOCATION_VIEW}?commandsearch&exp=${BRANCH_NAME} ${event[TAG_FUNC_LOC]}`,
 			{
@@ -94,7 +94,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 		)
 		const x2js = new X2JS()
 		const jsonData: any = x2js.xml2js(response.data)
-		console.log('jsonData',jsonData)
+		console.log('jsonData', jsonData)
 	}
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -136,16 +136,14 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 			})
 	}
 
-
-
 	const sendEmail = async () => {
 		// let url = `${homesessid}?SENDMAIL&PARM=[RMG_ROOT]feedback.txt`
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 		let HOME_SESSID = match[0]?.split('=')[1]
 
-		return await axios.post(`${HOME_SESSID}?SENDMAIL&PARM=[CALENDAR]RsvpForm.txt`, formData, {
+		return await axios.post(`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RsvpForm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=donryu1031@gmail.com`, {
 			headers: {
-				'Content-Type': 'text/xml',
+				"Content-Type": "multipart/form-data"
 			},
 		})
 	}

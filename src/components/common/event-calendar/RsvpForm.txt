@@ -1,7 +1,5 @@
-[METHOD]SMTP
-[SMTP]$DEFAULT
-[MAIL_TO]donryu1031@gmail.com
-[SUBJECT]RMG Record feedback
-[FROM]relay@minisisinc.com
-[TEXT]
-
+[SENDER]
+[RECEIVER]
+[CC]
+[SUBJECT]test
+[MAILBODY]
