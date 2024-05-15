@@ -30,6 +30,7 @@ import {
 	TAG_FUNC_RSVP,
 	PATRON,
 	SISN,
+	ContactInfo,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
@@ -42,9 +43,10 @@ export interface eventSumType {
 	filteredEvents: Cal_event[]
 	weekType: boolean
 	monthType: boolean
+	contactInfo: ContactInfo[]
 }
 
-const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) => {
+const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: eventSumType) => {
 	const { logo } = config
 
 	const getColor = (event_type: string) => {
@@ -127,7 +129,8 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 											className={
 												'w-full text-l sm:flex font-bold p-2 border-2 rounded '
 											}>
-											<div className={`w-full ${elm[TAG_FUNC_RSVP] && 'sm:w-8/12'}`}>
+											<div
+												className={`w-full ${elm[TAG_FUNC_RSVP] && 'sm:w-8/12'}`}>
 												<div className={'overflow-hidden text-lg'}>
 													{elm[TAG_NAME]}
 												</div>
@@ -136,9 +139,14 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 														&#x2022;{elm[TAG_FUNC_DATE]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														<span>&#x2022;{elm[TAG_FUNC_START_T].toUpperCase()}</span>
+														<span>
+															&#x2022;
+															{elm[TAG_FUNC_START_T].toUpperCase()}
+														</span>
 														<span className={'mx-2'}>-</span>
-														<span>{elm[TAG_FUNC_END_T].toUpperCase()}</span>
+														<span>
+															{elm[TAG_FUNC_END_T].toUpperCase()}
+														</span>
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
 														&#x2022;Room: {elm[TAG_FUNC_ROOM]}
@@ -146,7 +154,8 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 												</div>
 												<div className={'sm:flex'}>
 													<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;Suitable for: {elm[TAG_FUNC_LOC_AUD]}
+														&#x2022;Suitable for:{' '}
+														{elm[TAG_FUNC_LOC_AUD]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
 														&#x2022;Seats: {elm[TAG_FUNC_CAP]}
@@ -164,8 +173,13 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 											</div>
 											{elm[TAG_FUNC_RSVP] && (
 												<div className={'w-full sm:w-4/12'}>
-													<EventRSVPForm capacity={elm[TAG_FUNC_CAP]} patrons={convertToArr(elm[PATRON])} event={elm}
-													sisnNumber={elm[SISN]} />
+													<EventRSVPForm
+														capacity={elm[TAG_FUNC_CAP]}
+														patrons={convertToArr(elm[PATRON])}
+														event={elm}
+														sisnNumber={elm[SISN]}
+														contactInfo={contactInfo}
+													/>
 												</div>
 											)}
 										</div>
@@ -186,7 +200,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType }: eventSumType) =
 			) : (
 				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto'}>
 					{filteredEvents.map((item: any, idx: number) => (
-						<EventButton elm={item} key={idx} id={idx} weekType={weekType}/>
+						<EventButton elm={item} key={idx} id={idx} weekType={weekType} />
 					))}
 				</div>
 			)}

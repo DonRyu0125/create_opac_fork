@@ -12,20 +12,36 @@ import {
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
 	Day_obj,
+	LIBRARY_LOCATION_REPORT,
+	SUB_MWI_APPLICATION,
+	LIBRARY_LOCATION_XML_TAG,
+	BRANCH_NAME,
+	ContactInfo,
 } from './EventCalendar'
 import { convertLowerTrim } from '@/lib/utils'
 import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'
+import axios from 'axios'
+import x2js from 'x2js'
+import X2JS from 'x2js'
 
 export interface Event_list {
 	dayObj: Day_obj
 	currentFilter: string[]
 	currentEvent: Cal_event[]
-	weekType:boolean
-	monthType:boolean
+	weekType: boolean
+	monthType: boolean
+	contactInfo: ContactInfo[]
 }
 
-const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent, weekType, monthType}: Event_list) => {
+const EventCalendarEventList = ({
+	dayObj,
+	currentFilter = [],
+	currentEvent,
+	weekType,
+	monthType,
+	contactInfo,
+}: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 
 	useEffect(() => {
@@ -70,9 +86,9 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent, week
 	// To sort the time shift
 	const parseTimeString = (timeString: string) => {
 		if (timeString) {
-			const [time, meridian] = timeString?.split(' ');
-			const [hours, minutes] = time?.split(':').map(Number);
-			const meridianUpper = meridian.toUpperCase();
+			const [time, meridian] = timeString?.split(' ')
+			const [hours, minutes] = time?.split(':').map(Number)
+			const meridianUpper = meridian.toUpperCase()
 
 			let hours24 = hours
 			if (meridianUpper === 'PM' && hours !== 12) {
@@ -88,13 +104,18 @@ const EventCalendarEventList = ({ dayObj, currentFilter = [], currentEvent, week
 	}
 
 	return (
-		<div className={`${monthType?'h-4/5':'h-[98%]'} relative w-full`}>
+		<div className={`${monthType ? 'h-4/5' : 'h-[98%]'} relative w-full`}>
 			{/* Event button */}
-			<EventSumButton filteredEvents={filteredEvents} weekType={weekType} monthType={monthType} />
+			<EventSumButton
+				filteredEvents={filteredEvents}
+				weekType={weekType}
+				monthType={monthType}
+				contactInfo={contactInfo}
+			/>
 			{/* All events button */}
-			{(monthType && filteredEvents.length > 2) && (
+			{monthType && filteredEvents.length > 2 && (
 				<div className={'h-[20px] absolute bottom-0 w-full'}>
-					<EventAllButton filteredEvents={filteredEvents} />
+					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo}/>
 				</div>
 			)}
 		</div>

@@ -7,12 +7,18 @@ import X2JS from 'x2js'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import {
+	BRANCH_ADDRESS,
 	BRANCH_NAME,
+	BRANCH_PHONE,
 	Cal_event,
+	ContactInfo,
 	FUNC_LOC_P_GRP,
-	LIBRARY_LOCATION_VIEW,
+	LIBRARY_LOCATION_REPORT,
+	LIBRARY_LOCATION_XML_TAG,
+	MAIN_MWI_APPLICATION,
 	PATRON,
 	SISN,
+	SUB_MWI_APPLICATION,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_LOC,
@@ -31,6 +37,7 @@ import {
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 import { convertToArr } from '@/lib/utils'
+import x2js from 'x2js'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -51,6 +58,7 @@ type EventRSVPForm = {
 	patrons: patron[]
 	sisnNumber: number
 	event: Cal_event
+	contactInfo: ContactInfo[]
 }
 
 const MWI_RESFUL_RES = 'MWI-RESTful-response'
@@ -70,36 +78,18 @@ const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	)
 }
 
-const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) => {
+const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: EventRSVPForm) => {
 	const [showForm, setShowForm] = useState(false)
 	const { register, handleSubmit, reset } = useForm<Inputs>()
-	const x2js = new X2JS()
 	const [formData, setFormData] = useState({
 		MAIL_TO: '',
 	})
-
-	useEffect(() => {
-		// getLibraryLocation(event)
-	}, [])
-	///scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} ${DATE_WILDCARD}
-
-	const getLibraryLocation = async (event: Cal_event) => {
-		const response = await axios.get(
-			`/scripts/mwimain.dll/144/LIBRARY_LOCATION/${LIBRARY_LOCATION_VIEW}?commandsearch&exp=${BRANCH_NAME} ${event[TAG_FUNC_LOC]}`,
-			{
-				headers: {
-					'Content-Type': 'text/xml',
-				},
-			}
-		)
-		const x2js = new X2JS()
-		const jsonData: any = x2js.xml2js(response.data)
-		console.log('jsonData', jsonData)
-	}
+	const x2js = new X2JS()
+	console.log('contactInfo',contactInfo)
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		console.log('formData', formData)
-		let urlForSessionID = '/scripts/mwimain.dll?logon&application=M2L_TAG_TO_BIBLIO'
+		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}`
 		// mwi logon function
 		// 20240510 Richard said, calendar can't be the stand alone function so it will required the logon before using it
 		// 20240510 logon => storing data process optimization is not developed
@@ -141,11 +131,14 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 		let HOME_SESSID = match[0]?.split('=')[1]
 
-		return await axios.post(`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RsvpForm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=donryu1031@gmail.com`, {
-			headers: {
-				"Content-Type": "multipart/form-data"
-			},
-		})
+		return await axios.post(
+			`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RsvpForm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=donryu1031@gmail.com`,
+			{
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			}
+		)
 	}
 
 	const getRecord = async (data: Inputs) => {
@@ -250,7 +243,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 		return totalPatronAttnd ?? 0
 	}
 
-	const handleChange = (e) => {
+	const handleChange = (e: any) => {
 		const { name, value } = e.target
 		setFormData({
 			...formData,
@@ -286,11 +279,11 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event }: EventRSVPForm) 
 							)}
 						</div>
 					</div>
-					<div className={'h-3/6 flex flex-col items-center justify-center '}>
+					{/* <div className={'h-3/6 flex flex-col items-center justify-center '}>
 						<div>Contact Info</div>
-						<div>Telephone:000-000-0000</div>
-						<div>Email:test@gmail.com</div>
-					</div>
+						<div>Address: {contactInfo[BRANCH_ADDRESS]}</div>
+						<div>Phone: {contactInfo[BRANCH_PHONE]}</div>
+					</div> */}
 				</div>
 			)}
 			{showForm && (

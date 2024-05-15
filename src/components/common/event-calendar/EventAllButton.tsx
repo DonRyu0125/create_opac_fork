@@ -30,6 +30,7 @@ import {
 	TAG_FUNC_LANG,
 	PATRON,
 	SISN,
+	ContactInfo,
 } from './EventCalendar'
 import { config } from '@/constants'
 import EventRSVPForm from './EventRSVPForm'
@@ -39,7 +40,13 @@ type showStrObj = {
 	[key: number]: boolean
 }
 
-const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => {
+const EventAllButton = ({
+	filteredEvents,
+	contactInfo,
+}: {
+	filteredEvents: Cal_event[]
+	contactInfo: ContactInfo[]
+}) => {
 	const { logo } = config
 	const [showFullStr, setShowFullStr] = useState<showStrObj>({})
 	const showStrToggle = (key: number) => {
@@ -164,6 +171,7 @@ const EventAllButton = ({ filteredEvents }: { filteredEvents: Cal_event[] }) => 
 										patrons={convertToArr(item[PATRON])}
 										sisnNumber={item[SISN]}
 										event={item}
+										contactInfo={contactInfo}
 									/>
 								</div>
 

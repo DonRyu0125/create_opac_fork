@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button'
 import { convertToArr } from '@/lib/utils'
 
 export interface Cal_event {
-	[SISN]:number
+	[SISN]: number
 	[TAG_NAME]: string
 	[TAG_FUNC_DESCIPT]: string
 	[TAG_FUNC_LOC]: string
@@ -40,7 +40,6 @@ export interface patron {
 	[TAG_FUNC_P_ATTND]: string
 }
 
-
 export interface Day_obj {
 	day: number | null
 	month?: number
@@ -49,15 +48,19 @@ export interface Day_obj {
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
-export const LIBRARY_LOCATION_VIEW = 'LIBRARY_LOCATION_VIEW'
-export const BRANCH_NAME = 'BRANCH_NAME'
-export const BRANCH_ADDRESS = 'BRANCH_ADDRESS'
-export const BRANCH_PHONE = 'BRANCH_PHONE'
+export const MAIN_MWI_APPLICATION = 'M2L_TAG_TO_BIBLIO'
+export const SUB_MWI_APPLICATION = 'LIBRARY_LOCATION'
 export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const TAG_NAME = 'TAG_NAME'
 export const SISN = 'SISN'
-//Location group
+//Library Location group
+export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_REPORT'
+export const LIBRARY_LOCATION_XML_TAG = 'LOCATION'
+export const BRANCH_NAME = 'BRANCH_NAME'
+export const BRANCH_ADDRESS = 'BRANCH_ADDRESS'
+export const BRANCH_PHONE = 'BRANCH_PHONE'
+//Event location group
 export const TAG_FUNC_LOC_GRP = 'TAG_FUNC_LOC_GRP'
 export const TAG_FUNC_DESCIPT = 'TAG_FUNC_DESCIPT'
 export const TAG_FUNC_LOC = 'TAG_FUNC_LOC'
@@ -74,7 +77,7 @@ export const TAG_FUNC_CAP = 'TAG_FUNC_CAP'
 export const TAG_FUNC_ROOM = 'TAG_FUNC_ROOM'
 export const TAG_FUNC_LANG = 'TAG_FUNC_LANG'
 //Patron group by event
-export const FUNC_LOC_P_GRP = 'FUNC_LOC_P_GRP' 
+export const FUNC_LOC_P_GRP = 'FUNC_LOC_P_GRP'
 export const PATRON = 'PATRON'
 export const TAG_FUNC_P_ID = 'TAG_FUNC_P_ID'
 export const TAG_FUNC_P_FIRST = 'TAG_FUNC_P_FIRST'
@@ -102,6 +105,12 @@ export const COLORS_MAP = {
 export const ICON_SHAPE_MAP = {
 	SQUARE: 'rounded',
 	CIRCLE: 'rounded-full',
+}
+
+export type ContactInfo = {
+	[BRANCH_NAME]: string
+	[BRANCH_ADDRESS]: string
+	[BRANCH_PHONE]: string
 }
 
 export const FILTER_TYPE_COLORS = [
@@ -145,11 +154,30 @@ const EventCalendar = () => {
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
 	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
 	const [isClickableNext, setisClickableNext] = useState<boolean>(false)
+	const x2js = new X2JS()
+	const [contactInfo, setContactInfo] = useState([])
 
 	useEffect(() => {
 		getData(currentDate)
 		isMonthBtnClick()
 	}, [currentDate])
+
+	useEffect(() => {
+		getLibraryLocation()
+	}, [])
+
+	const getLibraryLocation = async () => {
+		const response = await axios.get(
+			`/scripts/mwimain.dll/144/${SUB_MWI_APPLICATION}/${LIBRARY_LOCATION_REPORT}?commandsearch&exp=%2B%2B%40`, // ++@
+			{
+				headers: {
+					'Content-Type': 'text/xml',
+				},
+			}
+		)
+		const jsonData: any = x2js.xml2js(response.data)
+		setContactInfo(jsonData.xml[LIBRARY_LOCATION_XML_TAG])
+	}
 
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate)
@@ -172,7 +200,7 @@ const EventCalendar = () => {
 
 		try {
 			const response = await axios.get(
-				`/scripts/mwimain.dll/144/M2L_TAG/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} ${DATE_WILDCARD}`,
+				`/scripts/mwimain.dll/144/${MAIN_MWI_APPLICATION}/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} ${DATE_WILDCARD}`,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
@@ -366,6 +394,7 @@ const EventCalendar = () => {
 										currentEvent={currentEvent}
 										monthType={monthType}
 										weekType={weekType}
+										contactInfo={contactInfo}
 									/>
 								</div>
 							)
@@ -383,6 +412,7 @@ const EventCalendar = () => {
 										currentEvent={currentEvent}
 										monthType={monthType}
 										weekType={weekType}
+										contactInfo={contactInfo}
 									/>
 								</div>
 							)
