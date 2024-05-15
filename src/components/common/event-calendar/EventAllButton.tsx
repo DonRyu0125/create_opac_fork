@@ -116,7 +116,6 @@ const EventAllButton = ({
 													)}></div>
 												{item[TAG_FUNC_LOC]}
 											</div>
-
 											<div className={'mx-2'}>
 												<span>{item[TAG_FUNC_START_T].toUpperCase()}</span>
 												<span className={'mx-2'}>-</span>

@@ -54,6 +54,7 @@ export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const TAG_NAME = 'TAG_NAME'
 export const SISN = 'SISN'
+export const CONFIRMATION_EMAIL_T = 'You’re confirmed for:'
 //Library Location group
 export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_REPORT'
 export const LIBRARY_LOCATION_XML_TAG = 'LOCATION'
@@ -147,6 +148,7 @@ export const FILTER_TYPE_COLORS = [
 ]
 
 const EventCalendar = () => {
+	const x2js = new X2JS()
 	const [monthType, setMonthType] = useState<boolean>(true)
 	const [weekType, setWeekType] = useState<boolean>(false)
 	const [currentDate, setCurrentDate] = useState(new Date())
@@ -154,7 +156,6 @@ const EventCalendar = () => {
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
 	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
 	const [isClickableNext, setisClickableNext] = useState<boolean>(false)
-	const x2js = new X2JS()
 	const [contactInfo, setContactInfo] = useState([])
 
 	useEffect(() => {

@@ -10,11 +10,10 @@ import {
 	BRANCH_ADDRESS,
 	BRANCH_NAME,
 	BRANCH_PHONE,
+	CONFIRMATION_EMAIL_T,
 	Cal_event,
 	ContactInfo,
 	FUNC_LOC_P_GRP,
-	LIBRARY_LOCATION_REPORT,
-	LIBRARY_LOCATION_XML_TAG,
 	MAIN_MWI_APPLICATION,
 	PATRON,
 	SISN,
@@ -87,7 +86,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const x2js = new X2JS()
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
-		console.log('formData', formData)
 		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}`
 		// mwi logon function
 		// 20240510 Richard said, calendar can't be the stand alone function so it will required the logon before using it
@@ -103,41 +101,23 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then(() => {
-				return sendEmail()
-				// return getRecord(data)
-				// 	.then((res) => storePatron(res))
-				// 	.then((res) => {
-				// 		if (!res) {
-				// 			console.log('this is error')
-				// 		}
-				// 		if (res === SUCCESS_RES_CODE) {
-				// 			console.log('this is success')
-				// 		}
-				// 		onReset()
-				// 	})
-				// 	.catch((error) => {
-				// 		console.log('this is error')
-				// 		onReset()
-				// 	})
+				return getRecord(data)
+					.then((res) => storePatron(res))
+					.then((res) => {
+						if (res.err == SUCCESS_RES_CODE) {
+							return sendEmail(res, data, event)
+						}
+						console.log('this is error an storePatron')
+						onReset()
+					})
+					.catch((error) => {
+						console.log('this is error an getRecord')
+						onReset()
+					})
 			})
 			.catch((error) => {
 				console.error('Error fetching session ID:', error)
 			})
-	}
-
-	const sendEmail = async () => {
-		// let url = `${homesessid}?SENDMAIL&PARM=[RMG_ROOT]feedback.txt`
-		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
-		let HOME_SESSID = match[0]?.split('=')[1]
-
-		return await axios.post(
-			`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RsvpForm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=donryu1031@gmail.com`,
-			{
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			}
-		)
 	}
 
 	const getRecord = async (data: Inputs) => {
@@ -159,6 +139,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				const jsonObj = conToJson[MWI_RESFUL_RES].record
 				const loc_group = convertToArr(jsonObj.TAG_FUNC_LOC_GRP)
 				const dte_group = convertToArr(loc_group[MWI_XML_DATA_INDEX].TAG_FUNC_DTE_GRP)
+				const ID = `${NON_LOGIN_USER_TYPE}${uuidv4().substring(15)}`
 				let TAG_FUNC_LOC_OCC = 0
 				let TAG_FUNC_DTE_OCC = 0
 
@@ -179,14 +160,13 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						TAG_FUNC_DTE_OCC = elm._occ
 					}
 				})
-				console.log(`${NON_LOGIN_USER_TYPE}${uuidv4()}`)
 
 				let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
 					<RECORD>
 						<${TAG_FUNC_LOC_GRP} occ="${TAG_FUNC_LOC_OCC}" op="chg">
 							<${TAG_FUNC_DTE_GRP} occ="${TAG_FUNC_DTE_OCC}" op="chg">
 								<${FUNC_LOC_P_GRP} op="add">
-									<${TAG_FUNC_P_ID}>${NON_LOGIN_USER_TYPE}${uuidv4().substring(15)}</${TAG_FUNC_P_ID}>
+									<${TAG_FUNC_P_ID}>${ID}</${TAG_FUNC_P_ID}>
 									<${TAG_FUNC_P_FIRST}>${data[TAG_FUNC_P_FIRST]}</${TAG_FUNC_P_FIRST}>
 									<${TAG_FUNC_P_LAST}>${data[TAG_FUNC_P_LAST]}</${TAG_FUNC_P_LAST}>
 									<${TAG_FUNC_P_EMAIL}>${data[TAG_FUNC_P_EMAIL]}</${TAG_FUNC_P_EMAIL}>
@@ -195,22 +175,21 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 							</${TAG_FUNC_DTE_GRP}>
 						</${TAG_FUNC_LOC_GRP}>
 					</RECORD>`
-
-				return xmlFormAdd
+				return { xmlFormAdd, occ1: TAG_FUNC_LOC_OCC, occ2: TAG_FUNC_DTE_OCC, id: ID }
 			})
 			.catch((error) => {
 				console.error('Getting record error', error)
-				return false
+				return { xmlFormAdd: '', occ1: 0, occ2: 0 }
 			})
 	}
 
-	const storePatron = async (xmlFormAdd: string | Boolean) => {
+	const storePatron = async (patron: { xmlFormAdd: string; occ1: string; occ2: string }) => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 		let HOME_SESSID = match[0]?.split('=')[1]
 		return await axios
 			.post(
 				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N&KEY=${SISN}&VALUE=${sisnNumber}`,
-				xmlFormAdd,
+				patron.xmlFormAdd,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
@@ -220,11 +199,45 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			)
 			.then((res) => {
 				const errJson: any = x2js.xml2js(res.data)
-				return errJson[MWI_RESFUL_RES].error ?? false
+				return {
+					err: errJson[MWI_RESFUL_RES].error,
+					occ1: patron.occ1,
+					occ2: patron.occ2,
+				}
 			})
 			.catch((error) => {
-				return false
+				return {
+					err: false,
+				}
 			})
+	}
+
+	const sendEmail = async (patron: any, data: any, event: Cal_event) => {
+		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
+		let HOME_SESSID = match[0]?.split('=')[1]
+		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
+					<RECORD>
+						<${TAG_FUNC_LOC_GRP} occ="${patron.occ1}" op="chg">
+							<${TAG_FUNC_DTE_GRP} occ="${patron.occ2}" op="chg">
+								<${FUNC_LOC_P_GRP} op="delete" search="${patron.ID}">
+								</${FUNC_LOC_P_GRP}>
+							</${TAG_FUNC_DTE_GRP}>
+						</${TAG_FUNC_LOC_GRP}>
+					</RECORD>`
+
+		console.log('{ ...data, ...event, xmlFormDelete }', { ...data, ...event, xmlFormDelete })
+
+		return await axios.post(
+			`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RsvpForm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CONFIRMATION_EMAIL_T}${event[TAG_NAME]}`,
+			{ ...data, ...event, xmlFormDelete },
+			{
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			}
+		).then(()=>{
+			onReset()
+		})
 	}
 
 	const onReset = () => {
@@ -297,91 +310,56 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				</div>
 			)}
 			{showForm && (
-				<form method="POST" id="feedback-form" action="" onSubmit={handleSubmit(onSubmit)}>
-					<div id="feedback-inputs">
-						{/* <input
-						id="feedback-id"
-						type="text"
-						name="MAIL_ID"
-						aria-label="User ID number"
-						placeholder=""
-						disabled />
-					<input
-						id="feedback-name"
-						type="text"
-						name="MAIL_NAME"
-						aria-label="Username"
-						placeholder="Name *" />
-					<div  hidden>This value is required</div> */}
-						<input
-							onChange={handleChange}
-							type="text"
-							name="MAIL_TO"
-							aria-label="User email"
-							placeholder="Email *"
+				<div className={'h-5/6 w-full p-1'}>
+					<div className={'bg-primary p-1 text-white'}>
+						Did you <span className={'text-gray-400'}>Log In?</span>
+					</div>
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className={'h-full w-full flex flex-col justify-start items-center'}>
+						<EventInput
+							label={'First Name'}
+							keyname={TAG_FUNC_P_FIRST}
+							register={register}
+							required={true}
 						/>
-						<div hidden>This value is required</div>
-						{/* <textarea
-						id="feedback-detail"
-						placeholder="Please give details of your feedback *"
-						aria-label="User feedback"
-						name="MAIL_FEEDBACK"></textarea>
-					<div hidden>This value is required</div> */}
-					</div>
-					<div>
-						<button id="feedback-submit-btn">Submit form</button>
-					</div>
-				</form>
-				// <div className={'h-5/6 w-full p-1'}>
-				// 	<div className={'bg-primary p-1 text-white'}>
-				// 		Did you <span className={'text-gray-400'}>Log In?</span>
-				// 	</div>
-				// 	<form
-				// 		onSubmit={handleSubmit(onSubmit)}
-				// 		className={'h-full w-full flex flex-col justify-start items-center'}>
-				// 		<EventInput
-				// 			label={'First Name'}
-				// 			keyname={TAG_FUNC_P_FIRST}
-				// 			register={register}
-				// 			required={true}
-				// 		/>
-				// 		<EventInput
-				// 			label={'Last Name'}
-				// 			keyname={TAG_FUNC_P_LAST}
-				// 			register={register}
-				// 			required={true}
-				// 		/>
-				// 		<EventInput
-				// 			label={'Email'}
-				// 			keyname={TAG_FUNC_P_EMAIL}
-				// 			register={register}
-				// 			required={true}
-				// 		/>
-				// 		<div className={'flex w-full flex-col my-1'}>
-				// 			<Label>Attendee</Label>
-				// 			<select
-				// 				defaultValue={TAG_FUNC_P_ATTND_DEFAULT}
-				// 				{...register(TAG_FUNC_P_ATTND)}
-				// 				className={'border-2 border-grey-500 w-1/4'}>
-				// 				{Array(TAG_FUNC_P_ATTND_MAX)
-				// 					.fill(0)
-				// 					.map((_, index) => {
-				// 						return (
-				// 							<option key={index} value={index + 1}>
-				// 								{index + 1}
-				// 							</option>
-				// 						)
-				// 					})}
-				// 			</select>
-				// 		</div>
-				// 		<Button className={'w-full'} type="submit">
-				// 			Register
-				// 		</Button>
-				// 		<div onClick={onReset} className="text-center border-b-4">
-				// 			Go Back
-				// 		</div>
-				// 	</form>
-				// </div>
+						<EventInput
+							label={'Last Name'}
+							keyname={TAG_FUNC_P_LAST}
+							register={register}
+							required={true}
+						/>
+						<EventInput
+							label={'Email'}
+							keyname={TAG_FUNC_P_EMAIL}
+							register={register}
+							required={true}
+						/>
+						<div className={'flex w-full flex-col my-1'}>
+							<Label>Attendee</Label>
+							<select
+								defaultValue={TAG_FUNC_P_ATTND_DEFAULT}
+								{...register(TAG_FUNC_P_ATTND)}
+								className={'border-2 border-grey-500 w-1/4'}>
+								{Array(TAG_FUNC_P_ATTND_MAX)
+									.fill(0)
+									.map((_, index) => {
+										return (
+											<option key={index} value={index + 1}>
+												{index + 1}
+											</option>
+										)
+									})}
+							</select>
+						</div>
+						<Button className={'w-full'} type="submit">
+							Register
+						</Button>
+						<div onClick={onReset} className="text-center border-b-4">
+							Go Back
+						</div>
+					</form>
+				</div>
 			)}
 		</div>
 	)
