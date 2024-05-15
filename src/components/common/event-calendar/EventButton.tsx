@@ -30,13 +30,24 @@ import {
 	PATRON,
 	TAG_FUNC_RSVP,
 	SISN,
+	ContactInfo,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
 import { SquareUserRound, X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 
-const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekType: boolean }) => {
+const EventButton = ({
+	elm,
+	id,
+	weekType,
+	contactInfo,
+}: {
+	elm: Cal_event
+	id: number
+	weekType: boolean
+	contactInfo: ContactInfo[]
+}) => {
 	const { logo } = config
 
 	const getColor = (event_type: string) => {
@@ -67,7 +78,7 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 									<div>{elm[TAG_FUNC_START_T].toUpperCase()}-</div>
 									<div>{elm[TAG_FUNC_END_T].toUpperCase()}</div>
 								</div>
-								{elm[TAG_FUNC_RSVP] && <SquareUserRound /> }
+								{elm[TAG_FUNC_RSVP] && <SquareUserRound />}
 							</div>
 						)}
 					</div>
@@ -135,6 +146,7 @@ const EventButton = ({ elm, id, weekType }: { elm: Cal_event; id: number; weekTy
 							capacity={elm[TAG_FUNC_CAP]}
 							patrons={convertToArr(elm[PATRON])}
 							event={elm}
+							contactInfo={contactInfo}
 						/>
 					</div>
 				</div>

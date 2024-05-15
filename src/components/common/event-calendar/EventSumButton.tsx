@@ -48,7 +48,6 @@ export interface eventSumType {
 
 const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: eventSumType) => {
 	const { logo } = config
-
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
@@ -200,7 +199,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 			) : (
 				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto'}>
 					{filteredEvents.map((item: any, idx: number) => (
-						<EventButton elm={item} key={idx} id={idx} weekType={weekType} />
+						<EventButton elm={item} key={idx} id={idx} weekType={weekType} contactInfo={contactInfo} />
 					))}
 				</div>
 			)}

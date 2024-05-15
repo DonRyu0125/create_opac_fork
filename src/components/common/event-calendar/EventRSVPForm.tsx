@@ -36,7 +36,7 @@ import {
 	patron,
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
-import { convertToArr } from '@/lib/utils'
+import { convertLowerTrim, convertToArr } from '@/lib/utils'
 import x2js from 'x2js'
 
 type Inputs = {
@@ -85,7 +85,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		MAIL_TO: '',
 	})
 	const x2js = new X2JS()
-	console.log('contactInfo',contactInfo)
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		console.log('formData', formData)
@@ -251,6 +250,17 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		})
 	}
 
+	const getContactInfo = (type: string) => {
+		let info: any = contactInfo?.filter((item) => {
+			return convertLowerTrim(item[BRANCH_NAME]) === convertLowerTrim(event[TAG_FUNC_LOC])
+		})
+		if (info) {
+			let contact = info[0]
+			return contact[type]
+		}
+		return ''
+	}
+
 	return (
 		<div className={`flex justify-center w-full h-full`}>
 			{!showForm && (
@@ -279,11 +289,11 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 							)}
 						</div>
 					</div>
-					{/* <div className={'h-3/6 flex flex-col items-center justify-center '}>
+					<div className={'h-3/6 flex flex-col items-center justify-center '}>
 						<div>Contact Info</div>
-						<div>Address: {contactInfo[BRANCH_ADDRESS]}</div>
-						<div>Phone: {contactInfo[BRANCH_PHONE]}</div>
-					</div> */}
+						<div>Address: {getContactInfo(BRANCH_ADDRESS)}</div>
+						<div>Phone: {getContactInfo(BRANCH_PHONE)}</div>
+					</div>
 				</div>
 			)}
 			{showForm && (
