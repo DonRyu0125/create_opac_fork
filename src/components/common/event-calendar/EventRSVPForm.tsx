@@ -176,11 +176,16 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 			.catch((error) => {
 				console.error('Getting record error', error)
-				return { xmlFormAdd: '', occ1: 0, occ2: 0 }
+				return { xmlFormAdd: '', occ1: 0, occ2: 0, id: '' }
 			})
 	}
 
-	const storePatron = async (patron: { xmlFormAdd: string; occ1: string; occ2: string }) => {
+	const storePatron = async (patron: {
+		xmlFormAdd: string
+		occ1: number
+		occ2: number
+		id: string
+	}) => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 		let HOME_SESSID = match[0]?.split('=')[1]
 		return await axios
