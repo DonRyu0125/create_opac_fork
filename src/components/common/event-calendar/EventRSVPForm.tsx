@@ -16,6 +16,7 @@ import {
 	FUNC_LOC_P_GRP,
 	MAIN_MWI_APPLICATION,
 	PATRON,
+	RSVP_CANCEL_LANDING_PAGE_URL,
 	SISN,
 	SUB_MWI_APPLICATION,
 	TAG_FUNC_DATE,
@@ -204,6 +205,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					err: errJson[MWI_RESFUL_RES].error,
 					occ1: patron.occ1,
 					occ2: patron.occ2,
+					id: patron.id,
 				}
 			})
 			.catch((error) => {
@@ -216,15 +218,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const sendEmail = async (patron: any, data: any, event: Cal_event) => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 		let HOME_SESSID = match[0]?.split('=')[1]
-		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
-					<RECORD>
-						<${TAG_FUNC_LOC_GRP} occ="${patron.occ1}" op="chg">
-							<${TAG_FUNC_DTE_GRP} occ="${patron.occ2}" op="chg">
-								<${FUNC_LOC_P_GRP} op="delete" search="${patron.ID}">
-								</${FUNC_LOC_P_GRP}>
-							</${TAG_FUNC_DTE_GRP}>
-						</${TAG_FUNC_LOC_GRP}>
-					</RECORD>`
 
 		return await axios
 			.post(
@@ -232,8 +225,12 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				{
 					...data,
 					...event,
-					currentDate: getCurrentDate(),
+					CURRENT_DATE: getCurrentDate(),
 					BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
+					CANCEL_URL: RSVP_CANCEL_LANDING_PAGE_URL,
+					occ1: patron.occ1,
+					occ2: patron.occ2,
+					TAG_FUNC_P_ID: patron.id
 				},
 				{
 					headers: {
