@@ -3,6 +3,7 @@ import Home from '@/page/Home'
 import NotFoundPage from '@/page/NotFoundPage'
 import Detail from '@/page/detail'
 import Summary from '@/page/summary'
+import Rsvp from '@/page/RsvpCancelLandingPage'
 
 export type TRoute = Record<string, () => React.ReactNode>
 
@@ -11,6 +12,7 @@ export const ROUTES: TRoute = {
 	summary: Summary,
 	detail: Detail,
 	faq: FAQ,
+	rsvp:Rsvp
 }
 
 /**

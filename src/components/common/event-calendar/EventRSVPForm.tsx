@@ -36,7 +36,6 @@ import {
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 import { convertLowerTrim, convertToArr, getCurrentDate } from '@/lib/utils'
-import x2js from 'x2js'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -227,7 +226,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						</${TAG_FUNC_LOC_GRP}>
 					</RECORD>`
 
-		console.log('getContactInfo(BRANCH_ADDRESS)', getContactInfo(BRANCH_ADDRESS))
 		return await axios
 			.post(
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RsvpForm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CONFIRMATION_EMAIL_T}${event[TAG_NAME]}`,
