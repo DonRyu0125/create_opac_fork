@@ -206,6 +206,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					occ1: patron.occ1,
 					occ2: patron.occ2,
 					id: patron.id,
+					sisn:sisnNumber
 				}
 			})
 			.catch((error) => {

@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import 
 { twMerge } from 'tailwind-merge'
+import X2JS from 'x2js'
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
@@ -61,6 +62,12 @@ export const convertToArr = (elm:Object | Array<any>) =>{
 		return elm
 	}
 	return [elm]
+}
+
+export const convertXMLToJson = (response:any)=>{
+    const x2js = new X2JS();
+    const jsonData: any = x2js.xml2js(response.data)
+    return jsonData;
 }
 
 /**

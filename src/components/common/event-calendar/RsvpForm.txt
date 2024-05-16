@@ -97,7 +97,7 @@
         <div style="border-style: dotted; padding: 10px; text-align: center">^TAG_FUNC_P_ATTND^ Spot Reserved</div>
       </div>
       <div class="button-container">
-        <a href="^CANCEL_URL^?TAG_FUNC_P_ID=^TAG_FUNC_P_ID^&OCC1=^occ1^&OCC2=^occ2^">
+        <a href="^CANCEL_URL^?TAG_FUNC_P_ID=^TAG_FUNC_P_ID^&OCC1=^occ1^&OCC2=^occ2^&SISN=^sisn^">
           <button>Cancel</button>
         </a>
       </div>

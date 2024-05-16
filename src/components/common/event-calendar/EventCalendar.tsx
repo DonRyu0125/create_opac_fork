@@ -47,7 +47,7 @@ export interface Day_obj {
 }
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
+export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
 export const RSVP_CANCEL_LANDING_PAGE_URL = 'http://donf.minisisinc.com/rsvp.html'
 export const MAIN_MWI_APPLICATION = 'M2L_TAG_TO_BIBLIO'
 export const SUB_MWI_APPLICATION = 'LIBRARY_LOCATION'
