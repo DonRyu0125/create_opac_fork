@@ -13,14 +13,13 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        width:980px;
+        width: 100%;
       }
       .container {
         width: 400px;
         padding: 20px;
-        background-color: #fff;
+        border: 1px solid #ccc;
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin-bottom: 10px;
       }
       .info {
@@ -36,18 +35,22 @@
         border: 1px solid #ccc;
         border-radius: 5px;
         background-color: #f9f9f9;
+        font-size: 15px;
       }
       .button-container {
         text-align: center;
       }
       .button-container button {
         width: 400px;
+        height: 50px;
         background-color: #4caf50;
         color: white;
         padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
       }
       .button-container button:hover {
         background-color: #45a049;
@@ -56,37 +59,42 @@
   </head>
   <body>
     <div class="container">
+     <h1>Registration Successful!</h1>
       <div class="info">
         <label>Event Name:</label>
-        <p>Summer Festival</p>
+        <p>^TAG_NAME^</p>
       </div>
       <div class="info">
         <label>Event Location:</label>
-        <p>123 Main Street, City, Country</p>
+        <p>^BRANCH_ADDRESS^</p>
       </div>
       <div class="info">
         <label>Room Number</label>
-        <p>505</p>
+        <p>^TAG_FUNC_ROOM^</p>
       </div>
-      <div style="display: flex; justify-content: space-between;">
-          <div class="info" style="width:40%;">
-            <label>Date:</label>
-            <p>2024-05-31</p>
-          </div>
-          <div class="info" style="width:50%;">
-            <label>Time:</label>
-            <p>2024-05-31</p>
-          </div>
+      <div style="display: flex;">
+         <div class="info" style="width: 40%; margin-right: 40px;">
+          <label>Date:</label>
+          <p>^TAG_FUNC_DATE^</p>
         </div>
+        <div class="info" style="width: 50%">
+          <label>Time:</label>
+          <p>^TAG_FUNC_START_T^ - ^TAG_FUNC_END_T^</p>
+        </div>
+      </div>
     </div>
     <div class="container">
       <div class="info">
         <label>Name:</label>
-        <p>John Doe</p>
+        <p>^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^ </p>
+      </div>
+      <div class="info">
+        <label>Date Registered:</label>
+       ^currentDate^
       </div>
       <div class="info">
         <label>Attendee:</label>
-        <p>John Doe</p>
+        <div style="border-style: dotted; padding: 10px; text-align: center;">^TAG_FUNC_P_ATTND^ Spot Reserved</div>
       </div>
       <div class="button-container">
         <button>Cancel</button>

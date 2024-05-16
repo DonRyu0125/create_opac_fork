@@ -35,7 +35,7 @@ import {
 	patron,
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
-import { convertLowerTrim, convertToArr } from '@/lib/utils'
+import { convertLowerTrim, convertToArr, getCurrentDate } from '@/lib/utils'
 import x2js from 'x2js'
 
 type Inputs = {
@@ -80,9 +80,6 @@ const EventInput = ({ label, keyname, register, required }: EventInput) => {
 const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: EventRSVPForm) => {
 	const [showForm, setShowForm] = useState(false)
 	const { register, handleSubmit, reset } = useForm<Inputs>()
-	const [formData, setFormData] = useState({
-		MAIL_TO: '',
-	})
 	const x2js = new X2JS()
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -225,19 +222,25 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						</${TAG_FUNC_LOC_GRP}>
 					</RECORD>`
 
-		console.log('{ ...data, ...event, xmlFormDelete }', { ...data, ...event, xmlFormDelete })
-
-		return await axios.post(
-			`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RsvpForm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CONFIRMATION_EMAIL_T}${event[TAG_NAME]}`,
-			{ ...data, ...event, xmlFormDelete },
-			{
-				headers: {
-					'Content-Type': 'multipart/form-data',
+		console.log('getContactInfo(BRANCH_ADDRESS)', getContactInfo(BRANCH_ADDRESS))
+		return await axios
+			.post(
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RsvpForm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CONFIRMATION_EMAIL_T}${event[TAG_NAME]}`,
+				{
+					...data,
+					...event,
+					currentDate: getCurrentDate(),
+					BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
 				},
-			}
-		).then(()=>{
-			onReset()
-		})
+				{
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				}
+			)
+			.then(() => {
+				onReset()
+			})
 	}
 
 	const onReset = () => {
@@ -253,14 +256,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			return total
 		}, 0)
 		return totalPatronAttnd ?? 0
-	}
-
-	const handleChange = (e: any) => {
-		const { name, value } = e.target
-		setFormData({
-			...formData,
-			[name]: value,
-		})
 	}
 
 	const getContactInfo = (type: string) => {
