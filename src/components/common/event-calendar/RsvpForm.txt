@@ -1,85 +1,96 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Landing Page</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f2f2f2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        .info {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .info label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .info p {
-            margin: 0;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .buttons button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .buttons button:hover {
-            background-color: #45a049;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width:980px;
+      }
+      .container {
+        width: 400px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+      }
+      .info {
+        margin-bottom: 20px;
+      }
+      .info label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+      }
+      .info p {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      .button-container {
+        text-align: center;
+      }
+      .button-container button {
+        width: 400px;
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .button-container button:hover {
+        background-color: #45a049;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="info">
-            <label>Event Name:</label>
-            <p>^TAG_NAME^</p>
-        </div>
-        <div class="info">
-            <label>First Name:</label>
-            <p>^TAG_FUNC_P_FIRST^</p>
-
-            <label>Last Name:</label>
-            <p>^TAG_FUNC_P_LAST^</p>
-        </div>
-        <div class="buttons">
-            <button onclick="cancelRegistration()">Cancel</button>
+      <div class="info">
+        <label>Event Name:</label>
+        <p>Summer Festival</p>
+      </div>
+      <div class="info">
+        <label>Event Location:</label>
+        <p>123 Main Street, City, Country</p>
+      </div>
+      <div class="info">
+        <label>Room Number</label>
+        <p>505</p>
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+          <div class="info" style="width:40%;">
+            <label>Date:</label>
+            <p>2024-05-31</p>
+          </div>
+          <div class="info" style="width:50%;">
+            <label>Time:</label>
+            <p>2024-05-31</p>
+          </div>
         </div>
     </div>
-
-    <script>
-        function cancelRegistration() {
-            console.log('asd')
-        }
-    </script>
-</body>
+    <div class="container">
+      <div class="info">
+        <label>Name:</label>
+        <p>John Doe</p>
+      </div>
+      <div class="info">
+        <label>Attendee:</label>
+        <p>John Doe</p>
+      </div>
+      <div class="button-container">
+        <button>Cancel</button>
+      </div>
+    </div>
+  </body>
 </html>
