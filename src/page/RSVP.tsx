@@ -21,6 +21,7 @@ type PatronInfo = {
 }
 
 const RSVP = () => {
+	const [patronInfo, setPatronInfo] = useState<PatronInfo>()
 	const [registerd, setRegistered] = useState(true)
 
 	useEffect(() => {
@@ -30,11 +31,11 @@ const RSVP = () => {
 			obj[key] = value
 		})
 
+		setPatronInfo(obj)
+
 		isRecord(obj.TAG_FUNC_P_ID).then((res) => {
 			if (res) {
-				getSessionID()
-					.then((res) => removeRecord(res, obj))
-					.then((res) => console.log('res', res))
+				return setRegistered(true)
 			}
 			setRegistered(false)
 		})
@@ -57,6 +58,12 @@ const RSVP = () => {
 				}
 				return false
 			})
+	}
+
+	const onClick = () => {
+		getSessionID()
+			.then((res) => removeRecord(res, patronInfo))
+			.then((res) => console.log('res', res))
 	}
 
 	const getSessionID = async () => {
@@ -82,12 +89,12 @@ const RSVP = () => {
 			})
 	}
 
-	const removeRecord = async (HOME_SESSID: string | boolean, obj: PatronInfo) => {
+	const removeRecord = async (HOME_SESSID: string | boolean, obj: PatronInfo | undefined) => {
 		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
     <RECORD>
-      <${TAG_FUNC_LOC_GRP} occ="${obj.OCC1}" op="chg">
-        <${TAG_FUNC_DTE_GRP} occ="${obj.OCC1}" op="chg">
-          <${FUNC_LOC_P_GRP} op="delete" search="${obj.TAG_FUNC_P_ID}">
+      <${TAG_FUNC_LOC_GRP} occ="${obj?.OCC1}" op="chg">
+        <${TAG_FUNC_DTE_GRP} occ="${obj?.OCC1}" op="chg">
+          <${FUNC_LOC_P_GRP} op="del" search="${obj?.TAG_FUNC_P_ID}">
           </${FUNC_LOC_P_GRP}>
         </${TAG_FUNC_DTE_GRP}>
       </${TAG_FUNC_LOC_GRP}>
@@ -95,7 +102,7 @@ const RSVP = () => {
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N&KEY=${SISN}&VALUE=${obj.SISN}`,
+				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N&KEY=${SISN}&VALUE=${obj?.SISN}`,
 				xmlFormDelete,
 				{
 					headers: {
@@ -104,7 +111,11 @@ const RSVP = () => {
 					timeout: 5000,
 				}
 			)
-			.then((res) => {console.log('res===>',res)})
+			.then((res) => {
+        // setRegistered 가 VALID 할때만 작동하게 할것 
+        let result = convertXMLToJson(res)
+				setRegistered(false)
+			})
 			.catch((error) => {})
 	}
 
@@ -117,19 +128,32 @@ const RSVP = () => {
 					className="h-64 w-full object-cover"
 				/>
 				<div className="flex flex-1 items-center justify-center">
-					<div className="mx-auto max-w-xl px-4 py-8 text-center">
-						<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-							This will cancel your registration for
-						</h1>
+					{registerd ? (
+						<div className="mx-auto max-w-xl px-4 py-8 text-center">
+							<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+								This will cancel your registration for
+							</h1>
 
-						<p className="mt-4 text-gray-500">
-							Try searching again, or return home to start from the beginning.
-						</p>
+							<p className="mt-4 text-gray-500">
+								Try searching again, or return home to start from the beginning.
+							</p>
 
-						<Button className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-							Unregister
-						</Button>
-					</div>
+							<Button
+								onClick={onClick}
+								className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+								Unregister
+							</Button>
+						</div>
+					) : (
+						<div className="mx-auto max-w-xl px-4 py-8 text-center">
+							<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+								You are not in the list !
+							</h1>
+							<p className="mt-4 text-gray-500">
+								Please go to our website to register again
+							</p>
+						</div>
+					)}
 				</div>
 			</div>
 		</Layout>
