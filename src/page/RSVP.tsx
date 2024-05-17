@@ -32,7 +32,6 @@ const RSVP = () => {
 		})
 
 		setPatronInfo(obj)
-
 		isRecord(obj.TAG_FUNC_P_ID).then((res) => {
 			if (res) {
 				return setRegistered(true)
@@ -54,6 +53,7 @@ const RSVP = () => {
 			.then((res) => {
 				let result = convertXMLToJson(res)
 				if (result.div) {
+					console.log('result.div',result.div)
 					return true
 				}
 				return false
@@ -61,9 +61,14 @@ const RSVP = () => {
 	}
 
 	const onClick = () => {
-		getSessionID()
-			.then((res) => removeRecord(res, patronInfo))
-			.then((res) => console.log('res', res))
+
+		const encodedData = btoa('asdasd');
+		const decodedData = atob(encodedData);
+		console.log('encodedData',encodedData)
+		console.log('decodedData',decodedData)
+		// getSessionID()
+		// 	.then((res) => removeRecord(res, patronInfo))
+		// 	.then((res) => sendCancelConfirmEmail(res))
 	}
 
 	const getSessionID = async () => {
@@ -115,11 +120,35 @@ const RSVP = () => {
 				// setRegistered 가 VALID 할때만 작동하게 할것
 				let result = convertXMLToJson(res)
 				setRegistered(false)
+				return HOME_SESSID;
 			})
 			.catch((error) => {
-        // error
-        setRegistered(true)
-      })
+				// error
+				setRegistered(true)
+			})
+	}
+
+	const sendCancelConfirmEmail = async (HOME_SESSID:string) => {
+		return await axios
+			.post(
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RsvpForm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CONFIRMATION_EMAIL_T}${event[TAG_NAME]}`,
+				{
+					// ...data,
+					// ...event,
+					// CURRENT_DATE: getCurrentDate(),
+					// BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
+					// CANCEL_URL: RSVP_CANCEL_LANDING_PAGE_URL,
+					// occ1: patron.occ1,
+					// occ2: patron.occ2,
+					// TAG_FUNC_P_ID: patron.id
+				},
+				{
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				}
+			)
+			.then(() => {})
 	}
 
 	return (
@@ -156,9 +185,7 @@ const RSVP = () => {
 							<h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 								Please go to our website to register again
 							</h2>
-							<p className="mt-4 text-gray-500">
-                Website name
-              </p>
+							<p className="mt-4 text-gray-500">Website name</p>
 						</div>
 					)}
 				</div>
