@@ -112,11 +112,14 @@ const RSVP = () => {
 				}
 			)
 			.then((res) => {
-        // setRegistered 가 VALID 할때만 작동하게 할것 
-        let result = convertXMLToJson(res)
+				// setRegistered 가 VALID 할때만 작동하게 할것
+				let result = convertXMLToJson(res)
 				setRegistered(false)
 			})
-			.catch((error) => {})
+			.catch((error) => {
+        // error
+        setRegistered(true)
+      })
 	}
 
 	return (
@@ -147,11 +150,15 @@ const RSVP = () => {
 					) : (
 						<div className="mx-auto max-w-xl px-4 py-8 text-center">
 							<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+								{' '}
 								You are not in the list !
 							</h1>
-							<p className="mt-4 text-gray-500">
+							<h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 								Please go to our website to register again
-							</p>
+							</h2>
+							<p className="mt-4 text-gray-500">
+                Website name
+              </p>
 						</div>
 					)}
 				</div>

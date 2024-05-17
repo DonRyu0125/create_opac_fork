@@ -24,6 +24,7 @@
       }
       .info {
         margin-bottom: 20px;
+        height:20px
       }
       .info label {
         font-weight: bold;
