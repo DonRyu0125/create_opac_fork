@@ -69,12 +69,12 @@ export const convertXMLToJson = (response: any) => {
 	return jsonData
 }
 
-export const encode = (input: string) => {
-	return btoa(input)
+export const encodeObj = (input: string) => {
+	return btoa(input) ?? ''
 }
 
-export const decode = (input: string) => {
-	return atob(input)
+export const decodeObj  = (input: string) => {
+	return atob(input) ?? ''
 }
 
 /**

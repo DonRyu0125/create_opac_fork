@@ -20,7 +20,9 @@ import {
 	SISN,
 	SUB_MWI_APPLICATION,
 	TAG_FUNC_DATE,
+	TAG_FUNC_DESCIPT,
 	TAG_FUNC_DTE_GRP,
+	TAG_FUNC_END_T,
 	TAG_FUNC_LOC,
 	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_P_ATTND,
@@ -31,12 +33,14 @@ import {
 	TAG_FUNC_P_ID,
 	TAG_FUNC_P_LAST,
 	TAG_FUNC_P_PAID,
+	TAG_FUNC_ROOM,
 	TAG_FUNC_START_T,
 	TAG_NAME,
 	patron,
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
-import { convertLowerTrim, convertToArr, getCurrentDate } from '@/lib/utils'
+import { convertLowerTrim, convertToArr, encodeObj, getCurrentDate } from '@/lib/utils'
+import { decode } from 'punycode'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -108,7 +112,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						onReset()
 					})
 					.catch((error) => {
-						console.log('this is error an getRecord')
+						console.log('onSubmit')
 						onReset()
 					})
 			})
@@ -206,7 +210,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					occ1: patron.occ1,
 					occ2: patron.occ2,
 					id: patron.id,
-					sisn:sisnNumber
+					sisn: sisnNumber,
 				}
 			})
 			.catch((error) => {
@@ -216,22 +220,41 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 	}
 
-	const sendEmail = async (patron: any, data: any, event: Cal_event) => {
+	const sendEmail = async (patron: any, patronInfo: Inputs, event: Cal_event) => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 		let HOME_SESSID = match[0]?.split('=')[1]
+		const encoded = encodeObj(
+			JSON.stringify({
+				...patronInfo,
+				[TAG_NAME]:event[TAG_NAME],
+				[TAG_FUNC_START_T]:event[TAG_FUNC_START_T],
+				[TAG_FUNC_END_T]:event[TAG_FUNC_END_T],
+				[TAG_FUNC_ROOM]:event[TAG_FUNC_ROOM],
+				[TAG_FUNC_DATE]:event[TAG_FUNC_DATE],
+				[TAG_FUNC_LOC]:event[TAG_FUNC_LOC],
+				[SISN]:event[SISN],
+				TAG_FUNC_P_ID: patron.id,
+				CURRENT_DATE: getCurrentDate(),
+				BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
+				occ1: patron.occ1,
+				occ2: patron.occ2,
+			})
+		)
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RsvpForm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CONFIRMATION_EMAIL_T}${event[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPConfirmEmailTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CONFIRMATION_EMAIL_T}${event[TAG_NAME]}`,
 				{
-					...data,
+					...patronInfo,
 					...event,
+					TAG_FUNC_P_ID: patron.id,
 					CURRENT_DATE: getCurrentDate(),
 					BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
 					CANCEL_URL: RSVP_CANCEL_LANDING_PAGE_URL,
 					occ1: patron.occ1,
 					occ2: patron.occ2,
-					TAG_FUNC_P_ID: patron.id
+					encoded,
+					[TAG_FUNC_DESCIPT]:event[TAG_FUNC_DESCIPT],
 				},
 				{
 					headers: {
