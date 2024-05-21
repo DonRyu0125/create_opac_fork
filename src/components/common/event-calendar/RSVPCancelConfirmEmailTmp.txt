@@ -66,10 +66,9 @@
         <h2>Your registration has been cancelled for:</h2>
         <p><strong>Event:</strong> ^TAG_NAME^</p>
         <p><strong>Date:</strong> ^TAG_FUNC_DATE^</p>
-        <p><strong>Time:</strong> 6:30 PM to 8:00 PM</p>
+        <p><strong>Time:</strong>^TAG_FUNC_START_T^ - ^TAG_FUNC_END_T^</p>
         <p><strong>Location:</strong></p>
         <p>^BRANCH_ADDRESS^</p>
-        <p><strong>Phone:</strong>^TAG_FUNC_START_T^ - ^TAG_FUNC_END_T^</p>
       </div>
     </div>
     <footer class="footer">2024 Minisis Inc. All rights reserved.</footer>
