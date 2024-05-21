@@ -57,7 +57,7 @@
     <tr>
       <td class="header-content">
         <img src="logo.png" alt="Company Logo">
-        <h1>Registration Successful!</h1>
+        <h1>Registration Canceled</h1>
       </td>
     </tr>
   </table>
