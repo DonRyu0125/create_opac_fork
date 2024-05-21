@@ -38,7 +38,7 @@
     .info {
       margin-bottom: 20px;
     }
-    .info label {
+    .info div {
       font-weight: 600;
       display: block;
       margin-bottom: 5px;
@@ -92,43 +92,43 @@
   </table>
   <div class="container">
     <div class="info">
-      <label for="event-name">Event Name:</label>
+      <div for="event-name">Event Name:</div>
       <p id="event-name">^TAG_NAME^</p>
     </div>
     <div class="info">
-      <label for="event-location">Event Location:</label>
+      <div for="event-location">Event Location:</div>
       <p id="event-location">^BRANCH_ADDRESS^</p>
     </div>
     <div class="info">
-      <label for="room-number">Room Number</label>
+      <div for="room-number">Room Number</div>
       <p id="room-number">^TAG_FUNC_ROOM^</p>
     </div>
     <div class="info">
-      <label for="event-description">Description</label>
+      <div for="event-description">Description</div>
       <p id="event-description">^TAG_FUNC_DESCIPT^</p>
     </div>
     <div style="display: flex;">
       <div class="info" style="width: 48%;">
-        <label for="event-date">Date:</label>
+        <div for="event-date">Date:</div>
         <p id="event-date">^TAG_FUNC_DATE^</p>
       </div>
       <div class="info" style="width: 48%; margin-left: 16px;">
-        <label for="event-time">Time:</label>
+        <div for="event-time">Time:</div>
         <p id="event-time">^TAG_FUNC_START_T^ - ^TAG_FUNC_END_T^</p>
       </div>
     </div>
   </div>
   <div class="container">
     <div class="info">
-      <label for="attendee-name">Name:</label>
+      <div for="attendee-name">Name:</div>
       <p id="attendee-name">^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>
     </div>
     <div class="info">
-      <label for="registration-date">Date Registered:</label>
+      <div for="registration-date">Date Registered:</div>
       <p id="registration-date">^REGISTERED_DATE^</p>
     </div>
     <div class="info">
-      <label for="attendee-details">Attendee:</label>
+      <div for="attendee-details">Attendee:</div>
       <div id="attendee-details" style="border: 2px dotted #ccc; padding: 10px; text-align: center;">
         ^TAG_FUNC_P_ATTND^ Spot Reserved
       </div>
