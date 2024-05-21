@@ -41,6 +41,7 @@ import {
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 import { convertLowerTrim, convertToArr, encodeObj, getCurrentDate } from '@/lib/utils'
 import { decode } from 'punycode'
+import Spinner from './Spinner'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -85,12 +86,14 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const [showForm, setShowForm] = useState(false)
 	const { register, handleSubmit, reset } = useForm<Inputs>()
 	const x2js = new X2JS()
+	const [loading, setLoading] = useState(false)
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}`
 		// mwi logon function
 		// 20240510 Richard said, calendar can't be the stand alone function so it will required the logon before using it
 		// 20240510 logon => storing data process optimization is not developed
+		setLoading(true)
 		return axios
 			.post(
 				urlForSessionID,
@@ -118,6 +121,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 			.catch((error) => {
 				console.error('Error fetching session ID:', error)
+				onReset()
 			})
 	}
 
@@ -226,13 +230,13 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		const encoded = encodeObj(
 			JSON.stringify({
 				...patronInfo,
-				[TAG_NAME]:event[TAG_NAME],
-				[TAG_FUNC_START_T]:event[TAG_FUNC_START_T],
-				[TAG_FUNC_END_T]:event[TAG_FUNC_END_T],
-				[TAG_FUNC_ROOM]:event[TAG_FUNC_ROOM],
-				[TAG_FUNC_DATE]:event[TAG_FUNC_DATE],
-				[TAG_FUNC_LOC]:event[TAG_FUNC_LOC],
-				[SISN]:event[SISN],
+				[TAG_NAME]: event[TAG_NAME],
+				[TAG_FUNC_START_T]: event[TAG_FUNC_START_T],
+				[TAG_FUNC_END_T]: event[TAG_FUNC_END_T],
+				[TAG_FUNC_ROOM]: event[TAG_FUNC_ROOM],
+				[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
+				[TAG_FUNC_LOC]: event[TAG_FUNC_LOC],
+				[SISN]: event[SISN],
 				TAG_FUNC_P_ID: patron.id,
 				REGISTERED_DATE: getCurrentDate(),
 				BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
@@ -254,7 +258,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					occ1: patron.occ1,
 					occ2: patron.occ2,
 					encoded,
-					[TAG_FUNC_DESCIPT]:event[TAG_FUNC_DESCIPT],
+					[TAG_FUNC_DESCIPT]: event[TAG_FUNC_DESCIPT],
 				},
 				{
 					headers: {
@@ -268,6 +272,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	}
 
 	const onReset = () => {
+		setLoading(false)
 		setShowForm((prev) => !prev)
 		reset()
 	}
@@ -330,6 +335,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			)}
 			{showForm && (
 				<div className={'h-5/6 w-full p-1'}>
+					{loading && <Spinner height={'h-[388px]'} spinHeight={'h-10'} />}
 					<div className={'bg-primary p-1 text-white'}>
 						Did you <span className={'text-gray-400'}>Log In?</span>
 					</div>
@@ -371,6 +377,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 									})}
 							</select>
 						</div>
+
 						<Button className={'w-full'} type="submit">
 							Register
 						</Button>
