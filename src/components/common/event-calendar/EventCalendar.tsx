@@ -56,6 +56,7 @@ export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const TAG_NAME = 'TAG_NAME'
 export const SISN = 'SISN'
 export const CONFIRMATION_EMAIL_T = 'You’re confirmed for:'
+export const CANCEL_CONFIRMATION_EMAIL_T = 'Your registration has been cancelled for'
 //Library Location group
 export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_REPORT'
 export const LIBRARY_LOCATION_XML_TAG = 'LOCATION'

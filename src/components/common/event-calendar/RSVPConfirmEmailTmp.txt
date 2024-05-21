@@ -120,7 +120,7 @@
     </div>
     <div class="info">
       <label for="registration-date">Date Registered:</label>
-      <p id="registration-date">^CURRENT_DATE^</p>
+      <p id="registration-date">^REGISTERED_DATE^</p>
     </div>
     <div class="info">
       <label for="attendee-details">Attendee:</label>
@@ -135,7 +135,7 @@
     </div>
   </div>
   <footer class="footer">
-    © 2024 Your Company. All rights reserved.
+    2024 Minisis Inc. All rights reserved.
   </footer>
 </body>
 </html>
