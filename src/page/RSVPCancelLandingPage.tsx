@@ -239,7 +239,7 @@ const RSVPCancelLandingPage = () => {
 					alt=""
 					className="h-64 w-full object-cover"
 				/>
-				<div className={'min-h-[350px] flex items-center justify-center h-full'}>
+				<div className={'min-h-[400px] flex items-center justify-center h-full'}>
 				{loading ? 
 					<Spinner
 						height={'h-full'}
