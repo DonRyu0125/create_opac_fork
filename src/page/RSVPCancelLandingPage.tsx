@@ -16,6 +16,7 @@ import {
 import axios from 'axios'
 import { convertXMLToJson, decodeObj } from '@/lib/utils'
 import { encode } from 'punycode'
+import Spinner from '@/components/common/event-calendar/Spinner'
 
 type PatronInfo = {
 	TAG_FUNC_P_ATTND: string
@@ -37,6 +38,7 @@ type PatronInfo = {
 }
 
 const RSVP = () => {
+	const [loading, setLoading] = useState(false)
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>({
 		TAG_FUNC_P_ATTND: '',
 		TAG_FUNC_P_FIRST: '',
@@ -69,11 +71,13 @@ const RSVP = () => {
 			if (res) {
 				return setRegistered(true)
 			}
+			setLoading(false)
 			setRegistered(false)
 		})
 	}, [])
 
 	const isRecord = async (id: string) => {
+		setLoading(true)
 		return await axios
 			.get(
 				`/scripts/mwimain.dll/144/${MAIN_MWI_APPLICATION}/${MONTH_REPORT}?commandsearch&exp=${TAG_FUNC_P_ID} ${id}`,
@@ -93,8 +97,10 @@ const RSVP = () => {
 	}
 
 	const onClick = () => {
-		getSessionID().then((res) => removeRecord(res, patronInfo))
-		.then((res) => sendCancelConfirmEmail(res))
+		setLoading(true)
+		getSessionID()
+			.then((res) => removeRecord(res, patronInfo))
+			.then((res) => sendCancelConfirmEmail(res))
 	}
 
 	const getSessionID = async () => {
@@ -146,12 +152,12 @@ const RSVP = () => {
 				}
 			)
 			.then((res) => {
-				return HOME_SESSID;
+				return HOME_SESSID
 			})
 			.catch((error) => {
 				// error
 				setRegistered(true)
-				return '';
+				return ''
 			})
 	}
 
@@ -160,16 +166,17 @@ const RSVP = () => {
 			.post(
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPCancelConfirmEmailTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
-					...patronInfo
+					...patronInfo,
 				},
 				{
 					headers: {
 						'Content-Type': 'multipart/form-data',
 					},
 				}
-			).then((res)=>{
+			)
+			.then((res) => {
 				setRegistered(false)
-				console.log('res===>',res)
+				setLoading(false)
 			})
 	}
 
@@ -183,51 +190,61 @@ const RSVP = () => {
 				/>
 				<div className="flex flex-1 items-center justify-center min-h-[200px] ">
 					{registerd ? (
-						<div className="mx-auto px-4 py-8 text-center">
-							<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-								This will cancel your registration for {patronInfo?.TAG_NAME}
-							</h1>
-							<div className="mt-4 text-gray-500 grid grid-cols-2 gap-1 text-lg">
-								<div className="text-left border-2 border-solid rounded-lg p-5 overflow-x-auto">
-									<div>{patronInfo?.TAG_NAME}</div>
-									<div>{patronInfo?.TAG_FUNC_DATE}</div>
-									<div>
-										{patronInfo?.TAG_FUNC_START_T} -{' '}
-										{patronInfo?.TAG_FUNC_END_T}
+						<>
+							{loading && (
+								<Spinner height={'h-full'} spinHeight={'h-20'} spinWidth={'w-20'} background={"bg-white"}/>
+							)}
+							<div className="mx-auto px-4 py-8 text-center">
+								<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+									This will cancel your registration for {patronInfo?.TAG_NAME}
+								</h1>
+								<div className="mt-4 text-gray-500 grid grid-cols-2 gap-1 text-lg">
+									<div className="text-left border-2 border-solid rounded-lg p-5 overflow-x-auto">
+										<div>{patronInfo?.TAG_NAME}</div>
+										<div>{patronInfo?.TAG_FUNC_DATE}</div>
+										<div>
+											{patronInfo?.TAG_FUNC_START_T} -{' '}
+											{patronInfo?.TAG_FUNC_END_T}
+										</div>
+										<div>
+											{patronInfo?.BRANCH_ADDRESS}, Room:{' '}
+											{patronInfo?.TAG_FUNC_ROOM}
+										</div>
 									</div>
-									<div>
-										{patronInfo?.BRANCH_ADDRESS}, Room:{' '}
-										{patronInfo?.TAG_FUNC_ROOM}
+									<div className="text-left border-2 border-solid rounded-md p-5 overflow-x-auto">
+										<div>
+											{patronInfo?.TAG_FUNC_P_LAST},{' '}
+											{patronInfo?.TAG_FUNC_P_FIRST}
+										</div>
+										<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
+										<div>Registered: {patronInfo?.REGISTERED_DATE}</div>
+										<div className="border-2 border-dashed p-2">
+											{patronInfo?.TAG_FUNC_P_ATTND} spot reserved
+										</div>
 									</div>
 								</div>
-								<div className="text-left border-2 border-solid rounded-md p-5 overflow-x-auto">
-									<div>
-										{patronInfo?.TAG_FUNC_P_LAST},{' '}
-										{patronInfo?.TAG_FUNC_P_FIRST}
-									</div>
-									<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
-									<div>Registered: {patronInfo?.REGISTERED_DATE}</div>
-									<div className="border-2 border-dashed p-2">
-										{patronInfo?.TAG_FUNC_P_ATTND} spot reserved
-									</div>
-								</div>
+								<Button
+									onClick={onClick}
+									className="w-[300px] mt-6 inline-block rounded bg-red-600 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+									Unregister
+								</Button>
 							</div>
-							<Button
-								onClick={onClick}
-								className="w-[300px] mt-6 inline-block rounded bg-red-600 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-								Unregister
-							</Button>
-						</div>
+						</>
 					) : (
-						<div className="mx-auto max-w-xl px-4 py-8 text-center">
-							<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-								You are not in the list !
-							</h1>
-							<h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-								Please go to our website to register.
-							</h2>
-							<p className="mt-4 text-gray-500">Website name</p>
-						</div>
+						<>
+							{loading && (
+								<Spinner height={'h-full'} spinHeight={'h-20'} spinWidth={'w-20'} background={"bg-white"} />
+							)}
+							<div className="mx-auto max-w-xl px-4 py-8 text-center">
+								<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+									You are not in the list !
+								</h1>
+								<h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+									Please go to our website to register.
+								</h2>
+								<p className="mt-4 text-gray-500">Website name</p>
+							</div>
+						</>
 					)}
 				</div>
 			</div>
