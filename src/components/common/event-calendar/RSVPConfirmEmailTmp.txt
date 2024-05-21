@@ -50,6 +50,7 @@
       background-color: #f5f5f5;
       font-size: 16px;
       margin: 0;
+      word-wrap: break-word;
     }
     .button-container {
       text-align: center;
@@ -101,6 +102,10 @@
     <div class="info">
       <label for="room-number">Room Number</label>
       <p id="room-number">^TAG_FUNC_ROOM^</p>
+    </div>
+    <div class="info">
+      <label for="event-description">Description</label>
+      <p id="event-description">^TAG_FUNC_DESCIPT^</p>
     </div>
     <div style="display: flex;">
       <div class="info" style="width: 48%;">
