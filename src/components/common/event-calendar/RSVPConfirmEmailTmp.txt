@@ -102,12 +102,12 @@
       <label for="room-number">Room Number</label>
       <p id="room-number">^TAG_FUNC_ROOM^</p>
     </div>
-    <div style="display: flex; justify-content: space-between;">
+    <div style="display: flex;">
       <div class="info" style="width: 48%;">
         <label for="event-date">Date:</label>
         <p id="event-date">^TAG_FUNC_DATE^</p>
       </div>
-      <div class="info" style="width: 48%;">
+      <div class="info" style="width: 48%; margin-left: 16px;">
         <label for="event-time">Time:</label>
         <p id="event-time">^TAG_FUNC_START_T^ - ^TAG_FUNC_END_T^</p>
       </div>
