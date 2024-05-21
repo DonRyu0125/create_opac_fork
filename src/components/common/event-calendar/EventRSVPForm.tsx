@@ -335,8 +335,9 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			)}
 			{showForm && (
 				<div className={'h-5/6 w-full p-1'}>
-					 <Spinner height={'h-[388px]'} spinHeight={'h-10'} spinWidth={'w-10'} />
-					{/* {loading && <Spinner height={'h-[388px]'} spinHeight={'h-10'} spinWidth={'w-10'} />} */}
+					{loading && (
+						<Spinner height={'h-[388px]'} spinHeight={'h-10'} spinWidth={'w-10'} />
+					)}
 					<div className={'bg-primary p-1 text-white'}>
 						Did you <span className={'text-gray-400'}>Log In?</span>
 					</div>

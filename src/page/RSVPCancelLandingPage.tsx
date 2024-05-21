@@ -68,10 +68,10 @@ const RSVP = () => {
 		let jsonObj = JSON.parse(obj)
 		setPatronInfo(jsonObj)
 		isRecord(jsonObj.TAG_FUNC_P_ID).then((res) => {
+			setLoading(false)
 			if (res) {
 				return setRegistered(true)
 			}
-			setLoading(false)
 			setRegistered(false)
 		})
 	}, [])
@@ -188,13 +188,18 @@ const RSVP = () => {
 					alt=""
 					className="h-64 w-full object-cover"
 				/>
-				<div className="flex flex-1 items-center justify-center min-h-[200px] ">
+				<div className="flex flex-1 items-center justify-center h-full ">
 					{registerd ? (
 						<>
 							{loading && (
-								<Spinner height={'h-full'} spinHeight={'h-20'} spinWidth={'w-20'} background={"bg-white"}/>
+								<Spinner
+									height={'h-full'}
+									spinHeight={'h-20'}
+									spinWidth={'w-20'}
+									background={'bg-white'}
+								/>
 							)}
-							<div className="mx-auto px-4 py-8 text-center">
+							<div className="h-full mx-auto px-4 py-8 text-center relative">
 								<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 									This will cancel your registration for {patronInfo?.TAG_NAME}
 								</h1>
@@ -233,7 +238,12 @@ const RSVP = () => {
 					) : (
 						<>
 							{loading && (
-								<Spinner height={'h-full'} spinHeight={'h-20'} spinWidth={'w-20'} background={"bg-white"} />
+								<Spinner
+									height={'h-full'}
+									spinHeight={'h-20'}
+									spinWidth={'w-20'}
+									background={'bg-white'}
+								/>
 							)}
 							<div className="mx-auto max-w-xl px-4 py-8 text-center">
 								<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
