@@ -37,7 +37,24 @@ type PatronInfo = {
 }
 
 const RSVP = () => {
-	const [patronInfo, setPatronInfo] = useState<PatronInfo>()
+	const [patronInfo, setPatronInfo] = useState<PatronInfo>({
+		TAG_FUNC_P_ATTND: '',
+		TAG_FUNC_P_FIRST: '',
+		TAG_FUNC_P_LAST: '',
+		TAG_FUNC_P_EMAIL: '',
+		TAG_NAME: '',
+		TAG_FUNC_START_T: '',
+		TAG_FUNC_END_T: '',
+		TAG_FUNC_ROOM: '',
+		TAG_FUNC_DATE: '',
+		TAG_FUNC_LOC: '',
+		SISN: '',
+		TAG_FUNC_P_ID: '',
+		REGISTERED_DATE: '',
+		BRANCH_ADDRESS: '',
+		occ1: '',
+		occ2: '',
+	})
 	const [registerd, setRegistered] = useState(true)
 
 	useEffect(() => {
@@ -77,7 +94,7 @@ const RSVP = () => {
 
 	const onClick = () => {
 		getSessionID().then((res) => removeRecord(res, patronInfo))
-		//.then((res) => sendCancelConfirmEmail(res))
+		.then((res) => sendCancelConfirmEmail(res))
 	}
 
 	const getSessionID = async () => {
@@ -129,44 +146,32 @@ const RSVP = () => {
 				}
 			)
 			.then((res) => {
-				// setRegistered 가 VALID 할때만 작동하게 할것
-				let result = convertXMLToJson(res)
-				console.log('result', result)
-				setRegistered(false)
-				return HOME_SESSID
+				return HOME_SESSID;
 			})
 			.catch((error) => {
 				// error
 				setRegistered(true)
+				return '';
 			})
 	}
 
-	const sendCancelConfirmEmail = async (HOME_SESSID: string) => {
+	const sendCancelConfirmEmail = async (HOME_SESSID: string | boolean) => {
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPConfirmEmailTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}${patronInfo[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPCancelConfirmEmailTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
-					// ...data,
-					// ...event,
-					// REGISTERED_DATE: getCurrentDate(),
-					// BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
-					// CANCEL_URL: RSVP_CANCEL_LANDING_PAGE_URL,
-					// occ1: patron.occ1,
-					// occ2: patron.occ2,
-					// TAG_FUNC_P_ID: patron.id
+					...patronInfo
 				},
 				{
 					headers: {
 						'Content-Type': 'multipart/form-data',
 					},
 				}
-			)
-			.then(() => {})
+			).then((res)=>{
+				setRegistered(false)
+				console.log('res===>',res)
+			})
 	}
-
-	// case1 : want to cancel?
-	// case2 : You are not in the list
-	// case3 : Event is already happened (not exsist)
 
 	return (
 		<Layout>
@@ -183,7 +188,7 @@ const RSVP = () => {
 								This will cancel your registration for {patronInfo?.TAG_NAME}
 							</h1>
 							<div className="mt-4 text-gray-500 grid grid-cols-2 gap-1 text-lg">
-								<div className="text-left border-2 border-solid rounded-lg p-5 overflow-scroll">
+								<div className="text-left border-2 border-solid rounded-lg p-5 overflow-x-auto">
 									<div>{patronInfo?.TAG_NAME}</div>
 									<div>{patronInfo?.TAG_FUNC_DATE}</div>
 									<div>
@@ -195,7 +200,7 @@ const RSVP = () => {
 										{patronInfo?.TAG_FUNC_ROOM}
 									</div>
 								</div>
-								<div className="text-left border-2 border-solid rounded-md p-5 overflow-scroll">
+								<div className="text-left border-2 border-solid rounded-md p-5 overflow-x-auto">
 									<div>
 										{patronInfo?.TAG_FUNC_P_LAST},{' '}
 										{patronInfo?.TAG_FUNC_P_FIRST}
@@ -219,7 +224,7 @@ const RSVP = () => {
 								You are not in the list !
 							</h1>
 							<h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-								Please go to our website to register again.
+								Please go to our website to register.
 							</h2>
 							<p className="mt-4 text-gray-500">Website name</p>
 						</div>
