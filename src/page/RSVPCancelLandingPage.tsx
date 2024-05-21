@@ -176,14 +176,14 @@ const RSVP = () => {
 					alt=""
 					className="h-64 w-full object-cover"
 				/>
-				<div className="flex flex-1 items-center justify-center">
+				<div className="flex flex-1 items-center justify-center min-h-[200px] ">
 					{registerd ? (
-						<div className="mx-auto max-w-xl px-4 py-8 text-center">
+						<div className="mx-auto px-4 py-8 text-center">
 							<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 								This will cancel your registration for {patronInfo?.TAG_NAME}
 							</h1>
 							<div className="mt-4 text-gray-500 grid grid-cols-2 gap-1 text-lg">
-								<div className="text-left border-2 border-solid rounded-lg p-5">
+								<div className="text-left border-2 border-solid rounded-lg p-5 overflow-scroll">
 									<div>{patronInfo?.TAG_NAME}</div>
 									<div>{patronInfo?.TAG_FUNC_DATE}</div>
 									<div>
@@ -195,13 +195,13 @@ const RSVP = () => {
 										{patronInfo?.TAG_FUNC_ROOM}
 									</div>
 								</div>
-								<div className="text-left border-2 border-solid rounded-md p-5">
+								<div className="text-left border-2 border-solid rounded-md p-5 overflow-scroll">
 									<div>
 										{patronInfo?.TAG_FUNC_P_LAST},{' '}
 										{patronInfo?.TAG_FUNC_P_FIRST}
 									</div>
 									<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
-									<div>{patronInfo?.REGISTERED_DATE}</div>
+									<div>Registered: {patronInfo?.REGISTERED_DATE}</div>
 									<div className="border-2 border-dashed p-2">
 										{patronInfo?.TAG_FUNC_P_ATTND} spot reserved
 									</div>
@@ -209,7 +209,7 @@ const RSVP = () => {
 							</div>
 							<Button
 								onClick={onClick}
-								className="mt-6 inline-block rounded bg-red-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+								className="w-[300px] mt-6 inline-block rounded bg-red-600 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
 								Unregister
 							</Button>
 						</div>
@@ -219,7 +219,7 @@ const RSVP = () => {
 								You are not in the list !
 							</h1>
 							<h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-								Please go to our website to register again. If
+								Please go to our website to register again.
 							</h2>
 							<p className="mt-4 text-gray-500">Website name</p>
 						</div>
