@@ -15,7 +15,6 @@ import {
 } from '@/components/common/event-calendar/EventCalendar'
 import axios from 'axios'
 import { convertXMLToJson, decodeObj } from '@/lib/utils'
-import { encode } from 'punycode'
 import Spinner from '@/components/common/event-calendar/Spinner'
 
 type PatronInfo = {
@@ -182,14 +181,14 @@ const RSVPCancelLandingPage = () => {
 
 	const showRegister = () => {
 		return (
-			<div className="flex flex-1 items-center justify-center h-full">
+			<>
 				{registerd ? (
-					<div className="h-full mx-auto px-4 py-10 text-center relative">
+					<div className="text-center">
 						<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 							This will cancel your registration for {patronInfo?.TAG_NAME}
 						</h1>
-						<div className="mt-4 text-gray-500 grid grid-cols-2 gap-1 text-lg">
-							<div className="text-left border-2 border-solid rounded-lg p-5 overflow-x-auto">
+						<div className="mt-4 text-gray-500 sm:flex text-lg w-full">
+							<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
 								<div>{patronInfo?.TAG_NAME}</div>
 								<div>{patronInfo?.TAG_FUNC_DATE}</div>
 								<div>
@@ -199,7 +198,7 @@ const RSVPCancelLandingPage = () => {
 									{patronInfo?.BRANCH_ADDRESS}, Room: {patronInfo?.TAG_FUNC_ROOM}
 								</div>
 							</div>
-							<div className="text-left border-2 border-solid rounded-lg p-5 overflow-x-auto">
+							<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
 								<div>
 									{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
 								</div>
@@ -217,41 +216,46 @@ const RSVPCancelLandingPage = () => {
 						</Button>
 					</div>
 				) : (
-					<div className="mx-auto max-w-xl px-4 py-8 text-center">
+					<div className="text-center">
 						<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 							You are not in the list !
 						</h1>
-						<h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-							Please go to our website to register.
-						</h2>
-						<p className="mt-4 text-gray-500">Website name</p>
+
+						<p className="mt-4 text-gray-500">Please go to our website to register.</p>
+
+						<a
+							href="#"
+							className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+							Search Events
+						</a>
 					</div>
 				)}
-			</div>
+			</>
 		)
 	}
 
 	return (
 		<Layout>
-			<div className="flex h-full flex-col bg-white">
+			<div className="flex h-full flex-col bg-white h-[800px]">
 				<img
 					src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
 					alt=""
 					className="h-64 w-full object-cover"
 				/>
-				<div className={'min-h-[400px] flex items-center justify-center h-full'}>
-				{loading ? 
-					<Spinner
-						height={'h-full'}
-						spinHeight={'h-20'}
-						spinWidth={'w-20'}
-						background={'bg-white'}
-					/>
-					:
-					showRegister()
-				}
-				</div>
-				
+				{loading ? (
+					<div className={'h-[500px]'}>
+						<Spinner
+							height={'h-full'}
+							spinHeight={'h-20'}
+							spinWidth={'w-20'}
+							background={'bg-white'}
+						/>
+					</div>
+				) : (
+					<div className={'h-[500px] flex items-center justify-center'}>
+						{showRegister()}
+					</div>
+				)}
 			</div>
 		</Layout>
 	)

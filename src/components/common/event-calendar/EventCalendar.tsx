@@ -395,6 +395,7 @@ const EventCalendar = () => {
 										monthType={monthType}
 										weekType={weekType}
 										contactInfo={contactInfo}
+										setCurrentEvent={setCurrentEvent}
 									/>
 								</div>
 							)

@@ -18,7 +18,6 @@ import {
 	PATRON,
 	RSVP_CANCEL_LANDING_PAGE_URL,
 	SISN,
-	SUB_MWI_APPLICATION,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DESCIPT,
 	TAG_FUNC_DTE_GRP,
@@ -40,7 +39,6 @@ import {
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 import { convertLowerTrim, convertToArr, encodeObj, getCurrentDate } from '@/lib/utils'
-import { decode } from 'punycode'
 import Spinner from './Spinner'
 
 type Inputs = {
