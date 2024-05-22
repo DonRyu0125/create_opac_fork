@@ -44,7 +44,7 @@ type showStrObj = {
 const EventAllButton = ({
 	filteredEvents,
 	contactInfo,
-	setCurrentEvent
+	setCurrentEvent,
 }: {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
@@ -103,14 +103,14 @@ const EventAllButton = ({
 						</DialogPrimitive.Close>
 					</DialogTitle>
 				</DialogHeader>
-				<Accordion.Root type="multiple" className={'AccordionRoot w-full px-2'}>
+				<Accordion.Root type="multiple" className={'AccordionRoot w-full px-2 '}>
 					{filteredEvents.map((item: Cal_event, idx: number) => (
 						<Accordion.Item className="AccordionItem" value={`${idx}`} key={idx}>
 							<AccordionTrigger className={'w-full'}>
-								<div key={idx} className={'w-full border-2 rounded'}>
+								<div key={idx} className={'w-full'}>
 									<DialogTitle
 										className={
-											'bg-primary text-primary-foreground h-10 flex justify-center items-center rounded'
+											'bg-primary text-primary-foreground h-10 flex justify-center items-center rounded m-1'
 										}>
 										<div className={'flex justify-between w-[400px]'}>
 											<div className={'flex'}>
@@ -130,15 +130,15 @@ const EventAllButton = ({
 									</DialogTitle>
 								</div>
 							</AccordionTrigger>
-							<AccordionContent>
-								<div className={'flex'}>
+							<AccordionContent
+							style={{borderRadius:'5px'}}
+								className={'border-2 border-lime-950 rounded-lg'}>
+								<div className={'flex '}>
 									<div
 										className={
 											'w-full text-l w-full flex flex-col justify-center items-left font-bold px-2 '
 										}>
-										<div className={'overflow-hidden text-lg font-bold'}>
-											{item[TAG_NAME]}
-										</div>
+										<div className={'text-lg font-bold'}>{item[TAG_NAME]}</div>
 										<div className={'sm:flex'}>
 											<div className="ml-[10px] sm:ml-0 text-md text-gray-600 font-bold">
 												&#x2022;{item[TAG_FUNC_DATE]}
@@ -166,10 +166,10 @@ const EventAllButton = ({
 								</div>
 								{/* 'More' button to toggle description of the event */}
 								<DialogDescription
-									className={`h-72 p-2 break-all overflow-x-hidden overflow-y-auto`}>
+									className={`min-h-[100px] p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									{item[TAG_FUNC_DESCIPT]}
 								</DialogDescription>
-								<div className={'h-[350px] rounded border-2 font-bold'}>
+								<div className={'h-[350px] rounded border-2 font-bold m-2'}>
 									<EventRSVPForm
 										capacity={item[TAG_FUNC_CAP]}
 										patrons={convertToArr(item[PATRON])}
