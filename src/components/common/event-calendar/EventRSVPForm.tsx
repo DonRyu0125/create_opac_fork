@@ -379,7 +379,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 									})}
 							</select>
 						</div>
-
 						<Button className={'w-full'} type="submit">
 							Register
 						</Button>

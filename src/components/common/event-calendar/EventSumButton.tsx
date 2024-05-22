@@ -38,15 +38,23 @@ import { X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 import { CalendarCheck } from 'lucide-react'
 import EventButton from './EventButton'
+import { fetch_get } from './Service'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]
 	weekType: boolean
 	monthType: boolean
 	contactInfo: ContactInfo[]
+	setCurrentEvent: React.Dispatch<React.SetStateAction<Cal_event[]>>
 }
 
-const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: eventSumType) => {
+const EventSumButton = ({
+	filteredEvents,
+	weekType,
+	monthType,
+	contactInfo,
+	setCurrentEvent,
+}: eventSumType) => {
 	const { logo } = config
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
@@ -73,6 +81,11 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 		return result ?? []
 	}
 
+	const refresh = async () => {
+		const currE = await fetch_get(new Date())
+		setCurrentEvent(currE)
+	}
+
 	return (
 		<>
 			{monthType && filteredEvents.length > 3 ? (
@@ -92,7 +105,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 										{item[TAG_FUNC_LOC]?.slice(0, TAG_FUNC_LOC_LENGTH)}
 									</div>
 									<div className={'flex items-center justify-center'}>
-										<CalendarCheck height={18} className={'hidden sm:block'} />:{' '}
+										<CalendarCheck height={18} className={'hidden sm:block'} />:
 										<div>{item[TAG_FUNC_DTE_LIST].length}</div>
 									</div>
 								</Button>
@@ -117,7 +130,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 													)}></div>
 												{item[TAG_FUNC_LOC]}
 											</div>
-											<DialogPrimitive.Close>
+											<DialogPrimitive.Close onClick={refresh}>
 												<X className={'h-6 w-6'} />
 											</DialogPrimitive.Close>
 										</DialogTitle>
@@ -185,6 +198,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 									))}
 									<DialogFooter>
 										<DialogPrimitive.Close
+											onClick={refresh}
 											className={
 												'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
 											}>
@@ -199,7 +213,13 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 			) : (
 				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto'}>
 					{filteredEvents.map((item: any, idx: number) => (
-						<EventButton elm={item} key={idx} id={idx} weekType={weekType} contactInfo={contactInfo} />
+						<EventButton
+							elm={item}
+							key={idx}
+							id={idx}
+							weekType={weekType}
+							contactInfo={contactInfo}
+						/>
 					))}
 				</div>
 			)}

@@ -6,24 +6,14 @@ import {
 	Cal_event,
 	TAG_FUNC_DATE,
 	TAG_FUNC_START_T,
-	TAG_NAME_LENGTH,
 	TAG_FUNC_LOC,
-	FILTER_TYPE_COLORS,
-	TAG_FUNC_CAP,
-	TAG_FUNC_LANG,
 	Day_obj,
-	LIBRARY_LOCATION_REPORT,
-	SUB_MWI_APPLICATION,
-	LIBRARY_LOCATION_XML_TAG,
-	BRANCH_NAME,
 	ContactInfo,
 } from './EventCalendar'
 import { convertLowerTrim } from '@/lib/utils'
 import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'
-import axios from 'axios'
-import x2js from 'x2js'
-import X2JS from 'x2js'
+
 
 export interface Event_list {
 	dayObj: Day_obj
@@ -32,6 +22,7 @@ export interface Event_list {
 	weekType: boolean
 	monthType: boolean
 	contactInfo: ContactInfo[]
+	setCurrentEvent: React.Dispatch<React.SetStateAction<Cal_event[]>>
 }
 
 const EventCalendarEventList = ({
@@ -41,6 +32,7 @@ const EventCalendarEventList = ({
 	weekType,
 	monthType,
 	contactInfo,
+	setCurrentEvent
 }: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 
@@ -111,11 +103,12 @@ const EventCalendarEventList = ({
 				weekType={weekType}
 				monthType={monthType}
 				contactInfo={contactInfo}
+				setCurrentEvent={setCurrentEvent}
 			/>
 			{/* All events button */}
 			{monthType && filteredEvents.length > 2 && (
 				<div className={'h-[20px] absolute bottom-0 w-full'}>
-					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo}/>
+					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} setCurrentEvent={setCurrentEvent}/>
 				</div>
 			)}
 		</div>

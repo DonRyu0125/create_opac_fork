@@ -11,6 +11,8 @@ import EventCalendarEventList from './EventCalendarEventList'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { convertToArr } from '@/lib/utils'
+import { fetch_get } from './Service'
+
 
 export interface Cal_event {
 	[SISN]: number
@@ -197,30 +199,6 @@ const EventCalendar = () => {
 		setMonthType(false)
 	}
 
-	const fetch_get = async (currentDate: Date) => {
-		const DATE_FIELD = 'TAG_FUNC_DATE'
-		const DATE_WILDCARD = `${currentDate.getFullYear()}%2D0${currentDate.getMonth() + 1}%2D%2A`
-
-		try {
-			const response = await axios.get(
-				`/scripts/mwimain.dll/144/${MAIN_MWI_APPLICATION}/${MONTH_REPORT}?commandsearch&exp=${DATE_FIELD} ${DATE_WILDCARD}`,
-				{
-					headers: {
-						'Content-Type': 'text/xml',
-					},
-				}
-			)
-			const x2js = new X2JS()
-			const jsonData: any = x2js.xml2js(response.data)
-			const event = jsonData?.div?.xml?.event
-
-			if (!event) return []
-			return convertToArr(event)
-		} catch (error) {
-			throw error
-		}
-	}
-
 	const isMonthBtnClick = () => {
 		const currentYear = new Date().getFullYear()
 		let next_next_year = currentYear + 2
@@ -398,6 +376,7 @@ const EventCalendar = () => {
 										monthType={monthType}
 										weekType={weekType}
 										contactInfo={contactInfo}
+										setCurrentEvent={setCurrentEvent}
 									/>
 								</div>
 							)

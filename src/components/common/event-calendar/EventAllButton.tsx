@@ -36,6 +36,7 @@ import { config } from '@/constants'
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
 import { AccordionContent } from '@/components/ui/accordion'
+import { fetch_get } from './Service'
 type showStrObj = {
 	[key: number]: boolean
 }
@@ -43,9 +44,11 @@ type showStrObj = {
 const EventAllButton = ({
 	filteredEvents,
 	contactInfo,
+	setCurrentEvent
 }: {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
+	setCurrentEvent: React.Dispatch<React.SetStateAction<Cal_event[]>>
 }) => {
 	const { logo } = config
 	const [showFullStr, setShowFullStr] = useState<showStrObj>({})
@@ -57,8 +60,10 @@ const EventAllButton = ({
 		})
 	}
 
-	const resetToggleSetting = () => {
+	const resetToggleSetting = async () => {
+		const currE = await fetch_get(new Date())
 		setShowFullStr({})
+		setCurrentEvent(currE)
 	}
 
 	const getColor = (event_type: string) => {
