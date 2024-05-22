@@ -61,9 +61,7 @@ const EventAllButton = ({
 	}
 
 	const resetToggleSetting = async () => {
-		const currE = await fetch_get(new Date())
 		setShowFullStr({})
-		setCurrentEvent(currE)
 	}
 
 	const getColor = (event_type: string) => {

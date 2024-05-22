@@ -81,10 +81,6 @@ const EventSumButton = ({
 		return result ?? []
 	}
 
-	const refresh = async () => {
-		const currE = await fetch_get(new Date())
-		setCurrentEvent(currE)
-	}
 
 	return (
 		<>
@@ -130,7 +126,7 @@ const EventSumButton = ({
 													)}></div>
 												{item[TAG_FUNC_LOC]}
 											</div>
-											<DialogPrimitive.Close onClick={refresh}>
+											<DialogPrimitive.Close>
 												<X className={'h-6 w-6'} />
 											</DialogPrimitive.Close>
 										</DialogTitle>
@@ -198,7 +194,6 @@ const EventSumButton = ({
 									))}
 									<DialogFooter>
 										<DialogPrimitive.Close
-											onClick={refresh}
 											className={
 												'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
 											}>
