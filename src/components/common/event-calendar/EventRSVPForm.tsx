@@ -53,6 +53,7 @@ type EventInput = {
 	keyname: string
 	register: Function
 	required: boolean
+	errors?: any
 }
 
 type EventRSVPForm = {
@@ -80,9 +81,33 @@ const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	)
 }
 
+const EventEmailInput = ({ label, keyname, register, required, errors }: EventInput) => {
+	return (
+		<div className={'flex w-full flex-col my-1'}>
+			<Label>{label}</Label>
+			<Input
+				className={'border-2 border-grey-500'}
+				{...register(keyname, {
+					required: required,
+					pattern: {
+						value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+						message: 'Invalid email address',
+					},
+				})}
+			/>
+			{errors[TAG_FUNC_P_EMAIL]?.message}
+		</div>
+	)
+}
+
 const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: EventRSVPForm) => {
 	const [showForm, setShowForm] = useState(false)
-	const { register, handleSubmit, reset } = useForm<Inputs>()
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = useForm<Inputs>()
 	const x2js = new X2JS()
 	const [loading, setLoading] = useState(false)
 
@@ -354,11 +379,12 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 							register={register}
 							required={true}
 						/>
-						<EventInput
+						<EventEmailInput
 							label={'Email'}
 							keyname={TAG_FUNC_P_EMAIL}
 							register={register}
 							required={true}
+							errors={errors}
 						/>
 						<div className={'flex w-full flex-col my-1'}>
 							<Label>Attendee</Label>

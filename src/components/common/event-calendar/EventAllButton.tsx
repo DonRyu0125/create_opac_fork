@@ -51,18 +51,19 @@ const EventAllButton = ({
 	setCurrentEvent: React.Dispatch<React.SetStateAction<Cal_event[]>>
 }) => {
 	const { logo } = config
-	const [showFullStr, setShowFullStr] = useState<showStrObj>({})
-	const showStrToggle = (key: number) => {
-		setShowFullStr((prevShowFullStr) => {
-			const updatedShowFullStr = { ...prevShowFullStr }
-			updatedShowFullStr[key] = !updatedShowFullStr[key]
-			return updatedShowFullStr
-		})
-	}
 
-	const resetToggleSetting = async () => {
-		setShowFullStr({})
-	}
+	// Description more button func
+	// const [showFullStr, setShowFullStr] = useState<showStrObj>({})
+	// const resetToggleSetting = async () => {
+	// 	setShowFullStr({})
+	// }
+	// const showStrToggle = (key: number) => {
+	// 	setShowFullStr((prevShowFullStr) => {
+	// 		const updatedShowFullStr = { ...prevShowFullStr }
+	// 		updatedShowFullStr[key] = !updatedShowFullStr[key]
+	// 		return updatedShowFullStr
+	// 	})
+	// }
 
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
@@ -82,7 +83,7 @@ const EventAllButton = ({
 				</Button>
 			</DialogTrigger>
 			<DialogContent
-				onPointerDownOutside={resetToggleSetting}
+			
 				className={
 					'max-w-lg h-[500px] overflow-auto p-1 flex flex-col items-center max-w-l md:max-w-3xl'
 				}
@@ -96,7 +97,7 @@ const EventAllButton = ({
 							<img className="h-full" src={logo} alt="logo" />
 						</div>
 						<div>All Events</div>
-						<DialogPrimitive.Close onClick={resetToggleSetting}>
+						<DialogPrimitive.Close>
 							<X className={'h-6 w-6'} />
 						</DialogPrimitive.Close>
 					</DialogTitle>
@@ -129,8 +130,8 @@ const EventAllButton = ({
 								</div>
 							</AccordionTrigger>
 							<AccordionContent
-							style={{borderRadius:'5px'}}
-								className={'border-2 border-lime-950 rounded-lg'}>
+								style={{ borderRadius: '5px' }} // Tailiwnd rounded-lg is not working so I put inline style here 
+								className={'border-2 border-lime-950'}>
 								<div className={'flex '}>
 									<div
 										className={
@@ -167,7 +168,7 @@ const EventAllButton = ({
 									className={`min-h-[100px] p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									{item[TAG_FUNC_DESCIPT]}
 								</DialogDescription>
-								<div className={'h-[350px] rounded border-2 font-bold m-2'}>
+								<div className={'h-[380px] rounded border-2 font-bold m-2 p-2'}>
 									<EventRSVPForm
 										capacity={item[TAG_FUNC_CAP]}
 										patrons={convertToArr(item[PATRON])}
@@ -176,7 +177,7 @@ const EventAllButton = ({
 										contactInfo={contactInfo}
 									/>
 								</div>
-
+								{/*  Description more button func */}
 								{/* <DialogDescription
 									className={`${showFullStr[idx] ? 'h-72' : 'h-10'} p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									<>
