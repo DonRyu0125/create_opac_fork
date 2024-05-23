@@ -10,14 +10,18 @@ import {
 	BRANCH_ADDRESS,
 	BRANCH_NAME,
 	BRANCH_PHONE,
-	CONFIRMATION_EMAIL_T,
+	VERIFICATION_EMAIL_T,
 	Cal_event,
 	ContactInfo,
 	FUNC_LOC_P_GRP,
 	MAIN_MWI_APPLICATION,
+	MWI_RESFUL_RES,
+	MWI_XML_DATA_INDEX,
+	NON_LOGIN_USER_TYPE,
 	PATRON,
 	RSVP_CANCEL_LANDING_PAGE_URL,
 	SISN,
+	SUCCESS_RES_CODE,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DESCIPT,
 	TAG_FUNC_DTE_GRP,
@@ -38,7 +42,13 @@ import {
 	patron,
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
-import { convertLowerTrim, convertToArr, encodeObj, getCurrentDate } from '@/lib/utils'
+import {
+	convertLowerTrim,
+	convertToArr,
+	convertXMLToJson,
+	encodeObj,
+	getCurrentDate,
+} from '@/lib/utils'
 import Spinner from './Spinner'
 
 type Inputs = {
@@ -63,11 +73,6 @@ type EventRSVPForm = {
 	event: Cal_event
 	contactInfo: ContactInfo[]
 }
-
-const MWI_RESFUL_RES = 'MWI-RESTful-response'
-const SUCCESS_RES_CODE = 0
-const MWI_XML_DATA_INDEX = 0
-const NON_LOGIN_USER_TYPE = 'NOLOGIN'
 
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	return (
@@ -108,7 +113,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		reset,
 		formState: { errors },
 	} = useForm<Inputs>()
-	const x2js = new X2JS()
 	const [loading, setLoading] = useState(false)
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -128,19 +132,10 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then(() => {
-				return getRecord(data)
-					.then((res) => storePatron(res))
-					.then((res) => {
-						if (res.err == SUCCESS_RES_CODE) {
-							return sendEmail(res, data, event)
-						}
-						console.log('this is error an storePatron')
-						onReset()
-					})
-					.catch((error) => {
-						console.log('onSubmit')
-						onReset()
-					})
+				return getOCCNumber().then((res) => {
+					sendEmail(res, data, event)
+					onReset()
+				})
 			})
 			.catch((error) => {
 				console.error('Error fetching session ID:', error)
@@ -148,7 +143,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 	}
 
-	const getRecord = async (data: Inputs) => {
+	const getOCCNumber = async () => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 		let HOME_SESSID = match[0]?.split('=')[1]
 
@@ -163,11 +158,10 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then((res) => {
-				const conToJson: any = x2js.xml2js(res.data)
+				const conToJson: any = convertXMLToJson(res)
 				const jsonObj = conToJson[MWI_RESFUL_RES].record
 				const loc_group = convertToArr(jsonObj.TAG_FUNC_LOC_GRP)
 				const dte_group = convertToArr(loc_group[MWI_XML_DATA_INDEX].TAG_FUNC_DTE_GRP)
-				const ID = `${NON_LOGIN_USER_TYPE}${uuidv4().substring(15)}`
 				let TAG_FUNC_LOC_OCC = 0
 				let TAG_FUNC_DTE_OCC = 0
 
@@ -189,63 +183,14 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					}
 				})
 
-				let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
-					<RECORD>
-						<${TAG_FUNC_LOC_GRP} occ="${TAG_FUNC_LOC_OCC}" op="chg">
-							<${TAG_FUNC_DTE_GRP} occ="${TAG_FUNC_DTE_OCC}" op="chg">
-								<${FUNC_LOC_P_GRP} op="add">
-									<${TAG_FUNC_P_ID}>${ID}</${TAG_FUNC_P_ID}>
-									<${TAG_FUNC_P_FIRST}>${data[TAG_FUNC_P_FIRST]}</${TAG_FUNC_P_FIRST}>
-									<${TAG_FUNC_P_LAST}>${data[TAG_FUNC_P_LAST]}</${TAG_FUNC_P_LAST}>
-									<${TAG_FUNC_P_EMAIL}>${data[TAG_FUNC_P_EMAIL]}</${TAG_FUNC_P_EMAIL}>
-									<${TAG_FUNC_P_ATTND}>${data[TAG_FUNC_P_ATTND]}</${TAG_FUNC_P_ATTND}>
-								</${FUNC_LOC_P_GRP}>
-							</${TAG_FUNC_DTE_GRP}>
-						</${TAG_FUNC_LOC_GRP}>
-					</RECORD>`
-				return { xmlFormAdd, occ1: TAG_FUNC_LOC_OCC, occ2: TAG_FUNC_DTE_OCC, id: ID }
+				return { occ1: TAG_FUNC_LOC_OCC, occ2: TAG_FUNC_DTE_OCC }
 			})
 			.catch((error) => {
 				console.error('Getting record error', error)
-				return { xmlFormAdd: '', occ1: 0, occ2: 0, id: '' }
+				return { occ1: 0, occ2: 0 }
 			})
 	}
 
-	const storePatron = async (patron: {
-		xmlFormAdd: string
-		occ1: number
-		occ2: number
-		id: string
-	}) => {
-		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
-		let HOME_SESSID = match[0]?.split('=')[1]
-		return await axios
-			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N&KEY=${SISN}&VALUE=${sisnNumber}`,
-				patron.xmlFormAdd,
-				{
-					headers: {
-						'Content-Type': 'text/xml',
-					},
-					timeout: 5000,
-				}
-			)
-			.then((res) => {
-				const errJson: any = x2js.xml2js(res.data)
-				return {
-					err: errJson[MWI_RESFUL_RES].error,
-					occ1: patron.occ1,
-					occ2: patron.occ2,
-					id: patron.id,
-					sisn: sisnNumber,
-				}
-			})
-			.catch((error) => {
-				return {
-					err: false,
-				}
-			})
-	}
 
 	const sendEmail = async (patron: any, patronInfo: Inputs, event: Cal_event) => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
@@ -270,7 +215,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPConfirmEmailTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CONFIRMATION_EMAIL_T}${event[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPVerificationTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T}${event[TAG_NAME]}`,
 				{
 					...patronInfo,
 					...event,
@@ -278,8 +223,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					REGISTERED_DATE: getCurrentDate(),
 					BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
 					CANCEL_URL: RSVP_CANCEL_LANDING_PAGE_URL,
-					occ1: patron.occ1,
-					occ2: patron.occ2,
 					encoded,
 					[TAG_FUNC_DESCIPT]: event[TAG_FUNC_DESCIPT],
 				},

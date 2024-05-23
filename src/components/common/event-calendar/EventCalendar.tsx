@@ -57,8 +57,9 @@ export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const TAG_NAME = 'TAG_NAME'
 export const SISN = 'SISN'
-export const CONFIRMATION_EMAIL_T = 'You’re confirmed for:'
-export const CANCEL_CONFIRMATION_EMAIL_T = 'Your registration has been cancelled for'
+export const VERIFICATION_EMAIL_T = 'Please confirm your event!'
+export const REG_CONFIMRATION_EMAIL_T = 'Your confirmed for: '
+export const CANCEL_CONFIRMATION_EMAIL_T = 'Your registration has been cancelled for: '
 //Library Location group
 export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_REPORT'
 export const LIBRARY_LOCATION_XML_TAG = 'LOCATION'
@@ -106,6 +107,11 @@ export const COLORS_MAP = {
 	GREY: 'bg-neutral-500 border-neutral-500',
 	PINK: 'bg-pink-500 border-pink-500',
 }
+//For RSVP
+export const MWI_RESFUL_RES = 'MWI-RESTful-response'
+export const SUCCESS_RES_CODE = 0
+export const MWI_XML_DATA_INDEX = 0
+export const NON_LOGIN_USER_TYPE = 'NOLOGIN'
 
 export const ICON_SHAPE_MAP = {
 	SQUARE: 'rounded',
