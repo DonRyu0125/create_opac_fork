@@ -3,7 +3,8 @@ import Home from '@/page/Home'
 import NotFoundPage from '@/page/NotFoundPage'
 import Detail from '@/page/detail'
 import Summary from '@/page/summary'
-import RSVP from '@/page/RSVPCancelLandingPage'
+import RSVP_CANCEL from '@/page/RSVPCancelLandingPage'
+import RSVP_CONFIRM from '@/page/RSVPConfirmLandingPage'
 
 export type TRoute = Record<string, () => React.ReactNode>
 
@@ -12,7 +13,8 @@ export const ROUTES: TRoute = {
 	summary: Summary,
 	detail: Detail,
 	faq: FAQ,
-	rsvp: RSVP
+	rsvp_cancel: RSVP_CANCEL,
+	rsvp_confirm: RSVP_CONFIRM
 }
 
 /**

@@ -6,16 +6,21 @@ import {
 	FUNC_LOC_P_GRP,
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
+	NON_LOGIN_USER_TYPE,
 	SISN,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_LOC_GRP,
+	TAG_FUNC_P_ATTND,
 	TAG_FUNC_P_EMAIL,
+	TAG_FUNC_P_FIRST,
 	TAG_FUNC_P_ID,
+	TAG_FUNC_P_LAST,
 	TAG_NAME,
 } from '@/components/common/event-calendar/EventCalendar'
 import axios from 'axios'
 import { convertXMLToJson, decodeObj } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
+import { v4 as uuidv4 } from 'uuid'
 
 type PatronInfo = {
 	TAG_FUNC_P_ATTND: string
@@ -58,6 +63,8 @@ const RSVPCancelLandingPage = () => {
 	})
 	const [registerd, setRegistered] = useState(true)
 
+	// canceled => go confirm landing page => 
+
 	useEffect(() => {
 		const params = new URLSearchParams(window.location.search)
 		let obj: any
@@ -66,40 +73,13 @@ const RSVPCancelLandingPage = () => {
 		})
 		let jsonObj = JSON.parse(obj)
 		setPatronInfo(jsonObj)
-		isRecord(jsonObj.TAG_FUNC_P_ID).then((res) => {
-			setLoading(false)
-			if (res) {
-				return setRegistered(true)
-			}
-			setRegistered(false)
-		})
 	}, [])
-
-	const isRecord = async (id: string) => {
-		setLoading(true)
-		return await axios
-			.get(
-				`/scripts/mwimain.dll/144/${MAIN_MWI_APPLICATION}/${MONTH_REPORT}?commandsearch&exp=${TAG_FUNC_P_ID} ${id}`,
-				{
-					headers: {
-						'Content-Type': 'text/xml',
-					},
-				}
-			)
-			.then((res) => {
-				let result = convertXMLToJson(res)
-				if (result.div) {
-					return true
-				}
-				return false
-			})
-	}
 
 	const onClick = () => {
 		setLoading(true)
 		getSessionID()
-			.then((res) => removeRecord(res, patronInfo))
-			.then((res) => sendCancelConfirmEmail(res))
+			.then((res) => storeRecord(res, patronInfo))
+			.then((res) => sendRegConfirmEmail(res))
 	}
 
 	const getSessionID = async () => {
@@ -125,24 +105,32 @@ const RSVPCancelLandingPage = () => {
 			})
 	}
 
-	const removeRecord = async (
+	const storeRecord = async (
 		HOME_SESSID: string | boolean,
 		PatronInfo: PatronInfo | undefined
 	) => {
-		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
-    <RECORD>
-      <${TAG_FUNC_LOC_GRP} occ="${PatronInfo?.occ1}" op="chg">
-        <${TAG_FUNC_DTE_GRP} occ="${PatronInfo?.occ2}" op="chg">
-          <${FUNC_LOC_P_GRP} op="del" search="${PatronInfo?.TAG_FUNC_P_ID}">
-          </${FUNC_LOC_P_GRP}>
-        </${TAG_FUNC_DTE_GRP}>
-      </${TAG_FUNC_LOC_GRP}>
-    </RECORD>`
+		const ID = `${NON_LOGIN_USER_TYPE}${uuidv4()?.substring(15)}`
+
+		let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
+		<RECORD>
+			<${TAG_FUNC_LOC_GRP} occ="${patronInfo.occ1}" op="chg">
+				<${TAG_FUNC_DTE_GRP} occ="${patronInfo.occ2}" op="chg">
+					<${FUNC_LOC_P_GRP} op="add">
+						<${TAG_FUNC_P_ID}>${ID}</${TAG_FUNC_P_ID}>
+						<${TAG_FUNC_P_FIRST}>${patronInfo[TAG_FUNC_P_FIRST]}</${TAG_FUNC_P_FIRST}>
+						<${TAG_FUNC_P_LAST}>${patronInfo[TAG_FUNC_P_LAST]}</${TAG_FUNC_P_LAST}>
+						<${TAG_FUNC_P_EMAIL}>${patronInfo[TAG_FUNC_P_EMAIL]}</${TAG_FUNC_P_EMAIL}>
+						<${TAG_FUNC_P_ATTND}>${patronInfo[TAG_FUNC_P_ATTND]}</${TAG_FUNC_P_ATTND}>
+					</${FUNC_LOC_P_GRP}>
+				</${TAG_FUNC_DTE_GRP}>
+			</${TAG_FUNC_LOC_GRP}>
+		</RECORD>`;
+
 
 		return await axios
 			.post(
 				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N&KEY=${SISN}&VALUE=${PatronInfo?.SISN}`,
-				xmlFormDelete,
+				xmlFormAdd,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
@@ -160,10 +148,10 @@ const RSVPCancelLandingPage = () => {
 			})
 	}
 
-	const sendCancelConfirmEmail = async (HOME_SESSID: string | boolean) => {
+	const sendRegConfirmEmail = async (HOME_SESSID: string | boolean) => {
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPCancelConfirmEmailTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPRegConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
 				},
@@ -185,7 +173,7 @@ const RSVPCancelLandingPage = () => {
 				{registerd ? (
 					<div className="text-center">
 						<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-							This will cancel your registration for {patronInfo?.TAG_NAME}
+							Please confirm your registration {patronInfo?.TAG_NAME}
 						</h1>
 						<div className="mt-4 text-gray-500 sm:flex text-lg w-full">
 							<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
@@ -211,8 +199,8 @@ const RSVPCancelLandingPage = () => {
 						</div>
 						<Button
 							onClick={onClick}
-							className="flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded bg-red-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-							<div>Unregister</div>
+							className="flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded bg-green-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+							<div>Confirm</div>
 						</Button>
 					</div>
 				) : (
@@ -233,22 +221,6 @@ const RSVPCancelLandingPage = () => {
 			</>
 		)
 	}
-
-	// const ID = `${NON_LOGIN_USER_TYPE}${uuidv4().substring(15)}`
-	// let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
-	// 	<RECORD>
-	// 		<${TAG_FUNC_LOC_GRP} occ="${TAG_FUNC_LOC_OCC}" op="chg">
-	// 			<${TAG_FUNC_DTE_GRP} occ="${TAG_FUNC_DTE_OCC}" op="chg">
-	// 				<${FUNC_LOC_P_GRP} op="add">
-	// 					<${TAG_FUNC_P_ID}>${ID}</${TAG_FUNC_P_ID}>
-	// 					<${TAG_FUNC_P_FIRST}>${data[TAG_FUNC_P_FIRST]}</${TAG_FUNC_P_FIRST}>
-	// 					<${TAG_FUNC_P_LAST}>${data[TAG_FUNC_P_LAST]}</${TAG_FUNC_P_LAST}>
-	// 					<${TAG_FUNC_P_EMAIL}>${data[TAG_FUNC_P_EMAIL]}</${TAG_FUNC_P_EMAIL}>
-	// 					<${TAG_FUNC_P_ATTND}>${data[TAG_FUNC_P_ATTND]}</${TAG_FUNC_P_ATTND}>
-	// 				</${FUNC_LOC_P_GRP}>
-	// 			</${TAG_FUNC_DTE_GRP}>
-	// 		</${TAG_FUNC_LOC_GRP}>
-	// 	</RECORD>`
 
 	return (
 		<Layout>

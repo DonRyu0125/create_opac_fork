@@ -40,6 +40,7 @@ import {
 	TAG_FUNC_START_T,
 	TAG_NAME,
 	patron,
+	RSVP_CONFIRM_LANDING_PAGE_URL,
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 import {
@@ -215,14 +216,14 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPVerificationTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T}${event[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPVerificationTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
 				{
 					...patronInfo,
 					...event,
 					TAG_FUNC_P_ID: patron.id,
 					REGISTERED_DATE: getCurrentDate(),
 					BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
-					CANCEL_URL: RSVP_CANCEL_LANDING_PAGE_URL,
+					VERIFICATION_URL: RSVP_CONFIRM_LANDING_PAGE_URL,
 					encoded,
 					[TAG_FUNC_DESCIPT]: event[TAG_FUNC_DESCIPT],
 				},
