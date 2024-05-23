@@ -73,8 +73,16 @@ export const encodeObj = (input: string) => {
 	return btoa(input) ?? ''
 }
 
-export const decodeObj  = (input: string) => {
+export const decodeObj = (input: string) => {
 	return atob(input) ?? ''
+}
+
+export const isDatePast = (dateString: string) => {
+	const givenDate = new Date(dateString)
+	const currentDate = new Date()
+	currentDate.setHours(0, 0, 0, 0)
+
+	return givenDate < currentDate
 }
 
 /**
