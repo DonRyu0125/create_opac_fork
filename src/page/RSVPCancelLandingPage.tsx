@@ -180,7 +180,7 @@ const RSVPCancelLandingPage = () => {
 	const sendCancelConfirmEmail = async (HOME_SESSID: string | boolean) => {
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPCancelConfirmEmailTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPCancelConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
 				},
@@ -272,11 +272,14 @@ const RegSuccess = () => {
 const RegCancelTmp = ({ patronInfo, onClick }: any) => {
 	return (
 		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				This will cancel your registration for {patronInfo?.TAG_NAME}
+			<h1 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
+				This will cancel your registration for :
 			</h1>
+			<h2 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
+				{patronInfo?.TAG_NAME}
+			</h2>
 			<div className="mt-4 text-gray-500 sm:flex justify-evenly text-lg w-full">
-				<div className="sm:w-1/2 text-left border-2 border-solid rounded-lg p-5 mx-2">
+				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>{patronInfo?.TAG_NAME}</div>
 					<div>{patronInfo?.TAG_FUNC_DATE}</div>
 					<div>
@@ -286,7 +289,7 @@ const RegCancelTmp = ({ patronInfo, onClick }: any) => {
 						{patronInfo?.BRANCH_ADDRESS}, Room: {patronInfo?.TAG_FUNC_ROOM}
 					</div>
 				</div>
-				<div className="sm:w-1/2 text-left border-2 border-solid rounded-lg p-5 mx-2">
+				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>
 						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
 					</div>
