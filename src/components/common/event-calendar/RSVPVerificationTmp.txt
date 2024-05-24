@@ -91,6 +91,10 @@
     </tr>
   </table>
   <div class="container">
+   <div class="info">
+      <div for="event-name">Event Name:</div>
+      <p id="event-name">^TAG_NAME^</p>
+    </div>
     <div class="info">
       <div for="attendee-name">Name:</div>
       <p id="attendee-name">^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>

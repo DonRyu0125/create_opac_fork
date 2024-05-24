@@ -206,7 +206,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 				[TAG_FUNC_LOC]: event[TAG_FUNC_LOC],
 				[SISN]: event[SISN],
-				TAG_FUNC_P_ID: patron.id,
 				REGISTERED_DATE: getCurrentDate(),
 				BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
 				occ1: patron.occ1,
@@ -219,8 +218,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPVerificationTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
 				{
 					...patronInfo,
-					...event,
-					TAG_FUNC_P_ID: patron.id,
+					[TAG_NAME]: event[TAG_NAME],
 					REGISTERED_DATE: getCurrentDate(),
 					BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
 					VERIFICATION_URL: RSVP_CONFIRM_LANDING_PAGE_URL,

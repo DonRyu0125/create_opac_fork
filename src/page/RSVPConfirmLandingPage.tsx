@@ -9,6 +9,7 @@ import {
 	NON_LOGIN_USER_TYPE,
 	SISN,
 	TAG_FUNC_DATE,
+	TAG_FUNC_DESCIPT,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_P_ATTND,
@@ -36,7 +37,6 @@ type PatronInfo = {
 	TAG_FUNC_DATE: string
 	TAG_FUNC_LOC: string
 	SISN: string
-	TAG_FUNC_P_ID: string
 	REGISTERED_DATE: string
 	BRANCH_ADDRESS: string
 	TAG_FUNC_DESCIPT: string
@@ -45,9 +45,9 @@ type PatronInfo = {
 }
 
 const STATUS_TYPE = {
-	Invalid:'Invalid',
-	Success:'Success',
-	Confirm:'Confirm'
+	Invalid: 'Invalid',
+	Success: 'Success',
+	Confirm: 'Confirm',
 }
 
 const RSVPCancelLandingPage = () => {
@@ -64,12 +64,11 @@ const RSVPCancelLandingPage = () => {
 		TAG_FUNC_DATE: '',
 		TAG_FUNC_LOC: '',
 		SISN: '',
-		TAG_FUNC_P_ID: '',
 		REGISTERED_DATE: '',
 		BRANCH_ADDRESS: '',
 		occ1: '',
 		occ2: '',
-		TAG_FUNC_DESCIPT:''
+		TAG_FUNC_DESCIPT: '',
 	})
 	const [status, setStatus] = useState('')
 
@@ -84,7 +83,7 @@ const RSVPCancelLandingPage = () => {
 			obj = decodeObj(value)
 		})
 		let jsonObj = JSON.parse(obj)
-
+		console.log('jsonObj', jsonObj)
 		return await isRecordValidate(jsonObj).then((res) => {
 			setLoading(false)
 			if (res) {
@@ -121,11 +120,13 @@ const RSVPCancelLandingPage = () => {
 						item[TAG_FUNC_START_T] === patrons[TAG_FUNC_START_T]
 					)
 				})
-				// there were no exsisted patron
+
+				// there were no exsisted patron then go true
 				if (!event[0].PATRON) {
 					return true
 				}
 				let event_arr = convertToArr(event[0].PATRON)
+				// Checking Patron's email is already in the list
 				let event_patron = event_arr.filter((item: PatronInfo) => {
 					if (item[TAG_FUNC_P_EMAIL] === patrons[TAG_FUNC_P_EMAIL]) {
 						return item
@@ -133,10 +134,13 @@ const RSVPCancelLandingPage = () => {
 				})
 
 				if (
-					event_patron.length > 1 &&
+					event_patron.length < 1 &&
 					event_patron.length < event[0].TAG_FUNC_CAP &&
 					!isDatePast(event[0].TAG_FUNC_DATE)
 				) {
+					// Adding event description to show at the RSVPRegConfirmTmp email
+					// TAG_FUNC_DESCIPT is too big so it can't get from the query string
+					setPatronInfo({ ...patronInfo, [TAG_FUNC_DESCIPT]: event[0].TAG_FUNC_DESCIPT }) 
 					return true
 				}
 
@@ -316,7 +320,7 @@ const RegSuccess = () => {
 	)
 }
 
-const RegConfirmTmp = ({ patronInfo, onClick }:any) => {
+const RegConfirmTmp = ({ patronInfo, onClick }: any) => {
 	return (
 		<div className="text-center">
 			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
