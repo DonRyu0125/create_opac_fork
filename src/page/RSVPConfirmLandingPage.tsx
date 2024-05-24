@@ -83,11 +83,10 @@ const RSVPCancelLandingPage = () => {
 			obj = decodeObj(value)
 		})
 		let jsonObj = JSON.parse(obj)
-		console.log('jsonObj', jsonObj)
 		return await isRecordValidate(jsonObj).then((res) => {
 			setLoading(false)
-			if (res) {
-				setPatronInfo(jsonObj)
+			if (res.status) {
+				setPatronInfo({ ...jsonObj, [TAG_FUNC_DESCIPT]: res.TAG_FUNC_DESCIPT })
 				setStatus(STATUS_TYPE.Confirm)
 				return
 			}
@@ -123,7 +122,7 @@ const RSVPCancelLandingPage = () => {
 
 				// there were no exsisted patron then go true
 				if (!event[0].PATRON) {
-					return true
+					return { status: true }
 				}
 				let event_arr = convertToArr(event[0].PATRON)
 				// Checking Patron's email is already in the list
@@ -138,13 +137,12 @@ const RSVPCancelLandingPage = () => {
 					event_patron.length < event[0].TAG_FUNC_CAP &&
 					!isDatePast(event[0].TAG_FUNC_DATE)
 				) {
-					// Adding event description to show at the RSVPRegConfirmTmp email
-					// TAG_FUNC_DESCIPT is too big so it can't get from the query string
-					setPatronInfo({ ...patronInfo, [TAG_FUNC_DESCIPT]: event[0].TAG_FUNC_DESCIPT }) 
-					return true
+					// Adding event description at the patronInfo to bring to RSVPRegConfirmTmp email
+					// TAG_FUNC_DESCIPT is too big to get from the query string so I try to add when the user registartion info is valid
+					return { status: true, [TAG_FUNC_DESCIPT]: event[0].TAG_FUNC_DESCIPT }
 				}
 
-				return false
+				return { status: false }
 			})
 			.catch((error) => {
 				throw error
@@ -276,7 +274,7 @@ const RSVPCancelLandingPage = () => {
 						/>
 					</div>
 				) : (
-					<div className={'h-[500px] flex items-center justify-center'}>
+					<div className={'h-full min-h-[550px] flex items-center justify-center'}>
 						{showRegStatus()}
 					</div>
 				)}
@@ -323,9 +321,12 @@ const RegSuccess = () => {
 const RegConfirmTmp = ({ patronInfo, onClick }: any) => {
 	return (
 		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Please confirm your registration: {patronInfo?.TAG_NAME}
+			<h1 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
+				Please confirm your registration
 			</h1>
+			<h2 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
+				'{patronInfo?.TAG_NAME}'
+			</h2>
 			<div className="mt-4 text-gray-500 sm:flex justify-evenly text-lg w-full">
 				<div className="sm:w-1/2 text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>{patronInfo?.TAG_NAME}</div>
