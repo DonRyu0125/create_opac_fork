@@ -39,6 +39,7 @@ type PatronInfo = {
 	TAG_FUNC_P_ID: string
 	REGISTERED_DATE: string
 	BRANCH_ADDRESS: string
+	TAG_FUNC_DESCIPT: string
 	occ1: string
 	occ2: string
 }
@@ -68,6 +69,7 @@ const RSVPCancelLandingPage = () => {
 		BRANCH_ADDRESS: '',
 		occ1: '',
 		occ2: '',
+		TAG_FUNC_DESCIPT:''
 	})
 	const [status, setStatus] = useState('')
 
@@ -241,11 +243,11 @@ const RSVPCancelLandingPage = () => {
 
 	const showRegStatus = () => {
 		switch (status) {
-			case 'A':
+			case STATUS_TYPE.Invalid:
 				return <RegInvalid />
-			case 'B':
+			case STATUS_TYPE.Success:
 				return <RegSuccess />
-			case 'C':
+			case STATUS_TYPE.Confirm:
 				return <RegConfirmTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
 				return <RegInvalid />
@@ -320,8 +322,8 @@ const RegConfirmTmp = ({ patronInfo, onClick }:any) => {
 			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 				Please confirm your registration: {patronInfo?.TAG_NAME}
 			</h1>
-			<div className="mt-4 text-gray-500 sm:flex text-lg w-full">
-				<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
+			<div className="mt-4 text-gray-500 sm:flex justify-evenly text-lg w-full">
+				<div className="sm:w-1/2 text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>{patronInfo?.TAG_NAME}</div>
 					<div>{patronInfo?.TAG_FUNC_DATE}</div>
 					<div>
@@ -331,7 +333,7 @@ const RegConfirmTmp = ({ patronInfo, onClick }:any) => {
 						{patronInfo?.BRANCH_ADDRESS}, Room: {patronInfo?.TAG_FUNC_ROOM}
 					</div>
 				</div>
-				<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
+				<div className="sm:w-1/2 text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>
 						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
 					</div>

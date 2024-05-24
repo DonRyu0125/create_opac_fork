@@ -58,7 +58,7 @@ export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const TAG_NAME = 'TAG_NAME'
 export const SISN = 'SISN'
-export const VERIFICATION_EMAIL_T = 'Please confirm your event!'
+export const VERIFICATION_EMAIL_T = 'Please confirm your event:'
 export const REG_CONFIMRATION_EMAIL_T = 'Your confirmed for: '
 export const CANCEL_CONFIRMATION_EMAIL_T = 'Your registration has been cancelled for: '
 //Library Location group

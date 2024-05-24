@@ -224,8 +224,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					REGISTERED_DATE: getCurrentDate(),
 					BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
 					VERIFICATION_URL: RSVP_CONFIRM_LANDING_PAGE_URL,
-					encoded,
-					[TAG_FUNC_DESCIPT]: event[TAG_FUNC_DESCIPT],
+					encoded
 				},
 				{
 					headers: {
