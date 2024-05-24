@@ -92,6 +92,7 @@ export const isDatePast = (dateString: string) => {
 function deleteCookie(cname: string) {
 	document.cookie = cname + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
 }
+
 function deleteAllCookies() {
 	var cookies = document.cookie.split(';')
 	var cookie = ''
