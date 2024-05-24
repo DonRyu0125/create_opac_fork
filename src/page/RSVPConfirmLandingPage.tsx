@@ -7,6 +7,7 @@ import {
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
 	NON_LOGIN_USER_TYPE,
+	REG_CONFIMRATION_EMAIL_T,
 	RSVP_CANCEL_LANDING_PAGE_URL,
 	SISN,
 	TAG_FUNC_DATE,
@@ -212,7 +213,7 @@ const RSVPCancelLandingPage = () => {
 				}
 			)
 			.then((res) => {
-				return HOME_SESSID
+				return {HOME_SESSID,ID}
 			})
 			.catch((error) => {
 				setStatus(STATUS_TYPE.Invalid)
@@ -220,15 +221,16 @@ const RSVPCancelLandingPage = () => {
 			})
 	}
 
-	const sendRegConfirmEmail = async (HOME_SESSID: string | boolean) => {
+	const sendRegConfirmEmail = async (obj:{HOME_SESSID: string | boolean,ID:string}) => {
 		const encoded = encodeObj(
 			JSON.stringify({
-				...patronInfo
+				...patronInfo,
+				[TAG_FUNC_P_ID]:obj.ID
 			})
 		)
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPRegConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
+				`${obj.HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPRegConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
 					RSVP_CANCEL_LANDING_PAGE_URL: RSVP_CANCEL_LANDING_PAGE_URL,

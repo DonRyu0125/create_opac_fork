@@ -75,7 +75,6 @@ const RSVPCancelLandingPage = () => {
 			obj = decodeObj(value)
 		})
 		let jsonObj = JSON.parse(obj)
-		// check the date is available
 		if (isDatePast(jsonObj.TAG_FUNC_DATE)) {
 			setStatus(STATUS_TYPE.Invalid)
 			return
@@ -276,8 +275,8 @@ const RegCancelTmp = ({ patronInfo, onClick }: any) => {
 			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 				This will cancel your registration for {patronInfo?.TAG_NAME}
 			</h1>
-			<div className="mt-4 text-gray-500 sm:flex text-lg w-full">
-				<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
+			<div className="mt-4 text-gray-500 sm:flex justify-evenly text-lg w-full">
+				<div className="sm:w-1/2 text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>{patronInfo?.TAG_NAME}</div>
 					<div>{patronInfo?.TAG_FUNC_DATE}</div>
 					<div>
@@ -287,7 +286,7 @@ const RegCancelTmp = ({ patronInfo, onClick }: any) => {
 						{patronInfo?.BRANCH_ADDRESS}, Room: {patronInfo?.TAG_FUNC_ROOM}
 					</div>
 				</div>
-				<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
+				<div className="sm:w-1/2 text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>
 						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
 					</div>
