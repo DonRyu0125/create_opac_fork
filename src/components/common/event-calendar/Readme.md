@@ -13,6 +13,13 @@ This is the Event Calendar for showing events and make the user register the eve
 
 ## Component List
 
+1.can't register exact date
+2.user should confirm the event
+  -two register at the same time, first confirm user first register
+  use could complain if they don't know they have to confirm
+
+  -User forgot to confirm, they try to register exact that date => no
+
 ```
 ── event-calendar                         
   ├── constants               JSON files that store the pages data
@@ -33,22 +40,7 @@ Every building block components for the UI will be put inside the `components/` 
 continue to add more components to the OPAC, keep in mind each of the sub folders serve a different
 purpose. Please refer to this diagram below while deciding where your React component lives.
 
-<span style="height:200px">![Components Decision](./images/folder-decision.png)</span>
 
-Another way to decide where to put your React component should be is by asking these following
-questions
-
-* Are you building a page ? => `/page-template`
-* Will I need to reuse this components on different pages with different data ? => `/layout` or
-`/common`
-    * Does this component take any data from the `constants` folder
-        * Yes: `/layout`
-        * No: `/common`
-* Otherwise, `/ui` is for headless UI component, consider this if your component checks out the
-following:
-    * Minimum styling and easy to customize
-    * Have no dependencies on any other components (if it does, it can only import from some from
-    `/ui` itself and only the neccessary ones)
 
 ## Setup the backend
 

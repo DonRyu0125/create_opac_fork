@@ -59,6 +59,12 @@ type Inputs = {
 	[TAG_FUNC_P_ATTND]: number
 }
 
+const STATUS_TYPE = {
+	SHOW_FORM: 'SHOW_FORM',
+	SHOW_BTN: 'SHOW_BTN',
+	SHOW_SUCCESS: 'SHOW_SUCCESS',
+}
+
 type EventInput = {
 	label: string
 	keyname: string
@@ -107,7 +113,7 @@ const EventEmailInput = ({ label, keyname, register, required, errors }: EventIn
 }
 
 const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: EventRSVPForm) => {
-	const [showForm, setShowForm] = useState(false)
+	const [status, setStatus] = useState(STATUS_TYPE.SHOW_BTN)
 	const {
 		register,
 		handleSubmit,
@@ -135,11 +141,12 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			.then(() => {
 				return getOCCNumber().then((res) => {
 					sendEmail(res, data, event)
-					onReset()
+					setLoading(false)
 				})
 			})
 			.catch((error) => {
 				console.error('Error fetching session ID:', error)
+				setLoading(false)
 				onReset()
 			})
 	}
@@ -192,6 +199,16 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 	}
 
+	const getContactInfo = (type: string) => {
+		let info: any = contactInfo?.filter((item) => {
+			return convertLowerTrim(item[BRANCH_NAME]) === convertLowerTrim(event[TAG_FUNC_LOC])
+		})
+		if (info) {
+			let contact = info[0]
+			return contact[type]
+		}
+		return ''
+	}
 
 	const sendEmail = async (patron: any, patronInfo: Inputs, event: Cal_event) => {
 		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
@@ -223,7 +240,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					REGISTERED_DATE: getCurrentDate(),
 					[BRANCH_ADDRESS]: getContactInfo(BRANCH_ADDRESS),
 					RSVP_CONFIRM_LANDING_PAGE_URL: RSVP_CONFIRM_LANDING_PAGE_URL,
-					encoded
+					encoded,
 				},
 				{
 					headers: {
@@ -232,16 +249,114 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then(() => {
-				onReset()
+				setLoading(false)
+				setStatus(STATUS_TYPE.SHOW_SUCCESS)
 			})
 	}
 
 	const onReset = () => {
 		setLoading(false)
-		setShowForm((prev) => !prev)
+		setStatus(STATUS_TYPE.SHOW_BTN)
 		reset()
 	}
 
+	const showRSVPStatus = () => {
+		switch (status) {
+			case STATUS_TYPE.SHOW_BTN:
+				return (
+					<ShowButton
+						capacity={capacity}
+						patrons={patrons}
+						getContactInfo={getContactInfo}
+						setStatus={setStatus}
+					/>
+				)
+			case STATUS_TYPE.SHOW_FORM:
+				return (
+					<ShowForm
+						loading={loading}
+						handleSubmit={handleSubmit}
+						register={register}
+						onSubmit={onSubmit}
+						errors={errors}
+						onReset={onReset}
+					/>
+				)
+			case STATUS_TYPE.SHOW_SUCCESS:
+				return <ShowRSVPSuccess onReset={onReset} getContactInfo={getContactInfo} />
+			default:
+				return (
+					<ShowButton
+						capacity={capacity}
+						patrons={patrons}
+						getContactInfo={getContactInfo}
+						setStatus={setStatus}
+					/>
+				)
+		}
+	}
+
+	return <div className={`flex justify-center w-full h-full`}>{showRSVPStatus()}</div>
+}
+
+const ShowForm = ({ loading, handleSubmit, register, onSubmit, errors, onReset }) => {
+	return (
+		<div className={'h-5/6 w-full p-1'}>
+			{loading && <Spinner height={'h-[388px]'} spinHeight={'h-10'} spinWidth={'w-10'} />}
+			<div className={'bg-primary p-1 text-white'}>
+				Did you <span className={'text-gray-400'}>Log In?</span>
+			</div>
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className={'h-full w-full flex flex-col justify-start items-center'}>
+				<EventInput
+					label={'First Name'}
+					keyname={TAG_FUNC_P_FIRST}
+					register={register}
+					required={true}
+				/>
+				<EventInput
+					label={'Last Name'}
+					keyname={TAG_FUNC_P_LAST}
+					register={register}
+					required={true}
+				/>
+				<EventEmailInput
+					label={'Email'}
+					keyname={TAG_FUNC_P_EMAIL}
+					register={register}
+					required={true}
+					errors={errors}
+				/>
+				<div className={'flex w-full flex-col my-1'}>
+					<Label>Attendee</Label>
+					<select
+						defaultValue={TAG_FUNC_P_ATTND_DEFAULT}
+						{...register(TAG_FUNC_P_ATTND)}
+						className={'border-2 border-grey-500 w-1/4'}>
+						{Array(TAG_FUNC_P_ATTND_MAX)
+							.fill(0)
+							.map((_, index) => {
+								return (
+									<option key={index} value={index + 1}>
+										{index + 1}
+									</option>
+								)
+							})}
+					</select>
+				</div>
+				<Button className={'w-full'} type="submit">
+					Register
+				</Button>
+				<div onClick={onReset} className="text-center border-b-4">
+					Go Back
+				</div>
+			</form>
+		</div>
+	)
+}
+
+const ShowButton = ({ capacity, patrons, getContactInfo, setStatus }) => {
 	const calNumOfPatron = (patrons: patron[]) => {
 		const totalPatronAttnd = patrons?.reduce((total: number, entry: patron) => {
 			if (entry && entry[TAG_FUNC_P_ATTND] !== undefined) {
@@ -252,108 +367,56 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		return totalPatronAttnd ?? 0
 	}
 
-	const getContactInfo = (type: string) => {
-		let info: any = contactInfo?.filter((item) => {
-			return convertLowerTrim(item[BRANCH_NAME]) === convertLowerTrim(event[TAG_FUNC_LOC])
-		})
-		if (info) {
-			let contact = info[0]
-			return contact[type]
-		}
-		return ''
-	}
-
 	return (
-		<div className={`flex justify-center w-full h-full`}>
-			{!showForm && (
-				<div className={'w-full p-2'}>
-					<div
-						className={
-							'w-full h-3/6 flex flex-col items-center justify-evenly space-evenly border-b-4'
-						}>
-						<div className={'flex'}>
-							<SquareUserRound /> Registration Required
-						</div>
-						<Button
-							disabled={capacity - calNumOfPatron(patrons) === 0 ? true : false}
-							className={'w-full '}
-							onClick={onReset}>{`Register`}</Button>
-						<div className={'flex items-center justify-center'}>
-							{capacity - calNumOfPatron(patrons) === 0 ? (
-								<div className={'flex text-red-600 items-center'}>
-									No Seats are remaining
-								</div>
-							) : (
-								<div className={'flex text-lime-800 items-center'}>
-									<BadgeCheck />{' '}
-									{`${capacity - calNumOfPatron(patrons)} seats remaining`}
-								</div>
-							)}
-						</div>
-					</div>
-					<div className={'h-3/6 flex flex-col items-center justify-center '}>
-						<div>Contact Info</div>
-						<div>Address: {getContactInfo(BRANCH_ADDRESS)}</div>
-						<div>Phone: {getContactInfo(BRANCH_PHONE)}</div>
-					</div>
+		<div className={'w-full p-2 border-2 rounded'}>
+			<div
+				className={
+					'w-full h-3/6 flex flex-col items-center justify-evenly space-evenly border-b-4'
+				}>
+				<div className={'flex'}>
+					<SquareUserRound /> Registration Required
 				</div>
-			)}
-			{showForm && (
-				<div className={'h-5/6 w-full p-1'}>
-					{loading && (
-						<Spinner height={'h-[388px]'} spinHeight={'h-10'} spinWidth={'w-10'} />
+				<Button
+					disabled={capacity - calNumOfPatron(patrons) === 0 ? true : false}
+					className={'w-full '}
+					onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>{`Register`}</Button>
+				<div className={'flex items-center justify-center'}>
+					{capacity - calNumOfPatron(patrons) === 0 ? (
+						<div className={'flex text-red-600 items-center'}>
+							No Seats are remaining
+						</div>
+					) : (
+						<div className={'flex text-lime-800 items-center'}>
+							<BadgeCheck /> {`${capacity - calNumOfPatron(patrons)} seats remaining`}
+						</div>
 					)}
-					<div className={'bg-primary p-1 text-white'}>
-						Did you <span className={'text-gray-400'}>Log In?</span>
-					</div>
-					<form
-						onSubmit={handleSubmit(onSubmit)}
-						className={'h-full w-full flex flex-col justify-start items-center'}>
-						<EventInput
-							label={'First Name'}
-							keyname={TAG_FUNC_P_FIRST}
-							register={register}
-							required={true}
-						/>
-						<EventInput
-							label={'Last Name'}
-							keyname={TAG_FUNC_P_LAST}
-							register={register}
-							required={true}
-						/>
-						<EventEmailInput
-							label={'Email'}
-							keyname={TAG_FUNC_P_EMAIL}
-							register={register}
-							required={true}
-							errors={errors}
-						/>
-						<div className={'flex w-full flex-col my-1'}>
-							<Label>Attendee</Label>
-							<select
-								defaultValue={TAG_FUNC_P_ATTND_DEFAULT}
-								{...register(TAG_FUNC_P_ATTND)}
-								className={'border-2 border-grey-500 w-1/4'}>
-								{Array(TAG_FUNC_P_ATTND_MAX)
-									.fill(0)
-									.map((_, index) => {
-										return (
-											<option key={index} value={index + 1}>
-												{index + 1}
-											</option>
-										)
-									})}
-							</select>
-						</div>
-						<Button className={'w-full'} type="submit">
-							Register
-						</Button>
-						<div onClick={onReset} className="text-center border-b-4">
-							Go Back
-						</div>
-					</form>
 				</div>
-			)}
+			</div>
+			<div className={'h-3/6 flex flex-col items-center justify-center '}>
+				<div>Contact Info</div>
+				<div>Address: {getContactInfo(BRANCH_ADDRESS)}</div>
+				<div>Phone: {getContactInfo(BRANCH_PHONE)}</div>
+			</div>
+		</div>
+	)
+}
+
+const ShowRSVPSuccess = ({ onReset, getContactInfo }) => {
+	return (
+		<div className={'w-full p-2 border-2 rounded'}>
+			<div className={'text-center w-full h-3/6 flex flex-col items-center justify-evenly'}>
+				<SquareUserRound />
+				<div>Your registarion is not complete!</div>
+				<div>Please check your email to complete the registration</div>
+			</div>
+			<div onClick={onReset} className="text-center bg-primary text-primary-foreground rounded">
+				Go Back
+			</div>
+			<div className={'h-3/6 flex flex-col items-center justify-center '}>
+				<div>Contact Info</div>
+				<div>Address: {getContactInfo(BRANCH_ADDRESS)}</div>
+				<div>Phone: {getContactInfo(BRANCH_PHONE)}</div>
+			</div>
 		</div>
 	)
 }
