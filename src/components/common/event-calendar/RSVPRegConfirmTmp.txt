@@ -125,7 +125,7 @@
     </div>
     <div class="info">
       <div for="registration-date">Date Registered:</div>
-      <p id="registration-date">^REGISTERED_DATE^</p>
+      ^REGISTERED_DATE^
     </div>
     <div class="info">
       <div for="attendee-details">Attendee:</div>

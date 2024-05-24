@@ -219,6 +219,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				{
 					...patronInfo,
 					[TAG_NAME]: event[TAG_NAME],
+					[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 					REGISTERED_DATE: getCurrentDate(),
 					[BRANCH_ADDRESS]: getContactInfo(BRANCH_ADDRESS),
 					RSVP_CONFIRM_LANDING_PAGE_URL: RSVP_CONFIRM_LANDING_PAGE_URL,

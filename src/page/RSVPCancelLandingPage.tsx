@@ -76,7 +76,7 @@ const RSVPCancelLandingPage = () => {
 		})
 		let jsonObj = JSON.parse(obj)
 		// check the date is available
-		if (!isDatePast(jsonObj.TAG_FUNC_DATE)) {
+		if (isDatePast(jsonObj.TAG_FUNC_DATE)) {
 			setStatus(STATUS_TYPE.Invalid)
 			return
 		}

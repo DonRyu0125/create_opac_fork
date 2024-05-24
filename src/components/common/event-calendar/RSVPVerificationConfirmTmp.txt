@@ -95,13 +95,17 @@
       <div for="event-name">Event Name:</div>
       <p id="event-name">^TAG_NAME^</p>
     </div>
+     <div class="info">
+      <div for="event-name">Event Date:</div>
+      <p id="event-name">^TAG_FUNC_DATE^</p>
+    </div>
     <div class="info">
       <div for="attendee-name">Name:</div>
       <p id="attendee-name">^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>
     </div>
     <div class="info">
       <div for="registration-date">Date Registered:</div>
-      <p id="registration-date">^REGISTERED_DATE^</p>
+      ^REGISTERED_DATE^
     </div>
     <div class="info">
       <div for="attendee-details">Attendee:</div>

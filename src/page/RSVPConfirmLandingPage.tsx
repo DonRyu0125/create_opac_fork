@@ -85,7 +85,7 @@ const RSVPCancelLandingPage = () => {
 		})
 		let jsonObj = JSON.parse(obj)
 		// check the date is available
-		if (!isDatePast(jsonObj.TAG_FUNC_DATE)) {
+		if (isDatePast(jsonObj.TAG_FUNC_DATE)) {
 			setStatus(STATUS_TYPE.Invalid)
 			return
 		}
@@ -136,7 +136,6 @@ const RSVPCancelLandingPage = () => {
 						return item
 					}
 				})
-
 				if (event_patron.length < 1 && event_patron.length < event[0].TAG_FUNC_CAP) {
 					// Adding event description at the patronInfo to bring to RSVPRegConfirmTmp email
 					// TAG_FUNC_DESCIPT is too big to get from the query string so I try to add when the user registartion info is valid
@@ -222,12 +221,14 @@ const RSVPCancelLandingPage = () => {
 	}
 
 	const sendRegConfirmEmail = async (HOME_SESSID: string | boolean) => {
+		const params = new URLSearchParams(window.location.search)
 		return await axios
 			.post(
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPRegConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
-					[RSVP_CANCEL_LANDING_PAGE_URL]: RSVP_CANCEL_LANDING_PAGE_URL,
+					RSVP_CANCEL_LANDING_PAGE_URL: RSVP_CANCEL_LANDING_PAGE_URL,
+					encoded:params
 				},
 				{
 					headers: {
