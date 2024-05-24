@@ -22,7 +22,7 @@ import {
 	TAG_NAME,
 } from '@/components/common/event-calendar/EventCalendar'
 import axios from 'axios'
-import { convertToArr, convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
+import { convertToArr, convertXMLToJson, decodeObj, encodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -221,14 +221,18 @@ const RSVPCancelLandingPage = () => {
 	}
 
 	const sendRegConfirmEmail = async (HOME_SESSID: string | boolean) => {
-		const params = new URLSearchParams(window.location.search)
+		const encoded = encodeObj(
+			JSON.stringify({
+				...patronInfo
+			})
+		)
 		return await axios
 			.post(
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPRegConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
 					RSVP_CANCEL_LANDING_PAGE_URL: RSVP_CANCEL_LANDING_PAGE_URL,
-					encoded:params
+					encoded
 				},
 				{
 					headers: {
