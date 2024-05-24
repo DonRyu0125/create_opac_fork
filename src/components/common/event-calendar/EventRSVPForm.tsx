@@ -215,13 +215,13 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPVerificationTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPVerificationConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
 				{
 					...patronInfo,
 					[TAG_NAME]: event[TAG_NAME],
 					REGISTERED_DATE: getCurrentDate(),
-					BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
-					VERIFICATION_URL: RSVP_CONFIRM_LANDING_PAGE_URL,
+					[BRANCH_ADDRESS]: getContactInfo(BRANCH_ADDRESS),
+					[RSVP_CONFIRM_LANDING_PAGE_URL]: RSVP_CONFIRM_LANDING_PAGE_URL,
 					encoded
 				},
 				{
