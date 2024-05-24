@@ -14,8 +14,14 @@ import {
 	TAG_NAME,
 } from '@/components/common/event-calendar/EventCalendar'
 import axios from 'axios'
-import { convertXMLToJson, decodeObj } from '@/lib/utils'
+import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
+
+const STATUS_TYPE = {
+	Invalid: 'Invalid',
+	Success: 'Success',
+	Cancel: 'Cancel',
+}
 
 type PatronInfo = {
 	TAG_FUNC_P_ATTND: string
@@ -56,26 +62,35 @@ const RSVPCancelLandingPage = () => {
 		occ1: '',
 		occ2: '',
 	})
-	const [registerd, setRegistered] = useState(true)
+	const [status, setStatus] = useState('')
 
 	useEffect(() => {
+		checkParms()
+	}, [])
+
+	const checkParms = async () => {
 		const params = new URLSearchParams(window.location.search)
 		let obj: any
 		params.forEach((value: string, key) => {
 			obj = decodeObj(value)
 		})
 		let jsonObj = JSON.parse(obj)
-		setPatronInfo(jsonObj)
-		isRecord(jsonObj.TAG_FUNC_P_ID).then((res) => {
+		// check the date is available
+		if (!isDatePast(jsonObj.REGISTERED_DATE)) {
+			setStatus(STATUS_TYPE.Invalid)
+			return
+		}
+		isRecordValidate(jsonObj.TAG_FUNC_P_ID).then((res) => {
 			setLoading(false)
 			if (res) {
-				return setRegistered(true)
+				setPatronInfo(jsonObj)
+				return setStatus(STATUS_TYPE.Cancel)
 			}
-			setRegistered(false)
+			setStatus(STATUS_TYPE.Invalid)
 		})
-	}, [])
+	}
 
-	const isRecord = async (id: string) => {
+	const isRecordValidate = async (id: string) => {
 		setLoading(true)
 		return await axios
 			.get(
@@ -99,7 +114,10 @@ const RSVPCancelLandingPage = () => {
 		setLoading(true)
 		getSessionID()
 			.then((res) => removeRecord(res, patronInfo))
-			.then((res) => sendCancelConfirmEmail(res))
+			.then((res) => {
+				setStatus(STATUS_TYPE.Success)
+				sendCancelConfirmEmail(res)
+			})
 	}
 
 	const getSessionID = async () => {
@@ -155,7 +173,7 @@ const RSVPCancelLandingPage = () => {
 			})
 			.catch((error) => {
 				// error
-				setRegistered(true)
+				setStatus(STATUS_TYPE.Invalid)
 				return ''
 			})
 	}
@@ -174,64 +192,21 @@ const RSVPCancelLandingPage = () => {
 				}
 			)
 			.then((res) => {
-				setRegistered(false)
 				setLoading(false)
 			})
 	}
 
-	const showRegister = () => {
-		return (
-			<>
-				{registerd ? (
-					<div className="text-center">
-						<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-							This will cancel your registration for {patronInfo?.TAG_NAME}
-						</h1>
-						<div className="mt-4 text-gray-500 sm:flex text-lg w-full">
-							<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
-								<div>{patronInfo?.TAG_NAME}</div>
-								<div>{patronInfo?.TAG_FUNC_DATE}</div>
-								<div>
-									{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
-								</div>
-								<div>
-									{patronInfo?.BRANCH_ADDRESS}, Room: {patronInfo?.TAG_FUNC_ROOM}
-								</div>
-							</div>
-							<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
-								<div>
-									{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
-								</div>
-								<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
-								<div>Registered: {patronInfo?.REGISTERED_DATE}</div>
-								<div className="border-2 border-dashed p-2">
-									{patronInfo?.TAG_FUNC_P_ATTND} spot reserved
-								</div>
-							</div>
-						</div>
-						<Button
-							onClick={onClick}
-							className="flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded bg-red-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-							<div>Unregister</div>
-						</Button>
-					</div>
-				) : (
-					<div className="text-center">
-						<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-							You are not in the list !
-						</h1>
-
-						<p className="mt-4 text-gray-500">Please go to our website to register.</p>
-
-						<a
-							href="#"
-							className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-							Search Events
-						</a>
-					</div>
-				)}
-			</>
-		)
+	const showRegStatus = () => {
+		switch (status) {
+			case STATUS_TYPE.Invalid:
+				return <RegInvalid />
+			case STATUS_TYPE.Success:
+				return <RegSuccess />
+			case STATUS_TYPE.Cancel:
+				return <RegCancelTmp patronInfo={patronInfo} onClick={onClick} />
+			default:
+				return <RegInvalid />
+		}
 	}
 
 	return (
@@ -252,12 +227,83 @@ const RSVPCancelLandingPage = () => {
 						/>
 					</div>
 				) : (
-					<div className={'h-[500px] flex items-center justify-center'}>
-						{showRegister()}
+					<div className={'h-full min-h-[550px] flex items-center justify-center'}>
+						{showRegStatus()}
 					</div>
 				)}
 			</div>
 		</Layout>
+	)
+}
+
+const RegInvalid = () => {
+	return (
+		<div className="text-center">
+			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+				Your registration information is not valid
+			</h1>
+
+			<p className="mt-4 text-gray-500">
+				The event date has expired, or you are not in the list!
+			</p>
+
+			<a
+				href="#"
+				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+				Go to website
+			</a>
+		</div>
+	)
+}
+
+const RegSuccess = () => {
+	return (
+		<div className="text-center">
+			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+				Your registration is successfully canceled.
+			</h1>
+
+			<p className="mt-4 text-gray-500">
+				We will send you email about your cancellation detail
+			</p>
+		</div>
+	)
+}
+
+const RegCancelTmp = ({ patronInfo, onClick }: any) => {
+	return (
+		<div className="text-center">
+			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+				This will cancel your registration for {patronInfo?.TAG_NAME}
+			</h1>
+			<div className="mt-4 text-gray-500 sm:flex text-lg w-full">
+				<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
+					<div>{patronInfo?.TAG_NAME}</div>
+					<div>{patronInfo?.TAG_FUNC_DATE}</div>
+					<div>
+						{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
+					</div>
+					<div>
+						{patronInfo?.BRANCH_ADDRESS}, Room: {patronInfo?.TAG_FUNC_ROOM}
+					</div>
+				</div>
+				<div className="text-left border-2 border-solid rounded-lg p-5 mx-2">
+					<div>
+						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
+					</div>
+					<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
+					<div>Registered: {patronInfo?.REGISTERED_DATE}</div>
+					<div className="border-2 border-dashed p-2">
+						{patronInfo?.TAG_FUNC_P_ATTND} spot reserved
+					</div>
+				</div>
+			</div>
+			<Button
+				onClick={onClick}
+				className="flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded bg-red-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+				<div>Unregister</div>
+			</Button>
+		</div>
 	)
 }
 
