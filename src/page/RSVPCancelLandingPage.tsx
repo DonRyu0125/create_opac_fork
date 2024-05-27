@@ -16,11 +16,13 @@ import {
 import axios from 'axios'
 import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
+import { RegInvalid, RegOutDate } from './RSVPConfirmLandingPage'
 
 const STATUS_TYPE = {
 	Invalid: 'Invalid',
 	Success: 'Success',
 	Cancel: 'Cancel',
+	OutDate: 'OutDate',
 }
 
 type PatronInfo = {
@@ -76,7 +78,7 @@ const RSVPCancelLandingPage = () => {
 		})
 		let jsonObj = JSON.parse(obj)
 		if (isDatePast(jsonObj.TAG_FUNC_DATE)) {
-			setStatus(STATUS_TYPE.Invalid)
+			setStatus(STATUS_TYPE.OutDate)
 			return
 		}
 		isRecordValidate(jsonObj.TAG_FUNC_P_ID).then((res) => {
@@ -198,9 +200,11 @@ const RSVPCancelLandingPage = () => {
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return <RegInvalid />
+				return <RegNotInTheList />
 			case STATUS_TYPE.Success:
 				return <RegSuccess />
+			case STATUS_TYPE.OutDate:
+				return <RegOutDate />
 			case STATUS_TYPE.Cancel:
 				return <RegCancelTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
@@ -235,17 +239,13 @@ const RSVPCancelLandingPage = () => {
 	)
 }
 
-const RegInvalid = () => {
+const RegNotInTheList = () => {
 	return (
 		<div className="text-center">
 			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Your registration information is not valid
+				Your are not in the List!
 			</h1>
-
-			<p className="mt-4 text-gray-500">
-				The event date has expired, or you are not in the list!
-			</p>
-
+			<p className="mt-4 text-gray-500">You already canceled the event</p>
 			<a
 				href="#"
 				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">

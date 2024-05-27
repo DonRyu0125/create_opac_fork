@@ -26,6 +26,7 @@ import axios from 'axios'
 import { convertToArr, convertXMLToJson, decodeObj, encodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
+import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
 
 type PatronInfo = {
 	TAG_FUNC_P_ATTND: string
@@ -50,6 +51,9 @@ const STATUS_TYPE = {
 	Invalid: 'Invalid',
 	Success: 'Success',
 	Confirm: 'Confirm',
+	OutDate: 'OutDate',
+	InList: 'InList', // Already registered
+	Full: 'Full', // Fully registered
 }
 
 const RSVPCancelLandingPage = () => {
@@ -87,7 +91,7 @@ const RSVPCancelLandingPage = () => {
 		let jsonObj = JSON.parse(obj)
 		// check the date is available
 		if (isDatePast(jsonObj.TAG_FUNC_DATE)) {
-			setStatus(STATUS_TYPE.Invalid)
+			setStatus(STATUS_TYPE.OutDate)
 			return
 		}
 		return await isRecordValidate(jsonObj).then((res) => {
@@ -97,7 +101,6 @@ const RSVPCancelLandingPage = () => {
 				setStatus(STATUS_TYPE.Confirm)
 				return
 			}
-			setStatus(STATUS_TYPE.Invalid)
 			return
 		})
 	}
@@ -131,19 +134,24 @@ const RSVPCancelLandingPage = () => {
 					return { status: true, [TAG_FUNC_DESCIPT]: event[0].TAG_FUNC_DESCIPT }
 				}
 				let event_arr = convertToArr(event[0].PATRON)
-				// Checking Patron's email is already in the list
 				let event_patron = event_arr.filter((item: PatronInfo) => {
 					if (item[TAG_FUNC_P_EMAIL] === patrons[TAG_FUNC_P_EMAIL]) {
 						return item
 					}
 				})
-				if (event_patron.length < 1 && event_patron.length < event[0].TAG_FUNC_CAP) {
-					// Adding event description at the patronInfo to bring to RSVPRegConfirmTmp email
-					// TAG_FUNC_DESCIPT is too big to get from the query string so I try to add when the user registartion info is valid
-					return { status: true, [TAG_FUNC_DESCIPT]: event[0].TAG_FUNC_DESCIPT }
+				// Checking Patron's email is already in the list
+				if (event_patron.length > 1) {
+					setStatus(STATUS_TYPE.InList)
+					return { status: false }
 				}
-
-				return { status: false }
+				// Checking the event is fully registered
+				if (calNumOfPatron(event_arr) >= event[0].TAG_FUNC_CAP) {
+					setStatus(STATUS_TYPE.Full)
+					return { status: false }
+				}
+				// Adding event description at the patronInfo to bring to RSVPRegConfirmTmp email
+				// TAG_FUNC_DESCIPT is too big to get from the query string so I try to add when the user registartion info is valid
+				return { status: true, [TAG_FUNC_DESCIPT]: event[0].TAG_FUNC_DESCIPT }
 			})
 			.catch((error) => {
 				throw error
@@ -213,7 +221,7 @@ const RSVPCancelLandingPage = () => {
 				}
 			)
 			.then((res) => {
-				return {HOME_SESSID,ID}
+				return { HOME_SESSID, ID }
 			})
 			.catch((error) => {
 				setStatus(STATUS_TYPE.Invalid)
@@ -221,12 +229,12 @@ const RSVPCancelLandingPage = () => {
 			})
 	}
 
-	const sendRegConfirmEmail = async (obj:{HOME_SESSID: string | boolean,ID:string}) => {
+	const sendRegConfirmEmail = async (obj: { HOME_SESSID: string | boolean; ID: string }) => {
 		const encoded = encodeObj(
 			JSON.stringify({
 				...patronInfo,
-				[TAG_FUNC_P_ID]:obj.ID,
-				TAG_FUNC_DESCIPT:undefined //TAG_FUNC_DESCRIPT is too big for query string
+				[TAG_FUNC_P_ID]: obj.ID,
+				TAG_FUNC_DESCIPT: undefined, //TAG_FUNC_DESCRIPT is too big for query string
 			})
 		)
 
@@ -236,7 +244,7 @@ const RSVPCancelLandingPage = () => {
 				{
 					...patronInfo,
 					RSVP_CANCEL_LANDING_PAGE_URL: RSVP_CANCEL_LANDING_PAGE_URL,
-					encoded
+					encoded,
 				},
 				{
 					headers: {
@@ -260,6 +268,12 @@ const RSVPCancelLandingPage = () => {
 				return <RegInvalid />
 			case STATUS_TYPE.Success:
 				return <RegSuccess />
+			case STATUS_TYPE.OutDate:
+				return <RegOutDate />
+			case STATUS_TYPE.InList:
+				return <RegInList />
+			case STATUS_TYPE.Full:
+				return <RegFullEvent />
 			case STATUS_TYPE.Confirm:
 				return <RegConfirmTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
@@ -294,17 +308,65 @@ const RSVPCancelLandingPage = () => {
 	)
 }
 
-const RegInvalid = () => {
+const RegInList = () => {
 	return (
 		<div className="text-center">
 			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Your registration information is not valid
+				You are already in the list!
 			</h1>
+			<p className="mt-4 text-gray-500">Please check your registartion confirm email</p>
+			<a
+				href="#"
+				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+				Go to website
+			</a>
+		</div>
+	)
+}
 
+const RegFullEvent = () => {
+	return (
+		<div className="text-center">
+			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+				This event is already fully registered.
+			</h1>
 			<p className="mt-4 text-gray-500">
-				The event date has expired, or you are already on the list.
+				Please check our website for updates on future events.
 			</p>
+			<a
+				href="#"
+				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+				Go to website
+			</a>
+		</div>
+	)
+}
 
+export const RegOutDate = () => {
+	return (
+		<div className="text-center">
+			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+				The event date has already passed.
+			</h1>
+			<p className="mt-4 text-gray-500">Please check our website for future events.</p>
+			<a
+				href="#"
+				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+				Go to website
+			</a>
+		</div>
+	)
+}
+
+export const RegInvalid = () => {
+	return (
+		<div className="text-center">
+			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+				We can't find that page.
+			</h1>
+			<p className="mt-4 text-gray-500">
+				Try searching again, or return home to start from the beginning.
+			</p>
 			<a
 				href="#"
 				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">

@@ -51,6 +51,7 @@ import {
 	getCurrentDate,
 } from '@/lib/utils'
 import Spinner from './Spinner'
+import { calNumOfPatron } from './EC-Util'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -299,7 +300,21 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	return <div className={`flex justify-center w-full h-full`}>{showRSVPStatus()}</div>
 }
 
-const ShowForm = ({ loading, handleSubmit, register, onSubmit, errors, onReset }) => {
+const ShowForm = ({
+	loading,
+	handleSubmit,
+	register,
+	onSubmit,
+	errors,
+	onReset,
+}: {
+	loading: boolean
+	handleSubmit: Function
+	register: Function
+	onSubmit: Function
+	errors: any
+	onReset: any
+}) => {
 	return (
 		<div className={'h-5/6 w-full p-1'}>
 			{loading && <Spinner height={'h-[388px]'} spinHeight={'h-10'} spinWidth={'w-10'} />}
@@ -356,17 +371,12 @@ const ShowForm = ({ loading, handleSubmit, register, onSubmit, errors, onReset }
 	)
 }
 
-const ShowButton = ({ capacity, patrons, getContactInfo, setStatus }) => {
-	const calNumOfPatron = (patrons: patron[]) => {
-		const totalPatronAttnd = patrons?.reduce((total: number, entry: patron) => {
-			if (entry && entry[TAG_FUNC_P_ATTND] !== undefined) {
-				return total + parseInt(entry[TAG_FUNC_P_ATTND], 10)
-			}
-			return total
-		}, 0)
-		return totalPatronAttnd ?? 0
-	}
-
+const ShowButton = ({ capacity, patrons, getContactInfo, setStatus }:{
+	capacity:number
+	patrons:patron[]
+	getContactInfo:Function
+	setStatus:React.Dispatch<React.SetStateAction<string>>
+}) => {
 	return (
 		<div className={'w-full p-2 border-2 rounded'}>
 			<div
@@ -377,11 +387,11 @@ const ShowButton = ({ capacity, patrons, getContactInfo, setStatus }) => {
 					<SquareUserRound /> Registration Required
 				</div>
 				<Button
-					disabled={capacity - calNumOfPatron(patrons) === 0 ? true : false}
+					disabled={capacity - calNumOfPatron(patrons) < 0 ? true : false}
 					className={'w-full '}
 					onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>{`Register`}</Button>
 				<div className={'flex items-center justify-center'}>
-					{capacity - calNumOfPatron(patrons) === 0 ? (
+					{capacity - calNumOfPatron(patrons) < 0 ? (
 						<div className={'flex text-red-600 items-center'}>
 							No Seats are remaining
 						</div>
@@ -401,7 +411,10 @@ const ShowButton = ({ capacity, patrons, getContactInfo, setStatus }) => {
 	)
 }
 
-const ShowRSVPSuccess = ({ onReset, getContactInfo }) => {
+const ShowRSVPSuccess = ({ onReset, getContactInfo }:{
+	onReset:any
+	getContactInfo:Function
+}) => {
 	return (
 		<div className={'w-full p-2 border-2 rounded'}>
 			<div className={'text-center w-full h-3/6 flex flex-col items-center justify-evenly'}>
@@ -409,7 +422,9 @@ const ShowRSVPSuccess = ({ onReset, getContactInfo }) => {
 				<div>Your registarion is not complete!</div>
 				<div>Please check your email to complete the registration</div>
 			</div>
-			<div onClick={onReset} className="text-center bg-primary text-primary-foreground rounded">
+			<div
+				onClick={onReset}
+				className="text-center bg-primary text-primary-foreground rounded">
 				Go Back
 			</div>
 			<div className={'h-3/6 flex flex-col items-center justify-center '}>
