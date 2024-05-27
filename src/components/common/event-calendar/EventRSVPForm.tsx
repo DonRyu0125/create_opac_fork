@@ -371,11 +371,16 @@ const ShowForm = ({
 	)
 }
 
-const ShowButton = ({ capacity, patrons, getContactInfo, setStatus }:{
-	capacity:number
-	patrons:patron[]
-	getContactInfo:Function
-	setStatus:React.Dispatch<React.SetStateAction<string>>
+const ShowButton = ({
+	capacity,
+	patrons,
+	getContactInfo,
+	setStatus,
+}: {
+	capacity: number
+	patrons: patron[]
+	getContactInfo: Function
+	setStatus: React.Dispatch<React.SetStateAction<string>>
 }) => {
 	return (
 		<div className={'w-full p-2 border-2 rounded'}>
@@ -387,11 +392,11 @@ const ShowButton = ({ capacity, patrons, getContactInfo, setStatus }:{
 					<SquareUserRound /> Registration Required
 				</div>
 				<Button
-					disabled={capacity - calNumOfPatron(patrons) < 0 ? true : false}
+					disabled={capacity - calNumOfPatron(patrons) <= 0 ? true : false}
 					className={'w-full '}
 					onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>{`Register`}</Button>
 				<div className={'flex items-center justify-center'}>
-					{capacity - calNumOfPatron(patrons) < 0 ? (
+					{capacity - calNumOfPatron(patrons) <= 0 ? (
 						<div className={'flex text-red-600 items-center'}>
 							No Seats are remaining
 						</div>
@@ -402,18 +407,28 @@ const ShowButton = ({ capacity, patrons, getContactInfo, setStatus }:{
 					)}
 				</div>
 			</div>
-			<div className={'h-3/6 flex flex-col items-center justify-center '}>
-				<div>Contact Info</div>
-				<div>Address: {getContactInfo(BRANCH_ADDRESS)}</div>
-				<div>Phone: {getContactInfo(BRANCH_PHONE)}</div>
-			</div>
+			{getContactInfo(BRANCH_ADDRESS) ? (
+				<div className={'h-3/6 flex flex-col items-center justify-center '}>
+					<div>Contact Info</div>
+					<div>Address: {getContactInfo(BRANCH_ADDRESS)}</div>
+					<div>Phone: {getContactInfo(BRANCH_PHONE)}</div>
+				</div>
+			) : (
+				<div className={'h-3/6 flex flex-col items-center justify-center '}>
+					<div>Private property </div>
+					<div>Contact info is not provided</div>
+				</div>
+			)}
 		</div>
 	)
 }
 
-const ShowRSVPSuccess = ({ onReset, getContactInfo }:{
-	onReset:any
-	getContactInfo:Function
+const ShowRSVPSuccess = ({
+	onReset,
+	getContactInfo,
+}: {
+	onReset: any
+	getContactInfo: Function
 }) => {
 	return (
 		<div className={'w-full p-2 border-2 rounded'}>

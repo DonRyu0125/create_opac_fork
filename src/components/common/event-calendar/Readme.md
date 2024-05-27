@@ -20,6 +20,8 @@ This is the Event Calendar for showing events and make the user register the eve
 
   -User forgot to confirm, they try to register exact that date => no
 
+3.no branch address at the library location database => private property
+
 ```
 ── event-calendar                         
   ├── constants               JSON files that store the pages data
