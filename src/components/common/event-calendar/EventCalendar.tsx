@@ -10,7 +10,6 @@ import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
-import { convertToArr } from '@/lib/utils'
 import { fetch_get } from './Service'
 
 
@@ -107,6 +106,7 @@ export const COLORS_MAP = {
 	PURPLE: 'bg-purple-500 border-purple-500',
 	GREY: 'bg-neutral-500 border-neutral-500',
 	PINK: 'bg-pink-500 border-pink-500',
+	INDIGO:'bg-sky-900 border-sky-900'
 }
 //For RSVP
 export const MWI_RESFUL_RES = 'MWI-RESTful-response'
@@ -128,7 +128,7 @@ export type ContactInfo = {
 export const FILTER_TYPE_COLORS = [
 	{
 		type: 'Delhi Branch',
-		color: COLORS_MAP['RED'],
+		color: COLORS_MAP['INDIGO'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
@@ -137,22 +137,22 @@ export const FILTER_TYPE_COLORS = [
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
-		type: 'Port Rowan',
+		type: 'Port Rowan Branch',
 		color: COLORS_MAP['GREEN'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
-		type: 'Simcoe',
+		type: 'Simcoe Branch',
 		color: COLORS_MAP['ORANGE'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
-		type: 'Waterford',
+		type: 'Waterford Branch',
 		color: COLORS_MAP['PURPLE'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
-		type: 'NORVIEW LODGE SITE',
+		type: 'Norview Lodge Site',
 		color: COLORS_MAP['PINK'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
@@ -315,7 +315,7 @@ const EventCalendar = () => {
 			firstDayOfWeek.getDate() + 6
 		)
 
-		return `${currentDate.getFullYear()} ${firstDayOfWeek.toLocaleString('default', { month: 'short' })} ${firstDayOfWeek.getDate()}th ~  ${nextDay.toLocaleString('default', { month: 'short' })} ${nextDay.getDate()}th`
+		return `${firstDayOfWeek.toLocaleString('default', { month: 'short' })} ${firstDayOfWeek.getDate()} -  ${nextDay.getDate() === 1 ? nextDay.toLocaleString('default', { month: 'long' }) : ''} ${nextDay.getDate()}, ${currentDate.getFullYear()}`
 	}
 
 	return (
