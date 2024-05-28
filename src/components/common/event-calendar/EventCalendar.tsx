@@ -31,6 +31,7 @@ export interface Cal_event {
 	[TAG_FUNC_ROOM]: string
 	[TAG_FUNC_LANG]: string
 	[PATRON]: patron[]
+	[TAG_FUNC_ACCESS]:string
 }
 
 export interface patron {
@@ -93,6 +94,7 @@ export const TAG_FUNC_P_LAST = 'TAG_FUNC_P_LAST'
 export const TAG_FUNC_P_EMAIL = 'TAG_FUNC_P_EMAIL'
 export const TAG_FUNC_P_PAID = 'TAG_FUNC_P_PAID'
 export const TAG_FUNC_P_ATTND = 'TAG_FUNC_P_ATTND'
+export const TAG_FUNC_ACCESS = 'TAG_FUNC_ACCESS'
 export const EVENT_RSVP_YES = 'X'
 //Others
 export const TAG_FUNC_P_ATTND_DEFAULT = 1

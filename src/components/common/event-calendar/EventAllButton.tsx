@@ -13,7 +13,7 @@ import { convertLowerTrim, convertToArr } from '@/lib/utils'
 import { cn } from '@/lib/utils'
 import * as Accordion from '@radix-ui/react-accordion'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { X } from 'lucide-react'
+import { Accessibility, X } from 'lucide-react'
 import {
 	Cal_event,
 	TAG_FUNC_DATE,
@@ -31,6 +31,7 @@ import {
 	PATRON,
 	SISN,
 	ContactInfo,
+	TAG_FUNC_ACCESS,
 } from './EventCalendar'
 import { config } from '@/constants'
 import EventRSVPForm from './EventRSVPForm'
@@ -81,7 +82,6 @@ const EventAllButton = ({
 				</Button>
 			</DialogTrigger>
 			<DialogContent
-			
 				className={
 					'max-w-lg h-[500px] overflow-auto p-1 flex flex-col items-center max-w-l md:max-w-3xl'
 				}
@@ -128,12 +128,12 @@ const EventAllButton = ({
 								</div>
 							</AccordionTrigger>
 							<AccordionContent
-								style={{ borderRadius: '5px' }} // Tailiwnd rounded-lg is not working so I put inline style here 
+								style={{ borderRadius: '5px' }} // Tailiwnd rounded-lg is not working so I put inline style here
 								className={'border-2 border-lime-950'}>
 								<div className={'flex '}>
 									<div
 										className={
-											'w-full text-l w-full flex flex-col justify-center items-left font-bold px-2 '
+											'w-full text-lg w-full flex flex-col justify-center items-left font-bold px-2 '
 										}>
 										<div className={'text-lg font-bold'}>{item[TAG_NAME]}</div>
 										<div className={'sm:flex'}>
@@ -150,6 +150,12 @@ const EventAllButton = ({
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
 												&#x2022;Room: {item[TAG_FUNC_ROOM]}
 											</div>
+											{item[TAG_FUNC_ACCESS] && (
+												<div className="ml-[10px] text-md text-gray-600 font-bold flex">
+													&#x2022;
+													<Accessibility />: Y
+												</div>
+											)}
 										</div>
 										<div className={'sm:flex'}>
 											<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
@@ -157,6 +163,9 @@ const EventAllButton = ({
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
 												&#x2022;Seats: {item[TAG_FUNC_CAP]}
+											</div>
+											<div className="ml-[10px] text-md text-gray-600 font-bold">
+												&#x2022;Language: {item[TAG_FUNC_LANG]}
 											</div>
 										</div>
 									</div>

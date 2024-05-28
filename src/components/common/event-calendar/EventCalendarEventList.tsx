@@ -33,7 +33,6 @@ const EventCalendarEventList = ({
 	contactInfo,
 }: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
-
 	useEffect(() => {
 		const updatedFilteredEvents = currentEvent?.filter((item: Cal_event) => {
 			const { day, month, year } = changeStrToDate(item[TAG_FUNC_DATE])
@@ -101,7 +100,6 @@ const EventCalendarEventList = ({
 				weekType={weekType}
 				monthType={monthType}
 				contactInfo={contactInfo}
-				
 			/>
 			{/* All events button */}
 			{monthType && filteredEvents.length > 2 && (

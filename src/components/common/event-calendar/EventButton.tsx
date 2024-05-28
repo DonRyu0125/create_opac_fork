@@ -31,10 +31,11 @@ import {
 	TAG_FUNC_RSVP,
 	SISN,
 	ContactInfo,
+	TAG_FUNC_ACCESS,
 } from './EventCalendar'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
-import { SquareUserRound, X } from 'lucide-react'
+import { Accessibility, SquareUserRound, X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 
 const EventButton = ({
@@ -106,7 +107,7 @@ const EventButton = ({
 						</DialogPrimitive.Close>
 					</DialogTitle>
 				</DialogHeader>
-				<div className={'w-full min-h-[400px] text-l sm:flex font-bold'}>
+				<div className={'w-full min-h-[400px]  sm:flex font-bold'}>
 					<div className={'w-full sm:w-8/12 '}>
 						<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
 						<div className={'sm:flex'}>
@@ -121,6 +122,12 @@ const EventButton = ({
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
 								&#x2022;Room: {elm[TAG_FUNC_ROOM]}
 							</div>
+							{elm[TAG_FUNC_ACCESS] && (
+								<div className="ml-[10px] text-md text-gray-600 font-bold flex">
+									&#x2022;
+									<Accessibility />: Y
+								</div>
+							)}
 						</div>
 						<div className={'sm:flex'}>
 							<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
