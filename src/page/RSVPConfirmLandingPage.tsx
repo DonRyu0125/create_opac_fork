@@ -28,7 +28,7 @@ import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
 import { useAtom } from 'jotai'
-import { calendarEvents, landingPageClick } from '@/store'
+import { landingPageClick } from '@/store'
 
 type PatronInfo = {
 	TAG_FUNC_P_ATTND: string
@@ -79,7 +79,6 @@ const RSVPCancelLandingPage = () => {
 		TAG_FUNC_DESCIPT: '',
 	})
 	const [status, setStatus] = useState('')
-	const [_, setCurrentEvent] = useAtom(calendarEvents)
 	const [__, setClick] = useAtom(landingPageClick)
 
 	useEffect(() => {

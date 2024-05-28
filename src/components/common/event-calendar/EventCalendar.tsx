@@ -169,7 +169,7 @@ const EventCalendar = () => {
 	const [isClickableNext, setisClickableNext] = useState<boolean>(false)
 	const [contactInfo, setContactInfo] = useState([])
 	const [currentEvent, setCurrentEvent] = useAtom(calendarEvents)
-	const [click, _] = useAtom(landingPageClick)
+	// const [click, _] = useAtom(landingPageClick)
 
 	useEffect(() => {
 		getData(currentDate)
@@ -180,10 +180,6 @@ const EventCalendar = () => {
 		getLibraryLocation()
 	}, [])
 
-	useEffect(() => {
-		console.log('==>')
-		getData(currentDate)
-	}, [landingPageClick])
 
 	const getLibraryLocation = async () => {
 		const response = await axios.get(
