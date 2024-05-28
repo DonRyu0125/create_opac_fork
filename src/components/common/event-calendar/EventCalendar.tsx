@@ -11,7 +11,8 @@ import EventCalendarEventList from './EventCalendarEventList'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { fetch_get } from './Service'
-
+import { calendarEvents } from '@/store'
+import { useAtom } from 'jotai'
 
 export interface Cal_event {
 	[SISN]: number
@@ -106,7 +107,7 @@ export const COLORS_MAP = {
 	PURPLE: 'bg-purple-500 border-purple-500',
 	GREY: 'bg-neutral-500 border-neutral-500',
 	PINK: 'bg-pink-500 border-pink-500',
-	INDIGO:'bg-sky-900 border-sky-900'
+	INDIGO: 'bg-sky-900 border-sky-900',
 }
 //For RSVP
 export const MWI_RESFUL_RES = 'MWI-RESTful-response'
@@ -163,11 +164,11 @@ const EventCalendar = () => {
 	const [monthType, setMonthType] = useState<boolean>(true)
 	const [weekType, setWeekType] = useState<boolean>(false)
 	const [currentDate, setCurrentDate] = useState(new Date())
-	const [currentEvent, setCurrentEvent] = useState<Cal_event[]>([])
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
 	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
 	const [isClickableNext, setisClickableNext] = useState<boolean>(false)
 	const [contactInfo, setContactInfo] = useState([])
+	const [currentEvent, setCurrentEvent] = useAtom(calendarEvents)
 
 	useEffect(() => {
 		getData(currentDate)
@@ -177,6 +178,10 @@ const EventCalendar = () => {
 	useEffect(() => {
 		getLibraryLocation()
 	}, [])
+
+	useEffect(() => {
+		console.log('---')
+	}, [currentEvent])
 
 	const getLibraryLocation = async () => {
 		const response = await axios.get(

@@ -1,3 +1,4 @@
+import { Cal_event } from '@/components/common/event-calendar/EventCalendar'
 import { GenericObject } from '@/lib/record'
 import { atom } from 'jotai'
 
@@ -5,3 +6,4 @@ export type ViewType = 'grid' | 'list'
 export const viewAtom = atom<ViewType>('grid')
 
 export const pageData = atom<GenericObject | null>(null)
+export const calendarEvents = atom<Cal_event[]>([])

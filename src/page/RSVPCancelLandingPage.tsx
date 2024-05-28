@@ -17,6 +17,9 @@ import axios from 'axios'
 import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
 import { RegInvalid, RegOutDate } from './RSVPConfirmLandingPage'
+import { fetch_get } from '@/components/common/event-calendar/Service'
+import { useAtom } from 'jotai'
+import { calendarEvents } from '@/store'
 
 const STATUS_TYPE = {
 	Invalid: 'Invalid',
@@ -65,6 +68,7 @@ const RSVPCancelLandingPage = () => {
 		occ2: '',
 	})
 	const [status, setStatus] = useState('')
+	const [_, setCurrentEvent] = useAtom(calendarEvents)
 
 	useEffect(() => {
 		checkParms()
@@ -192,7 +196,9 @@ const RSVPCancelLandingPage = () => {
 					},
 				}
 			)
-			.then((res) => {
+			.then(async (res) => {
+				const currE = await fetch_get(new Date())
+				setCurrentEvent(currE)
 				setLoading(false)
 			})
 	}

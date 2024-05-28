@@ -27,6 +27,9 @@ import { convertToArr, convertXMLToJson, decodeObj, encodeObj, isDatePast } from
 import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
+import { useAtom } from 'jotai'
+import { calendarEvents } from '@/store'
+import { fetch_get } from '@/components/common/event-calendar/Service'
 
 type PatronInfo = {
 	TAG_FUNC_P_ATTND: string
@@ -77,6 +80,7 @@ const RSVPCancelLandingPage = () => {
 		TAG_FUNC_DESCIPT: '',
 	})
 	const [status, setStatus] = useState('')
+	const [_, setCurrentEvent] = useAtom(calendarEvents)
 
 	useEffect(() => {
 		checkParms()
@@ -140,7 +144,7 @@ const RSVPCancelLandingPage = () => {
 					}
 				})
 				// Checking Patron's email is already in the list
-				if (event_patron.length > 1) {
+				if (event_patron.length >= 1) {
 					setStatus(STATUS_TYPE.InList)
 					return { status: false }
 				}
@@ -252,7 +256,9 @@ const RSVPCancelLandingPage = () => {
 					},
 				}
 			)
-			.then((res) => {
+			.then(async (res) => {
+				const currE = await fetch_get(new Date())
+				setCurrentEvent(currE)
 				setStatus(STATUS_TYPE.Success)
 				setLoading(false)
 			})
