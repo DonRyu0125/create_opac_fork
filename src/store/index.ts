@@ -7,3 +7,4 @@ export const viewAtom = atom<ViewType>('grid')
 
 export const pageData = atom<GenericObject | null>(null)
 export const calendarEvents = atom<Cal_event[]>([])
+export const landingPageClick = atom<boolean>(true)

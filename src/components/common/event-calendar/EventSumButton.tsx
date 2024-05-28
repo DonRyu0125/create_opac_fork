@@ -45,7 +45,6 @@ export interface eventSumType {
 	weekType: boolean
 	monthType: boolean
 	contactInfo: ContactInfo[]
-	setCurrentEvent: React.Dispatch<React.SetStateAction<Cal_event[]>>
 }
 
 const EventSumButton = ({
@@ -53,7 +52,6 @@ const EventSumButton = ({
 	weekType,
 	monthType,
 	contactInfo,
-	setCurrentEvent,
 }: eventSumType) => {
 	const { logo } = config
 	const getColor = (event_type: string) => {

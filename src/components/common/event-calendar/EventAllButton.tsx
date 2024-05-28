@@ -44,11 +44,9 @@ type showStrObj = {
 const EventAllButton = ({
 	filteredEvents,
 	contactInfo,
-	setCurrentEvent,
 }: {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
-	setCurrentEvent: React.Dispatch<React.SetStateAction<Cal_event[]>>
 }) => {
 	const { logo } = config
 

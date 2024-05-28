@@ -19,7 +19,7 @@ import Spinner from '@/components/common/event-calendar/Spinner'
 import { RegInvalid, RegOutDate } from './RSVPConfirmLandingPage'
 import { fetch_get } from '@/components/common/event-calendar/Service'
 import { useAtom } from 'jotai'
-import { calendarEvents } from '@/store'
+import { calendarEvents, landingPageClick } from '@/store'
 
 const STATUS_TYPE = {
 	Invalid: 'Invalid',
@@ -69,6 +69,7 @@ const RSVPCancelLandingPage = () => {
 	})
 	const [status, setStatus] = useState('')
 	const [_, setCurrentEvent] = useAtom(calendarEvents)
+	const [__, setClick] = useAtom(landingPageClick)
 
 	useEffect(() => {
 		checkParms()
@@ -197,8 +198,9 @@ const RSVPCancelLandingPage = () => {
 				}
 			)
 			.then(async (res) => {
-				const currE = await fetch_get(new Date())
-				setCurrentEvent(currE)
+				// const currE = await fetch_get(new Date())
+				// setCurrentEvent(currE)
+				setClick((prev) => !prev)
 				setLoading(false)
 			})
 	}

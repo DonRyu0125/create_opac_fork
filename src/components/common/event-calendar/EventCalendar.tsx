@@ -11,8 +11,9 @@ import EventCalendarEventList from './EventCalendarEventList'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { fetch_get } from './Service'
-import { calendarEvents } from '@/store'
+import { calendarEvents, landingPageClick } from '@/store'
 import { useAtom } from 'jotai'
+import { convertXMLToJson } from '@/lib/utils'
 
 export interface Cal_event {
 	[SISN]: number
@@ -160,7 +161,6 @@ export const FILTER_TYPE_COLORS = [
 ]
 
 const EventCalendar = () => {
-	const x2js = new X2JS()
 	const [monthType, setMonthType] = useState<boolean>(true)
 	const [weekType, setWeekType] = useState<boolean>(false)
 	const [currentDate, setCurrentDate] = useState(new Date())
@@ -169,6 +169,7 @@ const EventCalendar = () => {
 	const [isClickableNext, setisClickableNext] = useState<boolean>(false)
 	const [contactInfo, setContactInfo] = useState([])
 	const [currentEvent, setCurrentEvent] = useAtom(calendarEvents)
+	const [click, _] = useAtom(landingPageClick)
 
 	useEffect(() => {
 		getData(currentDate)
@@ -180,8 +181,9 @@ const EventCalendar = () => {
 	}, [])
 
 	useEffect(() => {
-		console.log('---')
-	}, [currentEvent])
+		console.log('==>')
+		getData(currentDate)
+	}, [landingPageClick])
 
 	const getLibraryLocation = async () => {
 		const response = await axios.get(
@@ -192,7 +194,7 @@ const EventCalendar = () => {
 				},
 			}
 		)
-		const jsonData: any = x2js.xml2js(response.data)
+		const jsonData: any = convertXMLToJson(response)
 		setContactInfo(jsonData.xml[LIBRARY_LOCATION_XML_TAG])
 	}
 
@@ -388,7 +390,7 @@ const EventCalendar = () => {
 										monthType={monthType}
 										weekType={weekType}
 										contactInfo={contactInfo}
-										setCurrentEvent={setCurrentEvent}
+										
 									/>
 								</div>
 							)
@@ -407,7 +409,7 @@ const EventCalendar = () => {
 										monthType={monthType}
 										weekType={weekType}
 										contactInfo={contactInfo}
-										setCurrentEvent={setCurrentEvent}
+										
 									/>
 								</div>
 							)
