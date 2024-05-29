@@ -41,6 +41,7 @@ import {
 	TAG_NAME,
 	patron,
 	RSVP_CONFIRM_LANDING_PAGE_URL,
+	TAG_FUNC_P_T,
 } from './EventCalendar'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 import {
@@ -224,7 +225,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 				[TAG_FUNC_LOC]: event[TAG_FUNC_LOC],
 				[SISN]: event[SISN],
-				REGISTERED_DATE: getCurrentDate(),
+				[TAG_FUNC_P_T]: getCurrentDate(),
 				BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
 				occ1: patron.occ1,
 				occ2: patron.occ2,
@@ -238,7 +239,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					...patronInfo,
 					[TAG_NAME]: event[TAG_NAME],
 					[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
-					REGISTERED_DATE: getCurrentDate(),
+					[TAG_FUNC_P_T]: getCurrentDate(),
 					[BRANCH_ADDRESS]: getContactInfo(BRANCH_ADDRESS),
 					RSVP_CONFIRM_LANDING_PAGE_URL: RSVP_CONFIRM_LANDING_PAGE_URL,
 					encoded,

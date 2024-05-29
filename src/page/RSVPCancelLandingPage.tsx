@@ -41,7 +41,7 @@ type PatronInfo = {
 	TAG_FUNC_LOC: string
 	SISN: string
 	TAG_FUNC_P_ID: string
-	REGISTERED_DATE: string
+	TAG_FUNC_P_T: string
 	BRANCH_ADDRESS: string
 	occ1: string
 	occ2: string
@@ -62,7 +62,7 @@ const RSVPCancelLandingPage = () => {
 		TAG_FUNC_LOC: '',
 		SISN: '',
 		TAG_FUNC_P_ID: '',
-		REGISTERED_DATE: '',
+		TAG_FUNC_P_T: '',
 		BRANCH_ADDRESS: '',
 		occ1: '',
 		occ2: '',
@@ -301,7 +301,7 @@ const RegCancelTmp = ({ patronInfo, onClick }: any) => {
 						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
 					</div>
 					<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
-					<div>Registered: {patronInfo?.REGISTERED_DATE}</div>
+					<div>Registered: {patronInfo?.TAG_FUNC_P_T}</div>
 					<div className="border-2 border-dashed p-2">
 						{patronInfo?.TAG_FUNC_P_ATTND} spot reserved
 					</div>

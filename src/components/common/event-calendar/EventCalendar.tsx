@@ -116,6 +116,10 @@ export const MWI_RESFUL_RES = 'MWI-RESTful-response'
 export const SUCCESS_RES_CODE = 0
 export const MWI_XML_DATA_INDEX = 0
 export const NON_LOGIN_USER_TYPE = 'NOLOGIN'
+//For RSVP LOG
+export const TAG_FUNC_P_T = 'TAG_FUNC_P_T'
+export const TAG_P_STATUS = 'TAG_P_STATUS'
+
 
 export const ICON_SHAPE_MAP = {
 	SQUARE: 'rounded',
@@ -126,6 +130,11 @@ export type ContactInfo = {
 	[BRANCH_NAME]: string
 	[BRANCH_ADDRESS]: string
 	[BRANCH_PHONE]: string
+}
+
+export const RSVP_LOG_P_STATUS = {
+	CONFIRM:'CONFIRM',
+	CANCEL:'CANCEL'
 }
 
 export const FILTER_TYPE_COLORS = [

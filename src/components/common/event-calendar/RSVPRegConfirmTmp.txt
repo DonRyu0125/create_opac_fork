@@ -125,7 +125,7 @@
     </div>
     <div class="info">
       <div for="registration-date">Date Registered:</div>
-      ^REGISTERED_DATE^
+      ^TAG_FUNC_P_T^
     </div>
     <div class="info">
       <div for="attendee-details">Attendee:</div>
