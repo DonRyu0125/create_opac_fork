@@ -6,12 +6,21 @@ import {
 	FUNC_LOC_P_GRP,
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
+	RSVP_LOG_P_STATUS,
 	SISN,
+	TAG_FUNC_DATE,
 	TAG_FUNC_DTE_GRP,
+	TAG_FUNC_END_T,
 	TAG_FUNC_LOC_GRP,
+	TAG_FUNC_P_ATTND,
 	TAG_FUNC_P_EMAIL,
 	TAG_FUNC_P_ID,
+	TAG_FUNC_P_PAID,
+	TAG_FUNC_P_T,
+	TAG_FUNC_START_T,
 	TAG_NAME,
+	TAG_P_STATUS,
+	TAG_RSVP_PATRON_LOG,
 } from '@/components/common/event-calendar/EventCalendar'
 import axios from 'axios'
 import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
@@ -45,6 +54,7 @@ type PatronInfo = {
 	BRANCH_ADDRESS: string
 	occ1: string
 	occ2: string
+	TAG_FUNC_P_PAID: any
 }
 
 const RSVPCancelLandingPage = () => {
@@ -66,6 +76,7 @@ const RSVPCancelLandingPage = () => {
 		BRANCH_ADDRESS: '',
 		occ1: '',
 		occ2: '',
+		TAG_FUNC_P_PAID: '',
 	})
 	const [status, setStatus] = useState('')
 	const [__, setClick] = useAtom(landingPageClick)
@@ -121,8 +132,9 @@ const RSVPCancelLandingPage = () => {
 			.then((res) => removeRecord(res, patronInfo))
 			.then((res) => {
 				setStatus(STATUS_TYPE.Success)
-				sendCancelConfirmEmail(res)
+				return sendCancelConfirmEmail(res)
 			})
+			.then((res)=>storeAtLog(res))
 	}
 
 	const getSessionID = async () => {
@@ -201,6 +213,40 @@ const RSVPCancelLandingPage = () => {
 				// setCurrentEvent(currE)
 				setClick((prev) => !prev)
 				setLoading(false)
+				return { HOME_SESSID, ID: patronInfo[TAG_FUNC_P_ID] }
+			})
+	}
+
+	const storeAtLog = async (obj: { HOME_SESSID: string | boolean; ID: string }) => {
+		let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
+		<RECORD>
+			<${TAG_NAME} op="add">${patronInfo[TAG_NAME]}</${TAG_NAME}>
+			<${TAG_FUNC_P_ID} op="add">${obj.ID}</${TAG_FUNC_P_ID}>
+			<${TAG_FUNC_P_EMAIL} op="add">${patronInfo[TAG_FUNC_P_EMAIL]}</${TAG_FUNC_P_EMAIL}>
+			<${TAG_FUNC_P_PAID} op="add">${patronInfo[TAG_FUNC_P_PAID]}</${TAG_FUNC_P_PAID}>
+			<${TAG_FUNC_P_T} op="add">${patronInfo[TAG_FUNC_P_T]}</${TAG_FUNC_P_T}>
+			<${TAG_FUNC_P_ATTND} op="add">${patronInfo[TAG_FUNC_P_ATTND]}</${TAG_FUNC_P_ATTND}>
+			<${TAG_P_STATUS} op="add">${RSVP_LOG_P_STATUS.CANCEL}</${TAG_P_STATUS}>
+			<${TAG_FUNC_DATE} op="add">${patronInfo[TAG_FUNC_DATE]}</${TAG_FUNC_DATE}>
+			<${TAG_FUNC_START_T} op="add">${patronInfo[TAG_FUNC_START_T]}</${TAG_FUNC_START_T}>
+			<${TAG_FUNC_END_T} op="add">${patronInfo[TAG_FUNC_END_T]}</${TAG_FUNC_END_T}>
+		</RECORD>`
+
+		return await axios
+			.post(
+				`${obj.HOME_SESSID}?manipxmlrecord&database=${TAG_RSVP_PATRON_LOG}&READ=N`,
+				xmlFormAdd,
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
+				}
+			)
+			.then((res) => {
+				return
+			})
+			.catch((error) => {
+				throw error
 			})
 	}
 

@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import Layout from '../components/layouts'
 import React, { useEffect, useState } from 'react'
 import {
-	CANCEL_CONFIRMATION_EMAIL_T,
 	FUNC_LOC_P_GRP,
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
