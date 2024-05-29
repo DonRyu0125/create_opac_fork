@@ -5,7 +5,7 @@
 This is the React repository for a OPAC Template. Although it's possible, please use this repository
 as a boilerplate/guideline rather than a final version of your application. This project is designed
 with the intention to be highly customizable and extensible and for that reason, everything was
-built to be generic and easy to modify.
+**built** to be generic and easy to modify.
 
 ## Feature
 

@@ -2,6 +2,7 @@ import FAQ from '@/page/FAQ'
 import Home from '@/page/Home'
 import NoRecord from '@/page/NoRecord'
 import NotFoundPage from '@/page/NotFoundPage'
+import Admin from '@/page/admin'
 import Detail from '@/page/detail'
 import Summary from '@/page/summary'
 
@@ -12,6 +13,7 @@ export const ROUTES: TRoute = {
 	summary: Summary,
 	detail: Detail,
 	faq: FAQ,
+	admin: Admin,
 	'no-record': NoRecord,
 }
 
