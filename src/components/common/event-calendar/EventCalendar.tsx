@@ -5,7 +5,6 @@
  * Draw the calendar using Date js object
  */
 import React, { useEffect, useState } from 'react'
-import X2JS from 'x2js'
 import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
 import axios from 'axios'
@@ -176,7 +175,7 @@ const EventCalendar = () => {
 	useEffect(() => {
 		getData(currentDate)
 		isMonthBtnClick()
-	}, [currentDate])
+	}, [currentDate,weekType])
 
 	useEffect(() => {
 		getLibraryLocation()
@@ -197,7 +196,7 @@ const EventCalendar = () => {
 	}
 
 	const getData = async (currentDate: Date) => {
-		const currE = await fetch_get(currentDate)
+		const currE = await fetch_get(currentDate,weekType)
 		setCurrentEvent(currE)
 	}
 
