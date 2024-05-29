@@ -76,8 +76,8 @@ const EventButton = ({
 						{weekType && (
 							<div className={'flex items-center justify-around w-full'}>
 								<div>
-									<div>{elm[TAG_FUNC_START_T].toUpperCase()}-</div>
-									<div>{elm[TAG_FUNC_END_T].toUpperCase()}</div>
+									<div>{elm[TAG_FUNC_START_T]?.toUpperCase()}-</div>
+									<div>{elm[TAG_FUNC_END_T]?.toUpperCase()}</div>
 								</div>
 								{elm[TAG_FUNC_RSVP] && <SquareUserRound />}
 							</div>
@@ -115,9 +115,9 @@ const EventButton = ({
 								&#x2022;{elm[TAG_FUNC_DATE]}
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								<span>&#x2022;{elm[TAG_FUNC_START_T].toUpperCase()}</span>
+								<span>&#x2022;{elm[TAG_FUNC_START_T]?.toUpperCase()}</span>
 								<span className={'mx-2'}>-</span>
-								<span>{elm[TAG_FUNC_END_T].toUpperCase()}</span>
+								<span>{elm[TAG_FUNC_END_T]?.toUpperCase()}</span>
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
 								&#x2022;Room: {elm[TAG_FUNC_ROOM]}

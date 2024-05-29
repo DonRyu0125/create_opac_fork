@@ -119,9 +119,9 @@ const EventAllButton = ({
 												{item[TAG_FUNC_LOC]}
 											</div>
 											<div className={'mx-2'}>
-												<span>{item[TAG_FUNC_START_T].toUpperCase()}</span>
+												<span>{item[TAG_FUNC_START_T]?.toUpperCase()}</span>
 												<span className={'mx-2'}>-</span>
-												<span>{item[TAG_FUNC_END_T].toUpperCase()}</span>
+												<span>{item[TAG_FUNC_END_T]?.toUpperCase()}</span>
 											</div>
 										</div>
 									</DialogTitle>
@@ -142,10 +142,10 @@ const EventAllButton = ({
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
 												<span>
-													&#x2022;{item[TAG_FUNC_START_T].toUpperCase()}
+													&#x2022;{item[TAG_FUNC_START_T]?.toUpperCase()}
 												</span>
 												<span className={'mx-2'}>-</span>
-												<span>{item[TAG_FUNC_END_T].toUpperCase()}</span>
+												<span>{item[TAG_FUNC_END_T]?.toUpperCase()}</span>
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
 												&#x2022;Room: {item[TAG_FUNC_ROOM]}

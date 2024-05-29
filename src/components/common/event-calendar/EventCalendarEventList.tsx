@@ -13,7 +13,7 @@ import {
 import { convertLowerTrim } from '@/lib/utils'
 import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'
-
+import * as dayjs from 'dayjs'
 
 export interface Event_list {
 	dayObj: Day_obj
@@ -35,9 +35,10 @@ const EventCalendarEventList = ({
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 	useEffect(() => {
 		const updatedFilteredEvents = currentEvent?.filter((item: Cal_event) => {
-			const { day, month, year } = changeStrToDate(item[TAG_FUNC_DATE])
+			const { day, month, year } = changeStrToDate(item[TAG_FUNC_DATE]);
 			const isMatchingDayMonth =
-				day === dayObj.day && month === dayObj.month && year === dayObj.year
+				day === dayObj.day && month === dayObj.month && year === dayObj.year;
+
 			if (currentFilter.length > 0) {
 				return (
 					isMatchingDayMonth &&
@@ -50,25 +51,26 @@ const EventCalendarEventList = ({
 			return isMatchingDayMonth
 		})
 
-		updatedFilteredEvents.sort((a: Cal_event, b: Cal_event) => {
-			const timeA: Date | undefined = parseTimeString(a[TAG_FUNC_START_T])
-			const timeB: Date | undefined = parseTimeString(b[TAG_FUNC_START_T])
+		updatedFilteredEvents?.sort((a: Cal_event, b: Cal_event) => {
+			const timeA: any= parseTimeString(a[TAG_FUNC_START_T])
+			const timeB: any = parseTimeString(b[TAG_FUNC_START_T])
 			if (timeA && timeB) {
 				return timeA.getTime() - timeB.getTime()
 			}
 			return 0
 		})
-
 		setFilteredEvents(updatedFilteredEvents)
 	}, [currentEvent, currentFilter, dayObj])
 
 	const changeStrToDate = (dateString: string) => {
-		const dateObject = new Date(dateString)
-		const month = dateObject.getMonth() + 1
-		const day = dateObject.getDate() + 1
-		const year = dateObject.getFullYear()
-
-		return { month, day, year }
+		if(dateString){
+			let date = dateString?.split('-').map((part) => parseInt(part.replace(/^0+/, ''), 10)) ?? []
+			let day = date[2] ?? 0
+			let month = date[1] ?? 0
+			let year = date[0] ?? 0
+			return { day, month, year }
+		}
+		 return { day:undefined, month:undefined, year:undefined }
 	}
 
 	// SMA's time format is 00:00 PM/AM
@@ -77,7 +79,7 @@ const EventCalendarEventList = ({
 		if (timeString) {
 			const [time, meridian] = timeString?.split(' ')
 			const [hours, minutes] = time?.split(':').map(Number)
-			const meridianUpper = meridian.toUpperCase()
+			const meridianUpper = meridian?.toUpperCase()
 
 			let hours24 = hours
 			if (meridianUpper === 'PM' && hours !== 12) {
@@ -91,6 +93,7 @@ const EventCalendarEventList = ({
 		}
 		return
 	}
+
 
 	return (
 		<div className={`${monthType ? 'h-4/5' : 'h-[98%]'} relative w-full`}>
