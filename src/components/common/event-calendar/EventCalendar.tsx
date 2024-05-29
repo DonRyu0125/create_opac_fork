@@ -117,6 +117,7 @@ export const SUCCESS_RES_CODE = 0
 export const MWI_XML_DATA_INDEX = 0
 export const NON_LOGIN_USER_TYPE = 'NOLOGIN'
 //For RSVP LOG
+export const TAG_RSVP_PATRON_LOG = 'TAG_RSVP_PATRON_LOG'
 export const TAG_FUNC_P_T = 'TAG_FUNC_P_T'
 export const TAG_P_STATUS = 'TAG_P_STATUS'
 

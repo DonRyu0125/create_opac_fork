@@ -26,6 +26,7 @@ import {
 	TAG_FUNC_START_T,
 	TAG_NAME,
 	TAG_P_STATUS,
+	TAG_RSVP_PATRON_LOG,
 } from '@/components/common/event-calendar/EventCalendar'
 import axios from 'axios'
 import { convertToArr, convertXMLToJson, decodeObj, encodeObj, isDatePast } from '@/lib/utils'
@@ -293,7 +294,7 @@ const RSVPCancelLandingPage = () => {
 		</RECORD>`
 
 		return await axios
-			.post(`${obj.HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N`, xmlFormAdd, {
+			.post(`${obj.HOME_SESSID}?manipxmlrecord&database=${TAG_RSVP_PATRON_LOG}&READ=N`, xmlFormAdd, {
 				headers: {
 					'Content-Type': 'text/xml',
 				}
