@@ -17,7 +17,7 @@ import { Accessibility, X } from 'lucide-react'
 import {
 	Cal_event,
 	TAG_FUNC_DATE,
-	TAG_FUNC_DESCIPT,
+	TAG_FUNC_DESCRIPT,
 	TAG_FUNC_END_T,
 	TAG_NAME,
 	TAG_FUNC_ROOM,
@@ -173,7 +173,7 @@ const EventAllButton = ({
 								{/* 'More' button to toggle description of the event */}
 								<DialogDescription
 									className={`min-h-[100px] p-2 break-all overflow-x-hidden overflow-y-auto`}>
-									{item[TAG_FUNC_DESCIPT]}
+									{item[TAG_FUNC_DESCRIPT]}
 								</DialogDescription>
 								<div className={'h-[380px] rounded border-2 font-bold m-2 p-2'}>
 									<EventRSVPForm
@@ -190,7 +190,7 @@ const EventAllButton = ({
 									<>
 										{showFullStr[idx] ? (
 											<>
-												{item[TAG_FUNC_DESCIPT]}
+												{item[TAG_FUNC_DESCRIPT]}
 												<button
 													className={'text-slate-950 font-semibold'}
 													onClick={() => showStrToggle(idx)}>
@@ -199,8 +199,8 @@ const EventAllButton = ({
 											</>
 										) : (
 											<>
-												{item[TAG_FUNC_DESCIPT]?.substring(0, 10)}
-												{(item[TAG_FUNC_DESCIPT]?.length ?? 0) > 10 && (
+												{item[TAG_FUNC_DESCRIPT]?.substring(0, 10)}
+												{(item[TAG_FUNC_DESCRIPT]?.length ?? 0) > 10 && (
 													<button
 														className={'text-slate-950 font-semibold'}
 														onClick={() => showStrToggle(idx)}>

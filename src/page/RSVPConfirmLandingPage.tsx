@@ -11,7 +11,7 @@ import {
 	RSVP_CANCEL_LANDING_PAGE_URL,
 	SISN,
 	TAG_FUNC_DATE,
-	TAG_FUNC_DESCIPT,
+	TAG_FUNC_DESCRIPT,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_P_ATTND,
@@ -44,7 +44,7 @@ type PatronInfo = {
 	SISN: string
 	REGISTERED_DATE: string
 	BRANCH_ADDRESS: string
-	TAG_FUNC_DESCIPT: string
+	TAG_FUNC_DESCRIPT: string
 	occ1: string
 	occ2: string
 }
@@ -76,7 +76,7 @@ const RSVPCancelLandingPage = () => {
 		BRANCH_ADDRESS: '',
 		occ1: '',
 		occ2: '',
-		TAG_FUNC_DESCIPT: '',
+		TAG_FUNC_DESCRIPT: '',
 	})
 	const [status, setStatus] = useState('')
 	const [__, setClick] = useAtom(landingPageClick)
@@ -100,7 +100,7 @@ const RSVPCancelLandingPage = () => {
 		return await isRecordValidate(jsonObj).then((res) => {
 			setLoading(false)
 			if (res.status) {
-				setPatronInfo({ ...jsonObj, [TAG_FUNC_DESCIPT]: res.TAG_FUNC_DESCIPT })
+				setPatronInfo({ ...jsonObj, [TAG_FUNC_DESCRIPT]: res.TAG_FUNC_DESCRIPT })
 				setStatus(STATUS_TYPE.Confirm)
 				return
 			}
@@ -134,7 +134,7 @@ const RSVPCancelLandingPage = () => {
 
 				// there were no exsisted patron then go true
 				if (!event[0].PATRON) {
-					return { status: true, [TAG_FUNC_DESCIPT]: event[0].TAG_FUNC_DESCIPT }
+					return { status: true, [TAG_FUNC_DESCRIPT]: event[0].TAG_FUNC_DESCRIPT }
 				}
 				let event_arr = convertToArr(event[0].PATRON)
 				let event_patron = event_arr.filter((item: PatronInfo) => {
@@ -153,8 +153,8 @@ const RSVPCancelLandingPage = () => {
 					return { status: false }
 				}
 				// Adding event description at the patronInfo to bring to RSVPRegConfirmTmp email
-				// TAG_FUNC_DESCIPT is too big to get from the query string so I try to add when the user registartion info is valid
-				return { status: true, [TAG_FUNC_DESCIPT]: event[0].TAG_FUNC_DESCIPT }
+				// TAG_FUNC_DESCRIPT is too big to get from the query string so I try to add when the user registartion info is valid
+				return { status: true, [TAG_FUNC_DESCRIPT]: event[0].TAG_FUNC_DESCRIPT }
 			})
 			.catch((error) => {
 				throw error
@@ -237,7 +237,7 @@ const RSVPCancelLandingPage = () => {
 			JSON.stringify({
 				...patronInfo,
 				[TAG_FUNC_P_ID]: obj.ID,
-				TAG_FUNC_DESCIPT: undefined, //TAG_FUNC_DESCRIPT is too big for query string
+				TAG_FUNC_DESCRIPT: undefined, //TAG_FUNC_DESCRIPT is too big for query string
 			})
 		)
 

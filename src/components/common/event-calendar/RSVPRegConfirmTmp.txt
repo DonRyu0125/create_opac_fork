@@ -105,7 +105,7 @@
     </div>
     <div class="info">
       <div for="event-description">Description</div>
-      <p id="event-description">^TAG_FUNC_DESCIPT^</p>
+      <p id="event-description">^TAG_FUNC_DESCRIPT^</p>
     </div>
     <div style="display: flex;">
       <div class="info" style="width: 48%;">
