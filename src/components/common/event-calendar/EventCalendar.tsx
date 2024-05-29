@@ -30,7 +30,7 @@ export interface Cal_event {
 	[TAG_FUNC_ROOM]: string
 	[TAG_FUNC_LANG]: string
 	[PATRON]: patron[]
-	[TAG_FUNC_ACCESS]:string
+	[TAG_FUNC_ACCESS]: string
 }
 
 export interface patron {
@@ -175,12 +175,11 @@ const EventCalendar = () => {
 	useEffect(() => {
 		getData(currentDate)
 		isMonthBtnClick()
-	}, [currentDate,weekType])
+	}, [currentDate, weekType])
 
 	useEffect(() => {
 		getLibraryLocation()
 	}, [])
-
 
 	const getLibraryLocation = async () => {
 		const response = await axios.get(
@@ -196,7 +195,7 @@ const EventCalendar = () => {
 	}
 
 	const getData = async (currentDate: Date) => {
-		const currE = await fetch_get(currentDate,weekType)
+		const currE = await fetch_get(currentDate, weekType)
 		setCurrentEvent(currE)
 	}
 
@@ -318,7 +317,8 @@ const EventCalendar = () => {
 			firstDayOfWeek.getDate() + 6
 		)
 
-		return `${firstDayOfWeek.toLocaleString('default', { month: 'short' })} ${firstDayOfWeek.getDate()} -  ${nextDay.getDate() === 1 ? nextDay.toLocaleString('default', { month: 'long' }) : ''} ${nextDay.getDate()}, ${currentDate.getFullYear()}`
+		return `${firstDayOfWeek.toLocaleString('default', { month: 'short' })} ${firstDayOfWeek.getDate()} -  
+		${firstDayOfWeek.getMonth() !== nextDay.getMonth() ? nextDay.toLocaleString('default', { month: 'long' }) : ''} ${nextDay.getDate()}, ${currentDate.getFullYear()}`
 	}
 
 	return (
@@ -386,7 +386,6 @@ const EventCalendar = () => {
 										monthType={monthType}
 										weekType={weekType}
 										contactInfo={contactInfo}
-										
 									/>
 								</div>
 							)
@@ -405,7 +404,6 @@ const EventCalendar = () => {
 										monthType={monthType}
 										weekType={weekType}
 										contactInfo={contactInfo}
-										
 									/>
 								</div>
 							)
