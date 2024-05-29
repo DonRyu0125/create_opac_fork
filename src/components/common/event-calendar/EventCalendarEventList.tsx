@@ -13,7 +13,6 @@ import {
 import { convertLowerTrim } from '@/lib/utils'
 import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'
-import * as dayjs from 'dayjs'
 
 export interface Event_list {
 	dayObj: Day_obj

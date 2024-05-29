@@ -275,11 +275,10 @@ const EventCalendar = () => {
 			day.setDate(day.getDate() + i)
 			weekArray.push({
 				day: day.getDate(),
-				month: currentDate.getMonth() + 1,
-				year: currentDate.getFullYear(),
+				month: day.getMonth() + 1,
+				year: day.getFullYear(),
 			})
 		}
-
 		return weekArray
 	}
 
