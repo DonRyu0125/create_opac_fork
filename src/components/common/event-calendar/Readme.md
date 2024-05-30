@@ -1,4 +1,4 @@
-# Event Calendar function (version 1.0)
+# Event Calendar function (version 1.0) 2024-05-30
 
 ## Introduction
 
@@ -10,6 +10,7 @@ This is the Event Calendar for showing events and make the user register the eve
 * ✅Event filtering (By location)
 * ✅RSVP Events
 * ✅Email confirmation
+* ✅Email cancellation
 
 ## Component List
 
@@ -42,13 +43,4 @@ Every building block components for the UI will be put inside the `components/` 
 continue to add more components to the OPAC, keep in mind each of the sub folders serve a different
 purpose. Please refer to this diagram below while deciding where your React component lives.
 
-
-
-## Setup the backend
-
-### IIS
-
-### MWI
-
-## Routing
 

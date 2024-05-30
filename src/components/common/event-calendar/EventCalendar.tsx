@@ -121,7 +121,6 @@ export const TAG_RSVP_PATRON_LOG = 'TAG_RSVP_PATRON_LOG'
 export const TAG_FUNC_P_T = 'TAG_FUNC_P_T'
 export const TAG_P_STATUS = 'TAG_P_STATUS'
 
-
 export const ICON_SHAPE_MAP = {
 	SQUARE: 'rounded',
 	CIRCLE: 'rounded-full',
@@ -134,8 +133,8 @@ export type ContactInfo = {
 }
 
 export const RSVP_LOG_P_STATUS = {
-	CONFIRM:'CONFIRM',
-	CANCEL:'CANCEL'
+	CONFIRM: 'CONFIRM',
+	CANCEL: 'CANCEL',
 }
 
 export const FILTER_TYPE_COLORS = [
@@ -336,37 +335,57 @@ const EventCalendar = () => {
 			className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
 			<div
 				className={
-					'flex justify-center items-center bg-primary h-[100px] rounded relative'
+					'relative flex justify-center items-center bg-primary h-[100px] rounded relative'
 				}>
 				<Button
 					onClick={weekType ? prevWeek : prevMonth}
-					className={'text-4xl text-primary-foreground mx-5'}
+					className={'text-4xl text-primary-foreground sm:mx-5'}
 					disabled={isClickablePrev}>
 					<div className="mt-2">&lt;</div>
 				</Button>
-				<div className="text-3xl text-primary-foreground">
+				<div className="max-w-[330px] text-center text-3xl text-primary-foreground">
 					{monthType &&
 						currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
 					{weekType && showWeek()}
 				</div>
 				<Button
 					onClick={weekType ? nextWeek : nextMonth}
-					className={'text-4xl text-primary-foreground mx-5'}
+					className={'text-4xl text-primary-foreground sm:mx-5'}
 					disabled={isClickableNext}>
 					<div className="mt-2">&gt;</div>
 				</Button>
-				<div className={'sm:absolute bottom-2 sm:right-10'}>
+				<div
+					className={
+						'hidden sm:absolute sm:right-5 w-[160px] sm:flex justify-evenly items-center'
+					}>
 					<Button
-						className={'bg-black text-primary-foreground rounded mx-1 hover:bg-black'}
+						className={
+							'w-[67px] bg-black text-primary-foreground rounded hover:bg-black'
+						}
 						onClick={showMonthView}>
 						Month
 					</Button>
 					<Button
-						className={'bg-black text-primary-foreground rounded hover:bg-black'}
+						className={
+							'w-[67px] bg-black text-primary-foreground rounded hover:bg-black'
+						}
 						onClick={showWeekView}>
 						Week
 					</Button>
 				</div>
+			</div>
+			{/* Mobile Week Month View */}
+			<div className={'sm:hidden mt-1 flex'}>
+				<Button
+					className={'w-1/2 bg-primary text-primary-foreground rounded hover:bg-black mr-1'}
+					onClick={showMonthView}>
+					Month
+				</Button>
+				<Button
+					className={'w-1/2 bg-primary text-primary-foreground rounded hover:bg-black ml-1'}
+					onClick={showWeekView}>
+					Week
+				</Button>
 			</div>
 			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
 			<div className={'w-full mt-1'}>
