@@ -16,7 +16,8 @@ This is the Event Calendar for showing events and make the user register the eve
 ## RSVP process
 
 * ✅ Non user received unique unit number called ID
-* ✅ User can't register exact date of event  ex) Chinese cooking class start 9:00 AM 21st May. User can't register the event at 21st May
+* ✅ User can't register exact date of event  
+      ex) Chinese cooking class start 9:00 AM 21st May. User can't register the event at 21st May
 
 -To Register: non login user
  Do register => get confirmation email  => go to 
