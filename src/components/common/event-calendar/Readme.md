@@ -19,12 +19,12 @@ This is the Event Calendar for showing events and make the user register the eve
 * ✅ User can't register exact date of event  
       ex) Chinese cooking class start 9:00 AM 21st May. User can't register the event at 21st May
 
--To Register: non login user
+-To Register: Non login user
  Do register => get confirmation email  => go to 
  confirm landing page => click confirm => store record and log data => 
  registration is done
 
- -To Cancel: non login user
+ -To Cancel: Non login user
  After confirm user, get the registration confirm email => go to cancel landing page =>click cancel => delete the record and adding cancel log data => user get cancel confirm email
 
 
@@ -45,9 +45,9 @@ This is the Event Calendar for showing events and make the user register the eve
               └── EventRSVPForm
           └── EventAllButton                  Month:all event modal
               └── EventRSVPForm
-  ├── RSVPCancelConfirmTmp.txt               Email tmp for cancellation confirm
-  ├── RSVPRegConfirmTmp.txt                  Email tmp for Registration confirm
-  └── RSVPVerificationConfirmTmp.txt         Email tmp for email verification
+  ├── RSVPCancelConfirmTmp.txt               Email tmp for cancellation confirm(3)
+  ├── RSVPRegConfirmTmp.txt                  Email tmp for Registration confirm(2)
+  └── RSVPVerificationConfirmTmp.txt         Email tmp for email verification(1)
 
 ```
 
