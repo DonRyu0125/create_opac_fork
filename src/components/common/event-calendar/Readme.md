@@ -24,14 +24,14 @@ This is the Event Calendar for showing events and make the user register the eve
  confirm landing page => click confirm => store record and log data => 
  registration is done
 
- -To Cancel: Non login user
+-To Cancel: Non login user
  After confirm user, get the registration confirm email => go to cancel landing page =>click cancel => delete the record and adding cancel log data => user get cancel confirm email
 
 
 ## Component Structure
 
 ```
-── event-calendar  
+── Event-calendar  
   ├── Constants                               Variables: SMA fields etc...
   ├── EC-Util                                 Util func only for calendar
   ├── Spinner                                 Loading view spinner
