@@ -105,7 +105,7 @@
     </div>
     <div class="info">
       <div for="event-description">Description</div>
-      <p id="event-description">^TAG_FUNC_DESCRIPT^</p>
+      <p id="event-description">^TAG_FUNC_DESC^</p>
     </div>
     <div style="display: flex;">
       <div class="info" style="width: 48%;">
@@ -119,6 +119,10 @@
     </div>
   </div>
   <div class="container">
+    <div class="info">
+      <div for="attendee-id">ID:</div>
+      <p id="attendee-name">^TAG_FUNC_P_ID^</p>
+    </div>
     <div class="info">
       <div for="attendee-name">Name:</div>
       <p id="attendee-name">^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>

@@ -23,7 +23,7 @@ import {
 	SISN,
 	SUCCESS_RES_CODE,
 	TAG_FUNC_DATE,
-	TAG_FUNC_DESCRIPT,
+	TAG_FUNC_DESC,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
 	TAG_FUNC_LOC,
@@ -142,8 +142,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			)
 			.then(() => {
 				return getOCCNumber().then((res) => {
-					sendEmail(res, data, event)
-					setLoading(false)
+					sendEmail(res, data, event);
 				})
 			})
 			.catch((error) => {
@@ -251,8 +250,8 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then(() => {
-				setLoading(false)
 				setStatus(STATUS_TYPE.SHOW_SUCCESS)
+				setLoading(false)
 			})
 	}
 

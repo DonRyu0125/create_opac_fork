@@ -14,7 +14,7 @@ import { convertLowerTrim } from '@/lib/utils'
 import {
 	Cal_event,
 	TAG_FUNC_DATE,
-	TAG_FUNC_DESCRIPT,
+	TAG_FUNC_DESC,
 	TAG_FUNC_END_T,
 	TAG_NAME,
 	TAG_FUNC_ROOM,
@@ -174,7 +174,7 @@ const EventSumButton = ({
 													className={
 														'h-[320px] break-all overflow-y-auto'
 													}>
-													{elm[TAG_FUNC_DESCRIPT]}
+													{elm[TAG_FUNC_DESC]}
 												</DialogDescription>
 											</div>
 											{elm[TAG_FUNC_RSVP] && (

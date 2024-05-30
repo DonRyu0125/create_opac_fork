@@ -17,7 +17,7 @@ import { convertXMLToJson } from '@/lib/utils'
 export interface Cal_event {
 	[SISN]: number
 	[TAG_NAME]: string
-	[TAG_FUNC_DESCRIPT]: string
+	[TAG_FUNC_DESC]: string
 	[TAG_FUNC_LOC]: string
 	[TAG_FUNC_LOC_FEE]: string
 	[TAG_FUNC_DATE]: string
@@ -70,7 +70,7 @@ export const BRANCH_ADDRESS = 'BRANCH_ADDRESS'
 export const BRANCH_PHONE = 'BRANCH_PHONE'
 //Event location group
 export const TAG_FUNC_LOC_GRP = 'TAG_FUNC_LOC_GRP'
-export const TAG_FUNC_DESCRIPT = 'TAG_FUNC_DESCRIPT'
+export const TAG_FUNC_DESC = 'TAG_FUNC_DESC'
 export const TAG_FUNC_LOC = 'TAG_FUNC_LOC'
 export const TAG_FUNC_LOC_FEE = 'TAG_FUNC_LOC_FEE'
 export const TAG_FUNC_LOC_BAN = 'TAG_FUNC_LOC_BAN'

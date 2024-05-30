@@ -11,7 +11,7 @@ import {
 	RSVP_LOG_P_STATUS,
 	SISN,
 	TAG_FUNC_DATE,
-	TAG_FUNC_DESCRIPT,
+	TAG_FUNC_DESC,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
 	TAG_FUNC_LOC_GRP,
@@ -49,7 +49,7 @@ type PatronInfo = {
 	SISN: string
 	TAG_FUNC_P_T: string
 	BRANCH_ADDRESS: string
-	TAG_FUNC_DESCRIPT: string
+	TAG_FUNC_DESC: string
 	occ1: string
 	occ2: string
 	TAG_FUNC_P_PAID: any
@@ -82,7 +82,7 @@ const RSVPCancelLandingPage = () => {
 		BRANCH_ADDRESS: '',
 		occ1: '',
 		occ2: '',
-		TAG_FUNC_DESCRIPT: '',
+		TAG_FUNC_DESC: '',
 		TAG_FUNC_P_PAID: '',
 	})
 	const [status, setStatus] = useState('')
@@ -107,7 +107,7 @@ const RSVPCancelLandingPage = () => {
 		return await isRecordValidate(jsonObj).then((res) => {
 			setLoading(false)
 			if (res.status) {
-				setPatronInfo({ ...jsonObj, [TAG_FUNC_DESCRIPT]: res.TAG_FUNC_DESCRIPT })
+				setPatronInfo({ ...jsonObj, [TAG_FUNC_DESC]: res.TAG_FUNC_DESC })
 				setStatus(STATUS_TYPE.Confirm)
 				return
 			}
@@ -141,7 +141,7 @@ const RSVPCancelLandingPage = () => {
 
 				// there were no exsisted patron then go true
 				if (!event[0].PATRON) {
-					return { status: true, [TAG_FUNC_DESCRIPT]: event[0].TAG_FUNC_DESCRIPT }
+					return { status: true, [TAG_FUNC_DESC]: event[0].TAG_FUNC_DESC }
 				}
 				let event_arr = convertToArr(event[0].PATRON)
 				let event_patron = event_arr.filter((item: PatronInfo) => {
@@ -160,8 +160,8 @@ const RSVPCancelLandingPage = () => {
 					return { status: false }
 				}
 				// Adding event description at the patronInfo to bring to RSVPRegConfirmTmp email
-				// TAG_FUNC_DESCRIPT is too big to get from the query string so I try to add when the user registartion info is valid
-				return { status: true, [TAG_FUNC_DESCRIPT]: event[0].TAG_FUNC_DESCRIPT }
+				// TAG_FUNC_DESC is too big to get from the query string so I try to add when the user registartion info is valid
+				return { status: true, [TAG_FUNC_DESC]: event[0].TAG_FUNC_DESC }
 			})
 			.catch((error) => {
 				throw error
@@ -245,7 +245,7 @@ const RSVPCancelLandingPage = () => {
 			JSON.stringify({
 				...patronInfo,
 				[TAG_FUNC_P_ID]: obj.ID,
-				TAG_FUNC_DESCRIPT: undefined, //TAG_FUNC_DESCRIPT is too big for query string
+				TAG_FUNC_DESC: undefined, //TAG_FUNC_DESC is too big for query string
 			})
 		)
 
