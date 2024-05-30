@@ -32,7 +32,7 @@ import {
 	SISN,
 	ContactInfo,
 	TAG_FUNC_ACCESS,
-} from './EventCalendar'
+} from './Constants'
 import { config } from '@/constants'
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'

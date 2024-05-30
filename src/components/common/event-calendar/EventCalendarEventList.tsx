@@ -9,7 +9,7 @@ import {
 	TAG_FUNC_LOC,
 	Day_obj,
 	ContactInfo,
-} from './EventCalendar'
+} from './Constants'
 import { convertLowerTrim } from '@/lib/utils'
 import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'

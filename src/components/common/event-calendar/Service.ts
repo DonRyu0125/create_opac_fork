@@ -1,6 +1,6 @@
 import axios from 'axios'
 import X2JS from 'x2js' // Ensure X2JS is installed
-import { CALENDAR_WEEK_VIEW_DAYS, MAIN_MWI_APPLICATION, MONTH_REPORT } from './EventCalendar'
+import { CALENDAR_WEEK_VIEW_DAYS, MAIN_MWI_APPLICATION, MONTH_REPORT } from './Constants'
 import { convertToArr } from '@/lib/utils'
 
 const getWeekRange = (currentDate: any) => {

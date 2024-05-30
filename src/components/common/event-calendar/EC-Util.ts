@@ -1,4 +1,4 @@
-import { TAG_FUNC_P_ATTND, patron } from "./EventCalendar"
+import { TAG_FUNC_P_ATTND, patron } from "./Constants"
 
 export const calNumOfPatron = (patrons: patron[]) => {
     const totalPatronAttnd = patrons?.reduce((total: number, entry: patron) => {

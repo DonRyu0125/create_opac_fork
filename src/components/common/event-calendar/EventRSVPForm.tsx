@@ -42,7 +42,7 @@ import {
 	patron,
 	RSVP_CONFIRM_LANDING_PAGE_URL,
 	TAG_FUNC_P_T,
-} from './EventCalendar'
+} from './Constants'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 import {
 	convertLowerTrim,

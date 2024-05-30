@@ -26,7 +26,7 @@ import {
 	TAG_NAME,
 	TAG_P_STATUS,
 	TAG_RSVP_PATRON_LOG,
-} from '@/components/common/event-calendar/EventCalendar'
+} from '@/components/common/event-calendar/Constants'
 import axios from 'axios'
 import { convertToArr, convertXMLToJson, decodeObj, encodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
@@ -34,6 +34,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
 import { useAtom } from 'jotai'
 import { landingPageClick } from '@/store'
+
 
 type PatronInfo = {
 	TAG_FUNC_P_ATTND: string

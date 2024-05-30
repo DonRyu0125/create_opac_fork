@@ -32,7 +32,7 @@ import {
 	SISN,
 	ContactInfo,
 	TAG_FUNC_ACCESS,
-} from './EventCalendar'
+} from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
 import { Accessibility, SquareUserRound, X } from 'lucide-react'

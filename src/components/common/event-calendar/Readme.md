@@ -11,21 +11,27 @@ This is the Event Calendar for showing events and make the user register the eve
 * ✅RSVP Events
 * ✅Email confirmation
 * ✅Email cancellation
+* ✅RSVP history log
+
+## RSVP process
+
+* ✅ Non user received unique unit number called ID
+* ✅ User can't register exact date of event  ex) Chinese cooking class start 9:00 AM 21st May. User can't register the event at 21st May
+
+-To Register: non login user
+ Do register => get confirmation email  => go to 
+ confirm landing page => click confirm => store record and log data => 
+ registration is done
+
+ -To Cancel: non login user
+ After confirm user, get the registration confirm email => go to cancel landing page =>click cancel => delete the record and adding cancel log data => user get cancel confirm email
+
 
 ## Component List
 
-1.can't register exact date
-2.user should confirm the event
-  -two register at the same time, first confirm user first register
-  use could complain if they don't know they have to confirm
-
-  -User forgot to confirm, they try to register exact that date => no
-
-3.no branch address at the library location database => private property
-
 ```
 ── event-calendar                         
-  ├── constants               JSON files that store the pages data
+  ├── EventCalendar               JSON files that store the pages data
   ├── hooks                   Custom hooks
   ├── lib                     External libraries, helper functions, etc.
   ├── providers               Providers for any React.Context

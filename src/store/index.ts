@@ -1,4 +1,4 @@
-import { Cal_event } from '@/components/common/event-calendar/EventCalendar'
+import { Cal_event } from './Constants'
 import { GenericObject } from '@/lib/record'
 import { atom } from 'jotai'
 

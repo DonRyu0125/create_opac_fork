@@ -31,7 +31,7 @@ import {
 	PATRON,
 	SISN,
 	ContactInfo,
-} from './EventCalendar'
+} from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { config } from '@/constants'
 import { X } from 'lucide-react'

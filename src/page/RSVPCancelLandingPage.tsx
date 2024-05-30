@@ -21,7 +21,7 @@ import {
 	TAG_NAME,
 	TAG_P_STATUS,
 	TAG_RSVP_PATRON_LOG,
-} from '@/components/common/event-calendar/EventCalendar'
+} from '@/components/common/event-calendar/Constants'
 import axios from 'axios'
 import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
