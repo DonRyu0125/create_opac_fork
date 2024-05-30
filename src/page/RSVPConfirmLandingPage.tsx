@@ -241,6 +241,7 @@ const RSVPCancelLandingPage = () => {
 	}
 
 	const sendRegConfirmEmail = async (obj: { HOME_SESSID: string | boolean; ID: string }) => {
+		console.log('obj',obj)
 		const encoded = encodeObj(
 			JSON.stringify({
 				...patronInfo,
@@ -255,6 +256,7 @@ const RSVPCancelLandingPage = () => {
 				{
 					...patronInfo,
 					RSVP_CANCEL_LANDING_PAGE_URL: RSVP_CANCEL_LANDING_PAGE_URL,
+					[TAG_FUNC_P_ID]: obj.ID,
 					encoded,
 				},
 				{
