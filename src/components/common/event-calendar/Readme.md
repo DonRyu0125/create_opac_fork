@@ -27,26 +27,27 @@ This is the Event Calendar for showing events and make the user register the eve
  After confirm user, get the registration confirm email => go to cancel landing page =>click cancel => delete the record and adding cancel log data => user get cancel confirm email
 
 
-## Component List
+## Component Structure
 
 ```
-── event-calendar                         
-  ├── EventCalendar               JSON files that store the pages data
-  ├── hooks                   Custom hooks
-  ├── lib                     External libraries, helper functions, etc.
-  ├── providers               Providers for any React.Context
-  ├── router                  Routes handler for the project
-  ├── schema                  Generated JSON schema from /constants folder
-  ├── store                   State management library store
-  ├── styles                  Styling
-  ├── themes                  Custom theme
-  └── tools                   Code generation tools
+── event-calendar  
+  ├── Constants                               Variables: SMA fields etc...
+  ├── EC-Util                                 Util func only for calendar
+  ├── Spinner                                 Loading view spinner
+  ├── Service                                 AJAX Call
+  ├── EventCalendar                           Root
+      ├── EventCalendarFilter                 location filtering
+      └── EventCalendarEventList              Month View or Week View
+          ├── EventSumButton                  Month:event summary modal
+              └── EventRSVPForm
+          ├── EventButton                     Month and Week:event common modal
+              └── EventRSVPForm
+          └── EventAllButton                  Month:all event modal
+              └── EventRSVPForm
+  ├── RSVPCancelConfirmTmp.txt               Email tmp for cancellation confirm
+  ├── RSVPRegConfirmTmp.txt                  Email tmp for Registration confirm
+  └── RSVPVerificationConfirmTmp.txt         Email tmp for email verification
+
 ```
-
-## Components Structure
-
-Every building block components for the UI will be put inside the `components/` folder. As you
-continue to add more components to the OPAC, keep in mind each of the sub folders serve a different
-purpose. Please refer to this diagram below while deciding where your React component lives.
 
 
