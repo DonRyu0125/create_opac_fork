@@ -5,8 +5,8 @@ import NotFoundPage from '@/page/NotFoundPage'
 import Admin from '@/page/admin'
 import Detail from '@/page/detail'
 import Summary from '@/page/summary'
-import RSVP_CANCEL from '@/page/RSVPCancelLandingPage'
-import RSVP_CONFIRM from '@/page/RSVPConfirmLandingPage'
+import RSVP_CANCEL from '@/page/RSVP/Cancellation'
+import RSVP_CONFIRM from '@/page/RSVP/Confirmation'
 
 export type TRoute = Record<string, () => React.ReactNode>
 
