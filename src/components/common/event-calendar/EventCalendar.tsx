@@ -7,20 +7,15 @@
 import React, { useEffect, useState } from 'react'
 import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
-import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { fetch_get, getLibraryLocation } from './Service'
-import { calendarEvents, landingPageClick } from '@/store'
+import { calendarEvents } from '@/store'
 import { useAtom } from 'jotai'
-import { convertXMLToJson } from '@/lib/utils'
 import {
 	CALENDAR_START_MONTH,
 	CALENDAR_WEEK_VIEW_DAYS,
 	DAYS_OF_WEEK,
 	Day_obj,
-	LIBRARY_LOCATION_REPORT,
-	LIBRARY_LOCATION_XML_TAG,
-	SUB_MWI_APPLICATION,
 } from './Constants'
 
 const EventCalendar = () => {
@@ -32,7 +27,6 @@ const EventCalendar = () => {
 	const [isClickableNext, setisClickableNext] = useState<boolean>(false)
 	const [contactInfo, setContactInfo] = useState([])
 	const [currentEvent, setCurrentEvent] = useAtom(calendarEvents)
-	// const [click, _] = useAtom(landingPageClick)
 
 	useEffect(() => {
 		getData(currentDate)

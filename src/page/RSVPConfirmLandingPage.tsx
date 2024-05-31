@@ -32,8 +32,6 @@ import { convertToArr, convertXMLToJson, decodeObj, encodeObj, isDatePast } from
 import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
-import { useAtom } from 'jotai'
-import { landingPageClick } from '@/store'
 
 
 type PatronInfo = {
@@ -87,7 +85,6 @@ const RSVPCancelLandingPage = () => {
 		TAG_FUNC_P_PAID: '',
 	})
 	const [status, setStatus] = useState('')
-	const [__, setClick] = useAtom(landingPageClick)
 
 	useEffect(() => {
 		checkParms()
@@ -267,9 +264,6 @@ const RSVPCancelLandingPage = () => {
 				}
 			)
 			.then(async (res) => {
-				// const currE = await fetch_get(new Date())
-				// setCurrentEvent(currE)
-				setClick((prev) => !prev)
 				setStatus(STATUS_TYPE.Success)
 				setLoading(false)
 				return obj

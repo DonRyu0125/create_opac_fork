@@ -26,10 +26,6 @@ import axios from 'axios'
 import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
 import { RegInvalid, RegOutDate } from './RSVPConfirmLandingPage'
-import { fetch_get } from '@/components/common/event-calendar/Service'
-import { useAtom } from 'jotai'
-import { landingPageClick } from '@/store'
-
 const STATUS_TYPE = {
 	Invalid: 'Invalid',
 	Success: 'Success',
@@ -79,7 +75,6 @@ const RSVPCancelLandingPage = () => {
 		TAG_FUNC_P_PAID: '',
 	})
 	const [status, setStatus] = useState('')
-	const [__, setClick] = useAtom(landingPageClick)
 
 	useEffect(() => {
 		checkParms()
@@ -209,9 +204,6 @@ const RSVPCancelLandingPage = () => {
 				}
 			)
 			.then(async (res) => {
-				// const currE = await fetch_get(new Date())
-				// setCurrentEvent(currE)
-				setClick((prev) => !prev)
 				setLoading(false)
 				return { HOME_SESSID, ID: patronInfo[TAG_FUNC_P_ID] }
 			})
