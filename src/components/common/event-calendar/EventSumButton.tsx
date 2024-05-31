@@ -39,15 +39,16 @@ import { CalendarCheck } from 'lucide-react'
 import EventButton from './EventButton'
 import { fetch_get } from './Service'
 import useConstants from '@/hooks/useConstants'
+import { useAtom } from 'jotai'
+import { calendarWeekType } from '@/store'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]
-	weekType: boolean
-	monthType: boolean
 	contactInfo: ContactInfo[]
 }
 
-const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: eventSumType) => {
+const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
+	const [weekType, _] = useAtom(calendarWeekType)
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
@@ -77,7 +78,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 
 	return (
 		<>
-			{monthType && filteredEvents.length > 3 ? (
+			{weekType && filteredEvents.length > 3 ? (
 				<div className={'h-full mb-[2px] overflow-x-hidden'}>
 					{groupedByLocation(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>
@@ -205,7 +206,6 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 							elm={item}
 							key={idx}
 							id={idx}
-							weekType={weekType}
 							contactInfo={contactInfo}
 						/>
 					))}

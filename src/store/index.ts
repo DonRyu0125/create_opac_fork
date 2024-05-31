@@ -1,4 +1,5 @@
-import { Cal_event } from './Constants'
+
+import { Cal_event } from '@/components/common/event-calendar/Constants'
 import { GenericObject } from '@/lib/record'
 import { atom } from 'jotai'
 
@@ -7,3 +8,4 @@ export const viewAtom = atom<ViewType>('grid')
 
 export const pageData = atom<GenericObject | null>(null)
 export const calendarEvents = atom<Cal_event[]>([])
+export const calendarWeekType = atom<boolean>(false)
