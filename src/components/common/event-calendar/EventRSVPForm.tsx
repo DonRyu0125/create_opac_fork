@@ -44,6 +44,9 @@ import {
 import Spinner from './Spinner'
 import { calNumOfPatron } from './EC-Util'
 import useConstants from '@/hooks/useConstants'
+import { useAtom } from 'jotai'
+import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
+import { fetch_get } from './Service'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -114,7 +117,9 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		formState: { errors },
 	} = useForm<Inputs>()
 	const [loading, setLoading] = useState(false)
-	const message = useConstants().message
+	const [currentDate, _] = useAtom(calendarCurrDate)
+	const [weekType, __] = useAtom(calendarWeekType)
+	const [___, setCurrentEvent] = useAtom(calendarEvents)
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}`
@@ -134,7 +139,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			)
 			.then(() => {
 				return getOCCNumber().then((res) => {
-					sendEmail(res, data, event);
+					sendEmail(res, data, event)
 				})
 			})
 			.catch((error) => {
@@ -241,9 +246,11 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					},
 				}
 			)
-			.then(() => {
+			.then(async () => {
 				setStatus(STATUS_TYPE.SHOW_SUCCESS)
 				setLoading(false)
+				const currE = await fetch_get(currentDate, weekType)
+				setCurrentEvent(currE)
 			})
 	}
 
@@ -388,7 +395,9 @@ const ShowButton = ({
 				<Button
 					disabled={capacity - calNumOfPatron(patrons) <= 0 ? true : false}
 					className={'w-full '}
-					onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>{message.register}</Button>
+					onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>
+					{message.register}
+				</Button>
 				<div className={'flex items-center justify-center'}>
 					{capacity - calNumOfPatron(patrons) <= 0 ? (
 						<div className={'flex text-red-600 items-center'}>
@@ -396,7 +405,8 @@ const ShowButton = ({
 						</div>
 					) : (
 						<div className={'flex text-lime-800 items-center'}>
-							<BadgeCheck /> {`${capacity - calNumOfPatron(patrons)} ${message.seatsRemaining}`}
+							<BadgeCheck />{' '}
+							{`${capacity - calNumOfPatron(patrons)} ${message.seatsRemaining}`}
 						</div>
 					)}
 				</div>
@@ -404,8 +414,12 @@ const ShowButton = ({
 			{getContactInfo(BRANCH_ADDRESS) ? (
 				<div className={'h-3/6 flex flex-col items-center justify-center '}>
 					<div>{message.contactInfo}</div>
-					<div>{message.address}: {getContactInfo(BRANCH_ADDRESS)}</div>
-					<div>{message.phone}: {getContactInfo(BRANCH_PHONE)}</div>
+					<div>
+						{message.address}: {getContactInfo(BRANCH_ADDRESS)}
+					</div>
+					<div>
+						{message.phone}: {getContactInfo(BRANCH_PHONE)}
+					</div>
 				</div>
 			) : (
 				<div className={'h-3/6 flex flex-col items-center justify-center '}>
@@ -439,8 +453,12 @@ const ShowRSVPSuccess = ({
 			</div>
 			<div className={'h-3/6 flex flex-col items-center justify-center '}>
 				<div>{message.contactInfo}</div>
-				<div>{message.address}: {getContactInfo(BRANCH_ADDRESS)}</div>
-				<div>{message.phone}: {getContactInfo(BRANCH_PHONE)}</div>
+				<div>
+					{message.address}: {getContactInfo(BRANCH_ADDRESS)}
+				</div>
+				<div>
+					{message.phone}: {getContactInfo(BRANCH_PHONE)}
+				</div>
 			</div>
 		</div>
 	)

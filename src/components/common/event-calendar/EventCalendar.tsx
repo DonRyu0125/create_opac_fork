@@ -9,20 +9,20 @@ import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
 import { Button } from '@/components/ui/button'
 import { fetch_get, getLibraryLocation } from './Service'
-import { calendarEvents, calendarWeekType } from '@/store'
+import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
 import { useAtom } from 'jotai'
 import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj } from './Constants'
 import useConstants from '@/hooks/useConstants'
 
 const EventCalendar = () => {
 	const message = useConstants().message
-	const [currentDate, setCurrentDate] = useState(new Date())
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
 	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
 	const [isClickableNext, setisClickableNext] = useState<boolean>(false)
 	const [contactInfo, setContactInfo] = useState([])
 	const [currentEvent, setCurrentEvent] = useAtom(calendarEvents)
 	const [weekType, setWeekType] = useAtom(calendarWeekType)
+	const [currentDate, setCurrentDate] = useAtom(calendarCurrDate)
 
 	useEffect(() => {
 		getData(currentDate)
