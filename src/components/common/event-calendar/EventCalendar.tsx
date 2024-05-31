@@ -4,15 +4,12 @@
  * EventCalendar: Main Calendar component
  * Draw the calendar using Date js object
  */
-import React, { useEffect, useState } from 'react'
-import EventCalendarFilter from './EventCalendarFilter'
-import EventCalendarEventList from './EventCalendarEventList'
-import axios from 'axios'
 import { Button } from '@/components/ui/button'
-import { fetch_get } from './Service'
-import { calendarEvents, landingPageClick } from '@/store'
-import { useAtom } from 'jotai'
 import { convertXMLToJson } from '@/lib/utils'
+import { calendarEvents } from '@/store'
+import axios from 'axios'
+import { useAtom } from 'jotai'
+import { useEffect, useState } from 'react'
 import {
 	CALENDAR_START_MONTH,
 	CALENDAR_WEEK_VIEW_DAYS,
@@ -22,6 +19,9 @@ import {
 	LIBRARY_LOCATION_XML_TAG,
 	SUB_MWI_APPLICATION,
 } from './Constants'
+import EventCalendarEventList from './EventCalendarEventList'
+import EventCalendarFilter from './EventCalendarFilter'
+import { fetch_get } from './Service'
 
 const EventCalendar = () => {
 	const [monthType, setMonthType] = useState<boolean>(true)
@@ -53,7 +53,9 @@ const EventCalendar = () => {
 			}
 		)
 		const jsonData: any = convertXMLToJson(response)
-		setContactInfo(jsonData.xml[LIBRARY_LOCATION_XML_TAG])
+		if (jsonData?.xml) {
+			setContactInfo(jsonData.xml[LIBRARY_LOCATION_XML_TAG])
+		}
 	}
 
 	const getData = async (currentDate: Date) => {
@@ -188,7 +190,7 @@ const EventCalendar = () => {
 			className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
 			<div
 				className={
-					'relative flex justify-center items-center bg-primary h-[100px] rounded relative'
+					'relative flex justify-center items-center bg-primary h-[100px] rounded '
 				}>
 				<Button
 					onClick={weekType ? prevWeek : prevMonth}
