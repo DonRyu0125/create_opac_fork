@@ -33,11 +33,11 @@ import {
 	ContactInfo,
 	TAG_FUNC_ACCESS,
 } from './Constants'
-import { config } from '@/constants'
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
 import { AccordionContent } from '@/components/ui/accordion'
 import { fetch_get } from './Service'
+import useConstants from '@/hooks/useConstants'
 type showStrObj = {
 	[key: number]: boolean
 }
@@ -49,7 +49,7 @@ const EventAllButton = ({
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
 }) => {
-	const { logo } = config
+	const { logo } = useConstants().config
 
 	// Description more button func
 	// const [showFullStr, setShowFullStr] = useState<showStrObj>({})

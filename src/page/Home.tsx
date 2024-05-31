@@ -1,8 +1,5 @@
-import { home } from '@/constants'
-import { truncateWords } from '@/lib/utils'
+import useConstants from '@/hooks/useConstants'
 import Hero from '../components/common/Hero'
-import HoverCard from '../components/common/HoverCard'
-import Masonry from '../components/common/Masonry'
 import SearchForm from '../components/common/SearchForm'
 import Section from '../components/common/Section'
 import Slide from '../components/common/Slide'
@@ -42,7 +39,7 @@ const Home = () => {
 		categoriesItems,
 		searchURL,
 		eventCalendar,
-	} = home
+	} = useConstants().home
 
 	return (
 		<Layout>
@@ -50,7 +47,7 @@ const Home = () => {
 				<SearchForm
 					className="w-full mt-6 max-w-2xl"
 					searchURL={searchURL}
-					inputName={'KEYWORD_CL'}
+					inputName={'KEYWORD_CLUSTER'}
 				/>
 
 				{/* <CommandDemo /> */}
@@ -61,7 +58,7 @@ const Home = () => {
 					// auto
 					itemsPerSlide={{ lg: 4 }}
 					items={categoriesItems}
-					renderItem={(item, index) => (
+					renderItem={(item: { title: any; url: any; thumbnail: any }, index: any) => (
 						<Card
 							className="max-w-md mx-auto shadow-xl border-none cursor-pointer"
 							key={index}>

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import Layout from '../components/layouts'
+import Layout from '@/components/layouts'
 import React, { useEffect, useState } from 'react'
 import {
 	FUNC_LOC_P_GRP,
@@ -32,7 +32,6 @@ import { convertToArr, convertXMLToJson, decodeObj, encodeObj, isDatePast } from
 import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
-
 
 type PatronInfo = {
 	TAG_FUNC_P_ATTND: string
@@ -239,7 +238,7 @@ const RSVPCancelLandingPage = () => {
 	}
 
 	const sendRegConfirmEmail = async (obj: { HOME_SESSID: string | boolean; ID: string }) => {
-		console.log('obj',obj)
+		console.log('obj', obj)
 		const encoded = encodeObj(
 			JSON.stringify({
 				...patronInfo,
@@ -290,11 +289,15 @@ const RSVPCancelLandingPage = () => {
 		</RECORD>`
 
 		return await axios
-			.post(`${obj.HOME_SESSID}?manipxmlrecord&database=${TAG_RSVP_PATRON_LOG}&READ=N`, xmlFormAdd, {
-				headers: {
-					'Content-Type': 'text/xml',
+			.post(
+				`${obj.HOME_SESSID}?manipxmlrecord&database=${TAG_RSVP_PATRON_LOG}&READ=N`,
+				xmlFormAdd,
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
 				}
-			})
+			)
 			.then((res) => {
 				return
 			})

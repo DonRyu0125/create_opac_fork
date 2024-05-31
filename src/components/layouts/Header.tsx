@@ -1,14 +1,11 @@
-import { config } from '@/constants'
-import { Button } from '../ui/button'
 import Link from '../common/Link'
-import { ThemeToggler } from '../common/ThemeToggler'
-import { MenuIcon } from 'lucide-react'
-import { useState } from 'react'
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import MobileMenu from './MobileMenu'
-const Header = () => {
-	const { logo, navigations } = config
 
+import useConstants from '@/hooks/useConstants'
+import { LanguageSelect } from '../common/LanguageSelect'
+
+const Header = () => {
+	const { logo, navigations, siteName } = useConstants().config
 	return (
 		<header className=" bg-primary  mx-auto px-4 sm:px-6 lg:px-8">
 			<div className="flex h-16 items-center justify-between max-w-screen-xl mx-auto">
@@ -32,7 +29,8 @@ const Header = () => {
 							))}
 						</ul>
 					</nav>
-					<div className="flex items-center gap-4">
+					<LanguageSelect />
+					<div className="flex md:hidden items-center gap-4">
 						{/* <ThemeToggler /> */}
 						<MobileMenu />
 					</div>

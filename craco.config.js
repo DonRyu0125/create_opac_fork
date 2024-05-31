@@ -16,9 +16,7 @@ module.exports = {
 			writeToDisk: true,
 		},
 	},
-	eslint: {
-		enable: false,
-	},
+
 	webpack: {
 		configure: {
 			entry: './src/index.tsx',

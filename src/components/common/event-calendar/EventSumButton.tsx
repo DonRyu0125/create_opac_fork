@@ -33,12 +33,12 @@ import {
 	ContactInfo,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { config } from '@/constants'
 import { X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 import { CalendarCheck } from 'lucide-react'
 import EventButton from './EventButton'
 import { fetch_get } from './Service'
+import useConstants from '@/hooks/useConstants'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]
@@ -47,13 +47,8 @@ export interface eventSumType {
 	contactInfo: ContactInfo[]
 }
 
-const EventSumButton = ({
-	filteredEvents,
-	weekType,
-	monthType,
-	contactInfo,
-}: eventSumType) => {
-	const { logo } = config
+const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: eventSumType) => {
+	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
@@ -78,7 +73,6 @@ const EventSumButton = ({
 		})
 		return result ?? []
 	}
-
 
 	return (
 		<>

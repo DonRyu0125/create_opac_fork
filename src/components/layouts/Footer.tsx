@@ -1,8 +1,8 @@
-import { config } from '@/constants'
+import { CONSTANTS } from '@/constants'
 import { getJSONType } from '@/lib/utils'
 
 const Footer = () => {
-	const { logo, siteName } = getJSONType(config)
+	const { logo, siteName } = getJSONType(CONSTANTS.EN.config)
 
 	return (
 		<footer className="bg-black mx-auto  px-4 py-8 sm:px-6 lg:px-8">

@@ -34,9 +34,9 @@ import {
 	TAG_FUNC_ACCESS,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { config } from '@/constants'
 import { Accessibility, SquareUserRound, X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
+import useConstants from '@/hooks/useConstants'
 
 const EventButton = ({
 	elm,
@@ -49,8 +49,7 @@ const EventButton = ({
 	weekType: boolean
 	contactInfo: ContactInfo[]
 }) => {
-	const { logo } = config
-
+	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)

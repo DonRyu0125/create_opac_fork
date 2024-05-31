@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import Layout from '../components/layouts'
+import Layout from '@/components/layouts'
 import React, { useEffect, useState } from 'react'
 import {
 	CANCEL_CONFIRMATION_EMAIL_T,
@@ -25,7 +25,9 @@ import {
 import axios from 'axios'
 import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
-import { RegInvalid, RegOutDate } from './RSVPConfirmLandingPage'
+import { RegInvalid, RegOutDate } from './Confirmation'
+
+
 const STATUS_TYPE = {
 	Invalid: 'Invalid',
 	Success: 'Success',
@@ -129,7 +131,7 @@ const RSVPCancelLandingPage = () => {
 				setStatus(STATUS_TYPE.Success)
 				return sendCancelConfirmEmail(res)
 			})
-			.then((res)=>storeAtLog(res))
+			.then((res) => storeAtLog(res))
 	}
 
 	const getSessionID = async () => {
