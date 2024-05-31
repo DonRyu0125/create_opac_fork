@@ -36,11 +36,7 @@ import {
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
 import { AccordionContent } from '@/components/ui/accordion'
-import { fetch_get } from './Service'
 import useConstants from '@/hooks/useConstants'
-type showStrObj = {
-	[key: number]: boolean
-}
 
 const EventAllButton = ({
 	filteredEvents,
@@ -50,6 +46,7 @@ const EventAllButton = ({
 	contactInfo: ContactInfo[]
 }) => {
 	const { logo } = useConstants().config
+	const message = useConstants().message
 
 	// Description more button func
 	// const [showFullStr, setShowFullStr] = useState<showStrObj>({})
@@ -78,7 +75,7 @@ const EventAllButton = ({
 					className={
 						' h-full w-full px-0 flex items-center justify-center overflow-hidden'
 					}>
-					All {filteredEvents.length} events
+					{message.all} {filteredEvents.length} {message.events}
 				</Button>
 			</DialogTrigger>
 			<DialogContent
@@ -94,7 +91,7 @@ const EventAllButton = ({
 						<div className="h-8">
 							<img className="h-full" src={logo} alt="logo" />
 						</div>
-						<div>All Events</div>
+						<div>{message.all} {message.events}</div>
 						<DialogPrimitive.Close>
 							<X className={'h-6 w-6'} />
 						</DialogPrimitive.Close>
@@ -148,7 +145,7 @@ const EventAllButton = ({
 												<span>{item[TAG_FUNC_END_T]?.toUpperCase()}</span>
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;Room: {item[TAG_FUNC_ROOM]}
+												&#x2022;{message.room}: {item[TAG_FUNC_ROOM]}
 											</div>
 											{item[TAG_FUNC_ACCESS] && (
 												<div className="ml-[10px] text-md text-gray-600 font-bold flex">
@@ -159,13 +156,13 @@ const EventAllButton = ({
 										</div>
 										<div className={'sm:flex'}>
 											<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;Suitable for: {item[TAG_FUNC_LOC_AUD]}
+												&#x2022;{message.suitableFor} {item[TAG_FUNC_LOC_AUD]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;Seats: {item[TAG_FUNC_CAP]}
+												&#x2022;{message.seats}: {item[TAG_FUNC_CAP]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;Language: {item[TAG_FUNC_LANG]}
+												&#x2022;{message.language}: {item[TAG_FUNC_LANG]}
 											</div>
 										</div>
 									</div>

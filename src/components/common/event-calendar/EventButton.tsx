@@ -49,6 +49,7 @@ const EventButton = ({
 	weekType: boolean
 	contactInfo: ContactInfo[]
 }) => {
+	const message = useConstants().message
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
@@ -119,7 +120,7 @@ const EventButton = ({
 								<span>{elm[TAG_FUNC_END_T]?.toUpperCase()}</span>
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;Room: {elm[TAG_FUNC_ROOM]}
+								&#x2022;{message.room}: {elm[TAG_FUNC_ROOM]}
 							</div>
 							{elm[TAG_FUNC_ACCESS] && (
 								<div className="ml-[10px] text-md text-gray-600 font-bold flex">
@@ -130,13 +131,13 @@ const EventButton = ({
 						</div>
 						<div className={'sm:flex'}>
 							<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;Suitable for: {elm[TAG_FUNC_LOC_AUD]}
+								&#x2022;{message.suitableFor}: {elm[TAG_FUNC_LOC_AUD]}
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;Seats: {elm[TAG_FUNC_CAP]}
+								&#x2022;{message.seats}: {elm[TAG_FUNC_CAP]}
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;Language: {elm[TAG_FUNC_LANG]}
+								&#x2022;{message.language}: {elm[TAG_FUNC_LANG]}
 							</div>
 						</div>
 						<DialogDescription
@@ -161,7 +162,7 @@ const EventButton = ({
 						className={
 							'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
 						}>
-						Close
+						{message.close}
 					</DialogPrimitive.Close>
 				</DialogFooter>
 			</DialogContent>

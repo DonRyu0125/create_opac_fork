@@ -11,9 +11,11 @@ import { Button } from '@/components/ui/button'
 import { fetch_get, getLibraryLocation } from './Service'
 import { calendarEvents } from '@/store'
 import { useAtom } from 'jotai'
-import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, DAYS_OF_WEEK, Day_obj } from './Constants'
+import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj } from './Constants'
+import useConstants from '@/hooks/useConstants'
 
 const EventCalendar = () => {
+	const message = useConstants().message
 	const [monthType, setMonthType] = useState<boolean>(true)
 	const [weekType, setWeekType] = useState<boolean>(false)
 	const [currentDate, setCurrentDate] = useState(new Date())
@@ -155,8 +157,8 @@ const EventCalendar = () => {
 			firstDayOfWeek.getDate() + 6
 		)
 
-		return `${firstDayOfWeek.toLocaleString('default', { month: 'short' })} ${firstDayOfWeek.getDate()} -  
-		${firstDayOfWeek.getMonth() !== nextDay.getMonth() ? nextDay.toLocaleString('default', { month: 'long' }) : ''} ${nextDay.getDate()}, ${currentDate.getFullYear()}`
+		return `${firstDayOfWeek.toLocaleString(message.dateType, { month: 'short' })} ${firstDayOfWeek.getDate()} -  
+		${firstDayOfWeek.getMonth() !== nextDay.getMonth() ? nextDay.toLocaleString(message.dateType, { month: 'long' }) : ''} ${nextDay.getDate()}, ${currentDate.getFullYear()}`
 	}
 
 	return (
@@ -174,7 +176,7 @@ const EventCalendar = () => {
 				</Button>
 				<div className="max-w-[330px] text-center text-3xl text-primary-foreground">
 					{monthType &&
-						currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+						currentDate.toLocaleString(message.dateType, { month: 'long', year: 'numeric' })}
 					{weekType && showWeek()}
 				</div>
 				<Button
@@ -192,14 +194,14 @@ const EventCalendar = () => {
 							'w-[67px] bg-black text-primary-foreground rounded hover:bg-black'
 						}
 						onClick={showMonthView}>
-						Month
+						{message.month}
 					</Button>
 					<Button
 						className={
 							'w-[67px] bg-black text-primary-foreground rounded hover:bg-black'
 						}
 						onClick={showWeekView}>
-						Week
+						{message.week}
 					</Button>
 				</div>
 			</div>
@@ -210,20 +212,20 @@ const EventCalendar = () => {
 						'w-1/2 bg-primary text-primary-foreground rounded hover:bg-black mr-1'
 					}
 					onClick={showMonthView}>
-					Month
+					{message.month}
 				</Button>
 				<Button
 					className={
 						'w-1/2 bg-primary text-primary-foreground rounded hover:bg-black ml-1'
 					}
 					onClick={showWeekView}>
-					Week
+					{message.week}
 				</Button>
 			</div>
 			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
 			<div className={'w-full mt-1'}>
 				<div className={'grid grid-cols-7 gap-1'}>
-					{DAYS_OF_WEEK.map((item, key) => {
+					{message.daysOfWeek.map((item, key) => {
 						return (
 							<div
 								key={key}

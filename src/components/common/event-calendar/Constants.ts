@@ -35,15 +35,10 @@ export interface Day_obj {
 //MINISIS REPORT
 export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
 export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_REPORT'
-//MINISIS DATABASE
-
 //MWI
 export const MAIN_MWI_APPLICATION = 'M2L_TAG_TO_BIBLIO'
-
-export const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const RSVP_CONFIRM_LANDING_PAGE_URL = 'http://donf.minisisinc.com/rsvp_confirm.html'
 export const RSVP_CANCEL_LANDING_PAGE_URL = 'http://donf.minisisinc.com/rsvp_cancel.html'
-
 export const SUB_MWI_APPLICATION = 'LIBRARY_LOCATION'
 export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7

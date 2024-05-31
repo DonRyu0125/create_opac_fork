@@ -55,6 +55,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 		})
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
+	const message = useConstants().message
 
 	const groupedByLocation = (filteredEvents: Cal_event[]) => {
 		let locationArr: any = {}
@@ -149,19 +150,19 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 														</span>
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;Room: {elm[TAG_FUNC_ROOM]}
+														&#x2022;{message.room}: {elm[TAG_FUNC_ROOM]}
 													</div>
 												</div>
 												<div className={'sm:flex'}>
 													<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;Suitable for:{' '}
+														&#x2022;{message.suitableFor}:{' '}
 														{elm[TAG_FUNC_LOC_AUD]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;Seats: {elm[TAG_FUNC_CAP]}
+														&#x2022;{message.seats}: {elm[TAG_FUNC_CAP]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;Language: {elm[TAG_FUNC_LANG]}
+														&#x2022;{message.language}: {elm[TAG_FUNC_LANG]}
 													</div>
 												</div>
 												<DialogDescription
@@ -189,7 +190,7 @@ const EventSumButton = ({ filteredEvents, weekType, monthType, contactInfo }: ev
 											className={
 												'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
 											}>
-											Close
+											{message.close}
 										</DialogPrimitive.Close>
 									</DialogFooter>
 								</>
