@@ -238,7 +238,6 @@ const RSVPCancelLandingPage = () => {
 	}
 
 	const sendRegConfirmEmail = async (obj: { HOME_SESSID: string | boolean; ID: string }) => {
-		console.log('obj', obj)
 		const encoded = encodeObj(
 			JSON.stringify({
 				...patronInfo,
