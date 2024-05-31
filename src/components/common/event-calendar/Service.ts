@@ -1,7 +1,7 @@
 import axios from 'axios'
 import X2JS from 'x2js' // Ensure X2JS is installed
-import { CALENDAR_WEEK_VIEW_DAYS, MAIN_MWI_APPLICATION, MONTH_REPORT } from './Constants'
-import { convertToArr } from '@/lib/utils'
+import { CALENDAR_WEEK_VIEW_DAYS, LIBRARY_LOCATION_REPORT, LIBRARY_LOCATION_XML_TAG, MAIN_MWI_APPLICATION, MONTH_REPORT, SUB_MWI_APPLICATION } from './Constants'
+import { convertToArr, convertXMLToJson } from '@/lib/utils'
 
 const getWeekRange = (currentDate: any) => {
 	const firstDayOfWeek: Date = new Date(currentDate)
@@ -48,3 +48,17 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		throw error
 	}
 }
+
+export const getLibraryLocation = async () => {
+	const response = await axios.get(
+		`/scripts/mwimain.dll/144/${SUB_MWI_APPLICATION}/${LIBRARY_LOCATION_REPORT}?commandsearch&exp=%2B%2B%40`, // ++@
+		{
+			headers: {
+				'Content-Type': 'text/xml',
+			},
+		}
+	)
+	const jsonData: any = convertXMLToJson(response)
+	return jsonData.xml[LIBRARY_LOCATION_XML_TAG]
+}
+

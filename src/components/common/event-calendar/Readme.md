@@ -51,4 +51,15 @@ This is the Event Calendar for showing events and make the user register the eve
 
 ```
 
+## Database Structure
+*Developed based on Norfolk library website
 
+Username: norfolk_m2l_mgr
+Main: M2L_TAG
+For contact info: LIBRARY_LOCATION
+For RSVP log: TAG_RSVP_PATRON_LOG
+
+
+## MINISIS Report Structure
+
+Main: MONTHLY_CALENDAR_NEW_T4
