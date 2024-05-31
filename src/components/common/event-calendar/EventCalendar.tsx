@@ -10,7 +10,7 @@ import EventCalendarEventList from './EventCalendarEventList'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { fetch_get } from './Service'
-import { calendarEvents, landingPageClick } from '@/store'
+import { calendarEvents } from '@/store'
 import { useAtom } from 'jotai'
 import { convertXMLToJson } from '@/lib/utils'
 import {
@@ -18,10 +18,11 @@ import {
 	CALENDAR_WEEK_VIEW_DAYS,
 	DAYS_OF_WEEK,
 	Day_obj,
+	LIBRARY_LOCATION_REPORT,
+	LIBRARY_LOCATION_XML_TAG,
+	SUB_MWI_APPLICATION,
 } from './Constants'
-import EventCalendarEventList from './EventCalendarEventList'
-import EventCalendarFilter from './EventCalendarFilter'
-import { fetch_get } from './Service'
+
 
 const EventCalendar = () => {
 	const [monthType, setMonthType] = useState<boolean>(true)
