@@ -7,22 +7,11 @@
 import React, { useEffect, useState } from 'react'
 import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
-import axios from 'axios'
 import { Button } from '@/components/ui/button'
-import { fetch_get } from './Service'
+import { fetch_get, getLibraryLocation } from './Service'
 import { calendarEvents } from '@/store'
 import { useAtom } from 'jotai'
-import { convertXMLToJson } from '@/lib/utils'
-import {
-	CALENDAR_START_MONTH,
-	CALENDAR_WEEK_VIEW_DAYS,
-	DAYS_OF_WEEK,
-	Day_obj,
-	LIBRARY_LOCATION_REPORT,
-	LIBRARY_LOCATION_XML_TAG,
-	SUB_MWI_APPLICATION,
-} from './Constants'
-
+import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, DAYS_OF_WEEK, Day_obj } from './Constants'
 
 const EventCalendar = () => {
 	const [monthType, setMonthType] = useState<boolean>(true)
@@ -40,21 +29,8 @@ const EventCalendar = () => {
 	}, [currentDate, weekType])
 
 	useEffect(() => {
-		getLibraryLocation().then((res)=>setContactInfo(res))
+		getLibraryLocation().then((res) => setContactInfo(res))
 	}, [])
-
-	const getLibraryLocation = async () => {
-		const response = await axios.get(
-			`/scripts/mwimain.dll/144/${SUB_MWI_APPLICATION}/${LIBRARY_LOCATION_REPORT}?commandsearch&exp=%2B%2B%40`, // ++@
-			{
-				headers: {
-					'Content-Type': 'text/xml',
-				},
-			}
-		)
-		const jsonData: any = convertXMLToJson(response)
-		setContactInfo(jsonData.xml[LIBRARY_LOCATION_XML_TAG])
-	}
 
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate, weekType)
