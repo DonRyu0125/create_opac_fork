@@ -48,7 +48,6 @@ export interface eventSumType {
 }
 
 const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
-	const [weekType, _] = useAtom(calendarWeekType)
 	const [monthType, __] = useAtom(calendarMonthType)
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
