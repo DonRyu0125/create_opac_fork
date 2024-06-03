@@ -149,13 +149,15 @@ const EventButton = ({
 						</DialogDescription>
 					</div>
 					<div className={'w-full sm:w-4/12'}>
-						<EventRSVPForm
-							sisnNumber={elm[SISN]}
-							capacity={elm[TAG_FUNC_CAP]}
-							patrons={convertToArr(elm[PATRON])}
-							event={elm}
-							contactInfo={contactInfo}
-						/>
+						{elm[TAG_FUNC_RSVP] && (
+							<EventRSVPForm
+								sisnNumber={elm[SISN]}
+								capacity={elm[TAG_FUNC_CAP]}
+								patrons={convertToArr(elm[PATRON])}
+								event={elm}
+								contactInfo={contactInfo}
+							/>
+						)}
 					</div>
 				</div>
 				<DialogFooter>
