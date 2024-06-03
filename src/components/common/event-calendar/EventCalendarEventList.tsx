@@ -13,7 +13,7 @@ import {
 import { convertLowerTrim } from '@/lib/utils'
 import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'
-import { calendarWeekType } from '@/store'
+import { calendarMonthType, calendarWeekType } from '@/store'
 import { useAtom } from 'jotai'
 
 export interface Event_list {
@@ -32,6 +32,7 @@ const EventCalendarEventList = ({
 }: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 	const [weekType, _] = useAtom(calendarWeekType)
+	const [monthType, __] = useAtom(calendarMonthType)
 	useEffect(() => {
 		const updatedFilteredEvents = currentEvent?.filter((item: Cal_event) => {
 			const { day, month, year } = changeStrToDate(item[TAG_FUNC_DATE]);
@@ -95,14 +96,14 @@ const EventCalendarEventList = ({
 
 
 	return (
-		<div className={`${!weekType ? 'h-4/5' : 'h-[98%]'} relative w-full`}>
+		<div className={`${monthType ? 'h-4/5' : 'h-[98%]'} relative w-full`}>
 			{/* Event button */}
 			<EventSumButton
 				filteredEvents={filteredEvents}
 				contactInfo={contactInfo}
 			/>
 			{/* All events button */}
-			{!weekType && filteredEvents.length > 2 && (
+			{monthType && filteredEvents.length > 2 && (
 				<div className={'h-[20px] absolute bottom-0 w-full'}>
 					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} />
 				</div>

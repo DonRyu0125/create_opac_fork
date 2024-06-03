@@ -40,7 +40,7 @@ import EventButton from './EventButton'
 import { fetch_get } from './Service'
 import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
-import { calendarWeekType } from '@/store'
+import { calendarMonthType, calendarWeekType } from '@/store'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]
@@ -49,6 +49,7 @@ export interface eventSumType {
 
 const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 	const [weekType, _] = useAtom(calendarWeekType)
+	const [monthType, __] = useAtom(calendarMonthType)
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
@@ -78,7 +79,7 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 
 	return (
 		<>
-			{weekType && filteredEvents.length > 3 ? (
+			{monthType && filteredEvents.length > 3 ? (
 				<div className={'h-full mb-[2px] overflow-x-hidden'}>
 					{groupedByLocation(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>
