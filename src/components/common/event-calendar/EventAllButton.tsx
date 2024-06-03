@@ -32,11 +32,14 @@ import {
 	SISN,
 	ContactInfo,
 	TAG_FUNC_ACCESS,
+	TAG_FUNC_CANCEL,
+	TAG_FUNC_CAN_RES,
 } from './Constants'
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
 import { AccordionContent } from '@/components/ui/accordion'
 import useConstants from '@/hooks/useConstants'
+import EventRSVPCancel from './EventRSVPCancel'
 
 const EventAllButton = ({
 	filteredEvents,
@@ -91,7 +94,9 @@ const EventAllButton = ({
 						<div className="h-8">
 							<img className="h-full" src={logo} alt="logo" />
 						</div>
-						<div>{message.all} {message.events}</div>
+						<div>
+							{message.all} {message.events}
+						</div>
 						<DialogPrimitive.Close>
 							<X className={'h-6 w-6'} />
 						</DialogPrimitive.Close>
@@ -126,7 +131,10 @@ const EventAllButton = ({
 							</AccordionTrigger>
 							<AccordionContent
 								style={{ borderRadius: '5px' }} // Tailiwnd rounded-lg is not working so I put inline style here
-								className={'border-2 border-lime-950'}>
+								className={'border-2 border-lime-950 relative'}>
+								{item[TAG_FUNC_CANCEL] && (
+									<EventRSVPCancel reason={item[TAG_FUNC_CAN_RES]} />
+								)}
 								<div className={'flex '}>
 									<div
 										className={
@@ -156,7 +164,8 @@ const EventAllButton = ({
 										</div>
 										<div className={'sm:flex'}>
 											<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;{message.suitableFor} {item[TAG_FUNC_LOC_AUD]}
+												&#x2022;{message.suitableFor}{' '}
+												{item[TAG_FUNC_LOC_AUD]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
 												&#x2022;{message.seats}: {item[TAG_FUNC_CAP]}

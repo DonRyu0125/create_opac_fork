@@ -15,6 +15,8 @@ export interface Cal_event {
 	[TAG_FUNC_LANG]: string
 	[PATRON]: patron[]
 	[TAG_FUNC_ACCESS]: string
+	[TAG_FUNC_CANCEL]: string
+	[TAG_FUNC_CAN_RES]: string
 }
 
 export interface patron {

@@ -52,5 +52,6 @@
 	"firstName": "Prénom",
 	"lastName": "Nom de famille",
 	"email": "Email",
-	"attendee": "Participant"
+	"attendee": "Participant",
+	"eventCancel":"Événement annulé"
 }

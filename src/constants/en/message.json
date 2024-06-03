@@ -52,5 +52,6 @@
 	"firstName": "First Name",
 	"lastName": "Last Name",
 	"email": "Email",
-	"attendee": "Attendee"
+	"attendee": "Attendee",
+	"eventCancel":"Event Canceled"
 }
