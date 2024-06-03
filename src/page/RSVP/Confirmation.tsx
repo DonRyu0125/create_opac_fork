@@ -99,6 +99,7 @@ const RSVPCancelLandingPage = () => {
 		})
 		let jsonObj = JSON.parse(obj)
 
+		// check the expired or not, user should confirm within TAG_FUNC_P_CONFIRM_EXP_HOURS
 		if (isExpired(jsonObj.TAG_FUNC_P_T)) {
 			setStatus(STATUS_TYPE.Expired)
 			return

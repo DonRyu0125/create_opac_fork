@@ -424,7 +424,7 @@ const ShowButton = ({
 			) : (
 				<div className={'h-3/6 flex flex-col items-center justify-center '}>
 					<div>{message.privateProperty}</div>
-					<div>{message.contactInfoNotProvided}</div>
+					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
 				</div>
 			)}
 		</div>
