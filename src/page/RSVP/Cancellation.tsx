@@ -1,6 +1,3 @@
-import { Button } from '@/components/ui/button'
-import Layout from '@/components/layouts'
-import React, { useEffect, useState } from 'react'
 import {
 	CANCEL_CONFIRMATION_EMAIL_T,
 	FUNC_LOC_P_GRP,
@@ -22,13 +19,17 @@ import {
 	TAG_P_STATUS,
 	TAG_RSVP_PATRON_LOG,
 } from '@/components/common/event-calendar/Constants'
-import axios from 'axios'
-import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
-import { RegInvalid, RegOutDate } from './Confirmation'
-import { fetch_get } from '@/components/common/event-calendar/Service'
-import { useAtom } from 'jotai'
+import Layout from '@/components/layouts'
+import { Button } from '@/components/ui/button'
+import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import { landingPageClick } from '@/store'
+import axios from 'axios'
+import { useAtom } from 'jotai'
+import { useEffect, useState } from 'react'
+import { RegInvalid, RegOutDate } from './Confirmation'
+import { useLanguage } from '@/hooks/useLanguage'
+import useConstants from '@/hooks/useConstants'
 
 const STATUS_TYPE = {
 	Invalid: 'Invalid',
@@ -267,7 +268,7 @@ const RSVPCancelLandingPage = () => {
 
 	return (
 		<Layout>
-			<div className="flex h-full flex-col bg-white h-[800px]">
+			<div className="flex flex-col bg-white h-[800px]">
 				<img
 					src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
 					alt=""
@@ -308,16 +309,19 @@ const RegNotInTheList = () => {
 	)
 }
 
+/**
+ * 
+ * Example for using multi-langual translation
+ */
 const RegSuccess = () => {
+	const { rsvpCancellationMessage } = useConstants().message
 	return (
 		<div className="text-center">
 			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
 				Your registration is successfully canceled.
 			</h1>
 
-			<p className="mt-4 text-gray-500">
-				We will send you email about your cancellation detail
-			</p>
+			<p className="mt-4 text-gray-500">{rsvpCancellationMessage} </p>
 		</div>
 	)
 }
