@@ -16,6 +16,7 @@ import {
 	TAG_FUNC_END_T,
 	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_P_ATTND,
+	TAG_FUNC_P_CONFIRM_EXP_HOURS,
 	TAG_FUNC_P_EMAIL,
 	TAG_FUNC_P_FIRST,
 	TAG_FUNC_P_ID,
@@ -60,6 +61,7 @@ const STATUS_TYPE = {
 	OutDate: 'OutDate',
 	InList: 'InList', // Already registered
 	Full: 'Full', // Fully registered
+	Expired: 'Expired',
 }
 
 const RSVPCancelLandingPage = () => {
@@ -96,6 +98,11 @@ const RSVPCancelLandingPage = () => {
 			obj = decodeObj(value)
 		})
 		let jsonObj = JSON.parse(obj)
+
+		if (isExpired(jsonObj.TAG_FUNC_P_T)) {
+			setStatus(STATUS_TYPE.Expired)
+			return
+		}
 		// check the date is available
 		if (isDatePast(jsonObj.TAG_FUNC_DATE)) {
 			setStatus(STATUS_TYPE.OutDate)
@@ -110,6 +117,14 @@ const RSVPCancelLandingPage = () => {
 			}
 			return
 		})
+	}
+
+	const isExpired = (registered_time: string) => {
+		const givenTime = new Date(registered_time)
+		const currentTime = new Date()
+		const milliseconds = TAG_FUNC_P_CONFIRM_EXP_HOURS * 60 * 60 * 1000
+		const timeDifference = currentTime.getTime() - givenTime.getTime()
+		return timeDifference > milliseconds
 	}
 
 	// check the email is already registered or not
@@ -305,6 +320,7 @@ const RSVPCancelLandingPage = () => {
 			})
 	}
 
+	// Various view for different status
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
@@ -317,6 +333,8 @@ const RSVPCancelLandingPage = () => {
 				return <RegInList />
 			case STATUS_TYPE.Full:
 				return <RegFullEvent />
+			case STATUS_TYPE.Expired:
+				return <RegExpired />
 			case STATUS_TYPE.Confirm:
 				return <RegConfirmTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
@@ -348,6 +366,22 @@ const RSVPCancelLandingPage = () => {
 				)}
 			</div>
 		</Layout>
+	)
+}
+
+const RegExpired = () => {
+	return (
+		<div className="text-center">
+			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+				Your registration has expired!
+			</h1>
+			<p className="mt-4 text-gray-500">Please visit the website and register again.</p>
+			<a
+				href="#"
+				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+				Go to website
+			</a>
+		</div>
 	)
 }
 

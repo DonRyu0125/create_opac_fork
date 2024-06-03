@@ -80,6 +80,7 @@ export const TAG_FUNC_P_ATTND = 'TAG_FUNC_P_ATTND'
 export const TAG_FUNC_ACCESS = 'TAG_FUNC_ACCESS'
 export const EVENT_RSVP_YES = 'X'
 //Others
+export const TAG_FUNC_P_CONFIRM_EXP_HOURS = 24
 export const TAG_FUNC_P_ATTND_DEFAULT = 1
 export const TAG_FUNC_P_ATTND_MAX = 4
 export const TAG_FUNC_DTE_LIST = 'list'
