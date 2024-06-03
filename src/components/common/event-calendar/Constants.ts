@@ -68,6 +68,8 @@ export const TAG_FUNC_RSVP = 'TAG_FUNC_RSVP'
 export const TAG_FUNC_CAP = 'TAG_FUNC_CAP'
 export const TAG_FUNC_ROOM = 'TAG_FUNC_ROOM'
 export const TAG_FUNC_LANG = 'TAG_FUNC_LANG'
+export const TAG_FUNC_CANCEL = 'TAG_FUNC_CANCEL'
+export const TAG_FUNC_CAN_RES = 'TAG_FUNC_CAN_RES'
 //Patron group by event
 export const FUNC_LOC_P_GRP = 'FUNC_LOC_P_GRP'
 export const PATRON = 'PATRON'
