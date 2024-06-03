@@ -21,6 +21,7 @@ import { useState } from 'react'
 import Link from '@/components/common/Link'
 import { Record } from '@/types/record'
 import { SummarySample } from '@/samples'
+import useConstants from '@/hooks/useConstants'
 
 const SummaryRecords = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -37,9 +38,10 @@ const SummaryRecords = () => {
 
 const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
+	const fields = useConstants().fields
 	const database = record.database_name
 	const recordLink = record.record_link
-	const title = getFieldDataByLabel(record, database, 'Title') || 'Untitled'
+	const title = getFieldDataByLabel(record, fields, database, 'Title') || 'Untitled'
 	const thumbnail =
 		record.media &&
 		Array.isArray(record.media.im_access_link) &&
@@ -48,12 +50,14 @@ const RecordView = ({ record }: { record: Record }) => {
 
 	const gridFields = getFieldsFromRecord(
 		record,
+		fields,
 		(item) => item.grid === true,
 		(data, item) => <DataWithLabel key={item.name} label={item.label || ''} items={data} />
 	) as React.ReactNode
 
 	const listFields = getFieldsFromRecord(
 		record,
+		fields,
 		() => true,
 		(data, item) => (
 			<DataWithLabel
@@ -71,7 +75,7 @@ const RecordView = ({ record }: { record: Record }) => {
 				className="border-primary"
 				title={<Link href={recordLink}>{truncateString(title)}</Link>}
 				description={gridFields}
-				thumbnail={thumbnail || 'https://www.svgrepo.com/show/451131/no-image.svg'}
+				thumbnail={thumbnail || 'https://placehold.co/250x250'}
 				footer={
 					<div className="flex h-4 items-center space-x-4 w-full justify-evenly ">
 						<RecordAction record={record} />
@@ -85,7 +89,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		<DetailInfoCard
 			title={<Link href={recordLink}>{title}</Link>}
 			className="col-span-3 border-primary"
-			thumbnail={thumbnail || 'https://www.svgrepo.com/show/451131/no-image.svg'}
+			thumbnail={thumbnail || 'https://placehold.co/250x250'}
 			footer={
 				<div>
 					<Separator />

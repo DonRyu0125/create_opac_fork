@@ -1,8 +1,12 @@
 import FAQ from '@/page/FAQ'
 import Home from '@/page/Home'
+import NoRecord from '@/page/NoRecord'
 import NotFoundPage from '@/page/NotFoundPage'
+import Admin from '@/page/admin'
 import Detail from '@/page/detail'
 import Summary from '@/page/summary'
+import RSVP_CANCEL from '@/page/RSVP/Cancellation'
+import RSVP_CONFIRM from '@/page/RSVP/Confirmation'
 
 export type TRoute = Record<string, () => React.ReactNode>
 
@@ -11,6 +15,10 @@ export const ROUTES: TRoute = {
 	summary: Summary,
 	detail: Detail,
 	faq: FAQ,
+	admin: Admin,
+	'no-record': NoRecord,
+	rsvp_cancel: RSVP_CANCEL,
+	rsvp_confirm: RSVP_CONFIRM
 }
 
 /**

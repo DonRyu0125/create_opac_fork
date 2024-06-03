@@ -1,4 +1,4 @@
-import { styles } from '@/constants'
+import useConstants from '@/hooks/useConstants'
 import { createContext, useEffect, useState } from 'react'
 
 type Theme = 'dark' | 'light' | 'system'
@@ -29,6 +29,7 @@ export function ThemeProvider({
 	storageKey = 'vite-ui-theme',
 	...props
 }: ThemeProviderProps) {
+	const styles = useConstants().styles
 	const defaultCustomKey = `theme-${styles.theme}`
 	const [theme, setTheme] = useState<Theme>(
 		() => (localStorage.getItem(storageKey) as Theme) || defaultTheme

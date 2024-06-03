@@ -1,0 +1,15 @@
+{
+	"siteName": "SFOPHO",
+	"logo": "https://www.sfopho.com/wp-content/uploads/elementor/thumbs/SFOPHO_transparent-blanc-ojdlp57g5x9dvzk1n5cew5vrbxvj1c67ydrzggq11k.png",
+	"navigations": [
+		{
+			"url": "/",
+			"title": "Accueil"
+		},
+
+		{
+			"url": "/faq.html",
+			"title": "FAQ"
+		}
+	]
+}
