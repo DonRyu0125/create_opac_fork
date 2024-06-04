@@ -83,7 +83,7 @@ const EventButton = ({
 									<div>{elm[TAG_FUNC_START_T]?.toUpperCase()}-</div>
 									<div>{elm[TAG_FUNC_END_T]?.toUpperCase()}</div>
 								</div>
-								<div className={'w-[18px]'}>
+								<div className={'hidden sm:block w-[18px]'}>
 									{elm[TAG_FUNC_RSVP] && <SquareUserRound />}
 								</div>
 							</div>
