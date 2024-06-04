@@ -34,6 +34,7 @@ import {
 	TAG_FUNC_ACCESS,
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
+	TAG_FUNC_RSVP,
 } from './Constants'
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
@@ -182,13 +183,15 @@ const EventAllButton = ({
 									{item[TAG_FUNC_DESC]}
 								</DialogDescription>
 								<div className={'h-[380px] rounded border-2 font-bold m-2 p-2'}>
-									<EventRSVPForm
-										capacity={item[TAG_FUNC_CAP]}
-										patrons={convertToArr(item[PATRON])}
-										sisnNumber={item[SISN]}
-										event={item}
-										contactInfo={contactInfo}
-									/>
+									{item[TAG_FUNC_RSVP] && (
+										<EventRSVPForm
+											capacity={item[TAG_FUNC_CAP]}
+											patrons={convertToArr(item[PATRON])}
+											sisnNumber={item[SISN]}
+											event={item}
+											contactInfo={contactInfo}
+										/>
+									)}
 								</div>
 								{/*  Description more button func */}
 								{/* <DialogDescription
