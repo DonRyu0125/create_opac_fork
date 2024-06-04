@@ -41,7 +41,7 @@ import EventRSVPForm from './EventRSVPForm'
 import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarWeekType } from '@/store'
-import EventRSVPCancel from './EventRSVPCancel'
+import EventRSVPCancel from './EventCancel'
 
 const EventButton = ({
 	elm,

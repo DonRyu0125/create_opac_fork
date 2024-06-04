@@ -42,7 +42,7 @@ import EventButton from './EventButton'
 import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarMonthType, calendarWeekType } from '@/store'
-import EventRSVPCancel from './EventRSVPCancel'
+import EventRSVPCancel from './EventCancel'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]

@@ -1,7 +1,8 @@
 import React from 'react'
 import { BookX } from 'lucide-react'
 import useConstants from '@/hooks/useConstants'
-const EventRSVPCancel = ({ reason }: { reason: string }) => {
+import { EVENT_CANCEL_NOTI_MODAL_BG } from './Constants'
+const EventCancel = ({ reason }: { reason: string }) => {
     const message = useConstants().message
 	return (
 		<div
@@ -10,7 +11,7 @@ const EventRSVPCancel = ({ reason }: { reason: string }) => {
 			}>
 			<div
 				className={
-					'bg-red-900 w-[300px] h-[200px] rounded flex justify-center items-center text-center'
+					`${EVENT_CANCEL_NOTI_MODAL_BG} w-[300px] h-[200px] rounded flex justify-center items-center text-center`
 				}>
 				<div className={'text-center p-1'}>
 					<div className={'flex justify-center mb-2'}>
@@ -23,4 +24,4 @@ const EventRSVPCancel = ({ reason }: { reason: string }) => {
 	)
 }
 
-export default EventRSVPCancel
+export default EventCancel

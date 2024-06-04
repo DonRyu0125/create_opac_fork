@@ -13,7 +13,7 @@ import { convertLowerTrim, convertToArr } from '@/lib/utils'
 import { cn } from '@/lib/utils'
 import * as Accordion from '@radix-ui/react-accordion'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { Accessibility, X } from 'lucide-react'
+import { Accessibility, BookX, X } from 'lucide-react'
 import {
 	Cal_event,
 	TAG_FUNC_DATE,
@@ -35,12 +35,13 @@ import {
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
 	TAG_FUNC_RSVP,
+	EVENT_CANCEL_NOTI_MODAL_BG,
 } from './Constants'
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
 import { AccordionContent } from '@/components/ui/accordion'
 import useConstants from '@/hooks/useConstants'
-import EventRSVPCancel from './EventRSVPCancel'
+import EventRSVPCancel from './EventCancel'
 
 const EventAllButton = ({
 	filteredEvents,
@@ -131,10 +132,17 @@ const EventAllButton = ({
 								</div>
 							</AccordionTrigger>
 							<AccordionContent
-								style={{ borderRadius: '5px' }} // Tailiwnd rounded-lg is not working so I put inline style here
+								style={{ borderRadius: '5px' }} // Tailwind rounded-lg is not working so I put inline style here
 								className={'border-2 border-lime-950 relative'}>
 								{item[TAG_FUNC_CANCEL] && (
-									<EventRSVPCancel reason={item[TAG_FUNC_CAN_RES]} />
+									<div
+										className={
+											`absolute z-40 ${EVENT_CANCEL_NOTI_MODAL_BG} rounded mx-auto left-0 right-0 w-[250px] h-[100px] top-1/4 text-white flex justify-center items-center`
+										}>
+										<div className={'flex justify-center items-center text-xl'}>
+											<BookX /> {message.eventCancel}
+										</div>
+									</div>
 								)}
 								<div className={'flex '}>
 									<div
@@ -182,8 +190,8 @@ const EventAllButton = ({
 									className={`min-h-[100px] p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									{item[TAG_FUNC_DESC]}
 								</DialogDescription>
-								<div className={'h-[380px] rounded border-2 font-bold m-2 p-2'}>
-									{item[TAG_FUNC_RSVP] && (
+								{item[TAG_FUNC_RSVP] && !item[TAG_FUNC_CANCEL] && (
+									<div className={'h-[380px] font-bold m-2 p-2'}>
 										<EventRSVPForm
 											capacity={item[TAG_FUNC_CAP]}
 											patrons={convertToArr(item[PATRON])}
@@ -191,8 +199,8 @@ const EventAllButton = ({
 											event={item}
 											contactInfo={contactInfo}
 										/>
-									)}
-								</div>
+									</div>
+								)}
 								{/*  Description more button func */}
 								{/* <DialogDescription
 									className={`${showFullStr[idx] ? 'h-72' : 'h-10'} p-2 break-all overflow-x-hidden overflow-y-auto`}>
