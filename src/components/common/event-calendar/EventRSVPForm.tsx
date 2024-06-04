@@ -389,7 +389,7 @@ const ShowButton = ({
 				className={
 					'w-full h-3/6 flex flex-col items-center justify-evenly space-evenly border-b-4'
 				}>
-				<div className={'flex'}>
+				<div className={'flex justify-center items-center'}>
 					<SquareUserRound /> {message.registrationRequired}
 				</div>
 				<Button
@@ -398,13 +398,13 @@ const ShowButton = ({
 					onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>
 					{message.register}
 				</Button>
-				<div className={'flex items-center justify-center'}>
+				<div className={'flex justify-center items-center'}>
 					{capacity - calNumOfPatron(patrons) <= 0 ? (
-						<div className={'flex text-red-600 items-center'}>
+						<div className={'flex text-red-600 justify-center items-center'}>
 							{message.noSeatsRemaining}
 						</div>
 					) : (
-						<div className={'flex text-lime-800 items-center'}>
+						<div className={'flex text-lime-800 justify-center items-center'}>
 							<BadgeCheck />{' '}
 							{`${capacity - calNumOfPatron(patrons)} ${message.seatsRemaining}`}
 						</div>
