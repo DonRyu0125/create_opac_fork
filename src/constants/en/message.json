@@ -31,6 +31,8 @@
 	"events": "Events",
 	"registrationRequired": "Registration Required",
 	"register": "Register",
+	"registered":"Registered",
+	"unregistered":"Unregister",
 	"noSeatsRemaining": "No Seats are remaining",
 	"seatsRemaining": "seats remaining",
 	"contactInfo": "Contact Info",
@@ -54,6 +56,17 @@
 	"email": "Email",
 	"attendee": "Attendee",
 	"eventCancel":"Event Canceled",
-	"confirmLandingRegOutDate":
-	"<div className='text-center'><h1 className='landing-page-title'>The event date has already passed.</h1><p className='landing-page-sub-title'>Please check our website for future events.</p><a href='#' className='landing-page-button'>Go to website</a></div>"
+	"spotReserved":"spot reserved",
+	"confirm":"Confirm",
+	"pleaseConfirm":"Please confirm your registration",
+	"pleaseCancel":"This will cancel your registration for",
+	"confirmLandingExpired":	"<div class='text-center'><h1 class='landing-page-title'>Your registration has expired!</h1><p class='landing-page-sub-title'>Please visit the website and register again.</p><a href='#' class='landing-page-button'>Go to website</a></div>",
+	"confirmLandingInList":	"<div class='text-center'><h1 class='landing-page-title'>You are already in the list!</h1><p class='landing-page-sub-title'>Please check your registration confirmation email.</p><a href='#' class='landing-page-button'>Go to website</a></div>",
+	"confirmLandingFullEvent":"<div class='text-center'><h1 class='landing-page-title'>This event is already fully registered.</h1><p class='landing-page-sub-title'>Please check our website for updates on future events.</p><a href='#' class='landing-page-button'>Go to website</a></div>",
+	"confirmLandingOutDate":
+	"<div class='text-center'><h1 class='landing-page-title'>The event has already taken place</h1><p class='landing-page-sub-title'>Please check our website for future events.</p><a href='#' class='landing-page-button'>Go to website</a></div>",
+	"confirmLandingInvalid":"<div class='text-center'><h1 class='landing-page-title'>We can't find that page.</h1><p class='landing-page-sub-title'>Try searching again, or return home to start from the beginning.</p><a href='#' class='landing-page-button'>Go to website</a></div>",
+	"confirmLandingSuccess":"<div class='text-center'><h1 class='landing-page-title'>Your registration is successfully done.</h1><p class='landing-page-sub-title'>We will send you an email with the details, and you can also cancel through the email.</p></div>",
+	"cancelLandingNotIntheList":"<div class='text-center'><h1 class='landing-page-title'>You are not in the List!</h1><p class='landing-page-sub-title'>You already canceled the event.</p><a href='#' class='landing-page-button'>Go to website</a></div>",
+	"cancelLandingSuccess":"<div class='text-center'><h1 class='landing-page-title'>Your registration is successfully canceled.</h1><p class='landing-page-sub-title'>We will send you email about your cancellation detail.</p></div>"
 }

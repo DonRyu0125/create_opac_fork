@@ -25,7 +25,8 @@ import {
 import axios from 'axios'
 import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
-import { RegInvalid, RegOutDate } from './Confirmation'
+import { Invalid, OutDate } from './Confirmation'
+import useConstants from '@/hooks/useConstants'
 
 
 const STATUS_TYPE = {
@@ -247,15 +248,15 @@ const RSVPCancelLandingPage = () => {
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return <RegNotInTheList />
+				return <NotInTheList />
 			case STATUS_TYPE.Success:
-				return <RegSuccess />
+				return <Success />
 			case STATUS_TYPE.OutDate:
-				return <RegOutDate />
+				return <OutDate />
 			case STATUS_TYPE.Cancel:
-				return <RegCancelTmp patronInfo={patronInfo} onClick={onClick} />
+				return <CancelTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
-				return <RegInvalid />
+				return <Invalid />
 		}
 	}
 
@@ -286,41 +287,22 @@ const RSVPCancelLandingPage = () => {
 	)
 }
 
-const RegNotInTheList = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Your are not in the List!
-			</h1>
-			<p className="mt-4 text-gray-500">You already canceled the event</p>
-			<a
-				href="#"
-				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				Go to website
-			</a>
-		</div>
-	)
+const NotInTheList = () => {
+	const message: any = useConstants().message
+	return <div dangerouslySetInnerHTML={{ __html: message.cancelLandingNotIntheList }}></div>
 }
 
-const RegSuccess = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Your registration is successfully canceled.
-			</h1>
-
-			<p className="mt-4 text-gray-500">
-				We will send you email about your cancellation detail
-			</p>
-		</div>
-	)
+const Success = () => {
+	const message: any = useConstants().message
+	return <div dangerouslySetInnerHTML={{ __html: message.cancelLandingSuccess }}></div>
 }
 
-const RegCancelTmp = ({ patronInfo, onClick }: any) => {
+const CancelTmp = ({ patronInfo, onClick }: any) => {
+	const message: any = useConstants().message
 	return (
 		<div className="text-center">
 			<h1 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
-				This will cancel your registration for :
+				{message.pleaseCancel} :
 			</h1>
 			<h2 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
 				{patronInfo?.TAG_NAME}
@@ -333,7 +315,7 @@ const RegCancelTmp = ({ patronInfo, onClick }: any) => {
 						{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
 					</div>
 					<div>
-						{patronInfo?.BRANCH_ADDRESS}, Room: {patronInfo?.TAG_FUNC_ROOM}
+						{patronInfo?.BRANCH_ADDRESS}, {message.room}: {patronInfo?.TAG_FUNC_ROOM}
 					</div>
 				</div>
 				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
@@ -341,16 +323,16 @@ const RegCancelTmp = ({ patronInfo, onClick }: any) => {
 						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
 					</div>
 					<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
-					<div>Registered: {patronInfo?.TAG_FUNC_P_T}</div>
+					<div>{message.registered}: {patronInfo?.TAG_FUNC_P_T}</div>
 					<div className="border-2 border-dashed p-2">
-						{patronInfo?.TAG_FUNC_P_ATTND} spot reserved
+						{patronInfo?.TAG_FUNC_P_ATTND} {message.spotReserved}
 					</div>
 				</div>
 			</div>
 			<Button
 				onClick={onClick}
 				className="flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded bg-red-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				<div>Unregister</div>
+				<div>{message.unregistered}</div>
 			</Button>
 		</div>
 	)

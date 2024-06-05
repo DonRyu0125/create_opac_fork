@@ -327,21 +327,21 @@ const RSVPCancelLandingPage = () => {
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return <RegInvalid />
+				return <Invalid />
 			case STATUS_TYPE.Success:
-				return <RegSuccess />
+				return <Success />
 			case STATUS_TYPE.OutDate:
-				return <RegOutDate />
+				return <OutDate />
 			case STATUS_TYPE.InList:
-				return <RegInList />
+				return <InList />
 			case STATUS_TYPE.Full:
-				return <RegFullEvent />
+				return <FullEvent />
 			case STATUS_TYPE.Expired:
-				return <RegExpired />
+				return <Expired />
 			case STATUS_TYPE.Confirm:
-				return <RegConfirmTmp patronInfo={patronInfo} onClick={onClick} />
+				return <ConfirmTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
-				return <RegInvalid />
+				return <Invalid />
 		}
 	}
 
@@ -370,106 +370,42 @@ const RSVPCancelLandingPage = () => {
 	)
 }
 
-const RegExpired = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Your registration has expired!
-			</h1>
-			<p className="mt-4 text-gray-500">Please visit the website and register again.</p>
-			<a
-				href="#"
-				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				Go to website
-			</a>
-		</div>
-	)
-}
-
-
-
-const RegInList = () => {
+const Expired = () => {
 	const message: any = useConstants().message
-	return (
-		// <div className="text-center">
-			// <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-			// 	You are already in the list!
-			// </h1>
-		// 	<p className="mt-4 text-gray-500">Please check your registration confirm email</p>
-		// 	<a
-		// 		href="#"
-		// 		className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-		// 		Go to website
-		// 	</a>
-		// </div>
-		<div dangerouslySetInnerHTML={{ __html: '<h1 class="landing-page-title">You are already in the list!</h1>' }}></div>
-	)
+	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingExpired }}></div>
 }
 
-const RegFullEvent = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				This event is already fully registered.
-			</h1>
-			<p className="mt-4 text-gray-500">
-				Please check our website for updates on future events.
-			</p>
-			<a
-				href="#"
-				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				Go to website
-			</a>
-		</div>
-	)
-}
-
-export const RegOutDate = () => {
+const InList = () => {
 	const message: any = useConstants().message
-	// return(
-	// 	<div className='text-center'><h1 className='landing-page-title'>The event date has already passed.</h1><p className='landing-page-sub-title'>Please check our website for future events.</p><a href='#' className='landing-page-button'>Go to website</a></div>
-	// )
-	 return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingRegOutDate }}></div>
+	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInList }}></div>
 }
 
-export const RegInvalid = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				We can't find that page.
-			</h1>
-			<p className="mt-4 text-gray-500">
-				Try searching again, or return home to start from the beginning.
-			</p>
-			<a
-				href="#"
-				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				Go to website
-			</a>
-		</div>
-	)
+const FullEvent = () => {
+	const message: any = useConstants().message
+	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingFullEvent }}></div>
 }
 
-const RegSuccess = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Your registration is successfully done.
-			</h1>
-
-			<p className="mt-4 text-gray-500">
-				We will send you an email with the details, and you can also cancel through the
-				email.
-			</p>
-		</div>
-	)
+export const OutDate = () => {
+	const message: any = useConstants().message
+	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingOutDate }}></div>
 }
 
-const RegConfirmTmp = ({ patronInfo, onClick }: any) => {
+export const Invalid = () => {
+	const message: any = useConstants().message
+	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>
+}
+
+const Success = () => {
+	const message: any = useConstants().message
+	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingSuccess }}></div>
+}
+
+const ConfirmTmp = ({ patronInfo, onClick }: any) => {
+	const message: any = useConstants().message
 	return (
 		<div className="text-center">
 			<h1 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Please confirm your registration
+				{message.pleaseConfirm}
 			</h1>
 			<h2 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
 				'{patronInfo?.TAG_NAME}'
@@ -482,7 +418,7 @@ const RegConfirmTmp = ({ patronInfo, onClick }: any) => {
 						{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
 					</div>
 					<div>
-						{patronInfo?.BRANCH_ADDRESS}, Room: {patronInfo?.TAG_FUNC_ROOM}
+						{patronInfo?.BRANCH_ADDRESS}, {message.room}: {patronInfo?.TAG_FUNC_ROOM}
 					</div>
 				</div>
 				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
@@ -490,16 +426,16 @@ const RegConfirmTmp = ({ patronInfo, onClick }: any) => {
 						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
 					</div>
 					<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
-					<div>Registered: {patronInfo?.TAG_FUNC_P_T}</div>
+					<div>{message.registered}: {patronInfo?.TAG_FUNC_P_T}</div>
 					<div className="border-2 border-dashed p-2">
-						{patronInfo?.TAG_FUNC_P_ATTND} spot reserved
+						{patronInfo?.TAG_FUNC_P_ATTND} {message.spotReserved}
 					</div>
 				</div>
 			</div>
 			<Button
 				onClick={onClick}
 				className="flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded bg-green-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				<div>Confirm</div>
+				<div>{message.confirm}</div>
 			</Button>
 		</div>
 	)
