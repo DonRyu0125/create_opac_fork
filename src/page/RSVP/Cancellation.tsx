@@ -25,7 +25,6 @@ import {
 import axios from 'axios'
 import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
-import { Invalid, OutDate } from './Confirmation'
 import useConstants from '@/hooks/useConstants'
 
 
@@ -246,17 +245,18 @@ const RSVPCancelLandingPage = () => {
 	}
 
 	const showRegStatus = () => {
+		const message: any = useConstants().message
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return <NotInTheList />
+				return <div dangerouslySetInnerHTML={{ __html: message.cancelLandingNotIntheList }}></div>;
 			case STATUS_TYPE.Success:
-				return <Success />
+				return <div dangerouslySetInnerHTML={{ __html: message.cancelLandingSuccess }}></div>;
 			case STATUS_TYPE.OutDate:
-				return <OutDate />
+				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingOutDate }}></div>;
 			case STATUS_TYPE.Cancel:
-				return <CancelTmp patronInfo={patronInfo} onClick={onClick} />
+				return <CancelTmp patronInfo={patronInfo} onClick={onClick} />;
 			default:
-				return <Invalid />
+				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>;
 		}
 	}
 
@@ -285,16 +285,6 @@ const RSVPCancelLandingPage = () => {
 			</div>
 		</Layout>
 	)
-}
-
-const NotInTheList = () => {
-	const message: any = useConstants().message
-	return <div dangerouslySetInnerHTML={{ __html: message.cancelLandingNotIntheList }}></div>
-}
-
-const Success = () => {
-	const message: any = useConstants().message
-	return <div dangerouslySetInnerHTML={{ __html: message.cancelLandingSuccess }}></div>
 }
 
 const CancelTmp = ({ patronInfo, onClick }: any) => {

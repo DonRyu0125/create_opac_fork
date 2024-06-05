@@ -325,23 +325,24 @@ const RSVPCancelLandingPage = () => {
 
 	// Various view for different status
 	const showRegStatus = () => {
+		const message: any = useConstants().message
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return <Invalid />
+				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>;
 			case STATUS_TYPE.Success:
-				return <Success />
+				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingSuccess }}></div>;
 			case STATUS_TYPE.OutDate:
-				return <OutDate />
+				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingOutDate }}></div>;
 			case STATUS_TYPE.InList:
-				return <InList />
+				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInList }}></div>;
 			case STATUS_TYPE.Full:
-				return <FullEvent />
+				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingFullEvent }}></div>;
 			case STATUS_TYPE.Expired:
-				return <Expired />
+				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingExpired }}></div>;
 			case STATUS_TYPE.Confirm:
-				return <ConfirmTmp patronInfo={patronInfo} onClick={onClick} />
+				return <ConfirmTmp patronInfo={patronInfo} onClick={onClick} />;
 			default:
-				return <Invalid />
+				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>;
 		}
 	}
 
@@ -370,35 +371,6 @@ const RSVPCancelLandingPage = () => {
 	)
 }
 
-const Expired = () => {
-	const message: any = useConstants().message
-	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingExpired }}></div>
-}
-
-const InList = () => {
-	const message: any = useConstants().message
-	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInList }}></div>
-}
-
-const FullEvent = () => {
-	const message: any = useConstants().message
-	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingFullEvent }}></div>
-}
-
-export const OutDate = () => {
-	const message: any = useConstants().message
-	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingOutDate }}></div>
-}
-
-export const Invalid = () => {
-	const message: any = useConstants().message
-	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>
-}
-
-const Success = () => {
-	const message: any = useConstants().message
-	return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingSuccess }}></div>
-}
 
 const ConfirmTmp = ({ patronInfo, onClick }: any) => {
 	const message: any = useConstants().message
