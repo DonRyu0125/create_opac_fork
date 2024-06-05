@@ -57,6 +57,7 @@ type PatronInfo = {
 
 const RSVPCancelLandingPage = () => {
 	const [loading, setLoading] = useState(true)
+	const message: any = useConstants().message
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>({
 		TAG_FUNC_P_ATTND: '',
 		TAG_FUNC_P_FIRST: '',
@@ -245,7 +246,6 @@ const RSVPCancelLandingPage = () => {
 	}
 
 	const showRegStatus = () => {
-		const message: any = useConstants().message
 		switch (status) {
 			case STATUS_TYPE.Invalid:
 				return <div dangerouslySetInnerHTML={{ __html: message.cancelLandingNotIntheList }}></div>;

@@ -67,6 +67,7 @@ const STATUS_TYPE = {
 }
 
 const RSVPCancelLandingPage = () => {
+	const message: any = useConstants().message
 	const [loading, setLoading] = useState(false)
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>({
 		TAG_FUNC_P_ATTND: '',
@@ -325,7 +326,6 @@ const RSVPCancelLandingPage = () => {
 
 	// Various view for different status
 	const showRegStatus = () => {
-		const message: any = useConstants().message
 		switch (status) {
 			case STATUS_TYPE.Invalid:
 				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>;
