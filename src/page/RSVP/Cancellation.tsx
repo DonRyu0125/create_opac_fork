@@ -304,8 +304,9 @@ const CancelTmp = ({ patronInfo, onClick }: any) => {
 					<div>
 						{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
 					</div>
+					<div>{patronInfo?.BRANCH_ADDRESS}</div>
 					<div>
-						{patronInfo?.BRANCH_ADDRESS}, {message.room}: {patronInfo?.TAG_FUNC_ROOM}
+						{message.room}: {patronInfo?.TAG_FUNC_ROOM}
 					</div>
 				</div>
 				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
@@ -313,7 +314,8 @@ const CancelTmp = ({ patronInfo, onClick }: any) => {
 						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
 					</div>
 					<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
-					<div>{message.registered}: {patronInfo?.TAG_FUNC_P_T}</div>
+					<div>{message.registered}:</div>
+					<div>{patronInfo?.TAG_FUNC_P_T}</div>
 					<div className="border-2 border-dashed p-2">
 						{patronInfo?.TAG_FUNC_P_ATTND} {message.spotReserved}
 					</div>

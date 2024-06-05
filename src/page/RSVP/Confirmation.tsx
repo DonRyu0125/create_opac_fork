@@ -328,21 +328,36 @@ const RSVPCancelLandingPage = () => {
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>;
+				return (
+					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>
+				)
 			case STATUS_TYPE.Success:
-				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingSuccess }}></div>;
+				return (
+					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingSuccess }}></div>
+				)
 			case STATUS_TYPE.OutDate:
-				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingOutDate }}></div>;
+				return (
+					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingOutDate }}></div>
+				)
 			case STATUS_TYPE.InList:
-				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInList }}></div>;
+				return (
+					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingInList }}></div>
+				)
 			case STATUS_TYPE.Full:
-				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingFullEvent }}></div>;
+				return (
+					<div
+						dangerouslySetInnerHTML={{ __html: message.confirmLandingFullEvent }}></div>
+				)
 			case STATUS_TYPE.Expired:
-				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingExpired }}></div>;
+				return (
+					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingExpired }}></div>
+				)
 			case STATUS_TYPE.Confirm:
-				return <ConfirmTmp patronInfo={patronInfo} onClick={onClick} />;
+				return <ConfirmTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
-				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>;
+				return (
+					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>
+				)
 		}
 	}
 
@@ -355,7 +370,7 @@ const RSVPCancelLandingPage = () => {
 					className="h-64 w-full object-cover"
 				/>
 				{loading ? (
-					<div className="flex flex-1 items-center justify-center">
+					<div className="flex h-full items-center justify-center">
 						<Spinner
 							height={'h-full'}
 							spinHeight={'h-20'}
@@ -364,13 +379,12 @@ const RSVPCancelLandingPage = () => {
 						/>
 					</div>
 				) : (
-					<div className="flex flex-1 items-center justify-center">{showRegStatus()}</div>
+					<div className="flex h-full items-center justify-center">{showRegStatus()}</div>
 				)}
 			</div>
 		</Layout>
 	)
 }
-
 
 const ConfirmTmp = ({ patronInfo, onClick }: any) => {
 	const message: any = useConstants().message
@@ -389,8 +403,9 @@ const ConfirmTmp = ({ patronInfo, onClick }: any) => {
 					<div>
 						{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
 					</div>
+					<div>{patronInfo?.BRANCH_ADDRESS}</div>
 					<div>
-						{patronInfo?.BRANCH_ADDRESS}, {message.room}: {patronInfo?.TAG_FUNC_ROOM}
+						{message.room}: {patronInfo?.TAG_FUNC_ROOM}
 					</div>
 				</div>
 				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
@@ -398,7 +413,8 @@ const ConfirmTmp = ({ patronInfo, onClick }: any) => {
 						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
 					</div>
 					<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
-					<div>{message.registered}: {patronInfo?.TAG_FUNC_P_T}</div>
+					<div>{message.registered}:</div>
+					<div>{patronInfo?.TAG_FUNC_P_T}</div>
 					<div className="border-2 border-dashed p-2">
 						{patronInfo?.TAG_FUNC_P_ATTND} {message.spotReserved}
 					</div>
