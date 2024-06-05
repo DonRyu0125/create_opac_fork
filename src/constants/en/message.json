@@ -53,5 +53,7 @@
 	"lastName": "Last Name",
 	"email": "Email",
 	"attendee": "Attendee",
-	"eventCancel":"Event Canceled"
+	"eventCancel":"Event Canceled",
+	"confirmLandingRegOutDate":
+	"<div className='text-center'><h1 className='landing-page-title'>The event date has already passed.</h1><p className='landing-page-sub-title'>Please check our website for future events.</p><a href='#' className='landing-page-button'>Go to website</a></div>"
 }

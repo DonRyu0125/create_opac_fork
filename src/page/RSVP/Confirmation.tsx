@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import Layout from '@/components/layouts'
+import '@/components/common/event-calendar/CalendarStyle.css'
 import React, { useEffect, useState } from 'react'
 import {
 	FUNC_LOC_P_GRP,
@@ -33,6 +34,7 @@ import { convertToArr, convertXMLToJson, decodeObj, encodeObj, isDatePast } from
 import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
+import useConstants from '@/hooks/useConstants'
 
 type PatronInfo = {
 	TAG_FUNC_P_ATTND: string
@@ -345,14 +347,14 @@ const RSVPCancelLandingPage = () => {
 
 	return (
 		<Layout>
-			<div className="flex h-full flex-col bg-white h-[800px]">
+			<div className="flex h-screen flex-col bg-white">
 				<img
 					src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
 					alt=""
 					className="h-64 w-full object-cover"
 				/>
 				{loading ? (
-					<div className={'h-[500px]'}>
+					<div className="flex flex-1 items-center justify-center">
 						<Spinner
 							height={'h-full'}
 							spinHeight={'h-20'}
@@ -361,9 +363,7 @@ const RSVPCancelLandingPage = () => {
 						/>
 					</div>
 				) : (
-					<div className={'h-full min-h-[550px] flex items-center justify-center'}>
-						{showRegStatus()}
-					</div>
+					<div className="flex flex-1 items-center justify-center">{showRegStatus()}</div>
 				)}
 			</div>
 		</Layout>
@@ -386,19 +386,23 @@ const RegExpired = () => {
 	)
 }
 
+
+
 const RegInList = () => {
+	const message: any = useConstants().message
 	return (
-		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				You are already in the list!
-			</h1>
-			<p className="mt-4 text-gray-500">Please check your registartion confirm email</p>
-			<a
-				href="#"
-				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				Go to website
-			</a>
-		</div>
+		// <div className="text-center">
+			// <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+			// 	You are already in the list!
+			// </h1>
+		// 	<p className="mt-4 text-gray-500">Please check your registration confirm email</p>
+		// 	<a
+		// 		href="#"
+		// 		className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
+		// 		Go to website
+		// 	</a>
+		// </div>
+		<div dangerouslySetInnerHTML={{ __html: '<h1 class="landing-page-title">You are already in the list!</h1>' }}></div>
 	)
 }
 
@@ -421,19 +425,11 @@ const RegFullEvent = () => {
 }
 
 export const RegOutDate = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				The event date has already passed.
-			</h1>
-			<p className="mt-4 text-gray-500">Please check our website for future events.</p>
-			<a
-				href="#"
-				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				Go to website
-			</a>
-		</div>
-	)
+	const message: any = useConstants().message
+	// return(
+	// 	<div className='text-center'><h1 className='landing-page-title'>The event date has already passed.</h1><p className='landing-page-sub-title'>Please check our website for future events.</p><a href='#' className='landing-page-button'>Go to website</a></div>
+	// )
+	 return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingRegOutDate }}></div>
 }
 
 export const RegInvalid = () => {
