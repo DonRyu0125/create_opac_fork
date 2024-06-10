@@ -397,7 +397,7 @@ const ConfirmTmp = ({ patronInfo, onClick }: any) => {
 				'{patronInfo?.TAG_NAME}'
 			</h2>
 			<div className="mt-4 text-gray-500 sm:flex justify-evenly text-lg w-full">
-				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
+				<div className="sm:w-1/2 text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>{patronInfo?.TAG_NAME}</div>
 					<div>{patronInfo?.TAG_FUNC_DATE}</div>
 					<div>
@@ -408,7 +408,7 @@ const ConfirmTmp = ({ patronInfo, onClick }: any) => {
 						{message.room}: {patronInfo?.TAG_FUNC_ROOM}
 					</div>
 				</div>
-				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
+				<div className="sm:w-1/2 text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>
 						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
 					</div>
