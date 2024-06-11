@@ -69,12 +69,12 @@ After confirm user, get the registration confirm email => go to cancel landing p
 
 \*Developed based on Norfolk library website
 
-Username: norfolk\_m2l\_mgr
+Username: cams m2l mgr
 Main: M2L\_TAG
 For contact info: LIBRARY\_LOCATION
 For RSVP log: TAG\_RSVP\_PATRON\_LOG
 
 ## MINISIS Report Structure
 
-Username: norfolk\_m2l\_mgr
+Username: cams m2l mgr
 Main: MONTHLY\_CALENDAR\_NEW\_T4
