@@ -32,6 +32,8 @@ import {
 	SISN,
 	ContactInfo,
 	TAG_FUNC_ACCESS,
+	TAG_FUNC_CANCEL,
+	TAG_FUNC_CAN_RES,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { Accessibility, SquareUserRound, X } from 'lucide-react'
@@ -39,6 +41,7 @@ import EventRSVPForm from './EventRSVPForm'
 import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarWeekType } from '@/store'
+import EventRSVPCancel from './EventCancel'
 
 const EventButton = ({
 	elm,
@@ -80,18 +83,21 @@ const EventButton = ({
 									<div>{elm[TAG_FUNC_START_T]?.toUpperCase()}-</div>
 									<div>{elm[TAG_FUNC_END_T]?.toUpperCase()}</div>
 								</div>
-								{elm[TAG_FUNC_RSVP] && <SquareUserRound />}
+								<div className={'hidden sm:block w-[18px]'}>
+									{elm[TAG_FUNC_RSVP] && <SquareUserRound />}
+								</div>
 							</div>
 						)}
 					</div>
 				</Button>
 			</DialogTrigger>
-			<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl'}>
+			<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl '}>
 				<DialogHeader>
 					<DialogTitle
 						className={
-							' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
+							' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2 '
 						}>
+						
 						<div className="h-8">
 							<img className="h-full" src={logo} alt="logo" />
 						</div>
@@ -108,7 +114,8 @@ const EventButton = ({
 						</DialogPrimitive.Close>
 					</DialogTitle>
 				</DialogHeader>
-				<div className={'w-full min-h-[400px]  sm:flex font-bold'}>
+				<div className={'w-full min-h-[400px]  sm:flex font-bold relative'}>
+				{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 					<div className={'w-full sm:w-8/12 '}>
 						<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
 						<div className={'sm:flex'}>

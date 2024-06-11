@@ -31,16 +31,18 @@ import {
 	PATRON,
 	SISN,
 	ContactInfo,
+	TAG_FUNC_CANCEL,
+	TAG_FUNC_CAN_RES,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 import { CalendarCheck } from 'lucide-react'
 import EventButton from './EventButton'
-import { fetch_get } from './Service'
 import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
-import { calendarWeekType } from '@/store'
+import { calendarMonthType, calendarWeekType } from '@/store'
+import EventRSVPCancel from './EventCancel'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]
@@ -48,7 +50,7 @@ export interface eventSumType {
 }
 
 const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
-	const [weekType, _] = useAtom(calendarWeekType)
+	const [monthType, __] = useAtom(calendarMonthType)
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
@@ -69,7 +71,6 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 			}
 			locationArr[location].push(classInfo)
 		})
-
 		result = Object.keys(locationArr).map((loc) => {
 			return { [TAG_FUNC_LOC]: loc, [TAG_FUNC_DTE_LIST]: locationArr[loc] }
 		})
@@ -78,7 +79,7 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 
 	return (
 		<>
-			{weekType && filteredEvents.length > 3 ? (
+			{monthType && filteredEvents.length > 3 ? (
 				<div className={'h-full mb-[2px] overflow-x-hidden'}>
 					{groupedByLocation(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>
@@ -129,12 +130,15 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 										<div
 											key={key}
 											className={
-												'w-full text-l sm:flex font-bold p-2 border-2 rounded '
+												'w-full text-l sm:flex font-bold p-2 border-2 rounded relative'
 											}>
+											{elm[TAG_FUNC_CANCEL] && (
+												<EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />
+											)}
 											<div
 												className={`w-full ${elm[TAG_FUNC_RSVP] && 'sm:w-8/12'}`}>
 												<div className={'overflow-hidden text-lg'}>
-													{elm[TAG_NAME]}
+													{elm[TAG_NAME]} {elm[TAG_FUNC_CANCEL]}
 												</div>
 												<div className={'sm:flex'}>
 													<div className="ml-[10px] sm:ml-0 text-md text-gray-600 font-bold">
@@ -163,7 +167,8 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 														&#x2022;{message.seats}: {elm[TAG_FUNC_CAP]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.language}: {elm[TAG_FUNC_LANG]}
+														&#x2022;{message.language}:{' '}
+														{elm[TAG_FUNC_LANG]}
 													</div>
 												</div>
 												<DialogDescription
@@ -202,12 +207,7 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 			) : (
 				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto'}>
 					{filteredEvents.map((item: any, idx: number) => (
-						<EventButton
-							elm={item}
-							key={idx}
-							id={idx}
-							contactInfo={contactInfo}
-						/>
+						<EventButton elm={item} key={idx} id={idx} contactInfo={contactInfo} />
 					))}
 				</div>
 			)}

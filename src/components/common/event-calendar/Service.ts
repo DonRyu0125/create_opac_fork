@@ -1,6 +1,13 @@
 import axios from 'axios'
 import X2JS from 'x2js' // Ensure X2JS is installed
-import { CALENDAR_WEEK_VIEW_DAYS, LIBRARY_LOCATION_REPORT, LIBRARY_LOCATION_XML_TAG, MAIN_MWI_APPLICATION, MONTH_REPORT, SUB_MWI_APPLICATION } from './Constants'
+import {
+	CALENDAR_WEEK_VIEW_DAYS,
+	LIBRARY_LOCATION_REPORT,
+	LIBRARY_LOCATION_XML_TAG,
+	MAIN_MWI_APPLICATION,
+	MONTH_REPORT,
+	SUB_MWI_APPLICATION,
+} from './Constants'
 import { convertToArr, convertXMLToJson } from '@/lib/utils'
 
 const getWeekRange = (currentDate: any) => {
@@ -27,7 +34,7 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 	const DATE_FIELD = 'TAG_FUNC_DATE'
 	const DATE_WILDCARD = isWeekType
 		? `${getWeekRange(currentDate).firstDay}//${getWeekRange(currentDate).lastDay}`
-		: `${currentDate.getFullYear()}%2D0${currentDate.getMonth() + 1}%2D%2A`;
+		: `${currentDate.getFullYear()}%2D0${currentDate.getMonth() + 1}%2D%2A`
 
 	try {
 		const response = await axios.get(
@@ -59,6 +66,5 @@ export const getLibraryLocation = async () => {
 		}
 	)
 	const jsonData: any = convertXMLToJson(response)
-	return jsonData.xml[LIBRARY_LOCATION_XML_TAG]
+	return jsonData?.xml?.[LIBRARY_LOCATION_XML_TAG] ?? []
 }
-

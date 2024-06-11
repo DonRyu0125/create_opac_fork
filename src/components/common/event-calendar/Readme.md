@@ -46,9 +46,23 @@ After confirm user, get the registration confirm email => go to cancel landing p
               └── EventRSVPForm
           └── EventAllButton                  Month:all event modal
               └── EventRSVPForm
-  ├── RSVPCancelConfirmTmp.txt               Email tmp for cancellation confirm(3)
-  ├── RSVPRegConfirmTmp.txt                  Email tmp for Registration confirm(2)
-  └── RSVPVerificationConfirmTmp.txt         Email tmp for email verification(1)
+  ├── RSVPCancelConfirmTmp.txt                Email tmp for cancellation confirm(3)
+  ├── RSVPRegConfirmTmp.txt                   Email tmp for Registration confirm(2)
+  └── RSVPVerificationConfirmTmp.txt          Email tmp for email verification(1)
+
+── Page
+    └── RSVP
+        ├──Cancellation.tsx                   Component for cancellation landing
+        └──Confirmation.tsx                   Component for confirmation landing
+
+── rsvp_cancel.html                           Html page for cancellation landing page
+── rsvp_confirm.html                          Html page for confirmation landing
+
+──store
+    └──index.ts                               Adding global state calendarEvents,calendarWeekType,calendarCurrDate
+
+──router
+    └──index.ts                               Adding route for rsvp_cancel,rsvp_confirm
 ```
 
 ## Database Structure

@@ -13,7 +13,7 @@ import { convertLowerTrim, convertToArr } from '@/lib/utils'
 import { cn } from '@/lib/utils'
 import * as Accordion from '@radix-ui/react-accordion'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { Accessibility, X } from 'lucide-react'
+import { Accessibility, BookX, X } from 'lucide-react'
 import {
 	Cal_event,
 	TAG_FUNC_DATE,
@@ -32,11 +32,16 @@ import {
 	SISN,
 	ContactInfo,
 	TAG_FUNC_ACCESS,
+	TAG_FUNC_CANCEL,
+	TAG_FUNC_CAN_RES,
+	TAG_FUNC_RSVP,
+	EVENT_CANCEL_NOTI_MODAL_BG,
 } from './Constants'
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
 import { AccordionContent } from '@/components/ui/accordion'
 import useConstants from '@/hooks/useConstants'
+import EventRSVPCancel from './EventCancel'
 
 const EventAllButton = ({
 	filteredEvents,
@@ -91,7 +96,9 @@ const EventAllButton = ({
 						<div className="h-8">
 							<img className="h-full" src={logo} alt="logo" />
 						</div>
-						<div>{message.all} {message.events}</div>
+						<div>
+							{message.all} {message.events}
+						</div>
 						<DialogPrimitive.Close>
 							<X className={'h-6 w-6'} />
 						</DialogPrimitive.Close>
@@ -125,8 +132,18 @@ const EventAllButton = ({
 								</div>
 							</AccordionTrigger>
 							<AccordionContent
-								style={{ borderRadius: '5px' }} // Tailiwnd rounded-lg is not working so I put inline style here
-								className={'border-2 border-lime-950'}>
+								style={{ borderRadius: '5px' }} // Tailwind rounded-lg is not working so I put inline style here
+								className={'border-2 border-lime-950 relative'}>
+								{item[TAG_FUNC_CANCEL] && (
+									<div
+										className={
+											`absolute z-40 ${EVENT_CANCEL_NOTI_MODAL_BG} rounded mx-auto left-0 right-0 w-[250px] h-[100px] top-1/4 text-white flex justify-center items-center`
+										}>
+										<div className={'flex justify-center items-center text-xl'}>
+											<BookX /> {message.eventCancel}
+										</div>
+									</div>
+								)}
 								<div className={'flex '}>
 									<div
 										className={
@@ -156,7 +173,8 @@ const EventAllButton = ({
 										</div>
 										<div className={'sm:flex'}>
 											<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;{message.suitableFor} {item[TAG_FUNC_LOC_AUD]}
+												&#x2022;{message.suitableFor}{' '}
+												{item[TAG_FUNC_LOC_AUD]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
 												&#x2022;{message.seats}: {item[TAG_FUNC_CAP]}
@@ -172,15 +190,17 @@ const EventAllButton = ({
 									className={`min-h-[100px] p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									{item[TAG_FUNC_DESC]}
 								</DialogDescription>
-								<div className={'h-[380px] rounded border-2 font-bold m-2 p-2'}>
-									<EventRSVPForm
-										capacity={item[TAG_FUNC_CAP]}
-										patrons={convertToArr(item[PATRON])}
-										sisnNumber={item[SISN]}
-										event={item}
-										contactInfo={contactInfo}
-									/>
-								</div>
+								{item[TAG_FUNC_RSVP] && !item[TAG_FUNC_CANCEL] && (
+									<div className={'h-[380px] font-bold m-2 p-2'}>
+										<EventRSVPForm
+											capacity={item[TAG_FUNC_CAP]}
+											patrons={convertToArr(item[PATRON])}
+											sisnNumber={item[SISN]}
+											event={item}
+											contactInfo={contactInfo}
+										/>
+									</div>
+								)}
 								{/*  Description more button func */}
 								{/* <DialogDescription
 									className={`${showFullStr[idx] ? 'h-72' : 'h-10'} p-2 break-all overflow-x-hidden overflow-y-auto`}>

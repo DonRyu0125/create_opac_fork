@@ -9,7 +9,7 @@ import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
 import { Button } from '@/components/ui/button'
 import { fetch_get, getLibraryLocation } from './Service'
-import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
+import { calendarCurrDate, calendarEvents, calendarMonthType, calendarWeekType } from '@/store'
 import { useAtom } from 'jotai'
 import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj } from './Constants'
 import useConstants from '@/hooks/useConstants'
@@ -22,6 +22,7 @@ const EventCalendar = () => {
 	const [contactInfo, setContactInfo] = useState([])
 	const [currentEvent, setCurrentEvent] = useAtom(calendarEvents)
 	const [weekType, setWeekType] = useAtom(calendarWeekType)
+	const [monthType, setMonthType] = useAtom(calendarMonthType)
 	const [currentDate, setCurrentDate] = useAtom(calendarCurrDate)
 
 	useEffect(() => {
@@ -38,8 +39,14 @@ const EventCalendar = () => {
 		setCurrentEvent(currE)
 	}
 
-	const calendarToggle = () => {
-		setWeekType((prev)=>!prev)
+	const convertToWeek = () => {
+		setMonthType(false)
+		setWeekType(true)
+	}
+
+	const convertToMonth = () => {
+		setMonthType(true)
+		setWeekType(false)
 	}
 
 	const isMonthBtnClick = () => {
@@ -168,8 +175,11 @@ const EventCalendar = () => {
 					<div className="mt-2">&lt;</div>
 				</Button>
 				<div className="max-w-[330px] text-center text-3xl text-primary-foreground">
-					{!weekType &&
-						currentDate.toLocaleString(message.dateType, { month: 'long', year: 'numeric' })}
+					{monthType &&
+						currentDate.toLocaleString(message.dateType, {
+							month: 'long',
+							year: 'numeric',
+						})}
 					{weekType && showWeek()}
 				</div>
 				<Button
@@ -186,14 +196,14 @@ const EventCalendar = () => {
 						className={
 							'w-[67px] bg-black text-primary-foreground rounded hover:bg-black'
 						}
-						onClick={calendarToggle}>
+						onClick={convertToMonth}>
 						{message.month}
 					</Button>
 					<Button
 						className={
 							'w-[67px] bg-black text-primary-foreground rounded hover:bg-black'
 						}
-						onClick={calendarToggle}>
+						onClick={convertToWeek}>
 						{message.week}
 					</Button>
 				</div>
@@ -204,14 +214,14 @@ const EventCalendar = () => {
 					className={
 						'w-1/2 bg-primary text-primary-foreground rounded hover:bg-black mr-1'
 					}
-					onClick={calendarToggle}>
+					onClick={convertToMonth}>
 					{message.month}
 				</Button>
 				<Button
 					className={
 						'w-1/2 bg-primary text-primary-foreground rounded hover:bg-black ml-1'
 					}
-					onClick={calendarToggle}>
+					onClick={convertToWeek}>
 					{message.week}
 				</Button>
 			</div>
@@ -229,7 +239,7 @@ const EventCalendar = () => {
 							</div>
 						)
 					})}
-					{!weekType &&
+					{monthType &&
 						generateMonth().map((item: Day_obj, key: number) => {
 							return (
 								<div
