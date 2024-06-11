@@ -38,8 +38,8 @@ export interface Day_obj {
 export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
 export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_REPORT'
 //MWI
-export const MAIN_MWI_APPLICATION = 'M2L_TAG_TO_BIBLIO'
-export const SUB_MWI_APPLICATION = 'LIBRARY_LOCATION'
+export const MAIN_MWI_APPLICATION = 'WEB_CALENDAR'
+export const SUB_MWI_APPLICATION = 'WEB_LIBRARY_LOC'
 export const RSVP_CONFIRM_LANDING_PAGE_URL = 'http://donf.minisisinc.com/rsvp_confirm.html'
 export const RSVP_CANCEL_LANDING_PAGE_URL = 'http://donf.minisisinc.com/rsvp_cancel.html'
 export const CALENDAR_START_MONTH = 1

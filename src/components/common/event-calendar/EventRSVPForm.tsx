@@ -201,7 +201,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		let info: any = contactInfo?.filter((item) => {
 			return convertLowerTrim(item[BRANCH_NAME]) === convertLowerTrim(event[TAG_FUNC_LOC])
 		})
-		if (info) {
+		if (info.length > 0) {
 			let contact = info[0]
 			return contact[type]
 		}
