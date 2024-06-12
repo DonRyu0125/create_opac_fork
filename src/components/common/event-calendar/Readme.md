@@ -12,6 +12,7 @@ This is the Event Calendar for showing events and make the user register the eve
 * ✅Email confirmation
 * ✅Email cancellation
 * ✅RSVP history log
+* ✅Waitlist --- On progress
 
 ## RSVP process
 
@@ -71,10 +72,11 @@ After confirm user, get the registration confirm email => go to cancel landing p
 
 Username: cams m2l mgr
 Main: M2L\_TAG
-For contact info: LIBRARY\_LOCATION
+Contact info: LIBRARY\_LOCATION
 For RSVP log: TAG\_RSVP\_PATRON\_LOG
 
 ## MINISIS Report Structure
 
 Username: cams m2l mgr
 Main: MONTHLY\_CALENDAR\_NEW\_T4
+Contact info: LIBRARY_LOCATION_REPORT
