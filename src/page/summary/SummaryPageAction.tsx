@@ -27,6 +27,9 @@ const SummaryPageAction = () => {
 				<Label>{message.sortBy}</Label>
 				<DropdownSelect title={message.sortBy} options={[]} />
 			</div>
+			<div className="flex flex-col space-y-2">
+				<div className={'flex'}><Label>{message.bookmark}<hr/></Label></div>
+			</div>
 
 			{filter && filter.length > 0 && (
 				<div className="flex flex-col space-y-2">
