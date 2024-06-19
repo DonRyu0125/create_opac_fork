@@ -1,7 +1,7 @@
 import AdminFormInput from '@/components/common/admin/AdminFormInput'
 import React from 'react'
-import message from '@/schema/config.json'
-import messageValue from '@/constants/en/config.json'
+import message from '@/schema/fields.json'
+import messageValue from '@/constants/en/fields.json'
 import { SchemaType } from '@/types/schema'
 type Props = {}
 

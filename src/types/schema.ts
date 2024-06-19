@@ -1,4 +1,4 @@
-export type SchemaValueType = Record<string, Object> | undefined
+export type SchemaValueType = Record<string, Object> | undefined | Array<Object>
 
 export type SchemaType = {
 	$schema?: string
