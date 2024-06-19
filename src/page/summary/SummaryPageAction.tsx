@@ -21,6 +21,7 @@ const SummaryPageAction = () => {
 			<div className="flex flex-col space-y-2">
 				<Label>{message.recordPerPage}</Label>
 				<DropdownSelect
+					
 					title={message.selectRecordsNumber}
 					options={[
 						{
