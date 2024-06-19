@@ -14,10 +14,8 @@ function main() {
 		console.time('gen-schema')
 		const files = getFiles(inputDir, 'json')
 
-		console.log({ files })
 		files.forEach((file) => {
 			const filePath = resolve(inputDir, file)
-			console.log({ filePath })
 			generateSchema(filePath, outDir)
 		})
 
@@ -35,7 +33,6 @@ main()
  * @param {string} filePath
  */
 function generateSchema(filePath = './', outDir = './schema') {
-	console.log({ filePath })
 	try {
 		const fileContent = fs.readFileSync(filePath, 'utf8')
 
@@ -58,7 +55,6 @@ function generateSchema(filePath = './', outDir = './schema') {
 			const schemaContent = JSON.stringify({ ...metadata, ...root })
 			const schemaPath = resolve(`${outDir}/${fileName}`)
 
-			console.log({ schemaContent })
 			if (!fs.existsSync(outDir)) {
 				fs.mkdirSync(outDir)
 			}
