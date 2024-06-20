@@ -137,7 +137,7 @@ const RecordAction = ({ record }: { record: Record }) => {
 				onClick={() => {
 					copyRecordURL(database, sisn)
 					toast({
-						title: message.recordIsCopieds,
+						title: message.recordIsCopied,
 					})
 				}}>
 				<Copy className="h-4 w-4 text-primary" />
