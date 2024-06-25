@@ -11,7 +11,7 @@ import {
 	copyRecordURL,
 	getFieldsFromRecord,
 } from '@/lib/record'
-import { cn } from '@/lib/utils'
+import { cn, getHOMESESSID } from '@/lib/utils'
 import { viewAtom } from '@/store'
 import { Separator } from '@/components/ui/separator'
 import { ToastAction } from '@radix-ui/react-toast'
@@ -22,6 +22,7 @@ import Link from '@/components/common/Link'
 import { Record } from '@/types/record'
 import { SummarySample } from '@/samples'
 import useConstants from '@/hooks/useConstants'
+import axios from 'axios'
 
 const SummaryRecords = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -109,6 +110,15 @@ const RecordAction = ({ record }: { record: Record }) => {
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const database = record.database_name
 
+	const bookmarkSelect = (recd:{database_name:string,record_link:string,record:any}) => {
+		const { database_name, record_link ,record} = recd
+		axios({
+			method: "post",
+			url: `${record_link.split('?')[0]}?ADDSELECTION&COOKIE=BOOKMARK`,
+			data: `mcheckbox_${record.sisn}=${record.sisn}-${database_name}`,
+		  })
+	}
+
 	return (
 		<>
 			<Button
@@ -122,6 +132,7 @@ const RecordAction = ({ record }: { record: Record }) => {
 							: 'Record has been bookmarked',
 						action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
 					})
+					bookmarkSelect(record)
 				}}>
 				<Heart
 					className={cn('h-4 w-4 text-primary')}
