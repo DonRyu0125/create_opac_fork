@@ -110,7 +110,7 @@ const RecordAction = ({ record }: { record: Record }) => {
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const database = record.database_name
 
-	const bookmarkSelect = (recd:{database_name:string,record_link:string,record:any}) => {
+	const bookmarkSelect = (recd: Record) => {
 		const { database_name, record_link ,record} = recd
 		axios({
 			method: "post",

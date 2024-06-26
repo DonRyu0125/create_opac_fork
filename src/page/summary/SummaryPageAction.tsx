@@ -6,6 +6,8 @@ import useJSONData from '@/hooks/useJSONData'
 import { SummarySample } from '@/samples'
 import { Label } from '@radix-ui/react-dropdown-menu'
 import ViewBookmarks from '../bookmark/ViewBookmarks'
+import BookmarkAll from '../bookmark/BookmarkAll'
+import PrintPage from '../bookmark/PrintPage'
 
 /**
  * This component contains:
@@ -33,9 +35,9 @@ const SummaryPageAction = () => {
 				<div className="flex-grow border-t border-gray-600 ml-[4px]"></div>
 			</div>
 			<div className="flex flex-col space-y-2">
-				<ViewBookmarks/>
-				<button className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground  disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 hover:bg-gray-200">Print this page</button>
-				<button className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground  disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 hover:bg-gray-200">View bookmarks</button>
+				<ViewBookmarks />
+				<BookmarkAll/>
+				<PrintPage/>	
 			</div>
 			{filter && filter.length > 0 && (
 				<div className="flex flex-col space-y-2">
