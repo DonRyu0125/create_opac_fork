@@ -11,7 +11,7 @@ import {
 	copyRecordURL,
 	getFieldsFromRecord,
 } from '@/lib/record'
-import { cn } from '@/lib/utils'
+import { cn, getHOMESESSID } from '@/lib/utils'
 import { viewAtom } from '@/store'
 import { Separator } from '@/components/ui/separator'
 import { ToastAction } from '@radix-ui/react-toast'
@@ -22,6 +22,8 @@ import Link from '@/components/common/Link'
 import { Record } from '@/types/record'
 import { SummarySample } from '@/samples'
 import useConstants from '@/hooks/useConstants'
+import axios from 'axios'
+import { bookmarkSelect } from '@/lib/bookmark'
 
 const SummaryRecords = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -110,36 +112,33 @@ const RecordAction = ({ record }: { record: Record }) => {
 
 	const { message } = useConstants()
 
+	const handleBookmark = () => {
+		setLike(true)
+		toast({
+			title: like ? 'This record has already been marked' : 'Record has been bookmarked',
+			action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
+		})
+		bookmarkSelect(record)
+	}
+
+	const handleCopy = () => {
+		copyRecordURL(database, sisn)
+		toast({
+			title: message.recordIsCopied,
+		})
+	}
+
 	return (
 		<>
-			{/* <Button
-				variant="ghost"
-				size="icon"
-				onClick={() => {
-					setLike(true)
-					toast({
-						title: like
-							? 'This record has already been marked'
-							: 'Record has been bookmarked',
-						action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
-					})
-				}}>
+			<Button variant="ghost" size="icon" onClick={handleBookmark}>
 				<Heart
 					className={cn('h-4 w-4 text-primary')}
 					fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
 					stroke={like ? 'hsl(var(--opac-blue))' : 'hsl(var(--primary'}
 				/>
-			</Button> */}
-			{/* <Separator orientation="vertical" /> */}
-			<Button
-				variant="ghost"
-				size="icon"
-				onClick={() => {
-					copyRecordURL(database, sisn)
-					toast({
-						title: message.recordIsCopied,
-					})
-				}}>
+			</Button>
+			<Separator orientation="vertical" />
+			<Button variant="ghost" size="icon" onClick={handleCopy}>
 				<Copy className="h-4 w-4 text-primary" />
 			</Button>
 			{/* <Separator orientation="vertical" /> */}
