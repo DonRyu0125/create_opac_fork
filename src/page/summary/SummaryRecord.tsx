@@ -103,14 +103,12 @@ const RecordView = ({ record }: { record: Record }) => {
 }
 
 const RecordAction = ({ record }: { record: Record }) => {
-	const [like, setLike] = useState(false)
+	const { database_name, is_bookmarked } = record
+	const [like, setLike] = useState(Boolean(JSON.parse(is_bookmarked)))
 	const { common } = useJSONData({ selector: '#xml_record' })
 	const { bookmark_url, bookmark_count } = common
-
 	const { toast } = useToast()
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
-	const database = record.database_name
-
 	const { message } = useConstants()
 
 	const handleBookmark = () => {
@@ -140,7 +138,7 @@ const RecordAction = ({ record }: { record: Record }) => {
 	}
 
 	const handleCopy = () => {
-		copyRecordURL(database, sisn)
+		copyRecordURL(database_name, sisn)
 		toast({
 			title: message.recordIsCopied,
 		})
