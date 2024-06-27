@@ -17,7 +17,7 @@ import SearchForm from '@/components/common/SearchForm'
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 
-	const { message, home } = useConstants()
+	const { message } = useConstants()
 	// const { common, pagination } = useJSONData({ defaultData: SummarySample })
 	const { common, pagination, backToSummary } = useJSONData({ selector: '#xml_record' })
 
@@ -43,7 +43,6 @@ const Summary = () => {
 						<SearchForm
 							className="w-[450px] m-0"
 							inputStyle="text-black"
-							searchURL={home.searchURL}
 							inputName={'KEYWORD_CLUSTER'}
 						/>
 						<ViewToggle />
