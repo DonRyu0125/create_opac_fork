@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import { useToast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { bookmarkSelect } from '@/lib/bookmark'
+import { bookmarkSelect, validateBookmarkSelectResponse } from '@/lib/bookmark'
 import {
 	copyRecordURL,
 	deepSearchKey,
@@ -105,6 +105,7 @@ const RecordView = ({ record }: { record: Record }) => {
 const RecordAction = ({ record }: { record: Record }) => {
 	const [like, setLike] = useState(false)
 	const { common } = useJSONData({ selector: '#xml_record' })
+	const { bookmark_url, bookmark_count } = common
 
 	const { toast } = useToast()
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
@@ -113,13 +114,28 @@ const RecordAction = ({ record }: { record: Record }) => {
 	const { message } = useConstants()
 
 	const handleBookmark = () => {
-		setLike(true)
-		toast({
-			title: like ? 'This record has already been marked' : 'Record has been bookmarked',
-			action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
-		})
-		bookmarkSelect(`${common.bookmark_url}`, record).then((res) => {
-			console.log(res)
+		if (like) {
+			toast({
+				title: 'This record has already been marked',
+				action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
+			})
+			return
+		}
+		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
+			const isValidated = validateBookmarkSelectResponse(
+				res,
+				typeof bookmark_count === 'number'
+					? bookmark_count
+					: Number.parseInt(bookmark_count || '0')
+			)
+			if (isValidated) {
+				setLike(true)
+				toast({
+					title: 'Record has been bookmarked',
+					action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
+				})
+				return
+			}
 		})
 	}
 
