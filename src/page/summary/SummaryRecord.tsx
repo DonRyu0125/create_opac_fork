@@ -7,7 +7,11 @@ import { Separator } from '@/components/ui/separator'
 import { useToast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { bookmarkSelect, validateBookmarkSelectResponse } from '@/lib/bookmark'
+import {
+	bookmarkSelect,
+	removeBookmarkFromKey,
+	validateBookmarkSelectResponse,
+} from '@/lib/bookmark'
 import {
 	copyRecordURL,
 	deepSearchKey,
@@ -35,7 +39,7 @@ const SummaryRecords = () => {
 	)
 }
 
-const RecordView = ({ record }: { record: Record }) => {
+const RecordView = ({ record, bookmark_sisn }: { record: Record; bookmark_sisn?: number }) => {
 	const [view] = useAtom(viewAtom)
 	const { fields } = useConstants()
 	const database = record.database_name
@@ -77,7 +81,7 @@ const RecordView = ({ record }: { record: Record }) => {
 				thumbnail={thumbnail || 'https://placehold.co/250x250'}
 				footer={
 					<div className="flex h-4 items-center space-x-4 w-full justify-center ">
-						<RecordAction record={record} />
+						<RecordAction record={record} bookmark_sisn={bookmark_sisn} />
 					</div>
 				}
 			/>
@@ -93,7 +97,7 @@ const RecordView = ({ record }: { record: Record }) => {
 				<div>
 					<Separator />
 					<div className="flex h-12 items-center space-x-4 w-full justify-evenly ">
-						<RecordAction record={record} />
+						<RecordAction record={record} bookmark_sisn={bookmark_sisn} />
 					</div>
 				</div>
 			}>
@@ -102,16 +106,24 @@ const RecordView = ({ record }: { record: Record }) => {
 	)
 }
 
-const RecordAction = ({ record }: { record: Record }) => {
+const RecordAction = ({ record, bookmark_sisn }: { record: Record; bookmark_sisn?: number }) => {
 	const { database_name, is_bookmarked } = record
-	const [like, setLike] = useState(Boolean(JSON.parse(is_bookmarked)))
+	const [like, setLike] = useState(is_bookmarked ? Boolean(JSON.parse(is_bookmarked)) : true)
 	const { common } = useJSONData({ selector: '#xml_record' })
 	const { bookmark_url, bookmark_count } = common
 	const { toast } = useToast()
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const { message } = useConstants()
-
 	const handleBookmark = () => {
+		if (!bookmark_url && like) {
+			removeBookmarkFromKey(record, bookmark_sisn).then((res) => {
+				window.location?.reload()
+			})
+			toast({
+				title: 'Bookmark has been removed',
+			})
+			return
+		}
 		if (like) {
 			toast({
 				title: 'This record has already been marked',
