@@ -23,16 +23,12 @@ import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
 import { Button } from '@/components/ui/button'
 import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
-// import { landingPageClick } from '@/store'
 import axios from 'axios'
-// import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
-// import { RegInvalid, RegOutDate } from './Confirmation'
-// import { useLanguage } from '@/hooks/useLanguage'
 import useConstants from '@/hooks/useConstants'
-import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
+import {PatronInfo, STATUS_TYPE, initialPatronInfo} from '@/types/patroninfo'
 
-const RSVPCancelLandingPage = () => {
+const RSVP_CANCEL = () => {
 	const [loading, setLoading] = useState(true)
 	const message: any = useConstants().message
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
@@ -300,4 +296,4 @@ const CancelTmp = ({ patronInfo, onClick }: any) => {
 	)
 }
 
-export default RSVPCancelLandingPage
+export default RSVP_CANCEL

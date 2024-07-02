@@ -35,9 +35,9 @@ import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
 import useConstants from '@/hooks/useConstants'
-import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
+import {PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 
-const RSVPCancelLandingPage = () => {
+const RSVP_CONFIRM = () => {
 	const message: any = useConstants().message
 	const [loading, setLoading] = useState(false)
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
@@ -75,7 +75,7 @@ const RSVPCancelLandingPage = () => {
 			return
 		})
 	}
-
+ 
 	const isExpired = (registered_time: string) => {
 		const givenTime = new Date(registered_time)
 		const currentTime = new Date()
@@ -382,4 +382,4 @@ const ConfirmTmp = ({ patronInfo, onClick }: any) => {
 	)
 }
 
-export default RSVPCancelLandingPage
+export default RSVP_CONFIRM
