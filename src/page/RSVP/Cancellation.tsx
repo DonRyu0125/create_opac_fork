@@ -30,30 +30,12 @@ import { useEffect, useState } from 'react'
 // import { RegInvalid, RegOutDate } from './Confirmation'
 // import { useLanguage } from '@/hooks/useLanguage'
 import useConstants from '@/hooks/useConstants'
-import { PatronInfo, STATUS_TYPE, StatusType } from '@/types/patroninfo'
+import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 
 const RSVPCancelLandingPage = () => {
 	const [loading, setLoading] = useState(true)
 	const message: any = useConstants().message
-	const [patronInfo, setPatronInfo] = useState<PatronInfo>({
-		TAG_FUNC_P_ATTND: '',
-		TAG_FUNC_P_FIRST: '',
-		TAG_FUNC_P_LAST: '',
-		TAG_FUNC_P_EMAIL: '',
-		TAG_NAME: '',
-		TAG_FUNC_START_T: '',
-		TAG_FUNC_END_T: '',
-		TAG_FUNC_ROOM: '',
-		TAG_FUNC_DATE: '',
-		TAG_FUNC_LOC: '',
-		SISN: '',
-		TAG_FUNC_P_ID: '',
-		TAG_FUNC_P_T: '',
-		BRANCH_ADDRESS: '',
-		occ1: '',
-		occ2: '',
-		TAG_FUNC_P_PAID: '',
-	})
+	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
 
 	useEffect(() => {

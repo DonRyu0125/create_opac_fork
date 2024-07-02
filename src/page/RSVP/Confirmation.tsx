@@ -35,51 +35,12 @@ import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
 import useConstants from '@/hooks/useConstants'
-import { STATUS_TYPE } from '@/types/patroninfo'
-
-type PatronInfo = {
-	TAG_FUNC_P_ATTND: string
-	TAG_FUNC_P_FIRST: string
-	TAG_FUNC_P_LAST: string
-	TAG_FUNC_P_EMAIL: string
-	TAG_NAME: string
-	TAG_FUNC_START_T: string
-	TAG_FUNC_END_T: string
-	TAG_FUNC_ROOM: string
-	TAG_FUNC_DATE: string
-	TAG_FUNC_LOC: string
-	SISN: string
-	TAG_FUNC_P_T: string
-	BRANCH_ADDRESS: string
-	TAG_FUNC_DESC: string
-	occ1: string
-	occ2: string
-	TAG_FUNC_P_PAID: any
-}
-
+import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 
 const RSVPCancelLandingPage = () => {
 	const message: any = useConstants().message
 	const [loading, setLoading] = useState(false)
-	const [patronInfo, setPatronInfo] = useState<PatronInfo>({
-		TAG_FUNC_P_ATTND: '',
-		TAG_FUNC_P_FIRST: '',
-		TAG_FUNC_P_LAST: '',
-		TAG_FUNC_P_EMAIL: '',
-		TAG_NAME: '',
-		TAG_FUNC_START_T: '',
-		TAG_FUNC_END_T: '',
-		TAG_FUNC_ROOM: '',
-		TAG_FUNC_DATE: '',
-		TAG_FUNC_LOC: '',
-		SISN: '',
-		TAG_FUNC_P_T: '',
-		BRANCH_ADDRESS: '',
-		occ1: '',
-		occ2: '',
-		TAG_FUNC_DESC: '',
-		TAG_FUNC_P_PAID: '',
-	})
+	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
 
 	useEffect(() => {
