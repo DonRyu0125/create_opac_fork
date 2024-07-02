@@ -35,6 +35,7 @@ import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
 import useConstants from '@/hooks/useConstants'
+import { STATUS_TYPE } from '@/types/patroninfo'
 
 type PatronInfo = {
 	TAG_FUNC_P_ATTND: string
@@ -56,15 +57,6 @@ type PatronInfo = {
 	TAG_FUNC_P_PAID: any
 }
 
-const STATUS_TYPE = {
-	Invalid: 'Invalid',
-	Success: 'Success',
-	Confirm: 'Confirm',
-	OutDate: 'OutDate',
-	InList: 'InList', // Already registered
-	Full: 'Full', // Fully registered
-	Expired: 'Expired',
-}
 
 const RSVPCancelLandingPage = () => {
 	const message: any = useConstants().message

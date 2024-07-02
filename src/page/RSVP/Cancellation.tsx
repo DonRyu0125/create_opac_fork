@@ -23,40 +23,14 @@ import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
 import { Button } from '@/components/ui/button'
 import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
-import { landingPageClick } from '@/store'
+// import { landingPageClick } from '@/store'
 import axios from 'axios'
-import { useAtom } from 'jotai'
+// import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
-import { RegInvalid, RegOutDate } from './Confirmation'
-import { useLanguage } from '@/hooks/useLanguage'
+// import { RegInvalid, RegOutDate } from './Confirmation'
+// import { useLanguage } from '@/hooks/useLanguage'
 import useConstants from '@/hooks/useConstants'
-
-const STATUS_TYPE = {
-	Invalid: 'Invalid',
-	Success: 'Success',
-	Cancel: 'Cancel',
-	OutDate: 'OutDate',
-}
-
-type PatronInfo = {
-	TAG_FUNC_P_ATTND: string
-	TAG_FUNC_P_FIRST: string
-	TAG_FUNC_P_LAST: string
-	TAG_FUNC_P_EMAIL: string
-	TAG_NAME: string
-	TAG_FUNC_START_T: string
-	TAG_FUNC_END_T: string
-	TAG_FUNC_ROOM: string
-	TAG_FUNC_DATE: string
-	TAG_FUNC_LOC: string
-	SISN: string
-	TAG_FUNC_P_ID: string
-	TAG_FUNC_P_T: string
-	BRANCH_ADDRESS: string
-	occ1: string
-	occ2: string
-	TAG_FUNC_P_PAID: any
-}
+import { PatronInfo, STATUS_TYPE, StatusType } from '@/types/patroninfo'
 
 const RSVPCancelLandingPage = () => {
 	const [loading, setLoading] = useState(true)
