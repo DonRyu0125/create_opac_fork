@@ -39,7 +39,7 @@ const SummaryRecords = () => {
 	)
 }
 
-const RecordView = ({ record, bookmark_sisn }: { record: Record; bookmark_sisn?: number }) => {
+const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
 	const { fields } = useConstants()
 	const database = record.database_name
@@ -81,7 +81,7 @@ const RecordView = ({ record, bookmark_sisn }: { record: Record; bookmark_sisn?:
 				thumbnail={thumbnail || 'https://placehold.co/250x250'}
 				footer={
 					<div className="flex h-4 items-center space-x-4 w-full justify-center ">
-						<RecordAction record={record} bookmark_sisn={bookmark_sisn} />
+						<RecordAction record={record} />
 					</div>
 				}
 			/>
@@ -97,7 +97,7 @@ const RecordView = ({ record, bookmark_sisn }: { record: Record; bookmark_sisn?:
 				<div>
 					<Separator />
 					<div className="flex h-12 items-center space-x-4 w-full justify-evenly ">
-						<RecordAction record={record} bookmark_sisn={bookmark_sisn} />
+						<RecordAction record={record} />
 					</div>
 				</div>
 			}>
@@ -106,7 +106,7 @@ const RecordView = ({ record, bookmark_sisn }: { record: Record; bookmark_sisn?:
 	)
 }
 
-const RecordAction = ({ record, bookmark_sisn }: { record: Record; bookmark_sisn?: number }) => {
+const RecordAction = ({ record }: { record: Record }) => {
 	const { database_name, is_bookmarked } = record
 	const [like, setLike] = useState(is_bookmarked ? Boolean(JSON.parse(is_bookmarked)) : true)
 	const { common } = useJSONData({ selector: '#xml_record' })
@@ -116,7 +116,7 @@ const RecordAction = ({ record, bookmark_sisn }: { record: Record; bookmark_sisn
 	const { message } = useConstants()
 	const handleBookmark = () => {
 		if (!bookmark_url && like) {
-			removeBookmarkFromKey(record, bookmark_sisn).then((res) => {
+			removeBookmarkFromKey(record).then((res) => {
 				window.location?.reload()
 			})
 			toast({
