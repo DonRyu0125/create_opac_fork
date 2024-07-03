@@ -26,12 +26,12 @@ import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import useConstants from '@/hooks/useConstants'
-import {PatronInfo, STATUS_TYPE, initialPatronInfo} from '@/types/patroninfo'
+import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 import { CancelTmp } from './ActionComponent'
 
 const RSVP_CANCEL = () => {
 	const [loading, setLoading] = useState(true)
-	const message: any = useConstants().message
+	const message: any = useConstants()
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
 
@@ -42,9 +42,14 @@ const RSVP_CANCEL = () => {
 	const checkParms = async () => {
 		const params = new URLSearchParams(window.location.search)
 		let obj: any
-		params.forEach((value: string, key) => {
+		params?.forEach((value: string, key) => {
 			obj = decodeObj(value)
 		})
+		if(!obj){
+			setLoading(false)
+			setStatus(STATUS_TYPE.Invalid)
+			return;
+		}
 		let jsonObj = JSON.parse(obj)
 		if (isDatePast(jsonObj.TAG_FUNC_DATE)) {
 			setStatus(STATUS_TYPE.OutDate)
@@ -58,6 +63,7 @@ const RSVP_CANCEL = () => {
 			}
 			setStatus(STATUS_TYPE.Invalid)
 		})
+
 	}
 
 	const isRecordValidate = async (id: string) => {
@@ -206,9 +212,7 @@ const RSVP_CANCEL = () => {
 			case STATUS_TYPE.Invalid:
 				return (
 					<div
-						dangerouslySetInnerHTML={{
-							__html: message.cancelLandingNotIntheList,
-						}}></div>
+						>asdas</div>
 				)
 			case STATUS_TYPE.Success:
 				return (

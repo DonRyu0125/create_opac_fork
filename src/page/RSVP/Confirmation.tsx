@@ -35,7 +35,7 @@ import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
 import useConstants from '@/hooks/useConstants'
-import {PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
+import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 import { ConfirmTmp } from './ActionComponent'
 
 const RSVP_CONFIRM = () => {
@@ -54,8 +54,12 @@ const RSVP_CONFIRM = () => {
 		params.forEach((value: string, key) => {
 			obj = decodeObj(value)
 		})
+		if (!obj) {
+			setLoading(false)
+			setStatus(STATUS_TYPE.Invalid)
+			return
+		}
 		let jsonObj = JSON.parse(obj)
-
 		// check the expired or not, user should confirm within TAG_FUNC_P_CONFIRM_EXP_HOURS
 		if (isExpired(jsonObj.TAG_FUNC_P_T)) {
 			setStatus(STATUS_TYPE.Expired)
@@ -76,7 +80,7 @@ const RSVP_CONFIRM = () => {
 			return
 		})
 	}
- 
+
 	const isExpired = (registered_time: string) => {
 		const givenTime = new Date(registered_time)
 		const currentTime = new Date()
@@ -339,6 +343,5 @@ const RSVP_CONFIRM = () => {
 		</Layout>
 	)
 }
-
 
 export default RSVP_CONFIRM
