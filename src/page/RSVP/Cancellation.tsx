@@ -28,10 +28,11 @@ import { useEffect, useState } from 'react'
 import useConstants from '@/hooks/useConstants'
 import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 import { CancelTmp } from './ActionComponent'
+import LandingPageMessage from './LandingPageMessage'
 
 const RSVP_CANCEL = () => {
 	const [loading, setLoading] = useState(true)
-	const message: any = useConstants()
+	const rsvp_landing_message = useConstants().rsvp_landing_message
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
 
@@ -45,10 +46,10 @@ const RSVP_CANCEL = () => {
 		params?.forEach((value: string, key) => {
 			obj = decodeObj(value)
 		})
-		if(!obj){
+		if (!obj) {
 			setLoading(false)
 			setStatus(STATUS_TYPE.Invalid)
-			return;
+			return
 		}
 		let jsonObj = JSON.parse(obj)
 		if (isDatePast(jsonObj.TAG_FUNC_DATE)) {
@@ -63,7 +64,6 @@ const RSVP_CANCEL = () => {
 			}
 			setStatus(STATUS_TYPE.Invalid)
 		})
-
 	}
 
 	const isRecordValidate = async (id: string) => {
@@ -210,24 +210,15 @@ const RSVP_CANCEL = () => {
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return (
-					<div
-						>asdas</div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.cancelLandingNotIntheList} />
 			case STATUS_TYPE.Success:
-				return (
-					<div dangerouslySetInnerHTML={{ __html: message.cancelLandingSuccess }}></div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.cancelLandingSuccess} />
 			case STATUS_TYPE.OutDate:
-				return (
-					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingOutDate }}></div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.confirmLandingOutDate} />
 			case STATUS_TYPE.Cancel:
 				return <CancelTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
-				return (
-					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.confirmLandingInvalid} />
 		}
 	}
 

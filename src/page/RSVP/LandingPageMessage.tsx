@@ -9,9 +9,9 @@ const LandingPageMessage = ({
 }: {
 	title: string
 	subtitle: string
-	showButton: string
-	buttonText: string
-	buttonLink: string
+	showButton: boolean
+	buttonText?: string
+	buttonLink?: string
 }) => (
 	<div className="text-center">
 		<h1 className="landing-page-title">{title}</h1>

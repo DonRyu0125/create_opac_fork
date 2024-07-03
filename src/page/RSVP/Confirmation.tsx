@@ -37,9 +37,10 @@ import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
 import useConstants from '@/hooks/useConstants'
 import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 import { ConfirmTmp } from './ActionComponent'
+import LandingPageMessage from './LandingPageMessage'
 
 const RSVP_CONFIRM = () => {
-	const message: any = useConstants().message
+	const rsvp_landing_message: any = useConstants().rsvp_landing_message
 	const [loading, setLoading] = useState(false)
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
@@ -286,36 +287,21 @@ const RSVP_CONFIRM = () => {
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return (
-					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.confirmLandingInvalid} />
 			case STATUS_TYPE.Success:
-				return (
-					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingSuccess }}></div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.confirmLandingSuccess} />
 			case STATUS_TYPE.OutDate:
-				return (
-					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingOutDate }}></div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.confirmLandingOutDate} />
 			case STATUS_TYPE.InList:
-				return (
-					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingInList }}></div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.confirmLandingInList} />
 			case STATUS_TYPE.Full:
-				return (
-					<div
-						dangerouslySetInnerHTML={{ __html: message.confirmLandingFullEvent }}></div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.confirmLandingFullEvent} />
 			case STATUS_TYPE.Expired:
-				return (
-					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingExpired }}></div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.confirmLandingExpired} />
 			case STATUS_TYPE.Confirm:
 				return <ConfirmTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
-				return (
-					<div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>
-				)
+				return <LandingPageMessage {...rsvp_landing_message.confirmLandingInvalid} />
 		}
 	}
 
