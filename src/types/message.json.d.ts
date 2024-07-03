@@ -8,6 +8,7 @@
 export type SearchPlaceholder = string;
 export type SearchButton = string;
 export type SummaryPage = string;
+export type BookmarkPage = string;
 export type DetailPage = string;
 export type ResultsFor = string;
 export type Displaying = string;
@@ -78,19 +79,12 @@ export type SpotReserved = string;
 export type Confirm = string;
 export type PleaseConfirm = string;
 export type PleaseCancel = string;
-export type ConfirmLandingExpired = string;
-export type ConfirmLandingInList = string;
-export type ConfirmLandingFullEvent = string;
-export type ConfirmLandingOutDate = string;
-export type ConfirmLandingInvalid = string;
-export type ConfirmLandingSuccess = string;
-export type CancelLandingNotIntheList = string;
-export type CancelLandingSuccess = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
   searchButton?: SearchButton;
   summaryPage?: SummaryPage;
+  bookmarkPage?: BookmarkPage;
   detailPage?: DetailPage;
   resultsFor?: ResultsFor;
   displaying?: Displaying;
@@ -161,13 +155,5 @@ export interface MessageJson {
   confirm?: Confirm;
   pleaseConfirm?: PleaseConfirm;
   pleaseCancel?: PleaseCancel;
-  confirmLandingExpired?: ConfirmLandingExpired;
-  confirmLandingInList?: ConfirmLandingInList;
-  confirmLandingFullEvent?: ConfirmLandingFullEvent;
-  confirmLandingOutDate?: ConfirmLandingOutDate;
-  confirmLandingInvalid?: ConfirmLandingInvalid;
-  confirmLandingSuccess?: ConfirmLandingSuccess;
-  cancelLandingNotIntheList?: CancelLandingNotIntheList;
-  cancelLandingSuccess?: CancelLandingSuccess;
   [k: string]: unknown;
 }
