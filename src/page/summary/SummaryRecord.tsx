@@ -27,7 +27,7 @@ import { useAtom } from 'jotai'
 import { Copy, Heart } from 'lucide-react'
 import { useState } from 'react'
 
-const SummaryRecords = ({ isBookmarked }: { isBookmarked?: boolean }) => {
+const SummaryRecords = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 
 	return (
@@ -39,12 +39,13 @@ const SummaryRecords = ({ isBookmarked }: { isBookmarked?: boolean }) => {
 	)
 }
 
-const RecordView = ({ record }: { record: Record; }) => {
+const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
 	const { fields } = useConstants()
 	const database = record.database_name
 	const recordLink = record.record_link
-	const title =  getFieldDataByLabel(record, fields, database, 'Title') || record.record.title ||  'Untitled'
+	const title =
+		getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || 'Untitled'
 	const thumbnail =
 		record.media &&
 		Array.isArray(record.media.im_access_link) &&

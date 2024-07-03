@@ -21,7 +21,7 @@ const Bookmark = () => {
 					breadcrumbs={[
 						{ label: message.home, url: '/' },
 						{
-							label: message.summaryPage,
+							label: message.bookmarkPage,
 							url: backToSummary,
 							active: true,
 						},
@@ -66,11 +66,7 @@ const Bookmark = () => {
 								</SheetContent>
 							</Sheet> */}
 						</div>
-
 						<div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 ">
-							<div className="hidden space-y-4 lg:block col-span-1">
-								<SummaryPageAction />
-							</div>
 							<div className="col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
 								<SummaryRecords />
 							</div>
