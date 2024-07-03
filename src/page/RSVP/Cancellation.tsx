@@ -32,7 +32,7 @@ import LandingPageMessage from './LandingPageMessage'
 
 const RSVP_CANCEL = () => {
 	const [loading, setLoading] = useState(true)
-	const rsvp_landing_message = useConstants().rsvp_landing_message
+	const rsvp = useConstants().rsvp
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
 
@@ -210,15 +210,15 @@ const RSVP_CANCEL = () => {
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return <LandingPageMessage {...rsvp_landing_message.cancelLandingNotIntheList} />
+				return <LandingPageMessage {...rsvp.cancelLandingNotIntheList} />
 			case STATUS_TYPE.Success:
-				return <LandingPageMessage {...rsvp_landing_message.cancelLandingSuccess} />
+				return <LandingPageMessage {...rsvp.cancelLandingSuccess} />
 			case STATUS_TYPE.OutDate:
-				return <LandingPageMessage {...rsvp_landing_message.confirmLandingOutDate} />
+				return <LandingPageMessage {...rsvp.confirmLandingOutDate} />
 			case STATUS_TYPE.Cancel:
 				return <CancelTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
-				return <LandingPageMessage {...rsvp_landing_message.confirmLandingInvalid} />
+				return <LandingPageMessage {...rsvp.confirmLandingInvalid} />
 		}
 	}
 

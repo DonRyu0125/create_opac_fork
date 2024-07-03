@@ -4,7 +4,7 @@ import fields from './fields.json'
 import home from './home.json'
 import styles from './styles.json'
 import message from './message.json'
-import rsvp_landing_message from './rsvp_landing_message.json'
+import rsvp from './rsvp.json'
 
-const constants = { config, faq, fields, home, styles, message, rsvp_landing_message }
+const constants = { config, faq, fields, home, styles, message, rsvp }
 export default constants

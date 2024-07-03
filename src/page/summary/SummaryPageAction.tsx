@@ -47,6 +47,15 @@ const SummaryPageAction = () => {
 	]
 	return (
 		<div className="flex flex-col space-y-4">
+			{/* <div className="flex items-center">
+				<Label>{message.bookmark}</Label>
+				<div className="flex-grow border-t border-gray-600 ml-[4px]"></div>
+			</div> */}
+			<div className="flex flex-col space-y-2">
+				<ViewBookmarks />
+				<BookmarkAll/>
+				<PrintPage/>	
+			</div>
 			<div className="flex flex-col space-y-2">
 				<Label>{message.recordPerPage}</Label>
 				<DropdownSelect
@@ -93,15 +102,6 @@ const SummaryPageAction = () => {
 					}}
 					options={SORT_OPTIONS}
 				/>
-			</div>
-			<div className="flex items-center">
-				<Label>{message.bookmark}</Label>
-				<div className="flex-grow border-t border-gray-600 ml-[4px]"></div>
-			</div>
-			<div className="flex flex-col space-y-2">
-				<ViewBookmarks />
-				<BookmarkAll/>
-				<PrintPage/>	
 			</div>
 			{filter && filter.length > 0 && (
 				<div className="flex flex-col space-y-2">

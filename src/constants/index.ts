@@ -11,7 +11,7 @@ export const CONSTANTS = {
 		faq: en.faq,
 		fields: en.fields,
 		message: en.message,
-		rsvp_landing_message: en.rsvp_landing_message,
+		rsvp: en.rsvp,
 	},
 	FR: {
 		config: fr.config,
@@ -21,6 +21,6 @@ export const CONSTANTS = {
 		faq: fr.faq,
 		fields: fr.fields,
 		message: fr.message,
-		rsvp_landing_message: fr.rsvp_landing_message
+		rsvp: fr.rsvp
 	},
 }

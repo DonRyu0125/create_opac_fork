@@ -40,7 +40,7 @@ import { ConfirmTmp } from './ActionComponent'
 import LandingPageMessage from './LandingPageMessage'
 
 const RSVP_CONFIRM = () => {
-	const rsvp_landing_message: any = useConstants().rsvp_landing_message
+	const rsvp: any = useConstants().rsvp
 	const [loading, setLoading] = useState(false)
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
@@ -287,21 +287,21 @@ const RSVP_CONFIRM = () => {
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return <LandingPageMessage {...rsvp_landing_message.confirmLandingInvalid} />
+				return <LandingPageMessage {...rsvp.confirmLandingInvalid} />
 			case STATUS_TYPE.Success:
-				return <LandingPageMessage {...rsvp_landing_message.confirmLandingSuccess} />
+				return <LandingPageMessage {...rsvp.confirmLandingSuccess} />
 			case STATUS_TYPE.OutDate:
-				return <LandingPageMessage {...rsvp_landing_message.confirmLandingOutDate} />
+				return <LandingPageMessage {...rsvp.confirmLandingOutDate} />
 			case STATUS_TYPE.InList:
-				return <LandingPageMessage {...rsvp_landing_message.confirmLandingInList} />
+				return <LandingPageMessage {...rsvp.confirmLandingInList} />
 			case STATUS_TYPE.Full:
-				return <LandingPageMessage {...rsvp_landing_message.confirmLandingFullEvent} />
+				return <LandingPageMessage {...rsvp.confirmLandingFullEvent} />
 			case STATUS_TYPE.Expired:
-				return <LandingPageMessage {...rsvp_landing_message.confirmLandingExpired} />
+				return <LandingPageMessage {...rsvp.confirmLandingExpired} />
 			case STATUS_TYPE.Confirm:
 				return <ConfirmTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
-				return <LandingPageMessage {...rsvp_landing_message.confirmLandingInvalid} />
+				return <LandingPageMessage {...rsvp.confirmLandingInvalid} />
 		}
 	}
 
