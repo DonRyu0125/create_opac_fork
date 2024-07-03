@@ -40,24 +40,15 @@ export const initialPatronInfo: PatronInfo = {
     TAG_FUNC_DESC: ''
   };
 
-export interface StatusType {
-	Invalid: string
-	Success: string
-	Cancel: string
-	OutDate: string
-	InList: string // Already registered
-	Full: string // Fully registered
-	Expired: string
-    Confirm:string
-}
-
-export const STATUS_TYPE: StatusType = {
+  export const STATUS_TYPE = {
 	Invalid: 'Invalid',
 	Success: 'Success',
 	Confirm: 'Confirm',
 	Cancel: 'Cancel',
 	OutDate: 'OutDate',
-	InList: 'InList',
-	Full: 'Full',
+	InList: 'InList', // Already registered
+	Full: 'Full', // Fully registered
 	Expired: 'Expired',
-}
+  } as const;
+  
+  export type StatusType = keyof typeof STATUS_TYPE;
