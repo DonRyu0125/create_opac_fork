@@ -51,7 +51,6 @@ const RecordView = ({ record }: { record: Record }) => {
 		Array.isArray(record.media.im_access_link) &&
 		record.media.im_access_link.length > 0 &&
 		record.media.im_access_link[0]
-
 	const gridFields = getFieldsFromRecord(
 		record,
 		fields,
