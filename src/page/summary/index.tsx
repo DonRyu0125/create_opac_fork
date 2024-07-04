@@ -16,7 +16,6 @@ import SearchForm from '@/components/common/SearchForm'
 
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
-
 	const { message } = useConstants()
 	// const { common, pagination } = useJSONData({ defaultData: SummarySample })
 	const { common, pagination, backToSummary } = useJSONData({ selector: '#xml_record' })

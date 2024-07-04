@@ -18,7 +18,6 @@ import PrintPage from '../bookmark/PrintPage'
 const SummaryPageAction = () => {
 	const { message } = useConstants()
 	const { filter, common, getSortURL } = useJSONData({ selector: '#xml_record' })
-
 	const SORT_OPTIONS: { label: string; value: SORT_TYPE }[] = [
 		{
 			label: message.sortDefault,
