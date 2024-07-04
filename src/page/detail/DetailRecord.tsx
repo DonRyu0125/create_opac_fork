@@ -13,10 +13,11 @@ const DetailRecord = (props: Props) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const fields = useConstants().fields
 	// const { records } = useJSONData({ defaultData: DetailM3Sample })
+	console.log('record',records)
 	const record = records[0]
 	const database = record.database_name
 	const recordData: DBFields<'COLLECTIONS'> = record.record
-	const title = getFieldDataByLabel(record, fields, database, 'Title') || 'Untitled'
+	const title = getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || 'Untitled'
 	const detailFields = getFieldsFromRecord(
 		record,
 		fields,
@@ -40,7 +41,6 @@ const DetailRecord = (props: Props) => {
 							return value
 						}}
 					/>
-
 					<DetailRecordAction />
 				</div>
 			</RecordDetail>

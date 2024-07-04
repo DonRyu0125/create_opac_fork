@@ -42,7 +42,10 @@ export const getFieldsFromRecord = (
 	filterFn: (e: any) => boolean,
 	componentFn: (data: any[], item: any) => RENDERED_COMPONENT
 ) => {
-	const database = record.database_name ?? record.record.link_dbname // for bookmark, Don 20240704
+	const database =
+		!record.database_name || record.database_name === 'SELECTION_LIST'
+			? record.record.link_dbname // for bookmark's sum,detail page
+			: record.database_name      // for normal sum,detail page
 	const listOfFields = getListOfFields(fields, database)
 	return listOfFields?.items
 		?.filter((item) => filterFn(item))
