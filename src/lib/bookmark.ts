@@ -20,6 +20,7 @@ export const removeBookmarkFromKey = (recd: Record) => {
 		data: `${input?._name}=${record.sisn}`,
 	})
 }
+
 export const validateBookmarkSelectResponse = (res: AxiosResponse<any, any>, prevCount: number) => {
 	if (res.status !== 200 && res.statusText !== 'OK') return false
 

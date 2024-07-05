@@ -115,7 +115,8 @@ const RecordAction = ({ record }: { record: Record }) => {
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const { message } = useConstants()
 	const handleBookmark = () => {
-		if (!bookmark_url && like) {
+		if (record.input?._name && like) {
+			//if record.input?._name is exsisted, we use bookmark sum report, Don Ryu20240705
 			removeBookmarkFromKey(record).then((res) => {
 				window.location?.reload()
 			})
