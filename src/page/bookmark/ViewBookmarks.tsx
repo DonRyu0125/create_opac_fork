@@ -8,7 +8,7 @@ const ViewBookmarks = () => {
 	const { message } = useConstants()
 	const onClick = () => {
 		let url = deepSearchKey(obj, 'bookmark_url')[0]
-		window.location.href = `${url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y`
+		window.location.href = `${url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bk-record.html`
 	}
 	return (
 		<button
