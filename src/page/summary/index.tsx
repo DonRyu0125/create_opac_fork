@@ -59,13 +59,13 @@ const Summary = () => {
 							<Button
 								className="flex cursor-pointer items-center gap-2 border-b "
 								onClick={() => setMobileFilter(true)}>
-								<span className="font-medium"> Filters & Sorting </span>
+								<span className="font-medium"> {message.filtersAndSorting} </span>
 								<ChevronRight className="h-4 w-4" />
 							</Button>
 							<Sheet open={mobileFilter} onOpenChange={setMobileFilter}>
 								<SheetContent>
 									<SheetHeader>
-										<SheetTitle>Filters & Sorting</SheetTitle>
+										<SheetTitle>{message.filtersAndSorting}</SheetTitle>
 									</SheetHeader>
 									<div className="mt-6">
 										<SummaryPageAction />

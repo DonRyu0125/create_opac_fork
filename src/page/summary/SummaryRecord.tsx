@@ -115,7 +115,9 @@ const RecordAction = ({ record }: { record: Record }) => {
 		if (like) {
 			toast({
 				title: 'This record has already been marked',
-				action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
+				action: (
+					<ToastAction altText={message.viewBookmark}>{message.viewBookmark}</ToastAction>
+				),
 			})
 			return
 		}
@@ -129,8 +131,12 @@ const RecordAction = ({ record }: { record: Record }) => {
 			if (isValidated) {
 				setLike(true)
 				toast({
-					title: 'Record has been bookmarked',
-					action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
+					title: message.successfullBookmark,
+					action: (
+						<ToastAction altText={message.viewBookmark}>
+							{message.viewBookmark}
+						</ToastAction>
+					),
 				})
 				return
 			}

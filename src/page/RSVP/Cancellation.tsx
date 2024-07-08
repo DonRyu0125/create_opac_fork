@@ -22,14 +22,10 @@ import {
 import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
 import { Button } from '@/components/ui/button'
-import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
-import { landingPageClick } from '@/store'
-import axios from 'axios'
-import { useAtom } from 'jotai'
-import { useEffect, useState } from 'react'
-import { RegInvalid, RegOutDate } from './Confirmation'
-import { useLanguage } from '@/hooks/useLanguage'
 import useConstants from '@/hooks/useConstants'
+import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 const STATUS_TYPE = {
 	Invalid: 'Invalid',
