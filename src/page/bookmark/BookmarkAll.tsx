@@ -15,9 +15,9 @@ const BookmarkAll = () => {
 			if (is_bookmarked === 'false') {
 				return `mcheckbox_${record.sisn}=${record.sisn}-${database_name}`
 			}
-			return ''
-		})
-		if (!dataString.every((item) => item === '')) {
+			return
+		}).filter(item => item !== undefined);
+		if (!dataString.every((item) => item === ' ')) {
 			await axios({
 				method: 'post',
 				url: `${bookmark_url}?ADDSELECTION&COOKIE=BOOKMARK`,
@@ -25,11 +25,13 @@ const BookmarkAll = () => {
 			}).then(() => {
 				toast({
 					title: `${message.allRecordsBookmarked}`,
-					action: <ToastAction altText="View bookmark">{message.viewBookmark}</ToastAction>,
+					action: (
+						<ToastAction altText="View bookmark">{message.viewBookmark}</ToastAction>
+					),
 				})
 				window.location?.reload()
 			})
-		}else{
+		} else {
 			toast({
 				title: `${message.recordAlreadyMarked}`,
 				action: <ToastAction altText="View bookmark">{message.viewBookmark}</ToastAction>,

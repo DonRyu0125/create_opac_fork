@@ -147,10 +147,10 @@ const RecordAction = ({ record }: { record: Record }) => {
 						<ToastAction altText="View bookmark">{message.viewBookmark}</ToastAction>
 					),
 				})
-				window.location?.reload()
 				return
 			}
 		})
+		window.location?.reload()
 	}
 
 	const handleCopy = () => {
