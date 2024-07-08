@@ -27,6 +27,11 @@ const BookmarkAll = () => {
 				})
 				window.location?.reload()
 			})
+		}else{
+			toast({
+				title: 'All records are already bookmarked',
+				action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
+			})
 		}
 	}
 
