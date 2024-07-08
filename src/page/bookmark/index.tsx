@@ -9,24 +9,11 @@ import SearchForm from '@/components/common/SearchForm'
 import SummaryRecords from '../summary/SummaryRecord'
 import { Button } from '@/components/ui/button'
 import axios from 'axios'
+import { removeAllBookmarks } from '@/lib/bookmark'
 
 const Bookmark = () => {
 	const { message } = useConstants()
 	const { common, pagination, backToSummary, records } = useJSONData({ selector: '#xml_record' })
-
-	const removeAllBookmarks = async () => {
-		let dataString = records.map(({ input, record }) => {
-			return `${input?._name}=${record.sisn}`
-		})
-
-		return await axios({
-			method: 'post',
-			url: `?DELETEORDER&COOKIE=BOOKMARK`,
-			data: dataString.join('&'),
-		}).then((res)=>{
-			window.location?.reload()
-		})
-	}
 
 	return (
 		<Layout>
@@ -54,7 +41,9 @@ const Bookmark = () => {
 					<div className="mx-auto py-4 sm:py-12 container flex flex-col">
 						<div className={'w-full flex justify-between'}>
 							<PageHeader heading={`${common.total_record} bookmarked item(s)`} />
-							<Button onClick={removeAllBookmarks}>{message.removeALL}</Button>
+							<Button onClick={() => removeAllBookmarks(records)}>
+								{message.removeALL}
+							</Button>
 						</div>
 						<div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 ">
 							<div className="col-span-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">

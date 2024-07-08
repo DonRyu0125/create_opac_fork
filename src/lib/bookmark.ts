@@ -35,3 +35,16 @@ export const validateBookmarkSelectResponse = (res: AxiosResponse<any, any>, pre
 		console.error('Error validating bookmark count', error)
 	}
 }
+
+export const removeAllBookmarks = async (records: Record[]) => {
+	let dataString = records.map(({ input, record }) => {
+		return `${input?._name}=${record.sisn}`
+	})
+	return await axios({
+		method: 'post',
+		url: `?DELETEORDER&COOKIE=BOOKMARK`,
+		data: dataString.join('&'),
+	}).then((res) => {
+		window.location?.reload()
+	})
+}
