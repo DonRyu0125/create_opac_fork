@@ -79,6 +79,10 @@ export type SpotReserved = string;
 export type Confirm = string;
 export type PleaseConfirm = string;
 export type PleaseCancel = string;
+export type AllRecordsBookmarked = string;
+export type RecordAlreadyMarked = string;
+export type BookmarkHasBeenRemoved = string;
+export type RemoveALL = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -155,5 +159,9 @@ export interface MessageJson {
   confirm?: Confirm;
   pleaseConfirm?: PleaseConfirm;
   pleaseCancel?: PleaseCancel;
+  allRecordsBookmarked?: AllRecordsBookmarked;
+  recordAlreadyMarked?: RecordAlreadyMarked;
+  bookmarkHasBeenRemoved?: BookmarkHasBeenRemoved;
+  RemoveALL?: RemoveALL;
   [k: string]: unknown;
 }

@@ -83,5 +83,6 @@
 	"pleaseCancel": "This will cancel your registration for",
 	"allRecordsBookmarked":"All records have been bookmarked",
 	"recordAlreadyMarked":"Record(s) has already been marked",
-	"bookmarkHasBeenRemoved":"Bookmark has been removed"
+	"bookmarkHasBeenRemoved":"Bookmark(s) has been removed",
+	"RemoveALL":"Remove All"
 }
