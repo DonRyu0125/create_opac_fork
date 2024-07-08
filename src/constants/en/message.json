@@ -80,5 +80,8 @@
 	"spotReserved": "spot reserved",
 	"confirm": "Confirm",
 	"pleaseConfirm": "Please confirm your registration",
-	"pleaseCancel": "This will cancel your registration for"
+	"pleaseCancel": "This will cancel your registration for",
+	"allRecordsBookmarked":"All records have been bookmarked",
+	"recordAlreadyMarked":"Record(s) has already been marked",
+	"bookmarkHasBeenRemoved":"Bookmark has been removed"
 }

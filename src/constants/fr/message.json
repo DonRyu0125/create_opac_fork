@@ -80,5 +80,8 @@
 	"spotReserved": "Une place réservée",
 	"confirm": "confirmer",
 	"pleaseConfirm": "Veuillez confirmer votre inscription",
-	"pleaseCancel": "Cela annulera votre inscription à"
+	"pleaseCancel": "Cela annulera votre inscription à",
+	"allRecordsBookmarked":"Tous les enregistrements ont été marqués d'un signet",
+	"recordAlreadyMarked":"Cet enregistrement a déjà été marqué",
+	"bookmarkHasBeenRemoved":"Le signet a été supprimé"
 }
