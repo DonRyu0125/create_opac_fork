@@ -145,6 +145,7 @@ const RecordAction = ({ record }: { record: Record }) => {
 					title: 'Record has been bookmarked',
 					action: <ToastAction altText="View bookmark">View bookmark</ToastAction>,
 				})
+				window.location?.reload()
 				return
 			}
 		})

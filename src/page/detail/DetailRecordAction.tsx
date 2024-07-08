@@ -7,10 +7,8 @@ import useConstants from '@/hooks/useConstants'
 
 const DetailRecordAction = () => {
 	const { toast } = useToast()
-
 	// const { nextRecord, previousRecord, records } = useJSONData({ defaultData: DetailM3Sample })
 	const { nextRecord, previousRecord, records } = useJSONData({ selector: '#xml_record' })
-
 	const { message } = useConstants()
 	const record = records[0]
 
