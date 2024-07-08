@@ -34,10 +34,10 @@ const Bookmark = () => {
 				</PageAction>
 
 				<section>
-					<div className="mx-auto py-4 sm:py-12  container flex flex-col">
+					<div className="mx-auto py-4 sm:py-12 container flex flex-col">
 						<PageHeader heading={`${common.total_record} bookmarked item(s)`} />
 						<div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 ">
-							<div className="col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+							<div className="col-span-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
 								<SummaryRecords />
 							</div>
 							{pagination?.a && pagination.a.length > 0 && (
