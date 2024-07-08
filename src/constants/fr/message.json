@@ -77,7 +77,7 @@
 	"recordAlreadyMarked": "Cet enregistrement a déjà été marqué",
 	"bookmarkHasBeenRemoved": "Le signet a été supprimé",
 	"removeALL": "Supprimer tout",
-	"noSavedItems": "Aucun élément enregistré",
+	"noBookmark": "Aucun favori",
 	"noItemsInBookmark": "Aucun élément enregistré dans vos favoris",
 	"goBackHome": "Retour à l'accueil"
 }

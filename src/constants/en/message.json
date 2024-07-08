@@ -77,7 +77,7 @@
 	"recordAlreadyMarked": "Record(s) has already been marked",
 	"bookmarkHasBeenRemoved": "Bookmark(s) has been removed",
 	"removeALL": "Remove All",
-	"noSavedItems": "No Saved Item(s)",
+	"noBookmark": "No bookmarks",
 	"noItemsInBookmark": "Sorry, there are no items saved in your bookmark!",
 	"goBackHome": "Go Back Home"
 }
