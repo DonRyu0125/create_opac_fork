@@ -82,7 +82,7 @@ export type PleaseCancel = string;
 export type AllRecordsBookmarked = string;
 export type RecordAlreadyMarked = string;
 export type BookmarkHasBeenRemoved = string;
-export type RemoveALL = string;
+export type removeALL = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -162,6 +162,6 @@ export interface MessageJson {
   allRecordsBookmarked?: AllRecordsBookmarked;
   recordAlreadyMarked?: RecordAlreadyMarked;
   bookmarkHasBeenRemoved?: BookmarkHasBeenRemoved;
-  RemoveALL?: RemoveALL;
+  removeALL?: removeALL;
   [k: string]: unknown;
 }

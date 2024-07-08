@@ -56,15 +56,7 @@
 	"seats": "Places",
 	"language": "Langue",
 	"dateType": "fr-FR",
-	"daysOfWeek": [
-		"Di",
-		"Lu",
-		"Ma",
-		"Me",
-		"Je",
-		"Ve",
-		"Sa"
-	],
+	"daysOfWeek": ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
 	"close": "Fermer",
 	"privateProperty": "Propriété privée",
 	"contactInfoNotProvided": "Les informations de contact ne sont pas fournies",
@@ -81,8 +73,11 @@
 	"confirm": "confirmer",
 	"pleaseConfirm": "Veuillez confirmer votre inscription",
 	"pleaseCancel": "Cela annulera votre inscription à",
-	"allRecordsBookmarked":"Tous les enregistrements ont été marqués d'un signet",
-	"recordAlreadyMarked":"Cet enregistrement a déjà été marqué",
-	"bookmarkHasBeenRemoved":"Le signet a été supprimé",
-	"RemoveALL":"Supprimer tout"
+	"allRecordsBookmarked": "Tous les enregistrements ont été marqués d'un signet",
+	"recordAlreadyMarked": "Cet enregistrement a déjà été marqué",
+	"bookmarkHasBeenRemoved": "Le signet a été supprimé",
+	"removeALL": "Supprimer tout",
+	"noSavedItems": "Aucun élément enregistré",
+	"noItemsInBookmark": "Aucun élément enregistré dans vos favoris",
+	"goBackHome": "Retour à l'accueil"
 }

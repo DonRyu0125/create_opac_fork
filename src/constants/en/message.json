@@ -2,7 +2,7 @@
 	"searchPlaceholder": "Enter Your Search",
 	"searchButton": "Search",
 	"summaryPage": "Summary Page",
-	"bookmarkPage":"Bookmark Page",
+	"bookmarkPage": "Bookmark Page",
 	"detailPage": "Detail Page",
 	"resultsFor": "Result For",
 	"displaying": "Displaying",
@@ -56,15 +56,7 @@
 	"seats": "Seats",
 	"language": "Language",
 	"dateType": "default",
-	"daysOfWeek": [
-		"Sun",
-		"Mon",
-		"Tue",
-		"Wed",
-		"Thu",
-		"Fri",
-		"Sat"
-	],
+	"daysOfWeek": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
 	"close": "Close",
 	"privateProperty": "Private property",
 	"contactInfoNotProvided": "Contact info is not provided",
@@ -81,8 +73,11 @@
 	"confirm": "Confirm",
 	"pleaseConfirm": "Please confirm your registration",
 	"pleaseCancel": "This will cancel your registration for",
-	"allRecordsBookmarked":"All records have been bookmarked",
-	"recordAlreadyMarked":"Record(s) has already been marked",
-	"bookmarkHasBeenRemoved":"Bookmark(s) has been removed",
-	"RemoveALL":"Remove All"
+	"allRecordsBookmarked": "All records have been bookmarked",
+	"recordAlreadyMarked": "Record(s) has already been marked",
+	"bookmarkHasBeenRemoved": "Bookmark(s) has been removed",
+	"removeALL": "Remove All",
+	"noSavedItems": "No Saved Item(s)",
+	"noItemsInBookmark": "Sorry, there are no items saved in your bookmark!",
+	"goBackHome": "Go Back Home"
 }
