@@ -1,8 +1,13 @@
 # Event Calendar function (version 1.0) 2024-05-30
 
 ## Introduction
+Event Calendar for showing events and make the user register the events
 
-This is the Event Calendar for showing events and make the user register the events
+*This is separate component from main OPAC, this component share webuser mwi profile but it has own website profile ...
+
+MWI structure
+-WEB_CALENDAR site profile - webuser - M2L_TAG 
+-WEB_LIBRARY_LOC site profile - webuser - LIBRARY_LOCATION 
 
 ## Feature
 
@@ -73,4 +78,4 @@ confirm email
 
 #Database needs
 -M2L_TAG
--Library location (Already in the M2L model)
+-Library location
