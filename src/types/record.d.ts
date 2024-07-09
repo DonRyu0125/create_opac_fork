@@ -25,7 +25,7 @@ export interface BookmarkCheckBoxData {
 export interface FieldData<T extends string> {
 	[key: string]: string | number | DBFields<T> | FieldData[]
 }
-interface Record {
+export interface Record {
 	media?: Media
 	is_bookmarked: string
 	database_name: string
@@ -35,3 +35,8 @@ interface Record {
 }
 
 export type MediaType = 'im_access_link' | 'vd_access_link' | 'ad_access_link' | 'tx_access_link'
+
+export interface BookmarkResponse {
+	isSuccess: boolean
+	newCount?: number
+}

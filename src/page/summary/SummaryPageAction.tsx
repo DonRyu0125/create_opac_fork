@@ -39,10 +39,6 @@ const SummaryPageAction = () => {
 			label: message.sortDateAscending,
 			value: 'date_asc',
 		},
-		// {
-		// 	label: message.sortDateDescending,
-		// 	value: 'date_dsc',
-		// },
 	]
 	return (
 		<div className="flex flex-col space-y-4">
@@ -52,8 +48,8 @@ const SummaryPageAction = () => {
 			</div>
 			<div className="flex flex-col space-y-2">
 				<ViewBookmarks />
-				<BookmarkAll/>
-				<PrintPage/>	
+				<BookmarkAll />
+				<PrintPage />
 			</div>
 			<div className="flex flex-col space-y-2">
 				<Label>{message.recordPerPage}</Label>

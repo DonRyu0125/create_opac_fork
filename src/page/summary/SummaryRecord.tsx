@@ -2,30 +2,14 @@ import DataWithLabel from '@/components/common/DataWithLabel'
 import DetailInfoCard from '@/components/common/DetailInfoCard'
 import InfoCard from '@/components/common/InfoCard'
 import Link from '@/components/common/Link'
-import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { useToast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import {
-	bookmarkSelect,
-	removeBookmarkFromKey,
-	validateBookmarkSelectResponse,
-} from '@/lib/bookmark'
-import {
-	copyRecordURL,
-	deepSearchKey,
-	getFieldDataByLabel,
-	getFieldsFromRecord,
-	truncateString,
-} from '@/lib/record'
-import { cn } from '@/lib/utils'
+import { getFieldDataByLabel, getFieldsFromRecord, truncateString } from '@/lib/record'
 import { viewAtom } from '@/store'
 import { Record } from '@/types/record'
-import { ToastAction } from '@radix-ui/react-toast'
 import { useAtom } from 'jotai'
-import { Copy, Heart } from 'lucide-react'
-import { useState } from 'react'
+import { RecordAction } from './RecordAction'
 
 const SummaryRecords = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -106,80 +90,4 @@ const RecordView = ({ record }: { record: Record }) => {
 	)
 }
 
-const RecordAction = ({ record }: { record: Record }) => {
-	const { database_name, is_bookmarked } = record
-	const [like, setLike] = useState(is_bookmarked ? Boolean(JSON.parse(is_bookmarked)) : true)
-	const { common } = useJSONData({ selector: '#xml_record' })
-	const { bookmark_url, bookmark_count } = common
-	const { toast } = useToast()
-	const sisn = deepSearchKey(record, 'sisn')[0] as string
-	const { message } = useConstants()
-	const handleBookmark = () => {
-		if (record.input?._name && like) {
-			//if record.input?._name is exsisted, we use bookmark sum report, Don Ryu20240705
-			removeBookmarkFromKey(record).then((res) => {
-				window.location?.reload()
-			})
-			toast({
-				title: `${message.bookmarkHasBeenRemoved}`,
-			})
-			return
-		}
-		if (like) {
-			toast({
-				title: `${message.allRecordsBookmarked}`,
-				action: <ToastAction altText={message.viewBookmark}>{message.viewBookmark}</ToastAction>,
-			})
-			return
-		}
-		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
-			const isValidated = validateBookmarkSelectResponse(
-				res,
-				typeof bookmark_count === 'number'
-					? bookmark_count
-					: Number.parseInt(bookmark_count || '0')
-			)
-			if (isValidated) {
-				setLike(true)
-				toast({
-					title: message.successfullBookmark,
-					action: (
-						<ToastAction altText={message.viewBookmark}>
-							{message.viewBookmark}
-						</ToastAction>
-					),
-				})
-				return
-			}
-		})
-		window.location?.reload()
-	}
-
-	const handleCopy = () => {
-		copyRecordURL(database_name, sisn)
-		toast({
-			title: message.recordIsCopied,
-		})
-	}
-
-	return (
-		<>
-			<Button variant="ghost" size="icon" onClick={handleBookmark}>
-				<Heart
-					className={cn('h-4 w-4 text-primary')}
-					fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
-					stroke={like ? 'hsl(var(--opac-blue))' : 'hsl(var(--primary'}
-				/>
-			</Button>
-			<Separator orientation="vertical" />
-			<Button variant="ghost" size="icon" onClick={handleCopy}>
-				<Copy className="h-4 w-4 text-primary" />
-			</Button>
-			{/* <Separator orientation="vertical" /> */}
-			{/* <Button variant="ghost" size="icon">
-				<Mail className="h-4 w-4 text-primary" />
-			</Button> */}
-		</>
-	)
-}
 export default SummaryRecords
