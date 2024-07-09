@@ -1,12 +1,12 @@
-import { faq } from '@/constants'
 import AccordionList from '../components/common/AccordionList'
 import Hero from '../components/common/Hero'
 import Section from '../components/common/Section'
 import SplitSection from '../components/common/SplitSection'
 import Layout from '../components/layouts'
+import useConstants from '@/hooks/useConstants'
 
 const FAQ = () => {
-	const { heading, subHeading, heroBanner } = faq
+	const { heading, subHeading, heroBanner } = useConstants().faq
 	return (
 		<Layout>
 			<Hero

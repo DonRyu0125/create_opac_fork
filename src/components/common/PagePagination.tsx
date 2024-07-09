@@ -34,7 +34,7 @@ const PagePagination = ({ items, maxItem = 10, renderItem }: PagePaginationProps
 				{items
 					.filter((e, i) => i < maxItem)
 					.map((item, index) => (
-						<PaginationItem>
+						<PaginationItem key={index}>
 							<PaginationLink isActive={item.active} href={item.url}>
 								{renderItem(item, index)}
 							</PaginationLink>

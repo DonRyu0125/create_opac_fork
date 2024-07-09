@@ -1,9 +1,12 @@
 import CheckboxWithLabel from '@/components/common/CheckboxWithLabel'
 import CollapseList from '@/components/common/CollapseList'
 import DropdownSelect from '@/components/common/DropdownSelect'
-import getJSONData from '@/hooks/getJSONData'
-import { SummarySample } from '@/samples'
+import useConstants from '@/hooks/useConstants'
+import useJSONData, { COMMON_FIELDS_TYPE, SORT_TYPE } from '@/hooks/useJSONData'
 import { Label } from '@radix-ui/react-dropdown-menu'
+import ViewBookmarks from '../bookmark/ViewBookmarks'
+import BookmarkAll from '../bookmark/BookmarkAll'
+import PrintPage from '../bookmark/PrintPage'
 
 /**
  * This component contains:
@@ -13,31 +16,99 @@ import { Label } from '@radix-ui/react-dropdown-menu'
  * - Bookmark
  */
 const SummaryPageAction = () => {
-	// const { filter } = getJSONData({ selector: '#xml_record' })
-	const { filter } = getJSONData({ defaultData: SummarySample })
-
+	const { message } = useConstants()
+	const { filter, common, getSortURL } = useJSONData({ selector: '#xml_record' })
+	const SORT_OPTIONS: { label: string; value: SORT_TYPE }[] = [
+		{
+			label: message.sortDefault,
+			value: 'default',
+		},
+		{
+			label: message.sortAccessionNumberAscending,
+			value: 'id_asc',
+		},
+		{
+			label: message.sortTitleAscending,
+			value: 'title_asc',
+		},
+		{
+			label: message.sortTitleDescending,
+			value: 'title_dsc',
+		},
+		{
+			label: message.sortDateAscending,
+			value: 'date_asc',
+		},
+	]
 	return (
 		<div className="flex flex-col space-y-4">
-			<div className="flex flex-col space-y-2">
-				<Label>Record per page</Label>
-				<DropdownSelect title={'Select records number'} options={[]} />
+			<div className="flex items-center">
+				<Label>{message.bookmark}</Label>
+				{/* <div className="flex-grow border-t border-gray-600 ml-[4px]"></div> */}
 			</div>
 			<div className="flex flex-col space-y-2">
-				<Label>Sort by</Label>
-				<DropdownSelect title={'Sort by'} options={[]} />
+				<ViewBookmarks />
+				<BookmarkAll />
+				<PrintPage />
 			</div>
-
+			<div className="flex flex-col space-y-2">
+				<Label>{message.recordPerPage}</Label>
+				<DropdownSelect
+					register={{
+						onValueChange: (value) => {
+							const pageURL = common[
+								`pagesize_${value}` as COMMON_FIELDS_TYPE
+							] as string
+							if (pageURL) {
+								window.location.href = pageURL
+							}
+						},
+					}}
+					title={message.selectRecordsNumber}
+					options={[
+						{
+							label: `${message.displaying} 12 ${message.record}`,
+							value: 12,
+						},
+						{
+							label: `${message.displaying} 25 ${message.record}`,
+							value: 25,
+						},
+						{
+							label: `${message.displaying} 50 ${message.record}`,
+							value: 50,
+						},
+						{
+							label: `${message.displaying} 100 ${message.record}`,
+							value: 100,
+						},
+					]}
+				/>
+			</div>
+			<div className="flex flex-col space-y-2">
+				<Label>{message.sortBy}</Label>
+				<DropdownSelect
+					title={message.sortBy}
+					register={{
+						onValueChange: (value: SORT_TYPE) => {
+							const url = getSortURL('UNION_VIEW', value)
+							window.location.href = url
+						},
+					}}
+					options={SORT_OPTIONS}
+				/>
+			</div>
 			{filter && filter.length > 0 && (
 				<div className="flex flex-col space-y-2">
-					<Label>Filter by</Label>
+					<Label>{message.filterBy}</Label>
 					<div className="flex flex-col space-y-4">
 						{filter.map((item, index) => (
 							<CollapseList title={item._title} expand={index === 0} key={item._name}>
-								<div className="space-y-3  border-t p-4">
+								<div className="space-y-3 border-t p-4">
 									{item.item_group.map((option) => (
 										<CheckboxWithLabel
 											callback={() => {
-												window.location = option.item_link
+												window.location.href = option.item_link
 											}}
 											label={`${option.item_value} (${option.item_frequency})`}
 											checked={option.item_selected === 'Y'}

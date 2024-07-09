@@ -1,33 +1,34 @@
-import Layout from '@/components/layouts'
+import PageAction from '@/components/common/PageAction'
 import PageHeader from '@/components/common/PageHeader'
-import ViewToggle from '@/components/common/ViewToggle'
 import PagePagination from '@/components/common/PagePagination'
+import SearchForm from '@/components/common/SearchForm'
+import ViewToggle from '@/components/common/ViewToggle'
+import Layout from '@/components/layouts'
 import { Button } from '@/components/ui/button'
-import { ChevronRight } from 'lucide-react'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
-import { useEffect, useState } from 'react'
-import getJSONData from '@/hooks/getJSONData'
+import useConstants from '@/hooks/useConstants'
+import useJSONData from '@/hooks/useJSONData'
+import { ChevronRight } from 'lucide-react'
+import { useState } from 'react'
 import SummaryPageAction from './SummaryPageAction'
 import SummaryRecords from './SummaryRecord'
-import PageAction from '@/components/common/PageAction'
-import { SummarySample } from '@/samples'
 
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
+	const { message } = useConstants()
+	// const { common, pagination } = useJSONData({ defaultData: SummarySample })
+	const { common, pagination, backToSummary } = useJSONData({ selector: '#xml_record' })
 
-	const { common, pagination } = getJSONData({ defaultData: SummarySample })
-	// const { common, pagination } = getJSONData({ selector: '#xml_record' })
-
-	if (!common || !pagination) return <></>
+	if (!common) return <></>
 	return (
 		<Layout>
 			<div className="rounded-sm border border-primary bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
 				<PageAction
 					breadcrumbs={[
-						{ label: 'Home', url: '/' },
+						{ label: message.home, url: '/' },
 						{
-							label: 'Summary',
-							url: '/summary',
+							label: message.summaryPage,
+							url: backToSummary,
 							active: true,
 						},
 					]}>
@@ -37,6 +38,11 @@ const Summary = () => {
 							Advanced Search
 						</Button> */}
 						{/* <Separator orientation="vertical" /> */}
+						<SearchForm
+							className="w-[450px] m-0"
+							inputStyle="text-black"
+							inputName={'KEYWORD_CLUSTER'}
+						/>
 						<ViewToggle />
 					</div>
 				</PageAction>
@@ -44,20 +50,20 @@ const Summary = () => {
 				<section>
 					<div className="mx-auto py-4 sm:py-12  container flex flex-col">
 						<PageHeader
-							heading={`${common.total_record} results for "${common.search_statement}"`}
-							subHeading={`Displaying ${common.first_record_seq}-${common.last_record_seq} of ${common.total_record}`}
+							heading={`${common.total_record} ${message.resultsFor.toLowerCase()} "${common.search_statement}"`}
+							subHeading={`${message.displaying} ${common.first_record_seq}-${common.last_record_seq} ${message.of} ${common.total_record}`}
 						/>
 						<div className="mt-8 block lg:hidden">
 							<Button
 								className="flex cursor-pointer items-center gap-2 border-b "
 								onClick={() => setMobileFilter(true)}>
-								<span className="font-medium"> Filters & Sorting </span>
+								<span className="font-medium"> {message.filtersAndSorting} </span>
 								<ChevronRight className="h-4 w-4" />
 							</Button>
 							<Sheet open={mobileFilter} onOpenChange={setMobileFilter}>
 								<SheetContent>
 									<SheetHeader>
-										<SheetTitle>Filters & Sorting</SheetTitle>
+										<SheetTitle>{message.filtersAndSorting}</SheetTitle>
 									</SheetHeader>
 									<div className="mt-6">
 										<SummaryPageAction />

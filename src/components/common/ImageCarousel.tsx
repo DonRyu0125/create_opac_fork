@@ -21,31 +21,18 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
 
 	return (
 		<div className="flex flex-col space-y-4">
-			<Slide
-				carouselStyle="sm:basis-1/4"
-				items={items}
-				renderItem={(item, index) => (
-					<div className="cursor-pointer" onClick={() => setCurrent(index)}>
-						{renderItems(item, index)}
-					</div>
-				)}
-				auto={false}
-			/>
-
 			<div className="flex w-full group cursor-pointer relative">
-				<img className="mx-auto" {...currentImage} />
+				<img className="mx-auto w-full lg:max-w-[400px]" {...currentImage} />
 				<Scan
 					strokeWidth={'3px'}
 					className="cursor-pointer absolute bg-gray-400 bg-opacity-30  w-8 h-8 text-white hover:text-primary bottom-2 right-2 transition-all ease-in duration-400 "
 					onClick={() => setOpenLightbox(true)}
 				/>
-
 				<ChevronLeft
 					strokeWidth={'3px'}
 					className="cursor-pointer absolute bg-gray-400 bg-opacity-30 w-8 h-8 text-white hover:text-primary left-2 top-1/2  transition-all ease-in duration-400 "
 					onClick={() => setCurrent(current - 1 < 0 ? 0 : current - 1)}
 				/>
-
 				<ChevronRight
 					strokeWidth={'3px'}
 					className="cursor-pointer absolute bg-gray-400 bg-opacity-30  w-8 h-8 text-white hover:text-primary right-2 top-1/2 transition-all ease-in duration-400 "
@@ -53,9 +40,19 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
 						setCurrent(current + 1 === items.length ? items.length - 1 : current + 1)
 					}
 				/>
-
 				<LightboxImage onOpen={setOpenLightbox} open={openLightbox} items={items} />
 			</div>
+
+			<Slide
+				carouselStyle="sm:basis-1/4"
+				items={items}
+				renderItem={(item, index) => (
+					<div className="cursor-pointer w-fit" onClick={() => setCurrent(index)}>
+						{renderItems(item, index)}
+					</div>
+				)}
+				auto={false}
+			/>
 		</div>
 	)
 }

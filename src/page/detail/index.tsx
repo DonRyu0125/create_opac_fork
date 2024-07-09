@@ -1,13 +1,10 @@
-import Layout from '@/components/layouts'
-import PageAction from '@/components/common/PageAction'
-import RecordDetail from '@/components/common/RecordDetail'
-import SearchForm from '@/components/common/SearchForm'
 import ImageCarousel from '@/components/common/ImageCarousel'
-import InfoTable from '@/components/common/InfoTable'
-import RecordAction from '@/components/common/RecordAction'
-import { SlidersHorizontal } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import getJSONData from '@/hooks/getJSONData'
+import PageAction from '@/components/common/PageAction'
+import SearchForm from '@/components/common/SearchForm'
+import Layout from '@/components/layouts'
+import useConstants from '@/hooks/useConstants'
+import useJSONData from '@/hooks/useJSONData'
+import DetailRecord from './DetailRecord'
 
 const images = [
 	{
@@ -27,65 +24,67 @@ const images = [
 	},
 ]
 const Detail = () => {
-	const { common, backToSummary } = getJSONData({ selector: '#xml_record' })
+	const { backToSummary, records, getMedia } = useJSONData({ selector: '#xml_record' })
+	// const { backToSummary, records, getMedia } = useJSONData({ defaultData: DetailM3Sample })
+	const images = getMedia(records[0], 'im_access_link')?.map((e) => ({ src: e })) || []
 
+	const { message } = useConstants()
+	// TODO: create placeholder component when there is no data
+	if (!records || records.length === 0) return <></>
 	return (
 		<Layout>
 			<div className="rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
 				<PageAction
 					breadcrumbs={[
-						{ label: 'Home', url: '/' },
+						{ label: message.home, url: '/' },
 						{
-							label: 'Summary',
+							label: `${records[0].database_name === 'SELECTION_LIST' ? message.bookmarkPage : message.summaryPage}`,
 							url: backToSummary,
 						},
 						{
-							label: 'Detail',
+							label: message.detailPage,
 							active: true,
+							url: '#',
 						},
 					]}>
 					{/* <Button>
 						<SlidersHorizontal className="mr-2 h-4 w-4" />
 						Advanced Search
 					</Button> */}
+					<div className="flex w-full flex-row space-x-2 justify-end">
+						{/* <Button>
+							<SlidersHorizontal className="mr-2 h-4 w-4" />
+							Advanced Search
+						</Button> */}
+						{/* <Separator orientation="vertical" /> */}
+						<SearchForm
+							className="w-[450px] m-0"
+							inputStyle="text-black"
+							inputName={'KEYWORD_CLUSTER'}
+						/>
+					</div>
 				</PageAction>
 				<section>
 					<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-						<div className="grid md:grid-cols-2 gap-6 lg:gap-12 items-start max-w-6xl px-4 mx-auto py-6">
-							<ImageCarousel
-								items={images}
-								renderItems={(image) => (
-									<img
-										src={image.src}
-										className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+						<div className="flex flex-col lg:flex-row space-y-12 lg:space-y-0 lg:space-x-8 items-start max-w-6xl p-4 mx-auto ">
+							<div className="max-w-[700px]  mx-auto">
+								{images && images.length > 0 ? (
+									<ImageCarousel
+										items={images}
+										renderItems={(image) => (
+											<img
+												alt="test"
+												src={image.src}
+												className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+											/>
+										)}
 									/>
+								) : (
+									<span>{message.noMediaFound}</span>
 								)}
-							/>
-							<div className=" grid gap-4 md:gap-10 items-start">
-								<RecordDetail heading={'A test record'} subHeading="by Author Jane">
-									<div className="flex flex-col space-y-4">
-										<InfoTable
-											rowsData={[
-												{
-													label: 'Title',
-													value: 'The Adventures of Fictional Book',
-												},
-												{ label: 'Author', value: 'John Authorson' },
-												{ label: 'Genre', value: 'Fantasy' },
-												{ label: 'Published Year', value: 2022 },
-												{ label: 'ISBN', value: '978-1-2345-6789-0' },
-												{ label: 'Available Copies', value: 10 },
-												{
-													label: 'Description',
-													value: 'A captivating tale of imagination and wonder.',
-												},
-											]}
-											renderRow={(row) => row.value}
-										/>
-
-										<RecordAction />
-									</div>
-								</RecordDetail>
+							</div>
+							<div className="w-full lg:w-1/2 grid gap-4 md:gap-10 items-start ">
+								<DetailRecord />
 							</div>
 						</div>
 					</div>

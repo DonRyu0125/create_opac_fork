@@ -1,0 +1,129 @@
+[
+	{
+		"database": "COLLECTIONS_WEB",
+		"items": [
+			{
+				"label": "Title",
+				"name": "LEGAL_TITLE",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Numéro d'accession",
+				"name": "ACCESSION_NUMBER",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Type de collection",
+				"name": "collect_typ_lan1",
+				"summary": true,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Date de début de production",
+				"name": "EARLY",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Date de fin de production",
+				"name": "LATE",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Nom de l'objet",
+				"name": "obj_nme_alt_lan1",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Description",
+				"name": "obj_description",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Auteur(e)",
+				"name": "Author",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Éditeur/Éditrice",
+				"name": "l_publisher",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			}
+		]
+	},
+	{
+		"database": "DESCRIPTION_WEB",
+		"items": [
+			{
+				"label": "Title",
+				"name": "TITLE",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "ID",
+				"name": "REFD",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Date",
+				"name": "date_cr_inc",
+				"summary": true,
+				"grid": false,
+				"detail": true
+			}
+		]
+	},
+	{
+		"database": "BIBLIO_WEB",
+		"items": [
+			{
+				"label": "Title",
+				"name": "LEGAL_TITLE",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "ID",
+				"name": "ACCESSION_NUMBER",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Date",
+				"name": "EARLY",
+				"summary": true,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Description",
+				"name": "OBJ_DESCRIPTION",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			}
+		]
+	}
+]

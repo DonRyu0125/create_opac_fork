@@ -4,12 +4,7 @@
 	"navigations": [
 		{
 			"url": "/",
-			"title": "Home"
-		},
-
-		{
-			"url": "/faq.html",
-			"title": "FAQ"
+			"title": "Accueil"
 		}
 	]
 }
