@@ -7,7 +7,11 @@ import { Separator } from '@/components/ui/separator'
 import { useToast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { bookmarkSelect, validateBookmarkSelectResponse } from '@/lib/bookmark'
+import {
+	bookmarkSelect,
+	removeBookmarkFromKey,
+	validateBookmarkSelectResponse,
+} from '@/lib/bookmark'
 import {
 	copyRecordURL,
 	deepSearchKey,
@@ -40,13 +44,13 @@ const RecordView = ({ record }: { record: Record }) => {
 	const { fields } = useConstants()
 	const database = record.database_name
 	const recordLink = record.record_link
-	const title = getFieldDataByLabel(record, fields, database, 'Title') || 'Untitled'
+	const title =
+		getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || 'Untitled'
 	const thumbnail =
 		record.media &&
 		Array.isArray(record.media.im_access_link) &&
 		record.media.im_access_link.length > 0 &&
 		record.media.im_access_link[0]
-
 	const gridFields = getFieldsFromRecord(
 		record,
 		fields,
@@ -104,20 +108,27 @@ const RecordView = ({ record }: { record: Record }) => {
 
 const RecordAction = ({ record }: { record: Record }) => {
 	const { database_name, is_bookmarked } = record
-	const [like, setLike] = useState(Boolean(JSON.parse(is_bookmarked)))
+	const [like, setLike] = useState(is_bookmarked ? Boolean(JSON.parse(is_bookmarked)) : true)
 	const { common } = useJSONData({ selector: '#xml_record' })
 	const { bookmark_url, bookmark_count } = common
 	const { toast } = useToast()
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const { message } = useConstants()
-
 	const handleBookmark = () => {
+		if (record.input?._name && like) {
+			//if record.input?._name is exsisted, we use bookmark sum report, Don Ryu20240705
+			removeBookmarkFromKey(record).then((res) => {
+				window.location?.reload()
+			})
+			toast({
+				title: `${message.bookmarkHasBeenRemoved}`,
+			})
+			return
+		}
 		if (like) {
 			toast({
-				title: 'This record has already been marked',
-				action: (
-					<ToastAction altText={message.viewBookmark}>{message.viewBookmark}</ToastAction>
-				),
+				title: `${message.allRecordsBookmarked}`,
+				action: <ToastAction altText={message.viewBookmark}>{message.viewBookmark}</ToastAction>,
 			})
 			return
 		}
@@ -141,6 +152,7 @@ const RecordAction = ({ record }: { record: Record }) => {
 				return
 			}
 		})
+		window.location?.reload()
 	}
 
 	const handleCopy = () => {

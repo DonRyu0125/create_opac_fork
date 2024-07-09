@@ -8,6 +8,8 @@ import Summary from '@/page/summary'
 import RSVP_CANCEL from '@/page/RSVP/Cancellation'
 import RSVP_CONFIRM from '@/page/RSVP/Confirmation'
 import Login from '@/page/login'
+import Bookmark from '@/page/bookmark'
+import NoBookmarkRecord from '@/page/NoBookmarkRecord'
 
 export type TRoute = Record<string, () => React.ReactNode>
 
@@ -18,9 +20,11 @@ export const ROUTES: TRoute = {
 	faq: FAQ,
 	admin: Admin,
 	'no-record': NoRecord,
+	'no-bk-record': NoBookmarkRecord,
 	rsvp_cancel: RSVP_CANCEL,
 	rsvp_confirm: RSVP_CONFIRM,
 	login: Login,
+	bookmark: Bookmark,
 }
 
 /**

@@ -37,7 +37,6 @@ const Detail = () => {
 	const { message } = useConstants()
 	// TODO: create placeholder component when there is no data
 	if (!records || records.length === 0) return <></>
-
 	return (
 		<Layout>
 			<div className="rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
@@ -45,7 +44,7 @@ const Detail = () => {
 					breadcrumbs={[
 						{ label: message.home, url: '/' },
 						{
-							label: message.summaryPage,
+							label: `${records[0].database_name === 'SELECTION_LIST' ? message.bookmarkPage : message.summaryPage}`,
 							url: backToSummary,
 						},
 						{

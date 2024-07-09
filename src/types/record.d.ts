@@ -17,7 +17,11 @@ export interface Media {
 	vd_access_link?: string[]
 	tx_access_link?: string[]
 }
-
+export interface BookmarkCheckBoxData {
+	_name: string
+	_type: string
+	_value: string
+}
 export interface FieldData<T extends string> {
 	[key: string]: string | number | DBFields<T> | FieldData[]
 }
@@ -27,6 +31,7 @@ interface Record {
 	database_name: string
 	record_link: string
 	record: FieldData
+	input?: BookmarkCheckBoxData
 }
 
 export type MediaType = 'im_access_link' | 'vd_access_link' | 'ad_access_link' | 'tx_access_link'

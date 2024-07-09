@@ -5,11 +5,19 @@ import { deepSearchKey } from './record'
 
 export const bookmarkSelect = async (session: string, recd: Record) => {
 	const { database_name, record } = recd
-	debugger
 	return axios({
 		method: 'post',
 		url: `${session}?ADDSELECTION&COOKIE=BOOKMARK`,
 		data: `mcheckbox_${record.sisn}=${record.sisn}-${database_name}`,
+	})
+}
+
+export const removeBookmarkFromKey = (recd: Record) => {
+	const { record, input } = recd
+	return axios({
+		method: 'post',
+		url: `?DELETEORDER&COOKIE=BOOKMARK`,
+		data: `${input?._name}=${record.sisn}`,
 	})
 }
 
@@ -26,4 +34,17 @@ export const validateBookmarkSelectResponse = (res: AxiosResponse<any, any>, pre
 	} catch (error) {
 		console.error('Error validating bookmark count', error)
 	}
+}
+
+export const removeAllBookmarks = async (records: Record[]) => {
+	let dataString = records.map(({ input, record }) => {
+		return `${input?._name}=${record.sisn}`
+	})
+	return await axios({
+		method: 'post',
+		url: `?DELETEORDER&COOKIE=BOOKMARK`,
+		data: dataString.join('&'),
+	}).then((res) => {
+		window.location?.reload()
+	})
 }
