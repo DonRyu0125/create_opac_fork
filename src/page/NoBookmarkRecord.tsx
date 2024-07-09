@@ -1,8 +1,7 @@
-import useConstants from '@/hooks/useConstants'
-import Layout from '@/components/layouts'
-import React from 'react'
 import Hero from '@/components/common/Hero'
 import SearchForm from '@/components/common/SearchForm'
+import Layout from '@/components/layouts'
+import useConstants from '@/hooks/useConstants'
 
 const NoBookmarkRecord = () => {
 	const { home, message } = useConstants()

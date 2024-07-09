@@ -2,7 +2,6 @@ import Hero from '@/components/common/Hero'
 import SearchForm from '@/components/common/SearchForm'
 import Layout from '@/components/layouts'
 import useConstants from '@/hooks/useConstants'
-import React from 'react'
 
 const NoRecord = () => {
 	const { home } = useConstants()

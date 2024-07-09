@@ -3,14 +3,14 @@ import { Separator } from '@/components/ui/separator'
 import { useToast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { removeBookmarkFromKey, bookmarkSelect, validateBookmarkResponse } from '@/lib/bookmark'
-import { deepSearchKey, copyRecordURL } from '@/lib/record'
+import { bookmarkSelect, removeBookmarkFromKey, validateBookmarkResponse } from '@/lib/bookmark'
+import { copyRecordURL, deepSearchKey } from '@/lib/record'
 import { cn } from '@/lib/utils'
 import { bookmarkCount } from '@/store'
 import { Record } from '@/types/record'
 import { ToastAction } from '@radix-ui/react-toast'
-import { useAtom, useSetAtom } from 'jotai'
-import { Heart, Copy } from 'lucide-react'
+import { useAtom } from 'jotai'
+import { Copy, Heart } from 'lucide-react'
 import { useState } from 'react'
 
 export const RecordAction = ({ record }: { record: Record }) => {
@@ -53,15 +53,15 @@ export const RecordAction = ({ record }: { record: Record }) => {
 
 		// send request to bookmark
 		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
-			const isValidated = validateBookmarkResponse(
+			const isValid = validateBookmarkResponse(
 				res,
 				typeof bookmark_count === 'number'
 					? bookmark_count
 					: Number.parseInt(bookmark_count || '0')
 			)
-			if (isValidated && isValidated.isSuccess) {
+			if (isValid && isValid.isSuccess) {
 				setLike(true)
-				setCount(isValidated.newCount || count)
+				setCount(isValid.newCount || count)
 				toast({
 					title: message.successfullBookmark,
 					action: (

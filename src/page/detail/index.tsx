@@ -1,16 +1,10 @@
-import Layout from '@/components/layouts'
-import PageAction from '@/components/common/PageAction'
-import RecordDetail from '@/components/common/RecordDetail'
-import SearchForm from '@/components/common/SearchForm'
 import ImageCarousel from '@/components/common/ImageCarousel'
-import InfoTable from '@/components/common/InfoTable'
-import RecordAction from '@/page/detail/DetailRecordAction'
-import { SlidersHorizontal } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import PageAction from '@/components/common/PageAction'
+import SearchForm from '@/components/common/SearchForm'
+import Layout from '@/components/layouts'
+import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import DetailRecord from './DetailRecord'
-import { DetailM3Sample } from '@/samples'
-import useConstants from '@/hooks/useConstants'
 
 const images = [
 	{

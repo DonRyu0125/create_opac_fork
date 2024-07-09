@@ -1,9 +1,9 @@
-import useJSONData from '@/hooks/useJSONData'
-import { Button } from '../../components/ui/button'
-import { ArrowLeftIcon, ArrowRightIcon, Heart, Link, Printer } from 'lucide-react'
-import { copyRecordURL, deepSearchKey } from '@/lib/record'
-import { useToast } from '../../components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
+import useJSONData from '@/hooks/useJSONData'
+import { copyRecordURL, deepSearchKey } from '@/lib/record'
+import { ArrowLeftIcon, ArrowRightIcon, Link } from 'lucide-react'
+import { Button } from '../../components/ui/button'
+import { useToast } from '../../components/ui/use-toast'
 
 const DetailRecordAction = () => {
 	const { toast } = useToast()

@@ -11,13 +11,17 @@ const ViewBookmarks = () => {
 	const { message } = useConstants()
 	const [count, setCount] = useAtom(bookmarkCount)
 	const defaultCount = jsonData.common.bookmark_count
+
+	// set default count on first load
 	useEffect(() => {
 		setCount(Number.parseInt(`${defaultCount}`) || 0)
 	}, [defaultCount, setCount])
+
 	const getBookmarkSumURL = () => {
 		let url = deepSearchKey(jsonData, 'bookmark_url')[0]
 		return `${url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bk-record.html`
 	}
+
 	return (
 		<a
 			href={getBookmarkSumURL()}

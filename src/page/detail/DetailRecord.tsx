@@ -1,11 +1,10 @@
 import InfoTable, { TableRow } from '@/components/common/InfoTable'
 import RecordDetail from '@/components/common/RecordDetail'
+import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { getFieldDataByLabel, getFieldsFromRecord } from '@/lib/record'
-import { DBFields } from '../../types/record'
-import { DetailM3Sample } from '@/samples'
 import DetailRecordAction from '@/page/detail/DetailRecordAction'
-import useConstants from '@/hooks/useConstants'
+import { DBFields } from '../../types/record'
 
 type Props = {}
 
