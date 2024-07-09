@@ -32,6 +32,7 @@ export interface Record {
 	record_link: string
 	record: FieldData
 	input?: BookmarkCheckBoxData
+	link_dbname?: string
 }
 
 export type MediaType = 'im_access_link' | 'vd_access_link' | 'ad_access_link' | 'tx_access_link'

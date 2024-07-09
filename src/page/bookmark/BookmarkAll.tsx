@@ -11,12 +11,14 @@ const BookmarkAll = () => {
 	const { message } = useConstants()
 
 	const bookmarkAllRecord = async () => {
-		let dataString = records.map(({ record, database_name, is_bookmarked }) => {
-			if (is_bookmarked === 'false') {
-				return `mcheckbox_${record.sisn}=${record.sisn}-${database_name}`
-			}
-			return
-		}).filter(item => item !== undefined);
+		let dataString = records
+			.map(({ record, database_name, is_bookmarked }) => {
+				if (is_bookmarked === 'false') {
+					return `mcheckbox_${record.sisn}=${record.sisn}-${database_name}`
+				}
+				return
+			})
+			.filter((item) => item !== undefined)
 		if (!dataString.every((item) => item === ' ')) {
 			await axios({
 				method: 'post',

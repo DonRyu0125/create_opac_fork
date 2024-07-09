@@ -26,7 +26,7 @@ const SummaryRecords = () => {
 const RecordView = ({ record }: { record: Record }) => {
 	const [view] = useAtom(viewAtom)
 	const { fields } = useConstants()
-	const database = record.database_name
+	const database = record.database_name || record.link_dbname || 'COLLECTIONS_WEB' // use link_dbname for SELECTION_LIST
 	const recordLink = record.record_link
 	const title =
 		getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || 'Untitled'

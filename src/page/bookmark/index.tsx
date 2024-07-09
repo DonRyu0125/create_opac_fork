@@ -8,7 +8,6 @@ import useConstants from '@/hooks/useConstants'
 import SearchForm from '@/components/common/SearchForm'
 import SummaryRecords from '../summary/SummaryRecord'
 import { Button } from '@/components/ui/button'
-import axios from 'axios'
 import { removeAllBookmarks } from '@/lib/bookmark'
 
 const Bookmark = () => {
