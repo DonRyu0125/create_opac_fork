@@ -1,17 +1,10 @@
-import Layout from '@/components/layouts'
-import PageAction from '@/components/common/PageAction'
-import RecordDetail from '@/components/common/RecordDetail'
-import SearchForm from '@/components/common/SearchForm'
 import ImageCarousel from '@/components/common/ImageCarousel'
-import InfoTable from '@/components/common/InfoTable'
-import RecordAction from '@/page/detail/DetailRecordAction'
-import { SlidersHorizontal } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import PageAction from '@/components/common/PageAction'
+import SearchForm from '@/components/common/SearchForm'
+import Layout from '@/components/layouts'
+import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import DetailRecord from './DetailRecord'
-import { DetailM3Sample } from '@/samples'
-import useConstants from '@/hooks/useConstants'
-import { home } from '@/constants'
 
 const images = [
 	{
@@ -35,12 +28,9 @@ const Detail = () => {
 	// const { backToSummary, records, getMedia } = useJSONData({ defaultData: DetailM3Sample })
 	const images = getMedia(records[0], 'im_access_link')?.map((e) => ({ src: e })) || []
 
-
-
 	const { message } = useConstants()
 	// TODO: create placeholder component when there is no data
 	if (!records || records.length === 0) return <></>
-
 	return (
 		<Layout>
 			<div className="rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
@@ -48,7 +38,7 @@ const Detail = () => {
 					breadcrumbs={[
 						{ label: message.home, url: '/' },
 						{
-							label: message.summaryPage,
+							label: `${records[0].database_name === 'SELECTION_LIST' ? message.bookmarkPage : message.summaryPage}`,
 							url: backToSummary,
 						},
 						{
@@ -61,6 +51,18 @@ const Detail = () => {
 						<SlidersHorizontal className="mr-2 h-4 w-4" />
 						Advanced Search
 					</Button> */}
+					<div className="flex w-full flex-row space-x-2 justify-end">
+						{/* <Button>
+							<SlidersHorizontal className="mr-2 h-4 w-4" />
+							Advanced Search
+						</Button> */}
+						{/* <Separator orientation="vertical" /> */}
+						<SearchForm
+							className="w-[450px] m-0"
+							inputStyle="text-black"
+							inputName={'KEYWORD_CLUSTER'}
+						/>
+					</div>
 				</PageAction>
 				<section>
 					<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -81,7 +83,7 @@ const Detail = () => {
 									<span>{message.noMediaFound}</span>
 								)}
 							</div>
-							<div className="grid gap-4 md:gap-10 items-start w-1/2">
+							<div className="w-full lg:w-1/2 grid gap-4 md:gap-10 items-start ">
 								<DetailRecord />
 							</div>
 						</div>

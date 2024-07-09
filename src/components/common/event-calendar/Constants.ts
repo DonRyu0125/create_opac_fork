@@ -18,7 +18,6 @@ export interface Cal_event {
 	[TAG_FUNC_CANCEL]: string
 	[TAG_FUNC_CAN_RES]: string
 }
-
 export interface patron {
 	[PATRON]: string
 	[TAG_FUNC_P_ID]: string
@@ -28,7 +27,6 @@ export interface patron {
 	[TAG_FUNC_P_PAID]: string
 	[TAG_FUNC_P_ATTND]: string
 }
-
 export interface Day_obj {
 	day: number | null
 	month?: number

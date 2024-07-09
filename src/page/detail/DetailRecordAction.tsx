@@ -1,17 +1,14 @@
-import useJSONData from '@/hooks/useJSONData'
-import { Button } from '../../components/ui/button'
-import { ArrowLeftIcon, ArrowRightIcon, Heart, Link, Printer } from 'lucide-react'
-import { copyRecordURL, deepSearchKey } from '@/lib/record'
-import { useToast } from '../../components/ui/use-toast'
-import { DetailM3Sample } from '@/samples'
 import useConstants from '@/hooks/useConstants'
+import useJSONData from '@/hooks/useJSONData'
+import { copyRecordURL, deepSearchKey } from '@/lib/record'
+import { ArrowLeftIcon, ArrowRightIcon, Link } from 'lucide-react'
+import { Button } from '../../components/ui/button'
+import { useToast } from '../../components/ui/use-toast'
 
 const DetailRecordAction = () => {
 	const { toast } = useToast()
-
 	// const { nextRecord, previousRecord, records } = useJSONData({ defaultData: DetailM3Sample })
 	const { nextRecord, previousRecord, records } = useJSONData({ selector: '#xml_record' })
-
 	const { message } = useConstants()
 	const record = records[0]
 
@@ -35,22 +32,22 @@ const DetailRecordAction = () => {
 				</Button>
 
 				<div className="flex space-x-2">
-					<Button className="" variant="outline">
+					{/* <Button className="" variant="outline">
 						<Heart className="w-4 h-4 mr-2 hidden md:block" /> {message.save}
-					</Button>
+					</Button> */}
 					<Button
 						variant="outline"
 						onClick={() => {
 							copyRecordURL(database, sisn)
 							toast({
-								title: 'Record URL is copied',
+								title: message.recordIsCopied,
 							})
 						}}>
 						<Link className="w-4 h-4 mr-2 hidden md:block" /> {message.copy}
 					</Button>
-					<Button variant="outline">
+					{/* <Button variant="outline">
 						<Printer className="w-4 h-4 mr-2 hidden md:block" /> {message.print}
-					</Button>
+					</Button> */}
 				</div>
 
 				<Button

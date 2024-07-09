@@ -1,6 +1,3 @@
-import { Button } from '@/components/ui/button'
-import Layout from '@/components/layouts'
-import React, { useEffect, useState } from 'react'
 import {
 	CANCEL_CONFIRMATION_EMAIL_T,
 	FUNC_LOC_P_GRP,
@@ -22,61 +19,21 @@ import {
 	TAG_P_STATUS,
 	TAG_RSVP_PATRON_LOG,
 } from '@/components/common/event-calendar/Constants'
-import axios from 'axios'
-import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
+import Layout from '@/components/layouts'
+import { Button } from '@/components/ui/button'
+import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import useConstants from '@/hooks/useConstants'
+import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
+import { CancelTmp } from './ActionComponent'
+import LandingPageMessage from './LandingPageMessage'
 
-
-const STATUS_TYPE = {
-	Invalid: 'Invalid',
-	Success: 'Success',
-	Cancel: 'Cancel',
-	OutDate: 'OutDate',
-}
-
-type PatronInfo = {
-	TAG_FUNC_P_ATTND: string
-	TAG_FUNC_P_FIRST: string
-	TAG_FUNC_P_LAST: string
-	TAG_FUNC_P_EMAIL: string
-	TAG_NAME: string
-	TAG_FUNC_START_T: string
-	TAG_FUNC_END_T: string
-	TAG_FUNC_ROOM: string
-	TAG_FUNC_DATE: string
-	TAG_FUNC_LOC: string
-	SISN: string
-	TAG_FUNC_P_ID: string
-	TAG_FUNC_P_T: string
-	BRANCH_ADDRESS: string
-	occ1: string
-	occ2: string
-	TAG_FUNC_P_PAID: any
-}
-
-const RSVPCancelLandingPage = () => {
+const RSVP_CANCEL = () => {
 	const [loading, setLoading] = useState(true)
-	const message: any = useConstants().message
-	const [patronInfo, setPatronInfo] = useState<PatronInfo>({
-		TAG_FUNC_P_ATTND: '',
-		TAG_FUNC_P_FIRST: '',
-		TAG_FUNC_P_LAST: '',
-		TAG_FUNC_P_EMAIL: '',
-		TAG_NAME: '',
-		TAG_FUNC_START_T: '',
-		TAG_FUNC_END_T: '',
-		TAG_FUNC_ROOM: '',
-		TAG_FUNC_DATE: '',
-		TAG_FUNC_LOC: '',
-		SISN: '',
-		TAG_FUNC_P_ID: '',
-		TAG_FUNC_P_T: '',
-		BRANCH_ADDRESS: '',
-		occ1: '',
-		occ2: '',
-		TAG_FUNC_P_PAID: '',
-	})
+	const rsvp = useConstants().rsvp
+	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
 
 	useEffect(() => {
@@ -86,9 +43,14 @@ const RSVPCancelLandingPage = () => {
 	const checkParms = async () => {
 		const params = new URLSearchParams(window.location.search)
 		let obj: any
-		params.forEach((value: string, key) => {
+		params?.forEach((value: string, key) => {
 			obj = decodeObj(value)
 		})
+		if (!obj) {
+			setLoading(false)
+			setStatus(STATUS_TYPE.Invalid)
+			return
+		}
 		let jsonObj = JSON.parse(obj)
 		if (isDatePast(jsonObj.TAG_FUNC_DATE)) {
 			setStatus(STATUS_TYPE.OutDate)
@@ -248,21 +210,21 @@ const RSVPCancelLandingPage = () => {
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return <div dangerouslySetInnerHTML={{ __html: message.cancelLandingNotIntheList }}></div>;
+				return <LandingPageMessage {...rsvp.cancelLandingNotIntheList} />
 			case STATUS_TYPE.Success:
-				return <div dangerouslySetInnerHTML={{ __html: message.cancelLandingSuccess }}></div>;
+				return <LandingPageMessage {...rsvp.cancelLandingSuccess} />
 			case STATUS_TYPE.OutDate:
-				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingOutDate }}></div>;
+				return <LandingPageMessage {...rsvp.confirmLandingOutDate} />
 			case STATUS_TYPE.Cancel:
-				return <CancelTmp patronInfo={patronInfo} onClick={onClick} />;
+				return <CancelTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
-				return <div dangerouslySetInnerHTML={{ __html: message.confirmLandingInvalid }}></div>;
+				return <LandingPageMessage {...rsvp.confirmLandingInvalid} />
 		}
 	}
 
 	return (
 		<Layout>
-			<div className="flex h-full flex-col bg-white h-[800px]">
+			<div className="flex flex-col bg-white h-[800px]">
 				<img
 					src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
 					alt=""
@@ -287,47 +249,4 @@ const RSVPCancelLandingPage = () => {
 	)
 }
 
-const CancelTmp = ({ patronInfo, onClick }: any) => {
-	const message: any = useConstants().message
-	return (
-		<div className="text-center">
-			<h1 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
-				{message.pleaseCancel} :
-			</h1>
-			<h2 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
-				{patronInfo?.TAG_NAME}
-			</h2>
-			<div className="mt-4 text-gray-500 sm:flex justify-evenly text-lg w-full">
-				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
-					<div>{patronInfo?.TAG_NAME}</div>
-					<div>{patronInfo?.TAG_FUNC_DATE}</div>
-					<div>
-						{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
-					</div>
-					<div>{patronInfo?.BRANCH_ADDRESS}</div>
-					<div>
-						{message.room}: {patronInfo?.TAG_FUNC_ROOM}
-					</div>
-				</div>
-				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
-					<div>
-						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
-					</div>
-					<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
-					<div>{message.registered}:</div>
-					<div>{patronInfo?.TAG_FUNC_P_T}</div>
-					<div className="border-2 border-dashed p-2">
-						{patronInfo?.TAG_FUNC_P_ATTND} {message.spotReserved}
-					</div>
-				</div>
-			</div>
-			<Button
-				onClick={onClick}
-				className="flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded bg-red-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				<div>{message.unregistered}</div>
-			</Button>
-		</div>
-	)
-}
-
-export default RSVPCancelLandingPage
+export default RSVP_CANCEL
