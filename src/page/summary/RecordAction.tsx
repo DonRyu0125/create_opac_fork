@@ -28,9 +28,15 @@ export const RecordAction = ({ record }: { record: Record }) => {
 			removeBookmarkFromKey(record).then((res) => {
 				setCount(count - 1)
 			})
+
 			toast({
 				title: `${message.bookmarkHasBeenRemoved}`,
 			})
+
+			// reload page on summary bookmark only
+			if (record.link_dbname) {
+				window.location.reload()
+			}
 			return
 		}
 

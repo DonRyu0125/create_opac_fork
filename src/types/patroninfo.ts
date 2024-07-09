@@ -16,31 +16,31 @@ export type PatronInfo = {
 	occ1: string
 	occ2: string
 	TAG_FUNC_P_PAID: any
-    TAG_FUNC_DESC:string
+	TAG_FUNC_DESC: string
 }
 
 export const initialPatronInfo: PatronInfo = {
-    TAG_FUNC_P_ATTND: '',
-    TAG_FUNC_P_FIRST: '',
-    TAG_FUNC_P_LAST: '',
-    TAG_FUNC_P_EMAIL: '',
-    TAG_NAME: '',
-    TAG_FUNC_START_T: '',
-    TAG_FUNC_END_T: '',
-    TAG_FUNC_ROOM: '',
-    TAG_FUNC_DATE: '',
-    TAG_FUNC_LOC: '',
-    SISN: '',
-    TAG_FUNC_P_ID: '',
-    TAG_FUNC_P_T: '',
-    BRANCH_ADDRESS: '',
-    occ1: '',
-    occ2: '',
-    TAG_FUNC_P_PAID: '',
-    TAG_FUNC_DESC: ''
-  };
+	TAG_FUNC_P_ATTND: '',
+	TAG_FUNC_P_FIRST: '',
+	TAG_FUNC_P_LAST: '',
+	TAG_FUNC_P_EMAIL: '',
+	TAG_NAME: '',
+	TAG_FUNC_START_T: '',
+	TAG_FUNC_END_T: '',
+	TAG_FUNC_ROOM: '',
+	TAG_FUNC_DATE: '',
+	TAG_FUNC_LOC: '',
+	SISN: '',
+	TAG_FUNC_P_ID: '',
+	TAG_FUNC_P_T: '',
+	BRANCH_ADDRESS: '',
+	occ1: '',
+	occ2: '',
+	TAG_FUNC_P_PAID: '',
+	TAG_FUNC_DESC: '',
+}
 
-  export const STATUS_TYPE = {
+export const STATUS_TYPE = {
 	Invalid: 'Invalid',
 	Success: 'Success',
 	Confirm: 'Confirm',
@@ -49,6 +49,6 @@ export const initialPatronInfo: PatronInfo = {
 	InList: 'InList', // Already registered
 	Full: 'Full', // Fully registered
 	Expired: 'Expired',
-  } as const;
-  
-  export type StatusType = keyof typeof STATUS_TYPE;
+} as const
+
+export type StatusType = keyof typeof STATUS_TYPE
