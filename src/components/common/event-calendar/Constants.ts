@@ -34,21 +34,21 @@ export interface Day_obj {
 }
 //MINISIS REPORT
 export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW'
-export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_REPORT'
+export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_NEW'
 //MWI
 export const MAIN_MWI_APPLICATION = 'WEB_CALENDAR'
 export const SUB_MWI_APPLICATION = 'WEB_LIBRARY_LOC'
-export const RSVP_CONFIRM_LANDING_PAGE_URL = 'http://donf.minisisinc.com/rsvp_confirm.html'
-export const RSVP_CANCEL_LANDING_PAGE_URL = 'http://donf.minisisinc.com/rsvp_cancel.html'
+export const RSVP_CONFIRM_LANDING_PAGE_URL = 'http://test.opac.minisis.com//rsvp_confirm.html'
+export const RSVP_CANCEL_LANDING_PAGE_URL = 'http://test.opac.minisis.com//rsvp_cancel.html'
 export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const SISN = 'SISN'
 export const VERIFICATION_EMAIL_T = 'Please confirm your event:'
 export const REG_CONFIMRATION_EMAIL_T = 'Your confirmed for: '
 export const CANCEL_CONFIRMATION_EMAIL_T = 'Your registration has been cancelled for: '
-//Library Location group
+//Library Location group (From LIBRARY_LOCATION_NEW report)
 export const TAG_NAME = 'TAG_NAME'
-export const LIBRARY_LOCATION_XML_TAG = 'LOCATION'
+export const LIBRARY_LOCATION_XML_TAG = 'record'
 export const BRANCH_NAME = 'BRANCH_NAME'
 export const BRANCH_ADDRESS = 'BRANCH_ADDRESS'
 export const BRANCH_PHONE = 'BRANCH_PHONE'

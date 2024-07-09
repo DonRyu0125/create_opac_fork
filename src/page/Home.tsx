@@ -44,9 +44,9 @@ const Home = () => {
 					)}
 				/>
 			</Section>
-			{/* <Section heading={eventCalendar}>
+			<Section heading={'Calendar'}>
 				<EventCalendar />
-			</Section> */}
+			</Section>
 			{/* <Section
         className='bg-secondary'
         heading={'Browse by area'}

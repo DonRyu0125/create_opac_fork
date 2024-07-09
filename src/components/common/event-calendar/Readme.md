@@ -65,13 +65,12 @@ confirm email
     └──index.ts                               Adding route for rsvp_cancel,rsvp_confirm
 ```
 
-## Database Structure
+## MINISIS STRUCTURE
 
-\*Developed based on Norfolk library website
+#Report needs
+-MONTHLY_CALENDAR_NEW.REPORT : For calendar
+-LIBRARY_LOCATION_NEW.REPORT: For library info and location
 
-Username: cams m2l mgr Main: M2L_TAG Contact info: LIBRARY_LOCATION For RSVP log:
-TAG_RSVP_PATRON_LOG
-
-## MINISIS Report Structure
-
-Username: cams m2l mgr Main: MONTHLY_CALENDAR_NEW_T4 Contact info: LIBRARY_LOCATION_REPORT
+#Database needs
+-M2L_TAG
+-Library location (Already in the M2L model)
