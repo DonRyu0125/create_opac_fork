@@ -5,13 +5,13 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Heading = string
-export type SubHeading = string
-export type HeroBanner = string
+export type Heading = string;
+export type SubHeading = string;
+export type HeroBanner = string;
 
 export interface FaqJson {
-	heading?: Heading
-	subHeading?: SubHeading
-	heroBanner?: HeroBanner
-	[k: string]: unknown
+  heading?: Heading;
+  subHeading?: SubHeading;
+  heroBanner?: HeroBanner;
+  [k: string]: unknown;
 }
