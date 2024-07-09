@@ -33,7 +33,7 @@ export interface Day_obj {
 	year?: number
 }
 //MINISIS REPORT
-export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW_T4'
+export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW'
 export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_REPORT'
 //MWI
 export const MAIN_MWI_APPLICATION = 'WEB_CALENDAR'
