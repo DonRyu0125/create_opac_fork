@@ -30,7 +30,7 @@ import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 import { CancelTmp } from './ActionComponent'
 import LandingPageMessage from './LandingPageMessage'
 
-const RSVP_CANCEL = () => {
+const RSVPCancel = () => {
 	const [loading, setLoading] = useState(true)
 	const rsvp = useConstants().rsvp
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
@@ -249,4 +249,4 @@ const RSVP_CANCEL = () => {
 	)
 }
 
-export default RSVP_CANCEL
+export default RSVPCancel

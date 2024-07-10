@@ -39,7 +39,7 @@ import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 import { ConfirmTmp } from './ActionComponent'
 import LandingPageMessage from './LandingPageMessage'
 
-const RSVP_CONFIRM = () => {
+const RSVPConfirm = () => {
 	const rsvp: any = useConstants().rsvp
 	const [loading, setLoading] = useState(false)
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
@@ -330,4 +330,4 @@ const RSVP_CONFIRM = () => {
 	)
 }
 
-export default RSVP_CONFIRM
+export default RSVPConfirm
