@@ -7,6 +7,7 @@ import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
 import EventCalendar from '@/components/common/event-calendar/EventCalendar'
+import AdvSearchBtn from '@/components/common/adv-search/AdvSearchBtn'
 
 const Home = () => {
 	const {
@@ -21,8 +22,10 @@ const Home = () => {
 	return (
 		<Layout>
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
-				<SearchForm className="w-full mt-6 max-w-2xl" inputName={'KEYWORD_CLUSTER'} />
-
+				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
+					<SearchForm inputName={'KEYWORD_CLUSTER'} />
+					<AdvSearchBtn/>
+				</div>
 				{/* <CommandDemo /> */}
 			</Hero>
 

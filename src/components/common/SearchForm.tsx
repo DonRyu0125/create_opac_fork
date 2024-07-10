@@ -26,7 +26,7 @@ const SearchForm = ({ className, inputName, inputStyle, ...props }: SearchFormPr
 		return url
 	}
 	return (
-		<div className={cn('w-full mx-auto flex space-x-4 justify-center', className)}>
+		
 			<form
 				method="POST"
 				action={getSearchURL()}
@@ -55,14 +55,8 @@ const SearchForm = ({ className, inputName, inputStyle, ...props }: SearchFormPr
 					</span>
 				</Button>
 			</form>
-			<a href="/advanced-search.html">
-				<Button variant={'default'} className="right-0 top-0 h-full bg-opac-green">
-					<span className="block">
-						<TextSearch className="w-4 h-4" />
-					</span>
-				</Button>
-			</a>
-		</div>
+			
+
 	)
 }
 
