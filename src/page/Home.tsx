@@ -44,6 +44,7 @@ const Home = () => {
 					)}
 				/>
 			</Section>
+
 			<Section heading={'Calendar'}>
 				<EventCalendar />
 			</Section>
