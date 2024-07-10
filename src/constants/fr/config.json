@@ -5,6 +5,10 @@
 		{
 			"url": "/",
 			"title": "Accueil"
+		},
+		{
+			"url": "/advanced-search.html",
+			"title": "Recherche Avancée"
 		}
 	]
 }
