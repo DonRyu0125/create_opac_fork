@@ -10,7 +10,7 @@ import RSVPConfirm from '@/page/RSVP/Confirmation'
 import Login from '@/page/login'
 import Bookmark from '@/page/bookmark'
 import NoBookmarkRecord from '@/page/NoBookmarkRecord'
-import AdvSearch from '@/page/AdvSearch'
+import AdvSearch from '@/page/advSearch'
 
 export type TRoute = Record<string, () => React.ReactNode>
 
