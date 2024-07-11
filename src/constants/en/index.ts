@@ -5,6 +5,7 @@ import home from './home.json'
 import styles from './styles.json'
 import message from './message.json'
 import rsvp from './rsvp.json'
+import advancedSearch from './advanced-search.json'
 
-const constants = { config, faq, fields, home, styles, message, rsvp }
+const constants = { config, faq, fields, home, styles, message, rsvp, advancedSearch }
 export default constants
