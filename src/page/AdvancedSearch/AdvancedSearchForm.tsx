@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AdvanceSearchInput from './AdvanceSearchInput'
+import AdvancedSearchInput from './AdvancedSearchInput'
 import { CircleMinus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
@@ -71,7 +71,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 			</form>
 			{searchExp.map((exp, index) => (
 				<div className={'w-2/3 flex items-center'}>
-					<AdvanceSearchInput updateField={updateField} exp={exp} index={index} />
+					<AdvancedSearchInput updateField={updateField} exp={exp} index={index} />
 					{index >= 3 ? (
 						<CircleMinus
 							className="dynamic-delete-button"

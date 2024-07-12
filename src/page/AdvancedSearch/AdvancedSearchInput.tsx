@@ -12,7 +12,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select'
 
-const AdvanceSearchInput = ({updateField,index,exp}:any) => {
+const AdvancedSearchInput = ({updateField,index,exp}:any) => {
 	const { message, advancedSearch } = useConstants()
 	const [select, setSelect] = useState<string>('Select a field')
 	return (
@@ -60,4 +60,4 @@ const AdvanceSearchInput = ({updateField,index,exp}:any) => {
 	)
 }
 
-export default AdvanceSearchInput
+export default AdvancedSearchInput
