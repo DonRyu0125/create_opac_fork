@@ -1,7 +1,6 @@
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import React, { useState } from 'react'
-import { SearchFormProps } from '../SearchForm'
 import useConstants from '@/hooks/useConstants'
 import { ChevronDownIcon, Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -13,7 +12,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select'
 
-const AdvSearchInput = ({updateField,index,exp}:any) => {
+const AdvanceSearchInput = ({updateField,index,exp}:any) => {
 	const { message, advancedSearch } = useConstants()
 	const [select, setSelect] = useState<string>('Select a field')
 	return (
@@ -61,4 +60,4 @@ const AdvSearchInput = ({updateField,index,exp}:any) => {
 	)
 }
 
-export default AdvSearchInput
+export default AdvanceSearchInput

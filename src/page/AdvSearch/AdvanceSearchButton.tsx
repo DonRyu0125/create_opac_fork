@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { TextSearch } from 'lucide-react'
 import React from 'react'
 
-const AdvSearchBtn = () => {
+const AdvanceSearchButton = () => {
 	return (
 		<a href="/advanced-search.html">
 			<Button variant={'default'} className="right-0 top-0 h-full bg-primary">
@@ -14,4 +14,4 @@ const AdvSearchBtn = () => {
 	)
 }
 
-export default AdvSearchBtn
+export default AdvanceSearchButton
