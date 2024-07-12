@@ -7,7 +7,7 @@ import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
 import EventCalendar from '@/components/common/event-calendar/EventCalendar'
-import AdvanceSearchButton from './advSearch/AdvanceSearchButton'
+import AdvanceSearchButton from './AdvancedSearch/AdvancedSearchButton'
 
 const Home = () => {
 	const {

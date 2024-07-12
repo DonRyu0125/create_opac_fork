@@ -8,10 +8,8 @@ type Advanced_Search_Props = {
 	url: string
 }
 
-const AdvanceSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
+const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	const { message, home } = useConstants()
-	const { searchURL: url } = home
-	const { session } = common
 
 	const [searchExp, setSearchExp] = useState([
 		{ field: 'REFD', keyword: '', boolean: 'and' },
@@ -49,9 +47,6 @@ const AdvanceSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 		])
 	}
 
-	// exp kc wildcard
-	//
-
 	const submitSearch = () => {
 		// let data = searchExp.filter((e) => e.keyword !== "");
 		// let len = data.length;
@@ -64,6 +59,7 @@ const AdvanceSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 		// document.getElementById('advancedSearchInput').value = 'title ontario'
 		// document.getElementById('advancedSearchForm').submit()
 	}
+
 	return (
 		<div className={'w-full h-full min-h-[475px] flex flex-col justify-center items-center'}>
 			<form
@@ -74,7 +70,7 @@ const AdvanceSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 				<input name="QUERY_EXPRESSION" hidden id="advancedSearchInput" />
 			</form>
 			{searchExp.map((exp, index) => (
-				<>
+				<div className={'w-2/3 flex items-center'}>
 					<AdvanceSearchInput updateField={updateField} exp={exp} index={index} />
 					{index >= 3 ? (
 						<CircleMinus
@@ -87,19 +83,19 @@ const AdvanceSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 					) : (
 						<span className="dynamic-delete-button" style={{ width: '24px' }}></span>
 					)}
-				</>
+				</div>
 			))}
+			<Button onClick={addField}>
+				Add field
+			</Button>
 			<Button
 				variant={'default'}
-				className="right-0 top-0 h-full bg-opac-green"
+				className="w-4/6"
 				onClick={submitSearch}>
 				<span className=" block">Search</span>
-			</Button>
-			<Button style={{ width: 200, marginTop: '40px' }} onClick={addField}>
-				Add field
 			</Button>
 		</div>
 	)
 }
 
-export default AdvanceSearchForm
+export default AdvancedSearchForm
