@@ -5,9 +5,9 @@ Event Calendar for showing events and make the user register the events
 
 *This is separate component from main OPAC, this component share webuser mwi profile but it has own website profile ...
 
-#MWI structure
--WEB_CALENDAR site profile - webuser - M2L_TAG 
--WEB_LIBRARY_LOC site profile - webuser - LIBRARY_LOCATION 
+## MWI structure
+-    WEB_CALENDAR site profile - webuser - M2L_TAG 
+-    WEB_LIBRARY_LOC site profile - webuser - LIBRARY_LOCATION 
 
 ## Feature
 
@@ -73,10 +73,10 @@ confirm email
 ## MINISIS STRUCTURE
 
 #Report needs
--MONTHLY_CALENDAR_NEW.REPORT : For calendar
--LIBRARY_LOCATION_NEW.REPORT: For library info and location
+-    MONTHLY_CALENDAR_NEW.REPORT : For calendar
+-    LIBRARY_LOCATION_NEW.REPORT: For library info and location
 
 #Database needs
--M2L_TAG : MAIN EVENT DB
--LIBRARY_LOCATION : LIBRARY INFO
--TAG_RSVP_PATRON_LOG : For RSVP LOG
+-    M2L_TAG : MAIN EVENT DB
+-    LIBRARY_LOCATION : LIBRARY INFO
+-    TAG_RSVP_PATRON_LOG : For RSVP LOG
