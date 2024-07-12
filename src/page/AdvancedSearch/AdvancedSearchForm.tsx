@@ -61,7 +61,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	}
 
 	return (
-		<div className={'w-full h-full min-h-[475px] flex flex-col justify-center items-center'}>
+		<div className={'w-full h-full flex flex-col justify-center items-center'}>
 			<form
 				method="POST"
 				id="advancedSearchForm"

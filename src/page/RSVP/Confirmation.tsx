@@ -307,7 +307,6 @@ const RSVPConfirm = () => {
 
 	return (
 		<Layout>
-			<div className="flex h-screen flex-col bg-white">
 				<img
 					src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
 					alt=""
@@ -323,9 +322,8 @@ const RSVPConfirm = () => {
 						/>
 					</div>
 				) : (
-					<div className="flex h-full items-center justify-center">{showRegStatus()}</div>
+					showRegStatus()
 				)}
-			</div>
 		</Layout>
 	)
 }

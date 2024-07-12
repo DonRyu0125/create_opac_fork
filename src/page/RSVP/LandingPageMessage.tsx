@@ -13,7 +13,7 @@ const LandingPageMessage = ({
 	buttonText?: string
 	buttonLink?: string
 }) => (
-	<div className="text-center">
+	<div className="min-h-[35vh] flex flex-col items-center justify-center">
 		<h1 className="landing-page-title">{title}</h1>
 		<p className="landing-page-sub-title">{subtitle}</p>
 		{showButton && (

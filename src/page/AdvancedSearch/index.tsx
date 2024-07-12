@@ -8,7 +8,7 @@ const AdvancedSearch = () => {
 
 	return (
 		<Layout>
-			<div className={'w-full flex items-center justify-center h-[100px]'}>
+			<div className={'w-full flex items-center justify-center'}>
 				<PageHeader heading={'Advanced Search'} />
 			</div>
 			<AdvanceSearchForm database_name={''} url={''} />

@@ -13,7 +13,7 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick, actionTyp
 	const actionText = actionType === 'confirm' ? message.confirm : message.unregistered
 
 	return (
-		<div className="text-center">
+		<div className="my-10 text-center">
 			<h1 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
 				{actionType === 'confirm' ? message.pleaseConfirm : message.pleaseCancel}
 			</h1>
