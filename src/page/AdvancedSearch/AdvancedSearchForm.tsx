@@ -17,13 +17,13 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 		{ field: 'REFD', keyword: '' },
 	])
 
-	const updateField = (key, value, index) => {
+	const updateField = (key:string, value:string, index:string) => {
 		const newSearchExp: any = [...searchExp]
 		newSearchExp[index][key] = value
 		setSearchExp(newSearchExp)
 	}
 
-	const removeField = (index) => {
+	const removeField = (index:number) => {
 		const newSearchExp = [...searchExp]
 		newSearchExp.splice(index, 1)
 		if (newSearchExp.length > 0) {
@@ -56,8 +56,8 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 		// 	  `${exp.field} ${exp.keyword} ${exp.boolean && index !== len - 1 ? exp.boolean : ""}`
 		//   )
 		//   .join(" ");
-		// document.getElementById('advancedSearchInput').value = 'title ontario'
-		// document.getElementById('advancedSearchForm').submit()
+		document.getElementById('advancedSearchInput').value = 'title ontario'
+		document.getElementById('advancedSearchForm').submit()
 	}
 
 	return (
@@ -90,7 +90,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 			</Button>
 			<Button
 				variant={'default'}
-				className="w-4/6"
+				className="w-4/6 mt-10"
 				onClick={submitSearch}>
 				<span className=" block">Search</span>
 			</Button>

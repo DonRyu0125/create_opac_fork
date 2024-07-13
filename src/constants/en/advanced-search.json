@@ -1,6 +1,9 @@
-[
-    {
-        "value":"TITLE",
-        "label":"Title"
-    }
-]
+{
+	"database": "COLLECTIONS_WEB",
+	"items": [
+		{
+			"label": "Title",
+			"value": "LEGAL_TITLE"
+		}
+	]
+}

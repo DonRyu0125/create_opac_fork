@@ -13,7 +13,8 @@ import {
 } from '@/components/ui/select'
 
 const AdvancedSearchInput = ({updateField,index,exp}:any) => {
-	const { message, advancedSearch } = useConstants()
+	const { advancedSearch , message} = useConstants()
+	const asd = useConstants().advancedSearch
 	const [select, setSelect] = useState<string>('Select a field')
 	return (
 		<div className="w-full flex relative m-2" key={index}>
@@ -25,7 +26,7 @@ const AdvancedSearchInput = ({updateField,index,exp}:any) => {
 					<SelectValue className={'text-black'} placeholder={<div>{select}</div>} />
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
-					{advancedSearch.map((item) => {
+					{advancedSearch?.items?.map((item) => {
 						return (
 							<SelectItem
 								value={item.value}
