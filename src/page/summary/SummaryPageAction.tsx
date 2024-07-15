@@ -42,17 +42,14 @@ const SummaryPageAction = () => {
 	]
 	return (
 		<div className="flex flex-col space-y-4">
-			<div className="flex items-center">
-				<Label>{message.bookmark}</Label>
-				{/* <div className="flex-grow border-t border-gray-600 ml-[4px]"></div> */}
-			</div>
 			<div className="flex flex-col space-y-2">
+				<Label className="text-bold">{message.bookmark}</Label>
 				<ViewBookmarks />
 				<BookmarkAll />
 				<PrintPage />
 			</div>
 			<div className="flex flex-col space-y-2">
-				<Label>{message.recordPerPage}</Label>
+				<Label className="text-bold">{message.recordPerPage}</Label>
 				<DropdownSelect
 					register={{
 						onValueChange: (value) => {
@@ -86,7 +83,7 @@ const SummaryPageAction = () => {
 				/>
 			</div>
 			<div className="flex flex-col space-y-2">
-				<Label>{message.sortBy}</Label>
+				<Label className="text-bold">{message.sortBy}</Label>
 				<DropdownSelect
 					title={message.sortBy}
 					register={{
@@ -100,7 +97,7 @@ const SummaryPageAction = () => {
 			</div>
 			{filter && filter.length > 0 && (
 				<div className="flex flex-col space-y-2">
-					<Label>{message.filterBy}</Label>
+					<Label className="text-bold">{message.filterBy}</Label>
 					<div className="flex flex-col space-y-4">
 						{filter.map((item, index) => (
 							<CollapseList title={item._title} expand={index === 0} key={item._name}>
