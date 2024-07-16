@@ -101,7 +101,7 @@ export function deleteAllCookies() {
 	}
 }
 
-export function getHOMESESSID() {
+export function getHomeSessionID() {
 	let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
 	let HOME_SESSID = match[0]?.split('=')[1]
 	return HOME_SESSID
@@ -132,7 +132,7 @@ export const getCurrentDate = () => {
 export const getSessionID = () => {
 	const domSessionId = document.querySelector('#session-id')?.textContent
 	if (document && domSessionId) return domSessionId
-	const cookieSessionId = getHOMESESSID()
+	const cookieSessionId = getHomeSessionID()
 	if (cookieSessionId === '') return null
 	return cookieSessionId;
 }

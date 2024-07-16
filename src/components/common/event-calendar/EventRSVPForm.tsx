@@ -40,6 +40,7 @@ import {
 	convertXMLToJson,
 	encodeObj,
 	getCurrentDate,
+	getSessionID,
 } from '@/lib/utils'
 import Spinner from './Spinner'
 import { calNumOfPatron } from './EC-Util'
@@ -150,8 +151,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	}
 
 	const getOCCNumber = async () => {
-		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
-		let HOME_SESSID = match[0]?.split('=')[1]
+		let HOME_SESSID = getSessionID()
 
 		return await axios
 			.post(
@@ -209,8 +209,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	}
 
 	const sendEmail = async (patron: any, patronInfo: Inputs, event: Cal_event) => {
-		let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
-		let HOME_SESSID = match[0]?.split('=')[1]
+		let HOME_SESSID = getSessionID()
 		const encoded = encodeObj(
 			JSON.stringify({
 				...patronInfo,

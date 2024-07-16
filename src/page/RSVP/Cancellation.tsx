@@ -21,8 +21,7 @@ import {
 } from '@/components/common/event-calendar/Constants'
 import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
-import { Button } from '@/components/ui/button'
-import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
+import { convertXMLToJson, decodeObj, getHomeSessionID, isDatePast } from '@/lib/utils'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import useConstants from '@/hooks/useConstants'
@@ -88,7 +87,7 @@ const RSVPCancel = () => {
 
 	const onClick = () => {
 		setLoading(true)
-		getSessionID()
+		getLogon()
 			.then((res) => removeRecord(res, patronInfo))
 			.then((res) => {
 				setStatus(STATUS_TYPE.Success)
@@ -97,7 +96,7 @@ const RSVPCancel = () => {
 			.then((res) => storeAtLog(res))
 	}
 
-	const getSessionID = async () => {
+	const getLogon = async () => {
 		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}`
 
 		return await axios
@@ -111,8 +110,7 @@ const RSVPCancel = () => {
 				}
 			)
 			.then(() => {
-				let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
-				let HOME_SESSID = match[0]?.split('=')[1]
+				let HOME_SESSID = getHomeSessionID()
 				return HOME_SESSID
 			})
 			.catch(() => {

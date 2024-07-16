@@ -30,7 +30,7 @@ import {
 	TAG_RSVP_PATRON_LOG,
 } from '@/components/common/event-calendar/Constants'
 import axios from 'axios'
-import { convertToArr, convertXMLToJson, decodeObj, encodeObj, isDatePast } from '@/lib/utils'
+import { convertToArr, convertXMLToJson, decodeObj, encodeObj, getHomeSessionID, isDatePast } from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
@@ -145,13 +145,13 @@ const RSVPConfirm = () => {
 
 	const onClick = () => {
 		setLoading(true)
-		getSessionID()
+		getLogon()
 			.then((res) => storeRecord(res, patronInfo))
 			.then((res) => sendRegConfirmEmail(res))
 			.then((res) => storeAtLog(res))
 	}
 
-	const getSessionID = async () => {
+	const getLogon = async () => {
 		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}`
 
 		return await axios
@@ -165,8 +165,7 @@ const RSVPConfirm = () => {
 				}
 			)
 			.then(() => {
-				let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
-				let HOME_SESSID = match[0]?.split('=')[1]
+				let HOME_SESSID = getHomeSessionID()
 				return HOME_SESSID
 			})
 			.catch((error) => {
