@@ -24,7 +24,6 @@ const Home = () => {
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
 					<SearchForm inputName={'KEYWORD_CLUSTER'} />
-					<AdvanceSearchButton/>
 				</div>
 				{/* <CommandDemo /> */}
 			</Hero>

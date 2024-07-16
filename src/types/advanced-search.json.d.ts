@@ -5,10 +5,16 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Value = string;
+export type Database = string;
 export type Label = string;
-export type AdvancedSearchJson = {
-  value?: Value;
+export type Name = string;
+export type Items = {
   label?: Label;
+  name?: Name;
+  [k: string]: unknown;
+}[];
+export type AdvancedSearchJson = {
+  database?: Database;
+  items?: Items;
   [k: string]: unknown;
 }[];

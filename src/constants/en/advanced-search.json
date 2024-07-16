@@ -1,9 +1,81 @@
-{
-	"database": "COLLECTIONS_WEB",
-	"items": [
-		{
-			"label": "Title",
-			"value": "LEGAL_TITLE"
-		}
-	]
-}
+[
+	{
+		"database": "COLLECTIONS_WEB",
+		"items": [
+			{
+				"label": "Title",
+				"name": "LEGAL_TITLE"
+			},
+			{
+				"label": "Accession Number",
+				"name": "ACCESSION_NUMBER"
+			},
+			{
+				"label": "Collection",
+				"name": "collection_type"
+			},
+			{
+				"label": "Earliest Date",
+				"name": "EARLY"
+			},
+			{
+				"label": "Latest Date",
+				"name": "LATE"
+			},
+			{
+				"label": "Object Name",
+				"name": "object_name_eng"
+			},
+			{
+				"label": "Description",
+				"name": "obj_description"
+			},
+			{
+				"label": "Author",
+				"name": "Author"
+			},
+			{
+				"label": "Publisher",
+				"name": "l_publisher"
+			}
+		]
+	},
+	{
+		"database": "DESCRIPTION_WEB",
+		"items": [
+			{
+				"label": "Title",
+				"name": "TITLE"
+			},
+			{
+				"label": "ID",
+				"name": "REFD"
+			},
+			{
+				"label": "Date",
+				"name": "date_cr_inc"
+			}
+		]
+	},
+	{
+		"database": "BIBLIO_WEB",
+		"items": [
+			{
+				"label": "Title",
+				"name": "LEGAL_TITLE"
+			},
+			{
+				"label": "ID",
+				"name": "ACCESSION_NUMBER"
+			},
+			{
+				"label": "Date",
+				"name": "EARLY"
+			},
+			{
+				"label": "Description",
+				"name": "OBJ_DESCRIPTION"
+			}
+		]
+	}
+]

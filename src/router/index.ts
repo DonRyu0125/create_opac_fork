@@ -10,7 +10,7 @@ import RSVPConfirm from '@/page/RSVP/Confirmation'
 import Login from '@/page/login'
 import Bookmark from '@/page/bookmark'
 import NoBookmarkRecord from '@/page/NoBookmarkRecord'
-import AdvancedSearch from '@/page/AdvancedSearch'
+import Description from '@/page/Description'
 
 
 export type TRoute = Record<string, () => React.ReactNode>
@@ -23,11 +23,12 @@ export const ROUTES: TRoute = {
 	admin: Admin,
 	login: Login,
 	bookmark: Bookmark,
+	description:Description,
 	'rsvp-cancel': RSVPCancel,
 	'rsvp-confirm': RSVPConfirm,
 	'no-record': NoRecord,
 	'no-bk-record': NoBookmarkRecord,
-	'advanced-search':AdvancedSearch
+
 }
 
 /**

@@ -3,17 +3,43 @@ import AdvancedSearchInput from './AdvancedSearchInput'
 import { CircleMinus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
+
+type FieldObject = {
+    field: string;
+    keyword: string;
+    boolean?: string;
+};
+
 type Advanced_Search_Props = {
 	database_name: string
 	url: string
 }
 
+export const STATUS_TYPE = {
+	Invalid: 'Invalid',
+	Success: 'Success',
+	Confirm: 'Confirm',
+	Cancel: 'Cancel',
+	OutDate: 'OutDate',
+	InList: 'InList', // Already registered
+	Full: 'Full', // Fully registered
+	Expired: 'Expired',
+} as const
+
+const Advanced_Search_Boolean = {
+	And:"and",
+	Or:"or",
+	Not:"not"
+}
+
+export type Adv_Search_Type = keyof typeof Advanced_Search_Boolean
+
 const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	const { message, home } = useConstants()
 
-	const [searchExp, setSearchExp] = useState([
-		{ field: 'REFD', keyword: '', boolean: 'and' },
-		{ field: 'REFD', keyword: '', boolean: 'and' },
+	const [searchExp, setSearchExp] = useState<FieldObject[]>([
+		{ field: 'REFD', keyword: '', boolean: Advanced_Search_Boolean.And },
+		{ field: 'REFD', keyword: '', boolean: Advanced_Search_Boolean.And },
 		{ field: 'REFD', keyword: '' },
 	])
 
@@ -56,8 +82,8 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 		// 	  `${exp.field} ${exp.keyword} ${exp.boolean && index !== len - 1 ? exp.boolean : ""}`
 		//   )
 		//   .join(" ");
-		document.getElementById('advancedSearchInput').value = 'title ontario'
-		document.getElementById('advancedSearchForm').submit()
+		// document.getElementById('advancedSearchInput').value = 'title ontario'
+		// document.getElementById('advancedSearchForm').submit()
 	}
 
 	return (
