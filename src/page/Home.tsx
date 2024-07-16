@@ -7,7 +7,8 @@ import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
 import EventCalendar from '@/components/common/event-calendar/EventCalendar'
-import AdvanceSearchButton from './AdvancedSearch/AdvancedSearchButton'
+import { getSearchURL } from '@/lib/utils'
+
 
 const Home = () => {
 	const {
@@ -23,7 +24,7 @@ const Home = () => {
 		<Layout>
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
-					<SearchForm inputName={'KEYWORD_CLUSTER'} />
+					<SearchForm inputName={'KEYWORD_CLUSTER'} action={getSearchURL(searchURL)}/>
 				</div>
 				{/* <CommandDemo /> */}
 			</Hero>

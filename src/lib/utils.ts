@@ -128,3 +128,17 @@ export const getCurrentDate = () => {
 
 	return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 }
+
+export const getSessionID = () => {
+	const domSessionId = document.querySelector('#session-id')?.textContent
+	if (document && domSessionId) return domSessionId
+	const cookieSessionId = getHOMESESSID()
+	if (cookieSessionId === '') return null
+	return cookieSessionId;
+}
+
+export const getSearchURL = (url:string)=>{
+	const sessionID = getSessionID();
+	if(sessionID) return `${sessionID}?${url}`
+	return `/SCRIPTS/MWIMAIN.DLL?${url}`
+}

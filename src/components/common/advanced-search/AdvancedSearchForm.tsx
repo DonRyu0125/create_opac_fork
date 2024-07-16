@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
 
 type FieldObject = {
-    field: string;
-    keyword: string;
-    boolean?: string;
-};
+	field: string
+	keyword: string
+	boolean?: string
+}
 
 type Advanced_Search_Props = {
 	database_name: string
@@ -27,9 +27,9 @@ export const STATUS_TYPE = {
 } as const
 
 const Advanced_Search_Boolean = {
-	And:"and",
-	Or:"or",
-	Not:"not"
+	And: 'and',
+	Or: 'or',
+	Not: 'not',
 }
 
 export type Adv_Search_Type = keyof typeof Advanced_Search_Boolean
@@ -43,13 +43,13 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 		{ field: 'REFD', keyword: '' },
 	])
 
-	const updateField = (key:string, value:string, index:string) => {
+	const updateField = (key: string, value: string, index: string) => {
 		const newSearchExp: any = [...searchExp]
 		newSearchExp[index][key] = value
 		setSearchExp(newSearchExp)
 	}
 
-	const removeField = (index:number) => {
+	const removeField = (index: number) => {
 		const newSearchExp = [...searchExp]
 		newSearchExp.splice(index, 1)
 		if (newSearchExp.length > 0) {
@@ -87,7 +87,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	}
 
 	return (
-		<div className={'w-full h-full flex flex-col justify-center items-center bg-slate-300'}>
+		<div className={'w-full h-full flex flex-col justify-center items-center'}>
 			<form
 				method="POST"
 				id="advancedSearchForm"
@@ -111,13 +111,8 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 					)}
 				</div>
 			))}
-			<Button onClick={addField}>
-				Add field
-			</Button>
-			<Button
-				variant={'default'}
-				className="w-4/6 mt-10"
-				onClick={submitSearch}>
+			<Button onClick={addField}>Add field</Button>
+			<Button variant={'default'} className="w-4/6 mt-10" onClick={submitSearch}>
 				<span className=" block">Search</span>
 			</Button>
 		</div>

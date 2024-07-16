@@ -1,9 +1,54 @@
 {
-	"database": "COLLECTIONS_WEB",
-	"items": [
+	"COLLECTIONS_WEB": [
 		{
 			"label": "Title",
-			"value": "LEGAL_TITLE"
+			"name": "LEGAL_TITLE"
+		},
+		{
+			"label": "Accession Number",
+			"name": "ACCESSION_NUMBER"
+		},
+		{
+			"label": "Collection",
+			"name": "collection_type"
+		},
+		{
+			"label": "Earliest Date",
+			"name": "EARLY"
+		},
+		{
+			"label": "Latest Date",
+			"name": "LATE"
+		},
+		{
+			"label": "Object Name",
+			"name": "object_name_eng"
+		},
+		{
+			"label": "Description",
+			"name": "obj_description"
+		},
+		{
+			"label": "Author",
+			"name": "Author"
+		},
+		{
+			"label": "Publisher",
+			"name": "l_publisher"
+		}
+	],
+	"DESCRIPTION_WEB": [
+		{
+			"label": "Title",
+			"name": "TITLE"
+		},
+		{
+			"label": "ID",
+			"name": "REFD"
+		},
+		{
+			"label": "Date",
+			"name": "date_cr_inc"
 		}
 	]
 }
