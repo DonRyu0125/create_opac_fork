@@ -6,17 +6,15 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { TextSearch } from 'lucide-react'
 import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
+import { getSearchURL } from '@/lib/utils'
 
 const Description = () => {
-	const [showAdvSearch, setShowAdvSearch] = useState(true)
+	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const {
-		heading,
 		heroBanner,
-		browseByCategoryTitle,
-		categoriesItems,
 		searchURL,
 		// eventCalendar,
-	} = useConstants().home
+	} = useConstants().description
 	return (
 		<Layout>
 			<Hero
@@ -27,11 +25,11 @@ const Description = () => {
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
 					{showAdvSearch ? (
 						<AdvancedSearchForm
-							database_name={'DESCRIPTION'}
-							url={'http://test.opac.minisis.com/'}
+							database_name={'DESCRIPTION_WEB'}
+							url={getSearchURL(searchURL)}
 						/>
 					) : (
-						<SearchForm inputName={'KEYWORD_CLUSTER'} action={''}/>
+						<SearchForm inputName={'KEYWORD_CLUSTER'} action={getSearchURL(searchURL)}/>
 					)}
 					<Button
 						variant={'default'}

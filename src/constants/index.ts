@@ -12,7 +12,8 @@ export const CONSTANTS = {
 		fields: en.fields,
 		message: en.message,
 		rsvp: en.rsvp,
-		advancedSearch: en.advancedSearch
+		advancedSearch: en.advancedSearch,
+		description:en.description
 	},
 	FR: {
 		config: fr.config,
@@ -23,6 +24,7 @@ export const CONSTANTS = {
 		fields: fr.fields,
 		message: fr.message,
 		rsvp: fr.rsvp,
-		advancedSearch: fr.advancedSearch
+		advancedSearch: fr.advancedSearch,
+		description:en.description
 	},
 }

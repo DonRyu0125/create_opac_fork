@@ -42,6 +42,7 @@ const Summary = () => {
 							className="w-[450px] m-0"
 							inputStyle="text-black"
 							inputName={'KEYWORD_CLUSTER'}
+							action={''}
 						/>
 						<ViewToggle />
 					</div>

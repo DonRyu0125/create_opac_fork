@@ -9,7 +9,6 @@ import { Card } from '../components/ui/card'
 import EventCalendar from '@/components/common/event-calendar/EventCalendar'
 import { getSearchURL } from '@/lib/utils'
 
-
 const Home = () => {
 	const {
 		heading,
@@ -19,7 +18,7 @@ const Home = () => {
 		searchURL,
 		// eventCalendar,
 	} = useConstants().home
-
+	console.log('getSearchURL(searchURL)',getSearchURL(searchURL))
 	return (
 		<Layout>
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">

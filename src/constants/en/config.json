@@ -7,7 +7,7 @@
 			"title": "Home"
 		},
 		{
-			"url": "/description.html",
+			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]description.html",
 			"title": "Description"
 		}
 	]

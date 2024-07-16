@@ -11,11 +11,7 @@ export interface SearchFormProps extends React.HTMLAttributes<HTMLFormElement> {
 	action: string
 }
 const SearchForm = ({ className, inputName, inputStyle, action, ...props }: SearchFormProps) => {
-	const { message, home } = useConstants()
-	const { common } = useJSONData({ selector: '#xml_record' })
-	const { searchURL: url } = home
-	const { session } = common
-
+	const { message } = useConstants()
 
 	return (
 		<form method="POST" action={action} className={'flex w-full max-w-[600px]'} {...props}>
@@ -30,13 +26,11 @@ const SearchForm = ({ className, inputName, inputStyle, action, ...props }: Sear
 					placeholder={message.searchPlaceholder}
 					type="search"
 				/>
-				{/* <SearchIcon className="absolute w-4 h-5 left-2 my-auto  mx-0 right-0 top-0 bottom-0 text-white" /> */}
 			</div>
 			<Button
 				variant={'default'}
 				className="right-0 top-0 h-full bg-opac-green"
 				type="submit">
-				{/* <span className="hidden md:block"> {message.searchButton}</span> */}
 				<span className=" block">
 					<Search className="w-4 h-4" />
 				</span>
