@@ -87,16 +87,16 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	}
 
 	return (
-		<div className={'w-full h-full flex flex-col justify-center items-center'}>
+		<div className={'w-full h-full flex flex-col justify-center items-center bg-slate-300'}>
 			<form
 				method="POST"
 				id="advancedSearchForm"
 				action={`${url}&database=${database_name}`}
-				className={'w-3/4 h-full '}>
+				className={'w-full h-full '}>
 				<input name="QUERY_EXPRESSION" hidden id="advancedSearchInput" />
 			</form>
 			{searchExp.map((exp, index) => (
-				<div className={'w-2/3 flex items-center'}>
+				<div className={'w-full flex items-center'}>
 					<AdvancedSearchInput updateField={updateField} exp={exp} index={index} />
 					{index >= 3 ? (
 						<CircleMinus

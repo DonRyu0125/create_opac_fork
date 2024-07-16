@@ -29,7 +29,7 @@ const SearchForm = ({ className, inputName, inputStyle, ...props }: SearchFormPr
 		
 			<form
 				method="POST"
-				action={getSearchURL()}
+				action={`${getSearchURL()}&DATABASE=description_web`}
 				className={'flex w-full'}
 				{...props}>
 				<div className="w-full relative">
@@ -55,8 +55,6 @@ const SearchForm = ({ className, inputName, inputStyle, ...props }: SearchFormPr
 					</span>
 				</Button>
 			</form>
-			
-
 	)
 }
 
