@@ -25,7 +25,7 @@ const AdvancedSearchInput = ({ updateField, index, exp }: any) => {
 					<SelectValue className={'text-black'} placeholder={<div>{select}</div>} />
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
-					{advancedSearch['DESCRIPTION_WEB']?.map((item) => {
+					{/* {advancedSearch['DESCRIPTION_WEB']?.map((item) => {
 						return (
 							<SelectItem
 								value={item.name}
@@ -33,7 +33,7 @@ const AdvancedSearchInput = ({ updateField, index, exp }: any) => {
 								{item.label}
 							</SelectItem>
 						)
-					})}
+					})} */}
 				</SelectContent>
 			</Select>
 			<Input

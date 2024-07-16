@@ -87,34 +87,45 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	}
 
 	return (
-		<div className={'w-full h-full flex flex-col justify-center items-center'}>
-			<form
-				method="POST"
-				id="advancedSearchForm"
-				action={`${url}&database=${database_name}`}
-				className={'w-full h-full '}>
-				<input name="QUERY_EXPRESSION" hidden id="advancedSearchInput" />
-			</form>
-			{searchExp.map((exp, index) => (
-				<div className={'w-full flex items-center'}>
-					<AdvancedSearchInput updateField={updateField} exp={exp} index={index} />
-					{index >= 3 ? (
-						<CircleMinus
-							className="dynamic-delete-button"
-							type="minus-circle-o"
-							onClick={(_) => {
-								removeField(index)
-							}}
-						/>
-					) : (
-						<span className="dynamic-delete-button" style={{ width: '24px' }}></span>
-					)}
+		<div className={'w-full h-full min-h-[100vh] my-8 flex flex-col justify-center items-center'}>
+			<div className={'w-5/6 flex flex-col justify-center items-center bg-slate-200 py-11'}>
+				<h2 className={'text-4xl'}>Advanced Search</h2>
+				<form
+					method="POST"
+					id="advancedSearchForm"
+					action={`${url}&database=${database_name}`}
+					className={'hidden '}>
+					<input name="QUERY_EXPRESSION" hidden id="advancedSearchInput" />
+				</form>
+				<div className={'w-4/6'}>
+					{searchExp.map((exp, index) => (
+						<div className={'w-full flex items-center justify-center'}>
+							<AdvancedSearchInput
+								updateField={updateField}
+								exp={exp}
+								index={index}
+							/>
+							{index >= 3 ? (
+								<CircleMinus
+									className="dynamic-delete-button"
+									type="minus-circle-o"
+									onClick={(_) => {
+										removeField(index)
+									}}
+								/>
+							) : (
+								<span
+									className="dynamic-delete-button"
+									style={{ width: '24px' }}></span>
+							)}
+						</div>
+					))}
 				</div>
-			))}
-			<Button onClick={addField}>Add field</Button>
-			<Button variant={'default'} className="w-4/6 mt-10" onClick={submitSearch}>
-				<span className=" block">Search</span>
-			</Button>
+				<Button onClick={addField}>Add field</Button>
+				<Button variant={'default'} className="w-4/6 mt-10" onClick={submitSearch}>
+					<span className=" block">Search</span>
+				</Button>
+			</div>
 		</div>
 	)
 }
