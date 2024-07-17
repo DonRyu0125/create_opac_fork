@@ -4,10 +4,11 @@ import { CircleMinus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
 
-type FieldObject = {
+export type FieldObject = {
 	field: string
 	keyword: string
 	boolean?: string
+	remove?: boolean
 }
 
 type Advanced_Search_Props = {
@@ -26,20 +27,18 @@ export const STATUS_TYPE = {
 	Expired: 'Expired',
 } as const
 
-const Advanced_Search_Boolean = {
-	And: 'and',
-	Or: 'or',
-	Not: 'not',
+export const Advanced_Search_Boolean = {
+	AND: 'AND',
+	OR: 'OR',
+	NOT: 'NOT',
 }
 
 export type Adv_Search_Type = keyof typeof Advanced_Search_Boolean
 
 const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
-	const { message, home } = useConstants()
-
 	const [searchExp, setSearchExp] = useState<FieldObject[]>([
-		{ field: 'REFD', keyword: '', boolean: Advanced_Search_Boolean.And },
-		{ field: 'REFD', keyword: '', boolean: Advanced_Search_Boolean.And },
+		{ field: 'REFD', keyword: '', boolean: Advanced_Search_Boolean.AND },
+		{ field: 'REFD', keyword: '', boolean: Advanced_Search_Boolean.AND },
 		{ field: 'REFD', keyword: '' },
 	])
 
@@ -60,34 +59,39 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 
 	const addField = () => {
 		const newSearchExp = [...searchExp]
-		newSearchExp[newSearchExp.length - 1].boolean = 'and'
-		newSearchExp.push({ field: 'REFD', keyword: '', boolean: 'and', remove: true })
+		newSearchExp[newSearchExp.length - 1].boolean = Advanced_Search_Boolean.AND
+		newSearchExp.push({ field: 'REFD', keyword: '', remove: true })
 		setSearchExp(newSearchExp)
 	}
 
 	const resetFields = () => {
 		setSearchExp([
-			{ field: 'REFD', keyword: '', boolean: 'and' },
-			{ field: 'REFD', keyword: '', boolean: 'and' },
+			{ field: 'REFD', keyword: '', boolean: Advanced_Search_Boolean.AND },
+			{ field: 'REFD', keyword: '', boolean: Advanced_Search_Boolean.AND },
 			{ field: 'REFD', keyword: '' },
 		])
 	}
 
 	const submitSearch = () => {
-		// let data = searchExp.filter((e) => e.keyword !== "");
-		// let len = data.length;
-		// data = data
-		//   .map(
-		// 	(exp, index) =>
-		// 	  `${exp.field} ${exp.keyword} ${exp.boolean && index !== len - 1 ? exp.boolean : ""}`
-		//   )
-		//   .join(" ");
+		let data = searchExp.filter((e) => e.keyword !== '')
+		let len = data.length
+		let qry = data
+			.map(
+				(exp, index) =>
+					`${exp.field} ${exp.keyword} ${exp.boolean && index !== len - 1 ? exp.boolean : ''}`
+			)
+			.join(' ')
+
+		console.log('qry', qry)
 		// document.getElementById('advancedSearchInput').value = 'title ontario'
 		// document.getElementById('advancedSearchForm').submit()
 	}
 
 	return (
-		<div className={'w-full h-full min-h-[100vh] my-8 flex flex-col justify-center items-center'}>
+		<div
+			className={
+				'w-full h-full min-h-[100vh] my-8 flex flex-col justify-center items-center'
+			}>
 			<div className={'w-5/6 flex flex-col justify-center items-center bg-slate-200 py-11'}>
 				<h2 className={'text-4xl'}>Advanced Search</h2>
 				<form
@@ -101,9 +105,11 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 					{searchExp.map((exp, index) => (
 						<div className={'w-full flex items-center justify-center'}>
 							<AdvancedSearchInput
+								key={index}
 								updateField={updateField}
 								exp={exp}
 								index={index}
+								database_name={database_name}
 							/>
 							{index >= 3 ? (
 								<CircleMinus
@@ -122,9 +128,14 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 					))}
 				</div>
 				<Button onClick={addField}>Add field</Button>
-				<Button variant={'default'} className="w-4/6 mt-10" onClick={submitSearch}>
-					<span className=" block">Search</span>
-				</Button>
+				<div className="w-4/6 mt-10 flex justify-between">
+					<Button variant={'default'} className={'w-[45%]'} onClick={submitSearch}>
+						<span className=" block">Search</span>
+					</Button>
+					<Button variant={'default'} className={'w-[45%]'} onClick={resetFields}>
+						<span className=" block">Clear</span>
+					</Button>
+				</div>
 			</div>
 		</div>
 	)

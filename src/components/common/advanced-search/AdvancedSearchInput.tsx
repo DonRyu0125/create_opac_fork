@@ -11,51 +11,86 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
+import { Advanced_Search_Boolean, FieldObject } from './AdvancedSearchForm'
 
-const AdvancedSearchInput = ({ updateField, index, exp }: any) => {
+interface AdvancedSearchInputProps {
+	exp: FieldObject
+	index: number
+	database_name: string
+	updateField: Function
+}
+
+const AdvancedSearchInput = ({
+	updateField,
+	index,
+	exp,
+	database_name,
+}: AdvancedSearchInputProps) => {
 	const { advancedSearch, message } = useConstants()
-	const [select, setSelect] = useState<string>('Select a field')
+
+	const searchDatabase = () => {
+		let dbArr = advancedSearch.filter((elm) => elm.database === database_name)
+		return dbArr[0]
+	}
+
 	return (
 		<div className="w-full flex relative m-2" key={index}>
 			<Select
-				onValueChange={(e) => {
-					setSelect(e)
+				onValueChange={(value) => {
+					updateField('field', value, index)
 				}}>
 				<SelectTrigger className="w-72 border border-opac-green bg-opac-green text-white">
-					<SelectValue className={'text-black'} placeholder={<div>{select}</div>} />
+					<SelectValue
+						className={'text-black'}
+						placeholder={<div>{exp.field}</div>}
+						defaultValue={''}
+					/>
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
-					{/* {advancedSearch['DESCRIPTION_WEB']?.map((item) => {
+					{searchDatabase()?.items.map((item, key) => {
 						return (
 							<SelectItem
+								key={key}
 								value={item.name}
 								className="w-46 border bg-opac-green border-opac-green ">
 								{item.label}
 							</SelectItem>
 						)
-					})} */}
+					})}
 				</SelectContent>
 			</Select>
 			<Input
+				onChange={(e) => updateField('keyword', e.target.value, index)}
 				className={cn(
-					'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green text-white '
+					'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green'
 				)}
 				placeholder={message.searchPlaceholder}
 				type="search"
 			/>
+
 			<Select
-				onValueChange={(e) => {
-					// setLanguage(e as LanguageCode)
+				onValueChange={(value) => {
+					updateField('boolean', value, index)
 				}}>
-				<SelectTrigger className="w-32 border border-opac-green bg-opac-green text-white">
-					<SelectValue placeholder={'And'} defaultValue={'And'} />
+				<SelectTrigger
+					disabled={!exp.boolean}
+					className="w-32 border border-opac-green bg-opac-green text-white">
+					<SelectValue
+						placeholder={Advanced_Search_Boolean.AND}
+						defaultValue={exp.boolean ? exp.boolean : exp.boolean}
+					/>
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
-					<SelectItem
-						value={'And'}
-						className="w-20 border border-opac-green bg-opac-green">
-						And
-					</SelectItem>
+					{Object.values(Advanced_Search_Boolean).map((item, key) => {
+						return (
+							<SelectItem
+								key={key}
+								value={item}
+								className="w-20 border border-opac-green bg-opac-green">
+								{item}
+							</SelectItem>
+						)
+					})}
 				</SelectContent>
 			</Select>
 		</div>
