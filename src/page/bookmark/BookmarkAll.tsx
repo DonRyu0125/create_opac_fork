@@ -30,7 +30,6 @@ const BookmarkAll = () => {
 						? bookmark_count
 						: Number.parseInt(bookmark_count || '0')
 				const isValid = validateBookmarkResponse(res, bookmarkCount)
-
 				if (isValid?.isSuccess) {
 					setCount(isValid.newCount || count)
 					toast({

@@ -19,7 +19,7 @@ interface AdvancedSearchInputProps {
 	database_name: string
 	updateField: Function
 }
-
+const DEFAULT_MSG = 'Select field'
 const AdvancedSearchInput = ({
 	updateField,
 	index,
@@ -42,8 +42,7 @@ const AdvancedSearchInput = ({
 				<SelectTrigger className="w-72 border border-opac-green bg-opac-green text-white">
 					<SelectValue
 						className={'text-black'}
-						placeholder={<div>{exp.field}</div>}
-						defaultValue={''}
+						placeholder={<div>{DEFAULT_MSG}</div>}
 					/>
 				</SelectTrigger>
 				<SelectContent position={'popper'}>

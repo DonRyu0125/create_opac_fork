@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import AdvancedSearchInput from './AdvancedSearchInput'
 import { CircleMinus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/use-toast'
 
 export type FieldObject = {
 	field: string
@@ -33,16 +34,15 @@ export const ADVANCED_SEARCH_BOOLEAN = {
 }
 
 export type Adv_Search_Type = keyof typeof ADVANCED_SEARCH_BOOLEAN
-export const DEFAULT_MSG = 'Select field'
 
 const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	const [searchExp, setSearchExp] = useState<FieldObject[]>([
-		{ field: DEFAULT_MSG, keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
-		{ field: DEFAULT_MSG, keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
-		{ field: DEFAULT_MSG, keyword: '' },
+		{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
+		{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
+		{ field: '', keyword: '' },
 	])
 	const formRef = useRef<HTMLFormElement>(null)
-	const inputRef = useRef<HTMLFormElement>(null)
+	const inputRef = useRef<any>(null)
 
 	const updateField = (key: string, value: string, index: string) => {
 		const newSearchExp: any = [...searchExp]
@@ -62,20 +62,25 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	const addField = () => {
 		const newSearchExp = [...searchExp]
 		newSearchExp[newSearchExp.length - 1].boolean = ADVANCED_SEARCH_BOOLEAN.AND
-		newSearchExp.push({ field: DEFAULT_MSG, keyword: '', remove: true })
+		newSearchExp.push({ field: '', keyword: '', remove: true })
 		setSearchExp(newSearchExp)
 	}
 
 	const resetFields = () => {
 		setSearchExp([
-			{ field: DEFAULT_MSG, keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
-			{ field: DEFAULT_MSG, keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
-			{ field: DEFAULT_MSG, keyword: '' },
+			{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
+			{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
+			{ field: '', keyword: '' },
 		])
 	}
 
 	const submitSearch = () => {
 		let data = searchExp.filter((e) => e.keyword !== '')
+		if (data.length < 1) {
+			toast({
+				title: 'Please enter your search!',
+			})
+		}
 		let len = data.length
 		let qry = data
 			.map(
@@ -84,12 +89,8 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 			)
 			.join(' ')
 
-		if (inputRef.current) {
-			inputRef.current.value = qry
-		}
-		if (formRef.current) {
-			formRef.current.submit()
-		}
+		inputRef.current.value = qry
+		formRef.current?.submit()
 	}
 
 	return (
@@ -109,9 +110,8 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 				</form>
 				<div className={'w-4/6'}>
 					{searchExp.map((exp, index) => (
-						<div className={'w-full flex items-center justify-center'}>
+						<div className={'w-full flex items-center justify-center'} key={index}>
 							<AdvancedSearchInput
-								key={index}
 								updateField={updateField}
 								exp={exp}
 								index={index}
@@ -119,6 +119,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 							/>
 							{index >= 3 ? (
 								<CircleMinus
+									key={index}
 									className="dynamic-delete-button"
 									type="minus-circle-o"
 									onClick={(_) => {
