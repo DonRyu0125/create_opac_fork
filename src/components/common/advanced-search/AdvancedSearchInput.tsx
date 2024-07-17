@@ -11,7 +11,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import { Advanced_Search_Boolean, FieldObject } from './AdvancedSearchForm'
+import { ADVANCED_SEARCH_BOOLEAN, FieldObject } from './AdvancedSearchForm'
 
 interface AdvancedSearchInputProps {
 	exp: FieldObject
@@ -76,12 +76,12 @@ const AdvancedSearchInput = ({
 					disabled={!exp.boolean}
 					className="w-32 border border-opac-green bg-opac-green text-white">
 					<SelectValue
-						placeholder={Advanced_Search_Boolean.AND}
+						placeholder={ADVANCED_SEARCH_BOOLEAN.AND}
 						defaultValue={exp.boolean ? exp.boolean : exp.boolean}
 					/>
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
-					{Object.values(Advanced_Search_Boolean).map((item, key) => {
+					{Object.values(ADVANCED_SEARCH_BOOLEAN).map((item, key) => {
 						return (
 							<SelectItem
 								key={key}
