@@ -1,17 +1,22 @@
 import { useState, useEffect } from 'react'
 
-function useDisplayMode(defaultMode = 'grid') {
+const useDisplayMode = () => {
+	// Initial display mode is fetched from localStorage or defaults to 'list'
 	const [displayMode, setDisplayMode] = useState(() => {
-		// Retrieve the display mode from localStorage or use the default value
-		return localStorage.getItem('displayMode') || defaultMode
+		return localStorage.getItem('displayMode') || 'list'
 	})
 
+	// Save the display mode to localStorage whenever it changes
 	useEffect(() => {
-		// Store the display mode in localStorage whenever it changes
 		localStorage.setItem('displayMode', displayMode)
 	}, [displayMode])
 
-	return [displayMode, setDisplayMode]
+	// Toggle between 'grid' and 'list' modes
+	const toggleDisplayMode = () => {
+		setDisplayMode((prevMode) => (prevMode === 'list' ? 'grid' : 'list'))
+	}
+
+	return { displayMode, toggleDisplayMode }
 }
 
 export default useDisplayMode

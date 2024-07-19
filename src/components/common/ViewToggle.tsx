@@ -10,11 +10,8 @@ const ViewToggle = () => {
 	// 	setView(view === 'grid' ? 'list' : 'grid')
 	// }
 
-	const [displayMode, setDisplayMode] = useDisplayMode()
+	const { displayMode, toggleDisplayMode } = useDisplayMode()
 
-	const toggleDisplayMode = () => {
-		setDisplayMode((prevMode) => (prevMode === 'grid' ? 'list' : 'grid'))
-	}
 	return (
 		<div className="flex flex-row">
 			<Button
