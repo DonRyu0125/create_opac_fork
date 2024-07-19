@@ -96,7 +96,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	return (
 		<div
 			className={
-				'w-full h-full min-h-[100vh] my-8 flex flex-col justify-center items-center'
+				'w-full h-full min-h-[45vh] my-8 flex flex-col justify-center items-center'
 			}>
 			<div className={'w-5/6 flex flex-col justify-center items-center bg-slate-200 py-11'}>
 				<h2 className={'text-4xl'}>Advanced Search</h2>

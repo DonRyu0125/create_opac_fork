@@ -54,6 +54,10 @@
 			{
 				"label": "Date",
 				"name": "date_cr_inc"
+			},
+			{
+				"label": "LEVEL DESC",
+				"name": "LEVEL_DESC"
 			}
 		]
 	},
