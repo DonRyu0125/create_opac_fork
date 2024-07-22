@@ -10,12 +10,12 @@ const AdvanceSearchButton: React.FC<ShowAdvSearch> = ({ setShowAdvSearch }: any)
 	return (
 		<Button
 			variant={'default'}
-			className="right-0 top-0 h-full bg-primary flex justify-between items-center "
+			className="right-0 top-0 h-full w-full max-w-[130px] bg-primary flex justify-center items-center "
 			onClick={() => setShowAdvSearch((prev: boolean) => !prev)}>
-			<div className={'text-sm'}>
+			<div className={'text-sm '}>
 				<TextSearch />
 			</div>
-			<div className={'text-sm'}>Advanced</div>
+			<div className={'text-base'}>Advanced</div>
 		</Button>
 	)
 }

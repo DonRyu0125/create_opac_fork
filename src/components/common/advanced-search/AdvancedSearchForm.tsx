@@ -33,7 +33,21 @@ export const ADVANCED_SEARCH_BOOLEAN = {
 	NOT: 'NOT',
 }
 
-export type Adv_Search_Type = keyof typeof ADVANCED_SEARCH_BOOLEAN
+export const ADVANCED_SEARCH_BOOLEAN_SELECT_MAP = [
+	{
+		key:'AND',
+		value:'AND'
+	},
+	{
+		key:'OR',
+		value:'OR'
+	},
+	{
+		key:'NOT',
+		value:'AND NOT'
+	}
+]
+
 
 const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	const [searchExp, setSearchExp] = useState<FieldObject[]>([

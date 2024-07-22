@@ -1,9 +1,6 @@
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
-import React, { useState } from 'react'
 import useConstants from '@/hooks/useConstants'
-import { ChevronDownIcon, Menu } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import {
 	Select,
 	SelectContent,
@@ -11,7 +8,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import { ADVANCED_SEARCH_BOOLEAN, FieldObject } from './AdvancedSearchForm'
+import { ADVANCED_SEARCH_BOOLEAN, ADVANCED_SEARCH_BOOLEAN_SELECT_MAP, FieldObject } from './AdvancedSearchForm'
 
 interface AdvancedSearchInputProps {
 	exp: FieldObject
@@ -80,13 +77,13 @@ const AdvancedSearchInput = ({
 					/>
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
-					{Object.values(ADVANCED_SEARCH_BOOLEAN).map((item, key) => {
+					{ADVANCED_SEARCH_BOOLEAN_SELECT_MAP.map((item, key) => {
 						return (
 							<SelectItem
 								key={key}
-								value={item}
+								value={item.value}
 								className="w-20 border border-opac-green bg-opac-green">
-								{item}
+								{item.key}
 							</SelectItem>
 						)
 					})}
