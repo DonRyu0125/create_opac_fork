@@ -15,7 +15,7 @@ const Description = () => {
 		heroBanner,
 		searchURL,
 		// eventCalendar,
-	} = useConstants().description
+	} = useConstants().archives
 	return (
 		<Layout>
 			<Hero
