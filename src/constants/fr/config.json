@@ -7,8 +7,16 @@
 			"title": "Accueil"
 		},
 		{
-			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]description.html",
+			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html",
 			"title": "Les archives"
+		},
+		{
+			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]library.html",
+			"title": "Bibliothèque"
+		},
+		{
+			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]museum.html",
+			"title": "Musée"
 		}
 	]
 }

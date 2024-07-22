@@ -11,6 +11,8 @@ import Login from '@/page/login'
 import Bookmark from '@/page/bookmark'
 import NoBookmarkRecord from '@/page/NoBookmarkRecord'
 import Archives from '@/page/archives'
+import Museum from '@/page/museum'
+import Library from '@/page/library'
 
 
 export type TRoute = Record<string, () => React.ReactNode>
@@ -24,11 +26,12 @@ export const ROUTES: TRoute = {
 	login: Login,
 	bookmark: Bookmark,
 	archives:Archives,
+	library:Library,
+	museum:Museum,
 	'rsvp-cancel': RSVPCancel,
 	'rsvp-confirm': RSVPConfirm,
 	'no-record': NoRecord,
 	'no-bk-record': NoBookmarkRecord,
-
 }
 
 /**

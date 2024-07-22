@@ -8,9 +8,8 @@ import { TextSearch } from 'lucide-react'
 import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
 import { getSearchURL } from '@/lib/utils'
 import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
-
-const Archives = () => {
-	const [showAdvSearch, setShowAdvSearch] = useState(false)
+const Museum = () => {
+    const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const {
 		heroBanner,
 		searchURL,
@@ -20,7 +19,7 @@ const Archives = () => {
 		<Layout>
 			<Hero
 				className={""}
-				title={'Search the Description'}
+				title={'Search the Museum'}
 				backgroundImage={heroBanner}
 				description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
@@ -37,4 +36,5 @@ const Archives = () => {
 		</Layout>
 	)
 }
-export default Archives
+
+export default Museum
