@@ -5,19 +5,19 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type SiteName = string
-export type Logo = string
-export type Url = string
-export type Title = string
+export type SiteName = string;
+export type Logo = string;
+export type Url = string;
+export type Title = string;
 export type Navigations = {
-	url?: Url
-	title?: Title
-	[k: string]: unknown
-}[]
+  url?: Url;
+  title?: Title;
+  [k: string]: unknown;
+}[];
 
 export interface ConfigJson {
-	siteName?: SiteName
-	logo?: Logo
-	navigations?: Navigations
-	[k: string]: unknown
+  siteName?: SiteName;
+  logo?: Logo;
+  navigations?: Navigations;
+  [k: string]: unknown;
 }

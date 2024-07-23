@@ -12,15 +12,20 @@ import Bookmark from '@/page/bookmark'
 import NoBookmarkRecord from '@/page/NoBookmarkRecord'
 import NoSession from '@/page/NoSession'
 import GenericErrorPage from '@/page/GenericErrorPage'
+import Fields from '@/page/admin/Fields'
 
 export type TRoute = Record<string, () => React.ReactNode>
+
+const ADMIN_ROUTES: TRoute = {
+	admin: Admin,
+	'admin-fields': Fields,
+}
 
 export const ROUTES: TRoute = {
 	home: Home,
 	summary: Summary,
 	detail: Detail,
 	faq: FAQ,
-	admin: Admin,
 	'no-record': NoRecord,
 	'no-bookmark': NoBookmarkRecord,
 	'no-session': NoSession,
@@ -29,6 +34,7 @@ export const ROUTES: TRoute = {
 	rsvp_confirm: RSVP_CONFIRM,
 	login: Login,
 	bookmark: Bookmark,
+	...ADMIN_ROUTES,
 }
 
 /**
