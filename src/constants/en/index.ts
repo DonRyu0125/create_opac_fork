@@ -7,6 +7,20 @@ import message from './message.json'
 import rsvp from './rsvp.json'
 import advancedSearch from './advanced-search.json'
 import archives from './archives.json'
+import museum from './museum.json'
+import library from './library.json'
 
-const constants = { config, faq, fields, home, styles, message, rsvp, advancedSearch, archives }
+const constants = {
+	config,
+	faq,
+	fields,
+	home,
+	styles,
+	message,
+	rsvp,
+	advancedSearch,
+	archives,
+	museum,
+	library,
+}
 export default constants

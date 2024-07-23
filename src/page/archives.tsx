@@ -8,31 +8,21 @@ import { TextSearch } from 'lucide-react'
 import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
 import { getSearchURL } from '@/lib/utils'
 import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
+import { UNION_SEARCH_CL } from './Home'
 
 const Archives = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
-	const {
-		heroBanner,
-		searchURL,
-		// eventCalendar,
-	} = useConstants().archives
+	const { heroBanner, searchURL, title, database_name } = useConstants().archives
 	return (
 		<Layout>
-			<Hero
-				className={""}
-				title={'Search the Description'}
-				backgroundImage={heroBanner}
-				description="">
+			<Hero className={''} title={title} backgroundImage={heroBanner} description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
-					<SearchForm inputName={'KEYWORD_CLUSTER'} action={getSearchURL(searchURL)} />
-					<AdvanceSearchButton setShowAdvSearch={setShowAdvSearch}/>
+					<SearchForm inputName={UNION_SEARCH_CL} action={getSearchURL(searchURL)} />
+					<AdvanceSearchButton setShowAdvSearch={setShowAdvSearch} />
 				</div>
 			</Hero>
 			{showAdvSearch && (
-				<AdvancedSearchForm
-					database_name={'DESCRIPTION_WEB'}
-					url={getSearchURL(searchURL)}
-				/>
+				<AdvancedSearchForm database_name={database_name} url={getSearchURL(searchURL)} />
 			)}
 		</Layout>
 	)

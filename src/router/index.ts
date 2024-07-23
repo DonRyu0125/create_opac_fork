@@ -10,9 +10,9 @@ import RSVPConfirm from '@/page/RSVP/Confirmation'
 import Login from '@/page/login'
 import Bookmark from '@/page/bookmark'
 import NoBookmarkRecord from '@/page/NoBookmarkRecord'
-import Archives from '@/page/archives'
-import Museum from '@/page/museum'
-import Library from '@/page/library'
+import Archives from '@/page/Archives'
+import Museum from '@/page/Museum'
+import Library from '@/page/Library'
 
 
 export type TRoute = Record<string, () => React.ReactNode>
