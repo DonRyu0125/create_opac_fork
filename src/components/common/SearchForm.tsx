@@ -19,7 +19,7 @@ const SearchForm = ({ className, inputName, inputStyle, action, ...props }: Sear
 					required
 					name={inputName}
 					className={cn(
-						'w-full max-w-[600px] rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green text-white',
+						'w-full max-w-[600px] rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green text-white rounded-l-md',
 						inputStyle
 					)}
 					placeholder={message.searchPlaceholder}
@@ -28,7 +28,7 @@ const SearchForm = ({ className, inputName, inputStyle, action, ...props }: Sear
 			</div>
 			<Button
 				variant={'default'}
-				className="right-0 top-0 h-full bg-opac-green"
+				className="right-0 top-0 h-full bg-opac-green rounded-l-lg"
 				type="submit">
 				<span className=" block">
 					<Search className="w-4 h-4" />
