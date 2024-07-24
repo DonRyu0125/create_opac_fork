@@ -7,7 +7,13 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import { ADVANCED_SEARCH_BOOLEAN, ADVANCED_SEARCH_BOOLEAN_SELECT_MAP, FieldObject } from './AdvancedSearchForm'
+import {
+	ADVANCED_SEARCH_BOOLEAN,
+	ADVANCED_SEARCH_BOOLEAN_SELECT_MAP,
+	FieldObject,
+} from './AdvancedSearchForm'
+import { Input } from '@/components/ui/input'
+import { useState } from 'react'
 
 interface AdvancedSearchInputProps {
 	exp: FieldObject
@@ -15,7 +21,7 @@ interface AdvancedSearchInputProps {
 	database_name: string
 	updateField: Function
 }
-const DEFAULT_MSG = 'Select field'
+const DEFAULT_MSG = 'Select a field'
 const AdvancedSearchInput = ({
 	updateField,
 	index,
@@ -23,6 +29,7 @@ const AdvancedSearchInput = ({
 	database_name,
 }: AdvancedSearchInputProps) => {
 	const { advancedSearch, message } = useConstants()
+	const [text, setText] = useState<string>()
 
 	const searchDatabase = () => {
 		let dbArr = advancedSearch.filter((elm) => elm.database === database_name)
@@ -35,11 +42,8 @@ const AdvancedSearchInput = ({
 				onValueChange={(value) => {
 					updateField('field', value, index)
 				}}>
-				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white">
-					<SelectValue
-						className={'text-black'}
-						placeholder={<div>{DEFAULT_MSG}</div>}
-					/>
+				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white rounded-r-lg font-semibold">
+					<SelectValue className={'text-black'} placeholder={<div>{DEFAULT_MSG}</div>} />
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
 					{searchDatabase()?.items.map((item, key) => {
@@ -54,22 +58,31 @@ const AdvancedSearchInput = ({
 					})}
 				</SelectContent>
 			</Select>
-			{/* Didn't use the Input component to remove the focus ring style , Don Ryu */}
-			<input
-				onChange={(e) => updateField('keyword', e.target.value, index)}
+			<Input
+				onChange={(e) => {
+					updateField('keyword', e.target.value, index)
+					setText(e.target.value)
+				}}
 				className={cn(
-					'w-full h-10 srounded-none pl-4 border-2 py-3 bg-transparent border-opac-green focus:outline-none focus:ring-0'
+					'placeholder:text-slate-400 border w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green focus:outline-none ring-inset'
 				)}
-				placeholder={message.searchPlaceholder}
 				type="search"
 			/>
+			{!text && (
+				<div
+					className={
+						'absolute w-full h-full flex items-center justify-center text-gray-500 pointer-events-none'
+					}>
+					<span className="hidden md:inline ml-[15px] text-gray-500">{message.searchPlaceholder}</span>
+				</div>
+			)}
 			<Select
 				onValueChange={(value) => {
 					updateField('boolean', value, index)
 				}}>
 				<SelectTrigger
 					disabled={!exp.boolean}
-					className="w-28 border border-opac-green bg-opac-green text-white">
+					className="w-28  border border-opac-green bg-opac-green text-white rounded-l-lg font-semibold ">
 					<SelectValue
 						placeholder={ADVANCED_SEARCH_BOOLEAN.AND}
 						defaultValue={exp.boolean ? exp.boolean : exp.boolean}

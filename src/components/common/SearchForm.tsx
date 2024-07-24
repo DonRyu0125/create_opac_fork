@@ -13,13 +13,13 @@ const SearchForm = ({ className, inputName, inputStyle, action, ...props }: Sear
 	const { message } = useConstants()
 
 	return (
-		<form method="POST" action={action} className={'flex w-full'} {...props}>
+		<form method="POST" action={action} className={'flex w-full max-w-[600px]'} {...props}>
 			<div className="w-full relative">
 				<Input
 					required
 					name={inputName}
 					className={cn(
-						'w-full max-w-[600px] rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green text-white rounded-l-md',
+						'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green text-white rounded-l-md',
 						inputStyle
 					)}
 					placeholder={message.searchPlaceholder}
@@ -30,7 +30,7 @@ const SearchForm = ({ className, inputName, inputStyle, action, ...props }: Sear
 				variant={'default'}
 				className="right-0 top-0 h-full bg-opac-green rounded-l-lg"
 				type="submit">
-				<span className=" block">
+				<span className="block">
 					<Search className="w-4 h-4" />
 				</span>
 			</Button>
