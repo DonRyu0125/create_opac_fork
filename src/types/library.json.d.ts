@@ -21,7 +21,7 @@ export type CategoriesItems = {
   [k: string]: unknown;
 }[];
 
-export interface ArchivesJson {
+export interface LibraryJson {
   heading?: Heading;
   heroBanner?: HeroBanner;
   searchURL?: SearchURL;

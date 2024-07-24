@@ -81,5 +81,6 @@
 	"removeALL": "Supprimer tout",
 	"noBookmark": "Aucun favori",
 	"noItemsInBookmark": "Aucun élément enregistré dans vos favoris",
-	"goBackHome": "Retour à l'accueil"
+	"goBackHome": "Retour à l'accueil",
+	"advanceSearchTooltip":"Ajoutez un champ supplémentaire pour effectuer une recherche avancée plus spécifique"
 }

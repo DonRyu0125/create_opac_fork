@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import AdvancedSearchInput from './AdvancedSearchInput'
-import { CircleMinus, CirclePlus } from 'lucide-react'
+import { CircleHelp, CircleMinus, CirclePlus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { toast } from '@/components/ui/use-toast'
-
+import useConstants from '@/hooks/useConstants'
 export type FieldObject = {
 	field: string
 	keyword: string
@@ -56,6 +56,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	])
 	const formRef = useRef<HTMLFormElement>(null)
 	const inputRef = useRef<any>(null)
+	const { advanceSearchTooltip } = useConstants().message
 
 	const updateField = (key: string, value: string, index: string) => {
 		const newSearchExp: any = [...searchExp]
@@ -109,9 +110,14 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	return (
 		<div
 			className={'w-full h-full min-h-[45vh] my-8 flex flex-col justify-center items-center'}>
-			<div className={'w-5/6 flex flex-col justify-center items-center bg-slate-200 py-11 rounded-xl'}>
+			<div
+				className={
+					'w-full md:w-5/6 flex flex-col justify-center items-center bg-slate-200 py-11 rounded-xl'
+				}>
 				<h2 className={'text-4xl text-center'}>Advanced Search</h2>
-				<div className={'text-center'}>Advanced search lets you select specific fields to refine your search results.</div>
+				<div className={'text-center'}>
+					Advanced search lets you select specific fields to refine your search results.
+				</div>
 				<form
 					ref={formRef}
 					method="POST"
@@ -120,7 +126,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 					className={'hidden'}>
 					<input name="QUERY_EXPRESSION" ref={inputRef} hidden id="advancedSearchInput" />
 				</form>
-				<div className={'w-4/6 mt-3 flex flex-col items-center'}>
+				<div className={'w-full md:w-4/6 mt-3 flex flex-col items-center'}>
 					{searchExp.map((exp, index) => (
 						<div className={'w-full flex items-center justify-center'} key={index}>
 							<AdvancedSearchInput
@@ -145,17 +151,36 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 							)}
 						</div>
 					))}
-					<div
-						onClick={addField}
-						className={'w-32 border-dashed border-2 border-opac-green p-2 flex justify-center items-center text-opac-green'}>
-						<CirclePlus /><div>Add field</div>
+					<div className={'flex items-center text-opac-green my-3 cursor-pointer'}>
+						<div
+							onClick={addField}
+							className={
+								'w-32 border-dashed border-2 border-opac-green p-2 flex justify-center items-center'
+							}>
+							<CirclePlus />
+							<div>Add field</div>
+						</div>
+						<div className="relative group inline-block">
+							<button className="p-2 rounded text-black">
+								<CircleHelp />
+							</button>
+							<div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 p-2 w-48 bg-gray-800 text-white text-center text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+								{advanceSearchTooltip}
+							</div>
+						</div>
 					</div>
 					<div className="w-full mt-10 flex justify-between m-2">
-						<Button variant={'default'} className={'w-[45%] ml-[7px] font-bold text-lg'} onClick={submitSearch}>
+						<Button
+							variant={'default'}
+							className={'w-[45%] ml-[7px] font-bold text-lg'}
+							onClick={submitSearch}>
 							<span className=" block">Search</span>
 						</Button>
-						<Button variant={'default'} className={'w-[45%] mr-[25px] font-bold text-lg'} onClick={resetFields}>
-							<span className=" block">Clear</span>
+						<Button
+							variant={'default'}
+							className={'w-[45%] mr-[25px] font-bold text-lg'}
+							onClick={resetFields}>
+							<span className="block">Clear</span>
 						</Button>
 					</div>
 				</div>
