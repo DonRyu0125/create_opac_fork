@@ -24,10 +24,8 @@ const images = [
 	},
 ]
 const Detail = () => {
-	const { backToSummary, records, getMedia } = useJSONData({ selector: '#xml_record' })
-	// const { backToSummary, records, getMedia } = useJSONData({ defaultData: DetailM3Sample })
+	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
 	const images = getMedia(records[0], 'im_access_link')?.map((e) => ({ src: e })) || []
-
 	const { message } = useConstants()
 	// TODO: create placeholder component when there is no data
 	if (!records || records.length === 0) return <></>
@@ -60,7 +58,9 @@ const Detail = () => {
 						<SearchForm
 							className="w-[450px] m-0"
 							inputStyle="text-black"
-							inputName={'KEYWORD_CLUSTER'} action={''}/>
+							inputName={'KEYWORD_CLUSTER'}
+							action={`${common.session}?UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=${records[0].database_name}`}
+						/>
 					</div>
 				</PageAction>
 				<section>
