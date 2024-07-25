@@ -80,7 +80,6 @@ const Summary = () => {
 							<div className="col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
 								<SummaryRecords />
 							</div>
-
 							{pagination?.a && pagination.a.length > 0 && (
 								<div className="col-span-4 mt-4">
 									<PagePagination

@@ -111,7 +111,6 @@ const useJSONData = ({ selector, defaultData }: useJSONDataProps) => {
 				object[key] = value[0] as string
 			}
 		})
-
 		return object
 	}
 

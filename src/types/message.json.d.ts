@@ -88,6 +88,7 @@ export type RemoveALL = string;
 export type NoBookmark = string;
 export type NoItemsInBookmark = string;
 export type GoBackHome = string;
+export type AdvanceSearchTooltip = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -173,5 +174,6 @@ export interface MessageJson {
   noBookmark?: NoBookmark;
   noItemsInBookmark?: NoItemsInBookmark;
   goBackHome?: GoBackHome;
+  advanceSearchTooltip?: AdvanceSearchTooltip;
   [k: string]: unknown;
 }

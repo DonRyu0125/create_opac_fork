@@ -11,32 +11,8 @@
 				"name": "ACCESSION_NUMBER"
 			},
 			{
-				"label": "Collection",
-				"name": "collection_type"
-			},
-			{
-				"label": "Earliest Date",
-				"name": "EARLY"
-			},
-			{
-				"label": "Latest Date",
-				"name": "LATE"
-			},
-			{
-				"label": "Object Name",
-				"name": "object_name_eng"
-			},
-			{
 				"label": "Description",
 				"name": "obj_description"
-			},
-			{
-				"label": "Author",
-				"name": "Author"
-			},
-			{
-				"label": "Publisher",
-				"name": "l_publisher"
 			}
 		]
 	},
@@ -65,20 +41,20 @@
 		"database": "BIBLIO_WEB",
 		"items": [
 			{
-				"label": "Title",
-				"name": "LEGAL_TITLE"
+				"label": "All title",
+				"name": "ALL_TITLE_WORD"
 			},
 			{
-				"label": "ID",
-				"name": "ACCESSION_NUMBER"
+				"label": "Subject",
+				"name": "SUBJECT_WORD"
 			},
 			{
-				"label": "Date",
-				"name": "EARLY"
+				"label": "Author",
+				"name": "AUTHOR_WORD"
 			},
 			{
 				"label": "Description",
-				"name": "OBJ_DESCRIPTION"
+				"name": "520_A"
 			}
 		]
 	}

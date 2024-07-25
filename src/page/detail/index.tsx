@@ -60,8 +60,7 @@ const Detail = () => {
 						<SearchForm
 							className="w-[450px] m-0"
 							inputStyle="text-black"
-							inputName={'KEYWORD_CLUSTER'}
-						/>
+							inputName={'KEYWORD_CLUSTER'} action={''}						/>
 					</div>
 				</PageAction>
 				<section>

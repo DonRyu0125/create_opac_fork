@@ -119,7 +119,7 @@
 			},
 			{
 				"label": "Description",
-				"name": "OBJ_DESCRIPTION",
+				"name": "520_A",
 				"summary": true,
 				"grid": true,
 				"detail": true
