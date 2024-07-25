@@ -13,7 +13,7 @@ import {
 	FieldObject,
 } from './AdvancedSearchForm'
 import { Input } from '@/components/ui/input'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface AdvancedSearchInputProps {
 	exp: FieldObject
@@ -30,6 +30,10 @@ const AdvancedSearchInput = ({
 }: AdvancedSearchInputProps) => {
 	const { advancedSearch, message } = useConstants()
 	const [text, setText] = useState<string>()
+
+	useEffect(() => {
+		setText('')
+	}, [])
 
 	const searchDatabase = () => {
 		let dbArr = advancedSearch.filter((elm) => elm.database === database_name)
@@ -59,6 +63,7 @@ const AdvancedSearchInput = ({
 				</SelectContent>
 			</Select>
 			<Input
+				value={text}
 				onChange={(e) => {
 					updateField('keyword', e.target.value, index)
 					setText(e.target.value)
@@ -73,7 +78,9 @@ const AdvancedSearchInput = ({
 					className={
 						'absolute w-full h-full flex items-center justify-center text-gray-500 pointer-events-none'
 					}>
-					<span className="hidden md:inline ml-[15px] text-gray-500">{message.searchPlaceholder}</span>
+					<span className="hidden md:inline ml-[15px] text-gray-500">
+						{message.searchPlaceholder}
+					</span>
 				</div>
 			)}
 			<Select

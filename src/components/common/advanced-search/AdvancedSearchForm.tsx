@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import AdvancedSearchInput from './AdvancedSearchInput'
 import { CircleHelp, CircleMinus, CirclePlus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
