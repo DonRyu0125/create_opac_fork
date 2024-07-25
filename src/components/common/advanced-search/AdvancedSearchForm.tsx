@@ -130,6 +130,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 					{searchExp.map((exp, index) => (
 						<div className={'w-full flex items-center justify-center'} key={index}>
 							<AdvancedSearchInput
+								submitSearch={submitSearch}
 								updateField={updateField}
 								exp={exp}
 								index={index}

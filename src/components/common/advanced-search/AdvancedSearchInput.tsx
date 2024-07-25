@@ -20,6 +20,7 @@ interface AdvancedSearchInputProps {
 	index: number
 	database_name: string
 	updateField: Function
+	submitSearch: Function
 }
 const DEFAULT_MSG = 'Select a field'
 const AdvancedSearchInput = ({
@@ -27,6 +28,7 @@ const AdvancedSearchInput = ({
 	index,
 	exp,
 	database_name,
+	submitSearch,
 }: AdvancedSearchInputProps) => {
 	const { advancedSearch, message } = useConstants()
 	const [text, setText] = useState<string>()
@@ -38,6 +40,12 @@ const AdvancedSearchInput = ({
 	const searchDatabase = () => {
 		let dbArr = advancedSearch.filter((elm) => elm.database === database_name)
 		return dbArr[0]
+	}
+
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter') {
+			submitSearch()
+		}
 	}
 
 	return (
@@ -63,6 +71,7 @@ const AdvancedSearchInput = ({
 				</SelectContent>
 			</Select>
 			<Input
+				onKeyDown={handleKeyDown}
 				value={text}
 				onChange={(e) => {
 					updateField('keyword', e.target.value, index)
