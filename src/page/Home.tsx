@@ -6,7 +6,7 @@ import Slide from '../components/common/Slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
-import EventCalendar from '@/components/common/event-calendar/EventCalendar'
+import EventCalendar from '@/components/common/event-calendar'
 import { getSearchURL } from '@/lib/utils'
 
 export const UNION_SEARCH_CL='KEYWORD_CLUSTER'

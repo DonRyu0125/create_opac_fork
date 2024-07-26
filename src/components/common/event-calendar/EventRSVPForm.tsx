@@ -32,6 +32,7 @@ import {
 	patron,
 	RSVP_CONFIRM_LANDING_PAGE_URL,
 	TAG_FUNC_P_T,
+	TAG_DB,
 } from './Constants'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 import {
@@ -123,25 +124,10 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const [___, setCurrentEvent] = useAtom(calendarEvents)
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
-		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}`
-		// mwi logon function
-		// 20240510 Richard said, calendar can't be the stand alone function so it will required the logon before using it
-		// 20240510 logon => storing data process optimization is not developed
 		setLoading(true)
-		return axios
-			.post(
-				urlForSessionID,
-				{},
-				{
-					headers: {
-						'Content-Type': 'text/xml',
-					},
-				}
-			)
-			.then(() => {
-				return getOCCNumber().then((res) => {
-					sendEmail(res, data, event)
-				})
+		return getOCCNumber()
+			.then((res) => {
+				sendEmail(res, data, event)
 			})
 			.catch((error) => {
 				console.error('Error fetching session ID:', error)
@@ -155,7 +141,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=Y&KEY=${SISN}&VALUE=${sisnNumber}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=Y&KEY=${SISN}&VALUE=${sisnNumber}`,
 				{
 					headers: {
 						'Content-Type': 'text/xml',

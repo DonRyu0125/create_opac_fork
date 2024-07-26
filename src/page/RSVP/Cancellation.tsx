@@ -5,6 +5,7 @@ import {
 	MONTH_REPORT,
 	RSVP_LOG_P_STATUS,
 	SISN,
+	TAG_DB,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
@@ -134,7 +135,7 @@ const RSVPCancel = () => {
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N&KEY=${SISN}&VALUE=${PatronInfo?.SISN}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=N&KEY=${SISN}&VALUE=${PatronInfo?.SISN}`,
 				xmlFormDelete,
 				{
 					headers: {

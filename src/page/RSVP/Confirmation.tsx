@@ -11,6 +11,7 @@ import {
 	RSVP_CANCEL_LANDING_PAGE_URL,
 	RSVP_LOG_P_STATUS,
 	SISN,
+	TAG_DB,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DESC,
 	TAG_FUNC_DTE_GRP,
@@ -146,13 +147,13 @@ const RSVPConfirm = () => {
 	const onClick = () => {
 		setLoading(true)
 		getLogon()
-			.then((res) => storeRecord(res, patronInfo))
-			.then((res) => sendRegConfirmEmail(res))
-			.then((res) => storeAtLog(res))
+			// .then((res) => storeRecord(res, patronInfo))
+			// .then((res) => sendRegConfirmEmail(res))
+			// .then((res) => storeAtLog(res))
 	}
 
 	const getLogon = async () => {
-		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}`
+		let urlForSessionID = `http://test.opac.minisis.com/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&language=144`
 
 		return await axios
 			.post(
@@ -164,13 +165,13 @@ const RSVPConfirm = () => {
 					},
 				}
 			)
-			.then(() => {
-				let HOME_SESSID = getHomeSessionID()
-				return HOME_SESSID
-			})
-			.catch((error) => {
-				throw error
-			})
+			// .then(() => {
+			// 	let HOME_SESSID = getHomeSessionID()
+			// 	return HOME_SESSID
+			// })
+			// .catch((error) => {
+			// 	throw error
+			// })
 	}
 
 	const storeRecord = async (
@@ -196,7 +197,7 @@ const RSVPConfirm = () => {
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N&KEY=${SISN}&VALUE=${PatronInfo?.SISN}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=N&KEY=${SISN}&VALUE=${PatronInfo?.SISN}`,
 				xmlFormAdd,
 				{
 					headers: {
