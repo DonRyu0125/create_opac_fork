@@ -7,11 +7,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import {
-	ADVANCED_SEARCH_BOOLEAN,
-	ADVANCED_SEARCH_BOOLEAN_SELECT_MAP,
-	FieldObject,
-} from './AdvancedSearchForm'
+import { ADVANCED_SEARCH_BOOLEAN, FieldObject } from './AdvancedSearchForm'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
 
@@ -22,7 +18,6 @@ interface AdvancedSearchInputProps {
 	updateField: Function
 	submitSearch: Function
 }
-const DEFAULT_MSG = 'Select a field'
 const AdvancedSearchInput = ({
 	updateField,
 	index,
@@ -32,6 +27,20 @@ const AdvancedSearchInput = ({
 }: AdvancedSearchInputProps) => {
 	const { advancedSearch, message } = useConstants()
 	const [text, setText] = useState<string>()
+	const ADVANCED_SEARCH_BOOLEAN_SELECT_MAP = [
+		{
+			key: `${message.and}`,
+			value: 'AND',
+		},
+		{
+			key: `${message.or}`,
+			value: 'OR',
+		},
+		{
+			key: `${message.not}`,
+			value: 'AND NOT',
+		},
+	]
 
 	useEffect(() => {
 		setText('')
@@ -55,7 +64,7 @@ const AdvancedSearchInput = ({
 					updateField('field', value, index)
 				}}>
 				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white rounded-r-lg font-semibold">
-					<SelectValue className={'text-black'} placeholder={<div>{DEFAULT_MSG}</div>} />
+					<SelectValue className={'text-black'} placeholder={<div>{message.selectAfield}</div>} />
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
 					{searchDatabase()?.items.map((item, key) => {
@@ -87,7 +96,7 @@ const AdvancedSearchInput = ({
 					className={
 						'absolute w-full h-full flex items-center justify-center text-gray-500 pointer-events-none'
 					}>
-					<span className="hidden md:inline ml-[15px] text-gray-500">
+					<span className="hidden lg:inline ml-[15px] text-gray-500">
 						{message.searchPlaceholder}
 					</span>
 				</div>
@@ -100,7 +109,7 @@ const AdvancedSearchInput = ({
 					disabled={!exp.boolean}
 					className="w-28  border border-opac-green bg-opac-green text-white rounded-l-lg font-semibold ">
 					<SelectValue
-						placeholder={ADVANCED_SEARCH_BOOLEAN.AND}
+						placeholder={message.and}
 						defaultValue={exp.boolean ? exp.boolean : exp.boolean}
 					/>
 				</SelectTrigger>

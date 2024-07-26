@@ -82,5 +82,14 @@
 	"noBookmark": "No bookmarks",
 	"noItemsInBookmark": "Sorry, there are no items saved in your bookmark!",
 	"goBackHome": "Go Back Home",
-	"advanceSearchTooltip":"Add an extra field to perform a more specific advanced search"
+	"advanceSearchTooltip": "Add an extra field to perform a more specific advanced search",
+	"selectAfield": "Select a field",
+	"advanceSearch": "Advance Search",
+	"advanceSearchDesc": "Advanced search lets you select specific fields to refine your search results",
+	"clear": "Clear",
+	"and": "And",
+	"or": "Or",
+	"not": "Not",
+	"addField": "Add field",
+	"advWarnMsg":"Please enter your search!"
 }

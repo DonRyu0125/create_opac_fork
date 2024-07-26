@@ -1,5 +1,5 @@
 {
-	"searchPlaceholder": "Saisissez les termes de votre recherche",
+	"searchPlaceholder": "Entrez votre recherche",
 	"searchButton": "Recherche",
 	"summaryPage": "Page des résultats",
 	"detailPage": "Page des détails",
@@ -82,5 +82,14 @@
 	"noBookmark": "Aucun favori",
 	"noItemsInBookmark": "Aucun élément enregistré dans vos favoris",
 	"goBackHome": "Retour à l'accueil",
-	"advanceSearchTooltip":"Ajoutez un champ supplémentaire pour effectuer une recherche avancée plus spécifique"
+	"advanceSearchTooltip": "Ajoutez un champ supplémentaire pour effectuer une recherche avancée plus spécifique",
+	"selectAfield": "Sélectionner",
+	"advanceSearch": "Recherche Avancée",
+	"advanceSearchDesc": "La recherche avancée vous permet de sélectionner des champs spécifiques pour affiner vos résultats de recherche",
+	"clear": "Effacer",
+	"and": "Et",
+	"or": "Ou",
+	"not": "Non",
+	"addField": "Ajouter champ",
+	"advWarnMsg":"Veuillez entrer votre recherche!"
 }

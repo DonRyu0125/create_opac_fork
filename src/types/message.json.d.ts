@@ -89,6 +89,15 @@ export type NoBookmark = string;
 export type NoItemsInBookmark = string;
 export type GoBackHome = string;
 export type AdvanceSearchTooltip = string;
+export type SelectAfield = string;
+export type AdvanceSearch = string;
+export type AdvanceSearchDesc = string;
+export type Clear = string;
+export type And = string;
+export type Or = string;
+export type Not = string;
+export type AddField = string;
+export type AdvWarnMsg = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -175,5 +184,14 @@ export interface MessageJson {
   noItemsInBookmark?: NoItemsInBookmark;
   goBackHome?: GoBackHome;
   advanceSearchTooltip?: AdvanceSearchTooltip;
+  selectAfield?: SelectAfield;
+  advanceSearch?: AdvanceSearch;
+  advanceSearchDesc?: AdvanceSearchDesc;
+  clear?: Clear;
+  and?: And;
+  or?: Or;
+  not?: Not;
+  addField?: AddField;
+  advWarnMsg?: AdvWarnMsg;
   [k: string]: unknown;
 }

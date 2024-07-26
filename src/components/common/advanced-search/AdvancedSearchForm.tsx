@@ -33,20 +33,6 @@ export const ADVANCED_SEARCH_BOOLEAN = {
 	NOT: 'NOT',
 }
 
-export const ADVANCED_SEARCH_BOOLEAN_SELECT_MAP = [
-	{
-		key: 'AND',
-		value: 'AND',
-	},
-	{
-		key: 'OR',
-		value: 'OR',
-	},
-	{
-		key: 'NOT',
-		value: 'AND NOT',
-	},
-]
 
 const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	const [searchExp, setSearchExp] = useState<FieldObject[]>([
@@ -56,7 +42,13 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	])
 	const formRef = useRef<HTMLFormElement>(null)
 	const inputRef = useRef<any>(null)
-	const { advanceSearchTooltip } = useConstants().message
+	const { message, config } = useConstants()
+	//Don Ryu, Using config's database setting to show the title of advance search
+	const DB_NAME_MAP: any = {
+		DESCRIPTION_WEB: config.navigations[1].title,
+		BIBLIO_WEB: config.navigations[2].title,
+		COLLECTIONS_WEB: config.navigations[3].title,
+	}
 
 	const updateField = (key: string, value: string, index: string) => {
 		const newSearchExp: any = [...searchExp]
@@ -92,7 +84,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 		let data = searchExp.filter((e) => e.keyword !== '')
 		if (data.length < 1) {
 			toast({
-				title: 'Please enter your search!',
+				title: `${message.advWarnMsg}`,
 			})
 		}
 		let len = data.length
@@ -106,7 +98,6 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 		inputRef.current.value = qry
 		formRef.current?.submit()
 	}
-
 	return (
 		<div
 			className={'w-full h-full min-h-[45vh] my-8 flex flex-col justify-center items-center'}>
@@ -114,10 +105,10 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 				className={
 					'w-full md:w-5/6 flex flex-col justify-center items-center bg-slate-200 py-11 rounded-xl'
 				}>
-				<h2 className={'text-4xl text-center'}>Advanced Search</h2>
-				<div className={'text-center'}>
-					Advanced search lets you select specific fields to refine your search results.
-				</div>
+				<h2 className={'text-4xl text-center'}>
+					{DB_NAME_MAP[database_name]} {message.advanceSearch}
+				</h2>
+				<div className={'text-center'}>{message.advanceSearchDesc}</div>
 				<form
 					ref={formRef}
 					method="POST"
@@ -156,17 +147,17 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 						<div
 							onClick={addField}
 							className={
-								'w-32 border-dashed border-2 border-opac-green p-2 flex justify-center items-center'
+								'w-40 border-dashed border-2 border-opac-green p-2 flex justify-evenly items-center'
 							}>
 							<CirclePlus />
-							<div>Add field</div>
+							<div className={"text-center font-bold"}>{message.addField}</div>
 						</div>
 						<div className="relative group inline-block">
 							<button className="p-2 rounded text-black">
 								<CircleHelp />
 							</button>
 							<div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 p-2 w-48 bg-gray-800 text-white text-center text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-								{advanceSearchTooltip}
+								{message.advanceSearchTooltip}
 							</div>
 						</div>
 					</div>
@@ -175,13 +166,13 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 							variant={'default'}
 							className={'w-[45%] ml-[7px] font-bold text-lg'}
 							onClick={submitSearch}>
-							<span className=" block">Search</span>
+							<span className=" block">{message.searchButton}</span>
 						</Button>
 						<Button
 							variant={'default'}
 							className={'w-[45%] mr-[25px] font-bold text-lg'}
 							onClick={resetFields}>
-							<span className="block">Clear</span>
+							<span className="block">{message.clear}</span>
 						</Button>
 					</div>
 				</div>
