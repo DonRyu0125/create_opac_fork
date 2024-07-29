@@ -134,28 +134,8 @@ export const FILTER_TYPE_COLORS = [
 		icon: ICON_SHAPE_MAP['SQUARE'],
 	},
 	{
-		type: 'PORT DOVER BRANCH',
+		type: 'MERKENICH',
 		color: COLORS_MAP['YELLOW'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
-	},
-	{
-		type: 'Port Rowan Branch',
-		color: COLORS_MAP['GREEN'],
-		icon: ICON_SHAPE_MAP['SQUARE'],
-	},
-	{
-		type: 'Simcoe Branch',
-		color: COLORS_MAP['ORANGE'],
-		icon: ICON_SHAPE_MAP['SQUARE'],
-	},
-	{
-		type: 'Waterford Branch',
-		color: COLORS_MAP['PURPLE'],
-		icon: ICON_SHAPE_MAP['SQUARE'],
-	},
-	{
-		type: 'Norview Lodge Site',
-		color: COLORS_MAP['PINK'],
-		icon: ICON_SHAPE_MAP['SQUARE'],
-	},
+	}
 ]
