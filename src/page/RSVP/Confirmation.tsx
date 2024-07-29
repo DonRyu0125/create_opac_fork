@@ -160,8 +160,7 @@ const RSVPConfirm = () => {
 	}
 
 	const getLogon = async () => {
-		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&language=144`
-		// let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&file=[OPAC]rsvp-confirm.html`
+		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&file=[OPAC]rsvp-confirm.html`
 		return await axios
 			.post(
 				urlForSessionID,
@@ -329,7 +328,7 @@ const RSVPConfirm = () => {
 					/>
 				</div>
 			) : (
-				showRegStatus()
+				<div>{showRegStatus()}</div>
 			)}
 		</Layout>
 	)

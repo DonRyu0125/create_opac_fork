@@ -98,7 +98,7 @@ const RSVPCancel = () => {
 	}
 
 	const getLogon = async () => {
-		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}`
+		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&file=[OPAC]rsvp-cancel.html`
 
 		return await axios
 			.post(

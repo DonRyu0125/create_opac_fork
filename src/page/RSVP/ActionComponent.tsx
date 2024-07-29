@@ -20,7 +20,7 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick, actionTyp
 			<h2 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
 				{patronInfo?.TAG_NAME}
 			</h2>
-			<div className="mt-4 text-gray-500 sm:flex justify-evenly text-lg w-full">
+			<div className="mt-4 text-gray-500 sm:flex justify-center text-lg w-full">
 				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>{patronInfo?.TAG_NAME}</div>
 					<div>{patronInfo?.TAG_FUNC_DATE}</div>
