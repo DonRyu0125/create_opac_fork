@@ -39,7 +39,7 @@ const RSVPCancel = () => {
 	useEffect(() => {
 		checkParms()
 	}, [])
-
+	
 	const checkParms = async () => {
 		const params = new URLSearchParams(window.location.search)
 		let obj: any

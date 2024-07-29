@@ -31,7 +31,14 @@ import {
 	TAG_RSVP_PATRON_LOG,
 } from '@/components/common/event-calendar/Constants'
 import axios from 'axios'
-import { convertToArr, convertXMLToJson, decodeObj, encodeObj, getHomeSessionID, isDatePast } from '@/lib/utils'
+import {
+	convertToArr,
+	convertXMLToJson,
+	decodeObj,
+	encodeObj,
+	getHomeSessionID,
+	isDatePast,
+} from '@/lib/utils'
 import Spinner from '@/components/common/event-calendar/Spinner'
 import { v4 as uuidv4 } from 'uuid'
 import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
@@ -147,14 +154,14 @@ const RSVPConfirm = () => {
 	const onClick = () => {
 		setLoading(true)
 		getLogon()
-			// .then((res) => storeRecord(res, patronInfo))
-			// .then((res) => sendRegConfirmEmail(res))
-			// .then((res) => storeAtLog(res))
+			.then((res) => storeRecord(res, patronInfo))
+			.then((res) => sendRegConfirmEmail(res))
+			.then((res) => storeAtLog(res))
 	}
 
 	const getLogon = async () => {
-		let urlForSessionID = `http://test.opac.minisis.com/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&language=144`
-
+		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&language=144`
+		// let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&file=[OPAC]rsvp-confirm.html`
 		return await axios
 			.post(
 				urlForSessionID,
@@ -165,13 +172,13 @@ const RSVPConfirm = () => {
 					},
 				}
 			)
-			// .then(() => {
-			// 	let HOME_SESSID = getHomeSessionID()
-			// 	return HOME_SESSID
-			// })
-			// .catch((error) => {
-			// 	throw error
-			// })
+			.then(() => {
+				let HOME_SESSID = getHomeSessionID()
+				return HOME_SESSID
+			})
+			.catch((error) => {
+				throw error
+			})
 	}
 
 	const storeRecord = async (
@@ -307,23 +314,23 @@ const RSVPConfirm = () => {
 
 	return (
 		<Layout>
-				<img
-					src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
-					alt=""
-					className="h-64 w-full object-cover"
-				/>
-				{loading ? (
-					<div className="flex h-full items-center justify-center">
-						<Spinner
-							height={'h-full'}
-							spinHeight={'h-20'}
-							spinWidth={'w-20'}
-							background={'bg-white'}
-						/>
-					</div>
-				) : (
-					showRegStatus()
-				)}
+			<img
+				src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
+				alt=""
+				className="h-64 w-full object-cover"
+			/>
+			{loading ? (
+				<div className="flex h-full items-center justify-center">
+					<Spinner
+						height={'h-full'}
+						spinHeight={'h-20'}
+						spinWidth={'w-20'}
+						background={'bg-white'}
+					/>
+				</div>
+			) : (
+				showRegStatus()
+			)}
 		</Layout>
 	)
 }

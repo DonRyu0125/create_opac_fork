@@ -33,7 +33,7 @@ export interface Day_obj {
 	year?: number
 }
 //DB /scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html
-export const TAG_DB = 'M2L_TAG'
+export const TAG_DB = 'M2L_TAG_SYN'
 //MINISIS REPORT
 export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW'
 export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_NEW'
