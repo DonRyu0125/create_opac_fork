@@ -7,6 +7,7 @@ import { Label } from '@radix-ui/react-dropdown-menu'
 import ViewBookmarks from '../bookmark/ViewBookmarks'
 import BookmarkAll from '../bookmark/BookmarkAll'
 import PrintPage from '../bookmark/PrintPage'
+import { convertToArr } from '@/lib/utils'
 
 /**
  * This component contains:
@@ -18,6 +19,7 @@ import PrintPage from '../bookmark/PrintPage'
 const SummaryPageAction = () => {
 	const { message } = useConstants()
 	const { filter, common, getSortURL } = useJSONData({ selector: '#xml_record' })
+	let filterArr = convertToArr(filter)
 	const SORT_OPTIONS: { label: string; value: SORT_TYPE }[] = [
 		{
 			label: message.sortDefault,
@@ -40,6 +42,7 @@ const SummaryPageAction = () => {
 			value: 'date_asc',
 		},
 	]
+
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex items-center">
@@ -98,14 +101,14 @@ const SummaryPageAction = () => {
 					options={SORT_OPTIONS}
 				/>
 			</div>
-			{filter && filter.length > 0 && (
+			{filterArr && filterArr.length > 0 && (
 				<div className="flex flex-col space-y-2">
 					<Label>{message.filterBy}</Label>
 					<div className="flex flex-col space-y-4">
-						{filter.map((item, index) => (
+						{filterArr.map((item, index) => (
 							<CollapseList title={item._title} expand={index === 0} key={item._name}>
 								<div className="space-y-3 border-t p-4">
-									{item.item_group.map((option) => (
+									{item.item_group.map((option: { item_link: string; item_value: any; item_frequency: any; item_selected: string }) => (
 										<CheckboxWithLabel
 											callback={() => {
 												window.location.href = option.item_link
