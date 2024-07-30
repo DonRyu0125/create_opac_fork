@@ -24,7 +24,7 @@ const ScrollToTopButton: React.FC = () => {
 	const scrollToTop = () => {
 		window.scrollTo({
 			top: 0,
-			behavior: 'smooth',
+		behavior: 'smooth',
 		})
 	}
 

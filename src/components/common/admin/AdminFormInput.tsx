@@ -5,6 +5,9 @@ import { SchemaType, SchemaValueType } from '@/types/schema'
 import { TEXTAREA_LENGTH } from '@/lib/admin'
 import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
+import Toolbar from './Toolbar'
+import useHover from '@/hooks/useHover'
+import { ChangeEvent } from 'react'
 
 type InputWrapperProps = {
 	children?: React.ReactNode
@@ -23,8 +26,40 @@ const InputWrapper = ({ children, id, label, className }: InputWrapperProps) => 
 		</div>
 	)
 }
-const AdminFormInput = ({ type, title, items, properties, value }: SchemaType) => {
-	console.log({ type, value, title })
+
+const ArrayItemWrapper = ({ children }: { children?: React.ReactNode }) => {
+	const [hoverRef, isHovered] = useHover<HTMLDivElement>()
+	return (
+		<div className="mx-2 my-4 border-2 border-black p-4 group relative" ref={hoverRef}>
+			<Toolbar className={cn(isHovered ? 'opacity-100' : '', 'justify-end')} />
+			{children}
+		</div>
+	)
+}
+
+type AdminFormInputProps = SchemaType & {
+	path?: string[]
+	onChange: (path: string[], value: SchemaValueType) => void
+}
+
+const AdminFormInput = ({
+	type,
+	title,
+	items,
+	properties,
+	value,
+	path = [],
+	onChange,
+}: AdminFormInputProps) => {
+	const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		if (event.target.type === 'checkbox') {
+			const v = (event as ChangeEvent<HTMLInputElement>).target.checked
+			onChange(path, v)
+		} else {
+			onChange(path, event.target.value)
+		}
+	}
+
 	if (type === 'string') {
 		try {
 			const stringValue = JSON.stringify(value).replace(/"/g, '')
@@ -32,9 +67,19 @@ const AdminFormInput = ({ type, title, items, properties, value }: SchemaType) =
 			return (
 				<InputWrapper label={title} id={inputId}>
 					{stringValue.length >= TEXTAREA_LENGTH ? (
-						<Textarea id={inputId} placeholder={title} defaultValue={stringValue} />
+						<Textarea
+							id={inputId}
+							placeholder={title}
+							defaultValue={stringValue}
+							onChange={handleChange}
+						/>
 					) : (
-						<Input id={inputId} placeholder={title} defaultValue={stringValue} />
+						<Input
+							id={inputId}
+							placeholder={title}
+							defaultValue={stringValue}
+							onChange={handleChange}
+						/>
 					)}
 				</InputWrapper>
 			)
@@ -43,21 +88,23 @@ const AdminFormInput = ({ type, title, items, properties, value }: SchemaType) =
 		}
 	}
 	if (type === 'boolean') {
-		console.log({ type, value, title })
 		const inputId = `${title.split(' ').join('')}-input`
 		return (
 			<InputWrapper label={title} id={inputId}>
 				<span>
-					<Checkbox defaultChecked={Boolean(value)} />
+					<Checkbox
+						defaultChecked={Boolean(value)}
+						onCheckedChange={(checked) => onChange(path, checked)}
+					/>
 				</span>
 			</InputWrapper>
 		)
 	}
 	if (type === 'array' && items) {
 		return (value as Array<SchemaValueType>)?.map((v, i) => (
-			<div className="mx-2 my-4 border-2 border-black p-4" key={i}>
-				<AdminFormInput value={v} {...items} />
-			</div>
+			<ArrayItemWrapper key={i}>
+				<AdminFormInput value={v} {...items} path={[...path, `${i}`]} onChange={onChange} />
+			</ArrayItemWrapper>
 		))
 	}
 	if (type === 'object' && properties) {
@@ -66,7 +113,16 @@ const AdminFormInput = ({ type, title, items, properties, value }: SchemaType) =
 			const itemValue = (value as Record<string, Object>)[e] as SchemaValueType
 
 			const { type, title, value: dValue, ...rest } = item
-			return <AdminFormInput value={itemValue} type={type} title={title} {...rest} />
+			return (
+				<AdminFormInput
+					value={itemValue}
+					type={type}
+					title={title}
+					path={[...path, e]}
+					onChange={onChange}
+					{...rest}
+				/>
+			)
 		})
 	}
 

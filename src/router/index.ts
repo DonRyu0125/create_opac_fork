@@ -13,12 +13,20 @@ import NoBookmarkRecord from '@/page/NoBookmarkRecord'
 import NoSession from '@/page/NoSession'
 import GenericErrorPage from '@/page/GenericErrorPage'
 import Fields from '@/page/admin/Fields'
+import AdminHome from '@/page/admin/Home'
+import AdminRSVP from '@/page/admin/RSVP'
+import AdminMessage from '@/page/admin/Message'
+import AdminStyles from '@/page/admin/Styles'
 
 export type TRoute = Record<string, () => React.ReactNode>
 
 const ADMIN_ROUTES: TRoute = {
 	admin: Admin,
 	'admin-fields': Fields,
+	'admin-home': AdminHome,
+	'admin-rsvp': AdminRSVP,
+	'admin-message': AdminMessage,
+	'admin-styles': AdminStyles,
 }
 
 export const ROUTES: TRoute = {

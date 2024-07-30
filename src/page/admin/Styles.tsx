@@ -1,19 +1,19 @@
 import AdminForm from '@/components/common/admin/AdminForm'
 import AdminLayout from '@/components/layouts/admin'
-import fieldsValue from '@/constants/en/fields.json'
-import fields from '@/schema/fields.json'
+import fieldsValue from '@/constants/fr/styles.json'
+import fields from '@/schema/styles.json'
 import { SchemaType } from '@/types/schema'
 
-const Fields = () => {
+const AdminStyles = () => {
 	return (
 		<AdminLayout>
 			<AdminForm
 				data={fieldsValue}
 				schema={fields as SchemaType}
-				filepath="constants/en/fields.json"
+				filepath="constants/fr/styles.json"
 			/>
 		</AdminLayout>
 	)
 }
 
-export default Fields
+export default AdminStyles
