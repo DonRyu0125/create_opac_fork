@@ -9,14 +9,20 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sh
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { ChevronRight } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SummaryPageAction from './SummaryPageAction'
 import SummaryRecords from './SummaryRecord'
 
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
-	const { message } = useConstants()
-	const { common, pagination, backToSummary } = useJSONData({ selector: '#xml_record' })
+	const { message, config } = useConstants()
+	const { common, pagination, backToSummary, data } = useJSONData({ selector: '#xml_record' })
+
+	const getDBTitle = (search_database: string) => {
+		let db = config.navigations.filter((item) => item.search_database === search_database)
+		if (!search_database) return ''
+		return `${message.in} ${db[0].title}`
+	}
 
 	if (!common) return <></>
 	return (
@@ -44,7 +50,7 @@ const Summary = () => {
 				<section>
 					<div className="mx-auto py-4 sm:py-12  container flex flex-col">
 						<PageHeader
-							heading={`${common.total_record} ${message.resultsFor.toLowerCase()} "${common.search_statement}"`}
+							heading={`${common.total_record} ${message.resultsFor.toLowerCase()} "${common.search_statement}" ${getDBTitle(data?.xml.search_database)}`}
 							subHeading={`${message.displaying} ${common.first_record_seq}-${common.last_record_seq} ${message.of} ${common.total_record}`}
 						/>
 						<div className="mt-8 block lg:hidden">
@@ -55,7 +61,7 @@ const Summary = () => {
 								<ChevronRight className="h-4 w-4" />
 							</Button>
 							<Sheet open={mobileFilter} onOpenChange={setMobileFilter}>
-								<SheetContent>
+								<SheetContent className={'overflow-auto'}>
 									<SheetHeader>
 										<SheetTitle>{message.filtersAndSorting}</SheetTitle>
 									</SheetHeader>

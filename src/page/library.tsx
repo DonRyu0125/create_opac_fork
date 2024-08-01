@@ -30,7 +30,7 @@ const Library = () => {
 			</Hero>
 			{showAdvSearch && (
 				<AdvancedSearchForm
-					database_name={database_name}
+					search_database={database_name}
 					url={getSearchURL(searchURL)}
 				/>
 			)}

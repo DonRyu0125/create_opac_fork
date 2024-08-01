@@ -12,7 +12,7 @@ export type FieldObject = {
 }
 
 type Advanced_Search_Props = {
-	database_name: string
+	search_database: string
 	url: string
 }
 
@@ -33,8 +33,7 @@ export const ADVANCED_SEARCH_BOOLEAN = {
 	NOT: 'NOT',
 }
 
-
-const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
+const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => {
 	const [searchExp, setSearchExp] = useState<FieldObject[]>([
 		{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
 		{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
@@ -43,11 +42,11 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 	const formRef = useRef<HTMLFormElement>(null)
 	const inputRef = useRef<any>(null)
 	const { message, config } = useConstants()
-	//Don Ryu, Using config's database setting to show the title of advance search
-	const DB_NAME_MAP: any = {
-		DESCRIPTION_WEB: config.navigations[1].title,
-		BIBLIO_WEB: config.navigations[2].title,
-		COLLECTIONS_WEB: config.navigations[3].title,
+
+	const getDBTitle = (search_database: string) => {
+		let db = config.navigations.filter((item) => item.search_database === search_database)
+		if (!search_database) return ''
+		return `${db[0].title}`
 	}
 
 	const updateField = (key: string, value: string, index: string) => {
@@ -106,7 +105,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 					'w-full md:w-5/6 flex flex-col justify-center items-center bg-slate-200 py-11 rounded-xl'
 				}>
 				<h2 className={'text-4xl text-center'}>
-					{DB_NAME_MAP[database_name]} {message.advanceSearch}
+					{getDBTitle(search_database)} {message.advanceSearch}
 				</h2>
 				<div className={'text-center'}>{message.advanceSearchDesc}</div>
 				<form
@@ -125,7 +124,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 								updateField={updateField}
 								exp={exp}
 								index={index}
-								database_name={database_name}
+								database_name={search_database}
 							/>
 							{index >= 3 ? (
 								<CircleMinus
@@ -150,7 +149,7 @@ const AdvancedSearchForm = ({ database_name, url }: Advanced_Search_Props) => {
 								'w-40 border-dashed border-2 border-opac-green p-2 flex justify-evenly items-center'
 							}>
 							<CirclePlus />
-							<div className={"text-center font-bold"}>{message.addField}</div>
+							<div className={'text-center font-bold'}>{message.addField}</div>
 						</div>
 						<div className="relative group inline-block">
 							<button className="p-2 rounded text-black">

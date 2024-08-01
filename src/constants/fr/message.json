@@ -91,5 +91,6 @@
 	"or": "Ou",
 	"not": "Non",
 	"addField": "Ajouter champ",
-	"advWarnMsg":"Veuillez entrer votre recherche!"
+	"advWarnMsg":"Veuillez entrer votre recherche!",
+	"in":"dans"
 }
