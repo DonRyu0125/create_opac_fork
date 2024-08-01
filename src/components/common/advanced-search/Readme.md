@@ -22,7 +22,7 @@ expression: QUERY_EXPRESSION
 @adv test query
 
 collections
--LEGAL_TITLE Incomplete Scan orACCESSION_NUMBER 2024.001.506
+-LEGAL_TITLE Incomplete Scan or ACCESSION_NUMBER 2024.001.506
 
 biblio
 -ALL_TITLE_WORD Learn PostgreSQL or SUBJECT_WORD Software Testing

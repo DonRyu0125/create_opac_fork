@@ -32,7 +32,7 @@
 				"name": "date_cr_inc"
 			},
 			{
-				"label": "LEVEL DESC",
+				"label": "Level Desc",
 				"name": "LEVEL_DESC"
 			}
 		]

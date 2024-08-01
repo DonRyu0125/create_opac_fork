@@ -72,7 +72,7 @@ const AdvancedSearchInput = ({
 							<SelectItem
 								key={key}
 								value={item.name}
-								className="w-full border bg-opac-green border-opac-green ">
+								className="w-full border bg-opac-green border-opac-green  ">
 								{item.label}
 							</SelectItem>
 						)
