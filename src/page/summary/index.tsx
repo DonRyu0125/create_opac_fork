@@ -16,7 +16,6 @@ import SummaryRecords from './SummaryRecord'
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 	const { message } = useConstants()
-	// const { common, pagination } = useJSONData({ defaultData: SummarySample })
 	const { common, pagination, backToSummary } = useJSONData({ selector: '#xml_record' })
 
 	if (!common) return <></>
@@ -33,11 +32,6 @@ const Summary = () => {
 						},
 					]}>
 					<div className="flex w-full flex-row space-x-2 justify-end">
-						{/* <Button>
-							<SlidersHorizontal className="mr-2 h-4 w-4" />
-							Advanced Search
-						</Button> */}
-						{/* <Separator orientation="vertical" /> */}
 						<SearchForm
 							className="w-[450px] m-0"
 							inputStyle="text-black"
@@ -47,7 +41,6 @@ const Summary = () => {
 						<ViewToggle />
 					</div>
 				</PageAction>
-
 				<section>
 					<div className="mx-auto py-4 sm:py-12  container flex flex-col">
 						<PageHeader
@@ -72,7 +65,6 @@ const Summary = () => {
 								</SheetContent>
 							</Sheet>
 						</div>
-
 						<div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 ">
 							<div className="hidden space-y-4 lg:block col-span-1">
 								<SummaryPageAction />
