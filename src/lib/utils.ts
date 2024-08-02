@@ -131,7 +131,7 @@ export const getCurrentDate = () => {
 
 export const getSessionID = () => {
 	const domSessionId = document.querySelector('#session-id')?.textContent
-	if (document && domSessionId) return domSessionId
+	if (document && domSessionId !== '^sessid^') return domSessionId
 	const cookieSessionId = getHomeSessionID()
 	if (cookieSessionId === '') return null
 	return cookieSessionId;

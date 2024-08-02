@@ -9,8 +9,8 @@ import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSea
 import { UNION_SEARCH_CL } from './Home'
 
 const Archives = () => {
-	const [showAdvSearch, setShowAdvSearch] = useState(false)
-	const { heroBanner, searchURL, title, database_name } = useConstants().archives
+	const [showAdvSearch, setShowAdvSearch] = useState(false);
+	const { heroBanner, searchURL, title, database_name } = useConstants().archives;
 	return (
 		<Layout>
 			<Hero className={''} title={title} backgroundImage={heroBanner} description="">
