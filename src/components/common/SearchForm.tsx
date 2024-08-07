@@ -19,7 +19,7 @@ const SearchForm = ({ className, inputName, inputStyle, action, ...props }: Sear
 					required
 					name={inputName}
 					className={cn(
-						'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green text-white rounded-l-md',
+						'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green text-white rounded-l-md italic ',
 						inputStyle
 					)}
 					placeholder={message.searchPlaceholder}

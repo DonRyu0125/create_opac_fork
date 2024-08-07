@@ -96,7 +96,7 @@ const AdvancedSearchInput = ({
 					className={
 						'absolute w-full h-full flex items-center justify-center text-gray-500 pointer-events-none'
 					}>
-					<span className="hidden lg:inline ml-[15px] text-gray-500">
+					<span className="hidden lg:inline ml-[15px] text-gray-500 italic">
 						{message.searchPlaceholder}
 					</span>
 				</div>

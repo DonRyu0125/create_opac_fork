@@ -41,7 +41,6 @@ import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
 import { AccordionContent } from '@/components/ui/accordion'
 import useConstants from '@/hooks/useConstants'
-import EventRSVPCancel from './EventCancel'
 
 const EventAllButton = ({
 	filteredEvents,
