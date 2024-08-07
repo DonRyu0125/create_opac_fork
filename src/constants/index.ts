@@ -11,6 +11,11 @@ export const CONSTANTS = {
 		faq: en.faq,
 		fields: en.fields,
 		message: en.message,
+		rsvp: en.rsvp,
+		advancedSearch: en.advancedSearch,
+		archives:en.archives,
+		museum:en.museum,
+		library:en.library
 	},
 	FR: {
 		config: fr.config,
@@ -20,5 +25,10 @@ export const CONSTANTS = {
 		faq: fr.faq,
 		fields: fr.fields,
 		message: fr.message,
-	},
+		rsvp: fr.rsvp,
+		advancedSearch: fr.advancedSearch,
+		archives:fr.archives,
+		museum:fr.museum,
+		library:fr.library
+	}
 }

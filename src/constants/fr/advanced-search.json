@@ -1,0 +1,61 @@
+[
+	{
+		"database": "COLLECTIONS_WEB",
+		"items": [
+			{
+				"label": "Title",
+				"name": "LEGAL_TITLE"
+			},
+			{
+				"label": "Accession Number",
+				"name": "ACCESSION_NUMBER"
+			},
+			{
+				"label": "Description",
+				"name": "obj_description"
+			}
+		]
+	},
+	{
+		"database": "DESCRIPTION_WEB",
+		"items": [
+			{
+				"label": "Title",
+				"name": "TITLE"
+			},
+			{
+				"label": "ID",
+				"name": "REFD"
+			},
+			{
+				"label": "Date",
+				"name": "date_cr_inc"
+			},
+			{
+				"label": "LEVEL DESC",
+				"name": "LEVEL_DESC"
+			}
+		]
+	},
+	{
+		"database": "BIBLIO_WEB",
+		"items": [
+			{
+				"label": "All title",
+				"name": "ALL_TITLE_WORD"
+			},
+			{
+				"label": "Subject",
+				"name": "SUBJECT_WORD"
+			},
+			{
+				"label": "Author",
+				"name": "AUTHOR_WORD"
+			},
+			{
+				"label": "Description",
+				"name": "520_A"
+			}
+		]
+	}
+]

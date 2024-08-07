@@ -4,12 +4,46 @@ import { Pagination } from '@/types/pagination'
 import { Record } from '@/types/record'
 import { useState } from 'react'
 import X2JS from 'x2js'
-type Props = {
+export type useJSONDataProps = {
 	selector?: string
 	defaultData?: GenericObject
 }
+export const SORT_DATABASE = {
+	default: {
+		UNION_VIEW: 'WEB_UNION_SUM',
+		COLLECTIONS_WEB: 'WEB_UNION_SUM_COL',
+		DESCRIPTION_WEB: 'WEB_UNION_SUM_DESC',
+	},
+	id_asc: {
+		UNION_VIEW: 'WEB_UNION_SUM_AID',
+		COLLECTIONS_WEB: 'WEB_UNION_SUM_COL_AID',
+		DESCRIPTION_WEB: 'WEB_UNION_SUM_COL_AID',
+	},
+	date_asc: {
+		UNION_VIEW: 'WEB_UNION_SUM_ADATE',
+		COLLECTIONS_WEB: 'WEB_UNION_SUM_COL_ADATE',
+		DESCRIPTION_WEB: 'WEB_UNION_SUM_DESC_ADATE',
+	},
+	date_dsc: {
+		UNION_VIEW: 'WEB_UNION_SUM_DDATE',
+		COLLECTIONS_WEB: 'WEB_UNION_SUM_COL_DDATE',
+		DESCRIPTION_WEB: 'WEB_UNION_SUM_DESC_DDATE',
+	},
+	title_asc: {
+		UNION_VIEW: 'WEB_UNION_SUM_ATITLE',
+		COLLECTIONS_WEB: 'WEB_UNION_SUM_COL_ATITLE',
+		DESCRIPTION_WEB: 'WEB_UNION_SUM_DESC_ATITLE',
+	},
+	title_dsc: {
+		UNION_VIEW: 'WEB_UNION_SUM_DTITLE',
+		COLLECTIONS_WEB: 'WEB_UNION_SUM_COL_DTITLE',
+		DESCRIPTION_WEB: 'WEB_UNION_SUM_DESC_DTITLE',
+	},
+}
 
-const COMMON_FIELDS = [
+export type SORT_TYPE = keyof typeof SORT_DATABASE
+export type APPLICATION_TYPE = keyof typeof SORT_DATABASE.default
+export const COMMON_FIELDS = [
 	'session',
 	'bookmark_count',
 	'query_statement',
@@ -18,11 +52,16 @@ const COMMON_FIELDS = [
 	'last_record_seq',
 	'bookmark_url',
 	'total_record',
+	'pagesize_12',
+	'pagesize_25',
+	'pagesize_50',
+	'pagesize_100',
+	'sort',
 ] as const
 
-type COMMON_FIELDS_TYPE = (typeof COMMON_FIELDS)[number]
+export type COMMON_FIELDS_TYPE = (typeof COMMON_FIELDS)[number]
 
-type COMMON_FIELDS_OBJECT = {
+export type COMMON_FIELDS_OBJECT = {
 	[key in COMMON_FIELDS_TYPE]?: string | number
 }
 
@@ -36,13 +75,13 @@ const ARRAY_ACCESS_PATHS = [
 	'xml.xml_record.media.image_caption',
 ]
 
-export const getRecordXML = (id: string) => {
-	return document.querySelector(id) || null
+export const getRecordXML = (id: string, doc = document) => {
+	return doc.querySelector(id) || null
 }
 
-export const getDataFromXML = (id: string) => {
+export const getDataFromXML = (id: string, doc = document) => {
 	if (!id) return null
-	const xml = getRecordXML(id)
+	const xml = getRecordXML(id, doc)
 	if (xml) {
 		try {
 			const x2js = new X2JS({
@@ -58,7 +97,7 @@ export const getDataFromXML = (id: string) => {
 	return null
 }
 
-const useJSONData = ({ selector, defaultData }: Props) => {
+const useJSONData = ({ selector, defaultData }: useJSONDataProps) => {
 	const [data] = useState<GenericObject | null>(
 		defaultData && !selector ? defaultData : selector ? getDataFromXML(selector) : null
 	)
@@ -72,7 +111,6 @@ const useJSONData = ({ selector, defaultData }: Props) => {
 				object[key] = value[0] as string
 			}
 		})
-
 		return object
 	}
 
@@ -140,6 +178,12 @@ const useJSONData = ({ selector, defaultData }: Props) => {
 		return record.media[type]
 	}
 
+	const getSortURL = (application: APPLICATION_TYPE, sort: SORT_TYPE) => {
+		const { bookmark_url } = getCommonFields()
+		const url = `${bookmark_url}/${SORT_DATABASE[sort][application]}?RECLIST&DATABASE=${application}`
+		return url
+	}
+
 	const common = getCommonFields()
 	const pagination = getPaginations()
 	const filter = getFilter()
@@ -158,6 +202,7 @@ const useJSONData = ({ selector, defaultData }: Props) => {
 		nextRecord,
 		previousRecord,
 		getMedia,
+		getSortURL,
 	}
 }
 

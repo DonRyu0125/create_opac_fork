@@ -1,26 +1,32 @@
-import Layout from '@/components/layouts'
+import PageAction from '@/components/common/PageAction'
 import PageHeader from '@/components/common/PageHeader'
-import ViewToggle from '@/components/common/ViewToggle'
 import PagePagination from '@/components/common/PagePagination'
+import SearchForm from '@/components/common/SearchForm'
+import ViewToggle from '@/components/common/ViewToggle'
+import Layout from '@/components/layouts'
 import { Button } from '@/components/ui/button'
-import { ChevronRight } from 'lucide-react'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
-import { useEffect, useState } from 'react'
+import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
+import { ChevronRight } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import SummaryPageAction from './SummaryPageAction'
 import SummaryRecords from './SummaryRecord'
-import PageAction from '@/components/common/PageAction'
-import { SummarySample } from '@/samples'
-import useConstants from '@/hooks/useConstants'
 
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
+	const { message, config, home } = useConstants()
+	const { common, pagination, backToSummary, data } = useJSONData({ selector: '#xml_record' })
 
-	const { message } = useConstants()
-	// const { common, pagination } = useJSONData({ defaultData: SummarySample })
-	const { common, pagination, backToSummary } = useJSONData({ selector: '#xml_record' })
+	const getDBTitle = (search_database: string) => {
+		const currentUrl = window.location.href
+		const match = home.searchURL.match(/&DATABASE=[^&]+/) ?? '';
+		let db = config.navigations.filter((item) => item.search_database === search_database)
+		if (currentUrl.includes(match[0])) return ''
+		return `${message.in} ${db[0].title}`
+	}
 
-	if (!common || !pagination) return <></>
+	if (!common) return <></>
 	return (
 		<Layout>
 			<div className="rounded-sm border border-primary bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
@@ -34,32 +40,32 @@ const Summary = () => {
 						},
 					]}>
 					<div className="flex w-full flex-row space-x-2 justify-end">
-						{/* <Button>
-							<SlidersHorizontal className="mr-2 h-4 w-4" />
-							Advanced Search
-						</Button> */}
-						{/* <Separator orientation="vertical" /> */}
+						<SearchForm
+							className="w-[450px] m-0"
+							inputStyle="text-black"
+							inputName={'KEYWORD_CLUSTER'}
+							action={''}
+						/>
 						<ViewToggle />
 					</div>
 				</PageAction>
-
 				<section>
 					<div className="mx-auto py-4 sm:py-12  container flex flex-col">
 						<PageHeader
-							heading={`${common.total_record} ${message.resultsFor.toLowerCase()} "${common.search_statement}"`}
+							heading={`${common.total_record} ${message.resultsFor.toLowerCase()} "${common.search_statement}" ${getDBTitle(data?.xml.search_database)}`}
 							subHeading={`${message.displaying} ${common.first_record_seq}-${common.last_record_seq} ${message.of} ${common.total_record}`}
 						/>
 						<div className="mt-8 block lg:hidden">
 							<Button
 								className="flex cursor-pointer items-center gap-2 border-b "
 								onClick={() => setMobileFilter(true)}>
-								<span className="font-medium"> Filters & Sorting </span>
+								<span className="font-medium"> {message.filtersAndSorting} </span>
 								<ChevronRight className="h-4 w-4" />
 							</Button>
 							<Sheet open={mobileFilter} onOpenChange={setMobileFilter}>
-								<SheetContent>
+								<SheetContent className={'overflow-auto'}>
 									<SheetHeader>
-										<SheetTitle>Filters & Sorting</SheetTitle>
+										<SheetTitle>{message.filtersAndSorting}</SheetTitle>
 									</SheetHeader>
 									<div className="mt-6">
 										<SummaryPageAction />
@@ -67,7 +73,6 @@ const Summary = () => {
 								</SheetContent>
 							</Sheet>
 						</div>
-
 						<div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 ">
 							<div className="hidden space-y-4 lg:block col-span-1">
 								<SummaryPageAction />
@@ -75,7 +80,6 @@ const Summary = () => {
 							<div className="col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
 								<SummaryRecords />
 							</div>
-
 							{pagination?.a && pagination.a.length > 0 && (
 								<div className="col-span-4 mt-4">
 									<PagePagination

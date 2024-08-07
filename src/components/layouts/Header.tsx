@@ -1,16 +1,15 @@
 import Link from '../common/Link'
 import MobileMenu from './MobileMenu'
-
 import useConstants from '@/hooks/useConstants'
 import { LanguageSelect } from '../common/LanguageSelect'
 
 const Header = () => {
 	const { logo, navigations, siteName } = useConstants().config
 	return (
-		<header className=" bg-primary  mx-auto px-4 sm:px-6 lg:px-8">
+		<header className=" w-full bg-primary  mx-auto px-4 sm:px-6 lg:px-8">
 			<div className="flex h-16 items-center justify-between max-w-screen-xl mx-auto">
 				<div className="flex-1 md:flex md:items-center md:gap-12">
-					<a className="block text-teal-600" href="/">
+					<a className="block text-teal-600" href="https://www.sfopho.com">
 						<span className="sr-only ">Home</span>
 						<img className="h-12" src={logo} alt="logo" />
 					</a>

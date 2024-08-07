@@ -2,35 +2,35 @@ import React from 'react'
 import { Input } from '@/components/ui/input'
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
-import { Search, SearchIcon } from 'lucide-react'
+import { Search } from 'lucide-react'
 import useConstants from '@/hooks/useConstants'
 export interface SearchFormProps extends React.HTMLAttributes<HTMLFormElement> {
-	searchURL: string
 	inputName: string
+	inputStyle?: string
+	action: string
 }
-const SearchForm = ({ className, searchURL, inputName, ...props }: SearchFormProps) => {
-	const message = useConstants().message
+const SearchForm = ({ className, inputName, inputStyle, action, ...props }: SearchFormProps) => {
+	const { message } = useConstants()
+
 	return (
-		<form
-			method="POST"
-			action={searchURL}
-			className={cn('w-full mx-auto flex space-x-4 justify-center', className)}
-			{...props}>
-			<div className="w-3/4 relative">
+		<form method="POST" action={action} className={'flex w-full max-w-[600px]'} {...props}>
+			<div className="w-full relative">
 				<Input
+					required
 					name={inputName}
-					className="w-full rounded-none pl-8 border-2 py-3 bg-transparent border-opac-green text-white"
+					className={cn(
+						'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green text-white rounded-l-md italic ',
+						inputStyle
+					)}
 					placeholder={message.searchPlaceholder}
 					type="search"
 				/>
-				{/* <SearchIcon className="absolute w-4 h-5 left-2 my-auto  mx-0 right-0 top-0 bottom-0 text-white" /> */}
 			</div>
 			<Button
 				variant={'default'}
-				className="right-0 top-0 h-full bg-opac-green"
+				className="right-0 top-0 h-full bg-opac-green rounded-l-lg"
 				type="submit">
-				{/* <span className="hidden md:block"> {message.searchButton}</span> */}
-				<span className=" block">
+				<span className="block">
 					<Search className="w-4 h-4" />
 				</span>
 			</Button>

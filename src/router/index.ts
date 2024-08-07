@@ -5,8 +5,15 @@ import NotFoundPage from '@/page/NotFoundPage'
 import Admin from '@/page/admin'
 import Detail from '@/page/detail'
 import Summary from '@/page/summary'
-import RSVP_CANCEL from '@/page/RSVP/Cancellation'
-import RSVP_CONFIRM from '@/page/RSVP/Confirmation'
+import RSVPCancel from '@/page/RSVP/Cancellation'
+import RSVPConfirm from '@/page/RSVP/Confirmation'
+import Login from '@/page/login'
+import Bookmark from '@/page/bookmark'
+import NoBookmarkRecord from '@/page/NoBookmarkRecord'
+import Archives from '@/page/Archives'
+import Museum from '@/page/Museum'
+import Library from '@/page/Library'
+
 
 export type TRoute = Record<string, () => React.ReactNode>
 
@@ -16,9 +23,15 @@ export const ROUTES: TRoute = {
 	detail: Detail,
 	faq: FAQ,
 	admin: Admin,
+	login: Login,
+	bookmark: Bookmark,
+	archives:Archives,
+	library:Library,
+	museum:Museum,
+	'rsvp-cancel': RSVPCancel,
+	'rsvp-confirm': RSVPConfirm,
 	'no-record': NoRecord,
-	rsvp_cancel: RSVP_CANCEL,
-	rsvp_confirm: RSVP_CONFIRM
+	'no-bk-record': NoBookmarkRecord,
 }
 
 /**
@@ -33,3 +46,4 @@ export const getComponentFromKey = (key: string | undefined): (() => React.React
 	}
 	return NotFoundPage
 }
+

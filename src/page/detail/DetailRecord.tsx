@@ -1,11 +1,10 @@
 import InfoTable, { TableRow } from '@/components/common/InfoTable'
 import RecordDetail from '@/components/common/RecordDetail'
+import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { getFieldDataByLabel, getFieldsFromRecord } from '@/lib/record'
-import { DBFields } from '../../types/record'
-import { DetailM3Sample } from '@/samples'
 import DetailRecordAction from '@/page/detail/DetailRecordAction'
-import useConstants from '@/hooks/useConstants'
+import { DBFields } from '../../types/record'
 
 type Props = {}
 
@@ -16,7 +15,8 @@ const DetailRecord = (props: Props) => {
 	const record = records[0]
 	const database = record.database_name
 	const recordData: DBFields<'COLLECTIONS'> = record.record
-	const title = getFieldDataByLabel(record, fields, database, 'Title') || 'Untitled'
+	const title =
+		getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || 'Untitled'
 	const detailFields = getFieldsFromRecord(
 		record,
 		fields,
@@ -24,16 +24,22 @@ const DetailRecord = (props: Props) => {
 		(data, item) => ({ label: item.label, value: data })
 	) as TableRow[]
 
-	
 	return (
 		<>
 			<RecordDetail heading={title} subHeading={recordData.collection}>
 				<div className="flex flex-col space-y-12">
 					<InfoTable
 						rowsData={detailFields || []}
-						renderRow={(row) => <div>{row.value}</div>}
+						renderRow={({ value }) => {
+							if (typeof value === 'string') {
+								return <div>{value}</div>
+							}
+							if (Array.isArray(value)) {
+								return value.map((e, i) => <div key={i}>{e.toString()}</div>)
+							}
+							return value
+						}}
 					/>
-
 					<DetailRecordAction />
 				</div>
 			</RecordDetail>

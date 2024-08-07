@@ -5,6 +5,7 @@ import {
 	MONTH_REPORT,
 	RSVP_LOG_P_STATUS,
 	SISN,
+	TAG_DB,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
@@ -21,77 +22,35 @@ import {
 } from '@/components/common/event-calendar/Constants'
 import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
-import { Button } from '@/components/ui/button'
-import { convertXMLToJson, decodeObj, isDatePast } from '@/lib/utils'
-import { landingPageClick } from '@/store'
+import { convertXMLToJson, decodeObj, getHomeSessionID, isDatePast } from '@/lib/utils'
 import axios from 'axios'
-import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
-import { RegInvalid, RegOutDate } from './Confirmation'
-import { useLanguage } from '@/hooks/useLanguage'
 import useConstants from '@/hooks/useConstants'
+import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
+import { CancelTmp } from './ActionComponent'
+import LandingPageMessage from './LandingPageMessage'
 
-const STATUS_TYPE = {
-	Invalid: 'Invalid',
-	Success: 'Success',
-	Cancel: 'Cancel',
-	OutDate: 'OutDate',
-}
-
-type PatronInfo = {
-	TAG_FUNC_P_ATTND: string
-	TAG_FUNC_P_FIRST: string
-	TAG_FUNC_P_LAST: string
-	TAG_FUNC_P_EMAIL: string
-	TAG_NAME: string
-	TAG_FUNC_START_T: string
-	TAG_FUNC_END_T: string
-	TAG_FUNC_ROOM: string
-	TAG_FUNC_DATE: string
-	TAG_FUNC_LOC: string
-	SISN: string
-	TAG_FUNC_P_ID: string
-	TAG_FUNC_P_T: string
-	BRANCH_ADDRESS: string
-	occ1: string
-	occ2: string
-	TAG_FUNC_P_PAID: any
-}
-
-const RSVPCancelLandingPage = () => {
+const RSVPCancel = () => {
 	const [loading, setLoading] = useState(true)
-	const [patronInfo, setPatronInfo] = useState<PatronInfo>({
-		TAG_FUNC_P_ATTND: '',
-		TAG_FUNC_P_FIRST: '',
-		TAG_FUNC_P_LAST: '',
-		TAG_FUNC_P_EMAIL: '',
-		TAG_NAME: '',
-		TAG_FUNC_START_T: '',
-		TAG_FUNC_END_T: '',
-		TAG_FUNC_ROOM: '',
-		TAG_FUNC_DATE: '',
-		TAG_FUNC_LOC: '',
-		SISN: '',
-		TAG_FUNC_P_ID: '',
-		TAG_FUNC_P_T: '',
-		BRANCH_ADDRESS: '',
-		occ1: '',
-		occ2: '',
-		TAG_FUNC_P_PAID: '',
-	})
+	const rsvp = useConstants().rsvp
+	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
-	const [__, setClick] = useAtom(landingPageClick)
 
 	useEffect(() => {
 		checkParms()
 	}, [])
-
+	
 	const checkParms = async () => {
 		const params = new URLSearchParams(window.location.search)
 		let obj: any
-		params.forEach((value: string, key) => {
+		params?.forEach((value: string, key) => {
 			obj = decodeObj(value)
 		})
+		if (!obj) {
+			setLoading(false)
+			setStatus(STATUS_TYPE.Invalid)
+			return
+		}
 		let jsonObj = JSON.parse(obj)
 		if (isDatePast(jsonObj.TAG_FUNC_DATE)) {
 			setStatus(STATUS_TYPE.OutDate)
@@ -129,7 +88,7 @@ const RSVPCancelLandingPage = () => {
 
 	const onClick = () => {
 		setLoading(true)
-		getSessionID()
+		getLogon()
 			.then((res) => removeRecord(res, patronInfo))
 			.then((res) => {
 				setStatus(STATUS_TYPE.Success)
@@ -138,8 +97,8 @@ const RSVPCancelLandingPage = () => {
 			.then((res) => storeAtLog(res))
 	}
 
-	const getSessionID = async () => {
-		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}`
+	const getLogon = async () => {
+		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&file=[OPAC]rsvp-cancel.html`
 
 		return await axios
 			.post(
@@ -152,8 +111,7 @@ const RSVPCancelLandingPage = () => {
 				}
 			)
 			.then(() => {
-				let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
-				let HOME_SESSID = match[0]?.split('=')[1]
+				let HOME_SESSID = getHomeSessionID()
 				return HOME_SESSID
 			})
 			.catch(() => {
@@ -177,7 +135,7 @@ const RSVPCancelLandingPage = () => {
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=M2L_TAG&READ=N&KEY=${SISN}&VALUE=${PatronInfo?.SISN}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=N&KEY=${SISN}&VALUE=${PatronInfo?.SISN}`,
 				xmlFormDelete,
 				{
 					headers: {
@@ -210,9 +168,6 @@ const RSVPCancelLandingPage = () => {
 				}
 			)
 			.then(async (res) => {
-				// const currE = await fetch_get(new Date())
-				// setCurrentEvent(currE)
-				setClick((prev) => !prev)
 				setLoading(false)
 				return { HOME_SESSID, ID: patronInfo[TAG_FUNC_P_ID] }
 			})
@@ -254,116 +209,39 @@ const RSVPCancelLandingPage = () => {
 	const showRegStatus = () => {
 		switch (status) {
 			case STATUS_TYPE.Invalid:
-				return <RegNotInTheList />
+				return <LandingPageMessage {...rsvp.cancelLandingNotIntheList} />
 			case STATUS_TYPE.Success:
-				return <RegSuccess />
+				return <LandingPageMessage {...rsvp.cancelLandingSuccess} />
 			case STATUS_TYPE.OutDate:
-				return <RegOutDate />
+				return <LandingPageMessage {...rsvp.confirmLandingOutDate} />
 			case STATUS_TYPE.Cancel:
-				return <RegCancelTmp patronInfo={patronInfo} onClick={onClick} />
+				return <CancelTmp patronInfo={patronInfo} onClick={onClick} />
 			default:
-				return <RegInvalid />
+				return <LandingPageMessage {...rsvp.confirmLandingInvalid} />
 		}
 	}
 
 	return (
 		<Layout>
-			<div className="flex flex-col bg-white h-[800px]">
-				<img
-					src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
-					alt=""
-					className="h-64 w-full object-cover"
-				/>
-				{loading ? (
-					<div className={'h-[500px]'}>
-						<Spinner
-							height={'h-full'}
-							spinHeight={'h-20'}
-							spinWidth={'w-20'}
-							background={'bg-white'}
-						/>
-					</div>
-				) : (
-					<div className={'h-full min-h-[550px] flex items-center justify-center'}>
-						{showRegStatus()}
-					</div>
-				)}
-			</div>
+			<img
+				src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
+				alt=""
+				className="h-64 w-full object-cover"
+			/>
+			{loading ? (
+				<div className="flex h-full items-center justify-center">
+					<Spinner
+						height={'h-full'}
+						spinHeight={'h-20'}
+						spinWidth={'w-20'}
+						background={'bg-white'}
+					/>
+				</div>
+			) : (
+				showRegStatus()
+			)}
 		</Layout>
 	)
 }
 
-const RegNotInTheList = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Your are not in the List!
-			</h1>
-			<p className="mt-4 text-gray-500">You already canceled the event</p>
-			<a
-				href="#"
-				className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				Go to website
-			</a>
-		</div>
-	)
-}
-
-/**
- * 
- * Example for using multi-langual translation
- */
-const RegSuccess = () => {
-	const { rsvpCancellationMessage } = useConstants().message
-	return (
-		<div className="text-center">
-			<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Your registration is successfully canceled.
-			</h1>
-
-			<p className="mt-4 text-gray-500">{rsvpCancellationMessage} </p>
-		</div>
-	)
-}
-
-const RegCancelTmp = ({ patronInfo, onClick }: any) => {
-	return (
-		<div className="text-center">
-			<h1 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
-				This will cancel your registration for :
-			</h1>
-			<h2 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
-				{patronInfo?.TAG_NAME}
-			</h2>
-			<div className="mt-4 text-gray-500 sm:flex justify-evenly text-lg w-full">
-				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
-					<div>{patronInfo?.TAG_NAME}</div>
-					<div>{patronInfo?.TAG_FUNC_DATE}</div>
-					<div>
-						{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
-					</div>
-					<div>
-						{patronInfo?.BRANCH_ADDRESS}, Room: {patronInfo?.TAG_FUNC_ROOM}
-					</div>
-				</div>
-				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
-					<div>
-						{patronInfo?.TAG_FUNC_P_LAST}, {patronInfo?.TAG_FUNC_P_FIRST}
-					</div>
-					<div>{patronInfo?.TAG_FUNC_P_EMAIL}</div>
-					<div>Registered: {patronInfo?.TAG_FUNC_P_T}</div>
-					<div className="border-2 border-dashed p-2">
-						{patronInfo?.TAG_FUNC_P_ATTND} spot reserved
-					</div>
-				</div>
-			</div>
-			<Button
-				onClick={onClick}
-				className="flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded bg-red-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring">
-				<div>Unregister</div>
-			</Button>
-		</div>
-	)
-}
-
-export default RSVPCancelLandingPage
+export default RSVPCancel

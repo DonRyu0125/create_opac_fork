@@ -17,8 +17,22 @@
 				"detail": true
 			},
 			{
-				"label": "Collection Type",
+				"label": "Collection",
 				"name": "collection_type",
+				"summary": true,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Earliest Date",
+				"name": "EARLY",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Latest Date",
+				"name": "LATE",
 				"summary": false,
 				"grid": false,
 				"detail": true
@@ -26,8 +40,8 @@
 			{
 				"label": "Object Name",
 				"name": "object_name_eng",
-				"summary": false,
-				"grid": false,
+				"summary": true,
+				"grid": true,
 				"detail": true
 			},
 			{
@@ -45,8 +59,8 @@
 				"detail": true
 			},
 			{
-				"name": "l_publisher",
 				"label": "Publisher",
+				"name": "l_publisher",
 				"summary": false,
 				"grid": false,
 				"detail": true
@@ -105,7 +119,7 @@
 			},
 			{
 				"label": "Description",
-				"name": "OBJ_DESCRIPTION",
+				"name": "520_A",
 				"summary": true,
 				"grid": true,
 				"detail": true

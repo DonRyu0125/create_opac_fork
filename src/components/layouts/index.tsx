@@ -5,9 +5,9 @@ import Header from './Header'
 
 const Layout = ({ children, className }: React.ComponentProps<'div'>) => {
 	return (
-		<div className={cn('mx-auto ', className)}>
+		<div className={cn('flex flex-col items-center justify-center min-h-screen ', className)}>
 			<Header />
-			<main className="min-w-screen h-fit">{children}</main>
+			<main className="flex-grow w-full max-w-screen">{children}</main>
 			<Footer />
 		</div>
 	)
