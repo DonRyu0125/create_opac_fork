@@ -98,6 +98,7 @@ export type Or = string;
 export type Not = string;
 export type AddField = string;
 export type AdvWarnMsg = string;
+export type In = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -193,5 +194,6 @@ export interface MessageJson {
   not?: Not;
   addField?: AddField;
   advWarnMsg?: AdvWarnMsg;
+  in?: In;
   [k: string]: unknown;
 }

@@ -15,12 +15,14 @@ import SummaryRecords from './SummaryRecord'
 
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
-	const { message, config } = useConstants()
+	const { message, config, home } = useConstants()
 	const { common, pagination, backToSummary, data } = useJSONData({ selector: '#xml_record' })
 
 	const getDBTitle = (search_database: string) => {
+		const currentUrl = window.location.href
+		const match = home.searchURL.match(/&DATABASE=[^&]+/) ?? '';
 		let db = config.navigations.filter((item) => item.search_database === search_database)
-		if (!search_database) return ''
+		if (currentUrl.includes(match[0])) return ''
 		return `${message.in} ${db[0].title}`
 	}
 

@@ -20,7 +20,6 @@ const Home = () => {
 		searchURL,
 		// eventCalendar,
 	} = useConstants().home
-
 	return (
 		<Layout>
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
