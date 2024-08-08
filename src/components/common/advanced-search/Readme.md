@@ -1,6 +1,4 @@
-@added
--adv search form, input, button
--collection, museum, library html.page
+
 
 @database SEARCH CLUSTER for union search
 
@@ -19,7 +17,7 @@ KEYWORD_CLUSTER=LEGAL_TITLE,ACCESSION_NUMBER,obj_description;
 @mwi EXPRESSION at each database profile
 expression: QUERY_EXPRESSION
 
-@adv test query
+@adv query example for testing 
 
 collections
 -LEGAL_TITLE Incomplete Scan or ACCESSION_NUMBER 2024.001.506
