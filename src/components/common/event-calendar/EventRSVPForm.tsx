@@ -150,7 +150,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then((res) => {
-				const conToJson: any = convertXMLToJson(res)
+				const conToJson: any = convertXMLToJson(res.data)
 				const jsonObj = conToJson[MWI_RESFUL_RES].record
 				const loc_group = convertToArr(jsonObj.TAG_FUNC_LOC_GRP)
 				const dte_group = convertToArr(loc_group[MWI_XML_DATA_INDEX].TAG_FUNC_DTE_GRP)

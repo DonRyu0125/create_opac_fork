@@ -65,7 +65,7 @@ export const convertToArr = (elm: Object | Array<any>) => {
 
 export const convertXMLToJson = (response: any) => {
 	const x2js = new X2JS()
-	const jsonData: any = x2js.xml2js(response.data)
+	const jsonData: any = x2js.xml2js(response)
 	return jsonData
 }
 

@@ -10,6 +10,7 @@ import {
 import { ADVANCED_SEARCH_BOOLEAN, FieldObject } from './AdvancedSearchForm'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
+import AdvancedSearchIndexDialog from './AdvancedSearchIndexDialog'
 
 interface AdvancedSearchInputProps {
 	exp: FieldObject
@@ -126,6 +127,7 @@ const AdvancedSearchInput = ({
 					})}
 				</SelectContent>
 			</Select>
+			<AdvancedSearchIndexDialog/>
 		</div>
 	)
 }
