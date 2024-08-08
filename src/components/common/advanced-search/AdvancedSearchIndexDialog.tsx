@@ -9,15 +9,20 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '../../ui/dialog'
-import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { Button } from '@/components/ui/button'
 import { convertXMLToJson, getSessionID } from '@/lib/utils'
 import { Menu } from 'lucide-react'
+import {
+	ScrollAreaCorner,
+	ScrollAreaRoot,
+	ScrollAreaScrollbar,
+	ScrollAreaThumb,
+	ScrollAreaViewport,
+} from '@/components/ui/scrollArea'
 
 const AdvancedSearchIndexDialog = ({ title }: any) => {
-	const [keyvalue, setKeyvalue] = useState<string>("");
-	const [option, setOption] = useState<string>("");
-
+	const [keyvalue, setKeyvalue] = useState<string>('')
+	const [option, setOption] = useState<string>('')
 
 	const getIndexList = () => {
 		let HOME_SESSID = getSessionID()
@@ -29,11 +34,12 @@ const AdvancedSearchIndexDialog = ({ title }: any) => {
 			let xml = parser.parseFromString(res.data, 'text/xml')
 			let xmlText = new XMLSerializer().serializeToString(xml)
 			const conToJson = convertXMLToJson(xmlText)
-			console.log('conToJson',conToJson)
+			console.log('conToJson', conToJson)
 			return conToJson
 		})
 	}
 
+	const TAGS = Array.from({ length: 20 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`)
 	return (
 		<Dialog>
 			<DialogTrigger asChild onClick={getIndexList}>
@@ -44,10 +50,32 @@ const AdvancedSearchIndexDialog = ({ title }: any) => {
 					<Menu />
 				</Button>
 			</DialogTrigger>
-			<DialogHeader>
 
-			</DialogHeader>
 			<DialogContent>
+				<DialogHeader>asd</DialogHeader>
+				<ScrollAreaRoot>
+					<ScrollAreaViewport>
+						<div className="py-[15px] px-5">
+							<div className="text-violet11 text-[15px] leading-[18px] font-medium">
+								Tags
+							</div>
+							{TAGS.map((tag) => (
+								<div
+									className="text-mauve12 text-[13px] leading-[18px] mt-2.5 pt-2.5 border-t border-t-mauve6"
+									key={tag}>
+									{tag}
+								</div>
+							))}
+						</div>
+					</ScrollAreaViewport>
+					<ScrollAreaScrollbar orientation="vertical">
+						<ScrollAreaThumb />
+					</ScrollAreaScrollbar>
+					<ScrollAreaScrollbar orientation="horizontal">
+						<ScrollAreaThumb />
+					</ScrollAreaScrollbar>
+					<ScrollAreaCorner />
+				</ScrollAreaRoot>
 				<DialogFooter className={'w-full flex absolute bottom-1 relative'}></DialogFooter>
 			</DialogContent>
 		</Dialog>
