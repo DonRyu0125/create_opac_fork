@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { HTMLAttributes } from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
+import { DeleteIcon } from 'lucide-react'
 
 function GripIcon(props: HTMLAttributes<SVGElement>) {
 	return (
@@ -48,7 +49,15 @@ function PlusIcon(props: HTMLAttributes<SVGElement>) {
 	)
 }
 
-export default function Toolbar({ className }: { className?: string }) {
+export default function Toolbar({
+	className,
+	onRemove,
+	onDuplicate,
+}: {
+	className?: string
+	onRemove: () => void
+	onDuplicate: () => void
+}) {
 	return (
 		<TooltipProvider>
 			<div
@@ -58,7 +67,11 @@ export default function Toolbar({ className }: { className?: string }) {
 				)}>
 				<Tooltip>
 					<TooltipTrigger>
-						<Button variant="ghost" size="icon" className="rounded-full">
+						<Button
+							variant="ghost"
+							size="icon"
+							className="rounded-full"
+							onClick={onDuplicate}>
 							<PlusIcon className="w-6 h-6 text-muted-foreground" />
 						</Button>
 					</TooltipTrigger>
@@ -67,11 +80,15 @@ export default function Toolbar({ className }: { className?: string }) {
 
 				<Tooltip>
 					<TooltipTrigger>
-						<Button variant="ghost" size="icon" className="rounded-full">
-							<GripIcon className="w-6 h-6 text-muted-foreground" />
+						<Button
+							variant="ghost"
+							size="icon"
+							className="rounded-full"
+							onClick={onRemove}>
+							<DeleteIcon className="w-6 h-6 text-muted-foreground" />
 						</Button>
 					</TooltipTrigger>
-					<TooltipContent>Reorder item</TooltipContent>
+					<TooltipContent>Remove item</TooltipContent>
 				</Tooltip>
 			</div>
 		</TooltipProvider>

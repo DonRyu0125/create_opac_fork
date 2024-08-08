@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import Toolbar from './Toolbar'
 import useHover from '@/hooks/useHover'
 import { ChangeEvent } from 'react'
+import { useAdminForm } from '@/hooks/useAdminForm'
 
 type InputWrapperProps = {
 	children?: React.ReactNode
@@ -27,11 +28,23 @@ const InputWrapper = ({ children, id, label, className }: InputWrapperProps) => 
 	)
 }
 
-const ArrayItemWrapper = ({ children }: { children?: React.ReactNode }) => {
+const ArrayItemWrapper = ({
+	children,
+	onDuplicate,
+	onRemove,
+}: {
+	children?: React.ReactNode
+	onDuplicate: () => void
+	onRemove: () => void
+}) => {
 	const [hoverRef, isHovered] = useHover<HTMLDivElement>()
 	return (
 		<div className="mx-2 my-4 border-2 border-black p-4 group relative" ref={hoverRef}>
-			<Toolbar className={cn(isHovered ? 'opacity-100' : '', 'justify-end')} />
+			<Toolbar
+				onDuplicate={onDuplicate}
+				onRemove={onRemove}
+				className={cn(isHovered ? 'opacity-100' : '', 'justify-end')}
+			/>
 			{children}
 		</div>
 	)
@@ -51,6 +64,7 @@ const AdminFormInput = ({
 	path = [],
 	onChange,
 }: AdminFormInputProps) => {
+	const { duplicateItem, removeItem } = useAdminForm()
 	const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		if (event.target.type === 'checkbox') {
 			const v = (event as ChangeEvent<HTMLInputElement>).target.checked
@@ -102,7 +116,10 @@ const AdminFormInput = ({
 	}
 	if (type === 'array' && items) {
 		return (value as Array<SchemaValueType>)?.map((v, i) => (
-			<ArrayItemWrapper key={i}>
+			<ArrayItemWrapper
+				key={i}
+				onDuplicate={() => duplicateItem(path, i)}
+				onRemove={() => removeItem(path, i)}>
 				<AdminFormInput value={v} {...items} path={[...path, `${i}`]} onChange={onChange} />
 			</ArrayItemWrapper>
 		))
