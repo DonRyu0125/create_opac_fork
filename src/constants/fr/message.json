@@ -92,5 +92,8 @@
 	"not": "Non",
 	"addField": "Ajouter champ",
 	"advWarnMsg":"Veuillez entrer votre recherche!",
-	"in":"dans"
+	"in":"dans",
+	"fisrt":"Premier",
+	"last":"Dernier",
+	"submit":"Soumettre"
 }

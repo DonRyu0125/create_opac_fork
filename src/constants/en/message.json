@@ -92,5 +92,8 @@
 	"not": "Not",
 	"addField": "Add field",
 	"advWarnMsg":"Please enter your search!",
-	"in":"in"
+	"in":"in",
+	"fisrt":"First",
+	"last":"Last",
+	"submit":"Submit"
 }

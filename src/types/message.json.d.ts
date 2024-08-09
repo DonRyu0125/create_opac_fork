@@ -99,6 +99,9 @@ export type Not = string;
 export type AddField = string;
 export type AdvWarnMsg = string;
 export type In = string;
+export type Fisrt = string;
+export type Last = string;
+export type Submit = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -195,5 +198,8 @@ export interface MessageJson {
   addField?: AddField;
   advWarnMsg?: AdvWarnMsg;
   in?: In;
+  fisrt?: Fisrt;
+  last?: Last;
+  submit?: Submit;
   [k: string]: unknown;
 }
