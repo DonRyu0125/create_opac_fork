@@ -22,10 +22,22 @@ import {
 import useConstants from '@/hooks/useConstants'
 import { Input } from '@/components/ui/input'
 
+interface ClusterData {
+	index_list: {
+		option: string[]
+	}
+	first_page: string
+	prev_page: string
+	next_page: string
+	last_page: string
+	keyname: string
+	find: string
+}
+
 const AdvancedSearchIndexDialog = ({ title }: any) => {
-	const {advancedSearch, message} = useConstants()
-	const [cluster, setCluster] = useState([])
-	const [options, setOptions] = useState([])
+	const { advancedSearch, message } = useConstants()
+	const [cluster, setCluster] = useState<ClusterData>([])
+	const [options, setOptions] = useState<string[]>([])
 	const [keyvalue, setKeyvalue] = useState<string>('')
 
 	const getCluster = async (field: string) => {
@@ -35,32 +47,38 @@ const AdvancedSearchIndexDialog = ({ title }: any) => {
 				`${HOME_SESSID}/FIRST?INDEXLIST&KEYNAME=${field}&DATABASE=DESCRIPTION_WEB&form=[INCLUDES]cluster.html`
 			)
 			.then((res) => {
-				let list = updateClusterList(res)
-				setCluster(list.cluster)
-				setOptions(list.cluster.index_list.option)
+				updateClusterList(res)
 			})
 	}
 
 	const getClusterBySearch = (keyvalue: string, keyname: string, url: string) => {
 		let data = `KEYNAME=${keyname}&KEYVALUE=${keyvalue}`
 		axios.post(url, data).then((res) => {
-			let list = updateClusterList(res)
-			setCluster(list.cluster)
-			setOptions(list.cluster.index_list.option)
+			updateClusterList(res)
 		})
 	}
 
 	const pageAction = (url: string) => {
-		return axios.get(url)
+		url = url.replace(/--/g, '')
+		axios
+			.get(url)
+			.then((res) => {
+				if (url !== '#' && res.data && res.data !== '') {
+					updateClusterList(res)
+				}
+			})
+			.catch(function (error) {
+				console.log(error)
+			})
 	}
 
 	const updateClusterList = (res: any) => {
 		let parser = new DOMParser()
 		let xml = parser.parseFromString(res.data, 'text/xml')
 		let xmlText = new XMLSerializer().serializeToString(xml)
-		const conToJson = convertXMLToJson(xmlText)
-		console.log('conToJson',conToJson.cluster.keyname)
-		return conToJson
+		const list = convertXMLToJson(xmlText)
+		setCluster(list.cluster)
+		setOptions(list.cluster.index_list.option)
 	}
 
 	const handleKeyvalueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,9 +112,7 @@ const AdvancedSearchIndexDialog = ({ title }: any) => {
 					</div>
 					<Button
 						variant={'default'}
-						onClick={() =>
-							 getClusterBySearch(keyvalue, cluster.keyname, cluster.find)
-						}
+						onClick={() => getClusterBySearch(keyvalue, cluster.keyname, cluster.find)}
 						className="right-0 top-0 h-full bg-opac-green rounded-l-lg"
 						type="submit">
 						<span className="block">
@@ -104,10 +120,9 @@ const AdvancedSearchIndexDialog = ({ title }: any) => {
 						</span>
 					</Button>
 				</div>
-
 				<div className={'flex w-full justify-between'}>
-					<Button>{message.fisrt}</Button>
-					<Button>{message.last}</Button>
+					<Button onClick={() => pageAction(cluster.first_page)}>{message.fisrt}</Button>
+					<Button onClick={() => pageAction(cluster.last_page)}>{message.last}</Button>
 				</div>
 				<ScrollAreaRoot className={'w-full'}>
 					<ScrollAreaViewport>
@@ -133,8 +148,10 @@ const AdvancedSearchIndexDialog = ({ title }: any) => {
 					<ScrollAreaCorner />
 				</ScrollAreaRoot>
 				<div className={'flex w-full justify-between'}>
-					<Button>{message.previous}</Button>
-					<Button>{message.next}</Button>
+					<Button onClick={() => pageAction(cluster.prev_page)}>
+						{message.previous}
+					</Button>
+					<Button onClick={() => pageAction(cluster.next_page)}>{message.next}</Button>
 				</div>
 				<DialogFooter className={'w-full flex absolute bottom-1 relative'}>
 					<Button>{message.submit}</Button>
