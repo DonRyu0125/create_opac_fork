@@ -128,7 +128,7 @@ const AdvancedSearchIndexDialog = ({
 
 	const handleSubmit = () => {
 		if (!userSelect) return toast({ title: `${message.advIdxSubmitWarnMsg}` })
-		updateField('field', userSelect, adv_search_index)
+		updateField('keyword', userSelect, adv_search_index)
 		setText(userSelect)
 		setOptions([])
 		setKeyvalue('')
