@@ -216,9 +216,7 @@ const AdvancedSearchIndexDialog = ({
 				<ScrollAreaRoot className={'w-full'}>
 					<ScrollAreaViewport>
 						<div className="py-[15px] px-5">
-							{options?.length < 1 ? (
-								<div>No key is found</div>
-							) : (
+							{options?.length > 1 ? (
 								options?.map((item: option, key) => (
 									<div
 										className={`${item.bg} cursor-pointer text-mauve12 text-[13px] leading-[18px] p-2.5 border-t border-t-mauve6`}
@@ -228,6 +226,8 @@ const AdvancedSearchIndexDialog = ({
 										{item.name}
 									</div>
 								))
+							) : (
+								<div>No key is found</div>
 							)}
 						</div>
 					</ScrollAreaViewport>

@@ -102,6 +102,8 @@ export type In = string;
 export type Fisrt = string;
 export type Last = string;
 export type Submit = string;
+export type AdvIdxSubmitWarnMsg = string;
+export type AdvIdxSelectWarnMsg = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -201,5 +203,7 @@ export interface MessageJson {
   fisrt?: Fisrt;
   last?: Last;
   submit?: Submit;
+  advIdxSubmitWarnMsg?: AdvIdxSubmitWarnMsg;
+  advIdxSelectWarnMsg?: AdvIdxSelectWarnMsg;
   [k: string]: unknown;
 }

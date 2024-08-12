@@ -32,7 +32,7 @@
 				"name": "date_cr_inc"
 			},
 			{
-				"label": "DESC Type",
+				"label": "DESC TYPE",
 				"name": "DESC_TYPE"
 			}
 		]
