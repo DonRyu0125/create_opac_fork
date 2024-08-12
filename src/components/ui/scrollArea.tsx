@@ -57,7 +57,7 @@ export const ScrollAreaThumb = React.forwardRef<
   <ScrollArea.Thumb
     ref={ref}
     className={cn(
-      'flex-1 bg-mauve10 rounded-[10px] relative before:content-[""] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]',
+      "flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]",
       className
     )}
     {...props}

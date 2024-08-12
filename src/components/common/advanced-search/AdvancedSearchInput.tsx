@@ -28,6 +28,7 @@ const AdvancedSearchInput = ({
 }: AdvancedSearchInputProps) => {
 	const { advancedSearch, message } = useConstants()
 	const [text, setText] = useState<string>()
+	const [userSelect, setUserSelect] = useState('')
 	const ADVANCED_SEARCH_BOOLEAN_SELECT_MAP = [
 		{
 			key: `${message.and}`,
@@ -63,9 +64,13 @@ const AdvancedSearchInput = ({
 			<Select
 				onValueChange={(value) => {
 					updateField('field', value, index)
+					setUserSelect(value)
 				}}>
 				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white rounded-r-lg font-semibold text-left">
-					<SelectValue className={'text-black'} placeholder={<div>{message.selectAfield}</div>} />
+					<SelectValue
+						className={'text-black'}
+						placeholder={<div>{message.selectAfield}</div>}
+					/>
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
 					{searchDatabase()?.items.map((item, key) => {
@@ -108,7 +113,7 @@ const AdvancedSearchInput = ({
 				}}>
 				<SelectTrigger
 					disabled={!exp.boolean}
-					className="w-28  border border-opac-green bg-opac-green text-white rounded-l-lg font-semibold ">
+					className="w-28 border border-opac-green bg-opac-green text-white rounded-l-lg font-semibold ">
 					<SelectValue
 						placeholder={message.and}
 						defaultValue={exp.boolean ? exp.boolean : exp.boolean}
@@ -127,7 +132,12 @@ const AdvancedSearchInput = ({
 					})}
 				</SelectContent>
 			</Select>
-			<AdvancedSearchIndexDialog/>
+			<AdvancedSearchIndexDialog
+				field={'TITLE'}
+				updateField={updateField}
+				setText={setText}
+				index={index}
+			/>
 		</div>
 	)
 }
