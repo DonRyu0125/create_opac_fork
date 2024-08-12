@@ -95,5 +95,7 @@
 	"in":"in",
 	"fisrt":"First",
 	"last":"Last",
-	"submit":"Submit"
+	"submit":"Submit",
+	"advIdxSubmitWarnMsg":"Please select before submit!",
+	"advIdxSelectWarnMsg":"Please select the field you want to search!"
 }

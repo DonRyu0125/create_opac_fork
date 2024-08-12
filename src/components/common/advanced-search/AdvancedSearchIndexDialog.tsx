@@ -22,6 +22,7 @@ import {
 import useConstants from '@/hooks/useConstants'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
+import { selected } from './AdvancedSearchInput'
 
 interface ClusterData {
 	index_list: {
@@ -41,11 +42,14 @@ type option = {
 }
 
 interface Adv_dialog {
-	field: string
+	field: selected | undefined
 	updateField: Function
 	setText: (text: string) => void
 	adv_search_index: number
 }
+
+const DEFAULT_OPTION_COLOR = 'bg-white'
+const SELECT_OPTION_COLOR = 'bg-green-200'
 
 const AdvancedSearchIndexDialog = ({
 	field,
@@ -110,12 +114,12 @@ const AdvancedSearchIndexDialog = ({
 		let nOptions: option[] = list.cluster?.index_list?.option.map((item: string) => {
 			return {
 				name: item,
-				bg: 'bg-white',
+				bg: DEFAULT_OPTION_COLOR,
 			}
 		})
 
 		setCluster(list.cluster)
-		setOptions(nOptions)
+		setOptions(nOptions ?? [])
 	}
 
 	const handleKeyvalueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,7 +127,7 @@ const AdvancedSearchIndexDialog = ({
 	}
 
 	const handleSubmit = () => {
-		if (!userSelect) return toast({ title: `${message.advWarnMsg}` })
+		if (!userSelect) return toast({ title: `${message.advIdxSubmitWarnMsg}` })
 		updateField('field', userSelect, adv_search_index)
 		setText(userSelect)
 		setOptions([])
@@ -137,12 +141,12 @@ const AdvancedSearchIndexDialog = ({
 			if (key === selected_key) {
 				return {
 					...item,
-					bg: 'bg-green-200',
+					bg: SELECT_OPTION_COLOR,
 				}
 			}
 			return {
 				...item,
-				bg: 'bg-white',
+				bg: DEFAULT_OPTION_COLOR,
 			}
 		})
 		setOptions(n_list)
@@ -150,26 +154,26 @@ const AdvancedSearchIndexDialog = ({
 	}
 
 	const openDialog = () => {
-		if (!field) return toast({ title: `${message.advWarnMsg}` })
+		if (!field) return toast({ title: `${message.advIdxSelectWarnMsg}` })
 		setOpen(true)
-		getCluster(field)
+		getCluster(field.name)
 	}
 
 	return (
 		<Dialog open={open}>
-			<DialogTrigger
-				asChild
-				onClick={openDialog}>
+			<DialogTrigger asChild onClick={openDialog}>
 				<Button
 					className={
-						'h-full w-[50px] px-0 flex items-center justify-center overflow-hidden ml-3 bg-opac-green'
+						'h-full w-[50px] px-0 flex items-center justify-center overflow-hidden ml-3 bg-opac-green '
 					}>
 					<Menu />
 				</Button>
 			</DialogTrigger>
 			<DialogContent hideClose={'hidden'}>
-				<div className={'w-full flex justify-center items-center font-bold relative'}>
-					<DialogHeader>Browse Cluster for '{field}' </DialogHeader>
+				<div className={'w-full flex justify-center items-center relative'}>
+					<DialogHeader className={'font-extrabold'}>
+						Browse Cluster for '{field?.label}'{' '}
+					</DialogHeader>
 					<button className={'absolute right-1'} onClick={() => setOpen(false)}>
 						<X className={'h-6 w-6'} />
 					</button>
@@ -190,7 +194,7 @@ const AdvancedSearchIndexDialog = ({
 					<Button
 						variant={'default'}
 						onClick={() => getClusterBySearch(keyvalue, cluster.keyname, cluster.find)}
-						className="right-0 top-0 h-full bg-opac-green rounded-l-lg"
+						className="right-0 top-0 h-full bg-opac-green rounded-l-lg "
 						type="submit">
 						<span className="block">
 							<Search className="w-4 h-4" />
@@ -198,21 +202,33 @@ const AdvancedSearchIndexDialog = ({
 					</Button>
 				</div>
 				<div className={'flex w-full justify-between'}>
-					<Button onClick={() => pageAction(cluster.first_page)}>{message.fisrt}</Button>
-					<Button onClick={() => pageAction(cluster.last_page)}>{message.last}</Button>
+					<Button
+						className={'min-w-[85px] font-bold'}
+						onClick={() => pageAction(cluster.first_page)}>
+						{message.fisrt}
+					</Button>
+					<Button
+						className={'min-w-[85px] font-bold'}
+						onClick={() => pageAction(cluster.last_page)}>
+						{message.last}
+					</Button>
 				</div>
 				<ScrollAreaRoot className={'w-full'}>
 					<ScrollAreaViewport>
 						<div className="py-[15px] px-5">
-							{options?.map((item: option, key) => (
-								<div
-									className={`${item.bg} cursor-pointer text-mauve12 text-[13px] leading-[18px] p-2.5 border-t border-t-mauve6`}
-									onDoubleClick={handleSubmit}
-									onClick={() => optionClick(item.name, key)}
-									key={key}>
-									{item.name}
-								</div>
-							))}
+							{options?.length < 1 ? (
+								<div>No key is found</div>
+							) : (
+								options?.map((item: option, key) => (
+									<div
+										className={`${item.bg} cursor-pointer text-mauve12 text-[13px] leading-[18px] p-2.5 border-t border-t-mauve6`}
+										onDoubleClick={handleSubmit}
+										onClick={() => optionClick(item.name, key)}
+										key={key}>
+										{item.name}
+									</div>
+								))
+							)}
 						</div>
 					</ScrollAreaViewport>
 					<ScrollAreaScrollbar orientation="vertical">
@@ -224,17 +240,30 @@ const AdvancedSearchIndexDialog = ({
 					<ScrollAreaCorner />
 				</ScrollAreaRoot>
 				<div className={'flex w-full justify-between'}>
-					<Button onClick={() => pageAction(cluster.prev_page)}>
+					<Button
+						onClick={() => pageAction(cluster.prev_page)}
+						className={'min-w-[85px] font-bold'}>
 						{message.previous}
 					</Button>
-					<Button onClick={() => pageAction(cluster.next_page)}>{message.next}</Button>
+					<Button
+						className={'min-w-[85px] font-bold'}
+						onClick={() => pageAction(cluster.next_page)}>
+						{message.next}
+					</Button>
 				</div>
 
 				<DialogFooter
 					className={
-						'w-full flex absolute bottom-1 relative md:justify-center md:items-center'
+						'relative w-full flex absolute bottom-1 relative md:justify-center md:items-center'
 					}>
-					<Button onClick={handleSubmit}>{message.submit}</Button>
+					<Button className={'min-w-[85px] font-bold'} onClick={handleSubmit}>
+						{message.submit}
+					</Button>
+					<Button
+						className={'absolute right-0 min-w-[85px] bg-red-600 font-bold'}
+						onClick={() => setOpen(false)}>
+						{message.close}
+					</Button>
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

@@ -95,5 +95,7 @@
 	"in":"dans",
 	"fisrt":"Premier",
 	"last":"Dernier",
-	"submit":"Soumettre"
+	"submit":"Soumettre",
+	"advIdxSubmitWarnMsg": "Veuillez sélectionner avant de soumettre",
+	"advIdxSelectWarnMsg": "Veuillez sélectionner le champ que vous souhaitez rechercher"
 }
