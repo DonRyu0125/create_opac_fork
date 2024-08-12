@@ -11,7 +11,7 @@ import {
 } from '../../ui/dialog'
 import { Button } from '@/components/ui/button'
 import { convertXMLToJson, getSessionID } from '@/lib/utils'
-import { Menu, Search } from 'lucide-react'
+import { Menu, Search, X } from 'lucide-react'
 import {
 	ScrollAreaCorner,
 	ScrollAreaRoot,
@@ -36,12 +36,25 @@ interface ClusterData {
 }
 
 type option = {
-	index: string
+	name: string
 	bg: string
 }
 
-const AdvancedSearchIndexDialog = ({ field, updateField, setText, index }: any) => {
+interface Adv_dialog {
+	field: string
+	updateField: Function
+	setText: (text: string) => void
+	adv_search_index: number
+}
+
+const AdvancedSearchIndexDialog = ({
+	field,
+	updateField,
+	setText,
+	adv_search_index,
+}: Adv_dialog) => {
 	const { message } = useConstants()
+	const [open, setOpen] = useState(false)
 	const [cluster, setCluster] = useState<ClusterData>({
 		index_list: {
 			option: [],
@@ -59,7 +72,6 @@ const AdvancedSearchIndexDialog = ({ field, updateField, setText, index }: any) 
 
 	const getCluster = async (field: string) => {
 		let HOME_SESSID = getSessionID()
-		if (!field) return toast({ title: `${message.advWarnMsg}` })
 		await axios
 			.get(
 				`${HOME_SESSID}/FIRST?INDEXLIST&KEYNAME=${field}&DATABASE=DESCRIPTION_WEB&form=[INCLUDES]cluster.html`
@@ -95,9 +107,9 @@ const AdvancedSearchIndexDialog = ({ field, updateField, setText, index }: any) 
 		let xml = parser.parseFromString(res.data, 'text/xml')
 		let xmlText = new XMLSerializer().serializeToString(xml)
 		const list = convertXMLToJson(xmlText)
-		let nOptions = list.cluster?.index_list?.option.map((item: string) => {
+		let nOptions: option[] = list.cluster?.index_list?.option.map((item: string) => {
 			return {
-				index: item,
+				name: item,
 				bg: 'bg-white',
 			}
 		})
@@ -112,19 +124,42 @@ const AdvancedSearchIndexDialog = ({ field, updateField, setText, index }: any) 
 
 	const handleSubmit = () => {
 		if (!userSelect) return toast({ title: `${message.advWarnMsg}` })
-		updateField('field', userSelect, index)
+		updateField('field', userSelect, adv_search_index)
 		setText(userSelect)
 		setOptions([])
 		setKeyvalue('')
+		setOpen(false)
 	}
 
-	const optionClick = (index: string, key: number) => {
-		setUserSelect(index)
+	const optionClick = (name: string, selected_key: number) => {
+		let list = options
+		let n_list = list.map((item, key) => {
+			if (key === selected_key) {
+				return {
+					...item,
+					bg: 'bg-green-200',
+				}
+			}
+			return {
+				...item,
+				bg: 'bg-white',
+			}
+		})
+		setOptions(n_list)
+		setUserSelect(name)
+	}
+
+	const openDialog = () => {
+		if (!field) return toast({ title: `${message.advWarnMsg}` })
+		setOpen(true)
+		getCluster(field)
 	}
 
 	return (
-		<Dialog>
-			<DialogTrigger asChild onClick={() => getCluster(field)}>
+		<Dialog open={open}>
+			<DialogTrigger
+				asChild
+				onClick={openDialog}>
 				<Button
 					className={
 						'h-full w-[50px] px-0 flex items-center justify-center overflow-hidden ml-3 bg-opac-green'
@@ -132,9 +167,12 @@ const AdvancedSearchIndexDialog = ({ field, updateField, setText, index }: any) 
 					<Menu />
 				</Button>
 			</DialogTrigger>
-			<DialogContent>
-				<div className={'w-full flex justify-center items-center font-bold'}>
-					<DialogHeader>Browse Clusture for '{field}' </DialogHeader>
+			<DialogContent hideClose={'hidden'}>
+				<div className={'w-full flex justify-center items-center font-bold relative'}>
+					<DialogHeader>Browse Cluster for '{field}' </DialogHeader>
+					<button className={'absolute right-1'} onClick={() => setOpen(false)}>
+						<X className={'h-6 w-6'} />
+					</button>
 				</div>
 				<div className={'flex'}>
 					<div className="w-full relative">
@@ -166,16 +204,13 @@ const AdvancedSearchIndexDialog = ({ field, updateField, setText, index }: any) 
 				<ScrollAreaRoot className={'w-full'}>
 					<ScrollAreaViewport>
 						<div className="py-[15px] px-5">
-							{/* <div className="text-violet11 text-[15px] leading-[18px] font-medium">
-								Tags
-							</div> */}
-							{options.map((item: option, key) => (
+							{options?.map((item: option, key) => (
 								<div
-									className={`${item} cursor-pointer text-mauve12 text-[13px] leading-[18px] mt-2.5 pt-2.5 border-t border-t-mauve6`}
+									className={`${item.bg} cursor-pointer text-mauve12 text-[13px] leading-[18px] p-2.5 border-t border-t-mauve6`}
 									onDoubleClick={handleSubmit}
-									onClick={() => optionClick(item.index, key)}
+									onClick={() => optionClick(item.name, key)}
 									key={key}>
-									{item.index}
+									{item.name}
 								</div>
 							))}
 						</div>
@@ -194,7 +229,11 @@ const AdvancedSearchIndexDialog = ({ field, updateField, setText, index }: any) 
 					</Button>
 					<Button onClick={() => pageAction(cluster.next_page)}>{message.next}</Button>
 				</div>
-				<DialogFooter className={'w-full flex absolute bottom-1 relative md:justify-center md:items-center'}>
+
+				<DialogFooter
+					className={
+						'w-full flex absolute bottom-1 relative md:justify-center md:items-center'
+					}>
 					<Button onClick={handleSubmit}>{message.submit}</Button>
 				</DialogFooter>
 			</DialogContent>
