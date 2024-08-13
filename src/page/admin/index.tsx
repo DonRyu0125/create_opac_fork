@@ -1,13 +1,13 @@
+import AdminForm from '@/components/common/admin/AdminForm'
 import AdminLayout from '@/components/layouts/admin'
-import useLocation from '@/hooks/useLocation'
-import AdminForm from './AdminForm'
+import messageValue from '@/constants/en/message.json'
+import message from '@/schema/message.json'
+import { SchemaType } from '@/types/schema'
 
 const Admin = () => {
-	const params = useLocation()
-	const page = params?.get('page')
 	return (
 		<AdminLayout>
-			<AdminForm />
+			<AdminForm data={messageValue} schema={message as SchemaType} />
 		</AdminLayout>
 	)
 }

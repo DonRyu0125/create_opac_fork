@@ -27,7 +27,13 @@ export function setFileContent(fp, content) {
 		if (fs.existsSync(fp)) {
 			fs.unlinkSync(fp)
 		}
-		fs.writeFileSync(fp, content)
+		fs.writeFileSync(fp, content, (err) => {
+			if (err) {
+				console.error(`Error writing file at ${fp}:`, err)
+			} else {
+				console.log(`File successfully written to ${content}`)
+			}
+		})
 	} catch (error) {
 		console.log(error)
 	}

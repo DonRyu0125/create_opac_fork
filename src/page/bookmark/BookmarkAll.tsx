@@ -40,14 +40,15 @@ const BookmarkAll = () => {
 							</ToastAction>
 						),
 					})
+					window.location.reload()
 					return
 				}
 				// in case response is not successful
-				window.location?.reload()
+				window.location.reload()
 			})
 		} else {
 			toast({
-				title: message.recordAlreadyMarked,
+				title: message.allRecordsBookmarked,
 				action: <ToastAction altText="View bookmark">{message.viewBookmark}</ToastAction>,
 			})
 		}

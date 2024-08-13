@@ -34,7 +34,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 			})
 
 			// reload page on summary bookmark only
-			if (record.link_dbname) {
+			if (record.record.link_dbname) {
 				window.location.reload()
 			}
 			return
@@ -43,7 +43,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 		// Display toast only if record has already been bookmarked
 		if (like) {
 			toast({
-				title: `${message.allRecordsBookmarked}`,
+				title: `${message.recordAlreadyMarked}`,
 				action: (
 					<ToastAction altText={message.viewBookmark}>{message.viewBookmark}</ToastAction>
 				),

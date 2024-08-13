@@ -3,15 +3,14 @@ import Hero from '../components/common/Hero'
 import SearchForm from '../components/common/SearchForm'
 import Layout from '../components/layouts'
 import { SetStateAction, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { TextSearch } from 'lucide-react'
 import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
 import { getSearchURL } from '@/lib/utils'
 import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
 import { UNION_SEARCH_CL } from './Home'
-const Museum = () => {
+
+const Library = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
-	const { heroBanner, searchURL, title, database_name } = useConstants().museum
+	const { heroBanner, searchURL, title, database_name } = useConstants().library
 	return (
 		<Layout>
 			<Hero className={''} title={title} backgroundImage={heroBanner} description="">
@@ -27,4 +26,4 @@ const Museum = () => {
 	)
 }
 
-export default Museum
+export default Library

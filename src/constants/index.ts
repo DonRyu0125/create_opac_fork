@@ -13,9 +13,9 @@ export const CONSTANTS = {
 		message: en.message,
 		rsvp: en.rsvp,
 		advancedSearch: en.advancedSearch,
-		archives:en.archives,
-		museum:en.museum,
-		library:en.library
+		archives: en.archives,
+		museum: en.museum,
+		library: en.library,
 	},
 	FR: {
 		config: fr.config,
@@ -27,8 +27,8 @@ export const CONSTANTS = {
 		message: fr.message,
 		rsvp: fr.rsvp,
 		advancedSearch: fr.advancedSearch,
-		archives:fr.archives,
-		museum:fr.museum,
-		library:fr.library
-	}
+		archives: fr.archives,
+		museum: fr.museum,
+		library: fr.library,
+	},
 }
