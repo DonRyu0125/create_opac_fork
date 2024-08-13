@@ -97,5 +97,6 @@
 	"last":"Last",
 	"submit":"Submit",
 	"advIdxSubmitWarnMsg":"Please select before submit!",
-	"advIdxSelectWarnMsg":"Please select the field you want to search!"
+	"advIdxSelectWarnMsg":"Please select the field you want to search!",
+	"NoKeyFound":"No key is found"
 }

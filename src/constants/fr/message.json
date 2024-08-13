@@ -97,5 +97,6 @@
 	"last":"Dernier",
 	"submit":"Soumettre",
 	"advIdxSubmitWarnMsg": "Veuillez sélectionner avant de soumettre",
-	"advIdxSelectWarnMsg": "Veuillez sélectionner le champ que vous souhaitez rechercher"
+	"advIdxSelectWarnMsg": "Veuillez sélectionner le champ que vous souhaitez rechercher",
+	"NoKeyFound":"Aucune clé n'est trouvée"
 }

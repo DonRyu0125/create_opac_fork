@@ -227,7 +227,7 @@ const AdvancedSearchIndexDialog = ({
 									</div>
 								))
 							) : (
-								<div>No key is found</div>
+								<div>{message.NoKeyFound}</div>
 							)}
 						</div>
 					</ScrollAreaViewport>
