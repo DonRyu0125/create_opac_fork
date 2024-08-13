@@ -171,7 +171,7 @@ const AdvancedSearchIndexDialog = ({
 			</DialogTrigger>
 			<DialogContent hideClose={'hidden'}>
 				<div className={'w-full flex justify-center items-center relative'}>
-					<DialogHeader className={'font-extrabold'}>
+					<DialogHeader className={'font-bold text-2xl'}>
 						Browse Cluster for '{field?.label}'{' '}
 					</DialogHeader>
 					<button className={'absolute right-1'} onClick={() => setOpen(false)}>
