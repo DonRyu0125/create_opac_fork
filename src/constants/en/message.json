@@ -4,7 +4,7 @@
 	"summaryPage": "Summary Page",
 	"bookmarkPage": "Bookmark Page",
 	"detailPage": "Detail Page",
-	"resultsFor": "Result For",
+	"resultsFor": "Result(s) For",
 	"displaying": "Displaying",
 	"of": "of",
 	"next": "Next",
@@ -91,6 +91,9 @@
 	"or": "Or",
 	"not": "Not",
 	"addField": "Add field",
-	"advWarnMsg":"Please enter your search!",
-	"in":"in"
+	"advWarnMsg": "Please enter your search!",
+	"in": "in",
+	"noResultFound": "No results found",
+	"noSession": "Session expired, please restart your search",
+	"genericError": "Something went wrong, please restart your search"
 }

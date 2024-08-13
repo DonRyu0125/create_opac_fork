@@ -137,5 +137,5 @@ export const FILTER_TYPE_COLORS = [
 		type: 'MERKENICH',
 		color: COLORS_MAP['YELLOW'],
 		icon: ICON_SHAPE_MAP['SQUARE'],
-	}
+	},
 ]

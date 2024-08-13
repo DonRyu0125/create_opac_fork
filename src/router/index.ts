@@ -10,12 +10,28 @@ import RSVPConfirm from '@/page/RSVP/Confirmation'
 import Login from '@/page/login'
 import Bookmark from '@/page/bookmark'
 import NoBookmarkRecord from '@/page/NoBookmarkRecord'
-import Archives from '@/page/Archives'
-import Museum from '@/page/Museum'
-import Library from '@/page/Library'
+import Archives from '@/page/archives'
+import Museum from '@/page/museum'
+import Library from '@/page/library'
 
+import NoSession from '@/page/NoSession'
+import GenericErrorPage from '@/page/GenericErrorPage'
+import Fields from '@/page/admin/Fields'
+import AdminHome from '@/page/admin/Home'
+import AdminRSVP from '@/page/admin/RSVP'
+import AdminMessage from '@/page/admin/Message'
+import AdminStyles from '@/page/admin/Styles'
 
 export type TRoute = Record<string, () => React.ReactNode>
+
+const ADMIN_ROUTES: TRoute = {
+	admin: Admin,
+	'admin-fields': Fields,
+	'admin-home': AdminHome,
+	'admin-rsvp': AdminRSVP,
+	'admin-message': AdminMessage,
+	'admin-styles': AdminStyles,
+}
 
 export const ROUTES: TRoute = {
 	home: Home,
@@ -24,21 +40,20 @@ export const ROUTES: TRoute = {
 	faq: FAQ,
 	admin: Admin,
 	login: Login,
-	bookmark: Bookmark,
-	archives:Archives,
-	library:Library,
-	museum:Museum,
+	archives: Archives,
+	library: Library,
+	museum: Museum,
 	'rsvp-cancel': RSVPCancel,
 	'rsvp-confirm': RSVPConfirm,
 	'no-record': NoRecord,
 	'no-bk-record': NoBookmarkRecord,
+	'no-bookmark': NoBookmarkRecord,
+	'no-session': NoSession,
+	error: GenericErrorPage,
+	bookmark: Bookmark,
+	...ADMIN_ROUTES,
 }
 
-/**
- * Return the Component for the corresponding key
- * @param key
- * @returns
- */
 export const getComponentFromKey = (key: string | undefined): (() => React.ReactNode) => {
 	if (!key) return NotFoundPage
 	if (key in ROUTES) {
@@ -46,4 +61,3 @@ export const getComponentFromKey = (key: string | undefined): (() => React.React
 	}
 	return NotFoundPage
 }
-

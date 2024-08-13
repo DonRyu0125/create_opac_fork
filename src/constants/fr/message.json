@@ -91,6 +91,9 @@
 	"or": "Ou",
 	"not": "Non",
 	"addField": "Ajouter champ",
-	"advWarnMsg":"Veuillez entrer votre recherche!",
-	"in":"dans"
+	"advWarnMsg": "Veuillez entrer votre recherche!",
+	"in": "dans",
+	"noResultFound": "Aucun résultat trouvé",
+	"noSession": "Session expired, please restart your search",
+	"genericError": "Something went wrong, please restart your search"
 }

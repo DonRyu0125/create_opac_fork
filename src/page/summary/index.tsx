@@ -20,7 +20,7 @@ const Summary = () => {
 
 	const getDBTitle = (search_database: string) => {
 		const currentUrl = window.location.href
-		const match = home.searchURL.match(/&DATABASE=[^&]+/) ?? '';
+		const match = home.searchURL.match(/&DATABASE=[^&]+/) ?? ''
 		let db = config.navigations.filter((item) => item.search_database === search_database)
 		if (currentUrl.includes(match[0])) return ''
 		return `${message.in} ${db[0].title}`

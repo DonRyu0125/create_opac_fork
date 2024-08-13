@@ -64,7 +64,10 @@ const AdvancedSearchInput = ({
 					updateField('field', value, index)
 				}}>
 				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white rounded-r-lg font-semibold text-left">
-					<SelectValue className={'text-black'} placeholder={<div>{message.selectAfield}</div>} />
+					<SelectValue
+						className={'text-black'}
+						placeholder={<div>{message.selectAfield}</div>}
+					/>
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
 					{searchDatabase()?.items.map((item, key) => {

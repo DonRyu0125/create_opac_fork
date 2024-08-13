@@ -16,7 +16,6 @@
 		"server": "tsx watch ./server/src/index.ts"
 	},
 	"dependencies": {
-		"@fastify/env": "^4.3.0",
 		"@icons-pack/react-simple-icons": "^9.3.0",
 		"@radix-ui/react-accordion": "^1.1.2",
 		"@radix-ui/react-aspect-ratio": "^1.0.3",

@@ -9,30 +9,18 @@ import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSea
 import { UNION_SEARCH_CL } from './Home'
 
 const Library = () => {
-    const [showAdvSearch, setShowAdvSearch] = useState(false)
-	const {
-		heroBanner,
-		searchURL,
-		title,
-		database_name
-	} = useConstants().library
+	const [showAdvSearch, setShowAdvSearch] = useState(false)
+	const { heroBanner, searchURL, title, database_name } = useConstants().library
 	return (
 		<Layout>
-			<Hero
-				className={""}
-				title={title}
-				backgroundImage={heroBanner}
-				description="">
+			<Hero className={''} title={title} backgroundImage={heroBanner} description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
 					<SearchForm inputName={UNION_SEARCH_CL} action={getSearchURL(searchURL)} />
-					<AdvanceSearchButton setShowAdvSearch={setShowAdvSearch}/>
+					<AdvanceSearchButton setShowAdvSearch={setShowAdvSearch} />
 				</div>
 			</Hero>
 			{showAdvSearch && (
-				<AdvancedSearchForm
-					search_database={database_name}
-					url={getSearchURL(searchURL)}
-				/>
+				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
 		</Layout>
 	)

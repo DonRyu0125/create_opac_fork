@@ -134,11 +134,11 @@ export const getSessionID = () => {
 	if (document && domSessionId !== '^sessid^') return domSessionId
 	const cookieSessionId = getHomeSessionID()
 	if (cookieSessionId === '') return null
-	return cookieSessionId;
+	return cookieSessionId
 }
 
-export const getSearchURL = (url:string)=>{
-	const sessionID = getSessionID();
-	if(sessionID) return `${sessionID}?${url}`
+export const getSearchURL = (url: string) => {
+	const sessionID = getSessionID()
+	if (sessionID) return `${sessionID}?${url}`
 	return `/SCRIPTS/MWIMAIN.DLL?${url}`
 }

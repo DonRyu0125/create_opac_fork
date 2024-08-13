@@ -9,7 +9,7 @@ import { Card } from '../components/ui/card'
 import EventCalendar from '@/components/common/event-calendar'
 import { getSearchURL } from '@/lib/utils'
 
-export const UNION_SEARCH_CL='KEYWORD_CLUSTER'
+export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
 const Home = () => {
 	const {
@@ -24,7 +24,7 @@ const Home = () => {
 		<Layout>
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
-					<SearchForm inputName={UNION_SEARCH_CL} action={getSearchURL(searchURL)}/>
+					<SearchForm inputName={UNION_SEARCH_CL} action={getSearchURL(searchURL)} />
 				</div>
 				{/* <CommandDemo /> */}
 			</Hero>

@@ -6,10 +6,9 @@ import { Separator } from '@/components/ui/separator'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { getFieldDataByLabel, getFieldsFromRecord, truncateString } from '@/lib/record'
-import { viewAtom } from '@/store'
 import { Record } from '@/types/record'
-import { useAtom } from 'jotai'
 import { RecordAction } from './RecordAction'
+import { useDisplayMode } from '@/hooks/useDisplayMode'
 
 const SummaryRecords = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -25,7 +24,7 @@ const SummaryRecords = () => {
 }
 
 const RecordView = ({ record }: { record: Record }) => {
-	const [view] = useAtom(viewAtom)
+	const { displayMode } = useDisplayMode()
 	const { fields } = useConstants()
 	const database = record.database_name || record.link_dbname || 'COLLECTIONS_WEB' // use link_dbname for SELECTION_LIST
 	const recordLink = record.record_link
@@ -57,7 +56,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		)
 	) as React.ReactNode
 
-	if (view === 'grid') {
+	if (displayMode === 'grid') {
 		return (
 			<InfoCard
 				className="border-primary"
@@ -76,7 +75,7 @@ const RecordView = ({ record }: { record: Record }) => {
 	return (
 		<DetailInfoCard
 			title={<Link href={recordLink}>{title}</Link>}
-			className="col-span-3 border-primary"
+			className="col-span-4 border-primary"
 			thumbnail={thumbnail || 'https://placehold.co/250x250'}
 			footer={
 				<div>
