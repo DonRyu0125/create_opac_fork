@@ -10,10 +10,9 @@ import RSVPConfirm from '@/page/RSVP/Confirmation'
 import Login from '@/page/login'
 import Bookmark from '@/page/bookmark'
 import NoBookmarkRecord from '@/page/NoBookmarkRecord'
-import Archives from '@/page/archives'
-import Museum from '@/page/museum'
-import Library from '@/page/library'
-
+import Museum from '@/page/Museum'
+import Archives from '@/page/Archives'
+import Library from '@/page/Library'
 import NoSession from '@/page/NoSession'
 import GenericErrorPage from '@/page/GenericErrorPage'
 import Fields from '@/page/admin/Fields'
@@ -21,6 +20,7 @@ import AdminHome from '@/page/admin/Home'
 import AdminRSVP from '@/page/admin/RSVP'
 import AdminMessage from '@/page/admin/Message'
 import AdminStyles from '@/page/admin/Styles'
+
 
 export type TRoute = Record<string, () => React.ReactNode>
 
