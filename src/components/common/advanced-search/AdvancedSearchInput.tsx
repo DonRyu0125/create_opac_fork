@@ -7,7 +7,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import { ADVANCED_SEARCH_BOOLEAN, FieldObject } from './AdvancedSearchForm'
+import { FieldObject } from './AdvancedSearchForm'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
 import AdvancedSearchIndexDialog from './AdvancedSearchIndexDialog'

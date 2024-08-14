@@ -99,11 +99,12 @@ export type Not = string;
 export type AddField = string;
 export type AdvWarnMsg = string;
 export type In = string;
-export type Fisrt = string;
+export type First = string;
 export type Last = string;
 export type Submit = string;
 export type AdvIdxSubmitWarnMsg = string;
 export type AdvIdxSelectWarnMsg = string;
+export type NoKeyFound = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -200,10 +201,11 @@ export interface MessageJson {
   addField?: AddField;
   advWarnMsg?: AdvWarnMsg;
   in?: In;
-  fisrt?: Fisrt;
+  first?: First;
   last?: Last;
   submit?: Submit;
   advIdxSubmitWarnMsg?: AdvIdxSubmitWarnMsg;
   advIdxSelectWarnMsg?: AdvIdxSelectWarnMsg;
+  NoKeyFound?: NoKeyFound;
   [k: string]: unknown;
 }

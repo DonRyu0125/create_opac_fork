@@ -156,15 +156,16 @@ const AdvancedSearchIndexDialog = ({
 	}
 
 	const openDialog = () => {
-		if (!field) return toast({ title: `${message.advIdxSelectWarnMsg}` })
+		if (!field) return
 		setOpen(true)
-		getCluster(field.name)
+		getCluster(field?.name)
 	}
 
 	return (
 		<Dialog open={open}>
 			<DialogTrigger asChild onClick={openDialog}>
 				<Button
+					disabled={!field ? true : false}
 					className={
 						'h-full w-[50px] px-0 flex items-center justify-center overflow-hidden ml-3 bg-opac-green '
 					}>
@@ -173,10 +174,10 @@ const AdvancedSearchIndexDialog = ({
 			</DialogTrigger>
 			<DialogContent hideClose={'hidden'}>
 				<div className={'w-full flex justify-center items-center relative'}>
-					<DialogHeader className={'font-bold text-2xl'}>
+					<DialogHeader className={'font-bold text-xl md:text-2xl'}>
 						Browse Cluster for '{field?.label}'{' '}
 					</DialogHeader>
-					<button className={'absolute right-1'} onClick={() => setOpen(false)}>
+					<button className={'absolute right-1 p-1 bg-primary font-bold mx-1 text-white rounded'} onClick={() => setOpen(false)}>
 						<X className={'h-6 w-6'} />
 					</button>
 				</div>
@@ -204,13 +205,17 @@ const AdvancedSearchIndexDialog = ({
 					</Button>
 				</div>
 				<div className={'flex w-full justify-between items-center'}>
-					<Button className={'font-bold'} onClick={() => pageAction(cluster.first_page)}>
+					<div
+						className={'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'}
+						onClick={() => pageAction(cluster.first_page)}>
 						<ChevronFirst />
-					</Button>
-					<Button onClick={() => pageAction(cluster.prev_page)} className={'] font-bold'}>
+					</div>
+					<div
+						className={'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'}
+						onClick={() => pageAction(cluster.prev_page)}>
 						<ChevronLeft />
-					</Button>
-					<ScrollAreaRoot className={'w-48'}>
+					</div>
+					<ScrollAreaRoot className={'w-48 md:w-64 h-[400px]'}>
 						<ScrollAreaViewport>
 							<div className="py-[15px] px-5">
 								{options?.length > 1 ? (
@@ -236,26 +241,25 @@ const AdvancedSearchIndexDialog = ({
 						</ScrollAreaScrollbar>
 						<ScrollAreaCorner />
 					</ScrollAreaRoot>
-					<Button className={' font-bold'} onClick={() => pageAction(cluster.next_page)}>
+					<div
+						className={'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'}
+						onClick={() => pageAction(cluster.next_page)}>
 						<ChevronRight />
-					</Button>
-					<Button className={' font-bold'} onClick={() => pageAction(cluster.last_page)}>
+					</div>
+					<div
+						className={'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'}
+						onClick={() => pageAction(cluster.last_page)}>
 						<ChevronLast />
-					</Button>
+					</div>
 				</div>
 
 				<DialogFooter
 					className={
 						'relative w-full flex absolute bottom-1 relative md:justify-center md:items-center'
 					}>
-					<Button className={'min-w-[85px] font-bold'} onClick={handleSubmit}>
+					<Button className={'w-full font-bold'} onClick={handleSubmit}>
 						{message.submit}
 					</Button>
-					{/* <Button
-						className={'absolute right-0 min-w-[85px] bg-red-600 font-bold'}
-						onClick={() => setOpen(false)}>
-						{message.close}
-					</Button> */}
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

@@ -20,7 +20,7 @@ const Archives = () => {
 				</div>
 			</Hero>
 			{showAdvSearch && (
-				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} default_field={'title'} />
+				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
 		</Layout>
 	)
