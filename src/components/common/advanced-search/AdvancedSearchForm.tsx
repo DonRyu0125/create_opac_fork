@@ -104,7 +104,6 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 					`${exp.field} ${exp.keyword} ${exp.boolean && index !== len - 1 ? exp.boolean : ''}`
 			)
 			.join(' ')
-
 		inputRef.current.value = qry
 		formRef.current?.submit()
 	}
