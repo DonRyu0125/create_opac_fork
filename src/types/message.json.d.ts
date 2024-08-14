@@ -5,201 +5,213 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type SearchPlaceholder = string
-export type SearchButton = string
-export type SummaryPage = string
-export type BookmarkPage = string
-export type DetailPage = string
-export type ResultsFor = string
-export type Displaying = string
-export type Of = string
-export type Next = string
-export type Previous = string
-export type Record = string
-export type RecordPerPage = string
-export type NoOptionsAvailable = string
-export type SortBy = string
-export type FilterBy = string
-export type Bookmark = string
-export type Home = string
-export type Copy = string
-export type Print = string
-export type Save = string
-export type NoMediaFound = string
-export type SelectRecordsNumber = string
-export type Grid = string
-export type List = string
-export type Camera = string
-export type Books = string
-export type Audio = string
-export type Video = string
-export type RsvpCancellationMessage = string
-export type SortDefault = string
-export type SortTitleAscending = string
-export type SortTitleDescending = string
-export type SortDateAscending = string
-export type SortDateDescending = string
-export type SortAccessionNumberAscending = string
-export type RecordIsCopied = string
-export type PrintPage = string
-export type BookmarkAll = string
-export type ViewBookmark = string
-export type Week = string
-export type Month = string
-export type All = string
-export type Events = string
-export type RegistrationRequired = string
-export type Register = string
-export type Registered = string
-export type Unregistered = string
-export type NoSeatsRemaining = string
-export type SeatsRemaining = string
-export type ContactInfo = string
-export type Address = string
-export type Phone = string
-export type Room = string
-export type SuitableFor = string
-export type Seats = string
-export type Language = string
-export type DateType = string
-export type DaysOfWeek = string[]
-export type Close = string
-export type PrivateProperty = string
-export type ContactInfoNotProvided = string
-export type GoBack = string
-export type RegistrationIncomplete = string
-export type CheckEmail = string
-export type LogIn = string
-export type FirstName = string
-export type LastName = string
-export type Email = string
-export type Attendee = string
-export type EventCancel = string
-export type SpotReserved = string
-export type Confirm = string
-export type PleaseConfirm = string
-export type PleaseCancel = string
-export type FiltersAndSorting = string
-export type SuccessfullBookmark = string
-export type AllRecordsBookmarked = string
-export type RecordAlreadyMarked = string
-export type BookmarkHasBeenRemoved = string
-export type RemoveALL = string
-export type NoBookmark = string
-export type NoItemsInBookmark = string
-export type GoBackHome = string
-export type AdvanceSearchTooltip = string
-export type SelectAfield = string
-export type AdvanceSearch = string
-export type AdvanceSearchDesc = string
-export type Clear = string
-export type And = string
-export type Or = string
-export type Not = string
-export type AddField = string
-export type AdvWarnMsg = string
-export type In = string
-export type NoResultFound = string
-export type NoSession = string
-export type GenericError = string
+export type SearchPlaceholder = string;
+export type SearchButton = string;
+export type SummaryPage = string;
+export type BookmarkPage = string;
+export type DetailPage = string;
+export type ResultsFor = string;
+export type Displaying = string;
+export type Of = string;
+export type Next = string;
+export type Previous = string;
+export type Record = string;
+export type RecordPerPage = string;
+export type NoOptionsAvailable = string;
+export type SortBy = string;
+export type FilterBy = string;
+export type Bookmark = string;
+export type Home = string;
+export type Copy = string;
+export type Print = string;
+export type Save = string;
+export type NoMediaFound = string;
+export type SelectRecordsNumber = string;
+export type Grid = string;
+export type List = string;
+export type Camera = string;
+export type Books = string;
+export type Audio = string;
+export type Video = string;
+export type RsvpCancellationMessage = string;
+export type SortDefault = string;
+export type SortTitleAscending = string;
+export type SortTitleDescending = string;
+export type SortDateAscending = string;
+export type SortDateDescending = string;
+export type SortAccessionNumberAscending = string;
+export type RecordIsCopied = string;
+export type PrintPage = string;
+export type BookmarkAll = string;
+export type ViewBookmark = string;
+export type Week = string;
+export type Month = string;
+export type All = string;
+export type Events = string;
+export type RegistrationRequired = string;
+export type Register = string;
+export type Registered = string;
+export type Unregistered = string;
+export type NoSeatsRemaining = string;
+export type SeatsRemaining = string;
+export type ContactInfo = string;
+export type Address = string;
+export type Phone = string;
+export type Room = string;
+export type SuitableFor = string;
+export type Seats = string;
+export type Language = string;
+export type DateType = string;
+export type DaysOfWeek = string[];
+export type Close = string;
+export type PrivateProperty = string;
+export type ContactInfoNotProvided = string;
+export type GoBack = string;
+export type RegistrationIncomplete = string;
+export type CheckEmail = string;
+export type LogIn = string;
+export type FirstName = string;
+export type LastName = string;
+export type Email = string;
+export type Attendee = string;
+export type EventCancel = string;
+export type SpotReserved = string;
+export type Confirm = string;
+export type PleaseConfirm = string;
+export type PleaseCancel = string;
+export type FiltersAndSorting = string;
+export type SuccessfullBookmark = string;
+export type AllRecordsBookmarked = string;
+export type RecordAlreadyMarked = string;
+export type BookmarkHasBeenRemoved = string;
+export type RemoveALL = string;
+export type NoBookmark = string;
+export type NoItemsInBookmark = string;
+export type GoBackHome = string;
+export type AdvanceSearchTooltip = string;
+export type SelectAfield = string;
+export type AdvanceSearch = string;
+export type AdvanceSearchDesc = string;
+export type Clear = string;
+export type And = string;
+export type Or = string;
+export type Not = string;
+export type AddField = string;
+export type NoResultFound = string;
+export type NoSession = string;
+export type GenericError = string;
+export type AdvWarnMsg = string;
+export type In = string;
+export type Fisrt = string;
+export type Last = string;
+export type Submit = string;
+export type AdvIdxSubmitWarnMsg = string;
+export type AdvIdxSelectWarnMsg = string;
+export type NoKeyFound = string;
 
 export interface MessageJson {
-	searchPlaceholder?: SearchPlaceholder
-	searchButton?: SearchButton
-	summaryPage?: SummaryPage
-	bookmarkPage?: BookmarkPage
-	detailPage?: DetailPage
-	resultsFor?: ResultsFor
-	displaying?: Displaying
-	of?: Of
-	next?: Next
-	previous?: Previous
-	record?: Record
-	recordPerPage?: RecordPerPage
-	noOptionsAvailable?: NoOptionsAvailable
-	sortBy?: SortBy
-	filterBy?: FilterBy
-	bookmark?: Bookmark
-	home?: Home
-	copy?: Copy
-	print?: Print
-	save?: Save
-	noMediaFound?: NoMediaFound
-	selectRecordsNumber?: SelectRecordsNumber
-	grid?: Grid
-	list?: List
-	camera?: Camera
-	books?: Books
-	audio?: Audio
-	video?: Video
-	rsvpCancellationMessage?: RsvpCancellationMessage
-	sortDefault?: SortDefault
-	sortTitleAscending?: SortTitleAscending
-	sortTitleDescending?: SortTitleDescending
-	sortDateAscending?: SortDateAscending
-	sortDateDescending?: SortDateDescending
-	sortAccessionNumberAscending?: SortAccessionNumberAscending
-	recordIsCopied?: RecordIsCopied
-	printPage?: PrintPage
-	bookmarkAll?: BookmarkAll
-	viewBookmark?: ViewBookmark
-	week?: Week
-	month?: Month
-	all?: All
-	events?: Events
-	registrationRequired?: RegistrationRequired
-	register?: Register
-	registered?: Registered
-	unregistered?: Unregistered
-	noSeatsRemaining?: NoSeatsRemaining
-	seatsRemaining?: SeatsRemaining
-	contactInfo?: ContactInfo
-	address?: Address
-	phone?: Phone
-	room?: Room
-	suitableFor?: SuitableFor
-	seats?: Seats
-	language?: Language
-	dateType?: DateType
-	daysOfWeek?: DaysOfWeek
-	close?: Close
-	privateProperty?: PrivateProperty
-	contactInfoNotProvided?: ContactInfoNotProvided
-	goBack?: GoBack
-	registrationIncomplete?: RegistrationIncomplete
-	checkEmail?: CheckEmail
-	logIn?: LogIn
-	firstName?: FirstName
-	lastName?: LastName
-	email?: Email
-	attendee?: Attendee
-	eventCancel?: EventCancel
-	spotReserved?: SpotReserved
-	confirm?: Confirm
-	pleaseConfirm?: PleaseConfirm
-	pleaseCancel?: PleaseCancel
-	filtersAndSorting?: FiltersAndSorting
-	successfullBookmark?: SuccessfullBookmark
-	allRecordsBookmarked?: AllRecordsBookmarked
-	recordAlreadyMarked?: RecordAlreadyMarked
-	bookmarkHasBeenRemoved?: BookmarkHasBeenRemoved
-	removeALL?: RemoveALL
-	noBookmark?: NoBookmark
-	noItemsInBookmark?: NoItemsInBookmark
-	goBackHome?: GoBackHome
-	advanceSearchTooltip?: AdvanceSearchTooltip
-	selectAfield?: SelectAfield
-	advanceSearch?: AdvanceSearch
-	advanceSearchDesc?: AdvanceSearchDesc
-	clear?: Clear
-	and?: And
-	or?: Or
-	not?: Not
-	addField?: AddField
-	advWarnMsg?: AdvWarnMsg
-	in?: In
-	noResultFound?: NoResultFound
-	noSession?: NoSession
-	genericError?: GenericError
-	[k: string]: unknown
+  searchPlaceholder?: SearchPlaceholder;
+  searchButton?: SearchButton;
+  summaryPage?: SummaryPage;
+  bookmarkPage?: BookmarkPage;
+  detailPage?: DetailPage;
+  resultsFor?: ResultsFor;
+  displaying?: Displaying;
+  of?: Of;
+  next?: Next;
+  previous?: Previous;
+  record?: Record;
+  recordPerPage?: RecordPerPage;
+  noOptionsAvailable?: NoOptionsAvailable;
+  sortBy?: SortBy;
+  filterBy?: FilterBy;
+  bookmark?: Bookmark;
+  home?: Home;
+  copy?: Copy;
+  print?: Print;
+  save?: Save;
+  noMediaFound?: NoMediaFound;
+  selectRecordsNumber?: SelectRecordsNumber;
+  grid?: Grid;
+  list?: List;
+  camera?: Camera;
+  books?: Books;
+  audio?: Audio;
+  video?: Video;
+  rsvpCancellationMessage?: RsvpCancellationMessage;
+  sortDefault?: SortDefault;
+  sortTitleAscending?: SortTitleAscending;
+  sortTitleDescending?: SortTitleDescending;
+  sortDateAscending?: SortDateAscending;
+  sortDateDescending?: SortDateDescending;
+  sortAccessionNumberAscending?: SortAccessionNumberAscending;
+  recordIsCopied?: RecordIsCopied;
+  printPage?: PrintPage;
+  bookmarkAll?: BookmarkAll;
+  viewBookmark?: ViewBookmark;
+  week?: Week;
+  month?: Month;
+  all?: All;
+  events?: Events;
+  registrationRequired?: RegistrationRequired;
+  register?: Register;
+  registered?: Registered;
+  unregistered?: Unregistered;
+  noSeatsRemaining?: NoSeatsRemaining;
+  seatsRemaining?: SeatsRemaining;
+  contactInfo?: ContactInfo;
+  address?: Address;
+  phone?: Phone;
+  room?: Room;
+  suitableFor?: SuitableFor;
+  seats?: Seats;
+  language?: Language;
+  dateType?: DateType;
+  daysOfWeek?: DaysOfWeek;
+  close?: Close;
+  privateProperty?: PrivateProperty;
+  contactInfoNotProvided?: ContactInfoNotProvided;
+  goBack?: GoBack;
+  registrationIncomplete?: RegistrationIncomplete;
+  checkEmail?: CheckEmail;
+  logIn?: LogIn;
+  firstName?: FirstName;
+  lastName?: LastName;
+  email?: Email;
+  attendee?: Attendee;
+  eventCancel?: EventCancel;
+  spotReserved?: SpotReserved;
+  confirm?: Confirm;
+  pleaseConfirm?: PleaseConfirm;
+  pleaseCancel?: PleaseCancel;
+  filtersAndSorting?: FiltersAndSorting;
+  successfullBookmark?: SuccessfullBookmark;
+  allRecordsBookmarked?: AllRecordsBookmarked;
+  recordAlreadyMarked?: RecordAlreadyMarked;
+  bookmarkHasBeenRemoved?: BookmarkHasBeenRemoved;
+  removeALL?: RemoveALL;
+  noBookmark?: NoBookmark;
+  noItemsInBookmark?: NoItemsInBookmark;
+  goBackHome?: GoBackHome;
+  advanceSearchTooltip?: AdvanceSearchTooltip;
+  selectAfield?: SelectAfield;
+  advanceSearch?: AdvanceSearch;
+  advanceSearchDesc?: AdvanceSearchDesc;
+  clear?: Clear;
+  and?: And;
+  or?: Or;
+  not?: Not;
+  addField?: AddField;
+  noResultFound?: NoResultFound;
+  noSession?: NoSession;
+  genericError?: GenericError;
+  advWarnMsg?: AdvWarnMsg;
+  in?: In;
+  fisrt?: Fisrt;
+  last?: Last;
+  submit?: Submit;
+  advIdxSubmitWarnMsg?: AdvIdxSubmitWarnMsg;
+  advIdxSelectWarnMsg?: AdvIdxSelectWarnMsg;
+  NoKeyFound?: NoKeyFound;
+  [k: string]: unknown;
 }

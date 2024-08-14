@@ -32,8 +32,8 @@
 				"name": "date_cr_inc"
 			},
 			{
-				"label": "Level Desc",
-				"name": "LEVEL_DESC"
+				"label": "DESC TYPE",
+				"name": "DESC_TYPE"
 			}
 		]
 	},

@@ -10,6 +10,7 @@ import {
 import { ADVANCED_SEARCH_BOOLEAN, FieldObject } from './AdvancedSearchForm'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
+import AdvancedSearchIndexDialog from './AdvancedSearchIndexDialog'
 
 interface AdvancedSearchInputProps {
 	exp: FieldObject
@@ -18,6 +19,11 @@ interface AdvancedSearchInputProps {
 	updateField: Function
 	submitSearch: Function
 }
+export type selected = {
+	label: string
+	name: string
+}
+
 const AdvancedSearchInput = ({
 	updateField,
 	index,
@@ -27,6 +33,7 @@ const AdvancedSearchInput = ({
 }: AdvancedSearchInputProps) => {
 	const { advancedSearch, message } = useConstants()
 	const [text, setText] = useState<string>()
+	const [userSelect, setUserSelect] = useState<selected|undefined>()
 	const ADVANCED_SEARCH_BOOLEAN_SELECT_MAP = [
 		{
 			key: `${message.and}`,
@@ -61,7 +68,9 @@ const AdvancedSearchInput = ({
 		<div className="w-full flex relative m-2" key={index}>
 			<Select
 				onValueChange={(value) => {
+					let item = searchDatabase()?.items.find((item) => item.name === value)
 					updateField('field', value, index)
+					setUserSelect(item)
 				}}>
 				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white rounded-r-lg font-semibold text-left">
 					<SelectValue
@@ -75,7 +84,7 @@ const AdvancedSearchInput = ({
 							<SelectItem
 								key={key}
 								value={item.name}
-								className="w-full border bg-opac-green border-opac-green  ">
+								className="w-full border bg-opac-green border-opac-green ">
 								{item.label}
 							</SelectItem>
 						)
@@ -110,7 +119,7 @@ const AdvancedSearchInput = ({
 				}}>
 				<SelectTrigger
 					disabled={!exp.boolean}
-					className="w-28  border border-opac-green bg-opac-green text-white rounded-l-lg font-semibold ">
+					className="w-28 border border-opac-green bg-opac-green text-white rounded-l-lg font-semibold ">
 					<SelectValue
 						placeholder={message.and}
 						defaultValue={exp.boolean ? exp.boolean : exp.boolean}
@@ -129,6 +138,12 @@ const AdvancedSearchInput = ({
 					})}
 				</SelectContent>
 			</Select>
+			<AdvancedSearchIndexDialog
+				field={userSelect}
+				updateField={updateField}
+				setText={setText}
+				adv_search_index={index}
+			/>
 		</div>
 	)
 }

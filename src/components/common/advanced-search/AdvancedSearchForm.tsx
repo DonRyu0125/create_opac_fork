@@ -52,6 +52,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 	const updateField = (key: string, value: string, index: string) => {
 		const newSearchExp: any = [...searchExp]
 		newSearchExp[index][key] = value
+		console.log('newSearchExp',newSearchExp)
 		setSearchExp(newSearchExp)
 	}
 

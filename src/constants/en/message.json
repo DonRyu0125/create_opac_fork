@@ -56,7 +56,15 @@
 	"seats": "All Seats",
 	"language": "Language",
 	"dateType": "default",
-	"daysOfWeek": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+	"daysOfWeek": [
+		"Sun",
+		"Mon",
+		"Tue",
+		"Wed",
+		"Thu",
+		"Fri",
+		"Sat"
+	],
 	"close": "Close",
 	"privateProperty": "Private property",
 	"contactInfoNotProvided": "Contact info is not provided",
@@ -91,9 +99,15 @@
 	"or": "Or",
 	"not": "Not",
 	"addField": "Add field",
-	"advWarnMsg": "Please enter your search!",
-	"in": "in",
 	"noResultFound": "No results found",
 	"noSession": "Session expired, please restart your search",
-	"genericError": "Something went wrong, please restart your search"
+	"genericError": "Something went wrong, please restart your search",
+	"advWarnMsg": "Please enter your search!",
+	"in": "in",
+	"fisrt": "First",
+	"last": "Last",
+	"submit": "Submit",
+	"advIdxSubmitWarnMsg": "Please select before submit!",
+	"advIdxSelectWarnMsg": "Please select the field you want to search!",
+	"NoKeyFound": "No key is found"
 }

@@ -5,29 +5,29 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Heading = string
-export type HeroBanner = string
-export type SearchURL = string
-export type BrowseByCategoryTitle = string
-export type Title = string
-export type DatabaseName = string
-export type Thumbnail = string
-export type Title1 = string
-export type Url = string
+export type Heading = string;
+export type HeroBanner = string;
+export type SearchURL = string;
+export type BrowseByCategoryTitle = string;
+export type Title = string;
+export type DatabaseName = string;
+export type Thumbnail = string;
+export type Title1 = string;
+export type Url = string;
 export type CategoriesItems = {
-	thumbnail?: Thumbnail
-	title?: Title1
-	url?: Url
-	[k: string]: unknown
-}[]
+  thumbnail?: Thumbnail;
+  title?: Title1;
+  url?: Url;
+  [k: string]: unknown;
+}[];
 
 export interface ArchivesJson {
-	heading?: Heading
-	heroBanner?: HeroBanner
-	searchURL?: SearchURL
-	browseByCategoryTitle?: BrowseByCategoryTitle
-	title?: Title
-	database_name?: DatabaseName
-	categoriesItems?: CategoriesItems
-	[k: string]: unknown
+  heading?: Heading;
+  heroBanner?: HeroBanner;
+  searchURL?: SearchURL;
+  browseByCategoryTitle?: BrowseByCategoryTitle;
+  title?: Title;
+  database_name?: DatabaseName;
+  categoriesItems?: CategoriesItems;
+  [k: string]: unknown;
 }
