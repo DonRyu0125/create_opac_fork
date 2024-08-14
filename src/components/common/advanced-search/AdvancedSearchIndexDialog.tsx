@@ -22,7 +22,6 @@ import {
 import useConstants from '@/hooks/useConstants'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
-import { selected } from './AdvancedSearchInput'
 
 interface ClusterData {
 	index_list: {
@@ -44,7 +43,6 @@ type option = {
 interface Adv_dialog {
 	field: string
 	updateField: Function
-	setText: (text: string) => void
 	adv_search_index: number
 	database_name: string
 }
@@ -55,7 +53,6 @@ const SELECT_OPTION_COLOR = 'bg-green-200'
 const AdvancedSearchIndexDialog = ({
 	field,
 	updateField,
-	setText,
 	adv_search_index,
 	database_name,
 }: Adv_dialog) => {
@@ -131,7 +128,6 @@ const AdvancedSearchIndexDialog = ({
 	const handleSubmit = () => {
 		if (!userSelect) return toast({ title: `${message.advIdxSubmitWarnMsg}` })
 		updateField('keyword', userSelect, adv_search_index)
-		setText(userSelect)
 		setOptions([])
 		setKeyvalue('')
 		setOpen(false)

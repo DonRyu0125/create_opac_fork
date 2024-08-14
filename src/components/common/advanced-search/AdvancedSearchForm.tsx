@@ -95,6 +95,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 			toast({
 				title: `${message.advWarnMsg}`,
 			})
+			return;
 		}
 		let len = data.length
 		let qry = data
@@ -133,7 +134,6 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							<AdvancedSearchInput
 								submitSearch={submitSearch}
 								updateField={updateField}
-								defaultField={exp.field}
 								exp={exp}
 								index={index}
 								database_name={search_database}

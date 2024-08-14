@@ -18,7 +18,6 @@ interface AdvancedSearchInputProps {
 	database_name: string
 	updateField: Function
 	submitSearch: Function
-	defaultField:string
 }
 export type selected = {
 	label: string
@@ -31,10 +30,8 @@ const AdvancedSearchInput = ({
 	exp,
 	database_name,
 	submitSearch,
-	defaultField,
 }: AdvancedSearchInputProps) => {
 	const { advancedSearch, message } = useConstants()
-	const [text, setText] = useState<string>()
 	const [userSelect, setUserSelect] = useState<string>('')
 	const ADVANCED_SEARCH_BOOLEAN_SELECT_MAP = [
 		{
@@ -51,10 +48,6 @@ const AdvancedSearchInput = ({
 		},
 	]
 
-	useEffect(() => {
-		setText('')
-	}, [])
-
 	const searchDatabase = () => {
 		let dbArr = advancedSearch.filter((elm) => elm.database === database_name)
 		return dbArr[0]
@@ -69,7 +62,7 @@ const AdvancedSearchInput = ({
 	return (
 		<div className="w-full flex relative m-2" key={index}>
 			<Select
-				defaultValue={defaultField}
+				value={exp.field}
 				onValueChange={(value) => {
 					updateField('field', value, index)
 					setUserSelect(value)
@@ -84,7 +77,6 @@ const AdvancedSearchInput = ({
 					{searchDatabase()?.items.map((item, key) => {
 						return (
 							<SelectItem
-								
 								key={key}
 								value={item.name}
 								className="w-full border bg-opac-green border-opac-green ">
@@ -96,17 +88,16 @@ const AdvancedSearchInput = ({
 			</Select>
 			<Input
 				onKeyDown={handleKeyDown}
-				value={text}
+				value={exp.keyword}
 				onChange={(e) => {
 					updateField('keyword', e.target.value, index)
-					setText(e.target.value)
 				}}
 				className={cn(
 					'placeholder:text-slate-400 border w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green focus:outline-none ring-inset'
 				)}
 				type="search"
 			/>
-			{!text && (
+			{!exp.keyword && (
 				<div
 					className={
 						'absolute w-full h-full flex items-center justify-center text-gray-500 pointer-events-none'
@@ -117,16 +108,14 @@ const AdvancedSearchInput = ({
 				</div>
 			)}
 			<Select
+				value={exp.boolean}
 				onValueChange={(value) => {
 					updateField('boolean', value, index)
 				}}>
 				<SelectTrigger
 					disabled={!exp.boolean}
 					className="w-28 border border-opac-green bg-opac-green text-white rounded-l-lg font-semibold ">
-					<SelectValue
-						placeholder={message.and}
-						defaultValue={exp.boolean ? exp.boolean : exp.boolean}
-					/>
+					<SelectValue />
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
 					{ADVANCED_SEARCH_BOOLEAN_SELECT_MAP.map((item, key) => {
@@ -142,9 +131,8 @@ const AdvancedSearchInput = ({
 				</SelectContent>
 			</Select>
 			<AdvancedSearchIndexDialog
-				field={defaultField ?? userSelect}
+				field={exp.field ?? userSelect}
 				updateField={updateField}
-				setText={setText}
 				adv_search_index={index}
 				database_name={database_name}
 			/>
