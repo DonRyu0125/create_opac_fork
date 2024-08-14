@@ -102,7 +102,7 @@ export type NoSession = string;
 export type GenericError = string;
 export type AdvWarnMsg = string;
 export type In = string;
-export type Fisrt = string;
+export type First = string;
 export type Last = string;
 export type Submit = string;
 export type AdvIdxSubmitWarnMsg = string;
@@ -207,7 +207,7 @@ export interface MessageJson {
   genericError?: GenericError;
   advWarnMsg?: AdvWarnMsg;
   in?: In;
-  fisrt?: Fisrt;
+  first?: First;
   last?: Last;
   submit?: Submit;
   advIdxSubmitWarnMsg?: AdvIdxSubmitWarnMsg;

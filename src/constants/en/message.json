@@ -1,5 +1,5 @@
 {
-	"searchPlaceholder": "Enter Your Search",
+	"searchPlaceholder": "Enter Your ",
 	"searchButton": "Search",
 	"summaryPage": "Summary Page",
 	"bookmarkPage": "Bookmark Page",
@@ -93,7 +93,7 @@
 	"advanceSearchTooltip": "Add an extra field to perform a more specific advanced search",
 	"selectAfield": "Select a field",
 	"advanceSearch": "Advanced Search",
-	"advanceSearchDesc": "Advanced search lets you select specific fields to refine your search results",
+	"advanceSearchDesc": "Select a field below to perform an advanced search",
 	"clear": "Clear",
 	"and": "And",
 	"or": "Or",
@@ -104,10 +104,11 @@
 	"genericError": "Something went wrong, please restart your search",
 	"advWarnMsg": "Please enter your search!",
 	"in": "in",
-	"fisrt": "First",
+	"first": "First",
 	"last": "Last",
 	"submit": "Submit",
 	"advIdxSubmitWarnMsg": "Please select before submit!",
 	"advIdxSelectWarnMsg": "Please select the field you want to search!",
-	"NoKeyFound": "No key is found"
+	"NoKeyFound": "No key is found",
+	"BrowseCluster":"Browse Cluster for"
 }

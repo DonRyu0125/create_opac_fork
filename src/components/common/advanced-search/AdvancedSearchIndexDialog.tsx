@@ -11,7 +11,7 @@ import {
 } from '../../ui/dialog'
 import { Button } from '@/components/ui/button'
 import { convertXMLToJson, getSessionID } from '@/lib/utils'
-import { Menu, Search, X } from 'lucide-react'
+import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight, Menu, Search, X } from 'lucide-react'
 import {
 	ScrollAreaCorner,
 	ScrollAreaRoot,
@@ -22,7 +22,6 @@ import {
 import useConstants from '@/hooks/useConstants'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
-import { selected } from './AdvancedSearchInput'
 
 interface ClusterData {
 	index_list: {
@@ -42,10 +41,11 @@ type option = {
 }
 
 interface Adv_dialog {
-	field: selected | undefined
+	field: string
 	updateField: Function
-	setText: (text: string) => void
 	adv_search_index: number
+	database_name: string
+	label:string | undefined
 }
 
 const DEFAULT_OPTION_COLOR = 'bg-white'
@@ -54,10 +54,11 @@ const SELECT_OPTION_COLOR = 'bg-green-200'
 const AdvancedSearchIndexDialog = ({
 	field,
 	updateField,
-	setText,
 	adv_search_index,
+	database_name,
+	label
 }: Adv_dialog) => {
-	const { message } = useConstants()
+	const { message, advancedSearch } = useConstants()
 	const [open, setOpen] = useState(false)
 	const [cluster, setCluster] = useState<ClusterData>({
 		index_list: {
@@ -78,7 +79,7 @@ const AdvancedSearchIndexDialog = ({
 		let HOME_SESSID = getSessionID()
 		await axios
 			.get(
-				`${HOME_SESSID}/FIRST?INDEXLIST&KEYNAME=${field}&DATABASE=DESCRIPTION_WEB&form=[INCLUDES]cluster.html`
+				`${HOME_SESSID}/FIRST?INDEXLIST&KEYNAME=${field}&DATABASE=${database_name}&form=[INCLUDES]cluster.html`
 			)
 			.then((res) => {
 				updateClusterList(res)
@@ -129,7 +130,6 @@ const AdvancedSearchIndexDialog = ({
 	const handleSubmit = () => {
 		if (!userSelect) return toast({ title: `${message.advIdxSubmitWarnMsg}` })
 		updateField('keyword', userSelect, adv_search_index)
-		setText(userSelect)
 		setOptions([])
 		setKeyvalue('')
 		setOpen(false)
@@ -154,15 +154,16 @@ const AdvancedSearchIndexDialog = ({
 	}
 
 	const openDialog = () => {
-		if (!field) return toast({ title: `${message.advIdxSelectWarnMsg}` })
+		if (!field) return
 		setOpen(true)
-		getCluster(field.name)
+		getCluster(field)
 	}
 
 	return (
 		<Dialog open={open}>
 			<DialogTrigger asChild onClick={openDialog}>
 				<Button
+					disabled={!field ? true : false}
 					className={
 						'h-full w-[50px] px-0 flex items-center justify-center overflow-hidden ml-3 bg-opac-green '
 					}>
@@ -171,10 +172,14 @@ const AdvancedSearchIndexDialog = ({
 			</DialogTrigger>
 			<DialogContent hideClose={'hidden'}>
 				<div className={'w-full flex justify-center items-center relative'}>
-					<DialogHeader className={'font-bold text-2xl'}>
-						Browse Cluster for '{field?.label}'{' '}
+					<DialogHeader className={'font-bold text-xl md:text-2xl'}>
+						{message.BrowseCluster} '{label}'
 					</DialogHeader>
-					<button className={'absolute right-1'} onClick={() => setOpen(false)}>
+					<button
+						className={
+							'absolute right-1 p-1 bg-primary font-bold mx-1 text-white rounded'
+						}
+						onClick={() => setOpen(false)}>
 						<X className={'h-6 w-6'} />
 					</button>
 				</div>
@@ -201,68 +206,68 @@ const AdvancedSearchIndexDialog = ({
 						</span>
 					</Button>
 				</div>
-				<div className={'flex w-full justify-between'}>
-					<Button
-						className={'min-w-[85px] font-bold'}
+				<div className={'flex w-full justify-between items-center'}>
+					<div
+						className={
+							'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'
+						}
 						onClick={() => pageAction(cluster.first_page)}>
-						{message.fisrt}
-					</Button>
-					<Button
-						className={'min-w-[85px] font-bold'}
-						onClick={() => pageAction(cluster.last_page)}>
-						{message.last}
-					</Button>
-				</div>
-				<ScrollAreaRoot className={'w-full'}>
-					<ScrollAreaViewport>
-						<div className="py-[15px] px-5">
-							{options?.length > 1 ? (
-								options?.map((item: option, key) => (
-									<div
-										className={`${item.bg} cursor-pointer text-mauve12 text-[13px] leading-[18px] p-2.5 border-t border-t-mauve6`}
-										onDoubleClick={handleSubmit}
-										onClick={() => optionClick(item.name, key)}
-										key={key}>
-										{item.name}
-									</div>
-								))
-							) : (
-								<div>{message.NoKeyFound}</div>
-							)}
-						</div>
-					</ScrollAreaViewport>
-					<ScrollAreaScrollbar orientation="vertical">
-						<ScrollAreaThumb />
-					</ScrollAreaScrollbar>
-					<ScrollAreaScrollbar orientation="horizontal">
-						<ScrollAreaThumb />
-					</ScrollAreaScrollbar>
-					<ScrollAreaCorner />
-				</ScrollAreaRoot>
-				<div className={'flex w-full justify-between'}>
-					<Button
-						onClick={() => pageAction(cluster.prev_page)}
-						className={'min-w-[85px] font-bold'}>
-						{message.previous}
-					</Button>
-					<Button
-						className={'min-w-[85px] font-bold'}
+						<ChevronFirst />
+					</div>
+					<div
+						className={
+							'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'
+						}
+						onClick={() => pageAction(cluster.prev_page)}>
+						<ChevronLeft />
+					</div>
+					<ScrollAreaRoot className={'w-48 md:w-64 h-[400px]'}>
+						<ScrollAreaViewport>
+							<div className="py-[15px] px-5">
+								{options?.length > 1 ? (
+									options?.map((item: option, key) => (
+										<div
+											className={`${item.bg} cursor-pointer text-mauve12 text-[13px] leading-[18px] p-2.5 border-t border-t-mauve6`}
+											onDoubleClick={handleSubmit}
+											onClick={() => optionClick(item.name, key)}
+											key={key}>
+											{item.name}
+										</div>
+									))
+								) : (
+									<div>{message.NoKeyFound}</div>
+								)}
+							</div>
+						</ScrollAreaViewport>
+						<ScrollAreaScrollbar orientation="vertical">
+							<ScrollAreaThumb />
+						</ScrollAreaScrollbar>
+						<ScrollAreaScrollbar orientation="horizontal">
+							<ScrollAreaThumb />
+						</ScrollAreaScrollbar>
+						<ScrollAreaCorner />
+					</ScrollAreaRoot>
+					<div
+						className={
+							'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'
+						}
 						onClick={() => pageAction(cluster.next_page)}>
-						{message.next}
-					</Button>
+						<ChevronRight />
+					</div>
+					<div
+						className={
+							'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'
+						}
+						onClick={() => pageAction(cluster.last_page)}>
+						<ChevronLast />
+					</div>
 				</div>
-
 				<DialogFooter
 					className={
 						'relative w-full flex absolute bottom-1 relative md:justify-center md:items-center'
 					}>
-					<Button className={'min-w-[85px] font-bold'} onClick={handleSubmit}>
+					<Button className={'w-full font-bold'} onClick={handleSubmit}>
 						{message.submit}
-					</Button>
-					<Button
-						className={'absolute right-0 min-w-[85px] bg-red-600 font-bold'}
-						onClick={() => setOpen(false)}>
-						{message.close}
 					</Button>
 				</DialogFooter>
 			</DialogContent>

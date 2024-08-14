@@ -20,7 +20,7 @@
 		"database": "DESCRIPTION_WEB",
 		"items": [
 			{
-				"label": "Title",
+				"label": "Titre",
 				"name": "TITLE"
 			},
 			{

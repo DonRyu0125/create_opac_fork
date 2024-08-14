@@ -1,5 +1,5 @@
 {
-	"searchPlaceholder": "Entrez votre recherche",
+	"searchPlaceholder": "Entrez votre ",
 	"searchButton": "Recherche",
 	"summaryPage": "Page des résultats",
 	"detailPage": "Page des détails",
@@ -85,7 +85,7 @@
 	"advanceSearchTooltip": "Ajoutez un champ supplémentaire pour effectuer une recherche avancée plus spécifique",
 	"selectAfield": "Sélectionner",
 	"advanceSearch": "Recherche Avancée",
-	"advanceSearchDesc": "La recherche avancée vous permet de sélectionner des champs spécifiques pour affiner vos résultats de recherche",
+	"advanceSearchDesc": "Sélectionnez un champ ci-dessous pour effectuer une recherche avancée",
 	"clear": "Effacer",
 	"and": "Et",
 	"or": "Ou",
@@ -96,10 +96,11 @@
 	"genericError": "Something went wrong, please restart your search",
 	"advWarnMsg":"Veuillez entrer votre recherche!",
 	"in":"dans",
-	"fisrt":"Premier",
+	"first":"Premier",
 	"last":"Dernier",
 	"submit":"Soumettre",
 	"advIdxSubmitWarnMsg": "Veuillez sélectionner avant de soumettre",
 	"advIdxSelectWarnMsg": "Veuillez sélectionner le champ que vous souhaitez rechercher",
-	"NoKeyFound":"Aucune clé n'est trouvée"
+	"NoKeyFound":"Aucune clé n'est trouvée",
+	"BrowseCluster":"Parcourir le cluster pour"
 }
