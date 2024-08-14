@@ -34,19 +34,29 @@ export const ADVANCED_SEARCH_BOOLEAN = {
 }
 
 const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => {
+	const { message, config, advancedSearch } = useConstants()
 	const [searchExp, setSearchExp] = useState<FieldObject[]>([
-		{ field: 'Title', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
+		{
+			field: getDefaultField(search_database),
+			keyword: '',
+			boolean: ADVANCED_SEARCH_BOOLEAN.AND,
+		},
 		{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
 		{ field: '', keyword: '' },
 	])
 	const formRef = useRef<HTMLFormElement>(null)
 	const inputRef = useRef<any>(null)
-	const { message, config } = useConstants()
+
 
 	const getDBTitle = (search_database: string) => {
 		let db = config.navigations.filter((item) => item.search_database === search_database)
 		if (!search_database) return ''
 		return `${db[0].title}`
+	}
+
+	function getDefaultField(search_database: string) {
+		let db = advancedSearch.filter((item) => item.database === search_database)
+		return db[0].items[0].name
 	}
 
 	const updateField = (key: string, value: string, index: string) => {
@@ -73,7 +83,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 
 	const resetFields = () => {
 		setSearchExp([
-			{ field: 'Title', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
+			{ field: getDefaultField(search_database), keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
 			{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
 			{ field: '', keyword: '' },
 		])
@@ -123,6 +133,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							<AdvancedSearchInput
 								submitSearch={submitSearch}
 								updateField={updateField}
+								defaultField={exp.field}
 								exp={exp}
 								index={index}
 								database_name={search_database}
@@ -166,14 +177,14 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							variant={'default'}
 							className={'h-[50px] w-[45%] ml-[7px] font-bold text-lg'}
 							onClick={submitSearch}>
-							<TextSearch className={'mb-1'}/>
+							<TextSearch className={'mb-1'} />
 							<span className="mx-2 block text-l">{message.searchButton}</span>
 						</Button>
 						<Button
 							variant={'default'}
 							className={'h-[50px] w-[45%] mr-[25px] font-bold text-lg'}
 							onClick={resetFields}>
-							<CircleX className={'mb-1'}/>
+							<CircleX className={'mb-1'} />
 							<span className="mx-2 block text-l">{message.clear}</span>
 						</Button>
 					</div>

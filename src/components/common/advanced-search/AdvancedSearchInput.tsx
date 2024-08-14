@@ -18,6 +18,7 @@ interface AdvancedSearchInputProps {
 	database_name: string
 	updateField: Function
 	submitSearch: Function
+	defaultField:string
 }
 export type selected = {
 	label: string
@@ -30,10 +31,11 @@ const AdvancedSearchInput = ({
 	exp,
 	database_name,
 	submitSearch,
+	defaultField,
 }: AdvancedSearchInputProps) => {
 	const { advancedSearch, message } = useConstants()
 	const [text, setText] = useState<string>()
-	const [userSelect, setUserSelect] = useState<selected | undefined>()
+	const [userSelect, setUserSelect] = useState<string>('')
 	const ADVANCED_SEARCH_BOOLEAN_SELECT_MAP = [
 		{
 			key: `${message.and}`,
@@ -67,10 +69,11 @@ const AdvancedSearchInput = ({
 	return (
 		<div className="w-full flex relative m-2" key={index}>
 			<Select
+				defaultValue={defaultField}
 				onValueChange={(value) => {
-					let item = searchDatabase()?.items.find((item) => item.name === value)
+					// let item = searchDatabase()?.items.find((item) => item.name === value)
 					updateField('field', value, index)
-					setUserSelect(item)
+					setUserSelect(value)
 				}}>
 				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white rounded-r-lg font-semibold text-left">
 					<SelectValue
@@ -139,7 +142,7 @@ const AdvancedSearchInput = ({
 				</SelectContent>
 			</Select>
 			<AdvancedSearchIndexDialog
-				field={userSelect}
+				field={defaultField ?? userSelect}
 				updateField={updateField}
 				setText={setText}
 				adv_search_index={index}

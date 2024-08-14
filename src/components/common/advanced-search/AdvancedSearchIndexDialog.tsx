@@ -42,7 +42,7 @@ type option = {
 }
 
 interface Adv_dialog {
-	field: selected | undefined
+	field: string 
 	updateField: Function
 	setText: (text: string) => void
 	adv_search_index: number
@@ -158,8 +158,9 @@ const AdvancedSearchIndexDialog = ({
 	const openDialog = () => {
 		if (!field) return
 		setOpen(true)
-		getCluster(field?.name)
+		getCluster(field)
 	}
+
 
 	return (
 		<Dialog open={open}>
@@ -175,7 +176,7 @@ const AdvancedSearchIndexDialog = ({
 			<DialogContent hideClose={'hidden'}>
 				<div className={'w-full flex justify-center items-center relative'}>
 					<DialogHeader className={'font-bold text-xl md:text-2xl'}>
-						Browse Cluster for '{field?.label}'{' '}
+						Browse Cluster for '{field}'{' '}
 					</DialogHeader>
 					<button className={'absolute right-1 p-1 bg-primary font-bold mx-1 text-white rounded'} onClick={() => setOpen(false)}>
 						<X className={'h-6 w-6'} />
@@ -252,7 +253,6 @@ const AdvancedSearchIndexDialog = ({
 						<ChevronLast />
 					</div>
 				</div>
-
 				<DialogFooter
 					className={
 						'relative w-full flex absolute bottom-1 relative md:justify-center md:items-center'
