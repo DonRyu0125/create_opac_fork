@@ -45,6 +45,7 @@ interface Adv_dialog {
 	updateField: Function
 	adv_search_index: number
 	database_name: string
+	label:string
 }
 
 const DEFAULT_OPTION_COLOR = 'bg-white'
@@ -55,6 +56,7 @@ const AdvancedSearchIndexDialog = ({
 	updateField,
 	adv_search_index,
 	database_name,
+	label
 }: Adv_dialog) => {
 	const { message, advancedSearch } = useConstants()
 	const [open, setOpen] = useState(false)
@@ -156,13 +158,7 @@ const AdvancedSearchIndexDialog = ({
 		setOpen(true)
 		getCluster(field)
 	}
-
-	const getLabel = () => {
-		let dbArr = advancedSearch.filter((elm) => elm.database === database_name)
-		let item = dbArr[0].items.find((item) => item.name === field)
-		return item?.label;
-	}
-
+	
 	return (
 		<Dialog open={open}>
 			<DialogTrigger asChild onClick={openDialog}>
@@ -177,7 +173,7 @@ const AdvancedSearchIndexDialog = ({
 			<DialogContent hideClose={'hidden'}>
 				<div className={'w-full flex justify-center items-center relative'}>
 					<DialogHeader className={'font-bold text-xl md:text-2xl'}>
-						{message.BrowseCluster} '{getLabel()}'
+						{message.BrowseCluster} '{label}'
 					</DialogHeader>
 					<button
 						className={

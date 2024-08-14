@@ -59,6 +59,11 @@ const AdvancedSearchInput = ({
 		}
 	}
 
+	const getLabel = () => {
+		let item = searchDatabase().items.find((item) => item.name === exp.field)
+		return item?.label
+	}
+
 	return (
 		<div className="w-full flex relative m-2" key={index}>
 			<Select
@@ -104,6 +109,7 @@ const AdvancedSearchInput = ({
 					}>
 					<span className="hidden lg:inline ml-[15px] text-gray-500 italic">
 						{message.searchPlaceholder}
+						{getLabel()}
 					</span>
 				</div>
 			)}
@@ -131,6 +137,7 @@ const AdvancedSearchInput = ({
 				</SelectContent>
 			</Select>
 			<AdvancedSearchIndexDialog
+				label={getLabel()}
 				field={exp.field ?? userSelect}
 				updateField={updateField}
 				adv_search_index={index}
