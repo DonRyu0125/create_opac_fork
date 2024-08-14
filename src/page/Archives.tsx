@@ -9,7 +9,7 @@ import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSea
 import { UNION_SEARCH_CL } from './Home'
 
 const Archives = () => {
-	const [showAdvSearch, setShowAdvSearch] = useState(false);
+	const [showAdvSearch, setShowAdvSearch] = useState(true);
 	const { heroBanner, searchURL, title, database_name } = useConstants().archives;
 	return (
 		<Layout>
@@ -20,7 +20,7 @@ const Archives = () => {
 				</div>
 			</Hero>
 			{showAdvSearch && (
-				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
+				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} default_field={'title'} />
 			)}
 		</Layout>
 	)

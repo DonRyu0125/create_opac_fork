@@ -33,7 +33,7 @@ const AdvancedSearchInput = ({
 }: AdvancedSearchInputProps) => {
 	const { advancedSearch, message } = useConstants()
 	const [text, setText] = useState<string>()
-	const [userSelect, setUserSelect] = useState<selected|undefined>()
+	const [userSelect, setUserSelect] = useState<selected | undefined>()
 	const ADVANCED_SEARCH_BOOLEAN_SELECT_MAP = [
 		{
 			key: `${message.and}`,
@@ -74,6 +74,7 @@ const AdvancedSearchInput = ({
 				}}>
 				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white rounded-r-lg font-semibold text-left">
 					<SelectValue
+					
 						className={'text-black'}
 						placeholder={<div>{message.selectAfield}</div>}
 					/>
