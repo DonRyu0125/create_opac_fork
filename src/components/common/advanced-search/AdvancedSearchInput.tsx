@@ -74,7 +74,6 @@ const AdvancedSearchInput = ({
 				}}>
 				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white rounded-r-lg font-semibold text-left">
 					<SelectValue
-					
 						className={'text-black'}
 						placeholder={<div>{message.selectAfield}</div>}
 					/>
@@ -144,6 +143,7 @@ const AdvancedSearchInput = ({
 				updateField={updateField}
 				setText={setText}
 				adv_search_index={index}
+				database_name={database_name}
 			/>
 		</div>
 	)
