@@ -98,5 +98,6 @@
 	"submit":"Submit",
 	"advIdxSubmitWarnMsg":"Please select before submit!",
 	"advIdxSelectWarnMsg":"Please select the field you want to search!",
-	"NoKeyFound":"No key is found"
+	"NoKeyFound":"No key is found",
+	"BrowseCluster":"Browse Cluster for"
 }

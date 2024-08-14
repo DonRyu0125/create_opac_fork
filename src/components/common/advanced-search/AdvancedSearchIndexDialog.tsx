@@ -42,7 +42,7 @@ type option = {
 }
 
 interface Adv_dialog {
-	field: string 
+	field: string
 	updateField: Function
 	setText: (text: string) => void
 	adv_search_index: number
@@ -59,7 +59,7 @@ const AdvancedSearchIndexDialog = ({
 	adv_search_index,
 	database_name,
 }: Adv_dialog) => {
-	const { message } = useConstants()
+	const { message, advancedSearch } = useConstants()
 	const [open, setOpen] = useState(false)
 	const [cluster, setCluster] = useState<ClusterData>({
 		index_list: {
@@ -161,6 +161,11 @@ const AdvancedSearchIndexDialog = ({
 		getCluster(field)
 	}
 
+	const getLabel = () => {
+		let dbArr = advancedSearch.filter((elm) => elm.database === database_name)
+		let item = dbArr[0].items.find((item) => item.name === field)
+		return item?.label;
+	}
 
 	return (
 		<Dialog open={open}>
@@ -176,9 +181,13 @@ const AdvancedSearchIndexDialog = ({
 			<DialogContent hideClose={'hidden'}>
 				<div className={'w-full flex justify-center items-center relative'}>
 					<DialogHeader className={'font-bold text-xl md:text-2xl'}>
-						Browse Cluster for '{field}'{' '}
+						{message.BrowseCluster} '{getLabel()}'
 					</DialogHeader>
-					<button className={'absolute right-1 p-1 bg-primary font-bold mx-1 text-white rounded'} onClick={() => setOpen(false)}>
+					<button
+						className={
+							'absolute right-1 p-1 bg-primary font-bold mx-1 text-white rounded'
+						}
+						onClick={() => setOpen(false)}>
 						<X className={'h-6 w-6'} />
 					</button>
 				</div>
@@ -207,12 +216,16 @@ const AdvancedSearchIndexDialog = ({
 				</div>
 				<div className={'flex w-full justify-between items-center'}>
 					<div
-						className={'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'}
+						className={
+							'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'
+						}
 						onClick={() => pageAction(cluster.first_page)}>
 						<ChevronFirst />
 					</div>
 					<div
-						className={'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'}
+						className={
+							'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'
+						}
 						onClick={() => pageAction(cluster.prev_page)}>
 						<ChevronLeft />
 					</div>
@@ -243,12 +256,16 @@ const AdvancedSearchIndexDialog = ({
 						<ScrollAreaCorner />
 					</ScrollAreaRoot>
 					<div
-						className={'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'}
+						className={
+							'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'
+						}
 						onClick={() => pageAction(cluster.next_page)}>
 						<ChevronRight />
 					</div>
 					<div
-						className={'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'}
+						className={
+							'p-1 bg-primary font-bold mx-1 text-white rounded cursor-pointer'
+						}
 						onClick={() => pageAction(cluster.last_page)}>
 						<ChevronLast />
 					</div>

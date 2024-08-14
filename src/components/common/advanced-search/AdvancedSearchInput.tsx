@@ -71,7 +71,6 @@ const AdvancedSearchInput = ({
 			<Select
 				defaultValue={defaultField}
 				onValueChange={(value) => {
-					// let item = searchDatabase()?.items.find((item) => item.name === value)
 					updateField('field', value, index)
 					setUserSelect(value)
 				}}>
@@ -85,6 +84,7 @@ const AdvancedSearchInput = ({
 					{searchDatabase()?.items.map((item, key) => {
 						return (
 							<SelectItem
+								
 								key={key}
 								value={item.name}
 								className="w-full border bg-opac-green border-opac-green ">
