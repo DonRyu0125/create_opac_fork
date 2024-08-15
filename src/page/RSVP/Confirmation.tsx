@@ -112,7 +112,7 @@ const RSVPConfirm = () => {
 				}
 			)
 			.then((res) => {
-				let result = convertXMLToJson(res)
+				let result = convertXMLToJson(res.data)
 				let records = result.div.xml.event
 				let recordArr = convertToArr(records) ?? []
 				let event = recordArr?.filter((item) => {

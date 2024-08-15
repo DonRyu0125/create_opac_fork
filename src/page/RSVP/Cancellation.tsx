@@ -78,7 +78,7 @@ const RSVPCancel = () => {
 				}
 			)
 			.then((res) => {
-				let result = convertXMLToJson(res)
+				let result = convertXMLToJson(res.data)
 				if (result.div) {
 					return true
 				}

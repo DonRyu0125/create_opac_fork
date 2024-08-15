@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import AdvancedSearchInput from './AdvancedSearchInput'
-import { CircleHelp, CircleMinus, CirclePlus } from 'lucide-react'
+import { CircleHelp, CircleMinus, CirclePlus, CircleX, TextSearch } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { toast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
@@ -34,19 +34,29 @@ export const ADVANCED_SEARCH_BOOLEAN = {
 }
 
 const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => {
+	const { message, config, advancedSearch } = useConstants()
 	const [searchExp, setSearchExp] = useState<FieldObject[]>([
-		{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
+		{
+			field: getDefaultField(search_database),
+			keyword: '',
+			boolean: ADVANCED_SEARCH_BOOLEAN.AND,
+		},
 		{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
 		{ field: '', keyword: '' },
 	])
 	const formRef = useRef<HTMLFormElement>(null)
 	const inputRef = useRef<any>(null)
-	const { message, config } = useConstants()
+
 
 	const getDBTitle = (search_database: string) => {
 		let db = config.navigations.filter((item) => item.search_database === search_database)
 		if (!search_database) return ''
 		return `${db[0].title}`
+	}
+
+	function getDefaultField(search_database: string) {
+		let db = advancedSearch.filter((item) => item.database === search_database)
+		return db[0].items[0].name
 	}
 
 	const updateField = (key: string, value: string, index: string) => {
@@ -73,7 +83,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 
 	const resetFields = () => {
 		setSearchExp([
-			{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
+			{ field: getDefaultField(search_database), keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
 			{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
 			{ field: '', keyword: '' },
 		])
@@ -85,6 +95,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 			toast({
 				title: `${message.advWarnMsg}`,
 			})
+			return;
 		}
 		let len = data.length
 		let qry = data
@@ -93,10 +104,10 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 					`${exp.field} ${exp.keyword} ${exp.boolean && index !== len - 1 ? exp.boolean : ''}`
 			)
 			.join(' ')
-
 		inputRef.current.value = qry
 		formRef.current?.submit()
 	}
+
 	return (
 		<div
 			className={'w-full h-full min-h-[45vh] my-8 flex flex-col justify-center items-center'}>
@@ -163,15 +174,17 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 					<div className="w-full mt-10 flex justify-between m-2">
 						<Button
 							variant={'default'}
-							className={'w-[45%] ml-[7px] font-bold text-lg'}
+							className={'h-[50px] w-[45%] ml-[7px] font-bold text-lg'}
 							onClick={submitSearch}>
-							<span className=" block">{message.searchButton}</span>
+							<TextSearch className={'mb-1'} />
+							<span className="mx-2 block text-l">{message.searchButton}</span>
 						</Button>
 						<Button
 							variant={'default'}
-							className={'w-[45%] mr-[25px] font-bold text-lg'}
+							className={'h-[50px] w-[45%] mr-[25px] font-bold text-lg'}
 							onClick={resetFields}>
-							<span className="block">{message.clear}</span>
+							<CircleX className={'mb-1'} />
+							<span className="mx-2 block text-l">{message.clear}</span>
 						</Button>
 					</div>
 				</div>
