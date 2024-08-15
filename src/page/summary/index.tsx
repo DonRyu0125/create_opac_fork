@@ -16,7 +16,7 @@ import SummaryRecords from './SummaryRecord'
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 	const { message, config, home } = useConstants()
-	const { common, pagination, backToSummary, data } = useJSONData({ selector: '#xml_record' })
+	const { common, pagination, backToSummary, data, records } = useJSONData({ selector: '#xml_record' })
 
 	const getDBTitle = (search_database: string) => {
 		const currentUrl = window.location.href
@@ -25,7 +25,8 @@ const Summary = () => {
 		if (currentUrl.includes(match[0])) return ''
 		return `${message.in} ${db[0].title}`
 	}
-
+	console.log(common)
+	console.log(records)
 	if (!common) return <></>
 	return (
 		<Layout>
