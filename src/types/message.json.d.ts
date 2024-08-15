@@ -108,6 +108,7 @@ export type Submit = string;
 export type AdvIdxSubmitWarnMsg = string;
 export type AdvIdxSelectWarnMsg = string;
 export type NoKeyFound = string;
+export type BrowseCluster = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -213,5 +214,6 @@ export interface MessageJson {
   advIdxSubmitWarnMsg?: AdvIdxSubmitWarnMsg;
   advIdxSelectWarnMsg?: AdvIdxSelectWarnMsg;
   NoKeyFound?: NoKeyFound;
+  BrowseCluster?: BrowseCluster;
   [k: string]: unknown;
 }
