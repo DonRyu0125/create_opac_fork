@@ -52,7 +52,7 @@ const Login = () => {
                 case 200:
                     // console.log('Login successful', response.data);
 					console.log(response)
-                    window.location.href = getHomeSessionID() + "?SEARCH&DATABASE=PATRON&REPORT=WEB_PATRON_PROFILE&EXP=patron_id%20nixon";
+                    window.location.href = getHomeSessionID() + "?SEARCH&DATABASE=PATRON&REPORT=WEB_PATRON_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)";
                     break;
 			}
         } catch (err) {
