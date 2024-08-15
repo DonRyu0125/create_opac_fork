@@ -9,11 +9,9 @@ export type SiteName = string;
 export type Logo = string;
 export type Url = string;
 export type Title = string;
-export type SearchDatabase = string;
 export type Navigations = {
   url?: Url;
   title?: Title;
-  search_database?: SearchDatabase;
   [k: string]: unknown;
 }[];
 
