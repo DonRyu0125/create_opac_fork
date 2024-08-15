@@ -20,6 +20,8 @@ import AdminHome from '@/page/admin/Home'
 import AdminRSVP from '@/page/admin/RSVP'
 import AdminMessage from '@/page/admin/Message'
 import AdminStyles from '@/page/admin/Styles'
+import PatronProfile from '@/page/PatronProfile'
+import PatronInfo from '@/page/PatronInfo'
 
 
 export type TRoute = Record<string, () => React.ReactNode>
@@ -43,6 +45,8 @@ export const ROUTES: TRoute = {
 	archives: Archives,
 	library: Library,
 	museum: Museum,
+	patronprofile: PatronProfile,
+	patroninfo: PatronInfo,
 	'rsvp-cancel': RSVPCancel,
 	'rsvp-confirm': RSVPConfirm,
 	'no-record': NoRecord,

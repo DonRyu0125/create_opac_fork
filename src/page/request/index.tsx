@@ -38,7 +38,7 @@ const Login = () => {
 									className="block text-sm font-medium text-gray-700">
 									Account Number
 								</label>
-								<Input type="text" id="Email" name="email" />
+								<Input type="text" id="Email" name="PATRON_ID" />
 							</div>
 
 							<div className="col-span-6 sm:col-span-6">
@@ -47,7 +47,7 @@ const Login = () => {
 									className="block text-sm font-medium text-gray-700">
 									Password
 								</label>
-								<Input type="password" id="Password" name="password" />
+								<Input type="password" id="Password" name="PATRON_PID" />
 							</div>
 
 							<div className="col-span-6 sm:flex sm:items-center sm:gap-4">

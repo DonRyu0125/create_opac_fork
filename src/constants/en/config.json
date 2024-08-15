@@ -22,7 +22,7 @@
 			"search_database": "COLLECTIONS_WEB"
 		},
 		{
-			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]login.html",
+			"url": "/scripts/mwimain.dll?GET&file=[OPAC]login.html",
 			"title": "Login"
 		}
 	]
