@@ -89,6 +89,22 @@ export const isDatePast = (dateString: string) => {
  * Cookie
  */
 
+export function isLogin() {
+	const cookies = document.cookie.split(';')
+	let hasId = false
+	let hasName = false
+	cookies.forEach((cookie) => {
+		const [name, value] = cookie.trim().split('=')
+		if (name === 'M2L_PATRON_ID' && value) {
+			hasId = true
+		}
+		if (name === 'M2L_PATRON_NAME' && value) {
+			hasName = true
+		}
+	})
+	return hasId && hasName
+}
+
 export function deleteCookie(cname: string) {
 	document.cookie = cname + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
 }
