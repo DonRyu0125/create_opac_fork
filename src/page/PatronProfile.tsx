@@ -1,14 +1,11 @@
-import AdminForm from '@/components/common/admin/AdminForm'
-import AdminLayout from '@/components/layouts/admin'
+// import PatronForm from '@/components/common/patron/PatronForm'
+import PatronLayout from '@/components/layouts/patron'
 const PatronProfile = () => {
 
 	return (
-        <>
-        <AdminLayout>
-                <div>hello world</div>
-        </AdminLayout>
-        
-        </>
+                <PatronLayout>
+                        
+                </PatronLayout>
 	)
 }
 export default PatronProfile
