@@ -2,6 +2,7 @@ import Link from '../common/Link'
 import MobileMenu from './MobileMenu'
 import useConstants from '@/hooks/useConstants'
 import { LanguageSelect } from '../common/LanguageSelect'
+import LoginBtn from './LoginBtn'
 
 const Header = () => {
 	const { logo, navigations, siteName } = useConstants().config
@@ -26,6 +27,7 @@ const Header = () => {
 									</Link>
 								</li>
 							))}
+							<LoginBtn/>
 						</ul>
 					</nav>
 					<LanguageSelect />
