@@ -57,6 +57,7 @@ export const COMMON_FIELDS = [
 	'pagesize_50',
 	'pagesize_100',
 	'sort',
+	'request'
 ] as const
 
 export type COMMON_FIELDS_TYPE = (typeof COMMON_FIELDS)[number]

@@ -20,7 +20,7 @@
 				"label": "Collection",
 				"name": "collection_type",
 				"summary": true,
-				"grid": false,
+				"grid": true,
 				"detail": true
 			},
 			{

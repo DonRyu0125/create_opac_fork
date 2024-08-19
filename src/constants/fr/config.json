@@ -20,6 +20,10 @@
 			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]museum.html",
 			"title": "Musée",
 			"search_database": "COLLECTIONS_WEB"
+		},
+		{
+			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]login.html",
+			"title": "Se connecter"
 		}
 	]
 }

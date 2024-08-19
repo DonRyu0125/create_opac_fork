@@ -1,5 +1,5 @@
 {
-	"searchPlaceholder": "Entrez votre recherche",
+	"searchPlaceholder": "Entrez votre ",
 	"searchButton": "Recherche",
 	"summaryPage": "Page des résultats",
 	"detailPage": "Page des détails",
@@ -102,5 +102,6 @@
 	"advIdxSubmitWarnMsg": "Veuillez sélectionner avant de soumettre",
 	"advIdxSelectWarnMsg": "Veuillez sélectionner le champ que vous souhaitez rechercher",
 	"NoKeyFound":"Aucune clé n'est trouvée",
-	"BrowseCluster":"Parcourir le cluster pour"
+	"BrowseCluster":"Parcourir le cluster pour",
+	"Search":"Recherche"
 }
