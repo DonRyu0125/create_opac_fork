@@ -41,7 +41,7 @@
 		"database": "BIBLIO_WEB",
 		"items": [
 			{
-				"label": "All title",
+				"label": "Title",
 				"name": "ALL_TITLE_WORD"
 			},
 			{
