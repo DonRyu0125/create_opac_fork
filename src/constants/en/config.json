@@ -1,6 +1,10 @@
 {
 	"siteName": "SFOPHO",
 	"logo": "https://www.sfopho.com/wp-content/uploads/elementor/thumbs/SFOPHO_transparent-blanc-ojdlp57g5x9dvzk1n5cew5vrbxvj1c67ydrzggq11k.png",
+	"auth": {
+		"login": true,
+		"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]login.html"
+	},
 	"navigations": [
 		{
 			"url": "/",
@@ -20,10 +24,6 @@
 			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]museum.html",
 			"title": "Museum",
 			"search_database": "COLLECTIONS_WEB"
-		},
-		{
-			"url": "/scripts/mwimain.dll?GET&file=[OPAC]login.html",
-			"title": "Login"
 		}
 	]
 }

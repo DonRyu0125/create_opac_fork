@@ -2,9 +2,10 @@ import Link from '../common/Link'
 import MobileMenu from './MobileMenu'
 import useConstants from '@/hooks/useConstants'
 import { LanguageSelect } from '../common/LanguageSelect'
+import LoginBtn from './LoginBtn'
 
 const Header = () => {
-	const { logo, navigations, siteName } = useConstants().config
+	const { logo, navigations, auth } = useConstants().config
 	return (
 		<header className=" w-full bg-primary  mx-auto px-4 sm:px-6 lg:px-8">
 			<div className="flex h-16 items-center justify-between max-w-screen-xl mx-auto">
@@ -26,6 +27,7 @@ const Header = () => {
 									</Link>
 								</li>
 							))}
+							{auth.login && <LoginBtn />}
 						</ul>
 					</nav>
 					<LanguageSelect />

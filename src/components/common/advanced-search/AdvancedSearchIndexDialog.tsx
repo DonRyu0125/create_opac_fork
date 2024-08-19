@@ -173,7 +173,7 @@ const AdvancedSearchIndexDialog = ({
 			<DialogContent hideClose={'hidden'}>
 				<div className={'w-full flex justify-center items-center relative'}>
 					<DialogHeader className={'font-bold text-xl md:text-2xl'}>
-						{message.BrowseCluster} '{label}'
+						{message.browseCluster} '{label}'
 					</DialogHeader>
 					<button
 						className={
@@ -235,7 +235,7 @@ const AdvancedSearchIndexDialog = ({
 										</div>
 									))
 								) : (
-									<div>{message.NoKeyFound}</div>
+									<div>{message.noKeyFound}</div>
 								)}
 							</div>
 						</ScrollAreaViewport>
