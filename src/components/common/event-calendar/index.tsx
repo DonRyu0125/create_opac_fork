@@ -174,14 +174,14 @@ const EventCalendar = () => {
 					disabled={isClickablePrev}>
 					<div className="mt-2">&lt;</div>
 				</Button>
-				<div className="max-w-[330px] text-center text-3xl text-primary-foreground">
+				<h2 className="max-w-[330px] text-center text-3xl text-primary-foreground">
 					{monthType &&
 						currentDate.toLocaleString(message.dateType, {
 							month: 'long',
 							year: 'numeric',
 						})}
 					{weekType && showWeek()}
-				</div>
+				</h2>
 				<Button
 					onClick={weekType ? nextWeek : nextMonth}
 					className={'text-4xl text-primary-foreground sm:mx-5'}
