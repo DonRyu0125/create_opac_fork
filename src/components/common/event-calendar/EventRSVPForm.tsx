@@ -369,7 +369,7 @@ const ShowButton = ({
 }) => {
 	const message = useConstants().message
 	return (
-		<div className={'w-full p-2 border-2 rounded'}>
+		<div className={'w-full p-2 border-2 rounded min-h-[300px]'}>
 			<div
 				className={
 					'w-full h-3/6 flex flex-col items-center justify-evenly space-evenly border-b-4'
