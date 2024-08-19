@@ -42,7 +42,7 @@ const Header = (props: Props) => {
 				</div>
 			</header>
 			<section className="bg-[#B5C0CD] text-white justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b py-4 px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
-				<NavigationMenu>
+				<NavigationMenu className="mx-auto">
 					<NavigationMenuList>
 						{navigationLists.map((e) => (
 							<NavigationMenuItem
