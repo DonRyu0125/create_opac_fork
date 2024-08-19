@@ -61,7 +61,7 @@ const AdvancedSearchInput = ({
 
 	const getLabel = () => {
 		let item = searchDatabase().items.find((item) => item.name === exp.field)
-		return `${item?.label ?? message.Search}`
+		return `${item?.label ?? message.searchButton}`
 	}
 
 	return (

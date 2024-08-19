@@ -7,10 +7,16 @@ Event Calendar for showing events and make the user register the events
 \*This is separate component from main OPAC, this component share webuser mwi profile but it has own
 website profile ...
 
-## MWI structure
+## How to set
 
+1.MWI SETTING
 -   WEB_CALENDAR site profile - webuser - M2L_TAG
 -   WEB_LIBRARY_LOC site profile - webuser - LIBRARY_LOCATION
+
+2.MINISIS VIRTUAL DIRECTORY SETTING
+
+CALENDAR: C:\INETPUB\create_opac\src\components\common\event-calendar\
+
 
 ## Feature
 
