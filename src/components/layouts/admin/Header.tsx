@@ -1,110 +1,62 @@
+import Button from '@/components/common/admin/Button'
 import Link from '@/components/common/Link'
 import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
-import { Button } from '@/components/ui/button'
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Home, LineChart, Package, Package2, PanelLeft, ShoppingCart, Users2 } from 'lucide-react'
+	NavigationMenu,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+} from '@/components/ui/navigation-menu'
+import { cn } from '@/lib/utils'
+import { LogOut } from 'lucide-react'
+
 type Props = {}
 
 const Header = (props: Props) => {
-	return (
-		<header className="justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-			<Sheet>
-				<SheetTrigger asChild>
-					<Button size="icon" variant="outline" className="sm:hidden">
-						<PanelLeft className="h-5 w-5" />
-						<span className="sr-only">Toggle Menu</span>
-					</Button>
-				</SheetTrigger>
-				<SheetContent side="left" className="sm:max-w-xs">
-					<nav className="grid gap-6 text-lg font-medium">
-						<Link
-							href="#"
-							className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
-							<Home className="h-5 w-5" />
-							Dashboard
-						</Link>
-						{/* <Link
-							href="#"
-							className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
-							<ShoppingCart className="h-5 w-5" />
-							Orders
-						</Link>
-						<Link href="#" className="flex items-center gap-4 px-2.5 text-foreground">
-							<Package className="h-5 w-5" />
-							Products
-						</Link>
-						<Link
-							href="#"
-							className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
-							<Users2 className="h-5 w-5" />
-							Customers
-						</Link>
-						<Link
-							href="#"
-							className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
-							<LineChart className="h-5 w-5" />
-							Settings
-						</Link> */}
-					</nav>
-				</SheetContent>
-			</Sheet>
-			<Breadcrumb className="hidden md:flex">
-				<BreadcrumbList>
-					<BreadcrumbItem>
-						<BreadcrumbLink asChild>
-							<Link href="#">Dashboard</Link>
-						</BreadcrumbLink>
-					</BreadcrumbItem>
-					{/* <BreadcrumbSeparator />
-					<BreadcrumbItem>
-						<BreadcrumbLink asChild>
-							<Link href="#">Products</Link>
-						</BreadcrumbLink>
-					</BreadcrumbItem>
-					<BreadcrumbSeparator />
-					<BreadcrumbItem>
-						<BreadcrumbPage>All Products</BreadcrumbPage>
-					</BreadcrumbItem> */}
-				</BreadcrumbList>
-			</Breadcrumb>
+	const navigationLists = [
+		{ url: './home.html', page: 'Home' },
+		{ url: './fields.html', page: 'Report fields' },
+		{ url: './rsvp.html', page: 'RSVP' },
+		{ url: './message.html', page: 'Translation' },
+		{ url: './styles.html', page: 'Theme' },
+	]
 
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-						{/* <Image
-                  src="/placeholder-user.jpg"
-                  width={36}
-                  height={36}
-                  alt="Avatar"
-                  className="overflow-hidden rounded-full"
-                /> */}
+	const checkActiveUrl = () => {
+		const currentUrl = window.location.href
+		const activePage = navigationLists.find((item) =>
+			currentUrl.includes(item.url.split('./')[1])
+		)
+		return activePage ? activePage.page : null
+	}
+
+	return (
+		<>
+			<header className="bg-[#002a54] text-white justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b py-4 px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
+				<Link className="text-white hover:text-white no-underline text-lg">
+					Minisis Template Toolkit
+				</Link>
+				<div>
+					<Button>
+						<LogOut />
+						Sign out
 					</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent align="end">
-					<DropdownMenuLabel>My Account</DropdownMenuLabel>
-					<DropdownMenuSeparator />
-					<DropdownMenuItem>Settings</DropdownMenuItem>
-					<DropdownMenuItem>Support</DropdownMenuItem>
-					<DropdownMenuSeparator />
-					<DropdownMenuItem>Logout</DropdownMenuItem>
-				</DropdownMenuContent>
-			</DropdownMenu>
-		</header>
+				</div>
+			</header>
+			<section className="bg-[#B5C0CD] text-white justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b py-4 px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
+				<NavigationMenu>
+					<NavigationMenuList>
+						{navigationLists.map((e) => (
+							<NavigationMenuItem
+								className={cn(
+									'text-blue-950 cursor-pointer  px-8 py-2 rounded-md',
+									e.page === checkActiveUrl() ? 'bg-white' : 'text-white'
+								)}>
+								<NavigationMenuLink href={e.url}>{e.page}</NavigationMenuLink>
+							</NavigationMenuItem>
+						))}
+					</NavigationMenuList>
+				</NavigationMenu>
+			</section>
+		</>
 	)
 }
 
