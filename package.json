@@ -41,7 +41,6 @@
 		"dexie-react-hooks": "^1.1.7",
 		"embla-carousel-autoplay": "8.0.0-rc19",
 		"embla-carousel-react": "8.0.0-rc19",
-		"fastify": "^4.26.2",
 		"jotai": "^2.6.4",
 		"lucide-react": "^0.407.0",
 		"next-themes": "^0.2.1",
