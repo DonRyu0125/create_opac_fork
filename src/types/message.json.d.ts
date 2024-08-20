@@ -109,6 +109,12 @@ export type AdvIdxSubmitWarnMsg = string;
 export type AdvIdxSelectWarnMsg = string;
 export type NoKeyFound = string;
 export type BrowseCluster = string;
+export type Support = string;
+export type MyAccount = string;
+export type Logout = string;
+export type Welcome = string;
+export type DashboardHome = string;
+export type AccountSettings = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -213,7 +219,13 @@ export interface MessageJson {
   submit?: Submit;
   advIdxSubmitWarnMsg?: AdvIdxSubmitWarnMsg;
   advIdxSelectWarnMsg?: AdvIdxSelectWarnMsg;
-  NoKeyFound?: NoKeyFound;
-  BrowseCluster?: BrowseCluster;
+  noKeyFound?: NoKeyFound;
+  browseCluster?: BrowseCluster;
+  support?: Support;
+  myAccount?: MyAccount;
+  logout?: Logout;
+  welcome?: Welcome;
+  dashboardHome?: DashboardHome;
+  accountSettings?: AccountSettings;
   [k: string]: unknown;
 }

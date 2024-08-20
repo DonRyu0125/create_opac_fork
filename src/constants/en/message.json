@@ -112,7 +112,9 @@
 	"noKeyFound": "No key is found",
 	"browseCluster":"Browse Cluster for",
 	"support": "Support",
-  "myAccount": "My Account",
-  "logout": "Logout",
-  "welcome": "Welcome"
+  	"myAccount": "My Account",
+  	"logout": "Logout",
+  	"welcome": "Welcome",
+  	"dashboardHome": "Dashboard Home",
+	"accountSettings": "Account Settings"
 }

@@ -106,5 +106,7 @@
 	"support": "Assistance",
 	"myAccount": "Mon Compte",
 	"logout": "Déconnexion",
-	"welcome": "Bienvenue"
+	"welcome": "Bienvenue",
+  	"dashboardHome": "Dashboard Home",
+	"accountSettings": "Account Settings"
 }

@@ -35,8 +35,8 @@ const LoginBtn = () => {
 					<DropdownMenuContent align="end" className={'w-full'}>
 						<DropdownMenuLabel>{message.myAccount}</DropdownMenuLabel>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>{message.searchButton}</DropdownMenuItem>
-						<DropdownMenuItem>{message.support}</DropdownMenuItem>
+						<DropdownMenuItem><Link href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=PATRON&REPORT=WEB_PATRON_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"}>{message.dashboardHome}</Link></DropdownMenuItem>
+						<DropdownMenuItem>{message.accountSettings}</DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem>
 							<Link onClick={clearCookies}>{message.logout}</Link>
