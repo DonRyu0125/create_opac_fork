@@ -59,7 +59,6 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 	const message = useConstants().message
-
 	const groupedByLocation = (filteredEvents: Cal_event[]) => {
 		let locationArr: any = {}
 		let result = []
