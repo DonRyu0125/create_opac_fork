@@ -7,10 +7,33 @@ Event Calendar for showing events and make the user register the events
 \*This is separate component from main OPAC, this component share webuser mwi profile but it has own
 website profile ...
 
-## MWI structure
+## MINISIS STRUCTURE
 
--   WEB_CALENDAR site profile - webuser - M2L_TAG
+#Report needs
+
+-   MONTHLY_CALENDAR_NEW.REPORT : For calendar
+-   LIBRARY_LOCATION_NEW.REPORT: For library info and location
+
+#Database needs
+
+-   M2L_TAG : MAIN EVENT DB
+-   LIBRARY_LOCATION : LIBRARY INFO
+-   TAG_RSVP_PATRON_LOG : For RSVP LOG
+
+#Virtual Directory needs
+
+-  CALENDAR: C:\INETPUB\create_opac\src\components\common\event-calendar\
+
+
+## How to set
+
+1.MWI SETTING
+-   WEB_CALENDAR site profile - webuser - M2L_TAG (Main), TAG_RSVP_PATRON_LOG_SYN (Log)
 -   WEB_LIBRARY_LOC site profile - webuser - LIBRARY_LOCATION
+
+
+
+
 
 ## Feature
 
@@ -73,15 +96,4 @@ confirm email
     └──index.ts                               Adding route for rsvp_cancel,rsvp_confirm
 ```
 
-## MINISIS STRUCTURE
 
-#Report needs
-
--   MONTHLY_CALENDAR_NEW.REPORT : For calendar
--   LIBRARY_LOCATION_NEW.REPORT: For library info and location
-
-#Database needs
-
--   M2L_TAG : MAIN EVENT DB
--   LIBRARY_LOCATION : LIBRARY INFO
--   TAG_RSVP_PATRON_LOG : For RSVP LOG

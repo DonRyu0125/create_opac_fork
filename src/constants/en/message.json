@@ -1,5 +1,6 @@
 {
-	"searchPlaceholder": "Enter Your",
+	"searchPlaceholder": "Enter Your Search",
+	"searchPlaceholderAdv":"Enter Your",
 	"searchButton": "Search",
 	"summaryPage": "Summary Page",
 	"bookmarkPage": "Bookmark Page",
@@ -56,15 +57,7 @@
 	"seats": "All Seats",
 	"language": "Language",
 	"dateType": "default",
-	"daysOfWeek": [
-		"Sun",
-		"Mon",
-		"Tue",
-		"Wed",
-		"Thu",
-		"Fri",
-		"Sat"
-	],
+	"daysOfWeek": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
 	"close": "Close",
 	"privateProperty": "Private property",
 	"contactInfoNotProvided": "Contact info is not provided",
@@ -110,9 +103,9 @@
 	"advIdxSubmitWarnMsg": "Please select before submit!",
 	"advIdxSelectWarnMsg": "Please select the field you want to search!",
 	"noKeyFound": "No key is found",
-	"browseCluster":"Browse Cluster for",
+	"browseCluster": "Browse Cluster for",
 	"support": "Support",
-  "myAccount": "My Account",
-  "logout": "Logout",
-  "welcome": "Welcome"
+	"myAccount": "My Account",
+	"logout": "Logout",
+	"welcome": "Welcome"
 }

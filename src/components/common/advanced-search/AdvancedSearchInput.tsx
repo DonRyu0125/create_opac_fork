@@ -61,7 +61,7 @@ const AdvancedSearchInput = ({
 
 	const getLabel = () => {
 		let item = searchDatabase().items.find((item) => item.name === exp.field)
-		return `${item?.label ?? message.Search}`
+		return `${item?.label ?? message.searchButton}`
 	}
 
 	return (
@@ -108,7 +108,7 @@ const AdvancedSearchInput = ({
 						'absolute w-full h-full flex items-center justify-center text-gray-500 pointer-events-none'
 					}>
 					<span className="hidden lg:inline ml-[15px] text-gray-500 italic">
-						{message.searchPlaceholder}
+						{message.searchPlaceholderAdv}
 						{` ${getLabel()}`}
 					</span>
 				</div>

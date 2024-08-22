@@ -1,5 +1,6 @@
 {
-	"searchPlaceholder": "Entrez votre ",
+	"searchPlaceholder": "Entrez votre recherche",
+	"searchPlaceholderAdv": "Entrez votre ",
 	"searchButton": "Recherche",
 	"summaryPage": "Page des résultats",
 	"detailPage": "Page des détails",

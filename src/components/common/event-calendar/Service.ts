@@ -65,6 +65,6 @@ export const getLibraryLocation = async () => {
 			},
 		}
 	)
-	const jsonData: any = convertXMLToJson(response)
+	const jsonData: any = convertXMLToJson(response.data)
 	return jsonData?.xml?.[LIBRARY_LOCATION_XML_TAG] ?? []
 }
