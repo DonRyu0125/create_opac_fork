@@ -1,5 +1,5 @@
 {
-	"heading": "Société franco-ontarienne du patrimoine et de l'histoire d'Orléans",
+	"heading": "Société franco-ontarienne du patrimoine et de l histoire dOrléans",
 	"heroBanner": "https://www.sfopho.com/wp-content/uploads/2019/11/banner_ancien_orleansJPG.jpg",
 	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=BIBLIO_WEB",
 	"browseByCategoryTitle": "Browse by Category",
@@ -27,5 +27,20 @@
 			"title": "Paintings",
 			"url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&exp=KEYWORD_CLUSTER \"painting\""
 		}
-	]
+	],
+	"rsvp": {
+		"filterOption": "TAG_FUNC_LOC",
+		"filterTypes": [
+			{
+				"type": "Delhi Branch",
+				"color":"bg-neutral-500 border-neutral-500",
+				"icon": "rounded"
+			},
+			{
+				"type": "MERKENICH",
+				"color": "bg-sky-900 border-sky-900",
+				"icon": "rounded"
+			}
+		]
+	}
 }

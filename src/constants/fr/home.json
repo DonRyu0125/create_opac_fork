@@ -27,7 +27,7 @@
 	],
 	"rsvp":{
 		"filterOption":"TAG_DB_TYPE",
-		"filterType":[
+		"filterTypes":[
 			{
 				"type": "Library",
 				"color": "bg-red-500 border-red-500",

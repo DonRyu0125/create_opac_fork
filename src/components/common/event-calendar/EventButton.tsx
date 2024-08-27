@@ -48,20 +48,20 @@ const EventButton = ({
 	elm,
 	id,
 	contactInfo,
-	filterType,
+	filterTypes,
 	fitlerOption
 }: {
 	elm: Cal_event
 	id: number
 	contactInfo: ContactInfo[]
-	filterType: FilterType[]
+	filterTypes: FilterType[]
 	fitlerOption:string
 }) => {
 	const [weekType, _] = useAtom(calendarWeekType)
 	const message = useConstants().message
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
-		let result = filterType?.filter((item) => {
+		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
 		return `${result[0]?.color} ${result[0]?.icon}`

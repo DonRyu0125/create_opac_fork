@@ -23,7 +23,7 @@ export interface Event_list {
 	currentEvent: Cal_event[]
 	weekType: boolean
 	contactInfo: ContactInfo[]
-	filterType: FilterType[]
+	filterTypes: FilterType[]
 	fitlerOption:string
 }
 
@@ -32,7 +32,7 @@ const EventCalendarEventList = ({
 	currentFilter = [],
 	currentEvent,
 	contactInfo,
-	filterType,
+	filterTypes,
 	fitlerOption
 }: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
@@ -102,11 +102,11 @@ const EventCalendarEventList = ({
 	return (
 		<div className={`${monthType ? 'h-4/5' : 'h-[98%]'} relative w-full`}>
 			{/* Event button */}
-			<EventSumButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterType={filterType} fitlerOption={fitlerOption} />
+			<EventSumButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterTypes={filterTypes} fitlerOption={fitlerOption} />
 			{/* All events button */}
 			{monthType && filteredEvents.length > 2 && (
 				<div className={'h-[20px] absolute bottom-0 w-full'}>
-					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterType={filterType} fitlerOption={fitlerOption} />
+					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterTypes={filterTypes} fitlerOption={fitlerOption} />
 				</div>
 			)}
 		</div>

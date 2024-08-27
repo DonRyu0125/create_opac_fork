@@ -16,11 +16,11 @@ import useConstants from '@/hooks/useConstants'
 
 export interface calendarFilterType {
 	databaseType?: string
-	filterType: FilterType[]
+	filterTypes: FilterType[]
 	fitlerOption: string
 }
 
-const EventCalendar = ({ databaseType, filterType, fitlerOption }: calendarFilterType) => {
+const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilterType) => {
 	const message = useConstants().message
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
 	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
@@ -232,7 +232,7 @@ const EventCalendar = ({ databaseType, filterType, fitlerOption }: calendarFilte
 				</Button>
 			</div>
 			{fitlerOption && (
-				<EventCalendarFilter setCurrentFilter={setCurrentFilter} filterType={filterType} />
+				<EventCalendarFilter setCurrentFilter={setCurrentFilter} filterTypes={filterTypes} />
 			)}
 
 			<div className={'w-full mt-1'}>
@@ -261,7 +261,7 @@ const EventCalendar = ({ databaseType, filterType, fitlerOption }: calendarFilte
 										currentEvent={currentEvent}
 										weekType={weekType}
 										contactInfo={contactInfo}
-										filterType={filterType}
+										filterTypes={filterTypes}
 										fitlerOption={fitlerOption}
 									/>
 								</div>
@@ -280,7 +280,7 @@ const EventCalendar = ({ databaseType, filterType, fitlerOption }: calendarFilte
 										currentEvent={currentEvent}
 										weekType={weekType}
 										contactInfo={contactInfo}
-										filterType={filterType}
+										filterTypes={filterTypes}
 										fitlerOption={fitlerOption}
 									/>
 								</div>

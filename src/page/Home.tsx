@@ -50,7 +50,7 @@ const Home = () => {
 			</Section>
 
 			<Section heading={'Calendar'}>
-				<EventCalendar databaseType={''} filterType={rsvp.filterType} fitlerOption={rsvp.filterOption} />
+				<EventCalendar databaseType={''} filterTypes={rsvp.filterTypes} fitlerOption={rsvp.filterOption} />
 			</Section>
 			{/* <Section
         className='bg-secondary'

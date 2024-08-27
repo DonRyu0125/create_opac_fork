@@ -46,18 +46,18 @@ import useConstants from '@/hooks/useConstants'
 const EventAllButton = ({
 	filteredEvents,
 	contactInfo,
-	filterType,
+	filterTypes,
 	fitlerOption
 }: {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
 	fitlerOption: string
-	filterType: FilterType[]
+	filterTypes: FilterType[]
 }) => {
 	const { logo } = useConstants().config
 	const message = useConstants().message
 	const getColor = (event_type: string) => {
-		let result = filterType?.filter((item) => {
+		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
 		return `${result[0]?.color} ${result[0]?.icon}`

@@ -137,12 +137,12 @@ export const FILTER_OPTION = 'TAG_FUNC_LOC'
 export const FILTER_TYPE_COLORS = [
 	{
 		type: 'Delhi Branch',
-		color: COLORS_MAP['INDIGO'],
-		icon: ICON_SHAPE_MAP['SQUARE'],
+		color:'bg-neutral-500 border-neutral-500',
+		icon: 'rounded',
 	},
 	{
 		type: 'MERKENICH',
-		color: COLORS_MAP['YELLOW'],
-		icon: ICON_SHAPE_MAP['SQUARE'],
+		color: 'bg-sky-900 border-sky-900',
+		icon: 'rounded',
 	},
 ]

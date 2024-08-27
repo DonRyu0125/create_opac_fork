@@ -8,14 +8,14 @@ import { RefreshCw } from 'lucide-react'
 
 interface MyComponentProps {
 	setCurrentFilter: React.Dispatch<React.SetStateAction<string[]>>
-	filterType: FilterType[]
+	filterTypes: FilterType[]
 }
 
 type SelectType = {
 	[key: string]: number
 }
 
-const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter,filterType}) => {
+const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter,filterTypes}) => {
 	const [selectType, setSelectedType] = useState<SelectType>({})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +40,7 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter,filt
 			className={
 				'flex-none sm:flex flex-wrap w-100 justify-evenly items-center my-2 h-16 overflow-auto'
 			}>
-			{filterType?.map((item, key) => {
+			{filterTypes?.map((item, key) => {
 				return (
 					<div className={'mx-1 my-1'} key={key}>
 						<CheckboxWithLabel

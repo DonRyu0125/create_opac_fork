@@ -48,20 +48,20 @@ import EventRSVPCancel from './EventCancel'
 export interface eventSumType {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
-	filterType: FilterType[]
+	filterTypes: FilterType[]
 	fitlerOption: string
 }
 
 const EventSumButton = ({
 	filteredEvents,
 	contactInfo,
-	filterType,
+	filterTypes,
 	fitlerOption,
 }: eventSumType) => {
 	const [monthType, __] = useAtom(calendarMonthType)
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
-		let result = filterType?.filter((item) => {
+		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
 		return `${result[0]?.color} ${result[0]?.icon}`
@@ -219,7 +219,7 @@ const EventSumButton = ({
 							key={idx}
 							id={idx}
 							contactInfo={contactInfo}
-							filterType={filterType}
+							filterTypes={filterTypes}
 							fitlerOption={fitlerOption}
 						/>
 					))}
