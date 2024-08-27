@@ -1,15 +1,7 @@
-import AdminForm from '@/components/common/admin/AdminForm'
-import AdminLayout from '@/components/layouts/admin'
-import messageValue from '@/constants/en/message.json'
-import message from '@/schema/message.json'
-import { SchemaType } from '@/types/schema'
+import Home from '../Home'
 
-const Admin = () => {
-	return (
-		<AdminLayout>
-			<AdminForm data={messageValue} schema={message as SchemaType} />
-		</AdminLayout>
-	)
+const Index = () => {
+	return <Home />
 }
 
-export default Admin
+export default Index

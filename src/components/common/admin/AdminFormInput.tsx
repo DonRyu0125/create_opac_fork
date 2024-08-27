@@ -61,7 +61,7 @@ const AdminFormInput = ({
 			const stringValue = JSON.stringify(value).replace(/"/g, '')
 			const inputId = `${title.split(' ').join('')}-input`
 			return (
-				<InputWrapper label={title} id={inputId}>
+				<InputWrapper label={title}>
 					{stringValue.length >= TEXTAREA_LENGTH ? (
 						<Textarea
 							id={inputId}

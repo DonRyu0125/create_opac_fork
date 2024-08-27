@@ -18,7 +18,7 @@ const AdminForm = ({ children }: { children?: ReactNode }) => {
 					items={items}
 					onChange={handleChange}
 				/>
-				{/* {children} */}
+				{children}
 			</div>
 
 			<div className="w-44 h-full sticky top-0 items-end p-4">

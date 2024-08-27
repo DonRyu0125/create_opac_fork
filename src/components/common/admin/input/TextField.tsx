@@ -3,16 +3,9 @@ import { Textarea } from '@/components/ui/textarea'
 import { TEXTAREA_LENGTH } from '@/lib/admin'
 import React, { useState } from 'react'
 import { InputWrapper } from './InputWrapper'
+import { InputProps } from './types'
 
-type Props = {
-	id?: string
-	title: string
-	value: string
-	onChange: (value: string) => void
-	placeholder?: string
-}
-
-const TextField = ({ id, title, value, onChange, placeholder }: Props) => {
+const TextField = ({ id, title, value, onChange, placeholder }: InputProps) => {
 	const [val, setVal] = useState(value)
 	const defaultId = id || `text-field-${title}`
 
@@ -24,7 +17,7 @@ const TextField = ({ id, title, value, onChange, placeholder }: Props) => {
 		onChange?.(e.target.value)
 	}
 	return (
-		<InputWrapper label={title} id={defaultId}>
+		<InputWrapper label={title}>
 			{value.length >= TEXTAREA_LENGTH ? (
 				<Textarea
 					aria-placeholder={placeholder}
