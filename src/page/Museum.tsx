@@ -11,6 +11,7 @@ import EventCalendar from '@/components/common/event-calendar'
 import Section from '@/components/common/Section'
 const Museum = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
+	const { message } = useConstants()
 	const { heroBanner, searchURL, title, database_name, rsvp } = useConstants().museum
 	return (
 		<Layout>
@@ -23,7 +24,7 @@ const Museum = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
-			<Section heading={'Calendar'}>
+			<Section heading={`${message.calendar}`}>
 				<EventCalendar
 					databaseType={'Museum'}
 					filterTypes={rsvp.filterTypes}

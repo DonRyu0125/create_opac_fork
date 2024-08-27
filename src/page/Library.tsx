@@ -12,6 +12,7 @@ import EventCalendar from '@/components/common/event-calendar'
 
 const Library = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
+	const { message } = useConstants()
 	const { heroBanner, searchURL, title, database_name, rsvp } = useConstants().library
 	return (
 		<Layout>
@@ -24,7 +25,7 @@ const Library = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
-			<Section heading={'Calendar'}>
+			<Section heading={`${message.calendar}`}>
 				<EventCalendar
 					databaseType={'Library'}
 					filterTypes={rsvp.filterTypes}
