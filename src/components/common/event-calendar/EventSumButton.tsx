@@ -104,7 +104,6 @@ const EventSumButton = ({
 											getColor(item[fitlerOption])
 										)}></div>
 									<div className={'hidden sm:block max-w-[126px] text-left '}>
-										{console.log('item[fitlerOption]',item[fitlerOption])}
 										{fitlerOption ? item[fitlerOption] : message.all}
 									</div>
 									<div className={'flex items-center justify-center'}>
@@ -131,8 +130,7 @@ const EventSumButton = ({
 														'h-4 w-[16px] border rounded mr-1 ',
 														getColor(item[fitlerOption])
 													)}></div>
-													{console.log('item',item)}
-												{item[fitlerOption]}
+											{fitlerOption ? item[fitlerOption] : message.all}
 											</div>
 											<DialogPrimitive.Close>
 												<X className={'h-6 w-6'} />

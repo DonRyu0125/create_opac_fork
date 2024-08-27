@@ -36,6 +36,7 @@ import {
 	TAG_FUNC_RSVP,
 	EVENT_CANCEL_NOTI_MODAL_BG,
 	FilterType,
+	EVENT_DEFAULT_COLOR,
 } from './Constants'
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
@@ -59,6 +60,9 @@ const EventAllButton = ({
 		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
+		if(result.length < 1){
+			return EVENT_DEFAULT_COLOR
+		}
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 
@@ -109,7 +113,8 @@ const EventAllButton = ({
 														'h-4 w-[16px] border rounded mr-1',
 														getColor(item[fitlerOption])
 													)}></div>
-												{item[fitlerOption]}
+												{item[TAG_NAME]}
+												{console.log('item',item)}
 											</div>
 											<div className={'mx-2'}>
 												<span>{item[TAG_FUNC_START_T]?.toUpperCase()}</span>
