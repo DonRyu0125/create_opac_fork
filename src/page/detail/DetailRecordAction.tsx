@@ -1,9 +1,10 @@
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { copyRecordURL, deepSearchKey } from '@/lib/record'
-import { ArrowLeftIcon, ArrowRightIcon, Link } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Copy } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
+import TooltipButton from '@/components/common/TooltipButton'
 
 const DetailRecordAction = () => {
 	const { toast } = useToast()
@@ -23,19 +24,18 @@ const DetailRecordAction = () => {
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-row justify-between space-x-2">
-				<Button
+				<TooltipButton
+					tooltipContent="Previous record"
 					className="align-center"
 					disabled={!previousRecord}
 					onClick={() => goToURL(previousRecord)}>
-					<ArrowLeftIcon />
+					<ChevronLeft />
 					<span className="hidden md:block">{message.previous}</span>
-				</Button>
+				</TooltipButton>
 
 				<div className="flex space-x-2">
-					{/* <Button className="" variant="outline">
-						<Heart className="w-4 h-4 mr-2 hidden md:block" /> {message.save}
-					</Button> */}
-					<Button
+					<TooltipButton
+						tooltipContent="Copy record URL"
 						variant="outline"
 						onClick={() => {
 							copyRecordURL(database, sisn)
@@ -43,20 +43,21 @@ const DetailRecordAction = () => {
 								title: message.recordIsCopied,
 							})
 						}}>
-						<Link className="w-4 h-4 mr-2 hidden md:block" /> {message.copy}
-					</Button>
+						<Copy className="w-4 h-4 mr-2 hidden md:block" /> {message.copy}
+					</TooltipButton>
 					{/* <Button variant="outline">
 						<Printer className="w-4 h-4 mr-2 hidden md:block" /> {message.print}
 					</Button> */}
 				</div>
 
-				<Button
+				<TooltipButton
+					tooltipContent="Next record"
 					className="align-center"
 					disabled={!nextRecord}
 					onClick={() => goToURL(nextRecord)}>
 					<span className="hidden md:block">{message.next}</span>
-					<ArrowRightIcon />
-				</Button>
+					<ChevronRight />
+				</TooltipButton>
 			</div>
 		</div>
 	)

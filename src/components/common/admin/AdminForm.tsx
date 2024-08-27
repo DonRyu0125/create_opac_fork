@@ -1,8 +1,9 @@
 import AdminFormInput from '@/components/common/admin/AdminFormInput'
 import { Button } from '@/components/ui/button'
 import { useAdminForm } from '@/hooks/useAdminForm'
+import { ReactNode } from 'react'
 
-const AdminForm = () => {
+const AdminForm = ({ children }: { children?: ReactNode }) => {
 	const { formData, handleChange, handleFormSave, schema } = useAdminForm()
 	const { type, title, properties, items } = schema
 
@@ -17,6 +18,7 @@ const AdminForm = () => {
 					items={items}
 					onChange={handleChange}
 				/>
+				{/* {children} */}
 			</div>
 
 			<div className="w-44 h-full sticky top-0 items-end p-4">

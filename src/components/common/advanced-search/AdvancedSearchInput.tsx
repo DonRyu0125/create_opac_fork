@@ -1,5 +1,4 @@
-import { cn } from '@/lib/utils'
-import useConstants from '@/hooks/useConstants'
+import { Input } from '@/components/ui/input'
 import {
 	Select,
 	SelectContent,
@@ -7,9 +6,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
+import useConstants from '@/hooks/useConstants'
+import { cn } from '@/lib/utils'
+import { useState } from 'react'
 import { FieldObject } from './AdvancedSearchForm'
-import { Input } from '@/components/ui/input'
-import { useEffect, useState } from 'react'
 import AdvancedSearchIndexDialog from './AdvancedSearchIndexDialog'
 
 interface AdvancedSearchInputProps {
@@ -98,7 +98,7 @@ const AdvancedSearchInput = ({
 					updateField('keyword', e.target.value, index)
 				}}
 				className={cn(
-					'placeholder:text-slate-400 border w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green focus:outline-none ring-inset'
+					'placeholder:text-slate-400  w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green focus:outline-none ring-inset'
 				)}
 				type="search"
 			/>

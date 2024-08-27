@@ -1,32 +1,14 @@
-import { Input } from '../../ui/input'
-import { Checkbox } from '../../ui/checkbox'
-import { Label } from '@/components/ui/label'
-import { SchemaType, SchemaValueType } from '@/types/schema'
-import { TEXTAREA_LENGTH } from '@/lib/admin'
 import { Textarea } from '@/components/ui/textarea'
-import { cn } from '@/lib/utils'
-import Toolbar from './Toolbar'
-import useHover from '@/hooks/useHover'
-import { ChangeEvent } from 'react'
 import { useAdminForm } from '@/hooks/useAdminForm'
-
-type InputWrapperProps = {
-	children?: React.ReactNode
-	id: string
-	label?: string
-	className?: string
-}
-
-const InputWrapper = ({ children, id, label, className }: InputWrapperProps) => {
-	return (
-		<div className={cn('my-3 flex flex-col space-y-2', className)}>
-			<Label className="font-bold" htmlFor={id}>
-				{label}
-			</Label>
-			{children}
-		</div>
-	)
-}
+import useHover from '@/hooks/useHover'
+import { TEXTAREA_LENGTH } from '@/lib/admin'
+import { cn } from '@/lib/utils'
+import { SchemaType, SchemaValueType } from '@/types/schema'
+import { ChangeEvent } from 'react'
+import { Checkbox } from '../../ui/checkbox'
+import { Input } from '../../ui/input'
+import { InputWrapper } from './input/InputWrapper'
+import Toolbar from './Toolbar'
 
 const ArrayItemWrapper = ({
 	children,

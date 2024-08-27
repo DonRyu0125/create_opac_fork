@@ -1,4 +1,5 @@
 import AdminForm from '@/components/common/admin/AdminForm'
+import TextField from '@/components/common/admin/input/TextField'
 import AdminLayout from '@/components/layouts/admin'
 import fieldsValue from '@/constants/en/home.json'
 import { AdminFormProvider } from '@/providers/AdminFormProvider'
@@ -12,7 +13,15 @@ const AdminHome = () => {
 				data={fieldsValue}
 				schema={fields as SchemaType}
 				filepath="constants/en/home.json">
-				<AdminForm />
+				<AdminForm>
+					<TextField
+						title={''}
+						value={''}
+						onChange={function (value: string): void {
+							throw new Error('Function not implemented.')
+						}}
+					/>
+				</AdminForm>
 			</AdminFormProvider>
 		</AdminLayout>
 	)
