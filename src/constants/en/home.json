@@ -3,6 +3,7 @@
 	"heroBanner": "https://www.sfopho.com/wp-content/uploads/2019/11/banner_ancien_orleansJPG.jpg",
 	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=UNION_VIEW_WEB",
 	"browseByCategoryTitle": "Browse by Category",
+	"CalendarfilterOption":"",
 	"categoriesItems": [
 		{
 			"thumbnail": "https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGlicmFyeSUyMGl0ZW1zfGVufDB8fDB8fHww",
@@ -24,5 +25,15 @@
 			"title": "Paintings",
 			"url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=KEYWORD_CLUSTER \"painting\""
 		}
-	]
+	],
+	"rsvp":{
+		"filterOption":"TAG_FUNC_LOC",
+		"filterType":[
+			{
+				"type": "Delhi Branch",
+				"color": "bg-sky-900 border-sky-900",
+				"icon": "rounded"
+			}
+		]
+	}
 }

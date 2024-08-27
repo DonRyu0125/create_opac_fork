@@ -2,26 +2,22 @@
  * EventCalendarFilter: Filter option list buttons at the EventCalendar
  */
 import React, { useState } from 'react'
-import { Cal_event, FILTER_TYPE_COLORS } from './Constants'
+import { Cal_event, FILTER_TYPE_COLORS, FilterType } from './Constants'
 import CheckboxWithLabel from '../CheckboxWithLabel'
 import { RefreshCw } from 'lucide-react'
 
 interface MyComponentProps {
 	setCurrentFilter: React.Dispatch<React.SetStateAction<string[]>>
+	filterType: FilterType
 }
 
 type SelectType = {
 	[key: string]: number
 }
 
-const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) => {
+const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter,filterType}) => {
 	const [selectType, setSelectedType] = useState<SelectType>({})
 
-	/**
-	 *
-	 * @param e
-	 * @returns user filter event map
-	 */
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (!e.target.id) return
 		let map = selectType
@@ -44,7 +40,7 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter }) =
 			className={
 				'flex-none sm:flex flex-wrap w-100 justify-evenly items-center my-2 h-16 overflow-auto'
 			}>
-			{FILTER_TYPE_COLORS.map((item, key) => {
+			{filterType?.map((item, key) => {
 				return (
 					<div className={'mx-1 my-1'} key={key}>
 						<CheckboxWithLabel

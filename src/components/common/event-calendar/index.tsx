@@ -11,10 +11,16 @@ import { Button } from '@/components/ui/button'
 import { fetch_get, getLibraryLocation } from './Service'
 import { calendarCurrDate, calendarEvents, calendarMonthType, calendarWeekType } from '@/store'
 import { useAtom } from 'jotai'
-import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj } from './Constants'
+import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj, FilterType } from './Constants'
 import useConstants from '@/hooks/useConstants'
 
-const EventCalendar = () => {
+export interface calendarFilterType {
+	databaseType: string
+	filterType: FilterType
+	fitlerOption: string
+}
+
+const EventCalendar = ({ databaseType, filterType, fitlerOption }: calendarFilterType) => {
 	const message = useConstants().message
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
 	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
@@ -36,6 +42,7 @@ const EventCalendar = () => {
 
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate, weekType)
+		console.log('currE', currE)
 		setCurrentEvent(currE)
 	}
 
@@ -225,7 +232,10 @@ const EventCalendar = () => {
 					{message.week}
 				</Button>
 			</div>
-			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
+			{fitlerOption && (
+				<EventCalendarFilter setCurrentFilter={setCurrentFilter} filterType={filterType} />
+			)}
+
 			<div className={'w-full mt-1'}>
 				<div className={'grid grid-cols-7 gap-1'}>
 					{message.daysOfWeek.map((item, key) => {
@@ -252,6 +262,8 @@ const EventCalendar = () => {
 										currentEvent={currentEvent}
 										weekType={weekType}
 										contactInfo={contactInfo}
+										filterType={filterType}
+										fitlerOption={fitlerOption}
 									/>
 								</div>
 							)
@@ -269,6 +281,8 @@ const EventCalendar = () => {
 										currentEvent={currentEvent}
 										weekType={weekType}
 										contactInfo={contactInfo}
+										filterType={filterType}
+										fitlerOption={fitlerOption}
 									/>
 								</div>
 							)

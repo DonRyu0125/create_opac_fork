@@ -32,6 +32,8 @@ export interface Day_obj {
 	month?: number
 	year?: number
 }
+export type FilterType = [{ type: string; color: string; icon: string }]
+
 //DB /scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html
 export const TAG_DB = 'M2L_TAG_SYN'
 //MINISIS REPORT
@@ -91,16 +93,7 @@ export const TAG_FUNC_P_ATTND_MAX = 4
 export const TAG_FUNC_DTE_LIST = 'list'
 export const TAG_FUNC_LOC_LENGTH = -7
 export const TAG_NAME_LENGTH = 18
-export const COLORS_MAP = {
-	RED: 'bg-red-500 border-red-500',
-	YELLOW: 'bg-yellow-500 border-yellow-500',
-	GREEN: 'bg-green-500 border-green-500',
-	ORANGE: 'bg-orange-500 border-orange-500',
-	PURPLE: 'bg-purple-500 border-purple-500',
-	GREY: 'bg-neutral-500 border-neutral-500',
-	PINK: 'bg-pink-500 border-pink-500',
-	INDIGO: 'bg-sky-900 border-sky-900',
-}
+
 //For RSVP
 export const MWI_RESFUL_RES = 'MWI-RESTful-response'
 export const SUCCESS_RES_CODE = 0
@@ -127,6 +120,18 @@ export const RSVP_LOG_P_STATUS = {
 	CANCEL: 'CANCEL',
 }
 
+export const COLORS_MAP = {
+	RED: 'bg-red-500 border-red-500',
+	YELLOW: 'bg-yellow-500 border-yellow-500',
+	GREEN: 'bg-green-500 border-green-500',
+	ORANGE: 'bg-orange-500 border-orange-500',
+	PURPLE: 'bg-purple-500 border-purple-500',
+	GREY: 'bg-neutral-500 border-neutral-500',
+	PINK: 'bg-pink-500 border-pink-500',
+	INDIGO: 'bg-sky-900 border-sky-900',
+}
+
+export const FILTER_OPTION = 'TAG_FUNC_LOC'
 export const FILTER_TYPE_COLORS = [
 	{
 		type: 'Delhi Branch',

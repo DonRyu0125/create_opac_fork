@@ -33,6 +33,7 @@ import {
 	ContactInfo,
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
+	FilterType,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
@@ -47,9 +48,16 @@ import EventRSVPCancel from './EventCancel'
 export interface eventSumType {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
+	filterType: FilterType
+	fitlerOption:string
 }
 
-const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
+const EventSumButton = ({
+	filteredEvents,
+	contactInfo,
+	filterType,
+	fitlerOption
+}: eventSumType) => {
 	const [monthType, __] = useAtom(calendarMonthType)
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
@@ -59,19 +67,19 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 	const message = useConstants().message
-	const groupedByLocation = (filteredEvents: Cal_event[]) => {
-		let locationArr: any = {}
+	const groupedByType = (filteredEvents: Cal_event[]) => {
+		let typeArr: any = {}
 		let result = []
 
 		filteredEvents.forEach((classInfo) => {
 			const location = classInfo[TAG_FUNC_LOC]
-			if (!locationArr[location]) {
-				locationArr[location] = []
+			if (!typeArr[location]) {
+				typeArr[location] = []
 			}
-			locationArr[location].push(classInfo)
+			typeArr[location].push(classInfo)
 		})
-		result = Object.keys(locationArr).map((loc) => {
-			return { [TAG_FUNC_LOC]: loc, [TAG_FUNC_DTE_LIST]: locationArr[loc] }
+		result = Object.keys(typeArr).map((loc) => {
+			return { [TAG_FUNC_LOC]: loc, [TAG_FUNC_DTE_LIST]: typeArr[loc] }
 		})
 		return result ?? []
 	}
@@ -80,7 +88,7 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 		<>
 			{monthType && filteredEvents.length > 3 ? (
 				<div className={'h-full mb-[2px] overflow-x-hidden'}>
-					{groupedByLocation(filteredEvents).map((item: any, key: number) => (
+					{groupedByType(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>
 							<DialogTrigger asChild>
 								<Button

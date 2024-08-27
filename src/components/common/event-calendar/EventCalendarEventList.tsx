@@ -9,6 +9,7 @@ import {
 	TAG_FUNC_LOC,
 	Day_obj,
 	ContactInfo,
+	FilterType,
 } from './Constants'
 import { convertLowerTrim } from '@/lib/utils'
 import EventSumButton from './EventSumButton'
@@ -22,6 +23,8 @@ export interface Event_list {
 	currentEvent: Cal_event[]
 	weekType: boolean
 	contactInfo: ContactInfo[]
+	filterType: FilterType
+	fitlerOption:string
 }
 
 const EventCalendarEventList = ({
@@ -29,6 +32,8 @@ const EventCalendarEventList = ({
 	currentFilter = [],
 	currentEvent,
 	contactInfo,
+	filterType,
+	fitlerOption
 }: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 	const [weekType, _] = useAtom(calendarWeekType)
@@ -98,11 +103,11 @@ const EventCalendarEventList = ({
 	return (
 		<div className={`${monthType ? 'h-4/5' : 'h-[98%]'} relative w-full`}>
 			{/* Event button */}
-			<EventSumButton filteredEvents={filteredEvents} contactInfo={contactInfo} />
+			<EventSumButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterType={filterType} fitlerOption={fitlerOption} />
 			{/* All events button */}
 			{monthType && filteredEvents.length > 2 && (
 				<div className={'h-[20px] absolute bottom-0 w-full'}>
-					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} />
+					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterType={filterType} fitlerOption={fitlerOption} />
 				</div>
 			)}
 		</div>

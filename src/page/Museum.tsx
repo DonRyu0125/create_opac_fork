@@ -7,6 +7,7 @@ import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSear
 import { getSearchURL } from '@/lib/utils'
 import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
 import { UNION_SEARCH_CL } from './Home'
+import EventCalendar from '@/components/common/event-calendar'
 const Museum = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { heroBanner, searchURL, title, database_name } = useConstants().museum
@@ -21,6 +22,7 @@ const Museum = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
+			<EventCalendar/>
 		</Layout>
 	)
 }

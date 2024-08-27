@@ -36,6 +36,7 @@ import {
 	TAG_FUNC_CAN_RES,
 	TAG_FUNC_RSVP,
 	EVENT_CANCEL_NOTI_MODAL_BG,
+	FilterType,
 } from './Constants'
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
@@ -45,26 +46,16 @@ import useConstants from '@/hooks/useConstants'
 const EventAllButton = ({
 	filteredEvents,
 	contactInfo,
+	filterType,
+	fitlerOption
 }: {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
+	fitlerOption: string
+	filterType: FilterType
 }) => {
 	const { logo } = useConstants().config
 	const message = useConstants().message
-
-	// Description more button func
-	// const [showFullStr, setShowFullStr] = useState<showStrObj>({})
-	// const resetToggleSetting = async () => {
-	// 	setShowFullStr({})
-	// }
-	// const showStrToggle = (key: number) => {
-	// 	setShowFullStr((prevShowFullStr) => {
-	// 		const updatedShowFullStr = { ...prevShowFullStr }
-	// 		updatedShowFullStr[key] = !updatedShowFullStr[key]
-	// 		return updatedShowFullStr
-	// 	})
-	// }
-
 	const getColor = (event_type: string) => {
 		let result = FILTER_TYPE_COLORS?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
