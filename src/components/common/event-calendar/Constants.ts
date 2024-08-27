@@ -34,6 +34,7 @@ export interface Day_obj {
 	year?: number
 }
 export type FilterType = { type: string; color: string; icon: string }
+export const EVENT_DEFAULT_COLOR = 'bg-sky-900 border-sky-900'
 
 //DB /scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html
 export const TAG_DB = 'M2L_TAG_SYN'

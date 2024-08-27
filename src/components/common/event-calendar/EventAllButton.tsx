@@ -24,7 +24,6 @@ import {
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_NAME_LENGTH,
-	fitlerOption,
 	FILTER_TYPE_COLORS,
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
@@ -95,7 +94,7 @@ const EventAllButton = ({
 					</DialogTitle>
 				</DialogHeader>
 				<Accordion.Root type="multiple" className={'AccordionRoot w-full px-2 '}>
-					{filteredEvents.map((item: Cal_event, idx: number) => (
+					{filteredEvents.map((item: any, idx: number) => (
 						<Accordion.Item className="AccordionItem" value={`${idx}`} key={idx}>
 							<AccordionTrigger className={'w-full'}>
 								<div key={idx} className={'w-full'}>

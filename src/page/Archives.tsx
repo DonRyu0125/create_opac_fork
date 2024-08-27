@@ -24,7 +24,7 @@ const Archives = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
-			<Section heading={'Calendar'}>
+			<Section heading={`Calendar for Archives`}>
 				<EventCalendar databaseType={'Archives'} filterTypes={rsvp.filterTypes} fitlerOption={rsvp.filterOption} />
 			</Section>
 		</Layout>

@@ -123,7 +123,7 @@ const EventSumButton = ({
 											<div className={'flex'}>
 												<div
 													className={cn(
-														'h-4 w-[16px] border rounded mr-1',
+														'h-4 w-[16px] border rounded mr-1 ',
 														getColor(item[fitlerOption])
 													)}></div>
 												{item[fitlerOption]}

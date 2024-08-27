@@ -32,7 +32,7 @@
 		"filterTypes": [
 			{
 				"type": "Delhi Branch",
-				"color":"bg-neutral-500 border-neutral-500",
+				"color":"bg-neutral-900 border-neutral-900",
 				"icon": "rounded"
 			},
 			{
