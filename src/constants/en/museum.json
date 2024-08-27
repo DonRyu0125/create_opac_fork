@@ -29,6 +29,7 @@
 		}
 	],
 	"rsvp": {
+		"filterDatabase":"Museum",
 		"filterOption": "",
 		"filterTypes": []
 	}

@@ -34,6 +34,7 @@ import {
 	TAG_FUNC_CAN_RES,
 	FilterType,
 	TAG_DB_TYPE,
+	EVENT_DEFAULT_COLOR,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
@@ -64,6 +65,9 @@ const EventSumButton = ({
 		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
+		if(result.length < 1){
+			return EVENT_DEFAULT_COLOR
+		}
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 	const message = useConstants().message
@@ -78,8 +82,8 @@ const EventSumButton = ({
 			}
 			typeArr[type].push(classInfo)
 		})
-		result = Object.keys(typeArr).map((loc) => {
-			return { [fitlerOption]: loc, [TAG_FUNC_DTE_LIST]: typeArr[loc] }
+		result = Object.keys(typeArr).map((item) => {
+			return { [fitlerOption]: item, [TAG_FUNC_DTE_LIST]: typeArr[item] }
 		})
 		return result ?? []
 	}
@@ -100,7 +104,7 @@ const EventSumButton = ({
 											getColor(item[fitlerOption])
 										)}></div>
 									<div className={'hidden sm:block max-w-[126px] text-left '}>
-										{item[fitlerOption]?.slice(0, TAG_FUNC_LOC_LENGTH)}
+										{item[fitlerOption]}
 									</div>
 									<div className={'flex items-center justify-center'}>
 										<CalendarCheck height={18} className={'hidden sm:block'} />:
@@ -126,6 +130,7 @@ const EventSumButton = ({
 														'h-4 w-[16px] border rounded mr-1 ',
 														getColor(item[fitlerOption])
 													)}></div>
+													{console.log('item',item)}
 												{item[fitlerOption]}
 											</div>
 											<DialogPrimitive.Close>

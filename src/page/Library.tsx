@@ -27,7 +27,7 @@ const Library = () => {
 			)}
 			<Section heading={`${message.calendar}`}>
 				<EventCalendar
-					databaseType={'Library'}
+					databaseType={rsvp.filterDatabase}
 					filterTypes={rsvp.filterTypes}
 					fitlerOption={rsvp.filterOption}
 				/>

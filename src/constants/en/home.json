@@ -27,6 +27,7 @@
 		}
 	],
 	"rsvp":{
+		"filterDatabase":"",
 		"filterOption":"TAG_DB_TYPE",
 		"filterTypes":[
 			{

@@ -26,7 +26,7 @@ const Museum = () => {
 			)}
 			<Section heading={`${message.calendar}`}>
 				<EventCalendar
-					databaseType={'Museum'}
+					databaseType={rsvp.filterDatabase}
 					filterTypes={rsvp.filterTypes}
 					fitlerOption={rsvp.filterOption}
 				/>

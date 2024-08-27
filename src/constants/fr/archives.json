@@ -28,6 +28,7 @@
 		}
 	],
 	"rsvp": {
+		"filterDatabase":"Archives",
 		"filterOption": "",
 		"filterTypes": []
 	}
