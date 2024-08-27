@@ -15,8 +15,8 @@ import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj, FilterType } fr
 import useConstants from '@/hooks/useConstants'
 
 export interface calendarFilterType {
-	databaseType: string
-	filterType: FilterType
+	databaseType?: string
+	filterType: FilterType[]
 	fitlerOption: string
 }
 
@@ -42,7 +42,6 @@ const EventCalendar = ({ databaseType, filterType, fitlerOption }: calendarFilte
 
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate, weekType)
-		console.log('currE', currE)
 		setCurrentEvent(currE)
 	}
 

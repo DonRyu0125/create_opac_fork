@@ -24,5 +24,25 @@
 			"title": "Peintures",
 			"url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=KEYWORD_CLUSTER \"painting\""
 		}
-	]
+	],
+	"rsvp":{
+		"filterOption":"TAG_DB_TYPE",
+		"filterType":[
+			{
+				"type": "Library",
+				"color": "bg-red-500 border-red-500",
+				"icon": "rounded"
+			},
+			{
+				"type": "Museum",
+				"color": "bg-yellow-500 border-yellow-500",
+				"icon": "rounded"
+			},
+			{
+				"type": "Archives",
+				"color": "bg-sky-900 border-sky-900",
+				"icon": "rounded"
+			}
+		]
+	}
 }

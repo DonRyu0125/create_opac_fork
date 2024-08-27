@@ -21,7 +21,7 @@ import {
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_NAME_LENGTH,
-	TAG_FUNC_LOC,
+	TAG_DB_TYPE,
 	FILTER_TYPE_COLORS,
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
@@ -34,6 +34,7 @@ import {
 	TAG_FUNC_ACCESS,
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
+	FilterType,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { Accessibility, SquareUserRound, X } from 'lucide-react'
@@ -47,16 +48,20 @@ const EventButton = ({
 	elm,
 	id,
 	contactInfo,
+	filterType,
+	fitlerOption
 }: {
 	elm: Cal_event
 	id: number
 	contactInfo: ContactInfo[]
+	filterType: FilterType[]
+	fitlerOption:string
 }) => {
 	const [weekType, _] = useAtom(calendarWeekType)
 	const message = useConstants().message
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
-		let result = FILTER_TYPE_COLORS?.filter((item) => {
+		let result = filterType?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
 		return `${result[0]?.color} ${result[0]?.icon}`
@@ -71,7 +76,7 @@ const EventButton = ({
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded',
-									getColor(elm[TAG_FUNC_LOC])
+									getColor(elm[TAG_DB_TYPE])
 								)}></div>
 							<p className={'w-full h-full hidden sm:block break-all text-left'}>
 								{elm[TAG_NAME]}
@@ -104,9 +109,9 @@ const EventButton = ({
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded mr-1',
-									getColor(elm[TAG_FUNC_LOC])
+									getColor(elm[TAG_DB_TYPE])
 								)}></div>
-							<div>{elm[TAG_FUNC_LOC]}</div>
+							<div>{elm[TAG_DB_TYPE]}</div>
 						</div>
 						<DialogPrimitive.Close>
 							<X className={'h-6 w-6'} />

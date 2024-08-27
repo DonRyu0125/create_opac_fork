@@ -23,7 +23,7 @@ export interface Event_list {
 	currentEvent: Cal_event[]
 	weekType: boolean
 	contactInfo: ContactInfo[]
-	filterType: FilterType
+	filterType: FilterType[]
 	fitlerOption:string
 }
 
@@ -39,17 +39,16 @@ const EventCalendarEventList = ({
 	const [weekType, _] = useAtom(calendarWeekType)
 	const [monthType, __] = useAtom(calendarMonthType)
 	useEffect(() => {
-		const updatedFilteredEvents = currentEvent?.filter((item: Cal_event) => {
+		const updatedFilteredEvents = currentEvent?.filter((item: any) => {
 			const { day, month, year } = changeStrToDate(item[TAG_FUNC_DATE])
 			const isMatchingDayMonth =
 				day === dayObj.day && month === dayObj.month && year === dayObj.year
-
 			if (currentFilter.length > 0) {
 				return (
 					isMatchingDayMonth &&
 					currentFilter.some(
 						(type: string) =>
-							convertLowerTrim(type) === convertLowerTrim(item[TAG_FUNC_LOC])
+							convertLowerTrim(type) === convertLowerTrim(item[fitlerOption])
 					)
 				)
 			}

@@ -18,6 +18,7 @@ const Home = () => {
 		browseByCategoryTitle,
 		categoriesItems,
 		searchURL,
+		rsvp
 		// eventCalendar,
 	} = useConstants().home
 	return (
@@ -49,7 +50,7 @@ const Home = () => {
 			</Section>
 
 			<Section heading={'Calendar'}>
-				<EventCalendar />
+				<EventCalendar databaseType={''} filterType={rsvp.filterType} fitlerOption={rsvp.filterOption} />
 			</Section>
 			{/* <Section
         className='bg-secondary'

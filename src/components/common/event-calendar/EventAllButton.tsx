@@ -24,7 +24,7 @@ import {
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_NAME_LENGTH,
-	TAG_FUNC_LOC,
+	fitlerOption,
 	FILTER_TYPE_COLORS,
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
@@ -52,12 +52,12 @@ const EventAllButton = ({
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
 	fitlerOption: string
-	filterType: FilterType
+	filterType: FilterType[]
 }) => {
 	const { logo } = useConstants().config
 	const message = useConstants().message
 	const getColor = (event_type: string) => {
-		let result = FILTER_TYPE_COLORS?.filter((item) => {
+		let result = filterType?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
 		return `${result[0]?.color} ${result[0]?.icon}`
@@ -108,9 +108,9 @@ const EventAllButton = ({
 												<div
 													className={cn(
 														'h-4 w-[16px] border rounded mr-1',
-														getColor(item[TAG_FUNC_LOC])
+														getColor(item[fitlerOption])
 													)}></div>
-												{item[TAG_FUNC_LOC]}
+												{item[fitlerOption]}
 											</div>
 											<div className={'mx-2'}>
 												<span>{item[TAG_FUNC_START_T]?.toUpperCase()}</span>

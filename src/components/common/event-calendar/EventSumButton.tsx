@@ -21,7 +21,6 @@ import {
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_NAME_LENGTH,
-	TAG_FUNC_LOC,
 	FILTER_TYPE_COLORS,
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
@@ -34,6 +33,7 @@ import {
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
 	FilterType,
+	TAG_DB_TYPE,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
@@ -48,20 +48,20 @@ import EventRSVPCancel from './EventCancel'
 export interface eventSumType {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
-	filterType: FilterType
-	fitlerOption:string
+	filterType: FilterType[]
+	fitlerOption: string
 }
 
 const EventSumButton = ({
 	filteredEvents,
 	contactInfo,
 	filterType,
-	fitlerOption
+	fitlerOption,
 }: eventSumType) => {
 	const [monthType, __] = useAtom(calendarMonthType)
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
-		let result = FILTER_TYPE_COLORS?.filter((item) => {
+		let result = filterType?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
 		return `${result[0]?.color} ${result[0]?.icon}`
@@ -71,15 +71,15 @@ const EventSumButton = ({
 		let typeArr: any = {}
 		let result = []
 
-		filteredEvents.forEach((classInfo) => {
-			const location = classInfo[TAG_FUNC_LOC]
-			if (!typeArr[location]) {
-				typeArr[location] = []
+		filteredEvents.forEach((classInfo: any) => {
+			const type = classInfo[fitlerOption]
+			if (!typeArr[type]) {
+				typeArr[type] = []
 			}
-			typeArr[location].push(classInfo)
+			typeArr[type].push(classInfo)
 		})
 		result = Object.keys(typeArr).map((loc) => {
-			return { [TAG_FUNC_LOC]: loc, [TAG_FUNC_DTE_LIST]: typeArr[loc] }
+			return { [fitlerOption]: loc, [TAG_FUNC_DTE_LIST]: typeArr[loc] }
 		})
 		return result ?? []
 	}
@@ -97,10 +97,10 @@ const EventSumButton = ({
 									<div
 										className={cn(
 											'h-4 w-[16px] border rounded',
-											getColor(item[TAG_FUNC_LOC])
+											getColor(item[fitlerOption])
 										)}></div>
 									<div className={'hidden sm:block max-w-[126px] text-left '}>
-										{item[TAG_FUNC_LOC]?.slice(0, TAG_FUNC_LOC_LENGTH)}
+										{item[fitlerOption]?.slice(0, TAG_FUNC_LOC_LENGTH)}
 									</div>
 									<div className={'flex items-center justify-center'}>
 										<CalendarCheck height={18} className={'hidden sm:block'} />:
@@ -124,9 +124,9 @@ const EventSumButton = ({
 												<div
 													className={cn(
 														'h-4 w-[16px] border rounded mr-1',
-														getColor(item[TAG_FUNC_LOC])
+														getColor(item[fitlerOption])
 													)}></div>
-												{item[TAG_FUNC_LOC]}
+												{item[fitlerOption]}
 											</div>
 											<DialogPrimitive.Close>
 												<X className={'h-6 w-6'} />
@@ -214,7 +214,14 @@ const EventSumButton = ({
 			) : (
 				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto'}>
 					{filteredEvents.map((item: any, idx: number) => (
-						<EventButton elm={item} key={idx} id={idx} contactInfo={contactInfo} />
+						<EventButton
+							elm={item}
+							key={idx}
+							id={idx}
+							contactInfo={contactInfo}
+							filterType={filterType}
+							fitlerOption={fitlerOption}
+						/>
 					))}
 				</div>
 			)}

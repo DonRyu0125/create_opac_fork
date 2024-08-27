@@ -17,6 +17,7 @@ export interface Cal_event {
 	[TAG_FUNC_ACCESS]: string
 	[TAG_FUNC_CANCEL]: string
 	[TAG_FUNC_CAN_RES]: string
+	[TAG_DB_TYPE]: string
 }
 export interface patron {
 	[PATRON]: string
@@ -32,7 +33,7 @@ export interface Day_obj {
 	month?: number
 	year?: number
 }
-export type FilterType = [{ type: string; color: string; icon: string }]
+export type FilterType = { type: string; color: string; icon: string }
 
 //DB /scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html
 export const TAG_DB = 'M2L_TAG_SYN'
@@ -52,6 +53,7 @@ export const REG_CONFIMRATION_EMAIL_T = 'Your confirmed for: '
 export const CANCEL_CONFIRMATION_EMAIL_T = 'Your registration has been cancelled for: '
 //Library Location group (From LIBRARY_LOCATION_NEW report)
 export const TAG_NAME = 'TAG_NAME'
+export const TAG_DB_TYPE = 'TAG_DB_TYPE'
 export const LIBRARY_LOCATION_XML_TAG = 'record'
 export const BRANCH_NAME = 'BRANCH_NAME'
 export const BRANCH_ADDRESS = 'BRANCH_ADDRESS'

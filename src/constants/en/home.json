@@ -27,10 +27,20 @@
 		}
 	],
 	"rsvp":{
-		"filterOption":"TAG_FUNC_LOC",
+		"filterOption":"TAG_DB_TYPE",
 		"filterType":[
 			{
-				"type": "Delhi Branch",
+				"type": "Library",
+				"color": "bg-red-500 border-red-500",
+				"icon": "rounded"
+			},
+			{
+				"type": "Museum",
+				"color": "bg-yellow-500 border-yellow-500",
+				"icon": "rounded"
+			},
+			{
+				"type": "Archives",
 				"color": "bg-sky-900 border-sky-900",
 				"icon": "rounded"
 			}
