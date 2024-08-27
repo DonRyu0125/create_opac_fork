@@ -104,7 +104,8 @@ const EventSumButton = ({
 											getColor(item[fitlerOption])
 										)}></div>
 									<div className={'hidden sm:block max-w-[126px] text-left '}>
-										{item[fitlerOption]}
+										{console.log('item[fitlerOption]',item[fitlerOption])}
+										{fitlerOption ? item[fitlerOption] : message.all}
 									</div>
 									<div className={'flex items-center justify-center'}>
 										<CalendarCheck height={18} className={'hidden sm:block'} />:
