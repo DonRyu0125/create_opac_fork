@@ -42,6 +42,11 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate, weekType)
+		if (databaseType) {
+			const filteredCurrE = currE.filter((item) => item.TAG_DB_TYPE === databaseType)
+			setCurrentEvent(filteredCurrE)
+			return
+		}
 		setCurrentEvent(currE)
 	}
 
@@ -232,7 +237,10 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 				</Button>
 			</div>
 			{fitlerOption && (
-				<EventCalendarFilter setCurrentFilter={setCurrentFilter} filterTypes={filterTypes} />
+				<EventCalendarFilter
+					setCurrentFilter={setCurrentFilter}
+					filterTypes={filterTypes}
+				/>
 			)}
 
 			<div className={'w-full mt-1'}>
