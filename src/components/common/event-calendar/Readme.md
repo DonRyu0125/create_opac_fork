@@ -25,7 +25,7 @@ website profile ...
 -  CALENDAR: C:\INETPUB\create_opac\src\components\common\event-calendar\
 
 
-## How to set
+## Installation
 
 1.MWI SETTING
 -   WEB_CALENDAR site profile - webuser - M2L_TAG (Main), TAG_RSVP_PATRON_LOG_SYN (Log)
@@ -51,6 +51,7 @@ website profile ...
 -   ✅ Confirm landing page has expiration time (default 24 hrs)
 
 -To Register: Non login user Do register => get confirmation email => go to confirm landing page => click confirm => store record and log data => registration is done
+
 
 -To Cancel: Non login user After confirm user, get the registration confirm email => go to cancel
 landing page =>click cancel => delete the record and adding cancel log data => user get cancel
