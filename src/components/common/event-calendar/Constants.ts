@@ -107,11 +107,6 @@ export const TAG_RSVP_PATRON_LOG = 'TAG_RSVP_PATRON_LOG_SYN'
 export const TAG_FUNC_P_T = 'TAG_FUNC_P_T'
 export const TAG_P_STATUS = 'TAG_P_STATUS'
 
-export const ICON_SHAPE_MAP = {
-	SQUARE: 'rounded',
-	CIRCLE: 'rounded-full',
-}
-
 export type ContactInfo = {
 	[BRANCH_NAME]: string
 	[BRANCH_ADDRESS]: string
@@ -123,27 +118,32 @@ export const RSVP_LOG_P_STATUS = {
 	CANCEL: 'CANCEL',
 }
 
-export const COLORS_MAP = {
-	RED: 'bg-red-500 border-red-500',
-	YELLOW: 'bg-yellow-500 border-yellow-500',
-	GREEN: 'bg-green-500 border-green-500',
-	ORANGE: 'bg-orange-500 border-orange-500',
-	PURPLE: 'bg-purple-500 border-purple-500',
-	GREY: 'bg-neutral-500 border-neutral-500',
-	PINK: 'bg-pink-500 border-pink-500',
-	INDIGO: 'bg-sky-900 border-sky-900',
+export const ICON_SHAPE_MAP = {
+	SQUARE: 'rounded',
+	CIRCLE: 'rounded-full',
 }
 
-export const FILTER_OPTION = 'TAG_FUNC_LOC'
-export const FILTER_TYPE_COLORS = [
-	{
-		type: 'Delhi Branch',
-		color:'bg-neutral-500 border-neutral-500',
-		icon: 'rounded',
-	},
-	{
-		type: 'MERKENICH',
-		color: 'bg-sky-900 border-sky-900',
-		icon: 'rounded',
-	},
-]
+// export const COLORS_MAP = {
+// 	RED: 'bg-red-500 border-red-500',
+// 	YELLOW: 'bg-yellow-500 border-yellow-500',
+// 	GREEN: 'bg-green-500 border-green-500',
+// 	ORANGE: 'bg-orange-500 border-orange-500',
+// 	PURPLE: 'bg-purple-500 border-purple-500',
+// 	GREY: 'bg-neutral-500 border-neutral-500',
+// 	PINK: 'bg-pink-500 border-pink-500',
+// 	INDIGO: 'bg-sky-900 border-sky-900',
+// }
+
+// export const FILTER_OPTION = 'TAG_FUNC_LOC'
+// export const FILTER_TYPE_COLORS = [
+// 	{
+// 		type: 'Delhi Branch',
+// 		color:'bg-neutral-500 border-neutral-500',
+// 		icon: 'rounded',
+// 	},
+// 	{
+// 		type: 'MERKENICH',
+// 		color: 'bg-sky-900 border-sky-900',
+// 		icon: 'rounded',
+// 	},
+// ]
