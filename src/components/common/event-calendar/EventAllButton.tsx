@@ -24,7 +24,6 @@ import {
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_NAME_LENGTH,
-	FILTER_TYPE_COLORS,
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
 	PATRON,
@@ -114,7 +113,6 @@ const EventAllButton = ({
 														getColor(item[fitlerOption])
 													)}></div>
 												{item[TAG_NAME]}
-												{console.log('item',item)}
 											</div>
 											<div className={'mx-2'}>
 												<span>{item[TAG_FUNC_START_T]?.toUpperCase()}</span>

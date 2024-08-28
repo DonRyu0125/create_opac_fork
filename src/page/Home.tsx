@@ -49,7 +49,6 @@ const Home = () => {
 					)}
 				/>
 			</Section>
-
 			<Section heading={`${message.calendar}`}>
 				<EventCalendar databaseType={rsvp.filterDatabase} filterTypes={rsvp.filterTypes} fitlerOption={rsvp.filterOption} />
 			</Section>

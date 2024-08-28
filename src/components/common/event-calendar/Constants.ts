@@ -40,12 +40,12 @@ export const EVENT_DEFAULT_COLOR = 'bg-sky-900 border-sky-900'
 export const TAG_DB = 'M2L_TAG_SYN'
 //MINISIS REPORT
 export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW'
-export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_NEW'
+export const LOCATION_REPORT = 'LIBRARY_LOCATION_NEW'
 //MWI
 export const MAIN_MWI_APPLICATION = 'WEB_CALENDAR'
 export const SUB_MWI_APPLICATION = 'WEB_LIBRARY_LOC'
-export const RSVP_CONFIRM_LANDING_PAGE_URL = 'http://dev.opac.minisisinc.com/rsvp-confirm.html'
-export const RSVP_CANCEL_LANDING_PAGE_URL = 'http://dev.opac.minisisinc.com/rsvp-cancel.html'
+export const RSVP_CONFIRM_LANDING_PAGE_URL = `${window.location.hostname}/rsvp-confirm.html`
+export const RSVP_CANCEL_LANDING_PAGE_URL = `${window.location.hostname}/rsvp-cancel.html`
 export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const SISN = 'SISN'
