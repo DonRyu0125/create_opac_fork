@@ -51,7 +51,7 @@ const Home = () => {
 			</Section>
 
 			<Section heading={`${message.calendar}`}>
-				<EventCalendar databaseType={undefined} filterTypes={rsvp.filterTypes} fitlerOption={rsvp.filterOption} />
+				<EventCalendar databaseType={rsvp.filterDatabase} filterTypes={rsvp.filterTypes} fitlerOption={rsvp.filterOption} />
 			</Section>
 			{/* <Section
         className='bg-secondary'
