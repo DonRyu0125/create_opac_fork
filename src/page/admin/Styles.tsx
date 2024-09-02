@@ -9,7 +9,7 @@ import TabsWrapper from '@/components/common/admin/layout/TabsWrapper'
 import { TabsContent } from '@radix-ui/react-tabs'
 import { useAdminForm } from '@/hooks/useAdminForm'
 import Select from '@/components/common/admin/input/Select'
-
+import themeOptions from '@/themes/index.json'
 const AdminStyles = () => {
 	return (
 		<AdminLayout>
@@ -43,10 +43,17 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 
 	const { handleChange } = useAdminForm()
 
+	const options = themeOptions.map((e) => ({ value: e, label: e }))
+
 	return (
 		<div className="flex gap-4 flex-col">
-			<Select />
-			<h1>test test</h1>
+			<Select
+				label="Site theme"
+				placeholder="Select a theme"
+				defaultValue={fieldsValue.theme}
+				options={options}
+				onChange={(e) => handleChange(['theme'], e.value)}
+			/>
 		</div>
 	)
 }

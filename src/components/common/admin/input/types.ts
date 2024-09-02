@@ -14,14 +14,18 @@ export type CheckboxProps = {
 	onChange: (value: boolean) => void
 }
 
+type SelectOption = {
+	value: string
+	label: string
+}
+
 export type SelectProps = {
+	label: string
 	placeholder?: string
 	triggerStyle?: string
 	itemStyle?: string
-	options: {
-		value: string
-		label: string
-	}[]
+	options: SelectOption[]
+	onChange?: (option: SelectOption) => void
 	defaultValue?: string
-	renderOption?: (option: { value: string; label: string }) => ReactNode
+	renderOption?: (option: SelectOption) => ReactNode
 }

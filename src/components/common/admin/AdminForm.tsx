@@ -10,14 +10,14 @@ const AdminForm = ({ children }: { children?: ReactNode }) => {
 	return (
 		<div className="flex col-span-3 flex-row  space-x-4 min-w-[500px] w-full max-w-6xl mx-auto">
 			<div className="w-full">
-				<AdminFormInput
+				{/* <AdminFormInput
 					value={formData}
 					type={type}
 					title={title}
 					properties={properties}
 					items={items}
 					onChange={handleChange}
-				/>
+				/> */}
 				{children}
 			</div>
 
