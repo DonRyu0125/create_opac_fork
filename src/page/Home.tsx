@@ -18,8 +18,10 @@ const Home = () => {
 		browseByCategoryTitle,
 		categoriesItems,
 		searchURL,
+		rsvp
 		// eventCalendar,
 	} = useConstants().home
+	const { message } = useConstants()
 	return (
 		<Layout>
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
@@ -47,9 +49,8 @@ const Home = () => {
 					)}
 				/>
 			</Section>
-
-			<Section heading={'Calendar'}>
-				<EventCalendar />
+			<Section heading={`${message.calendar}`}>
+				<EventCalendar databaseType={rsvp.filterDatabase} filterTypes={rsvp.filterTypes} fitlerOption={rsvp.filterOption} />
 			</Section>
 			{/* <Section
         className='bg-secondary'

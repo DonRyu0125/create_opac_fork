@@ -24,12 +24,14 @@ website profile ...
 
 -   CALENDAR: C:\INETPUB\create_opac\src\components\common\event-calendar\
 
-## How to set
+## Installation
 
 1.MWI SETTING
 
 -   WEB_CALENDAR site profile - webuser - M2L_TAG (Main), TAG_RSVP_PATRON_LOG_SYN (Log)
 -   WEB_LIBRARY_LOC site profile - webuser - LIBRARY_LOCATION
+
+
 
 ## Feature
 
@@ -41,24 +43,25 @@ website profile ...
 -   ✅RSVP history log
 -   ✅Waitlist --- On progress
 
-## RSVP process
+## RSVP process scenario
 
 -   ✅ Non user received unique unit number called ID
--   ✅ User can't register exact date of event ex) Chinese cooking class start 9:00 AM 21st May.
-    User can't register the event at 21st May
+-   ✅ User can't register exact date of event 
+    ex) Chinese cooking class start 9:00 AM 21st May. User can't register the event at 21st May
+-   ✅ Confirm landing page has expiration time (default 24 hrs)
 
--To Register: Non login user Do register => get confirmation email => go to confirm landing page =>
-click confirm => store record and log data => registration is done
+-To Register: Non login user Do register => get confirmation email => go to confirm landing page => click confirm => store record and log data => registration is done
 
-+Confirm landing page has expiration time (default 24 hrs)
 
 -To Cancel: Non login user After confirm user, get the registration confirm email => go to cancel
 landing page =>click cancel => delete the record and adding cancel log data => user get cancel
 confirm email
 
-## Component Structure
+## React Component Structure
 
 ```
+── src > constants > en,fr
+  ├── home.json, library.json, museum.json, archives.json 
 ── Event-calendar
   ├── Constants                               Variables: SMA fields etc...
   ├── EC-Util                                 Util func only for calendar

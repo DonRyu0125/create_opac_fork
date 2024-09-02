@@ -9,6 +9,7 @@ import {
 	TAG_FUNC_LOC,
 	Day_obj,
 	ContactInfo,
+	FilterType,
 } from './Constants'
 import { convertLowerTrim } from '@/lib/utils'
 import EventSumButton from './EventSumButton'
@@ -22,6 +23,8 @@ export interface Event_list {
 	currentEvent: Cal_event[]
 	weekType: boolean
 	contactInfo: ContactInfo[]
+	filterTypes: FilterType[]
+	fitlerOption:string
 }
 
 const EventCalendarEventList = ({
@@ -29,22 +32,23 @@ const EventCalendarEventList = ({
 	currentFilter = [],
 	currentEvent,
 	contactInfo,
+	filterTypes,
+	fitlerOption
 }: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 	const [weekType, _] = useAtom(calendarWeekType)
 	const [monthType, __] = useAtom(calendarMonthType)
 	useEffect(() => {
-		const updatedFilteredEvents = currentEvent?.filter((item: Cal_event) => {
+		const updatedFilteredEvents = currentEvent?.filter((item: any) => {
 			const { day, month, year } = changeStrToDate(item[TAG_FUNC_DATE])
 			const isMatchingDayMonth =
 				day === dayObj.day && month === dayObj.month && year === dayObj.year
-
 			if (currentFilter.length > 0) {
 				return (
 					isMatchingDayMonth &&
 					currentFilter.some(
 						(type: string) =>
-							convertLowerTrim(type) === convertLowerTrim(item[TAG_FUNC_LOC])
+							convertLowerTrim(type) === convertLowerTrim(item[fitlerOption])
 					)
 				)
 			}
@@ -98,11 +102,11 @@ const EventCalendarEventList = ({
 	return (
 		<div className={`${monthType ? 'h-4/5' : 'h-[98%]'} relative w-full`}>
 			{/* Event button */}
-			<EventSumButton filteredEvents={filteredEvents} contactInfo={contactInfo} />
+			<EventSumButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterTypes={filterTypes} fitlerOption={fitlerOption} />
 			{/* All events button */}
 			{monthType && filteredEvents.length > 2 && (
 				<div className={'h-[20px] absolute bottom-0 w-full'}>
-					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} />
+					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterTypes={filterTypes} fitlerOption={fitlerOption} />
 				</div>
 			)}
 		</div>

@@ -2,7 +2,7 @@ import axios from 'axios'
 import X2JS from 'x2js' // Ensure X2JS is installed
 import {
 	CALENDAR_WEEK_VIEW_DAYS,
-	LIBRARY_LOCATION_REPORT,
+	LOCATION_REPORT,
 	LIBRARY_LOCATION_XML_TAG,
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
@@ -58,7 +58,7 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 
 export const getLibraryLocation = async () => {
 	const response = await axios.get(
-		`/scripts/mwimain.dll/144/${SUB_MWI_APPLICATION}/${LIBRARY_LOCATION_REPORT}?commandsearch&exp=%2B%2B%40`, // ++@
+		`/scripts/mwimain.dll/144/${SUB_MWI_APPLICATION}/${LOCATION_REPORT}?commandsearch&exp=%2B%2B%40`, // ++@
 		{
 			headers: {
 				'Content-Type': 'text/xml',
