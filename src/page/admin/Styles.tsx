@@ -7,6 +7,8 @@ import { default as frValues } from '@/constants/fr/styles.json'
 import { SchemaType } from '@/types/schema'
 import TabsWrapper from '@/components/common/admin/layout/TabsWrapper'
 import { TabsContent } from '@radix-ui/react-tabs'
+import { useAdminForm } from '@/hooks/useAdminForm'
+import Select from '@/components/common/admin/input/Select'
 
 const AdminStyles = () => {
 	return (
@@ -17,7 +19,9 @@ const AdminStyles = () => {
 						data={enValues}
 						schema={fields as SchemaType}
 						filepath="constants/en/styles.json">
-						<AdminForm>{/* <HomeForm lang="en" /> */}</AdminForm>
+						<AdminForm>
+							<Form lang="en" />
+						</AdminForm>
 					</AdminFormProvider>
 				</TabsContent>
 				<TabsContent value="fr">
@@ -25,12 +29,25 @@ const AdminStyles = () => {
 						data={frValues}
 						schema={fields as SchemaType}
 						filepath="constants/fr/styles.json">
-						<AdminForm>{/* <HomeForm lang="fr" /> */}</AdminForm>
+						<AdminForm>
+							<Form lang="fr" />
+						</AdminForm>
 					</AdminFormProvider>
 				</TabsContent>
 			</TabsWrapper>
 		</AdminLayout>
 	)
 }
+const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
+	const fieldsValue = lang === 'en' ? enValues : frValues
 
+	const { handleChange } = useAdminForm()
+
+	return (
+		<div className="flex gap-4 flex-col">
+			<Select />
+			<h1>test test</h1>
+		</div>
+	)
+}
 export default AdminStyles

@@ -5,18 +5,28 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import { SelectProps } from '@radix-ui/react-select'
+import { cn } from '@/lib/utils'
+import { SelectProps } from './types'
 
-const Select = (props: SelectProps) => {
+const Select = ({
+	placeholder,
+	triggerStyle,
+	itemStyle,
+	options,
+	renderOption,
+	defaultValue,
+}: SelectProps) => {
 	return (
-		<DefaultSelect {...props}>
-			<SelectTrigger className="w-[180px]">
-				<SelectValue placeholder="Theme" />
+		<DefaultSelect defaultValue={defaultValue}>
+			<SelectTrigger className={cn('w-[180px]', triggerStyle)}>
+				<SelectValue placeholder={placeholder || 'Select an option'} />
 			</SelectTrigger>
 			<SelectContent>
-				<SelectItem value="light">Light</SelectItem>
-				<SelectItem value="dark">Dark</SelectItem>
-				<SelectItem value="system">System</SelectItem>
+				{options.map((option, index) => (
+					<SelectItem className={cn(itemStyle)} key={index} value={option.value}>
+						{renderOption ? renderOption(option) : option.label}
+					</SelectItem>
+				))}
 			</SelectContent>
 		</DefaultSelect>
 	)
