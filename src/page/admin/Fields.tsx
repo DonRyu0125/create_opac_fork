@@ -16,12 +16,6 @@ import { SchemaType } from '@/types/schema'
 const Fields = () => {
 	return (
 		<AdminLayout>
-			{/* <AdminFormProvider
-				data={fieldsValue}
-				schema={fields as SchemaType}
-				filepath="constants/en/fields.json">
-				<AdminForm />
-			</AdminFormProvider> */}
 			<TabsWrapper>
 				<TabsContent value="en">
 					<AdminFormProvider
@@ -29,7 +23,7 @@ const Fields = () => {
 						schema={fields as SchemaType}
 						filepath="constants/en/fields.json">
 						<AdminForm>
-							<FieldsForm lang="en" />
+							<Form lang="en" />
 						</AdminForm>
 					</AdminFormProvider>
 				</TabsContent>
@@ -39,7 +33,7 @@ const Fields = () => {
 						schema={fields as SchemaType}
 						filepath="constants/fr/fields.json">
 						<AdminForm>
-							<FieldsForm lang="fr" />
+							<Form lang="fr" />
 						</AdminForm>
 					</AdminFormProvider>
 				</TabsContent>
@@ -48,7 +42,7 @@ const Fields = () => {
 	)
 }
 
-const FieldsForm = ({ lang }: { lang: 'en' | 'fr' }) => {
+const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 	const fieldsValue = lang === 'en' ? enValues : frValues
 	const { handleChange } = useAdminForm()
 

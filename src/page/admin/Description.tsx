@@ -21,7 +21,7 @@ const AdminDescription = () => {
 						schema={fields as SchemaType}
 						filepath="constants/en/museum.json">
 						<AdminForm>
-							<HomeForm lang="en" />
+							<Form lang="en" />
 						</AdminForm>
 					</AdminFormProvider>
 				</TabsContent>
@@ -31,7 +31,7 @@ const AdminDescription = () => {
 						schema={fields as SchemaType}
 						filepath="constants/fr/museum.json">
 						<AdminForm>
-							<HomeForm lang="fr" />
+							<Form lang="fr" />
 						</AdminForm>
 					</AdminFormProvider>
 				</TabsContent>
@@ -40,7 +40,7 @@ const AdminDescription = () => {
 	)
 }
 
-const HomeForm = ({ lang }: { lang: 'en' | 'fr' }) => {
+const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 	const fieldsValue = lang === 'en' ? enValues : frValues
 	const { handleChange } = useAdminForm()
 

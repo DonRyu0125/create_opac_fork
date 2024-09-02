@@ -18,8 +18,8 @@ const Header = (props: Props) => {
 		{ url: './collections.html', page: 'Collections' },
 		{ url: './description.html', page: 'Description' },
 		{ url: './fields.html', page: 'Report fields' },
-		{ url: './rsvp.html', page: 'RSVP' },
-		{ url: './message.html', page: 'Translation' },
+		// { url: './rsvp.html', page: 'RSVP' },
+		// { url: './message.html', page: 'Translation' },
 		{ url: './styles.html', page: 'Theme' },
 	]
 
