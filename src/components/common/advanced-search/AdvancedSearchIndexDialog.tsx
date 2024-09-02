@@ -45,7 +45,7 @@ interface Adv_dialog {
 	updateField: Function
 	adv_search_index: number
 	database_name: string
-	label:string | undefined
+	label: string | undefined
 }
 
 const DEFAULT_OPTION_COLOR = 'bg-white'
@@ -56,7 +56,7 @@ const AdvancedSearchIndexDialog = ({
 	updateField,
 	adv_search_index,
 	database_name,
-	label
+	label,
 }: Adv_dialog) => {
 	const { message, advancedSearch } = useConstants()
 	const [open, setOpen] = useState(false)

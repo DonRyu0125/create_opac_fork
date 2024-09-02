@@ -118,12 +118,12 @@ export function getCookieValue(name: string) {
 }
 
 export const clearCookies = () => {
-	var cookies = document.cookie.split(';');
-	  for (var i = 0; i < cookies.length; i++) {
-	  //delete each cookie
-	  deleteCookie(cookies[i].split('=')[0]);
-	  }
-	  window.location.href = "/";
+	var cookies = document.cookie.split(';')
+	for (var i = 0; i < cookies.length; i++) {
+		//delete each cookie
+		deleteCookie(cookies[i].split('=')[0])
+	}
+	window.location.href = '/'
 }
 
 export function deleteCookie(cname: string) {

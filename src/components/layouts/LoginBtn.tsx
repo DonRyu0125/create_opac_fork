@@ -47,9 +47,7 @@ const LoginBtn = () => {
 				<li className="hover:border-b-opac-green">
 					<Link
 						className="transition no-underline  text-lg text-opac-white hover:text-opac-green"
-						href={
-							`${config.auth.url}`
-						}>
+						href={`${config.auth.url}`}>
 						{message.logIn}
 					</Link>
 				</li>

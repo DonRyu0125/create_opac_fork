@@ -22,18 +22,14 @@ website profile ...
 
 #Virtual Directory needs
 
--  CALENDAR: C:\INETPUB\create_opac\src\components\common\event-calendar\
-
+-   CALENDAR: C:\INETPUB\create_opac\src\components\common\event-calendar\
 
 ## How to set
 
 1.MWI SETTING
+
 -   WEB_CALENDAR site profile - webuser - M2L_TAG (Main), TAG_RSVP_PATRON_LOG_SYN (Log)
 -   WEB_LIBRARY_LOC site profile - webuser - LIBRARY_LOCATION
-
-
-
-
 
 ## Feature
 
@@ -95,5 +91,3 @@ confirm email
 ──router
     └──index.ts                               Adding route for rsvp_cancel,rsvp_confirm
 ```
-
-

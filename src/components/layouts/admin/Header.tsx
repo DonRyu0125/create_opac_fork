@@ -14,9 +14,9 @@ type Props = {}
 const Header = (props: Props) => {
 	const navigationLists = [
 		{ url: './home.html', page: 'Union home' },
-		{ url: './home.html', page: 'Biblio' },
-		{ url: './home.html', page: 'Collections' },
-		{ url: './home.html', page: 'Description' },
+		// { url: './biblio.html', page: 'Biblio' },
+		{ url: './collections.html', page: 'Collections' },
+		{ url: './description.html', page: 'Description' },
 		{ url: './fields.html', page: 'Report fields' },
 		{ url: './rsvp.html', page: 'RSVP' },
 		{ url: './message.html', page: 'Translation' },

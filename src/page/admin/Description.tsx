@@ -11,7 +11,7 @@ import { AdminFormProvider } from '@/providers/AdminFormProvider'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
 
-const AdminCollections = () => {
+const AdminDescription = () => {
 	return (
 		<AdminLayout>
 			<TabsWrapper>
@@ -63,4 +63,4 @@ const HomeForm = ({ lang }: { lang: 'en' | 'fr' }) => {
 		</div>
 	)
 }
-export default AdminCollections
+export default AdminDescription
