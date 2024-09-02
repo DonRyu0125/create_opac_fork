@@ -24,8 +24,6 @@ import {
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_NAME_LENGTH,
-	TAG_FUNC_LOC,
-	FILTER_TYPE_COLORS,
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
 	PATRON,
@@ -36,6 +34,8 @@ import {
 	TAG_FUNC_CAN_RES,
 	TAG_FUNC_RSVP,
 	EVENT_CANCEL_NOTI_MODAL_BG,
+	FilterType,
+	EVENT_DEFAULT_COLOR,
 } from './Constants'
 import EventRSVPForm from './EventRSVPForm'
 import { AccordionTrigger } from '@radix-ui/react-accordion'
@@ -45,30 +45,23 @@ import useConstants from '@/hooks/useConstants'
 const EventAllButton = ({
 	filteredEvents,
 	contactInfo,
+	filterTypes,
+	fitlerOption
 }: {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
+	fitlerOption: string
+	filterTypes: FilterType[]
 }) => {
 	const { logo } = useConstants().config
 	const message = useConstants().message
-
-	// Description more button func
-	// const [showFullStr, setShowFullStr] = useState<showStrObj>({})
-	// const resetToggleSetting = async () => {
-	// 	setShowFullStr({})
-	// }
-	// const showStrToggle = (key: number) => {
-	// 	setShowFullStr((prevShowFullStr) => {
-	// 		const updatedShowFullStr = { ...prevShowFullStr }
-	// 		updatedShowFullStr[key] = !updatedShowFullStr[key]
-	// 		return updatedShowFullStr
-	// 	})
-	// }
-
 	const getColor = (event_type: string) => {
-		let result = FILTER_TYPE_COLORS?.filter((item) => {
+		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
+		if(result.length < 1){
+			return EVENT_DEFAULT_COLOR
+		}
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 
@@ -104,7 +97,7 @@ const EventAllButton = ({
 					</DialogTitle>
 				</DialogHeader>
 				<Accordion.Root type="multiple" className={'AccordionRoot w-full px-2 '}>
-					{filteredEvents.map((item: Cal_event, idx: number) => (
+					{filteredEvents.map((item: any, idx: number) => (
 						<Accordion.Item className="AccordionItem" value={`${idx}`} key={idx}>
 							<AccordionTrigger className={'w-full'}>
 								<div key={idx} className={'w-full'}>
@@ -117,9 +110,9 @@ const EventAllButton = ({
 												<div
 													className={cn(
 														'h-4 w-[16px] border rounded mr-1',
-														getColor(item[TAG_FUNC_LOC])
+														getColor(item[fitlerOption])
 													)}></div>
-												{item[TAG_FUNC_LOC]}
+												{item[TAG_NAME]}
 											</div>
 											<div className={'mx-2'}>
 												<span>{item[TAG_FUNC_START_T]?.toUpperCase()}</span>

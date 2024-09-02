@@ -17,6 +17,7 @@ export interface Cal_event {
 	[TAG_FUNC_ACCESS]: string
 	[TAG_FUNC_CANCEL]: string
 	[TAG_FUNC_CAN_RES]: string
+	[TAG_DB_TYPE]: string
 }
 export interface patron {
 	[PATRON]: string
@@ -32,16 +33,19 @@ export interface Day_obj {
 	month?: number
 	year?: number
 }
+export type FilterType = { type: string; color: string; icon: string }
+export const EVENT_DEFAULT_COLOR = 'bg-sky-900 border-sky-900'
+
 //DB /scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html
 export const TAG_DB = 'M2L_TAG_SYN'
 //MINISIS REPORT
 export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW'
-export const LIBRARY_LOCATION_REPORT = 'LIBRARY_LOCATION_NEW'
+export const LOCATION_REPORT = 'LIBRARY_LOCATION_NEW'
 //MWI
 export const MAIN_MWI_APPLICATION = 'WEB_CALENDAR'
 export const SUB_MWI_APPLICATION = 'WEB_LIBRARY_LOC'
-export const RSVP_CONFIRM_LANDING_PAGE_URL = 'http://dev.opac.minisisinc.com/rsvp-confirm.html'
-export const RSVP_CANCEL_LANDING_PAGE_URL = 'http://dev.opac.minisisinc.com/rsvp-cancel.html'
+export const RSVP_CONFIRM_LANDING_PAGE_URL = `${window.location.hostname}/rsvp-confirm.html`
+export const RSVP_CANCEL_LANDING_PAGE_URL = `${window.location.hostname}/rsvp-cancel.html`
 export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const SISN = 'SISN'
@@ -50,6 +54,7 @@ export const REG_CONFIMRATION_EMAIL_T = 'Your confirmed for: '
 export const CANCEL_CONFIRMATION_EMAIL_T = 'Your registration has been cancelled for: '
 //Library Location group (From LIBRARY_LOCATION_NEW report)
 export const TAG_NAME = 'TAG_NAME'
+export const TAG_DB_TYPE = 'TAG_DB_TYPE'
 export const LIBRARY_LOCATION_XML_TAG = 'record'
 export const BRANCH_NAME = 'BRANCH_NAME'
 export const BRANCH_ADDRESS = 'BRANCH_ADDRESS'
@@ -91,16 +96,7 @@ export const TAG_FUNC_P_ATTND_MAX = 4
 export const TAG_FUNC_DTE_LIST = 'list'
 export const TAG_FUNC_LOC_LENGTH = -7
 export const TAG_NAME_LENGTH = 18
-export const COLORS_MAP = {
-	RED: 'bg-red-500 border-red-500',
-	YELLOW: 'bg-yellow-500 border-yellow-500',
-	GREEN: 'bg-green-500 border-green-500',
-	ORANGE: 'bg-orange-500 border-orange-500',
-	PURPLE: 'bg-purple-500 border-purple-500',
-	GREY: 'bg-neutral-500 border-neutral-500',
-	PINK: 'bg-pink-500 border-pink-500',
-	INDIGO: 'bg-sky-900 border-sky-900',
-}
+
 //For RSVP
 export const MWI_RESFUL_RES = 'MWI-RESTful-response'
 export const SUCCESS_RES_CODE = 0
@@ -110,11 +106,6 @@ export const NON_LOGIN_USER_TYPE = 'NOLOGIN'
 export const TAG_RSVP_PATRON_LOG = 'TAG_RSVP_PATRON_LOG_SYN'
 export const TAG_FUNC_P_T = 'TAG_FUNC_P_T'
 export const TAG_P_STATUS = 'TAG_P_STATUS'
-
-export const ICON_SHAPE_MAP = {
-	SQUARE: 'rounded',
-	CIRCLE: 'rounded-full',
-}
 
 export type ContactInfo = {
 	[BRANCH_NAME]: string
@@ -127,15 +118,32 @@ export const RSVP_LOG_P_STATUS = {
 	CANCEL: 'CANCEL',
 }
 
-export const FILTER_TYPE_COLORS = [
-	{
-		type: 'Delhi Branch',
-		color: COLORS_MAP['INDIGO'],
-		icon: ICON_SHAPE_MAP['SQUARE'],
-	},
-	{
-		type: 'MERKENICH',
-		color: COLORS_MAP['YELLOW'],
-		icon: ICON_SHAPE_MAP['SQUARE'],
-	},
-]
+export const ICON_SHAPE_MAP = {
+	SQUARE: 'rounded',
+	CIRCLE: 'rounded-full',
+}
+
+// export const COLORS_MAP = {
+// 	RED: 'bg-red-500 border-red-500',
+// 	YELLOW: 'bg-yellow-500 border-yellow-500',
+// 	GREEN: 'bg-green-500 border-green-500',
+// 	ORANGE: 'bg-orange-500 border-orange-500',
+// 	PURPLE: 'bg-purple-500 border-purple-500',
+// 	GREY: 'bg-neutral-500 border-neutral-500',
+// 	PINK: 'bg-pink-500 border-pink-500',
+// 	INDIGO: 'bg-sky-900 border-sky-900',
+// }
+
+// export const FILTER_OPTION = 'TAG_FUNC_LOC'
+// export const FILTER_TYPE_COLORS = [
+// 	{
+// 		type: 'Delhi Branch',
+// 		color:'bg-neutral-500 border-neutral-500',
+// 		icon: 'rounded',
+// 	},
+// 	{
+// 		type: 'MERKENICH',
+// 		color: 'bg-sky-900 border-sky-900',
+// 		icon: 'rounded',
+// 	},
+// ]

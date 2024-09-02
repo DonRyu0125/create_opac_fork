@@ -21,8 +21,6 @@ import {
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_NAME_LENGTH,
-	TAG_FUNC_LOC,
-	FILTER_TYPE_COLORS,
 	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
 	TAG_FUNC_LOC_LENGTH,
@@ -33,6 +31,9 @@ import {
 	ContactInfo,
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
+	FilterType,
+	TAG_DB_TYPE,
+	EVENT_DEFAULT_COLOR,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
@@ -47,31 +48,41 @@ import EventRSVPCancel from './EventCancel'
 export interface eventSumType {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
+	filterTypes: FilterType[]
+	fitlerOption: string
 }
 
-const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
+const EventSumButton = ({
+	filteredEvents,
+	contactInfo,
+	filterTypes,
+	fitlerOption,
+}: eventSumType) => {
 	const [monthType, __] = useAtom(calendarMonthType)
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
-		let result = FILTER_TYPE_COLORS?.filter((item) => {
+		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
+		if(result.length < 1){
+			return EVENT_DEFAULT_COLOR
+		}
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 	const message = useConstants().message
-	const groupedByLocation = (filteredEvents: Cal_event[]) => {
-		let locationArr: any = {}
+	const groupedByType = (filteredEvents: Cal_event[]) => {
+		let typeArr: any = {}
 		let result = []
 
-		filteredEvents.forEach((classInfo) => {
-			const location = classInfo[TAG_FUNC_LOC]
-			if (!locationArr[location]) {
-				locationArr[location] = []
+		filteredEvents.forEach((classInfo: any) => {
+			const type = classInfo[fitlerOption]
+			if (!typeArr[type]) {
+				typeArr[type] = []
 			}
-			locationArr[location].push(classInfo)
+			typeArr[type].push(classInfo)
 		})
-		result = Object.keys(locationArr).map((loc) => {
-			return { [TAG_FUNC_LOC]: loc, [TAG_FUNC_DTE_LIST]: locationArr[loc] }
+		result = Object.keys(typeArr).map((item) => {
+			return { [fitlerOption]: item, [TAG_FUNC_DTE_LIST]: typeArr[item] }
 		})
 		return result ?? []
 	}
@@ -80,7 +91,7 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 		<>
 			{monthType && filteredEvents.length > 3 ? (
 				<div className={'h-full mb-[2px] overflow-x-hidden'}>
-					{groupedByLocation(filteredEvents).map((item: any, key: number) => (
+					{groupedByType(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>
 							<DialogTrigger asChild>
 								<Button
@@ -89,10 +100,10 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 									<div
 										className={cn(
 											'h-4 w-[16px] border rounded',
-											getColor(item[TAG_FUNC_LOC])
+											getColor(item[fitlerOption])
 										)}></div>
 									<div className={'hidden sm:block max-w-[126px] text-left '}>
-										{item[TAG_FUNC_LOC]?.slice(0, TAG_FUNC_LOC_LENGTH)}
+										{fitlerOption ? item[fitlerOption] : message.all}
 									</div>
 									<div className={'flex items-center justify-center'}>
 										<CalendarCheck height={18} className={'hidden sm:block'} />:
@@ -115,10 +126,10 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 											<div className={'flex'}>
 												<div
 													className={cn(
-														'h-4 w-[16px] border rounded mr-1',
-														getColor(item[TAG_FUNC_LOC])
+														'h-4 w-[16px] border rounded mr-1 ',
+														getColor(item[fitlerOption])
 													)}></div>
-												{item[TAG_FUNC_LOC]}
+											{fitlerOption ? item[fitlerOption] : message.all}
 											</div>
 											<DialogPrimitive.Close>
 												<X className={'h-6 w-6'} />
@@ -206,7 +217,14 @@ const EventSumButton = ({ filteredEvents, contactInfo }: eventSumType) => {
 			) : (
 				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto'}>
 					{filteredEvents.map((item: any, idx: number) => (
-						<EventButton elm={item} key={idx} id={idx} contactInfo={contactInfo} />
+						<EventButton
+							elm={item}
+							key={idx}
+							id={idx}
+							contactInfo={contactInfo}
+							filterTypes={filterTypes}
+							fitlerOption={fitlerOption}
+						/>
 					))}
 				</div>
 			)}

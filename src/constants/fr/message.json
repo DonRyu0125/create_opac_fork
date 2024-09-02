@@ -107,5 +107,6 @@
 	"support": "Assistance",
 	"myAccount": "Mon Compte",
 	"logout": "Déconnexion",
-	"welcome": "Bienvenue"
+	"welcome": "Bienvenue",
+	"calendar":"calendrier"
 }
