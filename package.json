@@ -13,10 +13,9 @@
 		"gen:types": "node ./tools/gen-types.mjs",
 		"gen": "npm run gen:schema",
 		"doc": "docsify serve docs",
-		"server": "tsx watch ./server/src/index.ts"
+		"server": "cd backend && npm run dev"
 	},
 	"dependencies": {
-		"@icons-pack/react-simple-icons": "^9.3.0",
 		"@radix-ui/react-accordion": "^1.1.2",
 		"@radix-ui/react-aspect-ratio": "^1.0.3",
 		"@radix-ui/react-checkbox": "^1.0.4",
