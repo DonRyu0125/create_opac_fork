@@ -11,9 +11,9 @@ import Section from '@/components/common/Section'
 import EventCalendar from '@/components/common/event-calendar'
 
 const Archives = () => {
-	const [showAdvSearch, setShowAdvSearch] = useState(false);
-	const { message } = useConstants();
-	const { heroBanner, searchURL, title, database_name,rsvp } = useConstants().archives;
+	const [showAdvSearch, setShowAdvSearch] = useState(false)
+	const { message } = useConstants()
+	const { heroBanner, searchURL, title, database_name, rsvp } = useConstants().archives
 	return (
 		<Layout>
 			<Hero className={''} title={title} backgroundImage={heroBanner} description="">
@@ -26,7 +26,11 @@ const Archives = () => {
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
 			<Section heading={`${message.calendar}`}>
-				<EventCalendar databaseType={rsvp.filterDatabase} filterTypes={rsvp.filterTypes} fitlerOption={rsvp.filterOption} />
+				<EventCalendar
+					databaseType={rsvp.filterDatabase}
+					filterTypes={rsvp.filterTypes}
+					fitlerOption={rsvp.filterOption}
+				/>
 			</Section>
 		</Layout>
 	)

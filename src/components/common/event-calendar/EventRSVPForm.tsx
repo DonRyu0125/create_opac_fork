@@ -41,7 +41,7 @@ import {
 	TAG_FUNC_ROOM,
 	TAG_FUNC_START_T,
 	TAG_NAME,
-	VERIFICATION_EMAIL_T
+	VERIFICATION_EMAIL_T,
 } from './Constants'
 import { calNumOfPatron } from './EC-Util'
 import { fetch_get } from './Service'
@@ -191,7 +191,7 @@ const ShowButton = ({
 	setStatus: React.Dispatch<React.SetStateAction<string>>
 }) => {
 	const message = useConstants().message
-	
+
 	return (
 		<div className={'w-full p-2 border-2 rounded min-h-[300px]'}>
 			<div

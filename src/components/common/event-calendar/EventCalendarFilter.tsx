@@ -15,7 +15,7 @@ type SelectType = {
 	[key: string]: number
 }
 
-const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter,filterTypes}) => {
+const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter, filterTypes }) => {
 	const [selectType, setSelectedType] = useState<SelectType>({})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

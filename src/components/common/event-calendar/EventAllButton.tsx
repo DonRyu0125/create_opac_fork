@@ -1,4 +1,11 @@
-import React, { useState } from 'react'
+import { AccordionContent } from '@/components/ui/accordion'
+import { Button } from '@/components/ui/button'
+import useConstants from '@/hooks/useConstants'
+import { cn, convertLowerTrim, convertToArr } from '@/lib/utils'
+import * as Accordion from '@radix-ui/react-accordion'
+import { AccordionTrigger } from '@radix-ui/react-accordion'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { Accessibility, BookX, X } from 'lucide-react'
 import {
 	Dialog,
 	DialogContent,
@@ -8,45 +15,34 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '../../ui/dialog'
-import { Button } from '@/components/ui/button'
-import { convertLowerTrim, convertToArr } from '@/lib/utils'
-import { cn } from '@/lib/utils'
-import * as Accordion from '@radix-ui/react-accordion'
-import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { Accessibility, BookX, X } from 'lucide-react'
 import {
 	Cal_event,
+	ContactInfo,
+	EVENT_CANCEL_NOTI_MODAL_BG,
+	EVENT_DEFAULT_COLOR,
+	FilterType,
+	PATRON,
+	SISN,
+	TAG_FUNC_ACCESS,
+	TAG_FUNC_CANCEL,
+	TAG_FUNC_CAP,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DESC,
 	TAG_FUNC_END_T,
-	TAG_NAME,
-	TAG_FUNC_ROOM,
-	TAG_FUNC_LOC_AUD,
-	TAG_FUNC_START_T,
-	TAG_NAME_LENGTH,
-	TAG_FUNC_CAP,
 	TAG_FUNC_LANG,
-	PATRON,
-	SISN,
-	ContactInfo,
-	TAG_FUNC_ACCESS,
-	TAG_FUNC_CANCEL,
-	TAG_FUNC_CAN_RES,
+	TAG_FUNC_LOC_AUD,
+	TAG_FUNC_ROOM,
 	TAG_FUNC_RSVP,
-	EVENT_CANCEL_NOTI_MODAL_BG,
-	FilterType,
-	EVENT_DEFAULT_COLOR,
+	TAG_FUNC_START_T,
+	TAG_NAME,
 } from './Constants'
 import EventRSVPForm from './EventRSVPForm'
-import { AccordionTrigger } from '@radix-ui/react-accordion'
-import { AccordionContent } from '@/components/ui/accordion'
-import useConstants from '@/hooks/useConstants'
 
 const EventAllButton = ({
 	filteredEvents,
 	contactInfo,
 	filterTypes,
-	fitlerOption
+	fitlerOption,
 }: {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
@@ -59,7 +55,7 @@ const EventAllButton = ({
 		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
-		if(result.length < 1){
+		if (result.length < 1) {
 			return EVENT_DEFAULT_COLOR
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`

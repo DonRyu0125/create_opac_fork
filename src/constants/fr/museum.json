@@ -1,35 +1,35 @@
 {
-    "heading": "MINISIS OPAC Template- Museum Collections",
-    "heroBanner": "https://images.unsplash.com/photo-1579748048451-365c9c9bfbc1",
-    "searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB",
-    "browseByCategoryTitle": "Browse by Category",
-    "title": "Recherchez le musée",
-    "database_name": "COLLECTIONS_WEB",
-    "categoriesItems": [
-        {
-            "thumbnail": "https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGlicmFyeSUyMGl0ZW1zfGVufDB8fDB8fHww",
-            "title": "Digital Images",
-            "url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&exp=KEYWORD_CLUSTER \"digital image\""
-        },
-        {
-            "thumbnail": "https://images.unsplash.com/photo-1472173148041-00294f0814a2?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGxpYnJhcnklMjBpdGVtc3xlbnwwfHwwfHx8MA%3D%3D",
-            "title": "Books",
-            "url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&exp=L_REF_TYPE_LAN1 \"Livre imprimé\""
-        },
-        {
-            "thumbnail": "https://images.unsplash.com/photo-1479642770516-f2df0a071c6c?q=80&w=2004&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "title": "Photographs",
-            "url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&exp=KEYWORD_CLUSTER \"photograph\""
-        },
-        {
-            "thumbnail": "https://images.unsplash.com/photo-1611149916119-c6c16eb89f89?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            "title": "Paintings",
-            "url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&exp=KEYWORD_CLUSTER \"painting\""
-        }
-    ],
-    "rsvp": {
-        "filterDatabase": "Museum",
-        "filterOption": "",
-        "filterTypes": []
-    }
+	"heading": "MINISIS OPAC Template- Museum Collections",
+	"heroBanner": "https://images.unsplash.com/photo-1579748048451-365c9c9bfbc1",
+	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB",
+	"browseByCategoryTitle": "Browse by Category",
+	"title": "Recherchez le musée",
+	"database_name": "COLLECTIONS_WEB",
+	"categoriesItems": [
+		{
+			"thumbnail": "https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGlicmFyeSUyMGl0ZW1zfGVufDB8fDB8fHww",
+			"title": "Digital Images",
+			"url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&exp=KEYWORD_CLUSTER \"digital image\""
+		},
+		{
+			"thumbnail": "https://images.unsplash.com/photo-1472173148041-00294f0814a2?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGxpYnJhcnklMjBpdGVtc3xlbnwwfHwwfHx8MA%3D%3D",
+			"title": "Books",
+			"url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&exp=L_REF_TYPE_LAN1 \"Livre imprimé\""
+		},
+		{
+			"thumbnail": "https://images.unsplash.com/photo-1479642770516-f2df0a071c6c?q=80&w=2004&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+			"title": "Photographs",
+			"url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&exp=KEYWORD_CLUSTER \"photograph\""
+		},
+		{
+			"thumbnail": "https://images.unsplash.com/photo-1611149916119-c6c16eb89f89?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+			"title": "Paintings",
+			"url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&exp=KEYWORD_CLUSTER \"painting\""
+		}
+	],
+	"rsvp": {
+		"filterDatabase": "Museum",
+		"filterOption": "",
+		"filterTypes": []
+	}
 }

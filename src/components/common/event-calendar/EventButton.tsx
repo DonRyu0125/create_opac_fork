@@ -33,7 +33,7 @@ import {
 	TAG_FUNC_ROOM,
 	TAG_FUNC_RSVP,
 	TAG_FUNC_START_T,
-	TAG_NAME
+	TAG_NAME,
 } from './Constants'
 import EventRSVPCancel from './EventCancel'
 import EventRSVPForm from './EventRSVPForm'
@@ -43,13 +43,13 @@ const EventButton = ({
 	id,
 	contactInfo,
 	filterTypes,
-	fitlerOption
+	fitlerOption,
 }: {
 	elm: any
 	id: number
 	contactInfo: ContactInfo[]
 	filterTypes: FilterType[]
-	fitlerOption:string
+	fitlerOption: string
 }) => {
 	const [weekType, _] = useAtom(calendarWeekType)
 	const message = useConstants().message
@@ -59,11 +59,10 @@ const EventButton = ({
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
 
-		if(result.length < 1){
+		if (result.length < 1) {
 			return EVENT_DEFAULT_COLOR
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`
-	
 	}
 
 	return (
