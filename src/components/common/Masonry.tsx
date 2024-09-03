@@ -1,5 +1,3 @@
-import { cn } from '@/lib/utils'
-
 export interface MasonryProps<T> extends React.HTMLAttributes<HTMLDivElement> {
 	items: T[]
 	renderItem: (item: T, index: number) => React.ReactNode
