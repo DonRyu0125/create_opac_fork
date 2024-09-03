@@ -33,7 +33,6 @@ const Home = () => {
 
 			<Section heading={browseByCategoryTitle}>
 				<Slide
-					// auto
 					itemsPerSlide={{ lg: 4 }}
 					items={categoriesItems}
 					renderItem={(item, index: any) => (

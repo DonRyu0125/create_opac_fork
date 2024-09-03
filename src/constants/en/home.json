@@ -26,6 +26,14 @@
             "url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=KEYWORD_CLUSTER \"painting\""
         }
     ],
+    "featuredCollection": [
+        {
+            "title": "",
+            "description": "",
+            "thumbnail": "",
+            "url": ""
+        }
+    ],
     "rsvp": {
         "filterDatabase": "",
         "filterOption": "TAG_DB_TYPE",
