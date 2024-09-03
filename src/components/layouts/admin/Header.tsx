@@ -50,6 +50,7 @@ const Header = (props: Props) => {
 					<NavigationMenuList>
 						{navigationLists.map((e) => (
 							<NavigationMenuItem
+								key={e.page}
 								className={cn(
 									'text-blue-950 cursor-pointer  px-4 py-2 rounded-md',
 									e.page === checkActiveUrl() ? 'bg-white' : 'text-white'

@@ -1,4 +1,10 @@
-import React from 'react'
+import useConstants from '@/hooks/useConstants'
+import { cn, convertLowerTrim, convertToArr } from '@/lib/utils'
+import { calendarWeekType } from '@/store'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { useAtom } from 'jotai'
+import { Accessibility, SquareUserRound, X } from 'lucide-react'
+import { Button } from '../../ui/button'
 import {
 	Dialog,
 	DialogContent,
@@ -8,42 +14,29 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '../../ui/dialog'
-import { Button } from '../../ui/button'
-import { cn, convertToArr } from '@/lib/utils'
-import { convertLowerTrim } from '@/lib/utils'
 import {
-	Cal_event,
-	TAG_FUNC_DATE,
-	TAG_FUNC_DESC,
-	TAG_FUNC_END_T,
-	TAG_NAME,
-	TAG_FUNC_ROOM,
-	TAG_FUNC_LOC_AUD,
-	TAG_FUNC_START_T,
-	TAG_NAME_LENGTH,
-	TAG_DB_TYPE,
-	FILTER_TYPE_COLORS,
-	TAG_FUNC_CAP,
-	TAG_FUNC_LANG,
-	TAG_FUNC_LOC_LENGTH,
-	TAG_FUNC_DTE_LIST,
-	PATRON,
-	TAG_FUNC_RSVP,
-	SISN,
 	ContactInfo,
+	EVENT_DEFAULT_COLOR,
+	FilterType,
+	PATRON,
+	SISN,
+	TAG_DB_TYPE,
 	TAG_FUNC_ACCESS,
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
-	FilterType,
-	EVENT_DEFAULT_COLOR,
+	TAG_FUNC_CAP,
+	TAG_FUNC_DATE,
+	TAG_FUNC_DESC,
+	TAG_FUNC_END_T,
+	TAG_FUNC_LANG,
+	TAG_FUNC_LOC_AUD,
+	TAG_FUNC_ROOM,
+	TAG_FUNC_RSVP,
+	TAG_FUNC_START_T,
+	TAG_NAME
 } from './Constants'
-import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { Accessibility, SquareUserRound, X } from 'lucide-react'
-import EventRSVPForm from './EventRSVPForm'
-import useConstants from '@/hooks/useConstants'
-import { useAtom } from 'jotai'
-import { calendarWeekType } from '@/store'
 import EventRSVPCancel from './EventCancel'
+import EventRSVPForm from './EventRSVPForm'
 
 const EventButton = ({
 	elm,
