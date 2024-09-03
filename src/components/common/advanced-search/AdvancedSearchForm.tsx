@@ -47,7 +47,6 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 	const formRef = useRef<HTMLFormElement>(null)
 	const inputRef = useRef<any>(null)
 
-
 	const getDBTitle = (search_database: string) => {
 		let db = config.navigations.filter((item) => item.search_database === search_database)
 		if (!search_database) return ''
@@ -83,7 +82,11 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 
 	const resetFields = () => {
 		setSearchExp([
-			{ field: getDefaultField(search_database), keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
+			{
+				field: getDefaultField(search_database),
+				keyword: '',
+				boolean: ADVANCED_SEARCH_BOOLEAN.AND,
+			},
 			{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
 			{ field: '', keyword: '' },
 		])
@@ -95,7 +98,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 			toast({
 				title: `${message.advWarnMsg}`,
 			})
-			return;
+			return
 		}
 		let len = data.length
 		let qry = data
@@ -153,11 +156,11 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							)}
 						</div>
 					))}
-					<div className={'flex items-center text-opac-green my-3 cursor-pointer'}>
+					<div className={'flex items-center text-opac-secondary my-3 cursor-pointer'}>
 						<div
 							onClick={addField}
 							className={
-								'w-40 border-dashed border-2 border-opac-green p-2 flex justify-evenly items-center'
+								'w-40 border-dashed border-2 border-opac-secondary p-2 flex justify-evenly items-center'
 							}>
 							<CirclePlus />
 							<div className={'text-center font-bold'}>{message.addField}</div>

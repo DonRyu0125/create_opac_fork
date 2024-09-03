@@ -1,6 +1,6 @@
 {
-	"siteName": "SFOPHO",
-	"logo": "https://www.sfopho.com/wp-content/uploads/elementor/thumbs/SFOPHO_transparent-blanc-ojdlp57g5x9dvzk1n5cew5vrbxvj1c67ydrzggq11k.png",
+	"siteName": "MINISIS OPAC Template ",
+	"logo": "https://i.imgur.com/whpgDjK.jpeg",
 	"auth": {
 		"login": true,
 		"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]login.html"

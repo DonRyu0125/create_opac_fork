@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import { Search } from 'lucide-react'
 import useConstants from '@/hooks/useConstants'
 export interface SearchFormProps extends React.HTMLAttributes<HTMLFormElement> {
-	inputName: string
+	inputName?: string
 	inputStyle?: string
 	action: string
 }
@@ -17,9 +17,9 @@ const SearchForm = ({ className, inputName, inputStyle, action, ...props }: Sear
 			<div className="w-full relative">
 				<Input
 					required
-					name={inputName}
+					name={inputName || 'KEYWORD_CLUSTER'}
 					className={cn(
-						'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green text-white rounded-l-md ring-inset',
+						'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-secondary text-white rounded-l-md ring-inset',
 						inputStyle
 					)}
 					placeholder={message.searchPlaceholder}
@@ -28,7 +28,7 @@ const SearchForm = ({ className, inputName, inputStyle, action, ...props }: Sear
 			</div>
 			<Button
 				variant={'default'}
-				className="right-0 top-0 h-full bg-opac-green rounded-l-lg"
+				className="right-0 top-0 h-full bg-primary rounded-l-lg"
 				type="submit">
 				<span className="block">
 					<Search className="w-4 h-4" />

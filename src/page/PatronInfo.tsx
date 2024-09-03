@@ -1,8 +1,4 @@
-
 const PatronInfo = () => {
-
-	return (
-        <></>
-	)
+	return <></>
 }
 export default PatronInfo

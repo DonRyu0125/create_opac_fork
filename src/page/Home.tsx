@@ -18,7 +18,7 @@ const Home = () => {
 		browseByCategoryTitle,
 		categoriesItems,
 		searchURL,
-		rsvp
+		rsvp,
 		// eventCalendar,
 	} = useConstants().home
 	const { message } = useConstants()
@@ -33,7 +33,6 @@ const Home = () => {
 
 			<Section heading={browseByCategoryTitle}>
 				<Slide
-					// auto
 					itemsPerSlide={{ lg: 4 }}
 					items={categoriesItems}
 					renderItem={(item, index: any) => (
@@ -50,8 +49,13 @@ const Home = () => {
 				/>
 			</Section>
 			<Section heading={`${message.calendar}`}>
-				<EventCalendar databaseType={rsvp.filterDatabase} filterTypes={rsvp.filterTypes} fitlerOption={rsvp.filterOption} />
+				<EventCalendar
+					databaseType={rsvp.filterDatabase}
+					filterTypes={rsvp.filterTypes}
+					fitlerOption={rsvp.filterOption}
+				/>
 			</Section>
+
 			{/* <Section
         className='bg-secondary'
         heading={'Browse by area'}

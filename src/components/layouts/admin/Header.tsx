@@ -13,10 +13,14 @@ type Props = {}
 
 const Header = (props: Props) => {
 	const navigationLists = [
-		{ url: './home.html', page: 'Home' },
+		{ url: './home.html', page: 'Union home' },
+		// { url: './biblio.html', page: 'Biblio' },
+		{ url: './collections.html', page: 'Collections' },
+		{ url: './description.html', page: 'Description' },
 		{ url: './fields.html', page: 'Report fields' },
-		{ url: './rsvp.html', page: 'RSVP' },
-		{ url: './message.html', page: 'Translation' },
+		// { url: './rsvp.html', page: 'RSVP' },
+		// { url: './message.html', page: 'Translation' },
+		{ url: './settings.html', page: 'Settings' },
 		{ url: './styles.html', page: 'Theme' },
 	]
 
@@ -41,13 +45,13 @@ const Header = (props: Props) => {
 					</Button>
 				</div>
 			</header>
-			<section className="bg-[#B5C0CD] text-white justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b py-4 px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
+			<section className="bg-[#B5C0CD] text-white justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b py-2 px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
 				<NavigationMenu className="mx-auto">
 					<NavigationMenuList>
 						{navigationLists.map((e) => (
 							<NavigationMenuItem
 								className={cn(
-									'text-blue-950 cursor-pointer  px-8 py-2 rounded-md',
+									'text-blue-950 cursor-pointer  px-4 py-2 rounded-md',
 									e.page === checkActiveUrl() ? 'bg-white' : 'text-white'
 								)}>
 								<NavigationMenuLink href={e.url}>{e.page}</NavigationMenuLink>

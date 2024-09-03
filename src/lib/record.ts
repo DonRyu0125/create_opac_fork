@@ -78,7 +78,9 @@ export const bookmarkRecord = async (sessionId: string, database: string, sisn: 
 		url: `${sessionId}?ADDSELECTION&COOKIE=BOOKMARK`,
 		data: `mcheckbox_${sisn}=${sisn}-${database}`,
 	})
-		.then((res) => res)
+		.then((res) => {
+			window.location.reload()
+		})
 		.catch((err) => {
 			console.error('Error while bookmarking record', err)
 		})
