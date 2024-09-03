@@ -28,7 +28,7 @@ const SearchForm = ({ className, inputName, inputStyle, action, ...props }: Sear
 			</div>
 			<Button
 				variant={'default'}
-				className="right-0 top-0 h-full bg-opac-secondary rounded-l-lg"
+				className="right-0 top-0 h-full bg-primary rounded-l-lg"
 				type="submit">
 				<span className="block">
 					<Search className="w-4 h-4" />
