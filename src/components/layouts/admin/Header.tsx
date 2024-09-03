@@ -20,6 +20,7 @@ const Header = (props: Props) => {
 		{ url: './fields.html', page: 'Report fields' },
 		// { url: './rsvp.html', page: 'RSVP' },
 		// { url: './message.html', page: 'Translation' },
+		{ url: './settings.html', page: 'Settings' },
 		{ url: './styles.html', page: 'Theme' },
 	]
 

@@ -4,8 +4,8 @@ import TextField from '@/components/common/admin/input/TextField'
 import TabsWrapper from '@/components/common/admin/layout/TabsWrapper'
 import AdminLayout from '@/components/layouts/admin'
 import { TabsContent } from '@/components/ui/tabs'
-import { default as enValues } from '@/constants/en/museum.json'
-import { default as frValues } from '@/constants/fr/museum.json'
+import { default as enValues } from '@/constants/en/archives.json'
+import { default as frValues } from '@/constants/fr/archives.json'
 import { useAdminForm } from '@/hooks/useAdminForm'
 import { AdminFormProvider } from '@/providers/AdminFormProvider'
 import fields from '@/schema/home.json'
@@ -19,7 +19,7 @@ const AdminDescription = () => {
 					<AdminFormProvider
 						data={enValues}
 						schema={fields as SchemaType}
-						filepath="constants/en/museum.json">
+						filepath="constants/en/archives.json">
 						<AdminForm>
 							<Form lang="en" />
 						</AdminForm>
@@ -29,7 +29,7 @@ const AdminDescription = () => {
 					<AdminFormProvider
 						data={frValues}
 						schema={fields as SchemaType}
-						filepath="constants/fr/museum.json">
+						filepath="constants/fr/archives.json">
 						<AdminForm>
 							<Form lang="fr" />
 						</AdminForm>

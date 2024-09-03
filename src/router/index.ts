@@ -24,6 +24,7 @@ import PatronProfile from '@/page/PatronProfile'
 import PatronInfo from '@/page/PatronInfo'
 import AdminCollections from '@/page/admin/Collections'
 import AdminDescription from '@/page/admin/Description'
+import AdminSettings from '@/page/admin/Settings'
 
 export type TRoute = Record<string, () => React.ReactNode>
 
@@ -37,6 +38,7 @@ const ADMIN_ROUTES: TRoute = {
 	'admin-rsvp': AdminRSVP,
 	'admin-message': AdminMessage,
 	'admin-styles': AdminStyles,
+	'admin-settings': AdminSettings,
 }
 
 export const ROUTES: TRoute = {
