@@ -64,7 +64,7 @@ const EventSumButton = ({
 		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
-		if(result.length < 1){
+		if (result.length < 1) {
 			return EVENT_DEFAULT_COLOR
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`
@@ -129,7 +129,7 @@ const EventSumButton = ({
 														'h-4 w-[16px] border rounded mr-1 ',
 														getColor(item[fitlerOption])
 													)}></div>
-											{fitlerOption ? item[fitlerOption] : message.all}
+												{fitlerOption ? item[fitlerOption] : message.all}
 											</div>
 											<DialogPrimitive.Close>
 												<X className={'h-6 w-6'} />

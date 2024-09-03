@@ -1,22 +1,33 @@
 import { Button } from '@/components/ui/button'
-import { Label } from '@radix-ui/react-label'
-import React, { useEffect, useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
-import X2JS from 'x2js'
-import { v4 as uuidv4 } from 'uuid'
+import useConstants from '@/hooks/useConstants'
+import {
+	convertLowerTrim,
+	convertToArr,
+	convertXMLToJson,
+	encodeObj,
+	getCurrentDate,
+	getSessionID,
+} from '@/lib/utils'
+import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
+import { Label } from '@radix-ui/react-label'
 import axios from 'axios'
+import { useAtom } from 'jotai'
+import { BadgeCheck, SquareUserRound } from 'lucide-react'
+import React, { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import {
 	BRANCH_ADDRESS,
 	BRANCH_NAME,
 	BRANCH_PHONE,
-	VERIFICATION_EMAIL_T,
 	Cal_event,
 	ContactInfo,
-	MAIN_MWI_APPLICATION,
 	MWI_RESFUL_RES,
 	MWI_XML_DATA_INDEX,
+	patron,
+	RSVP_CONFIRM_LANDING_PAGE_URL,
 	SISN,
+	TAG_DB,
 	TAG_FUNC_DATE,
 	TAG_FUNC_END_T,
 	TAG_FUNC_LOC,
@@ -26,29 +37,15 @@ import {
 	TAG_FUNC_P_EMAIL,
 	TAG_FUNC_P_FIRST,
 	TAG_FUNC_P_LAST,
+	TAG_FUNC_P_T,
 	TAG_FUNC_ROOM,
 	TAG_FUNC_START_T,
 	TAG_NAME,
-	patron,
-	RSVP_CONFIRM_LANDING_PAGE_URL,
-	TAG_FUNC_P_T,
-	TAG_DB,
+	VERIFICATION_EMAIL_T,
 } from './Constants'
-import { BadgeCheck, SquareUserRound } from 'lucide-react'
-import {
-	convertLowerTrim,
-	convertToArr,
-	convertXMLToJson,
-	encodeObj,
-	getCurrentDate,
-	getSessionID,
-} from '@/lib/utils'
-import Spinner from './Spinner'
 import { calNumOfPatron } from './EC-Util'
-import useConstants from '@/hooks/useConstants'
-import { useAtom } from 'jotai'
-import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
 import { fetch_get } from './Service'
+import Spinner from './Spinner'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -194,7 +191,7 @@ const ShowButton = ({
 	setStatus: React.Dispatch<React.SetStateAction<string>>
 }) => {
 	const message = useConstants().message
-	
+
 	return (
 		<div className={'w-full p-2 border-2 rounded min-h-[300px]'}>
 			<div

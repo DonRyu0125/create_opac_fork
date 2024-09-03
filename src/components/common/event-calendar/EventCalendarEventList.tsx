@@ -1,21 +1,20 @@
 /**
  * EventCalendarEventList: Event list modal button (more than three events, it shows the all event buttons)
  */
+import { convertLowerTrim } from '@/lib/utils'
+import { calendarMonthType, calendarWeekType } from '@/store'
+import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import {
 	Cal_event,
+	ContactInfo,
+	Day_obj,
+	FilterType,
 	TAG_FUNC_DATE,
 	TAG_FUNC_START_T,
-	TAG_FUNC_LOC,
-	Day_obj,
-	ContactInfo,
-	FilterType,
 } from './Constants'
-import { convertLowerTrim } from '@/lib/utils'
-import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'
-import { calendarMonthType, calendarWeekType } from '@/store'
-import { useAtom } from 'jotai'
+import EventSumButton from './EventSumButton'
 
 export interface Event_list {
 	dayObj: Day_obj
@@ -24,7 +23,7 @@ export interface Event_list {
 	weekType: boolean
 	contactInfo: ContactInfo[]
 	filterTypes: FilterType[]
-	fitlerOption:string
+	fitlerOption: string
 }
 
 const EventCalendarEventList = ({
@@ -33,7 +32,7 @@ const EventCalendarEventList = ({
 	currentEvent,
 	contactInfo,
 	filterTypes,
-	fitlerOption
+	fitlerOption,
 }: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 	const [weekType, _] = useAtom(calendarWeekType)
@@ -102,11 +101,21 @@ const EventCalendarEventList = ({
 	return (
 		<div className={`${monthType ? 'h-4/5' : 'h-[98%]'} relative w-full`}>
 			{/* Event button */}
-			<EventSumButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterTypes={filterTypes} fitlerOption={fitlerOption} />
+			<EventSumButton
+				filteredEvents={filteredEvents}
+				contactInfo={contactInfo}
+				filterTypes={filterTypes}
+				fitlerOption={fitlerOption}
+			/>
 			{/* All events button */}
 			{monthType && filteredEvents.length > 2 && (
 				<div className={'h-[20px] absolute bottom-0 w-full'}>
-					<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterTypes={filterTypes} fitlerOption={fitlerOption} />
+					<EventAllButton
+						filteredEvents={filteredEvents}
+						contactInfo={contactInfo}
+						filterTypes={filterTypes}
+						fitlerOption={fitlerOption}
+					/>
 				</div>
 			)}
 		</div>

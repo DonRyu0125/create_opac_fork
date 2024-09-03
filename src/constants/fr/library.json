@@ -28,12 +28,12 @@
 		}
 	],
 	"rsvp": {
-		"filterDatabase":"Library",
+		"filterDatabase": "Library",
 		"filterOption": "TAG_FUNC_LOC",
 		"filterTypes": [
 			{
 				"type": "Delhi Branch",
-				"color":"bg-neutral-500 border-neutral-500",
+				"color": "bg-neutral-500 border-neutral-500",
 				"icon": "rounded"
 			},
 			{

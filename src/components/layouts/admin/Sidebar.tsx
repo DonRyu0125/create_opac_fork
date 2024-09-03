@@ -1,6 +1,6 @@
 import Link from '@/components/common/Link'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { Home, LineChart, Package, Package2, Settings, ShoppingCart, Users2 } from 'lucide-react'
+import { Home, Settings } from 'lucide-react'
 
 type Props = {}
 
