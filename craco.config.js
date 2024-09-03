@@ -36,6 +36,5 @@ module.exports = {
 		{
 			plugin: { overrideWebpackConfig },
 		},
-		new webpack.DefinePlugin(envKeys),
 	],
 }
