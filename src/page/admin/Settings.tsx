@@ -1,6 +1,8 @@
 import AdminForm from '@/components/common/admin/AdminForm'
 import ImagePreview from '@/components/common/admin/input/ImagePreview'
 import TextField from '@/components/common/admin/input/TextField'
+import SectionHeader from '@/components/common/admin/layout/SectionHeader'
+import SectionWrapper from '@/components/common/admin/layout/SectionWrapper'
 import TabsWrapper from '@/components/common/admin/layout/TabsWrapper'
 import AdminLayout from '@/components/layouts/admin'
 import { TabsContent } from '@/components/ui/tabs'
@@ -61,13 +63,13 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 				<ImagePreview src={fieldsValue.logo} alt="Site Banner" />
 			</div>
 
-			{/* <div className="mt-2">
-				<SectionHeader heading="Browse By Category" />
+			<div className="mt-2">
+				<SectionHeader heading="Topbar navigations" />
 				<div className="flex flex-col gap-2">
-					{fieldsValue.categoriesItems.map((item, index) => (
+					{fieldsValue.navigations.map((item, index) => (
 						<SectionWrapper key={JSON.stringify(item)}>
 							<TextField
-								title={'Category title'}
+								title={'Title'}
 								value={item.title}
 								onChange={(e) =>
 									handleChange(['categoriesItems', `${index}`, 'title'], e)
@@ -75,26 +77,16 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 							/>
 
 							<TextField
-								title={'Search expression'}
+								title={'URL'}
 								value={item.url}
 								onChange={(e) =>
 									handleChange(['categoriesItems', `${index}`, 'url'], e)
 								}
 							/>
-
-							<TextField
-								title={'Thumbnail'}
-								value={item.thumbnail}
-								onChange={(e) =>
-									handleChange(['categoriesItems', `${index}`, 'thumbnail'], e)
-								}
-							/>
-
-							<ImagePreview src={item.thumbnail} alt="Category thumbnail" />
 						</SectionWrapper>
 					))}{' '}
 				</div>
-			</div> */}
+			</div>
 		</div>
 	)
 }
