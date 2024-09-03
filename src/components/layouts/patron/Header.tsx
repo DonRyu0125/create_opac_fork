@@ -5,8 +5,6 @@ import {
 	BreadcrumbItem,
 	BreadcrumbLink,
 	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
 import {
@@ -18,7 +16,7 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Home, LineChart, Package, Package2, PanelLeft, ShoppingCart, Users2 } from 'lucide-react'
+import { Home, PanelLeft } from 'lucide-react'
 type Props = {}
 
 const Header = (props: Props) => {
@@ -27,7 +25,6 @@ const Header = (props: Props) => {
 	}
 	const clearCookies = () => {
 		var cookies = document.cookie.split(';')
-		var cookie = ''
 		for (var i = 0; i < cookies.length; i++) {
 			//delete each cookie
 			deleteCookie(cookies[i].split('=')[0])

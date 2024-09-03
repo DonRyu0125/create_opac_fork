@@ -64,6 +64,40 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 			</div>
 
 			<div className="mt-2">
+				<SectionHeader heading="Featured Collections" />
+				<div className="flex flex-col gap-2">
+					{fieldsValue.featuredCollection.map((item, index) => (
+						<SectionWrapper key={JSON.stringify(item)}>
+							<TextField
+								title={'Category title'}
+								value={item.title}
+								onChange={(e) =>
+									handleChange(['featuredCollection', `${index}`, 'title'], e)
+								}
+							/>
+
+							<TextField
+								title={'Search expression'}
+								value={item.url}
+								onChange={(e) =>
+									handleChange(['featuredCollection', `${index}`, 'url'], e)
+								}
+							/>
+
+							<TextField
+								title={'Thumbnail'}
+								value={item.thumbnail}
+								onChange={(e) =>
+									handleChange(['featuredCollection', `${index}`, 'thumbnail'], e)
+								}
+							/>
+
+							<ImagePreview src={item.thumbnail} alt="Featured collection thumbnail" />
+						</SectionWrapper>
+					))}{' '}
+				</div>
+			</div>
+			<div className="mt-2">
 				<SectionHeader heading="Browse By Category" />
 				<div className="flex flex-col gap-2">
 					{fieldsValue.categoriesItems.map((item, index) => (

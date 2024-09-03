@@ -1,4 +1,9 @@
+import EventCalendar from '@/components/common/event-calendar'
+import HoverCard from '@/components/common/HoverCard'
+import Masonry from '@/components/common/Masonry'
+import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
 import useConstants from '@/hooks/useConstants'
+import { cn, getSearchURL, truncateWords } from '@/lib/utils'
 import Hero from '../components/common/Hero'
 import SearchForm from '../components/common/SearchForm'
 import Section from '../components/common/Section'
@@ -6,12 +11,6 @@ import Slide from '../components/common/Slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
-import EventCalendar from '@/components/common/event-calendar'
-import { cn, getSearchURL, truncateWords } from '@/lib/utils'
-import HoverCard from '@/components/common/HoverCard'
-import Masonry from '@/components/common/Masonry'
-import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
-import { Skeleton } from '@/components/ui/skeleton'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 const pics = [
@@ -21,39 +20,17 @@ const pics = [
 	'https://picsum.photos/1181/329',
 	'https://picsum.photos/1125/731',
 ]
-const items = [
-	{
-		title: 'The Dawn of Innovation',
-		description: 'Explore the birth of groundbreaking ideas and inventions.',
-	},
-	{
-		title: 'The Digital Revolution',
-		description: 'Dive into the transformative power of technology.',
-	},
-	{
-		title: 'The Art of Design',
-		description: 'Discover the beauty of thoughtful and functional design.',
-	},
-	{
-		title: 'The Power of Communication',
-		description: 'Understand the impact of effective communication in our lives.',
-	},
-	{
-		title: 'The Pursuit of Knowledge',
-		description: 'Join the quest for understanding and enlightenment.',
-	},
-	{
-		title: 'The Joy of Creation',
-		description: 'Experience the thrill of bringing ideas to life.',
-	},
-	{
-		title: 'The Spirit of Adventure',
-		description: 'Embark on exciting journeys and thrilling discoveries.',
-	},
-]
+
 const Home = () => {
-	const { heading, heroBanner, browseByCategoryTitle, categoriesItems, searchURL, rsvp } =
-		useConstants().home
+	const {
+		heading,
+		heroBanner,
+		browseByCategoryTitle,
+		categoriesItems,
+		searchURL,
+		rsvp,
+		featuredCollection,
+	} = useConstants().home
 	const { message } = useConstants()
 	return (
 		<Layout>
@@ -64,13 +41,20 @@ const Home = () => {
 				{/* <CommandDemo /> */}
 			</Hero>
 
-			<Section heading={'Featured collections'}>
+			<Section heading={message.featuredCollections}>
 				<BentoGrid className="max-w-4xl mx-auto">
-					{items.map((item, i) => (
+					{featuredCollection.map((item, i) => (
 						<BentoGridItem
 							key={i}
 							title={item.title}
 							description={item.description}
+							header={
+								<img
+									src={item.thumbnail}
+									className="w-full object-cover max-h-[170px]"
+									alt={item.title}
+								/>
+							}
 							className={cn(i === 3 || i === 6 ? 'md:col-span-2' : '', 'bg-primary')}
 						/>
 					))}
@@ -108,7 +92,7 @@ const Home = () => {
       >
         <Map />
       </Section> */}
-			<Section heading={'Recent additions'}>
+			{/* <Section heading={'Recent additions'}>
 				<Masonry
 					items={pics}
 					renderItem={(item, index) => (
@@ -121,7 +105,7 @@ const Home = () => {
 						/>
 					)}
 				/>
-			</Section>
+			</Section> */}
 		</Layout>
 	)
 }
