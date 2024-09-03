@@ -1,1 +1,49 @@
-{"heading":"MINISIS Template OPAC","heroBanner":"https://images.unsplash.com/photo-1533669955142-6a73332af4db","searchURL":"UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=UNION_VIEW_WEB","browseByCategoryTitle":"Parcourir par catégorie","categoriesItems":[{"thumbnail":"https://images.unsplash.com/photo-1452587925148-ce544e77e70d","title":"Images Numériques","url":"UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=KEYWORD_CLUSTER \"digital image\""},{"thumbnail":"https://images.unsplash.com/photo-1472173148041-00294f0814a2","title":"Livres","url":"UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=L_REF_TYPE_LAN1 \"Livre imprimé\""},{"thumbnail":"https://images.unsplash.com/photo-1479642770516-f2df0a071c6c","title":"Photographies","url":"UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=KEYWORD_CLUSTER \"photograph\""},{"thumbnail":"https://images.unsplash.com/photo-1611149916119-c6c16eb89f89","title":"Peintures","url":"UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=KEYWORD_CLUSTER \"painting\""}],"rsvp":{"filterDatabase":"","filterOption":"TAG_DB_TYPE","filterTypes":[{"type":"Library","color":"bg-red-500 border-red-500","icon":"rounded"},{"type":"Museum","color":"bg-yellow-500 border-yellow-500","icon":"rounded"},{"type":"Archives","color":"bg-sky-900 border-sky-900","icon":"rounded"}]}}
+{
+    "heading": "MINISIS OPAC Template ",
+    "heroBanner": "https://images.unsplash.com/photo-1533669955142-6a73332af4db",
+    "searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=UNION_VIEW_WEB",
+    "browseByCategoryTitle": "Parcourir par catégorie",
+    "categoriesItems": [
+        {
+            "thumbnail": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d",
+            "title": "Images Numériques",
+            "url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=KEYWORD_CLUSTER \"digital image\""
+        },
+        {
+            "thumbnail": "https://images.unsplash.com/photo-1472173148041-00294f0814a2",
+            "title": "Livres",
+            "url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=L_REF_TYPE_LAN1 \"Livre imprimé\""
+        },
+        {
+            "thumbnail": "https://images.unsplash.com/photo-1479642770516-f2df0a071c6c",
+            "title": "Photographies",
+            "url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=KEYWORD_CLUSTER \"photograph\""
+        },
+        {
+            "thumbnail": "https://images.unsplash.com/photo-1611149916119-c6c16eb89f89",
+            "title": "Peintures",
+            "url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=KEYWORD_CLUSTER \"painting\""
+        }
+    ],
+    "rsvp": {
+        "filterDatabase": "",
+        "filterOption": "TAG_DB_TYPE",
+        "filterTypes": [
+            {
+                "type": "Library",
+                "color": "bg-red-500 border-red-500",
+                "icon": "rounded"
+            },
+            {
+                "type": "Museum",
+                "color": "bg-yellow-500 border-yellow-500",
+                "icon": "rounded"
+            },
+            {
+                "type": "Archives",
+                "color": "bg-sky-900 border-sky-900",
+                "icon": "rounded"
+            }
+        ]
+    }
+}

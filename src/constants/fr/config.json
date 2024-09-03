@@ -1,1 +1,29 @@
-{"siteName":"MINISIS Template OPAC","logo":"https://i.imgur.com/whpgDjK.jpeg","auth":{"login":true,"url":"/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]login.html"},"navigations":[{"url":"/","title":"Accueil"},{"url":"/archives.html","title":"Archives","search_database":"DESCRIPTION_WEB"},{"url":"/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]library.html","title":"Bibliothèque","search_database":"BIBLIO_WEB"},{"url":"/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]museum.html","title":"Musée","search_database":"COLLECTIONS_WEB"}]}
+{
+    "siteName": "MINISIS OPAC Template ",
+    "logo": "https://i.imgur.com/whpgDjK.jpeg",
+    "auth": {
+        "login": true,
+        "url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]login.html"
+    },
+    "navigations": [
+        {
+            "url": "/",
+            "title": "Accueil"
+        },
+        {
+            "url": "/archives.html",
+            "title": "Archives",
+            "search_database": "DESCRIPTION_WEB"
+        },
+        {
+            "url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]library.html",
+            "title": "Bibliothèque",
+            "search_database": "BIBLIO_WEB"
+        },
+        {
+            "url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]museum.html",
+            "title": "Musée",
+            "search_database": "COLLECTIONS_WEB"
+        }
+    ]
+}
