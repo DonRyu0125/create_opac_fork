@@ -44,5 +44,6 @@ export function rebuildOPAC() {
 	process.on('error', () => {
 		console.log('error')
 	})
+
 	return process
 }
