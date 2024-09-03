@@ -177,5 +177,6 @@ export const getSessionID = () => {
 export const getSearchURL = (url: string) => {
 	const sessionID = getSessionID()
 	if (sessionID) return `${sessionID}?${url}`
-	return `/SCRIPTS/MWIMAIN.DLL?${url}`
+	const hostname = window.location.protocol + '//' + window.location.host
+	return `${hostname}/SCRIPTS/MWIMAIN.DLL?${url}`
 }
