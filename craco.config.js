@@ -3,7 +3,6 @@ const DotEnv = require('dotenv')
 const webpack = require('webpack')
 const env = DotEnv.config({ path: `./.env.local` }).parsed || {}
 
-console.log({ env })
 const envKeys = Object.keys(env).reduce((prev, next) => {
 	prev[`process.env.${next.trim()}`] = env[next]
 		? JSON.stringify(env[next].trim())
@@ -37,6 +36,5 @@ module.exports = {
 		{
 			plugin: { overrideWebpackConfig },
 		},
-		new webpack.DefinePlugin(envKeys),
 	],
 }
