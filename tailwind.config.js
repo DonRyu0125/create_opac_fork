@@ -23,6 +23,7 @@ module.exports = {
 					grey: 'hsl(var(--opac-grey))',
 					darkblue: 'hsl(var(--opac-darkblue))',
 					green: 'hsl(var(--opac-green))',
+					secondary: 'hsl(var(--opac-secondary))',
 					blue: 'hsl(var(--opac-blue))',
 				},
 				border: 'hsl(var(--border))',

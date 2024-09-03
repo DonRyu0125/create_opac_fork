@@ -1,9 +1,4 @@
-import { CONSTANTS } from '@/constants'
-import { getJSONType } from '@/lib/utils'
-
 const Footer = () => {
-	const { logo, siteName } = getJSONType(CONSTANTS.EN.config)
-
 	return (
 		<footer className="bg-[#002a54] w-full text-white py-4 px-6">
 			<div className="max-w-6xl mx-auto flex flex-col items-center space-y-2">
@@ -12,7 +7,7 @@ const Footer = () => {
 					width={200}
 					height={40}
 					alt="MINISIS INC"
-					className="bg-white p-2 rounded"
+					className="bg-white p-0 rounded"
 				/>
 				<div className="text-sm">
 					<span>1-877-255-4399</span>
@@ -22,7 +17,7 @@ const Footer = () => {
 					</a>
 				</div>
 				<div className="text-xs">
-					© {new Date().getFullYear()} MINISIS Inc. All Rights Reserved|
+					© {new Date().getFullYear()} MINISIS Inc. All Rights Reserved
 				</div>
 			</div>
 		</footer>

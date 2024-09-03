@@ -19,9 +19,9 @@ const Header = () => {
 					<nav aria-label="Global" className="hidden md:block">
 						<ul className="flex items-center gap-6 text-sm ">
 							{navigations.map((nav) => (
-								<li key={nav.title} className="hover:border-b-opac-green">
+								<li key={nav.title} className="hover:border-b-opac-secondary">
 									<Link
-										className="transition no-underline  text-lg text-opac-white hover:text-opac-green"
+										className="transition no-underline  text-lg text-opac-white hover:text-opac-secondary"
 										href={nav.url}>
 										{nav.title}
 									</Link>

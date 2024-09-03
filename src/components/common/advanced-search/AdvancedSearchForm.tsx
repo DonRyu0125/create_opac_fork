@@ -156,11 +156,11 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							)}
 						</div>
 					))}
-					<div className={'flex items-center text-opac-green my-3 cursor-pointer'}>
+					<div className={'flex items-center text-opac-secondary my-3 cursor-pointer'}>
 						<div
 							onClick={addField}
 							className={
-								'w-40 border-dashed border-2 border-opac-green p-2 flex justify-evenly items-center'
+								'w-40 border-dashed border-2 border-opac-secondary p-2 flex justify-evenly items-center'
 							}>
 							<CirclePlus />
 							<div className={'text-center font-bold'}>{message.addField}</div>

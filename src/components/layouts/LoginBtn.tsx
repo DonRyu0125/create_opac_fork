@@ -44,9 +44,9 @@ const LoginBtn = () => {
 					</DropdownMenuContent>
 				</DropdownMenu>
 			) : (
-				<li className="hover:border-b-opac-green">
+				<li className="hover:border-b-opac-secondary">
 					<Link
-						className="transition no-underline  text-lg text-opac-white hover:text-opac-green"
+						className="transition no-underline  text-lg text-opac-white hover:text-opac-secondary"
 						href={`${config.auth.url}`}>
 						{message.logIn}
 					</Link>

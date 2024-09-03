@@ -72,7 +72,7 @@ const AdvancedSearchInput = ({
 					updateField('field', value, index)
 					setUserSelect(value)
 				}}>
-				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white rounded-r-lg font-semibold text-left">
+				<SelectTrigger className="w-52 border border-opac-secondary bg-opac-secondary text-white rounded-r-lg font-semibold text-left">
 					<SelectValue
 						className={'text-black'}
 						placeholder={<div>{message.selectAfield}</div>}
@@ -84,7 +84,7 @@ const AdvancedSearchInput = ({
 							<SelectItem
 								key={key}
 								value={item.name}
-								className="w-full border bg-opac-green border-opac-green ">
+								className="w-full border bg-opac-secondary border-opac-secondary ">
 								{item.label}
 							</SelectItem>
 						)
@@ -98,7 +98,7 @@ const AdvancedSearchInput = ({
 					updateField('keyword', e.target.value, index)
 				}}
 				className={cn(
-					'placeholder:text-slate-400  w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green focus:outline-none ring-inset'
+					'placeholder:text-slate-400  w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-secondary focus:outline-none ring-inset'
 				)}
 				type="search"
 			/>
@@ -120,7 +120,7 @@ const AdvancedSearchInput = ({
 				}}>
 				<SelectTrigger
 					disabled={!exp.boolean}
-					className="w-28 border border-opac-green bg-opac-green text-white rounded-l-lg font-semibold ">
+					className="w-28 border border-opac-secondary bg-opac-secondary text-white rounded-l-lg font-semibold ">
 					<SelectValue />
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
@@ -129,7 +129,7 @@ const AdvancedSearchInput = ({
 							<SelectItem
 								key={key}
 								value={item.value}
-								className="w-full border border-opac-green bg-opac-green">
+								className="w-full border border-opac-secondary bg-opac-secondary">
 								{item.key}
 							</SelectItem>
 						)
