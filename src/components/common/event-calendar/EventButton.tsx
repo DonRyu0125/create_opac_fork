@@ -14,16 +14,15 @@ import { convertLowerTrim } from '@/lib/utils'
 import {
 	Cal_event,
 	TAG_FUNC_DATE,
-	TAG_FUNC_DESC,
+	TAG_FUNC_LOC_DEC,
 	TAG_FUNC_END_T,
 	TAG_NAME,
-	TAG_FUNC_ROOM,
+	TAG_FUNC_LOC_ROO,
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_NAME_LENGTH,
 	TAG_DB_TYPE,
-	FILTER_TYPE_COLORS,
-	TAG_FUNC_CAP,
+	TAG_FUNC_LOC_MAX,
 	TAG_FUNC_LANG,
 	TAG_FUNC_LOC_LENGTH,
 	TAG_FUNC_DTE_LIST,
@@ -117,7 +116,7 @@ const EventButton = ({
 									'h-4 w-[16px] border rounded mr-1',
 									getColor(elm[TAG_DB_TYPE])
 								)}></div>
-							<div>{elm[TAG_DB_TYPE]}</div>
+							<div>{elm[TAG_NAME]}</div>
 						</div>
 						<DialogPrimitive.Close>
 							<X className={'h-6 w-6'} />
@@ -138,7 +137,7 @@ const EventButton = ({
 								<span>{elm[TAG_FUNC_END_T]?.toUpperCase()}</span>
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;{message.room}: {elm[TAG_FUNC_ROOM]}
+								&#x2022;{message.room}: {elm[TAG_FUNC_LOC_ROO]}
 							</div>
 							{elm[TAG_FUNC_ACCESS] && (
 								<div className="ml-[10px] text-md text-gray-600 font-bold flex">
@@ -152,7 +151,7 @@ const EventButton = ({
 								&#x2022;{message.suitableFor}: {elm[TAG_FUNC_LOC_AUD]}
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;{message.seats}: {elm[TAG_FUNC_CAP]}
+								&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
 							</div>
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
 								&#x2022;{message.language}: {elm[TAG_FUNC_LANG]}
@@ -162,14 +161,14 @@ const EventButton = ({
 							className={
 								'h-full max-h-80 break-all overflow-x-hidden overflow-y-auto'
 							}>
-							{elm[TAG_FUNC_DESC]}
+							{elm[TAG_FUNC_LOC_DEC]}
 						</DialogDescription>
 					</div>
 					<div className={'w-full sm:w-4/12'}>
 						{elm[TAG_FUNC_RSVP] && (
 							<EventRSVPForm
 								sisnNumber={elm[SISN]}
-								capacity={elm[TAG_FUNC_CAP]}
+								capacity={elm[TAG_FUNC_LOC_MAX]}
 								patrons={convertToArr(elm[PATRON])}
 								event={elm}
 								contactInfo={contactInfo}

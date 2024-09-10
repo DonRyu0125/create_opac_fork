@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react'
 import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
 import { Button } from '@/components/ui/button'
-import { fetch_get, getLibraryLocation } from './Service'
+import { fetch_get, getLocation } from './Service'
 import { calendarCurrDate, calendarEvents, calendarMonthType, calendarWeekType } from '@/store'
 import { useAtom } from 'jotai'
 import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj, FilterType } from './Constants'
@@ -37,7 +37,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 	}, [currentDate, weekType])
 
 	useEffect(() => {
-		getLibraryLocation().then((res) => setContactInfo(res))
+		getLocation().then((res) => setContactInfo(res))
 	}, [])
 
 	const getData = async (currentDate: Date) => {

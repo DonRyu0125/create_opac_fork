@@ -1,17 +1,18 @@
 export interface Cal_event {
+	[TAG_FUNC_LOC_ID]:string
 	[SISN]: number
 	[TAG_NAME]: string
-	[TAG_FUNC_DESC]: string
+	[TAG_FUNC_LOC_DEC]: string
 	[TAG_FUNC_LOC]: string
 	[TAG_FUNC_LOC_FEE]: string
 	[TAG_FUNC_DATE]: string
 	[TAG_FUNC_LOC_BAN]: string
 	[TAG_FUNC_LOC_AUD]: string
-	[TAG_FUNC_CAP]: number
+	[TAG_FUNC_LOC_CAP]: number
 	[TAG_FUNC_RSVP]: string
 	[TAG_FUNC_START_T]: string
 	[TAG_FUNC_END_T]: string
-	[TAG_FUNC_ROOM]: string
+	[TAG_FUNC_LOC_ROO]: string
 	[TAG_FUNC_LANG]: string
 	[PATRON]: patron[]
 	[TAG_FUNC_ACCESS]: string
@@ -40,10 +41,10 @@ export const EVENT_DEFAULT_COLOR = 'bg-sky-900 border-sky-900'
 export const TAG_DB = 'M2L_TAG_SYN'
 //MINISIS REPORT
 export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW'
-export const LOCATION_REPORT = 'LIBRARY_LOCATION_NEW'
+export const LOCATION_REPORT = 'CALENDAR_LOCATION_NEW'
 //MWI
 export const MAIN_MWI_APPLICATION = 'WEB_CALENDAR'
-export const SUB_MWI_APPLICATION = 'WEB_LIBRARY_LOC'
+export const SUB_MWI_APPLICATION = 'WEB_CALENDAR_LOC'
 export const RSVP_CONFIRM_LANDING_PAGE_URL = `${window.location.hostname}/rsvp-confirm.html`
 export const RSVP_CANCEL_LANDING_PAGE_URL = `${window.location.hostname}/rsvp-cancel.html`
 export const CALENDAR_START_MONTH = 1
@@ -56,24 +57,26 @@ export const CANCEL_CONFIRMATION_EMAIL_T = 'Your registration has been cancelled
 export const TAG_NAME = 'TAG_NAME'
 export const TAG_DB_TYPE = 'TAG_DB_TYPE'
 export const LIBRARY_LOCATION_XML_TAG = 'record'
-export const BRANCH_NAME = 'BRANCH_NAME'
-export const BRANCH_ADDRESS = 'BRANCH_ADDRESS'
-export const BRANCH_PHONE = 'BRANCH_PHONE'
+export const CURATORS_CODE = 'CURATORS_CODE'
+export const BD_ADDRESS = 'BD_ADDRESS'
+export const BD_CITY = 'BD_CITY'
 //Event location group
+export const TAG_FUNC_LOC_ID = 'TAG_FUNC_LOC_ID'
 export const TAG_FUNC_LOC_GRP = 'TAG_FUNC_LOC_GRP'
-export const TAG_FUNC_DESC = 'TAG_FUNC_DESC'
+export const TAG_FUNC_LOC_DEC= 'TAG_FUNC_LOC_DEC'
 export const TAG_FUNC_LOC = 'TAG_FUNC_LOC'
 export const TAG_FUNC_LOC_FEE = 'TAG_FUNC_LOC_FEE'
 export const TAG_FUNC_LOC_BAN = 'TAG_FUNC_LOC_BAN'
 export const TAG_FUNC_LOC_AUD = 'TAG_FUNC_LOC_AUD'
+export const TAG_FUNC_LOC_CAP = 'TAG_FUNC_LOC_CAP'
+export const TAG_FUNC_LOC_ROO = 'TAG_FUNC_LOC_ROO'
+export const TAG_FUNC_LOC_MAX = 'TAG_FUNC_LOC_MAX'
 //Event group by location
 export const TAG_FUNC_DTE_GRP = 'TAG_FUNC_DTE_GRP'
 export const TAG_FUNC_DATE = 'TAG_FUNC_DATE'
 export const TAG_FUNC_START_T = 'TAG_FUNC_START_T'
 export const TAG_FUNC_END_T = 'TAG_FUNC_END_T'
 export const TAG_FUNC_RSVP = 'TAG_FUNC_RSVP'
-export const TAG_FUNC_CAP = 'TAG_FUNC_CAP'
-export const TAG_FUNC_ROOM = 'TAG_FUNC_ROOM'
 export const TAG_FUNC_LANG = 'TAG_FUNC_LANG'
 export const TAG_FUNC_CANCEL = 'TAG_FUNC_CANCEL'
 export const TAG_FUNC_CAN_RES = 'TAG_FUNC_CAN_RES'
@@ -108,9 +111,9 @@ export const TAG_FUNC_P_T = 'TAG_FUNC_P_T'
 export const TAG_P_STATUS = 'TAG_P_STATUS'
 
 export type ContactInfo = {
-	[BRANCH_NAME]: string
-	[BRANCH_ADDRESS]: string
-	[BRANCH_PHONE]: string
+	[CURATORS_CODE]: string
+	[BD_ADDRESS]: string
+	[BD_CITY]: string
 }
 
 export const RSVP_LOG_P_STATUS = {

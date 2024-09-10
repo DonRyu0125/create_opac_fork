@@ -97,15 +97,15 @@
     </div>
     <div class="info">
       <div for="event-location">Event Location:</div>
-      <p id="event-location">^BRANCH_ADDRESS^</p>
+      <p id="event-location">^BD_ADDRESS^</p>
     </div>
     <div class="info">
       <div for="room-number">Room Number</div>
-      <p id="room-number">^TAG_FUNC_ROOM^</p>
+      <p id="room-number">^TAG_FUNC_LOC_ROO^</p>
     </div>
     <div class="info">
       <div for="event-description">Description</div>
-      <p id="event-description">^TAG_FUNC_DESC^</p>
+      <p id="event-description">^TAG_FUNC_LOC_DEC^</p>
     </div>
     <div style="display: flex;">
       <div class="info" style="width: 48%;">

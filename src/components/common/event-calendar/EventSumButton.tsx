@@ -14,14 +14,14 @@ import { convertLowerTrim } from '@/lib/utils'
 import {
 	Cal_event,
 	TAG_FUNC_DATE,
-	TAG_FUNC_DESC,
+	TAG_FUNC_LOC_DEC,
 	TAG_FUNC_END_T,
 	TAG_NAME,
-	TAG_FUNC_ROOM,
+	TAG_FUNC_LOC_ROO,
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_NAME_LENGTH,
-	TAG_FUNC_CAP,
+	TAG_FUNC_LOC_MAX,
 	TAG_FUNC_LANG,
 	TAG_FUNC_LOC_LENGTH,
 	TAG_FUNC_DTE_LIST,
@@ -165,7 +165,7 @@ const EventSumButton = ({
 														</span>
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.room}: {elm[TAG_FUNC_ROOM]}
+														&#x2022;{message.room}: {elm[TAG_FUNC_LOC_ROO]}
 													</div>
 												</div>
 												<div className={'sm:flex'}>
@@ -174,7 +174,7 @@ const EventSumButton = ({
 														{elm[TAG_FUNC_LOC_AUD]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.seats}: {elm[TAG_FUNC_CAP]}
+														&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
 														&#x2022;{message.language}:{' '}
@@ -185,13 +185,13 @@ const EventSumButton = ({
 													className={
 														'h-[320px] break-all overflow-y-auto'
 													}>
-													{elm[TAG_FUNC_DESC]}
+													{elm[TAG_FUNC_LOC_DEC]}
 												</DialogDescription>
 											</div>
 											{elm[TAG_FUNC_RSVP] && (
 												<div className={'w-full sm:w-4/12'}>
 													<EventRSVPForm
-														capacity={elm[TAG_FUNC_CAP]}
+														capacity={elm[TAG_FUNC_LOC_MAX]}
 														patrons={convertToArr(elm[PATRON])}
 														event={elm}
 														sisnNumber={elm[SISN]}

@@ -17,14 +17,14 @@ import { Accessibility, BookX, X } from 'lucide-react'
 import {
 	Cal_event,
 	TAG_FUNC_DATE,
-	TAG_FUNC_DESC,
+	TAG_FUNC_LOC_DEC,
 	TAG_FUNC_END_T,
 	TAG_NAME,
-	TAG_FUNC_ROOM,
+	TAG_FUNC_LOC_ROO,
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_NAME_LENGTH,
-	TAG_FUNC_CAP,
+	TAG_FUNC_LOC_MAX,
 	TAG_FUNC_LANG,
 	PATRON,
 	SISN,
@@ -152,7 +152,7 @@ const EventAllButton = ({
 												<span>{item[TAG_FUNC_END_T]?.toUpperCase()}</span>
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;{message.room}: {item[TAG_FUNC_ROOM]}
+												&#x2022;{message.room}: {item[TAG_FUNC_LOC_ROO]}
 											</div>
 											{item[TAG_FUNC_ACCESS] && (
 												<div className="ml-[10px] text-md text-gray-600 font-bold flex">
@@ -167,7 +167,7 @@ const EventAllButton = ({
 												{item[TAG_FUNC_LOC_AUD]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;{message.seats}: {item[TAG_FUNC_CAP]}
+												&#x2022;{message.seats}: {item[TAG_FUNC_LOC_MAX]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
 												&#x2022;{message.language}: {item[TAG_FUNC_LANG]}
@@ -178,12 +178,12 @@ const EventAllButton = ({
 								{/* 'More' button to toggle description of the event */}
 								<DialogDescription
 									className={`min-h-[100px] p-2 break-all overflow-x-hidden overflow-y-auto`}>
-									{item[TAG_FUNC_DESC]}
+									{item[TAG_FUNC_LOC_DEC]}
 								</DialogDescription>
 								{item[TAG_FUNC_RSVP] && !item[TAG_FUNC_CANCEL] && (
 									<div className={'h-[380px] font-bold m-2 p-2'}>
 										<EventRSVPForm
-											capacity={item[TAG_FUNC_CAP]}
+											capacity={item[TAG_FUNC_LOC_MAX]}
 											patrons={convertToArr(item[PATRON])}
 											sisnNumber={item[SISN]}
 											event={item}
@@ -197,7 +197,7 @@ const EventAllButton = ({
 									<>
 										{showFullStr[idx] ? (
 											<>
-												{item[TAG_FUNC_DESC]}
+												{item[TAG_FUNC_LOC_DEC]}
 												<button
 													className={'text-slate-950 font-semibold'}
 													onClick={() => showStrToggle(idx)}>
@@ -206,8 +206,8 @@ const EventAllButton = ({
 											</>
 										) : (
 											<>
-												{item[TAG_FUNC_DESC]?.substring(0, 10)}
-												{(item[TAG_FUNC_DESC]?.length ?? 0) > 10 && (
+												{item[TAG_FUNC_LOC_DEC]?.substring(0, 10)}
+												{(item[TAG_FUNC_LOC_DEC]?.length ?? 0) > 10 && (
 													<button
 														className={'text-slate-950 font-semibold'}
 														onClick={() => showStrToggle(idx)}>

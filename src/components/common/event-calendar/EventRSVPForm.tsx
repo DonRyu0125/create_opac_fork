@@ -7,9 +7,9 @@ import X2JS from 'x2js'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import {
-	BRANCH_ADDRESS,
-	BRANCH_NAME,
-	BRANCH_PHONE,
+	BD_ADDRESS,
+	CURATORS_CODE,
+	BD_CITY,
 	VERIFICATION_EMAIL_T,
 	Cal_event,
 	ContactInfo,
@@ -26,13 +26,14 @@ import {
 	TAG_FUNC_P_EMAIL,
 	TAG_FUNC_P_FIRST,
 	TAG_FUNC_P_LAST,
-	TAG_FUNC_ROOM,
+	TAG_FUNC_LOC_ROO,
 	TAG_FUNC_START_T,
 	TAG_NAME,
 	patron,
 	RSVP_CONFIRM_LANDING_PAGE_URL,
 	TAG_FUNC_P_T,
 	TAG_DB,
+	TAG_FUNC_LOC_ID
 } from './Constants'
 import { BadgeCheck, SquareUserRound } from 'lucide-react'
 import {
@@ -223,15 +224,16 @@ const ShowButton = ({
 					)}
 				</div>
 			</div>
-			{getContactInfo(BRANCH_ADDRESS) ? (
+			{getContactInfo(BD_ADDRESS) ? (
 				<div className={'h-3/6 flex flex-col items-center justify-center '}>
 					<div>{message.contactInfo}</div>
 					<div>
-						{message.address}: {getContactInfo(BRANCH_ADDRESS)}
+						{getContactInfo(BD_ADDRESS)},{getContactInfo(BD_CITY)}
 					</div>
-					<div>
-						{message.phone}: {getContactInfo(BRANCH_PHONE)}
-					</div>
+					{/* <div>
+					TAG_FUNC_LOC_CT 
+						{message.phone}: {getContactInfo(BD_CITY)}
+					</div> */}
 				</div>
 			) : (
 				<div className={'h-3/6 flex flex-col items-center justify-center '}>
@@ -266,11 +268,12 @@ const ShowRSVPSuccess = ({
 			<div className={'h-3/6 flex flex-col items-center justify-center '}>
 				<div>{message.contactInfo}</div>
 				<div>
-					{message.address}: {getContactInfo(BRANCH_ADDRESS)}
+					{message.address}: {getContactInfo(BD_ADDRESS)},{getContactInfo(BD_CITY)}
 				</div>
-				<div>
-					{message.phone}: {getContactInfo(BRANCH_PHONE)}
-				</div>
+				{/* <div>
+				TAG_FUNC_LOC_CT 
+					{message.phone}: {getContactInfo(BD_CITY)}
+				</div> */}
 			</div>
 		</div>
 	)
@@ -351,12 +354,13 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 	const getContactInfo = (type: string) => {
 		let info: any = contactInfo?.filter((item) => {
-			return convertLowerTrim(item[BRANCH_NAME]) === convertLowerTrim(event[TAG_FUNC_LOC])
+			return convertLowerTrim(item[CURATORS_CODE]) === convertLowerTrim(event[TAG_FUNC_LOC_ID])
 		})
 		if (info.length > 0) {
 			let contact = info[0]
 			return contact[type]
 		}
+
 		return ''
 	}
 
@@ -368,12 +372,12 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				[TAG_NAME]: event[TAG_NAME],
 				[TAG_FUNC_START_T]: event[TAG_FUNC_START_T],
 				[TAG_FUNC_END_T]: event[TAG_FUNC_END_T],
-				[TAG_FUNC_ROOM]: event[TAG_FUNC_ROOM],
+				[TAG_FUNC_LOC_ROO]: event[TAG_FUNC_LOC_ROO],
 				[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 				[TAG_FUNC_LOC]: event[TAG_FUNC_LOC],
 				[SISN]: event[SISN],
 				[TAG_FUNC_P_T]: getCurrentDate(),
-				BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
+				BD_ADDRESS: getContactInfo(BD_ADDRESS),
 				occ1: patron.occ1,
 				occ2: patron.occ2,
 			})
@@ -387,7 +391,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					[TAG_NAME]: event[TAG_NAME],
 					[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 					[TAG_FUNC_P_T]: getCurrentDate(),
-					[BRANCH_ADDRESS]: getContactInfo(BRANCH_ADDRESS),
+					[BD_ADDRESS]: getContactInfo(BD_ADDRESS),
 					RSVP_CONFIRM_LANDING_PAGE_URL: RSVP_CONFIRM_LANDING_PAGE_URL,
 					encoded,
 				},
