@@ -41,36 +41,6 @@
 				"type": "Vancouver Public Library, Central Library",
 				"color": "bg-sky-900 border-sky-900",
 				"icon": "rounded"
-			},
-			{
-				"type": "Vancouver Public Library, Joe Fortes Branch",
-				"color":"bg-neutral-500 border-neutral-500",
-				"icon": "rounded"
-			},
-			{
-				"type": "Vancouver Public Library, Central Library",
-				"color": "bg-sky-900 border-sky-900",
-				"icon": "rounded"
-			},
-			{
-				"type": "Vancouver Public Library, Joe Fortes Branch",
-				"color":"bg-neutral-500 border-neutral-500",
-				"icon": "rounded"
-			},
-			{
-				"type": "Vancouver Public Library, Central Library",
-				"color": "bg-sky-900 border-sky-900",
-				"icon": "rounded"
-			},
-			{
-				"type": "Vancouver Public Library, Joe Fortes Branch",
-				"color":"bg-neutral-500 border-neutral-500",
-				"icon": "rounded"
-			},
-			{
-				"type": "Vancouver Public Library, Central Library",
-				"color": "bg-sky-900 border-sky-900",
-				"icon": "rounded"
 			}
 		]
 	}

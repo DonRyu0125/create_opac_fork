@@ -227,23 +227,23 @@ const ShowButton = ({
 				</div>
 			</div>
 			{getContactInfo(BD_ADDRESS) ? (
-				<div className={'h-3/6 flex flex-col items-start justify-evenly '}>
+				<div className={'h-3/6 flex flex-col items-start justify-evenly text-sm'}>
 					<div className={'w-full'}>
-						{message.contactInfo}:
-						<div className={'w-full flex justify-between font-normal'}>
-							<div className={'flex items-center'}>
+						{message.contactInfo}
+						<div className={'w-full flex justify-evenly font-normal mt-2'}>
+							<div className={'flex items-center '}>
 								<Phone className={'h-[18px]'} />
-								:234-009-0098
+								234-009-0098
 							</div>
-							<div className={'flex items-center'}>
+							<div className={'flex justify-items-start'}>
 								<Mail className={'h-[18px]'} />
-								:info.vpl.com
+								info.vpl.com
 							</div>
 						</div>
 					</div>
 					<div className={'w-full'}>
-						{message.address}:
-						<div className={'font-normal'}>{getContactInfo(BD_BUILDING_NAME)}</div>
+						{message.address}
+						<div className={'font-normal mt-2'}>{getContactInfo(BD_BUILDING_NAME)}</div>
 						<div className={'font-normal'}>
 							{getContactInfo(BD_ADDRESS)} {getContactInfo(BD_CITY)},{' '}
 							{getContactInfo(BD_POSTAL_CODE)}
@@ -282,7 +282,7 @@ const ShowRSVPSuccess = ({
 			</div>
 			<div className={'h-3/6 flex flex-col items-center justify-center '}>
 				<div>{message.contactInfo}</div>
-				<div>{message.address}:</div>
+				<div>{message.address}</div>
 				<div>{getContactInfo(BD_BUILDING_NAME)}</div>
 				<div>{getContactInfo(BD_ADDRESS)}</div>
 				<div>

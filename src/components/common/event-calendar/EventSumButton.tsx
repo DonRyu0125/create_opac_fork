@@ -176,10 +176,10 @@ const EventSumButton = ({
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
 														&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
 													</div>
-													<div className="ml-[10px] text-md text-gray-600 font-bold">
+													{/* <div className="ml-[10px] text-md text-gray-600 font-bold">
 														&#x2022;{message.language}:{' '}
 														{elm[TAG_FUNC_LANG]}
-													</div>
+													</div> */}
 												</div>
 												<DialogDescription
 													className={

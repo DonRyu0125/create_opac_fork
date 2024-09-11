@@ -169,9 +169,9 @@ const EventAllButton = ({
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
 												&#x2022;{message.seats}: {item[TAG_FUNC_LOC_MAX]}
 											</div>
-											<div className="ml-[10px] text-md text-gray-600 font-bold">
+											{/* <div className="ml-[10px] text-md text-gray-600 font-bold">
 												&#x2022;{message.language}: {item[TAG_FUNC_LANG]}
-											</div>
+											</div> */}
 										</div>
 									</div>
 								</div>

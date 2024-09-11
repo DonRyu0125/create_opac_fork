@@ -101,7 +101,7 @@ const EventButton = ({
 					</div>
 				</Button>
 			</DialogTrigger>
-			<DialogContent hideClose={'invisible'} className={'h-5/6 lg:h-[600px] lg:min-w-[1000px] max-w-lg md:max-w-3xl '}>
+			<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl '}>
 				<DialogHeader>
 					<DialogTitle
 						className={
@@ -123,7 +123,7 @@ const EventButton = ({
 						</DialogPrimitive.Close>
 					</DialogTitle>
 				</DialogHeader>
-				<div className={'w-full overflow-x-auto h-full lg:h-[400px] sm:flex font-bold relative'}>
+				<div className={'w-full min-h-[400px]  sm:flex font-bold relative'}>
 					{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 					<div className={'w-full sm:w-8/12 '}>
 						<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
@@ -153,9 +153,9 @@ const EventButton = ({
 							<div className="ml-[10px] text-md text-gray-600 font-bold">
 								&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
 							</div>
-							<div className="ml-[10px] text-md text-gray-600 font-bold">
+							{/* <div className="ml-[10px] text-md text-gray-600 font-bold">
 								&#x2022;{message.language}: {elm[TAG_FUNC_LANG]}
-							</div>
+							</div> */}
 						</div>
 						<DialogDescription
 							className={

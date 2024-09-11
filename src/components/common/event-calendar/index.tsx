@@ -244,7 +244,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 			)}
 
 			<div className={'w-full mt-1'}>
-				<div className={'grid grid-cols-7 gap-1'}>
+				<div className={'grid grid-cols-7 gap-0.5'}>
 					{message.daysOfWeek.map((item, key) => {
 						return (
 							<div
@@ -261,7 +261,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 							return (
 								<div
 									key={key}
-									className="rounded-lg border border-black cursor-pointer max-w-40 h-28 w-full">
+									className="rounded border border-black cursor-pointer max-w-40 h-28 w-full">
 									<div className={'bg-slate-200'}>{item?.day}</div>
 									<EventCalendarEventList
 										dayObj={item}
@@ -280,7 +280,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 							return (
 								<div
 									key={key}
-									className="rounded-lg border border-black cursor-pointer max-w-40 h-96 w-full">
+									className="rounded-lg border border-black cursor-pointer max-w-40 h-96 w-full rounded">
 									<div className={'bg-slate-200'}>{item?.day}</div>
 									<EventCalendarEventList
 										dayObj={item}
