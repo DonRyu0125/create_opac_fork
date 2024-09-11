@@ -1,5 +1,5 @@
 export interface Cal_event {
-	[TAG_FUNC_LOC_ID]:string
+	[TAG_FUNC_LOC_ID]: string
 	[SISN]: number
 	[TAG_NAME]: string
 	[TAG_FUNC_LOC_DEC]: string
@@ -19,6 +19,11 @@ export interface Cal_event {
 	[TAG_FUNC_CANCEL]: string
 	[TAG_FUNC_CAN_RES]: string
 	[TAG_DB_TYPE]: string
+	[TAG_FUNC_LOC_CT]: string
+	[TAG_FUNC_LOC_EM]: string
+	[TAG_FUNC_LOC_IMG]: string
+	[TAG_FUNC_LOC_MD]: string
+	[TAG_FUNC_LOC_DOC]: string
 }
 export interface patron {
 	[PATRON]: string
@@ -65,7 +70,7 @@ export const BD_BUILDING_NAME = 'BD_BUILDING_NAME'
 //Event location group
 export const TAG_FUNC_LOC_ID = 'TAG_FUNC_LOC_ID'
 export const TAG_FUNC_LOC_GRP = 'TAG_FUNC_LOC_GRP'
-export const TAG_FUNC_LOC_DEC= 'TAG_FUNC_LOC_DEC'
+export const TAG_FUNC_LOC_DEC = 'TAG_FUNC_LOC_DEC'
 export const TAG_FUNC_LOC = 'TAG_FUNC_LOC'
 export const TAG_FUNC_LOC_FEE = 'TAG_FUNC_LOC_FEE'
 export const TAG_FUNC_LOC_BAN = 'TAG_FUNC_LOC_BAN'
@@ -73,6 +78,11 @@ export const TAG_FUNC_LOC_AUD = 'TAG_FUNC_LOC_AUD'
 export const TAG_FUNC_LOC_CAP = 'TAG_FUNC_LOC_CAP'
 export const TAG_FUNC_LOC_ROO = 'TAG_FUNC_LOC_ROO'
 export const TAG_FUNC_LOC_MAX = 'TAG_FUNC_LOC_MAX'
+export const TAG_FUNC_LOC_CT = 'TAG_FUNC_LOC_CT'
+export const TAG_FUNC_LOC_EM = 'TAG_FUNC_LOC_EM'
+export const TAG_FUNC_LOC_IMG = 'TAG_FUNC_LOC_IMG'
+export const TAG_FUNC_LOC_MD = 'TAG_FUNC_LOC_MD'
+export const TAG_FUNC_LOC_DOC = 'TAG_FUNC_LOC_DOC'
 //Event group by location
 export const TAG_FUNC_DTE_GRP = 'TAG_FUNC_DTE_GRP'
 export const TAG_FUNC_DATE = 'TAG_FUNC_DATE'

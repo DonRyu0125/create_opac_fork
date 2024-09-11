@@ -36,6 +36,8 @@ import {
 	TAG_FUNC_LOC_ID,
 	BD_POSTAL_CODE,
 	BD_BUILDING_NAME,
+	TAG_FUNC_LOC_CT,
+	TAG_FUNC_LOC_EM,
 } from './Constants'
 import { BadgeCheck, Mail, Phone, SquareUserRound } from 'lucide-react'
 import {
@@ -190,11 +192,13 @@ const ShowButton = ({
 	patrons,
 	getContactInfo,
 	setStatus,
+	event,
 }: {
 	capacity: number
 	patrons: patron[]
 	getContactInfo: Function
 	setStatus: React.Dispatch<React.SetStateAction<string>>
+	event: Cal_event
 }) => {
 	const message = useConstants().message
 
@@ -228,22 +232,20 @@ const ShowButton = ({
 			</div>
 			{getContactInfo(BD_ADDRESS) ? (
 				<div className={'h-3/6 flex flex-col items-start justify-evenly text-sm'}>
-					<div className={'w-full'}>
+					<div className={'w-full h-1/2 flex flex-col justify-evenly'}>
 						{message.contactInfo}
-						<div className={'w-full flex justify-evenly font-normal mt-2'}>
-							<div className={'flex items-center '}>
-								<Phone className={'h-[18px]'} />
-								234-009-0098
-							</div>
-							<div className={'flex justify-items-start'}>
-								<Mail className={'h-[18px]'} />
-								info.vpl.com
-							</div>
+						<div className={'flex font-normal'}>
+							<Phone className={'h-[18px]'} />
+							{event[TAG_FUNC_LOC_CT]}
+						</div>
+						<div className={'flex font-normal'}>
+							<Mail className={'h-[18px]'} />
+							{event[TAG_FUNC_LOC_EM]}
 						</div>
 					</div>
 					<div className={'w-full'}>
 						{message.address}
-						<div className={'font-normal mt-2'}>{getContactInfo(BD_BUILDING_NAME)}</div>
+						<div className={'font-normal'}>{getContactInfo(BD_BUILDING_NAME)}</div>
 						<div className={'font-normal'}>
 							{getContactInfo(BD_ADDRESS)} {getContactInfo(BD_CITY)},{' '}
 							{getContactInfo(BD_POSTAL_CODE)}
@@ -436,6 +438,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			case STATUS_TYPE.SHOW_BTN:
 				return (
 					<ShowButton
+						event={event}
 						capacity={capacity}
 						patrons={patrons}
 						getContactInfo={getContactInfo}
@@ -458,6 +461,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			default:
 				return (
 					<ShowButton
+						event={event}
 						capacity={capacity}
 						patrons={patrons}
 						getContactInfo={getContactInfo}
