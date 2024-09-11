@@ -33,9 +33,11 @@ import {
 	RSVP_CONFIRM_LANDING_PAGE_URL,
 	TAG_FUNC_P_T,
 	TAG_DB,
-	TAG_FUNC_LOC_ID
+	TAG_FUNC_LOC_ID,
+	BD_POSTAL_CODE,
+	BD_BUILDING_NAME,
 } from './Constants'
-import { BadgeCheck, SquareUserRound } from 'lucide-react'
+import { BadgeCheck, Mail, Phone, SquareUserRound } from 'lucide-react'
 import {
 	convertLowerTrim,
 	convertToArr,
@@ -195,7 +197,7 @@ const ShowButton = ({
 	setStatus: React.Dispatch<React.SetStateAction<string>>
 }) => {
 	const message = useConstants().message
-	
+
 	return (
 		<div className={'w-full p-2 border-2 rounded min-h-[300px]'}>
 			<div
@@ -225,15 +227,28 @@ const ShowButton = ({
 				</div>
 			</div>
 			{getContactInfo(BD_ADDRESS) ? (
-				<div className={'h-3/6 flex flex-col items-center justify-center '}>
-					<div>{message.contactInfo}</div>
-					<div>
-						{getContactInfo(BD_ADDRESS)},{getContactInfo(BD_CITY)}
+				<div className={'h-3/6 flex flex-col items-start justify-evenly '}>
+					<div className={'w-full'}>
+						{message.contactInfo}:
+						<div className={'w-full flex justify-between font-normal'}>
+							<div className={'flex items-center'}>
+								<Phone className={'h-[18px]'} />
+								:234-009-0098
+							</div>
+							<div className={'flex items-center'}>
+								<Mail className={'h-[18px]'} />
+								:info.vpl.com
+							</div>
+						</div>
 					</div>
-					{/* <div>
-					TAG_FUNC_LOC_CT 
-						{message.phone}: {getContactInfo(BD_CITY)}
-					</div> */}
+					<div className={'w-full'}>
+						{message.address}:
+						<div className={'font-normal'}>{getContactInfo(BD_BUILDING_NAME)}</div>
+						<div className={'font-normal'}>
+							{getContactInfo(BD_ADDRESS)} {getContactInfo(BD_CITY)},{' '}
+							{getContactInfo(BD_POSTAL_CODE)}
+						</div>
+					</div>
 				</div>
 			) : (
 				<div className={'h-3/6 flex flex-col items-center justify-center '}>
@@ -267,13 +282,12 @@ const ShowRSVPSuccess = ({
 			</div>
 			<div className={'h-3/6 flex flex-col items-center justify-center '}>
 				<div>{message.contactInfo}</div>
+				<div>{message.address}:</div>
+				<div>{getContactInfo(BD_BUILDING_NAME)}</div>
+				<div>{getContactInfo(BD_ADDRESS)}</div>
 				<div>
-					{message.address}: {getContactInfo(BD_ADDRESS)},{getContactInfo(BD_CITY)}
+					{getContactInfo(BD_CITY)}, {getContactInfo(BD_POSTAL_CODE)}
 				</div>
-				{/* <div>
-				TAG_FUNC_LOC_CT 
-					{message.phone}: {getContactInfo(BD_CITY)}
-				</div> */}
 			</div>
 		</div>
 	)
@@ -354,7 +368,9 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 	const getContactInfo = (type: string) => {
 		let info: any = contactInfo?.filter((item) => {
-			return convertLowerTrim(item[CURATORS_CODE]) === convertLowerTrim(event[TAG_FUNC_LOC_ID])
+			return (
+				convertLowerTrim(item[CURATORS_CODE]) === convertLowerTrim(event[TAG_FUNC_LOC_ID])
+			)
 		})
 		if (info.length > 0) {
 			let contact = info[0]

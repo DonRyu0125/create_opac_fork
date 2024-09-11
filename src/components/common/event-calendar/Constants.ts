@@ -60,6 +60,8 @@ export const LIBRARY_LOCATION_XML_TAG = 'record'
 export const CURATORS_CODE = 'CURATORS_CODE'
 export const BD_ADDRESS = 'BD_ADDRESS'
 export const BD_CITY = 'BD_CITY'
+export const BD_POSTAL_CODE = 'BD_POSTAL_CODE'
+export const BD_BUILDING_NAME = 'BD_BUILDING_NAME'
 //Event location group
 export const TAG_FUNC_LOC_ID = 'TAG_FUNC_LOC_ID'
 export const TAG_FUNC_LOC_GRP = 'TAG_FUNC_LOC_GRP'

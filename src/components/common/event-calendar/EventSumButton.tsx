@@ -65,7 +65,7 @@ const EventSumButton = ({
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
 		if(result.length < 1){
-			return EVENT_DEFAULT_COLOR
+			return EVENT_DEFAULT_COLOR;
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}

@@ -46,7 +46,7 @@ const EventAllButton = ({
 	filteredEvents,
 	contactInfo,
 	filterTypes,
-	fitlerOption
+	fitlerOption,
 }: {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfo[]
@@ -59,7 +59,7 @@ const EventAllButton = ({
 		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
-		if(result.length < 1){
+		if (result.length < 1) {
 			return EVENT_DEFAULT_COLOR
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`
@@ -134,7 +134,7 @@ const EventAllButton = ({
 										</div>
 									</div>
 								)}
-								<div className={'flex '}>
+								<div className={'flex'}>
 									<div
 										className={
 											'w-full text-lg w-full flex flex-col justify-center items-left font-bold px-2 '
@@ -191,46 +191,11 @@ const EventAllButton = ({
 										/>
 									</div>
 								)}
-								{/*  Description more button func */}
-								{/* <DialogDescription
-									className={`${showFullStr[idx] ? 'h-72' : 'h-10'} p-2 break-all overflow-x-hidden overflow-y-auto`}>
-									<>
-										{showFullStr[idx] ? (
-											<>
-												{item[TAG_FUNC_LOC_DEC]}
-												<button
-													className={'text-slate-950 font-semibold'}
-													onClick={() => showStrToggle(idx)}>
-													....Close
-												</button>
-											</>
-										) : (
-											<>
-												{item[TAG_FUNC_LOC_DEC]?.substring(0, 10)}
-												{(item[TAG_FUNC_LOC_DEC]?.length ?? 0) > 10 && (
-													<button
-														className={'text-slate-950 font-semibold'}
-														onClick={() => showStrToggle(idx)}>
-														....More
-													</button>
-												)}
-											</>
-										)}
-									</>
-								</DialogDescription> */}
 							</AccordionContent>
 						</Accordion.Item>
 					))}
 				</Accordion.Root>
-				<DialogFooter className={'w-full flex absolute bottom-1 relative'}>
-					{/* <DialogPrimitive.Close
-						onClick={resetToggleSetting}
-						className={
-							'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-center rounded absolute bottom-1'
-						}>
-						Close
-					</DialogPrimitive.Close> */}
-				</DialogFooter>
+				<DialogFooter className={'w-full flex absolute bottom-1 relative'}></DialogFooter>
 			</DialogContent>
 		</Dialog>
 	)
