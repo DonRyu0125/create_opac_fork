@@ -35,6 +35,7 @@ import {
 	TAG_FUNC_CAN_RES,
 	FilterType,
 	EVENT_DEFAULT_COLOR,
+	TAG_FUNC_LOC_IMG,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { Accessibility, SquareUserRound, X } from 'lucide-react'
@@ -130,10 +131,9 @@ const EventButton = ({
 					}>
 					{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 					<div className={'w-full sm:w-8/12 '}>
-						
 						<img
-							src="https://canto-wp-media.s3.amazonaws.com/app/uploads/2019/08/19194138/image-url-3.jpg"
-							alt="Jindo Dog"
+							src={elm[TAG_FUNC_LOC_IMG]}
+							alt={elm[TAG_NAME]}
 							className={'h-2/3 w-full'}
 						/>
 						<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
