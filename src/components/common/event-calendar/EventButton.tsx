@@ -75,7 +75,7 @@ const EventButton = ({
 	return (
 		<Dialog key={id}>
 			<DialogTrigger asChild>
-				<Button className={`w-full h-[95%] border-hidden p-0 text-sm`} variant="outline">
+				<Button className={`w-full h-[35%] border-hidden p-0 text-sm`} variant="outline">
 					<div className={'w-full text-left'}>
 						<div className={'flex'}>
 							<div

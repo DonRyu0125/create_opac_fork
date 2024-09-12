@@ -89,129 +89,157 @@ const EventSumButton = ({
 	}
 
 	return (
-		<div className={'h-[80%] mb-[2px] overflow-x-hidden overflow-y-auto custom-scrollbar'}>
-			{groupedByType(filteredEvents).map((item: any, key: number) => (
-				<Dialog key={key}>
-					<DialogTrigger asChild>
-						<Button
-							className={'h-[20px] border-hidden flex p-0 justify-start'}
-							variant="outline">
-							<div
-								className={cn(
-									'h-4 w-[16px] border rounded',
-									getColor(item[fitlerOption])
-								)}></div>
-							<div
-								className={
-									'hidden sm:block max-w-[100px] overflow-hidden text-left '
-								}>
-								{fitlerOption ? item[fitlerOption] : message.all}
-							</div>
-							<div className={'flex items-center justify-center'}>
-								<CalendarCheck height={18} className={'hidden sm:block'} />:
-								<div>{item[TAG_FUNC_DTE_LIST].length}</div>
-							</div>
-						</Button>
-					</DialogTrigger>
-					<DialogContent
-						hideClose={'invisible'}
-						className={'max-w-lg h-[500px] overflow-auto p-4 md:max-w-3xl'}>
-						<>
-							<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
-								<DialogTitle
-									className={
-										' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
-									}>
-									<div className="h-8">
-										<img className="h-full" src={logo} alt="logo" />
-									</div>
-									<div className={'flex'}>
-										<div
-											className={cn(
-												'h-4 w-[16px] border rounded mr-1 ',
-												getColor(item[fitlerOption])
-											)}></div>
+		<>
+			{/* If there is a filter option, show the filter only */}
+			{monthType && filterTypes.length > 1 ? (
+				<div
+					className={
+						'h-full mb-[2px] overflow-x-hidden overflow-y-auto custom-scrollbar'
+					}>
+					{groupedByType(filteredEvents).map((item: any, key: number) => (
+						<Dialog key={key}>
+							<DialogTrigger asChild>
+								<Button
+									className={'h-[20px] border-hidden flex p-0 justify-start'}
+									variant="outline">
+									<div
+										className={cn(
+											'h-4 w-[16px] border rounded',
+											getColor(item[fitlerOption])
+										)}></div>
+									<div
+										className={
+											'hidden sm:block max-w-[100px] overflow-hidden text-left '
+										}>
 										{fitlerOption ? item[fitlerOption] : message.all}
 									</div>
-									<DialogPrimitive.Close>
-										<X className={'h-6 w-6'} />
-									</DialogPrimitive.Close>
-								</DialogTitle>
-							</DialogHeader>
-							{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
-								<div
-									key={key}
-									className={
-										'w-full text-l sm:flex font-bold p-2 border-2 rounded relative'
-									}>
-									{elm[TAG_FUNC_CANCEL] && (
-										<EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />
-									)}
-									<div className={`w-full ${elm[TAG_FUNC_RSVP] && 'sm:w-8/12'}`}>
-										<img
-											src={elm[TAG_FUNC_LOC_IMG]}
-											alt={elm[TAG_NAME]}
-											className={'h-[300px] w-full'}
-										/>
-										<div className={'overflow-hidden text-lg'}>
-											{elm[TAG_NAME]} {elm[TAG_FUNC_CANCEL]}
-										</div>
-										<div className={'sm:flex'}>
-											<div className="ml-[10px] sm:ml-0 text-md text-gray-600 font-bold">
-												&#x2022;{elm[TAG_FUNC_DATE]}
-											</div>
-											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												<span>
-													&#x2022;
-													{elm[TAG_FUNC_START_T]?.toUpperCase()}
-												</span>
-												<span className={'mx-2'}>-</span>
-												<span>{elm[TAG_FUNC_END_T]?.toUpperCase()}</span>
-											</div>
-											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;{message.room}: {elm[TAG_FUNC_LOC_ROO]}
-											</div>
-										</div>
-										<div className={'sm:flex'}>
-											<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;{message.suitableFor}:{' '}
-												{elm[TAG_FUNC_LOC_AUD]}
-											</div>
-											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
-											</div>
-										</div>
-										<DialogDescription
-											className={'h-[320px] break-all overflow-y-auto'}>
-											{elm[TAG_FUNC_LOC_DEC]}
-										</DialogDescription>
+									<div className={'flex items-center justify-center'}>
+										<CalendarCheck height={18} className={'hidden sm:block'} />:
+										<div>{item[TAG_FUNC_DTE_LIST].length}</div>
 									</div>
-									{elm[TAG_FUNC_RSVP] && (
-										<div className={'w-full sm:w-4/12'}>
-											<EventRSVPForm
-												capacity={elm[TAG_FUNC_LOC_MAX]}
-												patrons={convertToArr(elm[PATRON])}
-												event={elm}
-												sisnNumber={elm[SISN]}
-												contactInfo={contactInfo}
-											/>
+								</Button>
+							</DialogTrigger>
+							<DialogContent
+								hideClose={'invisible'}
+								className={'max-w-lg h-[500px] overflow-auto p-4 md:max-w-3xl'}>
+								<>
+									<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
+										<DialogTitle
+											className={
+												' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
+											}>
+											<div className="h-8">
+												<img className="h-full" src={logo} alt="logo" />
+											</div>
+											<div className={'flex'}>
+												<div
+													className={cn(
+														'h-4 w-[16px] border rounded mr-1 ',
+														getColor(item[fitlerOption])
+													)}></div>
+												{fitlerOption ? item[fitlerOption] : message.all}
+											</div>
+											<DialogPrimitive.Close>
+												<X className={'h-6 w-6'} />
+											</DialogPrimitive.Close>
+										</DialogTitle>
+									</DialogHeader>
+									{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
+										<div
+											key={key}
+											className={
+												'w-full text-l sm:flex font-bold p-2 border-2 rounded relative'
+											}>
+											{elm[TAG_FUNC_CANCEL] && (
+												<EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />
+											)}
+											<div
+												className={`w-full ${elm[TAG_FUNC_RSVP] && 'sm:w-8/12'}`}>
+												<img
+													src={elm[TAG_FUNC_LOC_IMG]}
+													alt={elm[TAG_NAME]}
+													className={'h-[300px] w-full'}
+												/>
+												<div className={'overflow-hidden text-lg'}>
+													{elm[TAG_NAME]} {elm[TAG_FUNC_CANCEL]}
+												</div>
+												<div className={'sm:flex'}>
+													<div className="ml-[10px] sm:ml-0 text-md text-gray-600 font-bold">
+														&#x2022;{elm[TAG_FUNC_DATE]}
+													</div>
+													<div className="ml-[10px] text-md text-gray-600 font-bold">
+														<span>
+															&#x2022;
+															{elm[TAG_FUNC_START_T]?.toUpperCase()}
+														</span>
+														<span className={'mx-2'}>-</span>
+														<span>
+															{elm[TAG_FUNC_END_T]?.toUpperCase()}
+														</span>
+													</div>
+													<div className="ml-[10px] text-md text-gray-600 font-bold">
+														&#x2022;{message.room}:{' '}
+														{elm[TAG_FUNC_LOC_ROO]}
+													</div>
+												</div>
+												<div className={'sm:flex'}>
+													<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
+														&#x2022;{message.suitableFor}:{' '}
+														{elm[TAG_FUNC_LOC_AUD]}
+													</div>
+													<div className="ml-[10px] text-md text-gray-600 font-bold">
+														&#x2022;{message.seats}:{' '}
+														{elm[TAG_FUNC_LOC_MAX]}
+													</div>
+												</div>
+												<DialogDescription
+													className={
+														'h-[320px] break-all overflow-y-auto'
+													}>
+													{elm[TAG_FUNC_LOC_DEC]}
+												</DialogDescription>
+											</div>
+											{elm[TAG_FUNC_RSVP] && (
+												<div className={'w-full sm:w-4/12'}>
+													<EventRSVPForm
+														capacity={elm[TAG_FUNC_LOC_MAX]}
+														patrons={convertToArr(elm[PATRON])}
+														event={elm}
+														sisnNumber={elm[SISN]}
+														contactInfo={contactInfo}
+													/>
+												</div>
+											)}
 										</div>
-									)}
-								</div>
-							))}
-							<DialogFooter>
-								<DialogPrimitive.Close
-									className={
-										'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
-									}>
-									{message.close}
-								</DialogPrimitive.Close>
-							</DialogFooter>
-						</>
-					</DialogContent>
-				</Dialog>
-			))}
-		</div>
+									))}
+									<DialogFooter>
+										<DialogPrimitive.Close
+											className={
+												'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+											}>
+											{message.close}
+										</DialogPrimitive.Close>
+									</DialogFooter>
+								</>
+							</DialogContent>
+						</Dialog>
+					))}
+				</div>
+			) : (
+				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto custom-scrollbar'}>
+					{filteredEvents.map((item: any, idx: number) => (
+						<EventButton
+							elm={item}
+							key={idx}
+							id={idx}
+							contactInfo={contactInfo}
+							filterTypes={filterTypes}
+							fitlerOption={fitlerOption}
+						/>
+					))}
+				</div>
+			)}
+		</>
 	)
 }
 
