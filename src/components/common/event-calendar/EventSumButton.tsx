@@ -93,7 +93,7 @@ const EventSumButton = ({
 			{monthType && filterTypes.length > 1 ? (
 				<div
 					className={
-						'h-full mb-[2px] overflow-x-hidden overflow-y-auto custom-scrollbar'
+						'h-[80%] mb-[2px] overflow-x-hidden overflow-y-auto custom-scrollbar'
 					}>
 					{groupedByType(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>

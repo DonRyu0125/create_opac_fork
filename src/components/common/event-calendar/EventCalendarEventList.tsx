@@ -100,7 +100,7 @@ const EventCalendarEventList = ({
 	}
 
 	return (
-		<div className={`${monthType ? 'h-4/5' : 'h-[98%]'} relative w-full`}>
+		<div className={`${monthType ? 'h-[82%]' : 'h-[98%]'} relative w-full`}>
 			{/* Event button */}
 			<EventSumButton filteredEvents={filteredEvents} contactInfo={contactInfo} filterTypes={filterTypes} fitlerOption={fitlerOption} />
 			{/* All events button */}

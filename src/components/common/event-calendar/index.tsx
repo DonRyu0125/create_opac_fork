@@ -174,10 +174,10 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 
 	return (
 		<div
-			className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
+			className={'w-full mx-auto max-w-screen-xl'}>
 			<div
 				className={
-					'relative flex justify-center items-center bg-primary h-[100px] rounded '
+					'relative flex justify-center items-center bg-primary h-[80px] rounded '
 				}>
 				<Button
 					onClick={weekType ? prevWeek : prevMonth}
@@ -261,7 +261,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 							return (
 								<div
 									key={key}
-									className="rounded border border-black cursor-pointer max-w-40 h-28 w-full">
+									className="rounded border border-black cursor-pointer max-w-44 h-32 w-full">
 									<div className={'bg-slate-200'}>{item?.day}</div>
 									<EventCalendarEventList
 										dayObj={item}
