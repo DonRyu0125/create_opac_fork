@@ -64,8 +64,8 @@ const EventSumButton = ({
 		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
-		if(result.length < 1){
-			return EVENT_DEFAULT_COLOR;
+		if (result.length < 1) {
+			return EVENT_DEFAULT_COLOR
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
@@ -89,8 +89,12 @@ const EventSumButton = ({
 
 	return (
 		<>
-			{monthType && filteredEvents.length > 3 ? (
-				<div className={'h-full mb-[2px] overflow-x-hidden'}>
+			{/* If there is a filter option, show the filter only */}
+			{monthType && filterTypes.length > 1 ? (
+				<div
+					className={
+						'h-full mb-[2px] overflow-x-hidden overflow-y-auto custom-scrollbar'
+					}>
 					{groupedByType(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>
 							<DialogTrigger asChild>
@@ -102,7 +106,10 @@ const EventSumButton = ({
 											'h-4 w-[16px] border rounded',
 											getColor(item[fitlerOption])
 										)}></div>
-									<div className={'hidden sm:block max-w-[100px] overflow-hidden text-left '}>
+									<div
+										className={
+											'hidden sm:block max-w-[100px] overflow-hidden text-left '
+										}>
 										{fitlerOption ? item[fitlerOption] : message.all}
 									</div>
 									<div className={'flex items-center justify-center'}>
@@ -129,7 +136,7 @@ const EventSumButton = ({
 														'h-4 w-[16px] border rounded mr-1 ',
 														getColor(item[fitlerOption])
 													)}></div>
-											{fitlerOption ? item[fitlerOption] : message.all}
+												{fitlerOption ? item[fitlerOption] : message.all}
 											</div>
 											<DialogPrimitive.Close>
 												<X className={'h-6 w-6'} />
@@ -165,7 +172,8 @@ const EventSumButton = ({
 														</span>
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.room}: {elm[TAG_FUNC_LOC_ROO]}
+														&#x2022;{message.room}:{' '}
+														{elm[TAG_FUNC_LOC_ROO]}
 													</div>
 												</div>
 												<div className={'sm:flex'}>
@@ -174,12 +182,9 @@ const EventSumButton = ({
 														{elm[TAG_FUNC_LOC_AUD]}
 													</div>
 													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
+														&#x2022;{message.seats}:{' '}
+														{elm[TAG_FUNC_LOC_MAX]}
 													</div>
-													{/* <div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.language}:{' '}
-														{elm[TAG_FUNC_LANG]}
-													</div> */}
 												</div>
 												<DialogDescription
 													className={
@@ -215,7 +220,7 @@ const EventSumButton = ({
 					))}
 				</div>
 			) : (
-				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto'}>
+				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto custom-scrollbar'}>
 					{filteredEvents.map((item: any, idx: number) => (
 						<EventButton
 							elm={item}

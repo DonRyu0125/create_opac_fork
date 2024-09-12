@@ -75,7 +75,7 @@ const EventButton = ({
 	return (
 		<Dialog key={id}>
 			<DialogTrigger asChild>
-				<Button className={`w-full h-[95%] border-hidden p-0 `} variant="outline">
+				<Button className={`w-full h-[95%] border-hidden p-0 text-sm`} variant="outline">
 					<div className={'w-full text-left'}>
 						<div className={'flex'}>
 							<div
@@ -83,7 +83,7 @@ const EventButton = ({
 									'h-4 w-[16px] border rounded',
 									getColor(elm[fitlerOption])
 								)}></div>
-							<p className={'w-full h-full hidden sm:block break-all text-left'}>
+							<p className={'w-full h-full hidden sm:block break-all'}>
 								{elm[TAG_NAME]}
 							</p>
 						</div>

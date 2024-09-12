@@ -32,13 +32,28 @@
 		"filterOption": "TAG_FUNC_LOC",
 		"filterTypes": [
 			{
-				"type": "Delhi Branch",
+				"type": "Vancouver Public Library, Joe Fortes Branch",
 				"color":"bg-neutral-500 border-neutral-500",
 				"icon": "rounded"
 			},
 			{
-				"type": "MERKENICH",
+				"type": "Vancouver Public Library, Central Library",
 				"color": "bg-sky-900 border-sky-900",
+				"icon": "rounded"
+			},
+			{
+				"type": "Vancouver Public Library, Kitsilano Branch",
+				"color":"bg-red-500 border-red-500",
+				"icon": "rounded"
+			},
+			{
+				"type": "Vancouver Public Library, Britannia Branch",
+				"color": "bg-yellow-500 border-yellow-500",
+				"icon": "rounded"
+			},
+			{
+				"type": "Vancouver Public Library, West Point Grey Branch",
+				"color": "bg-orange-500 border-orange-500",
 				"icon": "rounded"
 			}
 		]
