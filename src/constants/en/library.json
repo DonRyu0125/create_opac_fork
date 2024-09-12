@@ -3,7 +3,7 @@
 	"heroBanner": "https://www.sfopho.com/wp-content/uploads/2019/11/banner_ancien_orleansJPG.jpg",
 	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=BIBLIO_WEB",
 	"browseByCategoryTitle": "Browse by Category",
-	"CalendarfilterOption":"",
+	"CalendarfilterOption": "",
 	"title": "Search the Library",
 	"database_name": "BIBLIO_WEB",
 	"categoriesItems": [
@@ -29,12 +29,12 @@
 		}
 	],
 	"rsvp": {
-		"filterDatabase":"Library",
+		"filterDatabase": "Library",
 		"filterOption": "TAG_FUNC_LOC",
 		"filterTypes": [
 			{
 				"type": "Vancouver Public Library, Joe Fortes Branch",
-				"color":"bg-neutral-500 border-neutral-500",
+				"color": "bg-neutral-500 border-neutral-500",
 				"icon": "rounded"
 			},
 			{
@@ -44,7 +44,7 @@
 			},
 			{
 				"type": "Vancouver Public Library, Kitsilano Branch",
-				"color":"bg-red-500 border-red-500",
+				"color": "bg-red-500 border-red-500",
 				"icon": "rounded"
 			},
 			{

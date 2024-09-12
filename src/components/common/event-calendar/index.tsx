@@ -280,7 +280,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 							return (
 								<div
 									key={key}
-									className="rounded-lg border border-black cursor-pointer max-w-40 h-96 w-full rounded">
+									className="rounded-lg border border-black cursor-pointer max-w-44 h-96 w-full rounded">
 									<div className={'bg-slate-200'}>{item?.day}</div>
 									<EventCalendarEventList
 										dayObj={item}

@@ -34,6 +34,7 @@ import {
 	FilterType,
 	TAG_DB_TYPE,
 	EVENT_DEFAULT_COLOR,
+	TAG_FUNC_LOC_IMG,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
@@ -154,6 +155,11 @@ const EventSumButton = ({
 											)}
 											<div
 												className={`w-full ${elm[TAG_FUNC_RSVP] && 'sm:w-8/12'}`}>
+												<img
+													src={elm[TAG_FUNC_LOC_IMG]}
+													alt={elm[TAG_NAME]}
+													className={'h-[300px] w-full'}
+												/>
 												<div className={'overflow-hidden text-lg'}>
 													{elm[TAG_NAME]} {elm[TAG_FUNC_CANCEL]}
 												</div>
