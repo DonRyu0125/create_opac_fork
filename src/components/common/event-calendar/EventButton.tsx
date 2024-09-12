@@ -44,6 +44,7 @@ import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarWeekType } from '@/store'
 import EventRSVPCancel from './EventCancel'
+import EventCustomDialogContent from './EventCustomDialogContent'
 
 const EventButton = ({
 	elm,
@@ -125,64 +126,7 @@ const EventButton = ({
 						</DialogPrimitive.Close>
 					</DialogTitle>
 				</DialogHeader>
-				<div
-					className={
-						'w-full overflow-x-auto h-full min-h-[400px] sm:flex font-bold relative'
-					}>
-					{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
-					<div className={'w-full sm:w-8/12 '}>
-						<img
-							src={elm[TAG_FUNC_LOC_IMG]}
-							alt={elm[TAG_NAME]}
-							className={'h-2/3 w-full'}
-						/>
-						<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
-						<div className={'sm:flex'}>
-							<div className="ml-[10px] sm:ml-0 text-md  text-gray-600 font-bold">
-								&#x2022;{elm[TAG_FUNC_DATE]}
-							</div>
-							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								<span>&#x2022;{elm[TAG_FUNC_START_T]?.toUpperCase()}</span>
-								<span className={'mx-2'}>-</span>
-								<span>{elm[TAG_FUNC_END_T]?.toUpperCase()}</span>
-							</div>
-							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;{message.room}: {elm[TAG_FUNC_LOC_ROO]}
-							</div>
-							{elm[TAG_FUNC_ACCESS] && (
-								<div className="ml-[10px] text-md text-gray-600 font-bold flex">
-									&#x2022;
-									<Accessibility />: Y
-								</div>
-							)}
-						</div>
-						<div className={'sm:flex'}>
-							<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;{message.suitableFor}: {elm[TAG_FUNC_LOC_AUD]}
-							</div>
-							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
-							</div>
-						</div>
-						<DialogDescription
-							className={
-								'h-full max-h-[60px] break-all overflow-y-hidden'
-							}>
-							{elm[TAG_FUNC_LOC_DEC]}
-						</DialogDescription>
-					</div>
-					<div className={'w-full sm:w-4/12'}>
-						{elm[TAG_FUNC_RSVP] && (
-							<EventRSVPForm
-								sisnNumber={elm[SISN]}
-								capacity={elm[TAG_FUNC_LOC_MAX]}
-								patrons={convertToArr(elm[PATRON])}
-								event={elm}
-								contactInfo={contactInfo}
-							/>
-						)}
-					</div>
-				</div>
+				<EventCustomDialogContent elm={elm} contactInfo={contactInfo}/>
 				<DialogFooter>
 					<DialogPrimitive.Close
 						className={

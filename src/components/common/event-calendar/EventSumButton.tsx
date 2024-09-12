@@ -45,6 +45,7 @@ import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarMonthType, calendarWeekType } from '@/store'
 import EventRSVPCancel from './EventCancel'
+import EventCustomDialogContent from './EventCustomDialogContent'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]
@@ -145,72 +146,10 @@ const EventSumButton = ({
 										</DialogTitle>
 									</DialogHeader>
 									{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
-										<div
-											key={key}
-											className={
-												'w-full text-l sm:flex font-bold p-2 border-2 rounded relative'
-											}>
-											{elm[TAG_FUNC_CANCEL] && (
-												<EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />
-											)}
-											<div
-												className={`w-full ${elm[TAG_FUNC_RSVP] && 'sm:w-8/12'}`}>
-												<img
-													src={elm[TAG_FUNC_LOC_IMG]}
-													alt={elm[TAG_NAME]}
-													className={'h-[300px] w-full'}
-												/>
-												<div className={'overflow-hidden text-lg'}>
-													{elm[TAG_NAME]} {elm[TAG_FUNC_CANCEL]}
-												</div>
-												<div className={'sm:flex'}>
-													<div className="ml-[10px] sm:ml-0 text-md text-gray-600 font-bold">
-														&#x2022;{elm[TAG_FUNC_DATE]}
-													</div>
-													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														<span>
-															&#x2022;
-															{elm[TAG_FUNC_START_T]?.toUpperCase()}
-														</span>
-														<span className={'mx-2'}>-</span>
-														<span>
-															{elm[TAG_FUNC_END_T]?.toUpperCase()}
-														</span>
-													</div>
-													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.room}:{' '}
-														{elm[TAG_FUNC_LOC_ROO]}
-													</div>
-												</div>
-												<div className={'sm:flex'}>
-													<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.suitableFor}:{' '}
-														{elm[TAG_FUNC_LOC_AUD]}
-													</div>
-													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.seats}:{' '}
-														{elm[TAG_FUNC_LOC_MAX]}
-													</div>
-												</div>
-												<DialogDescription
-													className={
-														'h-[320px] break-all overflow-y-auto'
-													}>
-													{elm[TAG_FUNC_LOC_DEC]}
-												</DialogDescription>
-											</div>
-											{elm[TAG_FUNC_RSVP] && (
-												<div className={'w-full sm:w-4/12'}>
-													<EventRSVPForm
-														capacity={elm[TAG_FUNC_LOC_MAX]}
-														patrons={convertToArr(elm[PATRON])}
-														event={elm}
-														sisnNumber={elm[SISN]}
-														contactInfo={contactInfo}
-													/>
-												</div>
-											)}
-										</div>
+										<EventCustomDialogContent
+											elm={elm}
+											contactInfo={contactInfo}
+										/>
 									))}
 									<DialogFooter>
 										<DialogPrimitive.Close
