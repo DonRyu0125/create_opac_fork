@@ -102,7 +102,7 @@ const EventSumButton = ({
 											'h-4 w-[16px] border rounded',
 											getColor(item[fitlerOption])
 										)}></div>
-									<div className={'hidden sm:block max-w-[126px] text-left '}>
+									<div className={'hidden sm:block max-w-[100px] overflow-hidden text-left '}>
 										{fitlerOption ? item[fitlerOption] : message.all}
 									</div>
 									<div className={'flex items-center justify-center'}>

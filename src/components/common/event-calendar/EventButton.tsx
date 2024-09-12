@@ -49,13 +49,13 @@ const EventButton = ({
 	id,
 	contactInfo,
 	filterTypes,
-	fitlerOption
+	fitlerOption,
 }: {
 	elm: any
 	id: number
 	contactInfo: ContactInfo[]
 	filterTypes: FilterType[]
-	fitlerOption:string
+	fitlerOption: string
 }) => {
 	const [weekType, _] = useAtom(calendarWeekType)
 	const message = useConstants().message
@@ -65,11 +65,10 @@ const EventButton = ({
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
 
-		if(result.length < 1){
+		if (result.length < 1) {
 			return EVENT_DEFAULT_COLOR
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`
-	
 	}
 
 	return (
@@ -101,7 +100,9 @@ const EventButton = ({
 					</div>
 				</Button>
 			</DialogTrigger>
-			<DialogContent hideClose={'invisible'} className={'h-5/6 lg:h-[600px] max-w-lg md:max-w-3xl '}>
+			<DialogContent
+				hideClose={'invisible'}
+				className={'h-5/6 lg:h-[600px] max-w-lg md:max-w-3xl '}>
 				<DialogHeader>
 					<DialogTitle
 						className={
@@ -123,9 +124,18 @@ const EventButton = ({
 						</DialogPrimitive.Close>
 					</DialogTitle>
 				</DialogHeader>
-				<div className={'w-full overflow-x-auto h-full min-h-[400px] sm:flex font-bold relative'}>
+				<div
+					className={
+						'w-full overflow-x-auto h-full min-h-[400px] sm:flex font-bold relative'
+					}>
 					{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 					<div className={'w-full sm:w-8/12 '}>
+						
+						<img
+							src="https://canto-wp-media.s3.amazonaws.com/app/uploads/2019/08/19194138/image-url-3.jpg"
+							alt="Jindo Dog"
+							className={'h-2/3 w-full'}
+						/>
 						<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
 						<div className={'sm:flex'}>
 							<div className="ml-[10px] sm:ml-0 text-md  text-gray-600 font-bold">
@@ -156,7 +166,7 @@ const EventButton = ({
 						</div>
 						<DialogDescription
 							className={
-								'h-full max-h-80 break-all overflow-x-hidden overflow-y-auto'
+								'h-full max-h-[60px] break-all overflow-y-hidden'
 							}>
 							{elm[TAG_FUNC_LOC_DEC]}
 						</DialogDescription>
