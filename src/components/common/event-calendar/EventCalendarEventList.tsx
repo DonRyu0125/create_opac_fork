@@ -16,6 +16,7 @@ import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'
 import { calendarMonthType, calendarWeekType } from '@/store'
 import { useAtom } from 'jotai'
+import EventButton from './EventButton'
 
 export interface Event_list {
 	dayObj: Day_obj
@@ -98,19 +99,33 @@ const EventCalendarEventList = ({
 		}
 		return
 	}
-	//filteredEvents: clustered events
 
 	return (
 		<div className={`${monthType ? 'h-[82%]' : 'h-[98%]'} relative w-full`}>
-			{/* Event button */}
-			<EventSumButton
-				filteredEvents={filteredEvents}
-				contactInfo={contactInfo}
-				filterTypes={filterTypes}
-				fitlerOption={fitlerOption}
-			/>
+			{monthType && filterTypes.length > 1 ? (
+				<EventSumButton
+					filteredEvents={filteredEvents}
+					contactInfo={contactInfo}
+					filterTypes={filterTypes}
+					fitlerOption={fitlerOption}
+				/>
+			) : (
+				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto custom-scrollbar'}>
+					{filteredEvents.map((item: any, idx: number) => (
+						<EventButton
+							elm={item}
+							key={idx}
+							id={idx}
+							contactInfo={contactInfo}
+							filterTypes={filterTypes}
+							fitlerOption={fitlerOption}
+						/>
+					))}
+				</div>
+			)}
+
 			{/* All events button */}
-			{monthType && filteredEvents.length > 2 && filterTypes.length < 1 && (
+			{/* {monthType && filteredEvents.length > 2 && filterTypes.length < 1 && (
 				<div className={'h-[20px] absolute bottom-0 w-full'}>
 					<EventAllButton
 						filteredEvents={filteredEvents}
@@ -119,7 +134,7 @@ const EventCalendarEventList = ({
 						fitlerOption={fitlerOption}
 					/>
 				</div>
-			)}
+			)} */}
 		</div>
 	)
 }
