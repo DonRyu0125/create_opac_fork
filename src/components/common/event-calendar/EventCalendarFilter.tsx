@@ -54,7 +54,7 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter, fil
 			})}
 			<button
 				className={
-					' absolute sticky bottom-0 left-full bg-primary h-8 w-8 text-white flex justify-center items-center rounded'
+					'absolute sticky bottom-0 left-full bg-primary h-8 w-8 text-white flex justify-center items-center rounded'
 				}
 				onClick={resetFilter}>
 				<RefreshCw />

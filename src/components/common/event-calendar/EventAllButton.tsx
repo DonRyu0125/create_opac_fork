@@ -13,7 +13,7 @@ import { convertLowerTrim, convertToArr } from '@/lib/utils'
 import { cn } from '@/lib/utils'
 import * as Accordion from '@radix-ui/react-accordion'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { Accessibility, BookX, X } from 'lucide-react'
+import { Accessibility, BookX, ListPlus, X } from 'lucide-react'
 import {
 	Cal_event,
 	TAG_FUNC_DATE,
@@ -68,12 +68,8 @@ const EventAllButton = ({
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button
-					className={
-						' h-full w-[10px] px-0 flex items-center justify-center overflow-hidden'
-					}>
-						{filteredEvents.length}
-					{/* {message.all} {filteredEvents.length} {message.events} */}
+				<Button className={'h-full p-1'}>
+					<ListPlus />
 				</Button>
 			</DialogTrigger>
 			<DialogContent
