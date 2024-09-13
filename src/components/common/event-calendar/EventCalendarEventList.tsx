@@ -102,7 +102,19 @@ const EventCalendarEventList = ({
 
 	return (
 		<div className={`${monthType ? 'h-[82%]' : 'h-[98%]'} relative w-full`}>
-			<div className={'bg-slate-200'}>{dayObj?.day}</div>
+			<div className={'bg-slate-200 flex justify-between h-[25px]'}>
+				<div>{dayObj?.day}</div>
+				{filteredEvents.length > 2 && (
+					<div>
+						<EventAllButton
+							filteredEvents={filteredEvents}
+							contactInfo={contactInfo}
+							filterTypes={filterTypes}
+							fitlerOption={fitlerOption}
+						/>
+					</div>
+				)}
+			</div>
 			{monthType && filterTypes.length > 1 ? (
 				<EventSumButton
 					filteredEvents={filteredEvents}
@@ -124,8 +136,8 @@ const EventCalendarEventList = ({
 					))}
 				</div>
 			)}
-			{filteredEvents.length > 2 && (
-				<div className={'h-[20px] absolute top-0 right-0'}>
+			{/* {filteredEvents.length > 2 && (
+				<div className={'h-[24px] absolute top-0 right-0'}>
 					<EventAllButton
 						filteredEvents={filteredEvents}
 						contactInfo={contactInfo}
@@ -133,7 +145,7 @@ const EventCalendarEventList = ({
 						fitlerOption={fitlerOption}
 					/>
 				</div>
-			)}
+			)} */}
 		</div>
 	)
 }

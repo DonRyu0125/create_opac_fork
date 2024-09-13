@@ -68,7 +68,7 @@ const EventAllButton = ({
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button className={'h-full p-1'}>
+				<Button className={'h-full p-1 rounded-none'}>
 					<ListPlus />
 				</Button>
 			</DialogTrigger>
