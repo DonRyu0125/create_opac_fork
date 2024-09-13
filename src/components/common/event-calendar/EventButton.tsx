@@ -104,7 +104,7 @@ const EventButton = ({
 			</DialogTrigger>
 			<DialogContent
 				hideClose={'invisible'}
-				className={'h-5/6 lg:h-[600px] max-w-lg md:max-w-3xl p-1 gap-1 '}>
+				className={'h-5/6 lg:h-[600px] max-w-5xl overflow-y-auto p-1 gap-1 '}>
 				<DialogHeader>
 					<DialogTitle
 						className={
@@ -126,7 +126,7 @@ const EventButton = ({
 						</DialogPrimitive.Close>
 					</DialogTitle>
 				</DialogHeader>
-				<EventCustomDialogContent elm={elm} contactInfo={contactInfo}/>
+				<EventCustomDialogContent elm={elm} contactInfo={contactInfo} />
 				<DialogFooter>
 					<DialogPrimitive.Close
 						className={

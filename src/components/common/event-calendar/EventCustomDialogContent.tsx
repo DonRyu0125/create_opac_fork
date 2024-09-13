@@ -33,10 +33,10 @@ import useConstants from '@/hooks/useConstants'
 const EventCustomDialogContent = ({ elm,contactInfo }: any) => {
 	const message = useConstants().message
 	return (
-		<div className={'border border-4 w-full overflow-x-auto h-full min-h-[500px] sm:flex font-bold relative'}>
+		<div className={'p-1 rounded border-2 border-slate-800 w-full h-full sm:flex font-bold relative'}>
 			{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
-			<div className={'w-full sm:w-8/12 '}>
-				<img src={elm[TAG_FUNC_LOC_IMG]} alt={elm[TAG_NAME]} className={'h-2/3 w-full'} />
+			<div className={'w-full h-full sm:w-8/12 '}>
+				<img src={elm[TAG_FUNC_LOC_IMG]} alt={elm[TAG_NAME]} className={'h-[300px] object-contain w-full'} />
 				<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
 				<div className={'sm:flex'}>
 					<div className="ml-[10px] sm:ml-0 text-md  text-gray-600 font-bold">
@@ -65,11 +65,11 @@ const EventCustomDialogContent = ({ elm,contactInfo }: any) => {
 						&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
 					</div>
 				</div>
-				<DialogDescription className={'h-full max-h-[60px] break-all overflow-y-hidden'}>
+				<DialogDescription className={'h-full break-all'}>
 					{elm[TAG_FUNC_LOC_DEC]}
 				</DialogDescription>
 			</div>
-			<div className={'w-full sm:w-4/12'}>
+			<div className={'w-full m-1 sm:w-4/12 max-h-[400px]'}>
 				{elm[TAG_FUNC_RSVP] && (
 					<EventRSVPForm
 						sisnNumber={elm[SISN]}

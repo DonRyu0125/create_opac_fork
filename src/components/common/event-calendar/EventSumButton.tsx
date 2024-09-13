@@ -122,7 +122,7 @@ const EventSumButton = ({
 							</DialogTrigger>
 							<DialogContent
 								hideClose={'invisible'}
-								className={'max-w-lg h-[500px] overflow-auto p-4 md:max-w-3xl'}>
+								className={'h-5/6 lg:h-[600px] max-w-5xl overflow-y-auto p-1 gap-1 '}>
 								<>
 									<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
 										<DialogTitle
