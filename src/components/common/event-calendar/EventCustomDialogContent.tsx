@@ -29,13 +29,21 @@ import EventRSVPForm from './EventRSVPForm'
 import EventRSVPCancel from './EventCancel'
 import useConstants from '@/hooks/useConstants'
 
-const EventCustomDialogContent = ({ elm,contactInfo }: any) => {
+const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
 	const message = useConstants().message
 	return (
-		<div className={'p-1 rounded border-2 border-slate-800 w-full h-full sm:flex font-bold relative'}>
+		<div
+			key={key}
+			className={
+				'p-1 rounded border-2 border-slate-800 w-full h-full sm:flex font-bold relative'
+			}>
 			{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 			<div className={'w-full h-full sm:w-8/12 '}>
-				<img src={elm[TAG_FUNC_LOC_IMG]} alt={elm[TAG_NAME]} className={'h-[300px] object-contain w-full'} />
+				<img
+					src={elm[TAG_FUNC_LOC_IMG]}
+					alt={elm[TAG_NAME]}
+					className={'h-[300px] object-contain w-full'}
+				/>
 				<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
 				<div className={'sm:flex'}>
 					<div className="ml-[10px] sm:ml-0 text-md  text-gray-600 font-bold">

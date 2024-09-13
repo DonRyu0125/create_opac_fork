@@ -109,8 +109,6 @@ const EventCalendarEventList = ({
 						<EventAllButton
 							filteredEvents={filteredEvents}
 							contactInfo={contactInfo}
-							filterTypes={filterTypes}
-							fitlerOption={fitlerOption}
 						/>
 					</div>
 				)}
@@ -136,16 +134,6 @@ const EventCalendarEventList = ({
 					))}
 				</div>
 			)}
-			{/* {filteredEvents.length > 2 && (
-				<div className={'h-[24px] absolute top-0 right-0'}>
-					<EventAllButton
-						filteredEvents={filteredEvents}
-						contactInfo={contactInfo}
-						filterTypes={filterTypes}
-						fitlerOption={fitlerOption}
-					/>
-				</div>
-			)} */}
 		</div>
 	)
 }

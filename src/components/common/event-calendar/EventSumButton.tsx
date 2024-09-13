@@ -38,13 +38,11 @@ import {
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
-import EventRSVPForm from './EventRSVPForm'
 import { CalendarCheck } from 'lucide-react'
 import EventButton from './EventButton'
 import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarMonthType, calendarWeekType } from '@/store'
-import EventRSVPCancel from './EventCancel'
 import EventCustomDialogContent from './EventCustomDialogContent'
 
 export interface eventSumType {
@@ -122,44 +120,45 @@ const EventSumButton = ({
 							</DialogTrigger>
 							<DialogContent
 								hideClose={'invisible'}
-								className={'h-5/6 lg:h-[600px] max-w-5xl overflow-y-auto p-1 gap-1 '}>
-								<>
-									<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
-										<DialogTitle
-											className={
-												' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
-											}>
-											<div className="h-8">
-												<img className="h-full" src={logo} alt="logo" />
-											</div>
-											<div className={'flex'}>
-												<div
-													className={cn(
-														'h-4 w-[16px] border rounded mr-1 ',
-														getColor(item[fitlerOption])
-													)}></div>
-												{fitlerOption ? item[fitlerOption] : message.all}
-											</div>
-											<DialogPrimitive.Close>
-												<X className={'h-6 w-6'} />
-											</DialogPrimitive.Close>
-										</DialogTitle>
-									</DialogHeader>
-									{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
-										<EventCustomDialogContent
-											elm={elm}
-											contactInfo={contactInfo}
-										/>
-									))}
-									<DialogFooter>
-										<DialogPrimitive.Close
-											className={
-												'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
-											}>
-											{message.close}
+								className={
+									'h-5/6 lg:h-[600px] max-w-5xl overflow-y-auto p-1 gap-1 '
+								}>
+								<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
+									<DialogTitle
+										className={
+											' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
+										}>
+										<div className="h-8">
+											<img className="h-full" src={logo} alt="logo" />
+										</div>
+										<div className={'flex'}>
+											<div
+												className={cn(
+													'h-4 w-[16px] border rounded mr-1 ',
+													getColor(item[fitlerOption])
+												)}></div>
+											{fitlerOption ? item[fitlerOption] : message.all}
+										</div>
+										<DialogPrimitive.Close>
+											<X className={'h-6 w-6'} />
 										</DialogPrimitive.Close>
-									</DialogFooter>
-								</>
+									</DialogTitle>
+								</DialogHeader>
+								{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
+									<EventCustomDialogContent
+										elm={elm}
+										contactInfo={contactInfo}
+										key={key}
+									/>
+								))}
+								<DialogFooter>
+									<DialogPrimitive.Close
+										className={
+											'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+										}>
+										{message.close}
+									</DialogPrimitive.Close>
+								</DialogFooter>
 							</DialogContent>
 						</Dialog>
 					))}
