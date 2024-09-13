@@ -70,9 +70,10 @@ const EventAllButton = ({
 			<DialogTrigger asChild>
 				<Button
 					className={
-						' h-full w-full px-0 flex items-center justify-center overflow-hidden'
+						' h-full w-[10px] px-0 flex items-center justify-center overflow-hidden'
 					}>
-					{message.all} {filteredEvents.length} {message.events}
+						{filteredEvents.length}
+					{/* {message.all} {filteredEvents.length} {message.events} */}
 				</Button>
 			</DialogTrigger>
 			<DialogContent

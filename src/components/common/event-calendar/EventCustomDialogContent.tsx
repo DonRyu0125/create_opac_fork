@@ -24,7 +24,6 @@ import {
 	SISN,
 	TAG_FUNC_ACCESS,
 } from './Constants'
-import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { Accessibility, X } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 import EventRSVPCancel from './EventCancel'

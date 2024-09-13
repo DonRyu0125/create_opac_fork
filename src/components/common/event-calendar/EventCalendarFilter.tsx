@@ -15,7 +15,7 @@ type SelectType = {
 	[key: string]: number
 }
 
-const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter,filterTypes}) => {
+const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter, filterTypes }) => {
 	const [selectType, setSelectedType] = useState<SelectType>({})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,11 +38,11 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter,filt
 	return (
 		<div
 			className={
-				'px-3 relative flex-none sm:flex flex-wrap w-100 justify-start items-center my-2 h-16 overflow-auto'
+				'px-3 relative flex-none sm:flex flex-wrap w-full justify-start items-center my-2 h-16 overflow-auto'
 			}>
 			{filterTypes?.map((item, key) => {
 				return (
-					<div className={'w-[30%] mx-1 my-1'} key={key}>
+					<div className={'md:w-[30%] md:mx-1 my-1'} key={key}>
 						<CheckboxWithLabel
 							label={item.type}
 							callback={handleChange}
@@ -53,7 +53,9 @@ const EventCalendarFilter: React.FC<MyComponentProps> = ({ setCurrentFilter,filt
 				)
 			})}
 			<button
-				className={'absolute right-1 bottom-2 bg-primary h-8 w-8 text-white flex justify-center items-center rounded'}
+				className={
+					' absolute sticky bottom-0 left-full bg-primary h-8 w-8 text-white flex justify-center items-center rounded'
+				}
 				onClick={resetFilter}>
 				<RefreshCw />
 			</button>
