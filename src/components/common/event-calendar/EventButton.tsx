@@ -39,12 +39,11 @@ import {
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { Accessibility, SquareUserRound, X } from 'lucide-react'
-import EventRSVPForm from './EventRSVPForm'
 import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarWeekType } from '@/store'
-import EventRSVPCancel from './EventCancel'
 import EventCustomDialogContent from './EventCustomDialogContent'
+import ImageCarousel from '../ImageCarousel'
 
 const EventButton = ({
 	elm,
@@ -72,6 +71,8 @@ const EventButton = ({
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
+
+
 
 	return (
 		<Dialog key={id}>

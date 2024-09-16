@@ -167,7 +167,6 @@ const useJSONData = ({ selector, defaultData }: useJSONDataProps) => {
 		if (!data) return null
 		const url = deepSearchKey(data, 'previous_record')[0]
 		if (!url) return null
-
 		return url.a._href
 	}
 
