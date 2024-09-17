@@ -50,7 +50,6 @@ const images = [
 ]
 
 const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
-	const message = useConstants().message
 	return (
 		<div
 			key={key}
@@ -60,6 +59,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
 			{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 			<div className={'w-full h-full sm:w-8/12 '}>
 				<RSVPCarousel
+					elm={elm}
 					items={images}
 					renderItems={(image) => (
 						<img
@@ -68,34 +68,6 @@ const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
 						/>
 					)}
 				/>
-				<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
-				<div className={'sm:flex'}>
-					<div className="ml-[10px] sm:ml-0 text-md  text-gray-600 font-bold">
-						&#x2022;{elm[TAG_FUNC_DATE]}
-					</div>
-					<div className="ml-[10px] text-md text-gray-600 font-bold">
-						<span>&#x2022;{elm[TAG_FUNC_START_T]?.toUpperCase()}</span>
-						<span className={'mx-2'}>-</span>
-						<span>{elm[TAG_FUNC_END_T]?.toUpperCase()}</span>
-					</div>
-					<div className="ml-[10px] text-md text-gray-600 font-bold">
-						&#x2022;{message.room}: {elm[TAG_FUNC_LOC_ROO]}
-					</div>
-					{elm[TAG_FUNC_ACCESS] && (
-						<div className="ml-[10px] text-md text-gray-600 font-bold flex">
-							&#x2022;
-							<Accessibility />: Y
-						</div>
-					)}
-				</div>
-				<div className={'sm:flex'}>
-					<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-						&#x2022;{message.suitableFor}: {elm[TAG_FUNC_LOC_AUD]}
-					</div>
-					<div className="ml-[10px] text-md text-gray-600 font-bold">
-						&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
-					</div>
-				</div>
 				<DialogDescription className={'h-full break-all'}>
 					{elm[TAG_FUNC_LOC_DEC]}
 				</DialogDescription>
