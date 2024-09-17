@@ -22,7 +22,6 @@ import { Accessibility } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 import EventRSVPCancel from './EventCancel'
 import useConstants from '@/hooks/useConstants'
-import ImageCarousel from '../ImageCarousel'
 import RSVPCarousel from './RSVPCarousel'
 
 // src: string
@@ -32,23 +31,22 @@ import RSVPCarousel from './RSVPCarousel'
 
 const images = [
 	{
+		type: 'Image',
 		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_10/6_16/ae91ce34_b9b4_44a4_9f0e_a3bc011460e8/preview_00433892_001.jpg',
 	},
 	{
+		type: 'Video',
 		src: 'https://titanapi.minisisinc.com/api/links/65043c1192f8422685fe7fcd57027d50/uuid/6d5353be50e04be7af42453ff65ca6c7/access',
-		video: 'https://titanapi.minisisinc.com/api/links/65043c1192f8422685fe7fcd57027d50/uuid/6d5353be50e04be7af42453ff65ca6c7/access',
-		caption: 'caption',
-		alt: 'ads',
 	},
 	{
+		type: 'Image',
 		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_11/2_1/5bcca073_26c7_4e0f_bb70_a3d7001a1c24/preview_01081548_001.jpg',
 	},
 	{
+		type: 'Image',
 		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_10/11_3/8dc66e9f_43e1_4170_956b_a3c1003d49ec/preview_00595099_001.jpg',
 	},
-	{
-		src: '',
-	},
+	{ type: '', src: '' },
 ]
 
 const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
@@ -65,7 +63,6 @@ const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
 					items={images}
 					renderItems={(image) => (
 						<img
-							alt={image.caption}
 							src={image.src}
 							className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
 						/>
