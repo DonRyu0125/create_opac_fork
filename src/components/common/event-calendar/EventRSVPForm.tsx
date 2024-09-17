@@ -132,8 +132,8 @@ const ShowForm = ({
 }) => {
 	const message = useConstants().message
 	return (
-		<div className={'h-5/6 w-full p-1'}>
-			{loading && <Spinner height={'h-[388px]'} spinHeight={'h-10'} spinWidth={'w-10'} />}
+		<div className={'h-full w-full p-1 border-2 rounded'}>
+			{loading && <Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />}
 			<div className={'bg-primary p-1 text-white'}>
 				<span className={'text-gray-400'}>{message.logIn}?</span>
 			</div>
@@ -203,10 +203,10 @@ const ShowButton = ({
 	const message = useConstants().message
 
 	return (
-		<div className={'w-full p-2 border-2 h-full rounded '}>
+		<div className={'min-h-[388px] w-full p-2 border-2 h-full rounded '}>
 			<div
 				className={
-					'h-1/2 w-full flex flex-col items-center justify-evenly space-evenly border-b-4'
+					'min-h-[194px] h-1/2 w-full flex flex-col items-center justify-evenly  border-b-4'
 				}>
 				<div className={'flex justify-center items-center'}>
 					<SquareUserRound /> {message.registrationRequired}
@@ -231,7 +231,7 @@ const ShowButton = ({
 				</div>
 			</div>
 			{getContactInfo(BD_ADDRESS) ? (
-				<div className={'h-1/2 w-full flex flex-col items-start justify-evenly  text-sm'}>
+				<div className={'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly  text-sm'}>
 					<div className={'w-full  '}>
 						{message.contactInfo}
 						<div className={'flex font-normal'}>
@@ -265,14 +265,16 @@ const ShowButton = ({
 const ShowRSVPSuccess = ({
 	onReset,
 	getContactInfo,
+	event
 }: {
 	onReset: any
 	getContactInfo: Function
+	event: Cal_event
 }) => {
 	const message = useConstants().message
 	return (
-		<div className={'w-full p-2 border-2 rounded'}>
-			<div className={'text-center w-full h-3/6 flex flex-col items-center justify-evenly'}>
+		<div className={'min-h-[388px] h-full w-full p-2 border-2 rounded'}>
+			<div className={'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'}>
 				<SquareUserRound />
 				<div>{message.checkEmail}</div>
 				<div>{message.registrationIncomplete}</div>
@@ -282,15 +284,34 @@ const ShowRSVPSuccess = ({
 				className="text-center bg-primary text-primary-foreground rounded">
 				{message.goBack}
 			</div>
-			<div className={'h-3/6 flex flex-col items-center justify-center '}>
-				<div>{message.contactInfo}</div>
-				<div>{message.address}</div>
-				<div>{getContactInfo(BD_BUILDING_NAME)}</div>
-				<div>{getContactInfo(BD_ADDRESS)}</div>
-				<div>
-					{getContactInfo(BD_CITY)}, {getContactInfo(BD_POSTAL_CODE)}
+			{getContactInfo(BD_ADDRESS) ? (
+				<div className={'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly  text-sm'}>
+					<div className={'w-full  '}>
+						{message.contactInfo}
+						<div className={'flex font-normal'}>
+							<Phone className={'h-[18px]'} />
+							{event[TAG_FUNC_LOC_CT]}
+						</div>
+						<div className={'flex font-normal'}>
+							<Mail className={'h-[18px]'} />
+							{event[TAG_FUNC_LOC_EM]}
+						</div>
+					</div>
+					<div className={'w-full '}>
+						{message.address}
+						<div className={'font-normal'}>{getContactInfo(BD_BUILDING_NAME)}</div>
+						<div className={'font-normal'}>
+							{getContactInfo(BD_ADDRESS)} {getContactInfo(BD_CITY)},{' '}
+							{getContactInfo(BD_POSTAL_CODE)}
+						</div>
+					</div>
 				</div>
-			</div>
+			) : (
+				<div className={'h-1/2 w-full flex flex-col items-center justify-center '}>
+					<div>{message.privateProperty}</div>
+					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
+				</div>
+			)}
 		</div>
 	)
 }
@@ -437,13 +458,14 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		switch (status) {
 			case STATUS_TYPE.SHOW_BTN:
 				return (
-					<ShowButton
-						event={event}
-						capacity={capacity}
-						patrons={patrons}
-						getContactInfo={getContactInfo}
-						setStatus={setStatus}
-					/>
+					// <ShowButton
+					// 	event={event}
+					// 	capacity={capacity}
+					// 	patrons={patrons}
+					// 	getContactInfo={getContactInfo}
+					// 	setStatus={setStatus}
+					// />
+					<ShowRSVPSuccess onReset={onReset} getContactInfo={getContactInfo} event={event} />
 				)
 			case STATUS_TYPE.SHOW_FORM:
 				return (
@@ -457,7 +479,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					/>
 				)
 			case STATUS_TYPE.SHOW_SUCCESS:
-				return <ShowRSVPSuccess onReset={onReset} getContactInfo={getContactInfo} />
+				return <ShowRSVPSuccess onReset={onReset} getContactInfo={getContactInfo} event={event} />
 			default:
 				return (
 					<ShowButton
