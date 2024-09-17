@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accessibility, ChevronLeft, ChevronRight, Scan } from 'lucide-react'
+import { Accessibility, ChevronLeft, ChevronRight, CircleParkingOff, Scan } from 'lucide-react'
 import LightboxImage from '../LightboxImage'
 
 import {
@@ -18,6 +18,7 @@ import {
 	PATRON,
 	SISN,
 	TAG_FUNC_ACCESS,
+	ContactInfoRSVP,
 } from './Constants'
 import useConstants from '@/hooks/useConstants'
 export type ImageProps = {
@@ -26,8 +27,8 @@ export type ImageProps = {
 }
 export interface ImageCarouselProps {
 	items: ImageProps[]
-	renderItems: (item: ImageProps, index: number) => React.ReactNode
 	elm: any
+	contactInfo: ContactInfoRSVP[]
 }
 
 const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
@@ -39,7 +40,7 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
 	)
 }
 
-const RSVPCarousel = ({ items, renderItems, elm }: ImageCarouselProps) => {
+const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 	const [current, setCurrent] = React.useState(0)
 	const currentMedia = items[current]
 	const message = useConstants().message
@@ -55,7 +56,7 @@ const RSVPCarousel = ({ items, renderItems, elm }: ImageCarouselProps) => {
 								{...currentMedia}
 							/>
 							<div className="max-h-[370px] absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-center transition-opacity duration-300 ease-in-out">
-								<div className={'text-white overflow-hidden text-2xl'}>
+								<div className={'mt-4 text-white overflow-hidden text-2xl'}>
 									{elm[TAG_NAME]}
 								</div>
 								<div className={'sm:flex text-lg'}>

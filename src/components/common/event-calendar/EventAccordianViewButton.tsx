@@ -28,7 +28,7 @@ import {
 	TAG_FUNC_LANG,
 	PATRON,
 	SISN,
-	ContactInfo,
+	ContactInfoRSVP,
 	TAG_FUNC_ACCESS,
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
@@ -49,7 +49,7 @@ const EventAccordianViewButton = ({
 	fitlerOption,
 }: {
 	filteredEvents: Cal_event[]
-	contactInfo: ContactInfo[]
+	contactInfo: ContactInfoRSVP[]
 	fitlerOption: string
 	filterTypes: FilterType[]
 }) => {

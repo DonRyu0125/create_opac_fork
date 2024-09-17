@@ -29,7 +29,7 @@ import {
 	PATRON,
 	TAG_FUNC_RSVP,
 	SISN,
-	ContactInfo,
+	ContactInfoRSVP,
 	TAG_FUNC_ACCESS,
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
@@ -54,7 +54,7 @@ const EventButton = ({
 }: {
 	elm: any
 	id: number
-	contactInfo: ContactInfo[]
+	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
 	fitlerOption: string
 }) => {

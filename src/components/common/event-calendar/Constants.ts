@@ -122,7 +122,7 @@ export const TAG_RSVP_PATRON_LOG = 'TAG_RSVP_PATRON_LOG_SYN'
 export const TAG_FUNC_P_T = 'TAG_FUNC_P_T'
 export const TAG_P_STATUS = 'TAG_P_STATUS'
 
-export type ContactInfo = {
+export type ContactInfoRSVP = {
 	[CURATORS_CODE]: string
 	[BD_ADDRESS]: string
 	[BD_CITY]: string

@@ -3,8 +3,6 @@ import { Label } from '@radix-ui/react-label'
 import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
-import X2JS from 'x2js'
-import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import {
 	BD_ADDRESS,
@@ -12,7 +10,7 @@ import {
 	BD_CITY,
 	VERIFICATION_EMAIL_T,
 	Cal_event,
-	ContactInfo,
+	ContactInfoRSVP,
 	MAIN_MWI_APPLICATION,
 	MWI_RESFUL_RES,
 	MWI_XML_DATA_INDEX,
@@ -53,7 +51,7 @@ import { calNumOfPatron } from './EC-Util'
 import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
-import { fetch_get } from './Service'
+import { fetch_get, getContactInfo } from './Service'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -81,7 +79,7 @@ type EventRSVPForm = {
 	patrons: patron[]
 	sisnNumber: number
 	event: Cal_event
-	contactInfo: ContactInfo[]
+	contactInfo: ContactInfoRSVP[]
 }
 
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
@@ -190,15 +188,15 @@ const ShowForm = ({
 const ShowButton = ({
 	capacity,
 	patrons,
-	getContactInfo,
 	setStatus,
 	event,
+	contactInfo,
 }: {
 	capacity: number
 	patrons: patron[]
-	getContactInfo: Function
 	setStatus: React.Dispatch<React.SetStateAction<string>>
 	event: Cal_event
+	contactInfo: ContactInfoRSVP[]
 }) => {
 	const message = useConstants().message
 
@@ -230,8 +228,11 @@ const ShowButton = ({
 					)}
 				</div>
 			</div>
-			{getContactInfo(BD_ADDRESS) ? (
-				<div className={'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly  text-sm'}>
+			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
+				<div
+					className={
+						'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly  text-sm'
+					}>
 					<div className={'w-full  '}>
 						{message.contactInfo}
 						<div className={'flex font-normal'}>
@@ -245,10 +246,13 @@ const ShowButton = ({
 					</div>
 					<div className={'w-full '}>
 						{message.address}
-						<div className={'font-normal'}>{getContactInfo(BD_BUILDING_NAME)}</div>
 						<div className={'font-normal'}>
-							{getContactInfo(BD_ADDRESS)} {getContactInfo(BD_CITY)},{' '}
-							{getContactInfo(BD_POSTAL_CODE)}
+							{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
+						</div>
+						<div className={'font-normal'}>
+							{getContactInfo(BD_ADDRESS, contactInfo, event)}{' '}
+							{getContactInfo(BD_CITY, contactInfo, event)},
+							{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 						</div>
 					</div>
 				</div>
@@ -264,29 +268,35 @@ const ShowButton = ({
 
 const ShowRSVPSuccess = ({
 	onReset,
-	getContactInfo,
-	event
+	event,
+	contactInfo,
 }: {
 	onReset: any
-	getContactInfo: Function
 	event: Cal_event
+	contactInfo: ContactInfoRSVP[]
 }) => {
 	const message = useConstants().message
 	return (
 		<div className={'min-h-[388px] h-full w-full p-2 border-2 rounded'}>
-			<div className={'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'}>
+			<div
+				className={
+					'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'
+				}>
 				<SquareUserRound />
 				<div>{message.checkEmail}</div>
 				<div>{message.registrationIncomplete}</div>
 			</div>
 			<div
 				onClick={onReset}
-				className="text-center bg-primary text-primary-foreground rounded">
+				className="h-[40px] flex items-center justify-center text-center bg-primary text-primary-foreground rounded">
 				{message.goBack}
 			</div>
-			{getContactInfo(BD_ADDRESS) ? (
-				<div className={'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly  text-sm'}>
-					<div className={'w-full  '}>
+			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
+				<div
+					className={
+						'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly text-sm'
+					}>
+					<div className={'w-full'}>
 						{message.contactInfo}
 						<div className={'flex font-normal'}>
 							<Phone className={'h-[18px]'} />
@@ -299,10 +309,13 @@ const ShowRSVPSuccess = ({
 					</div>
 					<div className={'w-full '}>
 						{message.address}
-						<div className={'font-normal'}>{getContactInfo(BD_BUILDING_NAME)}</div>
 						<div className={'font-normal'}>
-							{getContactInfo(BD_ADDRESS)} {getContactInfo(BD_CITY)},{' '}
-							{getContactInfo(BD_POSTAL_CODE)}
+							{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
+						</div>
+						<div className={'font-normal'}>
+							{getContactInfo(BD_ADDRESS, contactInfo, event)}{' '}
+							{getContactInfo(BD_CITY, contactInfo, event)},{' '}
+							{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 						</div>
 					</div>
 				</div>
@@ -389,20 +402,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 	}
 
-	const getContactInfo = (type: string) => {
-		let info: any = contactInfo?.filter((item) => {
-			return (
-				convertLowerTrim(item[CURATORS_CODE]) === convertLowerTrim(event[TAG_FUNC_LOC_ID])
-			)
-		})
-		if (info.length > 0) {
-			let contact = info[0]
-			return contact[type]
-		}
-
-		return ''
-	}
-
 	const sendEmail = async (patron: any, patronInfo: Inputs, event: Cal_event) => {
 		let HOME_SESSID = getSessionID()
 		const encoded = encodeObj(
@@ -416,7 +415,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				[TAG_FUNC_LOC]: event[TAG_FUNC_LOC],
 				[SISN]: event[SISN],
 				[TAG_FUNC_P_T]: getCurrentDate(),
-				BD_ADDRESS: getContactInfo(BD_ADDRESS),
+				BD_ADDRESS: getContactInfo(BD_ADDRESS, contactInfo, event),
 				occ1: patron.occ1,
 				occ2: patron.occ2,
 			})
@@ -430,7 +429,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					[TAG_NAME]: event[TAG_NAME],
 					[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 					[TAG_FUNC_P_T]: getCurrentDate(),
-					[BD_ADDRESS]: getContactInfo(BD_ADDRESS),
+					[BD_ADDRESS]: getContactInfo(BD_ADDRESS, contactInfo, event),
 					RSVP_CONFIRM_LANDING_PAGE_URL: RSVP_CONFIRM_LANDING_PAGE_URL,
 					encoded,
 				},
@@ -458,14 +457,13 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		switch (status) {
 			case STATUS_TYPE.SHOW_BTN:
 				return (
-					// <ShowButton
-					// 	event={event}
-					// 	capacity={capacity}
-					// 	patrons={patrons}
-					// 	getContactInfo={getContactInfo}
-					// 	setStatus={setStatus}
-					// />
-					<ShowRSVPSuccess onReset={onReset} getContactInfo={getContactInfo} event={event} />
+					<ShowButton
+						event={event}
+						capacity={capacity}
+						patrons={patrons}
+						setStatus={setStatus}
+						contactInfo={contactInfo}
+					/>
 				)
 			case STATUS_TYPE.SHOW_FORM:
 				return (
@@ -479,15 +477,15 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					/>
 				)
 			case STATUS_TYPE.SHOW_SUCCESS:
-				return <ShowRSVPSuccess onReset={onReset} getContactInfo={getContactInfo} event={event} />
+				return <ShowRSVPSuccess onReset={onReset} event={event} contactInfo={contactInfo} />
 			default:
 				return (
 					<ShowButton
 						event={event}
 						capacity={capacity}
 						patrons={patrons}
-						getContactInfo={getContactInfo}
 						setStatus={setStatus}
+						contactInfo={contactInfo}
 					/>
 				)
 		}

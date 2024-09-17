@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button'
 import { convertLowerTrim, convertToArr } from '@/lib/utils'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { ListPlus, X } from 'lucide-react'
-import { Cal_event, ContactInfo, FilterType, EVENT_DEFAULT_COLOR } from './Constants'
+import { Cal_event, ContactInfoRSVP, FilterType, EVENT_DEFAULT_COLOR } from './Constants'
 import useConstants from '@/hooks/useConstants'
 import EventCustomDialogContent from './EventCustomDialogContent'
 
@@ -21,7 +21,7 @@ const EventAllButton = ({
 	contactInfo,
 }: {
 	filteredEvents: Cal_event[]
-	contactInfo: ContactInfo[]
+	contactInfo: ContactInfoRSVP[]
 }) => {
 	const { logo } = useConstants().config
 	const message = useConstants().message

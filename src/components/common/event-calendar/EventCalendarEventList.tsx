@@ -8,7 +8,7 @@ import {
 	TAG_FUNC_START_T,
 	TAG_FUNC_LOC,
 	Day_obj,
-	ContactInfo,
+	ContactInfoRSVP,
 	FilterType,
 } from './Constants'
 import { convertLowerTrim } from '@/lib/utils'
@@ -23,7 +23,7 @@ export interface Event_list {
 	currentFilter: string[]
 	currentEvent: Cal_event[]
 	weekType: boolean
-	contactInfo: ContactInfo[]
+	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
 	fitlerOption: string
 }

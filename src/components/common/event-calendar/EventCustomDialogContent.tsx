@@ -54,22 +54,17 @@ const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
 		<div
 			key={key}
 			className={
-				' p-1 rounded border-2 border-slate-800 w-full h-full sm:flex font-bold relative'
+				'p-1 rounded border-2 border-slate-800 w-full h-full sm:flex font-bold relative'
 			}>
 			{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 			<div className={'w-full md:h-full sm:w-8/12 '}>
 				<RSVPCarousel
 					elm={elm}
 					items={images}
-					renderItems={(image) => (
-						<img
-							src={image.src}
-							className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
-						/>
-					)}
+					contactInfo={contactInfo}
 				/>
 				<DialogDescription
-					className={'h-[200px]  break-all overflow-y-auto'}>
+					className={'h-[200px] break-all overflow-y-auto'}>
 					{elm[TAG_FUNC_LOC_DEC]}
 				</DialogDescription>
 			</div>

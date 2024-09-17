@@ -7,8 +7,12 @@ import {
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
 	SUB_MWI_APPLICATION,
+	CURATORS_CODE,
+	TAG_FUNC_LOC_ID,
+	Cal_event,
+	ContactInfoRSVP,
 } from './Constants'
-import { convertToArr, convertXMLToJson } from '@/lib/utils'
+import { convertLowerTrim, convertToArr, convertXMLToJson } from '@/lib/utils'
 
 const getWeekRange = (currentDate: any) => {
 	const firstDayOfWeek: Date = new Date(currentDate)
@@ -67,4 +71,16 @@ export const getLocation = async () => {
 	)
 	const jsonData: any = convertXMLToJson(response.data)
 	return jsonData?.xml?.[LIBRARY_LOCATION_XML_TAG] ?? []
+}
+
+export const getContactInfo = (type: string, contactInfo: ContactInfoRSVP[], event: Cal_event) => {
+	let info: any = contactInfo?.filter((item: ContactInfoRSVP) => {
+		return convertLowerTrim(item[CURATORS_CODE]) === convertLowerTrim(event[TAG_FUNC_LOC_ID])
+	})
+	if (info.length > 0) {
+		let contact = info[0]
+		return contact[type]
+	}
+
+	return ''
 }

@@ -28,7 +28,7 @@ import {
 	TAG_FUNC_RSVP,
 	PATRON,
 	SISN,
-	ContactInfo,
+	ContactInfoRSVP,
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
 	FilterType,
@@ -47,7 +47,7 @@ import EventCustomDialogContent from './EventCustomDialogContent'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]
-	contactInfo: ContactInfo[]
+	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
 	fitlerOption: string
 }
@@ -91,7 +91,7 @@ const EventSumButton = ({
 			{monthType && filterTypes.length > 1 ? (
 				<div
 					className={
-						'h-full mb-[2px] overflow-x-hidden overflow-y-auto custom-scrollbar'
+						'h-full mb-[2px] overflow-y-auto custom-scrollbar'
 					}>
 					{groupedByType(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>
