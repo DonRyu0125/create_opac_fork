@@ -37,7 +37,7 @@ import {
 	TAG_FUNC_LOC_CT,
 	TAG_FUNC_LOC_EM,
 } from './Constants'
-import { BadgeCheck, Mail, Phone, SquareUserRound } from 'lucide-react'
+import { BadgeCheck, FileDown, Mail, Phone, SquareUserRound } from 'lucide-react'
 import {
 	convertLowerTrim,
 	convertToArr,
@@ -255,11 +255,17 @@ const ShowButton = ({
 							{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 						</div>
 					</div>
+					<Button>
+						<FileDown />
+					</Button>
 				</div>
 			) : (
 				<div className={'h-1/2 w-full flex flex-col items-center justify-center '}>
 					<div>{message.privateProperty}</div>
 					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
+					<Button>
+						<FileDown />
+					</Button>
 				</div>
 			)}
 		</div>

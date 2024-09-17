@@ -19,8 +19,12 @@ import {
 	SISN,
 	TAG_FUNC_ACCESS,
 	ContactInfoRSVP,
+	BD_DIS_ACC,
+	BD_DIS_ACC_TYPE,
+	BD_DIS_ACC_DETAI,
 } from './Constants'
 import useConstants from '@/hooks/useConstants'
+import { getContactInfo } from './Service'
 export type ImageProps = {
 	type: string
 	src: string
@@ -45,6 +49,8 @@ const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 	const currentMedia = items[current]
 	const message = useConstants().message
 
+	
+
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex w-full group cursor-pointer relative">
@@ -55,7 +61,7 @@ const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 								className="mx-auto w-full object-fill max-h-[370px]"
 								{...currentMedia}
 							/>
-							<div className="max-h-[370px] absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-center transition-opacity duration-300 ease-in-out">
+							<div className="max-h-[370px] overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ease-in-out">
 								<div className={'mt-4 text-white overflow-hidden text-2xl'}>
 									{elm[TAG_NAME]}
 								</div>
@@ -71,14 +77,8 @@ const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 									<div className="text-white ml-[10px] text-md text-gray-600 font-bold">
 										&#x2022;{message.room}: {elm[TAG_FUNC_LOC_ROO]}
 									</div>
-									{elm[TAG_FUNC_ACCESS] && (
-										<div className="text-white ml-[10px] text-md text-gray-600 font-bold flex">
-											&#x2022;
-											<Accessibility />: Y
-										</div>
-									)}
 								</div>
-								<div className={'sm:flex text-lg'}>
+								<div className={'sm:flex text-lg mb-2'}>
 									<div className="text-white sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
 										&#x2022;{message.suitableFor}: {elm[TAG_FUNC_LOC_AUD]}
 									</div>
@@ -86,6 +86,19 @@ const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 										&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
 									</div>
 								</div>
+								{getContactInfo(BD_DIS_ACC, contactInfo, elm)?.map(
+									(item: {
+										BD_DIS_ACC_TYPE: string
+										BD_DIS_ACC_DETAI: string
+									},key:number) => {
+										return (
+											<div className={'flex text-white'} key={key}>
+												<div className={'mr-2'}>{item[BD_DIS_ACC_TYPE]}</div>
+												<div>{item[BD_DIS_ACC_DETAI]}</div>
+											</div>
+										)
+									}
+								)}
 							</div>
 						</>
 					) : (

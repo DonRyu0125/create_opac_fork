@@ -49,7 +49,7 @@ const images = [
 	{ type: '', src: '' },
 ]
 
-const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
+const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 	return (
 		<div
 			key={key}
@@ -64,7 +64,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
 					contactInfo={contactInfo}
 				/>
 				<DialogDescription
-					className={'h-[200px] break-all overflow-y-auto'}>
+					className={'h-[200px] break-all overflow-y-auto text-base'}>
 					{elm[TAG_FUNC_LOC_DEC]}
 				</DialogDescription>
 			</div>
