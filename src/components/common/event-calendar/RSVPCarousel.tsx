@@ -32,7 +32,7 @@ export interface ImageCarouselProps {
 
 const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
 	return (
-		<video className="w-full h-full" controls controlsList="nodownload">
+		<video className="w-full h-full h-[370px]" controls controlsList="nodownload">
 			<source src={videoUrl} type="video/mp4" />
 			Your browser does not support the video tag.
 		</video>
@@ -88,9 +88,7 @@ const RSVPCarousel = ({ items, renderItems, elm }: ImageCarouselProps) => {
 							</div>
 						</>
 					) : (
-						<div className={'mx-11 my-11'}>
-							<VideoPlayer videoUrl={currentMedia.src} />
-						</div>
+						<VideoPlayer videoUrl={currentMedia.src} />
 					)}
 				</div>
 			</div>

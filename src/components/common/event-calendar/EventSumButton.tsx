@@ -71,9 +71,8 @@ const EventSumButton = ({
 	}
 	const message = useConstants().message
 	const groupedByType = (filteredEvents: Cal_event[]) => {
-		let typeArr: any = {}
-		let result = []
-
+		let typeArr: any = {};
+		let result = [];
 		filteredEvents.forEach((classInfo: any) => {
 			const type = classInfo[fitlerOption]
 			if (!typeArr[type]) {
@@ -89,7 +88,6 @@ const EventSumButton = ({
 
 	return (
 		<>
-			{/* If there is a filter option, show the filter only */}
 			{monthType && filterTypes.length > 1 ? (
 				<div
 					className={
@@ -121,12 +119,12 @@ const EventSumButton = ({
 							<DialogContent
 								hideClose={'invisible'}
 								className={
-									'h-5/6 lg:h-[600px] max-w-5xl overflow-y-auto p-1 gap-1 '
+									'h-full max-w-5xl overflow-y-auto p-1 gap-1'
 								}>
 								<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
 									<DialogTitle
 										className={
-											' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
+											'bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
 										}>
 										<div className="h-8">
 											<img className="h-full" src={logo} alt="logo" />

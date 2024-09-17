@@ -203,10 +203,10 @@ const ShowButton = ({
 	const message = useConstants().message
 
 	return (
-		<div className={'w-full p-2 border-2 rounded min-h-[300px]'}>
+		<div className={'w-full p-2 border-2 h-full rounded '}>
 			<div
 				className={
-					'w-full h-3/6 flex flex-col items-center justify-evenly space-evenly border-b-4'
+					'h-1/2 w-full flex flex-col items-center justify-evenly space-evenly border-b-4'
 				}>
 				<div className={'flex justify-center items-center'}>
 					<SquareUserRound /> {message.registrationRequired}
@@ -231,8 +231,8 @@ const ShowButton = ({
 				</div>
 			</div>
 			{getContactInfo(BD_ADDRESS) ? (
-				<div className={'h-3/6 flex flex-col items-start justify-evenly text-sm'}>
-					<div className={'w-full h-1/2 flex flex-col justify-evenly'}>
+				<div className={'h-1/2 w-full flex flex-col items-start justify-evenly  text-sm'}>
+					<div className={'w-full  '}>
 						{message.contactInfo}
 						<div className={'flex font-normal'}>
 							<Phone className={'h-[18px]'} />
@@ -243,7 +243,7 @@ const ShowButton = ({
 							{event[TAG_FUNC_LOC_EM]}
 						</div>
 					</div>
-					<div className={'w-full'}>
+					<div className={'w-full '}>
 						{message.address}
 						<div className={'font-normal'}>{getContactInfo(BD_BUILDING_NAME)}</div>
 						<div className={'font-normal'}>
@@ -253,7 +253,7 @@ const ShowButton = ({
 					</div>
 				</div>
 			) : (
-				<div className={'h-3/6 flex flex-col items-center justify-center '}>
+				<div className={'h-1/2 w-full flex flex-col items-center justify-center '}>
 					<div>{message.privateProperty}</div>
 					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
 				</div>
@@ -471,7 +471,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		}
 	}
 
-	return <div className={`flex justify-center w-full h-full`}>{showRSVPStatus()}</div>
+	return <>{showRSVPStatus()}</>
 }
 
 export default EventRSVPForm

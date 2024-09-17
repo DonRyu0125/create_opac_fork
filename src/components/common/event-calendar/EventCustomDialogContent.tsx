@@ -54,10 +54,10 @@ const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
 		<div
 			key={key}
 			className={
-				'p-1 rounded border-2 border-slate-800 w-full h-full sm:flex font-bold relative'
+				' p-1 rounded border-2 border-slate-800 w-full h-full sm:flex font-bold relative'
 			}>
 			{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
-			<div className={'w-full h-full sm:w-8/12 '}>
+			<div className={'w-full md:h-full sm:w-8/12 '}>
 				<RSVPCarousel
 					elm={elm}
 					items={images}
@@ -68,11 +68,12 @@ const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
 						/>
 					)}
 				/>
-				<DialogDescription className={'h-full break-all'}>
+				<DialogDescription
+					className={'h-[200px]  break-all overflow-y-auto'}>
 					{elm[TAG_FUNC_LOC_DEC]}
 				</DialogDescription>
 			</div>
-			<div className={'w-full m-1 sm:w-4/12 max-h-[400px]'}>
+			<div className={'w-full md:h-full md:ml-2 sm:w-4/12'}>
 				{elm[TAG_FUNC_RSVP] && (
 					<EventRSVPForm
 						sisnNumber={elm[SISN]}
