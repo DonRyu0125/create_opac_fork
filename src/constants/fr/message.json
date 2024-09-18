@@ -57,15 +57,7 @@
 	"seats": "Tous les sièges",
 	"language": "Langue",
 	"dateType": "fr-FR",
-	"daysOfWeek": [
-		"Di",
-		"Lu",
-		"Ma",
-		"Me",
-		"Je",
-		"Ve",
-		"Sa"
-	],
+	"daysOfWeek": ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
 	"close": "Fermer",
 	"privateProperty": "Propriété privée",
 	"contactInfoNotProvided": "Les informations de contact ne sont pas fournies",

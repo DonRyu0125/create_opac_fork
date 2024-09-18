@@ -92,7 +92,10 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 								}
 							/>
 
-							<ImagePreview src={item.thumbnail} alt="Featured collection thumbnail" />
+							<ImagePreview
+								src={item.thumbnail}
+								alt="Featured collection thumbnail"
+							/>
 						</SectionWrapper>
 					))}{' '}
 				</div>
