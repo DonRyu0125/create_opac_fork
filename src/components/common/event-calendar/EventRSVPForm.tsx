@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Label } from '@radix-ui/react-label'
 import { saveAs } from 'file-saver'
+import ReCAPTCHA from 'react-google-recaptcha'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
@@ -132,8 +133,24 @@ const ShowForm = ({
 	onReset: any
 }) => {
 	const message = useConstants().message
+	const [captchaValue, setCaptchaValue] = useState<string | null>(null)
+
+	const handleCaptchaChange = (value: string | null) => {
+		setCaptchaValue(value)
+	}
+
+	const handleFormSubmit = (data: any) => {
+		onSubmit({ ...data, captcha: captchaValue })
+		//   if (captchaValue) {
+		// 	onSubmit({ ...data, captcha: captchaValue });
+		//   } else {
+		// 	// Handle case where CAPTCHA is not filled out
+		// 	console.error('CAPTCHA verification failed');
+		//   }
+	}
+
 	return (
-		<div className={'h-full w-full p-1 border-2 rounded'}>
+		<div className={'h-full w-full p-1 border-2 rounded text-lg'}>
 			{loading && <Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />}
 			<div className={'bg-primary p-1 text-white'}>
 				<span className={'text-gray-400'}>{message.logIn}?</span>
@@ -168,19 +185,23 @@ const ShowForm = ({
 						className={'border-2 border-grey-500 w-1/4'}>
 						{Array(TAG_FUNC_P_ATTND_MAX)
 							.fill(0)
-							.map((_, index) => {
-								return (
-									<option key={index} value={index + 1}>
-										{index + 1}
-									</option>
-								)
-							})}
+							.map((_, index) => (
+								<option key={index} value={index + 1}>
+									{index + 1}
+								</option>
+							))}
 					</select>
+				</div>
+				<div className={'my-2'}>
+					<ReCAPTCHA
+						sitekey="YOUR_RECAPTCHA_SITE_KEY" // Replace with your reCAPTCHA site key
+						onChange={handleCaptchaChange}
+					/>
 				</div>
 				<Button className={'w-full font-bold'} type="submit">
 					{message.register}
 				</Button>
-				<div onClick={onReset} className="text-center border-b-4  font-bold">
+				<div onClick={onReset} className="text-center border-b-4 font-bold">
 					{message.goBack}
 				</div>
 			</form>
@@ -216,14 +237,14 @@ const ShowButton = ({
 		}
 	}
 	return (
-		<div className={'h-full w-full h-full'}>
+		<div className={'h-full w-full h-full text-lg'}>
 			{event[TAG_FUNC_RSVP] && (
 				<div
 					className={
 						'h-1/2 w-full flex flex-col items-center justify-evenly p-1 border-2 rounded'
 					}>
 					<div className={'flex justify-center items-center'}>
-						<SquareUserRound /> {message.registrationRequired}
+						<SquareUserRound className={'h-[30px]'} /> {message.registrationRequired}
 					</div>
 					<Button
 						disabled={capacity - calNumOfPatron(patrons) <= 0 ? true : false}
@@ -309,13 +330,13 @@ const ShowRSVPSuccess = ({
 				className={
 					'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'
 				}>
-				<SquareUserRound />
-				<div>{message.checkEmail}</div>
-				<div>{message.registrationIncomplete}</div>
+				<SquareUserRound className="w-12 h-12"/>
+				<div className={'text-2xl'}>{message.checkEmail}</div>
+				<div className={'text-xl'}>{message.registrationIncomplete}</div>
 			</div>
 			<div
 				onClick={onReset}
-				className="h-[40px] flex items-center justify-center text-center bg-primary text-primary-foreground rounded">
+				className="font-bold h-[40px] flex items-center justify-center text-center bg-primary text-primary-foreground rounded">
 				{message.goBack}
 			</div>
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (

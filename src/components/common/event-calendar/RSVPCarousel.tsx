@@ -53,7 +53,7 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 								alt={elm[TAG_NAME]}
 								src={`${currentMedia?.TAG_FUNC_LOC_MD}`}
 							/>
-							<div className="p-4 max-h-[370px] overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ease-in-out">
+							<div className="pt-3 px-12 max-h-[370px] overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ease-in-out">
 								<div className={'text-white overflow-hidden text-2xl'}>
 									{elm[TAG_NAME]}
 								</div>
@@ -70,7 +70,7 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 										&#x2022;{message.room}: {elm[TAG_FUNC_LOC_ROO]}
 									</div>
 								</div>
-								<div className={'sm:flex text-lg mb-2'}>
+								<div className={'sm:flex text-lg mb-6'}>
 									<div className="text-white sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
 										&#x2022;{message.suitableFor}: {elm[TAG_FUNC_LOC_AUD]}
 									</div>
@@ -87,7 +87,7 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 										key: number
 									) => {
 										return (
-											<div className={'flex text-white'} key={key}>
+											<div className={'sm:flex text-white'} key={key}>
 												<div className={'mr-2'}>
 													{item[BD_DIS_ACC_TYPE]}:
 												</div>
