@@ -234,7 +234,7 @@ const ShowButton = ({
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
 					className={
-						'h-1/2 w-full flex flex-col items-start justify-evenly text-sm p-1 border-2 rounded'
+						'h-1/2 w-full flex flex-col items-start justify-evenly text-lg p-1 border-2 rounded'
 					}>
 					<div className={'w-full '}>
 						{message.contactInfo}
