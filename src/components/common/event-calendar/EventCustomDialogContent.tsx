@@ -29,7 +29,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 		<div
 			key={key}
 			className={
-				'p-1 rounded border-2 border-slate-800 w-full h-full sm:flex font-bold relative sm:min-h-[750px]'
+				'p-1 rounded border-2 border-slate-800 w-full h-full sm:flex font-bold relative '
 			}>
 			{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 			<div className={'w-full md:h-full sm:w-8/12 '}>

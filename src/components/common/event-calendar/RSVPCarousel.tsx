@@ -53,8 +53,8 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 								alt={elm[TAG_NAME]}
 								src={`${currentMedia?.TAG_FUNC_LOC_MD}`}
 							/>
-							<div className="max-h-[370px] overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ease-in-out">
-								<div className={'mt-4 text-white overflow-hidden text-2xl'}>
+							<div className="p-4 max-h-[370px] overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ease-in-out">
+								<div className={'text-white overflow-hidden text-2xl'}>
 									{elm[TAG_NAME]}
 								</div>
 								<div className={'sm:flex text-lg'}>

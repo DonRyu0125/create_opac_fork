@@ -216,7 +216,7 @@ const ShowButton = ({
 		}
 	}
 	return (
-		<div className={'h-full w-full h-full sm:min-h-[740px]'}>
+		<div className={'h-full w-full h-full'}>
 			{event[TAG_FUNC_RSVP] && (
 				<div
 					className={

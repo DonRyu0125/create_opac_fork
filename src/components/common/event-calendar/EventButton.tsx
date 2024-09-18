@@ -105,7 +105,7 @@ const EventButton = ({
 			</DialogTrigger>
 			<DialogContent
 				hideClose={'invisible'}
-				className={'h-5/6 lg:h-[600px] max-w-5xl overflow-y-auto p-1 gap-1 '}>
+				className={'max-h-[90vh] max-w-5xl overflow-y-auto p-1 gap-1 '}>
 				<DialogHeader>
 					<DialogTitle
 						className={
