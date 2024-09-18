@@ -36,6 +36,7 @@ import {
 	BD_BUILDING_NAME,
 	TAG_FUNC_LOC_CT,
 	TAG_FUNC_LOC_EM,
+	TAG_FUNC_RSVP,
 } from './Constants'
 import { BadgeCheck, FileDown, Mail, Phone, SquareUserRound } from 'lucide-react'
 import {
@@ -201,39 +202,41 @@ const ShowButton = ({
 	const message = useConstants().message
 
 	return (
-		<div className={'min-h-[388px] w-full p-2 border-2 h-full rounded '}>
-			<div
-				className={
-					'min-h-[194px] h-1/2 w-full flex flex-col items-center justify-evenly  border-b-4'
-				}>
-				<div className={'flex justify-center items-center'}>
-					<SquareUserRound /> {message.registrationRequired}
+		<div className={'h-full w-full h-full sm:min-h-[740px]'}>
+			{event[TAG_FUNC_RSVP] && (
+				<div
+					className={
+						'h-1/2 w-full flex flex-col items-center justify-evenly p-1 border-2 rounded'
+					}>
+					<div className={'flex justify-center items-center'}>
+						<SquareUserRound /> {message.registrationRequired}
+					</div>
+					<Button
+						disabled={capacity - calNumOfPatron(patrons) <= 0 ? true : false}
+						className={'w-full '}
+						onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>
+						{message.register}
+					</Button>
+					<div className={'flex justify-center items-center'}>
+						{capacity - calNumOfPatron(patrons) <= 0 ? (
+							<div className={'flex text-red-600 justify-center items-center'}>
+								{message.noSeatsRemaining}
+							</div>
+						) : (
+							<div className={'flex text-lime-800 justify-center items-center'}>
+								<BadgeCheck />{' '}
+								{`${capacity - calNumOfPatron(patrons)} ${message.seatsRemaining}`}
+							</div>
+						)}
+					</div>
 				</div>
-				<Button
-					disabled={capacity - calNumOfPatron(patrons) <= 0 ? true : false}
-					className={'w-full '}
-					onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>
-					{message.register}
-				</Button>
-				<div className={'flex justify-center items-center'}>
-					{capacity - calNumOfPatron(patrons) <= 0 ? (
-						<div className={'flex text-red-600 justify-center items-center'}>
-							{message.noSeatsRemaining}
-						</div>
-					) : (
-						<div className={'flex text-lime-800 justify-center items-center'}>
-							<BadgeCheck />{' '}
-							{`${capacity - calNumOfPatron(patrons)} ${message.seatsRemaining}`}
-						</div>
-					)}
-				</div>
-			</div>
+			)}
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
 					className={
-						'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly  text-sm'
+						'h-1/2 w-full flex flex-col items-start justify-evenly text-sm p-1 border-2 rounded'
 					}>
-					<div className={'w-full  '}>
+					<div className={'w-full '}>
 						{message.contactInfo}
 						<div className={'flex font-normal'}>
 							<Phone className={'h-[18px]'} />
@@ -244,7 +247,7 @@ const ShowButton = ({
 							{event[TAG_FUNC_LOC_EM]}
 						</div>
 					</div>
-					<div className={'w-full '}>
+					<div className={'w-full'}>
 						{message.address}
 						<div className={'font-normal'}>
 							{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
@@ -255,12 +258,12 @@ const ShowButton = ({
 							{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 						</div>
 					</div>
-					<Button>
+					<Button >
 						<FileDown />
 					</Button>
 				</div>
 			) : (
-				<div className={'h-1/2 w-full flex flex-col items-center justify-center '}>
+				<div className={'h-1/2 w-full flex flex-col items-center justify-center'}>
 					<div>{message.privateProperty}</div>
 					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
 					<Button>
