@@ -142,6 +142,11 @@ export const ICON_SHAPE_MAP = {
 	CIRCLE: 'rounded-full',
 }
 
+export const MEDIA_TYPE = {
+	VIDEO:'Video',
+	IMAGE:'Image'
+}
+
 // export const COLORS_MAP = {
 // 	RED: 'bg-red-500 border-red-500',
 // 	YELLOW: 'bg-yellow-500 border-yellow-500',

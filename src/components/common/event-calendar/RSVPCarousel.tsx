@@ -22,13 +22,11 @@ import {
 	BD_DIS_ACC,
 	BD_DIS_ACC_TYPE,
 	BD_DIS_ACC_DETAI,
+	MEDIA_TYPE,
 } from './Constants'
 import useConstants from '@/hooks/useConstants'
 import { getContactInfo } from './Service'
 
-//FUNC_LOC_M_GRP
-//TAG_FUNC_LOC_MT
-//TAG_FUNC_LOC_MD
 export type ImageProps = {
 	TAG_FUNC_LOC_MT: string
 	TAG_FUNC_LOC_MD: string
@@ -39,29 +37,20 @@ export interface ImageCarouselProps {
 	contactInfo: ContactInfoRSVP[]
 }
 
-const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
-	return (
-		<video className="w-full h-full h-[370px]" controls controlsList="nodownload">
-			<source src={videoUrl} type="video/mp4" />
-			Your browser does not support the video tag.
-		</video>
-	)
-}
-
 const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 	const [current, setCurrent] = React.useState(0)
 	const currentMedia = items[current]
 	const message = useConstants().message
 
-
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex w-full group cursor-pointer relative">
 				<div className="w-full h-full min-h-[370px] flex justify-center items-center bg-zinc-400">
-					{currentMedia?.TAG_FUNC_LOC_MT !== 'Video' ? (
+					{currentMedia?.TAG_FUNC_LOC_MT !== MEDIA_TYPE.VIDEO ? (
 						<>
 							<img
 								className="mx-auto w-full object-fill max-h-[370px]"
+								alt={elm[TAG_NAME]}
 								src={`${currentMedia?.TAG_FUNC_LOC_MD}`}
 							/>
 							<div className="max-h-[370px] overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ease-in-out">
@@ -90,13 +79,18 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 									</div>
 								</div>
 								{getContactInfo(BD_DIS_ACC, contactInfo, elm)?.map(
-									(item: {
-										BD_DIS_ACC_TYPE: string
-										BD_DIS_ACC_DETAI: string
-									},key:number) => {
+									(
+										item: {
+											BD_DIS_ACC_TYPE: string
+											BD_DIS_ACC_DETAI: string
+										},
+										key: number
+									) => {
 										return (
 											<div className={'flex text-white'} key={key}>
-												<div className={'mr-2'}>{item[BD_DIS_ACC_TYPE]}</div>
+												<div className={'mr-2'}>
+													{item[BD_DIS_ACC_TYPE]}
+												</div>
 												<div>{item[BD_DIS_ACC_DETAI]}</div>
 											</div>
 										)
@@ -105,7 +99,13 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 							</div>
 						</>
 					) : (
-						<VideoPlayer videoUrl={currentMedia?.TAG_FUNC_LOC_MD} />
+						<video
+							className="w-full h-full h-[370px]"
+							controls
+							controlsList="nodownload">
+							<source src={currentMedia?.TAG_FUNC_LOC_MD} type="video/mp4" />
+							Your browser does not support the video tag.
+						</video>
 					)}
 				</div>
 			</div>

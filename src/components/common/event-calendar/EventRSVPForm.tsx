@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Label } from '@radix-ui/react-label'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import axios from 'axios'
@@ -37,6 +37,7 @@ import {
 	TAG_FUNC_LOC_CT,
 	TAG_FUNC_LOC_EM,
 	TAG_FUNC_RSVP,
+	TAG_FUNC_LOC_TXT,
 } from './Constants'
 import { BadgeCheck, FileDown, Mail, Phone, SquareUserRound } from 'lucide-react'
 import {
@@ -200,7 +201,7 @@ const ShowButton = ({
 	contactInfo: ContactInfoRSVP[]
 }) => {
 	const message = useConstants().message
-
+	
 	return (
 		<div className={'h-full w-full h-full sm:min-h-[740px]'}>
 			{event[TAG_FUNC_RSVP] && (
@@ -258,7 +259,7 @@ const ShowButton = ({
 							{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 						</div>
 					</div>
-					<Button >
+					<Button>
 						<FileDown />
 					</Button>
 				</div>
