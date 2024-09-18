@@ -131,7 +131,7 @@ const EventButton = ({
 				<DialogFooter>
 					<DialogPrimitive.Close
 						className={
-							'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+							'font-bold bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
 						}>
 						{message.close}
 					</DialogPrimitive.Close>

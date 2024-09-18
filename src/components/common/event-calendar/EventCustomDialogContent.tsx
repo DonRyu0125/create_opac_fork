@@ -34,7 +34,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 			{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 			<div className={'w-full md:h-full sm:w-8/12 '}>
 				<RSVPCarousel elm={elm} items={elm.FUNC_LOC_M_GRP ?? []} contactInfo={contactInfo} />
-				<DialogDescription className={'h-[200px] break-all overflow-y-auto text-base'}>
+				<DialogDescription className={'h-[200px] break-all overflow-y-auto text-base font-normal'}>
 					{elm[TAG_FUNC_LOC_DEC]}
 				</DialogDescription>
 			</div>

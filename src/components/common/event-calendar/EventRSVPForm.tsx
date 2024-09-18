@@ -177,10 +177,10 @@ const ShowForm = ({
 							})}
 					</select>
 				</div>
-				<Button className={'w-full'} type="submit">
+				<Button className={'w-full font-bold'} type="submit">
 					{message.register}
 				</Button>
-				<div onClick={onReset} className="text-center border-b-4">
+				<div onClick={onReset} className="text-center border-b-4  font-bold">
 					{message.goBack}
 				</div>
 			</form>
@@ -227,7 +227,7 @@ const ShowButton = ({
 					</div>
 					<Button
 						disabled={capacity - calNumOfPatron(patrons) <= 0 ? true : false}
-						className={'w-full '}
+						className={'w-full font-bold'}
 						onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>
 						{message.register}
 					</Button>

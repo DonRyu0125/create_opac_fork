@@ -55,7 +55,14 @@ const EventAllButton = ({
 				{filteredEvents?.map((elm: any, key: number) => (
 					<EventCustomDialogContent elm={elm} contactInfo={contactInfo} key={key} />
 				))}
-				<DialogFooter className={'w-full flex absolute bottom-1 relative'}></DialogFooter>
+				<DialogFooter className={'w-full flex absolute bottom-1 relative'}>
+					<DialogPrimitive.Close
+						className={
+							'mt-2 font-bold bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+						}>
+						{message.close}
+					</DialogPrimitive.Close>
+				</DialogFooter>
 			</DialogContent>
 		</Dialog>
 	)

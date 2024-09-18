@@ -89,7 +89,7 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 										return (
 											<div className={'flex text-white'} key={key}>
 												<div className={'mr-2'}>
-													{item[BD_DIS_ACC_TYPE]}
+													{item[BD_DIS_ACC_TYPE]}:
 												</div>
 												<div>{item[BD_DIS_ACC_DETAI]}</div>
 											</div>
