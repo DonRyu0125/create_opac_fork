@@ -23,7 +23,7 @@ export interface Cal_event {
 	[TAG_FUNC_LOC_EM]: string
 	[TAG_FUNC_LOC_IMG]: string
 	[TAG_FUNC_LOC_MD]: string
-	[TAG_FUNC_LOC_DOC]: string
+	[TAG_FUNC_LOC_TXT]: string
 }
 export interface patron {
 	[PATRON]: string
@@ -81,8 +81,7 @@ export const TAG_FUNC_LOC_MAX = 'TAG_FUNC_LOC_MAX'
 export const TAG_FUNC_LOC_CT = 'TAG_FUNC_LOC_CT'
 export const TAG_FUNC_LOC_EM = 'TAG_FUNC_LOC_EM'
 export const TAG_FUNC_LOC_IMG = 'TAG_FUNC_LOC_IMG'
-export const TAG_FUNC_LOC_MD = 'TAG_FUNC_LOC_MD'
-export const TAG_FUNC_LOC_DOC = 'TAG_FUNC_LOC_DOC'
+export const TAG_FUNC_LOC_TXT = 'TAG_FUNC_LOC_TXT'
 //Event group by location
 export const TAG_FUNC_DTE_GRP = 'TAG_FUNC_DTE_GRP'
 export const TAG_FUNC_DATE = 'TAG_FUNC_DATE'
@@ -106,6 +105,9 @@ export const TAG_FUNC_P_PAID = 'TAG_FUNC_P_PAID'
 export const TAG_FUNC_P_ATTND = 'TAG_FUNC_P_ATTND'
 export const TAG_FUNC_ACCESS = 'TAG_FUNC_ACCESS'
 export const EVENT_RSVP_YES = 'X'
+export const FUNC_LOC_M_GRP = 'FUNC_LOC_M_GRP'
+export const TAG_FUNC_LOC_MT = 'TAG_FUNC_LOC_MT'
+export const TAG_FUNC_LOC_MD = 'TAG_FUNC_LOC_MD'
 //Others
 export const EVENT_CANCEL_NOTI_MODAL_BG = 'bg-red-800'
 export const TAG_FUNC_P_CONFIRM_EXP_HOURS = 24
@@ -114,7 +116,6 @@ export const TAG_FUNC_P_ATTND_MAX = 4
 export const TAG_FUNC_DTE_LIST = 'list'
 export const TAG_FUNC_LOC_LENGTH = -7
 export const TAG_NAME_LENGTH = 18
-
 //For RSVP
 export const MWI_RESFUL_RES = 'MWI-RESTful-response'
 export const SUCCESS_RES_CODE = 0

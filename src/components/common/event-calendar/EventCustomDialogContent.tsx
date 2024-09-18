@@ -24,31 +24,6 @@ import EventRSVPCancel from './EventCancel'
 import useConstants from '@/hooks/useConstants'
 import RSVPCarousel from './RSVPCarousel'
 
-// src: string
-// alt?: string
-// caption?: string
-// video?: string
-
-const images = [
-	{
-		type: 'Image',
-		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_10/6_16/ae91ce34_b9b4_44a4_9f0e_a3bc011460e8/preview_00433892_001.jpg',
-	},
-	{
-		type: 'Video',
-		src: 'https://titanapi.minisisinc.com/api/links/65043c1192f8422685fe7fcd57027d50/uuid/6d5353be50e04be7af42453ff65ca6c7/access',
-	},
-	{
-		type: 'Image',
-		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_11/2_1/5bcca073_26c7_4e0f_bb70_a3d7001a1c24/preview_01081548_001.jpg',
-	},
-	{
-		type: 'Image',
-		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_10/11_3/8dc66e9f_43e1_4170_956b_a3c1003d49ec/preview_00595099_001.jpg',
-	},
-	{ type: '', src: '' },
-]
-
 const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 	return (
 		<div
@@ -58,7 +33,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 			}>
 			{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 			<div className={'w-full md:h-full sm:w-8/12 '}>
-				<RSVPCarousel elm={elm} items={images} contactInfo={contactInfo} />
+				<RSVPCarousel elm={elm} items={elm.FUNC_LOC_M_GRP ?? []} contactInfo={contactInfo} />
 				<DialogDescription className={'h-[200px] break-all overflow-y-auto text-base'}>
 					{elm[TAG_FUNC_LOC_DEC]}
 				</DialogDescription>

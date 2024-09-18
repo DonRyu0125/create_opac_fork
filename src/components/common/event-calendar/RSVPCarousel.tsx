@@ -25,9 +25,13 @@ import {
 } from './Constants'
 import useConstants from '@/hooks/useConstants'
 import { getContactInfo } from './Service'
+
+//FUNC_LOC_M_GRP
+//TAG_FUNC_LOC_MT
+//TAG_FUNC_LOC_MD
 export type ImageProps = {
-	type: string
-	src: string
+	TAG_FUNC_LOC_MT: string
+	TAG_FUNC_LOC_MD: string
 }
 export interface ImageCarouselProps {
 	items: ImageProps[]
@@ -44,22 +48,21 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
 	)
 }
 
-const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
+const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 	const [current, setCurrent] = React.useState(0)
 	const currentMedia = items[current]
 	const message = useConstants().message
 
-	
 
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex w-full group cursor-pointer relative">
 				<div className="w-full h-full min-h-[370px] flex justify-center items-center bg-zinc-400">
-					{currentMedia.type !== 'Video' ? (
+					{currentMedia?.TAG_FUNC_LOC_MT !== 'Video' ? (
 						<>
 							<img
 								className="mx-auto w-full object-fill max-h-[370px]"
-								{...currentMedia}
+								src={`${currentMedia?.TAG_FUNC_LOC_MD}`}
 							/>
 							<div className="max-h-[370px] overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ease-in-out">
 								<div className={'mt-4 text-white overflow-hidden text-2xl'}>
@@ -102,7 +105,7 @@ const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 							</div>
 						</>
 					) : (
-						<VideoPlayer videoUrl={currentMedia.src} />
+						<VideoPlayer videoUrl={currentMedia?.TAG_FUNC_LOC_MD} />
 					)}
 				</div>
 			</div>
