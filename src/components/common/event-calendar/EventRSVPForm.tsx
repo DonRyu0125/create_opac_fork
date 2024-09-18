@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Label } from '@radix-ui/react-label'
+import { saveAs } from 'file-saver'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
@@ -201,7 +202,19 @@ const ShowButton = ({
 	contactInfo: ContactInfoRSVP[]
 }) => {
 	const message = useConstants().message
-	
+
+	const handleDownload = async () => {
+		const fileUrl = event[TAG_FUNC_LOC_TXT];
+		
+		try {
+		  const response = await fetch(fileUrl);
+		  if (!response.ok) throw new Error('Network response was not ok');
+		  const blob = await response.blob();
+		  saveAs(blob, fileUrl.split('/').pop() || 'downloaded-file');
+		} catch (error) {
+		  console.error('Error downloading file:', error);
+		}
+	  };
 	return (
 		<div className={'h-full w-full h-full sm:min-h-[740px]'}>
 			{event[TAG_FUNC_RSVP] && (
@@ -259,7 +272,7 @@ const ShowButton = ({
 							{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 						</div>
 					</div>
-					<Button>
+					<Button onClick={handleDownload}>
 						<FileDown />
 					</Button>
 				</div>
@@ -267,7 +280,7 @@ const ShowButton = ({
 				<div className={'h-1/2 w-full flex flex-col items-center justify-center'}>
 					<div>{message.privateProperty}</div>
 					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
-					<Button>
+					<Button onClick={handleDownload}>
 						<FileDown />
 					</Button>
 				</div>
