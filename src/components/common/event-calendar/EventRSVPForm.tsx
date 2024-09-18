@@ -268,16 +268,14 @@ const ShowButton = ({
 			)}
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
-					className={
-						'h-1/2 w-full flex flex-col items-start justify-evenly text-lg p-1 border-2 rounded'
-					}>
+					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[58%]'} w-full flex flex-col items-start justify-evenly text-lg p-1 border-2 rounded`}>
 					<div className={'w-full '}>
 						{message.contactInfo}
-						<div className={'flex font-normal'}>
+						<div className={'flex font-normal items-center'}>
 							<Phone className={'h-[18px]'} />
 							{event[TAG_FUNC_LOC_CT]}
 						</div>
-						<div className={'flex font-normal'}>
+						<div className={'flex font-normal items-center'}>
 							<Mail className={'h-[18px]'} />
 							{event[TAG_FUNC_LOC_EM]}
 						</div>
@@ -330,7 +328,7 @@ const ShowRSVPSuccess = ({
 				className={
 					'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'
 				}>
-				<SquareUserRound className="w-12 h-12"/>
+				<SquareUserRound className="w-12 h-12" />
 				<div className={'text-2xl'}>{message.checkEmail}</div>
 				<div className={'text-xl'}>{message.registrationIncomplete}</div>
 			</div>
@@ -346,11 +344,11 @@ const ShowRSVPSuccess = ({
 					}>
 					<div className={'w-full'}>
 						{message.contactInfo}
-						<div className={'flex font-normal'}>
+						<div className={'flex font-normal items-center'}>
 							<Phone className={'h-[18px]'} />
 							{event[TAG_FUNC_LOC_CT]}
 						</div>
-						<div className={'flex font-normal'}>
+						<div className={'flex font-normal items-center'}>
 							<Mail className={'h-[18px]'} />
 							{event[TAG_FUNC_LOC_EM]}
 						</div>
