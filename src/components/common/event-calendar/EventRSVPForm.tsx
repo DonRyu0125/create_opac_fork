@@ -204,17 +204,17 @@ const ShowButton = ({
 	const message = useConstants().message
 
 	const handleDownload = async () => {
-		const fileUrl = event[TAG_FUNC_LOC_TXT];
-		
+		const fileUrl = event[TAG_FUNC_LOC_TXT]
+
 		try {
-		  const response = await fetch(fileUrl);
-		  if (!response.ok) throw new Error('Network response was not ok');
-		  const blob = await response.blob();
-		  saveAs(blob, fileUrl.split('/').pop() || 'downloaded-file');
+			const response = await fetch(fileUrl)
+			if (!response.ok) throw new Error('Network response was not ok')
+			const blob = await response.blob()
+			saveAs(blob, fileUrl.split('/').pop() || 'downloaded-file')
 		} catch (error) {
-		  console.error('Error downloading file:', error);
+			console.error('Error downloading file:', error)
 		}
-	  };
+	}
 	return (
 		<div className={'h-full w-full h-full sm:min-h-[740px]'}>
 			{event[TAG_FUNC_RSVP] && (
@@ -272,17 +272,21 @@ const ShowButton = ({
 							{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 						</div>
 					</div>
-					<Button onClick={handleDownload}>
-						<FileDown />
-					</Button>
+					{event[TAG_FUNC_LOC_TXT] && (
+						<Button onClick={handleDownload}>
+							<FileDown />
+						</Button>
+					)}
 				</div>
 			) : (
 				<div className={'h-1/2 w-full flex flex-col items-center justify-center'}>
 					<div>{message.privateProperty}</div>
 					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
-					<Button onClick={handleDownload}>
-						<FileDown />
-					</Button>
+					{event[TAG_FUNC_LOC_TXT] && (
+						<Button onClick={handleDownload}>
+							<FileDown />
+						</Button>
+					)}
 				</div>
 			)}
 		</div>
