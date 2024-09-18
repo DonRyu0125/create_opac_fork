@@ -353,7 +353,7 @@ const ShowRSVPSuccess = ({
 							{event[TAG_FUNC_LOC_EM]}
 						</div>
 					</div>
-					<div className={'w-full '}>
+					<div className={'w-full'}>
 						{message.address}
 						<div className={'font-normal'}>
 							{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}

@@ -43,17 +43,17 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 	const message = useConstants().message
 
 	return (
-		<div className="flex flex-col space-y-4 h-1/2 min-h-[370px]">
-			<div className="flex w-full h-full  group cursor-pointer relative">
+		<div className="flex flex-col space-y-4 h-1/2 min-h-[370px] justify-center bg-primary">
+			<div className="max-h-[370px] flex w-full h-full  group cursor-pointer relative">
 				<div className="w-full h-full flex justify-center items-center bg-zinc-400">
 					{currentMedia?.TAG_FUNC_LOC_MT !== MEDIA_TYPE.VIDEO ? (
 						<>
 							<img
-								className="mx-auto w-full object-fill h-full"
+								className="w-full object-fill h-full"
 								alt={elm[TAG_NAME]}
 								src={`${currentMedia?.TAG_FUNC_LOC_MD}`}
 							/>
-							<div className="pt-3 px-12 h-full overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ease-in-out">
+							<div className="pt-3 px-12 h-full overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ">
 								<div className={'text-white overflow-hidden text-2xl'}>
 									{elm[TAG_NAME]}
 								</div>
@@ -99,13 +99,12 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 							</div>
 						</>
 					) : (
-						<video
-							className="w-full h-full h-[370px]"
-							controls
-							controlsList="nodownload">
-							<source src={currentMedia?.TAG_FUNC_LOC_MD} type="video/mp4" />
-							Your browser does not support the video tag.
-						</video>
+						<>
+							<video className="w-full h-full" controls controlsList="nodownload">
+								<source src={currentMedia?.TAG_FUNC_LOC_MD} type="video/mp4" />
+								Your browser does not support the video tag.
+							</video>
+						</>
 					)}
 				</div>
 			</div>
