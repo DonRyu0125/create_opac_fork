@@ -44,6 +44,7 @@ import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarMonthType, calendarWeekType } from '@/store'
 import EventCustomDialogContent from './EventCustomDialogContent'
+import EventButtonTooltip from './EventButtonTooltip'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]
@@ -71,8 +72,8 @@ const EventSumButton = ({
 	}
 	const message = useConstants().message
 	const groupedByType = (filteredEvents: Cal_event[]) => {
-		let typeArr: any = {};
-		let result = [];
+		let typeArr: any = {}
+		let result = []
 		filteredEvents.forEach((classInfo: any) => {
 			const type = classInfo[fitlerOption]
 			if (!typeArr[type]) {
@@ -89,36 +90,38 @@ const EventSumButton = ({
 	return (
 		<>
 			{monthType && filterTypes.length > 1 ? (
-				<div
-					className={
-						'h-full mb-[2px] overflow-y-auto custom-scrollbar'
-					}>
+				<div className={'h-full mb-[2px] overflow-y-auto custom-scrollbar'}>
 					{groupedByType(filteredEvents).map((item: any, key: number) => (
 						<Dialog key={key}>
-							<DialogTrigger asChild>
-								<Button
-									className={'h-[20px] border-hidden flex p-0 justify-start'}
-									variant="outline">
-									<div
-										className={cn(
-											'h-4 w-[16px] border rounded',
-											getColor(item[fitlerOption])
-										)}></div>
-									<div
-										className={
-											'hidden sm:block max-w-[100px] overflow-hidden text-left '
-										}>
-										{fitlerOption ? item[fitlerOption] : message.all}
-									</div>
-									<div className={'flex items-center justify-center'}>
-										<CalendarCheck height={18} className={'hidden sm:block'} />:
-										<div>{item[TAG_FUNC_DTE_LIST].length}</div>
-									</div>
-								</Button>
-							</DialogTrigger>
+							<EventButtonTooltip item={item}>
+								<DialogTrigger asChild>
+									<Button
+										className="h-[20px] border-hidden flex p-0 justify-start"
+										variant="outline">
+										<div
+											className={cn(
+												'h-4 w-[16px] border rounded',
+												getColor(item[fitlerOption])
+											)}
+										/>
+										<div className="hidden sm:block max-w-[100px] overflow-hidden text-left">
+											{item[fitlerOption]}
+										</div>
+										<div className="flex items-center justify-center">
+											<CalendarCheck
+												height={18}
+												className="hidden sm:block"
+											/>
+											:<div>{item[TAG_FUNC_DTE_LIST].length}</div>
+										</div>
+									</Button>
+								</DialogTrigger>
+							</EventButtonTooltip>
 							<DialogContent
 								hideClose={'invisible'}
-								className={'max-h-[90vh] max-w-5xl overflow-y-auto p-1 gap-1 custom-scrollbar'}>
+								className={
+									'max-h-[90vh] max-w-5xl overflow-y-auto p-1 gap-1 custom-scrollbar'
+								}>
 								<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
 									<DialogTitle
 										className={
