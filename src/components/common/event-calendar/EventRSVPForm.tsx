@@ -226,14 +226,15 @@ const ShowButton = ({
 
 	const handleDownload = async () => {
 		const fileUrl = event[TAG_FUNC_LOC_TXT]
-
-		try {
-			const response = await fetch(fileUrl)
-			if (!response.ok) throw new Error('Network response was not ok')
-			const blob = await response.blob()
-			saveAs(blob, fileUrl.split('/').pop() || 'downloaded-file')
-		} catch (error) {
-			console.error('Error downloading file:', error)
+		if (fileUrl) {
+			try {
+				const response = await fetch(fileUrl)
+				if (!response.ok) throw new Error('Network response was not ok')
+				const blob = await response.blob()
+				saveAs(blob, fileUrl.split('/').pop() || 'downloaded-file')
+			} catch (error) {
+				console.error('Error downloading file:', error)
+			}
 		}
 	}
 	return (
