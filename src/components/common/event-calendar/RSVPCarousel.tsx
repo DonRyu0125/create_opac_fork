@@ -31,7 +31,6 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 	const [current, setCurrent] = React.useState(0)
 	const currentMedia = items[current]
 	const message = useConstants().message
-
 	return (
 		<div className="flex flex-col space-y-4 h-1/2 min-h-[370px] justify-center bg-primary">
 			<div className="max-h-[370px] flex w-full h-full  group cursor-pointer relative">

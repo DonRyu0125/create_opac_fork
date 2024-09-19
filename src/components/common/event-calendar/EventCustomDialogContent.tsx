@@ -4,11 +4,6 @@ import { cn, convertToArr } from '@/lib/utils'
 import {
 	TAG_FUNC_DATE,
 	TAG_FUNC_LOC_DEC,
-	TAG_FUNC_END_T,
-	TAG_NAME,
-	TAG_FUNC_LOC_ROO,
-	TAG_FUNC_LOC_AUD,
-	TAG_FUNC_START_T,
 	TAG_FUNC_LOC_MAX,
 	TAG_FUNC_RSVP,
 	TAG_FUNC_CANCEL,
@@ -18,10 +13,8 @@ import {
 	SISN,
 	TAG_FUNC_ACCESS,
 } from './Constants'
-import { Accessibility } from 'lucide-react'
 import EventRSVPForm from './EventRSVPForm'
 import EventRSVPCancel from './EventCancel'
-import useConstants from '@/hooks/useConstants'
 import RSVPCarousel from './RSVPCarousel'
 
 const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
@@ -33,7 +26,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 			}>
 			{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
 			<div className={'w-full md:h-full sm:w-8/12 '}>
-				<RSVPCarousel elm={elm} items={elm.FUNC_LOC_M_GRP ?? []} contactInfo={contactInfo} />
+				<RSVPCarousel elm={elm} items={elm.FUNC_LOC_M_GRP} contactInfo={contactInfo} />
 				<DialogDescription className={'h-1/2 min-h-[200px] break-all overflow-y-auto text-base font-normal'}>
 					{elm[TAG_FUNC_LOC_DEC]}
 				</DialogDescription>

@@ -51,10 +51,23 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		)
 		const x2js = new X2JS()
 		const jsonData: any = x2js.xml2js(response.data)
-		const event = jsonData?.div?.xml?.event
+		const events = jsonData?.div?.xml?.event
+		const formattedEvents = Array.isArray(events) 
+		? events.map(event => ({
+			...event,
+			FUNC_LOC_M_GRP: Array.isArray(event.FUNC_LOC_M_GRP) 
+				? event.FUNC_LOC_M_GRP 
+				: [event.FUNC_LOC_M_GRP]
+		}))
+		: events && {
+			...events,
+			FUNC_LOC_M_GRP: Array.isArray(events.FUNC_LOC_M_GRP) 
+				? events.FUNC_LOC_M_GRP 
+				: [events.FUNC_LOC_M_GRP]
+		};
 
-		if (!event) return []
-		return convertToArr(event)
+		if (!formattedEvents) return []
+		return convertToArr(formattedEvents)
 	} catch (error) {
 		throw error
 	}

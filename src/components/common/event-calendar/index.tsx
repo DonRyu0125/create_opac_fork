@@ -78,20 +78,12 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 		}
 	}
 
-	/**
-	 *
-	 * @param date
-	 * @returns Date objects by the month
-	 */
 	const daysInMonth = (date: Date) => {
 		const year = date.getFullYear()
 		const month = date.getMonth() + 1
 		return new Date(year, month, 0).getDate() // get the last date.getMonth() + 1's last date
 	}
-	/**
-	 *
-	 * @returns date objects by month
-	 */
+
 	const generateMonth = () => {
 		const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
 		const days = daysInMonth(currentDate)
