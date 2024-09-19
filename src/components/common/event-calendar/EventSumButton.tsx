@@ -13,24 +13,8 @@ import { cn, convertToArr } from '@/lib/utils'
 import { convertLowerTrim } from '@/lib/utils'
 import {
 	Cal_event,
-	TAG_FUNC_DATE,
-	TAG_FUNC_LOC_DEC,
-	TAG_FUNC_END_T,
-	TAG_NAME,
-	TAG_FUNC_LOC_ROO,
-	TAG_FUNC_LOC_AUD,
-	TAG_FUNC_START_T,
-	TAG_NAME_LENGTH,
-	TAG_FUNC_LOC_MAX,
-	TAG_FUNC_LANG,
-	TAG_FUNC_LOC_LENGTH,
 	TAG_FUNC_DTE_LIST,
-	TAG_FUNC_RSVP,
-	PATRON,
-	SISN,
 	ContactInfoRSVP,
-	TAG_FUNC_CANCEL,
-	TAG_FUNC_CAN_RES,
 	FilterType,
 	TAG_DB_TYPE,
 	EVENT_DEFAULT_COLOR,
@@ -86,6 +70,7 @@ const EventSumButton = ({
 		})
 		return result ?? []
 	}
+	
 
 	return (
 		<>
