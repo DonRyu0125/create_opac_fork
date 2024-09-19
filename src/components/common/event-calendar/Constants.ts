@@ -25,6 +25,11 @@ export interface Cal_event {
 	[TAG_FUNC_LOC_MD]: string
 	[TAG_FUNC_LOC_TXT]: string
 }
+export type ImageProps = {
+	[TAG_FUNC_LOC_MT]: string
+	[TAG_FUNC_LOC_MD]: string
+	[TAG_FUNC_LOC_TH]: string // Thumbnail
+}
 export interface patron {
 	[PATRON]: string
 	[TAG_FUNC_P_ID]: string
@@ -82,6 +87,7 @@ export const TAG_FUNC_LOC_CT = 'TAG_FUNC_LOC_CT'
 export const TAG_FUNC_LOC_EM = 'TAG_FUNC_LOC_EM'
 export const TAG_FUNC_LOC_IMG = 'TAG_FUNC_LOC_IMG'
 export const TAG_FUNC_LOC_TXT = 'TAG_FUNC_LOC_TXT'
+export const TAG_FUNC_LOC_TH = 'TAG_FUNC_LOC_TH'
 //Event group by location
 export const TAG_FUNC_DTE_GRP = 'TAG_FUNC_DTE_GRP'
 export const TAG_FUNC_DATE = 'TAG_FUNC_DATE'
@@ -143,8 +149,8 @@ export const ICON_SHAPE_MAP = {
 }
 
 export const MEDIA_TYPE = {
-	VIDEO:'Video',
-	IMAGE:'Image'
+	VIDEO: 'Video',
+	IMAGE: 'Image',
 }
 
 // export const COLORS_MAP = {

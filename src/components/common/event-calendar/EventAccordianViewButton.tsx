@@ -164,7 +164,7 @@ const EventAccordianViewButton = ({
 												{item[TAG_FUNC_LOC_AUD]}
 											</div>
 											<div className="ml-[10px] text-md text-gray-600 font-bold">
-												&#x2022;{message.seats}: {item[TAG_FUNC_LOC_MAX]}
+												&#x2022;{message.max}: {item[TAG_FUNC_LOC_MAX]}
 											</div>
 										</div>
 									</div>

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Accessibility, ChevronLeft, ChevronRight, CircleParkingOff, Scan } from 'lucide-react'
-import LightboxImage from '../LightboxImage'
 
 import {
 	TAG_FUNC_DATE,
@@ -11,26 +10,17 @@ import {
 	TAG_FUNC_LOC_AUD,
 	TAG_FUNC_START_T,
 	TAG_FUNC_LOC_MAX,
-	TAG_FUNC_RSVP,
-	TAG_FUNC_CANCEL,
-	TAG_FUNC_CAN_RES,
-	TAG_FUNC_LOC_IMG,
-	PATRON,
-	SISN,
-	TAG_FUNC_ACCESS,
 	ContactInfoRSVP,
 	BD_DIS_ACC,
 	BD_DIS_ACC_TYPE,
 	BD_DIS_ACC_DETAI,
 	MEDIA_TYPE,
+	ImageProps,
 } from './Constants'
 import useConstants from '@/hooks/useConstants'
 import { getContactInfo } from './Service'
 
-export type ImageProps = {
-	TAG_FUNC_LOC_MT: string
-	TAG_FUNC_LOC_MD: string
-}
+
 export interface ImageCarouselProps {
 	items: ImageProps[]
 	elm: any
@@ -75,7 +65,7 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 										&#x2022;{message.suitableFor}: {elm[TAG_FUNC_LOC_AUD]}
 									</div>
 									<div className="text-white ml-[10px] text-md text-gray-600 font-bold">
-										&#x2022;{message.seats}: {elm[TAG_FUNC_LOC_MAX]}
+										&#x2022;{message.max}: {elm[TAG_FUNC_LOC_MAX]}
 									</div>
 								</div>
 								{getContactInfo(BD_DIS_ACC, contactInfo, elm)?.map(
