@@ -1,15 +1,22 @@
 import { FC, ReactNode } from 'react'
 import * as Tooltip from '@radix-ui/react-tooltip'
+import { TAG_NAME } from './Constants'
 
-const EventButtonTooltip: React.FC<{ children: React.ReactNode; item:any; }> = ({ children,item }) => {
-	console.log('item', item)
+const EventButtonTooltip: React.FC<{ children: React.ReactNode; item: any }> = ({
+	children,
+	item,
+}) => {
 	return (
 		<Tooltip.Provider>
 			<Tooltip.Root>
 				<Tooltip.Trigger asChild>{children}</Tooltip.Trigger>
 				<Tooltip.Portal>
-					<Tooltip.Content className="bg-primary text-white" sideOffset={5}>
-						Add to library
+					<Tooltip.Content
+						className="w-[200px] max-h-[250px] overflow-y-auto p-2 rounded bg-primary text-white text-start"
+						sideOffset={5}>
+						{item.list.map((elm:any, key: number) => {
+							return <div key={key}>&#x2022;{elm[TAG_NAME]}</div>
+						})}
 					</Tooltip.Content>
 				</Tooltip.Portal>
 			</Tooltip.Root>

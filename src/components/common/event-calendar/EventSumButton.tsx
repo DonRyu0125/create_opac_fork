@@ -91,8 +91,8 @@ const EventSumButton = ({
 		<>
 			{monthType && filterTypes.length > 1 ? (
 				<div className={'h-full mb-[2px] overflow-y-auto custom-scrollbar'}>
-					{groupedByType(filteredEvents).map((item: any, key: number) => (
-						<Dialog key={key}>
+					{groupedByType(filteredEvents).map((item: any, id: number) => (
+						<Dialog key={id}>
 							<EventButtonTooltip item={item}>
 								<DialogTrigger asChild>
 									<Button
