@@ -11,7 +11,7 @@ import {
 	ContactInfoRSVP,
 	FilterType,
 } from './Constants'
-import { convertLowerTrim } from '@/lib/utils'
+import { cn, convertLowerTrim } from '@/lib/utils'
 import EventSumButton from './EventSumButton'
 import EventAllButton from './EventAllButton'
 import { calendarMonthType, calendarWeekType } from '@/store'
@@ -106,10 +106,7 @@ const EventCalendarEventList = ({
 				<div>{dayObj?.day}</div>
 				{filteredEvents.length > 2 && (
 					<div>
-						<EventAllButton
-							filteredEvents={filteredEvents}
-							contactInfo={contactInfo}
-						/>
+						<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} />
 					</div>
 				)}
 			</div>
@@ -121,7 +118,11 @@ const EventCalendarEventList = ({
 					fitlerOption={fitlerOption}
 				/>
 			) : (
-				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto custom-scrollbar'}>
+				<div
+					className={cn(
+						'h-[60px] md:h-[95%] mb-[2px] overflow-auto custom-scrollbar flex md:block',
+						``
+					)}>
 					{filteredEvents.map((item: any, idx: number) => (
 						<EventButton
 							elm={item}

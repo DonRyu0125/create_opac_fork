@@ -13,7 +13,7 @@ import { calendarCurrDate, calendarEvents, calendarMonthType, calendarWeekType }
 import { useAtom } from 'jotai'
 import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj, FilterType } from './Constants'
 import useConstants from '@/hooks/useConstants'
-
+import { cn } from '@/lib/utils'
 
 export interface calendarFilterType {
 	databaseType?: string
@@ -78,12 +78,12 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 		}
 	}
 
-	const daysInMonth = (date: Date) => {
+		const daysInMonth = (date: Date) => {
 		const year = date.getFullYear()
 		const month = date.getMonth() + 1
 		return new Date(year, month, 0).getDate() // get the last date.getMonth() + 1's last date
 	}
-
+	
 	const generateMonth = () => {
 		const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
 		const days = daysInMonth(currentDate)
@@ -166,8 +166,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 	}
 
 	return (
-		<div
-			className={'w-full mx-auto max-w-screen-xl custom-scrollbar'}>
+		<div className={'w-full mx-auto max-w-screen-xl custom-scrollbar'}>
 			<div
 				className={
 					'relative flex justify-center items-center bg-primary h-[80px] rounded '
@@ -238,17 +237,24 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 
 			<div className={'w-full mt-1'}>
 				<div className={'grid grid-cols-7 gap-0.5'}>
-					{message.daysOfWeek.map((item, key) => {
-						return (
-							<div
-								key={key}
-								className={
-									'text-center text-xl bg-primary text-primary-foreground rounded'
-								}>
-								{item}
-							</div>
-						)
-					})}
+					<div
+						className={cn(
+							'col-span-7 grid grid-cols-7 gap-1',
+							weekType && 'col-span-1 md:col-span-7'
+						)}>
+						{message.daysOfWeek.map((item, key) => {
+							return (
+								<div
+									key={key}
+									className={cn(
+										'text-center text-xl bg-primary text-primary-foreground rounded',
+										weekType && 'col-span-7 md:col-span-1'
+									)}>
+									{item}
+								</div>
+							)
+						})}
+					</div>
 					{monthType &&
 						generateMonth().map((item: Day_obj, key: number) => {
 							return (
@@ -267,24 +273,34 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 								</div>
 							)
 						})}
-					{weekType &&
-						generateWeek().map((item: Day_obj, key: number) => {
-							return (
-								<div
-									key={key}
-									className="rounded border border-black cursor-pointer max-w-44 h-96 w-full rounded">
-									<EventCalendarEventList
-										dayObj={item}
-										currentFilter={currentFilter}
-										currentEvent={currentEvent}
-										weekType={weekType}
-										contactInfo={contactInfo}
-										filterTypes={filterTypes}
-										fitlerOption={fitlerOption}
-									/>
-								</div>
-							)
-						})}
+					{weekType && (
+						<div
+							className={cn(
+								'col-span-7 grid grid-cols-7 gap-1',
+								weekType && 'col-span-6 md:col-span-7'
+							)}>
+							{generateWeek().map((item: Day_obj, key: number) => {
+								return (
+									<div
+										key={key}
+										className={cn(
+											'rounded border border-black cursor-pointer md:max-w-44 md:h-96 w-full ',
+											weekType && 'col-span-7 md:col-span-1 w-full min-h-min'
+										)}>
+										<EventCalendarEventList
+											dayObj={item}
+											currentFilter={currentFilter}
+											currentEvent={currentEvent}
+											weekType={weekType}
+											contactInfo={contactInfo}
+											filterTypes={filterTypes}
+											fitlerOption={fitlerOption}
+										/>
+									</div>
+								)
+							})}
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

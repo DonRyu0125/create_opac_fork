@@ -72,14 +72,40 @@ const EventButton = ({
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 
-
-
 	return (
 		<Dialog key={id}>
 			<DialogTrigger asChild>
-				<Button className={`w-full h-[35%] border-hidden p-0 text-sm`} variant="outline">
-					<div className={'w-full text-left'}>
-						<div className={'flex'}>
+				{weekType ? (
+					<Button
+						className={`w-full w-full md:max-w-[168px] h-[30%] border-hidden p-0 text-sm flex flex-col justify-start`}
+						variant="outline">
+						<div className={'w-full text-left'}>
+							<div className={'flex w-full'}>
+								<div
+									className={cn(
+										'h-4 w-[16px] border rounded',
+										getColor(elm[fitlerOption])
+									)}></div>
+								<p className={'w-full h-full break-all sm:overflow-hidden'}>
+									{elm[TAG_NAME]}
+								</p>
+							</div>
+							<div className={'hidden md:block flex items-center justify-around w-full'}>
+								<div>
+									<div>{elm[TAG_FUNC_START_T]?.toUpperCase()}-</div>
+									<div>{elm[TAG_FUNC_END_T]?.toUpperCase()}</div>
+								</div>
+								<div className={'hidden sm:block w-[18px]'}>
+									{elm[TAG_FUNC_RSVP] && <SquareUserRound />}
+								</div>
+							</div>
+						</div>
+					</Button>
+				) : (
+					<Button
+						className={`overflow-y-hidden flex flex-col justify-start w-full max-h-[60px] border-hidden p-0 text-sm`}
+						variant="outline">
+						<div className={'flex w-full text-left'}>
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded',
@@ -89,19 +115,8 @@ const EventButton = ({
 								{elm[TAG_NAME]}
 							</p>
 						</div>
-						{weekType && (
-							<div className={'flex items-center justify-around w-full'}>
-								<div>
-									<div>{elm[TAG_FUNC_START_T]?.toUpperCase()}-</div>
-									<div>{elm[TAG_FUNC_END_T]?.toUpperCase()}</div>
-								</div>
-								<div className={'hidden sm:block w-[18px]'}>
-									{elm[TAG_FUNC_RSVP] && <SquareUserRound />}
-								</div>
-							</div>
-						)}
-					</div>
-				</Button>
+					</Button>
+				)}
 			</DialogTrigger>
 			<DialogContent
 				hideClose={'invisible'}
