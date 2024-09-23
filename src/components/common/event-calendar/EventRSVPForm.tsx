@@ -275,11 +275,11 @@ const ShowButton = ({
 					<div className={'w-full '}>
 						{message.contactInfo}
 						<div className={'flex font-normal items-center'}>
-							<Phone className={'h-[18px]'} />
+							<Phone size={25} />
 							{event[TAG_FUNC_LOC_CT]}
 						</div>
 						<div className={'flex font-normal items-center'}>
-							<Mail className={'h-[18px]'} />
+							<Mail size={25} />
 							{event[TAG_FUNC_LOC_EM]}
 						</div>
 					</div>
@@ -287,8 +287,8 @@ const ShowButton = ({
 						{message.address}
 						{/*@ts-ignore there is variable called TAG_FUNC_O*/}
 						{event[TAG_FUNC_O] ? (
-							<div className={'flex flex-col justify-center items-center text-xl p-2'}>
-								<MonitorPlay size={30}/>
+							<div className={'flex font-normal items-center'}>
+								<MonitorPlay size={25} />
 								<div>{message.online}</div>
 							</div>
 						) : (
@@ -358,11 +358,11 @@ const ShowRSVPSuccess = ({
 					<div className={'w-full'}>
 						{message.contactInfo}
 						<div className={'flex font-normal items-center'}>
-							<Phone className={'h-[18px]'} />
+							<Phone />
 							{event[TAG_FUNC_LOC_CT]}
 						</div>
 						<div className={'flex font-normal items-center'}>
-							<Mail className={'h-[18px]'} />
+							<Mail />
 							{event[TAG_FUNC_LOC_EM]}
 						</div>
 					</div>
