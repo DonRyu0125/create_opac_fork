@@ -275,7 +275,7 @@ const ShowButton = ({
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
 					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[58%]'} w-full flex flex-col items-start justify-evenly text-lg p-1 border-2 rounded`}>
-					<div className={'w-full '}>
+					<div className={'w-full text-center'}>
 						{message.contactInfo}
 						<div className={'flex font-normal items-center text-base'}>
 							<Phone size={25} />
@@ -359,7 +359,7 @@ const ShowRSVPSuccess = ({
 					className={
 						'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly'
 					}>
-					<div className={'w-full'}>
+					<div className={'w-full text-center'}>
 						{message.contactInfo}
 						<div className={'flex font-normal items-center text-base'}>
 							<Phone />
@@ -379,7 +379,7 @@ const ShowRSVPSuccess = ({
 							</div>
 						) : (
 							<>
-							<div className={'font-normal text-base'}>
+								<div className={'font-normal text-base'}>
 									{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
 								</div>
 								<div className={'font-normal text-base'}>
