@@ -32,12 +32,12 @@
 		"filterTypes":[
 			{
 				"type": "Library",
-				"color": "bg-red-500 border-red-500",
+				"color": "bg-red-800 border-red-800",
 				"icon": "rounded"
 			},
 			{
 				"type": "Museum",
-				"color": "bg-yellow-500 border-yellow-500",
+				"color": "bg-orange-500 border-orange-500",
 				"icon": "rounded"
 			},
 			{

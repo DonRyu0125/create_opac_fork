@@ -25,13 +25,13 @@
 			"url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=KEYWORD_CLUSTER \"painting\""
 		}
 	],
-	"rsvp":{
-		"filterDatabase":"",
-		"filterOption":"TAG_DB_TYPE",
-		"filterTypes":[
+	"rsvp": {
+		"filterDatabase": "",
+		"filterOption": "TAG_DB_TYPE",
+		"filterTypes": [
 			{
 				"type": "Library",
-				"color": "bg-red-500 border-red-500",
+				"color": "bg-red-800 border-red-800",
 				"icon": "rounded"
 			},
 			{

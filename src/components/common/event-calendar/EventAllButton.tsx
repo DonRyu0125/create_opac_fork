@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { convertLowerTrim, convertToArr } from '@/lib/utils'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { ListPlus, X } from 'lucide-react'
+import { Expand, X } from 'lucide-react'
 import { Cal_event, ContactInfoRSVP, FilterType, EVENT_DEFAULT_COLOR } from './Constants'
 import useConstants from '@/hooks/useConstants'
 import EventCustomDialogContent from './EventCustomDialogContent'
@@ -30,7 +30,7 @@ const EventAllButton = ({
 		<Dialog>
 			<DialogTrigger asChild>
 				<Button className={'h-full p-1 rounded-none'}>
-					<ListPlus />
+					<Expand />
 				</Button>
 			</DialogTrigger>
 			<DialogContent

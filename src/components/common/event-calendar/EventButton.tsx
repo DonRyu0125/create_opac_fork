@@ -81,15 +81,10 @@ const EventButton = ({
 			<DialogTrigger asChild>
 				{weekType ? (
 					<Button
-						className={`${getColor(elm[fitlerOption])} w-full w-full md:max-w-[168px] h-[30%] border-hidden p-0 text-sm flex flex-col justify-start`}
+						className={`${getColor(elm[fitlerOption])} min-w-[100px] h-[55px] mr-1 overflow-y-hidden w-full md:max-w-[168px] md:h-[30%] md:mb-2 border-hidden p-1 text-sm flex flex-col justify-start text-white md:p-1`}
 						variant="outline">
 						<div className={'w-full text-left'}>
 							<div className={'flex w-full'}>
-								{/* <div
-									className={cn(
-										'h-4 w-[16px] border rounded',
-										getColor(elm[fitlerOption])
-									)}></div> */}
 								<p className={'w-full h-full break-all sm:overflow-hidden font-bold'}>
 									{elm[TAG_NAME]}
 								</p>
