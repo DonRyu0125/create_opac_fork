@@ -30,7 +30,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 			<div className={'w-full md:h-full sm:w-8/12 '}>
 				<RSVPCarousel
 					elm={elm}
-					items={[...elm[FLOC_IM_REF_GRP], ...elm[FLOC_VD_REF_GRP]]}
+					items={elm[FLOC_IM_REF_GRP].concat(elm[FLOC_VD_REF_GRP])}
 					contactInfo={contactInfo}
 				/>
 				<DialogDescription

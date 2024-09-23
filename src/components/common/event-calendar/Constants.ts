@@ -87,6 +87,11 @@ export const TAG_FUNC_LOC_ROO = 'TAG_FUNC_LOC_ROO'
 export const TAG_FUNC_LOC_MAX = 'TAG_FUNC_LOC_MAX'
 export const TAG_FUNC_LOC_CT = 'TAG_FUNC_LOC_CT'
 export const TAG_FUNC_LOC_EM = 'TAG_FUNC_LOC_EM'
+//ONLINE
+export const TAG_FUNC_O = 'TAG_FUNC_O'
+export const TAG_FUNC_O_PATH = 'TAG_FUNC_O_PATH'
+export const TAG_FUNC_O_ID = 'TAG_FUNC_O_ID'
+export const TAG_FUNC_O_CODE = 'TAG_FUNC_O_CODE'
 //TDR FIELD  
 export const FLOC_IM_REF_GRP = 'FLOC_IM_REF_GRP'
 export const FLOC_TX_ACCESS = 'FLOC_TX_ACCESS'

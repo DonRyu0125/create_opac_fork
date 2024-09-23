@@ -35,10 +35,10 @@ import {
 	TAG_FUNC_CAN_RES,
 	FilterType,
 	EVENT_DEFAULT_COLOR,
-	
+	TAG_FUNC_O,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { Accessibility, SquareUserRound, X } from 'lucide-react'
+import { Accessibility, MonitorPlay, SquareUserRound, X } from 'lucide-react'
 import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarWeekType } from '@/store'
@@ -71,10 +71,10 @@ const EventButton = ({
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
-	
+
 	// <Expand />
 	// <MonitorPlay />
-	//<SquareUserRound />
+	// <SquareUserRound />
 
 	return (
 		<Dialog key={id}>
@@ -85,7 +85,10 @@ const EventButton = ({
 						variant="outline">
 						<div className={'w-full text-left'}>
 							<div className={'flex w-full'}>
-								<p className={'w-full h-full break-all sm:overflow-hidden font-bold'}>
+								<p
+									className={
+										'w-full h-full sm:overflow-hidden font-bold'
+									}>
 									{elm[TAG_NAME]}
 								</p>
 							</div>
@@ -95,7 +98,7 @@ const EventButton = ({
 									<div>{elm[TAG_FUNC_END_T]?.toUpperCase()}</div>
 								</div>
 								<div className={'hidden sm:block w-[18px]'}>
-									{elm[TAG_FUNC_RSVP] && <SquareUserRound />}
+									{elm[TAG_FUNC_O] ? <MonitorPlay /> : <SquareUserRound />}
 								</div>
 							</div>
 						</div>

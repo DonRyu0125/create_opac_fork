@@ -108,5 +108,6 @@
 	"myAccount": "Mon Compte",
 	"logout": "Déconnexion",
 	"welcome": "Bienvenue",
-	"calendar":"calendrier"
+	"calendar":"calendrier",
+	"online":"en ligne"
 }

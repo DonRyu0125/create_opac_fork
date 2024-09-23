@@ -40,8 +40,9 @@ import {
 	TAG_FUNC_LOC_EM,
 	TAG_FUNC_RSVP,
 	FLOC_TX_ACCESS,
+	TAG_FUNC_O,
 } from './Constants'
-import { BadgeCheck, FileDown, Mail, Phone, SquareUserRound } from 'lucide-react'
+import { BadgeCheck, FileDown, Mail, MonitorPlay, Phone, SquareUserRound } from 'lucide-react'
 import {
 	convertLowerTrim,
 	convertToArr,
@@ -284,14 +285,24 @@ const ShowButton = ({
 					</div>
 					<div className={'w-full'}>
 						{message.address}
-						<div className={'font-normal'}>
-							{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
-						</div>
-						<div className={'font-normal'}>
-							{getContactInfo(BD_ADDRESS, contactInfo, event)}{' '}
-							{getContactInfo(BD_CITY, contactInfo, event)},
-							{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
-						</div>
+						{/*@ts-ignore there is variable called TAG_FUNC_O*/}
+						{event[TAG_FUNC_O] ? (
+							<div className={'flex flex-col justify-center items-center text-xl p-2'}>
+								<MonitorPlay size={30}/>
+								<div>{message.online}</div>
+							</div>
+						) : (
+							<>
+								<div className={'font-normal'}>
+									{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
+								</div>
+								<div className={'font-normal'}>
+									{getContactInfo(BD_ADDRESS, contactInfo, event)}{' '}
+									{getContactInfo(BD_CITY, contactInfo, event)},
+									{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
+								</div>
+							</>
+						)}
 					</div>
 					{event[FLOC_TX_ACCESS] && (
 						<Button onClick={handleDownload}>
