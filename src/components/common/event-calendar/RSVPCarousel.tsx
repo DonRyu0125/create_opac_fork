@@ -14,15 +14,14 @@ import {
 	BD_DIS_ACC,
 	BD_DIS_ACC_TYPE,
 	BD_DIS_ACC_DETAI,
-	MEDIA_TYPE,
-	ImageProps,
+	MEDIA_TYPE
 } from './Constants'
 import useConstants from '@/hooks/useConstants'
 import { getContactInfo } from './Service'
 
 
 export interface ImageCarouselProps {
-	items: ImageProps[]
+	items: any
 	elm: any
 	contactInfo: ContactInfoRSVP[]
 }
@@ -35,12 +34,12 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 		<div className="flex flex-col space-y-4 h-1/2 min-h-[370px] justify-center bg-primary">
 			<div className="max-h-[370px] flex w-full h-full  group cursor-pointer relative">
 				<div className="w-full h-full flex justify-center items-center bg-zinc-400">
-					{currentMedia?.TAG_FUNC_LOC_MT !== MEDIA_TYPE.VIDEO ? (
+					{currentMedia[MEDIA_TYPE.IMAGE] ? (
 						<>
 							<img
 								className="w-full object-fill h-full"
 								alt={elm[TAG_NAME]}
-								src={`${currentMedia?.TAG_FUNC_LOC_MD}`}
+								src={`${currentMedia[MEDIA_TYPE.IMAGE]}`}
 							/>
 							<div className="pt-3 px-12 h-full overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ">
 								<div className={'text-white overflow-hidden text-2xl'}>
@@ -90,7 +89,7 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 					) : (
 						<>
 							<video className="w-full h-full" controls controlsList="nodownload">
-								<source src={currentMedia?.TAG_FUNC_LOC_MD} type="video/mp4" />
+								<source src={currentMedia[MEDIA_TYPE.VIDEO]} type="video/mp4" />
 								Your browser does not support the video tag.
 							</video>
 						</>

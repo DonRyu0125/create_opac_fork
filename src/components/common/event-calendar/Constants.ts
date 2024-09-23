@@ -155,8 +155,13 @@ export const ICON_SHAPE_MAP = {
 }
 
 export const MEDIA_TYPE = {
-	VIDEO: 'Video',
-	IMAGE: 'Image',
+	VIDEO: 'FLOC_VD_ACCESS',
+	IMAGE: 'FLOC_IM_ACCESS',
+}
+
+export interface MEDIA_TYPE_ACCESS {
+	FLOC_IM_ACCESS?: string
+	FLOC_VD_ACCESS?: string
 }
 
 // export const COLORS_MAP = {
