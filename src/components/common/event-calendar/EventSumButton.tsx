@@ -18,7 +18,6 @@ import {
 	FilterType,
 	TAG_DB_TYPE,
 	EVENT_DEFAULT_COLOR,
-	TAG_FUNC_LOC_IMG,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'

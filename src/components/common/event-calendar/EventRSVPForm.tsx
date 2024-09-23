@@ -39,7 +39,7 @@ import {
 	TAG_FUNC_LOC_CT,
 	TAG_FUNC_LOC_EM,
 	TAG_FUNC_RSVP,
-	TAG_FUNC_LOC_TXT,
+	FLOC_TX_ACCESS,
 } from './Constants'
 import { BadgeCheck, FileDown, Mail, Phone, SquareUserRound } from 'lucide-react'
 import {
@@ -139,6 +139,7 @@ const ShowForm = ({
 		setCaptchaValue(value)
 	}
 
+	//captchaValues
 	const handleFormSubmit = (data: any) => {
 		onSubmit({ ...data, captcha: captchaValue })
 		//   if (captchaValue) {
@@ -225,7 +226,7 @@ const ShowButton = ({
 	const message = useConstants().message
 
 	const handleDownload = async () => {
-		const fileUrl = event[TAG_FUNC_LOC_TXT]
+		const fileUrl = event[FLOC_TX_ACCESS]
 		if (fileUrl) {
 			try {
 				const response = await fetch(fileUrl)
@@ -292,7 +293,7 @@ const ShowButton = ({
 							{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 						</div>
 					</div>
-					{event[TAG_FUNC_LOC_TXT] && (
+					{event[FLOC_TX_ACCESS] && (
 						<Button onClick={handleDownload}>
 							<FileDown />
 						</Button>
@@ -302,7 +303,7 @@ const ShowButton = ({
 				<div className={'h-1/2 w-full flex flex-col items-center justify-center'}>
 					<div>{message.privateProperty}</div>
 					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
-					{event[TAG_FUNC_LOC_TXT] && (
+					{event[FLOC_TX_ACCESS] && (
 						<Button onClick={handleDownload}>
 							<FileDown />
 						</Button>

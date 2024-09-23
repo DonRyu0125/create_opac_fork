@@ -35,7 +35,7 @@ import {
 	TAG_FUNC_CAN_RES,
 	FilterType,
 	EVENT_DEFAULT_COLOR,
-	TAG_FUNC_LOC_IMG,
+	
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { Accessibility, SquareUserRound, X } from 'lucide-react'

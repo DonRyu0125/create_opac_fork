@@ -22,7 +22,7 @@ export interface Cal_event {
 	[TAG_FUNC_LOC_CT]: string
 	[TAG_FUNC_LOC_EM]: string
 	[FLOC_IM_REF_GRP]: any
-	[FLOC_TX_REF_GRP]: any
+	[FLOC_TX_ACCESS]: string
 	[FLOC_VD_REF_GRP]: any
 }
 
@@ -87,12 +87,9 @@ export const TAG_FUNC_LOC_ROO = 'TAG_FUNC_LOC_ROO'
 export const TAG_FUNC_LOC_MAX = 'TAG_FUNC_LOC_MAX'
 export const TAG_FUNC_LOC_CT = 'TAG_FUNC_LOC_CT'
 export const TAG_FUNC_LOC_EM = 'TAG_FUNC_LOC_EM'
-export const TAG_FUNC_LOC_IMG = 'TAG_FUNC_LOC_IMG'
-export const TAG_FUNC_LOC_TXT = 'TAG_FUNC_LOC_TXT'
-export const TAG_FUNC_LOC_TH = 'TAG_FUNC_LOC_TH'
-//TDR FIELD
+//TDR FIELD  
 export const FLOC_IM_REF_GRP = 'FLOC_IM_REF_GRP'
-export const FLOC_TX_REF_GRP = 'FLOC_TX_REF_GRP'
+export const FLOC_TX_ACCESS = 'FLOC_TX_ACCESS'
 export const FLOC_VD_REF_GRP = 'FLOC_VD_REF_GRP'
 //Event group by location
 export const TAG_FUNC_DTE_GRP = 'TAG_FUNC_DTE_GRP'
@@ -157,11 +154,6 @@ export const ICON_SHAPE_MAP = {
 export const MEDIA_TYPE = {
 	VIDEO: 'FLOC_VD_ACCESS',
 	IMAGE: 'FLOC_IM_ACCESS',
-}
-
-export interface MEDIA_TYPE_ACCESS {
-	FLOC_IM_ACCESS?: string
-	FLOC_VD_ACCESS?: string
 }
 
 // export const COLORS_MAP = {
