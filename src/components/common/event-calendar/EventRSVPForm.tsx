@@ -41,6 +41,9 @@ import {
 	TAG_FUNC_RSVP,
 	FLOC_TX_ACCESS,
 	TAG_FUNC_O,
+	TAG_FUNC_O_PATH,
+	TAG_FUNC_O_ID,
+	TAG_FUNC_O_CODE,
 } from './Constants'
 import { BadgeCheck, FileDown, Mail, MonitorPlay, Phone, SquareUserRound } from 'lucide-react'
 import {
@@ -274,17 +277,16 @@ const ShowButton = ({
 					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[58%]'} w-full flex flex-col items-start justify-evenly text-lg p-1 border-2 rounded`}>
 					<div className={'w-full '}>
 						{message.contactInfo}
-						<div className={'flex font-normal items-center'}>
+						<div className={'flex font-normal items-center text-base'}>
 							<Phone size={25} />
 							{event[TAG_FUNC_LOC_CT]}
 						</div>
-						<div className={'flex font-normal items-center'}>
+						<div className={'flex font-normal items-center text-base'}>
 							<Mail size={25} />
 							{event[TAG_FUNC_LOC_EM]}
 						</div>
 					</div>
 					<div className={'w-full'}>
-						{message.address}
 						{/*@ts-ignore there is variable called TAG_FUNC_O*/}
 						{event[TAG_FUNC_O] ? (
 							<div className={'flex font-normal items-center'}>
@@ -293,11 +295,13 @@ const ShowButton = ({
 							</div>
 						) : (
 							<>
-								<div className={'font-normal'}>
+								<div className={'font-normal text-base'}>
 									{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
 								</div>
-								<div className={'font-normal'}>
-									{getContactInfo(BD_ADDRESS, contactInfo, event)}{' '}
+								<div className={'font-normal text-base'}>
+									{getContactInfo(BD_ADDRESS, contactInfo, event)}
+								</div>
+								<div className={'font-normal text-base'}>
 									{getContactInfo(BD_CITY, contactInfo, event)},
 									{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 								</div>
@@ -353,29 +357,40 @@ const ShowRSVPSuccess = ({
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
 					className={
-						'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly text-sm'
+						'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly'
 					}>
 					<div className={'w-full'}>
 						{message.contactInfo}
-						<div className={'flex font-normal items-center'}>
+						<div className={'flex font-normal items-center text-base'}>
 							<Phone />
 							{event[TAG_FUNC_LOC_CT]}
 						</div>
-						<div className={'flex font-normal items-center'}>
+						<div className={'flex font-normal items-center text-base'}>
 							<Mail />
 							{event[TAG_FUNC_LOC_EM]}
 						</div>
 					</div>
 					<div className={'w-full'}>
-						{message.address}
-						<div className={'font-normal'}>
-							{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
-						</div>
-						<div className={'font-normal'}>
-							{getContactInfo(BD_ADDRESS, contactInfo, event)}{' '}
-							{getContactInfo(BD_CITY, contactInfo, event)},{' '}
-							{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
-						</div>
+						{/*@ts-ignore there is variable called TAG_FUNC_O*/}
+						{event[TAG_FUNC_O] ? (
+							<div className={'flex font-normal items-center'}>
+								<MonitorPlay size={25} />
+								<div>{message.online}</div>
+							</div>
+						) : (
+							<>
+							<div className={'font-normal text-base'}>
+									{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
+								</div>
+								<div className={'font-normal text-base'}>
+									{getContactInfo(BD_ADDRESS, contactInfo, event)}
+								</div>
+								<div className={'font-normal text-base'}>
+									{getContactInfo(BD_CITY, contactInfo, event)},
+									{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 			) : (
@@ -477,6 +492,10 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				BD_ADDRESS: getContactInfo(BD_ADDRESS, contactInfo, event),
 				occ1: patron.occ1,
 				occ2: patron.occ2,
+				[TAG_FUNC_O]: event[TAG_FUNC_O],
+				[TAG_FUNC_O_PATH]: event[TAG_FUNC_O_PATH],
+				[TAG_FUNC_O_ID]: event[TAG_FUNC_O_ID],
+				[TAG_FUNC_O_CODE]: event[TAG_FUNC_O_CODE],
 			})
 		)
 

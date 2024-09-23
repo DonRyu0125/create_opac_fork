@@ -12,6 +12,8 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick, actionTyp
 	const message: any = useConstants().message
 	const actionText = actionType === 'confirm' ? message.confirm : message.unregistered
 
+	console.log('patronInfo', patronInfo)
+
 	return (
 		<div className="my-10 text-center">
 			<h1 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -27,10 +29,20 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick, actionTyp
 					<div>
 						{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
 					</div>
-					<div>{patronInfo?.BD_ADDRESS}</div>
-					<div>
-						{message.room}: {patronInfo?.TAG_FUNC_LOC_ROO}
-					</div>
+					{patronInfo.TAG_FUNC_O ? (
+						<>	<div>Join the online meeting</div>
+							<div>Path:{patronInfo?.TAG_FUNC_O_PATH}</div>
+							<div>ID:{patronInfo?.TAG_FUNC_P_ID}</div>
+							<div>Passcode:{patronInfo?.TAG_FUNC_O_CODE}</div>
+						</>
+					) : (
+						<>
+							<div>{patronInfo?.BD_ADDRESS}</div>
+							<div>
+								{message.room}: {patronInfo?.TAG_FUNC_LOC_ROO}
+							</div>
+						</>
+					)}
 				</div>
 				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>

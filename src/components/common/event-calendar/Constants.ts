@@ -24,6 +24,11 @@ export interface Cal_event {
 	[FLOC_IM_REF_GRP]: any
 	[FLOC_TX_ACCESS]: string
 	[FLOC_VD_REF_GRP]: any
+	[TAG_FUNC_O_PATH]:string
+	[TAG_FUNC_O]:string
+	[TAG_FUNC_O_ID]:string
+	[TAG_FUNC_O_PATH]:string
+	[TAG_FUNC_O_CODE]:string
 }
 
 // export type ImageProps = {
