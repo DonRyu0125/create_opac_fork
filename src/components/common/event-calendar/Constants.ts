@@ -21,15 +21,17 @@ export interface Cal_event {
 	[TAG_DB_TYPE]: string
 	[TAG_FUNC_LOC_CT]: string
 	[TAG_FUNC_LOC_EM]: string
-	[TAG_FUNC_LOC_IMG]: string
-	[TAG_FUNC_LOC_MD]: string
-	[TAG_FUNC_LOC_TXT]: string
+	[FLOC_IM_REF_GRP]: any
+	[FLOC_TX_REF_GRP]: any
+	[FLOC_VD_REF_GRP]: any
 }
-export type ImageProps = {
-	[TAG_FUNC_LOC_MT]: string
-	[TAG_FUNC_LOC_MD]: string
-	[TAG_FUNC_LOC_TH]: string // Thumbnail
-}
+
+// export type ImageProps = {
+// 	[TAG_FUNC_LOC_MT]: string
+// 	[TAG_FUNC_LOC_MD]: string
+// 	[TAG_FUNC_LOC_TH]: string // Thumbnail
+// }
+
 export interface patron {
 	[PATRON]: string
 	[TAG_FUNC_P_ID]: string
@@ -88,6 +90,10 @@ export const TAG_FUNC_LOC_EM = 'TAG_FUNC_LOC_EM'
 export const TAG_FUNC_LOC_IMG = 'TAG_FUNC_LOC_IMG'
 export const TAG_FUNC_LOC_TXT = 'TAG_FUNC_LOC_TXT'
 export const TAG_FUNC_LOC_TH = 'TAG_FUNC_LOC_TH'
+//TDR FIELD
+export const FLOC_IM_REF_GRP = 'FLOC_IM_REF_GRP'
+export const FLOC_TX_REF_GRP = 'FLOC_TX_REF_GRP'
+export const FLOC_VD_REF_GRP = 'FLOC_VD_REF_GRP'
 //Event group by location
 export const TAG_FUNC_DTE_GRP = 'TAG_FUNC_DTE_GRP'
 export const TAG_FUNC_DATE = 'TAG_FUNC_DATE'

@@ -52,22 +52,26 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		const x2js = new X2JS()
 		const jsonData: any = x2js.xml2js(response.data)
 		const events = jsonData?.div?.xml?.event
-		const formattedEvents = Array.isArray(events) 
-		? events.map(event => ({
-			...event,
-			FUNC_LOC_M_GRP: Array.isArray(event.FUNC_LOC_M_GRP) 
-				? event.FUNC_LOC_M_GRP 
-				: [event.FUNC_LOC_M_GRP]
-		}))
-		: events && {
-			...events,
-			FUNC_LOC_M_GRP: Array.isArray(events.FUNC_LOC_M_GRP) 
-				? events.FUNC_LOC_M_GRP 
-				: [events.FUNC_LOC_M_GRP]
-		};
 
-		if (!formattedEvents) return []
-		return convertToArr(formattedEvents)
+		let formatEvents = events.map((item) => {
+			return {
+				...item,
+				FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
+					? item.FLOC_IM_REF_GRP
+					: [item.FLOC_IM_REF_GRP],
+				FLOC_TX_REF_GRP: Array.isArray(item.FLOC_TX_REF_GRP)
+					? item.FLOC_TX_REF_GRP
+					: [item.FLOC_TX_REF_GRP],
+				FLOC_VD_REF_GRP: Array.isArray(item.FLOC_VD_REF_GRP)
+					? item.FLOC_VD_REF_GRP
+					: [item.FLOC_VD_REF_GRP],
+			}
+		})
+
+		console.log('formatEvents', formatEvents)
+
+		if (!formatEvents) return []
+		return convertToArr(formatEvents)
 	} catch (error) {
 		throw error
 	}

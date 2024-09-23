@@ -71,26 +71,30 @@ const EventButton = ({
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
+	
+	// <Expand />
+	// <MonitorPlay />
+	//<SquareUserRound />
 
 	return (
 		<Dialog key={id}>
 			<DialogTrigger asChild>
 				{weekType ? (
 					<Button
-						className={`w-full w-full md:max-w-[168px] h-[30%] border-hidden p-0 text-sm flex flex-col justify-start`}
+						className={`${getColor(elm[fitlerOption])} w-full w-full md:max-w-[168px] h-[30%] border-hidden p-0 text-sm flex flex-col justify-start`}
 						variant="outline">
 						<div className={'w-full text-left'}>
 							<div className={'flex w-full'}>
-								<div
+								{/* <div
 									className={cn(
 										'h-4 w-[16px] border rounded',
 										getColor(elm[fitlerOption])
-									)}></div>
-								<p className={'w-full h-full break-all sm:overflow-hidden'}>
+									)}></div> */}
+								<p className={'w-full h-full break-all sm:overflow-hidden font-bold'}>
 									{elm[TAG_NAME]}
 								</p>
 							</div>
-							<div className={'hidden md:block flex items-center justify-around w-full'}>
+							<div className={'hidden md:flex items-center justify-around w-full'}>
 								<div>
 									<div>{elm[TAG_FUNC_START_T]?.toUpperCase()}-</div>
 									<div>{elm[TAG_FUNC_END_T]?.toUpperCase()}</div>
