@@ -44,12 +44,12 @@
 			},
 			{
 				"type": "Vancouver Public Library, Kitsilano Branch",
-				"color": "bg-red-500 border-red-500",
+				"color": "bg-purple-500 border-purple-500",
 				"icon": "rounded"
 			},
 			{
 				"type": "Vancouver Public Library, Britannia Branch",
-				"color": "bg-yellow-500 border-yellow-500",
+				"color": "bg-red-600 border-red-600",
 				"icon": "rounded"
 			},
 			{

@@ -68,8 +68,6 @@
         <p><strong>Event:</strong> ^TAG_NAME^</p>
         <p><strong>Date:</strong> ^TAG_FUNC_DATE^</p>
         <p><strong>Time:</strong>^TAG_FUNC_START_T^ - ^TAG_FUNC_END_T^</p>
-        <p><strong>Location:</strong></p>
-        <p>^BD_ADDRESS^</p>
       </div>
     </div>
     <footer class="footer">2024 Minisis Inc. All rights reserved.</footer>
