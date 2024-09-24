@@ -77,13 +77,13 @@ const EventButton = ({
 			<DialogTrigger asChild>
 				{weekType ? (
 					<Button
-						className={`${getColor(elm[fitlerOption])} break-normal min-w-[100px] h-[65px] mr-1 overflow-y-hidden w-full md:max-w-[168px] md:h-[30%] md:mb-2 border-hidden p-1 text-sm flex flex-col justify-start text-white md:p-1`}
+						className={`${getColor(elm[fitlerOption])} w-full break-normal min-w-[100px] max-w-[100px] h-[65px] md:max-h-[165px] mr-1 overflow-y-hidden  md:max-w-[168px] md:h-full md:mb-2 border-hidden p-1 text-sm flex flex-col justify-start text-white md:p-1`}
 						variant="outline">
 						<div className={'w-full text-left'}>
 							<div className={'flex w-full'}>
 								<p
 									className={
-										'w-full h-full sm:overflow-hidden font-bold'
+										'w-full h-full sm:overflow-hidden font-bold max-h-[240px] overflow-y-hidden'
 									}>
 									{elm[TAG_NAME]}
 								</p>
@@ -127,13 +127,18 @@ const EventButton = ({
 						<div className="h-8">
 							<img className="h-full" src={logo} alt="logo" />
 						</div>
-						<div className={'flex'}>
+						<div className={'h-[40px] flex justify-center items-center'}>
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded mr-1',
 									getColor(elm[TAG_DB_TYPE])
 								)}></div>
-							<div>{elm[TAG_NAME]}</div>
+							<div
+								className={
+									'whitespace-nowrap  w-[200px] sm:w-full overflow-x-auto overflow-y-hidden text-left'
+								}>
+								{elm[TAG_NAME]}
+							</div>
 						</div>
 						<DialogPrimitive.Close>
 							<X className={'h-6 w-6'} />

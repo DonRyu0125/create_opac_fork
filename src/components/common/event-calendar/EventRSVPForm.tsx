@@ -191,19 +191,19 @@ const ShowForm = ({
 						className={'border-2 border-grey-500 w-1/4'}>
 						{Array(TAG_FUNC_P_ATTND_MAX)
 							.fill(0)
-							.map((_, index) => (
+							?.map((_, index) => (
 								<option key={index} value={index + 1}>
 									{index + 1}
 								</option>
 							))}
 					</select>
 				</div>
-				<div className={'my-2'}>
+				{/* <div className={'my-2'}>
 					<ReCAPTCHA
 						sitekey="YOUR_RECAPTCHA_SITE_KEY" // Replace with your reCAPTCHA site key
 						onChange={handleCaptchaChange}
 					/>
-				</div>
+				</div> */}
 				<Button className={'w-full font-bold'} type="submit">
 					{message.register}
 				</Button>
