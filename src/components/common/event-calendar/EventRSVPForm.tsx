@@ -549,7 +549,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						setStatus={setStatus}
 						contactInfo={contactInfo}
 					/>
-					// <ShowRSVPSuccess onReset={onReset} event={event} contactInfo={contactInfo} />
 				)
 			case STATUS_TYPE.SHOW_FORM:
 				return (
