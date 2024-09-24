@@ -78,7 +78,7 @@ const EventSumButton = ({
 					{groupedByType(filteredEvents).map((item: any, id: number) => (
 						<Dialog key={id}>
 							<ButtonTooltip item={item.list}>
-								<DialogTrigger asChild>
+								<DialogTrigger>
 									<Button
 										className="h-[20px] border-hidden flex p-0 justify-start"
 										variant="outline">

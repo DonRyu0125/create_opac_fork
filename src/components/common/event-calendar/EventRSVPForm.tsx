@@ -295,7 +295,9 @@ const ShowButton = ({
 									<MonitorPlay size={25} />
 									<div>{message.online}</div>
 								</div>
-								<div className={'text-sm'}>Use the meeting link to access the session!</div>
+								<div className={'text-sm'}>
+									"Use the meeting link to access the session!"
+								</div>
 							</>
 						) : (
 							<>
@@ -309,12 +311,14 @@ const ShowButton = ({
 									{getContactInfo(BD_CITY, contactInfo, event)},
 									{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 								</div>
-								<div className={'text-sm'}>Please be in the room ahead of the meeting time.</div>
+								<div className={'text-sm'}>
+									"Please be in the room ahead of the meeting time"
+								</div>
 							</>
 						)}
 					</div>
 					{event[FLOC_TX_ACCESS] && (
-						<ButtonTooltip item={[{ TAG_NAME: 'asdsad' }]}>
+						<ButtonTooltip item={[{ TAG_NAME: `Download material` }]}>
 							<Button onClick={handleDownload}>
 								<FileDown />
 							</Button>
@@ -322,6 +326,7 @@ const ShowButton = ({
 					)}
 				</div>
 			) : (
+				// If there are no building info, this is private place
 				<div className={'h-1/2 w-full flex flex-col items-center justify-center'}>
 					<div>{message.privateProperty}</div>
 					<div className={'text-center'}>{message.contactInfoNotProvided}</div>

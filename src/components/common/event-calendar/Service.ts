@@ -65,8 +65,6 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 			}
 		})
 
-		console.log('formatEvents', formatEvents)
-
 		if (!formatEvents) return []
 		return convertToArr(formatEvents)
 	} catch (error) {
