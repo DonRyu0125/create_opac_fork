@@ -60,6 +60,7 @@ import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
 import { fetch_get, getContactInfo } from './Service'
+import ButtonTooltip from './ButtonTooltip'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -289,10 +290,13 @@ const ShowButton = ({
 					<div className={'w-full'}>
 						{/*@ts-ignore there is variable called TAG_FUNC_O*/}
 						{event[TAG_FUNC_O] ? (
-							<div className={'flex font-normal items-center'}>
-								<MonitorPlay size={25} />
-								<div>{message.online}</div>
-							</div>
+							<>
+								<div className={'flex font-normal items-center'}>
+									<MonitorPlay size={25} />
+									<div>{message.online}</div>
+								</div>
+								<div className={'text-sm'}>Use the meeting link to access the session!</div>
+							</>
 						) : (
 							<>
 								<div className={'font-normal text-base'}>
@@ -305,13 +309,16 @@ const ShowButton = ({
 									{getContactInfo(BD_CITY, contactInfo, event)},
 									{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
 								</div>
+								<div className={'text-sm'}>Please be in the room ahead of the meeting time.</div>
 							</>
 						)}
 					</div>
 					{event[FLOC_TX_ACCESS] && (
-						<Button onClick={handleDownload}>
-							<FileDown />
-						</Button>
+						<ButtonTooltip item={[{ TAG_NAME: 'asdsad' }]}>
+							<Button onClick={handleDownload}>
+								<FileDown />
+							</Button>
+						</ButtonTooltip>
 					)}
 				</div>
 			) : (

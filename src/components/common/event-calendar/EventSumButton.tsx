@@ -27,7 +27,7 @@ import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarMonthType, calendarWeekType } from '@/store'
 import EventCustomDialogContent from './EventCustomDialogContent'
-import EventButtonTooltip from './EventButtonTooltip'
+import ButtonTooltip from './ButtonTooltip'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]
@@ -77,7 +77,7 @@ const EventSumButton = ({
 				<div className={'h-full mb-[2px] overflow-y-auto custom-scrollbar'}>
 					{groupedByType(filteredEvents).map((item: any, id: number) => (
 						<Dialog key={id}>
-							<EventButtonTooltip item={item}>
+							<ButtonTooltip item={item.list}>
 								<DialogTrigger asChild>
 									<Button
 										className="h-[20px] border-hidden flex p-0 justify-start"
@@ -100,7 +100,7 @@ const EventSumButton = ({
 										</div>
 									</Button>
 								</DialogTrigger>
-							</EventButtonTooltip>
+							</ButtonTooltip>
 							<DialogContent
 								hideClose={'invisible'}
 								className={
