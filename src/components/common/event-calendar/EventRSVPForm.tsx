@@ -295,7 +295,7 @@ const ShowButton = ({
 									<MonitorPlay size={25} />
 									<div>{message.online}</div>
 								</div>
-								<div className={'text-sm'}>
+								<div className={'text-sm my-2 text-center'}>
 									"Use the meeting link to access the session!"
 								</div>
 							</>
@@ -305,14 +305,18 @@ const ShowButton = ({
 									{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
 								</div>
 								<div className={'font-normal text-base'}>
-									{getContactInfo(BD_ADDRESS, contactInfo, event)}
+									<div>{getContactInfo(BD_ADDRESS, contactInfo, event)}</div>
+									<div>
+										<span className={'mr-1'}>
+											{getContactInfo(BD_CITY, contactInfo, event)}
+										</span>
+										<span>
+											{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
+										</span>
+									</div>
 								</div>
-								<div className={'font-normal text-base'}>
-									{getContactInfo(BD_CITY, contactInfo, event)},
-									{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
-								</div>
-								<div className={'text-sm'}>
-									"Please be in the room ahead of the meeting time"
+								<div className={'text-sm my-2 text-center'}>
+									"Please be in the room before meeting time"
 								</div>
 							</>
 						)}
@@ -352,65 +356,56 @@ const ShowRSVPSuccess = ({
 }) => {
 	const message = useConstants().message
 	return (
-		<div className={'min-h-[388px] h-full w-full p-2 border-2 rounded'}>
-			<div
-				className={
-					'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'
-				}>
-				<SquareUserRound className="w-12 h-12" />
-				<div className={'text-2xl'}>{message.checkEmail}</div>
-				<div className={'text-xl'}>{message.registrationIncomplete}</div>
-			</div>
-			<div
-				onClick={onReset}
-				className="font-bold h-[40px] flex items-center justify-center text-center bg-primary text-primary-foreground rounded">
-				{message.goBack}
-			</div>
-			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
+		<div className={'min-h-[388px] h-full w-full p-2 border-2 rounded flex flex-col justify-evenly'}>
+			<div>
 				<div
 					className={
-						'min-h-[194px] h-1/2 w-full flex flex-col items-start justify-evenly'
+						'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'
 					}>
-					<div className={'w-full text-center'}>
-						{message.contactInfo}
-						<div className={'flex font-normal items-center text-base'}>
-							<Phone />
-							{event[TAG_FUNC_LOC_CT]}
+					<SquareUserRound className="w-12 h-12" />
+					<div className={'text-xl'}>{message.checkEmail}</div>
+					<div className={'text-xl'}>{message.registrationIncomplete}</div>
+				</div>
+				<div
+					onClick={onReset}
+					className="font-bold h-[40px] flex items-center justify-center text-center bg-primary text-primary-foreground rounded">
+					{message.goBack}
+				</div>
+			</div>
+			<div>
+				{event[TAG_FUNC_O] ? (
+					<>
+						<div className={'flex font-normal items-center'}>
+							<MonitorPlay size={25} />
+							<div>{message.online}</div>
 						</div>
-						<div className={'flex font-normal items-center text-base'}>
-							<Mail />
-							{event[TAG_FUNC_LOC_EM]}
+						<div className={'text-sm my-2 text-center'}>
+							"Use the meeting link to access the session!"
 						</div>
-					</div>
-					<div className={'w-full'}>
-						{/*@ts-ignore there is variable called TAG_FUNC_O*/}
-						{event[TAG_FUNC_O] ? (
-							<div className={'flex font-normal items-center'}>
-								<MonitorPlay size={25} />
-								<div>{message.online}</div>
+					</>
+				) : (
+					<>
+						<div className={'font-normal text-base'}>
+							{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
+						</div>
+						<div className={'font-normal text-base'}>
+							<div>{getContactInfo(BD_ADDRESS, contactInfo, event)}</div>
+							<div>
+								<span className={'mr-1'}>
+									{getContactInfo(BD_CITY, contactInfo, event)}
+								</span>
+								<span>{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}</span>
 							</div>
-						) : (
-							<>
-								<div className={'font-normal text-base'}>
-									{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
-								</div>
-								<div className={'font-normal text-base'}>
-									{getContactInfo(BD_ADDRESS, contactInfo, event)}
-								</div>
-								<div className={'font-normal text-base'}>
-									{getContactInfo(BD_CITY, contactInfo, event)},
-									{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
-								</div>
-							</>
-						)}
-					</div>
-				</div>
-			) : (
-				<div className={'h-1/2 w-full flex flex-col items-center justify-center '}>
-					<div>{message.privateProperty}</div>
-					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
-				</div>
-			)}
+							<div>
+								{message.room}:{event[TAG_FUNC_LOC_ROO]}
+							</div>
+						</div>
+						<div className={'text-sm my-2 text-center'}>
+							"Please be in the room before meeting time"
+						</div>
+					</>
+				)}
+			</div>
 		</div>
 	)
 }
@@ -554,6 +549,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						setStatus={setStatus}
 						contactInfo={contactInfo}
 					/>
+					// <ShowRSVPSuccess onReset={onReset} event={event} contactInfo={contactInfo} />
 				)
 			case STATUS_TYPE.SHOW_FORM:
 				return (
