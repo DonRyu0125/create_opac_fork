@@ -52,6 +52,16 @@
       margin: 0;
       word-wrap: break-word;
     }
+    .info a {
+      display:block;
+      padding: 10px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background-color: #f5f5f5;
+      font-size: 16px;
+      margin: 0;
+      word-wrap: break-word;
+    }
     .button-container {
       text-align: center;
     }
@@ -96,15 +106,15 @@
       <p id="event-name">^TAG_NAME^</p>
     </div>
     <div class="info">
-      <div for="online meeting">Online Meeting Path:</div>
-      <p id="event-location">^TAG_FUNC_O_PATH^</p>
+      <div for="online meeting">Online Meeting Link:</div>
+      <a id="event-location" href="^TAG_FUNC_O_PATH^">Join the meeting</a>
     </div>
     <div class="info">
-      <div for="online meeting">ID:</div>
+      <div for="online meeting">Online Meeting ID:</div>
       <p id="event-location">^TAG_FUNC_O_ID^</p>
     </div>
     <div class="info">
-      <div for="online meeting">Password:</div>
+      <div for="online meeting">Online Meeting Password:</div>
       <p id="event-location">^TAG_FUNC_O_CODE^</p>
     </div>
     <div class="info">
@@ -128,7 +138,7 @@
   </div>
   <div class="container">
     <div class="info">
-      <div for="attendee-id">ID:</div>
+      <div for="attendee-id">Registration ID:</div>
       <p id="attendee-name">^TAG_FUNC_P_ID^</p>
     </div>
     <div class="info">
