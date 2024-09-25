@@ -83,7 +83,7 @@ const EventButton = ({
 							<div className={'flex w-full'}>
 								<p
 									className={
-										'w-full h-full sm:overflow-hidden font-bold h-[120px] overflow-y-hidden'
+										'w-full sm:overflow-hidden font-bold md:h-[120px] overflow-y-hidden'
 									}>
 									{elm[TAG_NAME]}
 								</p>
