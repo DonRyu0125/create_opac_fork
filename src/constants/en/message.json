@@ -109,5 +109,7 @@
 	"logout": "Logout",
 	"welcome": "Welcome",
 	"calendar":"Calendar",
-	"online":"Online"
+	"online":"Online",
+	"onlineTip":"Use the meeting link to access the session!",
+	"inPersonTip":"Please be in the room before meeting time"
 }

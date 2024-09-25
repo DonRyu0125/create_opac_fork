@@ -1,4 +1,5 @@
 export type PatronInfo = {
+	TAG_FUNC_O_ID: ReactNode
 	TAG_FUNC_O_CODE: ReactNode
 	TAG_FUNC_O_PATH: ReactNode
 	TAG_FUNC_O: ReactNode

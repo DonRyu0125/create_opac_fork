@@ -109,5 +109,7 @@
 	"logout": "Déconnexion",
 	"welcome": "Bienvenue",
 	"calendar":"calendrier",
-	"online":"en ligne"
+	"online":"en ligne",
+	"onlineTip":"Utilisez le lien de la réunion pour accéder à la session!",
+	"inPersonTip":"Veuillez être dans la salle avant l'heure du rendez-vous"
 }

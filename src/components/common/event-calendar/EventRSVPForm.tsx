@@ -296,7 +296,7 @@ const ShowButton = ({
 									<div>{message.online}</div>
 								</div>
 								<div className={'text-sm my-2 text-center'}>
-									"Use the meeting link to access the session!"
+									{message.onlineTip}
 								</div>
 							</>
 						) : (
@@ -316,7 +316,7 @@ const ShowButton = ({
 									</div>
 								</div>
 								<div className={'text-sm my-2 text-center'}>
-									"Please be in the room before meeting time"
+									{message.inPersonTip}
 								</div>
 							</>
 						)}

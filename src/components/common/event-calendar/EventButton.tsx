@@ -43,7 +43,6 @@ import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarWeekType } from '@/store'
 import EventCustomDialogContent from './EventCustomDialogContent'
-import ImageCarousel from '../ImageCarousel'
 
 const EventButton = ({
 	elm,
