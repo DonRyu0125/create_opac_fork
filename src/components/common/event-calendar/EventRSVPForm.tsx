@@ -275,7 +275,7 @@ const ShowButton = ({
 			)}
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
-					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[58%]'} w-full flex flex-col items-start justify-evenly text-lg p-1 border-2 rounded`}>
+					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-1 border-2 rounded`}>
 					<div className={'w-full text-center'}>
 						{message.contactInfo}
 						<div className={'flex font-normal items-center text-base'}>
@@ -296,7 +296,7 @@ const ShowButton = ({
 									<div>{message.online}</div>
 								</div>
 								<div className={'text-sm my-2 text-center'}>
-									{message.onlineTip}
+									"{message.onlineTip}"
 								</div>
 							</>
 						) : (
@@ -316,7 +316,7 @@ const ShowButton = ({
 									</div>
 								</div>
 								<div className={'text-sm my-2 text-center'}>
-									{message.inPersonTip}
+									"{message.inPersonTip}"
 								</div>
 							</>
 						)}

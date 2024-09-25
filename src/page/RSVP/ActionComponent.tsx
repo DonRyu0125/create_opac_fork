@@ -33,7 +33,7 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick }) => {
 								<MonitorPlay />
 								<div className={'ml-1'}>{message.online}</div>
 							</div>
-							<div>{message.onlineTip}</div>
+							<div>"{message.onlineTip}"</div>
 						</>
 					) : (
 						<>
