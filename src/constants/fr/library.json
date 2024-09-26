@@ -32,13 +32,8 @@
 		"filterOption": "TAG_FUNC_LOC",
 		"filterTypes": [
 			{
-<<<<<<< HEAD
-				"type": "Delhi Branch",
-				"color": "bg-neutral-500 border-neutral-500",
-=======
 				"type": "Vancouver Public Library, Joe Fortes Branch",
 				"color":"bg-neutral-500 border-neutral-500",
->>>>>>> 9b3bcdc51d65c57ab4322be2b66be155ae28f857
 				"icon": "rounded"
 			},
 			{
