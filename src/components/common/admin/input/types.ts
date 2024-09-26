@@ -19,6 +19,12 @@ type SelectOption = {
 	label: string
 }
 
+export type SwitchProps = {
+	title: string
+	value: boolean
+	onChange: (value: boolean) => void
+}
+
 export type SelectProps = {
 	label: string
 	placeholder?: string

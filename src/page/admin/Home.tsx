@@ -1,10 +1,13 @@
 import AdminForm from '@/components/common/admin/AdminForm'
 import ImagePreview from '@/components/common/admin/input/ImagePreview'
+import Switch from '@/components/common/admin/input/Switch'
 import TextField from '@/components/common/admin/input/TextField'
+import SectionActions from '@/components/common/admin/layout/SectionActions'
 import SectionHeader from '@/components/common/admin/layout/SectionHeader'
 import SectionWrapper from '@/components/common/admin/layout/SectionWrapper'
 import TabsWrapper from '@/components/common/admin/layout/TabsWrapper'
 import AdminLayout from '@/components/layouts/admin'
+import { Button } from '@/components/ui/button'
 import { TabsContent } from '@/components/ui/tabs'
 import { default as enValues } from '@/constants/en/home.json'
 import { default as frValues } from '@/constants/fr/home.json'
@@ -12,6 +15,7 @@ import { useAdminForm } from '@/hooks/useAdminForm'
 import { AdminFormProvider } from '@/providers/AdminFormProvider'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
+import { Plus, Trash } from 'lucide-react'
 
 const AdminHome = () => {
 	return (
@@ -44,7 +48,7 @@ const AdminHome = () => {
 
 const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 	const fieldsValue = lang === 'en' ? enValues : frValues
-	const { handleChange } = useAdminForm()
+	const { handleChange, handleAdd, handleFormSave } = useAdminForm()
 
 	return (
 		<div className="flex gap-4 flex-col">
@@ -65,9 +69,30 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 
 			<div className="mt-2">
 				<SectionHeader heading="Featured Collections" />
+
+				<SectionActions
+					onAddNew={() => {
+						handleAdd(
+							['featuredCollection', `${fieldsValue.featuredCollection.length}`],
+							{
+								title: '',
+								description: '',
+								url: '',
+								thumbnail: '',
+							}
+						)
+					}}
+					enableFeatureValue={fieldsValue.enableFeaturedCollection}
+					onEnableFeatureChange={(e) => handleChange(['enableFeaturedCollection'], e)}
+				/>
+
 				<div className="flex flex-col gap-2">
 					{fieldsValue.featuredCollection.map((item, index) => (
 						<SectionWrapper key={JSON.stringify(item)}>
+							<Button>
+								<Trash />
+								Remove
+							</Button>
 							<TextField
 								title={'Category title'}
 								value={item.title}
@@ -102,6 +127,18 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 			</div>
 			<div className="mt-2">
 				<SectionHeader heading="Browse By Category" />
+				<SectionActions
+					onAddNew={() => {
+						handleAdd(['categoriesItems', `${fieldsValue.categoriesItems.length}`], {
+							title: '',
+							url: '',
+							thumbnail: '',
+						})
+					}}
+					enableFeatureValue={fieldsValue.enableCategoriesItems}
+					onEnableFeatureChange={(e) => handleChange(['enableCategoriesItems'], e)}
+				/>
+
 				<div className="flex flex-col gap-2">
 					{fieldsValue.categoriesItems.map((item, index) => (
 						<SectionWrapper key={JSON.stringify(item)}>
@@ -131,7 +168,7 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 
 							<ImagePreview src={item.thumbnail} alt="Category thumbnail" />
 						</SectionWrapper>
-					))}{' '}
+					))}
 				</div>
 			</div>
 		</div>

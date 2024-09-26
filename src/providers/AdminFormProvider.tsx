@@ -1,12 +1,13 @@
 // AdminFormProvider.tsx
 import React, { createContext, useState, useCallback } from 'react'
 import { axios } from '@/lib/axios'
-import { updateJsonValue } from '@/lib/admin'
+import { addJsonValue, updateJsonValue } from '@/lib/admin'
 import { SchemaType, SchemaValueType } from '@/types/schema'
 
 type AdminFormContextType = {
 	formData: SchemaValueType
 	handleChange: (path: string[], newValue: SchemaValueType) => void
+	handleAdd: (path: string[], newValue: SchemaValueType) => void
 	handleFormSave: () => void
 	schema: SchemaType
 	duplicateItem: (path: string[], index: number) => void
@@ -33,8 +34,11 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 	const [schema] = useState<SchemaType>(defaultSchema)
 
 	const handleChange = useCallback((path: string[], newValue: SchemaValueType) => {
-		console.log({ path })
 		setFormData((prevData) => updateJsonValue(prevData, path, newValue))
+	}, [])
+
+	const handleAdd = useCallback((path: string[], newValue: SchemaValueType) => {
+		setFormData((prevData) => addJsonValue(prevData, path, newValue))
 	}, [])
 
 	const updateData = useCallback(
@@ -104,6 +108,7 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 		handleFormSave,
 		removeItem: handleItemRemove,
 		duplicateItem: handleItemDuplicate,
+		handleAdd,
 	}
 
 	return <AdminFormContext.Provider value={contextValue}>{children}</AdminFormContext.Provider>
