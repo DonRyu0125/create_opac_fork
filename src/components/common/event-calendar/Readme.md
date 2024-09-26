@@ -70,9 +70,9 @@ confirm email
       └── EventCalendarEventList              Month View or Week View
           ├── EventSumButton                  Month:event summary modal
               └── EventRSVPForm
-          ├── EventButton                     Month and Week:event common modal
+          ├── EventButton                     Month and Week:event common 
               └── EventRSVPForm
-          └── EventAllButton                  Month:all event modal
+          └── EventAllButton                  REMOVED
               └── EventRSVPForm
   ├── RSVPCancelConfirmTmp.txt                Email tmp for cancellation confirm(3)
   ├── RSVPRegConfirmTmp.txt                   Email tmp for Registration confirm(2)

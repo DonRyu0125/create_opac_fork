@@ -1,42 +1,29 @@
 import useConstants from '@/hooks/useConstants'
-import { cn, convertLowerTrim, convertToArr } from '@/lib/utils'
+import { cn, convertLowerTrim } from '@/lib/utils'
 import { calendarWeekType } from '@/store'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { useAtom } from 'jotai'
-import { Accessibility, SquareUserRound, X } from 'lucide-react'
+import { MonitorPlay, SquareUserRound, X } from 'lucide-react'
 import { Button } from '../../ui/button'
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription,
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-	DialogTrigger,
+	DialogTrigger
 } from '../../ui/dialog'
 import {
-	ContactInfo,
+	ContactInfoRSVP,
 	EVENT_DEFAULT_COLOR,
 	FilterType,
-	PATRON,
-	SISN,
 	TAG_DB_TYPE,
-	TAG_FUNC_ACCESS,
-	TAG_FUNC_CANCEL,
-	TAG_FUNC_CAN_RES,
-	TAG_FUNC_CAP,
-	TAG_FUNC_DATE,
-	TAG_FUNC_DESC,
 	TAG_FUNC_END_T,
-	TAG_FUNC_LANG,
-	TAG_FUNC_LOC_AUD,
-	TAG_FUNC_ROOM,
-	TAG_FUNC_RSVP,
+	TAG_FUNC_O,
 	TAG_FUNC_START_T,
-	TAG_NAME,
+	TAG_NAME
 } from './Constants'
-import EventRSVPCancel from './EventCancel'
-import EventRSVPForm from './EventRSVPForm'
+import EventCustomDialogContent from './EventCustomDialogContent'
 
 const EventButton = ({
 	elm,
@@ -47,7 +34,7 @@ const EventButton = ({
 }: {
 	elm: any
 	id: number
-	contactInfo: ContactInfo[]
+	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
 	fitlerOption: string
 }) => {
@@ -68,33 +55,50 @@ const EventButton = ({
 	return (
 		<Dialog key={id}>
 			<DialogTrigger asChild>
-				<Button className={`w-full h-[95%] border-hidden p-0 `} variant="outline">
-					<div className={'w-full text-left'}>
-						<div className={'flex'}>
-							<div
-								className={cn(
-									'h-4 w-[16px] border rounded',
-									getColor(elm[fitlerOption])
-								)}></div>
-							<p className={'w-full h-full hidden sm:block break-all text-left'}>
-								{elm[TAG_NAME]}
-							</p>
-						</div>
-						{weekType && (
-							<div className={'flex items-center justify-around w-full'}>
+				{weekType ? (
+					<Button
+						className={`${getColor(elm[fitlerOption])} w-full break-normal min-w-[100px] max-w-[100px] h-[65px] md:max-h-[165px] mr-1 overflow-y-hidden  md:max-w-[168px] md:h-full md:mb-2 border-hidden p-1 text-sm flex flex-col justify-start text-white md:p-1`}
+						variant="outline">
+						<div className={'w-full text-left'}>
+							<div className={'flex w-full'}>
+								<p
+									className={
+										'w-full sm:overflow-hidden font-bold md:h-[120px] overflow-y-hidden'
+									}>
+									{elm[TAG_NAME]}
+								</p>
+							</div>
+							<div className={'hidden md:flex items-center justify-around w-full'}>
 								<div>
 									<div>{elm[TAG_FUNC_START_T]?.toUpperCase()}-</div>
 									<div>{elm[TAG_FUNC_END_T]?.toUpperCase()}</div>
 								</div>
 								<div className={'hidden sm:block w-[18px]'}>
-									{elm[TAG_FUNC_RSVP] && <SquareUserRound />}
+									{elm[TAG_FUNC_O] ? <MonitorPlay /> : <SquareUserRound />}
 								</div>
 							</div>
-						)}
-					</div>
-				</Button>
+						</div>
+					</Button>
+				) : (
+					<Button
+						className={`overflow-y-hidden flex flex-col justify-start w-full max-h-[60px] border-hidden p-0 text-sm`}
+						variant="outline">
+						<div className={'flex w-full text-left'}>
+							<div
+								className={cn(
+									'h-4 w-[16px] border rounded',
+									getColor(elm[fitlerOption])
+								)}></div>
+							<p className={'w-full h-full hidden sm:block break-all'}>
+								{elm[TAG_NAME]}
+							</p>
+						</div>
+					</Button>
+				)}
 			</DialogTrigger>
-			<DialogContent hideClose={'invisible'} className={'max-w-lg md:max-w-3xl '}>
+			<DialogContent
+				hideClose={'invisible'}
+				className={'max-h-[90vh] max-w-5xl overflow-y-auto p-1 gap-1 '}>
 				<DialogHeader>
 					<DialogTitle
 						className={
@@ -103,76 +107,29 @@ const EventButton = ({
 						<div className="h-8">
 							<img className="h-full" src={logo} alt="logo" />
 						</div>
-						<div className={'flex'}>
+						<div className={'h-[40px] flex justify-center items-center'}>
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded mr-1',
 									getColor(elm[TAG_DB_TYPE])
 								)}></div>
-							<div>{elm[TAG_DB_TYPE]}</div>
+							<div
+								className={
+									'whitespace-nowrap  w-[200px] sm:w-full overflow-x-auto overflow-y-hidden text-left'
+								}>
+								{elm[TAG_NAME]}
+							</div>
 						</div>
 						<DialogPrimitive.Close>
 							<X className={'h-6 w-6'} />
 						</DialogPrimitive.Close>
 					</DialogTitle>
 				</DialogHeader>
-				<div className={'w-full min-h-[400px]  sm:flex font-bold relative'}>
-					{elm[TAG_FUNC_CANCEL] && <EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />}
-					<div className={'w-full sm:w-8/12 '}>
-						<div className={'overflow-hidden text-lg'}>{elm[TAG_NAME]}</div>
-						<div className={'sm:flex'}>
-							<div className="ml-[10px] sm:ml-0 text-md  text-gray-600 font-bold">
-								&#x2022;{elm[TAG_FUNC_DATE]}
-							</div>
-							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								<span>&#x2022;{elm[TAG_FUNC_START_T]?.toUpperCase()}</span>
-								<span className={'mx-2'}>-</span>
-								<span>{elm[TAG_FUNC_END_T]?.toUpperCase()}</span>
-							</div>
-							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;{message.room}: {elm[TAG_FUNC_ROOM]}
-							</div>
-							{elm[TAG_FUNC_ACCESS] && (
-								<div className="ml-[10px] text-md text-gray-600 font-bold flex">
-									&#x2022;
-									<Accessibility />: Y
-								</div>
-							)}
-						</div>
-						<div className={'sm:flex'}>
-							<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;{message.suitableFor}: {elm[TAG_FUNC_LOC_AUD]}
-							</div>
-							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;{message.seats}: {elm[TAG_FUNC_CAP]}
-							</div>
-							<div className="ml-[10px] text-md text-gray-600 font-bold">
-								&#x2022;{message.language}: {elm[TAG_FUNC_LANG]}
-							</div>
-						</div>
-						<DialogDescription
-							className={
-								'h-full max-h-80 break-all overflow-x-hidden overflow-y-auto'
-							}>
-							{elm[TAG_FUNC_DESC]}
-						</DialogDescription>
-					</div>
-					<div className={'w-full sm:w-4/12'}>
-						{elm[TAG_FUNC_RSVP] && (
-							<EventRSVPForm
-								sisnNumber={elm[SISN]}
-								capacity={elm[TAG_FUNC_CAP]}
-								patrons={convertToArr(elm[PATRON])}
-								event={elm}
-								contactInfo={contactInfo}
-							/>
-						)}
-					</div>
-				</div>
+				<EventCustomDialogContent elm={elm} contactInfo={contactInfo} />
 				<DialogFooter>
 					<DialogPrimitive.Close
 						className={
-							'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+							'font-bold bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
 						}>
 						{message.close}
 					</DialogPrimitive.Close>
