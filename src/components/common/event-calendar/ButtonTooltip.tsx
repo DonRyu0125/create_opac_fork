@@ -4,13 +4,12 @@ import { useEffect, useState } from 'react'
 
 interface ButtonTooltipProps {
 	children: React.ReactNode
-	item: Array<{ [key: string]: string }>
-	isDialogOpen: boolean
+	item?: Array<{ [key: string]: string }>
+	isDialogOpen?: boolean
 }
 
 const ButtonTooltip: React.FC<ButtonTooltipProps> = ({ children, item, isDialogOpen }) => {
 	const [useTool, setUseTool] = useState(true)
-	console.log('isDialogOpen',isDialogOpen)
 	useEffect(() => {
 		setUseTool(!isDialogOpen)
 		return () => {
