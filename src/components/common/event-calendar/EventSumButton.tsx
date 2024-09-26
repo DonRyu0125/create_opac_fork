@@ -103,94 +103,6 @@ const EventSumButton = ({
 							</ButtonTooltip>
 							<DialogContent
 								hideClose={'invisible'}
-<<<<<<< HEAD
-								className={'max-w-lg h-[500px] overflow-auto p-4 md:max-w-3xl'}>
-								<>
-									<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
-										<DialogTitle
-											className={
-												' bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
-											}>
-											<div className="h-8">
-												<img className="h-full" src={logo} alt="logo" />
-											</div>
-											<div className={'flex'}>
-												<div
-													className={cn(
-														'h-4 w-[16px] border rounded mr-1 ',
-														getColor(item[fitlerOption])
-													)}></div>
-												{fitlerOption ? item[fitlerOption] : message.all}
-											</div>
-											<DialogPrimitive.Close>
-												<X className={'h-6 w-6'} />
-											</DialogPrimitive.Close>
-										</DialogTitle>
-									</DialogHeader>
-									{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
-										<div
-											key={key}
-											className={
-												'w-full text-l sm:flex font-bold p-2 border-2 rounded relative'
-											}>
-											{elm[TAG_FUNC_CANCEL] && (
-												<EventRSVPCancel reason={elm[TAG_FUNC_CAN_RES]} />
-											)}
-											<div
-												className={`w-full ${elm[TAG_FUNC_RSVP] && 'sm:w-8/12'}`}>
-												<div className={'overflow-hidden text-lg'}>
-													{elm[TAG_NAME]} {elm[TAG_FUNC_CANCEL]}
-												</div>
-												<div className={'sm:flex'}>
-													<div className="ml-[10px] sm:ml-0 text-md text-gray-600 font-bold">
-														&#x2022;{elm[TAG_FUNC_DATE]}
-													</div>
-													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														<span>
-															&#x2022;
-															{elm[TAG_FUNC_START_T]?.toUpperCase()}
-														</span>
-														<span className={'mx-2'}>-</span>
-														<span>
-															{elm[TAG_FUNC_END_T]?.toUpperCase()}
-														</span>
-													</div>
-													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.room}: {elm[TAG_FUNC_ROOM]}
-													</div>
-												</div>
-												<div className={'sm:flex'}>
-													<div className="sm:ml-0 ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.suitableFor}:{' '}
-														{elm[TAG_FUNC_LOC_AUD]}
-													</div>
-													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.seats}: {elm[TAG_FUNC_CAP]}
-													</div>
-													<div className="ml-[10px] text-md text-gray-600 font-bold">
-														&#x2022;{message.language}:{' '}
-														{elm[TAG_FUNC_LANG]}
-													</div>
-												</div>
-												<DialogDescription
-													className={
-														'h-[320px] break-all overflow-y-auto'
-													}>
-													{elm[TAG_FUNC_DESC]}
-												</DialogDescription>
-											</div>
-											{elm[TAG_FUNC_RSVP] && (
-												<div className={'w-full sm:w-4/12'}>
-													<EventRSVPForm
-														capacity={elm[TAG_FUNC_CAP]}
-														patrons={convertToArr(elm[PATRON])}
-														event={elm}
-														sisnNumber={elm[SISN]}
-														contactInfo={contactInfo}
-													/>
-												</div>
-											)}
-=======
 								className={
 									'max-h-[90vh] max-w-5xl overflow-y-auto p-1 gap-1 custom-scrollbar'
 								}>
@@ -201,7 +113,6 @@ const EventSumButton = ({
 										}>
 										<div className="h-8">
 											<img className="h-full" src={logo} alt="logo" />
->>>>>>> 9b3bcdc51d65c57ab4322be2b66be155ae28f857
 										</div>
 										<div className={'flex'}>
 											<div
