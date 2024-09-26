@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
 	Dialog,
 	DialogContent,
@@ -70,14 +70,15 @@ const EventSumButton = ({
 		return result ?? []
 	}
 	
+	const [dialogOpen, setDialogOpen] = useState(false);
 
 	return (
 		<>
 			{monthType && filterTypes.length > 1 ? (
 				<div className={'h-full mb-[2px] overflow-y-auto custom-scrollbar'}>
 					{groupedByType(filteredEvents).map((item: any, id: number) => (
-						<Dialog key={id}>
-							<ButtonTooltip item={item.list}>
+						<Dialog key={id} open={dialogOpen} onOpenChange={setDialogOpen}>
+							<ButtonTooltip item={item.list} isDialogOpen={dialogOpen}>
 								<DialogTrigger>
 									<Button
 										className="h-[20px] border-hidden flex p-0 justify-start"
