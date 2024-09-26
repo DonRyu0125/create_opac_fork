@@ -13,41 +13,25 @@ import { cn, convertToArr } from '@/lib/utils'
 import { convertLowerTrim } from '@/lib/utils'
 import {
 	Cal_event,
-	TAG_FUNC_DATE,
-	TAG_FUNC_DESC,
-	TAG_FUNC_END_T,
-	TAG_NAME,
-	TAG_FUNC_ROOM,
-	TAG_FUNC_LOC_AUD,
-	TAG_FUNC_START_T,
-	TAG_NAME_LENGTH,
-	TAG_FUNC_CAP,
-	TAG_FUNC_LANG,
-	TAG_FUNC_LOC_LENGTH,
 	TAG_FUNC_DTE_LIST,
-	TAG_FUNC_RSVP,
-	PATRON,
-	SISN,
-	ContactInfo,
-	TAG_FUNC_CANCEL,
-	TAG_FUNC_CAN_RES,
+	ContactInfoRSVP,
 	FilterType,
 	TAG_DB_TYPE,
 	EVENT_DEFAULT_COLOR,
 } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
-import EventRSVPForm from './EventRSVPForm'
 import { CalendarCheck } from 'lucide-react'
 import EventButton from './EventButton'
 import useConstants from '@/hooks/useConstants'
 import { useAtom } from 'jotai'
 import { calendarMonthType, calendarWeekType } from '@/store'
-import EventRSVPCancel from './EventCancel'
+import EventCustomDialogContent from './EventCustomDialogContent'
+import ButtonTooltip from './ButtonTooltip'
 
 export interface eventSumType {
 	filteredEvents: Cal_event[]
-	contactInfo: ContactInfo[]
+	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
 	fitlerOption: string
 }
@@ -73,7 +57,6 @@ const EventSumButton = ({
 	const groupedByType = (filteredEvents: Cal_event[]) => {
 		let typeArr: any = {}
 		let result = []
-
 		filteredEvents.forEach((classInfo: any) => {
 			const type = classInfo[fitlerOption]
 			if (!typeArr[type]) {
@@ -86,33 +69,41 @@ const EventSumButton = ({
 		})
 		return result ?? []
 	}
+	
 
 	return (
 		<>
-			{monthType && filteredEvents.length > 3 ? (
-				<div className={'h-full mb-[2px] overflow-x-hidden'}>
-					{groupedByType(filteredEvents).map((item: any, key: number) => (
-						<Dialog key={key}>
-							<DialogTrigger asChild>
-								<Button
-									className={'h-[20px] border-hidden flex p-0 justify-start'}
-									variant="outline">
-									<div
-										className={cn(
-											'h-4 w-[16px] border rounded',
-											getColor(item[fitlerOption])
-										)}></div>
-									<div className={'hidden sm:block max-w-[126px] text-left '}>
-										{fitlerOption ? item[fitlerOption] : message.all}
-									</div>
-									<div className={'flex items-center justify-center'}>
-										<CalendarCheck height={18} className={'hidden sm:block'} />:
-										<div>{item[TAG_FUNC_DTE_LIST].length}</div>
-									</div>
-								</Button>
-							</DialogTrigger>
+			{monthType && filterTypes.length > 1 ? (
+				<div className={'h-full mb-[2px] overflow-y-auto custom-scrollbar'}>
+					{groupedByType(filteredEvents).map((item: any, id: number) => (
+						<Dialog key={id}>
+							<ButtonTooltip item={item.list}>
+								<DialogTrigger>
+									<Button
+										className="h-[20px] border-hidden flex p-0 justify-start"
+										variant="outline">
+										<div
+											className={cn(
+												'h-4 w-[16px] border rounded',
+												getColor(item[fitlerOption])
+											)}
+										/>
+										<div className="hidden sm:block max-w-[100px] overflow-hidden text-left">
+											{item[fitlerOption]}
+										</div>
+										<div className="flex items-center justify-center">
+											<CalendarCheck
+												height={18}
+												className="hidden sm:block"
+											/>
+											:<div>{item[TAG_FUNC_DTE_LIST].length}</div>
+										</div>
+									</Button>
+								</DialogTrigger>
+							</ButtonTooltip>
 							<DialogContent
 								hideClose={'invisible'}
+<<<<<<< HEAD
 								className={'max-w-lg h-[500px] overflow-auto p-4 md:max-w-3xl'}>
 								<>
 									<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
@@ -199,23 +190,53 @@ const EventSumButton = ({
 													/>
 												</div>
 											)}
+=======
+								className={
+									'max-h-[90vh] max-w-5xl overflow-y-auto p-1 gap-1 custom-scrollbar'
+								}>
+								<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
+									<DialogTitle
+										className={
+											'bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
+										}>
+										<div className="h-8">
+											<img className="h-full" src={logo} alt="logo" />
+>>>>>>> 9b3bcdc51d65c57ab4322be2b66be155ae28f857
 										</div>
-									))}
-									<DialogFooter>
-										<DialogPrimitive.Close
-											className={
-												'bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
-											}>
-											{message.close}
+										<div className={'flex'}>
+											<div
+												className={cn(
+													'h-4 w-[16px] border rounded mr-1 ',
+													getColor(item[fitlerOption])
+												)}></div>
+											{fitlerOption ? item[fitlerOption] : message.all}
+										</div>
+										<DialogPrimitive.Close>
+											<X className={'h-6 w-6'} />
 										</DialogPrimitive.Close>
-									</DialogFooter>
-								</>
+									</DialogTitle>
+								</DialogHeader>
+								{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
+									<EventCustomDialogContent
+										elm={elm}
+										contactInfo={contactInfo}
+										key={key}
+									/>
+								))}
+								<DialogFooter>
+									<DialogPrimitive.Close
+										className={
+											'font-bold bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+										}>
+										{message.close}
+									</DialogPrimitive.Close>
+								</DialogFooter>
 							</DialogContent>
 						</Dialog>
 					))}
 				</div>
 			) : (
-				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto'}>
+				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto custom-scrollbar'}>
 					{filteredEvents.map((item: any, idx: number) => (
 						<EventButton
 							elm={item}

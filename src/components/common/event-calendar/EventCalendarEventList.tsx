@@ -1,19 +1,20 @@
 /**
  * EventCalendarEventList: Event list modal button (more than three events, it shows the all event buttons)
  */
-import { convertLowerTrim } from '@/lib/utils'
+import { cn, convertLowerTrim } from '@/lib/utils'
 import { calendarMonthType, calendarWeekType } from '@/store'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import {
 	Cal_event,
-	ContactInfo,
+	ContactInfoRSVP,
 	Day_obj,
 	FilterType,
 	TAG_FUNC_DATE,
-	TAG_FUNC_START_T,
+	TAG_FUNC_START_T
 } from './Constants'
 import EventAllButton from './EventAllButton'
+import EventButton from './EventButton'
 import EventSumButton from './EventSumButton'
 
 export interface Event_list {
@@ -21,7 +22,7 @@ export interface Event_list {
 	currentFilter: string[]
 	currentEvent: Cal_event[]
 	weekType: boolean
-	contactInfo: ContactInfo[]
+	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
 	fitlerOption: string
 }
@@ -99,23 +100,38 @@ const EventCalendarEventList = ({
 	}
 
 	return (
-		<div className={`${monthType ? 'h-4/5' : 'h-[98%]'} relative w-full`}>
-			{/* Event button */}
-			<EventSumButton
-				filteredEvents={filteredEvents}
-				contactInfo={contactInfo}
-				filterTypes={filterTypes}
-				fitlerOption={fitlerOption}
-			/>
-			{/* All events button */}
-			{monthType && filteredEvents.length > 2 && (
-				<div className={'h-[20px] absolute bottom-0 w-full'}>
-					<EventAllButton
-						filteredEvents={filteredEvents}
-						contactInfo={contactInfo}
-						filterTypes={filterTypes}
-						fitlerOption={fitlerOption}
-					/>
+		<div className={`${monthType ? 'h-[82%]' : 'h-[98%]'} relative w-full`}>
+			<div className={'bg-slate-200 flex justify-between h-[25px]'}>
+				<div>{dayObj?.day}</div>
+				{filteredEvents.length > 2 && (
+					<div>
+						<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} />
+					</div>
+				)}
+			</div>
+			{monthType && filterTypes.length > 1 ? (
+				<EventSumButton
+					filteredEvents={filteredEvents}
+					contactInfo={contactInfo}
+					filterTypes={filterTypes}
+					fitlerOption={fitlerOption}
+				/>
+			) : (
+				<div
+					className={cn(
+						'w-full h-[70px] md:h-[95%] mb-[2px] overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto custom-scrollbar flex md:block mr-1 md:p-1',
+						``
+					)}>
+					{filteredEvents?.map((item: any, idx: number) => (
+						<EventButton
+							elm={item}
+							key={idx}
+							id={idx}
+							contactInfo={contactInfo}
+							filterTypes={filterTypes}
+							fitlerOption={fitlerOption}
+						/>
+					))}
 				</div>
 			)}
 		</div>

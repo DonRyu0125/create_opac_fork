@@ -7,8 +7,12 @@ import {
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
 	SUB_MWI_APPLICATION,
+	CURATORS_CODE,
+	TAG_FUNC_LOC_ID,
+	Cal_event,
+	ContactInfoRSVP,
 } from './Constants'
-import { convertToArr, convertXMLToJson } from '@/lib/utils'
+import { convertLowerTrim, convertToArr, convertXMLToJson } from '@/lib/utils'
 
 const getWeekRange = (currentDate: any) => {
 	const firstDayOfWeek: Date = new Date(currentDate)
@@ -47,16 +51,28 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		)
 		const x2js = new X2JS()
 		const jsonData: any = x2js.xml2js(response.data)
-		const event = jsonData?.div?.xml?.event
+		const events = jsonData?.div?.xml?.event
 
-		if (!event) return []
-		return convertToArr(event)
+		let formatEvents = events?.map((item:any) => {
+			return {
+				...item,
+				FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
+					? item.FLOC_IM_REF_GRP
+					: [item.FLOC_IM_REF_GRP],
+				FLOC_VD_REF_GRP: Array.isArray(item.FLOC_VD_REF_GRP)
+					? item.FLOC_VD_REF_GRP
+					: [item.FLOC_VD_REF_GRP],
+			}
+		})
+
+		if (!formatEvents) return []
+		return convertToArr(formatEvents)
 	} catch (error) {
 		throw error
 	}
 }
 
-export const getLibraryLocation = async () => {
+export const getLocation = async () => {
 	const response = await axios.get(
 		`/scripts/mwimain.dll/144/${SUB_MWI_APPLICATION}/${LOCATION_REPORT}?commandsearch&exp=%2B%2B%40`, // ++@
 		{
@@ -67,4 +83,21 @@ export const getLibraryLocation = async () => {
 	)
 	const jsonData: any = convertXMLToJson(response.data)
 	return jsonData?.xml?.[LIBRARY_LOCATION_XML_TAG] ?? []
+}
+
+export const getContactInfo = (type: string, contactInfo: ContactInfoRSVP[], event: Cal_event) => {
+	let info: any = contactInfo?.filter((item: ContactInfoRSVP) => {
+		return item[CURATORS_CODE] === event[TAG_FUNC_LOC_ID]
+	})
+
+	if (info.length > 0) {
+		let contact = info[0]
+		const value = contact[type]
+		if (value && value.__text === '') {
+			return []
+		}
+		return value ?? []
+	}
+
+	return []
 }
