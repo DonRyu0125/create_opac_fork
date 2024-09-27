@@ -139,7 +139,7 @@ export function deleteAllCookies() {
 }
 
 export function getHomeSessionID() {
-	let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
+	let match = document.cookie.match(/HOME_SESSID=(https?:\/\/[^;]+)/) ?? ''
 	let HOME_SESSID = match[0]?.split('=')[1]
 	return HOME_SESSID
 }
