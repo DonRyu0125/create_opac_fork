@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration Successful</title>
-    <style>
+  <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -26,7 +26,6 @@
     .header img {
       width: 80px;
       height: 80px;
-      /* Removed border-radius to make it a square */
     }
     .header h1 {
       font-size: 22px;
@@ -97,24 +96,24 @@
     </tr>
   </table>
   <div class="container">
-   <div class="info">
-      <div for="event-name">Event Name:</div>
-      <p id="event-name">^TAG_NAME^</p>
-    </div>
-     <div class="info">
-      <div for="event-name">Event Date:</div>
-      <p id="event-name">^TAG_FUNC_DATE^</p>
+    <div class="info">
+      <div>Event Name:</div>
+      <p>^TAG_NAME^</p>
     </div>
     <div class="info">
-      <div for="attendee-name">Name:</div>
-      <p id="attendee-name">^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>
+      <div>Event Date:</div>
+      <p>^TAG_FUNC_DATE^</p>
     </div>
     <div class="info">
-      <div for="registration-date">Date Registered:</div>
-      ^TAG_FUNC_P_T^
+      <div>Name:</div>
+      <p>^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>
     </div>
     <div class="info">
-      <div for="attendee-details">Attendee:</div>
+      <div>Date Registered:</div>
+      <p>^TAG_FUNC_P_T^</p>
+    </div>
+    <div class="info">
+      <div>Attendee:</div>
       <div id="attendee-details" style="border: 2px dotted #ccc; padding: 10px; text-align: center;">
         ^TAG_FUNC_P_ATTND^ Spot Reserved
       </div>
