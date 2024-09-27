@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration Successful</title>
-    <style>
+  <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -16,21 +16,6 @@
       color: white;
       padding: 20px 0;
       text-align: center;
-    }
-    .header-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-    }
-    .header img {
-      width: 80px;
-      height: 80px;
-      /* Removed border-radius to make it a square */
-    }
-    .header h1 {
-      font-size: 22px;
-      margin: 0;
     }
     .container {
       max-width: 400px;
@@ -85,70 +70,61 @@
       border-top-right-radius: 12px;
       font-size: 14px;
     }
+    table {
+      width: 100%;
+      max-width: 100%;
+      border-collapse: collapse;
+    }
   </style>
 </head>
 <body>
-  <table class="header" width="100%" cellpadding="0" cellspacing="0" border="0">
+  <table role="presentation" class="header" cellpadding="0" cellspacing="0">
     <tr>
-      <td class="header-content">
-        <img src="^EVENT_EMAIL_LOGO^" alt="Company Logo">
-        <h1>Registration Successful!</h1>
+      <td align="center">
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="center" style="padding-right: 15px;">
+              <img src="https://i.imgur.com/whpgDjK.jpeg" alt="Company Logo" style="width: 80px; height: 80px;">
+            </td>
+            <td align="center">
+              <h1 style="font-size: 22px; margin: 0; color: white;">Confirm your Registration!</h1>
+            </td>
+          </tr>
+        </table>
       </td>
     </tr>
   </table>
+
   <div class="container">
     <div class="info">
-      <div for="event-name">Event Name:</div>
-      <p id="event-name">^TAG_NAME^</p>
+      <div>Event Name:</div>
+      <p>^TAG_NAME^</p>
     </div>
     <div class="info">
-      <div for="event-location">Event Location:</div>
-      <p id="event-location">^BD_ADDRESS^</p>
+      <div>Event Date:</div>
+      <p>^TAG_FUNC_DATE^</p>
     </div>
     <div class="info">
-      <div for="room-number">Room Number</div>
-      <p id="room-number">^TAG_FUNC_LOC_ROO^</p>
+      <div>Name:</div>
+      <p>^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>
     </div>
     <div class="info">
-      <div for="event-description">Description</div>
-      <p id="event-description">^TAG_FUNC_LOC_DEC^</p>
-    </div>
-    <div style="display: flex;">
-      <div class="info" style="width: 48%;">
-        <div for="event-date">Date:</div>
-        <p id="event-date">^TAG_FUNC_DATE^</p>
-      </div>
-      <div class="info" style="width: 48%; margin-left: 16px;">
-        <div for="event-time">Time:</div>
-        <p id="event-time">^TAG_FUNC_START_T^ - ^TAG_FUNC_END_T^</p>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="info">
-      <div for="attendee-id">ID:</div>
-      <p id="attendee-name">^TAG_FUNC_P_ID^</p>
+      <div>Date Registered:</div>
+      <p>^TAG_FUNC_P_T^</p>
     </div>
     <div class="info">
-      <div for="attendee-name">Name:</div>
-      <p id="attendee-name">^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>
-    </div>
-    <div class="info">
-      <div for="registration-date">Date Registered:</div>
-      ^TAG_FUNC_P_T^
-    </div>
-    <div class="info">
-      <div for="attendee-details">Attendee:</div>
+      <div>Attendee:</div>
       <div id="attendee-details" style="border: 2px dotted #ccc; padding: 10px; text-align: center;">
         ^TAG_FUNC_P_ATTND^ Spot Reserved
       </div>
     </div>
     <div class="button-container">
-      <a href="^RSVP_CANCEL_LANDING_PAGE_URL^?user=^encoded^" style="text-decoration: none;">
-        <button>Cancel the event</button>
+      <a href="^RSVP_CONFIRM_LANDING_PAGE_URL^?user=^encoded^" style="text-decoration: none;">
+        <button>Confirm the event</button>
       </a>
     </div>
   </div>
+
   <footer class="footer">
     2024 Minisis Inc. All rights reserved.
   </footer>
