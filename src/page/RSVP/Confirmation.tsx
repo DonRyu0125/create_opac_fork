@@ -240,8 +240,7 @@ const RSVPConfirm = () => {
 					'EVENT_EMAIL_LOGO':logo,
 					RSVP_CANCEL_LANDING_PAGE_URL: RSVP_CANCEL_LANDING_PAGE_URL,
 					[TAG_FUNC_P_ID]: obj.ID,
-					encoded,
-					'EVENT_EMAIL_LOGO':logo
+					encoded
 				},
 				{
 					headers: {

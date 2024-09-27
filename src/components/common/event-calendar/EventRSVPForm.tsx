@@ -419,7 +419,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const [currentDate, _] = useAtom(calendarCurrDate)
 	const [weekType, __] = useAtom(calendarWeekType)
 	const [___, setCurrentEvent] = useAtom(calendarEvents)
-	const { logo } = useConstants().config
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		setLoading(true)
@@ -515,8 +514,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					[TAG_FUNC_P_T]: getCurrentDate(),
 					[BD_ADDRESS]: getContactInfo(BD_ADDRESS, contactInfo, event),
 					RSVP_CONFIRM_LANDING_PAGE_URL: RSVP_CONFIRM_LANDING_PAGE_URL,
-					encoded,
-					'EVENT_EMAIL_LOGO':logo
+					encoded
 				},
 				{
 					headers: {
