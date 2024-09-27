@@ -1,8 +1,10 @@
+import { ReactNode } from "react"
+
 export type PatronInfo = {
-	TAG_FUNC_O_ID: ReactNode
-	TAG_FUNC_O_CODE: ReactNode
-	TAG_FUNC_O_PATH: ReactNode
-	TAG_FUNC_O: ReactNode
+	TAG_FUNC_O_ID: string
+	TAG_FUNC_O_CODE: string
+	TAG_FUNC_O_PATH: string
+	TAG_FUNC_O: string
 	TAG_FUNC_P_ATTND: string
 	TAG_FUNC_P_FIRST: string
 	TAG_FUNC_P_LAST: string
@@ -42,6 +44,10 @@ export const initialPatronInfo: PatronInfo = {
 	occ2: '',
 	TAG_FUNC_P_PAID: '',
 	TAG_FUNC_DESC: '',
+	TAG_FUNC_O_ID: "",
+	TAG_FUNC_O_CODE: "",
+	TAG_FUNC_O_PATH: "",
+	TAG_FUNC_O: ""
 }
 
 export const STATUS_TYPE = {

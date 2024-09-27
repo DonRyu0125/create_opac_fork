@@ -95,32 +95,56 @@
     </tr>
   </table>
 
+   <div class="container">
+    <div class="info">
+      <div for="event-name">Event Name:</div>
+      <p id="event-name">^TAG_NAME^</p>
+    </div>
+    <div class="info">
+      <div for="event-location">Event Location:</div>
+      <p id="event-location">^BD_ADDRESS^</p>
+    </div>
+    <div class="info">
+      <div for="room-number">Room Number</div>
+      <p id="room-number">^TAG_FUNC_LOC_ROO^</p>
+    </div>
+    <div class="info">
+      <div for="event-description">Description</div>
+      <p id="event-description">^TAG_FUNC_LOC_DEC^</p>
+    </div>
+    <div style="display: flex;">
+      <div class="info" style="width: 48%;">
+        <div for="event-date">Date:</div>
+        <p id="event-date">^TAG_FUNC_DATE^</p>
+      </div>
+      <div class="info" style="width: 48%; margin-left: 16px;">
+        <div for="event-time">Time:</div>
+        <p id="event-time">^TAG_FUNC_START_T^ - ^TAG_FUNC_END_T^</p>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="info">
-      <div>Event Name:</div>
-      <p>^TAG_NAME^</p>
+      <div for="attendee-id">ID:</div>
+      <p id="attendee-name">^TAG_FUNC_P_ID^</p>
     </div>
     <div class="info">
-      <div>Event Date:</div>
-      <p>^TAG_FUNC_DATE^</p>
+      <div for="attendee-name">Name:</div>
+      <p id="attendee-name">^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>
     </div>
     <div class="info">
-      <div>Name:</div>
-      <p>^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>
+      <div for="registration-date">Date Registered:</div>
+      ^TAG_FUNC_P_T^
     </div>
     <div class="info">
-      <div>Date Registered:</div>
-      <p>^TAG_FUNC_P_T^</p>
-    </div>
-    <div class="info">
-      <div>Attendee:</div>
+      <div for="attendee-details">Attendee:</div>
       <div id="attendee-details" style="border: 2px dotted #ccc; padding: 10px; text-align: center;">
         ^TAG_FUNC_P_ATTND^ Spot Reserved
       </div>
     </div>
     <div class="button-container">
-      <a href="^RSVP_CONFIRM_LANDING_PAGE_URL^?user=^encoded^" style="text-decoration: none;">
-        <button>Confirm the event</button>
+      <a href="^RSVP_CANCEL_LANDING_PAGE_URL^?user=^encoded^" style="text-decoration: none;">
+        <button>Cancel the event</button>
       </a>
     </div>
   </div>

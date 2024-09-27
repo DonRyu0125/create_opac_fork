@@ -52,21 +52,21 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		const x2js = new X2JS()
 		const jsonData: any = x2js.xml2js(response.data)
 		const events = jsonData?.div?.xml?.event
+		// let test = convertToArr(events)
+		// let formatEvents = test?.map((item:any) => {
+		// 	return {
+		// 		...item,
+		// 		FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
+		// 			? item.FLOC_IM_REF_GRP
+		// 			: [item.FLOC_IM_REF_GRP],
+		// 		FLOC_VD_REF_GRP: Array.isArray(item.FLOC_VD_REF_GRP)
+		// 			? item.FLOC_VD_REF_GRP
+		// 			: [item.FLOC_VD_REF_GRP],
+		// 	}
+		// })
 
-		let formatEvents = events?.map((item:any) => {
-			return {
-				...item,
-				FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
-					? item.FLOC_IM_REF_GRP
-					: [item.FLOC_IM_REF_GRP],
-				FLOC_VD_REF_GRP: Array.isArray(item.FLOC_VD_REF_GRP)
-					? item.FLOC_VD_REF_GRP
-					: [item.FLOC_VD_REF_GRP],
-			}
-		})
-
-		if (!formatEvents) return []
-		return formatEvents
+		if (!events) return []
+		return convertToArr(events)
 	} catch (error) {
 		throw error
 	}

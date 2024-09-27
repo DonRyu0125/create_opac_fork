@@ -116,7 +116,7 @@
       <p id="room-number">^TAG_FUNC_LOC_ROO^</p>
     </div>
     <div class="info">
-      <div for="event-description">Description:</div>
+      <div for="event-description">Description</div>
       <p id="event-description">^TAG_FUNC_LOC_DEC^</p>
     </div>
     <div style="display: flex;">
