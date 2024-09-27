@@ -508,7 +508,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPVerificationConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
 				{
 					...patronInfo,
-					[EVENT_EMAIL_LOGO]:logo,
+					'EVENT_EMAIL_LOGO':logo,
 					[TAG_NAME]: event[TAG_NAME],
 					[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 					[TAG_FUNC_P_T]: getCurrentDate(),
