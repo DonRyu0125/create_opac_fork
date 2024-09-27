@@ -53,7 +53,7 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		const jsonData: any = x2js.xml2js(response.data)
 		const events = jsonData?.div?.xml?.event
 
-		let formatEvents = events?.map((item:any) => {
+		let formatEvents = convertToArr(events)?.map((item:any) => {
 			return {
 				...item,
 				FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
@@ -66,7 +66,7 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		})
 
 		if (!formatEvents) return []
-		return convertToArr(formatEvents)
+		return formatEvents
 	} catch (error) {
 		throw error
 	}
