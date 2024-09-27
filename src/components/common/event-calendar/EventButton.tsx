@@ -115,7 +115,7 @@ const EventButton = ({
 								)}></div>
 							<div
 								className={
-									'whitespace-nowrap  w-[200px] sm:w-full overflow-x-auto overflow-y-hidden text-left'
+									'whitespace-nowrap  w-[200px] sm:w-full overflow-x-auto overflow-y-hidden text-left min-h-[20px]'
 								}>
 								{elm[TAG_NAME]}
 							</div>
