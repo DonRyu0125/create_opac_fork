@@ -52,6 +52,7 @@ const RSVPConfirm = () => {
 	const [loading, setLoading] = useState(false)
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
+	const { logo } = useConstants().config
 
 	useEffect(() => {
 		checkParms()
@@ -237,6 +238,7 @@ const RSVPConfirm = () => {
 					RSVP_CANCEL_LANDING_PAGE_URL: RSVP_CANCEL_LANDING_PAGE_URL,
 					[TAG_FUNC_P_ID]: obj.ID,
 					encoded,
+					'EVENT_EMAIL_LOGO':logo
 				},
 				{
 					headers: {

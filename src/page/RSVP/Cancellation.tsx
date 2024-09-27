@@ -35,6 +35,7 @@ const RSVPCancel = () => {
 	const rsvp = useConstants().rsvp
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
+	const { logo } = useConstants().config
 
 	useEffect(() => {
 		checkParms()
@@ -160,6 +161,7 @@ const RSVPCancel = () => {
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPCancelConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
+					'EVENT_EMAIL_LOGO':logo
 				},
 				{
 					headers: {
