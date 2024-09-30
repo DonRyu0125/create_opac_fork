@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react'
 import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
 import { Button } from '@/components/ui/button'
-import { fetch_get } from './Service'
+import { fetch_get, getLocation } from './Service'
 import { calendarCurrDate, calendarEvents, calendarMonthType, calendarWeekType } from '@/store'
 import { useAtom } from 'jotai'
 import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj, FilterType } from './Constants'
@@ -36,6 +36,10 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 		getData(currentDate)
 		isMonthBtnClick()
 	}, [currentDate, weekType])
+
+	useEffect(() => {
+		getLocation().then((res) => setContactInfo(res))
+	}, [])
 
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate, weekType)
@@ -74,20 +78,12 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 		}
 	}
 
-	/**
-	 *
-	 * @param date
-	 * @returns Date objects by the month
-	 */
 	const daysInMonth = (date: Date) => {
 		const year = date.getFullYear()
 		const month = date.getMonth() + 1
 		return new Date(year, month, 0).getDate() // get the last date.getMonth() + 1's last date
 	}
-	/**
-	 *
-	 * @returns date objects by month
-	 */
+
 	const generateMonth = () => {
 		const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
 		const days = daysInMonth(currentDate)
@@ -243,7 +239,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 				<div className={'grid grid-cols-7 gap-0.5'}>
 					<div
 						className={cn(
-							'col-span-7 grid grid-cols-7',
+							'col-span-7 grid grid-cols-7 gap-1',
 							weekType && 'col-span-1 md:col-span-7'
 						)}>
 						{message.daysOfWeek.map((item, key) => {
@@ -280,7 +276,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 					{weekType && (
 						<div
 							className={cn(
-								'col-span-7 grid grid-cols-7',
+								'col-span-7 grid grid-cols-7 gap-1',
 								weekType && 'col-span-6 md:col-span-7'
 							)}>
 							{generateWeek().map((item: Day_obj, key: number) => {

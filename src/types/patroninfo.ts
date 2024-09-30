@@ -1,4 +1,8 @@
 export type PatronInfo = {
+	TAG_FUNC_O_ID: ReactNode
+	TAG_FUNC_O_CODE: ReactNode
+	TAG_FUNC_O_PATH: ReactNode
+	TAG_FUNC_O: ReactNode
 	TAG_FUNC_P_ATTND: string
 	TAG_FUNC_P_FIRST: string
 	TAG_FUNC_P_LAST: string
@@ -6,13 +10,13 @@ export type PatronInfo = {
 	TAG_NAME: string
 	TAG_FUNC_START_T: string
 	TAG_FUNC_END_T: string
-	TAG_FUNC_ROOM: string
+	TAG_FUNC_LOC_ROO: string
 	TAG_FUNC_DATE: string
 	TAG_FUNC_LOC: string
 	SISN: string
 	TAG_FUNC_P_ID: string
 	TAG_FUNC_P_T: string
-	BRANCH_ADDRESS: string
+	BD_ADDRESS: string
 	occ1: string
 	occ2: string
 	TAG_FUNC_P_PAID: any
@@ -27,13 +31,13 @@ export const initialPatronInfo: PatronInfo = {
 	TAG_NAME: '',
 	TAG_FUNC_START_T: '',
 	TAG_FUNC_END_T: '',
-	TAG_FUNC_ROOM: '',
+	TAG_FUNC_LOC_ROO: '',
 	TAG_FUNC_DATE: '',
 	TAG_FUNC_LOC: '',
 	SISN: '',
 	TAG_FUNC_P_ID: '',
 	TAG_FUNC_P_T: '',
-	BRANCH_ADDRESS: '',
+	BD_ADDRESS: '',
 	occ1: '',
 	occ2: '',
 	TAG_FUNC_P_PAID: '',

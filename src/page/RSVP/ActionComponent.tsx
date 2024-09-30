@@ -1,21 +1,21 @@
+import Link from '@/components/common/Link'
 import { Button } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
 import { PatronInfo } from '@/types/patroninfo'
+import { MonitorPlay } from 'lucide-react'
 
 interface ActionProps {
 	patronInfo: PatronInfo
 	onClick: () => void
-	actionType: 'confirm' | 'cancel' // Determine the action type
 }
 
-const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick, actionType }) => {
+const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick }) => {
 	const message: any = useConstants().message
-	const actionText = actionType === 'confirm' ? message.confirm : message.unregistered
 
 	return (
 		<div className="my-10 text-center">
 			<h1 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
-				{actionType === 'confirm' ? message.pleaseConfirm : message.pleaseCancel}
+				{message.pleaseConfirm}
 			</h1>
 			<h2 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
 				{patronInfo?.TAG_NAME}
@@ -27,10 +27,22 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick, actionTyp
 					<div>
 						{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
 					</div>
-					<div>{patronInfo?.BRANCH_ADDRESS}</div>
-					<div>
-						{message.room}: {patronInfo?.TAG_FUNC_ROOM}
-					</div>
+					{patronInfo.TAG_FUNC_O ? (
+						<>
+							<div className={'flex'}>
+								<MonitorPlay />
+								<div className={'ml-1'}>{message.online}</div>
+							</div>
+							<div>"{message.onlineTip}"</div>
+						</>
+					) : (
+						<>
+							<div>{patronInfo?.BD_ADDRESS}</div>
+							<div>
+								{message.room}: {patronInfo?.TAG_FUNC_LOC_ROO}
+							</div>
+						</>
+					)}
 				</div>
 				<div className="sm:w-1/2 max-w-[500px] text-left border-2 border-solid rounded-lg p-5 mx-2">
 					<div>
@@ -46,21 +58,36 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick, actionTyp
 			</div>
 			<Button
 				onClick={onClick}
-				className={`flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded ${
-					actionType === 'confirm' ? 'bg-green-600' : 'bg-red-600'
-				} text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring`}>
-				<div>{actionText}</div>
+				className={`flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded 
+				bg-green-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring`}>
+				<div>{message.confirm}</div>
 			</Button>
 		</div>
 	)
 }
 
 const ConfirmTmp = ({ patronInfo, onClick }: { patronInfo: PatronInfo; onClick: any }) => {
-	return <ActionComponent patronInfo={patronInfo} onClick={onClick} actionType="confirm" />
+	return <ActionComponent patronInfo={patronInfo} onClick={onClick} />
 }
 
 const CancelTmp = ({ patronInfo, onClick }: { patronInfo: PatronInfo; onClick: any }) => {
-	return <ActionComponent patronInfo={patronInfo} onClick={onClick} actionType="cancel" />
+	const message: any = useConstants().message
+	return (
+		<div className="my-10 text-center">
+			<h1 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
+				{message.pleaseCancel}
+			</h1>
+			<h2 className="text-l font-bold tracking-tight text-gray-900 sm:text-4xl">
+				{patronInfo?.TAG_NAME}
+			</h2>
+			<Button
+				onClick={onClick}
+				className={`flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded bg-red-600
+				 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring`}>
+				<div>{message.unregistered}</div>
+			</Button>
+		</div>
+	)
 }
 
 export { ConfirmTmp, CancelTmp }

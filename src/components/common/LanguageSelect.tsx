@@ -8,15 +8,16 @@ export interface ILANGUAGE {
 	icon: string
 }
 export const LANGUAGE_ITEMS: ILANGUAGE[] = [
-	{
-		code: ENGLISH_CODE,
-		name: 'English',
-		icon: 'https://www.svgrepo.com/show/405643/flag-for-flag-united-kingdom.svg',
-	},
+	
 	{
 		code: FRENCH_CODE,
 		name: 'Français',
 		icon: 'https://www.svgrepo.com/show/405485/flag-for-flag-france.svg',
+	},
+	{
+		code: ENGLISH_CODE,
+		name: 'English',
+		icon: 'https://www.svgrepo.com/show/405643/flag-for-flag-united-kingdom.svg',
 	},
 ]
 
