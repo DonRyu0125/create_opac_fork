@@ -1,54 +1,33 @@
-import AdminForm from '@/components/common/admin/AdminForm'
+import AdminFormLayout from '@/components/common/admin/AdminFormLayout'
 import ImagePreview from '@/components/common/admin/input/ImagePreview'
-import Switch from '@/components/common/admin/input/Switch'
 import TextField from '@/components/common/admin/input/TextField'
 import SectionActions from '@/components/common/admin/layout/SectionActions'
 import SectionHeader from '@/components/common/admin/layout/SectionHeader'
 import SectionWrapper from '@/components/common/admin/layout/SectionWrapper'
-import TabsWrapper from '@/components/common/admin/layout/TabsWrapper'
-import AdminLayout from '@/components/layouts/admin'
 import { Button } from '@/components/ui/button'
-import { TabsContent } from '@/components/ui/tabs'
 import { default as enValues } from '@/constants/en/home.json'
 import { default as frValues } from '@/constants/fr/home.json'
 import { useAdminForm } from '@/hooks/useAdminForm'
-import { AdminFormProvider } from '@/providers/AdminFormProvider'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
-import { Plus, Trash } from 'lucide-react'
+import { Trash } from 'lucide-react'
 
 const AdminHome = () => {
 	return (
-		<AdminLayout>
-			<TabsWrapper>
-				<TabsContent value="en">
-					<AdminFormProvider
-						data={enValues}
-						schema={fields as SchemaType}
-						filepath="constants/en/home.json">
-						<AdminForm>
-							<Form lang="en" />
-						</AdminForm>
-					</AdminFormProvider>
-				</TabsContent>
-				<TabsContent value="fr">
-					<AdminFormProvider
-						data={frValues}
-						schema={fields as SchemaType}
-						filepath="constants/fr/home.json">
-						<AdminForm>
-							<Form lang="fr" />
-						</AdminForm>
-					</AdminFormProvider>
-				</TabsContent>
-			</TabsWrapper>
-		</AdminLayout>
+		<AdminFormLayout
+			enData={enValues}
+			frData={frValues}
+			schema={fields as SchemaType}
+			enFilepath={'constants/en/home.json'}
+			frFilepath={'constants/fr/home.json'}
+			FormComponent={Form}
+		/>
 	)
 }
 
 const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 	const fieldsValue = lang === 'en' ? enValues : frValues
-	const { handleChange, handleAdd, handleFormSave } = useAdminForm()
+	const { handleChange, handleAdd, handleRemove } = useAdminForm()
 
 	return (
 		<div className="flex gap-4 flex-col">
@@ -83,47 +62,54 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 						)
 					}}
 					enableFeatureValue={fieldsValue.enableFeaturedCollection}
-					onEnableFeatureChange={(e) => handleChange(['enableFeaturedCollection'], e)}
+					onEnableFeatureChange={(e) => {
+						handleChange(['enableFeaturedCollection'], e)
+					}}
 				/>
 
-				<div className="flex flex-col gap-2">
-					{fieldsValue.featuredCollection.map((item, index) => (
-						<SectionWrapper key={JSON.stringify(item)}>
-							<Button>
-								<Trash />
-								Remove
-							</Button>
-							<TextField
-								title={'Category title'}
-								value={item.title}
-								onChange={(e) =>
-									handleChange(['featuredCollection', `${index}`, 'title'], e)
-								}
-							/>
+				{fieldsValue.enableFeaturedCollection && (
+					<div className="flex flex-col gap-2">
+						{fieldsValue.featuredCollection.map((item, index) => (
+							<SectionWrapper
+								key={JSON.stringify(item)}
+								onRemove={() => {
+									handleRemove(['featuredCollection'], index)
+								}}>
+								<TextField
+									title={'Category title'}
+									value={item.title}
+									onChange={(e) =>
+										handleChange(['featuredCollection', `${index}`, 'title'], e)
+									}
+								/>
 
-							<TextField
-								title={'Search expression'}
-								value={item.url}
-								onChange={(e) =>
-									handleChange(['featuredCollection', `${index}`, 'url'], e)
-								}
-							/>
+								<TextField
+									title={'Search expression'}
+									value={item.url}
+									onChange={(e) =>
+										handleChange(['featuredCollection', `${index}`, 'url'], e)
+									}
+								/>
 
-							<TextField
-								title={'Thumbnail'}
-								value={item.thumbnail}
-								onChange={(e) =>
-									handleChange(['featuredCollection', `${index}`, 'thumbnail'], e)
-								}
-							/>
+								<TextField
+									title={'Thumbnail'}
+									value={item.thumbnail}
+									onChange={(e) =>
+										handleChange(
+											['featuredCollection', `${index}`, 'thumbnail'],
+											e
+										)
+									}
+								/>
 
-							<ImagePreview
-								src={item.thumbnail}
-								alt="Featured collection thumbnail"
-							/>
-						</SectionWrapper>
-					))}{' '}
-				</div>
+								<ImagePreview
+									src={item.thumbnail}
+									alt="Featured collection thumbnail"
+								/>
+							</SectionWrapper>
+						))}{' '}
+					</div>
+				)}
 			</div>
 			<div className="mt-2">
 				<SectionHeader heading="Browse By Category" />
@@ -136,40 +122,51 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 						})
 					}}
 					enableFeatureValue={fieldsValue.enableCategoriesItems}
-					onEnableFeatureChange={(e) => handleChange(['enableCategoriesItems'], e)}
+					onEnableFeatureChange={(e) => {
+						handleChange(['enableCategoriesItems'], e)
+					}}
 				/>
 
-				<div className="flex flex-col gap-2">
-					{fieldsValue.categoriesItems.map((item, index) => (
-						<SectionWrapper key={JSON.stringify(item)}>
-							<TextField
-								title={'Category title'}
-								value={item.title}
-								onChange={(e) =>
-									handleChange(['categoriesItems', `${index}`, 'title'], e)
-								}
-							/>
+				{fieldsValue.enableCategoriesItems && (
+					<div className="flex flex-col gap-2">
+						{fieldsValue.categoriesItems.map((item, index) => (
+							<SectionWrapper
+								key={JSON.stringify(item)}
+								onRemove={() => {
+									handleRemove(['categoriesItems'], index)
+								}}>
+								<TextField
+									title={'Category title'}
+									value={item.title}
+									onChange={(e) =>
+										handleChange(['categoriesItems', `${index}`, 'title'], e)
+									}
+								/>
 
-							<TextField
-								title={'Search expression'}
-								value={item.url}
-								onChange={(e) =>
-									handleChange(['categoriesItems', `${index}`, 'url'], e)
-								}
-							/>
+								<TextField
+									title={'Search expression'}
+									value={item.url}
+									onChange={(e) =>
+										handleChange(['categoriesItems', `${index}`, 'url'], e)
+									}
+								/>
 
-							<TextField
-								title={'Thumbnail'}
-								value={item.thumbnail}
-								onChange={(e) =>
-									handleChange(['categoriesItems', `${index}`, 'thumbnail'], e)
-								}
-							/>
+								<TextField
+									title={'Thumbnail'}
+									value={item.thumbnail}
+									onChange={(e) =>
+										handleChange(
+											['categoriesItems', `${index}`, 'thumbnail'],
+											e
+										)
+									}
+								/>
 
-							<ImagePreview src={item.thumbnail} alt="Category thumbnail" />
-						</SectionWrapper>
-					))}
-				</div>
+								<ImagePreview src={item.thumbnail} alt="Category thumbnail" />
+							</SectionWrapper>
+						))}
+					</div>
+				)}
 			</div>
 		</div>
 	)

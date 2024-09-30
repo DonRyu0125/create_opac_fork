@@ -1,8 +1,6 @@
-import React from 'react'
-import Switch from '../input/Switch'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
-import { useAdminForm } from '@/hooks/useAdminForm'
+import Switch from '../input/Switch'
 
 type Props = {
 	enableFeatureValue: boolean
@@ -18,8 +16,10 @@ const SectionActions = ({ enableFeatureValue, onEnableFeatureChange, onAddNew }:
 				value={enableFeatureValue}
 				onChange={onEnableFeatureChange}
 			/>
+
 			{onAddNew && (
 				<Button
+					disabled={!enableFeatureValue}
 					variant="outline"
 					onClick={() => {
 						onAddNew()

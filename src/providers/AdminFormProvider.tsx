@@ -8,10 +8,10 @@ type AdminFormContextType = {
 	formData: SchemaValueType
 	handleChange: (path: string[], newValue: SchemaValueType) => void
 	handleAdd: (path: string[], newValue: SchemaValueType) => void
+	handleRemove: (path: string[], index: number) => void
 	handleFormSave: () => void
 	schema: SchemaType
 	duplicateItem: (path: string[], index: number) => void
-	removeItem: (path: string[], index: number) => void
 }
 
 const AdminFormContext = createContext<AdminFormContextType | undefined>(undefined)
@@ -88,16 +88,36 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 		handleFormSave()
 	}, [])
 
-	const handleItemRemove = useCallback((path: string[], index: number) => {
+	const handleRemove = useCallback((path: string[], index: number) => {
 		setFormData((prevData) => {
-			if (Array.isArray(prevData)) {
-				const newValue = [...prevData]
-				if (index >= 0 && index < prevData.length) {
-					newValue.splice(index, 1)
+			let targetArray = prevData
+
+			// Traverse through the path to get to the target array
+			path.forEach((key) => {
+				if (
+					targetArray &&
+					typeof targetArray === 'object' &&
+					!Array.isArray(targetArray) &&
+					targetArray !== null
+				) {
+					targetArray = targetArray[key] as SchemaValueType
 				}
-				return updateJsonValue(prevData, path, newValue)
+			})
+
+			// Check if the target is an array and the index is valid
+			if (Array.isArray(targetArray) && index >= 0 && index < targetArray.length) {
+				// Remove the item from the array
+				const newArray = [...targetArray]
+				newArray.splice(index, 1)
+
+				// Update the formData with the new array
+				const newData = updateJsonValue(prevData, path, newArray)
+				updateData(newData)
+				return newData
 			}
-			return prevData // If not an array, return as is
+
+			// Return previous data if the removal operation is invalid
+			return prevData
 		})
 	}, [])
 
@@ -106,9 +126,9 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 		schema,
 		handleChange,
 		handleFormSave,
-		removeItem: handleItemRemove,
 		duplicateItem: handleItemDuplicate,
 		handleAdd,
+		handleRemove,
 	}
 
 	return <AdminFormContext.Provider value={contextValue}>{children}</AdminFormContext.Provider>

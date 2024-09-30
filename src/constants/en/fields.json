@@ -1,129 +1,129 @@
 [
-	{
-		"database": "COLLECTIONS_WEB",
-		"items": [
-			{
-				"label": "Title",
-				"name": "LEGAL_TITLE",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
-			{
-				"label": "Accession Number",
-				"name": "ACCESSION_NUMBER",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
-			{
-				"label": "Collection",
-				"name": "collection_type",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
-			{
-				"label": "Earliest Date",
-				"name": "EARLY",
-				"summary": false,
-				"grid": false,
-				"detail": true
-			},
-			{
-				"label": "Latest Date",
-				"name": "LATE",
-				"summary": false,
-				"grid": false,
-				"detail": true
-			},
-			{
-				"label": "Object Name",
-				"name": "object_name_eng",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
-			{
-				"label": "Description",
-				"name": "obj_description",
-				"summary": false,
-				"grid": false,
-				"detail": true
-			},
-			{
-				"label": "Author",
-				"name": "Author",
-				"summary": false,
-				"grid": false,
-				"detail": true
-			},
-			{
-				"label": "Publisher",
-				"name": "l_publisher",
-				"summary": false,
-				"grid": false,
-				"detail": true
-			}
-		]
-	},
-	{
-		"database": "DESCRIPTION_WEB",
-		"items": [
-			{
-				"label": "Title",
-				"name": "TITLE",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
-			{
-				"label": "ID",
-				"name": "REFD",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
-			{
-				"label": "Date",
-				"name": "date_cr_inc",
-				"summary": true,
-				"grid": false,
-				"detail": true
-			}
-		]
-	},
-	{
-		"database": "BIBLIO_WEB",
-		"items": [
-			{
-				"label": "Title",
-				"name": "LEGAL_TITLE",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
-			{
-				"label": "ID",
-				"name": "ACCESSION_NUMBER",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
-			{
-				"label": "Date",
-				"name": "EARLY",
-				"summary": true,
-				"grid": false,
-				"detail": true
-			},
-			{
-				"label": "Description",
-				"name": "520_A",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			}
-		]
-	}
+    {
+        "database": "COLLECTIONS_WEB",
+        "items": [
+            {
+                "label": "Title",
+                "name": "LEGAL_TITLE",
+                "summary": true,
+                "grid": true,
+                "detail": true
+            },
+            {
+                "label": "Accession Number",
+                "name": "ACCESSION_NUMBER",
+                "summary": true,
+                "grid": true,
+                "detail": true
+            },
+            {
+                "label": "Collection",
+                "name": "collection_type",
+                "summary": true,
+                "grid": true,
+                "detail": true
+            },
+            {
+                "label": "Earliest Date",
+                "name": "EARLY",
+                "summary": false,
+                "grid": false,
+                "detail": true
+            },
+            {
+                "label": "Latest Date",
+                "name": "LATE",
+                "summary": false,
+                "grid": false,
+                "detail": true
+            },
+            {
+                "label": "Object Name",
+                "name": "object_name_eng",
+                "summary": true,
+                "grid": true,
+                "detail": true
+            },
+            {
+                "label": "Description",
+                "name": "obj_description",
+                "summary": false,
+                "grid": false,
+                "detail": true
+            },
+            {
+                "label": "Author",
+                "name": "Author",
+                "summary": false,
+                "grid": false,
+                "detail": true
+            },
+            {
+                "label": "Publisher",
+                "name": "l_publisher",
+                "summary": false,
+                "grid": false,
+                "detail": true
+            }
+        ]
+    },
+    {
+        "database": "DESCRIPTION_WEB",
+        "items": [
+            {
+                "label": "Title",
+                "name": "TITLE",
+                "summary": true,
+                "grid": true,
+                "detail": true
+            },
+            {
+                "label": "ID",
+                "name": "REFD",
+                "summary": true,
+                "grid": true,
+                "detail": true
+            },
+            {
+                "label": "Date",
+                "name": "date_cr_inc",
+                "summary": true,
+                "grid": false,
+                "detail": true
+            }
+        ]
+    },
+    {
+        "database": "BIBLIO_WEB",
+        "items": [
+            {
+                "label": "Title",
+                "name": "LEGAL_TITLE",
+                "summary": true,
+                "grid": true,
+                "detail": true
+            },
+            {
+                "label": "ID",
+                "name": "ACCESSION_NUMBER",
+                "summary": true,
+                "grid": true,
+                "detail": true
+            },
+            {
+                "label": "Date",
+                "name": "EARLY",
+                "summary": true,
+                "grid": false,
+                "detail": true
+            },
+            {
+                "label": "Description",
+                "name": "520_A",
+                "summary": true,
+                "grid": true,
+                "detail": true
+            }
+        ]
+    }
 ]
