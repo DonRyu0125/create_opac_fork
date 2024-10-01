@@ -29,7 +29,6 @@ const Detail = () => {
 	const { message } = useConstants()
 	// TODO: create placeholder component when there is no data
 
-
 	if (!records || records.length === 0) return <></>
 	return (
 		<Layout>

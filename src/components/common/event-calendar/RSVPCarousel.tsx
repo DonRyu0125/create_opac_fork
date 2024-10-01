@@ -14,11 +14,10 @@ import {
 	BD_DIS_ACC,
 	BD_DIS_ACC_TYPE,
 	BD_DIS_ACC_DETAI,
-	MEDIA_TYPE
+	MEDIA_TYPE,
 } from './Constants'
 import useConstants from '@/hooks/useConstants'
 import { getContactInfo } from './Service'
-
 
 export interface ImageCarouselProps {
 	items: any
@@ -79,7 +78,9 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 												<div className={'mr-2 w-[65px]'}>
 													{item[BD_DIS_ACC_TYPE]}:
 												</div>
-												<div className={'max-w-[450px]'}>{item[BD_DIS_ACC_DETAI]}</div>
+												<div className={'max-w-[450px]'}>
+													{item[BD_DIS_ACC_DETAI]}
+												</div>
 											</div>
 										)
 									}

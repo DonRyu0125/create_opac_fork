@@ -41,7 +41,6 @@ const SectionActions = <T extends HTMLFormControlsCollection>({
 								e.preventDefault()
 								handleAddNewItem?.(e)
 								setAddNewForm(false)
-							
 							}}>
 							{newItemForm}
 

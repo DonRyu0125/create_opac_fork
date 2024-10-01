@@ -24,11 +24,11 @@ export interface Cal_event {
 	[FLOC_IM_REF_GRP]: any
 	[FLOC_TX_ACCESS]: string
 	[FLOC_VD_REF_GRP]: any
-	[TAG_FUNC_O_PATH]:string
-	[TAG_FUNC_O]:string
-	[TAG_FUNC_O_ID]:string
-	[TAG_FUNC_O_PATH]:string
-	[TAG_FUNC_O_CODE]:string
+	[TAG_FUNC_O_PATH]: string
+	[TAG_FUNC_O]: string
+	[TAG_FUNC_O_ID]: string
+	[TAG_FUNC_O_PATH]: string
+	[TAG_FUNC_O_CODE]: string
 }
 
 // export type ImageProps = {
@@ -97,7 +97,7 @@ export const TAG_FUNC_O = 'TAG_FUNC_O'
 export const TAG_FUNC_O_PATH = 'TAG_FUNC_O_PATH'
 export const TAG_FUNC_O_ID = 'TAG_FUNC_O_ID'
 export const TAG_FUNC_O_CODE = 'TAG_FUNC_O_CODE'
-//TDR FIELD  
+//TDR FIELD
 export const FLOC_IM_REF_GRP = 'FLOC_IM_REF_GRP'
 export const FLOC_TX_ACCESS = 'FLOC_TX_ACCESS'
 export const FLOC_VD_REF_GRP = 'FLOC_VD_REF_GRP'

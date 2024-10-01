@@ -11,7 +11,7 @@ import {
 	Day_obj,
 	FilterType,
 	TAG_FUNC_DATE,
-	TAG_FUNC_START_T
+	TAG_FUNC_START_T,
 } from './Constants'
 import EventAllButton from './EventAllButton'
 import EventButton from './EventButton'

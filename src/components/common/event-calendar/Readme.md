@@ -70,7 +70,7 @@ confirm email
       └── EventCalendarEventList              Month View or Week View
           ├── EventSumButton                  Month:event summary modal
               └── EventRSVPForm
-          ├── EventButton                     Month and Week:event common 
+          ├── EventButton                     Month and Week:event common
               └── EventRSVPForm
           └── EventAllButton                  REMOVED
               └── EventRSVPForm

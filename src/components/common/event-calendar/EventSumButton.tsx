@@ -69,8 +69,8 @@ const EventSumButton = ({
 		})
 		return result ?? []
 	}
-	
-	const [dialogOpen, setDialogOpen] = useState(false);
+
+	const [dialogOpen, setDialogOpen] = useState(false)
 
 	return (
 		<>

@@ -8,7 +8,6 @@ export interface ILANGUAGE {
 	icon: string
 }
 export const LANGUAGE_ITEMS: ILANGUAGE[] = [
-	
 	{
 		code: FRENCH_CODE,
 		name: 'Français',

@@ -6,7 +6,7 @@ import {
 	convertXMLToJson,
 	encodeObj,
 	getCurrentDate,
-	getSessionID
+	getSessionID,
 } from '@/lib/utils'
 import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
 import { Label } from '@radix-ui/react-label'
@@ -51,7 +51,7 @@ import {
 	TAG_FUNC_RSVP,
 	TAG_FUNC_START_T,
 	TAG_NAME,
-	VERIFICATION_EMAIL_T
+	VERIFICATION_EMAIL_T,
 } from './Constants'
 import { calNumOfPatron } from './EC-Util'
 import { fetch_get, getContactInfo } from './Service'
@@ -351,7 +351,10 @@ const ShowRSVPSuccess = ({
 }) => {
 	const message = useConstants().message
 	return (
-		<div className={'min-h-[388px] h-full w-full p-2 border-2 rounded flex flex-col justify-evenly'}>
+		<div
+			className={
+				'min-h-[388px] h-full w-full p-2 border-2 rounded flex flex-col justify-evenly'
+			}>
 			<div>
 				<div
 					className={

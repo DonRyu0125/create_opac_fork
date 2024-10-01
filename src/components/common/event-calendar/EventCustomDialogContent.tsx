@@ -8,7 +8,6 @@ import {
 	TAG_FUNC_RSVP,
 	TAG_FUNC_CANCEL,
 	TAG_FUNC_CAN_RES,
-	
 	PATRON,
 	SISN,
 	TAG_FUNC_ACCESS,
@@ -34,9 +33,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 					contactInfo={contactInfo}
 				/>
 				<DialogDescription
-					className={
-						'h-1/2 min-h-[200px] overflow-y-auto text-base font-normal'
-					}>
+					className={'h-1/2 min-h-[200px] overflow-y-auto text-base font-normal'}>
 					{elm[TAG_FUNC_LOC_DEC]}
 				</DialogDescription>
 			</div>
