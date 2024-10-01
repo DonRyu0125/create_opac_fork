@@ -24,7 +24,7 @@ export interface Event_list {
 	weekType: boolean
 	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
-	fitlerOption: string
+	filterOption: string
 }
 
 const EventCalendarEventList = ({
@@ -33,7 +33,7 @@ const EventCalendarEventList = ({
 	currentEvent,
 	contactInfo,
 	filterTypes,
-	fitlerOption,
+	filterOption,
 }: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
 	const [weekType, _] = useAtom(calendarWeekType)
@@ -48,7 +48,7 @@ const EventCalendarEventList = ({
 					isMatchingDayMonth &&
 					currentFilter.some(
 						(type: string) =>
-							convertLowerTrim(type) === convertLowerTrim(item[fitlerOption])
+							convertLowerTrim(type) === convertLowerTrim(item[filterOption])
 					)
 				)
 			}
@@ -114,7 +114,7 @@ const EventCalendarEventList = ({
 					filteredEvents={filteredEvents}
 					contactInfo={contactInfo}
 					filterTypes={filterTypes}
-					fitlerOption={fitlerOption}
+					filterOption={filterOption}
 				/>
 			) : (
 				<div
@@ -129,7 +129,7 @@ const EventCalendarEventList = ({
 							id={idx}
 							contactInfo={contactInfo}
 							filterTypes={filterTypes}
-							fitlerOption={fitlerOption}
+							filterOption={filterOption}
 						/>
 					))}
 				</div>

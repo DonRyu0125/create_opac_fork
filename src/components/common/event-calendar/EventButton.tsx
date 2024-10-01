@@ -30,13 +30,13 @@ const EventButton = ({
 	id,
 	contactInfo,
 	filterTypes,
-	fitlerOption,
+	filterOption,
 }: {
 	elm: any
 	id: number
 	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
-	fitlerOption: string
+	filterOption: string
 }) => {
 	const [weekType, _] = useAtom(calendarWeekType)
 	const message = useConstants().message
@@ -57,7 +57,7 @@ const EventButton = ({
 			<DialogTrigger asChild>
 				{weekType ? (
 					<Button
-						className={`${getColor(elm[fitlerOption])} w-full whitespace-normal break-normal min-w-[100px] max-w-[100px] h-[65px] md:max-h-[165px] mr-1 overflow-y-hidden  md:max-w-[168px] md:h-full md:mb-2 border-hidden p-1 text-sm flex flex-col justify-start text-white md:p-1`}
+						className={`${getColor(elm[filterOption])} w-full whitespace-normal break-normal min-w-[100px] max-w-[100px] h-[65px] md:max-h-[165px] mr-1 overflow-y-hidden  md:max-w-[168px] md:h-full md:mb-2 border-hidden p-1 text-sm flex flex-col justify-start text-white md:p-1`}
 						variant="outline">
 						<div className={'w-full text-left'}>
 							<div className={'flex w-full'}>
@@ -87,7 +87,7 @@ const EventButton = ({
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded',
-									getColor(elm[fitlerOption])
+									getColor(elm[filterOption])
 								)}></div>
 							<p className={'w-full h-full hidden sm:block break-all'}>
 								{elm[TAG_NAME]}

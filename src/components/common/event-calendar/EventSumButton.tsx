@@ -33,14 +33,14 @@ export interface eventSumType {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
-	fitlerOption: string
+	filterOption: string
 }
 
 const EventSumButton = ({
 	filteredEvents,
 	contactInfo,
 	filterTypes,
-	fitlerOption,
+	filterOption,
 }: eventSumType) => {
 	const [monthType, __] = useAtom(calendarMonthType)
 	const { logo } = useConstants().config
@@ -58,19 +58,19 @@ const EventSumButton = ({
 		let typeArr: any = {}
 		let result = []
 		filteredEvents.forEach((classInfo: any) => {
-			const type = classInfo[fitlerOption]
+			const type = classInfo[filterOption]
 			if (!typeArr[type]) {
 				typeArr[type] = []
 			}
 			typeArr[type].push(classInfo)
 		})
 		result = Object.keys(typeArr).map((item) => {
-			return { [fitlerOption]: item, [TAG_FUNC_DTE_LIST]: typeArr[item] }
+			return { [filterOption]: item, [TAG_FUNC_DTE_LIST]: typeArr[item] }
 		})
 		return result ?? []
 	}
-	
-	const [dialogOpen, setDialogOpen] = useState(false);
+
+	const [dialogOpen, setDialogOpen] = useState(false)
 
 	return (
 		<>
@@ -80,17 +80,18 @@ const EventSumButton = ({
 						<Dialog key={id} open={dialogOpen} onOpenChange={setDialogOpen}>
 							<ButtonTooltip item={item.list} isDialogOpen={dialogOpen}>
 								<DialogTrigger>
+									<>{console.log('item[filterOption]', filterOption)}</>
 									<Button
 										className="h-[20px] border-hidden flex p-0 justify-start"
 										variant="outline">
 										<div
 											className={cn(
 												'h-4 w-[16px] border rounded',
-												getColor(item[fitlerOption])
+												getColor(item[filterOption])
 											)}
 										/>
 										<div className="hidden sm:block max-w-[100px] overflow-hidden text-left">
-											{item[fitlerOption]}
+											{item[filterOption]}
 										</div>
 										<div className="flex items-center justify-center">
 											<CalendarCheck
@@ -119,9 +120,10 @@ const EventSumButton = ({
 											<div
 												className={cn(
 													'h-4 w-[16px] border rounded mr-1 ',
-													getColor(item[fitlerOption])
+													getColor(item[filterOption])
 												)}></div>
-											{fitlerOption ? item[fitlerOption] : message.all}
+												<>
+												{console.log('{item[filterOption]')}</>
 										</div>
 										<DialogPrimitive.Close>
 											<X className={'h-6 w-6'} />
@@ -156,7 +158,7 @@ const EventSumButton = ({
 							id={idx}
 							contactInfo={contactInfo}
 							filterTypes={filterTypes}
-							fitlerOption={fitlerOption}
+							filterOption={filterOption}
 						/>
 					))}
 				</div>
