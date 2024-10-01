@@ -23,7 +23,8 @@ type SelectOption = {
 export type SwitchProps = {
 	title: string
 	value: boolean
-	onChange: (value: boolean) => void
+	onChange?: (value: boolean) => void
+	disabled?: boolean
 }
 
 export type SelectProps = {
@@ -36,3 +37,12 @@ export type SelectProps = {
 	defaultValue?: string
 	renderOption?: (option: SelectOption) => ReactNode
 }
+
+export type FCForm = HTMLFormControlsCollection & {
+	url: HTMLInputElement
+	title: HTMLInputElement
+	description: HTMLInputElement
+	thumbnail: HTMLInputElement
+}
+
+export type BCForm = Omit<FCForm, 'description'>

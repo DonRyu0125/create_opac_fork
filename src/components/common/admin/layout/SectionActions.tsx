@@ -3,7 +3,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Plus } from 'lucide-react'
 import { FormEvent, ReactNode, useState } from 'react'
 import Switch from '../input/Switch'
-import { DialogDescription } from '@radix-ui/react-dialog'
 
 export type NewElementForm<T extends HTMLFormControlsCollection> = HTMLFormElement & {
 	readonly elements: T
@@ -11,7 +10,7 @@ export type NewElementForm<T extends HTMLFormControlsCollection> = HTMLFormEleme
 
 type Props<T extends HTMLFormControlsCollection> = {
 	enableFeatureValue: boolean
-	onEnableFeatureChange: (e: boolean) => void
+	onEnableFeatureChange?: (e: boolean) => void
 	newItemForm?: ReactNode
 	handleAddNewItem?: (e: FormEvent<NewElementForm<T>>) => void
 }
@@ -28,6 +27,7 @@ const SectionActions = <T extends HTMLFormControlsCollection>({
 			<Switch
 				title={'Enable feature'}
 				value={enableFeatureValue}
+				disabled={onEnableFeatureChange === undefined}
 				onChange={onEnableFeatureChange}
 			/>
 			{newItemForm && (

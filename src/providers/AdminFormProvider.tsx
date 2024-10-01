@@ -98,13 +98,8 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 
 			// Traverse through the path to get to the target array
 			path.forEach((key) => {
-				if (
-					targetArray &&
-					typeof targetArray === 'object' &&
-					!Array.isArray(targetArray) &&
-					targetArray !== null
-				) {
-					targetArray = targetArray[key] as SchemaValueType
+				if (targetArray && typeof targetArray === 'object' && targetArray !== null) {
+					targetArray = targetArray[key as keyof typeof targetArray] as SchemaValueType
 				}
 			})
 

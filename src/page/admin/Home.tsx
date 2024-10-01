@@ -1,26 +1,15 @@
 import AdminFormLayout from '@/components/common/admin/AdminFormLayout'
 import FormField from '@/components/common/admin/input/FormField'
-import ImagePreview from '@/components/common/admin/input/ImagePreview'
-import TextField from '@/components/common/admin/input/TextField'
+import { BCForm, FCForm } from '@/components/common/admin/input/types'
 import SectionActions, { NewElementForm } from '@/components/common/admin/layout/SectionActions'
 import SectionHeader from '@/components/common/admin/layout/SectionHeader'
 import SectionWrapper from '@/components/common/admin/layout/SectionWrapper'
-import { Button } from '@/components/ui/button'
 import { default as enValues } from '@/constants/en/home.json'
 import { default as frValues } from '@/constants/fr/home.json'
 import { useAdminForm } from '@/hooks/useAdminForm'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
 import { FormEvent } from 'react'
-
-type FCForm = HTMLFormControlsCollection & {
-	url: HTMLInputElement
-	title: HTMLInputElement
-	description: HTMLInputElement
-	thumbnail: HTMLInputElement
-}
-
-type BCForm = Omit<FCForm, 'description'>
 
 const AdminHome = () => {
 	return (
@@ -149,6 +138,7 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 					</div>
 				)}
 			</div>
+
 			<div className="mt-2">
 				<SectionHeader heading="Browse By Category" />
 				<SectionActions
@@ -236,4 +226,5 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 		</div>
 	)
 }
+
 export default AdminHome
