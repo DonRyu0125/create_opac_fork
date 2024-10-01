@@ -80,7 +80,7 @@ const EventSumButton = ({
 						<Dialog key={id} open={dialogOpen} onOpenChange={setDialogOpen}>
 							<ButtonTooltip item={item.list} isDialogOpen={dialogOpen}>
 								<DialogTrigger>
-									<>{console.log('item[filterOption]', filterOption)}</>
+									{/* <>{console.log('item[filterOption]', filterOption)}</> */}
 									<Button
 										className="h-[20px] border-hidden flex p-0 justify-start"
 										variant="outline">

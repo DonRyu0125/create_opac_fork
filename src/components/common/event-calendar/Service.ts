@@ -34,11 +34,23 @@ const getWeekRange = (currentDate: any) => {
 	return { firstDay, lastDay }
 }
 
+// MWI commandsearch need 2024-04-* or 2024-10-* format
+const getMonFormat = (currentDate: Date) => {
+	if ((currentDate.getMonth() + 1) > 9) {
+		//2024-10-* format
+		return `${currentDate.getMonth() + 1}`
+	} else {
+		//2024-09-* format
+		return `0${currentDate.getMonth() + 1}`
+	}
+}
+
 export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 	const DATE_FIELD = 'TAG_FUNC_DATE'
+
 	const DATE_WILDCARD = isWeekType
 		? `${getWeekRange(currentDate).firstDay}//${getWeekRange(currentDate).lastDay}`
-		: `${currentDate.getFullYear()}%2D0${currentDate.getMonth() + 1}%2D%2A`
+		: `${currentDate.getFullYear()}%2D${getMonFormat(currentDate)}%2D%2A`
 
 	try {
 		const response = await axios.get(
