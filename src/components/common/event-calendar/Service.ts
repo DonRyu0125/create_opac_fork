@@ -36,7 +36,7 @@ const getWeekRange = (currentDate: any) => {
 
 // MWI commandsearch need 2024-04-* or 2024-10-* format
 const getMonFormat = (currentDate: Date) => {
-	if ((currentDate.getMonth() + 1) > 9) {
+	if (currentDate.getMonth() + 1 > 9) {
 		//2024-10-* format
 		return `${currentDate.getMonth() + 1}`
 	} else {
@@ -65,20 +65,23 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		const jsonData: any = x2js.xml2js(response.data)
 		const events = jsonData?.div?.xml?.event
 		let arr = convertToArr(events)
-		let formatEvents = arr?.map((item:any) => {
-			return {
-				...item,
-				FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
-					? item.FLOC_IM_REF_GRP
-					: [item.FLOC_IM_REF_GRP],
-				FLOC_VD_REF_GRP: Array.isArray(item.FLOC_VD_REF_GRP)
-					? item.FLOC_VD_REF_GRP
-					: [item.FLOC_VD_REF_GRP],
+
+		let formatEvents = arr?.map((item: any) => {
+			if (item?.FLOC_IM_REF_GRP && item?.FLOC_VD_REF_GRP) {
+				return {
+					...item,
+					FLOC_IM_REF_GRP: Array.isArray(item?.FLOC_IM_REF_GRP)
+						? item.FLOC_IM_REF_GRP
+						: [item.FLOC_IM_REF_GRP],
+					FLOC_VD_REF_GRP: Array.isArray(item?.FLOC_VD_REF_GRP)
+						? item.FLOC_VD_REF_GRP
+						: [item.FLOC_VD_REF_GRP],
+				}
 			}
+			return {...item}
 		})
 
-		if (!formatEvents) return []
-		return convertToArr(formatEvents)
+		return formatEvents
 	} catch (error) {
 		throw error
 	}

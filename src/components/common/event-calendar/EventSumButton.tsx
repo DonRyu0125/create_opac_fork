@@ -92,7 +92,6 @@ const EventSumButton = ({ item, contactInfo, filterTypes, filterOption }: eventS
 							</DialogPrimitive.Close>
 						</DialogTitle>
 					</DialogHeader>
-					{console.log('item[TAG_FUNC_DTE_LIST]', item[TAG_FUNC_DTE_LIST])}
 					{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
 						<EventCustomDialogContent elm={elm} contactInfo={contactInfo} key={key} />
 					))}

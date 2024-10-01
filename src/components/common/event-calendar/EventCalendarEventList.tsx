@@ -127,10 +127,11 @@ const EventCalendarEventList = ({
 				)}
 			</div>
 			{monthType && filterTypes.length > 1 ? (
-				groupedByType(filteredEvents).map((item) => {
+				groupedByType(filteredEvents).map((item, key) => {
 					return (
 						<EventSumButton
-						item={item}
+							key={key}
+							item={item}
 							contactInfo={contactInfo}
 							filterTypes={filterTypes}
 							filterOption={filterOption}
