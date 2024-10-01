@@ -27,8 +27,6 @@ const Summary = () => {
 		if (currentUrl.includes(match[0])) return ''
 		return `${message.in} ${db[0].title}`
 	}
-	console.log(common)
-	console.log(records)
 	if (!common) return <></>
 	return (
 		<Layout>
