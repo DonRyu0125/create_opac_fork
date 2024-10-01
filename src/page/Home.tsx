@@ -11,7 +11,6 @@ import Slide from '../components/common/Slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
-import { ParallaxScroll } from '@/components/ui/parallax-scroll'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -43,7 +42,13 @@ const images = [
 	'https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80',
 ]
 
-const Home = () => {
+type MainPageProps = {
+	previewMode?: boolean
+	previewData?: any
+}
+const Home = ({ previewMode = false, previewData }: MainPageProps) => {
+	const sourceData = useConstants().home
+	const data = previewMode && previewData ? (previewData as typeof sourceData) : sourceData
 	const {
 		heading,
 		heroBanner,
@@ -56,7 +61,7 @@ const Home = () => {
 		enableRSVP,
 		enableCategoriesItems,
 		enableRecentAddition,
-	} = useConstants().home
+	} = data
 	const { message } = useConstants()
 	return (
 		<Layout>
