@@ -30,19 +30,13 @@ import EventCustomDialogContent from './EventCustomDialogContent'
 import ButtonTooltip from './ButtonTooltip'
 
 export interface eventSumType {
-	filteredEvents: Cal_event[]
+	item: any
 	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
-	filterOption: string
+	filterOption: any
 }
 
-const EventSumButton = ({
-	filteredEvents,
-	contactInfo,
-	filterTypes,
-	filterOption,
-}: eventSumType) => {
-	const [monthType, __] = useAtom(calendarMonthType)
+const EventSumButton = ({ item, contactInfo, filterTypes, filterOption }: eventSumType) => {
 	const { logo } = useConstants().config
 	const getColor = (event_type: string) => {
 		let result = filterTypes?.filter((item) => {
@@ -54,116 +48,71 @@ const EventSumButton = ({
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 	const message = useConstants().message
-	const groupedByType = (filteredEvents: Cal_event[]) => {
-		let typeArr: any = {}
-		let result = []
-		filteredEvents.forEach((classInfo: any) => {
-			const type = classInfo[filterOption]
-			if (!typeArr[type]) {
-				typeArr[type] = []
-			}
-			typeArr[type].push(classInfo)
-		})
-		result = Object.keys(typeArr).map((item) => {
-			return { [filterOption]: item, [TAG_FUNC_DTE_LIST]: typeArr[item] }
-		})
-		return result ?? []
-	}
-
 	const [dialogOpen, setDialogOpen] = useState(false)
 
 	return (
-		<>
-			{monthType && filterTypes.length > 1 ? (
-				<div className={'h-full mb-[2px] overflow-y-auto custom-scrollbar'}>
-					{groupedByType(filteredEvents).map((item: any, id: number) => (
-						<Dialog key={id} open={dialogOpen} onOpenChange={setDialogOpen}>
-							<ButtonTooltip item={item.list} isDialogOpen={dialogOpen}>
-								<DialogTrigger>
-									{/* <>{console.log('item[filterOption]', filterOption)}</> */}
-									<Button
-										className="h-[20px] border-hidden flex p-0 justify-start"
-										variant="outline">
-										<div
-											className={cn(
-												'h-4 w-[16px] border rounded',
-												getColor(item[filterOption])
-											)}
-										/>
-										<div className="hidden sm:block max-w-[100px] overflow-hidden text-left">
-											{item[filterOption]}
-										</div>
-										<div className="flex items-center justify-center">
-											<CalendarCheck
-												height={18}
-												className="hidden sm:block"
-											/>
-											:<div>{item[TAG_FUNC_DTE_LIST].length}</div>
-										</div>
-									</Button>
-								</DialogTrigger>
-							</ButtonTooltip>
-							<DialogContent
-								hideClose={'invisible'}
-								className={
-									'max-h-[90vh] max-w-5xl overflow-y-auto p-1 gap-1 custom-scrollbar'
-								}>
-								<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
-									<DialogTitle
-										className={
-											'bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
-										}>
-										<div className="h-8">
-											<img className="h-full" src={logo} alt="logo" />
-										</div>
-										<div className={'flex'}>
-											<div
-												className={cn(
-													'h-4 w-[16px] border rounded mr-1 ',
-													getColor(item[filterOption])
-												)}></div>
-												<>
-												{console.log('{item[filterOption]')}</>
-										</div>
-										<DialogPrimitive.Close>
-											<X className={'h-6 w-6'} />
-										</DialogPrimitive.Close>
-									</DialogTitle>
-								</DialogHeader>
-								{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
-									<EventCustomDialogContent
-										elm={elm}
-										contactInfo={contactInfo}
-										key={key}
-									/>
-								))}
-								<DialogFooter>
-									<DialogPrimitive.Close
-										className={
-											'font-bold bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
-										}>
-										{message.close}
-									</DialogPrimitive.Close>
-								</DialogFooter>
-							</DialogContent>
-						</Dialog>
-					))}
-				</div>
-			) : (
-				<div className={'max-h-[95%] mb-[2px] w-full overflow-y-auto custom-scrollbar'}>
-					{filteredEvents.map((item: any, idx: number) => (
-						<EventButton
-							elm={item}
-							key={idx}
-							id={idx}
-							contactInfo={contactInfo}
-							filterTypes={filterTypes}
-							filterOption={filterOption}
+		<div className={'h-[20px] mb-[2px]  custom-scrollbar'}>
+			<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+				{/* <ButtonTooltip item={item.list} isDialogOpen={dialogOpen}> */}
+				<DialogTrigger>
+					<Button
+						className="h-full border-hidden flex p-0 justify-start"
+						variant="outline">
+						<div
+							className={cn(
+								'h-4 w-[16px] border rounded',
+								getColor(item[filterOption])
+							)}
 						/>
+						<div className="hidden sm:block max-w-[100px] overflow-hidden text-left">
+							{item[filterOption]}
+						</div>
+						<div className="flex items-center justify-center">
+							<CalendarCheck height={18} className="hidden sm:block" />:
+							<div>{item[TAG_FUNC_DTE_LIST].length}</div>
+						</div>
+					</Button>
+				</DialogTrigger>
+				{/* </ButtonTooltip> */}
+				<DialogContent
+					hideClose={'invisible'}
+					className={'max-h-[90vh] max-w-5xl overflow-y-auto p-1 gap-1 custom-scrollbar'}>
+					<DialogHeader className={'w-full sticky top-0 bg-white z-10 '}>
+						<DialogTitle
+							className={
+								'bg-primary text-primary-foreground h-10 flex items-center justify-between rounded p-2'
+							}>
+							<div className="h-8">
+								<img className="h-full" src={logo} alt="logo" />
+							</div>
+							<div className={'flex'}>
+								<div
+									className={cn(
+										'h-4 w-[16px] border rounded mr-1 ',
+										getColor(item[filterOption])
+									)}></div>
+								{item[filterOption]}
+							</div>
+							<DialogPrimitive.Close>
+								<X className={'h-6 w-6'} />
+							</DialogPrimitive.Close>
+						</DialogTitle>
+					</DialogHeader>
+					{console.log('item[TAG_FUNC_DTE_LIST]', item[TAG_FUNC_DTE_LIST])}
+					{item[TAG_FUNC_DTE_LIST]?.map((elm: any, key: number) => (
+						<EventCustomDialogContent elm={elm} contactInfo={contactInfo} key={key} />
 					))}
-				</div>
-			)}
-		</>
+					<DialogFooter>
+						<DialogPrimitive.Close
+							className={
+								'font-bold bg-primary text-primary-foreground h-10 w-20 flex items-center justify-around rounded'
+							}>
+							{message.close}
+						</DialogPrimitive.Close>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+		</div>
 	)
 }
 

@@ -11,7 +11,8 @@ import {
 	Day_obj,
 	FilterType,
 	TAG_FUNC_DATE,
-	TAG_FUNC_START_T
+	TAG_FUNC_DTE_LIST,
+	TAG_FUNC_START_T,
 } from './Constants'
 import EventAllButton from './EventAllButton'
 import EventButton from './EventButton'
@@ -99,8 +100,24 @@ const EventCalendarEventList = ({
 		return
 	}
 
+	const groupedByType = (filteredEvents: Cal_event[]) => {
+		let typeArr: any = {}
+		let result = []
+		filteredEvents.forEach((classInfo: any) => {
+			const type = classInfo[filterOption]
+			if (!typeArr[type]) {
+				typeArr[type] = []
+			}
+			typeArr[type].push(classInfo)
+		})
+		result = Object.keys(typeArr).map((item) => {
+			return { [filterOption]: item, [TAG_FUNC_DTE_LIST]: typeArr[item] }
+		})
+		return result ?? []
+	}
+
 	return (
-		<div className={`${monthType ? 'h-[82%]' : 'h-[98%]'} relative w-full`}>
+		<div className={`h-full relative w-full`}>
 			<div className={'bg-slate-200 flex justify-between h-[25px]'}>
 				<div>{dayObj?.day}</div>
 				{filteredEvents.length > 2 && (
@@ -110,12 +127,16 @@ const EventCalendarEventList = ({
 				)}
 			</div>
 			{monthType && filterTypes.length > 1 ? (
-				<EventSumButton
-					filteredEvents={filteredEvents}
-					contactInfo={contactInfo}
-					filterTypes={filterTypes}
-					filterOption={filterOption}
-				/>
+				groupedByType(filteredEvents).map((item) => {
+					return (
+						<EventSumButton
+						item={item}
+							contactInfo={contactInfo}
+							filterTypes={filterTypes}
+							filterOption={filterOption}
+						/>
+					)
+				})
 			) : (
 				<div
 					className={cn(
