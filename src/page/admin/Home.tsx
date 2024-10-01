@@ -1,7 +1,8 @@
 import AdminFormLayout from '@/components/common/admin/AdminFormLayout'
+import FormField from '@/components/common/admin/input/FormField'
 import ImagePreview from '@/components/common/admin/input/ImagePreview'
 import TextField from '@/components/common/admin/input/TextField'
-import SectionActions from '@/components/common/admin/layout/SectionActions'
+import SectionActions, { NewElementForm } from '@/components/common/admin/layout/SectionActions'
 import SectionHeader from '@/components/common/admin/layout/SectionHeader'
 import SectionWrapper from '@/components/common/admin/layout/SectionWrapper'
 import { Button } from '@/components/ui/button'
@@ -10,7 +11,16 @@ import { default as frValues } from '@/constants/fr/home.json'
 import { useAdminForm } from '@/hooks/useAdminForm'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
-import { Trash } from 'lucide-react'
+import { FormEvent } from 'react'
+
+type FCForm = HTMLFormControlsCollection & {
+	url: HTMLInputElement
+	title: HTMLInputElement
+	description: HTMLInputElement
+	thumbnail: HTMLInputElement
+}
+
+type BCForm = Omit<FCForm, 'description'>
 
 const AdminHome = () => {
 	return (
@@ -31,36 +41,65 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 
 	return (
 		<div className="flex gap-4 flex-col">
-			<TextField
-				title={'Page heading'}
+			<FormField
+				type="text"
+				field={'Page heading'}
 				value={fieldsValue.heading}
 				onChange={(e) => handleChange(['heading'], e)}
 			/>
 
-			<div className="flex flex-col">
-				<TextField
-					title={'Site banner'}
-					value={fieldsValue.heroBanner}
-					onChange={(e) => handleChange(['heroBanner'], e)}
-				/>
-				<ImagePreview src={fieldsValue.heroBanner} alt="Site Banner" />
-			</div>
+			<FormField
+				type="image"
+				field={'Site banner'}
+				value={fieldsValue.heroBanner}
+				onChange={(e) => handleChange(['heroBanner'], e)}
+			/>
 
 			<div className="mt-2">
 				<SectionHeader heading="Featured Collections" />
 
 				<SectionActions
-					onAddNew={() => {
+					handleAddNewItem={(event: FormEvent<NewElementForm<FCForm>>) => {
+						const { url, description, title, thumbnail } = event.currentTarget.elements
+
 						handleAdd(
 							['featuredCollection', `${fieldsValue.featuredCollection.length}`],
 							{
-								title: '',
-								description: '',
-								url: '',
-								thumbnail: '',
+								title: title.value,
+								description: description.value,
+								url: url.value,
+								thumbnail: thumbnail.value,
 							}
 						)
 					}}
+					newItemForm={
+						<>
+							<FormField
+								name="title"
+								type="text"
+								field={'Category title'}
+								value={''}
+							/>
+							<FormField
+								name="description"
+								type="text"
+								field={'Description'}
+								value={''}
+							/>
+							<FormField
+								name="url"
+								type="text"
+								field={'Search expression'}
+								value={''}
+							/>
+							<FormField
+								name="thumbnail"
+								type="text"
+								field={'Thumbnail'}
+								value={''}
+							/>
+						</>
+					}
 					enableFeatureValue={fieldsValue.enableFeaturedCollection}
 					onEnableFeatureChange={(e) => {
 						handleChange(['enableFeaturedCollection'], e)
@@ -71,28 +110,32 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 					<div className="flex flex-col gap-2">
 						{fieldsValue.featuredCollection.map((item, index) => (
 							<SectionWrapper
+								defaultCollapseMode={index !== 0}
 								key={JSON.stringify(item)}
 								onRemove={() => {
 									handleRemove(['featuredCollection'], index)
 								}}>
-								<TextField
-									title={'Category title'}
+								<FormField
+									type="text"
+									field={'Category title'}
 									value={item.title}
 									onChange={(e) =>
 										handleChange(['featuredCollection', `${index}`, 'title'], e)
 									}
 								/>
 
-								<TextField
-									title={'Search expression'}
+								<FormField
+									type="text"
+									field={'Search expression'}
 									value={item.url}
 									onChange={(e) =>
 										handleChange(['featuredCollection', `${index}`, 'url'], e)
 									}
 								/>
 
-								<TextField
-									title={'Thumbnail'}
+								<FormField
+									type="image"
+									field={'Thumbnail'}
 									value={item.thumbnail}
 									onChange={(e) =>
 										handleChange(
@@ -100,11 +143,6 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 											e
 										)
 									}
-								/>
-
-								<ImagePreview
-									src={item.thumbnail}
-									alt="Featured collection thumbnail"
 								/>
 							</SectionWrapper>
 						))}{' '}
@@ -114,13 +152,38 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 			<div className="mt-2">
 				<SectionHeader heading="Browse By Category" />
 				<SectionActions
-					onAddNew={() => {
+					handleAddNewItem={(event: FormEvent<NewElementForm<BCForm>>) => {
+						const { url, title, thumbnail } = event.currentTarget.elements
+
 						handleAdd(['categoriesItems', `${fieldsValue.categoriesItems.length}`], {
-							title: '',
-							url: '',
-							thumbnail: '',
+							title: title.value,
+							url: url.value,
+							thumbnail: thumbnail.value,
 						})
 					}}
+					newItemForm={
+						<>
+							<FormField
+								name="title"
+								type="text"
+								field={'Category title'}
+								value={''}
+							/>
+
+							<FormField
+								name="url"
+								type="text"
+								field={'Search expression'}
+								value={''}
+							/>
+							<FormField
+								name="thumbnail"
+								type="text"
+								field={'Thumbnail'}
+								value={''}
+							/>
+						</>
+					}
 					enableFeatureValue={fieldsValue.enableCategoriesItems}
 					onEnableFeatureChange={(e) => {
 						handleChange(['enableCategoriesItems'], e)
@@ -131,28 +194,32 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 					<div className="flex flex-col gap-2">
 						{fieldsValue.categoriesItems.map((item, index) => (
 							<SectionWrapper
+								defaultCollapseMode={index !== 0}
 								key={JSON.stringify(item)}
 								onRemove={() => {
 									handleRemove(['categoriesItems'], index)
 								}}>
-								<TextField
-									title={'Category title'}
+								<FormField
+									type="text"
+									field={'Category title'}
 									value={item.title}
 									onChange={(e) =>
 										handleChange(['categoriesItems', `${index}`, 'title'], e)
 									}
 								/>
 
-								<TextField
-									title={'Search expression'}
+								<FormField
+									type="text"
+									field={'Search expression'}
 									value={item.url}
 									onChange={(e) =>
 										handleChange(['categoriesItems', `${index}`, 'url'], e)
 									}
 								/>
 
-								<TextField
-									title={'Thumbnail'}
+								<FormField
+									type="image"
+									field={'Thumbnail'}
 									value={item.thumbnail}
 									onChange={(e) =>
 										handleChange(
@@ -161,8 +228,6 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 										)
 									}
 								/>
-
-								<ImagePreview src={item.thumbnail} alt="Category thumbnail" />
 							</SectionWrapper>
 						))}
 					</div>

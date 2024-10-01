@@ -38,7 +38,11 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 	}, [])
 
 	const handleAdd = useCallback((path: string[], newValue: SchemaValueType) => {
-		setFormData((prevData) => addJsonValue(prevData, path, newValue))
+		setFormData((prevData) => {
+			const newData = addJsonValue(prevData, path, newValue)
+			updateData(newData)
+			return newData
+		})
 	}, [])
 
 	const updateData = useCallback(

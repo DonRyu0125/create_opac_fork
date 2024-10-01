@@ -1,14 +1,28 @@
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Plus } from 'lucide-react'
+import { FormEvent, ReactNode, useState } from 'react'
 import Switch from '../input/Switch'
+import { DialogDescription } from '@radix-ui/react-dialog'
 
-type Props = {
-	enableFeatureValue: boolean
-	onEnableFeatureChange: (e: boolean) => void
-	onAddNew?: () => void
+export type NewElementForm<T extends HTMLFormControlsCollection> = HTMLFormElement & {
+	readonly elements: T
 }
 
-const SectionActions = ({ enableFeatureValue, onEnableFeatureChange, onAddNew }: Props) => {
+type Props<T extends HTMLFormControlsCollection> = {
+	enableFeatureValue: boolean
+	onEnableFeatureChange: (e: boolean) => void
+	newItemForm?: ReactNode
+	handleAddNewItem?: (e: FormEvent<NewElementForm<T>>) => void
+}
+
+const SectionActions = <T extends HTMLFormControlsCollection>({
+	enableFeatureValue,
+	onEnableFeatureChange,
+	newItemForm,
+	handleAddNewItem,
+}: Props<T>) => {
+	const [addNewForm, setAddNewForm] = useState(false)
 	return (
 		<div className="flex flex-row justify-between mt-2">
 			<Switch
@@ -16,13 +30,33 @@ const SectionActions = ({ enableFeatureValue, onEnableFeatureChange, onAddNew }:
 				value={enableFeatureValue}
 				onChange={onEnableFeatureChange}
 			/>
+			{newItemForm && (
+				<Dialog onOpenChange={setAddNewForm} open={addNewForm}>
+					<DialogContent>
+						<DialogHeader>
+							<DialogTitle>Add new item</DialogTitle>
+						</DialogHeader>
+						<form
+							onSubmit={(e: FormEvent<NewElementForm<T>>) => {
+								e.preventDefault()
+								handleAddNewItem?.(e)
+								setAddNewForm(false)
+							
+							}}>
+							{newItemForm}
 
-			{onAddNew && (
+							<Button type="submit">Submit</Button>
+						</form>
+					</DialogContent>
+				</Dialog>
+			)}
+
+			{newItemForm && (
 				<Button
 					disabled={!enableFeatureValue}
 					variant="outline"
 					onClick={() => {
-						onAddNew()
+						setAddNewForm(true)
 					}}>
 					<Plus className="text-primary h-4 w-4 mr-1" />
 					Add new

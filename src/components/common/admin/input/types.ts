@@ -6,6 +6,7 @@ export type InputProps = {
 	value: string
 	onChange: (value: string) => void
 	placeholder?: string
+	name?: string
 }
 
 export type CheckboxProps = {
