@@ -57,7 +57,7 @@ const EventButton = ({
 			<DialogTrigger asChild>
 				{weekType ? (
 					<Button
-						className={`${getColor(elm[filterOption])} w-full whitespace-normal break-normal min-w-[100px] max-w-[100px] h-[65px] md:max-h-[165px] mr-1 overflow-y-hidden  md:max-w-[168px] md:h-full md:mb-2 border-hidden p-1 text-sm flex flex-col justify-start text-white md:p-1`}
+						className={`${getColor(elm[filterOption])} w-full whitespace-normal break-normal min-w-[100px] max-w-[160px] h-[65px] md:max-h-[165px] mr-1 overflow-y-hidden  md:max-w-[168px] md:h-full md:mb-2 border-hidden p-1 text-sm flex flex-col justify-start text-white md:p-1`}
 						variant="outline">
 						<div className={'w-full text-left'}>
 							<div className={'flex w-full'}>
