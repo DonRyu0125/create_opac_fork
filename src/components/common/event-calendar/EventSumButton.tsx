@@ -38,32 +38,31 @@ const EventSumButton = ({ item, contactInfo, filterTypes, filterOption }: eventS
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
 	const message = useConstants().message
-	const [dialogOpen, setDialogOpen] = useState(false)
 
 	return (
 		<div className={'h-[20px] mb-[2px]  custom-scrollbar'}>
-			<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-				<ButtonTooltip item={item.list} isDialogOpen={dialogOpen}>
-					<DialogTrigger>
-						<Button
-							className="h-full border-hidden flex p-0 justify-start"
-							variant="outline">
+			<Dialog>
+				<DialogTrigger>
+					<Button
+						className="h-full border-hidden flex p-0 justify-start"
+						variant="outline">
+						<ButtonTooltip item={item.list}>
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded',
 									getColor(item[filterOption])
 								)}
 							/>
-							<div className="hidden sm:block max-w-[100px] overflow-hidden text-left">
-								{item[filterOption]}
-							</div>
-							<div className="flex items-center justify-center">
-								<CalendarCheck height={18} className="hidden sm:block" />:
-								<div>{item[TAG_FUNC_DTE_LIST].length}</div>
-							</div>
-						</Button>
-					</DialogTrigger>
-				</ButtonTooltip>
+						</ButtonTooltip>
+						<div className="hidden sm:block max-w-[100px] overflow-hidden text-left">
+							{item[filterOption]}
+						</div>
+						<div className="flex items-center justify-center">
+							<CalendarCheck height={18} className="hidden sm:block" />:
+							<div>{item[TAG_FUNC_DTE_LIST].length}</div>
+						</div>
+					</Button>
+				</DialogTrigger>
 				<DialogContent
 					hideClose={'invisible'}
 					className={'max-h-[90vh] max-w-5xl overflow-y-auto p-1 gap-1 custom-scrollbar'}>

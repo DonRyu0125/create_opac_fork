@@ -29,12 +29,8 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 	const [current, setCurrent] = React.useState(0)
 	const currentMedia = items[current]
 	const message = useConstants().message
-
-
-	console.log('items',items)
-
 	const renderPage = () => {
-		if (currentMedia[MEDIA_TYPE.IMAGE]) {
+		if (currentMedia[MEDIA_TYPE?.IMAGE]) {
 			return (
 				<>
 					<img
@@ -104,7 +100,7 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 		<div className="flex flex-col space-y-4 h-1/2 min-h-[370px] justify-center bg-primary">
 			<div className="max-h-[370px] flex w-full h-full  group cursor-pointer relative">
 				<div className="w-full h-full flex justify-center items-center bg-zinc-400">
-					{renderPage()}
+					{currentMedia && renderPage()}
 				</div>
 			</div>
 			<ChevronLeft
