@@ -11,17 +11,13 @@ import {
 import { Button } from '../../ui/button'
 import { cn, convertToArr } from '@/lib/utils'
 import { convertLowerTrim } from '@/lib/utils'
-import {
-	TAG_FUNC_DTE_LIST,
-	ContactInfoRSVP,
-	FilterType,
-	EVENT_DEFAULT_COLOR,
-} from './Constants'
+import { TAG_FUNC_DTE_LIST, ContactInfoRSVP, FilterType, EVENT_DEFAULT_COLOR } from './Constants'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 import { CalendarCheck } from 'lucide-react'
 import useConstants from '@/hooks/useConstants'
 import EventCustomDialogContent from './EventCustomDialogContent'
+import ButtonTooltip from './ButtonTooltip'
 
 export interface eventSumType {
 	item: any
@@ -47,27 +43,27 @@ const EventSumButton = ({ item, contactInfo, filterTypes, filterOption }: eventS
 	return (
 		<div className={'h-[20px] mb-[2px]  custom-scrollbar'}>
 			<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-				{/* <ButtonTooltip item={item.list} isDialogOpen={dialogOpen}> */}
-				<DialogTrigger>
-					<Button
-						className="h-full border-hidden flex p-0 justify-start"
-						variant="outline">
-						<div
-							className={cn(
-								'h-4 w-[16px] border rounded',
-								getColor(item[filterOption])
-							)}
-						/>
-						<div className="hidden sm:block max-w-[100px] overflow-hidden text-left">
-							{item[filterOption]}
-						</div>
-						<div className="flex items-center justify-center">
-							<CalendarCheck height={18} className="hidden sm:block" />:
-							<div>{item[TAG_FUNC_DTE_LIST].length}</div>
-						</div>
-					</Button>
-				</DialogTrigger>
-				{/* </ButtonTooltip> */}
+				<ButtonTooltip item={item.list} isDialogOpen={dialogOpen}>
+					<DialogTrigger>
+						<Button
+							className="h-full border-hidden flex p-0 justify-start"
+							variant="outline">
+							<div
+								className={cn(
+									'h-4 w-[16px] border rounded',
+									getColor(item[filterOption])
+								)}
+							/>
+							<div className="hidden sm:block max-w-[100px] overflow-hidden text-left">
+								{item[filterOption]}
+							</div>
+							<div className="flex items-center justify-center">
+								<CalendarCheck height={18} className="hidden sm:block" />:
+								<div>{item[TAG_FUNC_DTE_LIST].length}</div>
+							</div>
+						</Button>
+					</DialogTrigger>
+				</ButtonTooltip>
 				<DialogContent
 					hideClose={'invisible'}
 					className={'max-h-[90vh] max-w-5xl overflow-y-auto p-1 gap-1 custom-scrollbar'}>
