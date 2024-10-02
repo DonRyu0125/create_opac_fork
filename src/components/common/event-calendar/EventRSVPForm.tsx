@@ -57,6 +57,7 @@ import {
 import { calNumOfPatron } from './EC-Util'
 import { fetch_get, getContactInfo } from './Service'
 import Spinner from './Spinner'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -194,12 +195,12 @@ const ShowForm = ({
 							))}
 					</select>
 				</div>
-				{/* <div className={'my-2'}>
+				<div className={'my-2'}>
 					<ReCAPTCHA
 						sitekey="YOUR_RECAPTCHA_SITE_KEY" // Replace with your reCAPTCHA site key
 						onChange={handleCaptchaChange}
 					/>
-				</div> */}
+				</div>
 				<Button className={'w-full font-bold'} type="submit">
 					{message.register}
 				</Button>

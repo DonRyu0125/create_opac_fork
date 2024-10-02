@@ -66,21 +66,23 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		const events = jsonData?.div?.xml?.event
 		let arr = convertToArr(events)
 
+		console.log('arr',arr)
+
 		let formatEvents = arr?.map((item: any) => {
 			if (item?.FLOC_IM_REF_GRP && item?.FLOC_VD_REF_GRP) {
 				return {
 					...item,
-					FLOC_IM_REF_GRP: Array.isArray(item?.FLOC_IM_REF_GRP)
+					FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
 						? item.FLOC_IM_REF_GRP
-						: [item.FLOC_IM_REF_GRP],
-					FLOC_VD_REF_GRP: Array.isArray(item?.FLOC_VD_REF_GRP)
+						: [],
+					FLOC_VD_REF_GRP: Array.isArray(item.FLOC_VD_REF_GRP)
 						? item.FLOC_VD_REF_GRP
-						: [item.FLOC_VD_REF_GRP],
+						: [],
 				}
 			}
 			return {...item}
 		})
-
+	
 		return formatEvents
 	} catch (error) {
 		throw error

@@ -116,7 +116,7 @@ const EventCalendarEventList = ({
 		return result ?? []
 	}
 
-	const renderPage = () => {
+	const renderButtonPage = () => {
 		if (monthType && filterTypes.length > 1) {
 			// Filtered sum view at month type
 			return groupedByType(filteredEvents).map((item, key) => {
@@ -161,7 +161,7 @@ const EventCalendarEventList = ({
 					</div>
 				)}
 			</div>
-			{renderPage()}
+			{renderButtonPage()}
 		</div>
 	)
 }
