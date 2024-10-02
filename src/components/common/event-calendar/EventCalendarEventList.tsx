@@ -116,34 +116,26 @@ const EventCalendarEventList = ({
 		return result ?? []
 	}
 
-	return (
-		<div className={`h-full relative w-full`}>
-			<div className={'bg-slate-200 flex justify-between h-[25px]'}>
-				<div>{dayObj?.day}</div>
-				{filteredEvents.length > 2 && (
-					<div>
-						<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} />
-					</div>
-				)}
-			</div>
-			{monthType && filterTypes.length > 1 ? (
-				groupedByType(filteredEvents).map((item, key) => {
-					return (
-						<EventSumButton
-							key={key}
-							item={item}
-							contactInfo={contactInfo}
-							filterTypes={filterTypes}
-							filterOption={filterOption}
-						/>
-					)
-				})
-			) : (
+	const renderPage = () => {
+		if (monthType && filterTypes.length > 1) {
+			// Filtered sum view at month type
+			return groupedByType(filteredEvents).map((item, key) => {
+				return (
+					<EventSumButton
+						key={key}
+						item={item}
+						contactInfo={contactInfo}
+						filterTypes={filterTypes}
+						filterOption={filterOption}
+					/>
+				)
+			})
+		} else {
+			return (
 				<div
-					className={cn(
-						'w-full h-[70px] md:h-[95%] mb-[2px] overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto custom-scrollbar flex md:block mr-1 md:p-1',
-						``
-					)}>
+					className={`${monthType ? ' max-h-[95%] mb-[2px] w-full overflow-y-auto custom-scrollbar' 
+					: 'flex md:block h-[70px] md:h-[93%] mb-[2px] overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto w-full custom-scrollbar mr-1 md:p-1'}
+					'`}>
 					{filteredEvents?.map((item: any, idx: number) => (
 						<EventButton
 							elm={item}
@@ -155,7 +147,21 @@ const EventCalendarEventList = ({
 						/>
 					))}
 				</div>
-			)}
+			)
+		}
+	}
+
+	return (
+		<div className={`h-full relative w-full`}>
+			<div className={'bg-slate-200 flex justify-between h-[25px]'}>
+				<div>{dayObj?.day}</div>
+				{filteredEvents.length > 2 && (
+					<div>
+						<EventAllButton filteredEvents={filteredEvents} contactInfo={contactInfo} />
+					</div>
+				)}
+			</div>
+			{renderPage()}
 		</div>
 	)
 }

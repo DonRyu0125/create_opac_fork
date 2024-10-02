@@ -81,7 +81,7 @@ const EventButton = ({
 					</Button>
 				) : (
 					<Button
-						className={`overflow-y-hidden flex flex-col justify-start w-full max-h-[60px] border-hidden p-0 text-sm`}
+						className={` flex flex-col justify-start w-full  border-hidden p-0 text-sm whitespace-normal `}
 						variant="outline">
 						<div className={'flex w-full text-left'}>
 							<div
@@ -89,9 +89,9 @@ const EventButton = ({
 									'h-4 w-[16px] border rounded',
 									getColor(elm[filterOption])
 								)}></div>
-							<p className={'w-full h-full hidden sm:block break-all'}>
+							<div className={'w-full h-full hidden sm:block break-all'}>
 								{elm[TAG_NAME]}
-							</p>
+							</div>
 						</div>
 					</Button>
 				)}
