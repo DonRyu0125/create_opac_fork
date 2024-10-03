@@ -99,7 +99,6 @@ const Login = () => {
 									onChange={(e) => setPassword(e.target.value)}
 								/>
 							</div>
-
 							<div className="col-span-6 sm:flex sm:items-center sm:gap-4">
 								<Button
 									className="bg-opac-darkblue"
@@ -110,6 +109,12 @@ const Login = () => {
 								</Button>
 							</div>
 						</form>
+						<span>
+							I don't have a login{' '}
+							<a className="block text-blue-600" href="/">
+								Create Account
+							</a>
+						</span>
 					</div>
 				</main>
 			</div>

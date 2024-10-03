@@ -9,6 +9,6 @@ export const bookmarkCount = atom<number>(0)
 
 // RSVP Calendar App
 export const calendarEvents = atom<Cal_event[]>([])
-export const calendarWeekType = atom<boolean>(false)
-export const calendarMonthType = atom<boolean>(true)
+export const calendarWeekType = atom<boolean>(true)
+export const calendarMonthType = atom<boolean>(false)
 export const calendarCurrDate = atom<Date>(new Date())
