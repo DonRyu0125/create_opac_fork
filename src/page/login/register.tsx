@@ -70,9 +70,9 @@ const Register = () => {
 
 	const showRegStatus = () => {
 		return (
-			<form onSubmit={handleSubmit(onSubmit)} className={'bg-gray-200 p-5 rounded-md'}>
+			<form onSubmit={handleSubmit(onSubmit)} className={'bg-gray-200 p-5 rounded-md w-5/6'}>
 				<Tabs value={`step${currentStep}`}>
-					<TabsList className="bg-gray-400 p-5 min-h-[300px] sm:min-h-[70px] flex flex-wrap space-x-4 mb-6 w-full text-white">
+					<TabsList className="bg-gray-400 p-5 min-h-[300px] sm:min-h-[70px] flex flex-wrap justify-evenly mb-6 w-full text-white">
 						<TabsTrigger
 							value="step1"
 							className={`px-4 py-2 rounded-md ${currentStep > 1 ? 'bg-primary' : 'bg-gray-700'} w-full sm:w-auto`}
