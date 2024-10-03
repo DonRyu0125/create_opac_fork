@@ -144,7 +144,7 @@ const ShowForm = ({
 
 	const handleFormSubmit = (data: any) => {
 		if (captchaValue) {
-			onSubmit({ ...data, captcha: captchaValue })
+			onSubmit({ ...data})
 		} else {
 			toast({ title: `CAPTCHA verification failed` })
 		}

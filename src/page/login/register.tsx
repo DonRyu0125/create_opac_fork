@@ -2,7 +2,7 @@ import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
 import React, { useState } from 'react'
 
-const register = () => {
+const Register = () => {
 	const [loading, setLoading] = useState(false)
 
 	const showRegStatus = () => {
@@ -32,4 +32,4 @@ const register = () => {
 	)
 }
 
-export default register
+export default Register

@@ -109,12 +109,10 @@ const Login = () => {
 								</Button>
 							</div>
 						</form>
-						<span>
-							I don't have a login{' '}
-							<a className="block text-blue-600" href="/">
-								Create Account
-							</a>
-						</span>
+						<div className={'flex'}>
+							<div>I don't have a login.</div>
+							<a href="/register.html" className={'border-b-2 border-b-black ml-[10px] h-[22px]'}>Create an Account</a>
+						</div>
 					</div>
 				</main>
 			</div>
