@@ -47,7 +47,7 @@ const Register = () => {
 				email: '',
 				firstName: '',
 				lastName: '',
-				aorCard: '',
+				cardNumber: '',
 			},
 			currentAddress: {
 				address1: '',
@@ -74,7 +74,7 @@ const Register = () => {
 	const getStepFields = (step: number) => {
 		switch (step) {
 			case 1:
-				return ['yourDetail.email', 'yourDetail.firstName', 'yourDetail.lastName'] as const
+				return ['yourDetail.email', 'yourDetail.firstName', 'yourDetail.lastName','yourDetail.cardNumber'] as const
 			case 2:
 				return [
 					'currentAddress.address1',
@@ -191,10 +191,10 @@ const Register = () => {
 							</div>
 						</div>
 
-						<label className="font-semibold">AOR Card #</label>
+						<label className="font-semibold">Card #</label>
 						<input
-							{...register('yourDetail.aorCard')}
-							placeholder="AOR Card #"
+							{...register('yourDetail.cardNumber')}
+							placeholder="Card #"
 							className="border p-2 w-full mt-1"
 						/>
 					</TabsContent>
@@ -292,7 +292,7 @@ const Register = () => {
 					{/* Step 3: Contacts */}
 					<TabsContent value="step3" className="p-6 bg-white shadow-md rounded-md">
 						<label className="font-semibold">
-							Organization <span className="text-red-500">*</span>
+							Organization <span className="text-red-500"></span>
 						</label>
 						<input
 							{...register('contacts.organization', {
@@ -301,10 +301,6 @@ const Register = () => {
 							placeholder="Organization"
 							className="border p-2 w-full mt-1"
 						/>
-						{errors.contacts?.organization && (
-							<p className="text-red-500">{errors.contacts.organization.message}</p>
-						)}
-
 						<div className="flex space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
@@ -427,7 +423,7 @@ const Register = () => {
 					/>
 				</div>
 			) : (
-				<div className={'min-h-[400px] 2xl:min-h-[700px] flex justify-center items-center mb-4'}>
+				<div className={'min-h-[460px] flex justify-center items-center mb-4'}>
 					{showRegStatus()}
 				</div>
 			)}
