@@ -111,11 +111,13 @@ const Register = () => {
 
 					{/* Step 1: Your Detail */}
 					<TabsContent value="step1" className="p-6 bg-white shadow-md rounded-md">
-						<h2 className="text-lg font-semibold">Your Detail</h2>
+						<label className="font-semibold">
+							Email <span className="text-red-500">*</span>
+						</label>
 						<input
 							{...register('yourDetail.email', { required: 'Email is required' })}
 							placeholder="Email*"
-							className="border p-2 w-full"
+							className="border p-2 w-full mt-1"
 						/>
 						{errors.yourDetail?.email && (
 							<p className="text-red-500">{errors.yourDetail.email.message}</p>
@@ -123,12 +125,15 @@ const Register = () => {
 
 						<div className="flex space-x-4 mt-4">
 							<div className="flex-1">
+								<label className="font-semibold">
+									First Name <span className="text-red-500">*</span>
+								</label>
 								<input
 									{...register('yourDetail.firstName', {
 										required: 'First Name is required',
 									})}
 									placeholder="First Name*"
-									className="border p-2 w-full"
+									className="border p-2 w-full mt-1 placeholder:text-red-700"
 								/>
 								{errors.yourDetail?.firstName && (
 									<p className="text-red-500">
@@ -137,12 +142,15 @@ const Register = () => {
 								)}
 							</div>
 							<div className="flex-1">
+								<label className="font-semibold">
+									Last Name <span className="text-red-500">*</span>
+								</label>
 								<input
 									{...register('yourDetail.lastName', {
 										required: 'Last Name is required',
 									})}
 									placeholder="Last Name*"
-									className="border p-2 w-full"
+									className="border p-2 w-full mt-1"
 								/>
 								{errors.yourDetail?.lastName && (
 									<p className="text-red-500">
@@ -151,17 +159,27 @@ const Register = () => {
 								)}
 							</div>
 						</div>
+						<label className="font-semibold">
+							AOR Card # <span className="text-red-500"></span>
+						</label>
+						<input
+							{...register('yourDetail.email')}
+							placeholder="AOR Card #"
+							className="border p-2 w-full mt-1"
+						/>
 					</TabsContent>
 
 					{/* Step 2: Current Address */}
 					<TabsContent value="step2" className="p-6 bg-white shadow-md rounded-md">
-						<h2 className="text-lg font-semibold">Current Address</h2>
+						<h2 className="text-lg font-semibold">
+							Current Address <span className="text-red-500">*</span>
+						</h2>
 						<input
 							{...register('currentAddress', {
 								required: 'Current address is required',
 							})}
-							placeholder="Enter your current address"
-							className="border p-2 w-full"
+							placeholder="Enter your current address*"
+							className="border p-2 w-full mt-1"
 						/>
 						{errors.currentAddress && (
 							<p className="text-red-500">{errors.currentAddress.message}</p>
@@ -170,11 +188,13 @@ const Register = () => {
 
 					{/* Step 3: Contacts */}
 					<TabsContent value="step3" className="p-6 bg-white shadow-md rounded-md">
-						<h2 className="text-lg font-semibold">Contacts</h2>
+						<h2 className="text-lg font-semibold">
+							Contacts <span className="text-red-500">*</span>
+						</h2>
 						<input
 							{...register('contacts', { required: 'Contact details are required' })}
-							placeholder="Enter your contact details"
-							className="border p-2 w-full"
+							placeholder="Enter your contact details*"
+							className="border p-2 w-full mt-1"
 						/>
 						{errors.contacts && (
 							<p className="text-red-500">{errors.contacts.message}</p>
@@ -183,13 +203,15 @@ const Register = () => {
 
 					{/* Step 4: Research Interest */}
 					<TabsContent value="step4" className="p-6 bg-white shadow-md rounded-md">
-						<h2 className="text-lg font-semibold">Research Interest</h2>
+						<h2 className="text-lg font-semibold">
+							Research Interest <span className="text-red-500">*</span>
+						</h2>
 						<input
 							{...register('researchInterest', {
 								required: 'Research interest is required',
 							})}
-							placeholder="Enter your research interest"
-							className="border p-2 w-full"
+							placeholder="Enter your research interest*"
+							className="border p-2 w-full mt-1"
 						/>
 						{errors.researchInterest && (
 							<p className="text-red-500">{errors.researchInterest.message}</p>

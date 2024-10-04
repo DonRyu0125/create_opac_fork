@@ -87,7 +87,7 @@
               <img src="^EVENT_EMAIL_LOGO^" alt="Company Logo" style="width: 80px; height: 80px;">
             </td>
             <td align="center">
-              <h1 style="font-size: 22px; margin: 0; color: white;">Confirm your Registration!</h1>
+              <h1 style="font-size: 22px; margin: 0; color: white;">Registration Cancelled!</h1>
             </td>
           </tr>
         </table>
