@@ -413,7 +413,7 @@ const Register = () => {
 				alt=""
 				className="h-64 w-full object-cover"
 			/>
-			<div className={'text-center p-4'}>
+			<div className={'flex flex-col justify-center items-center p-7'}>
 				<div className={' text-2xl font-extrabold'}>Sign Up Your User Account</div>
 				<div className={'text-lg'}>Fill all form field to go to next step</div>
 			</div>
@@ -427,7 +427,7 @@ const Register = () => {
 					/>
 				</div>
 			) : (
-				<div className={'min-h-[400px] 2xl:min-h-[700px] flex justify-center items-center'}>
+				<div className={'min-h-[400px] 2xl:min-h-[700px] flex justify-center items-center mb-4'}>
 					{showRegStatus()}
 				</div>
 			)}
