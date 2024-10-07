@@ -1,8 +1,9 @@
 {
-	"heading": "Société franco-ontarienne du patrimoine et de l'histoire d'Orléans",
+	"heading": "Société franco-ontarienne du patrimoine et de l histoire dOrléans",
 	"heroBanner": "https://www.sfopho.com/wp-content/uploads/2019/11/banner_ancien_orleansJPG.jpg",
 	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=BIBLIO_WEB",
 	"browseByCategoryTitle": "Browse by Category",
+	"CalendarfilterOption": "",
 	"title": "Search the Library",
 	"database_name": "BIBLIO_WEB",
 	"categoriesItems": [
@@ -26,5 +27,36 @@
 			"title": "Paintings",
 			"url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&exp=KEYWORD_CLUSTER \"painting\""
 		}
-	]
+	],
+	"rsvp": {
+		"filterDatabase": "Library",
+		"filterOption": "TAG_FUNC_LOC",
+		"filterTypes": [
+			{
+				"type": "Vancouver Public Library, Joe Fortes Branch",
+				"color": "bg-neutral-500 border-neutral-500",
+				"icon": "rounded"
+			},
+			{
+				"type": "Vancouver Public Library, Central Library",
+				"color": "bg-sky-900 border-sky-900",
+				"icon": "rounded"
+			},
+			{
+				"type": "Vancouver Public Library, Kitsilano Branch",
+				"color": "bg-purple-500 border-purple-500",
+				"icon": "rounded"
+			},
+			{
+				"type": "Vancouver Public Library, Britannia Branch",
+				"color": "bg-red-600 border-red-600",
+				"icon": "rounded"
+			},
+			{
+				"type": "Vancouver Public Library, West Point Grey Branch",
+				"color": "bg-orange-500 border-orange-500",
+				"icon": "rounded"
+			}
+		]
+	}
 }

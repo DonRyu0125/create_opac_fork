@@ -1,4 +1,9 @@
+import EventCalendar from '@/components/common/event-calendar'
+import HoverCard from '@/components/common/HoverCard'
+import Masonry from '@/components/common/Masonry'
+import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
 import useConstants from '@/hooks/useConstants'
+import { cn, getSearchURL, truncateWords } from '@/lib/utils'
 import Hero from '../components/common/Hero'
 import SearchForm from '../components/common/SearchForm'
 import Section from '../components/common/Section'
@@ -6,10 +11,15 @@ import Slide from '../components/common/Slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
-import EventCalendar from '@/components/common/event-calendar'
-import { getSearchURL } from '@/lib/utils'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
+const pics = [
+	'https://picsum.photos/865/1194',
+	'https://picsum.photos/1268/454',
+	'https://picsum.photos/504/673',
+	'https://picsum.photos/1181/329',
+	'https://picsum.photos/1125/731',
+]
 
 const Home = () => {
 	const {
@@ -18,8 +28,10 @@ const Home = () => {
 		browseByCategoryTitle,
 		categoriesItems,
 		searchURL,
-		// eventCalendar,
+		rsvp,
+		featuredCollection,
 	} = useConstants().home
+	const { message } = useConstants()
 	return (
 		<Layout>
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
@@ -29,9 +41,27 @@ const Home = () => {
 				{/* <CommandDemo /> */}
 			</Hero>
 
+			<Section heading={message.featuredCollections}>
+				<BentoGrid className="max-w-4xl mx-auto">
+					{featuredCollection.map((item, i) => (
+						<BentoGridItem
+							key={i}
+							title={item.title}
+							description={item.description}
+							header={
+								<img
+									src={item.thumbnail}
+									className="w-full object-cover max-h-[170px]"
+									alt={item.title}
+								/>
+							}
+							className={cn(i === 3 || i === 6 ? 'md:col-span-2' : '', 'bg-primary')}
+						/>
+					))}
+				</BentoGrid>
+			</Section>
 			<Section heading={browseByCategoryTitle}>
 				<Slide
-					// auto
 					itemsPerSlide={{ lg: 4 }}
 					items={categoriesItems}
 					renderItem={(item, index: any) => (
@@ -47,10 +77,14 @@ const Home = () => {
 					)}
 				/>
 			</Section>
-
-			<Section heading={'Calendar'}>
-				<EventCalendar />
+			<Section heading={`${message.calendar}`}>
+				<EventCalendar
+					databaseType={rsvp.filterDatabase}
+					filterTypes={rsvp.filterTypes}
+					filterOption={rsvp.filterOption}
+				/>
 			</Section>
+
 			{/* <Section
         className='bg-secondary'
         heading={'Browse by area'}
@@ -58,7 +92,7 @@ const Home = () => {
       >
         <Map />
       </Section> */}
-			{/* <Section heading={'Recent Addition'}>
+			{/* <Section heading={'Recent additions'}>
 				<Masonry
 					items={pics}
 					renderItem={(item, index) => (

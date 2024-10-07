@@ -115,6 +115,10 @@ export type Logout = string;
 export type Welcome = string;
 export type DashboardHome = string;
 export type AccountSettings = string;
+<<<<<<< HEAD
+export type Search = string;
+=======
+>>>>>>> df2cf49b8a1a8f993ef8efef18b747b857a8d87b
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -219,13 +223,7 @@ export interface MessageJson {
   submit?: Submit;
   advIdxSubmitWarnMsg?: AdvIdxSubmitWarnMsg;
   advIdxSelectWarnMsg?: AdvIdxSelectWarnMsg;
-  noKeyFound?: NoKeyFound;
-  browseCluster?: BrowseCluster;
-  support?: Support;
-  myAccount?: MyAccount;
-  logout?: Logout;
-  welcome?: Welcome;
-  dashboardHome?: DashboardHome;
-  accountSettings?: AccountSettings;
+  NoKeyFound?: NoKeyFound;
+  BrowseCluster?: BrowseCluster;
   [k: string]: unknown;
 }

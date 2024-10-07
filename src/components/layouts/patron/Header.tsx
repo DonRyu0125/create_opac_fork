@@ -5,8 +5,6 @@ import {
 	BreadcrumbItem,
 	BreadcrumbLink,
 	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
 import {
@@ -20,22 +18,21 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import useConstants from '@/hooks/useConstants'
 import { getCookieValue } from '@/lib/utils'
-import { Home, LineChart, Package, Package2, PanelLeft, ShoppingCart, Users2 } from 'lucide-react'
+import { Home, PanelLeft } from 'lucide-react'
 type Props = {}
 
 const Header = (props: Props) => {
 	const { message, config } = useConstants()
 	function deleteCookie(cname: string) {
-		document.cookie = cname + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+		document.cookie = cname + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
 	}
 	const clearCookies = () => {
-		var cookies = document.cookie.split(';');
-  		var cookie = "";
-  		for (var i = 0; i < cookies.length; i++) {
-      	//delete each cookie
-      	deleteCookie(cookies[i].split('=')[0]);
-  		}
-  		window.location.href = "/";
+		var cookies = document.cookie.split(';')
+		for (var i = 0; i < cookies.length; i++) {
+			//delete each cookie
+			deleteCookie(cookies[i].split('=')[0])
+		}
+		window.location.href = '/'
 	}
 	return (
 		<header className="justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -124,7 +121,9 @@ const Header = (props: Props) => {
 					<DropdownMenuItem>Museum</DropdownMenuItem>
 					<DropdownMenuItem>Library</DropdownMenuItem>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem><Link onClick={clearCookies}>Logout</Link></DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link onClick={clearCookies}>Logout</Link>
+					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</header>

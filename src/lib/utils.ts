@@ -118,12 +118,12 @@ export function getCookieValue(name: string) {
 }
 
 export const clearCookies = () => {
-	var cookies = document.cookie.split(';');
-	  for (var i = 0; i < cookies.length; i++) {
-	  //delete each cookie
-	  deleteCookie(cookies[i].split('=')[0]);
-	  }
-	  window.location.href = "/";
+	var cookies = document.cookie.split(';')
+	for (var i = 0; i < cookies.length; i++) {
+		//delete each cookie
+		deleteCookie(cookies[i].split('=')[0])
+	}
+	window.location.href = '/'
 }
 
 export function deleteCookie(cname: string) {
@@ -139,7 +139,7 @@ export function deleteAllCookies() {
 }
 
 export function getHomeSessionID() {
-	let match = document.cookie.match(/HOME_SESSID=(http:\/\/[^;]+)/) ?? ''
+	let match = document.cookie.match(/HOME_SESSID=(https?:\/\/[^;]+)/) ?? ''
 	let HOME_SESSID = match[0]?.split('=')[1]
 	return HOME_SESSID
 }
@@ -177,5 +177,6 @@ export const getSessionID = () => {
 export const getSearchURL = (url: string) => {
 	const sessionID = getSessionID()
 	if (sessionID) return `${sessionID}?${url}`
-	return `/SCRIPTS/MWIMAIN.DLL?${url}`
+	const hostname = window.location.protocol + '//' + window.location.host
+	return `${hostname}/SCRIPTS/MWIMAIN.DLL?${url}`
 }

@@ -2,13 +2,17 @@ import axios from 'axios'
 import X2JS from 'x2js' // Ensure X2JS is installed
 import {
 	CALENDAR_WEEK_VIEW_DAYS,
-	LIBRARY_LOCATION_REPORT,
+	LOCATION_REPORT,
 	LIBRARY_LOCATION_XML_TAG,
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
 	SUB_MWI_APPLICATION,
+	CURATORS_CODE,
+	TAG_FUNC_LOC_ID,
+	Cal_event,
+	ContactInfoRSVP,
 } from './Constants'
-import { convertToArr, convertXMLToJson } from '@/lib/utils'
+import { convertLowerTrim, convertToArr, convertXMLToJson } from '@/lib/utils'
 
 const getWeekRange = (currentDate: any) => {
 	const firstDayOfWeek: Date = new Date(currentDate)
@@ -30,11 +34,23 @@ const getWeekRange = (currentDate: any) => {
 	return { firstDay, lastDay }
 }
 
+// MWI commandsearch need 2024-04-* or 2024-10-* format
+const getMonFormat = (currentDate: Date) => {
+	if (currentDate.getMonth() + 1 > 9) {
+		//2024-10-* format
+		return `${currentDate.getMonth() + 1}`
+	} else {
+		//2024-09-* format
+		return `0${currentDate.getMonth() + 1}`
+	}
+}
+
 export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 	const DATE_FIELD = 'TAG_FUNC_DATE'
+
 	const DATE_WILDCARD = isWeekType
 		? `${getWeekRange(currentDate).firstDay}//${getWeekRange(currentDate).lastDay}`
-		: `${currentDate.getFullYear()}%2D0${currentDate.getMonth() + 1}%2D%2A`
+		: `${currentDate.getFullYear()}%2D${getMonFormat(currentDate)}%2D%2A`
 
 	try {
 		const response = await axios.get(
@@ -47,24 +63,56 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		)
 		const x2js = new X2JS()
 		const jsonData: any = x2js.xml2js(response.data)
-		const event = jsonData?.div?.xml?.event
+		const events = jsonData?.div?.xml?.event
+		let arr = convertToArr(events)
 
-		if (!event) return []
-		return convertToArr(event)
+		let formatEvents = arr?.map((item: any) => {
+			if (item?.FLOC_IM_REF_GRP && item?.FLOC_VD_REF_GRP) {
+				return {
+					...item,
+					FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
+						? item.FLOC_IM_REF_GRP
+						: [],
+					FLOC_VD_REF_GRP: Array.isArray(item.FLOC_VD_REF_GRP)
+						? item.FLOC_VD_REF_GRP
+						: [],
+				}
+			}
+			return {...item}
+		})
+	
+		return formatEvents
 	} catch (error) {
 		throw error
 	}
 }
 
-export const getLibraryLocation = async () => {
+export const getLocation = async () => {
 	const response = await axios.get(
-		`/scripts/mwimain.dll/144/${SUB_MWI_APPLICATION}/${LIBRARY_LOCATION_REPORT}?commandsearch&exp=%2B%2B%40`, // ++@
+		`/scripts/mwimain.dll/144/${SUB_MWI_APPLICATION}/${LOCATION_REPORT}?commandsearch&exp=%2B%2B%40`, // ++@
 		{
 			headers: {
 				'Content-Type': 'text/xml',
 			},
 		}
 	)
-	const jsonData: any = convertXMLToJson(response)
+	const jsonData: any = convertXMLToJson(response.data)
 	return jsonData?.xml?.[LIBRARY_LOCATION_XML_TAG] ?? []
+}
+
+export const getContactInfo = (type: string, contactInfo: ContactInfoRSVP[], event: Cal_event) => {
+	let info: any = contactInfo?.filter((item: ContactInfoRSVP) => {
+		return item[CURATORS_CODE] === event[TAG_FUNC_LOC_ID]
+	})
+
+	if (info.length > 0) {
+		let contact = info[0]
+		const value = contact[type]
+		if (value && value.__text === '') {
+			return []
+		}
+		return value ?? []
+	}
+
+	return []
 }

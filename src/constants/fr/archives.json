@@ -1,6 +1,6 @@
 {
-	"heading": "Société franco-ontarienne du patrimoine et de l'histoire d'Orléans",
-	"heroBanner": "https://www.sfopho.com/wp-content/uploads/2019/11/banner_ancien_orleansJPG.jpg",
+	"heading": "MINISIS OPAC Template- Archives Collections",
+	"heroBanner": "https://images.unsplash.com/photo-1597092451116-27787c07901d",
 	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=DESCRIPTION_WEB",
 	"browseByCategoryTitle": "Browse by Category",
 	"title": "Recherchez la archives",
@@ -26,5 +26,10 @@
 			"title": "Paintings",
 			"url": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=DESCRIPTION_WEB&exp=KEYWORD_CLUSTER \"painting\""
 		}
-	]
+	],
+	"rsvp": {
+		"filterDatabase": "Archives",
+		"filterOption": "",
+		"filterTypes": []
+	}
 }

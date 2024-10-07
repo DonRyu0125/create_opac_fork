@@ -13,7 +13,7 @@ import {
 	SISN,
 	TAG_DB,
 	TAG_FUNC_DATE,
-	TAG_FUNC_DESC,
+	TAG_FUNC_LOC_DEC,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
 	TAG_FUNC_LOC_GRP,
@@ -29,6 +29,7 @@ import {
 	TAG_NAME,
 	TAG_P_STATUS,
 	TAG_RSVP_PATRON_LOG,
+	EVENT_EMAIL_LOGO,
 } from '@/components/common/event-calendar/Constants'
 import axios from 'axios'
 import {
@@ -52,6 +53,7 @@ const RSVPConfirm = () => {
 	const [loading, setLoading] = useState(false)
 	const [patronInfo, setPatronInfo] = useState<PatronInfo>(initialPatronInfo)
 	const [status, setStatus] = useState('')
+	const { logo } = useConstants().config
 
 	useEffect(() => {
 		checkParms()
@@ -82,7 +84,7 @@ const RSVPConfirm = () => {
 		return await isRecordValidate(jsonObj).then((res) => {
 			setLoading(false)
 			if (res.status) {
-				setPatronInfo({ ...jsonObj, [TAG_FUNC_DESC]: res.TAG_FUNC_DESC })
+				setPatronInfo({ ...jsonObj, [TAG_FUNC_LOC_DEC]: res.TAG_FUNC_LOC_DEC })
 				setStatus(STATUS_TYPE.Confirm)
 				return
 			}
@@ -124,7 +126,7 @@ const RSVPConfirm = () => {
 
 				// there were no exsisted patron then go true
 				if (!event[0].PATRON) {
-					return { status: true, [TAG_FUNC_DESC]: event[0].TAG_FUNC_DESC }
+					return { status: true, [TAG_FUNC_LOC_DEC]: event[0].TAG_FUNC_LOC_DEC }
 				}
 				let event_arr = convertToArr(event[0].PATRON)
 				let event_patron = event_arr.filter((item: PatronInfo) => {
@@ -138,13 +140,13 @@ const RSVPConfirm = () => {
 					return { status: false }
 				}
 				// Checking the event is fully registered
-				if (calNumOfPatron(event_arr) >= event[0].TAG_FUNC_CAP) {
+				if (calNumOfPatron(event_arr) >= event[0].TAG_FUNC_LOC_MAX) {
 					setStatus(STATUS_TYPE.Full)
 					return { status: false }
 				}
 				// Adding event description at the patronInfo to bring to RSVPRegConfirmTmp email
-				// TAG_FUNC_DESC is too big to get from the query string so I try to add when the user registartion info is valid
-				return { status: true, [TAG_FUNC_DESC]: event[0].TAG_FUNC_DESC }
+				// TAG_FUNC_LOC_DECis too big to get from the query string so I try to add when the user registartion info is valid
+				return { status: true, [TAG_FUNC_LOC_DEC]: event[0].TAG_FUNC_LOC_DEC }
 			})
 			.catch((error) => {
 				throw error
@@ -225,19 +227,20 @@ const RSVPConfirm = () => {
 		const encoded = encodeObj(
 			JSON.stringify({
 				...patronInfo,
+				[EVENT_EMAIL_LOGO]:logo,
 				[TAG_FUNC_P_ID]: obj.ID,
-				TAG_FUNC_DESC: undefined, //TAG_FUNC_DESC is too big for query string
+				TAG_FUNC_LOC_DEC: undefined, //TAG_FUNC_LOC_DECis too big for query string
 			})
 		)
-
 		return await axios
 			.post(
-				`${obj.HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPRegConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
+				`${obj.HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${patronInfo.TAG_FUNC_O ? '[CALENDAR]RSVPRegOnlineComfrimTmp.txt' : '[CALENDAR]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
+					'EVENT_EMAIL_LOGO':logo,
 					RSVP_CANCEL_LANDING_PAGE_URL: RSVP_CANCEL_LANDING_PAGE_URL,
 					[TAG_FUNC_P_ID]: obj.ID,
-					encoded,
+					encoded
 				},
 				{
 					headers: {

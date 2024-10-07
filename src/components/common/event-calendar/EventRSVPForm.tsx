@@ -1,54 +1,64 @@
 import { Button } from '@/components/ui/button'
-import { Label } from '@radix-ui/react-label'
-import React, { useEffect, useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
-import X2JS from 'x2js'
-import { v4 as uuidv4 } from 'uuid'
-import axios from 'axios'
+import useConstants from '@/hooks/useConstants'
 import {
-	BRANCH_ADDRESS,
-	BRANCH_NAME,
-	BRANCH_PHONE,
-	VERIFICATION_EMAIL_T,
+	convertToArr,
+	convertXMLToJson,
+	encodeObj,
+	getCurrentDate,
+	getSessionID
+} from '@/lib/utils'
+import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
+import { Label } from '@radix-ui/react-label'
+import axios from 'axios'
+import { saveAs } from 'file-saver'
+import { useAtom } from 'jotai'
+import { BadgeCheck, FileDown, Mail, MonitorPlay, Phone, SquareUserRound } from 'lucide-react'
+import React, { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import ButtonTooltip from './ButtonTooltip'
+import {
+	BD_ADDRESS,
+	BD_BUILDING_NAME,
+	BD_CITY,
+	BD_POSTAL_CODE,
 	Cal_event,
-	ContactInfo,
-	MAIN_MWI_APPLICATION,
+	ContactInfoRSVP,
+	EVENT_EMAIL_LOGO,
+	FLOC_TX_ACCESS,
 	MWI_RESFUL_RES,
 	MWI_XML_DATA_INDEX,
+	patron,
+	RSVP_CONFIRM_LANDING_PAGE_URL,
 	SISN,
+	TAG_DB,
 	TAG_FUNC_DATE,
 	TAG_FUNC_END_T,
 	TAG_FUNC_LOC,
+	TAG_FUNC_LOC_CT,
+	TAG_FUNC_LOC_EM,
+	TAG_FUNC_LOC_ROO,
+	TAG_FUNC_O,
+	TAG_FUNC_O_CODE,
+	TAG_FUNC_O_ID,
+	TAG_FUNC_O_PATH,
 	TAG_FUNC_P_ATTND,
 	TAG_FUNC_P_ATTND_DEFAULT,
 	TAG_FUNC_P_ATTND_MAX,
 	TAG_FUNC_P_EMAIL,
 	TAG_FUNC_P_FIRST,
 	TAG_FUNC_P_LAST,
-	TAG_FUNC_ROOM,
+	TAG_FUNC_P_T,
+	TAG_FUNC_RSVP,
 	TAG_FUNC_START_T,
 	TAG_NAME,
-	patron,
-	RSVP_CONFIRM_LANDING_PAGE_URL,
-	TAG_FUNC_P_T,
-	TAG_DB,
+	VERIFICATION_EMAIL_T
 } from './Constants'
-import { BadgeCheck, SquareUserRound } from 'lucide-react'
-import {
-	convertLowerTrim,
-	convertToArr,
-	convertXMLToJson,
-	encodeObj,
-	getCurrentDate,
-	getSessionID,
-} from '@/lib/utils'
-import Spinner from './Spinner'
 import { calNumOfPatron } from './EC-Util'
-import useConstants from '@/hooks/useConstants'
-import { useAtom } from 'jotai'
-import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
-import { fetch_get } from './Service'
+import { fetch_get, getContactInfo } from './Service'
+import Spinner from './Spinner'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { toast } from '@/components/ui/use-toast'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -76,7 +86,7 @@ type EventRSVPForm = {
 	patrons: patron[]
 	sisnNumber: number
 	event: Cal_event
-	contactInfo: ContactInfo[]
+	contactInfo: ContactInfoRSVP[]
 }
 
 const EventInput = ({ label, keyname, register, required }: EventInput) => {
@@ -110,8 +120,294 @@ const EventEmailInput = ({ label, keyname, register, required, errors }: EventIn
 	)
 }
 
+const ShowForm = ({
+	loading,
+	handleSubmit,
+	register,
+	onSubmit,
+	errors,
+	onReset,
+}: {
+	loading: boolean
+	handleSubmit: Function
+	register: Function
+	onSubmit: Function
+	errors: any
+	onReset: any
+}) => {
+	const message = useConstants().message
+	const conf = useConstants().config
+	const [captchaValue, setCaptchaValue] = useState<string | null>(null)
+	const handleCaptchaChange = (value: string | null) => {
+		setCaptchaValue(value)
+	}
+
+	const handleFormSubmit = (data: any) => {
+		if (captchaValue) {
+			onSubmit({ ...data})
+		} else {
+			toast({ title: `CAPTCHA verification failed` })
+		}
+	}
+
+	return (
+		<div className={'h-full w-full p-1 border-2 rounded text-lg'}>
+			{loading && <Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />}
+			<div className={'bg-primary p-1 text-white text-center'}>
+				<span className={'text-gray-400'}>RSVP</span>
+			</div>
+			<form
+				onSubmit={handleSubmit(handleFormSubmit)} // Use handleFormSubmit here
+				className={'h-full w-full flex flex-col justify-start items-center'}
+			>
+				<EventInput
+					label={message.firstName}
+					keyname={TAG_FUNC_P_FIRST}
+					register={register}
+					required={true}
+				/>
+				<EventInput
+					label={message.lastName}
+					keyname={TAG_FUNC_P_LAST}
+					register={register}
+					required={true}
+				/>
+				<EventEmailInput
+					label={message.email}
+					keyname={TAG_FUNC_P_EMAIL}
+					register={register}
+					required={true}
+					errors={errors}
+				/>
+				<div className={'flex w-full flex-col my-1'}>
+					<Label>{message.attendee}</Label>
+					<select
+						defaultValue={TAG_FUNC_P_ATTND_DEFAULT}
+						{...register(TAG_FUNC_P_ATTND)}
+						className={'border-2 border-grey-500 w-1/4'}
+					>
+						{Array(TAG_FUNC_P_ATTND_MAX)
+							.fill(0)
+							.map((_, index) => (
+								<option key={index} value={index + 1}>
+									{index + 1}
+								</option>
+							))}
+					</select>
+				</div>
+				<div className={'my-2'}>
+					<ReCAPTCHA sitekey={conf.reCaptchaKey} onChange={handleCaptchaChange} />
+				</div>
+				<Button className={'w-full font-bold'} type="submit">
+					{message.register}
+				</Button>
+				<div onClick={onReset} className="text-center border-b-4 font-bold">
+					{message.goBack}
+				</div>
+			</form>
+		</div>
+	)
+}
+
+
+const ShowButton = ({
+	capacity,
+	patrons,
+	setStatus,
+	event,
+	contactInfo,
+}: {
+	capacity: number
+	patrons: patron[]
+	setStatus: React.Dispatch<React.SetStateAction<string>>
+	event: Cal_event
+	contactInfo: ContactInfoRSVP[]
+}) => {
+	const message = useConstants().message
+
+	const handleDownload = async () => {
+		const fileUrl = event[FLOC_TX_ACCESS]
+		if (fileUrl) {
+			try {
+				const response = await fetch(fileUrl)
+				if (!response.ok) throw new Error('Network response was not ok')
+				const blob = await response.blob()
+				saveAs(blob, fileUrl.split('/').pop() || 'downloaded-file')
+			} catch (error) {
+				console.error('Error downloading file:', error)
+			}
+		}
+	}
+	return (
+		<div className={'h-full w-full h-full text-lg'}>
+			{event[TAG_FUNC_RSVP] && (
+				<div
+					className={
+						'h-1/2 w-full flex flex-col items-center justify-evenly p-1 border-2 rounded'
+					}>
+					<div className={'flex justify-center items-center'}>
+						<SquareUserRound className={'h-[30px]'} /> {message.registrationRequired}
+					</div>
+					<Button
+						disabled={capacity - calNumOfPatron(patrons) <= 0 ? true : false}
+						className={'w-full font-bold'}
+						onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>
+						{message.register}
+					</Button>
+					<div className={'flex justify-center items-center'}>
+						{capacity - calNumOfPatron(patrons) <= 0 ? (
+							<div className={'flex text-red-600 justify-center items-center'}>
+								{message.noSeatsRemaining}
+							</div>
+						) : (
+							<div className={'flex text-lime-800 justify-center items-center'}>
+								<BadgeCheck />{' '}
+								{`${capacity - calNumOfPatron(patrons)} ${message.seatsRemaining}`}
+							</div>
+						)}
+					</div>
+				</div>
+			)}
+			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
+				<div
+					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-1 border-2 rounded`}>
+					<div className={'w-full text-center'}>
+						{message.contactInfo}
+						<div className={'flex font-normal items-center text-base'}>
+							<Phone size={25} />
+							{event[TAG_FUNC_LOC_CT]}
+						</div>
+						<div className={'flex font-normal items-center text-base'}>
+							<Mail size={25} />
+							{event[TAG_FUNC_LOC_EM]}
+						</div>
+					</div>
+					<div className={'w-full'}>
+						{/*@ts-ignore there is variable called TAG_FUNC_O*/}
+						{event[TAG_FUNC_O] ? (
+							<>
+								<div className={'flex font-normal items-center'}>
+									<MonitorPlay size={25} />
+									<div>{message.online}</div>
+								</div>
+								<div className={'text-sm my-2 text-center'}>
+									"{message.onlineTip}"
+								</div>
+							</>
+						) : (
+							<>
+								<div className={'font-normal text-base'}>
+									{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
+								</div>
+								<div className={'font-normal text-base'}>
+									<div>{getContactInfo(BD_ADDRESS, contactInfo, event)}</div>
+									<div>
+										<span className={'mr-1'}>
+											{getContactInfo(BD_CITY, contactInfo, event)}
+										</span>
+										<span>
+											{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}
+										</span>
+									</div>
+								</div>
+								<div className={'text-sm my-2 text-center'}>
+									"{message.inPersonTip}"
+								</div>
+							</>
+						)}
+					</div>
+					{event[FLOC_TX_ACCESS] && (
+						<ButtonTooltip item={[{ TAG_NAME: `Download material` }]}>
+							<Button onClick={handleDownload}>
+								<FileDown />
+							</Button>
+						</ButtonTooltip>
+					)}
+				</div>
+			) : (
+				// If there are no building info, this is private place
+				<div className={'h-1/2 w-full flex flex-col items-center justify-center'}>
+					<div>{message.privateProperty}</div>
+					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
+					{event[FLOC_TX_ACCESS] && (
+						<Button onClick={handleDownload}>
+							<FileDown />
+						</Button>
+					)}
+				</div>
+			)}
+		</div>
+	)
+}
+
+const ShowRSVPSuccess = ({
+	onReset,
+	event,
+	contactInfo,
+}: {
+	onReset: any
+	event: Cal_event
+	contactInfo: ContactInfoRSVP[]
+}) => {
+	const message = useConstants().message
+	return (
+		<div className={'min-h-[388px] h-full w-full p-2 border-2 rounded flex flex-col justify-evenly'}>
+			<div>
+				<div
+					className={
+						'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'
+					}>
+					<SquareUserRound className="w-12 h-12" />
+					<div className={'text-xl'}>{message.checkEmail}</div>
+					<div className={'text-xl'}>{message.registrationIncomplete}</div>
+				</div>
+				<div
+					onClick={onReset}
+					className="font-bold h-[40px] flex items-center justify-center text-center bg-primary text-primary-foreground rounded">
+					{message.goBack}
+				</div>
+			</div>
+			<div>
+				{event[TAG_FUNC_O] ? (
+					<>
+						<div className={'flex font-normal items-center'}>
+							<MonitorPlay size={25} />
+							<div>{message.online}</div>
+						</div>
+						<div className={'text-sm my-2 text-center'}>
+							"Use the meeting link to access the session!"
+						</div>
+					</>
+				) : (
+					<>
+						<div className={'font-normal text-base'}>
+							{getContactInfo(BD_BUILDING_NAME, contactInfo, event)}
+						</div>
+						<div className={'font-normal text-base'}>
+							<div>{getContactInfo(BD_ADDRESS, contactInfo, event)}</div>
+							<div>
+								<span className={'mr-1'}>
+									{getContactInfo(BD_CITY, contactInfo, event)}
+								</span>
+								<span>{getContactInfo(BD_POSTAL_CODE, contactInfo, event)}</span>
+							</div>
+							<div>
+								{message.room}:{event[TAG_FUNC_LOC_ROO]}
+							</div>
+						</div>
+						<div className={'text-sm my-2 text-center'}>
+							"Please be in the room before meeting time"
+						</div>
+					</>
+				)}
+			</div>
+		</div>
+	)
+}
+
 const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: EventRSVPForm) => {
 	const [status, setStatus] = useState(STATUS_TYPE.SHOW_BTN)
+	const { logo } = useConstants().config
 	const {
 		register,
 		handleSubmit,
@@ -183,17 +479,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 	}
 
-	const getContactInfo = (type: string) => {
-		let info: any = contactInfo?.filter((item) => {
-			return convertLowerTrim(item[BRANCH_NAME]) === convertLowerTrim(event[TAG_FUNC_LOC])
-		})
-		if (info.length > 0) {
-			let contact = info[0]
-			return contact[type]
-		}
-		return ''
-	}
-
 	const sendEmail = async (patron: any, patronInfo: Inputs, event: Cal_event) => {
 		let HOME_SESSID = getSessionID()
 		const encoded = encodeObj(
@@ -202,14 +487,18 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				[TAG_NAME]: event[TAG_NAME],
 				[TAG_FUNC_START_T]: event[TAG_FUNC_START_T],
 				[TAG_FUNC_END_T]: event[TAG_FUNC_END_T],
-				[TAG_FUNC_ROOM]: event[TAG_FUNC_ROOM],
+				[TAG_FUNC_LOC_ROO]: event[TAG_FUNC_LOC_ROO],
 				[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 				[TAG_FUNC_LOC]: event[TAG_FUNC_LOC],
 				[SISN]: event[SISN],
 				[TAG_FUNC_P_T]: getCurrentDate(),
-				BRANCH_ADDRESS: getContactInfo(BRANCH_ADDRESS),
+				BD_ADDRESS: getContactInfo(BD_ADDRESS, contactInfo, event),
 				occ1: patron.occ1,
 				occ2: patron.occ2,
+				[TAG_FUNC_O]: event[TAG_FUNC_O],
+				[TAG_FUNC_O_PATH]: event[TAG_FUNC_O_PATH],
+				[TAG_FUNC_O_ID]: event[TAG_FUNC_O_ID],
+				[TAG_FUNC_O_CODE]: event[TAG_FUNC_O_CODE],
 			})
 		)
 
@@ -218,12 +507,13 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPVerificationConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
 				{
 					...patronInfo,
+					'EVENT_EMAIL_LOGO':logo,
 					[TAG_NAME]: event[TAG_NAME],
 					[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 					[TAG_FUNC_P_T]: getCurrentDate(),
-					[BRANCH_ADDRESS]: getContactInfo(BRANCH_ADDRESS),
+					[BD_ADDRESS]: getContactInfo(BD_ADDRESS, contactInfo, event),
 					RSVP_CONFIRM_LANDING_PAGE_URL: RSVP_CONFIRM_LANDING_PAGE_URL,
-					encoded,
+					encoded
 				},
 				{
 					headers: {
@@ -250,10 +540,11 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			case STATUS_TYPE.SHOW_BTN:
 				return (
 					<ShowButton
+						event={event}
 						capacity={capacity}
 						patrons={patrons}
-						getContactInfo={getContactInfo}
 						setStatus={setStatus}
+						contactInfo={contactInfo}
 					/>
 				)
 			case STATUS_TYPE.SHOW_FORM:
@@ -268,185 +559,21 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					/>
 				)
 			case STATUS_TYPE.SHOW_SUCCESS:
-				return <ShowRSVPSuccess onReset={onReset} getContactInfo={getContactInfo} />
+				return <ShowRSVPSuccess onReset={onReset} event={event} contactInfo={contactInfo} />
 			default:
 				return (
 					<ShowButton
+						event={event}
 						capacity={capacity}
 						patrons={patrons}
-						getContactInfo={getContactInfo}
 						setStatus={setStatus}
+						contactInfo={contactInfo}
 					/>
 				)
 		}
 	}
 
-	return <div className={`flex justify-center w-full h-full`}>{showRSVPStatus()}</div>
-}
-
-const ShowForm = ({
-	loading,
-	handleSubmit,
-	register,
-	onSubmit,
-	errors,
-	onReset,
-}: {
-	loading: boolean
-	handleSubmit: Function
-	register: Function
-	onSubmit: Function
-	errors: any
-	onReset: any
-}) => {
-	const message = useConstants().message
-	return (
-		<div className={'h-5/6 w-full p-1'}>
-			{loading && <Spinner height={'h-[388px]'} spinHeight={'h-10'} spinWidth={'w-10'} />}
-			<div className={'bg-primary p-1 text-white'}>
-				<span className={'text-gray-400'}>{message.logIn}?</span>
-			</div>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className={'h-full w-full flex flex-col justify-start items-center'}>
-				<EventInput
-					label={message.firstName}
-					keyname={TAG_FUNC_P_FIRST}
-					register={register}
-					required={true}
-				/>
-				<EventInput
-					label={message.lastName}
-					keyname={TAG_FUNC_P_LAST}
-					register={register}
-					required={true}
-				/>
-				<EventEmailInput
-					label={message.email}
-					keyname={TAG_FUNC_P_EMAIL}
-					register={register}
-					required={true}
-					errors={errors}
-				/>
-				<div className={'flex w-full flex-col my-1'}>
-					<Label>{message.attendee}</Label>
-					<select
-						defaultValue={TAG_FUNC_P_ATTND_DEFAULT}
-						{...register(TAG_FUNC_P_ATTND)}
-						className={'border-2 border-grey-500 w-1/4'}>
-						{Array(TAG_FUNC_P_ATTND_MAX)
-							.fill(0)
-							.map((_, index) => {
-								return (
-									<option key={index} value={index + 1}>
-										{index + 1}
-									</option>
-								)
-							})}
-					</select>
-				</div>
-				<Button className={'w-full'} type="submit">
-					{message.register}
-				</Button>
-				<div onClick={onReset} className="text-center border-b-4">
-					{message.goBack}
-				</div>
-			</form>
-		</div>
-	)
-}
-
-const ShowButton = ({
-	capacity,
-	patrons,
-	getContactInfo,
-	setStatus,
-}: {
-	capacity: number
-	patrons: patron[]
-	getContactInfo: Function
-	setStatus: React.Dispatch<React.SetStateAction<string>>
-}) => {
-	const message = useConstants().message
-	return (
-		<div className={'w-full p-2 border-2 rounded'}>
-			<div
-				className={
-					'w-full h-3/6 flex flex-col items-center justify-evenly space-evenly border-b-4'
-				}>
-				<div className={'flex justify-center items-center'}>
-					<SquareUserRound /> {message.registrationRequired}
-				</div>
-				<Button
-					disabled={capacity - calNumOfPatron(patrons) <= 0 ? true : false}
-					className={'w-full '}
-					onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>
-					{message.register}
-				</Button>
-				<div className={'flex justify-center items-center'}>
-					{capacity - calNumOfPatron(patrons) <= 0 ? (
-						<div className={'flex text-red-600 justify-center items-center'}>
-							{message.noSeatsRemaining}
-						</div>
-					) : (
-						<div className={'flex text-lime-800 justify-center items-center'}>
-							<BadgeCheck />{' '}
-							{`${capacity - calNumOfPatron(patrons)} ${message.seatsRemaining}`}
-						</div>
-					)}
-				</div>
-			</div>
-			{getContactInfo(BRANCH_ADDRESS) ? (
-				<div className={'h-3/6 flex flex-col items-center justify-center '}>
-					<div>{message.contactInfo}</div>
-					<div>
-						{message.address}: {getContactInfo(BRANCH_ADDRESS)}
-					</div>
-					<div>
-						{message.phone}: {getContactInfo(BRANCH_PHONE)}
-					</div>
-				</div>
-			) : (
-				<div className={'h-3/6 flex flex-col items-center justify-center '}>
-					<div>{message.privateProperty}</div>
-					<div className={'text-center'}>{message.contactInfoNotProvided}</div>
-				</div>
-			)}
-		</div>
-	)
-}
-
-const ShowRSVPSuccess = ({
-	onReset,
-	getContactInfo,
-}: {
-	onReset: any
-	getContactInfo: Function
-}) => {
-	const message = useConstants().message
-	return (
-		<div className={'w-full p-2 border-2 rounded'}>
-			<div className={'text-center w-full h-3/6 flex flex-col items-center justify-evenly'}>
-				<SquareUserRound />
-				<div>{message.checkEmail}</div>
-				<div>{message.registrationIncomplete}</div>
-			</div>
-			<div
-				onClick={onReset}
-				className="text-center bg-primary text-primary-foreground rounded">
-				{message.goBack}
-			</div>
-			<div className={'h-3/6 flex flex-col items-center justify-center '}>
-				<div>{message.contactInfo}</div>
-				<div>
-					{message.address}: {getContactInfo(BRANCH_ADDRESS)}
-				</div>
-				<div>
-					{message.phone}: {getContactInfo(BRANCH_PHONE)}
-				</div>
-			</div>
-		</div>
-	)
+	return <>{showRSVPStatus()}</>
 }
 
 export default EventRSVPForm

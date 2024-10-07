@@ -1,6 +1,6 @@
 import { SchemaValueType } from '@/types/schema'
 
-export const TEXTAREA_LENGTH = 50
+export const TEXTAREA_LENGTH = 300
 
 export const updateJsonValue = (
 	data: SchemaValueType,

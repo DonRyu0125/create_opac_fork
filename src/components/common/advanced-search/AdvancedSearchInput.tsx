@@ -1,5 +1,4 @@
-import { cn } from '@/lib/utils'
-import useConstants from '@/hooks/useConstants'
+import { Input } from '@/components/ui/input'
 import {
 	Select,
 	SelectContent,
@@ -7,9 +6,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
+import useConstants from '@/hooks/useConstants'
+import { cn } from '@/lib/utils'
+import { useState } from 'react'
 import { FieldObject } from './AdvancedSearchForm'
-import { Input } from '@/components/ui/input'
-import { useEffect, useState } from 'react'
 import AdvancedSearchIndexDialog from './AdvancedSearchIndexDialog'
 
 interface AdvancedSearchInputProps {
@@ -61,7 +61,7 @@ const AdvancedSearchInput = ({
 
 	const getLabel = () => {
 		let item = searchDatabase().items.find((item) => item.name === exp.field)
-		return `${item?.label ?? message.Search}`
+		return `${item?.label ?? message.searchButton}`
 	}
 
 	return (
@@ -72,7 +72,7 @@ const AdvancedSearchInput = ({
 					updateField('field', value, index)
 					setUserSelect(value)
 				}}>
-				<SelectTrigger className="w-52 border border-opac-green bg-opac-green text-white rounded-r-lg font-semibold text-left">
+				<SelectTrigger className="w-52 border border-opac-secondary bg-opac-secondary text-white rounded-r-lg font-semibold text-left">
 					<SelectValue
 						className={'text-black'}
 						placeholder={<div>{message.selectAfield}</div>}
@@ -84,7 +84,7 @@ const AdvancedSearchInput = ({
 							<SelectItem
 								key={key}
 								value={item.name}
-								className="w-full border bg-opac-green border-opac-green ">
+								className="w-full border bg-opac-secondary border-opac-secondary ">
 								{item.label}
 							</SelectItem>
 						)
@@ -98,7 +98,7 @@ const AdvancedSearchInput = ({
 					updateField('keyword', e.target.value, index)
 				}}
 				className={cn(
-					'placeholder:text-slate-400 border w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green focus:outline-none ring-inset'
+					'placeholder:text-slate-400  w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-secondary focus:outline-none ring-inset'
 				)}
 				type="search"
 			/>
@@ -108,7 +108,7 @@ const AdvancedSearchInput = ({
 						'absolute w-full h-full flex items-center justify-center text-gray-500 pointer-events-none'
 					}>
 					<span className="hidden lg:inline ml-[15px] text-gray-500 italic">
-						{message.searchPlaceholder}
+						{message.searchPlaceholderAdv}
 						{` ${getLabel()}`}
 					</span>
 				</div>
@@ -120,7 +120,7 @@ const AdvancedSearchInput = ({
 				}}>
 				<SelectTrigger
 					disabled={!exp.boolean}
-					className="w-28 border border-opac-green bg-opac-green text-white rounded-l-lg font-semibold ">
+					className="w-28 border border-opac-secondary bg-opac-secondary text-white rounded-l-lg font-semibold ">
 					<SelectValue />
 				</SelectTrigger>
 				<SelectContent position={'popper'}>
@@ -129,7 +129,7 @@ const AdvancedSearchInput = ({
 							<SelectItem
 								key={key}
 								value={item.value}
-								className="w-full border border-opac-green bg-opac-green">
+								className="w-full border border-opac-secondary bg-opac-secondary">
 								{item.key}
 							</SelectItem>
 						)

@@ -30,6 +30,7 @@ dist-ssr
 .vite
 
 .env
+.env.local
 
 pnpm-lock.yaml
 

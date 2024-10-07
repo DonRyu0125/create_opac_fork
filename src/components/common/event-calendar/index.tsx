@@ -8,13 +8,20 @@ import React, { useEffect, useState } from 'react'
 import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'
 import { Button } from '@/components/ui/button'
-import { fetch_get, getLibraryLocation } from './Service'
+import { fetch_get, getLocation } from './Service'
 import { calendarCurrDate, calendarEvents, calendarMonthType, calendarWeekType } from '@/store'
 import { useAtom } from 'jotai'
-import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj } from './Constants'
+import { CALENDAR_START_MONTH, CALENDAR_WEEK_VIEW_DAYS, Day_obj, FilterType } from './Constants'
 import useConstants from '@/hooks/useConstants'
+import { cn } from '@/lib/utils'
 
-const EventCalendar = () => {
+export interface calendarFilterType {
+	databaseType?: string
+	filterTypes: FilterType[]
+	filterOption: string
+}
+
+const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilterType) => {
 	const message = useConstants().message
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
 	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
@@ -31,11 +38,16 @@ const EventCalendar = () => {
 	}, [currentDate, weekType])
 
 	useEffect(() => {
-		getLibraryLocation().then((res) => setContactInfo(res))
+		getLocation().then((res) => setContactInfo(res))
 	}, [])
 
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate, weekType)
+		if (databaseType) {
+			const filteredCurrE = currE.filter((item) => item.TAG_DB_TYPE === databaseType)
+			setCurrentEvent(filteredCurrE)
+			return
+		}
 		setCurrentEvent(currE)
 	}
 
@@ -66,20 +78,12 @@ const EventCalendar = () => {
 		}
 	}
 
-	/**
-	 *
-	 * @param date
-	 * @returns Date objects by the month
-	 */
-	const daysInMonth = (date: Date) => {
+		const daysInMonth = (date: Date) => {
 		const year = date.getFullYear()
 		const month = date.getMonth() + 1
 		return new Date(year, month, 0).getDate() // get the last date.getMonth() + 1's last date
 	}
-	/**
-	 *
-	 * @returns date objects by month
-	 */
+	
 	const generateMonth = () => {
 		const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
 		const days = daysInMonth(currentDate)
@@ -162,11 +166,10 @@ const EventCalendar = () => {
 	}
 
 	return (
-		<div
-			className={'w-full mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-0'}>
+		<div className={'w-full mx-auto max-w-screen-xl custom-scrollbar'}>
 			<div
 				className={
-					'relative flex justify-center items-center bg-primary h-[100px] rounded '
+					'relative flex justify-center items-center bg-primary h-[80px] rounded '
 				}>
 				<Button
 					onClick={weekType ? prevWeek : prevMonth}
@@ -174,14 +177,14 @@ const EventCalendar = () => {
 					disabled={isClickablePrev}>
 					<div className="mt-2">&lt;</div>
 				</Button>
-				<div className="max-w-[330px] text-center text-3xl text-primary-foreground">
+				<h2 className="max-w-[330px] text-center text-3xl text-primary-foreground">
 					{monthType &&
 						currentDate.toLocaleString(message.dateType, {
 							month: 'long',
 							year: 'numeric',
 						})}
 					{weekType && showWeek()}
-				</div>
+				</h2>
 				<Button
 					onClick={weekType ? nextWeek : nextMonth}
 					className={'text-4xl text-primary-foreground sm:mx-5'}
@@ -225,54 +228,79 @@ const EventCalendar = () => {
 					{message.week}
 				</Button>
 			</div>
-			<EventCalendarFilter setCurrentFilter={setCurrentFilter} />
+			{filterOption && (
+				<EventCalendarFilter
+					setCurrentFilter={setCurrentFilter}
+					filterTypes={filterTypes}
+				/>
+			)}
+
 			<div className={'w-full mt-1'}>
-				<div className={'grid grid-cols-7 gap-1'}>
-					{message.daysOfWeek.map((item, key) => {
-						return (
-							<div
-								key={key}
-								className={
-									'text-center text-xl bg-primary text-primary-foreground rounded'
-								}>
-								{item}
-							</div>
-						)
-					})}
+				<div className={'grid grid-cols-7 gap-0.5'}>
+					<div
+						className={cn(
+							'col-span-7 grid grid-cols-7 gap-1',
+							weekType && 'col-span-1 md:col-span-7'
+						)}>
+						{message.daysOfWeek.map((item, key) => {
+							return (
+								<div
+									key={key}
+									className={cn(
+										'text-center text-xl bg-primary text-primary-foreground rounded',
+										weekType && 'col-span-7 md:col-span-1'
+									)}>
+									{item}
+								</div>
+							)
+						})}
+					</div>
 					{monthType &&
 						generateMonth().map((item: Day_obj, key: number) => {
 							return (
 								<div
 									key={key}
-									className="rounded-lg border border-black cursor-pointer max-w-40 h-28 w-full">
-									<div className={'bg-slate-200'}>{item?.day}</div>
+									className="rounded border border-black cursor-pointer max-w-44 h-32 w-full">
 									<EventCalendarEventList
 										dayObj={item}
 										currentFilter={currentFilter}
 										currentEvent={currentEvent}
 										weekType={weekType}
 										contactInfo={contactInfo}
+										filterTypes={filterTypes}
+										filterOption={filterOption}
 									/>
 								</div>
 							)
 						})}
-					{weekType &&
-						generateWeek().map((item: Day_obj, key: number) => {
-							return (
-								<div
-									key={key}
-									className="rounded-lg border border-black cursor-pointer max-w-40 h-96 w-full">
-									<div className={'bg-slate-200'}>{item?.day}</div>
-									<EventCalendarEventList
-										dayObj={item}
-										currentFilter={currentFilter}
-										currentEvent={currentEvent}
-										weekType={weekType}
-										contactInfo={contactInfo}
-									/>
-								</div>
-							)
-						})}
+					{weekType && (
+						<div
+							className={cn(
+								'col-span-7 grid grid-cols-7 gap-1',
+								weekType && 'col-span-6 md:col-span-7'
+							)}>
+							{generateWeek().map((item: Day_obj, key: number) => {
+								return (
+									<div
+										key={key}
+										className={cn(
+											'rounded border border-black cursor-pointer md:max-w-44 md:h-96 w-full ',
+											weekType && 'col-span-7 md:col-span-1 w-full min-h-min'
+										)}>
+										<EventCalendarEventList
+											dayObj={item}
+											currentFilter={currentFilter}
+											currentEvent={currentEvent}
+											weekType={weekType}
+											contactInfo={contactInfo}
+											filterTypes={filterTypes}
+											filterOption={filterOption}
+										/>
+									</div>
+								)
+							})}
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

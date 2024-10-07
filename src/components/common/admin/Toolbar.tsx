@@ -78,7 +78,7 @@ export default function Toolbar({
 					<TooltipContent>Duplicate item</TooltipContent>
 				</Tooltip>
 
-				<Tooltip>
+				{/* <Tooltip>
 					<TooltipTrigger>
 						<Button
 							variant="ghost"
@@ -89,7 +89,7 @@ export default function Toolbar({
 						</Button>
 					</TooltipTrigger>
 					<TooltipContent>Remove item</TooltipContent>
-				</Tooltip>
+				</Tooltip> */}
 			</div>
 		</TooltipProvider>
 	)

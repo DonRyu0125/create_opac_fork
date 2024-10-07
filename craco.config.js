@@ -1,4 +1,14 @@
 const path = require('path')
+const DotEnv = require('dotenv')
+const webpack = require('webpack')
+const env = DotEnv.config({ path: `./.env.local` }).parsed || {}
+
+const envKeys = Object.keys(env).reduce((prev, next) => {
+	prev[`process.env.${next.trim()}`] = env[next]
+		? JSON.stringify(env[next].trim())
+		: JSON.stringify(env[next].trim())
+	return prev
+}, {})
 
 const overrideWebpackConfig = ({ webpackConfig }) => {
 	webpackConfig.output.path = path.resolve('dist')

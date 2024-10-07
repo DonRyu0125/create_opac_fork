@@ -7,10 +7,13 @@ import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSear
 import { getSearchURL } from '@/lib/utils'
 import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
 import { UNION_SEARCH_CL } from './Home'
+import Section from '@/components/common/Section'
+import EventCalendar from '@/components/common/event-calendar'
 
 const Library = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
-	const { heroBanner, searchURL, title, database_name } = useConstants().library
+	const { message } = useConstants()
+	const { heroBanner, searchURL, title, database_name, rsvp } = useConstants().library
 	return (
 		<Layout>
 			<Hero className={''} title={title} backgroundImage={heroBanner} description="">
@@ -22,6 +25,13 @@ const Library = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
+			<Section heading={`${message.calendar}`}>
+				<EventCalendar
+					databaseType={rsvp.filterDatabase}
+					filterTypes={rsvp.filterTypes}
+					filterOption={rsvp.filterOption}
+				/>
+			</Section>
 		</Layout>
 	)
 }

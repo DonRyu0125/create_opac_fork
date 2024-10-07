@@ -57,7 +57,7 @@ export const COMMON_FIELDS = [
 	'pagesize_50',
 	'pagesize_100',
 	'sort',
-	'request'
+	'request',
 ] as const
 
 export type COMMON_FIELDS_TYPE = (typeof COMMON_FIELDS)[number]
@@ -167,7 +167,6 @@ const useJSONData = ({ selector, defaultData }: useJSONDataProps) => {
 		if (!data) return null
 		const url = deepSearchKey(data, 'previous_record')[0]
 		if (!url) return null
-
 		return url.a._href
 	}
 

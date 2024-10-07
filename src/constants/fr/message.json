@@ -1,5 +1,6 @@
 {
-	"searchPlaceholder": "Entrez votre ",
+	"searchPlaceholder": "Entrez votre recherche",
+	"searchPlaceholderAdv": "Entrez votre ",
 	"searchButton": "Recherche",
 	"summaryPage": "Page des résultats",
 	"detailPage": "Page des détails",
@@ -53,10 +54,18 @@
 	"phone": "Téléphone",
 	"room": "Salle",
 	"suitableFor": "Adaptée pour",
-	"seats": "Tous les sièges",
+	"max": "Max",
 	"language": "Langue",
 	"dateType": "fr-FR",
-	"daysOfWeek": ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+	"daysOfWeek": [
+		"Di",
+		"Lu",
+		"Ma",
+		"Me",
+		"Je",
+		"Ve",
+		"Sa"
+	],
 	"close": "Fermer",
 	"privateProperty": "Propriété privée",
 	"contactInfoNotProvided": "Les informations de contact ne sont pas fournies",
@@ -108,5 +117,10 @@
 	"logout": "Déconnexion",
 	"welcome": "Bienvenue",
   	"dashboardHome": "Dashboard Home",
-	"accountSettings": "Account Settings"
+	"accountSettings": "Account Settings",
+	"calendar": "calendrier",
+	"featuredCollections": "Collections en vedette",
+	"online": "en ligne",
+	"onlineTip": "Utilisez le lien de la réunion pour accéder à la session!",
+	"inPersonTip": "Veuillez être dans la salle avant l'heure du rendez-vous"
 }

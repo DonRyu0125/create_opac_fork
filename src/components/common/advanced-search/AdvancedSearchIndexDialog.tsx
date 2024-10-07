@@ -45,7 +45,7 @@ interface Adv_dialog {
 	updateField: Function
 	adv_search_index: number
 	database_name: string
-	label:string | undefined
+	label: string | undefined
 }
 
 const DEFAULT_OPTION_COLOR = 'bg-white'
@@ -56,7 +56,7 @@ const AdvancedSearchIndexDialog = ({
 	updateField,
 	adv_search_index,
 	database_name,
-	label
+	label,
 }: Adv_dialog) => {
 	const { message, advancedSearch } = useConstants()
 	const [open, setOpen] = useState(false)
@@ -165,7 +165,7 @@ const AdvancedSearchIndexDialog = ({
 				<Button
 					disabled={!field ? true : false}
 					className={
-						'h-full w-[50px] px-0 flex items-center justify-center overflow-hidden ml-3 bg-opac-green '
+						'h-full w-[50px] px-0 flex items-center justify-center overflow-hidden ml-3 bg-opac-secondary '
 					}>
 					<Menu />
 				</Button>
@@ -188,7 +188,7 @@ const AdvancedSearchIndexDialog = ({
 						<Input
 							required
 							className={
-								'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-green text-black rounded-l-md ring-inset'
+								'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-secondary text-black rounded-l-md ring-inset'
 							}
 							name="keyvalue"
 							onChange={handleKeyvalueChange}
@@ -199,7 +199,7 @@ const AdvancedSearchIndexDialog = ({
 					<Button
 						variant={'default'}
 						onClick={() => getClusterBySearch(keyvalue, cluster.keyname, cluster.find)}
-						className="right-0 top-0 h-full bg-opac-green rounded-l-lg "
+						className="right-0 top-0 h-full bg-opac-secondary rounded-l-lg "
 						type="submit">
 						<span className="block">
 							<Search className="w-4 h-4" />

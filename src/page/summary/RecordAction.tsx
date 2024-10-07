@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import TooltipButton from '@/components/common/TooltipButton'
 import { Separator } from '@/components/ui/separator'
 import { useToast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
@@ -10,7 +10,7 @@ import { bookmarkCount } from '@/store'
 import { Record } from '@/types/record'
 import { ToastAction } from '@radix-ui/react-toast'
 import { useAtom } from 'jotai'
-import { Copy, Heart } from 'lucide-react'
+import { Copy, Star } from 'lucide-react'
 import { useState } from 'react'
 
 export const RecordAction = ({ record }: { record: Record }) => {
@@ -84,21 +84,25 @@ export const RecordAction = ({ record }: { record: Record }) => {
 
 	return (
 		<>
-			<Button variant="ghost" size="icon" onClick={handleBookmark}>
-				<Heart
+			<TooltipButton
+				variant="ghost"
+				size="icon"
+				onClick={handleBookmark}
+				tooltipContent="Bookmark record">
+				<Star
 					className={cn('h-4 w-4 text-primary')}
 					fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
 					stroke={like ? 'hsl(var(--opac-blue))' : 'hsl(var(--primary'}
 				/>
-			</Button>
+			</TooltipButton>
 			<Separator orientation="vertical" />
-			<Button variant="ghost" size="icon" onClick={handleCopy}>
+			<TooltipButton
+				variant="ghost"
+				size="icon"
+				onClick={handleCopy}
+				tooltipContent="Copy record URL">
 				<Copy className="h-4 w-4 text-primary" />
-			</Button>
-			{/* <Separator orientation="vertical" /> */}
-			{/* <Button variant="ghost" size="icon">
-				<Mail className="h-4 w-4 text-primary" />
-			</Button> */}
+			</TooltipButton>
 		</>
 	)
 }

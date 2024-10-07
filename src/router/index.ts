@@ -22,6 +22,10 @@ import AdminMessage from '@/page/admin/Message'
 import AdminStyles from '@/page/admin/Styles'
 import PatronProfile from '@/page/PatronProfile'
 import PatronInfo from '@/page/PatronInfo'
+import AdminCollections from '@/page/admin/Collections'
+import AdminDescription from '@/page/admin/Description'
+import AdminSettings from '@/page/admin/Settings'
+import Register from '@/page/login/Register'
 
 
 export type TRoute = Record<string, () => React.ReactNode>
@@ -30,9 +34,13 @@ const ADMIN_ROUTES: TRoute = {
 	admin: Admin,
 	'admin-fields': Fields,
 	'admin-home': AdminHome,
+	'admin-biblio': AdminHome,
+	'admin-description': AdminDescription,
+	'admin-collections': AdminCollections,
 	'admin-rsvp': AdminRSVP,
 	'admin-message': AdminMessage,
 	'admin-styles': AdminStyles,
+	'admin-settings': AdminSettings,
 }
 
 export const ROUTES: TRoute = {
@@ -42,6 +50,7 @@ export const ROUTES: TRoute = {
 	faq: FAQ,
 	admin: Admin,
 	login: Login,
+	register:Register,
 	archives: Archives,
 	library: Library,
 	museum: Museum,
