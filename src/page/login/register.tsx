@@ -14,6 +14,8 @@ type FormData = {
 		firstName: string
 		lastName: string
 		aorCard?: string
+		password: string
+		retypePassword: string
 	}
 	currentAddress: {
 		address1: string
@@ -49,6 +51,8 @@ const Register = () => {
 				firstName: '',
 				lastName: '',
 				cardNumber: '',
+				password: '',
+				retypePassword: '',
 			},
 			currentAddress: {
 				address1: '',
@@ -81,6 +85,8 @@ const Register = () => {
 					'yourDetail.firstName',
 					'yourDetail.lastName',
 					'yourDetail.cardNumber',
+					'yourDetail.password',
+					'yourDetail.retypePassword',
 				] as const
 			case 2:
 				return [
@@ -149,7 +155,7 @@ const Register = () => {
 					{/* Step 1: Your Detail */}
 					<TabsContent value="step1" className="p-6 bg-white shadow-md rounded-md">
 						<label className="font-semibold">
-							Email <span className="text-red-500">*</span>
+							Email <span className="text-red-500">* (We will use this for ID)</span>
 						</label>
 						<input
 							{...register('yourDetail.email', { required: 'Email is required' })}
@@ -159,6 +165,53 @@ const Register = () => {
 						{errors.yourDetail?.email && (
 							<p className="text-red-500">{errors.yourDetail.email.message}</p>
 						)}
+
+						<div className="flex space-x-4 mt-4">
+							<div className="flex-1">
+								<label className="font-semibold">
+									Password <span className="text-red-500">*</span>
+								</label>
+								<input
+									type="password"
+									{...register('yourDetail.password', {
+										required: 'Password is required',
+										minLength: {
+											value: 8,
+											message: 'Password must be at least 8 characters',
+										},
+									})}
+									placeholder="Password"
+									className="border p-2 w-full mt-1"
+								/>
+								{errors.yourDetail?.password && (
+									<p className="text-red-500">
+										{errors.yourDetail.password.message}
+									</p>
+								)}
+							</div>
+
+							<div className="flex-1">
+								<label className="font-semibold">
+									Retype Password <span className="text-red-500">*</span>
+								</label>
+								<input
+									type="password"
+									{...register('yourDetail.retypePassword', {
+										required: 'Please confirm your password',
+										validate: (value) =>
+											value === watch('yourDetail.password') ||
+											'Passwords do not match',
+									})}
+									placeholder="Retype Password"
+									className="border p-2 w-full mt-1"
+								/>
+								{errors.yourDetail?.retypePassword && (
+									<p className="text-red-500">
+										{errors.yourDetail.retypePassword.message}
+									</p>
+								)}
+							</div>
+						</div>
 
 						<div className="flex space-x-4 mt-4">
 							<div className="flex-1">
