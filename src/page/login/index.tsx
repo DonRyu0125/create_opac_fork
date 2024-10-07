@@ -57,14 +57,17 @@ const Login = () => {
 
 				<main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
 					<div className="w-full">
-						<a className="block text-blue-600" href="/">
-							<span className="sr-only">Home</span>
-							Home
-						</a>
-
-						<h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-							Account Login
-						</h1>
+						<div className={'flex  items-center'}>
+							<div>
+								<a className="block text-teal-600" href="/">
+									<span className="sr-only ">Home</span>
+									<img className="h-14" src={config.logo} alt="logo" />
+								</a>
+							</div>
+							<h1 className="ml-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+								Account Login
+							</h1>
+						</div>
 
 						{/* Display error message if any */}
 						{error && <p className="mt-4 text-red-500">{error}</p>}
@@ -109,9 +112,13 @@ const Login = () => {
 								</Button>
 							</div>
 						</form>
-						<div className={'flex'}>
+						<div className={'flex mt-1'}>
 							<div>I don't have a login.</div>
-							<a href="/register.html" className={'border-b-2 border-b-black ml-[10px] h-[22px]'}>Create an Account</a>
+							<a
+								href="/register.html"
+								className={'border-b-2 border-b-black ml-[10px] h-[22px]'}>
+								Create an Account
+							</a>
 						</div>
 					</div>
 				</main>

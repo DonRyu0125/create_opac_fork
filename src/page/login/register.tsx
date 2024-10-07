@@ -33,6 +33,7 @@ type FormData = {
 
 const Register = () => {
 	const [loading, setLoading] = useState(false)
+	const [isSubmit, setIsSubmit] = useState(false)
 	const conf = useConstants().config
 	const {
 		register,
@@ -68,13 +69,19 @@ const Register = () => {
 	const [currentStep, setCurrentStep] = useState(1)
 
 	const onSubmit = (data: FormData) => {
+		setIsSubmit(true)
 		console.log('Final Submitted Data:', data)
 	}
 
 	const getStepFields = (step: number) => {
 		switch (step) {
 			case 1:
-				return ['yourDetail.email', 'yourDetail.firstName', 'yourDetail.lastName','yourDetail.cardNumber'] as const
+				return [
+					'yourDetail.email',
+					'yourDetail.firstName',
+					'yourDetail.lastName',
+					'yourDetail.cardNumber',
+				] as const
 			case 2:
 				return [
 					'currentAddress.address1',
@@ -391,10 +398,10 @@ const Register = () => {
 							Previous
 						</button>
 						<button
-							type="button"
+							type={currentStep === 4 ? 'submit' : 'button'}
 							onClick={handleNextStep}
 							className="w-[100px] bg-primary text-white px-4 py-2 rounded-md">
-							Next
+							{currentStep === 4 ? 'Submit' : 'Next'}
 						</button>
 					</div>
 				</Tabs>
@@ -409,23 +416,21 @@ const Register = () => {
 				alt=""
 				className="h-64 w-full object-cover"
 			/>
-			<div className={'flex flex-col justify-center items-center p-7'}>
-				<div className={' text-2xl font-extrabold'}>Sign Up Your User Account</div>
-				<div className={'text-lg'}>Fill all form field to go to next step</div>
-			</div>
-			{loading ? (
-				<div className="flex h-full items-center justify-center">
-					<Spinner
-						height={'h-full'}
-						spinHeight={'h-20'}
-						spinWidth={'w-20'}
-						background={'bg-white'}
-					/>
+			{isSubmit ? (
+				<div className="min-h-[35vh] flex flex-col items-center justify-center">
+					<h1 className="landing-page-title">You have successfully Signed!</h1>
+					<p className="landing-page-sub-title">subtitle</p>
 				</div>
 			) : (
-				<div className={'min-h-[460px] flex justify-center items-center mb-4'}>
-					{showRegStatus()}
-				</div>
+				<>
+					<div className={'flex flex-col justify-center items-center p-7'}>
+						<div className={' text-2xl font-extrabold'}>Sign Up Your User Account</div>
+						<div className={'text-lg'}>Fill all form field to go to next step</div>
+					</div>
+					<div className={'min-h-[460px] flex justify-center items-center mb-4'}>
+						{showRegStatus()}
+					</div>
+				</>
 			)}
 		</Layout>
 	)
