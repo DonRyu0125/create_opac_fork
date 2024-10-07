@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import useConstants from '@/hooks/useConstants'
+import { Button } from '@/components/ui/button'
 
 type FormData = {
 	yourDetail: {
@@ -37,6 +38,7 @@ const Register = () => {
 	const [loading, setLoading] = useState(false)
 	const [isSubmit, setIsSubmit] = useState(false)
 	const conf = useConstants().config
+	const { message } = useConstants()
 	const {
 		register,
 		handleSubmit,
@@ -133,7 +135,7 @@ const Register = () => {
 			<form onSubmit={handleSubmit(onSubmit)} className="bg-gray-200 p-5 rounded-md w-5/6">
 				<Tabs value={`step${currentStep}`}>
 					{/* Tabs List */}
-					<TabsList className="bg-gray-400 p-5 min-h-[300px] sm:min-h-[70px] flex flex-wrap justify-evenly mb-6 w-full text-white">
+					<TabsList className="bg-gray-400 p-5 min-h-[300px] md:min-h-[70px] flex flex-wrap justify-evenly mb-6 w-full text-white">
 						{[
 							{ value: 'step1', label: 'Step 1: Your Detail' },
 							{ value: 'step2', label: 'Step 2: Current Address' },
@@ -143,7 +145,7 @@ const Register = () => {
 							<TabsTrigger
 								key={tab.value}
 								value={tab.value}
-								className={`md:w-[190px] px-4 py-2 rounded-md w-full sm:w-auto ${
+								className={`md:w-[190px] px-4 py-2 rounded-md w-full md:w-auto ${
 									currentStep > idx + 1 ? 'bg-primary' : 'bg-gray-700'
 								}`}
 								onClick={() => currentStep >= idx + 1 && setCurrentStep(idx + 1)}>
@@ -155,10 +157,16 @@ const Register = () => {
 					{/* Step 1: Your Detail */}
 					<TabsContent value="step1" className="p-6 bg-white shadow-md rounded-md">
 						<label className="font-semibold">
-							Email <span className="text-red-500">* (We will use this for ID)</span>
+							Email(ID)<span className="text-red-500">* </span>
 						</label>
 						<input
-							{...register('yourDetail.email', { required: 'Email is required' })}
+							{...register('yourDetail.email', {
+								required: 'Email is required',
+								pattern: {
+									value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+									message: 'Please enter a valid email address',
+								},
+							})}
 							placeholder="Email"
 							className="border p-2 w-full mt-1"
 						/>
@@ -166,7 +174,7 @@ const Register = () => {
 							<p className="text-red-500">{errors.yourDetail.email.message}</p>
 						)}
 
-						<div className="flex space-x-4 mt-4">
+						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
 									Password <span className="text-red-500">*</span>
@@ -213,7 +221,7 @@ const Register = () => {
 							</div>
 						</div>
 
-						<div className="flex space-x-4 mt-4">
+						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
 									First Name <span className="text-red-500">*</span>
@@ -295,7 +303,7 @@ const Register = () => {
 
 							<div className="sm:col-span-1">
 								<label className="font-semibold">
-									Province <span className="text-red-500">*</span>
+									Province / State <span className="text-red-500">*</span>
 								</label>
 								<input
 									{...register('currentAddress.province', {
@@ -313,7 +321,7 @@ const Register = () => {
 
 							<div className="sm:col-span-1">
 								<label className="font-semibold">
-									Postal Code <span className="text-red-500">*</span>
+									Postal Code / Zip Code <span className="text-red-500">*</span>
 								</label>
 								<input
 									{...register('currentAddress.postalCode', {
@@ -361,7 +369,7 @@ const Register = () => {
 							placeholder="Organization"
 							className="border p-2 w-full mt-1"
 						/>
-						<div className="flex space-x-4 mt-4">
+						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
 									Work Number <span className="text-red-500">*</span>
@@ -472,7 +480,10 @@ const Register = () => {
 			{isSubmit ? (
 				<div className="min-h-[35vh] flex flex-col items-center justify-center">
 					<h1 className="landing-page-title">You have successfully Signed!</h1>
-					<p className="landing-page-sub-title">subtitle</p>
+					<div className={'text-lg'}>Use the button below to Login</div>
+					<Button className={'mt-4'}>
+						<a href="/">{message.home}</a>
+					</Button>
 				</div>
 			) : (
 				<>
