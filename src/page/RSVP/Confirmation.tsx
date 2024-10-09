@@ -144,9 +144,7 @@ const RSVPConfirm = () => {
 					setStatus(STATUS_TYPE.Full)
 					return { status: false }
 				}
-				// Adding event description at the patronInfo to bring to RSVPRegConfirmTmp email
-				// TAG_FUNC_LOC_DECis too big to get from the query string so I try to add when the user registartion info is valid
-				return { status: true, [TAG_FUNC_LOC_DEC]: event[0].TAG_FUNC_LOC_DEC }
+				return { status: true}
 			})
 			.catch((error) => {
 				throw error
