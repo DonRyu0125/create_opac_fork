@@ -1,4 +1,4 @@
-import { Layout } from 'lucide-react'
+import Layout from '@/components/layouts'
 import React from 'react'
 
 const RegisterConfirmation = () => {
@@ -9,8 +9,6 @@ const RegisterConfirmation = () => {
 				alt=""
 				className="h-64 w-full object-cover"
 			/>
-
-            asd
 		</Layout>
 	)
 }
