@@ -535,7 +535,9 @@ const Register = () => {
 			/>
 			{isSubmit ? (
 				<div className="min-h-[35vh] flex flex-col items-center justify-center p-8 text-center">
-					<CircleCheck className="w-16 h-16" />
+					<div className={'m-5'}>
+						<CircleCheck className="w-16 h-16" />
+					</div>
 					<h1 className="landing-page-title">
 						We have sent a verification email to '{userData.email}'
 					</h1>
