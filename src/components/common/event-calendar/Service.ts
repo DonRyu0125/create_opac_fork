@@ -34,11 +34,23 @@ const getWeekRange = (currentDate: any) => {
 	return { firstDay, lastDay }
 }
 
+// MWI commandsearch need 2024-04-* or 2024-10-* format
+const getMonFormat = (currentDate: Date) => {
+	if (currentDate.getMonth() + 1 > 9) {
+		//2024-10-* format
+		return `${currentDate.getMonth() + 1}`
+	} else {
+		//2024-09-* format
+		return `0${currentDate.getMonth() + 1}`
+	}
+}
+
 export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 	const DATE_FIELD = 'TAG_FUNC_DATE'
+
 	const DATE_WILDCARD = isWeekType
 		? `${getWeekRange(currentDate).firstDay}//${getWeekRange(currentDate).lastDay}`
-		: `${currentDate.getFullYear()}%2D0${currentDate.getMonth() + 1}%2D%2A`
+		: `${currentDate.getFullYear()}%2D${getMonFormat(currentDate)}%2D%2A`
 
 	try {
 		const response = await axios.get(
@@ -52,21 +64,24 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 		const x2js = new X2JS()
 		const jsonData: any = x2js.xml2js(response.data)
 		const events = jsonData?.div?.xml?.event
+		let arr = convertToArr(events)
 
-		let formatEvents = events?.map((item:any) => {
-			return {
-				...item,
-				FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
-					? item.FLOC_IM_REF_GRP
-					: [item.FLOC_IM_REF_GRP],
-				FLOC_VD_REF_GRP: Array.isArray(item.FLOC_VD_REF_GRP)
-					? item.FLOC_VD_REF_GRP
-					: [item.FLOC_VD_REF_GRP],
+		let formatEvents = arr?.map((item: any) => {
+			if (item?.FLOC_IM_REF_GRP && item?.FLOC_VD_REF_GRP) {
+				return {
+					...item,
+					FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
+						? item.FLOC_IM_REF_GRP
+						: [],
+					FLOC_VD_REF_GRP: Array.isArray(item.FLOC_VD_REF_GRP)
+						? item.FLOC_VD_REF_GRP
+						: [],
+				}
 			}
+			return {...item}
 		})
-
-		if (!formatEvents) return []
-		return convertToArr(formatEvents)
+	
+		return formatEvents
 	} catch (error) {
 		throw error
 	}

@@ -46,11 +46,11 @@ const EventAccordianViewButton = ({
 	filteredEvents,
 	contactInfo,
 	filterTypes,
-	fitlerOption,
+	filterOption,
 }: {
 	filteredEvents: Cal_event[]
 	contactInfo: ContactInfoRSVP[]
-	fitlerOption: string
+	filterOption: string
 	filterTypes: FilterType[]
 }) => {
 	const { logo } = useConstants().config
@@ -107,7 +107,7 @@ const EventAccordianViewButton = ({
 												<div
 													className={cn(
 														'h-4 w-[16px] border rounded mr-1',
-														getColor(item[fitlerOption])
+														getColor(item[filterOption])
 													)}></div>
 												{item[TAG_NAME]}
 											</div>
