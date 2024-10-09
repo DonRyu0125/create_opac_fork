@@ -451,7 +451,7 @@ const Register = () => {
 									</li>
 								</ul>
 
-								<div className="flex justify-center mt-6">
+								<div className="flex justify-center scale-75 sm:scale-90 mr-[210px] sm:mr-[0px]">
 									<ReCAPTCHA
 										sitekey={conf.reCaptchaKey}
 										onChange={onCaptchaChange}
