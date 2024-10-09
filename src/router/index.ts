@@ -57,7 +57,7 @@ export const ROUTES: TRoute = {
 	museum: Museum,
 	patronprofile: PatronProfile,
 	patroninfo: PatronInfo,
-	'login-confirm': RegisterConfirmation,
+	'reg-confirm': RegisterConfirmation,
 	'rsvp-cancel': RSVPCancel,
 	'rsvp-confirm': RSVPConfirm,
 	'no-record': NoRecord,
