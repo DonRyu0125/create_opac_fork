@@ -73,7 +73,23 @@ const Register = () => {
 	const { logo } = useConstants().config
 	const [recaptchaToken, setRecaptchaToken] = useState<string>('')
 	const { message } = useConstants()
-	const [vEmail,setVEmail] = useState("")
+	const [userData, setUserData] = useState<FormData>({
+		email: '',
+		firstName: '',
+		lastName: '',
+		cardNumber: '',
+		password: '',
+		retypePassword: '',
+		address1: '',
+		city: '',
+		province: '',
+		postalCode: '',
+		country: '',
+		organization: '',
+		workNumber: '',
+		phoneNumber: '',
+		recaptcha: '',
+	})
 	const {
 		register,
 		handleSubmit,
@@ -126,7 +142,7 @@ const Register = () => {
 
 	const onSubmit = (data: FormData) => {
 		setIsSubmit(true)
-		setVEmail(data.email)
+		setUserData(data)
 		console.log('Final Submitted Data:', data)
 		sendConfirmEmail(data)
 	}
@@ -140,7 +156,7 @@ const Register = () => {
 		const HOME_SESSID = getHomeSessionID()
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=LoginVerficationConfirm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data.email}&SUBJECT_DEFAULT=${REGISTRATION_COMPLTET_EMAIL_TITLE}:${data.firstName}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]LoginVerficationConfirm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data.email}&SUBJECT_DEFAULT=${REGISTRATION_COMPLTET_EMAIL_TITLE}:${data.firstName}`,
 				{
 					firstName: data.firstName,
 					EVENT_EMAIL_LOGO: logo,
@@ -518,12 +534,27 @@ const Register = () => {
 				className="h-64 w-full object-cover"
 			/>
 			{isSubmit ? (
-				<div className="min-h-[35vh] flex flex-col items-center justify-center">
-					<h1 className="landing-page-title"><CircleCheck />We have sent a verification email to '{vEmail}'</h1>
-					<div className={'text-lg'}>Use the button below to Login</div>
+				<div className="min-h-[35vh] flex flex-col items-center justify-center p-8 text-center">
+					<CircleCheck className="w-16 h-16" />
+					<h1 className="landing-page-title">
+						We have sent a verification email to '{userData.email}'
+					</h1>
+					<div className={'text-xl m-4'}>
+						Please check the emtail for further instructions
+					</div>
 					<Button className={'mt-4'}>
 						<a href="/">{message.home}</a>
 					</Button>
+					<div className={'mt-5'}>Didn't received the email yet? </div>
+					<span>
+						{' '}
+						Click
+						<a className={'font-bold'} onClick={() => sendConfirmEmail(userData)}>
+							{' '}
+							here{' '}
+						</a>
+						to try again.
+					</span>
 				</div>
 			) : (
 				<>
