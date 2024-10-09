@@ -14,7 +14,7 @@ type FormData = {
 		email: string
 		firstName: string
 		lastName: string
-		aorCard?: string
+		cardNumber?: string
 		password: string
 		retypePassword: string
 	}
@@ -40,6 +40,7 @@ const Register = () => {
 	const [loading, setLoading] = useState(false)
 	const [isSubmit, setIsSubmit] = useState(false)
 	const conf = useConstants().config
+	const [recaptchaToken, setRecaptchaToken] = useState<string>('')
 	const { message } = useConstants()
 	const {
 		register,
@@ -47,6 +48,8 @@ const Register = () => {
 		setValue,
 		watch,
 		trigger,
+		clearErrors,
+		setError,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -73,13 +76,7 @@ const Register = () => {
 			recaptcha: '',
 		},
 	})
-
 	const [currentStep, setCurrentStep] = useState(1)
-
-	const onSubmit = (data: FormData) => {
-		setIsSubmit(true)
-		console.log('Final Submitted Data:', data)
-	}
 
 	const getStepFields = (step: number) => {
 		switch (step) {
@@ -106,11 +103,14 @@ const Register = () => {
 					'contacts.workNumber',
 					'contacts.phoneNumber',
 				] as const
-			case 4:
-				return ['researchInterest'] as const
 			default:
 				return []
 		}
+	}
+
+	const onSubmit = (data: FormData) => {
+		setIsSubmit(true)
+		console.log('Final Submitted Data:', data)
 	}
 
 	const handleNextStep = async () => {
@@ -118,7 +118,7 @@ const Register = () => {
 		const stepValidation = await trigger(stepFields as any)
 
 		if (stepValidation) {
-			setCurrentStep((prev) => prev + 1) // Ensure we only go up to step 4
+			setCurrentStep((prev) => prev + 1)
 		}
 	}
 
@@ -126,11 +126,8 @@ const Register = () => {
 		setCurrentStep((prev) => prev - 1)
 	}
 
-	const handleRecaptcha = (token: string) => {
-		if (token) {
-			setValue('recaptcha', token)
-			trigger('recaptcha')
-		}
+	const onCaptchaChange = (token: any) => {
+		setRecaptchaToken(token ?? '')
 	}
 
 	const showRegStatus = () => {
@@ -365,9 +362,7 @@ const Register = () => {
 							Organization <span className="text-red-500"></span>
 						</label>
 						<input
-							{...register('contacts.organization', {
-								required: 'Organization is required',
-							})}
+							{...register('contacts.organization')}
 							placeholder="Organization"
 							className="border p-2 w-full mt-1"
 						/>
@@ -389,7 +384,6 @@ const Register = () => {
 									</p>
 								)}
 							</div>
-
 							<div className="flex-1">
 								<label className="font-semibold">
 									Phone Number <span className="text-red-500">*</span>
@@ -411,52 +405,66 @@ const Register = () => {
 					</TabsContent>
 
 					{/* Step 4: Confirmation */}
-					<TabsContent value="step4" className="p-6 bg-white shadow-md rounded-md">
-						<h2 className="text-lg font-semibold">Confirmation</h2>
-						<p>Review your details and complete the registration:</p>
-						<ul className="list-disc pl-5">
-							<li>
-								<strong>Email:</strong> {watch('yourDetail.email')}
-							</li>
-							<li>
-								<strong>Full Name:</strong>{' '}
-								{`${watch('yourDetail.firstName')} ${watch('yourDetail.lastName')}`}
-							</li>
-							<li>
-								<strong>Address Line 1:</strong> {watch('currentAddress.address1')}
-							</li>
-							<li>
-								<strong>City:</strong> {watch('currentAddress.city')}
-							</li>
-							<li>
-								<strong>Province:</strong> {watch('currentAddress.province')}
-							</li>
-							<li>
-								<strong>Country:</strong> {watch('currentAddress.country')}
-							</li>
-							<li>
-								<strong>Organization:</strong> {watch('contacts.organization')}
-							</li>
-							<li>
-								<strong>Phone Number:</strong> {watch('contacts.phoneNumber')}
-							</li>
-							<li>
-								<strong>Work Number:</strong> {watch('contacts.workNumber')}
-							</li>
-						</ul>
-						<div className="flex justify-center scale-75 sm:scale-90 mr-[210px] sm:mr-[0px]">
-							<ReCAPTCHA sitekey={conf.reCaptchaKey} onChange={handleRecaptcha} />
+					<TabsContent
+						value="step4"
+						className="p-6 bg-white shadow-md rounded-md w-full mx-auto">
+						<div className={'flex justify-center'}>
+							<div>
+								<h2 className="text-lg font-semibold text-center mb-4">
+									Confirmation
+								</h2>
+								<p className="text-center mb-6">
+									Review your details and complete the registration
+								</p>
+								<ul className="list-disc pl-5 space-y-2">
+									<li>
+										<strong>Email:</strong> {watch('yourDetail.email')}
+									</li>
+									<li>
+										<strong>Full Name:</strong>{' '}
+										{`${watch('yourDetail.firstName')} ${watch('yourDetail.lastName')}`}
+									</li>
+									<li>
+										<strong>Address Line 1:</strong>{' '}
+										{watch('currentAddress.address1')}
+									</li>
+									<li>
+										<strong>City:</strong> {watch('currentAddress.city')}
+									</li>
+									<li>
+										<strong>Province:</strong>{' '}
+										{watch('currentAddress.province')}
+									</li>
+									<li>
+										<strong>Country:</strong> {watch('currentAddress.country')}
+									</li>
+									<li>
+										<strong>Organization:</strong>{' '}
+										{watch('contacts.organization')}
+									</li>
+									<li>
+										<strong>Phone Number:</strong>{' '}
+										{watch('contacts.phoneNumber')}
+									</li>
+									<li>
+										<strong>Work Number:</strong> {watch('contacts.workNumber')}
+									</li>
+								</ul>
+
+								<div className="flex justify-center mt-6">
+									<ReCAPTCHA
+										sitekey={conf.reCaptchaKey}
+										onChange={onCaptchaChange}
+									/>
+								</div>
+
+								{errors.recaptcha && (
+									<p className="text-red-500 text-center mt-2">
+										{errors.recaptcha.message}
+									</p>
+								)}
+							</div>
 						</div>
-						<input
-							type="hidden"
-							{...register('recaptcha', {
-								validate: (value) =>
-									value !== null || 'Please complete the CAPTCHA.',
-							})}
-						/>
-						{errors.recaptcha && (
-							<p className="text-red-500">{errors.recaptcha.message}</p>
-						)}
 					</TabsContent>
 
 					{/* Navigation Buttons */}
@@ -471,8 +479,11 @@ const Register = () => {
 						)}
 						<button
 							type={currentStep === 5 ? 'submit' : 'button'}
-							onClick={currentStep === 5 ? undefined : handleNextStep}
-							className="w-[100px] bg-primary text-white px-4 py-2 rounded-md">
+							onClick={handleNextStep}
+							disabled={currentStep === 4 && !recaptchaToken ? true : false}
+							className={`w-[100px] text-white px-4 py-2 rounded-md 
+							${currentStep === 4 && !recaptchaToken ? 'bg-gray-400' : 'bg-primary'}
+							${currentStep === 4 && !recaptchaToken ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 							{currentStep === 4 ? 'Submit' : 'Next'}
 						</button>
 					</div>
