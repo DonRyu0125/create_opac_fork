@@ -113,10 +113,13 @@
       <div>
         Hello <strong>^firstName^</strong>, Click below to verify your email, and complete your registration.
       </div>
+      <div>
+      The confirm email link will be expired in 24 hours
+      </div>
     </div>
     <div class="button-container">
       <a href="^REG_CONFIRM_LANDING_PAGE_URL^?user=^encoded^" style="text-decoration: none;">
-        <button>Confirm the Registration</button>
+        <button>Confirm Email</button>
       </a>
     </div>
     <div class="alternative-link">
