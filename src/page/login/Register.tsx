@@ -2,46 +2,78 @@ import PageAction from '@/components/common/PageAction'
 import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
 import React, { useState } from 'react'
-import { cn } from '@/lib/utils'
+import { cn, encodeObj, getHomeSessionID } from '@/lib/utils'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import useConstants from '@/hooks/useConstants'
 import { Button } from '@/components/ui/button'
+import axios from 'axios'
+import { CircleCheck } from 'lucide-react'
 
 type FormData = {
-	yourDetail: {
-		email: string
-		firstName: string
-		lastName: string
-		cardNumber?: string
-		password: string
-		retypePassword: string
-	}
-	currentAddress: {
-		address1: string
-		city: string
-		province: string
-		postalCode: string
-		country: string
-	}
-	contacts: {
-		organization: string
-		workNumber: string
-		phoneNumber: string
-	}
-	researchInterest?: string
+	email: string
+	firstName: string
+	lastName: string
+	cardNumber?: string
+	password: string
+	retypePassword: string
+	address1: string
+	city: string
+	province: string
+	postalCode: string
+	country: string
+	organization?: string
+	workNumber?: string
+	phoneNumber: string
 	recaptcha: string
 }
 
 const PASSWORD_MIN_LENGTH = 1
+const REG_CONFIRM_LANDING_PAGE_URL = `${window.location.hostname}/reg-confirm.html`
+const REGISTRATION_COMPLTET_EMAIL_TITLE = "Don't forget to complete the account!"
+// C_TITLE: Ms
+// C_NAME_FIRST: Alice
+// C_NAME_LAST: Smith
+// C_EMAIL: donryu1031@gmail.com
+// C_STREET: 1122 smith
+// C_STREET2:
+// C_STREET3:
+// C_CITY: London
+// C_PROV_STATE:
+// C_POSTAL_ZIP: 123123
+// C_COUNTRY: United Kingdom
+// C_RES_PURPOSE: Work in connection with employment
+// C_RES_SUBJECT.6: Political/diplomatic history
+// PATRON_PID: Sktjsghks12
+// PATRON_PID: Sktjsghks12
+
+// {
+//     "email": "asd@sd.com",
+//     "firstName": "1",
+//     "lastName": "1",
+//     "cardNumber": "1",
+//     "password": "1",
+//     "retypePassword": "1",
+//     "address1": "1",
+//     "city": "1",
+//     "province": "1",
+//     "postalCode": "1",
+//     "country": "1",
+//     "organization": "",
+//     "workNumber": "1",
+//     "phoneNumber": "1",
+//     "recaptcha": ""
+// }
 
 const Register = () => {
 	const [loading, setLoading] = useState(false)
 	const [isSubmit, setIsSubmit] = useState(false)
 	const conf = useConstants().config
+	const { logo } = useConstants().config
 	const [recaptchaToken, setRecaptchaToken] = useState<string>('')
 	const { message } = useConstants()
+	const [vEmail,setVEmail] = useState("")
 	const {
 		register,
 		handleSubmit,
@@ -53,26 +85,20 @@ const Register = () => {
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			yourDetail: {
-				email: '',
-				firstName: '',
-				lastName: '',
-				cardNumber: '',
-				password: '',
-				retypePassword: '',
-			},
-			currentAddress: {
-				address1: '',
-				city: '',
-				province: '',
-				postalCode: '',
-				country: '',
-			},
-			contacts: {
-				organization: '',
-				workNumber: '',
-				phoneNumber: '',
-			},
+			email: '',
+			firstName: '',
+			lastName: '',
+			cardNumber: '',
+			password: '',
+			retypePassword: '',
+			address1: '',
+			city: '',
+			province: '',
+			postalCode: '',
+			country: '',
+			organization: '',
+			workNumber: '',
+			phoneNumber: '',
 			recaptcha: '',
 		},
 	})
@@ -82,27 +108,17 @@ const Register = () => {
 		switch (step) {
 			case 1:
 				return [
-					'yourDetail.email',
-					'yourDetail.firstName',
-					'yourDetail.lastName',
-					'yourDetail.cardNumber',
-					'yourDetail.password',
-					'yourDetail.retypePassword',
+					'email',
+					'firstName',
+					'lastName',
+					'cardNumber',
+					'password',
+					'retypePassword',
 				] as const
 			case 2:
-				return [
-					'currentAddress.address1',
-					'currentAddress.city',
-					'currentAddress.province',
-					'currentAddress.postalCode',
-					'currentAddress.country',
-				] as const
+				return ['address1', 'city', 'province', 'postalCode', 'country'] as const
 			case 3:
-				return [
-					'contacts.organization',
-					'contacts.workNumber',
-					'contacts.phoneNumber',
-				] as const
+				return ['organization', 'workNumber', 'phoneNumber'] as const
 			default:
 				return []
 		}
@@ -110,7 +126,36 @@ const Register = () => {
 
 	const onSubmit = (data: FormData) => {
 		setIsSubmit(true)
+		setVEmail(data.email)
 		console.log('Final Submitted Data:', data)
+		sendConfirmEmail(data)
+	}
+
+	const sendConfirmEmail = async (data: FormData) => {
+		const encoded = encodeObj(
+			JSON.stringify({
+				...data,
+			})
+		)
+		const HOME_SESSID = getHomeSessionID()
+		return await axios
+			.post(
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=LoginVerficationConfirm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data.email}&SUBJECT_DEFAULT=${REGISTRATION_COMPLTET_EMAIL_TITLE}:${data.firstName}`,
+				{
+					firstName: data.firstName,
+					EVENT_EMAIL_LOGO: logo,
+					REG_CONFIRM_LANDING_PAGE_URL: REG_CONFIRM_LANDING_PAGE_URL,
+					encoded,
+				},
+				{
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				}
+			)
+			.catch((error) => {
+				throw error
+			})
 	}
 
 	const handleNextStep = async () => {
@@ -160,7 +205,7 @@ const Register = () => {
 							Email<span className="text-red-500">* </span>
 						</label>
 						<input
-							{...register('yourDetail.email', {
+							{...register('email', {
 								required: 'Email is required',
 								pattern: {
 									value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
@@ -170,9 +215,7 @@ const Register = () => {
 							placeholder="Email"
 							className="border p-2 w-full mt-1"
 						/>
-						{errors.yourDetail?.email && (
-							<p className="text-red-500">{errors.yourDetail.email.message}</p>
-						)}
+						{errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
@@ -181,7 +224,7 @@ const Register = () => {
 								</label>
 								<input
 									type="password"
-									{...register('yourDetail.password', {
+									{...register('password', {
 										required: 'Password is required',
 										minLength: {
 											value: PASSWORD_MIN_LENGTH,
@@ -191,10 +234,8 @@ const Register = () => {
 									placeholder="Password"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.yourDetail?.password && (
-									<p className="text-red-500">
-										{errors.yourDetail.password.message}
-									</p>
+								{errors.password && (
+									<p className="text-red-500">{errors.password.message}</p>
 								)}
 							</div>
 
@@ -204,19 +245,16 @@ const Register = () => {
 								</label>
 								<input
 									type="password"
-									{...register('yourDetail.retypePassword', {
+									{...register('retypePassword', {
 										required: 'Please confirm your password',
 										validate: (value) =>
-											value === watch('yourDetail.password') ||
-											'Passwords do not match',
+											value === watch('password') || 'Passwords do not match',
 									})}
 									placeholder="Retype Password"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.yourDetail?.retypePassword && (
-									<p className="text-red-500">
-										{errors.yourDetail.retypePassword.message}
-									</p>
+								{errors.retypePassword && (
+									<p className="text-red-500">{errors.retypePassword.message}</p>
 								)}
 							</div>
 						</div>
@@ -226,16 +264,14 @@ const Register = () => {
 									First Name <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('yourDetail.firstName', {
+									{...register('firstName', {
 										required: 'First Name is required',
 									})}
 									placeholder="First Name"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.yourDetail?.firstName && (
-									<p className="text-red-500">
-										{errors.yourDetail.firstName.message}
-									</p>
+								{errors.firstName && (
+									<p className="text-red-500">{errors.firstName.message}</p>
 								)}
 							</div>
 
@@ -244,23 +280,21 @@ const Register = () => {
 									Last Name <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('yourDetail.lastName', {
+									{...register('lastName', {
 										required: 'Last Name is required',
 									})}
 									placeholder="Last Name"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.yourDetail?.lastName && (
-									<p className="text-red-500">
-										{errors.yourDetail.lastName.message}
-									</p>
+								{errors.lastName && (
+									<p className="text-red-500">{errors.lastName.message}</p>
 								)}
 							</div>
 						</div>
 
 						<label className="font-semibold">Card #</label>
 						<input
-							{...register('yourDetail.cardNumber')}
+							{...register('cardNumber')}
 							placeholder="Card #"
 							className="border p-2 w-full mt-1"
 						/>
@@ -272,14 +306,14 @@ const Register = () => {
 							Address 1 <span className="text-red-500">*</span>
 						</label>
 						<input
-							{...register('currentAddress.address1', {
+							{...register('address1', {
 								required: 'Current address is required',
 							})}
 							placeholder="Current Address"
 							className="border p-2 w-full mt-1"
 						/>
-						{errors.currentAddress?.address1 && (
-							<p className="text-red-500">{errors.currentAddress.address1.message}</p>
+						{errors.address1 && (
+							<p className="text-red-500">{errors.address1.message}</p>
 						)}
 						<div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-4 mt-4">
 							<div className="sm:col-span-1">
@@ -287,16 +321,14 @@ const Register = () => {
 									City <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('currentAddress.city', {
+									{...register('city', {
 										required: 'City is required',
 									})}
 									placeholder="City"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.currentAddress?.city && (
-									<p className="text-red-500">
-										{errors.currentAddress.city.message}
-									</p>
+								{errors.city && (
+									<p className="text-red-500">{errors.city.message}</p>
 								)}
 							</div>
 
@@ -305,16 +337,14 @@ const Register = () => {
 									Province / State <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('currentAddress.province', {
+									{...register('province', {
 										required: 'Province is required',
 									})}
 									placeholder="Province"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.currentAddress?.province && (
-									<p className="text-red-500">
-										{errors.currentAddress.province.message}
-									</p>
+								{errors.province && (
+									<p className="text-red-500">{errors.province.message}</p>
 								)}
 							</div>
 
@@ -323,16 +353,14 @@ const Register = () => {
 									Postal Code / Zip Code <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('currentAddress.postalCode', {
+									{...register('postalCode', {
 										required: 'Postal Code is required',
 									})}
 									placeholder="Postal Code"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.currentAddress?.postalCode && (
-									<p className="text-red-500">
-										{errors.currentAddress.postalCode.message}
-									</p>
+								{errors.postalCode && (
+									<p className="text-red-500">{errors.postalCode.message}</p>
 								)}
 							</div>
 
@@ -341,16 +369,14 @@ const Register = () => {
 									Country <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('currentAddress.country', {
+									{...register('country', {
 										required: 'Country is required',
 									})}
 									placeholder="Country"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.currentAddress?.country && (
-									<p className="text-red-500">
-										{errors.currentAddress.country.message}
-									</p>
+								{errors.country && (
+									<p className="text-red-500">{errors.country.message}</p>
 								)}
 							</div>
 						</div>
@@ -362,7 +388,7 @@ const Register = () => {
 							Organization <span className="text-red-500"></span>
 						</label>
 						<input
-							{...register('contacts.organization')}
+							{...register('organization')}
 							placeholder="Organization"
 							className="border p-2 w-full mt-1"
 						/>
@@ -372,16 +398,14 @@ const Register = () => {
 									Work Number <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('contacts.workNumber', {
+									{...register('workNumber', {
 										required: 'Work Number is required',
 									})}
 									placeholder="Work Number"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.contacts?.workNumber && (
-									<p className="text-red-500">
-										{errors.contacts.workNumber.message}
-									</p>
+								{errors.workNumber && (
+									<p className="text-red-500">{errors.workNumber.message}</p>
 								)}
 							</div>
 							<div className="flex-1">
@@ -389,16 +413,14 @@ const Register = () => {
 									Phone Number <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('contacts.phoneNumber', {
+									{...register('phoneNumber', {
 										required: 'Phone Number is required',
 									})}
 									placeholder="Phone Number"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.contacts?.phoneNumber && (
-									<p className="text-red-500">
-										{errors.contacts.phoneNumber.message}
-									</p>
+								{errors.phoneNumber && (
+									<p className="text-red-500">{errors.phoneNumber.message}</p>
 								)}
 							</div>
 						</div>
@@ -418,36 +440,32 @@ const Register = () => {
 								</p>
 								<ul className="list-disc pl-5 space-y-2">
 									<li>
-										<strong>Email:</strong> {watch('yourDetail.email')}
+										<strong>Email:</strong> {watch('email')}
 									</li>
 									<li>
 										<strong>Full Name:</strong>{' '}
-										{`${watch('yourDetail.firstName')} ${watch('yourDetail.lastName')}`}
+										{`${watch('firstName')} ${watch('lastName')}`}
 									</li>
 									<li>
-										<strong>Address Line 1:</strong>{' '}
-										{watch('currentAddress.address1')}
+										<strong>Address Line 1:</strong> {watch('address1')}
 									</li>
 									<li>
-										<strong>City:</strong> {watch('currentAddress.city')}
+										<strong>City:</strong> {watch('city')}
 									</li>
 									<li>
-										<strong>Province:</strong>{' '}
-										{watch('currentAddress.province')}
+										<strong>Province:</strong> {watch('province')}
 									</li>
 									<li>
-										<strong>Country:</strong> {watch('currentAddress.country')}
+										<strong>Country:</strong> {watch('country')}
 									</li>
 									<li>
-										<strong>Organization:</strong>{' '}
-										{watch('contacts.organization')}
+										<strong>Organization:</strong> {watch('organization')}
 									</li>
 									<li>
-										<strong>Phone Number:</strong>{' '}
-										{watch('contacts.phoneNumber')}
+										<strong>Phone Number:</strong> {watch('phoneNumber')}
 									</li>
 									<li>
-										<strong>Work Number:</strong> {watch('contacts.workNumber')}
+										<strong>Work Number:</strong> {watch('workNumber')}
 									</li>
 								</ul>
 
@@ -501,7 +519,7 @@ const Register = () => {
 			/>
 			{isSubmit ? (
 				<div className="min-h-[35vh] flex flex-col items-center justify-center">
-					<h1 className="landing-page-title">You have successfully Signed!</h1>
+					<h1 className="landing-page-title"><CircleCheck />We have sent a verification email to '{vEmail}'</h1>
 					<div className={'text-lg'}>Use the button below to Login</div>
 					<Button className={'mt-4'}>
 						<a href="/">{message.home}</a>

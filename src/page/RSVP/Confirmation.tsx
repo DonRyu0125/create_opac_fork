@@ -234,7 +234,7 @@ const RSVPConfirm = () => {
 		)
 		return await axios
 			.post(
-				`${obj.HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${patronInfo.TAG_FUNC_O ? '[CALENDAR]RSVPRegOnlineComfrimTmp.txt' : '[CALENDAR]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
+				`${obj.HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${patronInfo.TAG_FUNC_O ? '[OPAC_EMAIL_TMP]RSVPRegOnlineComfrimTmp.txt' : '[OPAC_EMAIL_TMP]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
 					'EVENT_EMAIL_LOGO':logo,
