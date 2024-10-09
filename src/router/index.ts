@@ -25,7 +25,7 @@ import PatronInfo from '@/page/PatronInfo'
 import AdminCollections from '@/page/admin/Collections'
 import AdminDescription from '@/page/admin/Description'
 import AdminSettings from '@/page/admin/Settings'
-import Register from '@/page/login/Register'
+import Register from '@/page/login/register_1'
 
 
 export type TRoute = Record<string, () => React.ReactNode>
