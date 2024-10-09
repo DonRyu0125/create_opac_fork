@@ -31,7 +31,7 @@ type FormData = {
 
 const PASSWORD_MIN_LENGTH = 1
 const REG_CONFIRM_LANDING_PAGE_URL = `${window.location.hostname}/reg-confirm.html`
-const REGISTRATION_COMPLTET_EMAIL_TITLE = "Don't forget to complete the account!"
+const REGISTRATION_CMT_EMAIL_TITLE = "Don't forget to complete the account!"
 // C_TITLE: Ms
 // C_NAME_FIRST: Alice
 // C_NAME_LAST: Smith
@@ -156,7 +156,7 @@ const Register = () => {
 		const HOME_SESSID = getHomeSessionID()
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]LoginVerficationConfirm.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data.email}&SUBJECT_DEFAULT=${REGISTRATION_COMPLTET_EMAIL_TITLE}:${data.firstName}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]LoginVerificationConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data.email}&SUBJECT_DEFAULT=${REGISTRATION_CMT_EMAIL_TITLE} \'${data.firstName}\'!`,
 				{
 					firstName: data.firstName,
 					EVENT_EMAIL_LOGO: logo,
