@@ -26,7 +26,6 @@ import AdminCollections from '@/page/admin/Collections'
 import AdminDescription from '@/page/admin/Description'
 import AdminSettings from '@/page/admin/Settings'
 import Register from '@/page/login/Register'
-import RegisterConfirmation from '@/page/login/RegisterConfirmation'
 
 
 export type TRoute = Record<string, () => React.ReactNode>
@@ -57,7 +56,6 @@ export const ROUTES: TRoute = {
 	museum: Museum,
 	patronprofile: PatronProfile,
 	patroninfo: PatronInfo,
-	'reg-confirm': RegisterConfirmation,
 	'rsvp-cancel': RSVPCancel,
 	'rsvp-confirm': RSVPConfirm,
 	'no-record': NoRecord,

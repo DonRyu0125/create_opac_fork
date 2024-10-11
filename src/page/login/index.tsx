@@ -14,6 +14,7 @@ const Login = () => {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(null)
 
+
 	const handleSubmit = async (event: any) => {
 		event.preventDefault()
 		setLoading(true)
@@ -117,7 +118,7 @@ const Login = () => {
 						<div className={'flex mt-1'}>
 							<div>I don't have a login.</div>
 							<a
-								href="/register.html"
+								href={`${config.auth.register_url}`}
 								className={'border-b-2 border-b-black ml-[10px] h-[22px]'}>
 								Create an Account
 							</a>

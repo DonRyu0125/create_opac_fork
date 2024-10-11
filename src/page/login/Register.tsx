@@ -12,11 +12,11 @@ import axios from 'axios'
 import { CircleCheck } from 'lucide-react'
 
 type FormData = {
-	email: string
-	firstName: string
-	lastName: string
+	C_EMAIL: string
+	C_NAME_FIRST: string
+	C_NAME_LAST: string
 	cardNumber?: string
-	password: string
+	PATRON_PID: string
 	retypePassword: string
 	address1: string
 	city: string
@@ -49,11 +49,11 @@ const REGISTRATION_CMT_EMAIL_TITLE = "Don't forget to complete the account!"
 // PATRON_PID: Sktjsghks12
 
 // {
-//     "email": "asd@sd.com",
-//     "firstName": "1",
-//     "lastName": "1",
+//     "C_EMAIL": "asd@sd.com",
+//     "C_NAME_FIRST": "1",
+//     "C_NAME_LAST": "1",
 //     "cardNumber": "1",
-//     "password": "1",
+//     "PATRON_PID": "1",
 //     "retypePassword": "1",
 //     "address1": "1",
 //     "city": "1",
@@ -74,11 +74,11 @@ const Register = () => {
 	const [recaptchaToken, setRecaptchaToken] = useState<string>('')
 	const { message } = useConstants()
 	const [userData, setUserData] = useState<FormData>({
-		email: '',
-		firstName: '',
-		lastName: '',
+		C_EMAIL: '',
+		C_NAME_FIRST: '',
+		C_NAME_LAST: '',
 		cardNumber: '',
-		password: '',
+		PATRON_PID: '',
 		retypePassword: '',
 		address1: '',
 		city: '',
@@ -93,19 +93,16 @@ const Register = () => {
 	const {
 		register,
 		handleSubmit,
-		setValue,
 		watch,
 		trigger,
-		clearErrors,
-		setError,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			email: '',
-			firstName: '',
-			lastName: '',
+			C_EMAIL: '',
+			C_NAME_FIRST: '',
+			C_NAME_LAST: '',
 			cardNumber: '',
-			password: '',
+			PATRON_PID: '',
 			retypePassword: '',
 			address1: '',
 			city: '',
@@ -119,16 +116,16 @@ const Register = () => {
 		},
 	})
 	const [currentStep, setCurrentStep] = useState(1)
-
+	const HOME_SESSID = getHomeSessionID()
 	const getStepFields = (step: number) => {
 		switch (step) {
 			case 1:
 				return [
-					'email',
-					'firstName',
-					'lastName',
+					'C_EMAIL',
+					'C_NAME_FIRST',
+					'C_NAME_LAST',
 					'cardNumber',
-					'password',
+					'PATRON_PID',
 					'retypePassword',
 				] as const
 			case 2:
@@ -140,39 +137,27 @@ const Register = () => {
 		}
 	}
 
-	const onSubmit = (data: FormData) => {
+	const onSubmit = async (data: FormData) => {
 		setIsSubmit(true)
 		setUserData(data)
 		console.log('Final Submitted Data:', data)
-		sendConfirmEmail(data)
+
+
+	// return await axios
+	// 		.post(
+	// 			`${HOME_SESSID}?SAVERECORD`,
+	// 			{...data},
+	// 			{
+	// 				headers: {
+	// 					'Content-Type': 'text/xml',
+	// 				},
+	// 			}
+	// 		)
+	// 		.catch((error) => {
+	// 			throw error
+	// 		})
 	}
 
-	const sendConfirmEmail = async (data: FormData) => {
-		const encoded = encodeObj(
-			JSON.stringify({
-				...data,
-			})
-		)
-		const HOME_SESSID = getHomeSessionID()
-		return await axios
-			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]LoginVerificationConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${data.email}&SUBJECT_DEFAULT=${REGISTRATION_CMT_EMAIL_TITLE} \'${data.firstName}\'!`,
-				{
-					firstName: data.firstName,
-					EVENT_EMAIL_LOGO: logo,
-					REG_CONFIRM_LANDING_PAGE_URL: REG_CONFIRM_LANDING_PAGE_URL,
-					encoded,
-				},
-				{
-					headers: {
-						'Content-Type': 'multipart/form-data',
-					},
-				}
-			)
-			.catch((error) => {
-				throw error
-			})
-	}
 
 	const handleNextStep = async () => {
 		const stepFields = getStepFields(currentStep)
@@ -193,7 +178,7 @@ const Register = () => {
 
 	const showRegStatus = () => {
 		return (
-			<form onSubmit={handleSubmit(onSubmit)} className="bg-gray-200 p-5 rounded-md w-5/6">
+			<form onSubmit={handleSubmit(onSubmit)} className="bg-gray-200 p-5 rounded-md w-5/6" method='post' action={`${HOME_SESSID}?SAVERECORD`}>
 				<Tabs value={`step${currentStep}`}>
 					{/* Tabs List */}
 					<TabsList className="bg-gray-400 p-5 min-h-[300px] md:min-h-[70px] flex flex-wrap justify-evenly mb-6 w-full text-white">
@@ -221,17 +206,17 @@ const Register = () => {
 							Email<span className="text-red-500">* </span>
 						</label>
 						<input
-							{...register('email', {
+							{...register('C_EMAIL', {
 								required: 'Email is required',
 								pattern: {
 									value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-									message: 'Please enter a valid email address',
+									message: 'Please enter a valid C_EMAIL address',
 								},
 							})}
 							placeholder="Email"
 							className="border p-2 w-full mt-1"
 						/>
-						{errors.email && <p className="text-red-500">{errors.email.message}</p>}
+						{errors.C_EMAIL && <p className="text-red-500">{errors.C_EMAIL.message}</p>}
 
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
@@ -239,8 +224,8 @@ const Register = () => {
 									Password <span className="text-red-500">*</span>
 								</label>
 								<input
-									type="password"
-									{...register('password', {
+									type="PATRON_PID"
+									{...register('PATRON_PID', {
 										required: 'Password is required',
 										minLength: {
 											value: PASSWORD_MIN_LENGTH,
@@ -250,8 +235,8 @@ const Register = () => {
 									placeholder="Password"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.password && (
-									<p className="text-red-500">{errors.password.message}</p>
+								{errors.PATRON_PID && (
+									<p className="text-red-500">{errors.PATRON_PID.message}</p>
 								)}
 							</div>
 
@@ -260,11 +245,11 @@ const Register = () => {
 									Retype Password <span className="text-red-500">*</span>
 								</label>
 								<input
-									type="password"
+									type="PATRON_PID"
 									{...register('retypePassword', {
-										required: 'Please confirm your password',
+										required: 'Please confirm your PATRON_PID',
 										validate: (value) =>
-											value === watch('password') || 'Passwords do not match',
+											value === watch('PATRON_PID') || 'Passwords do not match',
 									})}
 									placeholder="Retype Password"
 									className="border p-2 w-full mt-1"
@@ -280,14 +265,14 @@ const Register = () => {
 									First Name <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('firstName', {
+									{...register('C_NAME_FIRST', {
 										required: 'First Name is required',
 									})}
 									placeholder="First Name"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.firstName && (
-									<p className="text-red-500">{errors.firstName.message}</p>
+								{errors.C_NAME_FIRST && (
+									<p className="text-red-500">{errors.C_NAME_FIRST.message}</p>
 								)}
 							</div>
 
@@ -296,14 +281,14 @@ const Register = () => {
 									Last Name <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('lastName', {
+									{...register('C_NAME_LAST', {
 										required: 'Last Name is required',
 									})}
 									placeholder="Last Name"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.lastName && (
-									<p className="text-red-500">{errors.lastName.message}</p>
+								{errors.C_NAME_LAST && (
+									<p className="text-red-500">{errors.C_NAME_LAST.message}</p>
 								)}
 							</div>
 						</div>
@@ -318,7 +303,7 @@ const Register = () => {
 
 					{/* Step 2: Current Address */}
 					<TabsContent value="step2" className="p-6 bg-white shadow-md rounded-md">
-						<label className="font-semibold">
+						{/* <label className="font-semibold">
 							Address 1 <span className="text-red-500">*</span>
 						</label>
 						<input
@@ -395,12 +380,12 @@ const Register = () => {
 									<p className="text-red-500">{errors.country.message}</p>
 								)}
 							</div>
-						</div>
+						</div> */}
 					</TabsContent>
 
 					{/* Step 3: Contacts */}
 					<TabsContent value="step3" className="p-6 bg-white shadow-md rounded-md">
-						<label className="font-semibold">
+						{/* <label className="font-semibold">
 							Organization <span className="text-red-500"></span>
 						</label>
 						<input
@@ -439,7 +424,7 @@ const Register = () => {
 									<p className="text-red-500">{errors.phoneNumber.message}</p>
 								)}
 							</div>
-						</div>
+						</div> */}
 					</TabsContent>
 
 					{/* Step 4: Confirmation */}
@@ -456,11 +441,11 @@ const Register = () => {
 								</p>
 								<ul className="list-disc pl-5 space-y-2">
 									<li>
-										<strong>Email:</strong> {watch('email')}
+										<strong>Email:</strong> {watch('C_EMAIL')}
 									</li>
 									<li>
 										<strong>Full Name:</strong>{' '}
-										{`${watch('firstName')} ${watch('lastName')}`}
+										{`${watch('C_NAME_FIRST')} ${watch('C_NAME_LAST')}`}
 									</li>
 									<li>
 										<strong>Address Line 1:</strong> {watch('address1')}
@@ -539,7 +524,7 @@ const Register = () => {
 						<CircleCheck className="w-16 h-16" />
 					</div>
 					<h1 className="landing-page-title">
-						We have sent a verification email to '{userData.email}'
+						We have sent a verification C_EMAIL to '{userData.C_EMAIL}'
 					</h1>
 					<div className={'text-xl m-4'}>
 						Please check the emtail for further instructions
@@ -547,16 +532,6 @@ const Register = () => {
 					<Button className={'mt-4'}>
 						<a href="/">{message.home}</a>
 					</Button>
-					<div className={'mt-5'}>Didn't received the email yet? </div>
-					<span>
-						{' '}
-						Click
-						<a className={'font-bold'} onClick={() => sendConfirmEmail(userData)}>
-							{' '}
-							here{' '}
-						</a>
-						to try again.
-					</span>
 				</div>
 			) : (
 				<>
