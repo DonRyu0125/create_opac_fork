@@ -4,35 +4,35 @@
 		"subtitle": "Veuillez visiter le site web et vous inscrire à nouveau.",
 		"showButton": true,
 		"buttonText": "Aller au site web",
-		"buttonLink": "#"
+		"buttonLink": "/"
 	},
 	"confirmLandingInList": {
 		"title": "Vous êtes déjà sur la liste!",
 		"subtitle": "Veuillez vérifier votre e-mail de confirmation d'inscription.",
 		"showButton": true,
 		"buttonText": "Aller au site web",
-		"buttonLink": "#"
+		"buttonLink": "/"
 	},
 	"confirmLandingFullEvent": {
 		"title": "Cet événement est déjà complet.",
 		"subtitle": "Veuillez vérifier notre site web pour les mises à jour sur les événements futurs.",
 		"showButton": true,
 		"buttonText": "Aller au site web",
-		"buttonLink": "#"
+		"buttonLink": "/"
 	},
 	"confirmLandingOutDate": {
 		"title": "L'événement a déjà eu lieu",
 		"subtitle": "Veuillez vérifier notre site web pour les événements futurs.",
 		"showButton": true,
 		"buttonText": "Aller au site web",
-		"buttonLink": "#"
+		"buttonLink": "/"
 	},
 	"confirmLandingInvalid": {
 		"title": "Nous ne pouvons pas trouver cette page.",
 		"subtitle": "Essayez de rechercher à nouveau, ou retournez à l'accueil pour recommencer.",
 		"showButton": true,
 		"buttonText": "Aller au site web",
-		"buttonLink": "#"
+		"buttonLink": "/"
 	},
 	"confirmLandingSuccess": {
 		"title": "Votre inscription a été réalisée avec succès.",
@@ -44,7 +44,7 @@
 		"subtitle": "Vous avez déjà annulé l'événement.",
 		"showButton": true,
 		"buttonText": "Aller au site web",
-		"buttonLink": "#"
+		"buttonLink": "/"
 	},
 	"cancelLandingSuccess": {
 		"title": "Votre inscription a été annulée avec succès.",
