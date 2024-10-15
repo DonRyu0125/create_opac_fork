@@ -1,13 +1,10 @@
-import PageAction from '@/components/common/PageAction'
-import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
-import React, { useState } from 'react'
-import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import useConstants from '@/hooks/useConstants'
+import { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
-import useConstants from '@/hooks/useConstants'
-import { Button } from '@/components/ui/button'
 
 type FormData = {
 	yourDetail: {
@@ -33,6 +30,8 @@ type FormData = {
 	researchInterest?: string
 	recaptcha: string
 }
+
+const PASSWORD_MIN_LENGTH = 1
 
 const Register = () => {
 	const [loading, setLoading] = useState(false)
@@ -113,21 +112,22 @@ const Register = () => {
 
 	const handleNextStep = async () => {
 		const stepFields = getStepFields(currentStep)
-
-		// Trigger validation for the current step's fields
 		const stepValidation = await trigger(stepFields as any)
 
 		if (stepValidation) {
-			setCurrentStep((prev) => Math.min(prev + 1, 5))
+			setCurrentStep((prev) => prev + 1) // Ensure we only go up to step 4
 		}
 	}
 
 	const handlePrevStep = () => {
-		setCurrentStep((prev) => Math.max(prev - 1, 1))
+		setCurrentStep((prev) => prev - 1)
 	}
 
-	const handleRecaptcha = (token: string | null) => {
-		setValue('recaptcha', token ?? '')
+	const handleRecaptcha = (token: string) => {
+		if (token) {
+			setValue('recaptcha', token)
+			trigger('recaptcha')
+		}
 	}
 
 	const showRegStatus = () => {
@@ -157,7 +157,7 @@ const Register = () => {
 					{/* Step 1: Your Detail */}
 					<TabsContent value="step1" className="p-6 bg-white shadow-md rounded-md">
 						<label className="font-semibold">
-							Email(ID)<span className="text-red-500">* </span>
+							Email<span className="text-red-500">* </span>
 						</label>
 						<input
 							{...register('yourDetail.email', {
@@ -184,8 +184,8 @@ const Register = () => {
 									{...register('yourDetail.password', {
 										required: 'Password is required',
 										minLength: {
-											value: 8,
-											message: 'Password must be at least 8 characters',
+											value: PASSWORD_MIN_LENGTH,
+											message: `Password must be at least ${PASSWORD_MIN_LENGTH} characters`,
 										},
 									})}
 									placeholder="Password"
@@ -220,7 +220,6 @@ const Register = () => {
 								)}
 							</div>
 						</div>
-
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
@@ -445,22 +444,31 @@ const Register = () => {
 						<div className="flex justify-center scale-75 sm:scale-90 mr-[210px] sm:mr-[0px]">
 							<ReCAPTCHA sitekey={conf.reCaptchaKey} onChange={handleRecaptcha} />
 						</div>
+						<input
+							type="hidden"
+							{...register('recaptcha', {
+								validate: (value) =>
+									value !== null || 'Please complete the CAPTCHA.',
+							})}
+						/>
 						{errors.recaptcha && (
-							<p className="text-red-500">Please complete the CAPTCHA.</p>
+							<p className="text-red-500">{errors.recaptcha.message}</p>
 						)}
 					</TabsContent>
 
 					{/* Navigation Buttons */}
 					<div className="p-4 flex justify-evenly">
+						{currentStep > 1 && (
+							<button
+								type="button"
+								onClick={handlePrevStep}
+								className="w-[100px] bg-primary text-white px-4 py-2 rounded-md">
+								Previous
+							</button>
+						)}
 						<button
-							type="button"
-							onClick={handlePrevStep}
-							className="w-[100px] bg-primary text-white px-4 py-2 rounded-md">
-							Previous
-						</button>
-						<button
-							type={currentStep === 4 ? 'submit' : 'button'}
-							onClick={handleNextStep}
+							type={currentStep === 5 ? 'submit' : 'button'}
+							onClick={currentStep === 5 ? undefined : handleNextStep}
 							className="w-[100px] bg-primary text-white px-4 py-2 rounded-md">
 							{currentStep === 4 ? 'Submit' : 'Next'}
 						</button>

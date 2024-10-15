@@ -4,13 +4,13 @@ import { Button } from '../ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../ui/sheet'
 
 import useConstants from '@/hooks/useConstants'
+import { LanguageSelect } from '../common/LanguageSelect'
 import Link from '../common/Link'
+import LoginBtn from './LoginBtn'
 
-type Props = {}
-
-const MobileMenu = (props: Props) => {
+const MobileMenu = () => {
 	const [mobileMenu, setMobileMenu] = useState<boolean>(false)
-	const { logo, navigations, siteName } = useConstants().config
+	const { navigations, siteName, auth } = useConstants().config
 	return (
 		<div className="block md:hidden">
 			<Button size="icon" onClick={() => setMobileMenu(true)}>
@@ -26,7 +26,7 @@ const MobileMenu = (props: Props) => {
 							{navigations.map((nav) => (
 								<li
 									key={nav.title}
-									className="flex items-center text-left h-12 w-full px-2  hover:text-white hover:bg-primary/60 border-l-4 border-primary">
+									className="flex items-center text-left h-12 w-full px-2  hover:text-white hover:bg-primary/60 ">
 									<Link
 										className="transition no-underline text-md text-primary"
 										href={nav.url}>
@@ -34,7 +34,15 @@ const MobileMenu = (props: Props) => {
 									</Link>
 								</li>
 							))}
+							{auth.login && (
+								<li className="flex items-center text-left h-12 w-full px-2  hover:text-white hover:bg-primary/60">
+									<LoginBtn className="text-primary text-md " />
+								</li>
+							)}
 						</ul>
+						<div className="px-2">
+							<LanguageSelect />
+						</div>
 					</nav>
 				</SheetContent>
 			</Sheet>

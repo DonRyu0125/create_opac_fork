@@ -8,7 +8,7 @@ import {
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-	DialogTrigger
+	DialogTrigger,
 } from '../../ui/dialog'
 import { Cal_event, ContactInfoRSVP } from './Constants'
 import EventCustomDialogContent from './EventCustomDialogContent'

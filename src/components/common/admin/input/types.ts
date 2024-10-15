@@ -6,6 +6,7 @@ export type InputProps = {
 	value: string
 	onChange: (value: string) => void
 	placeholder?: string
+	name?: string
 }
 
 export type CheckboxProps = {
@@ -19,6 +20,13 @@ type SelectOption = {
 	label: string
 }
 
+export type SwitchProps = {
+	title: string
+	value: boolean
+	onChange?: (value: boolean) => void
+	disabled?: boolean
+}
+
 export type SelectProps = {
 	label: string
 	placeholder?: string
@@ -29,3 +37,12 @@ export type SelectProps = {
 	defaultValue?: string
 	renderOption?: (option: SelectOption) => ReactNode
 }
+
+export type FCForm = HTMLFormControlsCollection & {
+	url: HTMLInputElement
+	title: HTMLInputElement
+	description: HTMLInputElement
+	thumbnail: HTMLInputElement
+}
+
+export type BCForm = Omit<FCForm, 'description'>

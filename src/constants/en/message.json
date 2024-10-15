@@ -105,14 +105,12 @@
 	"noKeyFound": "No key is found",
 	"browseCluster": "Browse Cluster for",
 	"support": "Support",
-		"myAccount": "My Account",
-		"logout": "Logout",
-		"welcome": "Welcome",
-  	"dashboardHome": "Dashboard Home",
-	"accountSettings": "Account Settings",
-	"featuredCollections":"Featured collections",
-	"calendar":"Calendar",
-	"online":"Online",
-	"onlineTip":"Use the meeting link to access the session!",
-	"inPersonTip":"Please be in the room before meeting time"
+	"myAccount": "My Account",
+	"logout": "Logout",
+	"welcome": "Welcome",
+	"featuredCollections": "Featured collections",
+	"calendar": "Calendar",
+	"online": "Online",
+	"onlineTip": "Use the meeting link to access the session!",
+	"inPersonTip": "Please be in the room before meeting time"
 }

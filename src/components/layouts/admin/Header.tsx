@@ -21,7 +21,7 @@ const Header = (props: Props) => {
 		// { url: './rsvp.html', page: 'RSVP' },
 		// { url: './message.html', page: 'Translation' },
 		{ url: './settings.html', page: 'Settings' },
-		{ url: './styles.html', page: 'Theme' },
+		// { url: './styles.html', page: 'Theme' },
 	]
 
 	const checkActiveUrl = () => {
