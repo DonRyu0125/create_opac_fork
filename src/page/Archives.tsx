@@ -10,7 +10,7 @@ import useConstants from '@/hooks/useConstants'
 import { cn, getSearchURL } from '@/lib/utils'
 import { useState } from 'react'
 import Hero from '../components/common/Hero'
-import SearchForm from '../components/common/SearchForm'
+import SearchForm from '../components/common/search-form/SearchForm'
 import Layout from '../components/layouts'
 import { UNION_SEARCH_CL } from './Home'
 

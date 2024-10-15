@@ -1,6 +1,6 @@
 import ImageCarousel from '@/components/common/ImageCarousel'
 import PageAction from '@/components/common/PageAction'
-import SearchForm from '@/components/common/SearchForm'
+import SearchForm from '@/components/common/search-form/SearchForm'
 import Layout from '@/components/layouts'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
