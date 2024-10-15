@@ -1,22 +1,21 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import React from 'react'
-import { Accessibility, ChevronLeft, ChevronRight, CircleParkingOff, Scan } from 'lucide-react'
 
-import {
-	TAG_FUNC_DATE,
-	TAG_FUNC_LOC_DEC,
-	TAG_FUNC_END_T,
-	TAG_NAME,
-	TAG_FUNC_LOC_ROO,
-	TAG_FUNC_LOC_AUD,
-	TAG_FUNC_START_T,
-	TAG_FUNC_LOC_MAX,
-	ContactInfoRSVP,
-	BD_DIS_ACC,
-	BD_DIS_ACC_TYPE,
-	BD_DIS_ACC_DETAI,
-	MEDIA_TYPE,
-} from './Constants'
 import useConstants from '@/hooks/useConstants'
+import {
+	BD_DIS_ACC,
+	BD_DIS_ACC_DETAI,
+	BD_DIS_ACC_TYPE,
+	ContactInfoRSVP,
+	MEDIA_TYPE,
+	TAG_FUNC_DATE,
+	TAG_FUNC_END_T,
+	TAG_FUNC_LOC_AUD,
+	TAG_FUNC_LOC_MAX,
+	TAG_FUNC_LOC_ROO,
+	TAG_FUNC_START_T,
+	TAG_NAME,
+} from './Constants'
 import { getContactInfo } from './Service'
 
 export interface ImageCarouselProps {
@@ -92,7 +91,7 @@ const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
 				</video>
 			)
 		} else {
-			return;
+			return
 		}
 	}
 

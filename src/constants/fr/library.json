@@ -33,7 +33,7 @@
 		"filterTypes": [
 			{
 				"type": "Vancouver Public Library, Joe Fortes Branch",
-				"color":"bg-neutral-500 border-neutral-500",
+				"color": "bg-neutral-500 border-neutral-500",
 				"icon": "rounded"
 			},
 			{
@@ -43,7 +43,7 @@
 			},
 			{
 				"type": "Vancouver Public Library, Kitsilano Branch",
-				"color":"bg-red-500 border-red-500",
+				"color": "bg-red-500 border-red-500",
 				"icon": "rounded"
 			},
 			{

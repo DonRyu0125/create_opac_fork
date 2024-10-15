@@ -1,13 +1,10 @@
-import PageAction from '@/components/common/PageAction'
-import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
-import React, { useState } from 'react'
-import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import useConstants from '@/hooks/useConstants'
+import { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
-import useConstants from '@/hooks/useConstants'
-import { Button } from '@/components/ui/button'
 
 type FormData = {
 	yourDetail: {

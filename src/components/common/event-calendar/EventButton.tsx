@@ -11,7 +11,7 @@ import {
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-	DialogTrigger
+	DialogTrigger,
 } from '../../ui/dialog'
 import {
 	ContactInfoRSVP,
@@ -21,7 +21,7 @@ import {
 	TAG_FUNC_END_T,
 	TAG_FUNC_O,
 	TAG_FUNC_START_T,
-	TAG_NAME
+	TAG_NAME,
 } from './Constants'
 import EventCustomDialogContent from './EventCustomDialogContent'
 

@@ -1,61 +1,88 @@
-import AdminForm from '@/components/common/admin/AdminForm'
+import AdminFormLayout from '@/components/common/admin/AdminFormLayout'
 import CheckboxWithLabel from '@/components/common/admin/input/CheckboxWithLabel'
-import TextField from '@/components/common/admin/input/TextField'
+import FormField from '@/components/common/admin/input/FormField'
+import SectionActions, { NewElementForm } from '@/components/common/admin/layout/SectionActions'
 import SectionHeader from '@/components/common/admin/layout/SectionHeader'
 import SectionWrapper from '@/components/common/admin/layout/SectionWrapper'
-import TabsWrapper from '@/components/common/admin/layout/TabsWrapper'
-import AdminLayout from '@/components/layouts/admin'
-import { TabsContent } from '@/components/ui/tabs'
 import enValues from '@/constants/en/fields.json'
 import frValues from '@/constants/fr/fields.json'
 import { useAdminForm } from '@/hooks/useAdminForm'
-import { AdminFormProvider } from '@/providers/AdminFormProvider'
 import fields from '@/schema/fields.json'
 import { SchemaType } from '@/types/schema'
+import { FormEvent } from 'react'
+
+type NewFormType = HTMLFormControlsCollection & {
+	label: HTMLInputElement
+	name: HTMLInputElement
+}
 
 const Fields = () => {
 	return (
-		<AdminLayout>
-			<TabsWrapper>
-				<TabsContent value="en">
-					<AdminFormProvider
-						data={enValues}
-						schema={fields as SchemaType}
-						filepath="constants/en/fields.json">
-						<AdminForm>
-							<Form lang="en" />
-						</AdminForm>
-					</AdminFormProvider>
-				</TabsContent>
-				<TabsContent value="fr">
-					<AdminFormProvider
-						data={frValues}
-						schema={fields as SchemaType}
-						filepath="constants/fr/fields.json">
-						<AdminForm>
-							<Form lang="fr" />
-						</AdminForm>
-					</AdminFormProvider>
-				</TabsContent>
-			</TabsWrapper>
-		</AdminLayout>
+		<AdminFormLayout
+			enData={enValues}
+			frData={frValues}
+			schema={fields as SchemaType}
+			enFilepath={'constants/en/fields.json'}
+			frFilepath={'constants/fr/fields.json'}
+			FormComponent={Form}
+		/>
 	)
 }
 
 const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 	const fieldsValue = lang === 'en' ? enValues : frValues
-	const { handleChange } = useAdminForm()
+	const { handleChange, handleRemove, handleAdd } = useAdminForm()
 
 	return (
 		<div className="flex gap-4 flex-col">
 			{fieldsValue.map((db, dbIndex) => (
 				<div>
-					<SectionHeader heading={`${db.database} fields`} />
+					<SectionHeader heading={`${db.database} Fields`} />
+
+					<SectionActions
+						handleAddNewItem={(event: FormEvent<NewElementForm<NewFormType>>) => {
+							const { label, name } = event.currentTarget.elements
+
+							handleAdd(
+								[`${dbIndex}`, 'items', String(fieldsValue[dbIndex].items.length)],
+								{
+									name: name.value,
+									label: label.value,
+									summary: true,
+									grid: true,
+									detail: true,
+								}
+							)
+						}}
+						newItemForm={
+							<>
+								<FormField
+									name="name"
+									type="text"
+									field={'Field mnemonic'}
+									value={''}
+								/>
+								<FormField
+									name="label"
+									type="text"
+									field={'Field label'}
+									value={''}
+								/>
+							</>
+						}
+						enableFeatureValue={true}
+					/>
+
 					<div className="flex flex-col gap-2">
 						{db.items.map((item, itemIndex) => (
-							<SectionWrapper key={JSON.stringify(item)}>
-								<TextField
-									title={'Field mnemonic'}
+							<SectionWrapper
+								key={JSON.stringify(item)}
+								onRemove={() => {
+									handleRemove([`${dbIndex}`, 'items'], itemIndex)
+								}}>
+								<FormField
+									type="text"
+									field={'Field mnemonic'}
 									value={item.name.toUpperCase()}
 									onChange={(e) =>
 										handleChange(
@@ -65,8 +92,9 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 									}
 								/>
 
-								<TextField
-									title={'Field label'}
+								<FormField
+									type="text"
+									field={'Field label'}
 									value={item.label}
 									onChange={(e) =>
 										handleChange(

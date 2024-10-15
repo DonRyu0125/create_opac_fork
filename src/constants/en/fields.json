@@ -70,20 +70,8 @@
 	{
 		"database": "DESCRIPTION_WEB",
 		"items": [
-			{
-				"label": "Title",
-				"name": "TITLE",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
-			{
-				"label": "ID",
-				"name": "REFD",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
+			{ "label": "Title", "name": "TITLE", "summary": true, "grid": true, "detail": true },
+			{ "label": "ID", "name": "REFD", "summary": true, "grid": true, "detail": true },
 			{
 				"label": "Date",
 				"name": "date_cr_inc",
@@ -109,17 +97,29 @@
 				"summary": true,
 				"grid": true,
 				"detail": true
-			},
+			}
+		]
+	},
+	{
+		"database": "BIBLIO_WEB",
+		"items": [
 			{
-				"label": "Date",
-				"name": "EARLY",
+				"label": "Title",
+				"name": "LEGAL_TITLE",
 				"summary": true,
-				"grid": false,
+				"grid": true,
 				"detail": true
 			},
 			{
-				"label": "Description",
-				"name": "520_A",
+				"label": "ID",
+				"name": "ACCESSION_NUMBER",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"name": "LIB",
+				"label": "Library field",
 				"summary": true,
 				"grid": true,
 				"detail": true

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Slide from './Slide'
+import Slide from './slide'
 import { ChevronLeft, ChevronRight, Scan } from 'lucide-react'
 import LightboxImage from './LightboxImage'
 

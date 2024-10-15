@@ -1,23 +1,19 @@
-import React, { useState } from 'react'
+import useConstants from '@/hooks/useConstants'
+import { cn, convertLowerTrim } from '@/lib/utils'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { CalendarCheck, X } from 'lucide-react'
+import { Button } from '../../ui/button'
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription,
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-	DialogTrigger,
+	DialogTrigger
 } from '../../ui/dialog'
-import { Button } from '../../ui/button'
-import { cn, convertToArr } from '@/lib/utils'
-import { convertLowerTrim } from '@/lib/utils'
-import { TAG_FUNC_DTE_LIST, ContactInfoRSVP, FilterType, EVENT_DEFAULT_COLOR } from './Constants'
-import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { X } from 'lucide-react'
-import { CalendarCheck } from 'lucide-react'
-import useConstants from '@/hooks/useConstants'
-import EventCustomDialogContent from './EventCustomDialogContent'
 import ButtonTooltip from './ButtonTooltip'
+import { ContactInfoRSVP, EVENT_DEFAULT_COLOR, FilterType, TAG_FUNC_DTE_LIST } from './Constants'
+import EventCustomDialogContent from './EventCustomDialogContent'
 
 export interface eventSumType {
 	item: any

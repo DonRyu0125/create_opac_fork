@@ -1,7 +1,7 @@
 import PageAction from '@/components/common/PageAction'
 import PageHeader from '@/components/common/PageHeader'
 import PagePagination from '@/components/common/PagePagination'
-import SearchForm from '@/components/common/SearchForm'
+import SearchForm from '@/components/common/search-form/SearchForm'
 import ViewToggle from '@/components/common/ViewToggle'
 import Layout from '@/components/layouts'
 import { Button } from '@/components/ui/button'
@@ -27,8 +27,6 @@ const Summary = () => {
 		if (currentUrl.includes(match[0])) return ''
 		return `${message.in} ${db[0].title}`
 	}
-	console.log(common)
-	console.log(records)
 	if (!common) return <></>
 	return (
 		<Layout>
