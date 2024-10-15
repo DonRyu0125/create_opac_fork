@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import useConstants from '@/hooks/useConstants'
 import { Button } from '@/components/ui/button'
 import axios from 'axios'
+import { CircleCheck } from 'lucide-react'
 
 type FormData = {
 	C_EMAIL: string
