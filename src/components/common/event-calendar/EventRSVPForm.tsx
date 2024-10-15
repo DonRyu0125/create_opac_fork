@@ -1,12 +1,13 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import {
 	convertToArr,
 	convertXMLToJson,
 	encodeObj,
 	getCurrentDate,
-	getSessionID
+	getSessionID,
 } from '@/lib/utils'
 import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
 import { Label } from '@radix-ui/react-label'
@@ -15,6 +16,7 @@ import { saveAs } from 'file-saver'
 import { useAtom } from 'jotai'
 import { BadgeCheck, FileDown, Mail, MonitorPlay, Phone, SquareUserRound } from 'lucide-react'
 import React, { useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import ButtonTooltip from './ButtonTooltip'
 import {
@@ -24,7 +26,6 @@ import {
 	BD_POSTAL_CODE,
 	Cal_event,
 	ContactInfoRSVP,
-	EVENT_EMAIL_LOGO,
 	FLOC_TX_ACCESS,
 	MWI_RESFUL_RES,
 	MWI_XML_DATA_INDEX,
@@ -52,13 +53,11 @@ import {
 	TAG_FUNC_RSVP,
 	TAG_FUNC_START_T,
 	TAG_NAME,
-	VERIFICATION_EMAIL_T
+	VERIFICATION_EMAIL_T,
 } from './Constants'
 import { calNumOfPatron } from './EC-Util'
 import { fetch_get, getContactInfo } from './Service'
 import Spinner from './Spinner'
-import ReCAPTCHA from 'react-google-recaptcha'
-import { toast } from '@/components/ui/use-toast'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -144,7 +143,7 @@ const ShowForm = ({
 
 	const handleFormSubmit = (data: any) => {
 		if (captchaValue) {
-			onSubmit({ ...data})
+			onSubmit({ ...data })
 		} else {
 			toast({ title: `CAPTCHA verification failed` })
 		}
@@ -158,8 +157,7 @@ const ShowForm = ({
 			</div>
 			<form
 				onSubmit={handleSubmit(handleFormSubmit)} // Use handleFormSubmit here
-				className={'h-full w-full flex flex-col justify-start items-center'}
-			>
+				className={'h-full w-full flex flex-col justify-start items-center'}>
 				<EventInput
 					label={message.firstName}
 					keyname={TAG_FUNC_P_FIRST}
@@ -184,8 +182,7 @@ const ShowForm = ({
 					<select
 						defaultValue={TAG_FUNC_P_ATTND_DEFAULT}
 						{...register(TAG_FUNC_P_ATTND)}
-						className={'border-2 border-grey-500 w-1/4'}
-					>
+						className={'border-2 border-grey-500 w-1/4'}>
 						{Array(TAG_FUNC_P_ATTND_MAX)
 							.fill(0)
 							.map((_, index) => (
@@ -208,7 +205,6 @@ const ShowForm = ({
 		</div>
 	)
 }
-
 
 const ShowButton = ({
 	capacity,
@@ -239,7 +235,7 @@ const ShowButton = ({
 		}
 	}
 	return (
-		<div className={'h-full w-full h-full text-lg'}>
+		<div className={'h-full w-full text-lg'}>
 			{event[TAG_FUNC_RSVP] && (
 				<div
 					className={
@@ -351,7 +347,10 @@ const ShowRSVPSuccess = ({
 }) => {
 	const message = useConstants().message
 	return (
-		<div className={'min-h-[388px] h-full w-full p-2 border-2 rounded flex flex-col justify-evenly'}>
+		<div
+			className={
+				'min-h-[388px] h-full w-full p-2 border-2 rounded flex flex-col justify-evenly'
+			}>
 			<div>
 				<div
 					className={
@@ -507,13 +506,13 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]RSVPVerificationConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
 				{
 					...patronInfo,
-					'EVENT_EMAIL_LOGO':logo,
+					EVENT_EMAIL_LOGO: logo,
 					[TAG_NAME]: event[TAG_NAME],
 					[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 					[TAG_FUNC_P_T]: getCurrentDate(),
 					[BD_ADDRESS]: getContactInfo(BD_ADDRESS, contactInfo, event),
 					RSVP_CONFIRM_LANDING_PAGE_URL: RSVP_CONFIRM_LANDING_PAGE_URL,
-					encoded
+					encoded,
 				},
 				{
 					headers: {

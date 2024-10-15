@@ -78,12 +78,12 @@ const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilt
 		}
 	}
 
-		const daysInMonth = (date: Date) => {
+	const daysInMonth = (date: Date) => {
 		const year = date.getFullYear()
 		const month = date.getMonth() + 1
 		return new Date(year, month, 0).getDate() // get the last date.getMonth() + 1's last date
 	}
-	
+
 	const generateMonth = () => {
 		const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
 		const days = daysInMonth(currentDate)
@@ -166,7 +166,7 @@ const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilt
 	}
 
 	return (
-		<div className={'w-full mx-auto max-w-screen-xl custom-scrollbar'}>
+		<div className={'w-full  custom-scrollbar'}>
 			<div
 				className={
 					'relative flex justify-center items-center bg-primary h-[80px] rounded '

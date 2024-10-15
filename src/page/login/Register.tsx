@@ -1,15 +1,13 @@
-import PageAction from '@/components/common/PageAction'
-import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
 import React, { useState } from 'react'
 import { cn, encodeObj, getHomeSessionID } from '@/lib/utils'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import useConstants from '@/hooks/useConstants'
+import { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import useConstants from '@/hooks/useConstants'
 import { Button } from '@/components/ui/button'
-import axios from 'axios'
-import { CircleCheck } from 'lucide-react'
 
 type FormData = {
 	C_EMAIL: string

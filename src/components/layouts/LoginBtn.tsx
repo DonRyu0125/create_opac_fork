@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import useConstants from '@/hooks/useConstants'
+import { clearCookies, cn, getCookieValue, isLogin } from '@/lib/utils'
+import { ChevronDown } from 'lucide-react'
 import Link from '../common/Link'
-import { clearCookies, getCookieValue, isLogin } from '@/lib/utils'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -9,19 +10,15 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import { ChevronDown } from 'lucide-react'
-import useConstants from '@/hooks/useConstants'
 
-const LoginBtn = () => {
+const LoginBtn = ({ className }: { className?: string }) => {
 	const { message, config } = useConstants()
-	const [login, setlogin] = useState(false)
-	useEffect(() => {
-		setlogin(isLogin())
-	}, [])
+
+	const isAuthenticated = isLogin()
 
 	return (
 		<>
-			{login ? (
+			{isAuthenticated ? (
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild className={'focus:outline-none focus:border-none'}>
 						<button
@@ -44,13 +41,14 @@ const LoginBtn = () => {
 					</DropdownMenuContent>
 				</DropdownMenu>
 			) : (
-				<li className="hover:border-b-opac-secondary">
-					<Link
-						className="transition no-underline  text-lg text-opac-white hover:text-opac-secondary"
-						href={`${config.auth.url}`}>
-						{message.logIn}
-					</Link>
-				</li>
+				<Link
+					className={cn(
+						'transition no-underline text-lg text-opac-white hover:text-opac-secondary',
+						className
+					)}
+					href={`${config.auth.url}`}>
+					{message.logIn}
+				</Link>
 			)}
 		</>
 	)

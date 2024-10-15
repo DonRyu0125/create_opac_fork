@@ -1,6 +1,6 @@
 import ImageCarousel from '@/components/common/ImageCarousel'
 import PageAction from '@/components/common/PageAction'
-import SearchForm from '@/components/common/SearchForm'
+import SearchForm from '@/components/common/search-form/SearchForm'
 import Layout from '@/components/layouts'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
@@ -28,7 +28,6 @@ const Detail = () => {
 	const images = getMedia(records[0], 'im_access_link')?.map((e) => ({ src: e })) || []
 	const { message } = useConstants()
 	// TODO: create placeholder component when there is no data
-
 
 	if (!records || records.length === 0) return <></>
 	return (
@@ -68,7 +67,7 @@ const Detail = () => {
 				<section>
 					<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
 						<div className="flex flex-col lg:flex-row space-y-12 lg:space-y-0 lg:space-x-8 items-start max-w-6xl p-4 mx-auto ">
-							<div className="max-w-[700px]  mx-auto">
+							<div className="max-w-[700px] text-center mx-auto">
 								{images && images.length > 0 ? (
 									<ImageCarousel
 										items={images}
