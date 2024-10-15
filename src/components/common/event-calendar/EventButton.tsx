@@ -30,13 +30,13 @@ const EventButton = ({
 	id,
 	contactInfo,
 	filterTypes,
-	fitlerOption,
+	filterOption,
 }: {
 	elm: any
 	id: number
 	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
-	fitlerOption: string
+	filterOption: string
 }) => {
 	const [weekType, _] = useAtom(calendarWeekType)
 	const message = useConstants().message
@@ -57,7 +57,7 @@ const EventButton = ({
 			<DialogTrigger asChild>
 				{weekType ? (
 					<Button
-						className={`${getColor(elm[fitlerOption])} w-full whitespace-normal break-normal min-w-[100px] max-w-[100px] h-[65px] md:max-h-[165px] mr-1 overflow-y-hidden  md:max-w-[168px] md:h-full md:mb-2 border-hidden p-1 text-sm flex flex-col justify-start text-white md:p-1`}
+						className={`${getColor(elm[filterOption])} w-full whitespace-normal break-normal min-w-[100px] max-w-[160px] h-[65px] md:max-h-[165px] mr-1 overflow-y-hidden  md:max-w-[168px] md:h-full md:mb-2 border-hidden p-1 text-sm flex flex-col justify-start text-white md:p-1`}
 						variant="outline">
 						<div className={'w-full text-left'}>
 							<div className={'flex w-full'}>
@@ -81,17 +81,17 @@ const EventButton = ({
 					</Button>
 				) : (
 					<Button
-						className={`overflow-y-hidden flex flex-col justify-start w-full max-h-[60px] border-hidden p-0 text-sm`}
+						className={` flex flex-col justify-start w-full  border-hidden p-0 text-sm whitespace-normal `}
 						variant="outline">
 						<div className={'flex w-full text-left'}>
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded',
-									getColor(elm[fitlerOption])
+									getColor(elm[filterOption])
 								)}></div>
-							<p className={'w-full h-full hidden sm:block break-all'}>
+							<div className={'w-full h-full hidden sm:block break-all'}>
 								{elm[TAG_NAME]}
-							</p>
+							</div>
 						</div>
 					</Button>
 				)}
@@ -115,7 +115,7 @@ const EventButton = ({
 								)}></div>
 							<div
 								className={
-									'whitespace-nowrap  w-[200px] sm:w-full overflow-x-auto overflow-y-hidden text-left'
+									'whitespace-nowrap  w-[200px] sm:w-full overflow-x-auto overflow-y-hidden text-left min-h-[20px]'
 								}>
 								{elm[TAG_NAME]}
 							</div>

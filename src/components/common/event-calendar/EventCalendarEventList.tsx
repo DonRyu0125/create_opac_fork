@@ -1,8 +1,8 @@
 /**
  * EventCalendarEventList: Event list modal button (more than three events, it shows the all event buttons)
  */
-import { cn, convertLowerTrim } from '@/lib/utils'
-import { calendarMonthType, calendarWeekType } from '@/store'
+import { convertLowerTrim } from '@/lib/utils'
+import { calendarMonthType } from '@/store'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import {
@@ -11,6 +11,7 @@ import {
 	Day_obj,
 	FilterType,
 	TAG_FUNC_DATE,
+	TAG_FUNC_DTE_LIST,
 	TAG_FUNC_START_T,
 } from './Constants'
 import EventAllButton from './EventAllButton'
@@ -24,7 +25,7 @@ export interface Event_list {
 	weekType: boolean
 	contactInfo: ContactInfoRSVP[]
 	filterTypes: FilterType[]
-	fitlerOption: string
+	filterOption: string
 }
 
 const EventCalendarEventList = ({
@@ -33,10 +34,9 @@ const EventCalendarEventList = ({
 	currentEvent,
 	contactInfo,
 	filterTypes,
-	fitlerOption,
+	filterOption,
 }: Event_list) => {
 	const [filteredEvents, setFilteredEvents] = useState<Cal_event[]>([])
-	const [weekType, _] = useAtom(calendarWeekType)
 	const [monthType, __] = useAtom(calendarMonthType)
 	useEffect(() => {
 		const updatedFilteredEvents = currentEvent?.filter((item: any) => {
@@ -48,7 +48,7 @@ const EventCalendarEventList = ({
 					isMatchingDayMonth &&
 					currentFilter.some(
 						(type: string) =>
-							convertLowerTrim(type) === convertLowerTrim(item[fitlerOption])
+							convertLowerTrim(type) === convertLowerTrim(item[filterOption])
 					)
 				)
 			}
@@ -99,8 +99,59 @@ const EventCalendarEventList = ({
 		return
 	}
 
+	const groupedByType = (filteredEvents: Cal_event[]) => {
+		let typeArr: any = {}
+		let result = []
+		filteredEvents.forEach((classInfo: any) => {
+			const type = classInfo[filterOption]
+			if (!typeArr[type]) {
+				typeArr[type] = []
+			}
+			typeArr[type].push(classInfo)
+		})
+		result = Object.keys(typeArr).map((item) => {
+			return { [filterOption]: item, [TAG_FUNC_DTE_LIST]: typeArr[item] }
+		})
+		return result ?? []
+	}
+
+	const renderButtonPage = () => {
+		if (monthType && filterTypes.length > 1) {
+			// Filtered sum view at month type
+			return groupedByType(filteredEvents).map((item, key) => {
+				return (
+					<EventSumButton
+						key={key}
+						item={item}
+						contactInfo={contactInfo}
+						filterTypes={filterTypes}
+						filterOption={filterOption}
+					/>
+				)
+			})
+		} else {
+			return (
+				<div
+					className={`${monthType ? 'max-h-[95%] mb-[2px] w-full overflow-y-auto custom-scrollbar' 
+					: 'flex md:block h-[70px] md:h-[93%] mb-[2px] overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto w-full custom-scrollbar mr-1 md:p-1'}
+					'`}>
+					{filteredEvents?.map((item: any, idx: number) => (
+						<EventButton
+							elm={item}
+							key={idx}
+							id={idx}
+							contactInfo={contactInfo}
+							filterTypes={filterTypes}
+							filterOption={filterOption}
+						/>
+					))}
+				</div>
+			)
+		}
+	}
+
 	return (
-		<div className={`${monthType ? 'h-[82%]' : 'h-[98%]'} relative w-full`}>
+		<div className={`h-full relative w-full`}>
 			<div className={'bg-slate-200 flex justify-between h-[25px]'}>
 				<div>{dayObj?.day}</div>
 				{filteredEvents.length > 2 && (
@@ -109,31 +160,7 @@ const EventCalendarEventList = ({
 					</div>
 				)}
 			</div>
-			{monthType && filterTypes.length > 1 ? (
-				<EventSumButton
-					filteredEvents={filteredEvents}
-					contactInfo={contactInfo}
-					filterTypes={filterTypes}
-					fitlerOption={fitlerOption}
-				/>
-			) : (
-				<div
-					className={cn(
-						'w-full h-[70px] md:h-[95%] mb-[2px] overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto custom-scrollbar flex md:block mr-1 md:p-1',
-						``
-					)}>
-					{filteredEvents?.map((item: any, idx: number) => (
-						<EventButton
-							elm={item}
-							key={idx}
-							id={idx}
-							contactInfo={contactInfo}
-							filterTypes={filterTypes}
-							fitlerOption={fitlerOption}
-						/>
-					))}
-				</div>
-			)}
+			{renderButtonPage()}
 		</div>
 	)
 }

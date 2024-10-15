@@ -18,10 +18,10 @@ import { cn } from '@/lib/utils'
 export interface calendarFilterType {
 	databaseType?: string
 	filterTypes: FilterType[]
-	fitlerOption: string
+	filterOption: string
 }
 
-const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilterType) => {
+const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilterType) => {
 	const message = useConstants().message
 	const [currentFilter, setCurrentFilter] = useState<string[]>([])
 	const [isClickablePrev, setisClickablePrev] = useState<boolean>(false)
@@ -228,7 +228,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 					{message.week}
 				</Button>
 			</div>
-			{fitlerOption && (
+			{filterOption && (
 				<EventCalendarFilter
 					setCurrentFilter={setCurrentFilter}
 					filterTypes={filterTypes}
@@ -268,7 +268,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 										weekType={weekType}
 										contactInfo={contactInfo}
 										filterTypes={filterTypes}
-										fitlerOption={fitlerOption}
+										filterOption={filterOption}
 									/>
 								</div>
 							)
@@ -294,7 +294,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 											weekType={weekType}
 											contactInfo={contactInfo}
 											filterTypes={filterTypes}
-											fitlerOption={fitlerOption}
+											filterOption={filterOption}
 										/>
 									</div>
 								)

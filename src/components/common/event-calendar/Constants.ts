@@ -54,7 +54,7 @@ export interface Day_obj {
 export type FilterType = { type: string; color: string; icon: string }
 export const EVENT_DEFAULT_COLOR = 'bg-sky-900 border-sky-900'
 
-//DB /scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html
+//DB 
 export const TAG_DB = 'M2L_TAG_SYN'
 //MINISIS REPORT
 export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW'
@@ -128,13 +128,14 @@ export const FUNC_LOC_M_GRP = 'FUNC_LOC_M_GRP'
 export const TAG_FUNC_LOC_MT = 'TAG_FUNC_LOC_MT'
 export const TAG_FUNC_LOC_MD = 'TAG_FUNC_LOC_MD'
 //Others
+export const EVENT_EMAIL_LOGO = ''
 export const EVENT_CANCEL_NOTI_MODAL_BG = 'bg-red-800'
 export const TAG_FUNC_P_CONFIRM_EXP_HOURS = 24
 export const TAG_FUNC_P_ATTND_DEFAULT = 1
 export const TAG_FUNC_P_ATTND_MAX = 4
 export const TAG_FUNC_DTE_LIST = 'list'
 export const TAG_FUNC_LOC_LENGTH = -7
-export const TAG_NAME_LENGTH = 18
+export const TAG_NAME_LENGTH = 18 // for event accordian view button
 //For RSVP
 export const MWI_RESFUL_RES = 'MWI-RESTful-response'
 export const SUCCESS_RES_CODE = 0

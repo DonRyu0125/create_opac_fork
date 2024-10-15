@@ -93,7 +93,7 @@ const Archives = () => {
 					<EventCalendar
 						databaseType={rsvp.filterDatabase}
 						filterTypes={rsvp.filterTypes}
-						fitlerOption={rsvp.filterOption}
+						filterOption={rsvp.filterOption}
 					/>
 				</Section>
 			)}

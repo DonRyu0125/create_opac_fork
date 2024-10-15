@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import {
 	convertToArr,
@@ -15,6 +16,7 @@ import { saveAs } from 'file-saver'
 import { useAtom } from 'jotai'
 import { BadgeCheck, FileDown, Mail, MonitorPlay, Phone, SquareUserRound } from 'lucide-react'
 import React, { useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import ButtonTooltip from './ButtonTooltip'
 import {
@@ -133,31 +135,28 @@ const ShowForm = ({
 	onReset: any
 }) => {
 	const message = useConstants().message
+	const conf = useConstants().config
 	const [captchaValue, setCaptchaValue] = useState<string | null>(null)
-
 	const handleCaptchaChange = (value: string | null) => {
 		setCaptchaValue(value)
 	}
 
-	//captchaValues
 	const handleFormSubmit = (data: any) => {
-		onSubmit({ ...data, captcha: captchaValue })
-		//   if (captchaValue) {
-		// 	onSubmit({ ...data, captcha: captchaValue });
-		//   } else {
-		// 	// Handle case where CAPTCHA is not filled out
-		// 	console.error('CAPTCHA verification failed');
-		//   }
+		if (captchaValue) {
+			onSubmit({ ...data })
+		} else {
+			toast({ title: `CAPTCHA verification failed` })
+		}
 	}
 
 	return (
 		<div className={'h-full w-full p-1 border-2 rounded text-lg'}>
 			{loading && <Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />}
-			<div className={'bg-primary p-1 text-white'}>
-				<span className={'text-gray-400'}>{message.logIn}?</span>
+			<div className={'bg-primary p-1 text-white text-center'}>
+				<span className={'text-gray-400'}>RSVP</span>
 			</div>
 			<form
-				onSubmit={handleSubmit(onSubmit)}
+				onSubmit={handleSubmit(handleFormSubmit)} // Use handleFormSubmit here
 				className={'h-full w-full flex flex-col justify-start items-center'}>
 				<EventInput
 					label={message.firstName}
@@ -186,19 +185,16 @@ const ShowForm = ({
 						className={'border-2 border-grey-500 w-1/4'}>
 						{Array(TAG_FUNC_P_ATTND_MAX)
 							.fill(0)
-							?.map((_, index) => (
+							.map((_, index) => (
 								<option key={index} value={index + 1}>
 									{index + 1}
 								</option>
 							))}
 					</select>
 				</div>
-				{/* <div className={'my-2'}>
-					<ReCAPTCHA
-						sitekey="YOUR_RECAPTCHA_SITE_KEY" // Replace with your reCAPTCHA site key
-						onChange={handleCaptchaChange}
-					/>
-				</div> */}
+				<div className={'my-2'}>
+					<ReCAPTCHA sitekey={conf.reCaptchaKey} onChange={handleCaptchaChange} />
+				</div>
 				<Button className={'w-full font-bold'} type="submit">
 					{message.register}
 				</Button>
@@ -239,7 +235,7 @@ const ShowButton = ({
 		}
 	}
 	return (
-		<div className={'h-full w-full h-full text-lg'}>
+		<div className={'h-full w-full text-lg'}>
 			{event[TAG_FUNC_RSVP] && (
 				<div
 					className={
@@ -410,6 +406,7 @@ const ShowRSVPSuccess = ({
 
 const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: EventRSVPForm) => {
 	const [status, setStatus] = useState(STATUS_TYPE.SHOW_BTN)
+	const { logo } = useConstants().config
 	const {
 		register,
 		handleSubmit,
@@ -509,6 +506,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[CALENDAR]RSVPVerificationConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
 				{
 					...patronInfo,
+					EVENT_EMAIL_LOGO: logo,
 					[TAG_NAME]: event[TAG_NAME],
 					[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
 					[TAG_FUNC_P_T]: getCurrentDate(),

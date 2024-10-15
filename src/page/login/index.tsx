@@ -12,25 +12,6 @@ const Login = () => {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(null)
 
-	const setCookie = (name: string, value: string, days: number) => {
-		let expires = ''
-		if (days) {
-			const date = new Date()
-			date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
-			expires = '; expires=' + date.toUTCString()
-		}
-		document.cookie = name + '=' + (value || '') + expires + '; path=/'
-	}
-	const getCookie = (name: string) => {
-		const nameEQ = name + '='
-		const ca = document.cookie.split(';')
-		for (let i = 0; i < ca.length; i++) {
-			let c = ca[i]
-			while (c.charAt(0) === ' ') c = c.substring(1, c.length)
-			if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length)
-		}
-		return null
-	}
 	const handleSubmit = async (event: any) => {
 		event.preventDefault()
 		setLoading(true)
@@ -76,14 +57,17 @@ const Login = () => {
 
 				<main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
 					<div className="w-full">
-						<a className="block text-blue-600" href="/">
-							<span className="sr-only">Home</span>
-							Home
-						</a>
-
-						<h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-							Account Login
-						</h1>
+						<div className={'flex  items-center'}>
+							<div>
+								<a className="block text-teal-600" href="/">
+									<span className="sr-only ">Home</span>
+									<img className="h-14" src={config.logo} alt="logo" />
+								</a>
+							</div>
+							<h1 className="ml-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+								Account Login
+							</h1>
+						</div>
 
 						{/* Display error message if any */}
 						{error && <p className="mt-4 text-red-500">{error}</p>}
@@ -118,7 +102,6 @@ const Login = () => {
 									onChange={(e) => setPassword(e.target.value)}
 								/>
 							</div>
-
 							<div className="col-span-6 sm:flex sm:items-center sm:gap-4">
 								<Button
 									className="bg-opac-darkblue"
@@ -129,6 +112,14 @@ const Login = () => {
 								</Button>
 							</div>
 						</form>
+						<div className={'flex mt-1'}>
+							<div>I don't have a login.</div>
+							<a
+								href="/register.html"
+								className={'border-b-2 border-b-black ml-[10px] h-[22px]'}>
+								Create an Account
+							</a>
+						</div>
 					</div>
 				</main>
 			</div>

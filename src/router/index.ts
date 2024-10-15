@@ -25,6 +25,8 @@ import PatronInfo from '@/page/PatronInfo'
 import AdminCollections from '@/page/admin/Collections'
 import AdminDescription from '@/page/admin/Description'
 import AdminSettings from '@/page/admin/Settings'
+import Register from '@/page/login/Register'
+
 
 export type TRoute = Record<string, () => React.ReactNode>
 
@@ -48,6 +50,7 @@ export const ROUTES: TRoute = {
 	faq: FAQ,
 	admin: Admin,
 	login: Login,
+	register:Register,
 	archives: Archives,
 	library: Library,
 	museum: Museum,
