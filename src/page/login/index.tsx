@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import useConstants from '@/hooks/useConstants'
-import { getHomeSessionID } from '@/lib/utils'
+import { getHomeSessionID, getSessionID } from '@/lib/utils'
 import axios from 'axios'
 import { useState } from 'react'
 
@@ -46,6 +46,8 @@ const Login = () => {
 			setLoading(false)
 		}
 	}
+
+	const test = getSessionID()
 
 	return (
 		<section className="bg-white">
@@ -118,7 +120,7 @@ const Login = () => {
 						<div className={'flex mt-1'}>
 							<div>I don't have a login.</div>
 							<a
-								href={`${config.auth.register_url}`}
+								href={`/scripts/mwimain.dll/144/CARD_REGISTRATION?DIRECTSEARCH`}
 								className={'border-b-2 border-b-black ml-[10px] h-[22px]'}>
 								Create an Account
 							</a>

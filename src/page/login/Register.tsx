@@ -15,18 +15,18 @@ type FormData = {
 	C_EMAIL: string
 	C_NAME_FIRST: string
 	C_NAME_LAST: string
-	cardNumber?: string
-	PATRON_PID: string
-	retypePassword: string
-	address1: string
-	city: string
-	province: string
-	postalCode: string
-	country: string
-	organization?: string
-	workNumber?: string
-	phoneNumber: string
-	recaptcha: string
+	// cardNumber?: string
+	// PATRON_PID: string
+	// retypePassword: string
+	// address1: string
+	// city: string
+	// province: string
+	// postalCode: string
+	// country: string
+	// organization?: string
+	// workNumber?: string
+	// phoneNumber: string
+	// recaptcha: string
 }
 
 const PASSWORD_MIN_LENGTH = 1
@@ -77,18 +77,18 @@ const Register = () => {
 		C_EMAIL: '',
 		C_NAME_FIRST: '',
 		C_NAME_LAST: '',
-		cardNumber: '',
-		PATRON_PID: '',
-		retypePassword: '',
-		address1: '',
-		city: '',
-		province: '',
-		postalCode: '',
-		country: '',
-		organization: '',
-		workNumber: '',
-		phoneNumber: '',
-		recaptcha: '',
+		// cardNumber: '',
+		// PATRON_PID: '',
+		// retypePassword: '',
+		// address1: '',
+		// city: '',
+		// province: '',
+		// postalCode: '',
+		// country: '',
+		// organization: '',
+		// workNumber: '',
+		// phoneNumber: '',
+		// recaptcha: '',
 	})
 	const {
 		register,
@@ -101,18 +101,18 @@ const Register = () => {
 			C_EMAIL: '',
 			C_NAME_FIRST: '',
 			C_NAME_LAST: '',
-			cardNumber: '',
-			PATRON_PID: '',
-			retypePassword: '',
-			address1: '',
-			city: '',
-			province: '',
-			postalCode: '',
-			country: '',
-			organization: '',
-			workNumber: '',
-			phoneNumber: '',
-			recaptcha: '',
+			// cardNumber: '',
+			// PATRON_PID: '',
+			// retypePassword: '',
+			// address1: '',
+			// city: '',
+			// province: '',
+			// postalCode: '',
+			// country: '',
+			// organization: '',
+			// workNumber: '',
+			// phoneNumber: '',
+			// recaptcha: '',
 		},
 	})
 	const [currentStep, setCurrentStep] = useState(1)
@@ -124,16 +124,16 @@ const Register = () => {
 					'C_EMAIL',
 					'C_NAME_FIRST',
 					'C_NAME_LAST',
-					'cardNumber',
-					'PATRON_PID',
-					'retypePassword',
+					// 'cardNumber',
+					// 'PATRON_PID',
+					// 'retypePassword',
 				] as const
-			case 2:
-				return ['address1', 'city', 'province', 'postalCode', 'country'] as const
-			case 3:
-				return ['organization', 'workNumber', 'phoneNumber'] as const
-			default:
-				return []
+			// case 2:
+			// 	return ['address1', 'city', 'province', 'postalCode', 'country'] as const
+			// case 3:
+			// 	return ['organization', 'workNumber', 'phoneNumber'] as const
+			// default:
+			// 	return []
 		}
 	}
 
@@ -143,19 +143,19 @@ const Register = () => {
 		console.log('Final Submitted Data:', data)
 
 
-	// return await axios
-	// 		.post(
-	// 			`${HOME_SESSID}?SAVERECORD`,
-	// 			{...data},
-	// 			{
-	// 				headers: {
-	// 					'Content-Type': 'text/xml',
-	// 				},
-	// 			}
-	// 		)
-	// 		.catch((error) => {
-	// 			throw error
-	// 		})
+	return await axios
+			.post(
+				`${HOME_SESSID}?SAVERECORD`,
+				{...data},
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
+				}
+			)
+			.catch((error) => {
+				throw error
+			})
 	}
 
 
@@ -218,7 +218,7 @@ const Register = () => {
 						/>
 						{errors.C_EMAIL && <p className="text-red-500">{errors.C_EMAIL.message}</p>}
 
-						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
+						{/* <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
 									Password <span className="text-red-500">*</span>
@@ -258,7 +258,7 @@ const Register = () => {
 									<p className="text-red-500">{errors.retypePassword.message}</p>
 								)}
 							</div>
-						</div>
+						</div> */}
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
@@ -294,11 +294,11 @@ const Register = () => {
 						</div>
 
 						<label className="font-semibold">Card #</label>
-						<input
+						{/* <input
 							{...register('cardNumber')}
 							placeholder="Card #"
 							className="border p-2 w-full mt-1"
-						/>
+						/> */}
 					</TabsContent>
 
 					{/* Step 2: Current Address */}
@@ -447,7 +447,7 @@ const Register = () => {
 										<strong>Full Name:</strong>{' '}
 										{`${watch('C_NAME_FIRST')} ${watch('C_NAME_LAST')}`}
 									</li>
-									<li>
+									{/* <li>
 										<strong>Address Line 1:</strong> {watch('address1')}
 									</li>
 									<li>
@@ -467,7 +467,7 @@ const Register = () => {
 									</li>
 									<li>
 										<strong>Work Number:</strong> {watch('workNumber')}
-									</li>
+									</li> */}
 								</ul>
 
 								<div className="flex justify-center scale-75 sm:scale-90 mr-[210px] sm:mr-[0px]">
@@ -477,11 +477,11 @@ const Register = () => {
 									/>
 								</div>
 
-								{errors.recaptcha && (
+								{/* {errors.recaptcha && (
 									<p className="text-red-500 text-center mt-2">
 										{errors.recaptcha.message}
 									</p>
-								)}
+								)} */}
 							</div>
 						</div>
 					</TabsContent>

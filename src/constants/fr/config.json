@@ -4,9 +4,9 @@
 	"auth": {
 		"login": true,
 		"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]login.html",
-		"register_url":"/register.html"
+		"register_url": "/scripts/mwimain.dll?logon&application=CARD_REGISTRATION&language=144&file=[OPAC]register.html"
 	},
-	"reCaptchaKey":"6LcOFlYqAAAAAHc_oWNTonTkkRdzvQ30B42eQm6r",
+	"reCaptchaKey": "6LcOFlYqAAAAAHc_oWNTonTkkRdzvQ30B42eQm6r",
 	"navigations": [
 		{
 			"url": "/",
