@@ -1,15 +1,8 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select'
 import useConstants from '@/hooks/useConstants'
-import { Clock, CreditCard, LockKeyhole, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 
 export interface HomeSearchFormProps extends React.HTMLAttributes<HTMLFormElement> {
 	inputName?: string
@@ -26,7 +19,7 @@ export default function HomeSearchForm({
 }: HomeSearchFormProps) {
 	const { message } = useConstants()
 	return (
-		<Card className="w-full max-w-3xl mx-auto">
+		<Card className="w-full max-w-3xl mx-auto rounded-md">
 			<CardHeader>
 				<CardTitle className="text-2xl font-bold text-left">
 					Search all collections

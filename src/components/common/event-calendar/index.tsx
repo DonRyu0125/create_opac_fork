@@ -166,7 +166,7 @@ const EventCalendar = ({ databaseType, filterTypes, fitlerOption }: calendarFilt
 	}
 
 	return (
-		<div className={'w-full mx-auto max-w-screen-xl custom-scrollbar'}>
+		<div className={'w-full  custom-scrollbar'}>
 			<div
 				className={
 					'relative flex justify-center items-center bg-primary h-[80px] rounded '

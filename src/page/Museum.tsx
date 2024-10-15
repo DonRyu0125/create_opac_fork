@@ -10,7 +10,7 @@ import { UNION_SEARCH_CL } from './Home'
 import EventCalendar from '@/components/common/event-calendar'
 import Section from '@/components/common/Section'
 import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
-import Slide from '@/components/common/Slide'
+import Slide from '@/components/common/slide'
 import ThumbnailCard from '@/components/common/ThumbnailCard'
 import { Card } from '@/components/ui/card'
 const Museum = () => {

@@ -1,17 +1,16 @@
 import EventCalendar from '@/components/common/event-calendar'
 import HoverCard from '@/components/common/HoverCard'
 import Masonry from '@/components/common/Masonry'
+import HomeSearchForm from '@/components/common/search-form/HomeSearchForm'
 import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
 import useConstants from '@/hooks/useConstants'
 import { cn, getSearchURL, truncateWords } from '@/lib/utils'
 import Hero from '../components/common/Hero'
-import SearchForm from '../components/common/search-form/SearchForm'
 import Section from '../components/common/Section'
-import Slide from '../components/common/Slide'
+import Slide from '../components/common/slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
-import HomeSearchForm from '@/components/common/search-form/HomeSearchForm'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -68,8 +67,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 		<Layout>
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
-					{/* <SearchForm inputName={UNION_SEARCH_CL} action={getSearchURL(searchURL)} /> */}
-					<HomeSearchForm />
+					<HomeSearchForm inputName={UNION_SEARCH_CL} action={getSearchURL(searchURL)} />
 				</div>
 			</Hero>
 

@@ -1,5 +1,5 @@
 import Section from '@/components/common/Section'
-import Slide from '@/components/common/Slide'
+import Slide from '@/components/common/slide'
 import ThumbnailCard from '@/components/common/ThumbnailCard'
 import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
 import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
