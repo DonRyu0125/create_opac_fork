@@ -138,25 +138,18 @@ const Register = () => {
 	const onSubmit = async (data: FormData) => {
 		setIsSubmit(true)
 		setUserData(data)
-		console.log('Final Submitted Data:', data)
-		console.log('records',records[0].save_n_stop_record)
 
+		const formData = new FormData()
+		formData.append('C_EMAIL', data.C_EMAIL)
+		formData.append('C_NAME_FIRST', data.C_NAME_FIRST)
+		formData.append('C_NAME_LAST', data.C_NAME_LAST)
 
-	return await axios
-			.post(
-				`${records[0].save_n_stop_record}`,
-				{...data},
-				{
-					headers: {
-						'Content-Type': 'text/xml',
-					},
-				}
-			)
+		return await axios
+			.post(`${records[0].save_n_stop_record}`, formData)
 			.catch((error) => {
 				throw error
 			})
 	}
-
 
 	const handleNextStep = async () => {
 		const stepFields = getStepFields(currentStep)
