@@ -1,5 +1,5 @@
 import Layout from '@/components/layouts'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
@@ -79,6 +79,21 @@ const Register = () => {
 		},
 	})
 	const [currentStep, setCurrentStep] = useState(1)
+
+	useEffect(() => {
+		const currentUrl = window.location.href
+		const targetUrl =
+			'http://test.opac.minisisinc.com/scripts/mwimain.dll/144/CARD_REGISTRATION?DIRECTSEARCH'
+
+		if (currentUrl !== targetUrl) {
+			axios
+				.post(`${records[0].skip_n_stop_record}`)
+				.catch((error) => {
+					console.error('Error fetching data:', error)
+				})
+		}
+	}, [records])
+
 	const getStepFields = (step: number) => {
 		switch (step) {
 			case 1:
