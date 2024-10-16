@@ -26,6 +26,8 @@ export interface FieldData<T extends string> {
 	[key: string]: string | number | DBFields<T> | FieldData[]
 }
 export interface Record {
+	skip_n_stop_record?:string // for client registration
+	save_n_stop_record?: string // for client registration 
 	media?: Media
 	is_bookmarked: string
 	database_name: string

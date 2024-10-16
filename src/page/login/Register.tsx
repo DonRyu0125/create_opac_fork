@@ -1,6 +1,5 @@
 import Layout from '@/components/layouts'
 import React, { useState } from 'react'
-import { cn, encodeObj, getHomeSessionID } from '@/lib/utils'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
@@ -10,59 +9,25 @@ import axios from 'axios'
 import { CircleCheck } from 'lucide-react'
 import useJSONData from '@/hooks/useJSONData'
 
-type FormData = {
-	C_EMAIL: string
+type ClientFormData = {
+	C_TITLE: string
 	C_NAME_FIRST: string
 	C_NAME_LAST: string
-	// cardNumber?: string
-	// PATRON_PID: string
-	// retypePassword: string
-	// address1: string
-	// city: string
-	// province: string
-	// postalCode: string
-	// country: string
-	// organization?: string
-	// workNumber?: string
-	// phoneNumber: string
-	// recaptcha: string
+	C_EMAIL: string
+	C_STREET: string
+	C_STREET2: string
+	C_CITY: string
+	C_PROV_STATE: string
+	C_POSTAL_ZIP: string
+	C_COUNTRY: string
+	C_RES_PURPOSE: string
+	C_RES_SUBJECTS: string
+	PATRON_PID: string
+	PATRON_PID_RE: string
+	recaptcha: string
 }
 
 const PASSWORD_MIN_LENGTH = 1
-const REGISTRATION_CMT_EMAIL_TITLE = "Don't forget to complete the account!"
-// C_TITLE: Ms
-// C_NAME_FIRST: Alice
-// C_NAME_LAST: Smith
-// C_EMAIL: donryu1031@gmail.com
-// C_STREET: 1122 smith
-// C_STREET2:
-// C_STREET3:
-// C_CITY: London
-// C_PROV_STATE:
-// C_POSTAL_ZIP: 123123
-// C_COUNTRY: United Kingdom
-// C_RES_PURPOSE: Work in connection with employment
-// C_RES_SUBJECT.6: Political/diplomatic history
-// PATRON_PID: Sktjsghks12
-// PATRON_PID: Sktjsghks12
-
-// {
-//     "C_EMAIL": "asd@sd.com",
-//     "C_NAME_FIRST": "1",
-//     "C_NAME_LAST": "1",
-//     "cardNumber": "1",
-//     "PATRON_PID": "1",
-//     "retypePassword": "1",
-//     "address1": "1",
-//     "city": "1",
-//     "province": "1",
-//     "postalCode": "1",
-//     "country": "1",
-//     "organization": "",
-//     "workNumber": "1",
-//     "phoneNumber": "1",
-//     "recaptcha": ""
-// }
 
 const Register = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -71,22 +36,22 @@ const Register = () => {
 	const conf = useConstants().config
 	const [recaptchaToken, setRecaptchaToken] = useState<string>('')
 	const { message } = useConstants()
-	const [userData, setUserData] = useState<FormData>({
-		C_EMAIL: '',
+	const [userData, setUserData] = useState<ClientFormData>({
+		C_TITLE: '',
 		C_NAME_FIRST: '',
 		C_NAME_LAST: '',
-		// cardNumber: '',
-		// PATRON_PID: '',
-		// retypePassword: '',
-		// address1: '',
-		// city: '',
-		// province: '',
-		// postalCode: '',
-		// country: '',
-		// organization: '',
-		// workNumber: '',
-		// phoneNumber: '',
-		// recaptcha: '',
+		C_EMAIL: '',
+		C_STREET: '',
+		C_STREET2: '',
+		C_CITY: '',
+		C_PROV_STATE: '',
+		C_POSTAL_ZIP: '',
+		C_COUNTRY: '',
+		C_RES_PURPOSE: '',
+		C_RES_SUBJECTS: '',
+		PATRON_PID: '',
+		PATRON_PID_RE: '',
+		recaptcha: '',
 	})
 	const {
 		register,
@@ -96,25 +61,24 @@ const Register = () => {
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			C_EMAIL: '',
+			C_TITLE: '',
 			C_NAME_FIRST: '',
 			C_NAME_LAST: '',
-			// cardNumber: '',
-			// PATRON_PID: '',
-			// retypePassword: '',
-			// address1: '',
-			// city: '',
-			// province: '',
-			// postalCode: '',
-			// country: '',
-			// organization: '',
-			// workNumber: '',
-			// phoneNumber: '',
-			// recaptcha: '',
+			C_EMAIL: '',
+			PATRON_PID: '',
+			PATRON_PID_RE: '',
+			C_STREET: '',
+			C_STREET2: '',
+			C_CITY: '',
+			C_PROV_STATE: '',
+			C_POSTAL_ZIP: '',
+			C_COUNTRY: '',
+			C_RES_PURPOSE: '',
+			C_RES_SUBJECTS: '',
+			recaptcha: '',
 		},
 	})
 	const [currentStep, setCurrentStep] = useState(1)
-	const HOME_SESSID = getHomeSessionID()
 	const getStepFields = (step: number) => {
 		switch (step) {
 			case 1:
@@ -122,33 +86,37 @@ const Register = () => {
 					'C_EMAIL',
 					'C_NAME_FIRST',
 					'C_NAME_LAST',
-					// 'cardNumber',
-					// 'PATRON_PID',
-					// 'retypePassword',
+					'PATRON_PID',
+					'PATRON_PID_RE',
 				] as const
-			// case 2:
-			// 	return ['address1', 'city', 'province', 'postalCode', 'country'] as const
-			// case 3:
-			// 	return ['organization', 'workNumber', 'phoneNumber'] as const
-			// default:
-			// 	return []
+			case 2:
+				return [
+					'C_STREET',
+					'C_STREET2',
+					'C_CITY',
+					'C_PROV_STATE',
+					'C_POSTAL_ZIP',
+					'C_COUNTRY',
+				] as const
+			case 3:
+				return ['C_RES_PURPOSE', 'C_RES_SUBJECTS'] as const
+			default:
+				return []
 		}
 	}
 
-	const onSubmit = async (data: FormData) => {
+	const onSubmit = async (data: ClientFormData) => {
 		setIsSubmit(true)
 		setUserData(data)
 
 		const formData = new FormData()
-		formData.append('C_EMAIL', data.C_EMAIL)
-		formData.append('C_NAME_FIRST', data.C_NAME_FIRST)
-		formData.append('C_NAME_LAST', data.C_NAME_LAST)
+		Object.keys({ ...data, recaptcha: undefined }).forEach((key) => {
+			formData.append(key, data[key as keyof ClientFormData])
+		})
 
-		return await axios
-			.post(`${records[0].save_n_stop_record}`, formData)
-			.catch((error) => {
-				throw error
-			})
+		return await axios.post(`${records[0].save_n_stop_record}`, formData).catch((error) => {
+			throw error
+		})
 	}
 
 	const handleNextStep = async () => {
@@ -177,7 +145,7 @@ const Register = () => {
 						{[
 							{ value: 'step1', label: 'Step 1: Your Detail' },
 							{ value: 'step2', label: 'Step 2: Current Address' },
-							{ value: 'step3', label: 'Step 3: Contacts' },
+							{ value: 'step3', label: 'Step 3: Survey' },
 							{ value: 'step4', label: 'Step 4: Confirmation' },
 						].map((tab, idx) => (
 							<TabsTrigger
@@ -202,7 +170,7 @@ const Register = () => {
 								required: 'Email is required',
 								pattern: {
 									value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-									message: 'Please enter a valid C_EMAIL address',
+									message: 'Please enter a valid Email address',
 								},
 							})}
 							placeholder="Email"
@@ -210,13 +178,13 @@ const Register = () => {
 						/>
 						{errors.C_EMAIL && <p className="text-red-500">{errors.C_EMAIL.message}</p>}
 
-						{/* <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
+						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
 									Password <span className="text-red-500">*</span>
 								</label>
 								<input
-									type="PATRON_PID"
+									type="password"
 									{...register('PATRON_PID', {
 										required: 'Password is required',
 										minLength: {
@@ -234,23 +202,25 @@ const Register = () => {
 
 							<div className="flex-1">
 								<label className="font-semibold">
-									Retype Password <span className="text-red-500">*</span>
+									Confirm Password <span className="text-red-500">*</span>
 								</label>
 								<input
-									type="PATRON_PID"
-									{...register('retypePassword', {
-										required: 'Please confirm your PATRON_PID',
+									type="password"
+									{...register('PATRON_PID_RE', {
+										required: 'Please confirm your password',
 										validate: (value) =>
-											value === watch('PATRON_PID') || 'Passwords do not match',
+											value === watch('PATRON_PID') ||
+											'Passwords do not match',
 									})}
-									placeholder="Retype Password"
+									placeholder="Confirm Password"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.retypePassword && (
-									<p className="text-red-500">{errors.retypePassword.message}</p>
+								{errors.PATRON_PID_RE && (
+									<p className="text-red-500">{errors.PATRON_PID_RE.message}</p>
 								)}
 							</div>
-						</div> */}
+						</div>
+
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
@@ -284,29 +254,22 @@ const Register = () => {
 								)}
 							</div>
 						</div>
-
-						<label className="font-semibold">Card #</label>
-						{/* <input
-							{...register('cardNumber')}
-							placeholder="Card #"
-							className="border p-2 w-full mt-1"
-						/> */}
 					</TabsContent>
 
 					{/* Step 2: Current Address */}
 					<TabsContent value="step2" className="p-6 bg-white shadow-md rounded-md">
-						{/* <label className="font-semibold">
+						<label className="font-semibold">
 							Address 1 <span className="text-red-500">*</span>
 						</label>
 						<input
-							{...register('address1', {
+							{...register('C_STREET', {
 								required: 'Current address is required',
 							})}
 							placeholder="Current Address"
 							className="border p-2 w-full mt-1"
 						/>
-						{errors.address1 && (
-							<p className="text-red-500">{errors.address1.message}</p>
+						{errors.C_STREET && (
+							<p className="text-red-500">{errors.C_STREET.message}</p>
 						)}
 						<div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-4 mt-4">
 							<div className="sm:col-span-1">
@@ -314,14 +277,14 @@ const Register = () => {
 									City <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('city', {
+									{...register('C_CITY', {
 										required: 'City is required',
 									})}
 									placeholder="City"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.city && (
-									<p className="text-red-500">{errors.city.message}</p>
+								{errors.C_CITY && (
+									<p className="text-red-500">{errors.C_CITY.message}</p>
 								)}
 							</div>
 
@@ -330,14 +293,14 @@ const Register = () => {
 									Province / State <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('province', {
+									{...register('C_PROV_STATE', {
 										required: 'Province is required',
 									})}
 									placeholder="Province"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.province && (
-									<p className="text-red-500">{errors.province.message}</p>
+								{errors.C_PROV_STATE && (
+									<p className="text-red-500">{errors.C_PROV_STATE.message}</p>
 								)}
 							</div>
 
@@ -346,14 +309,14 @@ const Register = () => {
 									Postal Code / Zip Code <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('postalCode', {
+									{...register('C_POSTAL_ZIP', {
 										required: 'Postal Code is required',
 									})}
 									placeholder="Postal Code"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.postalCode && (
-									<p className="text-red-500">{errors.postalCode.message}</p>
+								{errors.C_POSTAL_ZIP && (
+									<p className="text-red-500">{errors.C_POSTAL_ZIP.message}</p>
 								)}
 							</div>
 
@@ -362,61 +325,49 @@ const Register = () => {
 									Country <span className="text-red-500">*</span>
 								</label>
 								<input
-									{...register('country', {
+									{...register('C_COUNTRY', {
 										required: 'Country is required',
 									})}
 									placeholder="Country"
 									className="border p-2 w-full mt-1"
 								/>
-								{errors.country && (
-									<p className="text-red-500">{errors.country.message}</p>
+								{errors.C_COUNTRY && (
+									<p className="text-red-500">{errors.C_COUNTRY.message}</p>
 								)}
 							</div>
-						</div> */}
+						</div>
 					</TabsContent>
 
-					{/* Step 3: Contacts */}
 					<TabsContent value="step3" className="p-6 bg-white shadow-md rounded-md">
-						{/* <label className="font-semibold">
-							Organization <span className="text-red-500"></span>
-						</label>
-						<input
-							{...register('organization')}
-							placeholder="Organization"
-							className="border p-2 w-full mt-1"
-						/>
-						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
-							<div className="flex-1">
-								<label className="font-semibold">
-									Work Number <span className="text-red-500">*</span>
+						<div className="flex flex-col space-y-2">
+							<label className="font-semibold">
+								What is the main reason for wishing to visit?
+							</label>
+							<div className="flex flex-col space-y-2">
+								<label className="inline-flex items-center">
+									<input
+										type="radio"
+										{...register('C_RES_PURPOSE')}
+										value="Personal leisure/recreation"
+										className="form-checkbox h-5 w-5 text-blue-600"
+									/>
+									<span className="ml-2">Personal leisure/recreation</span>
 								</label>
-								<input
-									{...register('workNumber', {
-										required: 'Work Number is required',
-									})}
-									placeholder="Work Number"
-									className="border p-2 w-full mt-1"
-								/>
-								{errors.workNumber && (
-									<p className="text-red-500">{errors.workNumber.message}</p>
-								)}
 							</div>
-							<div className="flex-1">
-								<label className="font-semibold">
-									Phone Number <span className="text-red-500">*</span>
+							<div className="flex flex-col space-y-2">
+								<label className="inline-flex items-center">
+									<input
+										type="radio"
+										{...register('C_RES_PURPOSE')}
+										value="Non-leisure personal or family business"
+										className="form-checkbox h-5 w-5 text-blue-600"
+									/>
+									<span className="ml-2">
+										Non-leisure personal or family business
+									</span>
 								</label>
-								<input
-									{...register('phoneNumber', {
-										required: 'Phone Number is required',
-									})}
-									placeholder="Phone Number"
-									className="border p-2 w-full mt-1"
-								/>
-								{errors.phoneNumber && (
-									<p className="text-red-500">{errors.phoneNumber.message}</p>
-								)}
 							</div>
-						</div> */}
+						</div>
 					</TabsContent>
 
 					{/* Step 4: Confirmation */}
@@ -439,45 +390,36 @@ const Register = () => {
 										<strong>Full Name:</strong>{' '}
 										{`${watch('C_NAME_FIRST')} ${watch('C_NAME_LAST')}`}
 									</li>
-									{/* <li>
-										<strong>Address Line 1:</strong> {watch('address1')}
+									<li>
+										<strong>Address Line 1:</strong> {watch('C_STREET')}
 									</li>
 									<li>
-										<strong>City:</strong> {watch('city')}
+										<strong>City:</strong> {watch('C_CITY')}
 									</li>
 									<li>
-										<strong>Province:</strong> {watch('province')}
+										<strong>Province/State:</strong> {watch('C_PROV_STATE')}
 									</li>
 									<li>
-										<strong>Country:</strong> {watch('country')}
+										<strong>Country:</strong> {watch('C_COUNTRY')}
 									</li>
 									<li>
-										<strong>Organization:</strong> {watch('organization')}
+										<strong>Purpose:</strong> {watch('C_RES_PURPOSE')}
 									</li>
-									<li>
-										<strong>Phone Number:</strong> {watch('phoneNumber')}
-									</li>
-									<li>
-										<strong>Work Number:</strong> {watch('workNumber')}
-									</li> */}
 								</ul>
-
 								<div className="flex justify-center scale-75 sm:scale-90 mr-[210px] sm:mr-[0px]">
 									<ReCAPTCHA
 										sitekey={conf.reCaptchaKey}
 										onChange={onCaptchaChange}
 									/>
 								</div>
-
-								{/* {errors.recaptcha && (
+								{errors.recaptcha && (
 									<p className="text-red-500 text-center mt-2">
 										{errors.recaptcha.message}
 									</p>
-								)} */}
+								)}
 							</div>
 						</div>
 					</TabsContent>
-
 					{/* Navigation Buttons */}
 					<div className="p-4 flex justify-evenly">
 						{currentStep > 1 && (
