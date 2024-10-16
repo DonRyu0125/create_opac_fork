@@ -8,6 +8,7 @@ import useConstants from '@/hooks/useConstants'
 import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import { CircleCheck } from 'lucide-react'
+import useJSONData from '@/hooks/useJSONData'
 
 type FormData = {
 	C_EMAIL: string
@@ -28,7 +29,6 @@ type FormData = {
 }
 
 const PASSWORD_MIN_LENGTH = 1
-const REG_CONFIRM_LANDING_PAGE_URL = `${window.location.hostname}/reg-confirm.html`
 const REGISTRATION_CMT_EMAIL_TITLE = "Don't forget to complete the account!"
 // C_TITLE: Ms
 // C_NAME_FIRST: Alice
@@ -65,10 +65,10 @@ const REGISTRATION_CMT_EMAIL_TITLE = "Don't forget to complete the account!"
 // }
 
 const Register = () => {
+	const { records } = useJSONData({ selector: '#xml_record' })
 	const [loading, setLoading] = useState(false)
 	const [isSubmit, setIsSubmit] = useState(false)
 	const conf = useConstants().config
-	const { logo } = useConstants().config
 	const [recaptchaToken, setRecaptchaToken] = useState<string>('')
 	const { message } = useConstants()
 	const [userData, setUserData] = useState<FormData>({
@@ -139,11 +139,12 @@ const Register = () => {
 		setIsSubmit(true)
 		setUserData(data)
 		console.log('Final Submitted Data:', data)
+		console.log('records',records[0].save_n_stop_record)
 
 
 	return await axios
 			.post(
-				`${HOME_SESSID}?SAVERECORD`,
+				`${records[0].save_n_stop_record}`,
 				{...data},
 				{
 					headers: {
@@ -176,7 +177,7 @@ const Register = () => {
 
 	const showRegStatus = () => {
 		return (
-			<form onSubmit={handleSubmit(onSubmit)} className="bg-gray-200 p-5 rounded-md w-5/6" method='post' action={`${HOME_SESSID}?SAVERECORD`}>
+			<form onSubmit={handleSubmit(onSubmit)} className="bg-gray-200 p-5 rounded-md w-5/6">
 				<Tabs value={`step${currentStep}`}>
 					{/* Tabs List */}
 					<TabsList className="bg-gray-400 p-5 min-h-[300px] md:min-h-[70px] flex flex-wrap justify-evenly mb-6 w-full text-white">
