@@ -87,7 +87,7 @@ const Register = () => {
 
 	useEffect(() => {
 		const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string }) => {
-			if (!isSaveRecordSent) {
+			if (!isSaveRecordSent && !isSubmit) {
 				sendSkipRecord()
 				event.preventDefault()
 				event.returnValue = ''
@@ -135,8 +135,9 @@ const Register = () => {
 		formData.append('C_RES_PURPOSE', data.C_RES_PURPOSE)
 		formData.append('C_RES_SUBJECTS', data.C_RES_SUBJECTS)
 
+		// save_n_stop_record need a return url but react doesn't need it so I add dummy &RETURN_URL=[OPAC]register-confirm.html
 		return await axios
-			.post(`${records[0].save_n_stop_record}`, formData)
+			.post(`${records[0].save_n_stop_record}&CLOSE=Y&RETURN_URL=[OPAC]register-confirm.html`, formData)
 			.then(() => {
 				setIsSaveRecordSent(true)
 			})
