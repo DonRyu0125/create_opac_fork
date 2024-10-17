@@ -136,7 +136,7 @@ const Register = () => {
 		formData.append('C_RES_SUBJECTS', data.C_RES_SUBJECTS)
 
 		return await axios
-			.post(`${records[0].save_n_stop_record}&CLOSE=Y`, formData)
+			.post(`${records[0].save_n_stop_record}`, formData)
 			.then(() => {
 				setIsSaveRecordSent(true)
 			})
