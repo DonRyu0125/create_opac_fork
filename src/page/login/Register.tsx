@@ -30,7 +30,6 @@ const PASSWORD_MIN_LENGTH = 1
 
 const Register = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const [loading, setLoading] = useState(false)
 	const [isSubmit, setIsSubmit] = useState(false)
 	const conf = useConstants().config
 	const [recaptchaToken, setRecaptchaToken] = useState<string>('')
@@ -76,22 +75,29 @@ const Register = () => {
 		},
 	})
 	const [currentStep, setCurrentStep] = useState(1)
+	const [isSaveRecordSent, setIsSaveRecordSent] = useState(false)
+	const sendSkipRecord = async () => {
+		try {
+			await axios.post(`${records[0].skip_n_stop_record}`)
+			console.log('SKIPRECORD sent to clean up resources')
+		} catch (error) {
+			console.error('Error sending SKIPRECORD:', error)
+		}
+	}
 
-
-	// const currentUrl = window.location.href
-	// useEffect(() => {
-	// 	const targetUrl =
-	// 		'http://test.opac.minisisinc.com/scripts/mwimain.dll/144/CARD_REGISTRATION?DIRECTSEARCH'
-
-	// 	if (currentUrl !== targetUrl) {
-	// 		console.log('--------------')
-	// 		// axios
-	// 		// 	.post(`${records[0].skip_n_stop_record}`)
-	// 		// 	.catch((error) => {
-	// 		// 		console.error('Error fetching data:', error)
-	// 		// 	})
-	// 	}
-	// }, [currentUrl])
+	useEffect(() => {
+		const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string }) => {
+			if (!isSaveRecordSent) {
+				sendSkipRecord()
+				event.preventDefault()
+				event.returnValue = ''
+			}
+		}
+		window.addEventListener('beforeunload', handleBeforeUnload)
+		return () => {
+			window.removeEventListener('beforeunload', handleBeforeUnload)
+		}
+	}, [isSaveRecordSent])
 
 	const getStepFields = (step: number) => {
 		switch (step) {
@@ -104,13 +110,7 @@ const Register = () => {
 					'PATRON_PID_RE',
 				] as const
 			case 2:
-				return [
-					'C_STREET',
-					'C_CITY',
-					'C_PROV_STATE',
-					'C_POSTAL_ZIP',
-					'C_COUNTRY',
-				] as const
+				return ['C_STREET', 'C_CITY', 'C_PROV_STATE', 'C_POSTAL_ZIP', 'C_COUNTRY'] as const
 			case 3:
 				return ['C_RES_PURPOSE', 'C_RES_SUBJECTS'] as const
 			default:
@@ -123,21 +123,26 @@ const Register = () => {
 		setUserData(data)
 
 		const formData = new FormData()
-		formData.append('C_EMAIL',data.C_EMAIL)
-		formData.append('C_NAME_FIRST',data.C_NAME_FIRST)
-		formData.append('C_NAME_LAST',data.C_NAME_LAST)
-		formData.append('PATRON_PID',data.C_EMAIL)
-		formData.append('C_STREET',data.C_NAME_FIRST)
-		formData.append('C_CITY',data.C_NAME_LAST)
-		formData.append('C_PROV_STATE',data.C_NAME_LAST)
-		formData.append('C_POSTAL_ZIP',data.C_NAME_LAST)
-		formData.append('C_COUNTRY',data.C_NAME_LAST)
-		formData.append('C_RES_PURPOSE',data.C_NAME_LAST)
-		formData.append('C_RES_SUBJECTS',data.C_NAME_LAST)
+		formData.append('C_EMAIL', data.C_EMAIL)
+		formData.append('C_NAME_FIRST', data.C_NAME_FIRST)
+		formData.append('C_NAME_LAST', data.C_NAME_LAST)
+		formData.append('PATRON_PID', data.PATRON_PID)
+		formData.append('C_STREET', data.C_STREET)
+		formData.append('C_CITY', data.C_CITY)
+		formData.append('C_PROV_STATE', data.C_PROV_STATE)
+		formData.append('C_POSTAL_ZIP', data.C_POSTAL_ZIP)
+		formData.append('C_COUNTRY', data.C_COUNTRY)
+		formData.append('C_RES_PURPOSE', data.C_RES_PURPOSE)
+		formData.append('C_RES_SUBJECTS', data.C_RES_SUBJECTS)
 
-		return await axios.post(`${records[0].save_n_stop_record}&CLOSE=Y`, formData).catch((error) => {
-			throw error
-		})
+		return await axios
+			.post(`${records[0].save_n_stop_record}&CLOSE=Y`, formData)
+			.then(() => {
+				setIsSaveRecordSent(true)
+			})
+			.catch((error) => {
+				throw error
+			})
 	}
 
 	const handleNextStep = async () => {
