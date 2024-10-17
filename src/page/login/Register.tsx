@@ -15,7 +15,6 @@ type ClientFormData = {
 	C_NAME_LAST: string
 	C_EMAIL: string
 	C_STREET: string
-	C_STREET2: string
 	C_CITY: string
 	C_PROV_STATE: string
 	C_POSTAL_ZIP: string
@@ -42,7 +41,6 @@ const Register = () => {
 		C_NAME_LAST: '',
 		C_EMAIL: '',
 		C_STREET: '',
-		C_STREET2: '',
 		C_CITY: '',
 		C_PROV_STATE: '',
 		C_POSTAL_ZIP: '',
@@ -68,7 +66,6 @@ const Register = () => {
 			PATRON_PID: '',
 			PATRON_PID_RE: '',
 			C_STREET: '',
-			C_STREET2: '',
 			C_CITY: '',
 			C_PROV_STATE: '',
 			C_POSTAL_ZIP: '',
@@ -80,19 +77,21 @@ const Register = () => {
 	})
 	const [currentStep, setCurrentStep] = useState(1)
 
-	useEffect(() => {
-		const currentUrl = window.location.href
-		const targetUrl =
-			'http://test.opac.minisisinc.com/scripts/mwimain.dll/144/CARD_REGISTRATION?DIRECTSEARCH'
 
-		if (currentUrl !== targetUrl) {
-			axios
-				.post(`${records[0].skip_n_stop_record}`)
-				.catch((error) => {
-					console.error('Error fetching data:', error)
-				})
-		}
-	}, [records])
+	// const currentUrl = window.location.href
+	// useEffect(() => {
+	// 	const targetUrl =
+	// 		'http://test.opac.minisisinc.com/scripts/mwimain.dll/144/CARD_REGISTRATION?DIRECTSEARCH'
+
+	// 	if (currentUrl !== targetUrl) {
+	// 		console.log('--------------')
+	// 		// axios
+	// 		// 	.post(`${records[0].skip_n_stop_record}`)
+	// 		// 	.catch((error) => {
+	// 		// 		console.error('Error fetching data:', error)
+	// 		// 	})
+	// 	}
+	// }, [currentUrl])
 
 	const getStepFields = (step: number) => {
 		switch (step) {
@@ -107,7 +106,6 @@ const Register = () => {
 			case 2:
 				return [
 					'C_STREET',
-					'C_STREET2',
 					'C_CITY',
 					'C_PROV_STATE',
 					'C_POSTAL_ZIP',
@@ -125,11 +123,19 @@ const Register = () => {
 		setUserData(data)
 
 		const formData = new FormData()
-		Object.keys({ ...data, recaptcha: undefined }).forEach((key) => {
-			formData.append(key, data[key as keyof ClientFormData])
-		})
+		formData.append('C_EMAIL',data.C_EMAIL)
+		formData.append('C_NAME_FIRST',data.C_NAME_FIRST)
+		formData.append('C_NAME_LAST',data.C_NAME_LAST)
+		formData.append('PATRON_PID',data.C_EMAIL)
+		formData.append('C_STREET',data.C_NAME_FIRST)
+		formData.append('C_CITY',data.C_NAME_LAST)
+		formData.append('C_PROV_STATE',data.C_NAME_LAST)
+		formData.append('C_POSTAL_ZIP',data.C_NAME_LAST)
+		formData.append('C_COUNTRY',data.C_NAME_LAST)
+		formData.append('C_RES_PURPOSE',data.C_NAME_LAST)
+		formData.append('C_RES_SUBJECTS',data.C_NAME_LAST)
 
-		return await axios.post(`${records[0].save_n_stop_record}`, formData).catch((error) => {
+		return await axios.post(`${records[0].save_n_stop_record}&CLOSE=Y`, formData).catch((error) => {
 			throw error
 		})
 	}
@@ -473,7 +479,7 @@ const Register = () => {
 						<CircleCheck className="w-16 h-16" />
 					</div>
 					<h1 className="landing-page-title">
-						We have sent a verification C_EMAIL to '{userData.C_EMAIL}'
+						We have sent a verification EMAIL to '{userData.C_EMAIL}'
 					</h1>
 					<div className={'text-xl m-4'}>
 						Please check the emtail for further instructions
