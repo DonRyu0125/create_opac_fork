@@ -5,15 +5,13 @@ import { getHomeSessionID, getSessionID } from '@/lib/utils'
 import axios from 'axios'
 import { useState } from 'react'
 
-
-
 const Login = () => {
 	const { config } = useConstants()
 	const [accountNumber, setAccountNumber] = useState('')
 	const [password, setPassword] = useState('')
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(null)
-
+	const [clientAcc, setClientAcc] = useState('')
 
 	const handleSubmit = async (event: any) => {
 		event.preventDefault()
@@ -47,7 +45,18 @@ const Login = () => {
 		}
 	}
 
-	const test = getSessionID()
+	const onSubmit = () => {
+
+		const formData = new FormData()
+		formData.append('C_CLIENT_NUMBER', clientAcc)
+		formData.append('submit', 'Submit')
+		axios.post(
+			'/scripts/mwimain.dll?emailpassword&application=CLIENT_VIEW&language=144&from=noreplylma@minisisinc.com&subject=The%20London%20Archives%20Collections%20Catalogue%20-%20Password Reset',
+			formData
+		).then((res)=>{
+			console.log('res',res)
+		})
+	}
 
 	return (
 		<section className="bg-white">
@@ -120,10 +129,21 @@ const Login = () => {
 						<div className={'flex mt-1'}>
 							<div>I don't have a login.</div>
 							<a
-								href={`/scripts/mwimain.dll/144/CARD_REGISTRATION?DIRECTSEARCH`}
+								href={`/scripts/mwimain.dll/144/CLIENT_VIEW?DIRECTSEARCH`}
 								className={'border-b-2 border-b-black ml-[10px] h-[22px]'}>
 								Create an Account
 							</a>
+						</div>
+						<div>
+							<a
+								// href={`/scripts/mwimain.dll/144/CLIENT_VIEW?DIRECTSEARCH`}
+								className={'border-b-2 border-b-black h-[22px]'}>
+								I Forgot my password
+							</a>
+						</div>
+						<div>
+							<input onChange={(e) => setClientAcc(e.target.value)} />
+							<Button onClick={onSubmit}>Submit</Button>
 						</div>
 					</div>
 				</main>

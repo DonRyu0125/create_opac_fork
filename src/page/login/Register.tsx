@@ -118,6 +118,8 @@ const Register = () => {
 		}
 	}
 
+	///scripts/mwimain.dll?emailpassword&application=lma&language=144&from=noreplylma@minisisinc.com&subject=The%20London%20Archives%20Collections%20Catalogue%20-%20Password Reset&file=[www_lma]email_confirm.htm
+
 	const onSubmit = async (data: ClientFormData) => {
 		setIsSubmit(true)
 		setUserData(data)
