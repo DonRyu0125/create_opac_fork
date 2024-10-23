@@ -26,7 +26,7 @@ type ClientFormData = {
 	recaptcha: string
 }
 
-const PASSWORD_MIN_LENGTH = 1
+export const PASSWORD_MIN_LENGTH = 1
 
 const Register = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
