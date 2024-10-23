@@ -26,7 +26,7 @@ const ResetPin = () => {
 		formData.append('PATRON_PID', data.PATRON_PID)
 
 		// save_n_stop_record need a return url but react doesn't need it so I add dummy &RETURN_URL=[OPAC]register-confirm.html
-		return await axios
+		// return await axios
 		// .post(`${records[0].save_n_stop_record}&CLOSE=Y&RETURN_URL=[OPAC]register-confirm.html`, formData)
 		// .then(() => {
 		// 	setIsSaveRecordSent(true)
