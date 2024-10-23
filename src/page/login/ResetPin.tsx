@@ -4,6 +4,12 @@ import { useForm } from 'react-hook-form'
 import { PASSWORD_MIN_LENGTH } from './Register'
 import { Button } from '@/components/ui/button'
 import { CircleCheck } from 'lucide-react'
+import useConstants from '@/hooks/useConstants'
+
+type ResetFormData = {
+	PATRON_PID: string
+	PATRON_PID_RE: string
+}
 
 const ResetPin = () => {
 	const {
@@ -20,8 +26,16 @@ const ResetPin = () => {
 	})
 
 	const [isSubmit, setIsSubmit] = useState(false)
+	const { message } = useConstants()
 
-	const onSubmit = async (data) => {
+
+// 	<Web Address>
+// ?RESETPASSWORD
+// &application=<Reset Password Application ID>
+// &language=<Language ID>]
+// &file=<File Path to Web Page after Resetting Password></File>
+
+	const onSubmit = async (data:ResetFormData) => {
 		const formData = new FormData()
 		formData.append('PATRON_PID', data.PATRON_PID)
 
@@ -54,10 +68,14 @@ const ResetPin = () => {
 					</div>
 				</div>
 			) : (
-				<div className={'min-h-[460px] flex justify-center items-center mb-4'}>
+				<div className={'min-h-[460px] flex  justify-center items-center mb-4'}>
 					<form
 						onSubmit={handleSubmit(onSubmit)}
-						className="bg-gray-200 p-5 rounded-md w-5/6">
+						className="bg-gray-200 p-5 rounded-md w-5/6 flex flex-col justify-center items-center">
+						<div className="landing-page-title"> {message.password}</div>
+						<div className={'text-xl m-4 text-center'}>
+							Enter your new password to reset password.
+						</div>
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
@@ -82,7 +100,7 @@ const ResetPin = () => {
 
 							<div className="flex-1">
 								<label className="font-semibold">
-									Confirm Password <span className="text-red-500">*</span>
+									{message.confirm}{message.password} <span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
@@ -100,7 +118,7 @@ const ResetPin = () => {
 								)}
 							</div>
 						</div>
-						<Button>Submit</Button>
+						<Button className={'mt-5'}>{message.submit}</Button>
 					</form>
 				</div>
 			)}

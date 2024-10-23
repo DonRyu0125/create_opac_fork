@@ -50,7 +50,7 @@ const Login = () => {
 		const formData = new FormData()
 		formData.append('C_CLIENT_NUMBER', clientAcc)
 		axios.post(
-			'/scripts/mwimain.dll?emailpassword&application=PASSWORD_RESET&language=144&from=noreply@minisisinc.com',
+			'/scripts/mwimain.dll?emailpassword&application=UNION_VIEW&language=144&from=noreply@minisisinc.com',
 			formData
 		).then((res)=>{
 			console.log('res',res)

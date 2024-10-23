@@ -112,5 +112,7 @@
 	"featuredCollections": "Collections en vedette",
 	"online": "en ligne",
 	"onlineTip": "Utilisez le lien de la réunion pour accéder à la session!",
-	"inPersonTip": "Veuillez être dans la salle avant l'heure du rendez-vous"
+	"inPersonTip": "Veuillez être dans la salle avant l'heure du rendez-vous",
+	"password":"mot de passe",
+	"reset":"Réinitialiser"
 }
