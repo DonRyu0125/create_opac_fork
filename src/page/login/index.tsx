@@ -45,13 +45,12 @@ const Login = () => {
 		}
 	}
 
-	const onSubmit = () => {
+	const resetPassword = () => {
 
 		const formData = new FormData()
 		formData.append('C_CLIENT_NUMBER', clientAcc)
-		formData.append('submit', 'Submit')
 		axios.post(
-			'/scripts/mwimain.dll?emailpassword&application=CLIENT_VIEW&language=144&from=noreplylma@minisisinc.com&subject=The%20London%20Archives%20Collections%20Catalogue%20-%20Password Reset',
+			'/scripts/mwimain.dll?emailpassword&application=PASSWORD_RESET&language=144&from=noreply@minisisinc.com',
 			formData
 		).then((res)=>{
 			console.log('res',res)
@@ -143,7 +142,7 @@ const Login = () => {
 						</div>
 						<div>
 							<input onChange={(e) => setClientAcc(e.target.value)} />
-							<Button onClick={onSubmit}>Submit</Button>
+							<Button onClick={resetPassword}>Submit</Button>
 						</div>
 					</div>
 				</main>
