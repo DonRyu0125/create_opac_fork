@@ -1,10 +1,12 @@
 import Layout from '@/components/layouts'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { PASSWORD_MIN_LENGTH } from './Register'
 import { Button } from '@/components/ui/button'
 import { CircleCheck } from 'lucide-react'
 import useConstants from '@/hooks/useConstants'
+import Spinner from '@/components/common/event-calendar/Spinner'
+import axios from 'axios'
 
 type ResetFormData = {
 	PATRON_PID: string
@@ -27,29 +29,41 @@ const ResetPin = () => {
 
 	const [isSubmit, setIsSubmit] = useState(false)
 	const { message } = useConstants()
+	const [loading, setLoading] = useState(false)
+	const [parm1Value, setParm1Value] = useState<string | null>('')
+	const [status, setStatus] = useState<string>('')
 
+	useEffect(() => {
+		const urlParams = new URLSearchParams(window.location.search)
+		const parm1 = urlParams.get('parm1')
+		setParm1Value(parm1)
+	}, [])
 
-// 	<Web Address>
-// ?RESETPASSWORD
-// &application=<Reset Password Application ID>
-// &language=<Language ID>]
-// &file=<File Path to Web Page after Resetting Password></File>
-
-//https://RMG.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL?RESETPASSWORD&application=reset_pin&language=144&file=[RMG_SRC_PAGES]reset_password_confirmation.html
-
-	const onSubmit = async (data:ResetFormData) => {
+	const onSubmit = async (data: ResetFormData) => {
+		setLoading(true)
 		const formData = new FormData()
 		formData.append('PATRON_PID', data.PATRON_PID)
+		formData.append('NEW_PATRON_PID', data.PATRON_PID)
+		formData.append('PASSCODE', parm1Value ?? '')
 
 		// save_n_stop_record need a return url but react doesn't need it so I add dummy &RETURN_URL=[OPAC]register-confirm.html
-		// return await axios
-		// .post(`${records[0].save_n_stop_record}&CLOSE=Y&RETURN_URL=[OPAC]register-confirm.html`, formData)
-		// .then(() => {
-		// 	setIsSaveRecordSent(true)
-		// })
-		// .catch((error) => {
-		// 	throw error
-		// })
+		return await axios
+			.post(
+				`/SCRIPTS/MWIMAIN.DLL?RESETPASSWORD&application=reset_pin&language=144&file=[OPAC]reset_password_confirmation.html`,
+				formData
+			)
+			.then((res) => {
+				const parser = new DOMParser()
+				const doc = parser.parseFromString(res.data, 'text/html')
+				const inputElement = doc.getElementById('MWI-error') as HTMLInputElement
+				const value = inputElement?.value
+				console.log('value', value)
+				setStatus(value ?? '200')
+				setLoading(false)
+			})
+			.catch((error) => {
+				throw error
+			})
 	}
 
 	return (
@@ -59,14 +73,25 @@ const ResetPin = () => {
 				alt=""
 				className="h-64 w-full object-cover"
 			/>
-			{isSubmit ? (
+			{loading && (
+				<div className="flex h-full items-center justify-center">
+					<Spinner
+						height={'h-full'}
+						spinHeight={'h-20'}
+						spinWidth={'w-20'}
+						background={'bg-white'}
+					/>
+				</div>
+			)}
+			{status == '200' ? (
 				<div className="min-h-[35vh] flex flex-col items-center justify-center p-8 text-center">
 					<div className={'m-5'}>
 						<CircleCheck className="w-16 h-16" />
 					</div>
-					<h1 className="landing-page-title">We have sent a verification EMAIL to</h1>
+					<h1 className="landing-page-title">Reset Password Confirmation</h1>
 					<div className={'text-xl m-4'}>
-						Please check the emtail for further instructions
+						You've successfully changed your password. Please log in with your new
+						password to access your account.
 					</div>
 				</div>
 			) : (
@@ -102,7 +127,8 @@ const ResetPin = () => {
 
 							<div className="flex-1">
 								<label className="font-semibold">
-									{message.confirm}{message.password} <span className="text-red-500">*</span>
+									{message.confirm}
+									{message.password} <span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
@@ -120,6 +146,11 @@ const ResetPin = () => {
 								)}
 							</div>
 						</div>
+						{status == '208' && (
+							<p className="text-red-500 my-2">
+								New password cannot be the same as old password.
+							</p>
+						)}
 						<Button className={'mt-5'}>{message.submit}</Button>
 					</form>
 				</div>
