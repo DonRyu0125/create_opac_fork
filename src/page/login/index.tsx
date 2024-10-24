@@ -45,17 +45,6 @@ const Login = () => {
 		}
 	}
 
-	const resetPassword = () => {
-
-		const formData = new FormData()
-		formData.append('C_CLIENT_NUMBER', clientAcc)
-		axios.post(
-			'/scripts/mwimain.dll?emailpassword&application=UNION_VIEW&language=144&from=noreply@minisisinc.com',
-			formData
-		).then((res)=>{
-			console.log('res',res)
-		})
-	}
 
 	return (
 		<section className="bg-white">
@@ -135,14 +124,10 @@ const Login = () => {
 						</div>
 						<div>
 							<a
-								// href={`/scripts/mwimain.dll/144/CLIENT_VIEW?DIRECTSEARCH`}
+								href={`/forgot-pin.html`}
 								className={'border-b-2 border-b-black h-[22px]'}>
 								I Forgot my password
 							</a>
-						</div>
-						<div>
-							<input onChange={(e) => setClientAcc(e.target.value)} />
-							<Button onClick={resetPassword}>Submit</Button>
 						</div>
 					</div>
 				</main>

@@ -27,6 +27,7 @@ import AdminDescription from '@/page/admin/Description'
 import AdminSettings from '@/page/admin/Settings'
 import Register from '@/page/login/Register'
 import ResetPin from '@/page/login/ResetPin'
+import ForgotPin from '@/page/login/ForgotPin'
 
 export type TRoute = Record<string, () => React.ReactNode>
 
@@ -56,6 +57,7 @@ export const ROUTES: TRoute = {
 	museum: Museum,
 	patronprofile: PatronProfile,
 	patroninfo: PatronInfo,
+	'forgot-pin':ForgotPin,
 	'reset-pin': ResetPin,
 	'rsvp-cancel': RSVPCancel,
 	'rsvp-confirm': RSVPConfirm,

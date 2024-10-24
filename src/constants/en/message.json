@@ -114,5 +114,6 @@
 	"onlineTip": "Use the meeting link to access the session!",
 	"inPersonTip": "Please be in the room before meeting time",
 	"password":"Password",
-	"reset":"Reset"
+	"reset":"Reset",
+	"cancel":"Cancel"
 }

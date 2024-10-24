@@ -1,0 +1,137 @@
+import Layout from '@/components/layouts'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { PASSWORD_MIN_LENGTH } from './Register'
+import { Button } from '@/components/ui/button'
+import { CircleCheck } from 'lucide-react'
+import useConstants from '@/hooks/useConstants'
+import axios from 'axios'
+import Spinner from '@/components/common/event-calendar/Spinner'
+
+type ResetFormData = {
+	C_CLIENT_NUMBER: string
+}
+
+const EMAIL_CONFIRM_CODE = '267'
+
+const ResetPin = () => {
+	const {
+		register,
+		handleSubmit,
+		watch,
+		trigger,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			C_CLIENT_NUMBER: '',
+		},
+	})
+	const [status, setStatus] = useState<string>('')
+	const [loading, setLoading] = useState(false)
+	const { message } = useConstants()
+
+	const onSubmit = async (data: ResetFormData) => {
+		setLoading(true)
+		const formData = new FormData()
+		formData.append('C_CLIENT_NUMBER', data.C_CLIENT_NUMBER)
+		axios
+			.post(
+				'/scripts/mwimain.dll?emailpassword&application=UNION_VIEW&language=144&from=noreply@minisisinc.com',
+				formData
+			)
+			.then((res) => {
+				const parser = new DOMParser()
+				const doc = parser.parseFromString(res.data, 'text/html')
+				const inputElement = doc.getElementById('MWI-error') as HTMLInputElement
+				const value = inputElement?.value
+				setStatus(value)
+				setLoading(false)
+			})
+	}
+
+	return (
+		<Layout>
+			<img
+				src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
+				alt=""
+				className="h-64 w-full object-cover"
+			/>
+			{loading && (
+				<div className="flex h-full items-center justify-center">
+					<Spinner
+						height={'h-full'}
+						spinHeight={'h-20'}
+						spinWidth={'w-20'}
+						background={'bg-white'}
+					/>
+				</div>
+			)}
+			{status == EMAIL_CONFIRM_CODE ? (
+				<div className="min-h-[35vh] flex flex-col items-center justify-center p-8 text-center">
+					<div className={'m-5'}>
+						<CircleCheck className="w-16 h-16" />
+					</div>
+					<h1 className="landing-page-title">We have sent a verification EMAIL</h1>
+					<div className={'text-xl m-4'}>
+						Please check the emtail for further instructions
+					</div>
+				</div>
+			) : (
+				<div className={'min-h-[460px] flex  justify-center items-center mb-4'}>
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className="bg-gray-200 p-5 rounded-md w-5/6 flex flex-col justify-center items-center">
+						<div className="landing-page-title"> Forgotten {message.password}</div>
+						<div className={'text-xl m-4 max-w-[560px]'}>
+							Enter your account number to request a new password.
+						</div>
+
+						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
+							<div className="flex-1">
+								<label className="font-semibold">
+									Card number <span className="text-red-500">*</span>
+								</label>
+								<input
+									disabled={loading}
+									type="password"
+									{...register('C_CLIENT_NUMBER', {
+										required: 'Card number is required',
+										minLength: {
+											value: PASSWORD_MIN_LENGTH,
+											message: `Card number is required`,
+										},
+									})}
+									placeholder="Card number"
+									className="border p-2 w-full mt-1"
+								/>
+								{errors.C_CLIENT_NUMBER && (
+									<p className="text-red-500">{errors.C_CLIENT_NUMBER.message}</p>
+								)}
+								{status == '200' && (
+									<p className="text-red-500">
+										Unknown Patron Name, Please try again
+									</p>
+								)}
+							</div>
+						</div>
+						<div className={'w-[272px] flex justify-evenly'}>
+							<Button className={'mt-5'} disabled={loading}>
+								{message.submit}
+							</Button>
+							<a
+								href="/"
+								onClick={(e) => {
+									e.preventDefault()
+									window.location.href = '/'
+								}}>
+								<Button className={'mt-5'}>{message.cancel}</Button>
+							</a>
+						</div>
+					</form>
+				</div>
+			)}
+		</Layout>
+	)
+}
+
+export default ResetPin
