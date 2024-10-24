@@ -57,8 +57,7 @@ const ResetPin = () => {
 				const doc = parser.parseFromString(res.data, 'text/html')
 				const inputElement = doc.getElementById('MWI-error') as HTMLInputElement
 				const value = inputElement?.value
-				console.log('value', value)
-				setStatus(value ?? '200')
+				setStatus(value ?? '200') // if no value, that means success, 200 means password is successfully changed
 				setLoading(false)
 			})
 			.catch((error) => {
