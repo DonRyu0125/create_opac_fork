@@ -56,7 +56,7 @@ export const ROUTES: TRoute = {
 	museum: Museum,
 	patronprofile: PatronProfile,
 	patroninfo: PatronInfo,
-	reset: ResetPin,
+	'reset-pin': ResetPin,
 	'rsvp-cancel': RSVPCancel,
 	'rsvp-confirm': RSVPConfirm,
 	'no-record': NoRecord,

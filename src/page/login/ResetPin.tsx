@@ -35,6 +35,8 @@ const ResetPin = () => {
 // &language=<Language ID>]
 // &file=<File Path to Web Page after Resetting Password></File>
 
+//https://RMG.MINISISINC.COM/SCRIPTS/MWIMAIN.DLL?RESETPASSWORD&application=reset_pin&language=144&file=[RMG_SRC_PAGES]reset_password_confirmation.html
+
 	const onSubmit = async (data:ResetFormData) => {
 		const formData = new FormData()
 		formData.append('PATRON_PID', data.PATRON_PID)
@@ -79,7 +81,7 @@ const ResetPin = () => {
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
-									Password <span className="text-red-500">*</span>
+									{message.password} <span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
