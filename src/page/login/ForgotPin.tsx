@@ -18,8 +18,6 @@ const ResetPin = () => {
 	const {
 		register,
 		handleSubmit,
-		watch,
-		trigger,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -34,6 +32,8 @@ const ResetPin = () => {
 		setLoading(true)
 		const formData = new FormData()
 		formData.append('C_CLIENT_NUMBER', data.C_CLIENT_NUMBER)
+		// Application name is not the matter, it need to use m2l extention at the site profile and follow the m2l extention's default databsae
+		// m2l extention's config is at the parameter database.
 		axios
 			.post(
 				'/scripts/mwimain.dll?emailpassword&application=UNION_VIEW&language=144&from=noreply@minisisinc.com',
