@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import { CircleCheck } from 'lucide-react'
 import useJSONData from '@/hooks/useJSONData'
+import Spinner from '@/components/common/event-calendar/Spinner'
 
 type ClientFormData = {
 	C_TITLE: string
@@ -29,6 +30,7 @@ type ClientFormData = {
 export const PASSWORD_MIN_LENGTH = 1
 
 const Register = () => {
+	const [loading, setLoading] = useState(false)
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [isSubmit, setIsSubmit] = useState(false)
 	const conf = useConstants().config
@@ -123,7 +125,7 @@ const Register = () => {
 	const onSubmit = async (data: ClientFormData) => {
 		setIsSubmit(true)
 		setUserData(data)
-
+		setLoading(true)
 		const formData = new FormData()
 		formData.append('C_EMAIL', data.C_EMAIL)
 		formData.append('C_NAME_FIRST', data.C_NAME_FIRST)
@@ -139,9 +141,14 @@ const Register = () => {
 
 		// save_n_stop_record need a return url but react doesn't need it so I add dummy &RETURN_URL=[OPAC]register-confirm.html
 		return await axios
-			.post(`${records[0].save_n_stop_record}&CLOSE=Y&RETURN_URL=[OPAC]register-confirm.html`, formData)
-			.then(() => {
+			.post(
+				`${records[0].save_n_stop_record}&CLOSE=Y&RETURN_URL=[OPAC]register-confirm.html`,
+				formData
+			)
+			.then((res) => {
+				console.log('res',res)
 				setIsSaveRecordSent(true)
+				setLoading(false)
 			})
 			.catch((error) => {
 				throw error
@@ -481,6 +488,16 @@ const Register = () => {
 				alt=""
 				className="h-64 w-full object-cover"
 			/>
+			{loading && (
+				<div className="flex h-full items-center justify-center">
+					<Spinner
+						height={'h-full'}
+						spinHeight={'h-20'}
+						spinWidth={'w-20'}
+						background={'bg-white'}
+					/>
+				</div>
+			)}
 			{isSubmit ? (
 				<div className="min-h-[35vh] flex flex-col items-center justify-center p-8 text-center">
 					<div className={'m-5'}>

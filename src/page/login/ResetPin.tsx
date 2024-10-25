@@ -26,8 +26,6 @@ const ResetPin = () => {
 			PATRON_PID_RE: '',
 		},
 	})
-
-	const [isSubmit, setIsSubmit] = useState(false)
 	const { message } = useConstants()
 	const [loading, setLoading] = useState(false)
 	const [parm1Value, setParm1Value] = useState<string | null>('')
@@ -92,6 +90,9 @@ const ResetPin = () => {
 						You've successfully changed your password. Please log in with your new
 						password to access your account.
 					</div>
+					<Button className={'mt-4'}>
+						<a href="/login.html">{message.logIn}</a>
+					</Button>
 				</div>
 			) : (
 				<div className={'min-h-[460px] flex  justify-center items-center mb-4'}>

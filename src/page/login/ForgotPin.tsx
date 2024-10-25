@@ -115,7 +115,7 @@ const ResetPin = () => {
 							</div>
 						</div>
 						<div className={'w-[272px] flex justify-evenly'}>
-							<Button className={'mt-5'} disabled={loading}>
+							<Button className={'mt-5 w-[100px]'} disabled={loading}>
 								{message.submit}
 							</Button>
 							<a
@@ -124,7 +124,7 @@ const ResetPin = () => {
 									e.preventDefault()
 									window.location.href = '/'
 								}}>
-								<Button className={'mt-5'}>{message.cancel}</Button>
+								<Button className={'mt-5 w-[100px]'}>{message.cancel}</Button>
 							</a>
 						</div>
 					</form>
