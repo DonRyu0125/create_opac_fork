@@ -501,9 +501,8 @@ const Register = () => {
 					<div className={'m-5'}>
 						<CircleCheck className="w-16 h-16" />
 					</div>
-					<h1 className="landing-page-title">
-						We have sent a verification EMAIL to '{userData.C_EMAIL}'
-					</h1>
+					<h1 className="landing-page-title">We have sent a verification EMAIL to</h1>
+					<div className="landing-page-title">'{userData.C_EMAIL}'</div>
 					<div className={'text-xl m-4'}>
 						Please check the email for further instructions
 					</div>
