@@ -27,12 +27,11 @@ type ClientFormData = {
 	recaptcha: string
 }
 
-export const PASSWORD_MIN_LENGTH = 1
+export const PASSWORD_MIN_LENGTH = 8
 
 const Register = () => {
 	const [loading, setLoading] = useState(false)
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const [isSubmit, setIsSubmit] = useState(false)
 	const conf = useConstants().config
 	const [recaptchaToken, setRecaptchaToken] = useState<string>('')
 	const { message } = useConstants()
@@ -90,7 +89,7 @@ const Register = () => {
 
 	useEffect(() => {
 		const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string }) => {
-			if (!isSaveRecordSent && !isSubmit) {
+			if (!isSaveRecordSent) {
 				sendSkipRecord()
 				event.preventDefault()
 				event.returnValue = ''
@@ -137,8 +136,8 @@ const Register = () => {
 		formData.append('C_RES_PURPOSE', data.C_RES_PURPOSE)
 		formData.append('C_RES_SUBJECTS', data.C_RES_SUBJECTS)
 
-		// MWI database profile's return html form is not working , Richard also don't know
-		// So I made dummy return url. if the mwi return the dummy url that means the email is not been used. DON 2024 1025
+		// MWI client registration database profile's return html form is not working , Richard also don't know
+		// So I put dummy at the return url option. if the mwi return the dummy url that means , registration is succefully done. DON 2024 1025
 		return await axios
 			.post(`${records[0].save_n_stop_record}&CLOSE=Y&RETURN_URL=dummy`, formData)
 			.then((res) => {
