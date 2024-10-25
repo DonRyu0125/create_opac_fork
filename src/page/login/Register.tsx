@@ -36,6 +36,7 @@ const Register = () => {
 	const conf = useConstants().config
 	const [recaptchaToken, setRecaptchaToken] = useState<string>('')
 	const { message } = useConstants()
+	const [status, setStatus] = useState(0)
 	const [userData, setUserData] = useState<ClientFormData>({
 		C_TITLE: '',
 		C_NAME_FIRST: '',
@@ -120,10 +121,7 @@ const Register = () => {
 		}
 	}
 
-	///scripts/mwimain.dll?emailpassword&application=lma&language=144&from=noreplylma@minisisinc.com&subject=The%20London%20Archives%20Collections%20Catalogue%20-%20Password Reset&file=[www_lma]email_confirm.htm
-
 	const onSubmit = async (data: ClientFormData) => {
-		setIsSubmit(true)
 		setUserData(data)
 		setLoading(true)
 		const formData = new FormData()
@@ -139,16 +137,13 @@ const Register = () => {
 		formData.append('C_RES_PURPOSE', data.C_RES_PURPOSE)
 		formData.append('C_RES_SUBJECTS', data.C_RES_SUBJECTS)
 
-		// save_n_stop_record need a return url but react doesn't need it so I add dummy &RETURN_URL=[OPAC]register-confirm.html
 		return await axios
-			.post(
-				`${records[0].save_n_stop_record}&CLOSE=Y&RETURN_URL=[OPAC]register-confirm.html`,
-				formData
-			)
+			.post(`${records[0].save_n_stop_record}&CLOSE=Y`, formData)
 			.then((res) => {
-				console.log('res',res)
-				setIsSaveRecordSent(true)
 				setLoading(false)
+				// Email is already used
+				setStatus(300)
+				setIsSaveRecordSent(true)
 			})
 			.catch((error) => {
 				throw error
@@ -190,7 +185,11 @@ const Register = () => {
 								className={`md:w-[190px] px-4 py-2 rounded-md w-full md:w-auto ${
 									currentStep > idx + 1 ? 'bg-primary' : 'bg-gray-700'
 								}`}
-								onClick={() => currentStep >= idx + 1 && setCurrentStep(idx + 1)}>
+								onClick={() => {
+									setLoading(false)
+									setStatus(0)
+									currentStep >= idx + 1 && setCurrentStep(idx + 1)
+								}}>
 								{tab.label}
 							</TabsTrigger>
 						))}
@@ -448,9 +447,10 @@ const Register = () => {
 										onChange={onCaptchaChange}
 									/>
 								</div>
-								{errors.recaptcha && (
+								{status === 300 && (
 									<p className="text-red-500 text-center mt-2">
-										{errors.recaptcha.message}
+										That email address is already registered. Please try a
+										different one.
 									</p>
 								)}
 							</div>
@@ -467,8 +467,8 @@ const Register = () => {
 							</button>
 						)}
 						<button
-							type={currentStep === 5 ? 'submit' : 'button'}
-							onClick={handleNextStep}
+							type={currentStep === 4 ? 'submit' : 'button'}
+							onClick={currentStep < 4 ? handleNextStep : undefined}
 							disabled={currentStep === 4 && !recaptchaToken ? true : false}
 							className={`w-[100px] text-white px-4 py-2 rounded-md 
 							${currentStep === 4 && !recaptchaToken ? 'bg-gray-400' : 'bg-primary'}
@@ -488,17 +488,7 @@ const Register = () => {
 				alt=""
 				className="h-64 w-full object-cover"
 			/>
-			{loading && (
-				<div className="flex h-full items-center justify-center">
-					<Spinner
-						height={'h-full'}
-						spinHeight={'h-20'}
-						spinWidth={'w-20'}
-						background={'bg-white'}
-					/>
-				</div>
-			)}
-			{isSubmit ? (
+			{/* {status === 200 ? (
 				<div className="min-h-[35vh] flex flex-col items-center justify-center p-8 text-center">
 					<div className={'m-5'}>
 						<CircleCheck className="w-16 h-16" />
@@ -514,16 +504,27 @@ const Register = () => {
 					</Button>
 				</div>
 			) : (
-				<>
-					<div className={'flex flex-col justify-center items-center p-7'}>
-						<div className={' text-2xl font-extrabold'}>Sign Up Your User Account</div>
-						<div className={'text-lg'}>Fill all form field to go to next step</div>
+				<> */}
+			<div className={'flex flex-col justify-center items-center p-7'}>
+				<div className={' text-2xl font-extrabold'}>Sign Up Your User Account</div>
+				<div className={'text-lg'}>Fill all form field to go to next step</div>
+			</div>
+			<div className={'min-h-[460px] w-full flex justify-center items-center mb-4 relative'}>
+				{loading && (
+					<div className=" h-full w-full  absolute ">
+						<Spinner
+							height={'h-full'}
+							spinHeight={'h-20'}
+							spinWidth={'w-20'}
+							background={'bg-gray-400 bg-opacity-30'}
+						/>
 					</div>
-					<div className={'min-h-[460px] flex justify-center items-center mb-4'}>
-						{showRegStatus()}
-					</div>
-				</>
-			)}
+				)}
+
+				{showRegStatus()}
+			</div>
+			{/* </>
+			)} */}
 		</Layout>
 	)
 }
