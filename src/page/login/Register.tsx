@@ -137,13 +137,20 @@ const Register = () => {
 		formData.append('C_RES_PURPOSE', data.C_RES_PURPOSE)
 		formData.append('C_RES_SUBJECTS', data.C_RES_SUBJECTS)
 
+		// MWI database profile's return html form is not working , Richard also don't know
+		// So I made dummy return url. if the mwi return the dummy url that means the email is not been used. DON 2024 1025
 		return await axios
-			.post(`${records[0].save_n_stop_record}&CLOSE=Y`, formData)
+			.post(`${records[0].save_n_stop_record}&CLOSE=Y&RETURN_URL=dummy`, formData)
 			.then((res) => {
 				setLoading(false)
-				// Email is already used
+				const regex = /window\.location\s*=\s*['"]([^'"]+)['"]/i
+				const match = res.data.match(regex)
+				if (match && match[1].includes('dummy')) {
+					setIsSaveRecordSent(true)
+					setStatus(200)
+					return
+				}
 				setStatus(300)
-				setIsSaveRecordSent(true)
 			})
 			.catch((error) => {
 				throw error
@@ -186,6 +193,7 @@ const Register = () => {
 									currentStep > idx + 1 ? 'bg-primary' : 'bg-gray-700'
 								}`}
 								onClick={() => {
+									setRecaptchaToken('')
 									setLoading(false)
 									setStatus(0)
 									currentStep >= idx + 1 && setCurrentStep(idx + 1)
@@ -488,7 +496,7 @@ const Register = () => {
 				alt=""
 				className="h-64 w-full object-cover"
 			/>
-			{/* {status === 200 ? (
+			{status === 200 ? (
 				<div className="min-h-[35vh] flex flex-col items-center justify-center p-8 text-center">
 					<div className={'m-5'}>
 						<CircleCheck className="w-16 h-16" />
@@ -497,34 +505,37 @@ const Register = () => {
 						We have sent a verification EMAIL to '{userData.C_EMAIL}'
 					</h1>
 					<div className={'text-xl m-4'}>
-						Please check the emtail for further instructions
+						Please check the email for further instructions
 					</div>
 					<Button className={'mt-4'}>
 						<a href="/">{message.home}</a>
 					</Button>
 				</div>
 			) : (
-				<> */}
-			<div className={'flex flex-col justify-center items-center p-7'}>
-				<div className={' text-2xl font-extrabold'}>Sign Up Your User Account</div>
-				<div className={'text-lg'}>Fill all form field to go to next step</div>
-			</div>
-			<div className={'min-h-[460px] w-full flex justify-center items-center mb-4 relative'}>
-				{loading && (
-					<div className=" h-full w-full  absolute ">
-						<Spinner
-							height={'h-full'}
-							spinHeight={'h-20'}
-							spinWidth={'w-20'}
-							background={'bg-gray-400 bg-opacity-30'}
-						/>
+				<>
+					<div className={'flex flex-col justify-center items-center p-7'}>
+						<div className={' text-2xl font-extrabold'}>Sign Up Your User Account</div>
+						<div className={'text-lg'}>Fill all form field to go to next step</div>
 					</div>
-				)}
+					<div
+						className={
+							'min-h-[460px] w-full flex justify-center items-center mb-4 relative'
+						}>
+						{loading && (
+							<div className=" h-full w-full  absolute ">
+								<Spinner
+									height={'h-full'}
+									spinHeight={'h-20'}
+									spinWidth={'w-20'}
+									background={'bg-gray-400 bg-opacity-30'}
+								/>
+							</div>
+						)}
 
-				{showRegStatus()}
-			</div>
-			{/* </>
-			)} */}
+						{showRegStatus()}
+					</div>
+				</>
+			)}
 		</Layout>
 	)
 }
