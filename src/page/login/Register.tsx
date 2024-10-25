@@ -223,7 +223,7 @@ const Register = () => {
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
-									Password <span className="text-red-500">*</span>
+									Password<span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
@@ -233,10 +233,16 @@ const Register = () => {
 											value: PASSWORD_MIN_LENGTH,
 											message: `Password must be at least ${PASSWORD_MIN_LENGTH} characters`,
 										},
+										pattern: {
+											value: /^(?=.*[A-Z]).*$/, // Regex to ensure at least one uppercase letter
+											message:
+												'Password must contain at least one uppercase letter',
+										},
 									})}
 									placeholder="Password"
 									className="border p-2 w-full mt-1"
 								/>
+								<p>(Must be more than 8 characters, At least one uppercase letter)</p>
 								{errors.PATRON_PID && (
 									<p className="text-red-500">{errors.PATRON_PID.message}</p>
 								)}
