@@ -12,7 +12,7 @@ const Login = () => {
 	const [password, setPassword] = useState('')
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(null)
-	const [clientAcc, setClientAcc] = useState('')
+	const { message } = useConstants()
 
 	const handleSubmit = async (event: any) => {
 		event.preventDefault()
@@ -62,11 +62,10 @@ const Login = () => {
 						<div className={'flex items-center justify-between'}>
 							<div className={'flex items-center'}>
 								<a className="block text-teal-600" href="/">
-									<span className="sr-only ">Home</span>
 									<img className="h-14" src={config.logo} alt="logo" />
 								</a>
 								<h1 className="ml-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-									Account Login
+									{message.logIn}
 								</h1>
 							</div>
 							<LanguageSelect />
@@ -111,7 +110,7 @@ const Login = () => {
 									type="submit"
 									variant="default"
 									disabled={loading}>
-									{loading ? 'Logging in...' : 'Login'}
+									{message.logIn}
 								</Button>
 							</div>
 						</form>
