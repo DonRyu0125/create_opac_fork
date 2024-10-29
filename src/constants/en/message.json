@@ -113,7 +113,11 @@
 	"online": "Online",
 	"onlineTip": "Use the meeting link to access the session!",
 	"inPersonTip": "Please be in the room before meeting time",
-	"password":"Password",
-	"reset":"Reset",
-	"cancel":"Cancel"
+	"password": "Password",
+	"reset": "Reset",
+	"cancel": "Cancel",
+	"noLogin": "I don't have a login",
+	"createAccount": "Create an Account",
+	"forgotPassword": "I Forgot my password",
+	"accountNumber": "Account Number"
 }

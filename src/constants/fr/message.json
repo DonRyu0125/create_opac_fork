@@ -115,5 +115,9 @@
 	"inPersonTip": "Veuillez être dans la salle avant l'heure du rendez-vous",
 	"password":"mot de passe",
 	"reset":"Réinitialiser",
-	"cancel":"Annuler"
+	"cancel":"Annuler",
+	"noLogin": "Je n'ai pas de connexion",
+    "createAccount": "Créer un compte",
+    "forgotPassword": "J'ai oublié mon mot de passe",
+    "accountNumber": "Numéro de compte"
 }
