@@ -149,5 +149,6 @@
 	"currentAddressLabel": "Current Address",
 	"surveyLabel": "Survey",
 	"confirmationLabel": "Confirmation",
-	"stepLabel": "Step"
+	"stepLabel": "Step",
+	"eventEndedMessage": "This event has ended"
 }
