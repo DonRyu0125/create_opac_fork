@@ -205,44 +205,44 @@ const Register = () => {
 					{/* Step 1: Your Detail */}
 					<TabsContent value="step1" className="p-6 bg-white shadow-md rounded-md">
 						<label className="font-semibold">
-							Email<span className="text-red-500">* </span>
+							{message.email}<span className="text-red-500">* </span>
 						</label>
 						<input
 							{...register('C_EMAIL', {
-								required: 'Email is required',
+								required: ' ',
 								pattern: {
 									value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-									message: 'Please enter a valid Email address',
+									message: `${message.validEmailAddress}`,
 								},
 							})}
-							placeholder="Email"
-							className="border p-2 w-full mt-1"
+							className={`p-2 w-full mt-1 border ${errors.C_EMAIL ? 'border-red-500' : 'border-gray-300'}`}
 						/>
-						{errors.C_EMAIL && <p className="text-red-500">{errors.C_EMAIL.message}</p>}
+						{errors.C_EMAIL  && (
+									<p className="text-red-500">{errors.C_EMAIL .message}</p>
+								)}
 
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
-									Password<span className="text-red-500">*</span>
+									{message.password}<span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
 									{...register('PATRON_PID', {
-										required: 'Password is required',
+										required: ' ',
 										minLength: {
 											value: PASSWORD_MIN_LENGTH,
-											message: `Password must be at least ${PASSWORD_MIN_LENGTH} characters`,
+											message: `${message.passwordValidation} ${PASSWORD_MIN_LENGTH} characters`,
 										},
 										pattern: {
 											value: /^(?=.*[A-Z]).*$/, // Regex to ensure at least one uppercase letter
 											message:
-												'Password must contain at least one uppercase letter',
+												`${message.passwordValidation}`,
 										},
 									})}
-									placeholder="Password"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.PATRON_PID ? 'border-red-500' : 'border-gray-300'}`}
 								/>
-								<p>(Must be more than 8 characters, At least one uppercase letter)</p>
+								<p>({message.passwordValidation})</p>
 								{errors.PATRON_PID && (
 									<p className="text-red-500">{errors.PATRON_PID.message}</p>
 								)}
@@ -250,18 +250,17 @@ const Register = () => {
 
 							<div className="flex-1">
 								<label className="font-semibold">
-									Confirm Password <span className="text-red-500">*</span>
+									{message.confirmPasswordLabel} <span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
 									{...register('PATRON_PID_RE', {
-										required: 'Please confirm your password',
+										required: ' ',
 										validate: (value) =>
 											value === watch('PATRON_PID') ||
-											'Passwords do not match',
+											`${message.passwordsDoNotMatch}`,
 									})}
-									placeholder="Confirm Password"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.PATRON_PID_RE ? 'border-red-500' : 'border-gray-300'}`}
 								/>
 								{errors.PATRON_PID_RE && (
 									<p className="text-red-500">{errors.PATRON_PID_RE.message}</p>
@@ -272,34 +271,26 @@ const Register = () => {
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
-									First Name <span className="text-red-500">*</span>
+									 {message.firstName} <span className="text-red-500">*</span>
 								</label>
 								<input
 									{...register('C_NAME_FIRST', {
-										required: 'First Name is required',
+										required: ' ',
 									})}
-									placeholder="First Name"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.C_NAME_FIRST ? 'border-red-500' : 'border-gray-300'}`}
 								/>
-								{errors.C_NAME_FIRST && (
-									<p className="text-red-500">{errors.C_NAME_FIRST.message}</p>
-								)}
 							</div>
 
 							<div className="flex-1">
 								<label className="font-semibold">
-									Last Name <span className="text-red-500">*</span>
+									{message.lastName} <span className="text-red-500">*</span>
 								</label>
 								<input
 									{...register('C_NAME_LAST', {
-										required: 'Last Name is required',
+										required: ' ',
 									})}
-									placeholder="Last Name"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.C_NAME_LAST ? 'border-red-500' : 'border-gray-300'}`}
 								/>
-								{errors.C_NAME_LAST && (
-									<p className="text-red-500">{errors.C_NAME_LAST.message}</p>
-								)}
 							</div>
 						</div>
 					</TabsContent>
@@ -307,61 +298,48 @@ const Register = () => {
 					{/* Step 2: Current Address */}
 					<TabsContent value="step2" className="p-6 bg-white shadow-md rounded-md">
 						<label className="font-semibold">
-							Address 1 <span className="text-red-500">*</span>
+							{message.address} <span className="text-red-500">*</span>
 						</label>
 						<input
 							{...register('C_STREET', {
-								required: 'Current address is required',
+								required: ' ',
 							})}
-							placeholder="Current Address"
-							className="border p-2 w-full mt-1"
+							className={`p-2 w-full mt-1 border ${errors.C_STREET ? 'border-red-500' : 'border-gray-300'}`}
 						/>
-						{errors.C_STREET && (
-							<p className="text-red-500">{errors.C_STREET.message}</p>
-						)}
 						<div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-4 mt-4">
 							<div className="sm:col-span-1">
 								<label className="font-semibold">
-									City <span className="text-red-500">*</span>
+									{message.city} <span className="text-red-500">*</span>
 								</label>
 								<input
 									{...register('C_CITY', {
-										required: 'City is required',
+										required: ' ',
 									})}
-									placeholder="City"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.C_CITY ? 'border-red-500' : 'border-gray-300'}`}
 								/>
-								{errors.C_CITY && (
-									<p className="text-red-500">{errors.C_CITY.message}</p>
-								)}
 							</div>
 
 							<div className="sm:col-span-1">
 								<label className="font-semibold">
-									Province / State <span className="text-red-500">*</span>
+									{message.provinceState} <span className="text-red-500">*</span>
 								</label>
 								<input
 									{...register('C_PROV_STATE', {
-										required: 'Province is required',
+										required: ' ',
 									})}
-									placeholder="Province"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.C_PROV_STATE ? 'border-red-500' : 'border-gray-300'}`}
 								/>
-								{errors.C_PROV_STATE && (
-									<p className="text-red-500">{errors.C_PROV_STATE.message}</p>
-								)}
 							</div>
 
 							<div className="sm:col-span-1">
 								<label className="font-semibold">
-									Postal Code / Zip Code <span className="text-red-500">*</span>
+									{message.postalCodeLabel} <span className="text-red-500">*</span>
 								</label>
 								<input
 									{...register('C_POSTAL_ZIP', {
-										required: 'Postal Code is required',
+										required: ' ',
 									})}
-									placeholder="Postal Code"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.C_POSTAL_ZIP ? 'border-red-500' : 'border-gray-300'}`}
 								/>
 								{errors.C_POSTAL_ZIP && (
 									<p className="text-red-500">{errors.C_POSTAL_ZIP.message}</p>
@@ -370,18 +348,14 @@ const Register = () => {
 
 							<div className="sm:col-span-1">
 								<label className="font-semibold">
-									Country <span className="text-red-500">*</span>
+									{message.country} <span className="text-red-500">*</span>
 								</label>
 								<input
 									{...register('C_COUNTRY', {
-										required: 'Country is required',
+										required: ' ',
 									})}
-									placeholder="Country"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.C_COUNTRY ? 'border-red-500' : 'border-gray-300'}`}
 								/>
-								{errors.C_COUNTRY && (
-									<p className="text-red-500">{errors.C_COUNTRY.message}</p>
-								)}
 							</div>
 						</div>
 					</TabsContent>
@@ -425,33 +399,33 @@ const Register = () => {
 						<div className={'flex justify-center'}>
 							<div>
 								<h2 className="text-lg font-semibold text-center mb-4">
-									Confirmation
+									{message.confirmation}
 								</h2>
 								<p className="text-center mb-6">
-									Review your details and complete the registration
+									{message.reviewDetails}
 								</p>
 								<ul className="list-disc pl-5 space-y-2">
 									<li>
-										<strong>Email:</strong> {watch('C_EMAIL')}
+										<strong>{message.email}:</strong> {watch('C_EMAIL')}
 									</li>
 									<li>
-										<strong>Full Name:</strong>{' '}
+										<strong>{message.fullName}:</strong>{' '}
 										{`${watch('C_NAME_FIRST')} ${watch('C_NAME_LAST')}`}
 									</li>
 									<li>
-										<strong>Address Line 1:</strong> {watch('C_STREET')}
+										<strong>{message.address}</strong> {watch('C_STREET')}
 									</li>
 									<li>
-										<strong>City:</strong> {watch('C_CITY')}
+										<strong>{message.city}:</strong> {watch('C_CITY')}
 									</li>
 									<li>
-										<strong>Province/State:</strong> {watch('C_PROV_STATE')}
+										<strong>{message.provinceState}:</strong> {watch('C_PROV_STATE')}
 									</li>
 									<li>
-										<strong>Country:</strong> {watch('C_COUNTRY')}
+										<strong>{message.country}:</strong> {watch('C_COUNTRY')}
 									</li>
 									<li>
-										<strong>Purpose:</strong> {watch('C_RES_PURPOSE')}
+										<strong>{message.purpose}:</strong> {watch('C_RES_PURPOSE')}
 									</li>
 								</ul>
 								<div className="flex justify-center scale-75 sm:scale-90 mr-[210px] sm:mr-[0px]">
@@ -462,8 +436,7 @@ const Register = () => {
 								</div>
 								{status === 300 && (
 									<p className="text-red-500 text-center mt-2">
-										That email address is already registered. Please try a
-										different one.
+										{message.emailAlreadyRegistered}
 									</p>
 								)}
 							</div>
@@ -476,7 +449,7 @@ const Register = () => {
 								type="button"
 								onClick={handlePrevStep}
 								className="w-[100px] bg-primary text-white px-4 py-2 rounded-md">
-								Previous
+								{message.previous}
 							</button>
 						)}
 						<button
@@ -486,7 +459,7 @@ const Register = () => {
 							className={`w-[100px] text-white px-4 py-2 rounded-md 
 							${currentStep === 4 && !recaptchaToken ? 'bg-gray-400' : 'bg-primary'}
 							${currentStep === 4 && !recaptchaToken ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
-							{currentStep === 4 ? 'Submit' : 'Next'}
+							{currentStep === 4 ? `${message.submit}` : `${message.next}`}
 						</button>
 					</div>
 				</Tabs>
@@ -506,10 +479,10 @@ const Register = () => {
 					<div className={'m-5'}>
 						<CircleCheck className="w-16 h-16" />
 					</div>
-					<h1 className="landing-page-title">We have sent a verification EMAIL to</h1>
+					<h1 className="landing-page-title">{message.verificationSent}</h1>
 					<div className="landing-page-title">'{userData.C_EMAIL}'</div>
 					<div className={'text-xl m-4'}>
-						Please check the email for further instructions
+						{message.checkEmailInstructions}
 					</div>
 					<Button className={'mt-4'}>
 						<a href="/">{message.home}</a>
@@ -518,8 +491,8 @@ const Register = () => {
 			) : (
 				<>
 					<div className={'flex flex-col justify-center items-center p-7'}>
-						<div className={' text-2xl font-extrabold'}>Sign Up Your User Account</div>
-						<div className={'text-lg'}>Fill all form field to go to next step</div>
+						<div className={' text-2xl font-extrabold'}>{message.signUpUserAccount}</div>
+						<div className={'text-lg'}>{message.fillAllFields}</div>
 					</div>
 					<div
 						className={

@@ -85,10 +85,9 @@ const ResetPin = () => {
 					<div className={'m-5'}>
 						<CircleCheck className="w-16 h-16" />
 					</div>
-					<h1 className="landing-page-title">Reset Password Confirmation</h1>
+					<h1 className="landing-page-title">{message.resetPasswordConfirmation}</h1>
 					<div className={'text-xl m-4'}>
-						You've successfully changed your password. Please log in with your new
-						password to access your account.
+						{message.passwordChangeSuccess}
 					</div>
 					<Button className={'mt-4'}>
 						<a href="/login.html">{message.logIn}</a>
@@ -101,53 +100,48 @@ const ResetPin = () => {
 						className="bg-gray-200 p-5 rounded-md w-5/6 flex flex-col justify-center items-center">
 						<div className="landing-page-title"> {message.password}</div>
 						<div className={'text-xl m-4 text-center'}>
-							Enter your new password to reset password.
+							{message.enterNewPassword}
 						</div>
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
-								<label className="font-semibold">
-									Password<span className="text-red-500">*</span>
+							<label className="font-semibold">
+									{message.password}<span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
 									{...register('PATRON_PID', {
-										required: 'Password is required',
+										required: ' ',
 										minLength: {
 											value: PASSWORD_MIN_LENGTH,
-											message: `Password must be at least ${PASSWORD_MIN_LENGTH} characters`,
+											message: `${message.passwordValidation} ${PASSWORD_MIN_LENGTH} characters`,
 										},
 										pattern: {
-											value: /^(?=.*[A-Z]).*$/,
+											value: /^(?=.*[A-Z]).*$/, // Regex to ensure at least one uppercase letter
 											message:
-												'Password must contain at least one uppercase letter',
+												`${message.passwordValidation}`,
 										},
 									})}
-									placeholder="Password"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.PATRON_PID ? 'border-red-500' : 'border-gray-300'}`}
 								/>
-								<p>
-									(Must be more than 8 characters, At least one uppercase letter)
-								</p>
+								<p>({message.passwordValidation})</p>
 								{errors.PATRON_PID && (
 									<p className="text-red-500">{errors.PATRON_PID.message}</p>
 								)}
 							</div>
 
 							<div className="flex-1">
-								<label className="font-semibold">
-									{message.confirm}
-									{message.password} <span className="text-red-500">*</span>
+							<label className="font-semibold">
+									{message.confirmPasswordLabel} <span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
 									{...register('PATRON_PID_RE', {
-										required: 'Please confirm your password',
+										required: `${message.passwordsDoNotMatch}`,
 										validate: (value) =>
 											value === watch('PATRON_PID') ||
-											'Passwords do not match',
+											`${message.passwordsDoNotMatch}`,
 									})}
-									placeholder="Confirm Password"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.PATRON_PID_RE ? 'border-red-500' : 'border-gray-300'}`}
 								/>
 								{errors.PATRON_PID_RE && (
 									<p className="text-red-500">{errors.PATRON_PID_RE.message}</p>
@@ -156,7 +150,7 @@ const ResetPin = () => {
 						</div>
 						{status == '208' && (
 							<p className="text-red-500 my-2">
-								New password cannot be the same as old password.
+								{message.newPasswordSameAsOld}
 							</p>
 						)}
 						<Button className={'mt-5'}>{message.submit}</Button>

@@ -93,7 +93,6 @@ const ResetPin = () => {
 								</label>
 								<input
 									disabled={loading}
-									type="password"
 									{...register('C_CLIENT_NUMBER', {
 										required: `${message.cardNumberRequired}`,
 										minLength: {
@@ -101,12 +100,8 @@ const ResetPin = () => {
 											message: `${message.cardNumberRequired}`,
 										},
 									})}
-									placeholder="Card number"
-									className="border p-2 w-full mt-1"
+									className={`p-2 w-full mt-1 border ${errors.C_CLIENT_NUMBER ? 'border-red-500' : 'border-gray-300'}`}
 								/>
-								{errors.C_CLIENT_NUMBER && (
-									<p className="text-red-500">{errors.C_CLIENT_NUMBER.message}</p>
-								)}
 								{status == '200' && (
 									<p className="text-red-500">
 										{message.unknownPatronName}
