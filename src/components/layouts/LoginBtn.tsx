@@ -23,7 +23,7 @@ const LoginBtn = ({ className }: { className?: string }) => {
 					<DropdownMenuTrigger asChild className={'focus:outline-none focus:border-none'}>
 						<button
 							className={
-								'bg-red text-lg font-bold flex items-center max-w-[250px] truncate'
+								'text-opac-white text-lg font-bold flex items-center max-w-[250px] truncate'
 							}>
 							{message.welcome}, {getCookieValue('M2L_PATRON_NAME')}!
 							<ChevronDown className={'h-4'} />

@@ -112,5 +112,6 @@
 	"calendar": "Calendar",
 	"online": "Online",
 	"onlineTip": "Use the meeting link to access the session!",
-	"inPersonTip": "Please be in the room before meeting time"
+	"inPersonTip": "Please be in the room before meeting time",
+	"dashboardHome": "Dashboard Home"
 }

@@ -22,6 +22,7 @@ import AdminMessage from '@/page/admin/Message'
 import AdminStyles from '@/page/admin/Styles'
 import PatronProfile from '@/page/PatronProfile'
 import PatronInfo from '@/page/PatronInfo'
+import Enquiry from '@/page/Enquiry'
 import AdminCollections from '@/page/admin/Collections'
 import AdminDescription from '@/page/admin/Description'
 import AdminSettings from '@/page/admin/Settings'
@@ -56,6 +57,7 @@ export const ROUTES: TRoute = {
 	museum: Museum,
 	patronprofile: PatronProfile,
 	patroninfo: PatronInfo,
+	enquiry: Enquiry,
 	'rsvp-cancel': RSVPCancel,
 	'rsvp-confirm': RSVPConfirm,
 	'no-record': NoRecord,
