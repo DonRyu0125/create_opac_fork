@@ -162,7 +162,7 @@ const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilt
 		)
 
 		return `${firstDayOfWeek.toLocaleString(message.dateType, { month: 'short' })} ${firstDayOfWeek.getDate()} -  
-		${firstDayOfWeek.getMonth() !== nextDay.getMonth() ? nextDay.toLocaleString(message.dateType, { month: 'long' }) : ''} ${nextDay.getDate()}, ${currentDate.getFullYear()}`
+		${firstDayOfWeek.getMonth() !== nextDay.getMonth() ? nextDay.toLocaleString(message.dateType, { month: 'short' }) : ''} ${nextDay.getDate()}, ${currentDate.getFullYear()}`
 	}
 
 	return (
