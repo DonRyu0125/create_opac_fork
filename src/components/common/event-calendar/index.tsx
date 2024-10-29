@@ -260,7 +260,7 @@ const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilt
 							return (
 								<div
 									key={key}
-									className="rounded border border-black cursor-pointer max-w-44 h-32 w-full">
+									className="rounded border border-black cursor-pointer h-32 w-full">
 									<EventCalendarEventList
 										dayObj={item}
 										currentFilter={currentFilter}
@@ -284,7 +284,7 @@ const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilt
 									<div
 										key={key}
 										className={cn(
-											'rounded border border-black cursor-pointer md:max-w-44 md:h-96 w-full ',
+											'rounded border border-black cursor-pointer  md:h-96 w-full ',
 											weekType && 'col-span-7 md:col-span-1 w-full min-h-min'
 										)}>
 										<EventCalendarEventList
