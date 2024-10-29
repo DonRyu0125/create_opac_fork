@@ -144,5 +144,10 @@
 	"newPasswordSameAsOld": "New password cannot be the same as old password",
 	"enterNewPassword": "Enter your new password to reset your password",
 	"passwordChangeSuccess": "You've successfully changed your password. Please log in with your new password to access your account.",
-	"resetPasswordConfirmation": "Reset Password Confirmation"
+	"resetPasswordConfirmation": "Reset Password Confirmation",
+	"yourDetailLabel": "Your Detail",
+	"currentAddressLabel": "Current Address",
+	"surveyLabel": "Survey",
+	"confirmationLabel": "Confirmation",
+	"stepLabel": "Step"
 }

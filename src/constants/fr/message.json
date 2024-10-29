@@ -144,6 +144,11 @@
 	"newPasswordSameAsOld": "Le nouveau mot de passe ne peut pas être le même que l'ancien mot de passe.",
 	"enterNewPassword": "Entrez votre nouveau mot de passe pour réinitialiser le mot de passe.",
 	"passwordChangeSuccess": "Vous avez réussi à changer votre mot de passe. Veuillez vous connecter avec votre nouveau mot de passe pour accéder à votre compte.",
-	"resetPasswordConfirmation": "Confirmation de réinitialisation du mot de passe"
+	"resetPasswordConfirmation": "Confirmation de réinitialisation du mot de passe",
+	"yourDetailLabel": "Vos Détails",
+	"currentAddressLabel": "Adresse Actuelle",
+	"surveyLabel": "Enquête",
+	"confirmationLabel": "Confirmation",
+	"stepLabel": "Step"
 }
 

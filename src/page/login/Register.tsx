@@ -180,10 +180,10 @@ const Register = () => {
 					{/* Tabs List */}
 					<TabsList className="bg-gray-400 p-5 min-h-[300px] md:min-h-[70px] flex flex-wrap justify-evenly mb-6 w-full text-white">
 						{[
-							{ value: 'step1', label: 'Step 1: Your Detail' },
-							{ value: 'step2', label: 'Step 2: Current Address' },
-							{ value: 'step3', label: 'Step 3: Survey' },
-							{ value: 'step4', label: 'Step 4: Confirmation' },
+							{ value: 'step1', label: `${message.stepLabel} 1: ${message.yourDetailLabel}` },
+							{ value: 'step2', label: `${message.stepLabel} 2: ${message.currentAddressLabel}` },
+							{ value: 'step3', label: `${message.stepLabel} 3: ${message.surveyLabel}`},
+							{ value: 'step4', label: `${message.stepLabel} 4: ${message.confirmationLabel}` },
 						].map((tab, idx) => (
 							<TabsTrigger
 								key={tab.value}
