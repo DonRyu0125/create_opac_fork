@@ -1,7 +1,8 @@
+import { LanguageSelect } from '@/components/common/LanguageSelect'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import useConstants from '@/hooks/useConstants'
-import { getHomeSessionID } from '@/lib/utils'
+import { getHomeSessionID, getSessionID } from '@/lib/utils'
 import axios from 'axios'
 import { useState } from 'react'
 
@@ -11,6 +12,7 @@ const Login = () => {
 	const [password, setPassword] = useState('')
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(null)
+	const { message } = useConstants()
 
 	const handleSubmit = async (event: any) => {
 		event.preventDefault()
@@ -57,16 +59,16 @@ const Login = () => {
 
 				<main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
 					<div className="w-full">
-						<div className={'flex  items-center'}>
-							<div>
+						<div className={'flex items-center justify-between'}>
+							<div className={'flex items-center'}>
 								<a className="block text-teal-600" href="/">
-									<span className="sr-only ">Home</span>
 									<img className="h-14" src={config.logo} alt="logo" />
 								</a>
+								<h1 className="ml-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+									{message.logIn}
+								</h1>
 							</div>
-							<h1 className="ml-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-								Account Login
-							</h1>
+							<LanguageSelect />
 						</div>
 
 						{/* Display error message if any */}
@@ -77,7 +79,7 @@ const Login = () => {
 								<label
 									htmlFor="Email"
 									className="block text-sm font-medium text-gray-700">
-									Account Number
+									{message.accountNumber}
 								</label>
 								<Input
 									type="text"
@@ -92,7 +94,7 @@ const Login = () => {
 								<label
 									htmlFor="Password"
 									className="block text-sm font-medium text-gray-700">
-									Password
+									{message.password}
 								</label>
 								<Input
 									type="password"
@@ -108,16 +110,23 @@ const Login = () => {
 									type="submit"
 									variant="default"
 									disabled={loading}>
-									{loading ? 'Logging in...' : 'Login'}
+									{message.logIn}
 								</Button>
 							</div>
 						</form>
 						<div className={'flex mt-1'}>
-							<div>I don't have a login.</div>
+							<div>{message.noLogin}</div>
 							<a
-								href="/register.html"
+								href={`/scripts/mwimain.dll/144/CLIENT_VIEW?DIRECTSEARCH`}
 								className={'border-b-2 border-b-black ml-[10px] h-[22px]'}>
-								Create an Account
+								{message.createAccount}
+							</a>
+						</div>
+						<div>
+							<a
+								href={`/forgot-pin.html`}
+								className={'border-b-2 border-b-black h-[22px]'}>
+								{message.forgotPassword}
 							</a>
 						</div>
 					</div>
