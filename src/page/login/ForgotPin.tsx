@@ -71,9 +71,9 @@ const ResetPin = () => {
 					<div className={'m-5'}>
 						<CircleCheck className="w-16 h-16" />
 					</div>
-					<h1 className="landing-page-title">We have sent a verification EMAIL</h1>
+					<h1 className="landing-page-title">{message.verificationSent}</h1>
 					<div className={'text-xl m-4'}>
-						Please check the emtail for further instructions
+						{message.checkEmailInstructions}
 					</div>
 				</div>
 			) : (
@@ -81,24 +81,24 @@ const ResetPin = () => {
 					<form
 						onSubmit={handleSubmit(onSubmit)}
 						className="bg-gray-200 p-5 rounded-md w-5/6 flex flex-col justify-center items-center">
-						<div className="landing-page-title"> Forgotten {message.password}</div>
+						<div className="landing-page-title"> {message.forgotPassword}</div>
 						<div className={'text-xl m-4 max-w-[560px]'}>
-							Enter your account number to request a new password.
+							{message.forgottenPasswordInstructions}
 						</div>
 
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
-									Card number <span className="text-red-500">*</span>
+									{message.cardNumber} <span className="text-red-500">*</span>
 								</label>
 								<input
 									disabled={loading}
 									type="password"
 									{...register('C_CLIENT_NUMBER', {
-										required: 'Card number is required',
+										required: `${message.cardNumberRequired}`,
 										minLength: {
 											value: PASSWORD_MIN_LENGTH,
-											message: `Card number is required`,
+											message: `${message.cardNumberRequired}`,
 										},
 									})}
 									placeholder="Card number"
@@ -109,7 +109,7 @@ const ResetPin = () => {
 								)}
 								{status == '200' && (
 									<p className="text-red-500">
-										Unknown Patron Name, Please try again
+										{message.unknownPatronName}
 									</p>
 								)}
 							</div>

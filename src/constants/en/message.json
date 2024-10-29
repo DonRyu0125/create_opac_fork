@@ -119,5 +119,11 @@
 	"noLogin": "I don't have a login",
 	"createAccount": "Create an Account",
 	"forgotPassword": "I Forgot my password",
-	"accountNumber": "Account Number"
+	"accountNumber": "Account Number",
+	"verificationSent": "We have sent a verification email.",
+    "checkEmailInstructions": "Please check the email for further instructions.",
+    "forgottenPasswordInstructions": "Enter your account number to request a new password",
+    "cardNumber": "Card number",
+    "cardNumberRequired": "Card number is required",
+    "unknownPatronName": "Unknown patron name, please try again"
 }

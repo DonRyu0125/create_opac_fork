@@ -119,5 +119,11 @@
 	"noLogin": "Je n'ai pas de connexion",
     "createAccount": "Créer un compte",
     "forgotPassword": "J'ai oublié mon mot de passe",
-    "accountNumber": "Numéro de compte"
+    "accountNumber": "Numéro de compte",
+	"verificationSent": "Nous avons envoyé un e-mail de vérification.",
+    "checkEmailInstructions": "Veuillez vérifier l'e-mail pour plus d'instructions.",
+    "forgottenPasswordInstructions": "Entrez votre numéro de compte pour demander un nouveau mot de passe",
+    "cardNumber": "Numéro de carte",
+    "cardNumberRequired": "Le numéro de carte est requis",
+    "unknownPatronName": "Nom d'usager inconnu, veuillez réessayer"
 }
