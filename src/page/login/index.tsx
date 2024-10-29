@@ -1,3 +1,4 @@
+import { LanguageSelect } from '@/components/common/LanguageSelect'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import useConstants from '@/hooks/useConstants'
@@ -45,7 +46,6 @@ const Login = () => {
 		}
 	}
 
-
 	return (
 		<section className="bg-white">
 			<div className="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -59,16 +59,17 @@ const Login = () => {
 
 				<main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
 					<div className="w-full">
-						<div className={'flex  items-center'}>
-							<div>
+						<div className={'flex items-center justify-between'}>
+							<div className={'flex items-center'}>
 								<a className="block text-teal-600" href="/">
 									<span className="sr-only ">Home</span>
 									<img className="h-14" src={config.logo} alt="logo" />
 								</a>
+								<h1 className="ml-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+									Account Login
+								</h1>
 							</div>
-							<h1 className="ml-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-								Account Login
-							</h1>
+							<LanguageSelect />
 						</div>
 
 						{/* Display error message if any */}

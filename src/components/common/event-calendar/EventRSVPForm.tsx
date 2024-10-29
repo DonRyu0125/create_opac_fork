@@ -152,8 +152,8 @@ const ShowForm = ({
 	return (
 		<div className={'h-full w-full p-1 border-2 rounded text-lg'}>
 			{loading && <Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />}
-			<div className={'bg-primary p-1 text-white text-center'}>
-				<span className={'text-gray-400'}>RSVP</span>
+			<div className={'bg-primary p-1 text-white'}>
+				<span className={'text-gray-400'}>Login?</span>
 			</div>
 			<form
 				onSubmit={handleSubmit(handleFormSubmit)} // Use handleFormSubmit here
