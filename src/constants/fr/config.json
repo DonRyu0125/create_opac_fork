@@ -5,7 +5,7 @@
 		"login": true,
 		"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]login.html"
 	},
-	"reCaptchaKey":"6LcOFlYqAAAAAHc_oWNTonTkkRdzvQ30B42eQm6r",
+	"reCaptchaKey": "6LcOFlYqAAAAAHc_oWNTonTkkRdzvQ30B42eQm6r",
 	"navigations": [
 		{
 			"url": "/",

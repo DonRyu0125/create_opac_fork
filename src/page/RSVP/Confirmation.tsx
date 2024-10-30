@@ -144,9 +144,7 @@ const RSVPConfirm = () => {
 					setStatus(STATUS_TYPE.Full)
 					return { status: false }
 				}
-				// Adding event description at the patronInfo to bring to RSVPRegConfirmTmp email
-				// TAG_FUNC_LOC_DECis too big to get from the query string so I try to add when the user registartion info is valid
-				return { status: true, [TAG_FUNC_LOC_DEC]: event[0].TAG_FUNC_LOC_DEC }
+				return { status: true}
 			})
 			.catch((error) => {
 				throw error
@@ -234,7 +232,7 @@ const RSVPConfirm = () => {
 		)
 		return await axios
 			.post(
-				`${obj.HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${patronInfo.TAG_FUNC_O ? '[CALENDAR]RSVPRegOnlineComfrimTmp.txt' : '[CALENDAR]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
+				`${obj.HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${patronInfo.TAG_FUNC_O ? '[OPAC_EMAIL_TMP]RSVPRegOnlineComfrimTmp.txt' : '[OPAC_EMAIL_TMP]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
 					'EVENT_EMAIL_LOGO':logo,
