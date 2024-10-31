@@ -6,6 +6,7 @@ import {
 	BD_DIS_ACC,
 	BD_DIS_ACC_DETAI,
 	BD_DIS_ACC_TYPE,
+	Cal_event,
 	ContactInfoRSVP,
 	MEDIA_TYPE,
 	TAG_FUNC_DATE,
@@ -20,11 +21,13 @@ import { getContactInfo } from './Service'
 
 export interface ImageCarouselProps {
 	items: any
-	elm: any
+	elm: Cal_event
 	contactInfo: ContactInfoRSVP[]
 }
 
-const RSVPCarousel = ({ items = [], elm, contactInfo }: ImageCarouselProps) => {
+
+
+const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 	const [current, setCurrent] = React.useState(0)
 	const currentMedia = items[current]
 	const message = useConstants().message

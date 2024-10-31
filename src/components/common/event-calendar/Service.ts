@@ -61,27 +61,16 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 				},
 			}
 		)
-		const x2js = new X2JS()
+		const x2js = new X2JS({
+			arrayAccessFormPaths: [
+				"div.xml.event.FLOC_IM_REF_GRP", 
+				"div.xml.event.FLOC_VD_REF_GRP"
+			  ]
+		})
 		const jsonData: any = x2js.xml2js(response.data)
 		const events = jsonData?.div?.xml?.event
 		let arr = convertToArr(events)
-
-		let formatEvents = arr?.map((item: any) => {
-			if (item?.FLOC_IM_REF_GRP && item?.FLOC_VD_REF_GRP) {
-				return {
-					...item,
-					FLOC_IM_REF_GRP: Array.isArray(item.FLOC_IM_REF_GRP)
-						? item.FLOC_IM_REF_GRP
-						: [],
-					FLOC_VD_REF_GRP: Array.isArray(item.FLOC_VD_REF_GRP)
-						? item.FLOC_VD_REF_GRP
-						: [],
-				}
-			}
-			return {...item}
-		})
-	
-		return formatEvents
+		return arr
 	} catch (error) {
 		throw error
 	}

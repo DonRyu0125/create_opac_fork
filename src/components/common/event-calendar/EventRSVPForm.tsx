@@ -153,7 +153,7 @@ const ShowForm = ({
 		<div className={'h-full w-full p-1 border-2 rounded text-lg'}>
 			{loading && <Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />}
 			<div className={'bg-primary p-1 text-white'}>
-				<span className={'text-gray-400'}>{message.logIn}?</span>
+				<a href={`${conf.auth.url}`}><span className={'text-gray-400'}>{message.logIn}?</span></a>
 			</div>
 			<form
 				onSubmit={handleSubmit(handleFormSubmit)} // Use handleFormSubmit here
