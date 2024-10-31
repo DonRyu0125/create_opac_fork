@@ -32,7 +32,6 @@ const Login = () => {
 			// login.html ==> static page(middleman) ==> ?SEARCH Report
 			switch (response.status) {
 				case 200:
-					// console.log('Login successful', response.data);
 					console.log(response)
 					window.location.href =
 						getHomeSessionID() +
