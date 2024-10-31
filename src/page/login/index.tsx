@@ -22,7 +22,7 @@ const Login = () => {
 		try {
 			const response = await axios.post(
 				'/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144',
-				{ PATRON_ID: accountNumber, PATRON_PID: password },
+				{ C_CLIENT_NUMBER: accountNumber, PATRON_PID: password },
 				{
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded', // Change to match your backend requirements

@@ -19,6 +19,12 @@ import EventRSVPCancel from './EventCancel'
 import RSVPCarousel from './RSVPCarousel'
 
 const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
+	const combined_VD_IMAG_Array_for_carousel = [
+		...(elm[FLOC_IM_REF_GRP] || []), 
+		...(elm[FLOC_VD_REF_GRP] || [])
+	  ];
+	  
+	  console.log('combined_VD_IMAG_Array',combined_VD_IMAG_Array_for_carousel)
 	return (
 		<div
 			key={key}
@@ -29,7 +35,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 			<div className={'w-full md:h-full sm:w-8/12 '}>
 				<RSVPCarousel
 					elm={elm}
-					items={elm[FLOC_IM_REF_GRP].concat(elm[FLOC_VD_REF_GRP])}
+					items={combined_VD_IMAG_Array_for_carousel}
 					contactInfo={contactInfo}
 				/>
 				<DialogDescription
