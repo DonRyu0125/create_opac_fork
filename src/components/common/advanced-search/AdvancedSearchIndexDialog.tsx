@@ -165,7 +165,7 @@ const AdvancedSearchIndexDialog = ({
 				<Button
 					disabled={!field ? true : false}
 					className={
-						'h-full w-[50px] px-0 flex items-center justify-center overflow-hidden ml-3 bg-opac-secondary '
+						'h-full w-[50px] px-0 flex items-center justify-center overflow-hidden ml-3 bg-primary '
 					}>
 					<Menu />
 				</Button>
@@ -188,7 +188,7 @@ const AdvancedSearchIndexDialog = ({
 						<Input
 							required
 							className={
-								'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-opac-secondary text-black rounded-l-md ring-inset'
+								'w-full rounded-none pl-4 border-2 py-3 bg-transparent border-primary text-black rounded-l-md ring-inset'
 							}
 							name="keyvalue"
 							onChange={handleKeyvalueChange}
@@ -199,7 +199,7 @@ const AdvancedSearchIndexDialog = ({
 					<Button
 						variant={'default'}
 						onClick={() => getClusterBySearch(keyvalue, cluster.keyname, cluster.find)}
-						className="right-0 top-0 h-full bg-opac-secondary rounded-l-lg "
+						className="right-0 top-0 h-full bg-primary rounded-l-lg "
 						type="submit">
 						<span className="block">
 							<Search className="w-4 h-4" />
