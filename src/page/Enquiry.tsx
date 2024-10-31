@@ -30,7 +30,7 @@ const Enquiry = () => {
 
     return (
         <PatronLayout>
-            <h1 className="text-2xl font-bold mb-4">Enquiries Welcome, {records[0]?.enq_id || 'User'}</h1>
+            <h1 className="text-2xl font-bold">Enquiries</h1>
             
           <ProfileTable></ProfileTable>
 

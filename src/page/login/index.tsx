@@ -22,7 +22,7 @@ const Login = () => {
 		try {
 			const response = await axios.post(
 				'/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144',
-				{ PATRON_ID: accountNumber, PATRON_PID: password },
+				{ C_CLIENT_NUMBER: accountNumber, PATRON_PID: password },
 				{
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded', // Change to match your backend requirements
@@ -36,7 +36,7 @@ const Login = () => {
 					console.log(response)
 					window.location.href =
 						getHomeSessionID() +
-						'?SEARCH&DATABASE=PATRON&REPORT=WEB_PATRON_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+						'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 					break
 			}
 		} catch (err) {
@@ -84,7 +84,7 @@ const Login = () => {
 								<Input
 									type="text"
 									id="Email"
-									name="PATRON_ID"
+									name="C_CLIENT_NUMBER"
 									value={accountNumber}
 									onChange={(e) => setAccountNumber(e.target.value)}
 								/>
