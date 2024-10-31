@@ -29,6 +29,7 @@ export interface Cal_event {
 	[TAG_FUNC_O_ID]: string
 	[TAG_FUNC_O_PATH]: string
 	[TAG_FUNC_O_CODE]: string
+	[TAG_FUNC_LOC_MAX]: string
 }
 
 // export type ImageProps = {

@@ -151,6 +151,7 @@
 	"currentAddressLabel": "Adresse Actuelle",
 	"surveyLabel": "Enquête",
 	"confirmationLabel": "Confirmation",
-	"stepLabel": "Step"
+	"stepLabel": "Step",
+	"eventEndedMessage": "Fermé"
 }
 
