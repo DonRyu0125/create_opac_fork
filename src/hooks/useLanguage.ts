@@ -1,5 +1,5 @@
 import { db } from '@/db/client'
-import { ENGLISH_CODE, FRENCH_CODE } from '@/types/lang'
+import { ENGLISH_CODE } from '@/types/lang'
 import { useLiveQuery } from 'dexie-react-hooks'
 
 export const useLanguage = () => {

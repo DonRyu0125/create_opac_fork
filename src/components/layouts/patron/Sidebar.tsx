@@ -10,6 +10,7 @@ import {
 	BookMarked,
 	Lightbulb,
 	MessageCircleMore,
+	CalendarDays
 } from 'lucide-react'
 
 type Props = {}
@@ -23,7 +24,7 @@ const Sidebar = (props: Props) => {
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Link
-							href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=PATRON&REPORT=WEB_PATRON_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"}
+							href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=CLIENT&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"}
 							className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8">
 							<Home className="h-5 w-5" />
 							<span className="sr-only">Patron Dashboard</span>
@@ -102,6 +103,17 @@ const Sidebar = (props: Props) => {
 						</Link>
 					</TooltipTrigger>
 					<TooltipContent side="right">Crowdsource</TooltipContent>
+				</Tooltip>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
+							href="#"
+							className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground hover:bg-neutral-200 rounded-full hover:text-slate-700 md:h-8 md:w-8">
+							<CalendarDays className="h-5 w-5" />
+							<span className="sr-only">Calendar</span>
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent side="right">Calendar</TooltipContent>
 				</Tooltip>
 			</nav>
 			<nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">

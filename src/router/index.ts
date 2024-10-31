@@ -23,6 +23,7 @@ import AdminStyles from '@/page/admin/Styles'
 import PatronProfile from '@/page/PatronProfile'
 import PatronInfo from '@/page/PatronInfo'
 import Enquiry from '@/page/Enquiry'
+import Calendar from '@/page/Calendar'
 import AdminCollections from '@/page/admin/Collections'
 import AdminDescription from '@/page/admin/Description'
 import AdminSettings from '@/page/admin/Settings'
@@ -59,6 +60,7 @@ export const ROUTES: TRoute = {
 	patronprofile: PatronProfile,
 	patroninfo: PatronInfo,
 	enquiry: Enquiry,
+	calendar: Calendar,
 	'forgot-pin':ForgotPin,
 	'reset-pin': ResetPin,
 	'rsvp-cancel': RSVPCancel,
