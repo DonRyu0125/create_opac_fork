@@ -32,7 +32,7 @@ const LoginBtn = ({ className }: { className?: string }) => {
 					<DropdownMenuContent align="end" className={'w-full'}>
 						<DropdownMenuLabel>{message.myAccount}</DropdownMenuLabel>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem><Link href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=CLIENT&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"}>{message.dashboardHome}</Link></DropdownMenuItem>
+						<DropdownMenuItem><Link href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"}>{message.dashboardHome}</Link></DropdownMenuItem>
 						<DropdownMenuItem>{message.accountSettings}</DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem>
