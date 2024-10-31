@@ -40,7 +40,7 @@ const EventCalendarEventList = ({
 	const [monthType, __] = useAtom(calendarMonthType)
 	useEffect(() => {
 		const updatedFilteredEvents = currentEvent?.filter((item: any) => {
-			const { day, month, year } = changeStrToDate(item[TAG_FUNC_DATE])
+			const { day, month, year } = changeStrToDate(item?.TAG_FUNC_DATE)
 			const isMatchingDayMonth =
 				day === dayObj.day && month === dayObj.month && year === dayObj.year
 			if (currentFilter.length > 0) {
