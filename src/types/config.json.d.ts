@@ -7,17 +7,27 @@
 
 export type SiteName = string;
 export type Logo = string;
+export type Login = boolean;
 export type Url = string;
+export type Url1 = string;
 export type Title = string;
+export type SearchDatabase = string;
 export type Navigations = {
-  url?: Url;
+  url?: Url1;
   title?: Title;
+  search_database?: SearchDatabase;
   [k: string]: unknown;
 }[];
 
 export interface ConfigJson {
   siteName?: SiteName;
   logo?: Logo;
+  auth?: Auth;
   navigations?: Navigations;
+  [k: string]: unknown;
+}
+export interface Auth {
+  login?: Login;
+  url?: Url;
   [k: string]: unknown;
 }

@@ -109,6 +109,12 @@ export type AdvIdxSubmitWarnMsg = string;
 export type AdvIdxSelectWarnMsg = string;
 export type NoKeyFound = string;
 export type BrowseCluster = string;
+export type Support = string;
+export type MyAccount = string;
+export type Logout = string;
+export type Welcome = string;
+export type DashboardHome = string;
+export type AccountSettings = string;
 <<<<<<< HEAD
 export type Search = string;
 =======
@@ -219,9 +225,5 @@ export interface MessageJson {
   advIdxSelectWarnMsg?: AdvIdxSelectWarnMsg;
   NoKeyFound?: NoKeyFound;
   BrowseCluster?: BrowseCluster;
-<<<<<<< HEAD
-  Search?: Search;
-=======
->>>>>>> df2cf49b8a1a8f993ef8efef18b747b857a8d87b
   [k: string]: unknown;
 }

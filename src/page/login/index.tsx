@@ -36,7 +36,7 @@ const Login = () => {
 					console.log(response)
 					window.location.href =
 						getHomeSessionID() +
-						'?SEARCH&DATABASE=PATRON&REPORT=WEB_PATRON_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+						'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 					break
 			}
 		} catch (err) {
@@ -84,7 +84,7 @@ const Login = () => {
 								<Input
 									type="text"
 									id="Email"
-									name="PATRON_ID"
+									name="C_CLIENT_NUMBER"
 									value={accountNumber}
 									onChange={(e) => setAccountNumber(e.target.value)}
 								/>
@@ -99,7 +99,7 @@ const Login = () => {
 								<Input
 									type="password"
 									id="Password"
-									name="PATRON"
+									name="PATRON_PID"
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 								/>

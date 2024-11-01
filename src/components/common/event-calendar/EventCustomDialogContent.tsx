@@ -24,7 +24,6 @@ const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 		...(elm[FLOC_VD_REF_GRP] || [])
 	  ];
 	  
-	  console.log('combined_VD_IMAG_Array',combined_VD_IMAG_Array_for_carousel)
 	return (
 		<div
 			key={key}

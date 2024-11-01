@@ -16,10 +16,13 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import useConstants from '@/hooks/useConstants'
+import { getCookieValue } from '@/lib/utils'
 import { Home, PanelLeft } from 'lucide-react'
 type Props = {}
 
 const Header = (props: Props) => {
+	const { message, config } = useConstants()
 	function deleteCookie(cname: string) {
 		document.cookie = cname + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
 	}
@@ -106,10 +109,15 @@ const Header = (props: Props) => {
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end">
-					<DropdownMenuLabel>My Account</DropdownMenuLabel>
+					<DropdownMenuLabel>Patron Dashboard</DropdownMenuLabel>
+					<DropdownMenuItem><Link href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"}>{message.dashboardHome}</Link></DropdownMenuItem>
+					<DropdownMenuItem>Account Settings</DropdownMenuItem>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem>Settings</DropdownMenuItem>
-					<DropdownMenuItem>Support</DropdownMenuItem>
+					<DropdownMenuLabel>Search Database</DropdownMenuLabel>
+					<DropdownMenuItem><Link href="/">All</Link></DropdownMenuItem>
+					<DropdownMenuItem>Archives</DropdownMenuItem>
+					<DropdownMenuItem>Museum</DropdownMenuItem>
+					<DropdownMenuItem>Library</DropdownMenuItem>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem>
 						<Link onClick={clearCookies}>Logout</Link>

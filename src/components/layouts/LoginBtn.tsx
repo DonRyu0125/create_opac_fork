@@ -23,7 +23,7 @@ const LoginBtn = ({ className }: { className?: string }) => {
 					<DropdownMenuTrigger asChild className={'focus:outline-none focus:border-none'}>
 						<button
 							className={
-								'bg-red text-lg font-bold flex items-center max-w-[250px] truncate'
+								'text-opac-white text-lg font-bold flex items-center max-w-[250px] truncate'
 							}>
 							{message.welcome}, {getCookieValue('M2L_PATRON_NAME')}!
 							<ChevronDown className={'h-4'} />
@@ -32,8 +32,8 @@ const LoginBtn = ({ className }: { className?: string }) => {
 					<DropdownMenuContent align="end" className={'w-full'}>
 						<DropdownMenuLabel>{message.myAccount}</DropdownMenuLabel>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>{message.searchButton}</DropdownMenuItem>
-						<DropdownMenuItem>{message.support}</DropdownMenuItem>
+						<DropdownMenuItem><Link href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"}>{message.dashboardHome}</Link></DropdownMenuItem>
+						<DropdownMenuItem>{message.accountSettings}</DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem>
 							<Link onClick={clearCookies}>{message.logout}</Link>
