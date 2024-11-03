@@ -6,7 +6,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../ui/sheet'
 import useConstants from '@/hooks/useConstants'
 import { LanguageSelect } from '../common/LanguageSelect'
 import Link from '../common/Link'
-import LoginBtn from './LoginBtn'
+import LoginBtn from '../common/LoginBtn'
 
 const MobileMenu = () => {
 	const [mobileMenu, setMobileMenu] = useState<boolean>(false)

@@ -7,24 +7,27 @@ on:
 jobs:
     format-and-lint:
         runs-on: ubuntu-latest
-        name: npm lint and format
+        name: Lint, Format Code
+
+        strategy:
+            matrix:
+                node-version: [16.x, 18.x] # Run on multiple Node.js versions if needed
 
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v3
 
-            - uses: pnpm/action-setup@v2.2.4
-              name: Install pnpm
-              id: pnpm-install
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
               with:
-                  version: 8.6.1
-                  run_install: false
+                  node-version: ${{ matrix.node-version }}
+                  cache: 'npm' # Cache npm dependencies
 
             - name: Install Dependencies
-              run: pnpm install
+              run: npm ci # Faster than install and ensures a clean install
 
             - name: Format Code
-              run: pnpm run format
+              run: npm run format
 
             - name: Lint Code
-              run: pnpm run lint
+              run: npm run lint

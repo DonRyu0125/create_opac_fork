@@ -31,10 +31,11 @@ import Register from '@/page/login/Register'
 import ResetPin from '@/page/login/ResetPin'
 import ForgotPin from '@/page/login/ForgotPin'
 
-export type TRoute = Record<string, () => React.ReactNode>
+export type TRoute = Record<string, (props?: any) => JSX.Element>
 
 const ADMIN_ROUTES: TRoute = {
 	admin: Admin,
+	'admin-login': Login,
 	'admin-fields': Fields,
 	'admin-home': AdminHome,
 	'admin-biblio': AdminHome,
@@ -61,7 +62,7 @@ export const ROUTES: TRoute = {
 	patroninfo: PatronInfo,
 	enquiry: Enquiry,
 	calendar: Calendar,
-	'forgot-pin':ForgotPin,
+	'forgot-pin': ForgotPin,
 	'reset-pin': ResetPin,
 	'rsvp-cancel': RSVPCancel,
 	'rsvp-confirm': RSVPConfirm,

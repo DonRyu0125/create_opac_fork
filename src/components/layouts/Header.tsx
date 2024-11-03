@@ -1,7 +1,7 @@
 import useConstants from '@/hooks/useConstants'
 import { LanguageSelect } from '../common/LanguageSelect'
 import Link from '../common/Link'
-import LoginBtn from './LoginBtn'
+import LoginBtn from '../common/LoginBtn'
 import MobileMenu from './MobileMenu'
 
 const Header = () => {
