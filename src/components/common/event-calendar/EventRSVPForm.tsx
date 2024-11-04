@@ -153,7 +153,9 @@ const ShowForm = ({
 		<div className={'h-full w-full p-1 border-2 rounded text-lg'}>
 			{loading && <Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />}
 			<div className={'bg-primary p-1 text-white'}>
-				<a href={`${conf.auth.url}`}><span className={'text-gray-400'}>{message.logIn}?</span></a>
+				<a href={`${conf.auth.url}`}>
+					<span className={'text-gray-400'}>{message.logIn}?</span>
+				</a>
 			</div>
 			<form
 				onSubmit={handleSubmit(handleFormSubmit)} // Use handleFormSubmit here
@@ -255,10 +257,17 @@ const ShowButton = ({
 						<SquareUserRound className={'h-[30px]'} /> {message.registrationRequired}
 					</div>
 					<Button
-						disabled={(capacity - calNumOfPatron(patrons) <= 0 || isDateInThePast(event[TAG_FUNC_DATE])) ? true : false}
+						disabled={
+							capacity - calNumOfPatron(patrons) <= 0 ||
+							isDateInThePast(event[TAG_FUNC_DATE])
+								? true
+								: false
+						}
 						className={'w-full font-bold'}
 						onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>
-						{isDateInThePast(event[TAG_FUNC_DATE]) ? message.eventEndedMessage:message.register}
+						{isDateInThePast(event[TAG_FUNC_DATE])
+							? message.eventEndedMessage
+							: message.register}
 					</Button>
 					<div className={'flex justify-center items-center'}>
 						{capacity - calNumOfPatron(patrons) <= 0 ? (

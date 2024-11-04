@@ -10,7 +10,7 @@ import {
 	BookMarked,
 	Lightbulb,
 	MessageCircleMore,
-	CalendarDays
+	CalendarDays,
 } from 'lucide-react'
 
 type Props = {}
@@ -24,7 +24,10 @@ const Sidebar = (props: Props) => {
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Link
-							href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=CLIENT&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"}
+							href={
+								getCookieValue('HOME_SESSID') +
+								'?SEARCH&DATABASE=CLIENT&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+							}
 							className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8">
 							<Home className="h-5 w-5" />
 							<span className="sr-only">Patron Dashboard</span>
@@ -84,7 +87,11 @@ const Sidebar = (props: Props) => {
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Link
-							href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=ENQUIRIES_VIEW&REPORT=WEB_ENQ_PROFILE&EXP=ENQ_PATRON_ID%20" + m2l_patron_id}
+							href={
+								getCookieValue('HOME_SESSID') +
+								'?SEARCH&DATABASE=ENQUIRIES_VIEW&REPORT=WEB_ENQ_PROFILE&EXP=ENQ_PATRON_ID%20' +
+								m2l_patron_id
+							}
 							className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground hover:bg-neutral-200 rounded-full hover:text-slate-700 md:h-8 md:w-8">
 							<Lightbulb className="h-5 w-5" />
 							<span className="sr-only">Inquiries</span>

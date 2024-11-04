@@ -13,13 +13,7 @@ import { convertXMLToJson, getSessionID } from '@/lib/utils'
 import axios from 'axios'
 import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight, Menu, Search, X } from 'lucide-react'
 import React, { useState } from 'react'
-import {
-	Dialog,
-	DialogContent,
-	DialogFooter,
-	DialogHeader,
-	DialogTrigger
-} from '../../ui/dialog'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '../../ui/dialog'
 
 interface ClusterData {
 	index_list: {

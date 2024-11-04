@@ -108,7 +108,7 @@
 	"myAccount": "Mon Compte",
 	"logout": "Déconnexion",
 	"welcome": "Bienvenue",
-  	"dashboardHome": "Dashboard Home",
+	"dashboardHome": "Dashboard Home",
 	"accountSettings": "Account Settings",
 	"calendar": "calendrier",
 	"featuredCollections": "Collections en vedette",
@@ -154,4 +154,3 @@
 	"stepLabel": "Step",
 	"eventEndedMessage": "Fermé"
 }
-

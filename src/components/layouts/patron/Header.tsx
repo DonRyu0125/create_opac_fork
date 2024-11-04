@@ -110,11 +110,21 @@ const Header = (props: Props) => {
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end">
 					<DropdownMenuLabel>Patron Dashboard</DropdownMenuLabel>
-					<DropdownMenuItem><Link href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"}>{message.dashboardHome}</Link></DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link
+							href={
+								getCookieValue('HOME_SESSID') +
+								'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+							}>
+							{message.dashboardHome}
+						</Link>
+					</DropdownMenuItem>
 					<DropdownMenuItem>Account Settings</DropdownMenuItem>
 					<DropdownMenuSeparator />
 					<DropdownMenuLabel>Search Database</DropdownMenuLabel>
-					<DropdownMenuItem><Link href="/">All</Link></DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link href="/">All</Link>
+					</DropdownMenuItem>
 					<DropdownMenuItem>Archives</DropdownMenuItem>
 					<DropdownMenuItem>Museum</DropdownMenuItem>
 					<DropdownMenuItem>Library</DropdownMenuItem>

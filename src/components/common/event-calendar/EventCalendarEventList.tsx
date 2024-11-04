@@ -132,8 +132,11 @@ const EventCalendarEventList = ({
 		} else {
 			return (
 				<div
-					className={`${monthType ? 'max-h-[95%] mb-[2px] w-full overflow-y-auto custom-scrollbar' 
-					: 'flex md:block h-[70px] md:h-[93%] mb-[2px] overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto w-full custom-scrollbar mr-1 md:p-1'}
+					className={`${
+						monthType
+							? 'max-h-[95%] mb-[2px] w-full overflow-y-auto custom-scrollbar'
+							: 'flex md:block h-[70px] md:h-[93%] mb-[2px] overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto w-full custom-scrollbar mr-1 md:p-1'
+					}
 					'`}>
 					{filteredEvents?.map((item: any, idx: number) => (
 						<EventButton
