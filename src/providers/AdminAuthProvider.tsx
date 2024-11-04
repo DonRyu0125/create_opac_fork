@@ -5,8 +5,8 @@ interface AdminUser {
 	id: string
 	name: string
 	email: string
-	role: 'admin' // Ensure only admin users are handled here
-	// add other admin-specific properties as needed
+	role: 'admin'
+	// Add other admin-specific properties as needed
 }
 
 interface AdminAuthContextType {
@@ -16,62 +16,70 @@ interface AdminAuthContextType {
 	isAuthenticated: boolean
 }
 
+async function hashPayload(payload: object) {
+	const jsonString = JSON.stringify(payload)
+	const encoder = new TextEncoder()
+	const data = encoder.encode(jsonString)
+	const hashBuffer = await window.crypto.subtle.digest('SHA-256', data)
+	const hashArray = Array.from(new Uint8Array(hashBuffer))
+	return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+}
+
+const CREDENTIAL_KEY = 'credential'
 const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefined)
 
 export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 	const [adminUser, setAdminUser] = useState<AdminUser | null>(null)
+	const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-	const signIn = useCallback(async (usename: string, password: string) => {
+	const signIn = useCallback(async (username: string, password: string) => {
 		const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]admin/login-success.html`
-		const payload = {
-			USERNAME: usename,
-			USERPASSWORD: password,
-		}
+		const payload = { USERNAME: username, USERPASSWORD: password }
+
 		try {
 			const loginRequest = await axios.post(url, { ...payload })
-			console.log({ loginRequest })
-			console.log('sign in')
-			setAdminUser({
-				email: 'test',
-				id: 'test',
-				name: 'test',
-				role: 'admin',
-			})
-			// Implement actual admin sign-in logic here, e.g., API request
-			// const response = await fetch('/api/admin/auth/signin', {
-			// 	method: 'POST',
-			// 	headers: { 'Content-Type': 'application/json' },
-			// 	body: JSON.stringify({ email, password }),
-			// })
-			// if (response.ok) {
-			// 	const adminData = await response.json()
-			// 	setAdminUser(adminData)
-			// } else {
-			// 	throw new Error('Admin sign-in failed')
-			// }
+			if (loginRequest.status === 200) {
+				const response = JSON.parse(loginRequest.data)
+				if (response.status === 'success') {
+					const hash = await hashPayload(payload)
+					window.localStorage.setItem(CREDENTIAL_KEY, hash)
+					setIsAuthenticated(true)
+					setAdminUser({
+						id: username,
+						name: username,
+						email: username,
+						role: 'admin',
+					})
+				}
+			}
 		} catch (error) {
 			console.error('Admin sign-in error:', error)
-			// Handle sign-in error, e.g., show toast or notification
 		}
 	}, [])
 
 	const signOut = useCallback(() => {
-		// Implement actual admin sign-out logic here, e.g., API request
+		window.localStorage.removeItem(CREDENTIAL_KEY)
+		setIsAuthenticated(false)
 		setAdminUser(null)
 	}, [])
 
-	const isAuthenticated = !!adminUser
+	useEffect(() => {
+		const storedHash = localStorage.getItem(CREDENTIAL_KEY)
+		if (storedHash) {
+			setIsAuthenticated(true)
+		}
+	}, [])
 
 	const isAdminLoginPath = window.location.pathname.includes('/admin/login.html')
 
-	// useEffect(() => {
-	// 	if (isAdminLoginPath && isAuthenticated) {
-	// 		window.location.assign('/admin/index.html')
-	// 	}
-	// 	if (!isAdminLoginPath && !isAuthenticated) {
-	// 		window.location.assign('/admin/login.html')
-	// 	}
-	// }, [isAdminLoginPath, isAuthenticated])
+	useEffect(() => {
+		if (isAdminLoginPath && isAuthenticated) {
+			window.location.assign('/admin/index.html')
+		} else if (!isAdminLoginPath && !isAuthenticated) {
+			window.location.assign('/admin/login.html')
+		}
+	}, [isAdminLoginPath, isAuthenticated])
+
 	return (
 		<AdminAuthContext.Provider value={{ adminUser, signIn, signOut, isAuthenticated }}>
 			{children}
