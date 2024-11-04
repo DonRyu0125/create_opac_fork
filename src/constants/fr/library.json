@@ -1,9 +1,8 @@
 {
-	"heading": "Société franco-ontarienne du patrimoine et de l'histoire d'Orléans",
+	"heading": "Recherchez la bibliothèque",
 	"heroBanner": "https://www.sfopho.com/wp-content/uploads/2019/11/banner_ancien_orleansJPG.jpg",
 	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=BIBLIO_WEB",
 	"browseByCategoryTitle": "Browse by Category",
-	"title": "Recherchez la bibliothèque",
 	"database_name": "BIBLIO_WEB",
 	"categoriesItems": [
 		{
