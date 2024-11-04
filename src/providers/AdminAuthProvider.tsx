@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
+import { useLoadingOverlay } from './LoadingOverlayProvider'
 
 interface AdminUser {
 	id: string
@@ -32,9 +33,12 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 	const [adminUser, setAdminUser] = useState<AdminUser | null>(null)
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+	const { showLoading, hideLoading } = useLoadingOverlay()
+
 	console.log({ isAuthenticated })
 
 	const signIn = useCallback(async (username: string, password: string) => {
+		showLoading()
 		const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]admin/login-success.html`
 		const payload = { USERNAME: username, USERPASSWORD: password }
 
@@ -57,6 +61,8 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 			}
 		} catch (error) {
 			console.error('Admin sign-in error:', error)
+		} finally {
+			hideLoading()
 		}
 	}, [])
 
