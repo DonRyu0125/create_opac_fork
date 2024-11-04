@@ -66,15 +66,13 @@ const ResetPin = () => {
 					/>
 				</div>
 			)}
-			{status == EMAIL_CONFIRM_CODE ? (
+			{status === EMAIL_CONFIRM_CODE ? (
 				<div className="min-h-[35vh] flex flex-col items-center justify-center p-8 text-center">
 					<div className={'m-5'}>
 						<CircleCheck className="w-16 h-16" />
 					</div>
 					<h1 className="landing-page-title">{message.verificationSent}</h1>
-					<div className={'text-xl m-4'}>
-						{message.checkEmailInstructions}
-					</div>
+					<div className={'text-xl m-4'}>{message.checkEmailInstructions}</div>
 				</div>
 			) : (
 				<div className={'min-h-[460px] flex  justify-center items-center mb-4'}>
@@ -102,10 +100,8 @@ const ResetPin = () => {
 									})}
 									className={`p-2 w-full mt-1 border ${errors.C_CLIENT_NUMBER ? 'border-red-500' : 'border-gray-300'}`}
 								/>
-								{status == '200' && (
-									<p className="text-red-500">
-										{message.unknownPatronName}
-									</p>
+								{status === '200' && (
+									<p className="text-red-500">{message.unknownPatronName}</p>
 								)}
 							</div>
 						</div>

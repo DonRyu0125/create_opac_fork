@@ -80,15 +80,13 @@ const ResetPin = () => {
 					/>
 				</div>
 			)}
-			{status == '200' ? (
+			{status === '200' ? (
 				<div className="min-h-[35vh] flex flex-col items-center justify-center p-8 text-center">
 					<div className={'m-5'}>
 						<CircleCheck className="w-16 h-16" />
 					</div>
 					<h1 className="landing-page-title">{message.resetPasswordConfirmation}</h1>
-					<div className={'text-xl m-4'}>
-						{message.passwordChangeSuccess}
-					</div>
+					<div className={'text-xl m-4'}>{message.passwordChangeSuccess}</div>
 					<Button className={'mt-4'}>
 						<a href="/login.html">{message.logIn}</a>
 					</Button>
@@ -99,13 +97,12 @@ const ResetPin = () => {
 						onSubmit={handleSubmit(onSubmit)}
 						className="bg-gray-200 p-5 rounded-md w-5/6 flex flex-col justify-center items-center">
 						<div className="landing-page-title"> {message.password}</div>
-						<div className={'text-xl m-4 text-center'}>
-							{message.enterNewPassword}
-						</div>
+						<div className={'text-xl m-4 text-center'}>{message.enterNewPassword}</div>
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
-							<label className="font-semibold">
-									{message.password}<span className="text-red-500">*</span>
+								<label className="font-semibold">
+									{message.password}
+									<span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
@@ -117,8 +114,7 @@ const ResetPin = () => {
 										},
 										pattern: {
 											value: /^(?=.*[A-Z]).*$/, // Regex to ensure at least one uppercase letter
-											message:
-												`${message.passwordValidation}`,
+											message: `${message.passwordValidation}`,
 										},
 									})}
 									className={`p-2 w-full mt-1 border ${errors.PATRON_PID ? 'border-red-500' : 'border-gray-300'}`}
@@ -130,8 +126,9 @@ const ResetPin = () => {
 							</div>
 
 							<div className="flex-1">
-							<label className="font-semibold">
-									{message.confirmPasswordLabel} <span className="text-red-500">*</span>
+								<label className="font-semibold">
+									{message.confirmPasswordLabel}{' '}
+									<span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
@@ -148,10 +145,8 @@ const ResetPin = () => {
 								)}
 							</div>
 						</div>
-						{status == '208' && (
-							<p className="text-red-500 my-2">
-								{message.newPasswordSameAsOld}
-							</p>
+						{status === '208' && (
+							<p className="text-red-500 my-2">{message.newPasswordSameAsOld}</p>
 						)}
 						<Button className={'mt-5'}>{message.submit}</Button>
 					</form>
