@@ -56,7 +56,7 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 						email: username,
 						role: 'admin',
 					})
-					window.location.assign('/admin/login.html')
+					window.location.assign('/admin/index.html')
 				}
 			}
 		} catch (error) {
