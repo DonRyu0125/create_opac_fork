@@ -1,9 +1,8 @@
 {
-	"heading": "MINISIS OPAC Template- Museum Collections",
+	"heading": "Recherchez le musée",
 	"heroBanner": "https://images.unsplash.com/photo-1579748048451-365c9c9bfbc1",
 	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB",
 	"browseByCategoryTitle": "Browse by Category",
-	"title": "Recherchez le musée",
 	"database_name": "COLLECTIONS_WEB",
 	"categoriesItems": [
 		{

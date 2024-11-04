@@ -44,7 +44,7 @@ const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilt
 	const getData = async (currentDate: Date) => {
 		const currE = await fetch_get(currentDate, weekType)
 		if (databaseType) {
-			const filteredCurrE = currE.filter((item) => item.TAG_DB_TYPE === databaseType)
+			const filteredCurrE = currE.filter((item) => item?.TAG_DB_TYPE === databaseType)
 			setCurrentEvent(filteredCurrE)
 			return
 		}

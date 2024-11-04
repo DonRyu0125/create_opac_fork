@@ -19,7 +19,7 @@ const Museum = () => {
 	const {
 		heroBanner,
 		searchURL,
-		title,
+		heading,
 		database_name,
 		rsvp,
 		enableCategoriesItems,
@@ -31,7 +31,7 @@ const Museum = () => {
 	} = useConstants().museum
 	return (
 		<Layout>
-			<Hero className={''} title={title} backgroundImage={heroBanner} description="">
+			<Hero className={''} title={heading} backgroundImage={heroBanner} description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
 					<SearchForm inputName={UNION_SEARCH_CL} action={getSearchURL(searchURL)} />
 					<AdvanceSearchButton setShowAdvSearch={setShowAdvSearch} />
