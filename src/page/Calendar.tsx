@@ -60,14 +60,14 @@ const Calendar = () => {
 		},
 	]
 
-	 type Payment = {
+	type Payment = {
 		id: string
 		amount: number
 		status: 'pending' | 'processing' | 'success' | 'failed'
 		email: string
 	}
 
-	 const columns: ColumnDef<Payment>[] = [
+	const columns: ColumnDef<Payment>[] = [
 		{
 			id: 'select',
 			header: ({ table }) => (
@@ -121,9 +121,9 @@ const Calendar = () => {
 					currency: 'USD',
 				}).format(amount)
 
-				return <div className="text-right font-medium">{formatted}</div>
+				return <Button>asd</Button>
 			},
-		}
+		},
 	]
 
 	const getOCCNumber = async (event) => {
@@ -206,10 +206,9 @@ const Calendar = () => {
 	return (
 		<PatronLayout>
 			<h1 className="text-2xl font-bold">Calendar</h1>
-			<ProfileTable data={data} columns={columns}/>
+			<ProfileTable data={data} columns={columns} />
 		</PatronLayout>
 	)
 }
 
 export default Calendar
- 

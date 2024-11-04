@@ -1,5 +1,3 @@
-'use client'
-
 import * as React from 'react'
 import { CaretSortIcon, ChevronDownIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
 import {
@@ -36,8 +34,12 @@ import {
 	TableRow,
 } from '@/components/ui/table'
 
+type profileData = {
+	id: string
+	[key: string]: any
+}
 
-export function ProfileTable({ data, columns }: { data: any; columns: any }) {
+export function ProfileTable({ data, columns }: { data: profileData[]; columns: ColumnDef<profileData>[] }) {
 	const [sorting, setSorting] = React.useState<SortingState>([])
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
 	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
