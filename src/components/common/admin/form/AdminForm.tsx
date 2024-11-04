@@ -27,7 +27,6 @@ const AdminForm = ({ children }: { children?: ReactNode }) => {
 					className="w-28"
 					onClick={() => {
 						setPreviewMode(true)
-						console.log(formData)
 					}}>
 					Preview
 				</Button>

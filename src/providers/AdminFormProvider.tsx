@@ -1,8 +1,9 @@
 // AdminFormProvider.tsx
-import React, { createContext, useState, useCallback } from 'react'
-import { axios } from '@/lib/axios'
 import { addJsonValue, updateJsonValue } from '@/lib/admin'
+import { axios } from '@/lib/axios'
 import { SchemaType, SchemaValueType } from '@/types/schema'
+import React, { createContext, useCallback, useState } from 'react'
+import { useLoadingOverlay } from './LoadingOverlayProvider'
 
 type AdminFormContextType = {
 	formData: SchemaValueType
@@ -33,6 +34,8 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 
 	const [schema] = useState<SchemaType>(defaultSchema)
 
+	const { showLoading, hideLoading } = useLoadingOverlay()
+
 	const handleChange = useCallback((path: string[], newValue: SchemaValueType) => {
 		setFormData((prevData) => updateJsonValue(prevData, path, newValue))
 	}, [])
@@ -47,6 +50,7 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 
 	const updateData = useCallback(
 		(data: SchemaValueType) => {
+			showLoading()
 			axios
 				.post('/update', {
 					path: filepath,
@@ -55,8 +59,11 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 				.then((res) => {
 					console.log(res)
 				})
+				.finally(() => {
+					hideLoading()
+				})
 		},
-		[filepath]
+		[filepath, hideLoading, showLoading]
 	)
 
 	const handleFormSave = useCallback(() => {
