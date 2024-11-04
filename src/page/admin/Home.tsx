@@ -102,6 +102,7 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 					<div className="flex flex-col gap-2">
 						{fieldsValue.featuredCollection.map((item, index) => (
 							<SectionWrapper
+								title={item.title}
 								defaultCollapseMode={index !== 0}
 								key={JSON.stringify(item)}
 								onRemove={() => {
@@ -187,6 +188,7 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 					<div className="flex flex-col gap-2">
 						{fieldsValue.categoriesItems.map((item, index) => (
 							<SectionWrapper
+								title={item.title}
 								defaultCollapseMode={index !== 0}
 								key={JSON.stringify(item)}
 								onRemove={() => {
