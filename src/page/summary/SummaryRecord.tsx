@@ -45,7 +45,7 @@ const RecordView = ({ record }: { record: Record }) => {
 	const listFields = getFieldsFromRecord(
 		record,
 		fields,
-		() => true,
+		(item) => item.summary === true,
 		(data, item) => (
 			<DataWithLabel
 				className="flex-col items-start justify-start my-1 space-x-0"

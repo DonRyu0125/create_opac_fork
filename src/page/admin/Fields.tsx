@@ -37,7 +37,10 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 		<div className="flex gap-4 flex-col">
 			{fieldsValue.map((db, dbIndex) => (
 				<div>
-					<SectionHeader heading={`${db.database} Fields`} />
+					<SectionHeader
+						heading={`${db.database} Fields`}
+						subHeading="Configure the fields for your web interface"
+					/>
 
 					<SectionActions
 						handleAddNewItem={(event: FormEvent<NewElementForm<NewFormType>>) => {
@@ -76,6 +79,7 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 					<div className="flex flex-col gap-2">
 						{db.items.map((item, itemIndex) => (
 							<SectionWrapper
+								title={item.name.toUpperCase()}
 								key={JSON.stringify(item)}
 								onRemove={() => {
 									handleRemove([`${dbIndex}`, 'items'], itemIndex)
@@ -106,7 +110,7 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 
 								<div className="flex flex-row gap-4">
 									<CheckboxWithLabel
-										title={'Summary report'}
+										title={'Summary list report'}
 										value={item.summary}
 										onChange={(e) =>
 											handleChange(
