@@ -39,7 +39,7 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 		try {
 			const loginRequest = await axios.post(url, { ...payload })
 			if (loginRequest.status === 200) {
-				const response = JSON.parse(loginRequest.data)
+				const response = JSON.parse(loginRequest.data.trim())
 				if (response.status === 'success') {
 					const hash = await hashPayload(payload)
 					window.localStorage.setItem(CREDENTIAL_KEY, hash)
