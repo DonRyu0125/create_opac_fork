@@ -1,4 +1,4 @@
-import AdminFormLayout from '@/components/common/admin/AdminFormLayout'
+import AdminFormLayout from '@/components/common/admin/form/AdminFormLayout'
 import FormField from '@/components/common/admin/input/FormField'
 import { BCForm, FCForm } from '@/components/common/admin/input/types'
 import SectionActions, { NewElementForm } from '@/components/common/admin/layout/SectionActions'
@@ -99,6 +99,7 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 					<div className="flex flex-col gap-2">
 						{fieldsValue.featuredCollection.map((item, index) => (
 							<SectionWrapper
+								title={item.title}
 								defaultCollapseMode={index !== 0}
 								key={JSON.stringify(item)}
 								onRemove={() => {
@@ -184,6 +185,7 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 					<div className="flex flex-col gap-2">
 						{fieldsValue.categoriesItems.map((item, index) => (
 							<SectionWrapper
+								title={item.title}
 								defaultCollapseMode={index !== 0}
 								key={JSON.stringify(item)}
 								onRemove={() => {

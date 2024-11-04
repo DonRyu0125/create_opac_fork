@@ -1,4 +1,4 @@
-import AdminFormLayout from '@/components/common/admin/AdminFormLayout'
+import AdminFormLayout from '@/components/common/admin/form/AdminFormLayout'
 import CheckboxWithLabel from '@/components/common/admin/input/CheckboxWithLabel'
 import FormField from '@/components/common/admin/input/FormField'
 import SectionActions, { NewElementForm } from '@/components/common/admin/layout/SectionActions'

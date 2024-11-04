@@ -1,4 +1,3 @@
-import AdminForm from '@/components/common/admin/AdminForm'
 import AdminLayout from '@/components/layouts/admin'
 import fields from '@/schema/styles.json'
 import { AdminFormProvider } from '@/providers/AdminFormProvider'
@@ -10,6 +9,7 @@ import { TabsContent } from '@radix-ui/react-tabs'
 import { useAdminForm } from '@/hooks/useAdminForm'
 import Select from '@/components/common/admin/input/Select'
 import themeOptions from '@/themes/index.json'
+import AdminForm from '@/components/common/admin/form/AdminForm'
 const AdminStyles = () => {
 	return (
 		<AdminLayout>

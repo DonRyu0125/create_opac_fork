@@ -1,4 +1,4 @@
-import AdminForm from '@/components/common/admin/AdminForm'
+import AdminForm from '@/components/common/admin/form/AdminForm'
 import AdminLayout from '@/components/layouts/admin'
 import fieldsValue from '@/constants/en/message.json'
 import { AdminFormProvider } from '@/providers/AdminFormProvider'

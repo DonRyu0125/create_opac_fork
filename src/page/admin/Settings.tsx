@@ -1,4 +1,4 @@
-import AdminForm from '@/components/common/admin/AdminForm'
+import AdminForm from '@/components/common/admin/form/AdminForm'
 import ImagePreview from '@/components/common/admin/input/ImagePreview'
 import TextField from '@/components/common/admin/input/TextField'
 import SectionHeader from '@/components/common/admin/layout/SectionHeader'

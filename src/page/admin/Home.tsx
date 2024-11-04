@@ -1,4 +1,4 @@
-import AdminFormLayout from '@/components/common/admin/AdminFormLayout'
+import AdminFormLayout from '@/components/common/admin/form/AdminFormLayout'
 import FormField from '@/components/common/admin/input/FormField'
 import { BCForm, FCForm } from '@/components/common/admin/input/types'
 import SectionActions, { NewElementForm } from '@/components/common/admin/layout/SectionActions'
@@ -10,20 +10,17 @@ import { useAdminForm } from '@/hooks/useAdminForm'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
 import { FormEvent } from 'react'
-import Home from '../Home'
 
 const AdminHome = () => {
 	return (
-		<>
-			<AdminFormLayout
-				enData={enValues}
-				frData={frValues}
-				schema={fields as SchemaType}
-				enFilepath={'constants/en/home.json'}
-				frFilepath={'constants/fr/home.json'}
-				FormComponent={Form}
-			/>
-		</>
+		<AdminFormLayout
+			enData={enValues}
+			frData={frValues}
+			schema={fields as SchemaType}
+			enFilepath={'constants/en/home.json'}
+			frFilepath={'constants/fr/home.json'}
+			FormComponent={Form}
+		/>
 	)
 }
 
