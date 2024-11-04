@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import PatronLayout from '@/components/layouts/patron'
-import ProfileTable from '@/components/common/client-profile/ProfileTable'
+import ProfileTable, { ProfileData } from '@/components/common/client-profile/ProfileTable'
 import useJSONData from '@/hooks/useJSONData'
 import { convertToArr, convertXMLToJson, getCookieValue, getSessionID } from '@/lib/utils'
 import axios from 'axios'
@@ -67,7 +67,7 @@ const Calendar = () => {
 		email: string
 	}
 
-	const columns: ColumnDef<Payment>[] = [
+	const columns: ColumnDef<ProfileData>[] = [
 		{
 			id: 'select',
 			header: ({ table }) => (
@@ -113,13 +113,6 @@ const Calendar = () => {
 			accessorKey: 'amount',
 			header: () => <div className="text-right">Amount</div>,
 			cell: ({ row }) => {
-				const amount = parseFloat(row.getValue('amount'))
-
-				// Format the amount as a dollar amount
-				const formatted = new Intl.NumberFormat('en-US', {
-					style: 'currency',
-					currency: 'USD',
-				}).format(amount)
 
 				return <Button>asd</Button>
 			},
@@ -206,7 +199,7 @@ const Calendar = () => {
 	return (
 		<PatronLayout>
 			<h1 className="text-2xl font-bold">Calendar</h1>
-			<ProfileTable data={data} columns={columns} />
+			<ProfileTable data={data} columns={columns} filterType={'email'}/>
 		</PatronLayout>
 	)
 }

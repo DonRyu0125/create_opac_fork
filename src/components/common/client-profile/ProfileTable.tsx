@@ -34,12 +34,12 @@ import {
 	TableRow,
 } from '@/components/ui/table'
 
-type profileData = {
+export type ProfileData = {
 	id: string
 	[key: string]: any
 }
 
-export function ProfileTable({ data, columns }: { data: profileData[]; columns: ColumnDef<profileData>[] }) {
+export function ProfileTable({ data, columns,filterType }: { data: ProfileData[]; columns: ColumnDef<ProfileData>[];filterType:string }) {
 	const [sorting, setSorting] = React.useState<SortingState>([])
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
 	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -68,10 +68,10 @@ export function ProfileTable({ data, columns }: { data: profileData[]; columns: 
 		<div className="w-full">
 			<div className="flex items-center py-4">
 				<Input
-					placeholder="Filter emails..."
-					value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
+					placeholder={`Filter ${filterType ?? ''}...`}
+					value={(table.getColumn(filterType)?.getFilterValue() as string) ?? ''}
 					onChange={(event) =>
-						table.getColumn('email')?.setFilterValue(event.target.value)
+						table.getColumn(filterType)?.setFilterValue(event.target.value)
 					}
 					className="max-w-sm"
 				/>
