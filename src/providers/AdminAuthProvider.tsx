@@ -22,7 +22,7 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 	const [adminUser, setAdminUser] = useState<AdminUser | null>(null)
 
 	const signIn = useCallback(async (usename: string, password: string) => {
-		const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]home.html`
+		const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]admin/login-success.html`
 		const payload = {
 			USERNAME: usename,
 			USERPASSWORD: password,
