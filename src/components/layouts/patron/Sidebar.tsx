@@ -107,7 +107,7 @@ const Sidebar = (props: Props) => {
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Link
-							href="#"
+							href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=M2L_TAG_SYN&REPORT=WEB_CALENDAR_PROFILE&EXP=TAG_FUNC_P_ID%20" + m2l_patron_id}
 							className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground hover:bg-neutral-200 rounded-full hover:text-slate-700 md:h-8 md:w-8">
 							<CalendarDays className="h-5 w-5" />
 							<span className="sr-only">Calendar</span>
