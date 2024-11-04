@@ -29,8 +29,10 @@ const AdminLoginForm = () => {
 	const passwordRef = useRef<HTMLInputElement>(null)
 	const username = usernameRef?.current?.value || ''
 	const password = passwordRef?.current?.value || ''
+
+	console.log({ username, password })
 	return (
-		<form className="space-y-4">
+		<div className="space-y-4">
 			<Input
 				ref={usernameRef}
 				className="max-w-xl mx-auto h-12 text-lg"
@@ -51,7 +53,7 @@ const AdminLoginForm = () => {
 				className="h-12 px-8 text-lg text-white bg-[#0B2C4D] hover:bg-[#0B2C4D]/90">
 				Login
 			</Button>
-		</form>
+		</div>
 	)
 }
 
