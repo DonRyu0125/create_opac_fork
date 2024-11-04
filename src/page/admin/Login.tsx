@@ -2,7 +2,7 @@ import Button from '@/components/common/admin/Button'
 import AdminLayout from '@/components/layouts/admin'
 import { Input } from '@/components/ui/input'
 import { useAdminAuth } from '@/providers/AdminAuthProvider'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 const AdminLogin = () => {
 	return (
@@ -25,35 +25,38 @@ const AdminLogin = () => {
 
 const AdminLoginForm = () => {
 	const { signIn } = useAdminAuth()
-	const usernameRef = useRef<HTMLInputElement>(null)
-	const passwordRef = useRef<HTMLInputElement>(null)
-	const username = usernameRef?.current?.value || ''
-	const password = passwordRef?.current?.value || ''
+	const [username, setUsername] = useState('')
 
-	console.log({ username, password })
+	const [password, setPassword] = useState('')
+
 	return (
-		<div className="space-y-4">
+		<form
+			onSubmit={(e) => {
+				e.preventDefault()
+				signIn(username, password)
+			}}
+			className="space-y-4">
 			<Input
-				ref={usernameRef}
 				className="max-w-xl mx-auto h-12 text-lg"
 				placeholder="Enter your Username"
 				type="text"
 				required
+				onChange={(e) => setUsername(e.currentTarget.value)}
 			/>
 			<Input
-				ref={passwordRef}
 				className="max-w-xl mx-auto h-12 text-lg"
 				placeholder="Enter your Password"
 				type="password"
 				required
+				onChange={(e) => setPassword(e.currentTarget.value)}
 			/>
 
 			<Button
-				onClick={() => signIn(username, password)}
+				type="submit"
 				className="h-12 px-8 text-lg text-white bg-[#0B2C4D] hover:bg-[#0B2C4D]/90">
 				Login
 			</Button>
-		</div>
+		</form>
 	)
 }
 
