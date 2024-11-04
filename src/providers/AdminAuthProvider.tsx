@@ -32,6 +32,8 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 	const [adminUser, setAdminUser] = useState<AdminUser | null>(null)
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+	console.log({ isAuthenticated })
+
 	const signIn = useCallback(async (username: string, password: string) => {
 		const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]admin/login-success.html`
 		const payload = { USERNAME: username, USERPASSWORD: password }
@@ -50,6 +52,7 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 						email: username,
 						role: 'admin',
 					})
+					window.location.assign('/admin/login.html')
 				}
 			}
 		} catch (error) {
@@ -70,15 +73,15 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 		}
 	}, [])
 
-	const isAdminLoginPath = window.location.pathname.includes('/admin/login.html')
+	// const isAdminLoginPath = window.location.pathname.includes('/admin/login.html')
 
-	useEffect(() => {
-		if (isAdminLoginPath && isAuthenticated) {
-			window.location.assign('/admin/index.html')
-		} else if (!isAdminLoginPath && !isAuthenticated) {
-			window.location.assign('/admin/login.html')
-		}
-	}, [isAdminLoginPath, isAuthenticated])
+	// useEffect(() => {
+	// 	if (isAdminLoginPath && isAuthenticated) {
+	// 		window.location.assign('/admin/index.html')
+	// 	} else if (!isAdminLoginPath && !isAuthenticated) {
+	// 		window.location.assign('/admin/login.html')
+	// 	}
+	// }, [isAdminLoginPath, isAuthenticated])
 
 	return (
 		<AdminAuthContext.Provider value={{ adminUser, signIn, signOut, isAuthenticated }}>
