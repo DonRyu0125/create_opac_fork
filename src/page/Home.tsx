@@ -73,7 +73,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 
 			{enableFeaturedCollection && (
 				<Section heading={message.featuredCollections}>
-					<BentoGrid className="max-w-4xl mx-auto">
+					<BentoGrid className="mx-auto">
 						{featuredCollection.map((item, i) => (
 							<BentoGridItem
 								onClick={() => {
