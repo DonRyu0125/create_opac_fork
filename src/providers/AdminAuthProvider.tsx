@@ -14,7 +14,7 @@ interface AdminAuthContextType {
 	adminUser: AdminUser | null
 	signIn: (email: string, password: string) => Promise<void>
 	signOut: () => void
-	isAuthenticated: boolean
+	isAuthenticated: string | null
 }
 
 async function hashPayload(payload: object) {
@@ -31,7 +31,7 @@ const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefin
 
 export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 	const [adminUser, setAdminUser] = useState<AdminUser | null>(null)
-	const [isAuthenticated, setIsAuthenticated] = useState(false)
+	const [isAuthenticated, setIsAuthenticated] = useState<string | null>(null)
 
 	const { showLoading, hideLoading } = useLoadingOverlay()
 
@@ -49,7 +49,7 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 				if (response.status === 'success') {
 					const hash = await hashPayload(payload)
 					window.localStorage.setItem(CREDENTIAL_KEY, hash)
-					setIsAuthenticated(true)
+					setIsAuthenticated(hash)
 					setAdminUser({
 						id: username,
 						name: username,
@@ -68,26 +68,31 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 
 	const signOut = useCallback(() => {
 		window.localStorage.removeItem(CREDENTIAL_KEY)
-		setIsAuthenticated(false)
+		setIsAuthenticated(null)
 		setAdminUser(null)
 	}, [])
 
 	useEffect(() => {
 		const storedHash = localStorage.getItem(CREDENTIAL_KEY)
 		if (storedHash) {
-			setIsAuthenticated(true)
+			setIsAuthenticated(storedHash)
 		}
 	}, [])
 
-	// const isAdminLoginPath = window.location.pathname.includes('/admin/login.html')
+	const isAdminLoginPath = window.location.pathname.includes('/admin/login.html')
 
-	// useEffect(() => {
-	// 	if (isAdminLoginPath && isAuthenticated) {
-	// 		window.location.assign('/admin/index.html')
-	// 	} else if (!isAdminLoginPath && !isAuthenticated) {
-	// 		window.location.assign('/admin/login.html')
-	// 	}
-	// }, [isAdminLoginPath, isAuthenticated])
+	useEffect(() => {
+		if (!window) return
+
+		const storedHash = window.localStorage.getItem(CREDENTIAL_KEY)
+		if (isAdminLoginPath && storedHash) {
+			window.location.assign('/admin/index.html')
+		}
+
+		if (!isAdminLoginPath && !storedHash) {
+			window.location.assign('/admin/login.html')
+		}
+	}, [isAdminLoginPath, isAuthenticated])
 
 	return (
 		<AdminAuthContext.Provider value={{ adminUser, signIn, signOut, isAuthenticated }}>
