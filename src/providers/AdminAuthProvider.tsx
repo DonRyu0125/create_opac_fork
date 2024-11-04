@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 
 interface AdminUser {
@@ -20,8 +21,15 @@ const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefin
 export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 	const [adminUser, setAdminUser] = useState<AdminUser | null>(null)
 
-	const signIn = useCallback(async (email: string, password: string) => {
+	const signIn = useCallback(async (usename: string, password: string) => {
+		const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]home.html`
+		const payload = {
+			USERNAME: usename,
+			USERPASSWORD: password,
+		}
 		try {
+			const loginRequest = await axios.post(url, { ...payload })
+			console.log({ loginRequest })
 			console.log('sign in')
 			setAdminUser({
 				email: 'test',
