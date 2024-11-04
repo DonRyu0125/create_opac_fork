@@ -2,7 +2,7 @@ import Button from '@/components/common/admin/Button'
 import AdminLayout from '@/components/layouts/admin'
 import { Input } from '@/components/ui/input'
 import { useAdminAuth } from '@/providers/AdminAuthProvider'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
 const AdminLogin = () => {
 	return (

@@ -64,14 +64,14 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 
 	const isAdminLoginPath = window.location.pathname.includes('/admin/login.html')
 
-	useEffect(() => {
-		if (isAdminLoginPath && isAuthenticated) {
-			window.location.assign('/admin/index.html')
-		}
-		if (!isAdminLoginPath && !isAuthenticated) {
-			window.location.assign('/admin/login.html')
-		}
-	}, [isAdminLoginPath, isAuthenticated])
+	// useEffect(() => {
+	// 	if (isAdminLoginPath && isAuthenticated) {
+	// 		window.location.assign('/admin/index.html')
+	// 	}
+	// 	if (!isAdminLoginPath && !isAuthenticated) {
+	// 		window.location.assign('/admin/login.html')
+	// 	}
+	// }, [isAdminLoginPath, isAuthenticated])
 	return (
 		<AdminAuthContext.Provider value={{ adminUser, signIn, signOut, isAuthenticated }}>
 			{children}
