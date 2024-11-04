@@ -188,8 +188,6 @@ const PatronProfile = () => {
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 
 				{/* Recent Media Section */}

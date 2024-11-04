@@ -152,6 +152,7 @@
 	"surveyLabel": "Enquête",
 	"confirmationLabel": "Confirmation",
 	"stepLabel": "Step",
-	"eventEndedMessage": "Fermé"
+	"eventEndedMessage": "Fermé",
+	"hello":"Bonjour"
 }
 
