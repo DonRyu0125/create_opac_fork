@@ -7,11 +7,10 @@ import {
 	NavigationMenuList,
 } from '@/components/ui/navigation-menu'
 import { cn } from '@/lib/utils'
+import { useAdminAuth } from '@/providers/AdminAuthProvider'
 import { LogOut } from 'lucide-react'
 
-type Props = {}
-
-const Header = (props: Props) => {
+const Header = () => {
 	const navigationLists = [
 		{ url: './home.html', page: 'Union home' },
 		// { url: './biblio.html', page: 'Biblio' },
@@ -23,6 +22,8 @@ const Header = (props: Props) => {
 		{ url: './settings.html', page: 'Settings' },
 		// { url: './styles.html', page: 'Theme' },
 	]
+
+	const { isAuthenticated, signOut } = useAdminAuth()
 
 	const checkActiveUrl = () => {
 		const currentUrl = window.location.href
@@ -36,31 +37,35 @@ const Header = (props: Props) => {
 		<>
 			<header className="bg-[#002a54] text-white justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b py-4 px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
 				<Link className="text-white hover:text-white no-underline text-lg">
-					Minisis Template Toolkit
+					MINISIS Template Toolkit
 				</Link>
-				<div>
-					<Button>
-						<LogOut />
-						Sign out
-					</Button>
-				</div>
+				{isAuthenticated && (
+					<div>
+						<Button onClick={() => signOut()}>
+							<LogOut />
+							Sign out
+						</Button>
+					</div>
+				)}
 			</header>
-			<section className="bg-[#B5C0CD] text-white justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b py-2 px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
-				<NavigationMenu className="mx-auto">
-					<NavigationMenuList>
-						{navigationLists.map((e) => (
-							<NavigationMenuItem
-								key={e.page}
-								className={cn(
-									'text-blue-950 cursor-pointer  px-4 py-2 rounded-md',
-									e.page === checkActiveUrl() ? 'bg-white' : 'text-white'
-								)}>
-								<NavigationMenuLink href={e.url}>{e.page}</NavigationMenuLink>
-							</NavigationMenuItem>
-						))}
-					</NavigationMenuList>
-				</NavigationMenu>
-			</section>
+			{isAuthenticated && (
+				<section className="bg-[#B5C0CD] text-white justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b py-2 px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
+					<NavigationMenu className="mx-auto">
+						<NavigationMenuList>
+							{navigationLists.map((e) => (
+								<NavigationMenuItem
+									key={e.page}
+									className={cn(
+										'text-blue-950 cursor-pointer  px-4 py-2 rounded-md',
+										e.page === checkActiveUrl() ? 'bg-white' : 'text-white'
+									)}>
+									<NavigationMenuLink href={e.url}>{e.page}</NavigationMenuLink>
+								</NavigationMenuItem>
+							))}
+						</NavigationMenuList>
+					</NavigationMenu>
+				</section>
+			)}
 		</>
 	)
 }

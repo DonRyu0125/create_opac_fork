@@ -145,7 +145,7 @@
     </div>
   </div>
   <footer class="footer">
-    2024 Minisis Inc. All rights reserved.
+    2024 MINISIS Inc. All rights reserved.
   </footer>
 </body>
 </html>

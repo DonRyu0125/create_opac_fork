@@ -30,12 +30,13 @@ import AdminSettings from '@/page/admin/Settings'
 import Register from '@/page/login/Register'
 import ResetPin from '@/page/login/ResetPin'
 import ForgotPin from '@/page/login/ForgotPin'
+import AdminLogin from '@/page/admin/Login'
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
 const ADMIN_ROUTES: TRoute = {
 	admin: Admin,
-	'admin-login': Login,
+	'admin-login': AdminLogin,
 	'admin-fields': Fields,
 	'admin-home': AdminHome,
 	'admin-biblio': AdminHome,
