@@ -35,7 +35,7 @@ const Header = (props: Props) => {
 		window.location.href = '/'
 	}
 	return (
-		<header className="justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+		<header className="justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 pb-4 shadow-md sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
 			<Sheet>
 				<SheetTrigger asChild>
 					<Button size="icon" variant="outline" className="sm:hidden">
@@ -80,7 +80,7 @@ const Header = (props: Props) => {
 				<BreadcrumbList>
 					<BreadcrumbItem>
 						<BreadcrumbLink asChild>
-							<Link href="#">Patron Dashboard</Link>
+							<Link href="#" className="flex no-underline"><Home className="mr-1 h-5 w-5"/>Client Dashboard</Link>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					{/* <BreadcrumbSeparator />
