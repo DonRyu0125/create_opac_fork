@@ -12,119 +12,111 @@ import {
 	TAG_DB,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DTE_GRP,
+	TAG_FUNC_END_T,
 	TAG_FUNC_LOC,
 	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_START_T,
+	TAG_NAME,
 } from '@/components/common/event-calendar/Constants'
 import { Button } from '@/components/ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
-import { Checkbox } from '@radix-ui/react-checkbox'
 import { ColumnDef } from '@tanstack/react-table'
+import useConstants from '@/hooks/useConstants'
+import { AlertDialog } from '@radix-ui/react-alert-dialog'
+import RadixAlertDialog from '@/components/common/RadixAlertDialog'
+
+interface TagFunction {
+	[key: string]: any;
+}
+
 
 const Calendar = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const [activeButton, setActiveButton] = useState(null)
-	const [apiData, setApiData] = useState(null)
-	const [loading, setLoading] = useState(false)
-
-	const data: Payment[] = [
-		{
-			id: 'm5gr84i9',
-			amount: 316,
-			status: 'success',
-			email: 'ken99@yahoo.com',
-		},
-		{
-			id: '3u1reuv4',
-			amount: 242,
-			status: 'success',
-			email: 'Abe45@gmail.com',
-		},
-		{
-			id: 'derv1ws0',
-			amount: 837,
-			status: 'processing',
-			email: 'Monserrat44@gmail.com',
-		},
-		{
-			id: '5kma53ae',
-			amount: 874,
-			status: 'success',
-			email: 'Silas22@gmail.com',
-		},
-		{
-			id: 'bhqecj4p',
-			amount: 721,
-			status: 'failed',
-			email: 'carmella@hotmail.com',
-		},
-	]
-
-	type Payment = {
-		id: string
-		amount: number
-		status: 'pending' | 'processing' | 'success' | 'failed'
-		email: string
-	}
+	const [loading, setLoading] = useState(true)
+	const message = useConstants().message
 
 	const columns: ColumnDef<ProfileData>[] = [
 		{
-			id: 'select',
-			header: ({ table }) => (
-				<Checkbox
-					checked={
-						table.getIsAllPageRowsSelected() ||
-						(table.getIsSomePageRowsSelected() && 'indeterminate')
-					}
-					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-					aria-label="Select all"
-				/>
-			),
+			accessorKey: TAG_NAME.toLocaleLowerCase(),
+			header: message.event,
 			cell: ({ row }) => (
-				<Checkbox
-					checked={row.getIsSelected()}
-					onCheckedChange={(value) => row.toggleSelected(!!value)}
-					aria-label="Select row"
-				/>
+				<div className="capitalize">{row.getValue(TAG_NAME.toLocaleLowerCase())}</div>
 			),
-			enableSorting: false,
-			enableHiding: false,
 		},
 		{
-			accessorKey: 'status',
-			header: 'Status2',
-			cell: ({ row }) => <div className="capitalize">{row.getValue('status')}</div>,
-		},
-		{
-			accessorKey: 'email',
+			accessorKey: TAG_FUNC_DATE.toLocaleLowerCase(),
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Email
-						<CaretSortIcon className="ml-2 h-4 w-4" />
+						{message.date}
+						<CaretSortIcon className="h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('email')}</div>,
+			cell: ({ row }) => (
+				<div className="lowercase">{row.getValue(TAG_FUNC_DATE.toLocaleLowerCase())}</div>
+			),
 		},
 		{
-			accessorKey: 'amount',
-			header: () => <div className="text-right">Amount</div>,
-			cell: ({ row }) => {
-
-				return <Button>asd</Button>
+			accessorKey: TAG_FUNC_START_T.toLocaleLowerCase(),
+			header: message.start,
+			cell: ({ row }) => (
+				<div className="capitalize">
+					{row.getValue(TAG_FUNC_START_T.toLocaleLowerCase())}
+				</div>
+			),
+		},
+		{
+			accessorKey: TAG_FUNC_END_T.toLocaleLowerCase(),
+			header: message.end,
+			cell: ({ row }) => (
+				<div className="capitalize">{row.getValue(TAG_FUNC_END_T.toLocaleLowerCase())}</div>
+			),
+		},
+		{
+			accessorKey: TAG_FUNC_LOC.toLocaleLowerCase(),
+			header: message.location,
+			cell: ({ row }) => (
+				<div className="capitalize">{row.getValue(TAG_FUNC_LOC.toLocaleLowerCase())}</div>
+			),
+		},
+		{
+			accessorKey: ' ',
+			header: '',
+			cell: ({ cell }) => {
+				return (
+					<RadixAlertDialog
+						DeleteButton={
+							<button
+								className="inline-flex h-[35px] items-center justify-center rounded bg-red4 px-[15px] font-medium leading-none text-red11 outline-none hover:bg-red5 focus:shadow-[0_0_0_2px] focus:shadow-red7"
+								onClick={() => cancelEvent(cell.row.original,cell.row.original.sisn)}>
+								{message.yes} {message.cancel}
+							</button>
+						}
+						InitialButton={<Button variant={'danger'}>{message.cancel}</Button>}
+					/>
+				)
 			},
 		},
 	]
 
-	const getOCCNumber = async (event) => {
+	const cancelEvent = async (event:TagFunction, sisnValue: number) => {
+		console.log('sisnValue', sisnValue)
+		console.log('event', event)
+
+		const occ_num = await getOCCNumber(event, sisnValue)
+
+		console.log('-',occ_num)
+	}
+
+	const getOCCNumber = async (event:TagFunction, sisnValue: number) => {
 		let HOME_SESSID = getSessionID()
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=Y&KEY=${SISN}&VALUE=${sisnNumber}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=Y&KEY=${SISN}&VALUE=${sisnValue}`,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
@@ -198,8 +190,13 @@ const Calendar = () => {
 
 	return (
 		<PatronLayout>
-			<h1 className="text-2xl font-bold">Calendar</h1>
-			<ProfileTable data={data} columns={columns} filterType={'email'}/>
+			<h1 className="text-2xl font-bold">{message.calendar}</h1>
+			<ProfileTable
+				data={records}
+				columns={columns}
+				filterType={TAG_NAME.toLocaleLowerCase()}
+				filterTypeShow={message.event}
+			/>
 		</PatronLayout>
 	)
 }

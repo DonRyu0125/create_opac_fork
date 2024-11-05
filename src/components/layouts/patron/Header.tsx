@@ -1,3 +1,4 @@
+import { LanguageSelect } from '@/components/common/LanguageSelect'
 import Link from '@/components/common/Link'
 
 import {
@@ -95,35 +96,52 @@ const Header = (props: Props) => {
 					</BreadcrumbItem> */}
 				</BreadcrumbList>
 			</Breadcrumb>
-
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-						{/* <Image
+			<div className={'flex'}>
+				<div className={'mr-2'}>
+					<LanguageSelect />
+				</div>
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<Button
+							variant="outline"
+							size="icon"
+							className="overflow-hidden rounded-full">
+							{/* <Image
                   src=""
                   width={36}
                   height={36}
                   alt="Avatar"
                   className="overflow-hidden rounded-full"
                 /> */}
-					</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent align="end">
-					<DropdownMenuLabel>Patron Dashboard</DropdownMenuLabel>
-					<DropdownMenuItem><Link href={getCookieValue('HOME_SESSID') + "?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"}>{message.dashboardHome}</Link></DropdownMenuItem>
-					<DropdownMenuItem>Account Settings</DropdownMenuItem>
-					<DropdownMenuSeparator />
-					<DropdownMenuLabel>Search Database</DropdownMenuLabel>
-					<DropdownMenuItem><Link href="/">All</Link></DropdownMenuItem>
-					<DropdownMenuItem>Archives</DropdownMenuItem>
-					<DropdownMenuItem>Museum</DropdownMenuItem>
-					<DropdownMenuItem>Library</DropdownMenuItem>
-					<DropdownMenuSeparator />
-					<DropdownMenuItem>
-						<Link onClick={clearCookies}>Logout</Link>
-					</DropdownMenuItem>
-				</DropdownMenuContent>
-			</DropdownMenu>
+						</Button>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align="end">
+						<DropdownMenuLabel>Patron Dashboard</DropdownMenuLabel>
+						<DropdownMenuItem>
+							<Link
+								href={
+									getCookieValue('HOME_SESSID') +
+									'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+								}>
+								{message.dashboardHome}
+							</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>Account Settings</DropdownMenuItem>
+						<DropdownMenuSeparator />
+						<DropdownMenuLabel>Search Database</DropdownMenuLabel>
+						<DropdownMenuItem>
+							<Link href="/">All</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>Archives</DropdownMenuItem>
+						<DropdownMenuItem>Museum</DropdownMenuItem>
+						<DropdownMenuItem>Library</DropdownMenuItem>
+						<DropdownMenuSeparator />
+						<DropdownMenuItem>
+							<Link onClick={clearCookies}>Logout</Link>
+						</DropdownMenuItem>
+					</DropdownMenuContent>
+				</DropdownMenu>
+			</div>
 		</header>
 	)
 }
