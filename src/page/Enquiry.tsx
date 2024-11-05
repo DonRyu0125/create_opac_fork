@@ -1,41 +1,134 @@
 import { useState } from 'react'
 import PatronLayout from '@/components/layouts/patron'
-import ProfileTable from '@/components/common/client-profile/ProfileTable'
+import ProfileTable, { ProfileData } from '@/components/common/client-profile/ProfileTable'
 import useJSONData from '@/hooks/useJSONData'
-import { getCookieValue } from '@/lib/utils'
 import axios from 'axios'
+import { Button } from '@/components/ui/button'
+import { CaretSortIcon } from '@radix-ui/react-icons'
+import { Checkbox } from '@radix-ui/react-checkbox'
+import { ColumnDef } from '@tanstack/react-table'
+import { getCookieValue } from '@/lib/utils'
+import clientProfileJSON from '@/constants/en/client-profile.json'
 
-const Enquiry = () => {
-    const { records } = useJSONData({ selector: '#xml_record' })
-    const [activeButton, setActiveButton] = useState(null);
-    const [apiData, setApiData] = useState(null)
-    const [loading, setLoading] = useState(false)
+const Enquiries = () => {
+	const { records } = useJSONData({ selector: '#xml_record' })
+	const [activeButton, setActiveButton] = useState(null)
+	const [apiData, setApiData] = useState(null)
+	const [loading, setLoading] = useState(false)
+	const profileList = clientProfileJSON.database
+	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+	// Handle button click
+	const handleClick = (id: any) => {
+		setActiveButton(id) // Set the clicked button as active
+	}
 
-  // Handle button click
-  const handleClick = (id : any) => {
-        setActiveButton(id); // Set the clicked button as active
-      };
-    
-    const fetchApiData = async (url: string) => {
-        setLoading(true)
-        try {
-            const response = await axios.get(url)
-            setApiData(response.data)
-        } catch (error) {
-            console.error('Error fetching data:', error)
-            setApiData(null)
-        }
-        setLoading(false)
-    }
+	const fetchApiData = async (url: string) => {
+		setLoading(true)
+		try {
+			const response = await axios.get(url)
+			setApiData(response.data)
+		} catch (error) {
+			console.error('Error fetching data:', error)
+			setApiData(null)
+		}
+		setLoading(false)
+	}
+	const columns: ColumnDef<ProfileData>[] = [
+		{
+			id: 'select',
+			header: ({ table }) => (
+				<Checkbox
+					checked={
+						table.getIsAllPageRowsSelected() ||
+						(table.getIsSomePageRowsSelected() && 'indeterminate')
+					}
+					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+					aria-label="Select all"
+				/>
+			),
+			cell: ({ row }) => (
+				<Checkbox
+					checked={row.getIsSelected()}
+					onCheckedChange={(value) => row.toggleSelected(!!value)}
+					aria-label="Select row"
+				/>
+			),
+			enableSorting: false,
+			enableHiding: false,
+		},
+		{
+			accessorKey: 'enq_id',
+			header: 'Enquiry #',
+			cell: ({ row }) => <div className="capitalize">{row.getValue('enq_id')}</div>,
+		},
+		{
+			accessorKey: 'enq_topic',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Topic
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_topic')}</div>,
+		},
+		{
+			accessorKey: 'enq_title',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Title
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_title')}</div>,
+		},
+		{
+			accessorKey: 'enq_status',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Status
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_status')}</div>,
+		},
+	]
+	return (
+		<PatronLayout>
+			<div className="container flex flex-col gap-8 p-6">
+				<div className="flex flex-wrap gap-2 sm:gap-4">
+					{profileList.map((button) => (
+						<a
+							key={button.id}
+							href={
+								getCookieValue('HOME_SESSID') +
+								button.url +
+								(button.db != 'SHOWORDERLIST' ? m2l_patron_id : '')
+							}
+							onClick={() => handleClick(button.id)}
+							className={`px-3 py-2 text-sm shadow sm:px-4 sm:py-2 sm:text-base text-accent-foreground bg-white text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}>
+							{button.label}
+						</a>
+					))}
+                    
+				</div><h1 className="text-2xl font-bold">Enquiries</h1>
 
-    return (
-        <PatronLayout>
-            <h1 className="text-2xl font-bold">Enquiries</h1>
-            
-          <ProfileTable></ProfileTable>
-
-        </PatronLayout>
-    )
+			<ProfileTable data={records} columns={columns} filterType={'enquiry'} />
+			</div>
+			
+		</PatronLayout>
+	)
 }
 
-export default Enquiry
+export default Enquiries

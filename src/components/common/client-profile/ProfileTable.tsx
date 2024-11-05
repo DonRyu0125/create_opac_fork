@@ -35,7 +35,6 @@ import {
 } from '@/components/ui/table'
 
 export type ProfileData = {
-	id: string
 	[key: string]: any
 }
 

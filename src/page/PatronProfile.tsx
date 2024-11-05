@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 import PatronLayout from '@/components/layouts/patron'
 import useJSONData from '@/hooks/useJSONData'
@@ -5,63 +7,114 @@ import clientProfileJSON from '@/constants/en/client-profile.json'
 import { getCookieValue } from '@/lib/utils'
 import { Card } from '@/components/ui/card'
 import {
-	ArrowDown,
-	ArrowUp,
-	MoreHorizontal,
-	Users,
-	Eye,
-	MessageSquare,
-	BarChart3,
-	Heart,
-  ShoppingBag,
+	ShoppingBag,
 	Copyright,
 	Copy,
 	BookMarked,
 	Lightbulb,
 	MessageCircleMore,
-	CalendarDays
+	CalendarDays,
+	MoreHorizontal,
+	Heart,
+	MessageSquare,
 } from 'lucide-react'
-import axios from 'axios'
-// import { ClipLoader } from 'react-spinners'
-interface ApiData {
-  id: number
-  title: string
+
+interface StatCardProps {
+	key: number
+	icon: React.ReactNode
+	label: string
+	color: string
+	value: any
 }
-const PatronProfile = () => {
-  const [data, setData] = useState<ApiData[][]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+
+export default function PatronProfile() {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
 
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-  const home_session = getCookieValue('HOME_SESSID')
-	// Handle button click
+	const home_session = getCookieValue('HOME_SESSID')
+
 	const handleClick = (id: any) => {
-		setActiveButton(id) // Set the clicked button as active
+		setActiveButton(id)
 	}
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const urls = [
-          home_session + "?COMMANDSEARCH&DATABASE=ENQUIRIES_VIEW&EXP=ENQ_USER_ID%2020240001",
-          home_session + "?SEARCH&DATABASE=COMMENTS_VIEW&EXP=CREATOR_ID%2020240001",
-        ]
 
-        const requests = urls.map(url => fetch(url).then(res => res.json()))
-        const results = await Promise.all(requests)
+	const statCards = [
+		{
+      key: 1,
+			icon: <ShoppingBag className="h-4 w-4" />,
+			label: 'Orders',
+			color: 'blue',
+			value: records[0].orders_count,
+		},
+		{
+      key: 2,
+			icon: <Copyright className="h-4 w-4" />,
+			label: 'Copyright Requests',
+			color: 'green',
+			value: 0,
+		},
+		{
+      key: 3,
+			icon: <Copy className="h-4 w-4" />,
+			label: 'Reproductions',
+			color: 'red',
+			value: 0,
+		},
+		{
+      key: 4,
+			icon: <BookMarked className="h-4 w-4" />,
+			label: 'Bookmarks',
+			color: 'purple',
+			value: records[0].bookmark_count,
+		},
+		{
+      key: 5,
+			icon: <Lightbulb className="h-4 w-4" />,
+			label: 'Enquiries',
+			color: 'amber',
+			value: records[0].enquiries_count,
+		},
+		{
+      key: 6,
+			icon: <MessageCircleMore className="h-4 w-4" />,
+			label: 'Crowdsource',
+			color: 'orange',
+			value: records[0].crowdsource_count,
+		},
+		{
+      key: 7,
+			icon: <CalendarDays className="h-4 w-4" />,
+			label: 'Calendar',
+			color: 'pink',
+			value: 0,
+		},
+	]
+	function StatCard({ icon, label, value, color }: StatCardProps) {
+		const colorClasses = {
+			blue: 'bg-blue-100 text-blue-500',
+			green: 'bg-green-100 text-green-500',
+			red: 'bg-red-100 text-red-500',
+			purple: 'bg-purple-100 text-purple-500',
+			amber: 'bg-amber-100 text-amber-500',
+			orange: 'bg-orange-100 text-orange-500',
+			pink: 'bg-pink-100 text-pink-500',
+		}
 
-        setData(results)
-      } catch (error) {
-        setError('Failed to fetch data')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
+		return (
+			<div className="rounded-lg bg-white p-6 shadow">
+				<div className="flex flex-col gap-2">
+					<div className="flex items-center justify-center gap-2">
+						<div className={`rounded-full p-2 ${colorClasses[color]}`}>{icon}</div>
+						<span className="text-sm text-gray-500">{label}</span>
+					</div>
+					<div className="flex items-baseline justify-center">
+						<h3 className="text-2xl font-bold">{value || 0}</h3>
+					</div>
+				</div>
+			</div>
+		)
+	}
 	return (
 		<PatronLayout>
 			<div className="container flex flex-col gap-8 p-6">
@@ -69,7 +122,11 @@ const PatronProfile = () => {
 					{profileList.map((button) => (
 						<a
 							key={button.id}
-							href={getCookieValue('HOME_SESSID') + button.url + (button.db != "SHOWORDERLIST" ? m2l_patron_id : "")}
+							href={
+								getCookieValue('HOME_SESSID') +
+								button.url +
+								(button.db != 'SHOWORDERLIST' ? m2l_patron_id : '')
+							}
 							onClick={() => handleClick(button.id)}
 							className={`px-3 py-2 text-sm shadow sm:px-4 sm:py-2 sm:text-base text-accent-foreground bg-white text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}>
 							{button.label}
@@ -78,7 +135,6 @@ const PatronProfile = () => {
 				</div>
 				<div className="mb-4 rounded-lg bg-white p-6 shadow">
 					<h1 className="text-3xl font-semibold text-gray-800">
-						{' '}
 						Welcome {records[0]?.full_name || 'User'}!
 					</h1>
 					<p className="mt-2">
@@ -89,105 +145,18 @@ const PatronProfile = () => {
 						</span>
 					</p>
 				</div>
+
 				{/* Stats Grid */}
 				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-					<div className="rounded-lg bg-white p-6 shadow">
-						<div className="flex flex-col gap-2">
-							<div className="flex items-center justify-center gap-2">
-								<div className="rounded-full bg-blue-100 p-2">
-									<ShoppingBag className="h-4 w-4 text-blue-500" />
-								</div>
-								<span className="text-sm text-gray-500">Orders</span>
-							</div>
-							<div className="flex items-baseline justify-center">
-								<h3 className="text-2xl font-bold">30.2K</h3>
-							</div>
-						</div>
-					</div>
-
-					<div className="rounded-lg bg-white p-6 shadow">
-						<div className="flex flex-col gap-2">
-							<div className="flex items-center justify-center gap-2">
-								<div className="rounded-full bg-green-100 p-2">
-									<Copyright className="h-4 w-4 text-green-500" />
-								</div>
-								<span className="text-sm text-gray-500">Copyright Requests</span>
-							</div>
-							<div className="flex items-baseline justify-center">
-								<h3 className="text-2xl font-bold">9.2K</h3>
-							</div>
-						</div>
-					</div>
-
-					<div className="rounded-lg bg-white p-6 shadow">
-						<div className="flex flex-col gap-2">
-							<div className="flex items-center justify-center gap-2">
-								<div className="rounded-full bg-red-100 p-2">
-									<Copy className="h-4 w-4 text-red-500" />
-								</div>
-								<span className="text-sm text-gray-500">Reproductions</span>
-							</div>
-							<div className="flex items-baseline justify-center">
-								<h3 className="text-2xl font-bold">1.2K</h3>
-							</div>
-						</div>
-					</div>
-
-					<div className="rounded-lg bg-white p-6 shadow">
-						<div className="flex flex-col gap-2">
-							<div className="flex items-center justify-center gap-2">
-								<div className="rounded-full bg-purple-100 p-2">
-									<BookMarked className="h-4 w-4 text-purple-500" />
-								</div>
-								<span className="text-sm text-gray-500">Bookmarks</span>
-							</div>
-							<div className="flex items-baseline justify-center">
-								<h3 className="text-2xl font-bold">18.2K</h3>
-							</div>
-						</div>
-					</div>
-
-          <div className="rounded-lg bg-white p-6 shadow">
-						<div className="flex flex-col gap-2">
-							<div className="flex items-center justify-center gap-2">
-								<div className="rounded-full bg-amber-100 p-2">
-									<Lightbulb className="h-4 w-4 text-amber-500" />
-								</div>
-								<span className="text-sm text-gray-500">Enquiries</span>
-							</div>
-							<div className="flex items-baseline justify-center">
-								<h3 className="text-2xl font-bold">18.2K</h3>
-							</div>
-						</div>
-					</div>
-
-          <div className="rounded-lg bg-white p-6 shadow">
-						<div className="flex flex-col gap-2">
-							<div className="flex items-center justify-center gap-2">
-								<div className="rounded-full bg-orange-100 p-2">
-									<MessageCircleMore className="h-4 w-4 text-orange-500" />
-								</div>
-								<span className="text-sm text-gray-500">Crowdsource</span>
-							</div>
-							<div className="flex items-baseline justify-center">
-								<h3 className="text-2xl font-bold">18.2K</h3>
-							</div>
-						</div>
-					</div>
-
-          <div className="rounded-lg bg-white p-6 shadow">
-						<div className="flex flex-col gap-2">
-							<div className="flex items-center justify-center gap-2">
-								<div className="rounded-full bg-pink-100 p-2">
-									<CalendarDays className="h-4 w-4 text-pink-500" />
-								</div>
-								<span className="text-sm text-gray-500">Calendar</span>
-							</div>
-							<div className="flex items-baseline justify-center">
-								<h3 className="text-2xl font-bold">18.2K</h3>
-							</div>
-						</div>
-					</div>
+					{statCards.map((card, index) => (
+						<StatCard
+							key={card.key}
+							icon={card.icon}
+							label={card.label}
+							color={card.color}
+							value={card.value}
+						/>
+					))}
 				</div>
 
 				{/* Recent Media Section */}
@@ -268,5 +237,3 @@ const PatronProfile = () => {
 		</PatronLayout>
 	)
 }
-
-export default PatronProfile
