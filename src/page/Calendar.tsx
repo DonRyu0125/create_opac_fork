@@ -25,8 +25,14 @@ import useConstants from '@/hooks/useConstants'
 import { AlertDialog } from '@radix-ui/react-alert-dialog'
 import RadixAlertDialog from '@/components/common/RadixAlertDialog'
 
+interface TagFunction {
+	[key: string]: any;
+}
+
+
 const Calendar = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
+	const [loading, setLoading] = useState(true)
 	const message = useConstants().message
 
 	const columns: ColumnDef<ProfileData>[] = [
@@ -79,11 +85,13 @@ const Calendar = () => {
 		{
 			accessorKey: ' ',
 			header: '',
-			cell: ({ row }) => {
+			cell: ({ cell }) => {
 				return (
 					<RadixAlertDialog
 						DeleteButton={
-							<button className="inline-flex h-[35px] items-center justify-center rounded bg-red4 px-[15px] font-medium leading-none text-red11 outline-none hover:bg-red5 focus:shadow-[0_0_0_2px] focus:shadow-red7">
+							<button
+								className="inline-flex h-[35px] items-center justify-center rounded bg-red4 px-[15px] font-medium leading-none text-red11 outline-none hover:bg-red5 focus:shadow-[0_0_0_2px] focus:shadow-red7"
+								onClick={() => cancelEvent(cell.row.original,cell.row.original.sisn)}>
 								{message.yes} {message.cancel}
 							</button>
 						}
@@ -94,12 +102,21 @@ const Calendar = () => {
 		},
 	]
 
-	const getOCCNumber = async (event) => {
+	const cancelEvent = async (event:TagFunction, sisnValue: number) => {
+		console.log('sisnValue', sisnValue)
+		console.log('event', event)
+
+		const occ_num = await getOCCNumber(event, sisnValue)
+
+		console.log('-',occ_num)
+	}
+
+	const getOCCNumber = async (event:TagFunction, sisnValue: number) => {
 		let HOME_SESSID = getSessionID()
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=Y&KEY=${SISN}&VALUE=${sisnNumber}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=Y&KEY=${SISN}&VALUE=${sisnValue}`,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
