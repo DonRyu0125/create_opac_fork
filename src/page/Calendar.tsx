@@ -22,6 +22,8 @@ import { Button } from '@/components/ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { ColumnDef } from '@tanstack/react-table'
 import useConstants from '@/hooks/useConstants'
+import { AlertDialog } from '@radix-ui/react-alert-dialog'
+import RadixAlertDialog from '@/components/common/RadixAlertDialog'
 
 const Calendar = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -42,7 +44,7 @@ const Calendar = () => {
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Date
+						{message.date}
 						<CaretSortIcon className="h-4 w-4" />
 					</Button>
 				)
@@ -53,21 +55,23 @@ const Calendar = () => {
 		},
 		{
 			accessorKey: TAG_FUNC_START_T.toLocaleLowerCase(),
-			header: 'Start',
+			header: message.start,
 			cell: ({ row }) => (
-				<div className="capitalize">{row.getValue(TAG_FUNC_START_T.toLocaleLowerCase())}</div>
+				<div className="capitalize">
+					{row.getValue(TAG_FUNC_START_T.toLocaleLowerCase())}
+				</div>
 			),
 		},
 		{
 			accessorKey: TAG_FUNC_END_T.toLocaleLowerCase(),
-			header: 'End',
+			header: message.end,
 			cell: ({ row }) => (
 				<div className="capitalize">{row.getValue(TAG_FUNC_END_T.toLocaleLowerCase())}</div>
 			),
 		},
 		{
 			accessorKey: TAG_FUNC_LOC.toLocaleLowerCase(),
-			header: 'Location',
+			header: message.location,
 			cell: ({ row }) => (
 				<div className="capitalize">{row.getValue(TAG_FUNC_LOC.toLocaleLowerCase())}</div>
 			),
@@ -75,9 +79,18 @@ const Calendar = () => {
 		{
 			accessorKey: ' ',
 			header: '',
-			cell: ({ row }) => (
-				<Button variant={'danger'}>{message.cancel}</Button>
-			),
+			cell: ({ row }) => {
+				return (
+					<RadixAlertDialog
+						DeleteButton={
+							<button className="inline-flex h-[35px] items-center justify-center rounded bg-red4 px-[15px] font-medium leading-none text-red11 outline-none hover:bg-red5 focus:shadow-[0_0_0_2px] focus:shadow-red7">
+								{message.yes} {message.cancel}
+							</button>
+						}
+						InitialButton={<Button variant={'danger'}>{message.cancel}</Button>}
+					/>
+				)
+			},
 		},
 	]
 
@@ -161,7 +174,12 @@ const Calendar = () => {
 	return (
 		<PatronLayout>
 			<h1 className="text-2xl font-bold">{message.calendar}</h1>
-			<ProfileTable data={records} columns={columns} filterType={TAG_NAME.toLocaleLowerCase()} filterTypeShow={message.event} />
+			<ProfileTable
+				data={records}
+				columns={columns}
+				filterType={TAG_NAME.toLocaleLowerCase()}
+				filterTypeShow={message.event}
+			/>
 		</PatronLayout>
 	)
 }

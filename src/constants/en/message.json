@@ -153,5 +153,12 @@
 	"eventEndedMessage": "Closed",
 	"hello":"Hello",
 	"event":"Event",
-	"dashboardHome": "Dashboard Home"
+	"dashboardHome": "Dashboard Home",
+	"date":"Date",
+	"location":"Location",
+	"start":"Start",
+	"end":"End",
+	"no":"No",
+	"confirmCancel":"Are you absolutely sure?",
+	"yes":"Yes"
 }
