@@ -12,110 +12,72 @@ import {
 	TAG_DB,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DTE_GRP,
+	TAG_FUNC_END_T,
 	TAG_FUNC_LOC,
 	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_START_T,
+	TAG_NAME,
 } from '@/components/common/event-calendar/Constants'
 import { Button } from '@/components/ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
-import { Checkbox } from '@radix-ui/react-checkbox'
 import { ColumnDef } from '@tanstack/react-table'
+import useConstants from '@/hooks/useConstants'
 
 const Calendar = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const [activeButton, setActiveButton] = useState(null)
-	const [apiData, setApiData] = useState(null)
-	const [loading, setLoading] = useState(false)
-
-	const data: Payment[] = [
-		{
-			id: 'm5gr84i9',
-			amount: 316,
-			status: 'success',
-			email: 'ken99@yahoo.com',
-		},
-		{
-			id: '3u1reuv4',
-			amount: 242,
-			status: 'success',
-			email: 'Abe45@gmail.com',
-		},
-		{
-			id: 'derv1ws0',
-			amount: 837,
-			status: 'processing',
-			email: 'Monserrat44@gmail.com',
-		},
-		{
-			id: '5kma53ae',
-			amount: 874,
-			status: 'success',
-			email: 'Silas22@gmail.com',
-		},
-		{
-			id: 'bhqecj4p',
-			amount: 721,
-			status: 'failed',
-			email: 'carmella@hotmail.com',
-		},
-	]
-
-	type Payment = {
-		id: string
-		amount: number
-		status: 'pending' | 'processing' | 'success' | 'failed'
-		email: string
-	}
+	const message = useConstants().message
 
 	const columns: ColumnDef<ProfileData>[] = [
 		{
-			id: 'select',
-			header: ({ table }) => (
-				<Checkbox
-					checked={
-						table.getIsAllPageRowsSelected() ||
-						(table.getIsSomePageRowsSelected() && 'indeterminate')
-					}
-					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-					aria-label="Select all"
-				/>
-			),
+			accessorKey: TAG_NAME.toLocaleLowerCase(),
+			header: 'Event',
 			cell: ({ row }) => (
-				<Checkbox
-					checked={row.getIsSelected()}
-					onCheckedChange={(value) => row.toggleSelected(!!value)}
-					aria-label="Select row"
-				/>
+				<div className="capitalize">{row.getValue(TAG_NAME.toLocaleLowerCase())}</div>
 			),
-			enableSorting: false,
-			enableHiding: false,
 		},
 		{
-			accessorKey: 'status',
-			header: 'Status2',
-			cell: ({ row }) => <div className="capitalize">{row.getValue('status')}</div>,
-		},
-		{
-			accessorKey: 'email',
+			accessorKey: TAG_FUNC_DATE.toLocaleLowerCase(),
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Email
-						<CaretSortIcon className="ml-2 h-4 w-4" />
+						Date
+						<CaretSortIcon className="h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('email')}</div>,
+			cell: ({ row }) => (
+				<div className="lowercase">{row.getValue(TAG_FUNC_DATE.toLocaleLowerCase())}</div>
+			),
 		},
 		{
-			accessorKey: 'amount',
-			header: () => <div className="text-right">Amount</div>,
-			cell: ({ row }) => {
-
-				return <Button>asd</Button>
-			},
+			accessorKey: TAG_FUNC_START_T.toLocaleLowerCase(),
+			header: 'Start',
+			cell: ({ row }) => (
+				<div className="capitalize">{row.getValue(TAG_FUNC_START_T.toLocaleLowerCase())}</div>
+			),
+		},
+		{
+			accessorKey: TAG_FUNC_END_T.toLocaleLowerCase(),
+			header: 'End',
+			cell: ({ row }) => (
+				<div className="capitalize">{row.getValue(TAG_FUNC_END_T.toLocaleLowerCase())}</div>
+			),
+		},
+		{
+			accessorKey: TAG_FUNC_LOC.toLocaleLowerCase(),
+			header: 'Location',
+			cell: ({ row }) => (
+				<div className="capitalize">{row.getValue(TAG_FUNC_LOC.toLocaleLowerCase())}</div>
+			),
+		},
+		{
+			accessorKey: ' ',
+			header: '',
+			cell: ({ row }) => (
+				<Button variant={'danger'}>{message.cancel}</Button>
+			),
 		},
 	]
 
@@ -199,7 +161,7 @@ const Calendar = () => {
 	return (
 		<PatronLayout>
 			<h1 className="text-2xl font-bold">Calendar</h1>
-			<ProfileTable data={data} columns={columns} filterType={'email'}/>
+			<ProfileTable data={records} columns={columns} filterType={TAG_NAME.toLocaleLowerCase()} />
 		</PatronLayout>
 	)
 }
