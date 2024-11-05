@@ -151,5 +151,7 @@
 	"confirmationLabel": "Confirmation",
 	"stepLabel": "Step",
 	"eventEndedMessage": "Closed",
-	"hello":"Hello"
+	"hello":"Hello",
+	"event":"Event",
+	"dashboardHome": "Dashboard Home"
 }

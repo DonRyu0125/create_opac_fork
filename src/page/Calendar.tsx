@@ -30,7 +30,7 @@ const Calendar = () => {
 	const columns: ColumnDef<ProfileData>[] = [
 		{
 			accessorKey: TAG_NAME.toLocaleLowerCase(),
-			header: 'Event',
+			header: message.event,
 			cell: ({ row }) => (
 				<div className="capitalize">{row.getValue(TAG_NAME.toLocaleLowerCase())}</div>
 			),
@@ -160,8 +160,8 @@ const Calendar = () => {
 
 	return (
 		<PatronLayout>
-			<h1 className="text-2xl font-bold">Calendar</h1>
-			<ProfileTable data={records} columns={columns} filterType={TAG_NAME.toLocaleLowerCase()} />
+			<h1 className="text-2xl font-bold">{message.calendar}</h1>
+			<ProfileTable data={records} columns={columns} filterType={TAG_NAME.toLocaleLowerCase()} filterTypeShow={message.event} />
 		</PatronLayout>
 	)
 }

@@ -153,6 +153,7 @@
 	"confirmationLabel": "Confirmation",
 	"stepLabel": "Step",
 	"eventEndedMessage": "Fermé",
-	"hello":"Bonjour"
+	"hello":"Bonjour",
+	"event":"Événement"
 }
 
