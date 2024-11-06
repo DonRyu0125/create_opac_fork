@@ -132,9 +132,9 @@ const Header = (props: Props) => {
 						<DropdownMenuItem>
 							<Link href="/">All</Link>
 						</DropdownMenuItem>
-						<DropdownMenuItem>Archives</DropdownMenuItem>
-						<DropdownMenuItem>Museum</DropdownMenuItem>
-						<DropdownMenuItem>Library</DropdownMenuItem>
+						<DropdownMenuItem><Link href="/archives.html">Archives</Link></DropdownMenuItem>
+						<DropdownMenuItem><Link href="/museum.html">Museum</Link></DropdownMenuItem>
+						<DropdownMenuItem><Link href="/library.html">Library</Link></DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem>
 							<Link onClick={clearCookies}>Logout</Link>
