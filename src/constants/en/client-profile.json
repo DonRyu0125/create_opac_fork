@@ -5,21 +5,21 @@
 			"label": "Orders",
 			"db": "DOC_REQUEST",
             "icon": "ShoppingBag",
-			"url": ""
+			"url": "?SEARCH&DATABASE=DOC_REQUEST&EXP=REQ_PATRON_ID%20"
 		},
 		{
 			"id": 2,
 			"label": "Copyright Requests",
 			"db": "REQUEST_VIEW",
             "icon": "Copyright" ,
-			"url": "?SEARCH&DATABASE=REQUEST_VIEW&"
+			"url": "?SEARCH&DATABASE=REQUEST_VIEW&EXP=REQ_PATRON_ID%2020240001%20AND%20REQ_TOPIC%20Copyright%20Services"
 		},
 		{
 			"id": 3,
 			"label": "Reproductions",
 			"db": "REQUEST_VIEW",
             "icon": "Copy" ,
-			"url": ""
+			"url": "?SEARCH&DATABASE=REQUEST_VIEW&EXP=REQ_PATRON_ID%2020240001%20AND%20REQ_TOPIC%20Obtaining%20Reproductions"
 		},
 		{
 			"id": 4,

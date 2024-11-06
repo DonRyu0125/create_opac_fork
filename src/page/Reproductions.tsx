@@ -10,7 +10,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { getCookieValue } from '@/lib/utils'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 
-const Crowdsource = () => {
+const Reproductions = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
 	const profileList = clientProfileJSON.database
@@ -109,7 +109,7 @@ const Crowdsource = () => {
 						</a>
 					))}
                     
-				</div><h1 className="text-2xl font-bold">Crowdsource</h1>
+				</div><h1 className="text-2xl font-bold">Reproductions</h1>
 
 			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow=''/>
 			</div>
@@ -118,4 +118,4 @@ const Crowdsource = () => {
 	)
 }
 
-export default Crowdsource
+export default Reproductions

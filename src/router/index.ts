@@ -22,6 +22,9 @@ import AdminMessage from '@/page/admin/Message'
 import AdminStyles from '@/page/admin/Styles'
 import PatronProfile from '@/page/PatronProfile'
 import PatronInfo from '@/page/PatronInfo'
+import Orders from '@/page/Orders'
+import Copyright from '@/page/Copyright'
+import Reproductions from '@/page/Reproductions'
 import Enquiry from '@/page/Enquiry'
 import Crowdsource from '@/page/Crowdsource'
 import Calendar from '@/page/Calendar'
@@ -60,6 +63,9 @@ export const ROUTES: TRoute = {
 	museum: Museum,
 	patronprofile: PatronProfile,
 	patroninfo: PatronInfo,
+	orders: Orders,
+	copyright: Copyright,
+	reproductions: Reproductions,
 	enquiry: Enquiry,
 	crowdsource: Crowdsource,
 	calendar: Calendar,

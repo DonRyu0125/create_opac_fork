@@ -33,7 +33,6 @@ export default function PatronProfile() {
 
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	const home_session = getCookieValue('HOME_SESSID')
 
 	const handleClick = (id: any) => {
 		setActiveButton(id)
@@ -41,53 +40,53 @@ export default function PatronProfile() {
 
 	const statCards = [
 		{
-      key: 1,
+			key: 1,
 			icon: <ShoppingBag className="h-4 w-4" />,
 			label: 'Orders',
 			color: 'blue',
 			value: records[0].orders_count,
 		},
 		{
-      key: 2,
+			key: 2,
 			icon: <Copyright className="h-4 w-4" />,
 			label: 'Copyright Requests',
 			color: 'green',
-			value: 0,
+			value: records[0].copyright_count,
 		},
 		{
-      key: 3,
+			key: 3,
 			icon: <Copy className="h-4 w-4" />,
 			label: 'Reproductions',
 			color: 'red',
-			value: 0,
+			value: records[0].reproductions_count,
 		},
 		{
-      key: 4,
+			key: 4,
 			icon: <BookMarked className="h-4 w-4" />,
 			label: 'Bookmarks',
 			color: 'purple',
 			value: records[0].bookmark_count,
 		},
 		{
-      key: 5,
+			key: 5,
 			icon: <Lightbulb className="h-4 w-4" />,
 			label: 'Enquiries',
 			color: 'amber',
 			value: records[0].enquiries_count,
 		},
 		{
-      key: 6,
+			key: 6,
 			icon: <MessageCircleMore className="h-4 w-4" />,
 			label: 'Crowdsource',
 			color: 'orange',
 			value: records[0].crowdsource_count,
 		},
 		{
-      key: 7,
+			key: 7,
 			icon: <CalendarDays className="h-4 w-4" />,
 			label: 'Calendar',
 			color: 'pink',
-			value: 0,
+			value: records[0].calendar_count
 		},
 	]
 	function StatCard({ icon, label, value, color }: StatCardProps) {

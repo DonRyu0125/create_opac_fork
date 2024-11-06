@@ -2,7 +2,6 @@ import { useState } from 'react'
 import PatronLayout from '@/components/layouts/patron'
 import ProfileTable, { ProfileData } from '@/components/common/client-profile/ProfileTable'
 import useJSONData from '@/hooks/useJSONData'
-import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { Checkbox } from '@radix-ui/react-checkbox'
@@ -10,7 +9,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { getCookieValue } from '@/lib/utils'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 
-const Crowdsource = () => {
+const Orders = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
 	const profileList = clientProfileJSON.database
@@ -109,7 +108,7 @@ const Crowdsource = () => {
 						</a>
 					))}
                     
-				</div><h1 className="text-2xl font-bold">Crowdsource</h1>
+				</div><h1 className="text-2xl font-bold">Orders</h1>
 
 			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow=''/>
 			</div>
@@ -118,4 +117,4 @@ const Crowdsource = () => {
 	)
 }
 
-export default Crowdsource
+export default Orders

@@ -124,7 +124,7 @@ const Enquiries = () => {
                     
 				</div><h1 className="text-2xl font-bold">Enquiries</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'enquiry'} />
+			<ProfileTable data={records} columns={columns} filterType={'enquiry'} filterTypeShow='' />
 			</div>
 			
 		</PatronLayout>
