@@ -2,7 +2,6 @@ import { useState } from 'react'
 import PatronLayout from '@/components/layouts/patron'
 import ProfileTable, { ProfileData } from '@/components/common/client-profile/ProfileTable'
 import useJSONData from '@/hooks/useJSONData'
-import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { Checkbox } from '@radix-ui/react-checkbox'
@@ -44,51 +43,79 @@ const Reproductions = () => {
 			enableHiding: false,
 		},
 		{
-			accessorKey: 'comments_date',
-			header: 'Date',
-			cell: ({ row }) => <div className="capitalize">{row.getValue('comments_date')}</div>,
+			accessorKey: 'req_order_num',
+			header: 'Order #',
+			cell: ({ row }) => <div className="capitalize">{row.getValue('req_order_num')}</div>,
 		},
 		{
-			accessorKey: 'creator_id',
+			accessorKey: 'req_item_id',
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Creator
+						Item #
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('creator_id')}</div>,
+			cell: ({ row }) => <div className="lowercase">{row.getValue('req_item_id')}</div>,
 		},
 		{
-			accessorKey: 'comments_item_id',
+			accessorKey: 'req_topic',
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Item-ID
+						Topic
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('comments_item_id')}</div>,
+			cell: ({ row }) => <div className="lowercase">{row.getValue('req_topic')}</div>,
 		},
 		{
-			accessorKey: 'comments',
+			accessorKey: 'req_item_title',
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Comment
+						Title
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('comments')}</div>,
+			cell: ({ row }) => <div className="lowercase">{row.getValue('req_item_title')}</div>,
+		},
+        {
+			accessorKey: 'req_charge_amt',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Amount
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="lowercase">{row.getValue('req_charge_amt')}</div>,
+		},
+        {
+			accessorKey: 'req_paid_amt',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Paid
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="lowercase">{row.getValue('req_paid_amt')}</div>,
 		},
 	]
 	return (

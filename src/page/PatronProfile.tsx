@@ -124,7 +124,7 @@ export default function PatronProfile() {
 							href={
 								getCookieValue('HOME_SESSID') +
 								button.url +
-								(button.db != 'SHOWORDERLIST' ? m2l_patron_id : '')
+								(button.label != 'Bookmarks' ? m2l_patron_id : '')
 							}
 							onClick={() => handleClick(button.id)}
 							className={`px-3 py-2 text-sm shadow sm:px-4 sm:py-2 sm:text-base text-accent-foreground bg-white text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}>

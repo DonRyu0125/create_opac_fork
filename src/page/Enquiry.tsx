@@ -2,7 +2,6 @@ import { useState } from 'react'
 import PatronLayout from '@/components/layouts/patron'
 import ProfileTable, { ProfileData } from '@/components/common/client-profile/ProfileTable'
 import useJSONData from '@/hooks/useJSONData'
-import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { Checkbox } from '@radix-ui/react-checkbox'
@@ -20,18 +19,6 @@ const Enquiries = () => {
 	// Handle button click
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
-	}
-
-	const fetchApiData = async (url: string) => {
-		setLoading(true)
-		try {
-			const response = await axios.get(url)
-			setApiData(response.data)
-		} catch (error) {
-			console.error('Error fetching data:', error)
-			setApiData(null)
-		}
-		setLoading(false)
 	}
 	const columns: ColumnDef<ProfileData>[] = [
 		{

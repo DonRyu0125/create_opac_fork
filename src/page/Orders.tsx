@@ -43,51 +43,93 @@ const Orders = () => {
 			enableHiding: false,
 		},
 		{
-			accessorKey: 'comments_date',
+			accessorKey: 'date_needed',
 			header: 'Date',
-			cell: ({ row }) => <div className="capitalize">{row.getValue('comments_date')}</div>,
+			cell: ({ row }) => <div className="capitalize">{row.getValue('date_needed') ? row.getValue('date_needed') : "N/A"}</div>,
 		},
 		{
-			accessorKey: 'creator_id',
+			accessorKey: 'time_needed',
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Creator
+						Time
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('creator_id')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('time_needed') ? row.getValue('time_needed') : "N/A"}</div>,
 		},
 		{
-			accessorKey: 'comments_item_id',
+			accessorKey: 'req_status',
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Item-ID
+						Status
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('comments_item_id')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('req_status')}</div>,
 		},
 		{
-			accessorKey: 'comments',
+			accessorKey: 'req_item_id',
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Comment
+						Reference No.
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('comments')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('req_item_id')}</div>,
+		},
+        {
+			accessorKey: 'req_title',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Title
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="">{row.getValue('req_title')}</div>,
+		},
+        {
+			accessorKey: 'req_paid_amt',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Amount
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="">{row.getValue('req_paid_amt') ? row.getValue('req_paid_amt') : "N/A"}</div>,
+		},
+        {
+			accessorKey: 'req_order_num',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Action
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="">{row.getValue('req_order_num')}</div>,
 		},
 	]
 	return (

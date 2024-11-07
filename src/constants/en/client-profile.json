@@ -5,48 +5,48 @@
 			"label": "Orders",
 			"db": "DOC_REQUEST",
             "icon": "ShoppingBag",
-			"url": "?SEARCH&DATABASE=DOC_REQUEST&EXP=REQ_PATRON_ID%20"
+			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_ORDERS_PROFILE&EXP=REQ_PATRON_ID%20"
 		},
 		{
 			"id": 2,
 			"label": "Copyright Requests",
-			"db": "REQUEST_VIEW",
-            "icon": "Copyright" ,
-			"url": "?SEARCH&DATABASE=REQUEST_VIEW&EXP=REQ_PATRON_ID%2020240001%20AND%20REQ_TOPIC%20Copyright%20Services"
+			"db": "DOC_REQUEST",
+            "icon": "Copyright",
+			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_COPY_PROFILE&EXP=REQ_TOPIC%20Copyright%20Services%20AND%20REQ_PATRON_ID%20"
 		},
 		{
 			"id": 3,
 			"label": "Reproductions",
-			"db": "REQUEST_VIEW",
-            "icon": "Copy" ,
-			"url": "?SEARCH&DATABASE=REQUEST_VIEW&EXP=REQ_PATRON_ID%2020240001%20AND%20REQ_TOPIC%20Obtaining%20Reproductions"
+			"db": "DOC_REQUEST",
+            "icon": "Copy",
+			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_REPRODUCTION_PROFILE&EXP=REQ_TOPIC%20Obtaining%20Reproductions%20AND%20REQ_PATRON_ID%20"
 		},
 		{
 			"id": 4,
 			"label": "Bookmarks",
 			"db": "SHOWORDERLIST",
-            "icon": "BookMarked" ,
+            "icon": "BookMarked",
 			"url": "?SHOWORDERLIST&COOKIE=BOOKMARK"
 		},
 		{
 			"id": 5,
 			"label": "Enquiries",
 			"db": "ENQUIRIES_VIEW",
-            "icon": "Lightbulb" ,
+            "icon": "Lightbulb",
 			"url": "?SEARCH&DATABASE=ENQUIRIES_VIEW&EXP=ENQ_USER_ID%20"
 		},
 		{
 			"id": 6,
 			"label": "Crowdsource",
 			"db": "COMMENTS_VIEW",
-            "icon": "MessageCircleMore" ,
+            "icon": "MessageCircleMore",
 			"url": "?SEARCH&DATABASE=COMMENTS_VIEW&EXP=CREATOR_ID%20"
 		},
         {
             "id": 7,
 			"label": "Calendar",
 			"db": "M2L_TAG",
-            "icon": "CalendarDays" ,
+            "icon": "CalendarDays",
 			"url": ""
         }
 	]
