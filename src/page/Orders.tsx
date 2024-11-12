@@ -115,7 +115,7 @@ const Orders = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="">{row.getValue('req_paid_amt') ? row.getValue('req_paid_amt') : "N/A"}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('req_paid_amt')}</div>,
 		},
         {
 			accessorKey: 'req_order_num',
@@ -152,7 +152,7 @@ const Orders = () => {
                     
 				</div><h1 className="text-2xl font-bold">Orders</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow=''/>
+			<ProfileTable data={records} columns={columns} filterType={'req_title'} filterTypeShow=''/>
 			</div>
 			
 		</PatronLayout>

@@ -17,6 +17,7 @@ import {
 	MoreHorizontal,
 	Heart,
 	MessageSquare,
+  Upload
 } from 'lucide-react'
 
 interface StatCardProps {

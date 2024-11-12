@@ -74,13 +74,13 @@ export function ProfileTable({
 				/>
 			</div>
 			<div className="rounded-md border">
-				<Table>
+				<Table className={'bg-white rounded shadow-md border '}>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
 									return (
-										<TableHead key={header.id} className={'text-center'}>
+										<TableHead key={header.id} className={'bg-gray-100 text-bold text-center'}>
 											{header.isPlaceholder
 												? null
 												: flexRender(

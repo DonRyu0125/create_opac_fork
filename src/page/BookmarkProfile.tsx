@@ -9,7 +9,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { getCookieValue } from '@/lib/utils'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 
-const Copyright = () => {
+const BookmarkProfile = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
 	const profileList = clientProfileJSON.database
@@ -108,13 +108,13 @@ const Copyright = () => {
 						</a>
 					))}
                     
-				</div><h1 className="text-2xl font-bold">Copyright Rquests</h1>
+				</div><h1 className="text-2xl font-bold">Bookmark</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'req_item_id'} filterTypeShow=''/>
+			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow=''/>
 			</div>
 			
 		</PatronLayout>
 	)
 }
 
-export default Copyright
+export default BookmarkProfile

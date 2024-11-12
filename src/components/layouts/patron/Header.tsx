@@ -1,6 +1,5 @@
 import { LanguageSelect } from '@/components/common/LanguageSelect'
 import Link from '@/components/common/Link'
-
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -19,11 +18,13 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import useConstants from '@/hooks/useConstants'
 import { getCookieValue } from '@/lib/utils'
-import { Home, PanelLeft } from 'lucide-react'
+import { Home, PanelLeft, UserRound } from 'lucide-react'
 type Props = {}
 
 const Header = (props: Props) => {
 	const { message, config } = useConstants()
+	const home_url =
+	'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 	function deleteCookie(cname: string) {
 		document.cookie = cname + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
 	}
@@ -47,33 +48,11 @@ const Header = (props: Props) => {
 				<SheetContent side="left" className="sm:max-w-xs">
 					<nav className="grid gap-6 text-lg font-medium">
 						<Link
-							href="#"
+							href={getCookieValue('HOME_SESSID') + home_url}
 							className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
 							<Home className="h-5 w-5" />
 							Patron Dashboard
 						</Link>
-						{/* <Link
-							href="#"
-							className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
-							<ShoppingCart className="h-5 w-5" />
-							Orders
-						</Link>
-						<Link href="#" className="flex items-center gap-4 px-2.5 text-foreground">
-							<Package className="h-5 w-5" />
-							Products
-						</Link>
-						<Link
-							href="#"
-							className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
-							<Users2 className="h-5 w-5" />
-							Customers
-						</Link>
-						<Link
-							href="#"
-							className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
-							<LineChart className="h-5 w-5" />
-							Settings
-						</Link> */}
 					</nav>
 				</SheetContent>
 			</Sheet>
@@ -81,7 +60,7 @@ const Header = (props: Props) => {
 				<BreadcrumbList>
 					<BreadcrumbItem>
 						<BreadcrumbLink asChild>
-							<Link href="#" className="flex no-underline"><Home className="mr-1 h-5 w-5"/>Client Dashboard</Link>
+							<Link href={getCookieValue('HOME_SESSID') + home_url} className="flex no-underline"><Home className="mr-1 h-5 w-5"/>Client Dashboard</Link>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					{/* <BreadcrumbSeparator />
@@ -106,13 +85,7 @@ const Header = (props: Props) => {
 							variant="outline"
 							size="icon"
 							className="overflow-hidden rounded-full">
-							{/* <Image
-                  src=""
-                  width={36}
-                  height={36}
-                  alt="Avatar"
-                  className="overflow-hidden rounded-full"
-                /> */}
+							<UserRound/>
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">

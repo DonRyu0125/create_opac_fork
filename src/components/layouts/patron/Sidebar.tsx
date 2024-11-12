@@ -11,6 +11,7 @@ import {
 	Lightbulb,
 	MessageCircleMore,
 	CalendarDays,
+	Upload,
 	FileX
 } from 'lucide-react'
 import clientProfileJSON from '@/constants/en/client-profile.json'
@@ -41,7 +42,7 @@ const Sidebar = (props: Props) => {
 					<Tooltip key={index}>
 						<TooltipTrigger asChild>
 							<Link
-								href={`${getCookieValue('HOME_SESSID') + item.url + (item.label != 'Bookmarks' ? m2l_patron_id : '')}`}
+								href={`${getCookieValue('HOME_SESSID') + item.url + (item.label === 'Bookmarks' || item.label === 'Easy Load' ? '' : m2l_patron_id)}`}
 								className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
 								{item.label == 'Orders' ? (
 									<ShoppingBag className="h-5 w-5" />
@@ -57,6 +58,8 @@ const Sidebar = (props: Props) => {
 									<MessageCircleMore className="h-5 w-5" />
 								) : item.label == 'Calendar' ? (
 									<CalendarDays className="h-5 w-5" />
+								) : item.label == 'Easy Upload' ? (
+									<Upload className="h-5 w-5" />
 								) : (
 									<FileX className="h-5 w-5"/>
 								)}

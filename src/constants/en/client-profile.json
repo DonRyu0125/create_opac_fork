@@ -26,7 +26,7 @@
 			"label": "Bookmarks",
 			"db": "SHOWORDERLIST",
             "icon": "BookMarked",
-			"url": "?SHOWORDERLIST&COOKIE=BOOKMARK"
+			"url": "?SHOWORDERLIST&COOKIE=BOOKMARK&NOMSG=[MESSAGES]no-bookmark.html"
 		},
 		{
 			"id": 5,
@@ -47,6 +47,13 @@
 			"label": "Calendar",
 			"db": "M2L_TAG",
             "icon": "CalendarDays",
+			"url": ""
+        },
+		{
+            "id": 8,
+			"label": "Easy Upload",
+			"db": "",
+            "icon": "Upload",
 			"url": ""
         }
 	]

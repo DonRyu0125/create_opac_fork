@@ -15,7 +15,7 @@ const LoginBtn = ({ className }: { className?: string }) => {
 	const { message, config } = useConstants()
 
 	const isAuthenticated = isLogin()
-
+	let m2l_patron_name = getCookieValue('M2L_PATRON_NAME') || "Guest"
 	return (
 		<>
 			{isAuthenticated ? (
@@ -25,7 +25,7 @@ const LoginBtn = ({ className }: { className?: string }) => {
 							className={
 								'text-opac-white text-lg font-bold flex items-center max-w-[250px] truncate'
 							}>
-							{message.welcome}, {getCookieValue('M2L_PATRON_NAME')}!
+							{message.welcome} {decodeURIComponent(m2l_patron_name)}!
 							<ChevronDown className={'h-4'} />
 						</button>
 					</DropdownMenuTrigger>
