@@ -6,14 +6,14 @@
  */
 
 export type Database = string;
-export type Label = string;
 export type Name = string;
+export type Label = string;
 export type Summary = boolean;
 export type Grid = boolean;
 export type Detail = boolean;
 export type Items = {
-  label?: Label;
   name?: Name;
+  label?: Label;
   summary?: Summary;
   grid?: Grid;
   detail?: Detail;

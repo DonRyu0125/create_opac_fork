@@ -9,8 +9,11 @@ export type Heading = string;
 export type HeroBanner = string;
 export type SearchURL = string;
 export type BrowseByCategoryTitle = string;
+export type CalendarfilterOption = string;
 export type Title = string;
 export type DatabaseName = string;
+export type DisplayTitle = string;
+export type LinkURL = string;
 export type Thumbnail = string;
 export type Title1 = string;
 export type Url = string;
@@ -20,14 +23,35 @@ export type CategoriesItems = {
   url?: Url;
   [k: string]: unknown;
 }[];
+export type FilterDatabase = string;
+export type FilterOption = string;
+export type Type = string;
+export type Color = string;
+export type Icon = string;
+export type FilterTypes = {
+  type?: Type;
+  color?: Color;
+  icon?: Icon;
+  [k: string]: unknown;
+}[];
 
 export interface LibraryJson {
   heading?: Heading;
   heroBanner?: HeroBanner;
   searchURL?: SearchURL;
   browseByCategoryTitle?: BrowseByCategoryTitle;
+  CalendarfilterOption?: CalendarfilterOption;
   title?: Title;
   database_name?: DatabaseName;
+  displayTitle?: DisplayTitle;
+  linkURL?: LinkURL;
   categoriesItems?: CategoriesItems;
+  rsvp?: Rsvp;
+  [k: string]: unknown;
+}
+export interface Rsvp {
+  filterDatabase?: FilterDatabase;
+  filterOption?: FilterOption;
+  filterTypes?: FilterTypes;
   [k: string]: unknown;
 }

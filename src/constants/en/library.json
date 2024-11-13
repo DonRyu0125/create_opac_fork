@@ -6,6 +6,8 @@
 	"CalendarfilterOption": "",
 	"title": "Search the Library",
 	"database_name": "BIBLIO_WEB",
+	"displayTitle":"Library",
+	"linkURL":"/library.html",
 	"categoriesItems": [
 		{
 			"thumbnail": "https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGlicmFyeSUyMGl0ZW1zfGVufDB8fDB8fHww",

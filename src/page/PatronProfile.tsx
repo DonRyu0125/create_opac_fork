@@ -15,10 +15,13 @@ import {
 	MessageCircleMore,
 	CalendarDays,
 	MoreHorizontal,
-	Heart,
-	MessageSquare,
-  Upload
+	File,
+	Landmark,
+	Library,
+	Archive
 } from 'lucide-react'
+import useConstants from '@/hooks/useConstants'
+import Link from '@/components/common/Link'
 
 interface StatCardProps {
 	key: number
@@ -31,7 +34,7 @@ interface StatCardProps {
 export default function PatronProfile() {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
-
+	const { home, archives, museum, library } = useConstants()
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 
@@ -87,7 +90,7 @@ export default function PatronProfile() {
 			icon: <CalendarDays className="h-4 w-4" />,
 			label: 'Calendar',
 			color: 'pink',
-			value: records[0].calendar_count
+			value: records[0].calendar_count,
 		},
 	]
 	function StatCard({ icon, label, value, color }: StatCardProps) {
@@ -163,38 +166,33 @@ export default function PatronProfile() {
 				<div className="space-y-4">
 					<div className="flex items-center justify-between">
 						<h2 className="text-xl font-medium">
-							<span>Preview</span>
+							<span>Search Databases</span>
 						</h2>
-						<button className="rounded-md p-2 hover:bg-gray-100">
+						{/* <button className="rounded-md p-2 hover:bg-gray-100">
 							<MoreHorizontal className="h-5 w-5 text-gray-500" />
-						</button>
+						</button> */}
 					</div>
 					<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-						{[
-							'/placeholder.svg?height=400&width=400',
-							'/placeholder.svg?height=400&width=400',
-							'/placeholder.svg?height=400&width=400',
-							'/placeholder.svg?height=400&width=400',
-						].map((src, index) => (
-							<div key={index} className="overflow-hidden rounded-lg bg-white shadow">
-								<div className="aspect-square relative">
-									<img
-										src={src}
-										alt={`Recent media ${index + 1}`}
-										className="h-full w-full object-cover"
-									/>
-								</div>
-								<div className="p-4">
-									<div className="flex items-center justify-between text-sm text-gray-500">
-										<div className="flex items-center gap-2">
-											<Heart className="h-4 w-4" />
-											2.3K
-											<MessageSquare className="h-4 w-4 ml-2" />
-											900
-										</div>
-										<span>23 days ago</span>
+						{[home, archives, museum, library].map((item, index) => (
+							<div key={index} className="overflow-hidden rounded-lg bg-white shadow hover:brightness-95">
+								<Link href={item.linkURL} className='group no-underline'>
+									<div className="aspect-square relative overflow-hidden">
+										<img
+											src={item.heroBanner}
+											alt={`Recent media ${index + 1}`}
+											className="h-full w-full object-cover transition ease-in-out duration-150 group-hover:scale-105"
+										/>
 									</div>
-								</div>
+									<div className="p-4">
+										<div className="flex items-center justify-between text-sm text-gray-500">
+											<div className="flex items-center gap-2">
+												{item == home ? <File className='w-5 h-5'/> : item == archives ? <Archive className='w-5 h-5'/> : item == museum ? <Landmark className='w-5 h-5'/> : item == library ? <Library className='w-5 h-5'/> : ""}
+												{item == home ? (Number(records[0].description_count) + Number(records[0].collection_count) + Number(records[0].biblio_count)) : item == archives ? records[0].description_count : item == museum ? records[0].collection_count : item == library ? records[0].biblio_count : ""}
+											</div>
+											<span>{item.displayTitle}</span>
+										</div>
+									</div>
+								</Link>
 							</div>
 						))}
 					</div>

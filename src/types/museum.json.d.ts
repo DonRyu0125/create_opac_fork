@@ -9,8 +9,11 @@ export type Heading = string;
 export type HeroBanner = string;
 export type SearchURL = string;
 export type BrowseByCategoryTitle = string;
+export type CalendarfilterOption = string;
 export type Title = string;
 export type DatabaseName = string;
+export type DisplayTitle = string;
+export type LinkURL = string;
 export type Thumbnail = string;
 export type Title1 = string;
 export type Url = string;
@@ -20,14 +23,47 @@ export type CategoriesItems = {
   url?: Url;
   [k: string]: unknown;
 }[];
+export type Title2 = string;
+export type Description = string;
+export type Url1 = string;
+export type Thumbnail1 = string;
+export type FeaturedCollection = {
+  title?: Title2;
+  description?: Description;
+  url?: Url1;
+  thumbnail?: Thumbnail1;
+  [k: string]: unknown;
+}[];
+export type FilterDatabase = string;
+export type FilterOption = string;
+export type FilterTypes = unknown[];
+export type EnableCategoriesItems = boolean;
+export type EnableFeaturedCollection = boolean;
+export type EnableRSVP = boolean;
+export type EnableRecentAddition = boolean;
 
 export interface MuseumJson {
   heading?: Heading;
   heroBanner?: HeroBanner;
   searchURL?: SearchURL;
   browseByCategoryTitle?: BrowseByCategoryTitle;
+  CalendarfilterOption?: CalendarfilterOption;
   title?: Title;
   database_name?: DatabaseName;
+  displayTitle?: DisplayTitle;
+  linkURL?: LinkURL;
   categoriesItems?: CategoriesItems;
+  featuredCollection?: FeaturedCollection;
+  rsvp?: Rsvp;
+  enableCategoriesItems?: EnableCategoriesItems;
+  enableFeaturedCollection?: EnableFeaturedCollection;
+  enableRSVP?: EnableRSVP;
+  enableRecentAddition?: EnableRecentAddition;
+  [k: string]: unknown;
+}
+export interface Rsvp {
+  filterDatabase?: FilterDatabase;
+  filterOption?: FilterOption;
+  filterTypes?: FilterTypes;
   [k: string]: unknown;
 }
