@@ -161,6 +161,7 @@
 	"end":"Fin",
 	"no":"Non",
 	"confirmCancel":"En êtes-vous absolument sûr ?",
-	"yes":"Oui"
+	"yes":"Oui",
+	"attendee":"participant"
 }
 
