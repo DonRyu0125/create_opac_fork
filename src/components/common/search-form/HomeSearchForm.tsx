@@ -26,7 +26,7 @@ export default function HomeSearchForm({
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="space-y-4">
-				<div className="flex space-x-2 mb-4">
+				<form method="POST" action={action} className="flex space-x-2 mb-4">
 					<Input
 						className="flex-grow"
 						required
@@ -40,7 +40,7 @@ export default function HomeSearchForm({
 						</span>
 						Search
 					</Button>
-				</div>
+				</form>
 			</CardContent>
 		</Card>
 	)
