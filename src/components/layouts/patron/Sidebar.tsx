@@ -15,7 +15,6 @@ import {
 	FileX
 } from 'lucide-react'
 import clientProfileJSON from '@/constants/en/client-profile.json'
-import { ItemText } from '@radix-ui/react-select'
 
 type Props = {}
 

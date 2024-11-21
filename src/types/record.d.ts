@@ -26,6 +26,7 @@ export interface FieldData<T extends string> {
 	[key: string]: string | number | DBFields<T> | FieldData[]
 }
 export interface Record {
+	email?: any
 	first_name: string
 	skip_n_stop_record?:string // for client registration
 	save_n_stop_record?: string // for client registration 
