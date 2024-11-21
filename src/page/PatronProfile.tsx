@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import PatronLayout from '@/components/layouts/patron'
 import useJSONData from '@/hooks/useJSONData'
 import clientProfileJSON from '@/constants/en/client-profile.json'
-import { getCookieValue } from '@/lib/utils'
+import { getCookieValue, setCookie } from '@/lib/utils'
 import { Card } from '@/components/ui/card'
 import {
 	ShoppingBag,
@@ -37,7 +37,7 @@ export default function PatronProfile() {
 	const { home, archives, museum, library } = useConstants()
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-
+	setCookie('Email',records[0].email) // Don added to use the email at the RSVP
 	const handleClick = (id: any) => {
 		setActiveButton(id)
 	}

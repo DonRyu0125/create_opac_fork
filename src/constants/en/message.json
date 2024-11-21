@@ -130,7 +130,7 @@
     "unknownPatronName": "Unknown patron name, please try again",
 	"fillAllFields": "Fill all form fields to go to the next step.",
     "signUpUserAccount": "Sign Up Your User Account",
-    "emailAlreadyRegistered": "This email address is already registered. Please try a different one.",
+    "emailAlreadyRegistered": "You are already registered",
     "purpose": "Purpose",
     "country": "Country",
     "provinceState": "Province/State",
@@ -162,5 +162,6 @@
 	"end":"End",
 	"no":"No",
 	"confirmCancel":"Are you absolutely sure?",
-	"yes":"Yes"
+	"yes":"Yes",
+	"attendee":"Attendee"
 }
