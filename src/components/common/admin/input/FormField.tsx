@@ -3,7 +3,7 @@ import ImagePreview from '@/components/common/admin/input/ImagePreview'
 import TextField from '@/components/common/admin/input/TextField'
 import Dropdown from './Dropdown'
 import TDRLinking from './TDRLinking'
-import { TDRFile } from '@/lib/tdr'
+import { isSupportedImageExtension, TDRFile } from '@/lib/tdr'
 import { useState } from 'react'
 type FormFieldBaseProps<T extends string | boolean> = {
 	field: string
@@ -60,9 +60,10 @@ const FormField = ({ field, type, value, onChange, name, ...props }: FormFieldPr
 				<div className="flex flex-col">
 					<div className="flex flex-row w-full items-center">
 						<TextField
+							key={curValue as string}
 							name={name}
 							title={field}
-							value={value as string}
+							value={curValue as string}
 							onChange={(e) => {
 								setCurValue(e)
 								onChange?.(e)
@@ -71,11 +72,21 @@ const FormField = ({ field, type, value, onChange, name, ...props }: FormFieldPr
 								(props as ImageProps<string>)?.onTDRAssetsSelect ? (
 									<div className="w-min">
 										<TDRLinking
-											onAssetsSelect={(files) =>
-												(props as ImageProps<string>)?.onTDRAssetsSelect?.(
-													files
-												)
-											}
+											onAssetsSelect={(files) => {
+												if (files.length > 0) {
+													const assetSelectHandler = (
+														props as ImageProps<string>
+													).onTDRAssetsSelect
+													const file = files[0]
+
+													setCurValue(
+														isSupportedImageExtension(file.Extension)
+															? file.Access
+															: file.Thumbnail
+													)
+													assetSelectHandler?.(files)
+												}
+											}}
 										/>
 									</div>
 								) : undefined

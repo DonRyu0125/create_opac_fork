@@ -7,6 +7,7 @@ import SectionWrapper from '@/components/common/admin/layout/SectionWrapper'
 import { default as enValues } from '@/constants/en/home.json'
 import { default as frValues } from '@/constants/fr/home.json'
 import { useAdminForm } from '@/hooks/useAdminForm'
+import { isSupportedImageExtension } from '@/lib/tdr'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
 import { FormEvent } from 'react'
@@ -44,7 +45,13 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 				value={fieldsValue.heroBanner}
 				onChange={(e) => handleChange(['heroBanner'], e)}
 				onTDRAssetsSelect={(files) => {
-					console.log({ files })
+					if (files.length > 0) {
+						const file = files[0]
+						handleChange(
+							['heroBanner'],
+							isSupportedImageExtension(file.Extension) ? file.Access : file.Thumbnail
+						)
+					}
 				}}
 			/>
 

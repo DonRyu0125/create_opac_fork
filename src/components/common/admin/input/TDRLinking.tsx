@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dialog'
 import useScreenDimensions from '@/hooks/useScreenDimensions'
 import {
+	deleteTDRBookmark,
 	generateBookmarkId,
 	generateTDRIframeURL,
 	getTDRAccessToken,
@@ -21,6 +22,7 @@ type TDRLinkingProps = { onAssetsSelect: (files: TDRFile[]) => void }
 
 const TDRLinking = ({ onAssetsSelect }: TDRLinkingProps) => {
 	const { height, width } = useScreenDimensions()
+	const [accessToken, setAccessToken] = useState<string | undefined>()
 	const [open, setOpen] = useState(false)
 	const [id, setId] = useState<string | undefined>()
 
@@ -32,8 +34,16 @@ const TDRLinking = ({ onAssetsSelect }: TDRLinkingProps) => {
 
 		if (!open) {
 			reset()
+
+			if (id && accessToken) {
+				deleteTDRBookmark(accessToken, id)
+					.then((res) => {
+						console.log('delete tdr bookmark', res)
+					})
+					.catch((err) => console.error(err))
+			}
 		}
-	}, [id, open])
+	}, [accessToken, id, open])
 
 	const reset = () => {
 		setId(undefined)
@@ -43,14 +53,17 @@ const TDRLinking = ({ onAssetsSelect }: TDRLinkingProps) => {
 		const authRes = await getTDRAccessToken()
 		if (authRes && id) {
 			const { access_token } = authRes
+			setAccessToken(access_token)
 
 			const bookmarkedItems = await getTDRBookmark(access_token, id)
 
 			if (bookmarkedItems) {
 				onAssetsSelect(bookmarkedItems)
+			} else {
+				throw new Error('No files from TDR')
 			}
 
-			throw new Error('No files from TDR')
+			setOpen(false)
 		} else {
 			throw new Error('Missing Access Token')
 		}

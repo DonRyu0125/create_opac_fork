@@ -131,3 +131,11 @@ export const deleteTDRBookmark = async (accessToken: string, bookmarkId: string)
 
 	return res?.data
 }
+
+export const isSupportedImageExtension = (extension: string): boolean => {
+	// Define a set of supported image extensions
+	const supportedImageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg']
+
+	// Check if the provided extension matches any of the supported image extensions
+	return supportedImageExtensions.includes(extension.toLowerCase())
+}
