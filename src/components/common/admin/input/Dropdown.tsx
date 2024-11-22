@@ -14,7 +14,7 @@ import Button from '../Button'
 
 type Props = {
 	options: { value: string; label: string }[]
-	onChange: (option: { value: string; label: strin }) => void
+	onChange: (option: { value: string; label: string }) => void
 }
 
 const Dropdown = ({ options, onChange }: Props) => {
@@ -55,7 +55,7 @@ const Dropdown = ({ options, onChange }: Props) => {
 											value === option.value ? 'opacity-100' : 'opacity-0'
 										)}
 									/>
-									{framework.label}
+									{option.label}
 								</CommandItem>
 							))}
 						</CommandGroup>

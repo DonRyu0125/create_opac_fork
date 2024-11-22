@@ -150,7 +150,7 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 
 	return (
 		<div className="flex gap-4 flex-col">
-			<FieldList />
+			{/* <FieldList /> */}
 			{fieldsValue.map((db, dbIndex) => (
 				<div>
 					<SectionHeader
