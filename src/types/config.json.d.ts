@@ -9,6 +9,7 @@ export type SiteName = string;
 export type Logo = string;
 export type Login = boolean;
 export type Url = string;
+export type ReCaptchaKey = string;
 export type Url1 = string;
 export type Title = string;
 export type SearchDatabase = string;
@@ -23,6 +24,7 @@ export interface ConfigJson {
   siteName?: SiteName;
   logo?: Logo;
   auth?: Auth;
+  reCaptchaKey?: ReCaptchaKey;
   navigations?: Navigations;
   [k: string]: unknown;
 }

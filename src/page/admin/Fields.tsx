@@ -144,8 +144,6 @@ const frameworks = [
 	},
 ]
 
-
-
 const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 	const fieldsValue = lang === 'en' ? enValues : frValues
 	const { handleChange, handleRemove, handleAdd } = useAdminForm()

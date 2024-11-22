@@ -110,7 +110,7 @@
 	"welcome": "Bienvenue",
 	"dashboardHome": "Dashboard Home",
 	"accountSettings": "Account Settings",
-	"calendar": "calendrier",
+	"calendar": "Calendrier",
 	"featuredCollections": "Collections en vedette",
 	"online": "en ligne",
 	"onlineTip": "Utilisez le lien de la réunion pour accéder à la session!",
@@ -152,5 +152,15 @@
 	"surveyLabel": "Enquête",
 	"confirmationLabel": "Confirmation",
 	"stepLabel": "Step",
-	"eventEndedMessage": "Fermé"
+	"eventEndedMessage": "Fermé",
+	"hello": "Bonjour",
+	"event": "Evenement",
+	"date": "Date",
+	"location": "Emplacement",
+	"start": "Commencer",
+	"end": "Fin",
+	"no": "Non",
+	"confirmCancel": "En êtes-vous absolument sûr ?",
+	"yes": "Oui",
+	"attendee": "participant"
 }

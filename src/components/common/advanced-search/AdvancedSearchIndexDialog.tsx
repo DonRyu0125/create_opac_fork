@@ -255,9 +255,7 @@ const AdvancedSearchIndexDialog = ({
 					</div>
 				</div>
 				<DialogFooter
-					className={
-						' w-full flex  bottom-1 relative md:justify-center md:items-center'
-					}>
+					className={' w-full flex  bottom-1 relative md:justify-center md:items-center'}>
 					<Button className={'w-full font-bold'} onClick={handleSubmit}>
 						{message.submit}
 					</Button>
