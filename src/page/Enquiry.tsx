@@ -108,12 +108,16 @@ const Enquiries = () => {
 							{button.label}
 						</a>
 					))}
-                    
-				</div><h1 className="text-2xl font-bold">Enquiries</h1>
+				</div>
+				<h1 className="text-2xl font-bold">Enquiries</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'enquiry'} filterTypeShow='' />
+				<ProfileTable
+					data={records}
+					columns={columns}
+					filterType={'enquiry'}
+					filterTypeShow=""
+				/>
 			</div>
-			
 		</PatronLayout>
 	)
 }

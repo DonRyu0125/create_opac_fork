@@ -107,12 +107,16 @@ const Copyright = () => {
 							{button.label}
 						</a>
 					))}
-                    
-				</div><h1 className="text-2xl font-bold">Copyright Rquests</h1>
+				</div>
+				<h1 className="text-2xl font-bold">Copyright Rquests</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'req_item_id'} filterTypeShow=''/>
+				<ProfileTable
+					data={records}
+					columns={columns}
+					filterType={'req_item_id'}
+					filterTypeShow=""
+				/>
 			</div>
-			
 		</PatronLayout>
 	)
 }

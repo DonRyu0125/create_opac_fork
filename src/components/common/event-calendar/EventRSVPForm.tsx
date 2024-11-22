@@ -670,7 +670,14 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 					/>
 				)
 			case STATUS_TYPE.SHOW_SUCCESS:
-				return <ShowRSVPSuccess onReset={onReset} event={event} contactInfo={contactInfo} isLogin={isLogin} />
+				return (
+					<ShowRSVPSuccess
+						onReset={onReset}
+						event={event}
+						contactInfo={contactInfo}
+						isLogin={isLogin}
+					/>
+				)
 			default:
 				return (
 					<ShowButton

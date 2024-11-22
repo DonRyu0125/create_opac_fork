@@ -12,7 +12,7 @@ import {
 	MessageCircleMore,
 	CalendarDays,
 	Upload,
-	FileX
+	FileX,
 } from 'lucide-react'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 
@@ -60,7 +60,7 @@ const Sidebar = (props: Props) => {
 								) : item.label == 'Easy Upload' ? (
 									<Upload className="h-5 w-5" />
 								) : (
-									<FileX className="h-5 w-5"/>
+									<FileX className="h-5 w-5" />
 								)}
 								<span className="sr-only">{item.label}</span>
 							</Link>

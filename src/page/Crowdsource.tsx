@@ -108,12 +108,16 @@ const Crowdsource = () => {
 							{button.label}
 						</a>
 					))}
-                    
-				</div><h1 className="text-2xl font-bold">Crowdsource</h1>
+				</div>
+				<h1 className="text-2xl font-bold">Crowdsource</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow=''/>
+				<ProfileTable
+					data={records}
+					columns={columns}
+					filterType={'comments'}
+					filterTypeShow=""
+				/>
 			</div>
-			
 		</PatronLayout>
 	)
 }

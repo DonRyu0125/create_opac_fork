@@ -18,7 +18,7 @@ import {
 	File,
 	Landmark,
 	Library,
-	Archive
+	Archive,
 } from 'lucide-react'
 import useConstants from '@/hooks/useConstants'
 import Link from '@/components/common/Link'
@@ -37,7 +37,7 @@ export default function PatronProfile() {
 	const { home, archives, museum, library } = useConstants()
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	setCookie('Email',records[0].email) // Don added to use the email at the RSVP
+	setCookie('Email', records[0].email) // Don added to use the email at the RSVP
 	const handleClick = (id: any) => {
 		setActiveButton(id)
 	}
@@ -174,8 +174,10 @@ export default function PatronProfile() {
 					</div>
 					<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 						{[home, archives, museum, library].map((item, index) => (
-							<div key={index} className="overflow-hidden rounded-lg bg-white shadow hover:brightness-95">
-								<Link href={item.linkURL} className='group no-underline'>
+							<div
+								key={index}
+								className="overflow-hidden rounded-lg bg-white shadow hover:brightness-95">
+								<Link href={item.linkURL} className="group no-underline">
 									<div className="aspect-square relative overflow-hidden">
 										<img
 											src={item.heroBanner}
@@ -186,8 +188,28 @@ export default function PatronProfile() {
 									<div className="p-4">
 										<div className="flex items-center justify-between text-sm text-gray-500">
 											<div className="flex items-center gap-2">
-												{item == home ? <File className='w-5 h-5'/> : item == archives ? <Archive className='w-5 h-5'/> : item == museum ? <Landmark className='w-5 h-5'/> : item == library ? <Library className='w-5 h-5'/> : ""}
-												{item == home ? (Number(records[0].description_count) + Number(records[0].collection_count) + Number(records[0].biblio_count)) : item == archives ? records[0].description_count : item == museum ? records[0].collection_count : item == library ? records[0].biblio_count : ""}
+												{item == home ? (
+													<File className="w-5 h-5" />
+												) : item == archives ? (
+													<Archive className="w-5 h-5" />
+												) : item == museum ? (
+													<Landmark className="w-5 h-5" />
+												) : item == library ? (
+													<Library className="w-5 h-5" />
+												) : (
+													''
+												)}
+												{item == home
+													? Number(records[0].description_count) +
+														Number(records[0].collection_count) +
+														Number(records[0].biblio_count)
+													: item == archives
+														? records[0].description_count
+														: item == museum
+															? records[0].collection_count
+															: item == library
+																? records[0].biblio_count
+																: ''}
 											</div>
 											<span>{item.displayTitle}</span>
 										</div>

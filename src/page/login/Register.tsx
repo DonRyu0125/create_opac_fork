@@ -180,10 +180,22 @@ const Register = () => {
 					{/* Tabs List */}
 					<TabsList className="bg-gray-400 p-5 min-h-[300px] md:min-h-[70px] flex flex-wrap justify-evenly mb-6 w-full text-white">
 						{[
-							{ value: 'step1', label: `${message.stepLabel} 1: ${message.yourDetailLabel}` },
-							{ value: 'step2', label: `${message.stepLabel} 2: ${message.currentAddressLabel}` },
-							{ value: 'step3', label: `${message.stepLabel} 3: ${message.surveyLabel}`},
-							{ value: 'step4', label: `${message.stepLabel} 4: ${message.confirmationLabel}` },
+							{
+								value: 'step1',
+								label: `${message.stepLabel} 1: ${message.yourDetailLabel}`,
+							},
+							{
+								value: 'step2',
+								label: `${message.stepLabel} 2: ${message.currentAddressLabel}`,
+							},
+							{
+								value: 'step3',
+								label: `${message.stepLabel} 3: ${message.surveyLabel}`,
+							},
+							{
+								value: 'step4',
+								label: `${message.stepLabel} 4: ${message.confirmationLabel}`,
+							},
 						].map((tab, idx) => (
 							<TabsTrigger
 								key={tab.value}
@@ -205,7 +217,8 @@ const Register = () => {
 					{/* Step 1: Your Detail */}
 					<TabsContent value="step1" className="p-6 bg-white shadow-md rounded-md">
 						<label className="font-semibold">
-							{message.email}<span className="text-red-500">* </span>
+							{message.email}
+							<span className="text-red-500">* </span>
 						</label>
 						<input
 							{...register('C_EMAIL', {
@@ -217,14 +230,13 @@ const Register = () => {
 							})}
 							className={`p-2 w-full mt-1 border ${errors.C_EMAIL ? 'border-red-500' : 'border-gray-300'}`}
 						/>
-						{errors.C_EMAIL  && (
-									<p className="text-red-500">{errors.C_EMAIL .message}</p>
-								)}
+						{errors.C_EMAIL && <p className="text-red-500">{errors.C_EMAIL.message}</p>}
 
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
-									{message.password}<span className="text-red-500">*</span>
+									{message.password}
+									<span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
@@ -236,8 +248,7 @@ const Register = () => {
 										},
 										pattern: {
 											value: /^(?=.*[A-Z]).*$/, // Regex to ensure at least one uppercase letter
-											message:
-												`${message.passwordValidation}`,
+											message: `${message.passwordValidation}`,
 										},
 									})}
 									className={`p-2 w-full mt-1 border ${errors.PATRON_PID ? 'border-red-500' : 'border-gray-300'}`}
@@ -250,7 +261,8 @@ const Register = () => {
 
 							<div className="flex-1">
 								<label className="font-semibold">
-									{message.confirmPasswordLabel} <span className="text-red-500">*</span>
+									{message.confirmPasswordLabel}{' '}
+									<span className="text-red-500">*</span>
 								</label>
 								<input
 									type="password"
@@ -271,7 +283,7 @@ const Register = () => {
 						<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
 							<div className="flex-1">
 								<label className="font-semibold">
-									 {message.firstName} <span className="text-red-500">*</span>
+									{message.firstName} <span className="text-red-500">*</span>
 								</label>
 								<input
 									{...register('C_NAME_FIRST', {
@@ -333,7 +345,8 @@ const Register = () => {
 
 							<div className="sm:col-span-1">
 								<label className="font-semibold">
-									{message.postalCodeLabel} <span className="text-red-500">*</span>
+									{message.postalCodeLabel}{' '}
+									<span className="text-red-500">*</span>
 								</label>
 								<input
 									{...register('C_POSTAL_ZIP', {
@@ -401,9 +414,7 @@ const Register = () => {
 								<h2 className="text-lg font-semibold text-center mb-4">
 									{message.confirmation}
 								</h2>
-								<p className="text-center mb-6">
-									{message.reviewDetails}
-								</p>
+								<p className="text-center mb-6">{message.reviewDetails}</p>
 								<ul className="list-disc pl-5 space-y-2">
 									<li>
 										<strong>{message.email}:</strong> {watch('C_EMAIL')}
@@ -419,7 +430,8 @@ const Register = () => {
 										<strong>{message.city}:</strong> {watch('C_CITY')}
 									</li>
 									<li>
-										<strong>{message.provinceState}:</strong> {watch('C_PROV_STATE')}
+										<strong>{message.provinceState}:</strong>{' '}
+										{watch('C_PROV_STATE')}
 									</li>
 									<li>
 										<strong>{message.country}:</strong> {watch('C_COUNTRY')}
@@ -481,9 +493,7 @@ const Register = () => {
 					</div>
 					<h1 className="landing-page-title">{message.verificationSent}</h1>
 					<div className="landing-page-title">'{userData.C_EMAIL}'</div>
-					<div className={'text-xl m-4'}>
-						{message.checkEmailInstructions}
-					</div>
+					<div className={'text-xl m-4'}>{message.checkEmailInstructions}</div>
 					<Button className={'mt-4'}>
 						<a href="/">{message.home}</a>
 					</Button>
@@ -491,7 +501,9 @@ const Register = () => {
 			) : (
 				<>
 					<div className={'flex flex-col justify-center items-center p-7'}>
-						<div className={' text-2xl font-extrabold'}>{message.signUpUserAccount}</div>
+						<div className={' text-2xl font-extrabold'}>
+							{message.signUpUserAccount}
+						</div>
 						<div className={'text-lg'}>{message.fillAllFields}</div>
 					</div>
 					<div

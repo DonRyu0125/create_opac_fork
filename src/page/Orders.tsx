@@ -45,7 +45,11 @@ const Orders = () => {
 		{
 			accessorKey: 'date_needed',
 			header: 'Date',
-			cell: ({ row }) => <div className="capitalize">{row.getValue('date_needed') ? row.getValue('date_needed') : "N/A"}</div>,
+			cell: ({ row }) => (
+				<div className="capitalize">
+					{row.getValue('date_needed') ? row.getValue('date_needed') : 'N/A'}
+				</div>
+			),
 		},
 		{
 			accessorKey: 'time_needed',
@@ -59,7 +63,11 @@ const Orders = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="">{row.getValue('time_needed') ? row.getValue('time_needed') : "N/A"}</div>,
+			cell: ({ row }) => (
+				<div className="">
+					{row.getValue('time_needed') ? row.getValue('time_needed') : 'N/A'}
+				</div>
+			),
 		},
 		{
 			accessorKey: 'req_status',
@@ -89,7 +97,7 @@ const Orders = () => {
 			},
 			cell: ({ row }) => <div className="">{row.getValue('req_item_id')}</div>,
 		},
-        {
+		{
 			accessorKey: 'req_title',
 			header: ({ column }) => {
 				return (
@@ -103,7 +111,7 @@ const Orders = () => {
 			},
 			cell: ({ row }) => <div className="">{row.getValue('req_title')}</div>,
 		},
-        {
+		{
 			accessorKey: 'req_paid_amt',
 			header: ({ column }) => {
 				return (
@@ -117,7 +125,7 @@ const Orders = () => {
 			},
 			cell: ({ row }) => <div className="">{row.getValue('req_paid_amt')}</div>,
 		},
-        {
+		{
 			accessorKey: 'req_order_num',
 			header: ({ column }) => {
 				return (
@@ -149,12 +157,16 @@ const Orders = () => {
 							{button.label}
 						</a>
 					))}
-                    
-				</div><h1 className="text-2xl font-bold">Orders</h1>
+				</div>
+				<h1 className="text-2xl font-bold">Orders</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'req_title'} filterTypeShow=''/>
+				<ProfileTable
+					data={records}
+					columns={columns}
+					filterType={'req_title'}
+					filterTypeShow=""
+				/>
 			</div>
-			
 		</PatronLayout>
 	)
 }

@@ -89,7 +89,7 @@ const Reproductions = () => {
 			},
 			cell: ({ row }) => <div className="lowercase">{row.getValue('req_item_title')}</div>,
 		},
-        {
+		{
 			accessorKey: 'req_charge_amt',
 			header: ({ column }) => {
 				return (
@@ -103,7 +103,7 @@ const Reproductions = () => {
 			},
 			cell: ({ row }) => <div className="lowercase">{row.getValue('req_charge_amt')}</div>,
 		},
-        {
+		{
 			accessorKey: 'req_paid_amt',
 			header: ({ column }) => {
 				return (
@@ -135,12 +135,16 @@ const Reproductions = () => {
 							{button.label}
 						</a>
 					))}
-                    
-				</div><h1 className="text-2xl font-bold">Reproductions</h1>
+				</div>
+				<h1 className="text-2xl font-bold">Reproductions</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow=''/>
+				<ProfileTable
+					data={records}
+					columns={columns}
+					filterType={'comments'}
+					filterTypeShow=""
+				/>
 			</div>
-			
 		</PatronLayout>
 	)
 }

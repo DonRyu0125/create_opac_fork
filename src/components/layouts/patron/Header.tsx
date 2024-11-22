@@ -24,7 +24,7 @@ type Props = {}
 const Header = (props: Props) => {
 	const { message, config } = useConstants()
 	const home_url =
-	'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+		'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 	function deleteCookie(cname: string) {
 		document.cookie = cname + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
 	}
@@ -60,7 +60,12 @@ const Header = (props: Props) => {
 				<BreadcrumbList>
 					<BreadcrumbItem>
 						<BreadcrumbLink asChild>
-							<Link href={getCookieValue('HOME_SESSID') + home_url} className="flex no-underline"><Home className="mr-1 h-5 w-5"/>Client Dashboard</Link>
+							<Link
+								href={getCookieValue('HOME_SESSID') + home_url}
+								className="flex no-underline">
+								<Home className="mr-1 h-5 w-5" />
+								Client Dashboard
+							</Link>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					{/* <BreadcrumbSeparator />
@@ -85,7 +90,7 @@ const Header = (props: Props) => {
 							variant="outline"
 							size="icon"
 							className="overflow-hidden rounded-full">
-							<UserRound/>
+							<UserRound />
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
@@ -105,9 +110,15 @@ const Header = (props: Props) => {
 						<DropdownMenuItem>
 							<Link href="/">All</Link>
 						</DropdownMenuItem>
-						<DropdownMenuItem><Link href="/archives.html">Archives</Link></DropdownMenuItem>
-						<DropdownMenuItem><Link href="/museum.html">Museum</Link></DropdownMenuItem>
-						<DropdownMenuItem><Link href="/library.html">Library</Link></DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link href="/archives.html">Archives</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link href="/museum.html">Museum</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link href="/library.html">Library</Link>
+						</DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem>
 							<Link onClick={clearCookies}>Logout</Link>

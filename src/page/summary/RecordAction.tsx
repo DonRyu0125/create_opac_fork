@@ -10,7 +10,7 @@ import { bookmarkCount } from '@/store'
 import { Record } from '@/types/record'
 import { ToastAction } from '@radix-ui/react-toast'
 import { useAtom } from 'jotai'
-import { Copy, Star,  } from 'lucide-react'
+import { Copy, Star } from 'lucide-react'
 import { useState } from 'react'
 
 export const RecordAction = ({ record }: { record: Record }) => {

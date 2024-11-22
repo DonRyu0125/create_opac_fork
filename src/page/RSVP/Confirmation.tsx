@@ -144,7 +144,7 @@ const RSVPConfirm = () => {
 					setStatus(STATUS_TYPE.Full)
 					return { status: false }
 				}
-				return { status: true}
+				return { status: true }
 			})
 			.catch((error) => {
 				throw error
@@ -225,7 +225,7 @@ const RSVPConfirm = () => {
 		const encoded = encodeObj(
 			JSON.stringify({
 				...patronInfo,
-				[EVENT_EMAIL_LOGO]:logo,
+				[EVENT_EMAIL_LOGO]: logo,
 				[TAG_FUNC_P_ID]: obj.ID,
 				TAG_FUNC_LOC_DEC: undefined, //TAG_FUNC_LOC_DECis too big for query string
 			})
@@ -235,10 +235,10 @@ const RSVPConfirm = () => {
 				`${obj.HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${patronInfo.TAG_FUNC_O ? '[OPAC_EMAIL_TMP]RSVPRegOnlineComfrimTmp.txt' : '[OPAC_EMAIL_TMP]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
-					'EVENT_EMAIL_LOGO':logo,
+					EVENT_EMAIL_LOGO: logo,
 					RSVP_CANCEL_LANDING_PAGE_URL: RSVP_CANCEL_LANDING_PAGE_URL,
 					[TAG_FUNC_P_ID]: obj.ID,
-					encoded
+					encoded,
 				},
 				{
 					headers: {

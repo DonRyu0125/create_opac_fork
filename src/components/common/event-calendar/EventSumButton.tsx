@@ -9,7 +9,7 @@ import {
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-	DialogTrigger
+	DialogTrigger,
 } from '../../ui/dialog'
 import ButtonTooltip from './ButtonTooltip'
 import { ContactInfoRSVP, EVENT_DEFAULT_COLOR, FilterType, TAG_FUNC_DTE_LIST } from './Constants'

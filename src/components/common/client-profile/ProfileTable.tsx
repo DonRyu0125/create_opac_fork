@@ -30,7 +30,7 @@ export function ProfileTable({
 	data,
 	columns,
 	filterType,
-	filterTypeShow
+	filterTypeShow,
 }: {
 	data: ProfileData[]
 	columns: ColumnDef<ProfileData>[]
@@ -58,7 +58,7 @@ export function ProfileTable({
 			columnFilters,
 			columnVisibility,
 			rowSelection,
-		}, 
+		},
 	})
 
 	return (
@@ -80,7 +80,9 @@ export function ProfileTable({
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
 									return (
-										<TableHead key={header.id} className={'bg-gray-100 text-bold text-center'}>
+										<TableHead
+											key={header.id}
+											className={'bg-gray-100 text-bold text-center'}>
 											{header.isPlaceholder
 												? null
 												: flexRender(

@@ -49,7 +49,7 @@ const Calendar = () => {
 	let HOME_SESSID = getSessionID()
 	const { logo } = useConstants().config
 
-	console.log('records',records)
+	console.log('records', records)
 
 	const columns: ColumnDef<ProfileData>[] = [
 		{
@@ -102,7 +102,9 @@ const Calendar = () => {
 			accessorKey: TAG_FUNC_P_ATTND.toLocaleLowerCase(),
 			header: message.attendee,
 			cell: ({ row }) => (
-				<div className="capitalize">{row.getValue(TAG_FUNC_P_ATTND.toLocaleLowerCase())}</div>
+				<div className="capitalize">
+					{row.getValue(TAG_FUNC_P_ATTND.toLocaleLowerCase())}
+				</div>
 			),
 		},
 		{
@@ -144,14 +146,14 @@ const Calendar = () => {
 					timeout: 5000,
 				}
 			)
-			.then(async(res) => {
+			.then(async (res) => {
 				const conToJson: any = await convertXMLToJson(res.data)
 				const jsonObj = conToJson[MWI_RESFUL_RES].record
 				const loc_group = convertToArr(jsonObj?.TAG_FUNC_LOC_GRP)
 				const dte_group = convertToArr(loc_group[MWI_XML_DATA_INDEX]?.TAG_FUNC_DTE_GRP)
 				let TAG_FUNC_LOC_OCC = 0
 				let TAG_FUNC_DTE_OCC = 0
-			
+
 				loc_group?.forEach((elm) => {
 					const funcLoc = elm?.TAG_FUNC_LOC
 					if (funcLoc === patronInfo['tag_func_loc']) {
@@ -165,11 +167,10 @@ const Calendar = () => {
 						funcDate === patronInfo['tag_func_date'] &&
 						funcTimeStart === patronInfo['tag_func_start_t']
 					) {
-						
 						TAG_FUNC_DTE_OCC = elm._occ
 					}
 				})
-		
+
 				return { occ1: TAG_FUNC_LOC_OCC, occ2: TAG_FUNC_DTE_OCC, patronInfo }
 			})
 			.catch((error) => {
@@ -179,7 +180,7 @@ const Calendar = () => {
 	}
 
 	const removeRecord = async (eventInfo: any) => {
-		console.log('eventInfo',eventInfo)
+		console.log('eventInfo', eventInfo)
 		let { tag_func_p_id, sisn } = eventInfo.patronInfo
 		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
     <RECORD>
@@ -211,7 +212,6 @@ const Calendar = () => {
 	}
 
 	const sendCancelConfirmEmail = async (patronInfo: any) => {
-
 		return await axios
 			.post(
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]RSVPCancelConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo?.tag_func_p_email}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo?.tag_name}`,
@@ -226,7 +226,7 @@ const Calendar = () => {
 				}
 			)
 			.then(async (res) => {
-				 window.location.reload();
+				window.location.reload()
 				return
 			})
 	}

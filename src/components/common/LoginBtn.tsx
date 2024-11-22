@@ -15,7 +15,7 @@ const LoginBtn = ({ className }: { className?: string }) => {
 	const { message, config } = useConstants()
 
 	const isAuthenticated = isLogin()
-	let m2l_patron_name = getCookieValue('M2L_PATRON_NAME') || "Guest"
+	let m2l_patron_name = getCookieValue('M2L_PATRON_NAME') || 'Guest'
 	return (
 		<>
 			{isAuthenticated ? (

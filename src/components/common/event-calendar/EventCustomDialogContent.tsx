@@ -20,10 +20,10 @@ import RSVPCarousel from './RSVPCarousel'
 
 const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 	const combined_VD_IMAG_Array_for_carousel = [
-		...(elm[FLOC_IM_REF_GRP] || []), 
-		...(elm[FLOC_VD_REF_GRP] || [])
-	  ];
-	  
+		...(elm[FLOC_IM_REF_GRP] || []),
+		...(elm[FLOC_VD_REF_GRP] || []),
+	]
+
 	return (
 		<div
 			key={key}
