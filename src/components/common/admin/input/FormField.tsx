@@ -46,7 +46,11 @@ const FormField = <T extends string | boolean>({
 						value={value as string}
 						onChange={(e) => onChange?.(e as T)}
 					/>
-					<TDRLinking />
+					<TDRLinking
+						onAssetsSelect={function (source: string): void {
+							throw new Error('Function not implemented.')
+						}}
+					/>
 					<ImagePreview src={value as string} alt={field} />
 				</div>
 			)

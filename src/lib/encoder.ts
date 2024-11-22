@@ -79,3 +79,120 @@ export function webEncoding(inputString: string): string {
 
 	return wEncodedString
 }
+
+export function decodeString(inputString: string): string {
+	let resultString: string
+	const tempArray: number[] = []
+	let ix = 0
+	let tempIx = 0
+	let charValue: number
+	let charSize: number
+	let numChar: number
+	let limit: number
+	let length = inputString.length
+
+	// Undo MWI encoding
+	while (ix < length) {
+		charValue = inputString.charCodeAt(ix)
+		if (getMultiplier(charValue) !== 0) {
+			if (ix + 1 < length) {
+				charValue = decodeWebChar(charValue, inputString.charCodeAt(ix + 1))
+				charSize = 2
+			} else {
+				charValue = decodeWebChar(charValue, 0)
+				charSize = 1
+			}
+		} else {
+			charValue = decodeWebChar(charValue, 0)
+			charSize = 1
+		}
+
+		if (charValue !== -1) {
+			tempArray[tempIx] = charValue
+			tempIx++
+		}
+		ix += charSize
+	}
+
+	// Undo MINISIS encoding
+	length = tempIx
+	numChar = (length - 1) / 2
+	limit = tempArray[length - 1] - 65 // 65 = "A"
+
+	if (limit !== numChar) {
+		resultString = inputString
+	} else {
+		limit = Math.floor(limit / 2)
+		tempIx = (numChar - 1) * 2
+		for (ix = 0; ix < limit; ix++) {
+			// Swap characters
+			charValue = tempArray[ix * 2]
+			tempArray[ix * 2] = tempArray[tempIx]
+			tempArray[tempIx] = charValue
+			tempIx -= 2
+		}
+
+		resultString = ''
+		for (ix = 0; ix < numChar; ix++) {
+			// Convert two byte values to one byte value
+			charValue = tempArray[ix * 2] - ix * 2 - 1 - 48 // 48 = "0"
+			charValue += (tempArray[ix * 2 + 1] - ix * 2 - 2 - 48) * 16 // 48 = "0"
+			resultString += String.fromCharCode(charValue)
+		}
+	}
+
+	return resultString
+}
+
+function getMultiplier(charValue: number): number {
+	switch (charValue) {
+		case 124: // "|"
+			return 62
+		case 63: // "?"
+			return 124
+		case 64: // "@"
+			return 186
+		case 91: // "["
+			return 248
+		default:
+			return 0
+	}
+}
+
+function decodeWebChar(char1: number, char2: number): number {
+	let charValue = -1
+
+	const multiplier = getMultiplier(char1)
+	if (multiplier !== 0) {
+		charValue = mapWebChar(char2)
+		if (charValue >= MAX_BYTE2_VALUE) {
+			charValue = -1
+		}
+		if (charValue !== -1) {
+			charValue += multiplier
+		}
+	} else {
+		charValue = mapWebChar(char1)
+	}
+
+	return charValue
+}
+
+function mapWebChar(webChar: number): number {
+	if (webChar >= 48 && webChar <= 57) {
+		// 0-9
+		return webChar - 48
+	} else if (webChar >= 65 && webChar <= 90) {
+		// A-Z
+		return 10 + (webChar - 65)
+	} else if (webChar >= 97 && webChar <= 122) {
+		// a-z
+		return 36 + (webChar - 97)
+	} else {
+		// Invalid base-62 characters
+		return -1
+	}
+}
+
+// Constants
+const MAX_BYTE2_VALUE = 62 // Define MAX_BYTE2_VALUE based on your requirements

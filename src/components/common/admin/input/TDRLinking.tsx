@@ -2,20 +2,65 @@ import { Button } from '@/components/ui/button'
 import {
 	Dialog,
 	DialogContent,
+	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog'
-import { generateTDRIframeURL } from '@/lib/tdr'
-import { useState } from 'react'
+import {
+	generateBookmarkId,
+	generateTDRIframeURL,
+	getTDRAccessToken,
+	getTDRBookmark,
+	TDRFile,
+} from '@/lib/tdr'
+import { useEffect, useState } from 'react'
 
-type TDRLinkingProps = { onAssetsSelect: (source: string) => void }
+type TDRLinkingProps = { onAssetsSelect: (files: TDRFile[]) => void }
 
 const TDRLinking = ({ onAssetsSelect }: TDRLinkingProps) => {
 	const [open, setOpen] = useState(false)
+	const [id, setId] = useState<string | undefined>()
+
+	useEffect(() => {
+		if (open && !id) {
+			const bookmarkId = generateBookmarkId()
+			setId(bookmarkId)
+		}
+
+		if (!open) {
+			reset()
+		}
+	}, [id, open])
+
+	const reset = () => {
+		setId(undefined)
+	}
+
+	const handleAssetsSelect = async () => {
+		const authRes = await getTDRAccessToken()
+		if (authRes && id) {
+			const { access_token } = authRes
+
+			const bookmarkedItems = await getTDRBookmark(access_token, id)
+
+			if (bookmarkedItems) {
+				onAssetsSelect(bookmarkedItems)
+			}
+
+			throw new Error('No files from TDR')
+		} else {
+			throw new Error('Missing Access Token')
+		}
+	}
+
 	return (
 		<>
-			<Dialog open={open} onOpenChange={setOpen}>
+			<Dialog
+				open={open}
+				onOpenChange={async (state) => {
+					setOpen(state)
+				}}>
 				<DialogTrigger asChild>
 					<Button
 						onClick={() => {
@@ -30,12 +75,18 @@ const TDRLinking = ({ onAssetsSelect }: TDRLinkingProps) => {
 					<DialogHeader>
 						<DialogTitle>Search from TDR Portal</DialogTitle>
 					</DialogHeader>
-					<iframe
-						width={1440}
-						height={900}
-						title="TDR Portal"
-						src={generateTDRIframeURL()}
-					/>
+					{id && (
+						<iframe
+							width={1440}
+							height={900}
+							title="TDR Portal"
+							src={generateTDRIframeURL(id)}
+						/>
+					)}
+
+					<DialogFooter>
+						<Button onClick={handleAssetsSelect}>Confirm</Button>
+					</DialogFooter>
 				</DialogContent>
 			</Dialog>
 		</>
