@@ -2,7 +2,7 @@ import CheckboxWithLabel from '@/components/common/admin/input/CheckboxWithLabel
 import ImagePreview from '@/components/common/admin/input/ImagePreview'
 import TextField from '@/components/common/admin/input/TextField'
 import Dropdown from './Dropdown'
-import { Button } from '@/components/ui/button'
+import TDRLinking from './TDRLinking'
 
 type FormFieldProps<T extends string | boolean> = {
 	field: string
@@ -46,7 +46,7 @@ const FormField = <T extends string | boolean>({
 						value={value as string}
 						onChange={(e) => onChange?.(e as T)}
 					/>
-					<Button>Link from TDR</Button>
+					<TDRLinking />
 					<ImagePreview src={value as string} alt={field} />
 				</div>
 			)
