@@ -7,6 +7,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog'
+import useScreenDimensions from '@/hooks/useScreenDimensions'
 import {
 	generateBookmarkId,
 	generateTDRIframeURL,
@@ -19,6 +20,7 @@ import { useEffect, useState } from 'react'
 type TDRLinkingProps = { onAssetsSelect: (files: TDRFile[]) => void }
 
 const TDRLinking = ({ onAssetsSelect }: TDRLinkingProps) => {
+	const { height, width } = useScreenDimensions()
 	const [open, setOpen] = useState(false)
 	const [id, setId] = useState<string | undefined>()
 
@@ -68,7 +70,7 @@ const TDRLinking = ({ onAssetsSelect }: TDRLinkingProps) => {
 								setOpen(true)
 							}
 						}}>
-						Link from TDR
+						Browse from TDR
 					</Button>
 				</DialogTrigger>
 				<DialogContent className=" max-w-full w-fit h-fit">
@@ -77,8 +79,8 @@ const TDRLinking = ({ onAssetsSelect }: TDRLinkingProps) => {
 					</DialogHeader>
 					{id && (
 						<iframe
-							width={1440}
-							height={900}
+							width={width * 0.75}
+							height={height * 0.75}
 							title="TDR Portal"
 							src={generateTDRIframeURL(id)}
 						/>

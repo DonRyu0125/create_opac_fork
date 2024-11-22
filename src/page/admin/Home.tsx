@@ -43,6 +43,9 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 				field={'Site banner'}
 				value={fieldsValue.heroBanner}
 				onChange={(e) => handleChange(['heroBanner'], e)}
+				onTDRAssetsSelect={(files) => {
+					console.log({ files })
+				}}
 			/>
 
 			<div className="mt-2">

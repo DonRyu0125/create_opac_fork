@@ -116,3 +116,18 @@ export const getTDRBookmark = async (accessToken: string, bookmarkId: string) =>
 
 	return res?.data
 }
+
+export const deleteTDRBookmark = async (accessToken: string, bookmarkId: string) => {
+	const res = await axios.delete(
+		`${TDR_CONFIG.tdr_api}/${TDR_CONFIG.delete_bookmark_ep}/${bookmarkId}`,
+		{
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				Accept: 'application/json',
+				Authorization: `Bearer ${accessToken}`,
+			},
+		}
+	)
+
+	return res?.data
+}
