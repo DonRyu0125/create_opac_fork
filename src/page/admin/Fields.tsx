@@ -4,11 +4,24 @@ import FormField from '@/components/common/admin/input/FormField'
 import SectionActions, { NewElementForm } from '@/components/common/admin/layout/SectionActions'
 import SectionHeader from '@/components/common/admin/layout/SectionHeader'
 import SectionWrapper from '@/components/common/admin/layout/SectionWrapper'
+import { Button } from '@/components/ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import enValues from '@/constants/en/fields.json'
 import frValues from '@/constants/fr/fields.json'
 import { useAdminForm } from '@/hooks/useAdminForm'
+import { cn } from '@/lib/utils'
 import fields from '@/schema/fields.json'
 import { SchemaType } from '@/types/schema'
+import {
+	Command,
+	CommandInput,
+	CommandList,
+	CommandEmpty,
+	CommandGroup,
+	CommandItem,
+} from '@/components/ui/command'
+import { ChevronsUpDown, Check } from 'lucide-react'
+import React from 'react'
 import { FormEvent } from 'react'
 
 type NewFormType = HTMLFormControlsCollection & {
@@ -28,6 +41,110 @@ const Fields = () => {
 		/>
 	)
 }
+const frameworks = [
+	{
+		value: 'sin',
+		label: 'Sin',
+	},
+	{
+		value: 'refd',
+		label: 'Refd',
+	},
+	{
+		value: 'refd_higher',
+		label: 'Refd Higher',
+	},
+	{
+		value: 'level_desc',
+		label: 'Level Desc',
+	},
+	{
+		value: 'accession_grp',
+		label: 'Accession Grp',
+	},
+	{
+		value: 'title',
+		label: 'Title',
+	},
+	{
+		value: 'desc_type',
+		label: 'Desc Type',
+	},
+	{
+		value: 'date_cr_inc',
+		label: 'Date Cr Inc',
+	},
+	{
+		value: 'date_search',
+		label: 'Date Search',
+	},
+	{
+		value: 'notes',
+		label: 'Notes',
+	},
+	{
+		value: 'statusd',
+		label: 'Statusd',
+	},
+	{
+		value: 'webd',
+		label: 'Webd',
+	},
+	{
+		value: 'indexprov_grp',
+		label: 'Indexprov Grp',
+	},
+	{
+		value: 'd_box_no',
+		label: 'D Box No',
+	},
+	{
+		value: 'place_of_pub',
+		label: 'Place Of Pub',
+	},
+	{
+		value: 'edition',
+		label: 'Edition',
+	},
+	{
+		value: 'specific_mat',
+		label: 'Specific Mat',
+	},
+	{
+		value: 'modified_hist',
+		label: 'Modified Hist',
+	},
+	{
+		value: 'tree_id',
+		label: 'Tree Id',
+	},
+	{
+		value: 'parent_tree_id',
+		label: 'Parent Tree Id',
+	},
+	{
+		value: 'input_by',
+		label: 'Input By',
+	},
+	{
+		value: 'entry_date',
+		label: 'Entry Date',
+	},
+	{
+		value: 'd_restrict_grp',
+		label: 'D Restrict Grp',
+	},
+	{
+		value: 'original_refd',
+		label: 'Original Refd',
+	},
+	{
+		value: 'repository',
+		label: 'Repository',
+	},
+]
+
+
 
 const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 	const fieldsValue = lang === 'en' ? enValues : frValues
@@ -35,6 +152,7 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 
 	return (
 		<div className="flex gap-4 flex-col">
+			<FieldList />
 			{fieldsValue.map((db, dbIndex) => (
 				<div>
 					<SectionHeader

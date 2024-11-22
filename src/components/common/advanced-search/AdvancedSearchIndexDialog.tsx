@@ -167,13 +167,13 @@ const AdvancedSearchIndexDialog = ({
 					<DialogHeader className={'font-bold text-xl md:text-2xl'}>
 						{message.browseCluster} '{label}'
 					</DialogHeader>
-					<button
+					<Button
 						className={
 							'absolute right-1 p-1 bg-primary font-bold mx-1 text-white rounded'
 						}
 						onClick={() => setOpen(false)}>
 						<X className={'h-6 w-6'} />
-					</button>
+					</Button>
 				</div>
 				<div className={'flex'}>
 					<div className="w-full relative">
@@ -256,7 +256,7 @@ const AdvancedSearchIndexDialog = ({
 				</div>
 				<DialogFooter
 					className={
-						'relative w-full flex absolute bottom-1 relative md:justify-center md:items-center'
+						' w-full flex  bottom-1 relative md:justify-center md:items-center'
 					}>
 					<Button className={'w-full font-bold'} onClick={handleSubmit}>
 						{message.submit}

@@ -14,6 +14,7 @@ import { FormEvent } from 'react'
 const AdminHome = () => {
 	return (
 		<AdminFormLayout
+			enablePreview
 			enData={enValues}
 			frData={frValues}
 			schema={fields as SchemaType}
