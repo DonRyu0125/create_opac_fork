@@ -6,8 +6,10 @@ import {
 	convertToArr,
 	convertXMLToJson,
 	encodeObj,
+	getCookieValue,
 	getCurrentDate,
 	getSessionID,
+	isLogin,
 } from '@/lib/utils'
 import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
 import { Label } from '@radix-ui/react-label'
@@ -15,7 +17,7 @@ import axios from 'axios'
 import { saveAs } from 'file-saver'
 import { useAtom } from 'jotai'
 import { BadgeCheck, FileDown, Mail, MonitorPlay, Phone, SquareUserRound } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import ButtonTooltip from './ButtonTooltip'
@@ -26,10 +28,13 @@ import {
 	BD_POSTAL_CODE,
 	Cal_event,
 	ContactInfoRSVP,
+	EVENT_EMAIL_LOGO,
 	FLOC_TX_ACCESS,
 	MWI_RESFUL_RES,
 	MWI_XML_DATA_INDEX,
 	patron,
+	REG_CONFIMRATION_EMAIL_T,
+	RSVP_CANCEL_LANDING_PAGE_URL,
 	RSVP_CONFIRM_LANDING_PAGE_URL,
 	SISN,
 	TAG_DB,
@@ -48,6 +53,7 @@ import {
 	TAG_FUNC_P_ATTND_MAX,
 	TAG_FUNC_P_EMAIL,
 	TAG_FUNC_P_FIRST,
+	TAG_FUNC_P_ID,
 	TAG_FUNC_P_LAST,
 	TAG_FUNC_P_T,
 	TAG_FUNC_RSVP,
@@ -78,6 +84,7 @@ type EventInput = {
 	register: Function
 	required: boolean
 	errors?: any
+	isLogin: boolean
 }
 
 type EventRSVPForm = {
@@ -88,11 +95,12 @@ type EventRSVPForm = {
 	contactInfo: ContactInfoRSVP[]
 }
 
-const EventInput = ({ label, keyname, register, required }: EventInput) => {
+const EventInput = ({ label, keyname, register, required, isLogin }: EventInput) => {
 	return (
 		<div className={'flex w-full flex-col my-1'}>
 			<Label>{label}</Label>
 			<Input
+				disabled={isLogin}
 				className={'border-2 border-grey-500'}
 				{...register(keyname, { required: required })}
 			/>
@@ -100,11 +108,12 @@ const EventInput = ({ label, keyname, register, required }: EventInput) => {
 	)
 }
 
-const EventEmailInput = ({ label, keyname, register, required, errors }: EventInput) => {
+const EventEmailInput = ({ label, keyname, register, required, errors, isLogin }: EventInput) => {
 	return (
 		<div className={'flex w-full flex-col my-1'}>
 			<Label>{label}</Label>
 			<Input
+				disabled={isLogin}
 				className={'border-2 border-grey-500'}
 				{...register(keyname, {
 					required: required,
@@ -126,6 +135,8 @@ const ShowForm = ({
 	onSubmit,
 	errors,
 	onReset,
+	setValue,
+	isLogin,
 }: {
 	loading: boolean
 	handleSubmit: Function
@@ -133,6 +144,8 @@ const ShowForm = ({
 	onSubmit: Function
 	errors: any
 	onReset: any
+	setValue: Function
+	isLogin: boolean
 }) => {
 	const message = useConstants().message
 	const conf = useConstants().config
@@ -140,20 +153,38 @@ const ShowForm = ({
 	const handleCaptchaChange = (value: string | null) => {
 		setCaptchaValue(value)
 	}
-
 	const handleFormSubmit = (data: any) => {
-		if (captchaValue) {
+		if (captchaValue || isLogin) {
 			onSubmit({ ...data })
 		} else {
 			toast({ title: `CAPTCHA verification failed` })
 		}
 	}
 
+	useEffect(() => {
+		// If user login in , fill the form automatically.
+		if (isLogin) {
+			let name = getCookieValue('M2L_PATRON_NAME')?.split('%2C%20') ?? []
+			setValue(TAG_FUNC_P_FIRST, name[1])
+			setValue(TAG_FUNC_P_LAST, name[0])
+			setValue(TAG_FUNC_P_EMAIL, getCookieValue('Email') ?? '')
+		}
+	}, [setValue])
+
+	const M2L_PATRON_NAME = getCookieValue('M2L_PATRON_NAME')
 	return (
 		<div className={'h-full w-full p-1 border-2 rounded text-lg'}>
 			{loading && <Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />}
 			<div className={'bg-primary p-1 text-white'}>
-				<a href={`${conf.auth.url}`}><span className={'text-gray-400'}>{message.logIn}?</span></a>
+				{M2L_PATRON_NAME ? (
+					<span className={'text-gray-400'}>
+						{message.hello}! {decodeURIComponent(M2L_PATRON_NAME)}
+					</span>
+				) : (
+					<a href={`${conf.auth.url}`}>
+						<span className={'text-gray-400'}>{message.logIn}?</span>
+					</a>
+				)}
 			</div>
 			<form
 				onSubmit={handleSubmit(handleFormSubmit)} // Use handleFormSubmit here
@@ -163,12 +194,14 @@ const ShowForm = ({
 					keyname={TAG_FUNC_P_FIRST}
 					register={register}
 					required={true}
+					isLogin
 				/>
 				<EventInput
 					label={message.lastName}
 					keyname={TAG_FUNC_P_LAST}
 					register={register}
 					required={true}
+					isLogin
 				/>
 				<EventEmailInput
 					label={message.email}
@@ -176,6 +209,7 @@ const ShowForm = ({
 					register={register}
 					required={true}
 					errors={errors}
+					isLogin
 				/>
 				<div className={'flex w-full flex-col my-1'}>
 					<Label>{message.attendee}</Label>
@@ -193,12 +227,14 @@ const ShowForm = ({
 					</select>
 				</div>
 				<div className={'my-2'}>
-					<ReCAPTCHA sitekey={conf.reCaptchaKey} onChange={handleCaptchaChange} />
+					{!isLogin && (
+						<ReCAPTCHA sitekey={conf.reCaptchaKey} onChange={handleCaptchaChange} />
+					)}
 				</div>
 				<Button className={'w-full font-bold'} type="submit">
 					{message.register}
 				</Button>
-				<div onClick={onReset} className="text-center border-b-4 font-bold">
+				<div onClick={onReset} className="text-center border-b-4 font-bold mt-6">
 					{message.goBack}
 				</div>
 			</form>
@@ -255,10 +291,17 @@ const ShowButton = ({
 						<SquareUserRound className={'h-[30px]'} /> {message.registrationRequired}
 					</div>
 					<Button
-						disabled={(capacity - calNumOfPatron(patrons) <= 0 || isDateInThePast(event[TAG_FUNC_DATE])) ? true : false}
+						disabled={
+							capacity - calNumOfPatron(patrons) <= 0 ||
+							isDateInThePast(event[TAG_FUNC_DATE])
+								? true
+								: false
+						}
 						className={'w-full font-bold'}
 						onClick={() => setStatus(STATUS_TYPE.SHOW_FORM)}>
-						{isDateInThePast(event[TAG_FUNC_DATE]) ? message.eventEndedMessage:message.register}
+						{isDateInThePast(event[TAG_FUNC_DATE])
+							? message.eventEndedMessage
+							: message.register}
 					</Button>
 					<div className={'flex justify-center items-center'}>
 						{capacity - calNumOfPatron(patrons) <= 0 ? (
@@ -350,10 +393,12 @@ const ShowRSVPSuccess = ({
 	onReset,
 	event,
 	contactInfo,
+	isLogin,
 }: {
 	onReset: any
 	event: Cal_event
 	contactInfo: ContactInfoRSVP[]
+	isLogin: boolean
 }) => {
 	const message = useConstants().message
 	return (
@@ -367,8 +412,12 @@ const ShowRSVPSuccess = ({
 						'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'
 					}>
 					<SquareUserRound className="w-12 h-12" />
+					{isLogin ? (
+						<div className={'text-2xl'}>{message.registered}!</div>
+					) : (
+						<div className={'text-2xl'}>{message.registrationIncomplete}</div>
+					)}
 					<div className={'text-xl'}>{message.checkEmail}</div>
-					<div className={'text-xl'}>{message.registrationIncomplete}</div>
 				</div>
 				<div
 					onClick={onReset}
@@ -422,14 +471,26 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		handleSubmit,
 		reset,
 		formState: { errors },
+		setValue,
 	} = useForm<Inputs>()
 	const [loading, setLoading] = useState(false)
 	const [currentDate, _] = useAtom(calendarCurrDate)
 	const [weekType, __] = useAtom(calendarWeekType)
 	const [___, setCurrentEvent] = useAtom(calendarEvents)
+	const [isLogin, setIsLogin] = useState(false)
+
+	useEffect(() => {
+		if (getCookieValue('M2L_PATRON_NAME')) {
+			setIsLogin(true)
+		}
+	}, [])
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		setLoading(true)
+		if (isLogin) {
+			setLoading(false)
+			return sendRegConfirmEmail(data, event)
+		}
 		return getOCCNumber()
 			.then((res) => {
 				sendEmail(res, data, event)
@@ -538,6 +599,45 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 	}
 
+	const sendRegConfirmEmail = async (userData: Inputs, event: Cal_event) => {
+		const userID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+		let HOME_SESSID = getSessionID()
+		const encoded = encodeObj(
+			JSON.stringify({
+				...event,
+				[EVENT_EMAIL_LOGO]: logo,
+				[TAG_FUNC_P_ID]: userID,
+				TAG_FUNC_LOC_DEC: undefined, //TAG_FUNC_LOC_DECis too big for query string
+			})
+		)
+		return await axios
+			.post(
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${event.TAG_FUNC_O ? '[OPAC_EMAIL_TMP]RSVPRegOnlineComfrimTmp.txt' : '[OPAC_EMAIL_TMP]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${userData[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${event[TAG_NAME]}`,
+				{
+					...userData,
+					...event,
+					EVENT_EMAIL_LOGO: logo,
+					RSVP_CANCEL_LANDING_PAGE_URL: RSVP_CANCEL_LANDING_PAGE_URL,
+					[TAG_FUNC_P_ID]: userID,
+					encoded,
+				},
+				{
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				}
+			)
+			.then(async (res) => {
+				// setStatus(STATUS_TYPE.SHOW_SUCCESS)
+				setLoading(false)
+				return
+			})
+			.catch((error) => {
+				// setStatus(STATUS_TYPE.Invalid)
+				throw error
+			})
+	}
+
 	const onReset = () => {
 		setLoading(false)
 		setStatus(STATUS_TYPE.SHOW_BTN)
@@ -565,10 +665,19 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						onSubmit={onSubmit}
 						errors={errors}
 						onReset={onReset}
+						setValue={setValue}
+						isLogin={isLogin}
 					/>
 				)
 			case STATUS_TYPE.SHOW_SUCCESS:
-				return <ShowRSVPSuccess onReset={onReset} event={event} contactInfo={contactInfo} />
+				return (
+					<ShowRSVPSuccess
+						onReset={onReset}
+						event={event}
+						contactInfo={contactInfo}
+						isLogin={isLogin}
+					/>
+				)
 			default:
 				return (
 					<ShowButton

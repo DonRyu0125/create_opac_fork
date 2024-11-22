@@ -144,7 +144,7 @@ export function getHomeSessionID() {
 	return HOME_SESSID
 }
 
-export function setCookie(name: string, value: string, days: number) {
+export function setCookie(name: string, value: string, days?: number) {
 	var expires = ''
 	if (days) {
 		var date = new Date()

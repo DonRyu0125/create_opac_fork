@@ -25,8 +25,6 @@ export interface ImageCarouselProps {
 	contactInfo: ContactInfoRSVP[]
 }
 
-
-
 const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 	const [current, setCurrent] = React.useState(0)
 	const currentMedia = items[current]

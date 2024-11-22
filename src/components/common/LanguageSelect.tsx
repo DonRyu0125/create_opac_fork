@@ -6,17 +6,20 @@ export interface ILANGUAGE {
 	code: LanguageCode
 	name: string
 	icon: string
+	abbr: string
 }
 export const LANGUAGE_ITEMS: ILANGUAGE[] = [
 	{
 		code: FRENCH_CODE,
 		name: 'Français',
 		icon: 'https://www.svgrepo.com/show/405485/flag-for-flag-france.svg',
+		abbr: 'FR',
 	},
 	{
 		code: ENGLISH_CODE,
 		name: 'English',
 		icon: 'https://www.svgrepo.com/show/405643/flag-for-flag-united-kingdom.svg',
+		abbr: 'EN',
 	},
 ]
 
@@ -35,7 +38,7 @@ export function LanguageSelect() {
 			onValueChange={(e) => {
 				setLanguage(e as LanguageCode)
 			}}>
-			<SelectTrigger className="w-auto bg-transparent text-white">
+			<SelectTrigger className="w-auto bg-transparent">
 				<SelectValue
 					placeholder={
 						<img alt="language icon" className="w-6 h-6" src={language.icon} />
@@ -45,9 +48,12 @@ export function LanguageSelect() {
 			<SelectContent>
 				{LANGUAGE_ITEMS.map((item) => (
 					<SelectItem key={item.code} value={item.code}>
-						<span className="flex flex-col text-center justify-center">
-							<img alt="language icon" className="w-6 h-6" src={item.icon} />{' '}
-						</span>
+						<div className="flex justify-center items-center">
+							<span className="flex flex-row text-center justify-center">
+								<img alt="language icon" className="w-6 h-6" src={item.icon} />
+							</span>
+							<span className="ml-2 text-black">{item.abbr}</span>
+						</div>
 					</SelectItem>
 				))}
 			</SelectContent>

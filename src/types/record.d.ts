@@ -26,6 +26,8 @@ export interface FieldData<T extends string> {
 	[key: string]: string | number | DBFields<T> | FieldData[]
 }
 export interface Record {
+	email?: any
+	first_name: string
 	skip_n_stop_record?:string // for client registration
 	save_n_stop_record?: string // for client registration 
 	media?: Media
@@ -35,6 +37,17 @@ export interface Record {
 	record: FieldData
 	input?: BookmarkCheckBoxData
 	link_dbname?: string
+	full_name: string
+	description_count: string
+	collection_count: string
+	biblio_count: string
+	orders_count: string
+	copyright_count: string
+	reproductions_count: string
+	bookmark_count: string
+	enquiries_count: string
+	crowdsource_count: string
+	calendar_count: string
 }
 
 export type MediaType = 'im_access_link' | 'vd_access_link' | 'ad_access_link' | 'tx_access_link'

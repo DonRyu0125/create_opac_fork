@@ -8,7 +8,7 @@ import ViewBookmarks from '../bookmark/ViewBookmarks'
 import BookmarkAll from '../bookmark/BookmarkAll'
 import PrintPage from '../bookmark/PrintPage'
 import { convertToArr } from '@/lib/utils'
-import { SortDateDescending } from '../../types/message.json';
+import { SortDateDescending } from '../../types/message.json'
 
 /**
  * This component contains:

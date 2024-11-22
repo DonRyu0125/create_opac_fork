@@ -4,42 +4,42 @@
 			"id": 1,
 			"label": "Orders",
 			"db": "DOC_REQUEST",
-            "icon": "ShoppingBag",
+			"icon": "ShoppingBag",
 			"url": ""
 		},
 		{
 			"id": 2,
 			"label": "Copyright Requests",
 			"db": "REQUEST_VIEW",
-            "icon": "Copyright" ,
+			"icon": "Copyright",
 			"url": "?SEARCH&DATABASE=REQUEST_VIEW&"
 		},
 		{
 			"id": 3,
 			"label": "Reproductions",
 			"db": "REQUEST_VIEW",
-            "icon": "Copy" ,
+			"icon": "Copy",
 			"url": ""
 		},
 		{
 			"id": 4,
 			"label": "Bookmarks",
 			"db": "SHOWORDERLIST",
-            "icon": "BookMarked" ,
+			"icon": "BookMarked",
 			"url": ""
 		},
 		{
 			"id": 5,
 			"label": "Inquiries",
 			"db": "ENQUIRIES_VIEW",
-            "icon": "Lightbulb" ,
+			"icon": "Lightbulb",
 			"url": "?SEARCH&DATABASE=ENQUIRIES_VIEW&EXP=SISN%201"
 		},
 		{
 			"id": 6,
 			"label": "Crowdsource",
 			"db": "COMMENTS_VIEW",
-            "icon": "MessageCircleMore" ,
+			"icon": "MessageCircleMore",
 			"url": ""
 		}
 	]

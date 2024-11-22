@@ -22,6 +22,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const { message } = useConstants()
 	const [count, setCount] = useAtom(bookmarkCount)
+	console.log(record)
 	const handleBookmark = () => {
 		if (record.input?._name && like) {
 			//if record.input?._name is exsisted, we use bookmark sum report, Don Ryu20240705
@@ -103,6 +104,14 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				tooltipContent="Copy record URL">
 				<Copy className="h-4 w-4 text-primary" />
 			</TooltipButton>
+			{/* {record.avail ? <><Separator orientation="vertical" />
+			<TooltipButton
+				variant="ghost"
+				size="icon"
+				onClick={handleCopy}
+				tooltipContent="Request record">
+				<Copyright className="h-4 w-4 text-primary" />
+			</TooltipButton></> : ""} */}
 		</>
 	)
 }
