@@ -109,10 +109,8 @@ const BookmarkProfile = () => {
 					))}
                     
 				</div><h1 className="text-2xl font-bold">Bookmark</h1>
-
 			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow=''/>
 			</div>
-			
 		</PatronLayout>
 	)
 }
