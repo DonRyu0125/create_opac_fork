@@ -9,17 +9,16 @@ import { ColumnDef } from '@tanstack/react-table'
 import { getCookieValue } from '@/lib/utils'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 
-const Enquiries = () => {
+const Orders = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
-	const [apiData, setApiData] = useState(null)
-	const [loading, setLoading] = useState(false)
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	// Handle button click
+
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
+
 	const columns: ColumnDef<ProfileData>[] = [
 		{
 			id: 'select',
@@ -44,40 +43,26 @@ const Enquiries = () => {
 			enableHiding: false,
 		},
 		{
-			accessorKey: 'enq_id',
-			header: 'Enquiry #',
-			cell: ({ row }) => <div className="capitalize">{row.getValue('enq_id')}</div>,
+			accessorKey: 'date_needed',
+			header: 'Date',
+			cell: ({ row }) => <div className="capitalize">{row.getValue('date_needed') ? row.getValue('date_needed') : "N/A"}</div>,
 		},
 		{
-			accessorKey: 'enq_topic',
+			accessorKey: 'time_needed',
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Topic
+						Time
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_topic')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('time_needed') ? row.getValue('time_needed') : "N/A"}</div>,
 		},
 		{
-			accessorKey: 'enq_title',
-			header: ({ column }) => {
-				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Title
-						<CaretSortIcon className="ml-2 h-4 w-4" />
-					</Button>
-				)
-			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_title')}</div>,
-		},
-		{
-			accessorKey: 'enq_status',
+			accessorKey: 'req_status',
 			header: ({ column }) => {
 				return (
 					<Button
@@ -88,7 +73,63 @@ const Enquiries = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_status')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('req_status')}</div>,
+		},
+		{
+			accessorKey: 'req_item_id',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Reference No.
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="">{row.getValue('req_item_id')}</div>,
+		},
+        {
+			accessorKey: 'req_title',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Title
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="">{row.getValue('req_title')}</div>,
+		},
+        {
+			accessorKey: 'req_paid_amt',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Amount
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="">{row.getValue('req_paid_amt')}</div>,
+		},
+        {
+			accessorKey: 'req_order_num',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Action
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="">{row.getValue('req_order_num')}</div>,
 		},
 	]
 	return (
@@ -109,13 +150,13 @@ const Enquiries = () => {
 						</a>
 					))}
                     
-				</div><h1 className="text-2xl font-bold">Enquiries</h1>
+				</div><h1 className="text-2xl font-bold">Orders</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'enquiry'} filterTypeShow='' />
+			<ProfileTable data={records} columns={columns} filterType={'req_title'} filterTypeShow=''/>
 			</div>
 			
 		</PatronLayout>
 	)
 }
 
-export default Enquiries
+export default Orders

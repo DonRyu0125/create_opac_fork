@@ -2,6 +2,7 @@ import { useState } from 'react'
 import PatronLayout from '@/components/layouts/patron'
 import ProfileTable, { ProfileData } from '@/components/common/client-profile/ProfileTable'
 import useJSONData from '@/hooks/useJSONData'
+import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { Checkbox } from '@radix-ui/react-checkbox'
@@ -9,17 +10,16 @@ import { ColumnDef } from '@tanstack/react-table'
 import { getCookieValue } from '@/lib/utils'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 
-const Enquiries = () => {
+const Crowdsource = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
-	const [apiData, setApiData] = useState(null)
-	const [loading, setLoading] = useState(false)
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	// Handle button click
+
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
+
 	const columns: ColumnDef<ProfileData>[] = [
 		{
 			id: 'select',
@@ -44,51 +44,51 @@ const Enquiries = () => {
 			enableHiding: false,
 		},
 		{
-			accessorKey: 'enq_id',
-			header: 'Enquiry #',
-			cell: ({ row }) => <div className="capitalize">{row.getValue('enq_id')}</div>,
+			accessorKey: 'comments_date',
+			header: 'Date',
+			cell: ({ row }) => <div className="capitalize">{row.getValue('comments_date')}</div>,
 		},
 		{
-			accessorKey: 'enq_topic',
+			accessorKey: 'creator_id',
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Topic
+						Creator
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_topic')}</div>,
+			cell: ({ row }) => <div className="lowercase">{row.getValue('creator_id')}</div>,
 		},
 		{
-			accessorKey: 'enq_title',
+			accessorKey: 'comments_item_id',
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Title
+						Item-ID
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_title')}</div>,
+			cell: ({ row }) => <div className="lowercase">{row.getValue('comments_item_id')}</div>,
 		},
 		{
-			accessorKey: 'enq_status',
+			accessorKey: 'comments',
 			header: ({ column }) => {
 				return (
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Status
+						Comment
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_status')}</div>,
+			cell: ({ row }) => <div className="lowercase">{row.getValue('comments')}</div>,
 		},
 	]
 	return (
@@ -109,13 +109,13 @@ const Enquiries = () => {
 						</a>
 					))}
                     
-				</div><h1 className="text-2xl font-bold">Enquiries</h1>
+				</div><h1 className="text-2xl font-bold">Crowdsource</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'enquiry'} filterTypeShow='' />
+			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow=''/>
 			</div>
 			
 		</PatronLayout>
 	)
 }
 
-export default Enquiries
+export default Crowdsource

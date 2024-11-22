@@ -8,7 +8,7 @@ import Summary from '@/page/summary'
 import RSVPCancel from '@/page/RSVP/Cancellation'
 import RSVPConfirm from '@/page/RSVP/Confirmation'
 import Login from '@/page/login'
-import Bookmark from '@/page/bookmark'
+import BookmarkProfile from '@/page/BookmarkProfile'
 import NoBookmarkRecord from '@/page/NoBookmarkRecord'
 import Museum from '@/page/Museum'
 import Archives from '@/page/Archives'
@@ -22,7 +22,12 @@ import AdminMessage from '@/page/admin/Message'
 import AdminStyles from '@/page/admin/Styles'
 import PatronProfile from '@/page/PatronProfile'
 import PatronInfo from '@/page/PatronInfo'
+import Orders from '@/page/Orders'
+import Copyright from '@/page/Copyright'
+import Reproductions from '@/page/Reproductions'
 import Enquiry from '@/page/Enquiry'
+import Bookmark from '@/page/bookmark'
+import Crowdsource from '@/page/Crowdsource'
 import Calendar from '@/page/Calendar'
 import AdminCollections from '@/page/admin/Collections'
 import AdminDescription from '@/page/admin/Description'
@@ -61,7 +66,12 @@ export const ROUTES: TRoute = {
 	museum: Museum,
 	patronprofile: PatronProfile,
 	patroninfo: PatronInfo,
+	orders: Orders,
+	copyright: Copyright,
+	reproductions: Reproductions,
 	enquiry: Enquiry,
+	bookmarkprofile: BookmarkProfile,
+	crowdsource: Crowdsource,
 	calendar: Calendar,
 	'forgot-pin': ForgotPin,
 	'reset-pin': ResetPin,

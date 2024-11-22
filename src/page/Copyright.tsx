@@ -9,17 +9,16 @@ import { ColumnDef } from '@tanstack/react-table'
 import { getCookieValue } from '@/lib/utils'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 
-const Enquiries = () => {
+const Copyright = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
-	const [apiData, setApiData] = useState(null)
-	const [loading, setLoading] = useState(false)
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	// Handle button click
+
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
+
 	const columns: ColumnDef<ProfileData>[] = [
 		{
 			id: 'select',
@@ -44,12 +43,12 @@ const Enquiries = () => {
 			enableHiding: false,
 		},
 		{
-			accessorKey: 'enq_id',
-			header: 'Enquiry #',
-			cell: ({ row }) => <div className="capitalize">{row.getValue('enq_id')}</div>,
+			accessorKey: 'req_item_id',
+			header: 'Item #',
+			cell: ({ row }) => <div className="capitalize">{row.getValue('req_item_id')}</div>,
 		},
 		{
-			accessorKey: 'enq_topic',
+			accessorKey: 'req_topic',
 			header: ({ column }) => {
 				return (
 					<Button
@@ -60,10 +59,10 @@ const Enquiries = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_topic')}</div>,
+			cell: ({ row }) => <div className="capitalize">{row.getValue('req_topic')}</div>,
 		},
 		{
-			accessorKey: 'enq_title',
+			accessorKey: 'req_item_title',
 			header: ({ column }) => {
 				return (
 					<Button
@@ -74,10 +73,10 @@ const Enquiries = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_title')}</div>,
+			cell: ({ row }) => <div className="capitalize">{row.getValue('req_item_title')}</div>,
 		},
 		{
-			accessorKey: 'enq_status',
+			accessorKey: 'req_status',
 			header: ({ column }) => {
 				return (
 					<Button
@@ -88,7 +87,7 @@ const Enquiries = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('enq_status')}</div>,
+			cell: ({ row }) => <div className="capitalize">{row.getValue('req_status')}</div>,
 		},
 	]
 	return (
@@ -109,13 +108,13 @@ const Enquiries = () => {
 						</a>
 					))}
                     
-				</div><h1 className="text-2xl font-bold">Enquiries</h1>
+				</div><h1 className="text-2xl font-bold">Copyright Rquests</h1>
 
-			<ProfileTable data={records} columns={columns} filterType={'enquiry'} filterTypeShow='' />
+			<ProfileTable data={records} columns={columns} filterType={'req_item_id'} filterTypeShow=''/>
 			</div>
 			
 		</PatronLayout>
 	)
 }
 
-export default Enquiries
+export default Copyright

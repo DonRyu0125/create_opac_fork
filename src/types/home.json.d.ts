@@ -9,21 +9,65 @@ export type Heading = string;
 export type HeroBanner = string;
 export type SearchURL = string;
 export type BrowseByCategoryTitle = string;
-export type Thumbnail = string;
+export type CalendarfilterOption = string;
+export type DisplayTitle = string;
+export type LinkURL = string;
 export type Title = string;
 export type Url = string;
+export type Thumbnail = string;
 export type CategoriesItems = {
-  thumbnail?: Thumbnail;
   title?: Title;
   url?: Url;
+  thumbnail?: Thumbnail;
   [k: string]: unknown;
 }[];
+export type FilterDatabase = string;
+export type FilterOption = string;
+export type Type = string;
+export type Color = string;
+export type Icon = string;
+export type FilterTypes = {
+  type?: Type;
+  color?: Color;
+  icon?: Icon;
+  [k: string]: unknown;
+}[];
+export type Title1 = string;
+export type Description = string;
+export type Url1 = string;
+export type Thumbnail1 = string;
+export type FeaturedCollection = {
+  title?: Title1;
+  description?: Description;
+  url?: Url1;
+  thumbnail?: Thumbnail1;
+  [k: string]: unknown;
+}[];
+export type EnableCategoriesItems = boolean;
+export type EnableFeaturedCollection = boolean;
+export type EnableRSVP = boolean;
+export type EnableRecentAddition = boolean;
 
 export interface HomeJson {
   heading?: Heading;
   heroBanner?: HeroBanner;
   searchURL?: SearchURL;
   browseByCategoryTitle?: BrowseByCategoryTitle;
+  CalendarfilterOption?: CalendarfilterOption;
+  displayTitle?: DisplayTitle;
+  linkURL?: LinkURL;
   categoriesItems?: CategoriesItems;
+  rsvp?: Rsvp;
+  featuredCollection?: FeaturedCollection;
+  enableCategoriesItems?: EnableCategoriesItems;
+  enableFeaturedCollection?: EnableFeaturedCollection;
+  enableRSVP?: EnableRSVP;
+  enableRecentAddition?: EnableRecentAddition;
+  [k: string]: unknown;
+}
+export interface Rsvp {
+  filterDatabase?: FilterDatabase;
+  filterOption?: FilterOption;
+  filterTypes?: FilterTypes;
   [k: string]: unknown;
 }

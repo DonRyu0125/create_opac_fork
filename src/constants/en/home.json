@@ -4,6 +4,8 @@
     "searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=UNION_VIEW_WEB",
     "browseByCategoryTitle": "Browse by Category",
     "CalendarfilterOption": "",
+    "displayTitle": "All",
+    "linkURL": "/",
     "categoriesItems": [
         {
             "thumbnail": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d",
