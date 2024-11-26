@@ -72,7 +72,7 @@ export const ROUTES: TRoute = {
 	enquiry: Enquiry,
 	bookmarkprofile: BookmarkProfile,
 	crowdsource: Crowdsource,
-	'client-calendar': Calendar,
+	calendar: Calendar,
 	'forgot-pin': ForgotPin,
 	'reset-pin': ResetPin,
 	'rsvp-cancel': RSVPCancel,
