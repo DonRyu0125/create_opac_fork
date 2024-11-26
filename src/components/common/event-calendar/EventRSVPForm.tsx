@@ -30,8 +30,10 @@ import {
 	ContactInfoRSVP,
 	EVENT_EMAIL_LOGO,
 	FLOC_TX_ACCESS,
+	FUNC_LOC_P_GRP,
 	MWI_RESFUL_RES,
 	MWI_XML_DATA_INDEX,
+	NON_LOGIN_USER_TYPE,
 	patron,
 	REG_CONFIMRATION_EMAIL_T,
 	RSVP_CANCEL_LANDING_PAGE_URL,
@@ -39,10 +41,12 @@ import {
 	SISN,
 	TAG_DB,
 	TAG_FUNC_DATE,
+	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
 	TAG_FUNC_LOC,
 	TAG_FUNC_LOC_CT,
 	TAG_FUNC_LOC_EM,
+	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_LOC_ROO,
 	TAG_FUNC_O,
 	TAG_FUNC_O_CODE,
@@ -64,6 +68,7 @@ import {
 import { calNumOfPatron } from './EC-Util'
 import { fetch_get, getContactInfo } from './Service'
 import Spinner from './Spinner'
+import { PatronInfo } from '@/types/patroninfo'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -487,13 +492,9 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		setLoading(true)
-		if (isLogin) {
-			setLoading(false)
-			return sendRegConfirmEmail(data, event)
-		}
 		return getOCCNumber()
 			.then((res) => {
-				sendEmail(res, data, event)
+				isLogin ? storeRecord(res, data, event) : sendEmail(res, data, event)
 			})
 			.catch((error) => {
 				console.error('Error fetching session ID:', error)
@@ -599,6 +600,44 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 	}
 
+	const storeRecord = async (occ_info: any, patronInfo: any, event: Cal_event) => {
+		let HOME_SESSID = getSessionID()
+		const ID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+
+		let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
+		<RECORD>
+			<${TAG_FUNC_LOC_GRP} occ="${occ_info.occ1}" op="chg">
+				<${TAG_FUNC_DTE_GRP} occ="${occ_info.occ2}" op="chg">
+					<${FUNC_LOC_P_GRP} op="add">
+						<${TAG_FUNC_P_ID}>${ID}</${TAG_FUNC_P_ID}>
+						<${TAG_FUNC_P_FIRST}>${patronInfo[TAG_FUNC_P_FIRST]}</${TAG_FUNC_P_FIRST}>
+						<${TAG_FUNC_P_LAST}>${patronInfo[TAG_FUNC_P_LAST]}</${TAG_FUNC_P_LAST}>
+						<${TAG_FUNC_P_EMAIL}>${patronInfo[TAG_FUNC_P_EMAIL]}</${TAG_FUNC_P_EMAIL}>
+						<${TAG_FUNC_P_ATTND}>${patronInfo[TAG_FUNC_P_ATTND]}</${TAG_FUNC_P_ATTND}>
+					</${FUNC_LOC_P_GRP}>
+				</${TAG_FUNC_DTE_GRP}>
+			</${TAG_FUNC_LOC_GRP}>
+		</RECORD>`
+
+		return await axios
+			.post(
+				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=N&KEY=${SISN}&VALUE=${event?.SISN}`,
+				xmlFormAdd,
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
+					timeout: 5000,
+				}
+			)
+			.then((res) => {
+				sendRegConfirmEmail(patronInfo, event)
+			})
+			.catch((error) => {
+				throw error
+			})
+	}
+
 	const sendRegConfirmEmail = async (userData: Inputs, event: Cal_event) => {
 		const userID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 		let HOME_SESSID = getSessionID()
@@ -610,10 +649,13 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				TAG_FUNC_LOC_DEC: undefined, //TAG_FUNC_LOC_DECis too big for query string
 			})
 		)
+		console.log('event[TAG_FUNC_LOC]', event[TAG_FUNC_LOC])
+
 		return await axios
 			.post(
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${event.TAG_FUNC_O ? '[OPAC_EMAIL_TMP]RSVPRegOnlineComfrimTmp.txt' : '[OPAC_EMAIL_TMP]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${userData[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${event[TAG_NAME]}`,
 				{
+					BD_ADDRESS: event[TAG_FUNC_LOC],
 					...userData,
 					...event,
 					EVENT_EMAIL_LOGO: logo,
@@ -628,12 +670,11 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then(async (res) => {
-				// setStatus(STATUS_TYPE.SHOW_SUCCESS)
+				console.log('res====>', res)
 				setLoading(false)
 				return
 			})
 			.catch((error) => {
-				// setStatus(STATUS_TYPE.Invalid)
 				throw error
 			})
 	}
