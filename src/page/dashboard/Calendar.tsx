@@ -49,8 +49,6 @@ const Calendar = () => {
 	let HOME_SESSID = getSessionID()
 	const { logo } = useConstants().config
 
-	console.log('records', records)
-
 	const columns: ColumnDef<ProfileData>[] = [
 		{
 			accessorKey: TAG_NAME.toLocaleLowerCase(),
