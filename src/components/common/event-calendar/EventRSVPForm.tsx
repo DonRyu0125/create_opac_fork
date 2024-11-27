@@ -631,7 +631,9 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then((res) => {
-				sendRegConfirmEmail(occ_info, patronInfo, event)
+				console.log('res',res)
+				// sendRegConfirmEmail(occ_info, patronInfo, event)
+				setLoading(false)
 			})
 			.catch((error) => {
 				throw error
