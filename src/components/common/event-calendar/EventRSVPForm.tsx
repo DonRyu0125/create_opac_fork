@@ -648,6 +648,8 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 	}
 
+	// User only can register one event
+	// If Cooking class is on Dec 1st or Dec 12st, user can register only one of the two.
 	const isUserAlreadyReg = async (event: Cal_event) => {
 		const ID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 		return await axios

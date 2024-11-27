@@ -44,7 +44,6 @@ interface PatronInfo {
 
 const Calendar = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const [loading, setLoading] = useState(true)
 	const message = useConstants().message
 	let HOME_SESSID = getSessionID()
 	const { logo } = useConstants().config
