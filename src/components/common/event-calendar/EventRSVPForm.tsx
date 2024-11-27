@@ -324,9 +324,9 @@ const ShowButton = ({
 			)}
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
-					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-1 border-2 rounded`}>
+					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-3 border-2 rounded`}>
+					<div className={"w-full flex justify-center"}>{message.contactInfo}</div>
 					<div className={'w-full text-center'}>
-						{message.contactInfo}
 						<div className={'flex font-normal items-center text-base'}>
 							<Phone size={25} />
 							{event[TAG_FUNC_LOC_CT]}
@@ -431,6 +431,7 @@ const ShowRSVPSuccess = ({
 				</div>
 			</div>
 			<div>
+			<div className={"w-full flex justify-center text-lg"}>{message.contactInfo}</div>
 				{event[TAG_FUNC_O] ? (
 					<>
 						<div className={'flex font-normal items-center'}>
@@ -631,8 +632,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then((res) => {
-				console.log('res',res)
-				// sendRegConfirmEmail(occ_info, patronInfo, event)
+				sendRegConfirmEmail(occ_info, patronInfo, event)
 				setLoading(false)
 			})
 			.catch((error) => {
@@ -646,7 +646,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		const encoded = encodeObj(
 			JSON.stringify({
 				...userData,
-				[TAG_FUNC_P_ID]:userID,
+				[TAG_FUNC_P_ID]: userID,
 				[TAG_NAME]: event[TAG_NAME],
 				[TAG_FUNC_START_T]: event[TAG_FUNC_START_T],
 				[TAG_FUNC_END_T]: event[TAG_FUNC_END_T],
@@ -685,6 +685,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			)
 			.then(async (res) => {
 				setLoading(false)
+				setStatus(STATUS_TYPE.SHOW_SUCCESS)
 				return
 			})
 			.catch((error) => {
