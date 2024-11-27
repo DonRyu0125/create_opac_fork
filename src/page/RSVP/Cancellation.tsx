@@ -72,7 +72,7 @@ const RSVPCancel = () => {
 		setLoading(true)
 		return await axios
 			.get(
-				`/scripts/mwimain.dll/144/${MAIN_MWI_APPLICATION}/${MONTH_REPORT}?commandsearch&exp=${TAG_FUNC_P_ID} ${id}`,
+				`/scripts/mwimain.dll/144/${MAIN_MWI_APPLICATION}/${MONTH_REPORT}?commandsearch&exp=${TAG_FUNC_P_ID} ${id} AND ${TAG_FUNC_DATE} ${patronInfo.TAG_FUNC_DATE}`,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
@@ -81,6 +81,7 @@ const RSVPCancel = () => {
 			)
 			.then((res) => {
 				let result = convertXMLToJson(res.data)
+				console.log('result',result)
 				if (result.div) {
 					return true
 				}

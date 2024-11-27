@@ -631,25 +631,37 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then((res) => {
-				sendRegConfirmEmail(patronInfo, event)
+				sendRegConfirmEmail(occ_info, patronInfo, event)
 			})
 			.catch((error) => {
 				throw error
 			})
 	}
 
-	const sendRegConfirmEmail = async (userData: Inputs, event: Cal_event) => {
+	const sendRegConfirmEmail = async (occ_info: any, userData: Inputs, event: Cal_event) => {
 		const userID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 		let HOME_SESSID = getSessionID()
 		const encoded = encodeObj(
 			JSON.stringify({
-				...event,
-				[EVENT_EMAIL_LOGO]: logo,
-				[TAG_FUNC_P_ID]: userID,
-				TAG_FUNC_LOC_DEC: undefined, //TAG_FUNC_LOC_DECis too big for query string
+				...userData,
+				[TAG_FUNC_P_ID]:userID,
+				[TAG_NAME]: event[TAG_NAME],
+				[TAG_FUNC_START_T]: event[TAG_FUNC_START_T],
+				[TAG_FUNC_END_T]: event[TAG_FUNC_END_T],
+				[TAG_FUNC_LOC_ROO]: event[TAG_FUNC_LOC_ROO],
+				[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
+				[TAG_FUNC_LOC]: event[TAG_FUNC_LOC],
+				[SISN]: event[SISN],
+				[TAG_FUNC_P_T]: getCurrentDate(),
+				BD_ADDRESS: getContactInfo(BD_ADDRESS, contactInfo, event),
+				occ1: occ_info.occ1,
+				occ2: occ_info.occ2,
+				[TAG_FUNC_O]: event[TAG_FUNC_O],
+				[TAG_FUNC_O_PATH]: event[TAG_FUNC_O_PATH],
+				[TAG_FUNC_O_ID]: event[TAG_FUNC_O_ID],
+				[TAG_FUNC_O_CODE]: event[TAG_FUNC_O_CODE],
 			})
 		)
-		console.log('event[TAG_FUNC_LOC]', event[TAG_FUNC_LOC])
 
 		return await axios
 			.post(
@@ -670,7 +682,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then(async (res) => {
-				console.log('res====>', res)
 				setLoading(false)
 				return
 			})
