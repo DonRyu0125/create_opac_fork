@@ -68,7 +68,6 @@ import {
 import { calNumOfPatron } from './EC-Util'
 import { fetch_get, getContactInfo } from './Service'
 import Spinner from './Spinner'
-import { PatronInfo } from '@/types/patroninfo'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string

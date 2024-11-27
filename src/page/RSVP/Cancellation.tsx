@@ -58,7 +58,7 @@ const RSVPCancel = () => {
 			setStatus(STATUS_TYPE.OutDate)
 			return
 		}
-		isRecordValidate(jsonObj.TAG_FUNC_P_ID).then((res) => {
+		isRecordValidate(jsonObj.TAG_FUNC_P_ID,jsonObj.TAG_FUNC_DATE).then((res) => {
 			setLoading(false)
 			if (res) {
 				setPatronInfo(jsonObj)
@@ -68,11 +68,11 @@ const RSVPCancel = () => {
 		})
 	}
 
-	const isRecordValidate = async (id: string) => {
+	const isRecordValidate = async (id: string,date:string) => {
 		setLoading(true)
 		return await axios
 			.get(
-				`/scripts/mwimain.dll/144/${MAIN_MWI_APPLICATION}/${MONTH_REPORT}?commandsearch&exp=${TAG_FUNC_P_ID} ${id} AND ${TAG_FUNC_DATE} ${patronInfo.TAG_FUNC_DATE}`,
+				`/scripts/mwimain.dll/144/${MAIN_MWI_APPLICATION}/${MONTH_REPORT}?commandsearch&exp=${TAG_FUNC_P_ID} ${id} AND ${TAG_FUNC_DATE} ${date}`,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
