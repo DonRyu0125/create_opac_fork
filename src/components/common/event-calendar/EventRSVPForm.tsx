@@ -31,6 +31,8 @@ import {
 	EVENT_EMAIL_LOGO,
 	FLOC_TX_ACCESS,
 	FUNC_LOC_P_GRP,
+	MAIN_MWI_APPLICATION,
+	MONTH_REPORT,
 	MWI_RESFUL_RES,
 	MWI_XML_DATA_INDEX,
 	NON_LOGIN_USER_TYPE,
@@ -141,6 +143,7 @@ const ShowForm = ({
 	onReset,
 	setValue,
 	isLogin,
+	isIDValid,
 }: {
 	loading: boolean
 	handleSubmit: Function
@@ -150,6 +153,7 @@ const ShowForm = ({
 	onReset: any
 	setValue: Function
 	isLogin: boolean
+	isIDValid: boolean
 }) => {
 	const message = useConstants().message
 	const conf = useConstants().config
@@ -230,6 +234,7 @@ const ShowForm = ({
 							))}
 					</select>
 				</div>
+				{!isIDValid && <div className={'my-2'}>{message.emailAlreadyRegistered}</div>}
 				<div className={'my-2'}>
 					{!isLogin && (
 						<ReCAPTCHA sitekey={conf.reCaptchaKey} onChange={handleCaptchaChange} />
@@ -324,7 +329,7 @@ const ShowButton = ({
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
 					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-3 border-2 rounded`}>
-					<div className={"w-full flex justify-center"}>{message.contactInfo}</div>
+					<div className={'w-full flex justify-center'}>{message.contactInfo}</div>
 					<div className={'w-full text-center'}>
 						<div className={'flex font-normal items-center text-base'}>
 							<Phone size={25} />
@@ -430,7 +435,7 @@ const ShowRSVPSuccess = ({
 				</div>
 			</div>
 			<div>
-			<div className={"w-full flex justify-center text-lg"}>{message.contactInfo}</div>
+				<div className={'w-full flex justify-center text-lg'}>{message.contactInfo}</div>
 				{event[TAG_FUNC_O] ? (
 					<>
 						<div className={'flex font-normal items-center'}>
@@ -483,6 +488,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const [weekType, __] = useAtom(calendarWeekType)
 	const [___, setCurrentEvent] = useAtom(calendarEvents)
 	const [isLogin, setIsLogin] = useState(false)
+	const [isIDValid, setIsIDValid] = useState(true)
 
 	useEffect(() => {
 		if (getCookieValue('M2L_PATRON_NAME')) {
@@ -492,15 +498,19 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		setLoading(true)
-		return getOCCNumber()
-			.then((res) => {
-				isLogin ? storeRecord(res, data, event) : sendEmail(res, data, event)
-			})
-			.catch((error) => {
-				console.error('Error fetching session ID:', error)
+		if (isLogin) {
+			const isReg= await isUserAlreadyReg(event)
+			if (isReg) {
 				setLoading(false)
-				onReset()
-			})
+				setIsIDValid(false)
+				return;
+			}
+			const res = await getOCCNumber()
+			return storeRecord(res, data, event);
+		}
+
+		const res = await getOCCNumber()
+		return sendEmail(res, data, event)
 	}
 
 	const getOCCNumber = async () => {
@@ -603,7 +613,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const storeRecord = async (occ_info: any, patronInfo: any, event: Cal_event) => {
 		let HOME_SESSID = getSessionID()
 		const ID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-
 		let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
 		<RECORD>
 			<${TAG_FUNC_LOC_GRP} occ="${occ_info.occ1}" op="chg">
@@ -636,6 +645,26 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 			.catch((error) => {
 				throw error
+			})
+	}
+
+	const isUserAlreadyReg = async (event: Cal_event) => {
+		const ID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+		return await axios
+			.get(
+				`/scripts/mwimain.dll/144/${MAIN_MWI_APPLICATION}/${MONTH_REPORT}?commandsearch&exp=${TAG_FUNC_P_ID} ${ID} AND ${TAG_FUNC_DATE} ${event[TAG_FUNC_DATE]}`,
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
+				}
+			)
+			.then((res) => {
+				let result = convertXMLToJson(res.data)
+				if (result.div) {
+					return true
+				}
+				return false
 			})
 	}
 
@@ -721,6 +750,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						onReset={onReset}
 						setValue={setValue}
 						isLogin={isLogin}
+						isIDValid={isIDValid}
 					/>
 				)
 			case STATUS_TYPE.SHOW_SUCCESS:
