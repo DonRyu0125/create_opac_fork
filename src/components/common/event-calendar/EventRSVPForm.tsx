@@ -90,7 +90,7 @@ type EventInput = {
 	register: Function
 	required: boolean
 	errors?: any
-	isLogin: boolean
+	isLoginValid: boolean
 }
 
 type EventRSVPForm = {
@@ -101,12 +101,12 @@ type EventRSVPForm = {
 	contactInfo: ContactInfoRSVP[]
 }
 
-const EventInput = ({ label, keyname, register, required, isLogin }: EventInput) => {
+const EventInput = ({ label, keyname, register, required, isLoginValid }: EventInput) => {
 	return (
 		<div className={'flex w-full flex-col my-1'}>
 			<Label>{label}</Label>
 			<Input
-				disabled={isLogin}
+				disabled={isLoginValid}
 				className={'border-2 border-grey-500'}
 				{...register(keyname, { required: required })}
 			/>
@@ -114,12 +114,12 @@ const EventInput = ({ label, keyname, register, required, isLogin }: EventInput)
 	)
 }
 
-const EventEmailInput = ({ label, keyname, register, required, errors, isLogin }: EventInput) => {
+const EventEmailInput = ({ label, keyname, register, required, errors, isLoginValid }: EventInput) => {
 	return (
 		<div className={'flex w-full flex-col my-1'}>
 			<Label>{label}</Label>
 			<Input
-				disabled={isLogin}
+				disabled={isLoginValid}
 				className={'border-2 border-grey-500'}
 				{...register(keyname, {
 					required: required,
@@ -142,7 +142,7 @@ const ShowForm = ({
 	errors,
 	onReset,
 	setValue,
-	isLogin,
+	isLoginValid,
 	isIDValid,
 }: {
 	loading: boolean
@@ -152,7 +152,7 @@ const ShowForm = ({
 	errors: any
 	onReset: any
 	setValue: Function
-	isLogin: boolean
+	isLoginValid: boolean
 	isIDValid: boolean
 }) => {
 	const message = useConstants().message
@@ -162,7 +162,7 @@ const ShowForm = ({
 		setCaptchaValue(value)
 	}
 	const handleFormSubmit = (data: any) => {
-		if (captchaValue || isLogin) {
+		if (captchaValue || isLoginValid) {
 			onSubmit({ ...data })
 		} else {
 			toast({ title: `CAPTCHA verification failed` })
@@ -171,7 +171,7 @@ const ShowForm = ({
 
 	useEffect(() => {
 		// If user login in , fill the form automatically.
-		if (isLogin) {
+		if (isLoginValid) {
 			let name = getCookieValue('M2L_PATRON_NAME')?.split('%2C%20') ?? []
 			setValue(TAG_FUNC_P_FIRST, name[1])
 			setValue(TAG_FUNC_P_LAST, name[0])
@@ -202,14 +202,14 @@ const ShowForm = ({
 					keyname={TAG_FUNC_P_FIRST}
 					register={register}
 					required={true}
-					isLogin
+					isLoginValid={isLoginValid}
 				/>
 				<EventInput
 					label={message.lastName}
 					keyname={TAG_FUNC_P_LAST}
 					register={register}
 					required={true}
-					isLogin
+					isLoginValid={isLoginValid}
 				/>
 				<EventEmailInput
 					label={message.email}
@@ -217,7 +217,7 @@ const ShowForm = ({
 					register={register}
 					required={true}
 					errors={errors}
-					isLogin
+					isLoginValid={isLoginValid}
 				/>
 				<div className={'flex w-full flex-col my-1'}>
 					<Label>{message.attendee}</Label>
@@ -402,12 +402,12 @@ const ShowRSVPSuccess = ({
 	onReset,
 	event,
 	contactInfo,
-	isLogin,
+	isLoginValid,
 }: {
 	onReset: any
 	event: Cal_event
 	contactInfo: ContactInfoRSVP[]
-	isLogin: boolean
+	isLoginValid: boolean
 }) => {
 	const message = useConstants().message
 	return (
@@ -421,7 +421,7 @@ const ShowRSVPSuccess = ({
 						'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'
 					}>
 					<SquareUserRound className="w-12 h-12" />
-					{isLogin ? (
+					{isLoginValid ? (
 						<div className={'text-2xl'}>{message.registered}!</div>
 					) : (
 						<div className={'text-2xl'}>{message.registrationIncomplete}</div>
@@ -499,14 +499,14 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		setLoading(true)
 		if (isLogin) {
-			const isReg= await isUserAlreadyReg(event)
+			const isReg = await isUserAlreadyReg(event)
 			if (isReg) {
 				setLoading(false)
 				setIsIDValid(false)
-				return;
+				return
 			}
 			const res = await getOCCNumber()
-			return storeRecord(res, data, event);
+			return storeRecord(res, data, event)
 		}
 
 		const res = await getOCCNumber()
@@ -751,7 +751,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						errors={errors}
 						onReset={onReset}
 						setValue={setValue}
-						isLogin={isLogin}
+						isLoginValid={isLogin}
 						isIDValid={isIDValid}
 					/>
 				)
@@ -761,7 +761,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						onReset={onReset}
 						event={event}
 						contactInfo={contactInfo}
-						isLogin={isLogin}
+						isLoginValid={isLogin}
 					/>
 				)
 			default:
