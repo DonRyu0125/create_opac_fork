@@ -604,9 +604,9 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			)
 			.then(async () => {
 				setStatus(STATUS_TYPE.SHOW_SUCCESS)
-				setLoading(false)
 				const currE = await fetch_get(currentDate, weekType)
 				setCurrentEvent(currE)
+				setLoading(false)
 			})
 	}
 
@@ -714,8 +714,8 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then(async (res) => {
-				setLoading(false)
 				setStatus(STATUS_TYPE.SHOW_SUCCESS)
+				setLoading(false)
 				return
 			})
 			.catch((error) => {
