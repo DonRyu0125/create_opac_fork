@@ -30,8 +30,12 @@ import {
 	ContactInfoRSVP,
 	EVENT_EMAIL_LOGO,
 	FLOC_TX_ACCESS,
+	FUNC_LOC_P_GRP,
+	MAIN_MWI_APPLICATION,
+	MONTH_REPORT,
 	MWI_RESFUL_RES,
 	MWI_XML_DATA_INDEX,
+	NON_LOGIN_USER_TYPE,
 	patron,
 	REG_CONFIMRATION_EMAIL_T,
 	RSVP_CANCEL_LANDING_PAGE_URL,
@@ -39,10 +43,12 @@ import {
 	SISN,
 	TAG_DB,
 	TAG_FUNC_DATE,
+	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
 	TAG_FUNC_LOC,
 	TAG_FUNC_LOC_CT,
 	TAG_FUNC_LOC_EM,
+	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_LOC_ROO,
 	TAG_FUNC_O,
 	TAG_FUNC_O_CODE,
@@ -84,7 +90,7 @@ type EventInput = {
 	register: Function
 	required: boolean
 	errors?: any
-	isLogin: boolean
+	isLoginValid: boolean
 }
 
 type EventRSVPForm = {
@@ -95,12 +101,12 @@ type EventRSVPForm = {
 	contactInfo: ContactInfoRSVP[]
 }
 
-const EventInput = ({ label, keyname, register, required, isLogin }: EventInput) => {
+const EventInput = ({ label, keyname, register, required, isLoginValid }: EventInput) => {
 	return (
 		<div className={'flex w-full flex-col my-1'}>
 			<Label>{label}</Label>
 			<Input
-				disabled={isLogin}
+				disabled={isLoginValid}
 				className={'border-2 border-grey-500'}
 				{...register(keyname, { required: required })}
 			/>
@@ -108,12 +114,12 @@ const EventInput = ({ label, keyname, register, required, isLogin }: EventInput)
 	)
 }
 
-const EventEmailInput = ({ label, keyname, register, required, errors, isLogin }: EventInput) => {
+const EventEmailInput = ({ label, keyname, register, required, errors, isLoginValid }: EventInput) => {
 	return (
 		<div className={'flex w-full flex-col my-1'}>
 			<Label>{label}</Label>
 			<Input
-				disabled={isLogin}
+				disabled={isLoginValid}
 				className={'border-2 border-grey-500'}
 				{...register(keyname, {
 					required: required,
@@ -136,7 +142,8 @@ const ShowForm = ({
 	errors,
 	onReset,
 	setValue,
-	isLogin,
+	isLoginValid,
+	isIDValid,
 }: {
 	loading: boolean
 	handleSubmit: Function
@@ -145,7 +152,8 @@ const ShowForm = ({
 	errors: any
 	onReset: any
 	setValue: Function
-	isLogin: boolean
+	isLoginValid: boolean
+	isIDValid: boolean
 }) => {
 	const message = useConstants().message
 	const conf = useConstants().config
@@ -154,7 +162,7 @@ const ShowForm = ({
 		setCaptchaValue(value)
 	}
 	const handleFormSubmit = (data: any) => {
-		if (captchaValue || isLogin) {
+		if (captchaValue || isLoginValid) {
 			onSubmit({ ...data })
 		} else {
 			toast({ title: `CAPTCHA verification failed` })
@@ -163,7 +171,7 @@ const ShowForm = ({
 
 	useEffect(() => {
 		// If user login in , fill the form automatically.
-		if (isLogin) {
+		if (isLoginValid) {
 			let name = getCookieValue('M2L_PATRON_NAME')?.split('%2C%20') ?? []
 			setValue(TAG_FUNC_P_FIRST, name[1])
 			setValue(TAG_FUNC_P_LAST, name[0])
@@ -194,14 +202,14 @@ const ShowForm = ({
 					keyname={TAG_FUNC_P_FIRST}
 					register={register}
 					required={true}
-					isLogin
+					isLoginValid={isLoginValid}
 				/>
 				<EventInput
 					label={message.lastName}
 					keyname={TAG_FUNC_P_LAST}
 					register={register}
 					required={true}
-					isLogin
+					isLoginValid={isLoginValid}
 				/>
 				<EventEmailInput
 					label={message.email}
@@ -209,7 +217,7 @@ const ShowForm = ({
 					register={register}
 					required={true}
 					errors={errors}
-					isLogin
+					isLoginValid={isLoginValid}
 				/>
 				<div className={'flex w-full flex-col my-1'}>
 					<Label>{message.attendee}</Label>
@@ -226,6 +234,7 @@ const ShowForm = ({
 							))}
 					</select>
 				</div>
+				{!isIDValid && <div className={'my-2'}>{message.emailAlreadyRegistered}</div>}
 				<div className={'my-2'}>
 					{!isLogin && (
 						<ReCAPTCHA sitekey={conf.reCaptchaKey} onChange={handleCaptchaChange} />
@@ -319,9 +328,9 @@ const ShowButton = ({
 			)}
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
-					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-1 border-2 rounded`}>
+					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-3 border-2 rounded`}>
+					<div className={'w-full flex justify-center'}>{message.contactInfo}</div>
 					<div className={'w-full text-center'}>
-						{message.contactInfo}
 						<div className={'flex font-normal items-center text-base'}>
 							<Phone size={25} />
 							{event[TAG_FUNC_LOC_CT]}
@@ -393,12 +402,12 @@ const ShowRSVPSuccess = ({
 	onReset,
 	event,
 	contactInfo,
-	isLogin,
+	isLoginValid,
 }: {
 	onReset: any
 	event: Cal_event
 	contactInfo: ContactInfoRSVP[]
-	isLogin: boolean
+	isLoginValid: boolean
 }) => {
 	const message = useConstants().message
 	return (
@@ -412,7 +421,7 @@ const ShowRSVPSuccess = ({
 						'min-h-[194px] text-center w-full h-3/6 flex flex-col items-center justify-evenly'
 					}>
 					<SquareUserRound className="w-12 h-12" />
-					{isLogin ? (
+					{isLoginValid ? (
 						<div className={'text-2xl'}>{message.registered}!</div>
 					) : (
 						<div className={'text-2xl'}>{message.registrationIncomplete}</div>
@@ -426,6 +435,7 @@ const ShowRSVPSuccess = ({
 				</div>
 			</div>
 			<div>
+				<div className={'w-full flex justify-center text-lg'}>{message.contactInfo}</div>
 				{event[TAG_FUNC_O] ? (
 					<>
 						<div className={'flex font-normal items-center'}>
@@ -478,6 +488,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const [weekType, __] = useAtom(calendarWeekType)
 	const [___, setCurrentEvent] = useAtom(calendarEvents)
 	const [isLogin, setIsLogin] = useState(false)
+	const [isIDValid, setIsIDValid] = useState(true)
 
 	useEffect(() => {
 		if (getCookieValue('M2L_PATRON_NAME')) {
@@ -488,18 +499,18 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		setLoading(true)
 		if (isLogin) {
-			setLoading(false)
-			return sendRegConfirmEmail(data, event)
-		}
-		return getOCCNumber()
-			.then((res) => {
-				sendEmail(res, data, event)
-			})
-			.catch((error) => {
-				console.error('Error fetching session ID:', error)
+			const isReg = await isUserAlreadyReg(event)
+			if (isReg) {
 				setLoading(false)
-				onReset()
-			})
+				setIsIDValid(false)
+				return
+			}
+			const res = await getOCCNumber()
+			return storeRecord(res, data, event)
+		}
+
+		const res = await getOCCNumber()
+		return sendEmail(res, data, event)
 	}
 
 	const getOCCNumber = async () => {
@@ -599,21 +610,96 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 	}
 
-	const sendRegConfirmEmail = async (userData: Inputs, event: Cal_event) => {
+	const storeRecord = async (occ_info: any, patronInfo: any, event: Cal_event) => {
+		let HOME_SESSID = getSessionID()
+		const ID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+		let xmlFormAdd = `<?xml version="1.0" encoding="UTF-8"?>
+		<RECORD>
+			<${TAG_FUNC_LOC_GRP} occ="${occ_info.occ1}" op="chg">
+				<${TAG_FUNC_DTE_GRP} occ="${occ_info.occ2}" op="chg">
+					<${FUNC_LOC_P_GRP} op="add">
+						<${TAG_FUNC_P_ID}>${ID}</${TAG_FUNC_P_ID}>
+						<${TAG_FUNC_P_FIRST}>${patronInfo[TAG_FUNC_P_FIRST]}</${TAG_FUNC_P_FIRST}>
+						<${TAG_FUNC_P_LAST}>${patronInfo[TAG_FUNC_P_LAST]}</${TAG_FUNC_P_LAST}>
+						<${TAG_FUNC_P_EMAIL}>${patronInfo[TAG_FUNC_P_EMAIL]}</${TAG_FUNC_P_EMAIL}>
+						<${TAG_FUNC_P_ATTND}>${patronInfo[TAG_FUNC_P_ATTND]}</${TAG_FUNC_P_ATTND}>
+					</${FUNC_LOC_P_GRP}>
+				</${TAG_FUNC_DTE_GRP}>
+			</${TAG_FUNC_LOC_GRP}>
+		</RECORD>`
+
+		return await axios
+			.post(
+				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=N&KEY=${SISN}&VALUE=${event?.SISN}`,
+				xmlFormAdd,
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
+					timeout: 5000,
+				}
+			)
+			.then((res) => {
+				sendRegConfirmEmail(occ_info, patronInfo, event)
+				setLoading(false)
+			})
+			.catch((error) => {
+				throw error
+			})
+	}
+
+	// User only can register one event
+	// If Cooking class is on Dec 1st or Dec 12st, user can register only one of the two.
+	const isUserAlreadyReg = async (event: Cal_event) => {
+		const ID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+		return await axios
+			.get(
+				`/scripts/mwimain.dll/144/${MAIN_MWI_APPLICATION}/${MONTH_REPORT}?commandsearch&exp=${TAG_FUNC_P_ID} ${ID} AND ${TAG_FUNC_DATE} ${event[TAG_FUNC_DATE]}`,
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
+				}
+			)
+			.then((res) => {
+				let result = convertXMLToJson(res.data)
+				if (result.div) {
+					return true
+				}
+				return false
+			})
+	}
+
+	const sendRegConfirmEmail = async (occ_info: any, userData: Inputs, event: Cal_event) => {
 		const userID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 		let HOME_SESSID = getSessionID()
 		const encoded = encodeObj(
 			JSON.stringify({
-				...event,
-				[EVENT_EMAIL_LOGO]: logo,
+				...userData,
 				[TAG_FUNC_P_ID]: userID,
-				TAG_FUNC_LOC_DEC: undefined, //TAG_FUNC_LOC_DECis too big for query string
+				[TAG_NAME]: event[TAG_NAME],
+				[TAG_FUNC_START_T]: event[TAG_FUNC_START_T],
+				[TAG_FUNC_END_T]: event[TAG_FUNC_END_T],
+				[TAG_FUNC_LOC_ROO]: event[TAG_FUNC_LOC_ROO],
+				[TAG_FUNC_DATE]: event[TAG_FUNC_DATE],
+				[TAG_FUNC_LOC]: event[TAG_FUNC_LOC],
+				[SISN]: event[SISN],
+				[TAG_FUNC_P_T]: getCurrentDate(),
+				BD_ADDRESS: getContactInfo(BD_ADDRESS, contactInfo, event),
+				occ1: occ_info.occ1,
+				occ2: occ_info.occ2,
+				[TAG_FUNC_O]: event[TAG_FUNC_O],
+				[TAG_FUNC_O_PATH]: event[TAG_FUNC_O_PATH],
+				[TAG_FUNC_O_ID]: event[TAG_FUNC_O_ID],
+				[TAG_FUNC_O_CODE]: event[TAG_FUNC_O_CODE],
 			})
 		)
+
 		return await axios
 			.post(
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${event.TAG_FUNC_O ? '[OPAC_EMAIL_TMP]RSVPRegOnlineComfrimTmp.txt' : '[OPAC_EMAIL_TMP]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${userData[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${event[TAG_NAME]}`,
 				{
+					BD_ADDRESS: event[TAG_FUNC_LOC],
 					...userData,
 					...event,
 					EVENT_EMAIL_LOGO: logo,
@@ -628,12 +714,11 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 				}
 			)
 			.then(async (res) => {
-				// setStatus(STATUS_TYPE.SHOW_SUCCESS)
 				setLoading(false)
+				setStatus(STATUS_TYPE.SHOW_SUCCESS)
 				return
 			})
 			.catch((error) => {
-				// setStatus(STATUS_TYPE.Invalid)
 				throw error
 			})
 	}
@@ -666,7 +751,8 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						errors={errors}
 						onReset={onReset}
 						setValue={setValue}
-						isLogin={isLogin}
+						isLoginValid={isLogin}
+						isIDValid={isIDValid}
 					/>
 				)
 			case STATUS_TYPE.SHOW_SUCCESS:
@@ -675,7 +761,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 						onReset={onReset}
 						event={event}
 						contactInfo={contactInfo}
-						isLogin={isLogin}
+						isLoginValid={isLogin}
 					/>
 				)
 			default:

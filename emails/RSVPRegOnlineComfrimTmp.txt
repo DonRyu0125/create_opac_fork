@@ -136,10 +136,6 @@
       <p id="attendee-name">^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>
     </div>
     <div class="info">
-      <div for="registration-date">Date Registered:</div>
-      <p id="registration-date">^TAG_FUNC_P_T^</p>
-    </div>
-    <div class="info">
       <div for="attendee-details">Attendee:</div>
       <div id="attendee-details" style="border: 2px dotted #ccc; padding: 10px; text-align: center;">
         ^TAG_FUNC_P_ATTND^ Spot Reserved
