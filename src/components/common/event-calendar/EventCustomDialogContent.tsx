@@ -18,7 +18,7 @@ import EventRSVPForm from './EventRSVPForm'
 import EventRSVPCancel from './EventCancel'
 import RSVPCarousel from './RSVPCarousel'
 
-const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
+const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
 	const combined_VD_IMAG_Array_for_carousel = [
 		...(elm[FLOC_IM_REF_GRP] || []),
 		...(elm[FLOC_VD_REF_GRP] || []),
@@ -26,7 +26,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key = 0 }: any) => {
 
 	return (
 		<div
-			key={key}
+			key={key++}
 			className={
 				'p-1 rounded border-2 border-primary w-full h-full sm:flex font-bold relative '
 			}>

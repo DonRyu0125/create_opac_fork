@@ -43,13 +43,6 @@
 			"url": "?SEARCH&DATABASE=COMMENTS_VIEW&EXP=CREATOR_ID%20"
 		},
 		{
-			"id": 7,
-			"label": "Calendar",
-			"db": "M2L_TAG",
-			"icon": "CalendarDays",
-			"url": "?SEARCH&DATABASE=M2L_TAG_SYN&REPORT=WEB_CALENDAR_PROFILE&EXP=TAG_FUNC_P_ID%20"
-		},
-		{
 			"id": 8,
 			"label": "Easy Upload",
 			"db": "",
