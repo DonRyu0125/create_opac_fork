@@ -161,7 +161,7 @@
 	"start": "Start",
 	"end": "End",
 	"no": "No",
-	"confirmCancel": "Are you absolutely sure?",
+	"confirmCancel": "Are you sure?",
 	"yes": "Yes",
 	"attendee": "Attendee"
 }
