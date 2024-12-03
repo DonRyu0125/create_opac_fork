@@ -13,8 +13,6 @@ import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
 import InterativeMap from '@/components/common/interativeMap'
 
-
-
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
 const images = [
@@ -64,6 +62,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 		enableRSVP,
 		enableCategoriesItems,
 		enableRecentAddition,
+		enableMap,
 	} = data
 	const { message } = useConstants()
 	return (
@@ -130,9 +129,11 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 					/>
 				</Section>
 			)}
-			<InterativeMap/>
-
-
+			{enableMap && (
+				<Section heading={`${message.map}`}>
+					<InterativeMap />
+				</Section>
+			)}
 			{enableRecentAddition && (
 				<Section heading="Recent additions">
 					{/* <ParallaxScroll images={images} />; */}

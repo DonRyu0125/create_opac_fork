@@ -162,5 +162,6 @@
 	"no": "Non",
 	"confirmCancel": "En êtes-vous sûr ?",
 	"yes": "Oui",
-	"attendee": "participant"
+	"attendee": "participant",
+	"map":"Carte"
 }
