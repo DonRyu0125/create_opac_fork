@@ -11,6 +11,8 @@ export type SearchURL = string;
 export type BrowseByCategoryTitle = string;
 export type CalendarfilterOption = string;
 export type DatabaseName = string;
+export type DisplayTitle = string;
+export type LinkURL = string;
 export type Thumbnail = string;
 export type Title = string;
 export type Url = string;
@@ -39,6 +41,8 @@ export interface LibraryJson {
   browseByCategoryTitle?: BrowseByCategoryTitle;
   CalendarfilterOption?: CalendarfilterOption;
   database_name?: DatabaseName;
+  displayTitle?: DisplayTitle;
+  linkURL?: LinkURL;
   categoriesItems?: CategoriesItems;
   rsvp?: Rsvp;
   [k: string]: unknown;

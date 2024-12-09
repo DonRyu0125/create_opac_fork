@@ -114,6 +114,8 @@ export type Support = string;
 export type MyAccount = string;
 export type Logout = string;
 export type Welcome = string;
+export type DashboardHome = string;
+export type AccountSettings = string;
 export type FeaturedCollections = string;
 export type Calendar = string;
 export type Online = string;
@@ -157,6 +159,16 @@ export type SurveyLabel = string;
 export type ConfirmationLabel = string;
 export type StepLabel = string;
 export type EventEndedMessage = string;
+export type Hello = string;
+export type Event = string;
+export type Date = string;
+export type Location = string;
+export type Start = string;
+export type End = string;
+export type No = string;
+export type ConfirmCancel = string;
+export type Yes = string;
+export type DetailRecordActionRequest = string;
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -268,6 +280,8 @@ export interface MessageJson {
   myAccount?: MyAccount;
   logout?: Logout;
   welcome?: Welcome;
+  dashboardHome?: DashboardHome;
+  accountSettings?: AccountSettings;
   featuredCollections?: FeaturedCollections;
   calendar?: Calendar;
   online?: Online;
@@ -311,5 +325,15 @@ export interface MessageJson {
   confirmationLabel?: ConfirmationLabel;
   stepLabel?: StepLabel;
   eventEndedMessage?: EventEndedMessage;
+  hello?: Hello;
+  event?: Event;
+  date?: Date;
+  location?: Location;
+  start?: Start;
+  end?: End;
+  no?: No;
+  confirmCancel?: ConfirmCancel;
+  yes?: Yes;
+  detailRecordActionRequest?: DetailRecordActionRequest;
   [k: string]: unknown;
 }

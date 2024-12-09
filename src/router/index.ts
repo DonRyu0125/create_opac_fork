@@ -29,6 +29,8 @@ import Enquiry from '@/page/dashboard/Enquiry'
 import Bookmark from '@/page/bookmark'
 import Crowdsource from '@/page/dashboard/Crowdsource'
 import Calendar from '@/page/dashboard/Calendar'
+import Request from '@/page/request'
+import RequestConfirmed from '@/page/request/RequestConfirmed'
 import AdminCollections from '@/page/admin/Collections'
 import AdminDescription from '@/page/admin/Description'
 import AdminSettings from '@/page/admin/Settings'
@@ -36,6 +38,7 @@ import Register from '@/page/login/Register'
 import ResetPin from '@/page/login/ResetPin'
 import ForgotPin from '@/page/login/ForgotPin'
 import AdminLogin from '@/page/admin/Login'
+
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
@@ -73,6 +76,8 @@ export const ROUTES: TRoute = {
 	bookmarkprofile: BookmarkProfile,
 	crowdsource: Crowdsource,
 	calendar: Calendar,
+	request: Request,
+	requestconfirmed: RequestConfirmed,
 	'forgot-pin': ForgotPin,
 	'reset-pin': ResetPin,
 	'rsvp-cancel': RSVPCancel,
