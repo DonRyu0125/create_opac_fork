@@ -1,0 +1,81 @@
+[
+    
+	{
+		"DATABASE_TYPE": "Museum",
+		"ACCESSION_NUMBER": "2004A.003.0901495324",
+		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
+		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
+		"DECIMAL_LATITUDE": "66.975804",
+		"DECIMAL_LONGITUD": "-95.925563",
+		"ORIGIN_COUNTRY": "Canada",
+		"ORIGIN_PRV_STATE": "ON",
+		"ORIGIN_CITY": "Ottawa"
+	},
+    {
+		"DATABASE_TYPE": "Museum",
+		"ACCESSION_NUMBER": "2004A.003.09057658",
+		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
+		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
+		"DECIMAL_LATITUDE": "65.975802",
+		"DECIMAL_LONGITUD": "-95.925563",
+		"ORIGIN_COUNTRY": "Canada",
+		"ORIGIN_PRV_STATE": "ON",
+		"ORIGIN_CITY": "Ottawa"
+	},
+    {
+		"DATABASE_TYPE": "Museum",
+		"ACCESSION_NUMBER": "1223442004A.003.090",
+		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
+		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
+		"DECIMAL_LATITUDE": "66.985802",
+		"DECIMAL_LONGITUD": "-95.925563",
+		"ORIGIN_COUNTRY": "Canada",
+		"ORIGIN_PRV_STATE": "ON",
+		"ORIGIN_CITY": "Ottawa"
+	},
+	{
+		"DATABASE_TYPE": "Archive",
+		"REFD": "82004A.003.091AA1111",
+		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
+		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
+		"DECIMAL_LATITUDE": "43.018252",
+		"DECIMAL_LONGITUD": "-128.846066",
+		"ORIGIN_COUNTRY": "Canada",
+		"ORIGIN_PRV_STATE": "MB",
+		"ORIGIN_CITY": "Winnipeg"
+	},
+    {
+		"DATABASE_TYPE": "Archive",
+		"REFD": "212004A.003.091VS900H",
+		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
+		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
+		"DECIMAL_LATITUDE": "42.018252",
+		"DECIMAL_LONGITUD": "-128.846066",
+		"ORIGIN_COUNTRY": "Canada",
+		"ORIGIN_PRV_STATE": "MB",
+		"ORIGIN_CITY": "Winnipeg"
+	},
+    {
+		"DATABASE_TYPE": "Archive",
+		"REFD": "202304321A.003.091",
+		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
+		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
+		"DECIMAL_LATITUDE": "41.018252",
+		"DECIMAL_LONGITUD": "-128.846066",
+		"ORIGIN_COUNTRY": "Canada",
+		"ORIGIN_PRV_STATE": "MB",
+		"ORIGIN_CITY": "Winnipeg"
+	},
+    {
+		"DATABASE_TYPE": "Archive",
+		"REFD": "aaaaaaaaaaaaadvvvvasdwqedwqgfewfwq",
+		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
+		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
+		"DECIMAL_LATITUDE": "43.019252",
+		"DECIMAL_LONGITUD": "-128.846066",
+		"ORIGIN_COUNTRY": "Canada",
+		"ORIGIN_PRV_STATE": "MB",
+		"ORIGIN_CITY": "Winnipeg"
+	}
+	
+]

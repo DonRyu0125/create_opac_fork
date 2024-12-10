@@ -100,7 +100,6 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 					</BentoGrid>
 				</Section>
 			)}
-
 			{enableCategoriesItems && (
 				<Section heading={browseByCategoryTitle}>
 					<Slide
