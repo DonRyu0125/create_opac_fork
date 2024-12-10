@@ -9,7 +9,7 @@ type InputWrapperProps = {
 
 export const InputWrapper = ({ children, label, className }: InputWrapperProps) => {
 	return (
-		<div className={cn('my-3 flex flex-col space-y-2', className)}>
+		<div className={cn('my-3 flex flex-col space-y-2 w-full', className)}>
 			<Label className="font-bold">{label}</Label>
 			{children}
 		</div>

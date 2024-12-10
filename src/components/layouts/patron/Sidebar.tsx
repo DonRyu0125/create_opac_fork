@@ -76,7 +76,7 @@ const Sidebar = (props: Props) => {
 								'&M_GVAR1=USER_ID:' +
 								m2l_patron_id
 							}
-							className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
+							className="flex h-9 w-9 items-center justify-center  text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
 							<CalendarDays className="h-5 w-5" />
 						</Link>
 					</TooltipTrigger>

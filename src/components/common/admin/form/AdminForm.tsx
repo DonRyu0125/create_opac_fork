@@ -10,7 +10,13 @@ import { useAdminForm } from '@/hooks/useAdminForm'
 import Home from '@/page/Home'
 import { ReactNode, useState } from 'react'
 
-const AdminForm = ({ children }: { children?: ReactNode }) => {
+const AdminForm = ({
+	children,
+	enablePreview = false,
+}: {
+	children?: ReactNode
+	enablePreview?: boolean
+}) => {
 	const { handleFormSave, formData } = useAdminForm()
 	const [previewMode, setPreviewMode] = useState(false)
 
@@ -22,14 +28,16 @@ const AdminForm = ({ children }: { children?: ReactNode }) => {
 				<Button className="w-28" onClick={() => handleFormSave()}>
 					Save changes
 				</Button>
-				<Button
-					variant="outline"
-					className="w-28"
-					onClick={() => {
-						setPreviewMode(true)
-					}}>
-					Preview
-				</Button>
+				{enablePreview && (
+					<Button
+						variant="outline"
+						className="w-28"
+						onClick={() => {
+							setPreviewMode(true)
+						}}>
+						Preview
+					</Button>
+				)}
 			</div>
 			<Dialog open={previewMode} onOpenChange={setPreviewMode}>
 				<DialogContent className="w-screen max-w-screen-2xl h-[80vh]">

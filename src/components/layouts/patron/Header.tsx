@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import useConstants from '@/hooks/useConstants'
-import { getCookieValue } from '@/lib/utils'
+import { clearCookies, getCookieValue } from '@/lib/utils'
 import { Home, PanelLeft, UserRound } from 'lucide-react'
 type Props = {}
 
@@ -25,17 +25,7 @@ const Header = (props: Props) => {
 	const { message, config } = useConstants()
 	const home_url =
 		'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
-	function deleteCookie(cname: string) {
-		document.cookie = cname + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
-	}
-	const clearCookies = () => {
-		var cookies = document.cookie.split(';')
-		for (var i = 0; i < cookies.length; i++) {
-			//delete each cookie
-			deleteCookie(cookies[i].split('=')[0])
-		}
-		window.location.href = '/'
-	}
+
 	return (
 		<header className="justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 pb-4 shadow-md sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
 			<Sheet>

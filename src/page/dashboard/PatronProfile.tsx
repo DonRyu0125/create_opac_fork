@@ -1,27 +1,24 @@
-'use client'
-
-import { useState, useEffect } from 'react'
+import Link from '@/components/common/Link'
 import PatronLayout from '@/components/layouts/patron'
-import useJSONData from '@/hooks/useJSONData'
 import clientProfileJSON from '@/constants/en/client-profile.json'
+import useConstants from '@/hooks/useConstants'
+import useJSONData from '@/hooks/useJSONData'
 import { getCookieValue, setCookie } from '@/lib/utils'
-import { Card } from '@/components/ui/card'
 import {
-	ShoppingBag,
-	Copyright,
-	Copy,
+	Archive,
 	BookMarked,
-	Lightbulb,
-	MessageCircleMore,
 	CalendarDays,
-	MoreHorizontal,
+	Copy,
+	Copyright,
 	File,
 	Landmark,
 	Library,
-	Archive,
+	Lightbulb,
+	MessageCircleMore,
+	MoreHorizontal,
+	ShoppingBag,
 } from 'lucide-react'
-import useConstants from '@/hooks/useConstants'
-import Link from '@/components/common/Link'
+import { useState } from 'react'
 
 interface StatCardProps {
 	key: number
@@ -102,13 +99,16 @@ export default function PatronProfile() {
 			amber: 'bg-amber-100 text-amber-500',
 			orange: 'bg-orange-100 text-orange-500',
 			pink: 'bg-pink-100 text-pink-500',
-		}
+		} as const
 
 		return (
 			<div className="rounded-lg bg-white p-6 shadow">
 				<div className="flex flex-col gap-2">
 					<div className="flex items-center justify-center gap-2">
-						<div className={`rounded-full p-2 ${colorClasses[color]}`}>{icon}</div>
+						<div
+							className={`rounded-full p-2 ${colorClasses[color as keyof typeof colorClasses]}`}>
+							{icon}
+						</div>
 						<span className="text-sm text-gray-500">{label}</span>
 					</div>
 					<div className="flex items-baseline justify-center">
