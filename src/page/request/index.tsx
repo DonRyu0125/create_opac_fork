@@ -1,69 +1,158 @@
 import useConstants from '@/hooks/useConstants'
+import Layout from '@/components/layouts'
+import useJSONData from '@/hooks/useJSONData'
+import { Button } from '../../components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Archive, CircleEllipsis, Landmark, LibraryBig } from 'lucide-react'
 
-const Login = () => {
-	const { config } = useConstants()
+const Request = () => {
+	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
+	let reqData = records[0].request
+	console.log(reqData)
+	const handleGoBack = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault()
+		window.history.back() 
+	}
 	return (
-		<section className="bg-white">
-			<div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-				<aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
-					<img
-						alt=""
-						src="https://images.unsplash.com/photo-1537202108838-e7072bad1927?q=80&w=1946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-						className="absolute inset-0 h-full w-full object-cover"
-					/>
-				</aside>
-
-				<main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
-					<div className="w-full">
-						<a className="block text-blue-600" href="/">
-							<span className="sr-only">Home</span>
-							Home
-						</a>
-
-						<h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-							Account Login
-						</h1>
-
-						{/* <p className="mt-4 leading-relaxed text-gray-500"></p> */}
-
-						<form
-							method="POST"
-							action="/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144&file=[OPAC]home.html"
-							className="mt-8 grid grid-cols-6 gap-6">
-							<div className="col-span-6">
-								<label
-									htmlFor="Email"
-									className="block text-sm font-medium text-gray-700">
-									Account Number
-								</label>
-								<Input type="text" id="Email" name="PATRON_ID" />
+		<Layout>
+			<section>
+				<div className="bg-gray-50 min-h-screen py-10">
+					<div className="max-w-4xl mx-auto bg-white shadow-md rounded-md p-6">
+						{/* Header */}
+						<div className="flex justify-between items-center border-b pb-4">
+							<h1 className="flex items-center text-xl font-bold"><CircleEllipsis className='mr-2'/>Request Order Confirmation</h1>
+							<div className="text-right">
+								<form
+									method="post"
+									className="m-0"
+									action={reqData.action.replace(/['"]+/g, '')}>
+									<Input
+										type="hidden"
+										name="AUTO_APPROVE"
+										value={reqData.auto_approve}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_PROCESS_DATE"
+										value={reqData.req_process_date}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_STATUS"
+										value={reqData.req_status}
+									/>
+									<Input
+										type="hidden"
+										name="REC_STATUS"
+										value={reqData.rec_status}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_DB_NAME"
+										value={reqData.req_db_name}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_DB_RECID"
+										value={reqData.req_db_recid}
+									/>
+									<Input
+										type="hidden"
+										name="TIME_NEEDED"
+										value={reqData.time_needed}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_DB_LINK2"
+										value={reqData.req_db_link2}
+									/>
+									<Input
+										type="hidden"
+										name="METHOD_REQUEST"
+										value={reqData.method_request}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_TOPIC"
+										value={reqData.req_topic}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_LOC_CODE"
+										value={reqData.req_loc_code}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_APPL_NAME"
+										value={reqData.req_appl_name}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_TITLE"
+										value={reqData.req_title}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_ITEM_ID"
+										value={reqData.req_item_id}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_ITEM_TITLE"
+										value={reqData.req_item_title}
+									/>
+									<Input
+										type="hidden"
+										name="REQ_QUEUE"
+										value={reqData.req_queue}
+									/>
+									<Button
+										className="bg-opac-darkblue rounded mx-1 hover:bg-opac-darkblue"
+										type="submit"
+										name="Submit"
+										variant="default">
+										Place Request
+									</Button>
+									<Button
+										className="bg-opac-darkblue rounded mx-1 hover:bg-opac-darkblue"
+										type="submit"
+										name="Submit2"
+										variant="default"
+										onClick={handleGoBack}>
+										Cancel Request
+									</Button>
+								</form>
 							</div>
+						</div>
+						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
+							<p>
+								You have requested to view <b>{reqData.req_item_title}</b> with the
+								reference number: <b>{reqData.req_item_id}</b>
+							</p>
+							<p>Your request will be fulfilled in three business days.</p>
+							<p>Please confirm whether you would like to proceed with this request.</p>
+						</div>
 
-							<div className="col-span-6 sm:col-span-6">
-								<label
-									htmlFor="Password"
-									className="block text-sm font-medium text-gray-700">
-									Password
-								</label>
-								<Input type="password" id="Password" name="PATRON_PID" />
+						<div>
+							<div className="border p-4 rounded">
+								{reqData.req_db_name == 'DESCRIPTION_WEB' ? (
+									<div className='flex flex-row items-center'><Archive className='mr-2'/><h1 className="text-xl font-bold">Archives</h1></div>
+								) : reqData.req_db_name == 'COLLECTIONS_WEB' ? (
+									<div className='flex flex-row items-center'><Landmark className='mr-2'/><h1 className="text-xl font-bold">Museum</h1></div>
+								) : reqData.req_db_name == 'BIBLIO_WEB' ? (
+									<div className='flex flex-row items-center'><LibraryBig className='mr-2'/><h1 className="text-xl font-bold">Library</h1></div>
+								) : (
+									''
+								)}
+								<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
+								<p className="text-sm text-gray-600">{reqData.req_item_id}</p>
 							</div>
-
-							<div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-								<Button
-									className="bg-opac-darkblue"
-									type="submit"
-									variant="default">
-									Login
-								</Button>
-							</div>
-						</form>
+						</div>
 					</div>
-				</main>
-			</div>
-		</section>
+				</div>
+			</section>
+		</Layout>
 	)
 }
 
-export default Login
+export default Request

@@ -22,13 +22,15 @@ import AdminMessage from '@/page/admin/Message'
 import AdminStyles from '@/page/admin/Styles'
 import PatronProfile from '@/page/dashboard/PatronProfile'
 import PatronInfo from '@/page/dashboard/PatronInfo'
-import Orders from '@/page/Orders'
-import Copyright from '@/page/Copyright'
-import Reproductions from '@/page/Reproductions'
+import Orders from '@/page/dashboard/Orders'
+import Copyright from '@/page/dashboard/Copyright'
+import Reproductions from '@/page/dashboard/Reproductions'
 import Enquiry from '@/page/dashboard/Enquiry'
 import Bookmark from '@/page/bookmark'
-import Crowdsource from '@/page/Crowdsource'
+import Crowdsource from '@/page/dashboard/Crowdsource'
 import Calendar from '@/page/dashboard/Calendar'
+import Request from '@/page/request'
+import RequestConfirmed from '@/page/request/RequestConfirmed'
 import AdminCollections from '@/page/admin/Collections'
 import AdminDescription from '@/page/admin/Description'
 import AdminSettings from '@/page/admin/Settings'
@@ -36,6 +38,7 @@ import Register from '@/page/login/Register'
 import ResetPin from '@/page/login/ResetPin'
 import ForgotPin from '@/page/login/ForgotPin'
 import AdminLogin from '@/page/admin/Login'
+
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
@@ -73,6 +76,8 @@ export const ROUTES: TRoute = {
 	bookmarkprofile: BookmarkProfile,
 	crowdsource: Crowdsource,
 	calendar: Calendar,
+	request: Request,
+	requestconfirmed: RequestConfirmed,
 	'forgot-pin': ForgotPin,
 	'reset-pin': ResetPin,
 	'rsvp-cancel': RSVPCancel,

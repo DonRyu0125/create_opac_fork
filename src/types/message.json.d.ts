@@ -157,6 +157,17 @@ export type SurveyLabel = string;
 export type ConfirmationLabel = string;
 export type StepLabel = string;
 export type EventEndedMessage = string;
+export type Hello = string;
+export type Event = string;
+export type Date = string;
+export type Location = string;
+export type Start = string;
+export type End = string;
+export type No = string;
+export type ConfirmCancel = string;
+export type Yes = string;
+export type DetailRecordActionRequest = string;
+
 
 export interface MessageJson {
   searchPlaceholder?: SearchPlaceholder;
@@ -311,5 +322,15 @@ export interface MessageJson {
   confirmationLabel?: ConfirmationLabel;
   stepLabel?: StepLabel;
   eventEndedMessage?: EventEndedMessage;
+  hello?: Hello;
+  event?: Event;
+  date?: Date;
+  location?: Location;
+  start?: Start;
+  end?: End;
+  no?: No;
+  confirmCancel?: ConfirmCancel;
+  yes?: Yes;
+  detailRecordActionRequest?: DetailRecordActionRequest;
   [k: string]: unknown;
 }
