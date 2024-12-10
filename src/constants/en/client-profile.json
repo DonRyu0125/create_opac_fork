@@ -5,21 +5,21 @@
 			"label": "Orders",
 			"db": "DOC_REQUEST",
 			"icon": "ShoppingBag",
-			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_ORDERS_PROFILE&EXP=REQ_PATRON_ID%20"
+			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_ORDERS_PROFILE&NEW=Y&EXP=REQ_PATRON_ID%20"
 		},
 		{
 			"id": 2,
 			"label": "Copyright Requests",
 			"db": "DOC_REQUEST",
 			"icon": "Copyright",
-			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_COPY_PROFILE&EXP=REQ_TOPIC%20Copyright%20Services%20AND%20REQ_PATRON_ID%20"
+			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_COPY_PROFILE&NEW=Y&EXP=REQ_TOPIC%20Copyright%20Services%20AND%20REQ_PATRON_ID%20"
 		},
 		{
 			"id": 3,
 			"label": "Reproductions",
 			"db": "DOC_REQUEST",
 			"icon": "Copy",
-			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_REPRODUCTION_PROFILE&EXP=REQ_TOPIC%20Obtaining%20Reproductions%20AND%20REQ_PATRON_ID%20"
+			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_REPRODUCTION_PROFILE&NEW=Y&EXP=REQ_TOPIC%20Obtaining%20Reproductions%20AND%20REQ_PATRON_ID%20"
 		},
 		{
 			"id": 4,
@@ -33,21 +33,14 @@
 			"label": "Enquiries",
 			"db": "ENQUIRIES_VIEW",
 			"icon": "Lightbulb",
-			"url": "?SEARCH&DATABASE=ENQUIRIES_VIEW&EXP=ENQ_USER_ID%20"
+			"url": "?SEARCH&DATABASE=ENQUIRIES_VIEW&NEW=Y&EXP=ENQ_USER_ID%20"
 		},
 		{
 			"id": 6,
 			"label": "Crowdsource",
 			"db": "COMMENTS_VIEW",
 			"icon": "MessageCircleMore",
-			"url": "?SEARCH&DATABASE=COMMENTS_VIEW&EXP=CREATOR_ID%20"
-		},
-		{
-			"id": 7,
-			"label": "Calendar",
-			"db": "M2L_TAG",
-			"icon": "CalendarDays",
-			"url": "?SEARCH&DATABASE=M2L_TAG_SYN&REPORT=WEB_CALENDAR_PROFILE&EXP=TAG_FUNC_P_ID%20"
+			"url": "?SEARCH&DATABASE=COMMENTS_VIEW&NEW=Y&EXP=CREATOR_ID%20"
 		},
 		{
 			"id": 8,

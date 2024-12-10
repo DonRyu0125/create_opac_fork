@@ -161,5 +161,6 @@
 	"no": "No",
 	"confirmCancel": "Are you absolutely sure?",
 	"yes": "Yes",
-	"attendee": "Attendee"
+	"attendee": "Attendee",
+	"detailRecordActionRequest": "Request"
 }

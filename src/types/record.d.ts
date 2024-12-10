@@ -25,29 +25,54 @@ export interface BookmarkCheckBoxData {
 export interface FieldData<T extends string> {
 	[key: string]: string | number | DBFields<T> | FieldData[]
 }
+export interface RequestData {
+	action: string
+	auto_approve: string
+	item_req_time: string
+	method_request: string
+	rec_status: string
+	req_appl_name: string
+	req_back_to_record: string
+	req_db_link2: string
+	req_db_name: string
+	req_db_recid: string
+	req_item_id: string
+	req_item_title: string
+	req_loc_code: string
+	req_process_date: string
+	req_queue: string
+	req_status: string
+	req_title: string
+	req_topic: string
+	sentence_1: string
+	sentence_2: string
+	time_needed: string
+}
 export interface Record {
-	email?: any
-	first_name: string
-	skip_n_stop_record?:string // for client registration
-	save_n_stop_record?: string // for client registration 
-	media?: Media
-	is_bookmarked: string
+	action: string
+	biblio_count: string
+	bookmark_count: string
+	calendar_count: string
+	collection_count: string
+	copyright_count: string
+	crowdsource_count: string
 	database_name: string
+	description_count: string
+	email?: any
+	enquiries_count: string
+	first_name: string
+	full_name: string
+	input?: BookmarkCheckBoxData
+	is_bookmarked: string
+	link_dbname?: string
+	media?: Media
+	orders_count: string
 	record_link: string
 	record: FieldData
-	input?: BookmarkCheckBoxData
-	link_dbname?: string
-	full_name: string
-	description_count: string
-	collection_count: string
-	biblio_count: string
-	orders_count: string
-	copyright_count: string
 	reproductions_count: string
-	bookmark_count: string
-	enquiries_count: string
-	crowdsource_count: string
-	calendar_count: string
+	request: RequestData
+	save_n_stop_record?: string // for client registration 
+	skip_n_stop_record?:string // for client registration
 }
 
 export type MediaType = 'im_access_link' | 'vd_access_link' | 'ad_access_link' | 'tx_access_link'

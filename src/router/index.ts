@@ -8,7 +8,7 @@ import Summary from '@/page/summary'
 import RSVPCancel from '@/page/RSVP/Cancellation'
 import RSVPConfirm from '@/page/RSVP/Confirmation'
 import Login from '@/page/login'
-import BookmarkProfile from '@/page/BookmarkProfile'
+import BookmarkProfile from '@/page/dashboard/BookmarkProfile'
 import NoBookmarkRecord from '@/page/NoBookmarkRecord'
 import Museum from '@/page/Museum'
 import Archives from '@/page/Archives'
@@ -20,15 +20,17 @@ import AdminHome from '@/page/admin/Home'
 import AdminRSVP from '@/page/admin/RSVP'
 import AdminMessage from '@/page/admin/Message'
 import AdminStyles from '@/page/admin/Styles'
-import PatronProfile from '@/page/PatronProfile'
-import PatronInfo from '@/page/PatronInfo'
-import Orders from '@/page/Orders'
-import Copyright from '@/page/Copyright'
-import Reproductions from '@/page/Reproductions'
-import Enquiry from '@/page/Enquiry'
+import PatronProfile from '@/page/dashboard/PatronProfile'
+import PatronInfo from '@/page/dashboard/PatronInfo'
+import Orders from '@/page/dashboard/Orders'
+import Copyright from '@/page/dashboard/Copyright'
+import Reproductions from '@/page/dashboard/Reproductions'
+import Enquiry from '@/page/dashboard/Enquiry'
 import Bookmark from '@/page/bookmark'
-import Crowdsource from '@/page/Crowdsource'
-import Calendar from '@/page/Calendar'
+import Crowdsource from '@/page/dashboard/Crowdsource'
+import Calendar from '@/page/dashboard/Calendar'
+import Request from '@/page/request'
+import RequestConfirmed from '@/page/request/RequestConfirmed'
 import AdminCollections from '@/page/admin/Collections'
 import AdminDescription from '@/page/admin/Description'
 import AdminSettings from '@/page/admin/Settings'
@@ -73,6 +75,8 @@ export const ROUTES: TRoute = {
 	bookmarkprofile: BookmarkProfile,
 	crowdsource: Crowdsource,
 	calendar: Calendar,
+	request: Request,
+	requestconfirmed: RequestConfirmed,
 	'forgot-pin': ForgotPin,
 	'reset-pin': ResetPin,
 	'rsvp-cancel': RSVPCancel,

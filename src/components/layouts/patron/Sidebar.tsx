@@ -42,7 +42,7 @@ const Sidebar = (props: Props) => {
 						<TooltipTrigger asChild>
 							<Link
 								href={`${getCookieValue('HOME_SESSID') + item.url + (item.label === 'Bookmarks' || item.label === 'Easy Load' ? '' : m2l_patron_id)}`}
-								className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
+								className="flex h-9 w-9 items-center justify-center  text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
 								{item.label === 'Orders' ? (
 									<ShoppingBag className="h-5 w-5" />
 								) : item.label === 'Copyright Requests' ? (
@@ -55,8 +55,6 @@ const Sidebar = (props: Props) => {
 									<Lightbulb className="h-5 w-5" />
 								) : item.label === 'Crowdsource' ? (
 									<MessageCircleMore className="h-5 w-5" />
-								) : item.label === 'Calendar' ? (
-									<CalendarDays className="h-5 w-5" />
 								) : item.label === 'Easy Upload' ? (
 									<Upload className="h-5 w-5" />
 								) : (
@@ -68,6 +66,21 @@ const Sidebar = (props: Props) => {
 						<TooltipContent side="right">{item.label}</TooltipContent>
 					</Tooltip>
 				))}
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
+							href={
+								getCookieValue('HOME_SESSID') +
+								'?SEARCH&DATABASE=M2L_TAG_SYN&REPORT=WEB_CALENDAR_PROFILE&EXP=TAG_FUNC_P_ID%20' +
+								m2l_patron_id +
+								'&M_GVAR1=USER_ID:' +
+								m2l_patron_id
+							}
+							className="flex h-9 w-9 items-center justify-center  text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
+							<CalendarDays className="h-5 w-5" />
+						</Link>
+					</TooltipTrigger>
+				</Tooltip>
 			</nav>
 			<nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
 				<Tooltip>
