@@ -14,7 +14,7 @@ import CheckboxWithLabel from '../CheckboxWithLabel'
 import axios from 'axios'
 import X2JS from 'x2js'
 import Spinner from '../event-calendar/Spinner'
-import markersData from './dummy.json'
+import markersData from './dummy02.json'
 
 const DB_TYPE_MAP = {
 	library: 'Library',
@@ -116,6 +116,7 @@ const InteractiveMap: React.FC = () => {
 	const [selectedCities, setSelectedCities] = useState<string[]>([])
 
 	const [ckTypes, setCkTypes] = useState<any>({
+		databases: [],
 		countries: [],
 		provinces: [],
 		cities: [],
@@ -125,19 +126,35 @@ const InteractiveMap: React.FC = () => {
 	}, [])
 
 	useEffect(() => {
-		if (currentFilter.length > 0) {
-			const nData = allData.filter(
-				(item: any) =>
-					currentFilter.includes(item.DATABASE_TYPE) ||
-					currentFilter.includes(item.ORIGIN_COUNTRY) ||
-					currentFilter.includes(item.ORIGIN_PRV_STATE) ||
-					currentFilter.includes(item.ORIGIN_CITY)
-			)
+		if (
+			selectedDatabases.length > 0 ||
+			selectedCountries.length > 0 ||
+			selectedProvinces.length > 0 ||
+			selectedCities.length > 0
+		) {
+			const nData = allData.filter((item: any) => {
+				const matchesDatabase =
+					selectedDatabases.length > 0
+						? selectedDatabases.includes(item.DATABASE_TYPE)
+						: true
+				const matchesCountry =
+					selectedCountries.length > 0
+						? selectedCountries.includes(item.ORIGIN_COUNTRY)
+						: true
+				const matchesProvince =
+					selectedProvinces.length > 0
+						? selectedProvinces.includes(item.ORIGIN_PRV_STATE)
+						: true
+				const matchesCity =
+					selectedCities.length > 0 ? selectedCities.includes(item.ORIGIN_CITY) : true
+
+				return matchesDatabase && matchesCountry && matchesProvince && matchesCity
+			})
 			setFilteredData(nData)
 		} else {
 			setFilteredData(allData)
 		}
-	}, [currentFilter, allData])
+	}, [selectedDatabases, selectedCountries, selectedProvinces, selectedCities, allData])
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (!e.target.id) return
@@ -153,27 +170,27 @@ const InteractiveMap: React.FC = () => {
 
 	const handleDatabaseChange = (database: string) => {
 		setSelectedDatabases((prev) =>
-		  prev.includes(database) ? prev.filter((d) => d !== database) : [...prev, database]
-		);
-	  };
-	  
-	  const handleCountryChange = (country: string) => {
+			prev.includes(database) ? prev.filter((d) => d !== database) : [...prev, database]
+		)
+	}
+
+	const handleCountryChange = (country: string) => {
 		setSelectedCountries((prev) =>
-		  prev.includes(country) ? prev.filter((c) => c !== country) : [...prev, country]
-		);
-	  };
-	  
-	  const handleProvinceChange = (province: string) => {
+			prev.includes(country) ? prev.filter((c) => c !== country) : [...prev, country]
+		)
+	}
+
+	const handleProvinceChange = (province: string) => {
 		setSelectedProvinces((prev) =>
-		  prev.includes(province) ? prev.filter((p) => p !== province) : [...prev, province]
-		);
-	  };
-	  
-	  const handleCityChange = (city: string) => {
+			prev.includes(province) ? prev.filter((p) => p !== province) : [...prev, province]
+		)
+	}
+
+	const handleCityChange = (city: string) => {
 		setSelectedCities((prev) =>
-		  prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city]
-		);
-	  };
+			prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city]
+		)
+	}
 
 	const fetch_get = async () => {
 		// setLoading(true)
@@ -197,12 +214,22 @@ const InteractiveMap: React.FC = () => {
 		// })
 		setAllData(markersData)
 		setFilteredData(markersData)
+		const databases = Array.from(new Set(markersData.map((item) => item.DATABASE_TYPE)))
 		const countries = Array.from(new Set(markersData.map((item) => item.ORIGIN_COUNTRY)))
 		const provinces = Array.from(new Set(markersData.map((item) => item.ORIGIN_PRV_STATE)))
 		const cities = Array.from(new Set(markersData.map((item) => item.ORIGIN_CITY)))
-		setCkTypes({ countries, provinces, cities })
+		setCkTypes({ databases, countries, provinces, cities })
 		// setLoading(false)
 	}
+
+	console.log('selectedCountries', selectedCountries)
+	console.log('selectedProvinces', selectedProvinces)
+	console.log('selectedCities', selectedCities)
+
+	// const getUniqueValues = (field: string) => {
+	// 	const uniqueValues = Array.from(new Set(filteredData.map((item:any) => item[field])))
+	// 	return uniqueValues
+	// }
 
 	return (
 		<div className="w-full relative flex">
@@ -216,63 +243,53 @@ const InteractiveMap: React.FC = () => {
 				<div className="flex flex-col space-y-4 max-h-[87vh] ">
 					<CollapseList title={'Database'}>
 						<div className="space-y-3 border-t p-4">
-							<CheckboxWithLabel
-								label={DB_TYPE_MAP.archive}
-								callback={handleChange}
-								checked={selectType[DB_TYPE_MAP.archive] === 1}
-							/>
-							<CheckboxWithLabel
-								label={DB_TYPE_MAP.library}
-								callback={handleChange}
-								checked={selectType[DB_TYPE_MAP.library] === 1}
-							/>
-							<CheckboxWithLabel
-								label={DB_TYPE_MAP.museum}
-								callback={handleChange}
-								checked={selectType[DB_TYPE_MAP.museum] === 1}
-							/>
+							{ckTypes?.databases.map((item: string, key: number) => (
+								<CheckboxWithLabel
+									key={key}
+									callback={() => handleDatabaseChange(item)}
+									label={item}
+									checked={selectedCountries.includes(item)}
+								/>
+							))}
+
 						</div>
 					</CollapseList>
 					<CollapseList title={'Country'} expand={true}>
-						<div className="space-y-3 border-t p-4 ">
-							{ckTypes?.countries.map((item: string, key: number) => {
-								return (
-									<CheckboxWithLabel
-										key={key}
-										callback={handleChange}
-										label={item}
-										checked={selectType[item] === 1}
-									/>
-								)
-							})}
+						<div className="space-y-3 border-t p-4">
+							{ckTypes?.countries.map((item: string, key: number) => (
+								<CheckboxWithLabel
+									key={key}
+									callback={() => handleCountryChange(item)}
+									label={item}
+									checked={selectedCountries.includes(item)}
+								/>
+							))}
 						</div>
 					</CollapseList>
+
 					<CollapseList title={'Province'} expand={true}>
-						<div className="space-y-3 border-t p-4 ">
-							{ckTypes?.provinces.map((item: string, key: number) => {
-								return (
-									<CheckboxWithLabel
-										key={key}
-										callback={handleChange}
-										label={item}
-										checked={selectType[item] === 1}
-									/>
-								)
-							})}
+						<div className="space-y-3 border-t p-4">
+							{ckTypes?.provinces.map((item: string, key: number) => (
+								<CheckboxWithLabel
+									key={key}
+									callback={() => handleProvinceChange(item)}
+									label={item}
+									checked={selectedProvinces.includes(item)}
+								/>
+							))}
 						</div>
 					</CollapseList>
+
 					<CollapseList title={'City'} expand={true}>
 						<div className="space-y-3 border-t p-4">
-							{ckTypes?.cities.map((item: string, key: number) => {
-								return (
-									<CheckboxWithLabel
-										key={key}
-										callback={handleChange}
-										label={item}
-										checked={selectType[item] === 1}
-									/>
-								)
-							})}
+							{ckTypes?.cities.map((item: string, key: number) => (
+								<CheckboxWithLabel
+									key={key}
+									callback={() => handleCityChange(item)}
+									label={item}
+									checked={selectedCities.includes(item)}
+								/>
+							))}
 						</div>
 					</CollapseList>
 				</div>
@@ -314,9 +331,8 @@ const InteractiveMap: React.FC = () => {
 							/>
 						</LayersControl.BaseLayer>
 					</LayersControl>
-					{/* @ts-ignore */}
 					<MarkerClusterGroup
-						key={`L${filteredData.length}`}
+						key={`L${filteredData.filter((item) => item.DATABASE_TYPE === DB_TYPE_MAP.library)}`}
 						spiderfyDistanceMultiplier={2}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
@@ -344,9 +360,8 @@ const InteractiveMap: React.FC = () => {
 							}
 						})}
 					</MarkerClusterGroup>
-					{/* @ts-ignore */}
 					<MarkerClusterGroup
-						key={`A${filteredData.length}`}
+						key={`A${filteredData.filter((item) => item.DATABASE_TYPE === DB_TYPE_MAP.archive)}`}
 						spiderfyDistanceMultiplier={2}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
@@ -374,9 +389,8 @@ const InteractiveMap: React.FC = () => {
 							}
 						})}
 					</MarkerClusterGroup>
-					{/* @ts-ignore */}
 					<MarkerClusterGroup
-						key={`M${filteredData.length}`}
+						key={`M${filteredData.filter((item) => item.DATABASE_TYPE === DB_TYPE_MAP.museum)}`}
 						spiderfyDistanceMultiplier={2}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>

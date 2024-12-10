@@ -1,81 +1,113 @@
 [
-    
-	{
-		"DATABASE_TYPE": "Museum",
-		"ACCESSION_NUMBER": "2004A.003.0901495324",
-		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
-		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
-		"DECIMAL_LATITUDE": "66.975804",
-		"DECIMAL_LONGITUD": "-95.925563",
-		"ORIGIN_COUNTRY": "Canada",
-		"ORIGIN_PRV_STATE": "ON",
-		"ORIGIN_CITY": "Ottawa"
-	},
     {
-		"DATABASE_TYPE": "Museum",
-		"ACCESSION_NUMBER": "2004A.003.09057658",
-		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
-		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
-		"DECIMAL_LATITUDE": "65.975802",
-		"DECIMAL_LONGITUD": "-95.925563",
-		"ORIGIN_COUNTRY": "Canada",
-		"ORIGIN_PRV_STATE": "ON",
-		"ORIGIN_CITY": "Ottawa"
-	},
+      "DATABASE_TYPE": "Museum",
+      "ACCESSION_NUMBER": "2004A.003.0901495324",
+      "DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued by the Priory of Canada.",
+      "LEGAL_TITLE": "Booklet - Pocket Guide to First Aid",
+      "DECIMAL_LATITUDE": "66.975804",
+      "DECIMAL_LONGITUD": "-95.925563",
+      "ORIGIN_COUNTRY": "Canada",
+      "ORIGIN_PRV_STATE": "ON",
+      "ORIGIN_CITY": "Ottawa"
+    },
     {
-		"DATABASE_TYPE": "Museum",
-		"ACCESSION_NUMBER": "1223442004A.003.090",
-		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
-		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
-		"DECIMAL_LATITUDE": "66.985802",
-		"DECIMAL_LONGITUD": "-95.925563",
-		"ORIGIN_COUNTRY": "Canada",
-		"ORIGIN_PRV_STATE": "ON",
-		"ORIGIN_CITY": "Ottawa"
-	},
-	{
-		"DATABASE_TYPE": "Archive",
-		"REFD": "82004A.003.091AA1111",
-		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
-		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
-		"DECIMAL_LATITUDE": "43.018252",
-		"DECIMAL_LONGITUD": "-128.846066",
-		"ORIGIN_COUNTRY": "Canada",
-		"ORIGIN_PRV_STATE": "MB",
-		"ORIGIN_CITY": "Winnipeg"
-	},
+      "DATABASE_TYPE": "Museum",
+      "ACCESSION_NUMBER": "2006B.004.1230984501",
+      "DESCRIPTION": "Historical artifact depicting indigenous culture.",
+      "LEGAL_TITLE": "Carving - Indigenous Totem",
+      "DECIMAL_LATITUDE": "48.428421",
+      "DECIMAL_LONGITUD": "-123.365644",
+      "ORIGIN_COUNTRY": "Canada",
+      "ORIGIN_PRV_STATE": "BC",
+      "ORIGIN_CITY": "Victoria"
+    },
     {
-		"DATABASE_TYPE": "Archive",
-		"REFD": "212004A.003.091VS900H",
-		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
-		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
-		"DECIMAL_LATITUDE": "42.018252",
-		"DECIMAL_LONGITUD": "-128.846066",
-		"ORIGIN_COUNTRY": "Canada",
-		"ORIGIN_PRV_STATE": "MB",
-		"ORIGIN_CITY": "Winnipeg"
-	},
+      "DATABASE_TYPE": "Library",
+      "ACCESSION_NUMBER": "2010C.005.8945012394",
+      "DESCRIPTION": "First edition of 'Winds of Change' by a notable author.",
+      "LEGAL_TITLE": "Book - Winds of Change",
+      "DECIMAL_LATITUDE": "41.878003",
+      "DECIMAL_LONGITUD": "-93.097702",
+      "ORIGIN_COUNTRY": "USA",
+      "ORIGIN_PRV_STATE": "IA",
+      "ORIGIN_CITY": "Des Moines"
+    },
     {
-		"DATABASE_TYPE": "Archive",
-		"REFD": "202304321A.003.091",
-		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
-		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
-		"DECIMAL_LATITUDE": "41.018252",
-		"DECIMAL_LONGITUD": "-128.846066",
-		"ORIGIN_COUNTRY": "Canada",
-		"ORIGIN_PRV_STATE": "MB",
-		"ORIGIN_CITY": "Winnipeg"
-	},
+      "DATABASE_TYPE": "Library",
+      "ACCESSION_NUMBER": "2008D.006.0038945120",
+      "DESCRIPTION": "Original map of the gold rush era in California.",
+      "LEGAL_TITLE": "Map - California Gold Rush",
+      "DECIMAL_LATITUDE": "34.052235",
+      "DECIMAL_LONGITUD": "-118.243683",
+      "ORIGIN_COUNTRY": "USA",
+      "ORIGIN_PRV_STATE": "CA",
+      "ORIGIN_CITY": "Los Angeles"
+    },
     {
-		"DATABASE_TYPE": "Archive",
-		"REFD": "aaaaaaaaaaaaadvvvvasdwqedwqgfewfwq",
-		"DESCRIPTION": "Pocket Guide to First Aid (Vade-Mecum du Secouriste). Issued and copyrighted by the Priory of Canada. (fifth edition- Issued December, 1950) This booklet was created as a guide to providing first aid to injured. Little blue book.",
-		"LEGAL_TITLE": "Booklet - Pocket Guide to First Aid (Vade-Mecum du Secouriste)",
-		"DECIMAL_LATITUDE": "43.019252",
-		"DECIMAL_LONGITUD": "-128.846066",
-		"ORIGIN_COUNTRY": "Canada",
-		"ORIGIN_PRV_STATE": "MB",
-		"ORIGIN_CITY": "Winnipeg"
-	}
-	
-]
+      "DATABASE_TYPE": "Archive",
+      "ACCESSION_NUMBER": "2015E.007.1234500983",
+      "DESCRIPTION": "Letter from the Civil War era.",
+      "LEGAL_TITLE": "Document - Civil War Letter",
+      "DECIMAL_LATITUDE": "38.907192",
+      "DECIMAL_LONGITUD": "-77.036873",
+      "ORIGIN_COUNTRY": "USA",
+      "ORIGIN_PRV_STATE": "DC",
+      "ORIGIN_CITY": "Washington"
+    },
+    {
+      "DATABASE_TYPE": "Museum",
+      "ACCESSION_NUMBER": "2020F.008.7890123456",
+      "DESCRIPTION": "Ancient pottery from the Mayan civilization.",
+      "LEGAL_TITLE": "Artifact - Mayan Pottery",
+      "DECIMAL_LATITUDE": "17.251011",
+      "DECIMAL_LONGITUD": "-88.759020",
+      "ORIGIN_COUNTRY": "Belize",
+      "ORIGIN_PRV_STATE": "Belize District",
+      "ORIGIN_CITY": "Belize City"
+    },
+    {
+      "DATABASE_TYPE": "Library",
+      "ACCESSION_NUMBER": "2019G.009.1029384756",
+      "DESCRIPTION": "Handwritten diary from the Victorian era.",
+      "LEGAL_TITLE": "Diary - Victorian Era",
+      "DECIMAL_LATITUDE": "51.509865",
+      "DECIMAL_LONGITUD": "-0.118092",
+      "ORIGIN_COUNTRY": "UK",
+      "ORIGIN_PRV_STATE": "England",
+      "ORIGIN_CITY": "London"
+    },
+    {
+      "DATABASE_TYPE": "Archive",
+      "ACCESSION_NUMBER": "2022H.010.5647382910",
+      "DESCRIPTION": "Photograph from World War II.",
+      "LEGAL_TITLE": "Photograph - WWII",
+      "DECIMAL_LATITUDE": "48.856613",
+      "DECIMAL_LONGITUD": "2.352222",
+      "ORIGIN_COUNTRY": "France",
+      "ORIGIN_PRV_STATE": "Île-de-France",
+      "ORIGIN_CITY": "Paris"
+    },
+    {
+      "DATABASE_TYPE": "Museum",
+      "ACCESSION_NUMBER": "2002I.011.9876543210",
+      "DESCRIPTION": "Bronze statue from the Roman Empire.",
+      "LEGAL_TITLE": "Artifact - Roman Statue",
+      "DECIMAL_LATITUDE": "41.902784",
+      "DECIMAL_LONGITUD": "12.496366",
+      "ORIGIN_COUNTRY": "Italy",
+      "ORIGIN_PRV_STATE": "Lazio",
+      "ORIGIN_CITY": "Rome"
+    },
+    {
+      "DATABASE_TYPE": "Library",
+      "ACCESSION_NUMBER": "2017J.012.0192837465",
+      "DESCRIPTION": "Ancient scroll from the Han dynasty.",
+      "LEGAL_TITLE": "Scroll - Han Dynasty",
+      "DECIMAL_LATITUDE": "39.904202",
+      "DECIMAL_LONGITUD": "116.407394",
+      "ORIGIN_COUNTRY": "China",
+      "ORIGIN_PRV_STATE": "Beijing",
+      "ORIGIN_CITY": "Beijing"
+    }
+  ]
+  
