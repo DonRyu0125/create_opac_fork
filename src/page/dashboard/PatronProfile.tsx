@@ -188,26 +188,26 @@ export default function PatronProfile() {
 									<div className="p-4">
 										<div className="flex items-center justify-between text-sm text-gray-500">
 											<div className="flex items-center gap-2">
-												{item == home ? (
+												{item === home ? (
 													<File className="w-5 h-5" />
-												) : item == archives ? (
+												) : item === archives ? (
 													<Archive className="w-5 h-5" />
-												) : item == museum ? (
+												) : item === museum ? (
 													<Landmark className="w-5 h-5" />
-												) : item == library ? (
+												) : item === library ? (
 													<Library className="w-5 h-5" />
 												) : (
 													''
 												)}
-												{item == home
+												{item === home
 													? Number(records[0].description_count) +
 														Number(records[0].collection_count) +
 														Number(records[0].biblio_count)
-													: item == archives
+													: item === archives
 														? records[0].description_count
-														: item == museum
+														: item === museum
 															? records[0].collection_count
-															: item == library
+															: item === library
 																? records[0].biblio_count
 																: ''}
 											</div>

@@ -10,8 +10,8 @@ import TooltipButton from '@/components/common/TooltipButton'
 import { getCookieValue, getHomeSessionID } from '@/lib/utils'
 import axios from 'axios'
 import { Input } from '@/components/ui/input'
-	// State for modal visibility
-	
+// State for modal visibility
+
 const DetailRecordAction = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 	const formRef = useRef<HTMLFormElement | null>(null)
@@ -34,15 +34,14 @@ const DetailRecordAction = () => {
 	// REQ_ITEM_ID:    requestData.req_item_id,
 	// REQ_ITEM_TITLE: requestData.req_item_title
 
-
 	const handleSubmit = () => {
-		if(checkLoggedInToRequest()){
+		if (checkLoggedInToRequest()) {
 			if (formRef.current) {
-			formRef.current.submit()
+				formRef.current.submit()
 			}
 		}
 	}
-	
+
 	const goToURL = (url: string | null) => {
 		if (url) {
 			window.location.href = url
@@ -50,33 +49,37 @@ const DetailRecordAction = () => {
 	}
 
 	const checkRecordHasMandatoryDataToRequest = () => {
-		const checkRecord = record.record;
-		const recordRequestBool = "Yes" as string
-		let requestable = false as boolean;
-		(checkRecord?.a_avail === recordRequestBool || checkRecord?.m_avail === recordRequestBool || checkRecord?.l_avail === recordRequestBool) ? requestable = true : requestable = false;
+		const checkRecord = record.record
+		const recordRequestBool = 'Yes' as string
+		let requestable = false as boolean
+		checkRecord?.a_avail === recordRequestBool ||
+		checkRecord?.m_avail === recordRequestBool ||
+		checkRecord?.l_avail === recordRequestBool
+			? (requestable = true)
+			: (requestable = false)
 		return requestable
 	}
 
 	const checkIfCurrentClientRequestedThisRecord = () => {
-		const recordRequested = record.record?.is_requested_by_client;
-		let currentClientRequested = false;
-		if (recordRequested == "Current"){
-			currentClientRequested = true;
+		const recordRequested = record.record?.is_requested_by_client
+		let currentClientRequested = false
+		if (recordRequested === 'Current') {
+			currentClientRequested = true
 		}
-		return currentClientRequested;
+		return currentClientRequested
 	}
 
 	const checkLoggedInToRequest = () => {
 		let isLoggedIn = false
-		const patronID = getCookieValue("M2L_PATRON_ID")?.split(']')[1];
-		if (patronID === null || patronID === undefined || patronID === "") {
+		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+		if (patronID === null || patronID === undefined || patronID === '') {
 			setIsModalOpen(true)
 		} else {
 			isLoggedIn = true
 		}
 		return isLoggedIn
 	}
-	
+
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-row justify-between space-x-2">
@@ -88,44 +91,98 @@ const DetailRecordAction = () => {
 					<ChevronLeft />
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
-				
+
 				<div className="flex space-x-2">
-					{checkRecordHasMandatoryDataToRequest() 
-					// && checkIfCurrentClientRequestedThisRecord() 
-					? 
-					<TooltipButton
-						tooltipContent="Request Record"
-						variant="outline"
-						onClick={handleSubmit}
-					>
-						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
-						<form method="post" ref={formRef} action={getHomeSessionID() + "/1/" + record.request.req_db_link2 + "?REQUESTLOGIN&DBNAME=" + record.request.req_db_name} className='hidden'>
-							<Input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time}/>
-							<Input type="hidden" name="METHOD_REQUEST" value={requestData.method_request}/>
-							<Input type="hidden" name="REQ_TOPIC" value={requestData.req_topic}/>
-							<Input type="hidden" name="REQ_APPL_NAME" value={requestData.req_appl_name}/>
-							<Input type="hidden" name="REQ_DB_NAME" value={ requestData.req_db_name}/>
-							<Input type="hidden" name="REQ_DB_LINK2" value={requestData.req_db_link2}/>
-							<Input type="hidden" name="REQ_QUEUE" value={requestData.req_queue}/>
-							<Input type="hidden" name="REQ_DB_RECID" value={requestData.req_db_recid}/>
-							<Input type="hidden" name="REQ_TITLE" value={requestData.req_title}/>
-							<Input type="hidden" name="REQ_ITEM_ID" value={requestData.req_item_id}/>
-							<Input type="hidden" name="REQ_ITEM_TITLE" value={requestData.req_item_title}/>
-							<Input type="hidden" name="nixon" value="nixon"/>
-							
-							<Button
-								className="bg-opac-darkblue"
-								type="submit"
-								variant="default">
-								Submit
-							</Button>
-						</form>
-					</TooltipButton> : <TooltipButton
-						tooltipContent="Request Record"
-						variant="outline"
-						disabled>
-						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
-					</TooltipButton>}
+					{checkRecordHasMandatoryDataToRequest() ? (
+						// && checkIfCurrentClientRequestedThisRecord()
+						<TooltipButton
+							tooltipContent="Request Record"
+							variant="outline"
+							onClick={handleSubmit}>
+							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
+							{message.detailRecordActionRequest}
+							<form
+								method="post"
+								ref={formRef}
+								action={
+									getHomeSessionID() +
+									'/1/' +
+									record.request.req_db_link2 +
+									'?REQUESTLOGIN&DBNAME=' +
+									record.request.req_db_name
+								}
+								className="hidden">
+								<Input
+									type="hidden"
+									name="ITEM_REQ_TIME"
+									value={requestData.item_req_time}
+								/>
+								<Input
+									type="hidden"
+									name="METHOD_REQUEST"
+									value={requestData.method_request}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_TOPIC"
+									value={requestData.req_topic}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_APPL_NAME"
+									value={requestData.req_appl_name}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_DB_NAME"
+									value={requestData.req_db_name}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_DB_LINK2"
+									value={requestData.req_db_link2}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_QUEUE"
+									value={requestData.req_queue}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_DB_RECID"
+									value={requestData.req_db_recid}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_TITLE"
+									value={requestData.req_title}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_ITEM_ID"
+									value={requestData.req_item_id}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_ITEM_TITLE"
+									value={requestData.req_item_title}
+								/>
+								<Input type="hidden" name="nixon" value="nixon" />
+
+								<Button
+									className="bg-opac-darkblue"
+									type="submit"
+									variant="default">
+									Submit
+								</Button>
+							</form>
+						</TooltipButton>
+					) : (
+						<TooltipButton tooltipContent="Request Record" variant="outline" disabled>
+							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
+							{message.detailRecordActionRequest}
+						</TooltipButton>
+					)}
 					<TooltipButton
 						tooltipContent="Copy record URL"
 						variant="outline"
@@ -151,7 +208,7 @@ const DetailRecordAction = () => {
 					<ChevronRight />
 				</TooltipButton>
 			</div>
-			<DialogLogin open={isModalOpen} onOpenChange={setIsModalOpen}/>
+			<DialogLogin open={isModalOpen} onOpenChange={setIsModalOpen} />
 			<form></form>
 		</div>
 	)

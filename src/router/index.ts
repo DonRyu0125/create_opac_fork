@@ -39,7 +39,6 @@ import ResetPin from '@/page/login/ResetPin'
 import ForgotPin from '@/page/login/ForgotPin'
 import AdminLogin from '@/page/admin/Login'
 
-
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
 const ADMIN_ROUTES: TRoute = {

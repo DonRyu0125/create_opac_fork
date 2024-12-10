@@ -11,7 +11,7 @@ const Request = () => {
 	console.log(reqData)
 	const handleGoBack = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		window.history.back() 
+		window.history.back()
 	}
 	return (
 		<Layout>
@@ -20,7 +20,10 @@ const Request = () => {
 					<div className="max-w-4xl mx-auto bg-white shadow-md rounded-md p-6">
 						{/* Header */}
 						<div className="flex justify-between items-center border-b pb-4">
-							<h1 className="flex items-center text-xl font-bold"><CircleEllipsis className='mr-2'/>Request Order Confirmation</h1>
+							<h1 className="flex items-center text-xl font-bold">
+								<CircleEllipsis className="mr-2" />
+								Request Order Confirmation
+							</h1>
 							<div className="text-right">
 								<form
 									method="post"
@@ -130,17 +133,28 @@ const Request = () => {
 								reference number: <b>{reqData.req_item_id}</b>
 							</p>
 							<p>Your request will be fulfilled in three business days.</p>
-							<p>Please confirm whether you would like to proceed with this request.</p>
+							<p>
+								Please confirm whether you would like to proceed with this request.
+							</p>
 						</div>
 
 						<div>
 							<div className="border p-4 rounded">
-								{reqData.req_db_name == 'DESCRIPTION_WEB' ? (
-									<div className='flex flex-row items-center'><Archive className='mr-2'/><h1 className="text-xl font-bold">Archives</h1></div>
-								) : reqData.req_db_name == 'COLLECTIONS_WEB' ? (
-									<div className='flex flex-row items-center'><Landmark className='mr-2'/><h1 className="text-xl font-bold">Museum</h1></div>
-								) : reqData.req_db_name == 'BIBLIO_WEB' ? (
-									<div className='flex flex-row items-center'><LibraryBig className='mr-2'/><h1 className="text-xl font-bold">Library</h1></div>
+								{reqData.req_db_name === 'DESCRIPTION_WEB' ? (
+									<div className="flex flex-row items-center">
+										<Archive className="mr-2" />
+										<h1 className="text-xl font-bold">Archives</h1>
+									</div>
+								) : reqData.req_db_name === 'COLLECTIONS_WEB' ? (
+									<div className="flex flex-row items-center">
+										<Landmark className="mr-2" />
+										<h1 className="text-xl font-bold">Museum</h1>
+									</div>
+								) : reqData.req_db_name === 'BIBLIO_WEB' ? (
+									<div className="flex flex-row items-center">
+										<LibraryBig className="mr-2" />
+										<h1 className="text-xl font-bold">Library</h1>
+									</div>
 								) : (
 									''
 								)}

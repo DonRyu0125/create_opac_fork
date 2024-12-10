@@ -42,20 +42,20 @@ const Sidebar = (props: Props) => {
 						<TooltipTrigger asChild>
 							<Link
 								href={`${getCookieValue('HOME_SESSID') + item.url + (item.label === 'Bookmarks' || item.label === 'Easy Load' ? '' : m2l_patron_id)}`}
-								className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
-								{item.label == 'Orders' ? (
+								className="flex h-9 w-9 items-center justify-center  text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
+								{item.label === 'Orders' ? (
 									<ShoppingBag className="h-5 w-5" />
-								) : item.label == 'Copyright Requests' ? (
+								) : item.label === 'Copyright Requests' ? (
 									<Copyright className="h-5 w-5" />
-								) : item.label == 'Reproductions' ? (
+								) : item.label === 'Reproductions' ? (
 									<Copy className="h-5 w-5" />
-								) : item.label == 'Bookmarks' ? (
+								) : item.label === 'Bookmarks' ? (
 									<BookMarked className="h-5 w-5" />
-								) : item.label == 'Enquiries' ? (
+								) : item.label === 'Enquiries' ? (
 									<Lightbulb className="h-5 w-5" />
-								) : item.label == 'Crowdsource' ? (
+								) : item.label === 'Crowdsource' ? (
 									<MessageCircleMore className="h-5 w-5" />
-								) : item.label == 'Easy Upload' ? (
+								) : item.label === 'Easy Upload' ? (
 									<Upload className="h-5 w-5" />
 								) : (
 									<FileX className="h-5 w-5" />
