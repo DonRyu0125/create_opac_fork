@@ -163,5 +163,6 @@
 	"confirmCancel": "En êtes-vous sûr ?",
 	"yes": "Oui",
 	"attendee": "participant",
-	"map":"Carte"
+	"map":"Carte",
+	"detailRecordActionRequest": "Request"
 }

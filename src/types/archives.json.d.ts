@@ -10,25 +10,24 @@ export type HeroBanner = string;
 export type SearchURL = string;
 export type BrowseByCategoryTitle = string;
 export type CalendarfilterOption = string;
-export type Title = string;
 export type DatabaseName = string;
 export type DisplayTitle = string;
 export type LinkURL = string;
 export type Thumbnail = string;
-export type Title1 = string;
+export type Title = string;
 export type Url = string;
 export type CategoriesItems = {
   thumbnail?: Thumbnail;
-  title?: Title1;
+  title?: Title;
   url?: Url;
   [k: string]: unknown;
 }[];
-export type Title2 = string;
+export type Title1 = string;
 export type Description = string;
 export type Url1 = string;
 export type Thumbnail1 = string;
 export type FeaturedCollection = {
-  title?: Title2;
+  title?: Title1;
   description?: Description;
   url?: Url1;
   thumbnail?: Thumbnail1;
@@ -48,7 +47,6 @@ export interface ArchivesJson {
   searchURL?: SearchURL;
   browseByCategoryTitle?: BrowseByCategoryTitle;
   CalendarfilterOption?: CalendarfilterOption;
-  title?: Title;
   database_name?: DatabaseName;
   displayTitle?: DisplayTitle;
   linkURL?: LinkURL;

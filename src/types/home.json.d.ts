@@ -10,8 +10,6 @@ export type HeroBanner = string;
 export type SearchURL = string;
 export type BrowseByCategoryTitle = string;
 export type CalendarfilterOption = string;
-export type DisplayTitle = string;
-export type LinkURL = string;
 export type Title = string;
 export type Url = string;
 export type Thumbnail = string;
@@ -54,8 +52,6 @@ export interface HomeJson {
   searchURL?: SearchURL;
   browseByCategoryTitle?: BrowseByCategoryTitle;
   CalendarfilterOption?: CalendarfilterOption;
-  displayTitle?: DisplayTitle;
-  linkURL?: LinkURL;
   categoriesItems?: CategoriesItems;
   rsvp?: Rsvp;
   featuredCollection?: FeaturedCollection;

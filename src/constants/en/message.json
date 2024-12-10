@@ -164,5 +164,7 @@
 	"confirmCancel": "Are you sure?",
 	"yes": "Yes",
 	"attendee": "Attendee",
-	"map":"Map"
+	"map":"Map",
+	"detailRecordActionRequest": "Request"
+
 }

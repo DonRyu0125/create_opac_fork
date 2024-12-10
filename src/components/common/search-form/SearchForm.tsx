@@ -13,7 +13,7 @@ const SearchForm = ({ className, inputName, inputStyle, action, ...props }: Sear
 	const { message } = useConstants()
 
 	return (
-		<form method="POST" action={action} className={'flex w-full max-w-[600px]'} {...props}>
+		<form method="POST" action={action} className={'flex w-full max-w-[600px] m-0'} {...props}>
 			<div className="w-full relative">
 				<Input
 					required
