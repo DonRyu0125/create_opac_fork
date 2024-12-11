@@ -9,11 +9,13 @@ import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSea
 import { UNION_SEARCH_CL } from './Home'
 import Section from '@/components/common/Section'
 import EventCalendar from '@/components/common/event-calendar'
+import InterativeMap from '@/components/common/interativeMap'
 
 const Library = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { message } = useConstants()
-	const { heroBanner, searchURL, heading, database_name, rsvp } = useConstants().library
+	const { heroBanner, searchURL, heading, database_name, rsvp, enableRSVP,enableMap } =
+		useConstants().library
 	return (
 		<Layout>
 			<Hero className={''} title={heading} backgroundImage={heroBanner} description="">
@@ -25,13 +27,20 @@ const Library = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
-			<Section heading={`${message.calendar}`}>
-				<EventCalendar
-					databaseType={rsvp.filterDatabase}
-					filterTypes={rsvp.filterTypes}
-					filterOption={rsvp.filterOption}
-				/>
-			</Section>
+			{enableRSVP && (
+				<Section heading={`${message.calendar}`}>
+					<EventCalendar
+						databaseType={rsvp.filterDatabase}
+						filterTypes={rsvp.filterTypes}
+						filterOption={rsvp.filterOption}
+					/>
+				</Section>
+			)}
+			{enableMap && (
+				<Section heading={`${message.map}`}>
+					<InterativeMap DB_TYPE={'BIBLIO_WEB'} />
+				</Section>
+			)}
 		</Layout>
 	)
 }

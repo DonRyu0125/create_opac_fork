@@ -56,5 +56,10 @@
 				"icon": "rounded"
 			}
 		]
-	}
+	},
+	"enableCategoriesItems": true,
+	"enableFeaturedCollection": true,
+	"enableRSVP": true,
+	"enableRecentAddition": true,
+	"enableMap":true
 }

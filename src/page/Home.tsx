@@ -130,7 +130,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap />
+					<InterativeMap DB_TYPE={'UNION_VIEW'}/>
 				</Section>
 			)}
 			{enableRecentAddition && (
