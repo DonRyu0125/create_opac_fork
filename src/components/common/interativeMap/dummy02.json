@@ -23,7 +23,7 @@
     },
     {
       "DATABASE_TYPE": "Library",
-      "ACCESSION_NUMBER": "2010C.005.8945012394",
+      "REFD": "2010C.005.8945012394",
       "DESCRIPTION": "First edition of 'Winds of Change' by a notable author.",
       "LEGAL_TITLE": "Book - Winds of Change",
       "DECIMAL_LATITUDE": "41.878003",
@@ -34,7 +34,7 @@
     },
     {
       "DATABASE_TYPE": "Library",
-      "ACCESSION_NUMBER": "2008D.006.0038945120",
+      "REFD": "2008D.006.0038945120",
       "DESCRIPTION": "Original map of the gold rush era in California.",
       "LEGAL_TITLE": "Map - California Gold Rush",
       "DECIMAL_LATITUDE": "34.052235",
@@ -67,7 +67,7 @@
     },
     {
       "DATABASE_TYPE": "Library",
-      "ACCESSION_NUMBER": "2019G.009.1029384756",
+      "REFD": "2019G.009.1029384756",
       "DESCRIPTION": "Handwritten diary from the Victorian era.",
       "LEGAL_TITLE": "Diary - Victorian Era",
       "DECIMAL_LATITUDE": "51.509865",
@@ -100,13 +100,57 @@
     },
     {
       "DATABASE_TYPE": "Library",
-      "ACCESSION_NUMBER": "2017J.012.0192837465",
+      "REFD": "2017J.012.0192123215324213837465",
       "DESCRIPTION": "Ancient scroll from the Han dynasty.",
       "LEGAL_TITLE": "Scroll - Han Dynasty",
       "DECIMAL_LATITUDE": "39.904202",
       "DECIMAL_LONGITUD": "116.407394",
       "ORIGIN_COUNTRY": "China",
-      "ORIGIN_PRV_STATE": "Beijing",
+      "ORIGIN_PRV_STATE": "Beijing Municipality",
+      "ORIGIN_CITY": "Beijing"
+    },
+    {
+      "DATABASE_TYPE": "Library",
+      "REFD": "2017J.012.0192123123837465",
+      "DESCRIPTION": "Ancient scroll from the Han dynasty.",
+      "LEGAL_TITLE": "Scroll - Han Dynasty",
+      "DECIMAL_LATITUDE": "39.904202",
+      "DECIMAL_LONGITUD": "116.407394",
+      "ORIGIN_COUNTRY": "China",
+      "ORIGIN_PRV_STATE": "Beijing Municipality",
+      "ORIGIN_CITY": "Beijing"
+    },
+    {
+      "DATABASE_TYPE": "Library",
+      "REFD": "2017J.012.019234122837465",
+      "DESCRIPTION": "Ancient scroll from the Han dynasty.",
+      "LEGAL_TITLE": "Scroll - Han Dynasty",
+      "DECIMAL_LATITUDE": "39.904202",
+      "DECIMAL_LONGITUD": "116.407394",
+      "ORIGIN_COUNTRY": "China",
+      "ORIGIN_PRV_STATE": "Beijing Municipality",
+      "ORIGIN_CITY": "Beijing"
+    },
+    {
+      "DATABASE_TYPE": "Library",
+      "REFD": "2011232137J.0122.0192837465",
+      "DESCRIPTION": "Ancient scroll from the Han dynasty.",
+      "LEGAL_TITLE": "Scroll - Han Dynasty",
+      "DECIMAL_LATITUDE": "39.904202",
+      "DECIMAL_LONGITUD": "116.407394",
+      "ORIGIN_COUNTRY": "China",
+      "ORIGIN_PRV_STATE": "Beijing Municipality",
+      "ORIGIN_CITY": "Beijing"
+    },
+    {
+      "DATABASE_TYPE": "Library",
+      "REFD": "2123213017J.012.01922837465",
+      "DESCRIPTION": "Ancient scroll from the Han dynasty.",
+      "LEGAL_TITLE": "Scroll - Han Dynasty",
+      "DECIMAL_LATITUDE": "39.904202",
+      "DECIMAL_LONGITUD": "116.407394",
+      "ORIGIN_COUNTRY": "China",
+      "ORIGIN_PRV_STATE": "Beijing Municipality",
       "ORIGIN_CITY": "Beijing"
     }
   ]

@@ -15,6 +15,9 @@ import axios from 'axios'
 import X2JS from 'x2js'
 import Spinner from '../event-calendar/Spinner'
 import markersData from './dummy02.json'
+import Button from '../admin/Button'
+import { v4 as uuidv4 } from 'uuid'
+import { RefreshCw } from 'lucide-react'
 
 const DB_TYPE_MAP = {
 	library: 'Library',
@@ -106,21 +109,16 @@ const InteractiveMap: React.FC = () => {
 	const { message } = useConstants()
 	const [allData, setAllData] = useState<any>([])
 	const [filteredData, setFilteredData] = useState<any>([])
-	const [loading, setLoading] = useState(false)
-	const [selectType, setSelectedType] = useState<SelectType>({})
-	const [currentFilter, setCurrentFilter] = useState<any[]>([])
-
 	const [selectedDatabases, setSelectedDatabases] = useState<string[]>([])
 	const [selectedCountries, setSelectedCountries] = useState<string[]>([])
 	const [selectedProvinces, setSelectedProvinces] = useState<string[]>([])
 	const [selectedCities, setSelectedCities] = useState<string[]>([])
-
 	const [ckTypes, setCkTypes] = useState<any>({
 		databases: [],
 		countries: [],
-		provinces: [],
-		cities: [],
 	})
+	const [loading, setLoading] = useState(false)
+
 	useEffect(() => {
 		fetch_get()
 	}, [])
@@ -155,18 +153,6 @@ const InteractiveMap: React.FC = () => {
 			setFilteredData(allData)
 		}
 	}, [selectedDatabases, selectedCountries, selectedProvinces, selectedCities, allData])
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (!e.target.id) return
-		let map = { ...selectType }
-		if (map[e.target.id] > 0) {
-			delete map[e.target.id]
-		} else {
-			map[e.target.id] = 1
-		}
-		setSelectedType(map)
-		setCurrentFilter(Object.keys(map))
-	}
 
 	const handleDatabaseChange = (database: string) => {
 		setSelectedDatabases((prev) =>
@@ -216,20 +202,37 @@ const InteractiveMap: React.FC = () => {
 		setFilteredData(markersData)
 		const databases = Array.from(new Set(markersData.map((item) => item.DATABASE_TYPE)))
 		const countries = Array.from(new Set(markersData.map((item) => item.ORIGIN_COUNTRY)))
-		const provinces = Array.from(new Set(markersData.map((item) => item.ORIGIN_PRV_STATE)))
-		const cities = Array.from(new Set(markersData.map((item) => item.ORIGIN_CITY)))
-		setCkTypes({ databases, countries, provinces, cities })
+		setCkTypes({ databases, countries })
 		// setLoading(false)
 	}
 
-	console.log('selectedCountries', selectedCountries)
-	console.log('selectedProvinces', selectedProvinces)
-	console.log('selectedCities', selectedCities)
+	const getUniqueValuesP = () => {
+		const nData = allData.filter((item: any) => {
+			const matchesDatabase =
+				selectedDatabases.length > 0 ? selectedDatabases.includes(item.DATABASE_TYPE) : true
+			const matchesCountry =
+				selectedCountries.length > 0
+					? selectedCountries.includes(item.ORIGIN_COUNTRY)
+					: true
 
-	// const getUniqueValues = (field: string) => {
-	// 	const uniqueValues = Array.from(new Set(filteredData.map((item:any) => item[field])))
-	// 	return uniqueValues
-	// }
+			return matchesDatabase && matchesCountry
+		})
+		const uniqueValues = Array.from(new Set(nData.map((item: any) => item.ORIGIN_PRV_STATE)))
+		return uniqueValues
+	}
+
+	const getUniqueValuesC = () => {
+		const uniqueValues = Array.from(new Set(filteredData.map((item: any) => item.ORIGIN_CITY)))
+		return uniqueValues
+	}
+
+	const resetMap = () => {
+		setSelectedDatabases([])
+		setSelectedCountries([])
+		setSelectedProvinces([])
+		setSelectedCities([])
+		setFilteredData(allData)
+	}
 
 	return (
 		<div className="w-full relative flex">
@@ -238,58 +241,78 @@ const InteractiveMap: React.FC = () => {
 					<Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />
 				</div>
 			)}
-			<div className="w-1/4 rounded border border-primary p-2 overflow-y-auto custom-scrollbar mr-2">
-				<Label className="font-bold">{message.filterBy}</Label>
-				<div className="flex flex-col space-y-4 max-h-[87vh] ">
-					<CollapseList title={'Database'}>
+			<div className="w-1/4 rounded border border-primary  mr-2 relative">
+				<div className="flex justify-between items-center bg-primary p-2">
+					<div className={'text-white'}>{message.filterBy}</div>
+					<Button onClick={resetMap} className={'bg-black text-white'}>
+						<RefreshCw />
+					</Button>
+				</div>
+				<div className="flex flex-col space-y-4 max-h-[90vh] mb-2 p-2 overflow-y-auto custom-scrollbar">
+					<CollapseList title={'Database'} expand={true}>
 						<div className="space-y-3 border-t p-4">
 							{ckTypes?.databases.map((item: string, key: number) => (
 								<CheckboxWithLabel
 									key={key}
 									callback={() => handleDatabaseChange(item)}
 									label={item}
-									checked={selectedCountries.includes(item)}
+									checked={selectedDatabases.includes(item)}
 								/>
 							))}
-
 						</div>
 					</CollapseList>
 					<CollapseList title={'Country'} expand={true}>
 						<div className="space-y-3 border-t p-4">
-							{ckTypes?.countries.map((item: string, key: number) => (
-								<CheckboxWithLabel
-									key={key}
-									callback={() => handleCountryChange(item)}
-									label={item}
-									checked={selectedCountries.includes(item)}
-								/>
-							))}
+							{ckTypes?.countries.map((item: string, key: number) => {
+								return (
+									<CheckboxWithLabel
+										key={key}
+										callback={() => handleCountryChange(item)}
+										label={item}
+										checked={selectedCountries.includes(item)}
+									/>
+								)
+							})}
 						</div>
 					</CollapseList>
-
-					<CollapseList title={'Province'} expand={true}>
+					<CollapseList expand={true} title={'Province'}>
 						<div className="space-y-3 border-t p-4">
-							{ckTypes?.provinces.map((item: string, key: number) => (
-								<CheckboxWithLabel
-									key={key}
-									callback={() => handleProvinceChange(item)}
-									label={item}
-									checked={selectedProvinces.includes(item)}
-								/>
-							))}
+							{selectedCountries.length > 0 ? (
+								getUniqueValuesP().map((item: any, key: number) => {
+									return (
+										<CheckboxWithLabel
+											key={key}
+											callback={() => handleProvinceChange(item)}
+											label={item}
+											checked={selectedProvinces.includes(item)}
+										/>
+									)
+								})
+							) : (
+								<div className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+									'Select the Country'
+								</div>
+							)}
 						</div>
 					</CollapseList>
-
-					<CollapseList title={'City'} expand={true}>
+					<CollapseList expand={true} title={'City'}>
 						<div className="space-y-3 border-t p-4">
-							{ckTypes?.cities.map((item: string, key: number) => (
-								<CheckboxWithLabel
-									key={key}
-									callback={() => handleCityChange(item)}
-									label={item}
-									checked={selectedCities.includes(item)}
-								/>
-							))}
+							{selectedProvinces.length > 0 ? (
+								getUniqueValuesC()?.map((item: any, key: number) => {
+									return (
+										<CheckboxWithLabel
+											key={key}
+											callback={() => handleCityChange(item)}
+											label={item}
+											checked={selectedCities.includes(item)}
+										/>
+									)
+								})
+							) : (
+								<div className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+									'Select the Province'
+								</div>
+							)}
 						</div>
 					</CollapseList>
 				</div>
@@ -331,8 +354,9 @@ const InteractiveMap: React.FC = () => {
 							/>
 						</LayersControl.BaseLayer>
 					</LayersControl>
+					{/* @ts-ignore */}
 					<MarkerClusterGroup
-						key={`L${filteredData.filter((item) => item.DATABASE_TYPE === DB_TYPE_MAP.library)}`}
+						key={`L${uuidv4()?.substring(15)}`}
 						spiderfyDistanceMultiplier={2}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
@@ -342,12 +366,12 @@ const InteractiveMap: React.FC = () => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.library) {
 								return (
 									<Marker
-										key={`L${marker.DATABASE_TYPE}-${marker.ACCESSION_NUMBER}`}
+										key={`L${marker.DATABASE_TYPE}-${marker.REFD}`}
 										position={[
 											marker.DECIMAL_LATITUDE,
 											marker.DECIMAL_LONGITUD,
 										]}
-										icon={icons['archive']}>
+										icon={icons['library']}>
 										<Popup>
 											<div className="p-2 bg-white rounded">
 												<h3 className="font-bold text-blue-600">
@@ -360,8 +384,9 @@ const InteractiveMap: React.FC = () => {
 							}
 						})}
 					</MarkerClusterGroup>
+					{/* @ts-ignore */}
 					<MarkerClusterGroup
-						key={`A${filteredData.filter((item) => item.DATABASE_TYPE === DB_TYPE_MAP.archive)}`}
+						key={`A${uuidv4()?.substring(15)}`}
 						spiderfyDistanceMultiplier={2}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
@@ -371,7 +396,7 @@ const InteractiveMap: React.FC = () => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.archive) {
 								return (
 									<Marker
-										key={`A${marker.DATABASE_TYPE}-${marker.REFD}`}
+										key={`A${marker.DATABASE_TYPE}-${marker.ACCESSION_NUMBER}`}
 										position={[
 											marker.DECIMAL_LATITUDE,
 											marker.DECIMAL_LONGITUD,
@@ -380,7 +405,7 @@ const InteractiveMap: React.FC = () => {
 										<Popup>
 											<div className="p-2 bg-white rounded">
 												<h3 className="font-bold text-blue-600">
-													{marker.REFD}
+													{marker.ACCESSION_NUMBER}
 												</h3>
 											</div>
 										</Popup>
@@ -389,8 +414,9 @@ const InteractiveMap: React.FC = () => {
 							}
 						})}
 					</MarkerClusterGroup>
+					{/* @ts-ignore */}
 					<MarkerClusterGroup
-						key={`M${filteredData.filter((item) => item.DATABASE_TYPE === DB_TYPE_MAP.museum)}`}
+						key={`M${uuidv4()?.substring(15)}`}
 						spiderfyDistanceMultiplier={2}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
@@ -409,7 +435,7 @@ const InteractiveMap: React.FC = () => {
 										<Popup>
 											<div className="p-2 bg-white rounded">
 												<h3 className="font-bold text-blue-600">
-													{marker.ACCESSION_NUMBER}
+													ACCESSION_NUMBER:{marker.ACCESSION_NUMBER}
 												</h3>
 											</div>
 										</Popup>
