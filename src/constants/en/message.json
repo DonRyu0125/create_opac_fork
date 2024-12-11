@@ -155,7 +155,6 @@
 	"eventEndedMessage": "Closed",
 	"hello": "Hello",
 	"event": "Event",
-	"dashboardHome": "Dashboard Home",
 	"date": "Date",
 	"location": "Location",
 	"start": "Start",
@@ -163,7 +162,7 @@
 	"no": "No",
 	"confirmCancel": "Are you absolutely sure?",
 	"yes": "Yes",
-	"attendee": "Attendee",
-	"detailRecordActionRequest": "Request"
+	"detailRecordActionRequest": "Request",
+	"detailRecordActionEnquire": "Enquire"
 
 }

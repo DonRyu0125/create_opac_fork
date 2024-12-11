@@ -163,5 +163,6 @@
 	"confirmCancel": "En êtes-vous absolument sûr ?",
 	"yes": "Oui",
 	"attendee": "participant",
-	"detailRecordActionRequest": "Request"
+	"detailRecordActionRequest": "Request",
+	"detailRecordActionEnquire": "Enquire"
 }

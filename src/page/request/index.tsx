@@ -4,7 +4,6 @@ import useJSONData from '@/hooks/useJSONData'
 import { Button } from '../../components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Archive, CircleEllipsis, Landmark, LibraryBig } from 'lucide-react'
-
 const Request = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
 	let reqData = records[0].request
@@ -99,7 +98,7 @@ const Request = () => {
 									<Input
 										type="hidden"
 										name="REQ_ITEM_TITLE"
-										value={reqData.req_item_title}
+										value={typeof reqData.req_item_title === "object" ? reqData.req_item_title.__text.replace(/\s+/g, ' ').trim() : reqData.req_item_title}
 									/>
 									<Input
 										type="hidden"

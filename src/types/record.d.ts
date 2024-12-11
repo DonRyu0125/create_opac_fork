@@ -25,6 +25,15 @@ export interface BookmarkCheckBoxData {
 export interface FieldData<T extends string> {
 	[key: string]: string | number | DBFields<T> | FieldData[]
 }
+export interface EnquiryData {
+	enq_id: string
+	enq_patron_email: string
+	enq_telephone: string
+	enq_title: string
+	enq_topic_detail: string
+	enq_topic: string
+	enq_user: string
+}
 export interface RequestData {
 	action: string
 	auto_approve: string
@@ -60,6 +69,7 @@ export interface Record {
 	description_count: string
 	email?: any
 	enquiries_count: string
+	enquiry: EnquiryData
 	first_name: string
 	full_name: string
 	input?: BookmarkCheckBoxData
