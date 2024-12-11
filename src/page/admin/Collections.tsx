@@ -14,6 +14,7 @@ import { FormEvent } from 'react'
 const AdminCollections = () => {
 	return (
 		<AdminFormLayout
+			enablePreview
 			enData={enValues}
 			frData={frValues}
 			schema={fields as unknown as SchemaType}

@@ -9,8 +9,8 @@ import DialogLogin from '../../components/common/DialogLogin'
 import TooltipButton from '@/components/common/TooltipButton'
 import { getCookieValue, getHomeSessionID } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
-	// State for modal visibility
-	
+// State for modal visibility
+
 const DetailRecordAction = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 	const formRef = useRef<HTMLFormElement | null>(null)
@@ -43,7 +43,7 @@ const DetailRecordAction = () => {
 			}
 		}
 	}
-	
+
 	const goToURL = (url: string | null) => {
 		if (url) {
 			window.location.href = url
@@ -51,33 +51,37 @@ const DetailRecordAction = () => {
 	}
 
 	const checkRecordHasMandatoryDataToRequest = () => {
-		const checkRecord = record.record;
-		const recordRequestBool = "Yes" as string
-		let requestable = false as boolean;
-		(checkRecord?.a_avail === recordRequestBool || checkRecord?.m_avail === recordRequestBool || checkRecord?.l_avail === recordRequestBool) ? requestable = true : requestable = false;
+		const checkRecord = record.record
+		const recordRequestBool = 'Yes' as string
+		let requestable = false as boolean
+		checkRecord?.a_avail === recordRequestBool ||
+		checkRecord?.m_avail === recordRequestBool ||
+		checkRecord?.l_avail === recordRequestBool
+			? (requestable = true)
+			: (requestable = false)
 		return requestable
 	}
 
 	const checkIfCurrentClientRequestedThisRecord = () => {
-		const recordRequested = record.record?.is_requested_by_client;
-		let currentClientRequested = false;
-		if (recordRequested == "Current"){
-			currentClientRequested = true;
+		const recordRequested = record.record?.is_requested_by_client
+		let currentClientRequested = false
+		if (recordRequested === 'Current') {
+			currentClientRequested = true
 		}
-		return currentClientRequested;
+		return currentClientRequested
 	}
 
 	const checkLoggedInToRequest = () => {
 		let isLoggedIn = false
-		const patronID = getCookieValue("M2L_PATRON_ID")?.split(']')[1];
-		if (patronID === null || patronID === undefined || patronID === "") {
+		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+		if (patronID === null || patronID === undefined || patronID === '') {
 			setIsModalOpen(true)
 		} else {
 			isLoggedIn = true
 		}
 		return isLoggedIn
 	}
-	
+
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-row justify-between space-x-2">
@@ -89,7 +93,7 @@ const DetailRecordAction = () => {
 					<ChevronLeft />
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
-				
+
 				<div className="flex space-x-2">
 					{checkRecordHasMandatoryDataToRequest() 
 					// && checkIfCurrentClientRequestedThisRecord() 
@@ -125,6 +129,7 @@ const DetailRecordAction = () => {
 						disabled>
 						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
 					</TooltipButton>}
+
 					<TooltipButton
 						tooltipContent="Ask about this record"
 						variant="outline"
@@ -164,7 +169,7 @@ const DetailRecordAction = () => {
 					<ChevronRight />
 				</TooltipButton>
 			</div>
-			<DialogLogin open={isModalOpen} onOpenChange={setIsModalOpen}/>
+			<DialogLogin open={isModalOpen} onOpenChange={setIsModalOpen} />
 			<form></form>
 		</div>
 	)

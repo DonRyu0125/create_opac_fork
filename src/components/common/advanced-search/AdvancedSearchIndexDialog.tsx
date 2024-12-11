@@ -1,17 +1,5 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from '../../ui/dialog'
 import { Button } from '@/components/ui/button'
-import { convertXMLToJson, getSessionID } from '@/lib/utils'
-import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight, Menu, Search, X } from 'lucide-react'
+import { Input } from '@/components/ui/input'
 import {
 	ScrollAreaCorner,
 	ScrollAreaRoot,
@@ -19,9 +7,13 @@ import {
 	ScrollAreaThumb,
 	ScrollAreaViewport,
 } from '@/components/ui/scrollArea'
-import useConstants from '@/hooks/useConstants'
-import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
+import useConstants from '@/hooks/useConstants'
+import { convertXMLToJson, getSessionID } from '@/lib/utils'
+import axios from 'axios'
+import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight, Menu, Search, X } from 'lucide-react'
+import React, { useState } from 'react'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '../../ui/dialog'
 
 interface ClusterData {
 	index_list: {
@@ -175,13 +167,13 @@ const AdvancedSearchIndexDialog = ({
 					<DialogHeader className={'font-bold text-xl md:text-2xl'}>
 						{message.browseCluster} '{label}'
 					</DialogHeader>
-					<button
+					<Button
 						className={
 							'absolute right-1 p-1 bg-primary font-bold mx-1 text-white rounded'
 						}
 						onClick={() => setOpen(false)}>
 						<X className={'h-6 w-6'} />
-					</button>
+					</Button>
 				</div>
 				<div className={'flex'}>
 					<div className="w-full relative">
@@ -263,9 +255,7 @@ const AdvancedSearchIndexDialog = ({
 					</div>
 				</div>
 				<DialogFooter
-					className={
-						'relative w-full flex absolute bottom-1 relative md:justify-center md:items-center'
-					}>
+					className={' w-full flex  bottom-1 relative md:justify-center md:items-center'}>
 					<Button className={'w-full font-bold'} onClick={handleSubmit}>
 						{message.submit}
 					</Button>
