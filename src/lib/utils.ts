@@ -118,8 +118,8 @@ export function getCookieValue(name: string) {
 }
 
 export const clearCookies = () => {
-	var cookies = document.cookie.split(';')
-	for (var i = 0; i < cookies.length; i++) {
+	let cookies = document.cookie.split(';')
+	for (let i = 0; i < cookies.length; i++) {
 		//delete each cookie
 		deleteCookie(cookies[i].split('=')[0])
 	}
@@ -131,9 +131,9 @@ export function deleteCookie(cname: string) {
 }
 
 export function deleteAllCookies() {
-	var cookies = document.cookie.split(';')
-	var cookie = ''
-	for (var i = 0; i < cookies.length; i++) {
+	let cookies = document.cookie.split(';')
+	let cookie = ''
+	for (let i = 0; i < cookies.length; i++) {
 		deleteCookie(cookies[i].split('=')[0])
 	}
 }
@@ -145,9 +145,9 @@ export function getHomeSessionID() {
 }
 
 export function setCookie(name: string, value: string, days?: number) {
-	var expires = ''
+	let expires = ''
 	if (days) {
-		var date = new Date()
+		let date = new Date()
 		date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
 		expires = '; expires=' + date.toUTCString()
 	}

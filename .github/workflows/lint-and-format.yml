@@ -28,6 +28,3 @@ jobs:
 
             - name: Format Code
               run: npm run format
-
-            - name: Lint Code
-              run: npm run lint

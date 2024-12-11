@@ -68,7 +68,6 @@
 	"firstName": "First Name",
 	"lastName": "Last Name",
 	"email": "Email",
-	"attendee": "Attendee",
 	"eventCancel": "Event Cancelled",
 	"spotReserved": "spot reserved",
 	"confirm": "Confirm",
@@ -162,7 +161,7 @@
 	"no": "No",
 	"confirmCancel": "Are you absolutely sure?",
 	"yes": "Yes",
+  "attendee": "Attendee",
 	"detailRecordActionRequest": "Request",
 	"detailRecordActionEnquire": "Enquire"
-
 }

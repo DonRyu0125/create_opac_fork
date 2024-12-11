@@ -49,7 +49,7 @@ const Header = () => {
 				)}
 			</header>
 			{isAuthenticated && (
-				<section className="bg-[#B5C0CD] text-white justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b py-2 px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
+				<section className="bg-[#8ea4c0] text-white justify-between sticky top-0 z-30 flex h-14 items-center gap-4 border-b py-2 px-4 sm:static sm:h-auto sm:border-0  sm:px-6">
 					<NavigationMenu className="mx-auto">
 						<NavigationMenuList>
 							{navigationLists.map((e) => (

@@ -7,6 +7,7 @@ export type InputProps = {
 	onChange: (value: string) => void
 	placeholder?: string
 	name?: string
+	append?: ReactNode
 }
 
 export type CheckboxProps = {

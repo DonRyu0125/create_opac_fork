@@ -1,27 +1,24 @@
-'use client'
-
-import { useState, useEffect } from 'react'
+import Link from '@/components/common/Link'
 import PatronLayout from '@/components/layouts/patron'
-import useJSONData from '@/hooks/useJSONData'
 import clientProfileJSON from '@/constants/en/client-profile.json'
+import useConstants from '@/hooks/useConstants'
+import useJSONData from '@/hooks/useJSONData'
 import { getCookieValue, setCookie } from '@/lib/utils'
-import { Card } from '@/components/ui/card'
 import {
-	ShoppingBag,
-	Copyright,
-	Copy,
+	Archive,
 	BookMarked,
-	Lightbulb,
-	MessageCircleMore,
 	CalendarDays,
-	MoreHorizontal,
+	Copy,
+	Copyright,
 	File,
 	Landmark,
 	Library,
-	Archive,
+	Lightbulb,
+	MessageCircleMore,
+	MoreHorizontal,
+	ShoppingBag,
 } from 'lucide-react'
-import useConstants from '@/hooks/useConstants'
-import Link from '@/components/common/Link'
+import { useState } from 'react'
 
 interface StatCardProps {
 	key: number
@@ -102,13 +99,16 @@ export default function PatronProfile() {
 			amber: 'bg-amber-100 text-amber-500',
 			orange: 'bg-orange-100 text-orange-500',
 			pink: 'bg-pink-100 text-pink-500',
-		}
+		} as const
 
 		return (
 			<div className="rounded-lg bg-white p-6 shadow">
 				<div className="flex flex-col gap-2">
 					<div className="flex items-center justify-center gap-2">
-						<div className={`rounded-full p-2 ${colorClasses[color]}`}>{icon}</div>
+						<div
+							className={`rounded-full p-2 ${colorClasses[color as keyof typeof colorClasses]}`}>
+							{icon}
+						</div>
 						<span className="text-sm text-gray-500">{label}</span>
 					</div>
 					<div className="flex items-baseline justify-center">
@@ -188,26 +188,26 @@ export default function PatronProfile() {
 									<div className="p-4">
 										<div className="flex items-center justify-between text-sm text-gray-500">
 											<div className="flex items-center gap-2">
-												{item == home ? (
+												{item === home ? (
 													<File className="w-5 h-5" />
-												) : item == archives ? (
+												) : item === archives ? (
 													<Archive className="w-5 h-5" />
-												) : item == museum ? (
+												) : item === museum ? (
 													<Landmark className="w-5 h-5" />
-												) : item == library ? (
+												) : item === library ? (
 													<Library className="w-5 h-5" />
 												) : (
 													''
 												)}
-												{item == home
+												{item === home
 													? Number(records[0].description_count) +
 														Number(records[0].collection_count) +
 														Number(records[0].biblio_count)
-													: item == archives
+													: item === archives
 														? records[0].description_count
-														: item == museum
+														: item === museum
 															? records[0].collection_count
-															: item == library
+															: item === library
 																? records[0].biblio_count
 																: ''}
 											</div>
