@@ -164,5 +164,6 @@
 	"yes": "Oui",
 	"attendee": "participant",
 	"detailRecordActionRequest": "Request",
-	"detailRecordActionEnquire": "Enquire"
+	"detailRecordActionEnquire": "Enquire",
+	"detailRecordActionReproduction": "Reproduction"
 }

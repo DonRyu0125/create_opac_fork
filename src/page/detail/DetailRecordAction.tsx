@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { copyRecordURL, deepSearchKey } from '@/lib/record'
-import { ChevronLeft, ChevronRight, Copy, ShoppingBag } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
 import DialogLogin from '../../components/common/DialogLogin'
@@ -23,7 +23,7 @@ const DetailRecordAction = () => {
 	const database = record.database_name
 	console.log(record)
 	const handleSubmit = (action: string | null) => {
-		if(checkLoggedInToRequest()){
+		if (checkLoggedInToRequest()){
 			switch(action) {
 				case "Request":
 					if (formRef.current) {
@@ -33,11 +33,14 @@ const DetailRecordAction = () => {
 					}
 					break;
 				case "Enquire":
-					const url = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=ENQUIRIES_VIEW&de_form=[OPAC]src/page/enquiry/de_enquiryform.html&subject=${record.record.title}`;
+					const url = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=ENQUIRIES_VIEW&DE_FORM=[OPAC_ENQUIRY]de_enquiryform.html&subject=${record.record.title}`;
 					window.location.href = url;
 					break;
+				case "Reproduction":
+					const reprodURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_VIEW&DE_FORM=[OPAC_REPROD]de_reproductionform.html&title=${record.record.title}`;
+					window.location.href = reprodURL;
+					break;
 			}
-			
 		}
 	}
 	
@@ -128,7 +131,13 @@ const DetailRecordAction = () => {
 						onClick={() => handleSubmit("Enquire")}
 					>
 						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionEnquire}
-						
+					</TooltipButton>
+					<TooltipButton
+						tooltipContent="Reproduce this record"
+						variant="outline"
+						onClick={() => handleSubmit("Reproduction")}
+					>
+						<Files className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionReproduction}
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Copy record URL"

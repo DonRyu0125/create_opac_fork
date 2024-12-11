@@ -163,6 +163,7 @@
 	"confirmCancel": "Are you absolutely sure?",
 	"yes": "Yes",
 	"detailRecordActionRequest": "Request",
-	"detailRecordActionEnquire": "Enquire"
+	"detailRecordActionEnquire": "Enquire",
+	"detailRecordActionReproduction": "Reproduction"
 
 }

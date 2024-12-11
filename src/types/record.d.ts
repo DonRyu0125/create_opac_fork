@@ -34,6 +34,16 @@ export interface EnquiryData {
 	enq_topic: string
 	enq_user: string
 }
+export interface ReproductionData{
+	req_order_num: string
+	req_patron_name: string
+	req_patron_id: string
+	req_patron_email: string
+	req_topic: string
+	req_topic_gl: string
+	req_repro_type_occurrence: string
+	req_title: string
+}
 export interface RequestData {
 	action: string
 	auto_approve: string
@@ -80,6 +90,7 @@ export interface Record {
 	record_link: string
 	record: FieldData
 	reproductions_count: string
+	reproduction: ReproductionData
 	request: RequestData
 	save_n_stop_record?: string // for client registration 
 	skip_n_stop_record?:string // for client registration
