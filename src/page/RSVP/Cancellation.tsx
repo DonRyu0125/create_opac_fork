@@ -58,7 +58,7 @@ const RSVPCancel = () => {
 			setStatus(STATUS_TYPE.OutDate)
 			return
 		}
-		isRecordValidate(jsonObj.TAG_FUNC_P_ID,jsonObj.TAG_FUNC_DATE).then((res) => {
+		isRecordValidate(jsonObj.TAG_FUNC_P_ID, jsonObj.TAG_FUNC_DATE).then((res) => {
 			setLoading(false)
 			if (res) {
 				setPatronInfo(jsonObj)
@@ -68,7 +68,7 @@ const RSVPCancel = () => {
 		})
 	}
 
-	const isRecordValidate = async (id: string,date:string) => {
+	const isRecordValidate = async (id: string, date: string) => {
 		setLoading(true)
 		return await axios
 			.get(

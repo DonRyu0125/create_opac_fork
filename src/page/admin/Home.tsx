@@ -7,6 +7,7 @@ import SectionWrapper from '@/components/common/admin/layout/SectionWrapper'
 import { default as enValues } from '@/constants/en/home.json'
 import { default as frValues } from '@/constants/fr/home.json'
 import { useAdminForm } from '@/hooks/useAdminForm'
+import { isSupportedImageExtension } from '@/lib/tdr'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
 import { FormEvent } from 'react'
@@ -14,6 +15,7 @@ import { FormEvent } from 'react'
 const AdminHome = () => {
 	return (
 		<AdminFormLayout
+			enablePreview
 			enData={enValues}
 			frData={frValues}
 			schema={fields as SchemaType}
@@ -42,6 +44,15 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 				field={'Site banner'}
 				value={fieldsValue.heroBanner}
 				onChange={(e) => handleChange(['heroBanner'], e)}
+				onTDRAssetsSelect={(files) => {
+					if (files.length > 0) {
+						const file = files[0]
+						handleChange(
+							['heroBanner'],
+							isSupportedImageExtension(file.Extension) ? file.Access : file.Thumbnail
+						)
+					}
+				}}
 			/>
 
 			<div className="mt-2">

@@ -114,7 +114,14 @@ const EventInput = ({ label, keyname, register, required, isLoginValid }: EventI
 	)
 }
 
-const EventEmailInput = ({ label, keyname, register, required, errors, isLoginValid }: EventInput) => {
+const EventEmailInput = ({
+	label,
+	keyname,
+	register,
+	required,
+	errors,
+	isLoginValid,
+}: EventInput) => {
 	return (
 		<div className={'flex w-full flex-col my-1'}>
 			<Label>{label}</Label>

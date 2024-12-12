@@ -68,7 +68,6 @@
 	"firstName": "First Name",
 	"lastName": "Last Name",
 	"email": "Email",
-	"attendee": "Attendee",
 	"eventCancel": "Event Cancelled",
 	"spotReserved": "spot reserved",
 	"confirm": "Confirm",
@@ -155,7 +154,6 @@
 	"eventEndedMessage": "Closed",
 	"hello": "Hello",
 	"event": "Event",
-	"dashboardHome": "Dashboard Home",
 	"date": "Date",
 	"location": "Location",
 	"start": "Start",
@@ -163,8 +161,10 @@
 	"no": "No",
 	"confirmCancel": "Are you sure?",
 	"yes": "Yes",
-	"attendee": "Attendee",
+  "attendee": "Attendee",
 	"map":"Map",
-	"detailRecordActionRequest": "Request"
+	"detailRecordActionRequest": "Request",
+	"detailRecordActionEnquire": "Enquire",
+	"detailRecordActionReproduction": "Reproduction"
 
 }

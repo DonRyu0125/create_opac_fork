@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { InputWrapper } from './InputWrapper'
 import { InputProps } from './types'
 
-const TextField = ({ id, title, value, onChange, placeholder, name }: InputProps) => {
+const TextField = ({ id, title, value, onChange, placeholder, name, append }: InputProps) => {
 	const [val, setVal] = useState(value)
 	const defaultId = id || `text-field-${title}`
 
@@ -37,6 +37,8 @@ const TextField = ({ id, title, value, onChange, placeholder, name }: InputProps
 					name={name}
 				/>
 			)}
+
+			{append}
 		</InputWrapper>
 	)
 }

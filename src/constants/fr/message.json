@@ -164,5 +164,7 @@
 	"yes": "Oui",
 	"attendee": "participant",
 	"map":"Carte",
-	"detailRecordActionRequest": "Request"
+	"detailRecordActionRequest": "Request",
+	"detailRecordActionEnquire": "Enquire",
+	"detailRecordActionReproduction": "Reproduction"
 }
