@@ -160,8 +160,11 @@
 	"start": "Commencer",
 	"end": "Fin",
 	"no": "Non",
-	"confirmCancel": "En êtes-vous absolument sûr ?",
+	"confirmCancel": "En êtes-vous sûr ?",
 	"yes": "Oui",
 	"attendee": "participant",
-	"detailRecordActionRequest": "Request"
+	"map":"Carte",
+	"detailRecordActionRequest": "Request",
+	"detailRecordActionEnquire": "Enquire",
+	"detailRecordActionReproduction": "Reproduction"
 }

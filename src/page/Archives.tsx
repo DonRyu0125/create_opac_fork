@@ -13,6 +13,7 @@ import Hero from '../components/common/Hero'
 import SearchForm from '../components/common/search-form/SearchForm'
 import Layout from '../components/layouts'
 import { UNION_SEARCH_CL } from './Home'
+import InterativeMap from '@/components/common/interativeMap'
 
 const Archives = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
@@ -29,6 +30,7 @@ const Archives = () => {
 		categoriesItems,
 		enableRSVP,
 		browseByCategoryTitle,
+		enableMap,
 	} = useConstants().archives
 	return (
 		<Layout>
@@ -95,6 +97,11 @@ const Archives = () => {
 						filterTypes={rsvp.filterTypes}
 						filterOption={rsvp.filterOption}
 					/>
+				</Section>
+			)}
+			{enableMap && (
+				<Section heading={`${message.map}`}>
+					<InterativeMap DB_TYPE={'DESCRIPTION_WEB'} />
 				</Section>
 			)}
 		</Layout>
