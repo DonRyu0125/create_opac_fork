@@ -17,6 +17,7 @@ import Button from '../admin/Button'
 import { v4 as uuidv4 } from 'uuid'
 import { RefreshCw } from 'lucide-react'
 import { getSessionID } from '@/lib/utils'
+import file_map from './dummy.json'
 
 const DB_TYPE_MAP = {
 	library: 'Library',
@@ -41,6 +42,9 @@ interface DataType {
 	ORIGIN_COUNTRY: string
 	ORIGIN_PRV_STATE: string
 	ORIGIN_CITY: string
+	DATE: string
+	IMAG_URL: string
+	LINK: string
 }
 
 // Add background circle to icons using CSS
@@ -190,7 +194,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 		setAllData(updatedRecords)
 		setFilteredData(updatedRecords)
 		const countries = Array.from(
-			new Set(updatedRecords?.map((item: DataType) => item.ORIGIN_COUNTRY))
+			new Set(updatedRecords?.map((item: any) => item.ORIGIN_COUNTRY))
 		)
 		setCkTypes({ countries })
 		setLoading(false)
@@ -370,7 +374,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 						iconCreateFunction={(cluster) =>
 							createClusterIcon(cluster, libraryIcon, COLOR_MAP.library)
 						}>
-						{filteredData?.map((marker: any, key: number) => {
+						{filteredData?.map((marker: DataType, key: number) => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.library) {
 								return (
 									<Marker
@@ -380,11 +384,43 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 											marker?.DECIMAL_LONGITUD,
 										]}
 										icon={icons['library']}>
-										<Popup>
-											<div className="p-2 bg-white rounded">
-												<h3 className="font-bold text-blue-600">
-													{marker.REFD}
-												</h3>
+										<Popup className="hidden md:block">
+											<div className="max-w-[400px]">
+												<a href={marker.LINK}>
+													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
+														{marker.LEGAL_TITLE ?? 'n/a'}
+													</h3>
+												</a>
+												<div className="bg-slate-100 h-48 mb-4">
+													<img
+														src={marker.IMAG_URL}
+														alt="Library"
+														className="w-full h-full object-contain rounded-t-lg "
+													/>
+												</div>
+												<table className="w-full text-sm">
+													<tbody>
+														<tr className="border-b">
+															<td className="font-semibold">REFD</td>
+															<td>{marker.REFD ?? 'n/a'} </td>
+														</tr>
+														<tr className="border-b">
+															<td className="font-semibold py-1 pr-2">
+																Location
+															</td>
+															<td>
+																{marker.ORIGIN_CITY ?? 'n/a'} ,{' '}
+																{marker.ORIGIN_PRV_STATE ?? 'n/a'}
+															</td>
+														</tr>
+														<tr>
+															<td className="font-semibold py-1 pr-2">
+																Date
+															</td>
+															<td>{marker.DATE ?? 'n/a'}</td>
+														</tr>
+													</tbody>
+												</table>
 											</div>
 										</Popup>
 									</Marker>
@@ -410,11 +446,47 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 											marker?.DECIMAL_LONGITUD,
 										]}
 										icon={icons['archive']}>
-										<Popup>
-											<div className="p-2 bg-white rounded">
-												<h3 className="font-bold text-blue-600">
-													{marker.ACCESSION_NUMBER}
-												</h3>
+										<Popup className="hidden md:block">
+											<div className="max-w-[400px]">
+												<a href={marker.LINK}>
+													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
+														{marker.LEGAL_TITLE ?? 'n/a'}
+													</h3>
+												</a>
+												<div className="bg-slate-100 h-48 mb-4">
+													<img
+														src={marker.IMAG_URL}
+														alt="Archive"
+														className="w-full h-full object-contain rounded-t-lg "
+													/>
+												</div>
+												<table className="w-full text-sm">
+													<tbody>
+														<tr className="border-b">
+															<td className="font-semibold">
+																Accession Number
+															</td>
+															<td>
+																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
+															</td>
+														</tr>
+														<tr className="border-b">
+															<td className="font-semibold py-1 pr-2">
+																Location
+															</td>
+															<td>
+																{marker.ORIGIN_CITY ?? 'n/a'} ,{' '}
+																{marker.ORIGIN_PRV_STATE ?? 'n/a'}
+															</td>
+														</tr>
+														<tr>
+															<td className="font-semibold py-1 pr-2">
+																Date
+															</td>
+															<td>{marker.DATE ?? 'n/a'}</td>
+														</tr>
+													</tbody>
+												</table>
 											</div>
 										</Popup>
 									</Marker>
@@ -440,11 +512,47 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 											marker?.DECIMAL_LONGITUD,
 										]}
 										icon={icons['museum']}>
-										<Popup>
-											<div className="p-2 bg-white rounded">
-												<h3 className="font-bold text-blue-600">
-													ACCESSION_NUMBER:{marker.ACCESSION_NUMBER}
-												</h3>
+										<Popup className="hidden md:block">
+											<div className="max-w-[400px]">
+												<a href={marker.LINK}>
+													<h3 className="text-lg font-bold text-blue-600 border-b pb-2 overflow-x-auto">
+														{marker.LEGAL_TITLE ?? 'n/a'}
+													</h3>
+												</a>
+												<div className="bg-slate-100 h-48 mb-4">
+													<img
+														src={marker.IMAG_URL}
+														alt="Museum"
+														className="w-full h-full object-contain rounded-t-lg "
+													/>
+												</div>
+												<table className="w-full text-sm">
+													<tbody>
+														<tr className="border-b">
+															<td className="font-semibold">
+																Accession Number
+															</td>
+															<td className='overflow-x-auto'>
+																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
+															</td>
+														</tr>
+														<tr className="border-b">
+															<td className="font-semibold py-1 pr-2">
+																Location
+															</td>
+															<td className='overflow-x-auto'>
+																{marker.ORIGIN_CITY ?? 'n/a'} ,{' '}
+																{marker.ORIGIN_PRV_STATE ?? 'n/a'}
+															</td>
+														</tr>
+														<tr>
+															<td className="font-semibold py-1 pr-2">
+																Date
+															</td>
+															<td className='overflow-x-auto'>{marker.DATE ?? 'n/a'}</td>
+														</tr>
+													</tbody>
+												</table>
 											</div>
 										</Popup>
 									</Marker>
