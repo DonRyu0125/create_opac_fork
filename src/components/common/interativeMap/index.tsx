@@ -409,8 +409,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 																Location
 															</td>
 															<td>
-																{marker.ORIGIN_CITY ?? 'n/a'} ,{' '}
-																{marker.ORIGIN_PRV_STATE ?? 'n/a'}
+																{marker.ORIGIN_CITY } 
+																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
 														<tr>
@@ -475,8 +475,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 																Location
 															</td>
 															<td>
-																{marker.ORIGIN_CITY ?? 'n/a'} ,{' '}
-																{marker.ORIGIN_PRV_STATE ?? 'n/a'}
+																{marker.ORIGIN_CITY} 
+																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
 														<tr>
@@ -541,8 +541,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 																Location
 															</td>
 															<td className='overflow-x-auto'>
-																{marker.ORIGIN_CITY ?? 'n/a'} ,{' '}
-																{marker.ORIGIN_PRV_STATE ?? 'n/a'}
+																{marker.ORIGIN_CITY }
+																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
 														<tr>
