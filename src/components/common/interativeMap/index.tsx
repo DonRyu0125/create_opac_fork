@@ -391,13 +391,15 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 														{marker.LEGAL_TITLE ?? 'n/a'}
 													</h3>
 												</a>
-												<div className="bg-slate-100 h-48 mb-4">
-													<img
-														src={marker.IMAG_URL}
-														alt="Library"
-														className="w-full h-full object-contain rounded-t-lg "
-													/>
-												</div>
+												{marker?.IMAG_URL && (
+													<div className="bg-slate-100 h-48 mb-4">
+														<img
+															src={marker.IMAG_URL}
+															alt="Library"
+															className="w-full h-full object-contain rounded-t-lg "
+														/>
+													</div>
+												)}
 												<table className="w-full text-sm">
 													<tbody>
 														<tr className="border-b">
@@ -409,7 +411,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 																Location
 															</td>
 															<td>
-																{marker.ORIGIN_CITY } 
+																{marker.ORIGIN_CITY}
 																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
@@ -453,13 +455,15 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 														{marker.LEGAL_TITLE ?? 'n/a'}
 													</h3>
 												</a>
-												<div className="bg-slate-100 h-48 mb-4">
-													<img
-														src={marker.IMAG_URL}
-														alt="Archive"
-														className="w-full h-full object-contain rounded-t-lg "
-													/>
-												</div>
+												{marker?.IMAG_URL && (
+													<div className="bg-slate-100 h-48 mb-4">
+														<img
+															src={marker.IMAG_URL}
+															alt="Archive"
+															className="w-full h-full object-contain rounded-t-lg "
+														/>
+													</div>
+												)}
 												<table className="w-full text-sm">
 													<tbody>
 														<tr className="border-b">
@@ -475,7 +479,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 																Location
 															</td>
 															<td>
-																{marker.ORIGIN_CITY} 
+																{marker.ORIGIN_CITY}
 																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
@@ -519,20 +523,22 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 														{marker.LEGAL_TITLE ?? 'n/a'}
 													</h3>
 												</a>
-												<div className="bg-slate-100 h-48 mb-4">
-													<img
-														src={marker.IMAG_URL}
-														alt="Museum"
-														className="w-full h-full object-contain rounded-t-lg "
-													/>
-												</div>
+												{marker?.IMAG_URL && (
+													<div className="bg-slate-100 h-48 mb-4">
+														<img
+															src={marker.IMAG_URL}
+															alt="Museum"
+															className="w-full h-full object-contain rounded-t-lg "
+														/>
+													</div>
+												)}
 												<table className="w-full text-sm">
 													<tbody>
 														<tr className="border-b">
 															<td className="font-semibold">
 																Accession Number
 															</td>
-															<td className='overflow-x-auto'>
+															<td className="overflow-x-auto">
 																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
 															</td>
 														</tr>
@@ -540,8 +546,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 															<td className="font-semibold py-1 pr-2">
 																Location
 															</td>
-															<td className='overflow-x-auto'>
-																{marker.ORIGIN_CITY }
+															<td className="overflow-x-auto">
+																{marker.ORIGIN_CITY}
 																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
@@ -549,7 +555,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 															<td className="font-semibold py-1 pr-2">
 																Date
 															</td>
-															<td className='overflow-x-auto'>{marker.DATE ?? 'n/a'}</td>
+															<td className="overflow-x-auto">
+																{marker.DATE ?? 'n/a'}
+															</td>
 														</tr>
 													</tbody>
 												</table>
