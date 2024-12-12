@@ -378,7 +378,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.library) {
 								return (
 									<Marker
-										key={`L${marker.DATABASE_TYPE}-${marker.REFD}`}
+										key={`L${marker.DATABASE_TYPE}-${marker.ACCESSION_NUMBER}`}
 										position={[
 											marker?.DECIMAL_LATITUDE,
 											marker?.DECIMAL_LONGITUD,
@@ -403,8 +403,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												<table className="w-full text-sm">
 													<tbody>
 														<tr className="border-b">
-															<td className="font-semibold">REFD</td>
-															<td>{marker.REFD ?? 'n/a'} </td>
+															<td className="font-semibold">ACCESSION_NUMBER</td>
+															<td>{marker.ACCESSION_NUMBER ?? 'n/a'} </td>
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
@@ -442,7 +442,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.archive) {
 								return (
 									<Marker
-										key={`A${marker.DATABASE_TYPE}-${marker.ACCESSION_NUMBER}`}
+										key={`A${marker.DATABASE_TYPE}-${marker.REFD}`}
 										position={[
 											marker?.DECIMAL_LATITUDE,
 											marker?.DECIMAL_LONGITUD,
@@ -468,10 +468,10 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 													<tbody>
 														<tr className="border-b">
 															<td className="font-semibold">
-																Accession Number
+																REFD
 															</td>
 															<td>
-																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
+																{marker.REFD ?? 'n/a'}{' '}
 															</td>
 														</tr>
 														<tr className="border-b">
