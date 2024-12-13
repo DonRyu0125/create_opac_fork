@@ -174,30 +174,30 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 	}
 
 	const fetch_get = async () => {
-		setLoading(true)
-		let HOME_SESSID = getSessionID()
-		const response = await axios.get(
-			`${HOME_SESSID}?SEARCH&REPORT=WEB_UNION_SUM_MAP&APPLICATION=UNION_VIEW&DATABASE=${DB_TYPE}&EXP=%2B%2B%40`,
-			{
-				headers: {
-					Accept: 'application/xml',
-				},
-			}
-		)
-		const x2js = new X2JS()
-		const jsonData: any = x2js.xml2js(response.data)
-		const updatedRecords = jsonData?.xml?.record?.map((record: DataType) => {
-			record.DECIMAL_LATITUDE = parseFloat(record.DECIMAL_LATITUDE ?? 0)
-			record.DECIMAL_LONGITUD = parseFloat(record.DECIMAL_LONGITUD ?? 0)
-			return record
-		})
-		setAllData(updatedRecords)
-		setFilteredData(updatedRecords)
+		// setLoading(true)
+		// let HOME_SESSID = getSessionID()
+		// const response = await axios.get(
+		// 	`${HOME_SESSID}?SEARCH&REPORT=WEB_UNION_SUM_MAP&APPLICATION=UNION_VIEW&DATABASE=${DB_TYPE}&EXP=%2B%2B%40`,
+		// 	{
+		// 		headers: {
+		// 			Accept: 'application/xml',
+		// 		},
+		// 	}
+		// )
+		// const x2js = new X2JS()
+		// const jsonData: any = x2js.xml2js(response.data)
+		// const updatedRecords = jsonData?.xml?.record?.map((record: DataType) => {
+		// 	record.DECIMAL_LATITUDE = parseFloat(record.DECIMAL_LATITUDE ?? 0)
+		// 	record.DECIMAL_LONGITUD = parseFloat(record.DECIMAL_LONGITUD ?? 0)
+		// 	return record
+		// })
+		setAllData(file_map)
+		setFilteredData(file_map)
 		const countries = Array.from(
-			new Set(updatedRecords?.map((item: any) => item.ORIGIN_COUNTRY))
+			new Set(file_map?.map((item: any) => item.ORIGIN_COUNTRY))
 		)
 		setCkTypes({ countries })
-		setLoading(false)
+		// setLoading(false)
 	}
 
 	const getUniqueValuesP = () => {

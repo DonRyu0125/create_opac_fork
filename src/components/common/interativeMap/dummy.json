@@ -9,7 +9,8 @@
         "ORIGIN_COUNTRY": "Canada",
         "ORIGIN_PRV_STATE": "NS",
         "ORIGIN_CITY": "Halifax",
-        "DATE": "1995-02-01"
+        "DATE": "1995-02-01",
+        "IMAG_URL":"https://cloudinary-marketing-res.cloudinary.com/images/w_1000,c_scale/v1679921049/Image_URL_header/Image_URL_header-png?_i=AA"
     },
     {
         "DATABASE_TYPE": "Museum",
@@ -21,7 +22,8 @@
         "ORIGIN_COUNTRY": "Canada",
         "ORIGIN_PRV_STATE": "ON",
         "ORIGIN_CITY": "Ottawa",
-        "DATE": "1995-02-01"
+        "DATE": "1995-02-01",
+        "IMAG_URL":"https://cloudinary-marketing-res.cloudinary.com/images/w_1000,c_scale/v1679921049/Image_URL_header/Image_URL_header-png?_i=AA"
     },
     {
         "DATABASE_TYPE": "Library",
@@ -33,7 +35,8 @@
         "ORIGIN_COUNTRY": "Canada",
         "ORIGIN_PRV_STATE": "AB",
         "ORIGIN_CITY": "Edmonton",
-        "DATE": "1995-02-01"
+        "DATE": "1995-02-01",
+        "IMAG_URL":"https://cloudinary-marketing-res.cloudinary.com/images/w_1000,c_scale/v1679921049/Image_URL_header/Image_URL_header-png?_i=AA"
     },
     {
         "DATABASE_TYPE": "Museum",
@@ -45,7 +48,8 @@
         "ORIGIN_COUNTRY": "Canada",
         "ORIGIN_PRV_STATE": "QC",
         "ORIGIN_CITY": "Montreal",
-        "DATE": "1995-02-01"
+        "DATE": "1995-02-01",
+        "IMAG_URL":"https://cloudinary-marketing-res.cloudinary.com/images/w_1000,c_scale/v1679921049/Image_URL_header/Image_URL_header-png?_i=AA"
     },
     {
         "DATABASE_TYPE": "Archive",
