@@ -50,6 +50,7 @@ export interface RequestData {
 	item_req_time: string
 	method_request: string
 	rec_status: string
+	req_acc_number: string
 	req_appl_name: string
 	req_back_to_record: string
 	req_db_link2: string
@@ -92,6 +93,8 @@ export interface Record {
 	reproductions_count: string
 	reproduction: ReproductionData
 	request: RequestData
+	req_status: string
+	rec_status: string
 	save_n_stop_record?: string // for client registration 
 	skip_n_stop_record?:string // for client registration
 }

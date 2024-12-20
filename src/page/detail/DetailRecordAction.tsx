@@ -115,6 +115,7 @@ const DetailRecordAction = () => {
 							<Input type="hidden" name="REQ_DB_RECID" value={requestData.req_db_recid}/>
 							<Input type="hidden" name="REQ_TITLE" value={requestData.req_title}/>
 							<Input type="hidden" name="REQ_ITEM_ID" value={requestData.req_item_id}/>
+							<Input type="hidden" name="REQ_ACC_NUMBER" value={requestData.req_acc_number}/>
 							<Input type="hidden" name="REQ_ITEM_TITLE" value={requestData.req_item_title}/>
 							<Button
 								className="bg-opac-darkblue"
