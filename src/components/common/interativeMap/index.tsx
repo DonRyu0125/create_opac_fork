@@ -18,6 +18,9 @@ import { v4 as uuidv4 } from 'uuid'
 import { RefreshCw } from 'lucide-react'
 import { getSessionID } from '@/lib/utils'
 
+import { Label } from '@/components/ui/label'
+import { Checkbox } from '@/components/ui/checkbox'
+
 const DB_TYPE_MAP = {
 	library: 'Library',
 	archive: 'Archive',
@@ -249,27 +252,47 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 						<CollapseList title={'Database'} expand={true}>
 							<div className="space-y-3 border-t p-4">
 								<div className="flex">
-									<CheckboxWithLabel
-										callback={() => handleDatabaseChange(DB_TYPE_MAP.archive)}
-										label={DB_TYPE_MAP.archive}
-										checked={selectedDatabases.includes(DB_TYPE_MAP.archive)}
-									/>
+									<div className={'flex items-center space-x-2'}>
+										<Checkbox
+											onClick={(e) =>
+												handleDatabaseChange(DB_TYPE_MAP.archive)
+											}
+											checked={selectedDatabases.includes(
+												DB_TYPE_MAP.archive
+											)}
+										/>
+										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+											{DB_TYPE_MAP.archive}
+										</Label>
+									</div>
 									<img src={archiveIcon} className="ml-1 w-5 h-5" />
 								</div>
 								<div className="flex">
-									<CheckboxWithLabel
-										callback={() => handleDatabaseChange(DB_TYPE_MAP.library)}
-										label={DB_TYPE_MAP.library}
-										checked={selectedDatabases.includes(DB_TYPE_MAP.library)}
-									/>
+									<div className={'flex items-center space-x-2'}>
+										<Checkbox
+											onClick={() =>
+												handleDatabaseChange(DB_TYPE_MAP.library)
+											}
+											checked={selectedDatabases.includes(
+												DB_TYPE_MAP.library
+											)}
+										/>
+										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+											{DB_TYPE_MAP.library}
+										</Label>
+									</div>
 									<img src={libraryIcon} className="ml-1 w-5 h-5" />
 								</div>
 								<div className="flex">
-									<CheckboxWithLabel
-										callback={() => handleDatabaseChange(DB_TYPE_MAP.museum)}
-										label={DB_TYPE_MAP.museum}
-										checked={selectedDatabases.includes(DB_TYPE_MAP.museum)}
-									/>
+									<div className={'flex items-center space-x-2'}>
+										<Checkbox
+											onClick={() => handleDatabaseChange(DB_TYPE_MAP.museum)}
+											checked={selectedDatabases.includes(DB_TYPE_MAP.museum)}
+										/>
+										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+											{DB_TYPE_MAP.museum}
+										</Label>
+									</div>
 									<img src={museumIcon} className="ml-1 w-5 h-5" />
 								</div>
 							</div>
@@ -280,12 +303,15 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							{ckTypes?.countries?.map((item: string, key: number) => {
 								if (item) {
 									return (
-										<CheckboxWithLabel
-											key={key}
-											callback={() => handleCountryChange(item)}
-											label={item}
-											checked={selectedCountries.includes(item)}
-										/>
+										<div className={'flex items-center space-x-2'} key={key}>
+											<Checkbox
+												onClick={() => handleCountryChange(item)}
+												checked={selectedCountries.includes(item)}
+											/>
+											<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+												{item}
+											</Label>
+										</div>
 									)
 								}
 								return
@@ -297,12 +323,15 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							{selectedCountries.length > 0 ? (
 								getUniqueValuesP()?.map((item: any, key: number) => {
 									return (
-										<CheckboxWithLabel
-											key={key}
-											callback={() => handleProvinceChange(item)}
-											label={item}
-											checked={selectedProvinces.includes(item)}
-										/>
+										<div className={'flex items-center space-x-2'} key={key}>
+											<Checkbox
+												onClick={() => handleProvinceChange(item)}
+												checked={selectedProvinces.includes(item)}
+											/>
+											<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+												{item}
+											</Label>
+										</div>
 									)
 								})
 							) : (
@@ -317,12 +346,15 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							{selectedProvinces.length > 0 ? (
 								getUniqueValuesC()?.map((item: any, key: number) => {
 									return (
-										<CheckboxWithLabel
-											key={key}
-											callback={() => handleCityChange(item)}
-											label={item}
-											checked={selectedCities.includes(item)}
-										/>
+										<div className={'flex items-center space-x-2'} key={key}>
+											<Checkbox
+												onClick={() => handleCityChange(item)}
+												checked={selectedCities.includes(item)}
+											/>
+											<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+												{item}
+											</Label>
+										</div>
 									)
 								})
 							) : (
@@ -392,7 +424,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										<Popup className="hidden md:block">
 											<div className="max-w-[400px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${library.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`} target="_blank">
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${library.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
+													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
 														{marker.LEGAL_TITLE ?? 'n/a'}
 													</h3>
@@ -461,7 +494,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										<Popup className="hidden md:block">
 											<div className="max-w-[400px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${archives.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=REFD%20${marker.REFD}`} target="_blank">
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${archives.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=REFD%20${marker.REFD}`}
+													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
 														{marker.LEGAL_TITLE ?? 'n/a'}
 													</h3>
@@ -526,7 +560,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										<Popup className="hidden md:block">
 											<div className="max-w-[400px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`} target="_blank">
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
+													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600 border-b pb-2 overflow-x-auto">
 														{marker.LEGAL_TITLE ?? 'n/a'}
 													</h3>
