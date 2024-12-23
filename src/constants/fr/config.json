@@ -12,7 +12,7 @@
 			"title": "Accueil"
 		},
 		{
-			"url": "/archives.html",
+			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html",
 			"title": "Archives",
 			"search_database": "DESCRIPTION_WEB"
 		},
