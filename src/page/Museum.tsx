@@ -13,6 +13,7 @@ import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
 import Slide from '@/components/common/slide'
 import ThumbnailCard from '@/components/common/ThumbnailCard'
 import { Card } from '@/components/ui/card'
+import InterativeMap from '@/components/common/interativeMap'
 const Museum = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { message } = useConstants()
@@ -28,6 +29,7 @@ const Museum = () => {
 		categoriesItems,
 		enableRSVP,
 		browseByCategoryTitle,
+		enableMap,
 	} = useConstants().museum
 	return (
 		<Layout>
@@ -68,7 +70,6 @@ const Museum = () => {
 					</BentoGrid>
 				</Section>
 			)}
-
 			{enableCategoriesItems && (
 				<Section heading={browseByCategoryTitle}>
 					<Slide
@@ -88,7 +89,6 @@ const Museum = () => {
 					/>
 				</Section>
 			)}
-
 			{enableRSVP && (
 				<Section heading={`${message.calendar}`}>
 					<EventCalendar
@@ -96,6 +96,11 @@ const Museum = () => {
 						filterTypes={rsvp.filterTypes}
 						filterOption={rsvp.filterOption}
 					/>
+				</Section>
+			)}
+			{enableMap && (
+				<Section heading={`${message.map}`}>
+					<InterativeMap DB_TYPE={'COLLECTIONS_WEB'} />
 				</Section>
 			)}
 		</Layout>

@@ -9,11 +9,13 @@ import Hero from '../components/common/Hero'
 import SearchForm from '../components/common/search-form/SearchForm'
 import Layout from '../components/layouts'
 import { UNION_SEARCH_CL } from './Home'
+import InterativeMap from '@/components/common/interativeMap'
 
 const Library = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { message } = useConstants()
-	const { heroBanner, searchURL, heading, database_name, rsvp } = useConstants().library
+	const { heroBanner, searchURL, heading, database_name, rsvp, enableRSVP,enableMap } =
+		useConstants().library
 	return (
 		<Layout>
 			<Hero className={''} title={heading} backgroundImage={heroBanner} description="">
@@ -25,13 +27,20 @@ const Library = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
-			<Section heading={`${message.calendar}`}>
-				<EventCalendar
-					databaseType={rsvp.filterDatabase}
-					filterTypes={rsvp.filterTypes}
-					filterOption={rsvp.filterOption}
-				/>
-			</Section>
+			{enableRSVP && (
+				<Section heading={`${message.calendar}`}>
+					<EventCalendar
+						databaseType={rsvp.filterDatabase}
+						filterTypes={rsvp.filterTypes}
+						filterOption={rsvp.filterOption}
+					/>
+				</Section>
+			)}
+			{enableMap && (
+				<Section heading={`${message.map}`}>
+					<InterativeMap DB_TYPE={'BIBLIO_WEB'} />
+				</Section>
+			)}
 		</Layout>
 	)
 }

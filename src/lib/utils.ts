@@ -180,3 +180,11 @@ export const getSearchURL = (url: string) => {
 	const hostname = window.location.protocol + '//' + window.location.host
 	return `${hostname}/SCRIPTS/MWIMAIN.DLL?${url}`
 }
+
+export const getPatronID = () => {
+	return getCookieValue("M2L_PATRON_ID")?.split(']')[1]
+}
+
+export const getLanguageID = () => {
+	return getCookieValue("$LANG")?.split(']')[1]
+}

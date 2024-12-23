@@ -33,7 +33,7 @@
 			"label": "Enquiries",
 			"db": "ENQUIRIES_VIEW",
 			"icon": "Lightbulb",
-			"url": "?SEARCH&DATABASE=ENQUIRIES_VIEW&NEW=Y&EXP=ENQ_USER_ID%20"
+			"url": "?SEARCH&DATABASE=ENQUIRIES_VIEW&NEW=Y&EXP=ENQ_PATRON_ID%20"
 		},
 		{
 			"id": 6,

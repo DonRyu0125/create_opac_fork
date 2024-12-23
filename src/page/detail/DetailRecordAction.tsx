@@ -2,13 +2,12 @@ import { useState, useRef } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { copyRecordURL, deepSearchKey } from '@/lib/record'
-import { ChevronLeft, ChevronRight, Copy, ShoppingBag } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
 import DialogLogin from '../../components/common/DialogLogin'
 import TooltipButton from '@/components/common/TooltipButton'
 import { getCookieValue, getHomeSessionID } from '@/lib/utils'
-import axios from 'axios'
 import { Input } from '@/components/ui/input'
 // State for modal visibility
 
@@ -22,22 +21,25 @@ const DetailRecordAction = () => {
 	const requestData = record?.request
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const database = record.database_name
-	// ITEM_REQ_TIME:  requestData.item_req_time,
-	// METHOD_REQUEST: requestData.method_request,
-	// REQ_TOPIC:      requestData.req_topic,
-	// REQ_APPL_NAME:  requestData.req_appl_name,
-	// REQ_DB_NAME:    requestData.req_db_name,
-	// REQ_DB_LINK2:   requestData.req_db_link2,
-	// REQ_QUEUE:      requestData.req_queue,
-	// REQ_DB_RECID:   requestData.req_db_recid,
-	// REQ_TITLE:      requestData.req_title,
-	// REQ_ITEM_ID:    requestData.req_item_id,
-	// REQ_ITEM_TITLE: requestData.req_item_title
-
-	const handleSubmit = () => {
-		if (checkLoggedInToRequest()) {
-			if (formRef.current) {
-				formRef.current.submit()
+	console.log(record)
+	const handleSubmit = (action: string | null) => {
+		if (checkLoggedInToRequest()){
+			switch(action) {
+				case "Request":
+					if (formRef.current) {
+						formRef.current.submit()
+					} else {
+						console.log("Request Error")
+					}
+					break;
+				case "Enquire":
+					const url = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=ENQUIRIES_VIEW&DE_FORM=[OPAC_ENQUIRY]de_enquiryform.html&subject=${record.record.title}`;
+					window.location.href = url;
+					break;
+				case "Reproduction":
+					const reprodURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_VIEW&DE_FORM=[OPAC_REPROD]de_reproductionform.html&title=${record.record.title}`;
+					window.location.href = reprodURL;
+					break;
 			}
 		}
 	}
@@ -93,96 +95,55 @@ const DetailRecordAction = () => {
 				</TooltipButton>
 
 				<div className="flex space-x-2">
-					{checkRecordHasMandatoryDataToRequest() ? (
-						// && checkIfCurrentClientRequestedThisRecord()
-						<TooltipButton
-							tooltipContent="Request Record"
-							variant="outline"
-							onClick={handleSubmit}>
-							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
-							{message.detailRecordActionRequest}
-							<form
-								method="post"
-								ref={formRef}
-								action={
-									getHomeSessionID() +
-									'/1/' +
-									record.request.req_db_link2 +
-									'?REQUESTLOGIN&DBNAME=' +
-									record.request.req_db_name
-								}
-								className="hidden">
-								<Input
-									type="hidden"
-									name="ITEM_REQ_TIME"
-									value={requestData.item_req_time}
-								/>
-								<Input
-									type="hidden"
-									name="METHOD_REQUEST"
-									value={requestData.method_request}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_TOPIC"
-									value={requestData.req_topic}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_APPL_NAME"
-									value={requestData.req_appl_name}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_DB_NAME"
-									value={requestData.req_db_name}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_DB_LINK2"
-									value={requestData.req_db_link2}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_QUEUE"
-									value={requestData.req_queue}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_DB_RECID"
-									value={requestData.req_db_recid}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_TITLE"
-									value={requestData.req_title}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_ITEM_ID"
-									value={requestData.req_item_id}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_ITEM_TITLE"
-									value={requestData.req_item_title}
-								/>
-								<Input type="hidden" name="nixon" value="nixon" />
+					{checkRecordHasMandatoryDataToRequest() 
+					// && checkIfCurrentClientRequestedThisRecord() 
+					? 
+					<TooltipButton
+						tooltipContent="Request Record"
+						variant="outline"
+						onClick={() => handleSubmit("Request")}
+					>
+						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
+						<form method="post" ref={formRef} action={getHomeSessionID() + "/1/" + record.request.req_db_link2 + "?REQUESTLOGIN&DBNAME=" + record.request.req_db_name} className='hidden'>
+							<Input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time}/>
+							<Input type="hidden" name="METHOD_REQUEST" value={requestData.method_request}/>
+							<Input type="hidden" name="REQ_TOPIC" value={requestData.req_topic}/>
+							<Input type="hidden" name="REQ_APPL_NAME" value={requestData.req_appl_name}/>
+							<Input type="hidden" name="REQ_DB_NAME" value={ requestData.req_db_name}/>
+							<Input type="hidden" name="REQ_DB_LINK2" value={requestData.req_db_link2}/>
+							<Input type="hidden" name="REQ_QUEUE" value={requestData.req_queue}/>
+							<Input type="hidden" name="REQ_DB_RECID" value={requestData.req_db_recid}/>
+							<Input type="hidden" name="REQ_TITLE" value={requestData.req_title}/>
+							<Input type="hidden" name="REQ_ITEM_ID" value={requestData.req_item_id}/>
+							<Input type="hidden" name="REQ_ITEM_TITLE" value={requestData.req_item_title}/>
+							<Button
+								className="bg-opac-darkblue"
+								type="submit"
+								variant="default">
+								Submit
+							</Button>
+						</form>
+					</TooltipButton> : <TooltipButton
+						tooltipContent="Request Record"
+						variant="outline"
+						disabled>
+						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
+					</TooltipButton>}
 
-								<Button
-									className="bg-opac-darkblue"
-									type="submit"
-									variant="default">
-									Submit
-								</Button>
-							</form>
-						</TooltipButton>
-					) : (
-						<TooltipButton tooltipContent="Request Record" variant="outline" disabled>
-							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
-							{message.detailRecordActionRequest}
-						</TooltipButton>
-					)}
+					<TooltipButton
+						tooltipContent="Ask about this record"
+						variant="outline"
+						onClick={() => handleSubmit("Enquire")}
+					>
+						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionEnquire}
+					</TooltipButton>
+					<TooltipButton
+						tooltipContent="Reproduce this record"
+						variant="outline"
+						onClick={() => handleSubmit("Reproduction")}
+					>
+						<Files className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionReproduction}
+					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Copy record URL"
 						variant="outline"
