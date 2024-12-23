@@ -11,6 +11,7 @@ import Slide from '../components/common/slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
+import InterativeMap from '@/components/common/interativeMap'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -61,6 +62,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 		enableRSVP,
 		enableCategoriesItems,
 		enableRecentAddition,
+		enableMap,
 	} = data
 	const { message } = useConstants()
 	return (
@@ -98,7 +100,6 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 					</BentoGrid>
 				</Section>
 			)}
-
 			{enableCategoriesItems && (
 				<Section heading={browseByCategoryTitle}>
 					<Slide
@@ -127,7 +128,11 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 					/>
 				</Section>
 			)}
-
+			{enableMap && (
+				<Section heading={`${message.map}`}>
+					<InterativeMap DB_TYPE={'UNION_VIEW'}/>
+				</Section>
+			)}
 			{enableRecentAddition && (
 				<Section heading="Recent additions">
 					{/* <ParallaxScroll images={images} />; */}

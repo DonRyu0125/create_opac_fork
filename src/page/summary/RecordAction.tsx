@@ -22,7 +22,6 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const { message } = useConstants()
 	const [count, setCount] = useAtom(bookmarkCount)
-	console.log(record)
 	const handleBookmark = () => {
 		if (record.input?._name && like) {
 			//if record.input?._name is exsisted, we use bookmark sum report, Don Ryu20240705

@@ -38,6 +38,10 @@ import Register from '@/page/login/Register'
 import ResetPin from '@/page/login/ResetPin'
 import ForgotPin from '@/page/login/ForgotPin'
 import AdminLogin from '@/page/admin/Login'
+import EnquiryForm from '@/page/enquiry/EnquiryForm'
+import EnquiryConfirmed from '@/page/enquiry/EnquiryConfirmed'
+import ReproductionConfirmed from '@/page/reproduction/ReproductionConfirmed'
+import ReproductionForm from '@/page/reproduction/ReproductionForm'
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
@@ -87,6 +91,10 @@ export const ROUTES: TRoute = {
 	'no-session': NoSession,
 	error: GenericErrorPage,
 	bookmark: Bookmark,
+	enquiryform: EnquiryForm,
+	enquiryconfirmed: EnquiryConfirmed,
+	reproductionform: ReproductionForm,
+	reproductionconfirmed: ReproductionConfirmed,
 	...ADMIN_ROUTES,
 }
 
