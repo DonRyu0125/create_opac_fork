@@ -12,7 +12,6 @@ import { useAdminForm } from '@/hooks/useAdminForm'
 import { AdminFormProvider } from '@/providers/AdminFormProvider'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
-
 const AdminSettings = () => {
 	return (
 		<AdminLayout>
