@@ -1,4 +1,3 @@
-import Link from '@/components/common/Link'
 import { Button } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
 import { PatronInfo } from '@/types/patroninfo'
@@ -90,4 +89,4 @@ const CancelTmp = ({ patronInfo, onClick }: { patronInfo: PatronInfo; onClick: a
 	)
 }
 
-export { ConfirmTmp, CancelTmp }
+export { CancelTmp, ConfirmTmp }
