@@ -5,21 +5,21 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Id = number;
-export type Label = string;
-export type Db = string;
-export type Icon = string;
-export type Url = string;
+export type Id = number
+export type Label = string
+export type Db = string
+export type Icon = string
+export type Url = string
 export type Database = {
-  id?: Id;
-  label?: Label;
-  db?: Db;
-  icon?: Icon;
-  url?: Url;
-  [k: string]: unknown;
-}[];
+	id?: Id
+	label?: Label
+	db?: Db
+	icon?: Icon
+	url?: Url
+	[k: string]: unknown
+}[]
 
 export interface ClientProfileJson {
-  database?: Database;
-  [k: string]: unknown;
+	database?: Database
+	[k: string]: unknown
 }
