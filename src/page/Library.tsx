@@ -10,12 +10,21 @@ import SearchForm from '../components/common/search-form/SearchForm'
 import Layout from '../components/layouts'
 import { UNION_SEARCH_CL } from './Home'
 import InterativeMap from '@/components/common/interativeMap'
+import FeaturedColection from '@/components/features/FeaturedColection'
 
 const Library = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { message } = useConstants()
-	const { heroBanner, searchURL, heading, database_name, rsvp, enableRSVP,enableMap } =
-		useConstants().library
+	const {
+		heroBanner,
+		enableFeaturedCollection,
+		searchURL,
+		heading,
+		database_name,
+		rsvp,
+		enableRSVP,
+		enableMap,
+	} = useConstants().library
 	return (
 		<Layout>
 			<Hero className={''} title={heading} backgroundImage={heroBanner} description="">
@@ -27,6 +36,7 @@ const Library = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
+			{enableFeaturedCollection && <FeaturedColection page={'library'} />}
 			{enableRSVP && (
 				<Section heading={`${message.calendar}`}>
 					<EventCalendar

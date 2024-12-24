@@ -18,8 +18,8 @@ const Header = () => {
 							<a className="block text-teal-600" href="/">
 								<span className="sr-only ">Home</span>
 								<img className="h-12" src={logo} alt="logo" />
+								<h1 className="text-2xl font-bold text-opac-white">{siteName}</h1>
 							</a>
-							<h1 className="text-2xl font-bold text-opac-white">{siteName}</h1>
 						</div>
 					</div>
 					<div className=" items-center space-x-4 hidden md:flex">

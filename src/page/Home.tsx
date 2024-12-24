@@ -12,6 +12,7 @@ import Slide from '../components/common/slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
+import FeaturedColection from '@/components/features/FeaturedColection'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -43,9 +44,13 @@ const images = [
 	'https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3070&q=80',
 ]
 
-type MainPageProps = {
+export type MainPageProps = {
 	previewMode?: boolean
 	previewData?: any
+}
+
+export type PageSectionProps = MainPageProps & {
+	page: 'home' | 'archives' | 'library' | 'museum'
 }
 const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 	const sourceData = useConstants().home
@@ -73,11 +78,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 				</div>
 			</Hero>
 
-			{enableFeaturedCollection && (
-				<Section heading={message.featuredCollections}>
-					<ImageAccordion items={featuredCollection} />
-				</Section>
-			)}
+			{enableFeaturedCollection && <FeaturedColection page={'home'} />}
 			{enableCategoriesItems && (
 				<Section heading={browseByCategoryTitle}>
 					<Slide
@@ -97,6 +98,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 					/>
 				</Section>
 			)}
+
 			{enableRSVP && (
 				<Section heading={`${message.calendar}`}>
 					<EventCalendar

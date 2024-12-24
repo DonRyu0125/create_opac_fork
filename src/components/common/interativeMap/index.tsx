@@ -193,9 +193,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 		// })
 		setAllData(file_map)
 		setFilteredData(file_map)
-		const countries = Array.from(
-			new Set(file_map?.map((item: any) => item.ORIGIN_COUNTRY))
-		)
+		const countries = Array.from(new Set(file_map?.map((item: any) => item.ORIGIN_COUNTRY)))
 		setCkTypes({ countries })
 		// setLoading(false)
 	}
@@ -403,8 +401,12 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												<table className="w-full text-sm">
 													<tbody>
 														<tr className="border-b">
-															<td className="font-semibold">ACCESSION_NUMBER</td>
-															<td>{marker.ACCESSION_NUMBER ?? 'n/a'} </td>
+															<td className="font-semibold">
+																ACCESSION_NUMBER
+															</td>
+															<td>
+																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
+															</td>
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
@@ -467,12 +469,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												<table className="w-full text-sm">
 													<tbody>
 														<tr className="border-b">
-															<td className="font-semibold">
-																REFD
-															</td>
-															<td>
-																{marker.REFD ?? 'n/a'}{' '}
-															</td>
+															<td className="font-semibold">REFD</td>
+															<td>{marker.REFD ?? 'n/a'} </td>
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">

@@ -14,6 +14,7 @@ import SearchForm from '../components/common/search-form/SearchForm'
 import Layout from '../components/layouts'
 import { UNION_SEARCH_CL } from './Home'
 import InterativeMap from '@/components/common/interativeMap'
+import FeaturedColection from '@/components/features/FeaturedColection'
 
 const Archives = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
@@ -43,33 +44,7 @@ const Archives = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
-			{enableFeaturedCollection && (
-				<Section heading={message.featuredCollections}>
-					<BentoGrid className="mx-auto">
-						{featuredCollection.map((item, i) => (
-							<BentoGridItem
-								onClick={() => {
-									window.location.href = `${getSearchURL(`UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&DATABASE=DESCRIPTION_WEB&APPLICATION=UNION_VIEW&exp=${item.url}`)}`
-								}}
-								key={i}
-								title={item.title}
-								description={item.description}
-								header={
-									<img
-										src={item.thumbnail}
-										className="w-full object-cover max-h-[170px]"
-										alt={item.title}
-									/>
-								}
-								className={cn(
-									i === 3 || i === 6 ? 'md:col-span-2' : '',
-									'bg-primary'
-								)}
-							/>
-						))}
-					</BentoGrid>
-				</Section>
-			)}
+			{enableFeaturedCollection && <FeaturedColection page={'archives'} />}
 
 			{enableCategoriesItems && (
 				<Section heading={browseByCategoryTitle}>
@@ -90,6 +65,7 @@ const Archives = () => {
 					/>
 				</Section>
 			)}
+
 			{enableRSVP && (
 				<Section heading={`${message.calendar}`}>
 					<EventCalendar

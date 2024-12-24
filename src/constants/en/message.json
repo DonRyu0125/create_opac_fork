@@ -161,10 +161,9 @@
 	"no": "No",
 	"confirmCancel": "Are you sure?",
 	"yes": "Yes",
-  "attendee": "Attendee",
-	"map":"Map",
+	"attendee": "Attendee",
+	"map": "Map",
 	"detailRecordActionRequest": "Request",
 	"detailRecordActionEnquire": "Enquire",
 	"detailRecordActionReproduction": "Reproduction"
-
 }

@@ -1,19 +1,19 @@
+import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
+import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
+import EventCalendar from '@/components/common/event-calendar'
+import InterativeMap from '@/components/common/interativeMap'
+import Section from '@/components/common/Section'
+import Slide from '@/components/common/slide'
+import ThumbnailCard from '@/components/common/ThumbnailCard'
+import FeaturedColection from '@/components/features/FeaturedColection'
+import { Card } from '@/components/ui/card'
 import useConstants from '@/hooks/useConstants'
+import { getSearchURL } from '@/lib/utils'
+import { useState } from 'react'
 import Hero from '../components/common/Hero'
 import SearchForm from '../components/common/search-form/SearchForm'
 import Layout from '../components/layouts'
-import { SetStateAction, useState } from 'react'
-import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
-import { cn, getSearchURL } from '@/lib/utils'
-import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
 import { UNION_SEARCH_CL } from './Home'
-import EventCalendar from '@/components/common/event-calendar'
-import Section from '@/components/common/Section'
-import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
-import Slide from '@/components/common/slide'
-import ThumbnailCard from '@/components/common/ThumbnailCard'
-import { Card } from '@/components/ui/card'
-import InterativeMap from '@/components/common/interativeMap'
 const Museum = () => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { message } = useConstants()
@@ -24,7 +24,6 @@ const Museum = () => {
 		database_name,
 		rsvp,
 		enableCategoriesItems,
-		featuredCollection,
 		enableFeaturedCollection,
 		categoriesItems,
 		enableRSVP,
@@ -43,33 +42,7 @@ const Museum = () => {
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
 
-			{enableFeaturedCollection && (
-				<Section heading={message.featuredCollections}>
-					<BentoGrid className="mx-auto">
-						{featuredCollection.map((item, i) => (
-							<BentoGridItem
-								onClick={() => {
-									window.location.href = `${getSearchURL(`UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=${item.url}`)}`
-								}}
-								key={i}
-								title={item.title}
-								description={item.description}
-								header={
-									<img
-										src={item.thumbnail}
-										className="w-full object-cover max-h-[170px]"
-										alt={item.title}
-									/>
-								}
-								className={cn(
-									i === 3 || i === 6 ? 'md:col-span-2' : '',
-									'bg-primary'
-								)}
-							/>
-						))}
-					</BentoGrid>
-				</Section>
-			)}
+			{enableFeaturedCollection && <FeaturedColection page={'museum'} />}
 			{enableCategoriesItems && (
 				<Section heading={browseByCategoryTitle}>
 					<Slide
