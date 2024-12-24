@@ -1,5 +1,3 @@
-import { ReactNode } from 'react'
-
 export type PatronInfo = {
 	TAG_FUNC_O_ID: string
 	TAG_FUNC_O_CODE: string
