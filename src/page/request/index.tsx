@@ -101,7 +101,13 @@ const Request = () => {
 									<Input
 										type="hidden"
 										name="REQ_ITEM_TITLE"
-										value={typeof reqData.req_item_title === "object" ? reqData.req_item_title.__text.replace(/\s+/g, ' ').trim() : reqData.req_item_title}
+										value={
+											typeof reqData.req_item_title === 'object'
+												? reqData.req_item_title.__text
+														.replace(/\s+/g, ' ')
+														.trim()
+												: reqData.req_item_title
+										}
 									/>
 									<Input
 										type="hidden"

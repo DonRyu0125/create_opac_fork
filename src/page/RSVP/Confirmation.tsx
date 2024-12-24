@@ -1,8 +1,6 @@
-import { Button } from '@/components/ui/button'
-import Layout from '@/components/layouts'
 import '@/components/common/event-calendar/CalendarStyle.css'
-import React, { useEffect, useState } from 'react'
 import {
+	EVENT_EMAIL_LOGO,
 	FUNC_LOC_P_GRP,
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
@@ -13,9 +11,9 @@ import {
 	SISN,
 	TAG_DB,
 	TAG_FUNC_DATE,
-	TAG_FUNC_LOC_DEC,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
+	TAG_FUNC_LOC_DEC,
 	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_P_ATTND,
 	TAG_FUNC_P_CONFIRM_EXP_HOURS,
@@ -29,9 +27,11 @@ import {
 	TAG_NAME,
 	TAG_P_STATUS,
 	TAG_RSVP_PATRON_LOG,
-	EVENT_EMAIL_LOGO,
 } from '@/components/common/event-calendar/Constants'
-import axios from 'axios'
+import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
+import Spinner from '@/components/common/event-calendar/Spinner'
+import Layout from '@/components/layouts'
+import useConstants from '@/hooks/useConstants'
 import {
 	convertToArr,
 	convertXMLToJson,
@@ -40,11 +40,10 @@ import {
 	getHomeSessionID,
 	isDatePast,
 } from '@/lib/utils'
-import Spinner from '@/components/common/event-calendar/Spinner'
-import { v4 as uuidv4 } from 'uuid'
-import { calNumOfPatron } from '@/components/common/event-calendar/EC-Util'
-import useConstants from '@/hooks/useConstants'
 import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { ConfirmTmp } from './ActionComponent'
 import LandingPageMessage from './LandingPageMessage'
 

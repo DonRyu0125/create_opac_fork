@@ -1,6 +1,5 @@
 import {
 	CANCEL_CONFIRMATION_EMAIL_T,
-	EVENT_EMAIL_LOGO,
 	FUNC_LOC_P_GRP,
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
@@ -23,11 +22,11 @@ import {
 } from '@/components/common/event-calendar/Constants'
 import Spinner from '@/components/common/event-calendar/Spinner'
 import Layout from '@/components/layouts'
+import useConstants from '@/hooks/useConstants'
 import { convertXMLToJson, decodeObj, getHomeSessionID, isDatePast } from '@/lib/utils'
+import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import useConstants from '@/hooks/useConstants'
-import { PatronInfo, STATUS_TYPE, initialPatronInfo } from '@/types/patroninfo'
 import { CancelTmp } from './ActionComponent'
 import LandingPageMessage from './LandingPageMessage'
 
