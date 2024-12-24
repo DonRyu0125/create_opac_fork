@@ -9,7 +9,6 @@ import libraryIcon from './book.png'
 import museumIcon from './museum.png'
 import useConstants from '@/hooks/useConstants'
 import CollapseList from '../CollapseList'
-import CheckboxWithLabel from '../CheckboxWithLabel'
 import axios from 'axios'
 import X2JS from 'x2js'
 import Spinner from '../event-calendar/Spinner'
@@ -261,11 +260,15 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												DB_TYPE_MAP.archive
 											)}
 										/>
+										<div
+											style={{ background: `${COLOR_MAP.archive}` }}
+											className={`w-[30px] h-[30px] flex justify-center items-center rounded-full shadow-md`}>
+											<img src={archiveIcon} className="w-5 h-5" />
+										</div>
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.archive}
 										</Label>
 									</div>
-									<img src={archiveIcon} className="ml-1 w-5 h-5" />
 								</div>
 								<div className="flex">
 									<div className={'flex items-center space-x-2'}>
@@ -277,11 +280,16 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												DB_TYPE_MAP.library
 											)}
 										/>
+										<div
+											style={{ background: `${COLOR_MAP.library}` }}
+											className={`w-[30px] h-[30px] flex justify-center items-center rounded-full shadow-md`}>
+											{' '}
+											<img src={libraryIcon} className=" w-5 h-5" />
+										</div>
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.library}
 										</Label>
 									</div>
-									<img src={libraryIcon} className="ml-1 w-5 h-5" />
 								</div>
 								<div className="flex">
 									<div className={'flex items-center space-x-2'}>
@@ -289,11 +297,16 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 											onClick={() => handleDatabaseChange(DB_TYPE_MAP.museum)}
 											checked={selectedDatabases.includes(DB_TYPE_MAP.museum)}
 										/>
+										<div
+											style={{ background: `${COLOR_MAP.museum}` }}
+											className={`w-[30px] h-[30px] flex justify-center items-center rounded-full shadow-md`}>
+											{' '}
+											<img src={museumIcon} className="w-5 h-5" />
+										</div>
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.museum}
 										</Label>
 									</div>
-									<img src={museumIcon} className="ml-1 w-5 h-5" />
 								</div>
 							</div>
 						</CollapseList>
@@ -303,15 +316,19 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							{ckTypes?.countries?.map((item: string, key: number) => {
 								if (item) {
 									return (
-										<div className={'flex items-center space-x-2'} key={key}>
-											<Checkbox
-												onClick={() => handleCountryChange(item)}
-												checked={selectedCountries.includes(item)}
-											/>
-											<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-												{item}
-											</Label>
-										</div>
+										item && (
+											<div
+												className={'flex items-center space-x-2'}
+												key={key}>
+												<Checkbox
+													onClick={() => handleCountryChange(item)}
+													checked={selectedCountries.includes(item)}
+												/>
+												<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+													{item}
+												</Label>
+											</div>
+										)
 									)
 								}
 								return
@@ -323,15 +340,19 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							{selectedCountries.length > 0 ? (
 								getUniqueValuesP()?.map((item: any, key: number) => {
 									return (
-										<div className={'flex items-center space-x-2'} key={key}>
-											<Checkbox
-												onClick={() => handleProvinceChange(item)}
-												checked={selectedProvinces.includes(item)}
-											/>
-											<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-												{item}
-											</Label>
-										</div>
+										item && (
+											<div
+												className={'flex items-center space-x-2'}
+												key={key}>
+												<Checkbox
+													onClick={() => handleProvinceChange(item)}
+													checked={selectedProvinces.includes(item)}
+												/>
+												<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+													{item}
+												</Label>
+											</div>
+										)
 									)
 								})
 							) : (
@@ -370,7 +391,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 				<MapContainer
 					className="markercluster-map"
 					center={[49.1044, -122.8011]}
-					zoom={3}
+					zoom={5}
 					maxZoom={18}
 					style={{
 						height: '90vh',
@@ -421,7 +442,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 											marker?.DECIMAL_LONGITUD,
 										]}
 										icon={icons['library']}>
-										<Popup className="hidden md:block">
+										<Popup className="hidden md:block" offset={[-7, 0]}>
 											<div className="max-w-[400px]">
 												<a
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${library.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
@@ -491,7 +512,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 											marker?.DECIMAL_LONGITUD,
 										]}
 										icon={icons['archive']}>
-										<Popup className="hidden md:block">
+										<Popup className="hidden md:block" offset={[-7, 0]}>
 											<div className="max-w-[400px]">
 												<a
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${archives.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=REFD%20${marker.REFD}`}
@@ -557,7 +578,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 											marker?.DECIMAL_LONGITUD,
 										]}
 										icon={icons['museum']}>
-										<Popup className="hidden md:block">
+										<Popup className="hidden md:block" offset={[-7, 0]}>
 											<div className="max-w-[400px]">
 												<a
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
