@@ -155,18 +155,25 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 		setSelectedDatabases((prev) =>
 			prev.includes(database) ? prev.filter((d) => d !== database) : [...prev, database]
 		)
+		setSelectedCountries([])
+		setSelectedProvinces([])
+		setSelectedCities([])
+		setFilteredData(allData)
 	}
 
 	const handleCountryChange = (country: string) => {
 		setSelectedCountries((prev) =>
 			prev.includes(country) ? prev.filter((c) => c !== country) : [...prev, country]
 		)
+		setSelectedProvinces([])
+		setSelectedCities([])
 	}
 
 	const handleProvinceChange = (province: string) => {
 		setSelectedProvinces((prev) =>
 			prev.includes(province) ? prev.filter((p) => p !== province) : [...prev, province]
 		)
+		setSelectedCities([])
 	}
 
 	const handleCityChange = (city: string) => {
@@ -403,7 +410,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 				<MapContainer
 					className="markercluster-map"
 					center={[49.1044, -122.8011]}
-					zoom={5}
+					zoom={3}
 					maxZoom={18}
 					style={{
 						height: '90vh',
