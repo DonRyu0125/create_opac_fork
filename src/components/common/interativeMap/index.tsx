@@ -195,8 +195,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 			record.DECIMAL_LONGITUD = parseFloat(record.DECIMAL_LONGITUD ?? 0)
 			return record
 		})
-		setAllData(updatedRecords)
-		setFilteredData(updatedRecords)
+		setAllData(updatedRecords ?? [])
+		setFilteredData(updatedRecords ?? [])
 		const countries = Array.from(
 			new Set(updatedRecords?.map((item: any) => item.ORIGIN_COUNTRY))
 		)
