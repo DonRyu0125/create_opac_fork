@@ -8,11 +8,12 @@ import { useState } from 'react'
 import Hero from '../components/common/Hero'
 import SearchForm from '../components/common/search-form/SearchForm'
 import Layout from '../components/layouts'
-import { UNION_SEARCH_CL } from './Home'
+import { MainPageProps, UNION_SEARCH_CL } from './Home'
 import InterativeMap from '@/components/common/interativeMap'
-import FeaturedColection from '@/components/features/FeaturedColection'
+import FeaturedCollection from '@/components/features/FeaturedCollection'
+import Categories from '@/components/features/Categories'
 
-const Library = () => {
+const Library = ({ previewMode = false, previewData }: MainPageProps) => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { message } = useConstants()
 	const {
@@ -24,6 +25,7 @@ const Library = () => {
 		rsvp,
 		enableRSVP,
 		enableMap,
+		enableCategoriesItems,
 	} = useConstants().library
 	return (
 		<Layout>
@@ -36,7 +38,17 @@ const Library = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
-			{enableFeaturedCollection && <FeaturedColection page={'library'} />}
+			{enableFeaturedCollection && (
+				<FeaturedCollection
+					page={'library'}
+					previewData={previewData}
+					previewMode={previewMode}
+				/>
+			)}
+
+			{enableCategoriesItems && (
+				<Categories page={'library'} previewData={previewData} previewMode={previewMode} />
+			)}
 			{enableRSVP && (
 				<Section heading={`${message.calendar}`}>
 					<EventCalendar

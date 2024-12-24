@@ -1,22 +1,19 @@
-import Section from '@/components/common/Section'
-import Slide from '@/components/common/slide'
-import ThumbnailCard from '@/components/common/ThumbnailCard'
 import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
 import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
 import EventCalendar from '@/components/common/event-calendar'
-import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
-import { Card } from '@/components/ui/card'
+import InterativeMap from '@/components/common/interativeMap'
+import Section from '@/components/common/Section'
+import Categories from '@/components/features/Categories'
+import FeaturedCollection from '@/components/features/FeaturedCollection'
 import useConstants from '@/hooks/useConstants'
-import { cn, getSearchURL } from '@/lib/utils'
+import { getSearchURL } from '@/lib/utils'
 import { useState } from 'react'
 import Hero from '../components/common/Hero'
 import SearchForm from '../components/common/search-form/SearchForm'
 import Layout from '../components/layouts'
-import { UNION_SEARCH_CL } from './Home'
-import InterativeMap from '@/components/common/interativeMap'
-import FeaturedColection from '@/components/features/FeaturedColection'
+import { MainPageProps, UNION_SEARCH_CL } from './Home'
 
-const Archives = () => {
+const Archives = ({ previewMode = false, previewData }: MainPageProps) => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { message } = useConstants()
 	const {
@@ -26,11 +23,8 @@ const Archives = () => {
 		database_name,
 		rsvp,
 		enableFeaturedCollection,
-		featuredCollection,
 		enableCategoriesItems,
-		categoriesItems,
 		enableRSVP,
-		browseByCategoryTitle,
 		enableMap,
 	} = useConstants().archives
 	return (
@@ -44,26 +38,16 @@ const Archives = () => {
 			{showAdvSearch && (
 				<AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />
 			)}
-			{enableFeaturedCollection && <FeaturedColection page={'archives'} />}
+			{enableFeaturedCollection && (
+				<FeaturedCollection
+					page={'archives'}
+					previewData={previewData}
+					previewMode={previewMode}
+				/>
+			)}
 
 			{enableCategoriesItems && (
-				<Section heading={browseByCategoryTitle}>
-					<Slide
-						itemsPerSlide={{ lg: 4 }}
-						items={categoriesItems}
-						renderItem={(item, index: any) => (
-							<Card
-								className="max-w-md mx-auto shadow-xl border-none cursor-pointer"
-								key={index}>
-								<ThumbnailCard
-									title={item.title}
-									url={`${getSearchURL(`UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=${item.url}`)}`}
-									thumbnail={item.thumbnail}
-								/>
-							</Card>
-						)}
-					/>
-				</Section>
+				<Categories page={'archives'} previewData={previewData} previewMode={previewMode} />
 			)}
 
 			{enableRSVP && (

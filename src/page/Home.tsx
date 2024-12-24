@@ -12,7 +12,8 @@ import Slide from '../components/common/slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
-import FeaturedColection from '@/components/features/FeaturedColection'
+import Categories from '@/components/features/Categories'
+import FeaturedCollection from '@/components/features/FeaturedCollection'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -58,11 +59,8 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 	const {
 		heading,
 		heroBanner,
-		browseByCategoryTitle,
-		categoriesItems,
 		searchURL,
 		rsvp,
-		featuredCollection,
 		enableFeaturedCollection,
 		enableRSVP,
 		enableCategoriesItems,
@@ -78,25 +76,15 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 				</div>
 			</Hero>
 
-			{enableFeaturedCollection && <FeaturedColection page={'home'} />}
+			{enableFeaturedCollection && (
+				<FeaturedCollection
+					page={'home'}
+					previewData={previewData}
+					previewMode={previewMode}
+				/>
+			)}
 			{enableCategoriesItems && (
-				<Section heading={browseByCategoryTitle}>
-					<Slide
-						itemsPerSlide={{ lg: 4 }}
-						items={categoriesItems}
-						renderItem={(item, index: any) => (
-							<Card
-								className="max-w-md mx-auto shadow-xl border-none cursor-pointer"
-								key={index}>
-								<ThumbnailCard
-									title={item.title}
-									url={`${getSearchURL(`UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=${item.url}`)}`}
-									thumbnail={item.thumbnail}
-								/>
-							</Card>
-						)}
-					/>
-				</Section>
+				<Categories page={'home'} previewData={previewData} previewMode={previewMode} />
 			)}
 
 			{enableRSVP && (

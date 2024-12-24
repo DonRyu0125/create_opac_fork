@@ -3,7 +3,7 @@ import { PageSectionProps } from '@/page/Home'
 import ImageAccordion from '../common/ImageAccordion'
 import Section from '../common/Section'
 
-const FeaturedColection = ({ page, previewData, previewMode }: PageSectionProps) => {
+const FeaturedCollection = ({ page, previewData, previewMode }: PageSectionProps) => {
 	const sourceData = useConstants()[page]
 	const data = previewMode && previewData ? (previewData as typeof sourceData) : sourceData
 	const { message } = useConstants()
@@ -14,4 +14,4 @@ const FeaturedColection = ({ page, previewData, previewMode }: PageSectionProps)
 	)
 }
 
-export default FeaturedColection
+export default FeaturedCollection
