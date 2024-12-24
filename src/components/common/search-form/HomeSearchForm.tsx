@@ -29,7 +29,7 @@ export default function HomeSearchForm({
 			<CardHeader>
 				<CardTitle className="text-2xl font-bold text-left">{title}</CardTitle>
 			</CardHeader>
-			<CardContent className="space-y-4 flex flex-col items-end">
+			<CardContent className="space-y-2 flex flex-col items-end">
 				<form method="POST" action={action} className="flex w-full space-x-2 mb-4 relative">
 					<Input
 						className="w-full h-14 pl-6 pr-32 text-lg border-2 border-gray-200 focus:border-primary "
