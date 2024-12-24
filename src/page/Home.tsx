@@ -1,17 +1,17 @@
 import EventCalendar from '@/components/common/event-calendar'
 import HoverCard from '@/components/common/HoverCard'
+import ImageAccordion from '@/components/common/ImageAccordion'
+import InterativeMap from '@/components/common/interativeMap'
 import Masonry from '@/components/common/Masonry'
 import HomeSearchForm from '@/components/common/search-form/HomeSearchForm'
-import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
 import useConstants from '@/hooks/useConstants'
-import { cn, getSearchURL, truncateWords } from '@/lib/utils'
+import { getSearchURL, truncateWords } from '@/lib/utils'
 import Hero from '../components/common/Hero'
 import Section from '../components/common/Section'
 import Slide from '../components/common/slide'
 import ThumbnailCard from '../components/common/ThumbnailCard'
 import Layout from '../components/layouts'
 import { Card } from '../components/ui/card'
-import InterativeMap from '@/components/common/interativeMap'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -75,29 +75,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 
 			{enableFeaturedCollection && (
 				<Section heading={message.featuredCollections}>
-					<BentoGrid className="mx-auto">
-						{featuredCollection.map((item, i) => (
-							<BentoGridItem
-								onClick={() => {
-									window.location.href = `${getSearchURL(`UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=${item.url}`)}`
-								}}
-								key={i}
-								title={item.title}
-								description={item.description}
-								header={
-									<img
-										src={item.thumbnail}
-										className="w-full object-cover max-h-[170px]"
-										alt={item.title}
-									/>
-								}
-								className={cn(
-									i === 3 || i === 6 ? 'md:col-span-2' : '',
-									'bg-primary'
-								)}
-							/>
-						))}
-					</BentoGrid>
+					<ImageAccordion items={featuredCollection} />
 				</Section>
 			)}
 			{enableCategoriesItems && (
@@ -130,7 +108,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap DB_TYPE={'UNION_VIEW'}/>
+					<InterativeMap DB_TYPE={'UNION_VIEW'} />
 				</Section>
 			)}
 			{enableRecentAddition && (
