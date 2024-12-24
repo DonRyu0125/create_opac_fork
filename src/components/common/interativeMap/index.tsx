@@ -176,32 +176,30 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 	}
 
 	const fetch_get = async () => {
-		setLoading(true)
-		let HOME_SESSID = getSessionID()
-		const response = await axios.get(
-			`${HOME_SESSID}?SEARCH&REPORT=WEB_UNION_SUM_MAP&APPLICATION=UNION_VIEW&DATABASE=${DB_TYPE}&EXP=%2B%2B%40`,
-			{
-				headers: {
-					Accept: 'application/xml',
-				},
-			}
-		)
+		// setLoading(true)
+		// let HOME_SESSID = getSessionID()
+		// const response = await axios.get(
+		// 	`${HOME_SESSID}?SEARCH&REPORT=WEB_UNION_SUM_MAP&APPLICATION=UNION_VIEW&DATABASE=${DB_TYPE}&EXP=%2B%2B%40`,
+		// 	{
+		// 		headers: {
+		// 			Accept: 'application/xml',
+		// 		},
+		// 	}
+		// )
 
-		const x2js = new X2JS()
-		const jsonData: any = x2js.xml2js(response.data)
+		// const x2js = new X2JS()
+		// const jsonData: any = x2js.xml2js(response.data)
 
-		const updatedRecords = jsonData?.xml?.record?.map((record: DataType) => {
-			record.DECIMAL_LATITUDE = parseFloat(record.DECIMAL_LATITUDE ?? 0)
-			record.DECIMAL_LONGITUD = parseFloat(record.DECIMAL_LONGITUD ?? 0)
-			return record
-		})
-		setAllData(updatedRecords ?? [])
-		setFilteredData(updatedRecords ?? [])
-		const countries = Array.from(
-			new Set(updatedRecords?.map((item: any) => item.ORIGIN_COUNTRY))
-		)
+		// const updatedRecords = jsonData?.xml?.record?.map((record: DataType) => {
+		// 	record.DECIMAL_LATITUDE = parseFloat(record.DECIMAL_LATITUDE ?? 0)
+		// 	record.DECIMAL_LONGITUD = parseFloat(record.DECIMAL_LONGITUD ?? 0)
+		// 	return record
+		// })
+		setAllData(d_dummy ?? [])
+		setFilteredData(d_dummy ?? [])
+		const countries = Array.from(new Set(d_dummy?.map((item: any) => item.ORIGIN_COUNTRY)))
 		setCkTypes({ countries })
-		setLoading(false)
+		// setLoading(false)
 	}
 
 	const getUniqueValuesP = () => {
@@ -220,7 +218,21 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 	}
 
 	const getUniqueValuesC = () => {
-		const uniqueValues = Array.from(new Set(filteredData?.map((item: any) => item.ORIGIN_CITY)))
+		const nData = allData.filter((item: any) => {
+			const matchesDatabase =
+				selectedDatabases.length > 0 ? selectedDatabases.includes(item.DATABASE_TYPE) : true
+			const matchesCountry =
+				selectedCountries.length > 0
+					? selectedCountries.includes(item.ORIGIN_COUNTRY)
+					: true
+			const matchesProvince =
+				selectedProvinces.length > 0
+					? selectedProvinces.includes(item.ORIGIN_PRV_STATE)
+					: true
+
+			return matchesDatabase && matchesCountry && matchesProvince
+		})
+		const uniqueValues = Array.from(new Set(nData?.map((item: any) => item.ORIGIN_CITY)))
 		return uniqueValues
 	}
 
@@ -248,7 +260,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 				</div>
 				<div className="flex flex-col space-y-4 max-h-[90vh] mb-2 p-2 overflow-y-auto custom-scrollbar">
 					{DB_TYPE === 'UNION_VIEW' && (
-						<CollapseList title={'Database'} expand={true} >
+						<CollapseList title={'Database'} expand={true}>
 							<div className="space-y-3 border-t p-4">
 								<div className="flex">
 									<div className={'flex items-center space-x-2'}>
