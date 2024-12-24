@@ -88,7 +88,7 @@ const Summary = () => {
 							{pagination?.a && pagination.a.length > 0 && (
 								<div className="col-span-4 mt-4">
 									<PagePagination
-										items={pagination.a.map((item) => ({
+										items={pagination.a.map((item: { _href: any; b: undefined }) => ({
 											url: item._href,
 											active: item.b !== undefined,
 										}))}

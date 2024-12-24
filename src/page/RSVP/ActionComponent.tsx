@@ -57,7 +57,7 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick }) => {
 			</div>
 			<Button
 				onClick={onClick}
-				className={`flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded 
+				className={`flex items-center justify-center w-[300px] h-[50px] mt-6  rounded 
 				bg-green-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring`}>
 				<div>{message.confirm}</div>
 			</Button>
@@ -81,7 +81,7 @@ const CancelTmp = ({ patronInfo, onClick }: { patronInfo: PatronInfo; onClick: a
 			</h2>
 			<Button
 				onClick={onClick}
-				className={`flex items-center justify-center w-[300px] h-[50px] mt-6 inline-block rounded bg-red-600
+				className={`flex items-center justify-center w-[300px] h-[50px] mt-6  rounded bg-red-600
 				 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring`}>
 				<div>{message.unregistered}</div>
 			</Button>
