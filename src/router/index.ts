@@ -21,7 +21,6 @@ import AdminRSVP from '@/page/admin/RSVP'
 import AdminMessage from '@/page/admin/Message'
 import AdminStyles from '@/page/admin/Styles'
 import PatronProfile from '@/page/dashboard/PatronProfile'
-import PatronInfo from '@/page/dashboard/PatronInfo'
 import Orders from '@/page/dashboard/Orders'
 import Copyright from '@/page/dashboard/Copyright'
 import Reproductions from '@/page/dashboard/Reproductions'
@@ -71,7 +70,6 @@ export const ROUTES: TRoute = {
 	library: Library,
 	museum: Museum,
 	patronprofile: PatronProfile,
-	patroninfo: PatronInfo,
 	orders: Orders,
 	copyright: Copyright,
 	reproductions: Reproductions,
