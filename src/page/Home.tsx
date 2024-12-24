@@ -10,6 +10,7 @@ import { getSearchURL, truncateWords } from '@/lib/utils'
 import Hero from '../components/common/Hero'
 import Section from '../components/common/Section'
 import Layout from '../components/layouts'
+import RSVPCalendar from '../components/features/RSVPCalendar'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -84,13 +85,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 
 			{enableRSVP && (
-				<Section heading={`${message.calendar}`}>
-					<EventCalendar
-						databaseType={rsvp.filterDatabase}
-						filterTypes={rsvp.filterTypes}
-						filterOption={rsvp.filterOption}
-					/>
-				</Section>
+				<RSVPCalendar page={'home'} previewData={previewData} previewMode={previewMode} />
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
