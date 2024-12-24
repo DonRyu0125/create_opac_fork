@@ -1,6 +1,7 @@
 import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
 import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
 import InterativeMap from '@/components/common/interativeMap'
+import HomeSearchForm from '@/components/common/search-form/HomeSearchForm'
 import Section from '@/components/common/Section'
 import Categories from '@/components/features/Categories'
 import FeaturedCollection from '@/components/features/FeaturedCollection'
@@ -9,7 +10,6 @@ import useConstants from '@/hooks/useConstants'
 import { getSearchURL } from '@/lib/utils'
 import { useState } from 'react'
 import Hero from '../components/common/Hero'
-import SearchForm from '../components/common/search-form/SearchForm'
 import Layout from '../components/layouts'
 import { MainPageProps, UNION_SEARCH_CL } from './Home'
 
@@ -30,8 +30,11 @@ const Archives = ({ previewMode = false, previewData }: MainPageProps) => {
 		<Layout>
 			<Hero className={''} title={heading} backgroundImage={heroBanner} description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
-					<SearchForm inputName={UNION_SEARCH_CL} action={getSearchURL(searchURL)} />
-					<AdvanceSearchButton setShowAdvSearch={setShowAdvSearch} />
+					<HomeSearchForm
+						inputName={UNION_SEARCH_CL}
+						action={getSearchURL(searchURL)}
+						append={<AdvanceSearchButton setShowAdvSearch={setShowAdvSearch} />}
+					/>
 				</div>
 			</Hero>
 			{showAdvSearch && (

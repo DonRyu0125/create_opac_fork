@@ -3,11 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import useConstants from '@/hooks/useConstants'
 import { Search } from 'lucide-react'
+import { ReactNode } from 'react'
 
 export interface HomeSearchFormProps extends React.HTMLAttributes<HTMLFormElement> {
 	inputName?: string
 	inputStyle?: string
 	action: string
+	append?: ReactNode
+	title?: string
 }
 
 export default function HomeSearchForm({
@@ -15,15 +18,16 @@ export default function HomeSearchForm({
 	inputName,
 	inputStyle,
 	action,
+	append,
+	title = '',
 	...props
 }: HomeSearchFormProps) {
 	const { message } = useConstants()
+
 	return (
 		<Card className="w-full max-w-3xl mx-auto rounded-md shadow-lg">
 			<CardHeader>
-				<CardTitle className="text-2xl font-bold text-left">
-					Search all collections
-				</CardTitle>
+				<CardTitle className="text-2xl font-bold text-left">{title}</CardTitle>
 			</CardHeader>
 			<CardContent className="space-y-4">
 				<form method="POST" action={action} className="flex space-x-2 mb-4 relative">
@@ -41,6 +45,7 @@ export default function HomeSearchForm({
 						Search
 					</Button>
 				</form>
+				{append}
 			</CardContent>
 		</Card>
 	)
