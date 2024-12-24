@@ -1,10 +1,10 @@
 import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
 import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
-import EventCalendar from '@/components/common/event-calendar'
 import InterativeMap from '@/components/common/interativeMap'
 import Section from '@/components/common/Section'
 import Categories from '@/components/features/Categories'
 import FeaturedCollection from '@/components/features/FeaturedCollection'
+import RSVPCalendar from '@/components/features/RSVPCalendar'
 import useConstants from '@/hooks/useConstants'
 import { getSearchURL } from '@/lib/utils'
 import { useState } from 'react'
@@ -20,7 +20,6 @@ const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 		searchURL,
 		heading,
 		database_name,
-		rsvp,
 		enableCategoriesItems,
 		enableFeaturedCollection,
 		enableRSVP,
@@ -50,13 +49,7 @@ const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 				<Categories page={'museum'} previewData={previewData} previewMode={previewMode} />
 			)}
 			{enableRSVP && (
-				<Section heading={`${message.calendar}`}>
-					<EventCalendar
-						databaseType={rsvp.filterDatabase}
-						filterTypes={rsvp.filterTypes}
-						filterOption={rsvp.filterOption}
-					/>
-				</Section>
+				<RSVPCalendar page={'museum'} previewData={previewData} previewMode={previewMode} />
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>

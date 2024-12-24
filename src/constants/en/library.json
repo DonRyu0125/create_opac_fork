@@ -89,6 +89,6 @@
 	"enableCategoriesItems": true,
 	"enableFeaturedCollection": true,
 	"enableRSVP": true,
-	"enableRecentAddition": true,
+	"enableRecentAddition": false,
 	"enableMap": true
 }
