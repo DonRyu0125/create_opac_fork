@@ -3,9 +3,8 @@ import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSear
 import EventCalendar from '@/components/common/event-calendar'
 import InterativeMap from '@/components/common/interativeMap'
 import Section from '@/components/common/Section'
-import Slide from '@/components/common/slide'
-import ThumbnailCard from '@/components/common/ThumbnailCard'
-import { Card } from '@/components/ui/card'
+import Categories from '@/components/features/Categories'
+import FeaturedCollection from '@/components/features/FeaturedCollection'
 import useConstants from '@/hooks/useConstants'
 import { getSearchURL } from '@/lib/utils'
 import { useState } from 'react'
@@ -13,8 +12,6 @@ import Hero from '../components/common/Hero'
 import SearchForm from '../components/common/search-form/SearchForm'
 import Layout from '../components/layouts'
 import { MainPageProps, UNION_SEARCH_CL } from './Home'
-import Categories from '@/components/features/Categories'
-import FeaturedCollection from '@/components/features/FeaturedCollection'
 const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { message } = useConstants()
