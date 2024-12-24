@@ -16,7 +16,7 @@ const AdvanceSearchButton: React.FC<ShowAdvSearch> = ({ setShowAdvSearch }: any)
 				<TextSearch />
 			</div>
 			<div className={'text-base'}>Advanced</div>
-		</Button>
+		</Button>  
 	)
 }
 

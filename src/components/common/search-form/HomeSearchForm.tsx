@@ -29,8 +29,8 @@ export default function HomeSearchForm({
 			<CardHeader>
 				<CardTitle className="text-2xl font-bold text-left">{title}</CardTitle>
 			</CardHeader>
-			<CardContent className="space-y-4">
-				<form method="POST" action={action} className="flex space-x-2 mb-4 relative">
+			<CardContent className="space-y-4 flex flex-col items-end">
+				<form method="POST" action={action} className="flex w-full space-x-2 mb-4 relative">
 					<Input
 						className="w-full h-14 pl-6 pr-32 text-lg border-2 border-gray-200 focus:border-primary "
 						required
@@ -40,7 +40,7 @@ export default function HomeSearchForm({
 					/>
 					<Button className="absolute right-2 top-2 h-10 px-8 rounded-full bg-primary">
 						<span className="block">
-							<Search className="w-4 h-4 mr-6" />
+							<Search className="w-4 h-4 mr-2" />
 						</span>
 						Search
 					</Button>
