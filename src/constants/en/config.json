@@ -9,7 +9,8 @@
 	"navigations": [
 		{
 			"url": "/",
-			"title": "Home"
+			"title": "Home",
+			"search_database":"UNION_VIEW"
 		},
 		{
 			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html",

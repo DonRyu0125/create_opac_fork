@@ -3,7 +3,8 @@
     "heroBanner": "https://titanapi.minisisinc.com/api/links/65043c1192f8422685fe7fcd57027d50/uuid/1f20eeb9841744fdb3c194274fbc9451/access",
     "searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=UNION_VIEW_WEB",
     "browseByCategoryTitle": "Browse by Category",
-    "CalendarfilterOption": "",
+    "calendarfilterOption": "",
+    "displayTitle": "Accueil",
     "categoriesItems": [
         {
             "thumbnail": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d",
@@ -97,5 +98,6 @@
     "enableFeaturedCollection": true,
     "enableRSVP": true,
     "enableRecentAddition": false,
-    "enableMap": true
+    "enableMap": true,
+    "linkURL": "/"
 }

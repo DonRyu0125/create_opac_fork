@@ -3,10 +3,9 @@
 	"heroBanner": "https://images.unsplash.com/photo-1597092451116-27787c07901d",
 	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=DESCRIPTION_WEB",
 	"browseByCategoryTitle": "Browse by Category",
-	"CalendarfilterOption": "",
+	"calendarfilterOption": "",
 	"database_name": "DESCRIPTION_WEB",
 	"displayTitle": "Archives",
-	"linkURL": "/archives.html",
 	"categoriesItems": [
 		{
 			"thumbnail": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d",
@@ -82,5 +81,6 @@
 	"enableFeaturedCollection": true,
 	"enableRSVP": true,
 	"enableRecentAddition": false,
-	"enableMap": true
+	"enableMap": true,
+	"linkURL": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html"
 }

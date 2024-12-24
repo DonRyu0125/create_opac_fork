@@ -5,7 +5,6 @@
 	"browseByCategoryTitle": "Browse by Category",
 	"database_name": "DESCRIPTION_WEB",
 	"displayTitle": "Archives",
-	"linkURL": "/archives.html",
 	"categoriesItems": [
 		{
 			"thumbnail": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d",
@@ -81,5 +80,6 @@
 	"enableFeaturedCollection": true,
 	"enableRSVP": true,
 	"enableRecentAddition": false,
-	"enableMap": true
+	"enableMap": true,
+	"linkURL": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html"
 }

@@ -128,7 +128,7 @@ export default function PatronProfile() {
 							href={
 								getCookieValue('HOME_SESSID') +
 								button.url +
-								(button.label != 'Bookmarks' ? m2l_patron_id : '')
+								(button.label !== 'Bookmarks' ? m2l_patron_id : '')
 							}
 							onClick={() => handleClick(button.id)}
 							className={`px-3 py-2 text-sm shadow sm:px-4 sm:py-2 sm:text-base text-accent-foreground bg-white text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}>
@@ -188,17 +188,17 @@ export default function PatronProfile() {
 									<div className="p-4">
 										<div className="flex items-center justify-between text-sm text-gray-500">
 											<div className="flex items-center gap-2">
-												{item === home ? (
-													<File className="w-5 h-5" />
-												) : item === archives ? (
+												{item === home && <File className="w-5 h-5" />}
+												{item === archives && (
 													<Archive className="w-5 h-5" />
-												) : item === museum ? (
-													<Landmark className="w-5 h-5" />
-												) : item === library ? (
-													<Library className="w-5 h-5" />
-												) : (
-													''
 												)}
+												{item === museum && (
+													<Landmark className="w-5 h-5" />
+												)}
+												{item === library && (
+													<Library className="w-5 h-5" />
+												)}
+
 												{item === home
 													? Number(records[0].description_count) +
 														Number(records[0].collection_count) +

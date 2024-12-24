@@ -4,8 +4,7 @@
 	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB",
 	"browseByCategoryTitle": "Browse by Category",
 	"database_name": "COLLECTIONS_WEB",
-	"displayTitle": "Museum",
-	"linkURL": "/museum.html",
+	"displayTitle": "Musée",
 	"categoriesItems": [
 		{
 			"thumbnail": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d",
@@ -81,5 +80,6 @@
 	"enableFeaturedCollection": true,
 	"enableRSVP": true,
 	"enableRecentAddition": false,
-	"enableMap": true
+	"enableMap": true,
+	"linkURL": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]museum.html"
 }

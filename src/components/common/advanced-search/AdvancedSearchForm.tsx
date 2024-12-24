@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
-import AdvancedSearchInput from './AdvancedSearchInput'
-import { CircleHelp, CircleMinus, CirclePlus, CircleX, TextSearch } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { toast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
+import { CircleHelp, CircleMinus, CirclePlus, CircleX, TextSearch } from 'lucide-react'
+import { useRef, useState } from 'react'
+import AdvancedSearchInput from './AdvancedSearchInput'
 export type FieldObject = {
 	field: string
 	keyword: string
