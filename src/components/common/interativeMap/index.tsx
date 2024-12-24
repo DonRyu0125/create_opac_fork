@@ -16,9 +16,9 @@ import Button from '../admin/Button'
 import { v4 as uuidv4 } from 'uuid'
 import { RefreshCw } from 'lucide-react'
 import { getSessionID } from '@/lib/utils'
-
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
+import d_dummy from './dummy.json'
 
 const DB_TYPE_MAP = {
 	library: 'Library',
@@ -248,7 +248,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 				</div>
 				<div className="flex flex-col space-y-4 max-h-[90vh] mb-2 p-2 overflow-y-auto custom-scrollbar">
 					{DB_TYPE === 'UNION_VIEW' && (
-						<CollapseList title={'Database'} expand={true}>
+						<CollapseList title={'Database'} expand={true} >
 							<div className="space-y-3 border-t p-4">
 								<div className="flex">
 									<div className={'flex items-center space-x-2'}>
