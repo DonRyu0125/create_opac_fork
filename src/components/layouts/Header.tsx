@@ -5,9 +5,11 @@ import LoginBtn from '../common/LoginBtn'
 import MobileMenu from './MobileMenu'
 
 const Header = () => {
-	const { config } = useConstants()
+	const { config, home, archives, museum, library } = useConstants()
 
-	const { logo, navigations, siteName } = config
+	const { logo, siteName } = config
+
+	const navigations = [home, archives, museum, library]
 
 	return (
 		<header className="w-full bg-primary  mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,11 +36,11 @@ const Header = () => {
 				<nav className="hidden md:block py-2 pb-4">
 					<ul className="flex space-x-6 text-sm justify-end">
 						{navigations.map((item) => (
-							<li key={item.title}>
+							<li key={item.displayTitle}>
 								<Link
-									href={item.url}
+									href={item.linkURL}
 									className="text-lg hover:underline text-opac-white hover:text-opac-secondary">
-									{item.title}
+									{item.displayTitle}
 								</Link>
 							</li>
 						))}
