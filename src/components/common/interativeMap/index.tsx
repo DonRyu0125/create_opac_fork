@@ -158,7 +158,6 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 		setSelectedCountries([])
 		setSelectedProvinces([])
 		setSelectedCities([])
-		setFilteredData(allData)
 	}
 
 	const handleCountryChange = (country: string) => {
@@ -183,30 +182,30 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 	}
 
 	const fetch_get = async () => {
-		// setLoading(true)
-		// let HOME_SESSID = getSessionID()
-		// const response = await axios.get(
-		// 	`${HOME_SESSID}?SEARCH&REPORT=WEB_UNION_SUM_MAP&APPLICATION=UNION_VIEW&DATABASE=${DB_TYPE}&EXP=%2B%2B%40`,
-		// 	{
-		// 		headers: {
-		// 			Accept: 'application/xml',
-		// 		},
-		// 	}
-		// )
+		setLoading(true)
+		let HOME_SESSID = getSessionID()
+		const response = await axios.get(
+			`${HOME_SESSID}?SEARCH&REPORT=WEB_UNION_SUM_MAP&APPLICATION=UNION_VIEW&DATABASE=${DB_TYPE}&EXP=%2B%2B%40`,
+			{
+				headers: {
+					Accept: 'application/xml',
+				},
+			}
+		)
 
-		// const x2js = new X2JS()
-		// const jsonData: any = x2js.xml2js(response.data)
+		const x2js = new X2JS()
+		const jsonData: any = x2js.xml2js(response.data)
 
-		// const updatedRecords = jsonData?.xml?.record?.map((record: DataType) => {
-		// 	record.DECIMAL_LATITUDE = parseFloat(record.DECIMAL_LATITUDE ?? 0)
-		// 	record.DECIMAL_LONGITUD = parseFloat(record.DECIMAL_LONGITUD ?? 0)
-		// 	return record
-		// })
-		setAllData(d_dummy ?? [])
-		setFilteredData(d_dummy ?? [])
-		const countries = Array.from(new Set(d_dummy?.map((item: any) => item.ORIGIN_COUNTRY)))
+		const updatedRecords = jsonData?.xml?.record?.map((record: DataType) => {
+			record.DECIMAL_LATITUDE = parseFloat(record.DECIMAL_LATITUDE ?? 0)
+			record.DECIMAL_LONGITUD = parseFloat(record.DECIMAL_LONGITUD ?? 0)
+			return record
+		})
+		setAllData(updatedRecords ?? [])
+		setFilteredData(updatedRecords ?? [])
+		const countries = Array.from(new Set(updatedRecords?.map((item: any) => item.ORIGIN_COUNTRY)))
 		setCkTypes({ countries })
-		// setLoading(false)
+		setLoading(false)
 	}
 
 	const getUniqueValuesP = () => {
