@@ -5,7 +5,7 @@
 			"label": "Orders",
 			"db": "DOC_REQUEST",
 			"icon": "ShoppingBag",
-			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_ORDERS_PROFILE&NEW=Y&EXP=REQ_PATRON_ID%20"
+			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_ORDERS_PROFILE&EXP=REQ_PATRON_ID%20"
 		},
 		{
 			"id": 2,
@@ -19,7 +19,7 @@
 			"label": "Reproductions",
 			"db": "DOC_REQUEST",
 			"icon": "Copy",
-			"url": "?SEARCH&DATABASE=DOC_REQUEST&REPORT=WEB_REPRODUCTION_PROFILE&NEW=Y&EXP=REQ_TOPIC%20Obtaining%20Reproductions%20AND%20REQ_PATRON_ID%20"
+			"url": "?SEARCH&DATABASE=REQUEST_VIEW&REPORT=WEB_REPRODUCTION_PROFILE&EXP=REQ_TOPIC%20Obtaining%20Reproductions%20AND%20REQ_PATRON_ID%20"
 		},
 		{
 			"id": 4,

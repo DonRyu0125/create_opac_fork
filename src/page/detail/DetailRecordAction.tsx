@@ -37,7 +37,11 @@ const DetailRecordAction = () => {
 					window.location.href = url;
 					break;
 				case "Reproduction":
-					const reprodURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_VIEW&DE_FORM=[OPAC_REPROD]de_reproductionform.html&title=${record.record.title}`;
+					const { refd, accession_number, title: recordTitle } = record.record;
+    				const itemid = refd || accession_number || "";
+    				const title = recordTitle || "";
+					
+					const reprodURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_VIEW&DE_FORM=[OPAC_REPROD]de_reproductionform.html&title=${title}&itemid=${itemid}`;
 					window.location.href = reprodURL;
 					break;
 			}

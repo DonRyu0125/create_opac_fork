@@ -17,13 +17,15 @@ const ReproductionForm = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [title, setTitle] = useState("");
+    const [itemid, setItemID] = useState("");
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
         const title = queryParams.get("title")
-        if (title) {
-            setTitle(title)
-        }
+        const itemid = queryParams.get("itemid")
+        if (title) setTitle(title)
+        if (itemid) setItemID(itemid)
+        
         const fetchData = async () => {
             try {
                 const response = await axios.get(`/scripts/mwimain.dll/${getLanguageID()}/CLIENT_VIEW/WEB_CLIENT/C_CLIENT_NUMBER%20${getPatronID()}?COMMANDSEARCH`,
@@ -86,6 +88,13 @@ const ReproductionForm = () => {
                                     name="REQ_TITLE"
                                     className='w-full p-2 border rounded mb-4'
                                     value={title}
+                                    readOnly
+                                />
+                                <Input
+                                    type="hidden"
+                                    name="REQ_ITEM_ID"
+                                    className='w-full p-2 border rounded mb-4'
+                                    value={itemid}
                                     readOnly
                                 />
                                 <div className="px-4 rounded grid grid-cols-1 gap-4">
