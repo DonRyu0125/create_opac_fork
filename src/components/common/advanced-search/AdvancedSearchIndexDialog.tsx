@@ -169,7 +169,7 @@ const AdvancedSearchIndexDialog = ({
 					</DialogHeader>
 					<Button
 						className={
-							'absolute right-1 p-1 bg-primary font-bold mx-1 text-white rounded'
+							'absolute right-1 p-1 bg-primary font-bold mx-1 text-white rounded w-[40px]'
 						}
 						onClick={() => setOpen(false)}>
 						<X className={'h-6 w-6'} />
