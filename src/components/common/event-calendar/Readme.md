@@ -18,7 +18,7 @@ website profile ...
 
 -   M2L_TAG : MAIN EVENT DB
 -   LIBRARY_LOCATION : LIBRARY INFO
--   TAG_RSVP_PATRON_LOG : For RSVP LOG
+-   MAIN_EVENT_CAL_LOG_DB : For RSVP LOG
 
 #Virtual Directory needs
 

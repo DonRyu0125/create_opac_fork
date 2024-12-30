@@ -11,7 +11,7 @@ import {
 	RSVP_CANCEL_LANDING_PAGE_URL,
 	RSVP_LOG_P_STATUS,
 	SISN,
-	TAG_DB,
+	MAIN_EVENT_CAL_DB,
 	TAG_FUNC_DATE,
 	TAG_FUNC_LOC_DEC,
 	TAG_FUNC_DTE_GRP,
@@ -28,7 +28,7 @@ import {
 	TAG_FUNC_START_T,
 	TAG_NAME,
 	TAG_P_STATUS,
-	TAG_RSVP_PATRON_LOG,
+	MAIN_EVENT_CAL_LOG_DB,
 	EVENT_EMAIL_LOGO,
 } from '@/components/common/event-calendar/Constants'
 import axios from 'axios'
@@ -156,7 +156,7 @@ const RSVPConfirm = () => {
 		getLogon()
 			.then((res) => storeRecord(res, patronInfo))
 			.then((res) => sendRegConfirmEmail(res))
-			.then((res) => storeAtLog(res))
+			// .then((res) => storeAtLog(res))
 	}
 
 	const getLogon = async () => {
@@ -203,7 +203,7 @@ const RSVPConfirm = () => {
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=N&KEY=${SISN}&VALUE=${PatronInfo?.SISN}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${MAIN_EVENT_CAL_DB}&READ=N&KEY=${SISN}&VALUE=${PatronInfo?.SISN}`,
 				xmlFormAdd,
 				{
 					headers: {
@@ -274,7 +274,7 @@ const RSVPConfirm = () => {
 
 		return await axios
 			.post(
-				`${obj.HOME_SESSID}?manipxmlrecord&database=${TAG_RSVP_PATRON_LOG}&READ=N`,
+				`${obj.HOME_SESSID}?manipxmlrecord&database=${MAIN_EVENT_CAL_LOG_DB}&READ=N`,
 				xmlFormAdd,
 				{
 					headers: {

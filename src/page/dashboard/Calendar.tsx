@@ -10,7 +10,7 @@ import {
 	MWI_RESFUL_RES,
 	MWI_XML_DATA_INDEX,
 	SISN,
-	TAG_DB,
+	MAIN_EVENT_CAL_DB,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
@@ -135,7 +135,7 @@ const Calendar = () => {
 	const getOCCNumber = async (patronInfo: PatronInfo, sisnValue: number) => {
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=Y&KEY=${SISN}&VALUE=${sisnValue}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${MAIN_EVENT_CAL_DB}&READ=Y&KEY=${SISN}&VALUE=${sisnValue}`,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
@@ -191,7 +191,7 @@ const Calendar = () => {
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=N&KEY=${SISN}&VALUE=${sisn}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${MAIN_EVENT_CAL_DB}&READ=N&KEY=${SISN}&VALUE=${sisn}`,
 				xmlFormDelete,
 				{
 					headers: {
