@@ -168,6 +168,12 @@ export const MEDIA_TYPE = {
 	IMAGE: 'FLOC_IM_ACCESS',
 }
 
+export const RSVP_MAP = {
+	YES: 'Yes',
+	NO: 'No',
+	BLANK:'blank'
+}
+
 // export const COLORS_MAP = {
 // 	RED: 'bg-red-500 border-red-500',
 // 	YELLOW: 'bg-yellow-500 border-yellow-500',

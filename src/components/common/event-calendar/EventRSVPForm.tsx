@@ -66,6 +66,7 @@ import {
 	TAG_FUNC_START_T,
 	TAG_NAME,
 	VERIFICATION_EMAIL_T,
+	RSVP_MAP,
 } from './Constants'
 import { calNumOfPatron } from './EC-Util'
 import { fetch_get, getContactInfo } from './Service'
@@ -298,7 +299,7 @@ const ShowButton = ({
 
 	return (
 		<div className={'h-full w-full text-lg'}>
-			{event[TAG_FUNC_RSVP] && (
+			{event[TAG_FUNC_RSVP] !== RSVP_MAP.NO && (
 				<div
 					className={
 						'h-1/2 w-full flex flex-col items-center justify-evenly p-1 border-2 rounded'
@@ -335,7 +336,7 @@ const ShowButton = ({
 			)}
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
-					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-3 border-2 rounded`}>
+					className={`${event[TAG_FUNC_RSVP] !== RSVP_MAP.NO ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-3 border-2 rounded`}>
 					<div className={'w-full flex justify-center'}>{message.contactInfo}</div>
 					<div className={'w-full text-center'}>
 						<div className={'flex font-normal items-center text-base'}>
