@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { Checkbox } from '@radix-ui/react-checkbox'
 import { ColumnDef } from '@tanstack/react-table'
-import { getCookieValue } from '@/lib/utils'
+import { getCookieValue, getHomeSessionID } from '@/lib/utils'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 import axios from 'axios'
 
@@ -127,7 +127,7 @@ const Orders = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="">{row.getValue('req_item_id')}</div>,
+			cell: ({ row }) => <div className=""><a href={getHomeSessionID() + "/" + row.getValue('req_db_name') + "/REFD/" + row.getValue('req_item_id') + "?JUMP"}>{row.getValue('req_item_id')}</a></div>,
 		},
 		{
 			accessorKey: 'req_title',
@@ -175,6 +175,15 @@ const Orders = () => {
 		},
 		{
 			accessorKey: 'rec_status',
+			header: ({ column }) => {
+				return (
+					<></>
+				)
+			},
+			cell: ({ row }) => <></>,
+		},
+		{
+			accessorKey: 'req_db_name',
 			header: ({ column }) => {
 				return (
 					<></>
