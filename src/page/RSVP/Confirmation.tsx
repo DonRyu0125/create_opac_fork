@@ -1,6 +1,5 @@
 import '@/components/common/event-calendar/CalendarStyle.css'
 import {
-	EVENT_EMAIL_LOGO,
 	FUNC_LOC_P_GRP,
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
