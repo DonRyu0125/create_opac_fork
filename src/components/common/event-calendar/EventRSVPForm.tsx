@@ -41,7 +41,7 @@ import {
 	RSVP_CANCEL_LANDING_PAGE_URL,
 	RSVP_CONFIRM_LANDING_PAGE_URL,
 	SISN,
-	TAG_DB,
+	MAIN_EVENT_CAL_DB,
 	TAG_FUNC_DATE,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
@@ -66,6 +66,7 @@ import {
 	TAG_FUNC_START_T,
 	TAG_NAME,
 	VERIFICATION_EMAIL_T,
+	RSVP_MAP,
 } from './Constants'
 import { calNumOfPatron } from './EC-Util'
 import { fetch_get, getContactInfo } from './Service'
@@ -298,7 +299,7 @@ const ShowButton = ({
 
 	return (
 		<div className={'h-full w-full text-lg'}>
-			{event[TAG_FUNC_RSVP] && (
+			{event[TAG_FUNC_RSVP] !== RSVP_MAP.NO && (
 				<div
 					className={
 						'h-1/2 w-full flex flex-col items-center justify-evenly p-1 border-2 rounded'
@@ -335,7 +336,7 @@ const ShowButton = ({
 			)}
 			{getContactInfo(BD_ADDRESS, contactInfo, event) ? (
 				<div
-					className={`${event[TAG_FUNC_RSVP] ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-3 border-2 rounded`}>
+					className={`${event[TAG_FUNC_RSVP] !== RSVP_MAP.NO ? 'h-1/2' : 'h-[54%]'} w-full flex flex-col items-start justify-evenly text-lg p-3 border-2 rounded`}>
 					<div className={'w-full flex justify-center'}>{message.contactInfo}</div>
 					<div className={'w-full text-center'}>
 						<div className={'flex font-normal items-center text-base'}>
@@ -525,7 +526,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=Y&KEY=${SISN}&VALUE=${sisnNumber}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${MAIN_EVENT_CAL_DB}&READ=Y&KEY=${SISN}&VALUE=${sisnNumber}`,
 				{
 					headers: {
 						'Content-Type': 'text/xml',
@@ -637,7 +638,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?manipxmlrecord&database=${TAG_DB}&READ=N&KEY=${SISN}&VALUE=${event?.SISN}`,
+				`${HOME_SESSID}?manipxmlrecord&database=${MAIN_EVENT_CAL_DB}&READ=N&KEY=${SISN}&VALUE=${event?.SISN}`,
 				xmlFormAdd,
 				{
 					headers: {

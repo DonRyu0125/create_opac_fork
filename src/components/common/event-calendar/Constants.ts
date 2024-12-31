@@ -56,7 +56,8 @@ export type FilterType = { type: string; color: string; icon: string }
 export const EVENT_DEFAULT_COLOR = 'bg-sky-900 border-sky-900'
 
 //DB
-export const TAG_DB = 'M2L_TAG_SYN'
+export const MAIN_EVENT_CAL_DB = 'CALENDAR_VAL'
+export const MAIN_EVENT_CAL_LOG_DB = 'TAG_RSVP_PATRON_LOG_SYN'
 //MINISIS REPORT
 export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW'
 export const LOCATION_REPORT = 'CALENDAR_LOCATION_NEW'
@@ -143,7 +144,6 @@ export const SUCCESS_RES_CODE = 0
 export const MWI_XML_DATA_INDEX = 0
 export const NON_LOGIN_USER_TYPE = 'NOLOGIN'
 //For RSVP LOG
-export const TAG_RSVP_PATRON_LOG = 'TAG_RSVP_PATRON_LOG_SYN'
 export const TAG_FUNC_P_T = 'TAG_FUNC_P_T'
 export const TAG_P_STATUS = 'TAG_P_STATUS'
 
@@ -166,6 +166,12 @@ export const ICON_SHAPE_MAP = {
 export const MEDIA_TYPE = {
 	VIDEO: 'FLOC_VD_ACCESS',
 	IMAGE: 'FLOC_IM_ACCESS',
+}
+
+export const RSVP_MAP = {
+	YES: 'Yes',
+	NO: 'No',
+	BLANK:'blank'
 }
 
 // export const COLORS_MAP = {
