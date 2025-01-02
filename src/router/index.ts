@@ -41,6 +41,7 @@ import EnquiryForm from '@/page/enquiry/EnquiryForm'
 import EnquiryConfirmed from '@/page/enquiry/EnquiryConfirmed'
 import ReproductionConfirmed from '@/page/reproduction/ReproductionConfirmed'
 import ReproductionForm from '@/page/reproduction/ReproductionForm'
+import ReproductionDetail from '@/page/reproduction/ReproductionDetail'
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
@@ -93,6 +94,7 @@ export const ROUTES: TRoute = {
 	enquiryconfirmed: EnquiryConfirmed,
 	reproductionform: ReproductionForm,
 	reproductionconfirmed: ReproductionConfirmed,
+	reproductiondetail: ReproductionDetail,
 	...ADMIN_ROUTES,
 }
 

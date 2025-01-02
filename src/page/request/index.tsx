@@ -100,6 +100,11 @@ const Request = () => {
 									/>
 									<Input
 										type="hidden"
+										name="REQ_ACC_NUMBER"
+										value={reqData.req_acc_number}
+									/>
+									<Input
+										type="hidden"
 										name="REQ_ITEM_TITLE"
 										value={
 											typeof reqData.req_item_title === 'object'
@@ -164,7 +169,8 @@ const Request = () => {
 									''
 								)}
 								<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
-								<p className="text-sm text-gray-600">{reqData.req_item_id}</p>
+								<p className="text-sm text-gray-600">Reference Number: {reqData.req_item_id}</p>
+								{ reqData.req_acc_number ? (<p className="text-sm text-gray-600">Accession Number: </p>) : ""}
 							</div>
 						</div>
 					</div>

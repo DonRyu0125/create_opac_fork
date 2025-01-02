@@ -45,7 +45,12 @@ const Reproductions = () => {
 		{
 			accessorKey: 'req_order_num',
 			header: 'Order #',
-			cell: ({ row }) => <div className="capitalize">{row.getValue('req_order_num')}</div>,
+			cell: ({ row }) => <div className="capitalize"><a className="underline text-primary hover:text-opac-secondary" href={row.getValue('req_order_num_link')}>{row.getValue('req_order_num')}</a></div>,
+		},
+		{
+			accessorKey: 'req_order_num_link',
+			header: '',
+			cell: ({ row }) => <></>,
 		},
 		{
 			accessorKey: 'req_item_id',
@@ -59,7 +64,7 @@ const Reproductions = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('req_item_id')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('req_item_id')}</div>,
 		},
 		{
 			accessorKey: 'req_topic',
@@ -73,10 +78,10 @@ const Reproductions = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('req_topic')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('req_topic')}</div>,
 		},
 		{
-			accessorKey: 'req_item_title',
+			accessorKey: 'req_title',
 			header: ({ column }) => {
 				return (
 					<Button
@@ -87,10 +92,24 @@ const Reproductions = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('req_item_title')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('req_title')}</div>,
 		},
 		{
-			accessorKey: 'req_charge_amt',
+			accessorKey: 'req_status',
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+						Status
+						<CaretSortIcon className="ml-2 h-4 w-4" />
+					</Button>
+				)
+			},
+			cell: ({ row }) => <div className="">{row.getValue('req_status')}</div>,
+		},
+		{
+			accessorKey: 'req_paid_amt',
 			header: ({ column }) => {
 				return (
 					<Button
@@ -101,10 +120,10 @@ const Reproductions = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('req_charge_amt')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('req_paid_amt')}</div>,
 		},
 		{
-			accessorKey: 'req_paid_amt',
+			accessorKey: 'amt_paid',
 			header: ({ column }) => {
 				return (
 					<Button
@@ -115,7 +134,7 @@ const Reproductions = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="lowercase">{row.getValue('req_paid_amt')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('amt_paid')}</div>,
 		},
 	]
 	return (
