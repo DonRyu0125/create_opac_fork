@@ -33,6 +33,11 @@
 		"filterOption": "TAG_DB_TYPE",
 		"filterTypes": [
 			{
+				"type": "Archives",
+				"color": "bg-sky-900 border-sky-900",
+				"icon": "rounded"
+			},
+			{
 				"type": "Library",
 				"color": "bg-red-500 border-red-500",
 				"icon": "rounded"
@@ -40,11 +45,6 @@
 			{
 				"type": "Museum",
 				"color": "bg-yellow-500 border-yellow-500",
-				"icon": "rounded"
-			},
-			{
-				"type": "Archives",
-				"color": "bg-sky-900 border-sky-900",
 				"icon": "rounded"
 			}
 		]
