@@ -409,7 +409,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 				<MapContainer
 					className="markercluster-map"
 					center={[49.1044, -122.8011]}
-					zoom={3}
+					zoom={10}
 					maxZoom={18}
 					style={{
 						height: '90vh',

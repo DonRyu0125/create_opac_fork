@@ -67,11 +67,6 @@ const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilt
 
 		if (currentDate.getFullYear() >= next_next_year) {
 			setisClickableNext(true)
-		} else if (
-			currentDate.getMonth() + 1 === CALENDAR_START_MONTH &&
-			currentDate.getFullYear() === currentYear
-		) {
-			setisClickablePrev(true)
 		} else {
 			setisClickablePrev(false)
 			setisClickableNext(false)
