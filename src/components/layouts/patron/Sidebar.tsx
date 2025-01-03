@@ -15,6 +15,7 @@ import {
 	FileX,
 } from 'lucide-react'
 import clientProfileJSON from '@/constants/en/client-profile.json'
+import { MAIN_EVENT_CAL_DB } from '@/components/common/event-calendar/Constants'
 
 type Props = {}
 
@@ -71,7 +72,7 @@ const Sidebar = (props: Props) => {
 						<Link
 							href={
 								getCookieValue('HOME_SESSID') +
-								'?SEARCH&DATABASE=M2L_TAG_SYN&REPORT=WEB_CALENDAR_PROFILE&EXP=TAG_FUNC_P_ID%20' +
+								`?SEARCH&DATABASE=${MAIN_EVENT_CAL_DB}&REPORT=WEB_CALENDAR_PROFILE&EXP=TAG_FUNC_P_ID%20` +
 								m2l_patron_id +
 								'&M_GVAR1=USER_ID:' +
 								m2l_patron_id
