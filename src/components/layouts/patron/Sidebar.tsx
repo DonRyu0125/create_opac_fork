@@ -70,7 +70,7 @@ const Sidebar = (props: Props) => {
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Link
-							href={`http://test.opac.minisisinc.com/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}
+							href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}
 								&M_GVAR1=USER_ID:${m2l_patron_id}`}
 							className="flex h-9 w-9 items-center justify-center  text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
 							<CalendarDays className="h-5 w-5" />

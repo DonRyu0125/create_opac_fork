@@ -55,12 +55,14 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick }) => {
 					</div>
 				</div>
 			</div>
-			<Button
-				onClick={onClick}
-				className={`flex items-center justify-center w-[300px] h-[50px] mt-6  rounded 
+			<div className='w-full justify-center items-center'>
+				<Button
+					onClick={onClick}
+					className={`w-[300px] h-[50px] mt-6  rounded 
 				bg-green-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring`}>
-				<div>{message.confirm}</div>
-			</Button>
+					<div>{message.confirm}</div>
+				</Button>
+			</div>
 		</div>
 	)
 }
