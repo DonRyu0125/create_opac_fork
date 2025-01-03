@@ -244,7 +244,7 @@ const ShowForm = ({
 				</div>
 				{!isIDValid && <div className={'my-2'}>{message.emailAlreadyRegistered}</div>}
 				<div className={'my-2'}>
-					{!isLogin && (
+					{!isLoginValid && (
 						<ReCAPTCHA sitekey={conf.reCaptchaKey} onChange={handleCaptchaChange} />
 					)}
 				</div>
