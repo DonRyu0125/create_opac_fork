@@ -43,6 +43,12 @@ export interface ReproductionData{
 	req_topic_gl: string
 	req_repro_type_occurrence: string
 	req_title: string
+	req_paid_amt: string
+	req_tax: string
+	req_handling: string
+	req_loc_code: string
+	req_tax_percent: string
+	req_charge_amt: string
 }
 export interface RequestData {
 	action: string
@@ -92,6 +98,7 @@ export interface Record {
 	record: FieldData
 	reproductions_count: string
 	reproduction: ReproductionData
+	reproductiondetail: ReproductionData
 	request: RequestData
 	req_status: string
 	rec_status: string

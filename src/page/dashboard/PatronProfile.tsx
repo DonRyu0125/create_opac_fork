@@ -141,11 +141,7 @@ export default function PatronProfile() {
 						Welcome {records[0]?.full_name || 'User'}!
 					</h1>
 					<p className="mt-2">
-						You have completed <span className="font-medium text-blue-600">70%</span> of
-						your goal this week!{' '}
-						<span className="text-gray-600">
-							Start a new goal and improve your result.
-						</span>
+						This is your <span className="font-medium text-blue-600">Client Profile</span>. Check your saved or inquired items here!
 					</p>
 				</div>
 
@@ -221,7 +217,7 @@ export default function PatronProfile() {
 				</div>
 
 				{/* Follower Growth Section */}
-				<div className="rounded-lg bg-white p-6 shadow">
+				{/* <div className="rounded-lg bg-white p-6 shadow">
 					<div className="flex items-center justify-between">
 						<h2 className="text-lg font-medium">Follower Growth</h2>
 						<button className="rounded-md p-2 hover:bg-gray-100">
@@ -252,7 +248,7 @@ export default function PatronProfile() {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</PatronLayout>
 	)
