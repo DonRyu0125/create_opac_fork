@@ -9,7 +9,8 @@ const ReproductionDetail = () => {
     const { records } = useJSONData({ selector: '#xml_record' })
 	const { config } = useConstants()
 	const { navigations } = config
-	let reprodData = records[0]
+    const ZERO_AMOUNT = "$0.00"
+	let reprodData = records[0].reproductiondetail
     console.log(reprodData)
     
 	return (
@@ -20,16 +21,8 @@ const ReproductionDetail = () => {
 						{/* Header */}
 						<div className="flex justify-between items-center border-b pb-4">
 							<h1 className="flex items-center text-xl font-bold">
-                            <CircleCheck className='mr-2 text-green-500'/>Reproduction Information
+                            Reproduction Information
                             </h1>
-						</div>
-						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
-                            <h1 className="text-lg font-bold">
-                               nixon Thank you for your request!
-                            </h1>
-                            <p>Your information has been submitted.</p>
-                            <p>Please give us 24 hours to reply back to your inquiry.</p>
-                            <p>Check your profile to stay updated with replies and/or comment from the staff.</p>
 						</div>
                         <div>
 							<div className="border p-4 rounded">
@@ -38,8 +31,10 @@ const ReproductionDetail = () => {
 								<p className="text-lg font-bold mt-4">{reprodData.req_title}</p>
 								<p className="text-sm text-gray-600">{reprodData.req_topic}</p>
 								<p className="text-md my-2">{reprodData.req_topic_gl}</p>
-								<p className="text-md mt-4">{reprodData.req_patron_name}</p>
-								<p className="text-md">{reprodData.req_patron_email}</p>
+                                <p className="text-md">Charge Amount: {reprodData.req_charge_amt ? reprodData.req_charge_amt : ZERO_AMOUNT}</p>
+                                <p className="text-md">Tax {reprodData.req_tax_percent ? "(" + reprodData.req_tax_percent + ")": "(0%)"}: {reprodData.req_tax ? reprodData.req_tax : ZERO_AMOUNT}</p>
+                                <p className="text-md">Handling: {reprodData.req_handling ? reprodData.req_handling : ZERO_AMOUNT}</p>
+                                <p className="text-md">Total Amount: {reprodData.req_paid_amt}</p>
 							</div>
 						</div>
                         <div className='border-t mt-6'>
