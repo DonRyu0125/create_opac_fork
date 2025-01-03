@@ -9,7 +9,7 @@ const ReproductionDetail = () => {
     const { records } = useJSONData({ selector: '#xml_record' })
 	const { config } = useConstants()
 	const { navigations } = config
-	let reprodData = records[0].reproduction
+	let reprodData = records[0]
     console.log(reprodData)
     
 	return (
