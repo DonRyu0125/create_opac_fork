@@ -12,6 +12,7 @@ import { useDisplayMode } from '@/hooks/useDisplayMode'
 
 const SummaryRecords = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
+
 	return (
 		<>
 			{records.map((e, i) => {

@@ -9,9 +9,10 @@ import SearchForm from '@/components/common/search-form/SearchForm'
 import SummaryRecords from '../summary/SummaryRecord'
 import { Button } from '@/components/ui/button'
 import { removeAllBookmarks } from '@/lib/bookmark'
+import { getSearchURL } from '@/lib/utils'
 
 const Bookmark = () => {
-	const { message } = useConstants()
+	const { message, home } = useConstants()
 	const { common, pagination, backToSummary, records } = useJSONData({ selector: '#xml_record' })
 
 	return (
@@ -31,6 +32,7 @@ const Bookmark = () => {
 							className="w-[450px] m-0"
 							inputStyle="text-black"
 							inputName={'KEYWORD_CLUSTER'}
+							action={getSearchURL(home.searchURL)}
 						/>
 						<ViewToggle />
 					</div>
@@ -51,7 +53,7 @@ const Bookmark = () => {
 							{pagination?.a && pagination.a.length > 0 && (
 								<div className="col-span-4 mt-4">
 									<PagePagination
-										items={pagination.a.map((item) => ({
+										items={pagination.a.map((item: { _href: any; b: undefined }) => ({
 											url: item._href,
 											active: item.b !== undefined,
 										}))}

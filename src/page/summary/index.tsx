@@ -12,6 +12,7 @@ import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import SummaryPageAction from './SummaryPageAction'
 import SummaryRecords from './SummaryRecord'
+import { getSearchURL } from '@/lib/utils'
 
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
@@ -49,7 +50,7 @@ const Summary = () => {
 							className="w-[450px] m-0"
 							inputStyle="text-black"
 							inputName={'KEYWORD_CLUSTER'}
-							action={''}
+							action={getSearchURL(home.searchURL)}
 						/>
 						<ViewToggle />
 					</div>
