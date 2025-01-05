@@ -27,10 +27,6 @@ const SummaryPageAction = () => {
 			value: 'default',
 		},
 		{
-			label: message.sortAccessionNumberAscending,
-			value: 'id_asc',
-		},
-		{
 			label: message.sortTitleAscending,
 			value: 'title_asc',
 		},
