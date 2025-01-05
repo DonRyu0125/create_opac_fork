@@ -15,11 +15,9 @@ const SummaryRecords = () => {
 
 	return (
 		<>
-			{records.map((e, i) => {
-				if (e.record_link) {
-					return <RecordView record={e} key={i} />
-				}
-			})}
+			{records.map((e, i) => (
+				<RecordView record={e} key={i} />
+			))}
 		</>
 	)
 }
