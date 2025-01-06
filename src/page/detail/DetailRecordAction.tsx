@@ -9,7 +9,6 @@ import DialogLogin from '../../components/common/DialogLogin'
 import TooltipButton from '@/components/common/TooltipButton'
 import { getCookieValue, getHomeSessionID } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
-// State for modal visibility
 
 const DetailRecordAction = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -94,7 +93,7 @@ const DetailRecordAction = () => {
 							tooltipContent="Request Record"
 							variant="outline"
 							onClick={() => handleSubmit('Request')}>
-							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
+							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />
 							{message.detailRecordActionRequest}
 							<form
 								method="post"
@@ -172,7 +171,7 @@ const DetailRecordAction = () => {
 						</TooltipButton>
 					) : (
 						<TooltipButton tooltipContent="Request Record" variant="outline" disabled>
-							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
+							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />
 							{message.detailRecordActionRequest}
 						</TooltipButton>
 					)}
@@ -181,14 +180,14 @@ const DetailRecordAction = () => {
 						tooltipContent="Ask about this record"
 						variant="outline"
 						onClick={() => handleSubmit('Enquire')}>
-						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
+						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />
 						{message.detailRecordActionEnquire}
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Reproduce this record"
 						variant="outline"
 						onClick={() => handleSubmit('Reproduction')}>
-						<Files className="w-4 h-4 mr-2 hidden md:block" />{' '}
+						<Files className="w-4 h-4 mr-2 hidden md:block" />
 						{message.detailRecordActionReproduction}
 					</TooltipButton>
 					<TooltipButton
@@ -206,9 +205,6 @@ const DetailRecordAction = () => {
 						}}>
 						<Copy className="w-4 h-4 mr-2 hidden md:block" /> {message.copy}
 					</TooltipButton>
-					{/* <Button variant="outline">
-						<Printer className="w-4 h-4 mr-2 hidden md:block" /> {message.print}
-					</Button> */}
 				</div>
 
 				<TooltipButton
@@ -221,7 +217,6 @@ const DetailRecordAction = () => {
 				</TooltipButton>
 			</div>
 			<DialogLogin open={isModalOpen} onOpenChange={setIsModalOpen} />
-			<form></form>
 		</div>
 	)
 }
