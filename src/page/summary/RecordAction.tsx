@@ -79,8 +79,8 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const handleCopy = () => {
 		if (record.database_name) {
 			copyRecordURL(record.database_name, sisn)
-		} else if (record.link_dbname && record.link_sisn) {
-			copyRecordURL(record.link_dbname, record.link_sisn)
+		} else if (record.link_dbname && record.record.link_sisn) {
+			copyRecordURL(record.link_dbname, record.record.link_sisn)
 		}
 
 		toast({

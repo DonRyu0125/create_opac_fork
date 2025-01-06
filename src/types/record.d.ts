@@ -92,7 +92,6 @@ export interface Record {
 	input?: BookmarkCheckBoxData
 	is_bookmarked: string
 	link_dbname?: string
-	link_sisn?: string
 	media?: Media
 	orders_count: string
 	record_link: string
