@@ -20,10 +20,15 @@ app.post('/update', async (c) => {
 	if (!base) return c.json({ status: 'failed', message: 'No base directory' })
 	const body: { path: string; content: string } = await c.req.json()
 
+
+	console.log({body, path})
 	try {
 		const { path, content } = body
 		setFileContent(resolve(base, path), content)
 		const process = rebuildOPAC()
+
+		console.log({process})
+
 
 		return c.json({ status: 'success', message: 'Your file has been updated successfully' })
 	} catch (error) {
