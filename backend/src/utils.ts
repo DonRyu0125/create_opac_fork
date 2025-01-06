@@ -15,6 +15,8 @@ export function setFileContent(fp: string, content: string) {
 
 export function rebuildOPAC() {
 	const base = path.dirname(path.dirname(__dirname))
+
+	console.log({ base })
 	const process = exec(`cd ${base} && npx craco start`, (error, stdout, stderr) => {
 		if (error) {
 			console.error(`error: ${error.message}`)
