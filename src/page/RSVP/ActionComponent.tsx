@@ -55,7 +55,7 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick }) => {
 					</div>
 				</div>
 			</div>
-			<div className='w-full justify-center items-center'>
+			<div className="w-full justify-center items-center">
 				<Button
 					onClick={onClick}
 					className={`w-[300px] h-[50px] mt-6  rounded 

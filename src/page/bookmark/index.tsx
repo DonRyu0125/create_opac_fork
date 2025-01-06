@@ -53,10 +53,12 @@ const Bookmark = () => {
 							{pagination?.a && pagination.a.length > 0 && (
 								<div className="col-span-4 mt-4">
 									<PagePagination
-										items={pagination.a.map((item: { _href: any; b: undefined }) => ({
-											url: item._href,
-											active: item.b !== undefined,
-										}))}
+										items={pagination.a.map(
+											(item: { _href: any; b: undefined }) => ({
+												url: item._href,
+												active: item.b !== undefined,
+											})
+										)}
 										renderItem={(_, index) => (
 											<span key={index}>{index + 1}</span>
 										)}

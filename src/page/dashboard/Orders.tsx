@@ -10,45 +10,47 @@ import { getCookieValue, getHomeSessionID } from '@/lib/utils'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 import axios from 'axios'
 
-
 const Orders = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	let reqData = records;
+	let reqData = records
 	console.log(reqData)
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
 
 	const cancelRequest = (reqNumber: string) => {
-		var cancelReq_url = getCookieValue("HOME_SESSID") + "?MANIPXMLRECORD&KEY=REQ_ORDER_NUM&VALUE=" + reqNumber + "&DATABASE=REQUEST_INFO";
-		var xmlForm = '<?xml version="1.0" encoding="UTF-8"?>\n<RECORD>\n';
+		var cancelReq_url =
+			getCookieValue('HOME_SESSID') +
+			'?MANIPXMLRECORD&KEY=REQ_ORDER_NUM&VALUE=' +
+			reqNumber +
+			'&DATABASE=REQUEST_INFO'
+		var xmlForm = '<?xml version="1.0" encoding="UTF-8"?>\n<RECORD>\n'
 		xmlForm = xmlForm.concat('<REC_STATUS>Deleted</REC_STATUS>\n')
 		axios({
 			method: 'post',
 			url: cancelReq_url,
 			headers: {
-			  'Content-Type': 'text/xml',
+				'Content-Type': 'text/xml',
 			},
 			data: xmlForm,
 			timeout: 300000, // 5-minute timeout
-		  })
+		})
 			.then((response) => {
-			  const parser = new DOMParser();
-			  const xmlDoc = parser.parseFromString(response.data, 'text/xml');
-			  const errorValue = xmlDoc.querySelector('error')?.textContent;
-		
-			  if (errorValue && parseInt(errorValue, 10) === 0) {
-				// Reload the page if the status was successfully changed
-				window.location.reload();
-			  }
+				const parser = new DOMParser()
+				const xmlDoc = parser.parseFromString(response.data, 'text/xml')
+				const errorValue = xmlDoc.querySelector('error')?.textContent
+
+				if (errorValue && parseInt(errorValue, 10) === 0) {
+					// Reload the page if the status was successfully changed
+					window.location.reload()
+				}
 			})
 			.catch((error) => {
-			  console.error('Error:', error);
-			});
-		
+				console.error('Error:', error)
+			})
 	}
 
 	const columns: ColumnDef<ProfileData>[] = [
@@ -127,7 +129,21 @@ const Orders = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className=""><a href={getHomeSessionID() + "/" + row.getValue('req_db_name') + "/REFD/" + row.getValue('req_item_id') + "?JUMP"}>{row.getValue('req_item_id')}</a></div>,
+			cell: ({ row }) => (
+				<div className="">
+					<a
+						href={
+							getHomeSessionID() +
+							'/' +
+							row.getValue('req_db_name') +
+							'/REFD/' +
+							row.getValue('req_item_id') +
+							'?JUMP'
+						}>
+						{row.getValue('req_item_id')}
+					</a>
+				</div>
+			),
 		},
 		{
 			accessorKey: 'req_title',
@@ -169,25 +185,34 @@ const Orders = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="">
-				{(row.getValue('rec_status') === "Deleted") ? <Button disabled>Cancelled</Button> : (row.getValue('req_status') === "Retrieve" || row.getValue('req_status') === "Prepared" || row.getValue('req_status') === "Requested" || row.getValue('req_status') === "Conservation") ? <Button onClick={() => cancelRequest(row.getValue('req_order_num'))}>Cancel</Button> : <Button disabled>No Action</Button>}
-				</div>,
+			cell: ({ row }) => (
+				<div className="">
+					{row.getValue('rec_status') === 'Deleted' ? (
+						<Button disabled>Cancelled</Button>
+					) : row.getValue('req_status') === 'Retrieve' ||
+					  row.getValue('req_status') === 'Prepared' ||
+					  row.getValue('req_status') === 'Requested' ||
+					  row.getValue('req_status') === 'Conservation' ? (
+						<Button onClick={() => cancelRequest(row.getValue('req_order_num'))}>
+							Cancel
+						</Button>
+					) : (
+						<Button disabled>No Action</Button>
+					)}
+				</div>
+			),
 		},
 		{
 			accessorKey: 'rec_status',
 			header: ({ column }) => {
-				return (
-					<></>
-				)
+				return <></>
 			},
 			cell: ({ row }) => <></>,
 		},
 		{
 			accessorKey: 'req_db_name',
 			header: ({ column }) => {
-				return (
-					<></>
-				)
+				return <></>
 			},
 			cell: ({ row }) => <></>,
 		},

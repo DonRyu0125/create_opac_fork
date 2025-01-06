@@ -203,7 +203,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 		})
 		setAllData(updatedRecords ?? [])
 		setFilteredData(updatedRecords ?? [])
-		const countries = Array.from(new Set(updatedRecords?.map((item: any) => item.ORIGIN_COUNTRY)))
+		const countries = Array.from(
+			new Set(updatedRecords?.map((item: any) => item.ORIGIN_COUNTRY))
+		)
 		setCkTypes({ countries })
 		setLoading(false)
 	}

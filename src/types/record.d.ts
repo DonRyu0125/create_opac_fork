@@ -34,7 +34,7 @@ export interface EnquiryData {
 	enq_topic: string
 	enq_user: string
 }
-export interface ReproductionData{
+export interface ReproductionData {
 	req_order_num: string
 	req_patron_name: string
 	req_patron_id: string
@@ -92,6 +92,7 @@ export interface Record {
 	input?: BookmarkCheckBoxData
 	is_bookmarked: string
 	link_dbname?: string
+	link_sisn?: string
 	media?: Media
 	orders_count: string
 	record_link: string
@@ -102,8 +103,8 @@ export interface Record {
 	request: RequestData
 	req_status: string
 	rec_status: string
-	save_n_stop_record?: string // for client registration 
-	skip_n_stop_record?:string // for client registration
+	save_n_stop_record?: string // for client registration
+	skip_n_stop_record?: string // for client registration
 }
 
 export type MediaType = 'im_access_link' | 'vd_access_link' | 'ad_access_link' | 'tx_access_link'

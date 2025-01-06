@@ -141,7 +141,9 @@ export default function PatronProfile() {
 						Welcome {records[0]?.full_name || 'User'}!
 					</h1>
 					<p className="mt-2">
-						This is your <span className="font-medium text-blue-600">Client Profile</span>. Check your saved or inquired items here!
+						This is your{' '}
+						<span className="font-medium text-blue-600">Client Profile</span>. Check
+						your saved or inquired items here!
 					</p>
 				</div>
 

@@ -6,7 +6,6 @@ import copy from 'copy-to-clipboard'
 const DEFAULT_DETAIL_REPORT = 'WEB_UNION_DETAIL'
 const DEFAULT_SUM_REPORT = 'WEB_UNION_SUM'
 
-
 export type RENDERED_COMPONENT = React.ReactNode | object | null
 
 export type GenericObject = {

@@ -45,7 +45,15 @@ const Reproductions = () => {
 		{
 			accessorKey: 'req_order_num',
 			header: 'Order #',
-			cell: ({ row }) => <div className="capitalize"><a className="underline text-primary hover:text-opac-secondary" href={row.getValue('req_order_num_link')}>{row.getValue('req_order_num')}</a></div>,
+			cell: ({ row }) => (
+				<div className="capitalize">
+					<a
+						className="underline text-primary hover:text-opac-secondary"
+						href={row.getValue('req_order_num_link')}>
+						{row.getValue('req_order_num')}
+					</a>
+				</div>
+			),
 		},
 		{
 			accessorKey: 'req_order_num_link',

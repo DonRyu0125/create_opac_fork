@@ -169,8 +169,14 @@ const Request = () => {
 									''
 								)}
 								<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
-								<p className="text-sm text-gray-600">Reference Number: {reqData.req_item_id}</p>
-								{ reqData.req_acc_number ? (<p className="text-sm text-gray-600">Accession Number: </p>) : ""}
+								<p className="text-sm text-gray-600">
+									Reference Number: {reqData.req_item_id}
+								</p>
+								{reqData.req_acc_number ? (
+									<p className="text-sm text-gray-600">Accession Number: </p>
+								) : (
+									''
+								)}
 							</div>
 						</div>
 					</div>

@@ -155,7 +155,7 @@ const RSVPConfirm = () => {
 		getLogon()
 			.then((res) => storeRecord(res, patronInfo))
 			.then((res) => sendRegConfirmEmail(res))
-			// .then((res) => storeAtLog(res))
+		// .then((res) => storeAtLog(res))
 	}
 
 	const getLogon = async () => {

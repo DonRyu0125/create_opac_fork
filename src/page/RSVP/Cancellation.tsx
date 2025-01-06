@@ -95,7 +95,7 @@ const RSVPCancel = () => {
 				setStatus(STATUS_TYPE.Success)
 				return sendCancelConfirmEmail(res)
 			})
-			// .then((res) => storeAtLog(res))
+		// .then((res) => storeAtLog(res))
 	}
 
 	const getLogon = async () => {

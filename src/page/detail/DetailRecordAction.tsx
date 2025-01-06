@@ -20,8 +20,6 @@ const DetailRecordAction = () => {
 	const record = records[0]
 	const requestData = record?.request
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
-	const database = record.database_name
-	console.log(record)
 	const handleSubmit = (action: string | null) => {
 		if (checkLoggedInToRequest()) {
 			switch (action) {
@@ -37,10 +35,10 @@ const DetailRecordAction = () => {
 					window.location.href = url
 					break
 				case 'Reproduction':
-					const { refd, accession_number, title: recordTitle } = record.record;
-    				const itemid = refd || accession_number || "";
-    				const title = recordTitle || "";
-					
+					const { refd, accession_number, title: recordTitle } = record.record
+					const itemid = refd || accession_number || ''
+					const title = recordTitle || ''
+
 					const reprodURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_VIEW&DE_FORM=[OPAC_REPROD]de_reproductionform.html&title=${title}&itemid=${itemid}`
 					window.location.href = reprodURL
 					break
@@ -64,15 +62,6 @@ const DetailRecordAction = () => {
 			? (requestable = true)
 			: (requestable = false)
 		return requestable
-	}
-
-	const checkIfCurrentClientRequestedThisRecord = () => {
-		const recordRequested = record.record?.is_requested_by_client
-		let currentClientRequested = false
-		if (recordRequested === 'Current') {
-			currentClientRequested = true
-		}
-		return currentClientRequested
 	}
 
 	const checkLoggedInToRequest = () => {
@@ -99,40 +88,94 @@ const DetailRecordAction = () => {
 				</TooltipButton>
 
 				<div className="flex space-x-2">
-					{checkRecordHasMandatoryDataToRequest() 
-					// && checkIfCurrentClientRequestedThisRecord() 
-					? 
-					<TooltipButton
-						tooltipContent="Request Record"
-						variant="outline"
-						onClick={() => handleSubmit("Request")}
-					>
-						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
-						<form method="post" ref={formRef} action={getHomeSessionID() + "/1/" + record.request.req_db_link2 + "?REQUESTLOGIN&DBNAME=" + record.request.req_db_name} className='hidden'>
-							<Input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time}/>
-							<Input type="hidden" name="METHOD_REQUEST" value={requestData.method_request}/>
-							<Input type="hidden" name="REQ_TOPIC" value={requestData.req_topic}/>
-							<Input type="hidden" name="REQ_APPL_NAME" value={requestData.req_appl_name}/>
-							<Input type="hidden" name="REQ_DB_NAME" value={ requestData.req_db_name}/>
-							<Input type="hidden" name="REQ_DB_LINK2" value={requestData.req_db_link2}/>
-							<Input type="hidden" name="REQ_QUEUE" value={requestData.req_queue}/>
-							<Input type="hidden" name="REQ_DB_RECID" value={requestData.req_db_recid}/>
-							<Input type="hidden" name="REQ_TITLE" value={requestData.req_title}/>
-							<Input type="hidden" name="REQ_ITEM_ID" value={requestData.req_item_id}/>
-							<Input type="hidden" name="REQ_ITEM_TITLE" value={requestData.req_item_title}/>
-							<Button
-								className="bg-opac-darkblue"
-								type="submit"
-								variant="default">
-								Submit
-							</Button>
-						</form>
-					</TooltipButton> : <TooltipButton
-						tooltipContent="Request Record"
-						variant="outline"
-						disabled>
-						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
-					</TooltipButton>}
+					{checkRecordHasMandatoryDataToRequest() ? (
+						// && checkIfCurrentClientRequestedThisRecord()
+						<TooltipButton
+							tooltipContent="Request Record"
+							variant="outline"
+							onClick={() => handleSubmit('Request')}>
+							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
+							{message.detailRecordActionRequest}
+							<form
+								method="post"
+								ref={formRef}
+								action={
+									getHomeSessionID() +
+									'/1/' +
+									record.request.req_db_link2 +
+									'?REQUESTLOGIN&DBNAME=' +
+									record.request.req_db_name
+								}
+								className="hidden">
+								<Input
+									type="hidden"
+									name="ITEM_REQ_TIME"
+									value={requestData.item_req_time}
+								/>
+								<Input
+									type="hidden"
+									name="METHOD_REQUEST"
+									value={requestData.method_request}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_TOPIC"
+									value={requestData.req_topic}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_APPL_NAME"
+									value={requestData.req_appl_name}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_DB_NAME"
+									value={requestData.req_db_name}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_DB_LINK2"
+									value={requestData.req_db_link2}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_QUEUE"
+									value={requestData.req_queue}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_DB_RECID"
+									value={requestData.req_db_recid}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_TITLE"
+									value={requestData.req_title}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_ITEM_ID"
+									value={requestData.req_item_id}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_ITEM_TITLE"
+									value={requestData.req_item_title}
+								/>
+								<Button
+									className="bg-opac-darkblue"
+									type="submit"
+									variant="default">
+									Submit
+								</Button>
+							</form>
+						</TooltipButton>
+					) : (
+						<TooltipButton tooltipContent="Request Record" variant="outline" disabled>
+							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
+							{message.detailRecordActionRequest}
+						</TooltipButton>
+					)}
 
 					<TooltipButton
 						tooltipContent="Ask about this record"
@@ -152,7 +195,11 @@ const DetailRecordAction = () => {
 						tooltipContent="Copy record URL"
 						variant="outline"
 						onClick={() => {
-							copyRecordURL(database, sisn)
+							if (record.database_name) {
+								copyRecordURL(record.database_name, sisn)
+							} else if (record.link_dbname && record.link_sisn) {
+								copyRecordURL(record.link_dbname, record.link_sisn)
+							}
 							toast({
 								title: message.recordIsCopied,
 							})

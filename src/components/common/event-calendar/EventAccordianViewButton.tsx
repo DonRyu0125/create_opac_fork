@@ -175,17 +175,18 @@ const EventAccordianViewButton = ({
 									className={`min-h-[100px] p-2 break-all overflow-x-hidden overflow-y-auto`}>
 									{item[TAG_FUNC_LOC_DEC]}
 								</DialogDescription>
-								{item[TAG_FUNC_RSVP] !== RSVP_MAP.NO && item[TAG_FUNC_CANCEL] !== RSVP_MAP.YES && (
-									<div className={'h-[380px] font-bold m-2 p-2'}>
-										<EventRSVPForm
-											capacity={item[TAG_FUNC_LOC_MAX]}
-											patrons={convertToArr(item[PATRON])}
-											sisnNumber={item[SISN]}
-											event={item}
-											contactInfo={contactInfo}
-										/>
-									</div>
-								)}
+								{item[TAG_FUNC_RSVP] !== RSVP_MAP.NO &&
+									item[TAG_FUNC_CANCEL] !== RSVP_MAP.YES && (
+										<div className={'h-[380px] font-bold m-2 p-2'}>
+											<EventRSVPForm
+												capacity={item[TAG_FUNC_LOC_MAX]}
+												patrons={convertToArr(item[PATRON])}
+												sisnNumber={item[SISN]}
+												event={item}
+												contactInfo={contactInfo}
+											/>
+										</div>
+									)}
 							</AccordionContent>
 						</Accordion.Item>
 					))}

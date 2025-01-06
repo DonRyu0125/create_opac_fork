@@ -172,7 +172,7 @@ export const MEDIA_TYPE = {
 export const RSVP_MAP = {
 	YES: 'Yes',
 	NO: 'No',
-	BLANK:'blank'
+	BLANK: 'blank',
 }
 
 // export const COLORS_MAP = {

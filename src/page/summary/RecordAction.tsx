@@ -14,7 +14,8 @@ import { Copy, Star } from 'lucide-react'
 import { useState } from 'react'
 
 export const RecordAction = ({ record }: { record: Record }) => {
-	const { database_name, is_bookmarked } = record
+	const { is_bookmarked } = record
+
 	const [like, setLike] = useState(is_bookmarked ? Boolean(JSON.parse(is_bookmarked)) : true)
 	const { common } = useJSONData({ selector: '#xml_record' })
 	const { bookmark_url, bookmark_count } = common
@@ -76,7 +77,12 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	}
 
 	const handleCopy = () => {
-		copyRecordURL(database_name, sisn)
+		if (record.database_name) {
+			copyRecordURL(record.database_name, sisn)
+		} else if (record.link_dbname && record.link_sisn) {
+			copyRecordURL(record.link_dbname, record.link_sisn)
+		}
+
 		toast({
 			title: message.recordIsCopied,
 		})
