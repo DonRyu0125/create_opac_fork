@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { copyRecordURL, deepSearchKey } from '@/lib/record'
+import { copyRecordURL, deepSearchKey, handleCopyRecordURL } from '@/lib/record'
 import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
@@ -194,11 +194,7 @@ const DetailRecordAction = () => {
 						tooltipContent="Copy record URL"
 						variant="outline"
 						onClick={() => {
-							if (record.database_name) {
-								copyRecordURL(record.database_name, sisn)
-							} else if (record.link_dbname && record.record.link_sisn) {
-								copyRecordURL(record.link_dbname, record.record.link_sisn)
-							}
+							handleCopyRecordURL(record)
 							toast({
 								title: message.recordIsCopied,
 							})

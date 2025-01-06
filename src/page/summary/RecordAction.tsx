@@ -4,7 +4,7 @@ import { useToast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { bookmarkSelect, removeBookmarkFromKey, validateBookmarkResponse } from '@/lib/bookmark'
-import { copyRecordURL, deepSearchKey } from '@/lib/record'
+import { copyRecordURL, deepSearchKey, handleCopyRecordURL } from '@/lib/record'
 import { cn } from '@/lib/utils'
 import { bookmarkCount } from '@/store'
 import { Record } from '@/types/record'
@@ -77,12 +77,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	}
 
 	const handleCopy = () => {
-		if (record.database_name) {
-			copyRecordURL(record.database_name, sisn)
-		} else if (record.link_dbname && record.record.link_sisn) {
-			copyRecordURL(record.link_dbname, record.record.link_sisn)
-		}
-
+		handleCopyRecordURL(record)
 		toast({
 			title: message.recordIsCopied,
 		})

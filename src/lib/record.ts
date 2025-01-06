@@ -102,3 +102,11 @@ export const copyRecordURL = (database: string, sisn: string, report = DEFAULT_D
 		console.error(error)
 	}
 }
+
+export const handleCopyRecordURL = (record: Record) => {
+	if (record.database_name && record.database_name !== 'SELECTION_LIST') {
+		copyRecordURL(record.database_name, record.record.sisn)
+	} else if (record.link_dbname && record.record.link_sisn) {
+		copyRecordURL(record.link_dbname, record.record.link_sisn)
+	}
+}
