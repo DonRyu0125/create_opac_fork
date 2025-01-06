@@ -108,5 +108,7 @@ export const handleCopyRecordURL = (record: Record) => {
 		copyRecordURL(record.database_name, record.record.sisn)
 	} else if (record.link_dbname && record.record.link_sisn) {
 		copyRecordURL(record.link_dbname, record.record.link_sisn)
+	} else if (record.record.link_dbname && record.record.link_sisn) {
+		copyRecordURL(record.record.link_dbname, record.record.link_sisn)
 	}
 }
