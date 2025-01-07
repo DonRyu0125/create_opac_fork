@@ -128,7 +128,7 @@
 	"cardNumberRequired": "Card number is required",
 	"unknownPatronName": "Unknown patron name, please try again",
 	"fillAllFields": "Fill all form fields to go to the next step.",
-	"signUpUserAccount": "Sign Up Your User Account",
+	"signUpUserAccount": "Create client account",
 	"emailAlreadyRegistered": "You are already registered",
 	"purpose": "Purpose",
 	"country": "Country",

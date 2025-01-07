@@ -129,7 +129,7 @@
 	"cardNumberRequired": "Le numéro de carte est requis",
 	"unknownPatronName": "Nom d'usager inconnu, veuillez réessayer",
 	"fillAllFields": "Remplissez tous les champs du formulaire pour passer à l'étape suivante.",
-	"signUpUserAccount": "Enregistrez votre compte utilisateur",
+	"signUpUserAccount": "Créer un compte client",
 	"emailAlreadyRegistered": "Cette adresse e-mail est déjà enregistrée. Veuillez en essayer une autre.",
 	"purpose": "Objet",
 	"country": "Pays",
