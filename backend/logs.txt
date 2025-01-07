@@ -1,0 +1,3 @@
+2025-01-07T10:24:21.608Z - GET http://localhost:3030/
+2025-01-07T10:24:21.763Z - GET http://localhost:3030/favicon.ico
+2025-01-07T10:24:32.174Z - GET http://localhost:3030/test
