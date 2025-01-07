@@ -70,32 +70,53 @@
 	{
 		"database": "DESCRIPTION_WEB",
 		"items": [
-			{ "label": "Title", "name": "TITLE", "summary": true, "grid": true, "detail": true },
-			{ "label": "ID", "name": "REFD", "summary": true, "grid": true, "detail": true },
-			{
-				"label": "Date",
-				"name": "date_cr_inc",
-				"summary": true,
-				"grid": false,
-				"detail": true
-			}
-		]
-	},
-	{
-		"database": "BIBLIO_WEB",
-		"items": [
 			{
 				"label": "Title",
-				"name": "LEGAL_TITLE",
+				"name": "TITLE",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
 				"label": "ID",
-				"name": "ACCESSION_NUMBER",
+				"name": "REFD",
 				"summary": true,
 				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Date",
+				"name": "date_cr_inc",
+				"summary": true,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Level",
+				"name": "LEVEL_DESC",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Location",
+				"name": "location_occurrence",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Scope",
+				"name": "scope_occurrence",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Arrangement",
+				"name": "arrangement",
+				"summary": false,
+				"grid": false,
 				"detail": true
 			}
 		]
