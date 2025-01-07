@@ -17,18 +17,18 @@ export function rebuildOPAC() {
 	const base = path.dirname(path.dirname(__dirname))
 
 	console.log({ base })
-	const process = exec(`cd ${base} && npx craco start`, (error, stdout, stderr) => {
+	const process = exec(`cd ${base} && npm start`, (error, stdout, stderr) => {
 		if (error) {
-			console.error(`error: ${error.message}`)
+			// console.error(`error: ${error.message}`)
 			return
 		}
 
 		if (stderr) {
-			console.error(`stderr: ${stderr}`)
+			// console.error(`stderr: ${stderr}`)
 			return
 		}
 
-		console.log(`stdout:\n${stdout}`)
+		// console.log(`stdout:\n${stdout}`)
 	})
 
 	process.on('spawn', () => {
