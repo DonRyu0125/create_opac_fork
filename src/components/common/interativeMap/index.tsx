@@ -18,6 +18,7 @@ import { RefreshCw } from 'lucide-react'
 import { getSessionID } from '@/lib/utils'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
+import './style.css'
 import d_dummy from './dummy.json'
 
 const DB_TYPE_MAP = {
