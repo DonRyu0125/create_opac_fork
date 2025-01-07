@@ -39,7 +39,7 @@
 			},
 			{
 				"label": "Object Name",
-				"name": "object_name_eng",
+				"name": "object_name_occurrence",
 				"summary": true,
 				"grid": true,
 				"detail": true
@@ -52,15 +52,29 @@
 				"detail": true
 			},
 			{
-				"label": "Author",
-				"name": "Author",
+				"label": "Subject",
+				"name": "sub_keyword",
 				"summary": false,
 				"grid": false,
 				"detail": true
 			},
 			{
-				"label": "Publisher",
-				"name": "l_publisher",
+				"label": "Associated person",
+				"name": "assoc_person_typ_occurrence",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Associated organization",
+				"name": "org_assoc_type_occurrence",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Associated place",
+				"name": "place_assoc_name",
 				"summary": false,
 				"grid": false,
 				"detail": true
