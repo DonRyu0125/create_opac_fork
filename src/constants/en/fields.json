@@ -106,6 +106,27 @@
 				"detail": true
 			},
 			{
+				"label": "Classification",
+				"name": "classification",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Physical description",
+				"name": "physical_desc_occurrence",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Originator",
+				"name": "originator",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
 				"label": "Scope",
 				"name": "scope_occurrence",
 				"summary": false,
@@ -115,6 +136,13 @@
 			{
 				"label": "Arrangement",
 				"name": "arrangement",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Notes",
+				"name": "notes_occurrence",
 				"summary": false,
 				"grid": false,
 				"detail": true
