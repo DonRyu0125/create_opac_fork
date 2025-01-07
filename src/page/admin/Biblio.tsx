@@ -4,23 +4,23 @@ import { BCForm, FCForm } from '@/components/common/admin/input/types'
 import SectionActions, { NewElementForm } from '@/components/common/admin/layout/SectionActions'
 import SectionHeader from '@/components/common/admin/layout/SectionHeader'
 import SectionWrapper from '@/components/common/admin/layout/SectionWrapper'
-import { default as enValues } from '@/constants/en/home.json'
-import { default as frValues } from '@/constants/fr/home.json'
+import { default as enValues } from '@/constants/en/library.json'
+import { default as frValues } from '@/constants/fr/library.json'
 import { useAdminForm } from '@/hooks/useAdminForm'
-import { isSupportedImageExtension } from '@/lib/tdr'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
 import { FormEvent } from 'react'
+import { isSupportedImageExtension } from '@/lib/tdr'
 
-const AdminHome = () => {
+const AdminBiblio = () => {
 	return (
 		<AdminFormLayout
 			enablePreview
 			enData={enValues}
 			frData={frValues}
 			schema={fields as SchemaType}
-			enFilepath={'constants/en/home.json'}
-			frFilepath={'constants/fr/home.json'}
+			enFilepath={'constants/en/library.json'}
+			frFilepath={'constants/fr/library.json'}
 			FormComponent={Form}
 		/>
 	)
@@ -261,5 +261,4 @@ const Form = ({ lang }: { lang: 'en' | 'fr' }) => {
 		</div>
 	)
 }
-
-export default AdminHome
+export default AdminBiblio

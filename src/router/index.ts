@@ -42,6 +42,7 @@ import EnquiryConfirmed from '@/page/enquiry/EnquiryConfirmed'
 import ReproductionConfirmed from '@/page/reproduction/ReproductionConfirmed'
 import ReproductionForm from '@/page/reproduction/ReproductionForm'
 import ReproductionDetail from '@/page/reproduction/ReproductionDetail'
+import AdminBiblio from '@/page/admin/Biblio'
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
@@ -50,7 +51,7 @@ const ADMIN_ROUTES: TRoute = {
 	'admin-login': AdminLogin,
 	'admin-fields': Fields,
 	'admin-home': AdminHome,
-	'admin-biblio': AdminHome,
+	'admin-biblio': AdminBiblio,
 	'admin-description': AdminDescription,
 	'admin-collections': AdminCollections,
 	'admin-rsvp': AdminRSVP,
