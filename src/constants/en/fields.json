@@ -174,17 +174,52 @@
 				"detail": true
 			},
 			{
-				"label": "ID",
+				"label": "Accession number",
 				"name": "ACCESSION_NUMBER",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
-				"name": "LIB",
-				"label": "Library field",
+				"label": "Holding center",
+				"name": "holding_centre",
 				"summary": true,
 				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Author",
+				"name": "pauthor",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Publication year",
+				"name": "publication_year_occurrence",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Subject",
+				"name": "subject",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Series",
+				"name": "series_occurrence",
+				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Tags",
+				"name": "biblio_tag_occurrence",
+				"summary": false,
+				"grid": false,
 				"detail": true
 			}
 		]
