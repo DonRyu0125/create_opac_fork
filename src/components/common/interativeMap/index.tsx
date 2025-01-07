@@ -463,7 +463,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										]}
 										icon={icons['library']}>
 										<Popup className="hidden md:block" offset={[-7, 0]}>
-											<div className="max-w-[400px]">
+											<div className="w-[300px]">
 												<a
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${library.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
 													target="_blank">
@@ -533,7 +533,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										]}
 										icon={icons['archive']}>
 										<Popup className="hidden md:block" offset={[-7, 0]}>
-											<div className="max-w-[400px]">
+											<div className="w-[300px]">
 												<a
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${archives.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=REFD%20${marker.REFD}`}
 													target="_blank">
@@ -599,7 +599,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										]}
 										icon={icons['museum']}>
 										<Popup className="hidden md:block" offset={[-7, 0]}>
-											<div className="max-w-[400px]">
+											<div className="w-[300px]">
 												<a
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
 													target="_blank">
