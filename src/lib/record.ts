@@ -104,11 +104,14 @@ export const copyRecordURL = (database: string, sisn: string, report = DEFAULT_D
 }
 
 export const handleCopyRecordURL = (record: Record) => {
-	if (record.database_name && record.database_name !== 'SELECTION_LIST') { // union summary
+	if (record.database_name && record.database_name !== 'SELECTION_LIST') {
+		// union summary
 		copyRecordURL(record.database_name, record.record.sisn)
-	} else if (record.link_dbname && record.record.link_sisn) { // bookmark summary
+	} else if (record.link_dbname && record.record.link_sisn) {
+		// bookmark summary
 		copyRecordURL(record.link_dbname, record.record.link_sisn)
-	} else if (record.record.link_dbname && record.record.link_sisn) { //bookmark detail
+	} else if (record.record.link_dbname && record.record.link_sisn) {
+		//bookmark detail
 		copyRecordURL(record.record.link_dbname, record.record.link_sisn)
 	}
 }

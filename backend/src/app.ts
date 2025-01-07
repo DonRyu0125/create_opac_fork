@@ -25,10 +25,7 @@ app.post('/update', async (c) => {
 		setFileContent(resolve(base, path), content)
 		const process = rebuildOPAC()
 
-		console.log(resolve(base, path))
-
-		console.log({ process })
-
+		console.log(process.exitCode)
 		return c.json({ status: 'success', message: 'Your file has been updated successfully' })
 	} catch (error) {
 		console.error('Error updating file:', error)
