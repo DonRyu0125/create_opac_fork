@@ -32,7 +32,7 @@ export default function HomeSearchForm({
 			<CardContent className="space-y-2 flex flex-col items-end">
 				<form method="POST" action={action} className="flex w-full space-x-2 mb-4 relative">
 					<Input
-						className="w-full h-14 pl-6 pr-32 text-lg border-2 border-gray-200 focus:border-primary "
+						className="w-full h-14 pl-6 pr-36 text-lg border-2 border-gray-200 focus:border-primary "
 						required
 						name={inputName || 'KEYWORD_CLUSTER'}
 						placeholder={message.searchPlaceholder}
