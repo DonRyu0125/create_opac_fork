@@ -2,7 +2,7 @@ import { useState } from 'react'
 import PatronLayout from '@/components/layouts/patron'
 import ProfileTable, { ProfileData } from '@/components/common/client-profile/ProfileTable'
 import useJSONData from '@/hooks/useJSONData'
-import { convertToArr, convertXMLToJson, getCookieValue, getSessionID } from '@/lib/utils'
+import { convertToArr, convertXMLToJson, getCookieValue, getHomeSessionID, getSessionID } from '@/lib/utils'
 import axios from 'axios'
 import {
 	CANCEL_CONFIRMATION_EMAIL_T,
@@ -45,7 +45,7 @@ interface PatronInfo {
 const Calendar = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const message = useConstants().message
-	let HOME_SESSID = getSessionID()
+	let HOME_SESSID = getHomeSessionID()
 	const { logo } = useConstants().config
 
 	const columns: ColumnDef<ProfileData>[] = [
