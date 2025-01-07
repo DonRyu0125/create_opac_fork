@@ -175,7 +175,7 @@
 			},
 			{
 				"label": "Accession number",
-				"name": "ACCESSION_NUMBER",
+				"name": "accession_number",
 				"summary": true,
 				"grid": true,
 				"detail": true
@@ -183,8 +183,8 @@
 			{
 				"label": "Holding center",
 				"name": "holding_centre",
-				"summary": true,
-				"grid": true,
+				"summary": false,
+				"grid": false,
 				"detail": true
 			},
 			{
