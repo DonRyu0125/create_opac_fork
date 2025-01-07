@@ -10,7 +10,7 @@ applyMiddleware(app)
 
 // Route for checking server status
 app.get('/', (c) => {
-	return c.text('Server is currently running')
+	return c.text('Server is currently running on port 3030')
 })
 
 // Route for updating files
