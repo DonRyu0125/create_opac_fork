@@ -5,9 +5,13 @@ import Layout from '@/components/layouts'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import DetailRecord from './DetailRecord'
+import { isDescriptionDatabase } from '@/lib/utils'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import DescriptionTree from '@/components/common/description-tree'
 
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
+	const record = records[0]
 	const images =
 		getMedia(records[0], 'im_access_link')?.map((e) => ({
 			src: e.includes('[MEDIA]') ? e.replace('[MEDIA]', '/media/') : e,
@@ -26,7 +30,7 @@ const Detail = () => {
 		})) || []
 	const { message } = useConstants()
 	// TODO: create placeholder component when there is no data
-
+	const database = record.database_name
 	if (!records || records.length === 0) return <></>
 	return (
 		<Layout>
@@ -104,8 +108,21 @@ const Detail = () => {
 									</>
 								)}
 							</div>
-							<div className="w-full lg:w-1/2 grid gap-4 md:gap-10 items-start ">
+							<div className="w-full  grid gap-4 md:gap-10 items-start ">
 								<DetailRecord />
+
+								{isDescriptionDatabase(database) && (
+									<Accordion type="single" collapsible>
+										<AccordionItem value="description-tree">
+											<AccordionTrigger className="bg-primary text-white px-4 rounded">
+												{message.descriptionTree}
+											</AccordionTrigger>
+											<AccordionContent className="max-h-[700px]">
+												<DescriptionTree show={true} />
+											</AccordionContent>
+										</AccordionItem>
+									</Accordion>
+								)}
 							</div>
 						</div>
 					</div>

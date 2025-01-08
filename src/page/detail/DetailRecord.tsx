@@ -5,20 +5,12 @@ import useJSONData from '@/hooks/useJSONData'
 import { getFieldDataByLabel, getFieldsFromRecord } from '@/lib/record'
 import DetailRecordAction from '@/page/detail/DetailRecordAction'
 import { DBFields } from '../../types/record'
-import DescriptionTree from '@/components/common/description-tree'
-import { isDescriptionDatabase } from '@/lib/utils'
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from '@/components/ui/accordion'
 
 type Props = {}
 
 const DetailRecord = (props: Props) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const { fields, message } = useConstants()
+	const { fields } = useConstants()
 	const record = records[0]
 	const database = record.database_name
 	const recordData: DBFields<'COLLECTIONS'> = record.record
@@ -47,18 +39,7 @@ const DetailRecord = (props: Props) => {
 							return value
 						}}
 					/>
-					{isDescriptionDatabase(database) && (
-						<Accordion type="single" collapsible>
-							<AccordionItem value="description-tree">
-								<AccordionTrigger className="bg-primary text-white px-4 rounded">
-									{message.descriptionTree}
-								</AccordionTrigger>
-								<AccordionContent className="max-h-[700px]">
-									<DescriptionTree show={true} />
-								</AccordionContent>
-							</AccordionItem>
-						</Accordion>
-					)}
+
 					<DetailRecordAction />
 				</div>
 			</RecordDetail>
