@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils'
 import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
+import { Button } from './button'
 
 interface AccordionItem {
 	title: string
@@ -24,7 +25,7 @@ export default function Accordion({ items }: AccordionProps) {
 		<div className="w-full max-w-md mx-auto space-y-2">
 			{items.map((item, index) => (
 				<div key={index} className="border rounded-md">
-					<button
+					<Button
 						className="flex justify-between items-center w-full p-4 text-left bg-primary text-white"
 						onClick={() => toggleItem(index)}
 						aria-expanded={openIndex === index}
@@ -36,7 +37,7 @@ export default function Accordion({ items }: AccordionProps) {
 								openIndex === index && 'transform rotate-180'
 							)}
 						/>
-					</button>
+					</Button>
 					{openIndex === index && (
 						<div id={`accordion-content-${index}`} className="p-4 pt-0">
 							{item.content}
