@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import { ChevronDown } from 'lucide-react'
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 
 interface AccordionItem {
 	title: string

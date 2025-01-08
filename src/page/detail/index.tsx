@@ -4,11 +4,14 @@ import SearchForm from '@/components/common/search-form/SearchForm'
 import Layout from '@/components/layouts'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
+import { getSessionID, isDescriptionDatabase } from '@/lib/utils'
 import DetailRecord from './DetailRecord'
-import { isDescriptionDatabase } from '@/lib/utils'
 
 import DescriptionTree from '@/components/common/description-tree'
 import Accordion from '@/components/ui/simple-accordion'
+import { deepSearchKey } from '@/lib/record'
+import { getJSONTree, TreeNode } from '@/lib/tree'
+import { useEffect, useState } from 'react'
 
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
@@ -29,9 +32,33 @@ const Detail = () => {
 				},
 			],
 		})) || []
+	const [openKeyPath, setOpenKeyPath] = useState<string[]>([])
 	const { message } = useConstants()
-	// TODO: create placeholder component when there is no data
+	const refd = deepSearchKey(record, 'refd')[0]
 	const database = record.database_name
+	const [loading, setLoading] = useState(true)
+	const [tree, setTree] = useState<TreeNode | undefined>()
+	useEffect(() => {
+		const sessionID = getSessionID()
+		if (sessionID && isDescriptionDatabase(database)) {
+			getJSONTree(sessionID, database, refd)
+				.then((res) => {
+					if (!res || res.noTree) {
+						return
+					}
+					const { tree, openKeyPath } = res
+
+					setTree(tree)
+					console.log({ openKeyPath })
+
+					setOpenKeyPath(openKeyPath)
+				})
+				.finally(() => {
+					setLoading(false)
+				})
+		}
+	}, [database, refd])
+	// TODO: create placeholder component when there is no data
 	if (!records || records.length === 0) return <></>
 	return (
 		<Layout>
@@ -120,7 +147,13 @@ const Detail = () => {
 											items={[
 												{
 													title: message.descriptionTree,
-													content: <DescriptionTree />,
+													content: (
+														<DescriptionTree
+															loading={loading}
+															tree={tree}
+															selectedId={openKeyPath[0]}
+														/>
+													),
 												},
 											]}
 										/>
