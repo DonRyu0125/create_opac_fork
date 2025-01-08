@@ -38,7 +38,7 @@ const EventCustomDialogContent = ({ elm, contactInfo, key }: any) => {
 					contactInfo={contactInfo}
 				/>
 				<DialogDescription
-					className={'h-1/2 h-[250px] overflow-y-auto text-base font-normal p-2'}>
+					className={'h-1/2 h-[20px] overflow-y-auto text-base font-normal p-2'}>
 					{elm[TAG_FUNC_LOC_DEC]}
 				</DialogDescription>
 			</div>
