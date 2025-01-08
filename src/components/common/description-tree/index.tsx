@@ -1,14 +1,21 @@
 import { TreeView, TreeDataItem } from '@/components/tree-view'
+import { Button } from '@/components/ui/button'
 import useJSONData from '@/hooks/useJSONData'
 import { deepSearchKey } from '@/lib/record'
 import { getJSONTree, TreeNode, TreeResponse } from '@/lib/tree'
 import { getSessionID } from '@/lib/utils'
+import { Link } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 const data: TreeDataItem[] = [
 	{
 		id: '1',
 		name: 'Item 1',
+		actions: (
+			<Button>
+				<Link />
+			</Button>
+		),
 		children: [
 			{
 				id: '2',
