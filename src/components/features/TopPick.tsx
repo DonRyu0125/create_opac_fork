@@ -90,7 +90,7 @@ const ReviewCard = ({
 			<div className="flex flex-row items-center gap-2">
 				<Archive />
 				<div className="flex flex-col">
-					<figcaption className="text-sm font-medium ">{name}</figcaption>
+					<figcaption className="text-sm font-bold text-primary">{name}</figcaption>
 					<p className="text-xs font-medium ">{username}</p>
 				</div>
 			</div>
