@@ -1,12 +1,13 @@
 import { LanguageSelect } from '@/components/common/LanguageSelect'
+import Link from '@/components/common/Link'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import useConstants from '@/hooks/useConstants'
 import { getHomeSessionID } from '@/lib/utils'
-import axios from 'axios'
+import { XCircle } from 'lucide-react'
 import { useState } from 'react'
 
-const Login = () => {
+const ClientLoginError = () => {
 	const { config } = useConstants()
 	const [accountNumber, setAccountNumber] = useState('')
 	const [password, setPassword] = useState('')
@@ -14,6 +15,18 @@ const Login = () => {
 	const [error, setError] = useState(null)
 	const { message } = useConstants()
 
+	const ErrorMessage = () => {
+		return (
+			<div
+				className="flex items-center gap-3 rounded-lg border border-red-100 bg-red-50 px-4 py-3 mt-6"
+				role="alert">
+				<XCircle className="h-5 w-5 shrink-0 text-red-400" aria-hidden="true" />
+				<p className="text-sm text-red-800">
+					Incorrect username or password. Please try again.
+				</p>
+			</div>
+		)
+	}
 
 	return (
 		<section className="bg-white">
@@ -40,20 +53,25 @@ const Login = () => {
 							<LanguageSelect />
 						</div>
 
-						{/* Display error message if any */}
-						{error && <p className="mt-4 text-red-500">{error}</p>}
-
-						<form method="post" action={getHomeSessionID() + "/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144&file=[OPAC]home.html"} className="mt-8 grid grid-cols-6 gap-6">
+						{ErrorMessage()}
+						<form
+							method="post"
+							action={
+								getHomeSessionID() +
+								'/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144&file=[OPAC]home.html'
+							}
+							className="mt-2 grid grid-cols-6 gap-6">
 							<div className="col-span-6">
 								<label
-									htmlFor="user"
-									className="block text-sm font-medium text-gray-700">
+									htmlFor="Email"
+									className="block text-sm font-medium text-red-700">
 									{message.accountNumber}
 								</label>
 								<Input
 									type="text"
-									id="user"
+									id="Email"
 									name="C_CLIENT_NUMBER"
+									className="border-2 border-rose-500"
 									value={accountNumber}
 									onChange={(e) => setAccountNumber(e.target.value)}
 								/>
@@ -62,13 +80,14 @@ const Login = () => {
 							<div className="col-span-6 sm:col-span-6">
 								<label
 									htmlFor="Password"
-									className="block text-sm font-medium text-gray-700">
+									className="block text-sm font-medium text-red-700">
 									{message.password}
 								</label>
 								<Input
 									type="password"
 									id="Password"
 									name="PATRON_PID"
+									className="border-2 border-rose-500"
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 								/>
@@ -105,4 +124,4 @@ const Login = () => {
 	)
 }
 
-export default Login
+export default ClientLoginError
