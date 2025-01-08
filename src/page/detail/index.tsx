@@ -12,6 +12,7 @@ import Accordion from '@/components/ui/simple-accordion'
 import { deepSearchKey } from '@/lib/record'
 import { getJSONTree, TreeNode } from '@/lib/tree'
 import { useEffect, useState } from 'react'
+import NavigationSideBar from './NavigationSideBar'
 
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
@@ -97,44 +98,52 @@ const Detail = () => {
 				<section>
 					<div className="container mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
 						<div className="flex flex-col  space-y-12 items-start p-4 mx-auto ">
-							<div className="min-w-[300px] w-full max-w-[500px] text-center ">
-								{images && images.length > 0 ? (
-									<ImageCarousel
-										items={[...images, ...videos]}
-										renderItems={(item) => {
-											if (!(item as ImageProps).src) {
-												const video = item as VideoProps
-												return (
-													<img
-														alt={'video thumbnail'}
-														src={
-															'https://d2uolguxr56s4e.cloudfront.net/img/kartrapages/video_player_placeholder.gif'
-														}
-														className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
-													/>
-												)
-											}
+							<div className="w-full flex flex-col lg:flex-row">
+								<div className="w-full lg:w-2/3">
+									<div className="min-w-[300px] w-full max-w-[500px] text-center ">
+										{images && images.length > 0 ? (
+											<ImageCarousel
+												items={[...images, ...videos]}
+												renderItems={(item) => {
+													if (!(item as ImageProps).src) {
+														const video = item as VideoProps
+														return (
+															<img
+																alt={'video thumbnail'}
+																src={
+																	'https://d2uolguxr56s4e.cloudfront.net/img/kartrapages/video_player_placeholder.gif'
+																}
+																className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+															/>
+														)
+													}
 
-											const image = item as ImageProps
-											return (
+													const image = item as ImageProps
+													return (
+														<img
+															alt={image.caption}
+															src={image.src}
+															className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+														/>
+													)
+												}}
+											/>
+										) : (
+											<>
 												<img
-													alt={image.caption}
-													src={image.src}
+													alt={message.noMediaFound}
+													src={'https://placehold.co/250x250'}
 													className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
 												/>
-											)
-										}}
-									/>
-								) : (
-									<>
-										<img
-											alt={message.noMediaFound}
-											src={'https://placehold.co/250x250'}
-											className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
-										/>
-										<span>{message.noMediaFound}</span>
-									</>
-								)}
+												<span>{message.noMediaFound}</span>
+											</>
+										)}
+									</div>
+								</div>
+
+								<div className="w-full lg:w-1/3">
+									<NavigationSideBar />
+								</div>
 							</div>
 							<div className="w-full flex flex-col lg:flex-row lg:space-x-6 lg:space-y-0  space-y-6  items-start ">
 								<div className="w-full lg:w-2/3 ">
