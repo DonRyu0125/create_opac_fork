@@ -114,19 +114,23 @@ const Detail = () => {
 								)}
 							</div>
 							<div className="w-full flex flex-col lg:flex-row lg:space-x-6 lg:space-y-0  space-y-6  items-start ">
-								<DetailRecord />
+								<div className="w-full lg:w-2/3 ">
+									<DetailRecord />
+								</div>
 
 								{isDescriptionDatabase(database) && (
-									<Accordion type="single" collapsible>
-										<AccordionItem value="description-tree">
-											<AccordionTrigger className="bg-primary text-white px-4 rounded">
-												{message.descriptionTree}
-											</AccordionTrigger>
-											<AccordionContent className="max-h-[700px] overflow-auto">
-												<DescriptionTree show={true} />
-											</AccordionContent>
-										</AccordionItem>
-									</Accordion>
+									<div className="w-full lg:w-1/3">
+										<Accordion type="single" collapsible>
+											<AccordionItem value="description-tree">
+												<AccordionTrigger className="bg-primary text-white px-4 rounded">
+													{message.descriptionTree}
+												</AccordionTrigger>
+												<AccordionContent className="max-h-[700px] overflow-auto">
+													<DescriptionTree show={true} />
+												</AccordionContent>
+											</AccordionItem>
+										</Accordion>
+									</div>
 								)}
 							</div>
 						</div>
