@@ -19,7 +19,6 @@ type Props = {}
 const DetailRecord = (props: Props) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { fields, message } = useConstants()
-	// const { records } = useJSONData({ defaultData: DetailM3Sample })
 	const record = records[0]
 	const database = record.database_name
 	const recordData: DBFields<'COLLECTIONS'> = record.record
