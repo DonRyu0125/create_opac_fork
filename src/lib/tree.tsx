@@ -1,15 +1,10 @@
 import axios from 'axios'
 import { clone, findIndex, flatten, isEmpty } from 'lodash'
 import X2JS from 'x2js'
-import { deepSearchKey, GenericObject } from './record'
+import { deepSearchKey, DEFAULT_DETAIL_REPORT, GenericObject, getRecordPermalink } from './record'
 import { ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-const NodeAction = ({ url }: { url: string }) => (
-	<Button onClick={() => window.open(url)}>
-		<ExternalLink />
-	</Button>
-)
 export type TreeNode = {
 	id: string
 	key: string
@@ -104,7 +99,16 @@ export const mapLowerLevelXMLToNode = (xml: any[], parentId: string): any[] => {
 				hasChildren,
 				children: hasChildren ? [] : null,
 				isChildrenLoaded: !hasChildren,
-				onClick: () => window.open('/'),
+				onClick: () =>
+					window.open(
+						getRecordPermalink(
+							'DESCRIPTION_WEB',
+							deepSearchKey(e, 'refd')[0],
+							DEFAULT_DETAIL_REPORT,
+							144,
+							'REFD'
+						)
+					),
 			}
 		})
 }
@@ -132,7 +136,10 @@ export const mapXMLToNode = (xml: any, id: string): any => {
 		hasChildren,
 		isChildrenLoaded: true,
 		children: hasChildren ? mapLowerLevelXMLToNode(lower_level_occurrence, id) : null,
-		onClick: () => window.open('/'),
+		onClick: () =>
+			window.open(
+				getRecordPermalink('DESCRIPTION_WEB', id, DEFAULT_DETAIL_REPORT, 144, 'REFD')
+			),
 	}
 }
 

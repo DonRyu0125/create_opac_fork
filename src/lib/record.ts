@@ -3,7 +3,7 @@ import { FieldsJson } from '@/types/fields.json'
 import { Record } from '@/types/record'
 import axios from 'axios'
 import copy from 'copy-to-clipboard'
-const DEFAULT_DETAIL_REPORT = 'WEB_UNION_DETAIL'
+export const DEFAULT_DETAIL_REPORT = 'WEB_UNION_DETAIL'
 const DEFAULT_SUM_REPORT = 'WEB_UNION_SUM'
 
 export type RENDERED_COMPONENT = React.ReactNode | object | null
@@ -89,9 +89,10 @@ export const getRecordPermalink = (
 	database: string,
 	sisn: string,
 	report = DEFAULT_DETAIL_REPORT,
-	lang = 144
+	lang = 144,
+	key = 'SISN'
 ) => {
-	return `https://${window.location.hostname}/scripts/mwimain.dll/${lang}/${database}/${report}?sessionsearch&exp=SISN+${sisn}`
+	return `https://${window.location.hostname}/scripts/mwimain.dll/${lang}/${database}/${report}?sessionsearch&exp=${key}+${sisn}`
 }
 
 export const copyRecordURL = (database: string, sisn: string, report = DEFAULT_DETAIL_REPORT) => {

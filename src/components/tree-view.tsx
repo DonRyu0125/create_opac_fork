@@ -195,7 +195,7 @@ const TreeNode = ({
 					/>
 					<span
 						onClick={() => item.onClick?.()}
-						className="flex-grow text-sm truncate font-bold">
+						className="flex text-sm truncate hover:text-primary">
 						{item.title}
 					</span>
 					<TreeActions isSelected={selectedItemId === item.id}>
@@ -244,7 +244,9 @@ const TreeLeaf = React.forwardRef<
 				isSelected={selectedItemId === item.id}
 				default={defaultLeafIcon}
 			/>
-			<span onClick={() => item.onClick?.()} className="flex-grow text-sm truncate font-bold">
+			<span
+				onClick={() => item.onClick?.()}
+				className="flex-grow text-sm truncate hover:text-primary">
 				{item.title}
 			</span>
 			<TreeActions isSelected={selectedItemId === item.id}>{item.actions}</TreeActions>
