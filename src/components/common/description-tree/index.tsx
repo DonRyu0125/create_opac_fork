@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import EmptyState from './empty-state'
 import TreeSkeleton from './loading'
 
-const DescriptionTree = ({ show = true }: { show: boolean }) => {
+const DescriptionTree = ({ show = true }: { show?: boolean }) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [loading, setLoading] = useState(true)
 	const [tree, setTree] = useState<TreeNode | undefined>()
