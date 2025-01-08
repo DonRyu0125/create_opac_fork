@@ -3,6 +3,23 @@ import { clone, findIndex, flatten, isEmpty } from 'lodash'
 import X2JS from 'x2js'
 import { deepSearchKey, GenericObject } from './record'
 
+export type TreeNode = {
+	id: string
+	key: string
+	title: string | null
+	hasChildren: boolean
+	isChildrenLoaded: boolean
+	isRoot: boolean
+	parentId?: string // Optional because it might not be present for root nodes
+	children?: TreeNode[] // Recursive type to define nested children
+}
+
+export type TreeResponse = {
+	openKeyPath: string[]
+	tree: TreeNode
+	noTree?: boolean
+}
+
 export const getXMLTreeRecord = (xml: string) => {
 	try {
 		const x2js = new X2JS()
@@ -117,7 +134,11 @@ let noTree = false
 /**
  * Build the tree from the current record using bottom-up approach
  */
-export const getJSONTree = async (session: string, database: string, id: string): Promise<any> => {
+export const getJSONTree = async (
+	session: string,
+	database: string,
+	id: string
+): Promise<TreeResponse | undefined> => {
 	openKeyPath.push(id)
 
 	while (!tree.isRoot) {
