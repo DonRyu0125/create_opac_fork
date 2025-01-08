@@ -2,6 +2,8 @@ import axios from 'axios'
 import { clone, findIndex, flatten, isEmpty } from 'lodash'
 import X2JS from 'x2js'
 import { deepSearchKey, GenericObject } from './record'
+import { ExternalLink } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export type TreeNode = {
 	id: string
@@ -97,6 +99,11 @@ export const mapLowerLevelXMLToNode = (xml: any[], parentId: string): any[] => {
 				hasChildren,
 				children: hasChildren ? [] : null,
 				isChildrenLoaded: !hasChildren,
+				action: (
+					<Button onClick={() => window.open('/')}>
+						<ExternalLink />
+					</Button>
+				),
 			}
 		})
 }
@@ -124,6 +131,11 @@ export const mapXMLToNode = (xml: any, id: string): any => {
 		hasChildren,
 		isChildrenLoaded: true,
 		children: hasChildren ? mapLowerLevelXMLToNode(lower_level_occurrence, id) : null,
+		action: (
+			<Button onClick={() => window.open('/')}>
+				<ExternalLink />
+			</Button>
+		),
 	}
 }
 
