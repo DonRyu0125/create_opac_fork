@@ -1,5 +1,5 @@
 import HoverCard from '@/components/common/HoverCard'
-import InterativeMap from '@/components/common/interativeMap'
+import InterativeMap from '@/components/common/interactive-map'
 import Masonry from '@/components/common/Masonry'
 import HomeSearchForm from '@/components/common/search-form/HomeSearchForm'
 import Categories from '@/components/features/Categories'

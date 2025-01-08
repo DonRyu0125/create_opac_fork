@@ -5,6 +5,7 @@ import useJSONData from '@/hooks/useJSONData'
 import { getFieldDataByLabel, getFieldsFromRecord } from '@/lib/record'
 import DetailRecordAction from '@/page/detail/DetailRecordAction'
 import { DBFields } from '../../types/record'
+import DescriptionTree from '@/components/common/description-tree'
 
 type Props = {}
 
@@ -40,6 +41,7 @@ const DetailRecord = (props: Props) => {
 							return value
 						}}
 					/>
+					<DescriptionTree />
 					<DetailRecordAction />
 				</div>
 			</RecordDetail>
