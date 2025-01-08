@@ -64,8 +64,8 @@ const Detail = () => {
 				</PageAction>
 				<section>
 					<div className="mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-						<div className="flex flex-col lg:flex-row space-y-12 lg:space-y-0 lg:space-x-8 items-start p-4 mx-auto ">
-							<div className="max-w-[700px] text-center mx-auto">
+						<div className="flex flex-col  space-y-6 items-start p-4 mx-auto ">
+							<div className="max-w-[700px] text-center ">
 								{images && images.length > 0 ? (
 									<ImageCarousel
 										items={[...images, ...videos]}

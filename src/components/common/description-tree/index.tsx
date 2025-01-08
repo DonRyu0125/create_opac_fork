@@ -42,7 +42,7 @@ const DescriptionTree = ({ show = true }: { show: boolean }) => {
 	return (
 		<TreeView
 			data={tree}
-			initialSelectedItemId={'5'}
+			initialSelectedItemId={openKeyPath[0]}
 			onSelectChange={(item) => {
 				console.log({ item })
 			}}
