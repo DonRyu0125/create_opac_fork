@@ -38,7 +38,7 @@ export function LanguageSelect() {
 			onValueChange={(e) => {
 				setLanguage(e as LanguageCode)
 			}}>
-			<SelectTrigger className="w-auto bg-transparent">
+			<SelectTrigger className="w-auto bg-primary">
 				<SelectValue
 					placeholder={
 						<img alt="language icon" className="w-6 h-6" src={language.icon} />
