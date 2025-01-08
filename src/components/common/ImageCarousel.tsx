@@ -32,7 +32,15 @@ const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex w-full group cursor-pointer relative">
-				<img className="mx-auto w-full lg:max-w-[400px]" {...currentImage} />
+				{(currentImage as ImageProps).src ? (
+					<img className="mx-auto w-full lg:max-w-[400px]" {...currentImage} />
+				) : (
+					<video className="mx-auto w-full lg:max-w-[400px]" controls>
+						<source
+							src={(currentImage as VideoProps).sources[0].src}
+							type="video/mp4"></source>
+					</video>
+				)}
 				<Scan
 					strokeWidth={'3px'}
 					className="cursor-pointer absolute bg-gray-400 bg-opacity-30  w-8 h-8 text-white hover:text-primary bottom-2 right-2 transition-all ease-in duration-400 "
