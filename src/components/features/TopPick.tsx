@@ -43,7 +43,7 @@ const items = [
 		name: "London's Craft Beer Market",
 		username: 'MINISIS Inc.',
 
-		body: 'This is a series of records related to the Craft beer market that exists in London and contains detailed records and licenses associated with the business that created the market.',
+		body: 'This is a series of records related to the Craft beer market that exists in London and contains detailed records and licenses...',
 		img: 'https://avatar.vercel.sh/james',
 		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/DESCRIPTION_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+3440',
 	},
@@ -65,7 +65,6 @@ const items = [
 	},
 ]
 
-const firstRow = items.slice(0, items.length / 2)
 const secondRow = items.slice(items.length / 2)
 
 const ReviewCard = ({
