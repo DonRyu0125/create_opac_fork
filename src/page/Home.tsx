@@ -76,7 +76,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 				</div>
 			</Hero>
 
-			<TopPick />
+			<TopPick page={'home'} previewData={previewData} previewMode={previewMode} />
 
 			{enableFeaturedCollection && (
 				<FeaturedCollection

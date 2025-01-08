@@ -1,7 +1,8 @@
-import { cn } from '@/lib/utils'
 import Marquee from '@/components/ui/marquee'
-import { PageSectionProps } from '@/page/Home'
 import useConstants from '@/hooks/useConstants'
+import { cn } from '@/lib/utils'
+import { PageSectionProps } from '@/page/Home'
+import { Archive } from 'lucide-react'
 import Section from '../common/Section'
 
 const items = [
@@ -87,7 +88,7 @@ const ReviewCard = ({
 			)}
 			onClick={onClick}>
 			<div className="flex flex-row items-center gap-2">
-				<img className="rounded-full" width="32" height="32" alt="" src={img} />
+				<Archive />
 				<div className="flex flex-col">
 					<figcaption className="text-sm font-medium dark:text-white">{name}</figcaption>
 					<p className="text-xs font-medium dark:text-white/40">{username}</p>
@@ -105,18 +106,7 @@ const TopPick = ({ page, previewData, previewMode }: PageSectionProps) => {
 	return (
 		<Section heading={message.topPick}>
 			<div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg border  ">
-				<Marquee pauseOnHover className="[--duration:30s]">
-					{firstRow.map((review) => (
-						<ReviewCard
-							onClick={() => {
-								window.location.href = review.url
-							}}
-							key={review.username}
-							{...review}
-						/>
-					))}
-				</Marquee>
-				<Marquee reverse pauseOnHover className="[--duration:30s]">
+				<Marquee reverse pauseOnHover className="[--duration:25s]">
 					{secondRow.map((review) => (
 						<ReviewCard
 							onClick={() => {
@@ -127,8 +117,8 @@ const TopPick = ({ page, previewData, previewMode }: PageSectionProps) => {
 						/>
 					))}
 				</Marquee>
-				<div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent dark:from-background"></div>
-				<div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-transparent dark:from-background"></div>
+				<div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent dark:from-transparent"></div>
+				<div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-transparent dark:from-transparent"></div>
 			</div>
 		</Section>
 	)
