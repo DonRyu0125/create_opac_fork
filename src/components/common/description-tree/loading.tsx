@@ -1,6 +1,6 @@
 export default function TreeSkeleton() {
 	return (
-		<div className="w-full max-w-3xl mx-auto animate-pulse">
+		<div className="w-full max-w-3xl mx-auto animate-pulse p-4">
 			{/* Root item skeleton */}
 			<div className="mb-2">
 				<div className="flex items-center gap-1">

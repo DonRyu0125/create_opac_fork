@@ -6,7 +6,12 @@ import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import DetailRecord from './DetailRecord'
 import { isDescriptionDatabase } from '@/lib/utils'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from '@/components/ui/accordion'
 import DescriptionTree from '@/components/common/description-tree'
 
 const Detail = () => {
@@ -69,7 +74,7 @@ const Detail = () => {
 				<section>
 					<div className="container mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
 						<div className="flex flex-col  space-y-12 items-start p-4 mx-auto ">
-							<div className="max-w-[700px] text-center ">
+							<div className="min-w-[300px] w-full max-w-[500px] text-center ">
 								{images && images.length > 0 ? (
 									<ImageCarousel
 										items={[...images, ...videos]}
@@ -108,7 +113,7 @@ const Detail = () => {
 									</>
 								)}
 							</div>
-							<div className="w-full  grid gap-4 md:gap-10 items-start ">
+							<div className="w-full flex flex-col lg:flex-row lg:space-x-6 lg:space-y-0  space-y-6  items-start ">
 								<DetailRecord />
 
 								{isDescriptionDatabase(database) && (
@@ -117,7 +122,7 @@ const Detail = () => {
 											<AccordionTrigger className="bg-primary text-white px-4 rounded">
 												{message.descriptionTree}
 											</AccordionTrigger>
-											<AccordionContent className="max-h-[700px]">
+											<AccordionContent className="max-h-[700px] overflow-auto">
 												<DescriptionTree show={true} />
 											</AccordionContent>
 										</AccordionItem>
