@@ -53,7 +53,7 @@ const DescriptionTree = ({ show = true }: { show: boolean }) => {
 					if (!res || res.noTree) {
 						return
 					}
-					let { tree, openKeyPath } = res
+					const { tree, openKeyPath } = res
 
 					setTree(tree)
 
@@ -67,7 +67,15 @@ const DescriptionTree = ({ show = true }: { show: boolean }) => {
 
 	console.log({ tree })
 
-	return <TreeView data={data} />
+	return (
+		<TreeView
+			data={data}
+			initialSelectedItemId={'5'}
+			onSelectChange={(item) => {
+				console.log({ item })
+			}}
+		/>
+	)
 }
 
 export default DescriptionTree
