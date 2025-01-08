@@ -7,42 +7,6 @@ import { getSessionID } from '@/lib/utils'
 import { Link } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
-const data: TreeDataItem[] = [
-	{
-		id: '1',
-		name: 'Item 1',
-		actions: (
-			<Button>
-				<Link />
-			</Button>
-		),
-		children: [
-			{
-				id: '2',
-				name: 'Item 1.1',
-				children: [
-					{
-						id: '3',
-						name: 'Item 1.1.1',
-					},
-					{
-						id: '4',
-						name: 'Item 1.1.2',
-					},
-				],
-			},
-			{
-				id: '5',
-				name: 'Item 1.2',
-			},
-		],
-	},
-	{
-		id: '6',
-		name: 'Item 2',
-	},
-]
-
 const DescriptionTree = ({ show = true }: { show: boolean }) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [loading, setLoading] = useState(true)
@@ -74,9 +38,10 @@ const DescriptionTree = ({ show = true }: { show: boolean }) => {
 
 	console.log({ tree })
 
+	if (!tree) return null
 	return (
 		<TreeView
-			data={data}
+			data={tree}
 			initialSelectedItemId={'5'}
 			onSelectChange={(item) => {
 				console.log({ item })
