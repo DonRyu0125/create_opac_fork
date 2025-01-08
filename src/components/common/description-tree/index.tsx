@@ -6,6 +6,8 @@ import { getJSONTree, TreeNode, TreeResponse } from '@/lib/tree'
 import { getSessionID } from '@/lib/utils'
 import { Link } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import TreeSkeleton from './loading'
+import EmptyState from './empty-state'
 
 const DescriptionTree = ({ show = true }: { show: boolean }) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -38,7 +40,9 @@ const DescriptionTree = ({ show = true }: { show: boolean }) => {
 
 	console.log({ tree })
 
-	if (!tree) return null
+	if (loading) return <TreeSkeleton />
+	if (!tree) return <EmptyState />
+
 	return (
 		<TreeView
 			data={tree}
