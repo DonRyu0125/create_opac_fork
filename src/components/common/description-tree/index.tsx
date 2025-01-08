@@ -36,7 +36,7 @@ const data: TreeDataItem[] = [
 	},
 ]
 
-const DescriptionTree = ({ show }: { show: boolean }) => {
+const DescriptionTree = ({ show = true }: { show: boolean }) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [loading, setLoading] = useState(true)
 	const record = records[0]
