@@ -188,3 +188,7 @@ export const getPatronID = () => {
 export const getLanguageID = () => {
 	return getCookieValue("$LANG")?.split(']')[1]
 }
+
+export const encodeURIStringToMinisisSpecialCharacter = (originalString: string) => {
+	return encodeURIComponent(originalString).replace(/%/g, "~")
+}
