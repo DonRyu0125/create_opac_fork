@@ -22,7 +22,7 @@ export const getChildrenSearchLink = (
 	refd: string,
 	report = 'EXTRACT_TREE_PAGE'
 ): string => {
-	return `${session}/${database}/REFD/${refd}/${report}?JUMP&DATABASE=${database}&SHOWSINGLE=Y&SHARE_SESSID=LMA_SHARE_SESSID&M_GVAR1=TREE_FORMAT:XML&M_GVAR2=STARTENTRY:1#false`
+	return `${session}/${database}/REFD/${report}?JUMP&DATABASE=${database}&SHOWSINGLE=Y&SHARE_SESSID=LMA_SHARE_SESSID&M_GVAR1=TREE_FORMAT:XML&M_GVAR2=STARTENTRY:1#false&KEY="${refd}"`
 }
 
 /**
