@@ -9,9 +9,19 @@ export type ImageProps = {
 	alt?: string
 	caption?: string
 }
+
+export type VideoProps = {
+	type: 'video'
+	width: number
+	height: number
+	sources: {
+		src: string
+		type: 'video/mp4'
+	}[]
+}
 export interface ImageCarouselProps {
-	items: ImageProps[]
-	renderItems: (item: ImageProps, index: number) => React.ReactNode
+	items: (ImageProps | VideoProps)[]
+	renderItems: (item: ImageProps | VideoProps, index: number) => React.ReactNode
 }
 
 const ImageCarousel = ({ items, renderItems }: ImageCarouselProps) => {

@@ -1,4 +1,4 @@
-import ImageCarousel from '@/components/common/ImageCarousel'
+import ImageCarousel, { ImageProps, VideoProps } from '@/components/common/ImageCarousel'
 import PageAction from '@/components/common/PageAction'
 import SearchForm from '@/components/common/search-form/SearchForm'
 import Layout from '@/components/layouts'
@@ -11,6 +11,18 @@ const Detail = () => {
 	const images =
 		getMedia(records[0], 'im_access_link')?.map((e) => ({
 			src: e.includes('[MEDIA]') ? e.replace('[MEDIA]', '/media/') : e,
+		})) || []
+	const videos: VideoProps[] =
+		getMedia(records[0], 'vd_access_link')?.map((e) => ({
+			type: 'video',
+			width: 1280,
+			height: 720,
+			sources: [
+				{
+					src: e.includes('[MEDIA]') ? e.replace('[MEDIA]', '/media/') : e,
+					type: 'video/mp4',
+				},
+			],
 		})) || []
 	const { message } = useConstants()
 	// TODO: create placeholder component when there is no data
@@ -56,14 +68,30 @@ const Detail = () => {
 							<div className="max-w-[700px] text-center mx-auto">
 								{images && images.length > 0 ? (
 									<ImageCarousel
-										items={images}
-										renderItems={(image) => (
-											<img
-												alt={image.caption}
-												src={image.src}
-												className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
-											/>
-										)}
+										items={[...images, ...videos]}
+										renderItems={(item) => {
+											if (!(item as ImageProps).src) {
+												const video = item as VideoProps
+												return (
+													<img
+														alt={'video thumbnail'}
+														src={
+															'https://d2uolguxr56s4e.cloudfront.net/img/kartrapages/video_player_placeholder.gif'
+														}
+														className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+													/>
+												)
+											}
+
+											const image = item as ImageProps
+											return (
+												<img
+													alt={image.caption}
+													src={image.src}
+													className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+												/>
+											)
+										}}
 									/>
 								) : (
 									<>
