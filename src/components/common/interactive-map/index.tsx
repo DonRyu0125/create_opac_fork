@@ -269,7 +269,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 				</div>
 				<div className="flex flex-col space-y-4 max-h-[90vh] mb-2 p-2 overflow-y-auto custom-scrollbar">
 					{DB_TYPE === 'UNION_VIEW' && (
-						<CollapseList title={'Database'} expand={true}>
+						<CollapseList title={message.Type} expand={true}>
 							<div className="space-y-3 border-t p-4">
 								<div className="flex">
 									<div className={'flex items-center space-x-2'}>
@@ -332,7 +332,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							</div>
 						</CollapseList>
 					)}
-					<CollapseList title={'Country'} expand={true}>
+					<CollapseList title={message.country} expand={true}>
 						<div className="space-y-3 border-t p-4">
 							{ckTypes?.countries?.map((item: string, key: number) => {
 								if (item) {
@@ -356,7 +356,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							})}
 						</div>
 					</CollapseList>
-					<CollapseList expand={true} title={'Province'}>
+					<CollapseList expand={true} title={message.provinceState}>
 						<div className="space-y-3 border-t p-4">
 							{selectedCountries.length > 0 ? (
 								getUniqueValuesP()?.map((item: any, key: number) => {
@@ -383,7 +383,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							)}
 						</div>
 					</CollapseList>
-					<CollapseList expand={true} title={'City'}>
+					<CollapseList expand={true} title={message.city}>
 						<div className="space-y-3 border-t p-4">
 							{selectedProvinces.length > 0 ? (
 								getUniqueValuesC()?.map((item: any, key: number) => {
