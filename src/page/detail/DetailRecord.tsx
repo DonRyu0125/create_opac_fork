@@ -50,9 +50,11 @@ const DetailRecord = (props: Props) => {
 					{isDescriptionDatabase(database) && (
 						<Accordion type="single" collapsible>
 							<AccordionItem value="description-tree">
-								<AccordionTrigger>{message.descriptionTree}</AccordionTrigger>
-								<AccordionContent>
-									<DescriptionTree />
+								<AccordionTrigger className="bg-primary text-white px-4 rounded">
+									{message.descriptionTree}
+								</AccordionTrigger>
+								<AccordionContent className="max-h-[700px]">
+									<DescriptionTree show={true} />
 								</AccordionContent>
 							</AccordionItem>
 						</Accordion>

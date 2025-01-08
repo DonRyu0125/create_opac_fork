@@ -1,13 +1,11 @@
-import { TreeView, TreeDataItem } from '@/components/tree-view'
-import { Button } from '@/components/ui/button'
+import { TreeView } from '@/components/tree-view'
 import useJSONData from '@/hooks/useJSONData'
 import { deepSearchKey } from '@/lib/record'
-import { getJSONTree, TreeNode, TreeResponse } from '@/lib/tree'
+import { getJSONTree, TreeNode } from '@/lib/tree'
 import { getSessionID } from '@/lib/utils'
-import { Link } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import TreeSkeleton from './loading'
 import EmptyState from './empty-state'
+import TreeSkeleton from './loading'
 
 const DescriptionTree = ({ show = true }: { show: boolean }) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
