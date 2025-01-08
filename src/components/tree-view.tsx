@@ -186,7 +186,6 @@ const TreeNode = ({
 					)}
 					onClick={() => {
 						handleSelectChange(item)
-						item.onClick?.()
 					}}>
 					<TreeIcon
 						item={item}
@@ -194,7 +193,11 @@ const TreeNode = ({
 						isOpen={value.includes(item.id)}
 						default={defaultNodeIcon}
 					/>
-					<span className="text-sm truncate">{item.title}</span>
+					<span
+						onClick={() => item.onClick?.()}
+						className="flex-grow text-sm truncate font-bold">
+						{item.title}
+					</span>
 					<TreeActions isSelected={selectedItemId === item.id}>
 						{item.actions}
 					</TreeActions>
