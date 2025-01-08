@@ -1,9 +1,5 @@
 import { TreeView } from '@/components/tree-view'
-import useJSONData from '@/hooks/useJSONData'
-import { deepSearchKey } from '@/lib/record'
-import { getJSONTree, TreeNode } from '@/lib/tree'
-import { getSessionID } from '@/lib/utils'
-import { useEffect, useState } from 'react'
+import { TreeNode } from '@/lib/tree'
 import EmptyState from './empty-state'
 import TreeSkeleton from './loading'
 
