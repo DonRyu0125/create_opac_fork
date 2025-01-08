@@ -43,6 +43,7 @@ import EnquiryConfirmed from '@/page/enquiry/EnquiryConfirmed'
 import ReproductionConfirmed from '@/page/reproduction/ReproductionConfirmed'
 import ReproductionForm from '@/page/reproduction/ReproductionForm'
 import ReproductionDetail from '@/page/reproduction/ReproductionDetail'
+import ClientLoginError from '@/page/login/ClientLoginError'
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
@@ -97,6 +98,7 @@ export const ROUTES: TRoute = {
 	reproductionform: ReproductionForm,
 	reproductionconfirmed: ReproductionConfirmed,
 	reproductiondetail: ReproductionDetail,
+	'client-login-error': ClientLoginError,
 	...ADMIN_ROUTES,
 }
 
