@@ -6,12 +6,19 @@ import { getFieldDataByLabel, getFieldsFromRecord } from '@/lib/record'
 import DetailRecordAction from '@/page/detail/DetailRecordAction'
 import { DBFields } from '../../types/record'
 import DescriptionTree from '@/components/common/description-tree'
+import { isDescriptionDatabase } from '@/lib/utils'
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from '@/components/ui/accordion'
 
 type Props = {}
 
 const DetailRecord = (props: Props) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const fields = useConstants().fields
+	const { fields, message } = useConstants()
 	// const { records } = useJSONData({ defaultData: DetailM3Sample })
 	const record = records[0]
 	const database = record.database_name
@@ -41,7 +48,16 @@ const DetailRecord = (props: Props) => {
 							return value
 						}}
 					/>
-					<DescriptionTree />
+					{isDescriptionDatabase(database) && (
+						<Accordion type="single" collapsible>
+							<AccordionItem value="description-tree">
+								<AccordionTrigger>{message.descriptionTree}</AccordionTrigger>
+								<AccordionContent>
+									<DescriptionTree />
+								</AccordionContent>
+							</AccordionItem>
+						</Accordion>
+					)}
 					<DetailRecordAction />
 				</div>
 			</RecordDetail>

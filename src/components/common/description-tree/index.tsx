@@ -32,7 +32,7 @@ const data: TreeDataItem[] = [
 ]
 
 const DescriptionTree = () => {
-	return <TreeView data={data} />
+	return <TreeView  data={data} />
 }
 
 export default DescriptionTree
