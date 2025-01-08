@@ -81,7 +81,13 @@ const RecordView = ({ record }: { record: Record }) => {
 		<DetailInfoCard
 			title={<Link href={recordLink}>{title}</Link>}
 			className="col-span-4 border-primary"
-			thumbnail={thumbnail || 'https://placehold.co/250x250'}
+			thumbnail={
+				thumbnail
+					? thumbnail.includes('[MEDIA]')
+						? thumbnail.replace('[MEDIA]', '/media/')
+						: thumbnail
+					: 'https://placehold.co/250x250'
+			}
 			footer={
 				<div>
 					<Separator />

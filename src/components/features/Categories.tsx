@@ -17,7 +17,7 @@ const Categories = ({ page, previewData, previewMode }: PageSectionProps) => {
 				items={data.categoriesItems}
 				renderItem={(item, index: any) => (
 					<Card
-						className="max-w-md mx-auto shadow-xl border-none cursor-pointer"
+						className="max-w-md mx-auto  border-none cursor-pointer hover:shadow-lg"
 						key={index}>
 						<ThumbnailCard
 							title={item.title}

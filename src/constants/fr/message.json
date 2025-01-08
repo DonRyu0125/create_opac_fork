@@ -57,7 +57,15 @@
 	"max": "Max",
 	"language": "Langue",
 	"dateType": "fr-FR",
-	"daysOfWeek": ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+	"daysOfWeek": [
+		"Di",
+		"Lu",
+		"Ma",
+		"Me",
+		"Je",
+		"Ve",
+		"Sa"
+	],
 	"close": "Fermer",
 	"privateProperty": "Propriété privée",
 	"contactInfoNotProvided": "Les informations de contact ne sont pas fournies",
@@ -68,7 +76,6 @@
 	"firstName": "Prénom",
 	"lastName": "Nom de famille",
 	"email": "Email",
-	"attendee": "Participant",
 	"eventCancel": "Événement annulé",
 	"spotReserved": "Une place réservée",
 	"confirm": "confirmer",
@@ -166,5 +173,7 @@
 	"map": "Carte",
 	"detailRecordActionRequest": "Request",
 	"detailRecordActionEnquire": "Enquire",
-	"detailRecordActionReproduction": "Reproduction"
+	"detailRecordActionReproduction": "Reproduction",
+	"descriptionTree": "Liste complète des collections",
+	"topPick": "Nos coups de coeur"
 }

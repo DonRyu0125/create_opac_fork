@@ -9,6 +9,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { getCookieValue, getHomeSessionID } from '@/lib/utils'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 import axios from 'axios'
+import { encodeURIStringToMinisisSpecialCharacter } from '@/lib/utils'
 
 const Orders = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -20,7 +21,7 @@ const Orders = () => {
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
-
+	
 	const cancelRequest = (reqNumber: string) => {
 		var cancelReq_url =
 			getCookieValue('HOME_SESSID') +
@@ -129,21 +130,7 @@ const Orders = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => (
-				<div className="">
-					<a
-						href={
-							getHomeSessionID() +
-							'/' +
-							row.getValue('req_db_name') +
-							'/REFD/' +
-							row.getValue('req_item_id') +
-							'?JUMP'
-						}>
-						{row.getValue('req_item_id')}
-					</a>
-				</div>
-			),
+			cell: ({ row }) => <div className="underline"><a href={getHomeSessionID() + "/" + row.getValue('req_db_name') + "/" + (row.getValue('req_db_name') == "DESCRIPTION_WEB" ? "REFD": "ACCESSION_NUMBER") + "/" + encodeURIStringToMinisisSpecialCharacter(row.getValue('req_item_id')) + "?JUMP"}>{row.getValue('req_item_id')}</a></div>,
 		},
 		{
 			accessorKey: 'req_title',

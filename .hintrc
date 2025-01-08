@@ -9,6 +9,14 @@
         "button-name": "off"
       }
     ],
-    "no-inline-styles": "off"
+    "no-inline-styles": "off",
+    "axe/aria": [
+      "default",
+      {
+        "aria-required-children": "off",
+        "aria-valid-attr-value": "off"
+      }
+    ],
+    "button-type": "off"
   }
 }

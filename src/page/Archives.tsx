@@ -1,6 +1,6 @@
 import AdvanceSearchButton from '@/components/common/advanced-search/AdvancedSearchButton'
 import AdvancedSearchForm from '@/components/common/advanced-search/AdvancedSearchForm'
-import InterativeMap from '@/components/common/interativeMap'
+import InterativeMap from '@/components/common/interactive-map'
 import HomeSearchForm from '@/components/common/search-form/HomeSearchForm'
 import Section from '@/components/common/Section'
 import Categories from '@/components/features/Categories'

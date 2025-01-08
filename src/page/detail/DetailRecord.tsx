@@ -10,8 +10,7 @@ type Props = {}
 
 const DetailRecord = (props: Props) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const fields = useConstants().fields
-	// const { records } = useJSONData({ defaultData: DetailM3Sample })
+	const { fields } = useConstants()
 	const record = records[0]
 	const database = record.database_name
 	const recordData: DBFields<'COLLECTIONS'> = record.record
@@ -25,25 +24,24 @@ const DetailRecord = (props: Props) => {
 	) as TableRow[]
 
 	return (
-		<>
-			<RecordDetail heading={title} subHeading={recordData.collection}>
-				<div className="flex flex-col space-y-12">
-					<InfoTable
-						rowsData={detailFields || []}
-						renderRow={({ value }) => {
-							if (typeof value === 'string') {
-								return <div>{value}</div>
-							}
-							if (Array.isArray(value)) {
-								return value.map((e, i) => <div key={i}>{e.toString()}</div>)
-							}
-							return value
-						}}
-					/>
-					<DetailRecordAction />
-				</div>
-			</RecordDetail>
-		</>
+		<RecordDetail heading={title} subHeading={recordData.collection}>
+			<div className="flex flex-col space-y-12">
+				<InfoTable
+					rowsData={detailFields || []}
+					renderRow={({ value }) => {
+						if (typeof value === 'string') {
+							return <div>{value}</div>
+						}
+						if (Array.isArray(value)) {
+							return value.map((e, i) => <div key={i}>{e.toString()}</div>)
+						}
+						return value
+					}}
+				/>
+
+				<DetailRecordAction />
+			</div>
+		</RecordDetail>
 	)
 }
 

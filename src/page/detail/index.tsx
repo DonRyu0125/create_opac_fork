@@ -1,20 +1,65 @@
-import ImageCarousel from '@/components/common/ImageCarousel'
+import ImageCarousel, { ImageProps, VideoProps } from '@/components/common/ImageCarousel'
 import PageAction from '@/components/common/PageAction'
 import SearchForm from '@/components/common/search-form/SearchForm'
 import Layout from '@/components/layouts'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
+import { getSessionID, isDescriptionDatabase } from '@/lib/utils'
 import DetailRecord from './DetailRecord'
+
+import DescriptionTree from '@/components/common/description-tree'
+import Accordion from '@/components/ui/simple-accordion'
+import { deepSearchKey } from '@/lib/record'
+import { getJSONTree, TreeNode } from '@/lib/tree'
+import { useEffect, useState } from 'react'
+import NavigationSideBar from './NavigationSideBar'
 
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
+	const record = records[0]
 	const images =
 		getMedia(records[0], 'im_access_link')?.map((e) => ({
 			src: e.includes('[MEDIA]') ? e.replace('[MEDIA]', '/media/') : e,
 		})) || []
+	const videos: VideoProps[] =
+		getMedia(records[0], 'vd_access_link')?.map((e) => ({
+			type: 'video',
+			width: 1280,
+			height: 720,
+			sources: [
+				{
+					src: e.includes('[MEDIA]') ? e.replace('[MEDIA]', '/media/') : e,
+					type: 'video/mp4',
+				},
+			],
+		})) || []
+	const [openKeyPath, setOpenKeyPath] = useState<string[]>([])
 	const { message } = useConstants()
-	// TODO: create placeholder component when there is no data
+	const refd = deepSearchKey(record, 'refd')[0]
+	const database = record.database_name
+	const [loading, setLoading] = useState(true)
+	const [tree, setTree] = useState<TreeNode | undefined>()
+	useEffect(() => {
+		const sessionID = getSessionID()
+		if (sessionID && isDescriptionDatabase(database)) {
+			getJSONTree(sessionID, database, refd)
+				.then((res) => {
+					if (!res || res.noTree) {
+						return
+					}
+					const { tree, openKeyPath } = res
 
+					setTree(tree)
+					console.log({ openKeyPath })
+
+					setOpenKeyPath(openKeyPath)
+				})
+				.finally(() => {
+					setLoading(false)
+				})
+		}
+	}, [database, refd])
+	// TODO: create placeholder component when there is no data
 	if (!records || records.length === 0) return <></>
 	return (
 		<Layout>
@@ -51,33 +96,80 @@ const Detail = () => {
 					</div>
 				</PageAction>
 				<section>
-					<div className="mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-						<div className="flex flex-col lg:flex-row space-y-12 lg:space-y-0 lg:space-x-8 items-start p-4 mx-auto ">
-							<div className="max-w-[700px] text-center mx-auto">
-								{images && images.length > 0 ? (
-									<ImageCarousel
-										items={images}
-										renderItems={(image) => (
-											<img
-												alt={image.caption}
-												src={image.src}
-												className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+					<div className="container mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+						<div className="flex flex-col  space-y-12 items-start p-4 mx-auto ">
+							<div className="w-full flex flex-col lg:flex-row">
+								<div className="w-full lg:w-2/3">
+									<div className="min-w-[300px] w-full max-w-[500px] text-center ">
+										{images && images.length > 0 ? (
+											<ImageCarousel
+												items={[...images, ...videos]}
+												renderItems={(item) => {
+													if (!(item as ImageProps).src) {
+														const video = item as VideoProps
+														return (
+															<img
+																alt={'video thumbnail'}
+																src={
+																	'https://d2uolguxr56s4e.cloudfront.net/img/kartrapages/video_player_placeholder.gif'
+																}
+																className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+															/>
+														)
+													}
+
+													const image = item as ImageProps
+													return (
+														<img
+															alt={image.caption}
+															src={image.src}
+															className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+														/>
+													)
+												}}
 											/>
+										) : (
+											<>
+												<img
+													alt={message.noMediaFound}
+													src={'https://placehold.co/250x250'}
+													className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+												/>
+												<span>{message.noMediaFound}</span>
+											</>
 										)}
-									/>
-								) : (
-									<>
-										<img
-											alt={message.noMediaFound}
-											src={'https://placehold.co/250x250'}
-											className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
-										/>
-										<span>{message.noMediaFound}</span>
-									</>
-								)}
+									</div>
+								</div>
+
+								<div className="w-full lg:w-1/3">
+									<NavigationSideBar />
+								</div>
 							</div>
-							<div className="w-full lg:w-1/2 grid gap-4 md:gap-10 items-start ">
-								<DetailRecord />
+							<div className="w-full flex flex-col lg:flex-row lg:space-x-6 lg:space-y-0  space-y-6  items-start ">
+								<div className="w-full lg:w-2/3 ">
+									<DetailRecord />
+								</div>
+
+								{isDescriptionDatabase(database) && (
+									<div className="w-full lg:w-1/3">
+										<Accordion
+											items={[
+												{
+													title: message.descriptionTree,
+													content: (
+														<div className="max-h-[600px] overflow-auto">
+															<DescriptionTree
+																loading={loading}
+																tree={tree}
+																selectedId={openKeyPath[0]}
+															/>
+														</div>
+													),
+												},
+											]}
+										/>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>

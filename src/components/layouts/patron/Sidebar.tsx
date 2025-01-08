@@ -1,21 +1,20 @@
 import Link from '@/components/common/Link'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import clientProfileJSON from '@/constants/en/client-profile.json'
 import { getCookieValue } from '@/lib/utils'
 import {
-	Home,
-	Settings,
-	ShoppingBag,
-	Copyright,
-	Copy,
 	BookMarked,
+	CalendarDays,
+	Copy,
+	Copyright,
+	FileX,
+	Home,
 	Lightbulb,
 	MessageCircleMore,
-	CalendarDays,
+	Settings,
+	ShoppingBag,
 	Upload,
-	FileX,
 } from 'lucide-react'
-import clientProfileJSON from '@/constants/en/client-profile.json'
-import { MAIN_EVENT_CAL_DB_SYN } from '@/components/common/event-calendar/Constants'
 
 type Props = {}
 
