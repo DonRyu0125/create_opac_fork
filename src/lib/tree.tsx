@@ -104,7 +104,7 @@ export const mapLowerLevelXMLToNode = (xml: any[], parentId: string): any[] => {
 				hasChildren,
 				children: hasChildren ? [] : null,
 				isChildrenLoaded: !hasChildren,
-				action: <NodeAction url="/" />,
+				onClick: () => window.open('/'),
 			}
 		})
 }
@@ -132,7 +132,7 @@ export const mapXMLToNode = (xml: any, id: string): any => {
 		hasChildren,
 		isChildrenLoaded: true,
 		children: hasChildren ? mapLowerLevelXMLToNode(lower_level_occurrence, id) : null,
-		action: <NodeAction url="/" />,
+		onClick: () => window.open('/'),
 	}
 }
 

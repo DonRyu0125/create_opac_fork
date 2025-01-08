@@ -234,7 +234,6 @@ const TreeLeaf = React.forwardRef<
 			)}
 			onClick={() => {
 				handleSelectChange(item)
-				item.onClick?.()
 			}}
 			{...props}>
 			<TreeIcon
@@ -242,7 +241,9 @@ const TreeLeaf = React.forwardRef<
 				isSelected={selectedItemId === item.id}
 				default={defaultLeafIcon}
 			/>
-			<span className="flex-grow text-sm truncate">{item.title}</span>
+			<span onClick={() => item.onClick?.()} className="flex-grow text-sm truncate font-bold">
+				{item.title}
+			</span>
 			<TreeActions isSelected={selectedItemId === item.id}>{item.actions}</TreeActions>
 		</div>
 	)
