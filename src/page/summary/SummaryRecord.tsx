@@ -61,7 +61,13 @@ const RecordView = ({ record }: { record: Record }) => {
 				className="border-primary"
 				title={<Link href={recordLink}>{truncateString(title)}</Link>}
 				description={gridFields}
-				thumbnail={thumbnail || 'https://placehold.co/250x250'}
+				thumbnail={
+					thumbnail
+						? thumbnail.includes('[MEDIA]')
+							? thumbnail.replace('[MEDIA]', '/media/')
+							: thumbnail
+						: 'https://placehold.co/250x250'
+				}
 				footer={
 					<div className="flex h-4 items-center space-x-4 w-full justify-center ">
 						<RecordAction record={record} />

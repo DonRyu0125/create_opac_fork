@@ -6,26 +6,12 @@ import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import DetailRecord from './DetailRecord'
 
-const images = [
-	{
-		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_10/6_16/9a192748_4e41_4f04_a2de_a3bc0114cb3f/preview_00433935_001.jpg',
-	},
-	{
-		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_10/6_16/ae91ce34_b9b4_44a4_9f0e_a3bc011460e8/preview_00433892_001.jpg',
-	},
-	{
-		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_11/2_1/5bcca073_26c7_4e0f_bb70_a3d7001a1c24/preview_01081548_001.jpg',
-	},
-	{
-		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_10/11_3/8dc66e9f_43e1_4170_956b_a3c1003d49ec/preview_00595099_001.jpg',
-	},
-	{
-		src: 'https://media.britishmuseum.org/media/Repository/Documents/2014_11/9_19/c4b282ba_d905_4cff_adcb_a3de0144bc78/preview_01466623_001.jpg',
-	},
-]
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
-	const images = getMedia(records[0], 'im_access_link')?.map((e) => ({ src: e })) || []
+	const images =
+		getMedia(records[0], 'im_access_link')?.map((e) => ({
+			src: e.includes('[MEDIA]') ? e.replace('[MEDIA]', '/media/') : e,
+		})) || []
 	const { message } = useConstants()
 	// TODO: create placeholder component when there is no data
 
