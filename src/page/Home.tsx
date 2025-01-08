@@ -10,6 +10,7 @@ import Hero from '../components/common/Hero'
 import Section from '../components/common/Section'
 import RSVPCalendar from '../components/features/RSVPCalendar'
 import Layout from '../components/layouts'
+import TopPick from '@/components/features/TopPick'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -74,6 +75,8 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 					/>
 				</div>
 			</Hero>
+
+			<TopPick />
 
 			{enableFeaturedCollection && (
 				<FeaturedCollection
