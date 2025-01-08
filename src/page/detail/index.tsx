@@ -148,11 +148,13 @@ const Detail = () => {
 												{
 													title: message.descriptionTree,
 													content: (
-														<DescriptionTree
-															loading={loading}
-															tree={tree}
-															selectedId={openKeyPath[0]}
-														/>
+														<div className="max-h-[600px] overflow-auto">
+															<DescriptionTree
+																loading={loading}
+																tree={tree}
+																selectedId={openKeyPath[0]}
+															/>
+														</div>
 													),
 												},
 											]}

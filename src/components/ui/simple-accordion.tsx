@@ -25,7 +25,7 @@ export default function Accordion({ items }: AccordionProps) {
 			{items.map((item, index) => (
 				<div key={index} className="border rounded-md">
 					<button
-						className="flex justify-between items-center w-full p-4 text-left"
+						className="flex justify-between items-center w-full p-4 text-left bg-primary text-white"
 						onClick={() => toggleItem(index)}
 						aria-expanded={openIndex === index}
 						aria-controls={`accordion-content-${index}`}>
