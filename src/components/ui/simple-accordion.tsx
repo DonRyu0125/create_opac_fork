@@ -22,7 +22,7 @@ export default function Accordion({ items }: AccordionProps) {
 	}
 
 	return (
-		<div className="w-full max-w-md mx-auto space-y-2">
+		<div className="w-full  mx-auto space-y-2">
 			{items.map((item, index) => (
 				<div key={index} className="border rounded-md">
 					<Button

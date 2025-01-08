@@ -6,7 +6,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 
 export default function NavigationSideBar() {
 	return (
-		<div className="w-full max-w-sm p-4 space-y-3">
+		<div className="w-full  space-y-3">
 			<nav className="grid gap-2">
 				<Button
 					variant="ghost"
