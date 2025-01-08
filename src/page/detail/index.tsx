@@ -8,14 +8,7 @@ import DetailRecord from './DetailRecord'
 import { isDescriptionDatabase } from '@/lib/utils'
 
 import DescriptionTree from '@/components/common/description-tree'
-import {
-	Accordion,
-	AccordionContainer,
-	AccordionHeader,
-	AccordionItem,
-	AccordionPanel,
-	AccordionWrapper,
-} from '@/components/ui/animated-accordion'
+import Accordion from '@/components/ui/simple-accordion'
 
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
@@ -123,34 +116,14 @@ const Detail = () => {
 
 								{isDescriptionDatabase(database) && (
 									<div className="w-full lg:w-1/3">
-										<AccordionContainer className="md:grid-cols-2 grid-cols-1">
-											<AccordionWrapper>
-												<Accordion defaultValue={'item-1'}>
-													<AccordionItem value="item-1">
-														<AccordionHeader>
-															What is a UI component?
-														</AccordionHeader>
-														<AccordionPanel>
-															<div className="max-h-[600px] overflow-auto">
-																<DescriptionTree />
-															</div>
-														</AccordionPanel>
-													</AccordionItem>
-												</Accordion>
-											</AccordionWrapper>
-										</AccordionContainer>
-
-										{/* 													
-										<Accordion type="single" collapsible>
-											<AccordionItem value="description-tree">
-												<AccordionTrigger className="bg-primary text-white px-4 rounded">
-													{message.descriptionTree}
-												</AccordionTrigger>
-												<AccordionContent className="max-h-[700px] overflow-auto">
-													<DescriptionTree />
-												</AccordionContent>
-											</AccordionItem>
-										</Accordion> */}
+										<Accordion
+											items={[
+												{
+													title: message.descriptionTree,
+													content: <DescriptionTree />,
+												},
+											]}
+										/>
 									</div>
 								)}
 							</div>
