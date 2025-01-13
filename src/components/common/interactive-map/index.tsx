@@ -252,6 +252,10 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 		setFilteredData(allData)
 	}
 
+	const getImage = (image:string) =>{
+		return image.includes('[MEDIA]') ? image.replace('[MEDIA]', '/media/') : image
+	}
+
 	return (
 		<div className="w-full relative md:flex">
 			{loading && (
@@ -476,7 +480,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
-															src={marker.IMAG_URL}
+															src={getImage(marker.IMAG_URL)}
 															alt="Library"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
@@ -546,7 +550,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
-															src={marker.IMAG_URL}
+															src={getImage(marker.IMAG_URL)}
 															alt="Archive"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
@@ -612,7 +616,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
-															src={marker.IMAG_URL}
+															src={getImage(marker.IMAG_URL)}
 															alt="Museum"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
