@@ -253,7 +253,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 	}
 
 	const getImage = (image:string) =>{
-		return image.includes('[MEDIA]') ? image.replace('[MEDIA]', '/media/') : image
+		return image.toLowerCase().includes('[media]') ? image.replace(/\[media\]/i, '/media/') : image
 	}
 
 	return (

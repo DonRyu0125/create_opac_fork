@@ -275,7 +275,9 @@ const ShowButton = ({
 	const message = useConstants().message
 
 	const handleDownload = async () => {
-		const fileUrl = event[FLOC_TX_ACCESS]
+		let fileUrl = event[FLOC_TX_ACCESS].toLowerCase().includes('[media]')
+			? event[FLOC_TX_ACCESS].replace(/\[media\]/i, '/media/')
+			: event[FLOC_TX_ACCESS]
 		if (fileUrl) {
 			try {
 				const response = await fetch(fileUrl)
@@ -287,6 +289,7 @@ const ShowButton = ({
 			}
 		}
 	}
+
 	function isDateInThePast(dateString: string) {
 		const inputDate = new Date(dateString)
 		const currentDate = new Date()

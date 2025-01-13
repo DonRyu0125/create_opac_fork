@@ -37,7 +37,7 @@ const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 					<img
 						className="w-full object-fill h-full"
 						alt={elm[TAG_NAME]}
-						src={`${currentMedia[MEDIA_TYPE.IMAGE].includes('[MEDIA]') ? currentMedia[MEDIA_TYPE.IMAGE].replace('[MEDIA]', '/media/') : currentMedia[MEDIA_TYPE.IMAGE]}`}
+						src={`${currentMedia[MEDIA_TYPE.IMAGE].toLowerCase().includes('[media]') ? currentMedia[MEDIA_TYPE.IMAGE].replace(/\[media\]/i, '/media/') : currentMedia[MEDIA_TYPE.IMAGE]}`}
 					/>
 					<div className="pt-3 px-12 h-full overflow-y-auto absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100  items-center justify-evenly transition-opacity duration-300 ">
 						<div className={'text-white overflow-hidden text-2xl'}>{elm[TAG_NAME]}</div>
@@ -90,8 +90,8 @@ const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 				<video className="w-full h-full" controls controlsList="nodownload">
 					<source
 						src={
-							currentMedia[MEDIA_TYPE.VIDEO].includes('[MEDIA]')
-								? currentMedia[MEDIA_TYPE.VIDEO].replace('[MEDIA]', '/media/')
+							currentMedia[MEDIA_TYPE.VIDEO].toLowerCase().includes('[media]')
+								? currentMedia[MEDIA_TYPE.VIDEO].replace(/\[media\]/i, '/media/')
 								: currentMedia[MEDIA_TYPE.VIDEO]
 						}
 						type="video/mp4"
