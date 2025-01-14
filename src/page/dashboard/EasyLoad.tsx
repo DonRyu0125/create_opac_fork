@@ -1,52 +1,62 @@
 import PatronLayout from '@/components/layouts/patron'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Search, Upload, Camera, Monitor, Box, Webcam } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useAuth } from '@/providers/EasyloadAuthProvider'
+import { Camera, Monitor, Search, Upload, Webcam } from 'lucide-react'
+
+const TENANT =
+	process.env.REACT_APP_EASYLOAD_TENANT || import.meta.env.VITE_REACT_APP_EASYLOAD_TENANT
+const PASSWORD =
+	process.env.REACT_APP_EASYLOAD_PASSWORD || import.meta.env.VITE_REACT_APP_EASYLOAD_PASSWORD
+
 const EasyLoad = () => {
+	const { authToken } = useAuth()
+
 	return (
 		<PatronLayout>
 			<div className="container flex flex-col gap-8 p-6">
 				<div className="flex flex-wrap gap-2 sm:gap-4">
-					{' '}
 					<Card className="w-full max-w-3xl mx-auto">
 						<CardContent className="p-6">
 							<Tabs defaultValue="search" className="space-y-6">
-								<TabsList className="grid grid-cols-5 h-14">
+								<TabsList className="grid w-full grid-cols-5 rounded-lg bg-muted p-1 h-14">
 									<TabsTrigger
 										value="search"
-										className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+										className="rounded-md data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow">
 										<Search className="h-5 w-5" />
 									</TabsTrigger>
 									<TabsTrigger
 										value="upload"
-										className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+										className="rounded-md data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow">
 										<Upload className="h-5 w-5" />
 									</TabsTrigger>
 									<TabsTrigger
 										value="camera"
-										className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+										className="rounded-md data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow">
 										<Camera className="h-5 w-5" />
 									</TabsTrigger>
 									<TabsTrigger
 										value="screen"
-										className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+										className="rounded-md data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow">
 										<Monitor className="h-5 w-5" />
 									</TabsTrigger>
 									<TabsTrigger
 										value="capture"
-										className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+										className="rounded-md data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow">
 										<Webcam className="h-5 w-5" />
 									</TabsTrigger>
 								</TabsList>
 
-								<TabsContent value="search" className="p-4">
+								<TabsContent
+									value="search"
+									className="p-4 bg-background rounded-lg shadow-inner">
 									<div className="relative">
-										<Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+										<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 										<Input
 											placeholder="Search by phrase or use * for all"
-											className="pl-9"
+											className="pl-9 pr-4 py-2 w-full bg-muted"
 										/>
 									</div>
 								</TabsContent>
@@ -83,6 +93,7 @@ const EasyLoad = () => {
 										<Button>Start Recording</Button>
 									</div>
 								</TabsContent>
+
 								<TabsContent value="capture" className="p-4">
 									<div className="text-center p-8 border-2 border-dashed rounded-lg">
 										<Webcam className="h-8 w-8 mx-auto mb-4 text-muted-foreground" />

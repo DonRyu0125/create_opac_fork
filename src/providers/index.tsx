@@ -3,6 +3,7 @@ import ErrorBoundary from './ErrorBoundary'
 import { ThemeProvider } from './Theme'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import { DisplayModeProvider } from './DisplayModeProvider'
+import { EasyloadAuthProvider } from './EasyloadAuthProvider'
 
 type Props = {
 	children?: React.ReactNode
@@ -11,11 +12,13 @@ type Props = {
 const Provider = ({ children }: Props) => {
 	return (
 		<ErrorBoundary>
-			<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-				<DisplayModeProvider>
-					<TooltipProvider>{children}</TooltipProvider>
-				</DisplayModeProvider>
-			</ThemeProvider>
+			<EasyloadAuthProvider>
+				<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+					<DisplayModeProvider>
+						<TooltipProvider>{children}</TooltipProvider>
+					</DisplayModeProvider>
+				</ThemeProvider>
+			</EasyloadAuthProvider>
 		</ErrorBoundary>
 	)
 }
