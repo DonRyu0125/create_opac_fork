@@ -34,7 +34,6 @@ export default function PatronProfile() {
 	const { home, archives, museum, library } = useConstants()
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	setCookie('Email', records[0].email) // Don added to use the email at the RSVP
 	const handleClick = (id: any) => {
 		setActiveButton(id)
 	}
