@@ -19,10 +19,9 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import useConstants from '@/hooks/useConstants'
 import { clearCookies, getCookieValue } from '@/lib/utils'
 import { Home, PanelLeft, UserRound } from 'lucide-react'
-type Props = {}
 
-const Header = (props: Props) => {
-	const { message, config } = useConstants()
+const Header = () => {
+	const { message } = useConstants()
 	const home_url =
 		'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 
