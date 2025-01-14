@@ -10,6 +10,7 @@ import {
 	getCurrentDate,
 	getSessionID,
 	isLogin,
+	setCookie,
 } from '@/lib/utils'
 import { calendarCurrDate, calendarEvents, calendarWeekType } from '@/store'
 import { Label } from '@radix-ui/react-label'
@@ -71,6 +72,7 @@ import {
 import { calNumOfPatron } from './EC-Util'
 import { fetch_get, getContactInfo } from './Service'
 import Spinner from './Spinner'
+import x2js from 'x2js'
 
 type Inputs = {
 	[TAG_FUNC_P_FIRST]: string
@@ -152,6 +154,7 @@ const ShowForm = ({
 	setValue,
 	isLoginValid,
 	isIDValid,
+	setLoading,
 }: {
 	loading: boolean
 	handleSubmit: Function
@@ -162,6 +165,7 @@ const ShowForm = ({
 	setValue: Function
 	isLoginValid: boolean
 	isIDValid: boolean
+	setLoading: any
 }) => {
 	const message = useConstants().message
 	const conf = useConstants().config
@@ -180,14 +184,44 @@ const ShowForm = ({
 	useEffect(() => {
 		// If user login in , fill the form automatically.
 		if (isLoginValid) {
+			// M2L_PATRON_ID
 			let name = getCookieValue('M2L_PATRON_NAME')?.split('%2C%20') ?? []
+
 			setValue(TAG_FUNC_P_FIRST, name[1])
 			setValue(TAG_FUNC_P_LAST, name[0])
-			setValue(TAG_FUNC_P_EMAIL, getCookieValue('Email') ?? '')
+			if (getCookieValue('Email')) {
+				setValue(TAG_FUNC_P_EMAIL, getCookieValue('Email'))
+			} else {
+				let email = getEmail()
+				setValue(TAG_FUNC_P_EMAIL, email)
+			}
 		}
-	}, [setValue])
+	}, [setValue,loading])
 
 	const M2L_PATRON_NAME = getCookieValue('M2L_PATRON_NAME')
+
+	const getEmail = async () => {
+		setLoading(true)
+		let HOME_SESSID = getSessionID()
+		let ID = getCookieValue('M2L_PATRON_ID') ?? ''
+		return axios
+			.post(
+				`${HOME_SESSID}?manipxmlrecord&database=CLIENT&READ=Y&KEY=C_CLIENT_NUMBER&VALUE=${ID.replace(/\[.*?\]/g, '')}`,
+				{
+					headers: {
+						'Content-Type': 'text/xml',
+					},
+					timeout: 5000,
+				}
+			)
+			.then((res) => {
+				const conToJson: any = convertXMLToJson(res.data)
+				const jsonObj = conToJson[MWI_RESFUL_RES].record
+				setCookie('Email', jsonObj['C_EMAIL'])
+				setLoading(false)
+				return jsonObj['C_EMAIL']
+			})
+	}
 	return (
 		<div className={'h-full w-full p-1 border-2 rounded text-lg'}>
 			{loading && <Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />}
@@ -755,6 +789,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			case STATUS_TYPE.SHOW_FORM:
 				return (
 					<ShowForm
+						setLoading={setLoading}
 						loading={loading}
 						handleSubmit={handleSubmit}
 						register={register}
