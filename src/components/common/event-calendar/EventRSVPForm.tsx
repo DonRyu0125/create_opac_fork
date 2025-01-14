@@ -186,7 +186,6 @@ const ShowForm = ({
 		if (isLoginValid) {
 			// M2L_PATRON_ID
 			let name = getCookieValue('M2L_PATRON_NAME')?.split('%2C%20') ?? []
-
 			setValue(TAG_FUNC_P_FIRST, name[1])
 			setValue(TAG_FUNC_P_LAST, name[0])
 			if (getCookieValue('Email')) {
