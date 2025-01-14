@@ -16,9 +16,7 @@ import {
 	Upload,
 } from 'lucide-react'
 
-type Props = {}
-
-const Sidebar = (props: Props) => {
+const Sidebar = () => {
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 	const home_url =
 		'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
@@ -41,7 +39,7 @@ const Sidebar = (props: Props) => {
 					<Tooltip key={index}>
 						<TooltipTrigger asChild>
 							<Link
-								href={`${getCookieValue('HOME_SESSID') + item.url + (item.label === 'Bookmarks' || item.label === 'Easy Load' ? '' : m2l_patron_id)}`}
+								href={`${getCookieValue('HOME_SESSID') + item.url + (item.label === 'Bookmarks' || item.label === 'Easy Upload' ? '' : m2l_patron_id)}`}
 								className="flex h-9 w-9 items-center justify-center  text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
 								{item.label === 'Orders' ? (
 									<ShoppingBag className="h-5 w-5" />
