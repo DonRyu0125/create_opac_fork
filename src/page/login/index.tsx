@@ -14,7 +14,6 @@ const Login = () => {
 	const [error, setError] = useState(null)
 	const { message } = useConstants()
 
-
 	return (
 		<section className="bg-white">
 			<div className="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -43,7 +42,13 @@ const Login = () => {
 						{/* Display error message if any */}
 						{error && <p className="mt-4 text-red-500">{error}</p>}
 
-						<form method="post" action={getHomeSessionID() + "/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144&file=[OPAC]home.html"} className="mt-8 grid grid-cols-6 gap-6">
+						<form
+							method="post"
+							action={
+								getHomeSessionID() +
+								'/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144&file=[OPAC]home.html'
+							}
+							className="mt-8 grid grid-cols-6 gap-6">
 							<div className="col-span-6">
 								<label
 									htmlFor="user"

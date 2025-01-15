@@ -2,7 +2,13 @@ import { useState } from 'react'
 import PatronLayout from '@/components/layouts/patron'
 import ProfileTable, { ProfileData } from '@/components/common/client-profile/ProfileTable'
 import useJSONData from '@/hooks/useJSONData'
-import { convertToArr, convertXMLToJson, getCookieValue, getHomeSessionID, getSessionID } from '@/lib/utils'
+import {
+	convertToArr,
+	convertXMLToJson,
+	getCookieValue,
+	getHomeSessionID,
+	getSessionID,
+} from '@/lib/utils'
 import axios from 'axios'
 import {
 	CANCEL_CONFIRMATION_EMAIL_T,

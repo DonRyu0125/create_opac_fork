@@ -4,7 +4,6 @@
 
 Event Calendar for showing events and make the user register the events
 
-
 ## Feature
 
 -   ✅Dynamic view (Monthly, Weekly)
@@ -28,4 +27,3 @@ click confirm => store record and log data => registration is done
 -To Cancel: Non login user After confirm user, get the registration confirm email => go to cancel
 landing page =>click cancel => delete the record and adding cancel log data => user get cancel
 confirm email
-
