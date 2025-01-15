@@ -258,6 +258,11 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 			: image
 	}
 
+	const getNumberofType = (type:string,fileterType:string) =>{
+		let arr = allData.filter((item:any)=>item[type] === fileterType) ?? []
+		return `(${arr.length})`
+	}
+
 	return (
 		<div className="w-full relative md:flex">
 			{loading && (
@@ -294,6 +299,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.archive}
 										</Label>
+										<div>{getNumberofType('DATABASE_TYPE',DB_TYPE_MAP.archive)}</div>
 									</div>
 								</div>
 								<div className="flex">
@@ -315,6 +321,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.library}
 										</Label>
+										<div>{getNumberofType('DATABASE_TYPE',DB_TYPE_MAP.library)}</div>
 									</div>
 								</div>
 								<div className="flex">
@@ -332,6 +339,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.museum}
 										</Label>
+										<div>{getNumberofType('DATABASE_TYPE',DB_TYPE_MAP.museum)}</div>
 									</div>
 								</div>
 							</div>
@@ -353,6 +361,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 													{item}
 												</Label>
+												<div>{getNumberofType('ORIGIN_COUNTRY',item)}</div>
 											</div>
 										)
 									)
@@ -377,6 +386,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 													{item}
 												</Label>
+												<div>{getNumberofType('ORIGIN_PRV_STATE',item)}</div>
 											</div>
 										)
 									)
@@ -401,6 +411,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 											<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 												{item}
 											</Label>
+											<div>{getNumberofType('ORIGIN_CITY',item)}</div>
 										</div>
 									)
 								})
