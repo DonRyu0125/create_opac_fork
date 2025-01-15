@@ -146,9 +146,9 @@
     </div>
     <div class="info">
      <div for="attendee-details" style="margin-top:50px"> If the button is not working...</div>
-      <div id="attendee-details" style="border: 2px dotted #ccc; padding: 10px;">
+      <p id="attendee-details" style="border: 2px dotted #ccc; padding: 10px;">
       ^RSVP_CANCEL_LANDING_PAGE_URL^?user=^encoded^
-      </div>
+      </p>
     </div>
   </div>
   </div>
