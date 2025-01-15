@@ -76,6 +76,7 @@ const RSVPCancel = () => {
 					headers: {
 						'Content-Type': 'text/xml',
 					},
+					withCredentials: true,
 				}
 			)
 			.then((res) => {
@@ -109,6 +110,7 @@ const RSVPCancel = () => {
 					headers: {
 						'Content-Type': 'text/xml',
 					},
+					withCredentials: true,
 				}
 			)
 			.then(() => {
@@ -142,6 +144,7 @@ const RSVPCancel = () => {
 					headers: {
 						'Content-Type': 'text/xml',
 					},
+					withCredentials: true,
 					timeout: 5000,
 				}
 			)
@@ -198,6 +201,7 @@ const RSVPCancel = () => {
 					headers: {
 						'Content-Type': 'text/xml',
 					},
+					withCredentials: true,
 				}
 			)
 			.then((res) => {

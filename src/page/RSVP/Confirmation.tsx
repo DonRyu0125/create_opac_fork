@@ -110,6 +110,7 @@ const RSVPConfirm = () => {
 					headers: {
 						'Content-Type': 'text/xml',
 					},
+					withCredentials: true,
 				}
 			)
 			.then((res) => {
@@ -168,6 +169,7 @@ const RSVPConfirm = () => {
 					headers: {
 						'Content-Type': 'text/xml',
 					},
+					withCredentials: true,
 				}
 			)
 			.then(() => {
@@ -208,6 +210,7 @@ const RSVPConfirm = () => {
 					headers: {
 						'Content-Type': 'text/xml',
 					},
+					withCredentials: true,
 					timeout: 5000,
 				}
 			)
@@ -279,6 +282,7 @@ const RSVPConfirm = () => {
 					headers: {
 						'Content-Type': 'text/xml',
 					},
+					withCredentials: true,
 				}
 			)
 			.then((res) => {
