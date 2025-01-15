@@ -26,6 +26,14 @@ module.exports = {
 		devMiddleware: {
 			writeToDisk: true,
 		},
+		proxy: {
+			'/api': {
+				target: 'http://localhost:3000', // Replace with your API server URL
+				changeOrigin: true,
+				secure: false,
+				pathRewrite: { '^/api': '' }, // Optional: Removes `/api` prefix
+			},
+		},
 	},
 
 	webpack: {

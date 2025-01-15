@@ -26,7 +26,8 @@ import BookmarkProfile from '@/page/dashboard/BookmarkProfile'
 import Calendar from '@/page/dashboard/Calendar'
 import Copyright from '@/page/dashboard/Copyright'
 import Crowdsource from '@/page/dashboard/Crowdsource'
-import EasyLoad from '@/page/dashboard/EasyLoad'
+import EasyLoad from '@/page/dashboard/Easyload'
+import Relogin from '@/page/dashboard/Easyload/Relogin'
 import Enquiry from '@/page/dashboard/Enquiry'
 import Orders from '@/page/dashboard/Orders'
 import PatronProfile from '@/page/dashboard/PatronProfile'
@@ -83,6 +84,7 @@ export const ROUTES: TRoute = {
 	calendar: Calendar,
 	request: Request,
 	easyload: EasyLoad,
+	'easyload-login': Relogin,
 	requestconfirmed: RequestConfirmed,
 	'forgot-pin': ForgotPin,
 	'reset-pin': ResetPin,

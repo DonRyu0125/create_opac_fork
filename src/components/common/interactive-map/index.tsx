@@ -252,18 +252,19 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 		setFilteredData(allData)
 	}
 
-	const getImage = (image:string) =>{
-		return image.toLowerCase().includes('[media]') ? image.replace(/\[media\]/i, '/media/') : image
+	const getImage = (image: string) => {
+		return image.toLowerCase().includes('[media]')
+			? image.replace(/\[media\]/i, '/media/')
+			: image
 	}
 
 	return (
 		<div className="w-full relative md:flex">
 			{loading && (
-				<div className="absolute w-full h-full bg-primary opacity-25" style={{zIndex:9}}>
-			<Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />
-		</div>
-	)
-}
+				<div className="absolute w-full h-full bg-primary opacity-25" style={{ zIndex: 9 }}>
+					<Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />
+				</div>
+			)}
 			<div className="mb-2 md:mb-0 md:w-1/4 rounded border border-primary mr-2 relative">
 				<div className="flex justify-between items-center bg-primary p-2">
 					<div className={'text-white'}>{message.filterBy}</div>
@@ -422,7 +423,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 						height: '90vh',
 						borderRadius: '10px',
 						boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-						zIndex:8
+						zIndex: 8,
 					}}>
 					<LayersControl position="topright">
 						<LayersControl.BaseLayer checked name="Street Map">
@@ -660,7 +661,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 					</MarkerClusterGroup>
 				</MapContainer>
 			</div>
-		</div >
+		</div>
 	)
 }
 

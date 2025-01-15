@@ -1,26 +1,42 @@
-import axios from 'axios'
+import { axios } from '@/lib/axios'
 import { atom, useAtom } from 'jotai'
-import { ReactNode, useEffect } from 'react'
+import { createContext, ReactNode, useContext, useEffect } from 'react'
 
-const authTokenAtom = atom(localStorage.getItem('jwtToken'))
+const authTokenAtom = atom(localStorage.getItem('easyloadToken'))
+const easyloadUserAtom = atom(localStorage.getItem('easyloadUser'))
 const loadingAtom = atom(false)
 const errorAtom = atom(null)
+const TENANT =
+	process.env.REACT_APP_EASYLOAD_TENANT || import.meta.env.VITE_REACT_APP_EASYLOAD_TENANT
+const PASSWORD =
+	process.env.REACT_APP_EASYLOAD_PASSWORD || import.meta.env.VITE_REACT_APP_EASYLOAD_PASSWORD
+
+type AuthContextType = {
+	authenticate: () => Promise<void>
+}
+
+const AuthContext = createContext<AuthContextType | null>(null)
 
 export const EasyloadAuthProvider = ({ children }: { children?: ReactNode }) => {
 	const [authToken, setAuthToken] = useAtom(authTokenAtom)
-	const [loading, setLoading] = useAtom(loadingAtom)
-	const [error, setError] = useAtom(errorAtom)
+	const [, setUser] = useAtom(easyloadUserAtom)
+	const [, setLoading] = useAtom(loadingAtom)
+	const [, setError] = useAtom(errorAtom)
 
-	const authenticate = async (tenant: string, password: string) => {
+	const authenticate = async () => {
+		const tenant = TENANT
+		const password = PASSWORD
 		setLoading(true)
 		try {
-			const response = await axios.post(
-				'https://easyload-dev.azurewebsites.net/api/Auth/Token',
-				{ tenant, password }
-			)
-			const { token } = response.data
-			localStorage.setItem('jwtToken', token)
-			setAuthToken(token)
+			const response = await axios.post('/easyload/auth', { tenant, password })
+			const { token, id } = response.data.data
+			console.log(response.data.data)
+			if (token) {
+				localStorage.setItem('easyloadUser', id)
+				localStorage.setItem('easyloadToken', token)
+				setAuthToken(token)
+				setUser(id)
+			}
 		} catch (err: any) {
 			setError(err.response?.data?.message || 'Authentication failed.')
 			console.error('Authentication Error:', err)
@@ -31,20 +47,23 @@ export const EasyloadAuthProvider = ({ children }: { children?: ReactNode }) => 
 
 	useEffect(() => {
 		if (!authToken) {
-			// Replace with your tenant and password logic.
-			const tenant = 'your-tenant'
-			const password = 'your-password'
-			authenticate(tenant, password)
+			authenticate()
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [authToken])
 
-	return <>{children}</>
+	return <AuthContext.Provider value={{ authenticate }}>{children}</AuthContext.Provider>
 }
 
 export const useAuth = () => {
+	const context = useContext(AuthContext)
+	if (!context) {
+		throw new Error('useAuth must be used within an EasyloadAuthProvider')
+	}
 	const [authToken] = useAtom(authTokenAtom)
 	const [loading] = useAtom(loadingAtom)
 	const [error] = useAtom(errorAtom)
+	const [user] = useAtom(easyloadUserAtom)
 
-	return { authToken, loading, error }
+	return { ...context, authToken, loading, error, user }
 }

@@ -21,7 +21,7 @@ const Orders = () => {
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
-	
+
 	const cancelRequest = (reqNumber: string) => {
 		var cancelReq_url =
 			getCookieValue('HOME_SESSID') +
@@ -130,7 +130,25 @@ const Orders = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="underline"><a href={getHomeSessionID() + "/" + row.getValue('req_db_name') + "/" + (row.getValue('req_db_name') == "DESCRIPTION_WEB" ? "REFD": "ACCESSION_NUMBER") + "/" + encodeURIStringToMinisisSpecialCharacter(row.getValue('req_item_id')) + "?JUMP"}>{row.getValue('req_item_id')}</a></div>,
+			cell: ({ row }) => (
+				<div className="underline">
+					<a
+						href={
+							getHomeSessionID() +
+							'/' +
+							row.getValue('req_db_name') +
+							'/' +
+							(row.getValue('req_db_name') == 'DESCRIPTION_WEB'
+								? 'REFD'
+								: 'ACCESSION_NUMBER') +
+							'/' +
+							encodeURIStringToMinisisSpecialCharacter(row.getValue('req_item_id')) +
+							'?JUMP'
+						}>
+						{row.getValue('req_item_id')}
+					</a>
+				</div>
+			),
 		},
 		{
 			accessorKey: 'req_title',
