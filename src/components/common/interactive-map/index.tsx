@@ -432,7 +432,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 								attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 							/>
 						</LayersControl.BaseLayer>
-						<LayersControl.BaseLayer name="Topo Map">
+						<LayersControl.BaseLayer name="Topology Map">
 							<TileLayer
 								url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
 								attribution='&copy; <a href="https://opentopomap.org/">OpenTopoMap</a> contributors'

@@ -146,6 +146,7 @@ const Calendar = () => {
 					headers: {
 						'Content-Type': 'text/xml',
 					},
+					withCredentials: true,
 					timeout: 5000,
 				}
 			)
@@ -203,6 +204,7 @@ const Calendar = () => {
 					headers: {
 						'Content-Type': 'text/xml',
 					},
+					withCredentials: true,
 					timeout: 5000,
 				}
 			)
