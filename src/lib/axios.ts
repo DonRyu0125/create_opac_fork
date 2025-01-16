@@ -7,7 +7,6 @@ export const axios = client.create({
 axios.interceptors.response.use(
 	(response) => response,
 	(error) => {
-		console.log({ error: error })
 		if (error.response && error.response.status === 401) {
 			window.location.href = '/includes/easyload-login.html'
 		}

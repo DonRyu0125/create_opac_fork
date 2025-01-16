@@ -126,10 +126,63 @@ easyload.post('/search', async (c) => {
 
 // Upload endpoint (placeholder)
 easyload.post('/upload', async (c) => {
-	return c.json({
-		status: 'success',
-		message: 'Upload endpoint placeholder',
-	})
+	const blobId = c.req.header('BlobId')
+	const blockId = c.req.header('BlockId')
+	const tenant = c.req.header('Tenant')
+	const blobName = c.req.header('BlobName')
+	const token = c.req.header('Token')
+
+	if (!token) {
+		return c.json(
+			{
+				status: 'failed',
+				message: 'Token is required',
+			},
+			400
+		)
+	}
+	if (!blobId || !blockId || !tenant) {
+		return c.json(
+			{
+				message: 'Missing required headers: BlobId, BlockId, and Tenant are required',
+			},
+			400
+		)
+	}
+
+	// Validate that BlockId is a valid integer
+	if (!Number.isInteger(Number(blockId))) {
+		return c.json(
+			{
+				message: 'BlockId must be a valid integer',
+			},
+			400
+		)
+	}
+
+	try {
+		const chunkData = await c.req.arrayBuffer()
+		const response = await axios.post(`${API_BASE_URL}/Assets/UploadChunk`, chunkData, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				Blobid: blobId,
+				Blockid: blockId,
+				Blobname: blobName,
+				Tenant: tenant,
+				'Content-Type': 'application/octet-stream',
+			},
+		})
+
+		return c.json(response.data, response.status as StatusCode)
+	} catch (error) {
+		return c.json(
+			{
+				message: 'Internal server error during upload',
+				error,
+			},
+			500
+		)
+	}
 })
 
 export { easyload }

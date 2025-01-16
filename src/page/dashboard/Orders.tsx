@@ -17,7 +17,6 @@ const Orders = () => {
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 	let reqData = records
-	console.log(reqData)
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}

@@ -15,15 +15,7 @@ const DescriptionTree = ({
 	if (loading) return <TreeSkeleton />
 	if (!tree) return <EmptyState />
 
-	return (
-		<TreeView
-			data={tree}
-			initialSelectedItemId={selectedId}
-			onSelectChange={(item) => {
-				console.log({ item })
-			}}
-		/>
-	)
+	return <TreeView data={tree} initialSelectedItemId={selectedId} onSelectChange={(item) => {}} />
 }
 
 export default DescriptionTree

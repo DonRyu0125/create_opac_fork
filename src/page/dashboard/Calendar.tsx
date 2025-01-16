@@ -184,7 +184,6 @@ const Calendar = () => {
 	}
 
 	const removeRecord = async (eventInfo: any) => {
-		console.log('eventInfo', eventInfo)
 		let { tag_func_p_id, sisn } = eventInfo.patronInfo
 		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
     <RECORD>

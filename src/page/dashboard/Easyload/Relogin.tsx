@@ -6,7 +6,7 @@ const Relogin = () => {
 
 	useEffect(() => {
 		authenticate().then(() => {
-			window.location.href = './scripts/mwimain.dll?GET&FILE=[OPAC]includes/easyload.html'
+			window.location.href = '/scripts/mwimain.dll?GET&FILE=[OPAC]includes/easyload.html'
 		})
 	}, [])
 	return <></>

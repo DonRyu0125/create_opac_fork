@@ -94,9 +94,7 @@ const AdvancedSearchIndexDialog = ({
 					updateClusterList(res)
 				}
 			})
-			.catch(function (error) {
-				console.log(error)
-			})
+			.catch(function (error) {})
 	}
 
 	const updateClusterList = (res: any) => {
