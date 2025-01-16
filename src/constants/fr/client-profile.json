@@ -45,9 +45,9 @@
 		{
 			"id": 8,
 			"label": "Easy Upload",
-			"db": "",
+			"db": "SHOWORDERLIST",
 			"icon": "Upload",
-			"url": ""
+			"url": "?GET&FILE=[OPAC]includes/easyload.html"
 		}
 	]
 }
