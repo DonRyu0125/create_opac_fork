@@ -84,6 +84,8 @@ const AssetUpload: React.FC = () => {
 							file.type,
 							blockIds
 						)
+
+						console.log({ commitResult })
 						if (commitResult.success) load(commitResult.data as string)
 						else error(commitResult.message || `Error commiting upload of ${file.name}`)
 					}

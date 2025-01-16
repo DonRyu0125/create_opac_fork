@@ -185,4 +185,55 @@ easyload.post('/upload', async (c) => {
 	}
 })
 
+easyload.post('/commit', async (c) => {
+	const blobId = c.req.header('BlobId')
+	const tenant = c.req.header('Tenant')
+	const user = c.req.header('User')
+	const type = c.req.header('MimeType')
+	const blobName = c.req.header('BlobName')
+	const token = c.req.header('Token')
+
+	if (!token) {
+		return c.json(
+			{
+				status: 'failed',
+				message: 'Token is required',
+			},
+			400
+		)
+	}
+	if (!blobId || !user || !tenant || !type || !blobName) {
+		return c.json(
+			{
+				message:
+					'Missing required headers: BlobId, BlobName, User, Type, and Tenant are required',
+			},
+			400
+		)
+	}
+
+	try {
+		const data = await c.req.json()
+		const response = await axios.post(`${API_BASE_URL}/Assets/Commit`, data, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				Blobid: blobId,
+				Blobname: blobName,
+				MimeType: type,
+				Tenant: tenant,
+				User: user,
+			},
+		})
+
+		return c.json(response.data, response.status as StatusCode)
+	} catch (error) {
+		return c.json(
+			{
+				message: 'Internal server error during upload',
+				error,
+			},
+			500
+		)
+	}
+})
 export { easyload }

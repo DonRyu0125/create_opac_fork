@@ -55,11 +55,11 @@ export const UploadAssetChunk = async (
 				BlobName: fileName,
 				BlockId: chunkId,
 				Tenant: `${localStorage.getItem('easyloadUser')}`,
-				token: `${localStorage.getItem('easyloadToken')}`,
+				Token: `${localStorage.getItem('easyloadToken')}`,
 			},
 		})
 
-		if (res.status === 200) {
+		if (res.status === 201) {
 			return { success: true, data: res.data } as RequestResult
 		}
 
@@ -79,17 +79,19 @@ export const CommitAssetUpload = async (
 	chunksIds: string[]
 ): Promise<RequestResult> => {
 	try {
-		const response = await axios.postForm('/api/commit', {
-			Blobid: fileId,
-			Blobname: fileName,
-			Tenant: sessionStorage.getItem(auth.TENANT_ID) || '',
-			Token: `${sessionStorage.getItem(auth.AUTH_TOKEN)}`,
-			MimeType: fileType,
-			User: sessionStorage.getItem(auth.USER),
+		const response = await axios.post('/easyload/commit', chunksIds, {
+			headers: {
+				Blobid: fileId,
+				Blobname: fileName,
+				MimeType: fileType,
+				User: 'WEB_OPAC',
+				Tenant: `${localStorage.getItem('easyloadUser')}`,
+				Token: `${localStorage.getItem('easyloadToken')}`,
+			},
 		})
 
 		return {
-			success: response.status === 200,
+			success: response.status === 201,
 			data: response.data,
 		} as RequestResult
 	} catch (error) {
@@ -130,7 +132,7 @@ export const SearchAssets = async (phrase: string): Promise<RequestResult> => {
 		})
 
 		return {
-			success: response.status === 200,
+			success: response.status === 201,
 			data: response.data,
 		} as RequestResult
 	} catch (error) {
