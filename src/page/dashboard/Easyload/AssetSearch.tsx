@@ -11,6 +11,7 @@ interface Asset {
 	createdBy: string
 	createdOn: string
 	link: string
+	thumbnail: string
 }
 interface SearchResponse {
 	status: string
@@ -81,8 +82,25 @@ function AssetGrid({ assets }: { assets: Asset[] }) {
 		<div className="grid gap-4 p-4 md:grid-cols-2 lg:grid-cols-3">
 			{assets.map((asset) => (
 				<Card key={asset.id} className="overflow-hidden">
+					<div className="aspect-video relative">
+						<a
+							href={asset.link}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="block aspect-video relative">
+							<img
+								src={asset.thumbnail || '/placeholder.svg'}
+								alt={asset.name}
+								className="object-cover transition-opacity duration-300 hover:opacity-80"
+							/>
+						</a>
+					</div>
 					<CardHeader className="space-y-1">
-						<CardTitle className="text-base truncate">{asset.name}</CardTitle>
+						<CardTitle className="text-base truncate">
+							<a href={asset.link} target="_blank" rel="noopener noreferrer">
+								{asset.name}
+							</a>
+						</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<div className="space-y-2 text-sm">

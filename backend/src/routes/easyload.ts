@@ -81,9 +81,8 @@ easyload.post('/search', async (c) => {
 			)
 		}
 
-		console.log({ query, token })
 		const response = await axios.get(
-			`${API_BASE_URL}/Assets/TenantSearch?phrase=${encodeURIComponent(query)}&tenant=opac_template_easyload`,
+			`${API_BASE_URL}/Assets/TenantSearch?${query === '*' ? '' : `phrase=${encodeURIComponent(query)}`}`,
 			{
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -93,7 +92,6 @@ easyload.post('/search', async (c) => {
 			}
 		)
 
-		console.log({ response })
 		return c.json({
 			status: 'success',
 			message: 'Search completed successfully',

@@ -15,7 +15,7 @@ const MainContent = () => {
 	if (!authToken) return ''
 
 	return (
-		<Card className="w-full max-w-3xl mx-auto">
+		<Card className="w-full  mx-auto">
 			<CardContent className="p-6">
 				<Tabs defaultValue="search" className="space-y-6">
 					<TabsList className="grid w-full grid-cols-4 rounded-lg bg-muted p-1 h-14">
