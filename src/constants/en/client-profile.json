@@ -47,7 +47,7 @@
 			"label": "Easy Upload",
 			"db": "",
 			"icon": "Upload",
-			"url": ""
+			"url": "?GET&FILE=[OPAC]includes/easyload.html"
 		}
 	]
 }

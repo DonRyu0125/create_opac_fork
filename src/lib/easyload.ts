@@ -1,4 +1,5 @@
 import { axios } from '@/lib/axios'
+import { getPatronID } from './utils'
 
 export const EASYLOAD_BASE_API =
 	process.env.EASYLOAD_BASE_API || 'https://easyload-dev.azurewebsites.net'
@@ -84,7 +85,7 @@ export const CommitAssetUpload = async (
 				Blobid: fileId,
 				Blobname: fileName,
 				MimeType: fileType,
-				User: 'WEB_OPAC',
+				User: getPatronID(),
 				Tenant: `${localStorage.getItem('easyloadUser')}`,
 				Token: `${localStorage.getItem('easyloadToken')}`,
 			},

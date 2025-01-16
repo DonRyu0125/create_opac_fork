@@ -18,7 +18,7 @@ const MainContent = () => {
 		<Card className="w-full  mx-auto">
 			<CardContent className="p-6">
 				<Tabs defaultValue="search" className="space-y-6">
-					<TabsList className="grid w-full grid-cols-4 rounded-lg bg-muted p-1 h-14">
+					<TabsList className="grid w-full grid-cols-2 rounded-lg bg-muted p-1 h-14">
 						<TabsTrigger
 							value="search"
 							className="rounded-md data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow">
@@ -34,7 +34,7 @@ const MainContent = () => {
 							className="rounded-md data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow">
 							<Camera className="h-5 w-5" />
 						</TabsTrigger> */}
-						<TabsTrigger
+						{/* <TabsTrigger
 							value="screen"
 							className="rounded-md data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow">
 							<Monitor className="h-5 w-5" />
@@ -43,7 +43,7 @@ const MainContent = () => {
 							value="capture"
 							className="rounded-md data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow">
 							<Webcam className="h-5 w-5" />
-						</TabsTrigger>
+						</TabsTrigger> */}
 					</TabsList>
 
 					<TabsContent value="search" className="p-4 bg-background rounded-lg">
