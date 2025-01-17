@@ -19,6 +19,8 @@ import archiveIcon from './archive.png'
 import libraryIcon from './book.png'
 import museumIcon from './museum.png'
 import './style.css'
+import TimeLine from './TimeLine'
+import dummy from './dummy.json'
 
 const DB_TYPE_MAP = {
 	library: 'Library',
@@ -101,7 +103,7 @@ const createClusterIcon = function (cluster: any, iconUrl: string, bgColor: stri
 	})
 }
 
-const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
+const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 	const { archives, museum, library } = useConstants()
 	const { message } = useConstants()
 	const [allData, setAllData] = useState<any>([])
@@ -183,15 +185,15 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 
 	const fetch_get = async () => {
 		setLoading(true)
-		let HOME_SESSID = getSessionID()
-		const response = await axios.get(
-			`${HOME_SESSID}?SEARCH&REPORT=WEB_UNION_SUM_MAP&APPLICATION=UNION_VIEW&DATABASE=${DB_TYPE}&EXP=%2B%2B%40`,
-			{
-				headers: {
-					Accept: 'application/xml',
-				},
-			}
-		)
+		const baseURL = '/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&APPLICATION=UNION_VIEW&REPORT=WEB_UNION_SUM_MAP&EXP=UNION_MAP_CL%20%40';
+		const databaseParam = DB_TYPE ? `&DATABASE=${DB_TYPE}` : '';
+		const url = `${baseURL}${databaseParam}`;
+		
+		const response = await axios.get(url, {
+		  headers: {
+			Accept: 'application/xml',
+		  },
+		});
 
 		const x2js = new X2JS()
 		const jsonData: any = x2js.xml2js(response.data)
@@ -278,7 +280,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 					</Button>
 				</div>
 				<div className="flex flex-col space-y-4 max-h-[90vh] mb-2 p-2 overflow-y-auto custom-scrollbar">
-					{DB_TYPE === 'UNION_VIEW' && (
+					{!DB_TYPE && (
 						<CollapseList title={message.Type} expand={true}>
 							<div className="space-y-3 border-t p-4">
 								<div className="flex">
@@ -670,7 +672,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 							}
 						})}
 					</MarkerClusterGroup>
+			
 				</MapContainer>
+				<TimeLine/>
 			</div>
 		</div>
 	)

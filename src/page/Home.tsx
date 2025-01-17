@@ -94,7 +94,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap DB_TYPE={'UNION_VIEW'} />
+					<InterativeMap />
 				</Section>
 			)}
 			{enableRecentAddition && (
