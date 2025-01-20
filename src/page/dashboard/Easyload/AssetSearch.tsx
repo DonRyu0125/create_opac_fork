@@ -5,6 +5,7 @@ import { Search } from 'lucide-react'
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { axios } from '@/lib/axios'
+import SearchLoading from './SearchLoading'
 interface Asset {
 	id: string
 	name: string
@@ -28,7 +29,7 @@ const AssetSearch = () => {
 	const [searchTerm, setSearchTerm] = useState('')
 
 	// Mutation to send the search request
-	const { mutate, data } = useMutation<SearchResponse, SearchError, string>({
+	const { mutate, data, isPending } = useMutation<SearchResponse, SearchError, string>({
 		mutationFn: async (term) => {
 			const response = await axios.post(
 				'/easyload/search',
@@ -59,7 +60,6 @@ const AssetSearch = () => {
 		}
 	}
 
-	console.log(data)
 	return (
 		<div className="relative">
 			<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -72,7 +72,9 @@ const AssetSearch = () => {
 				onKeyDown={handleKeyDown}
 			/>
 
-			{data?.data && data.data.length > 0 && <AssetGrid assets={data.data} />}
+			{isPending && <SearchLoading />}
+			{!isPending && data?.data && data.data.length > 0 && <AssetGrid assets={data.data} />}
+			{!isPending && data?.data && data.data.length === 0 && <AssetGrid assets={data.data} />}
 		</div>
 	)
 }
