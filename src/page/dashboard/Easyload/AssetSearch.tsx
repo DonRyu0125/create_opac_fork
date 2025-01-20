@@ -28,6 +28,7 @@ interface SearchError {
 const AssetSearch = () => {
 	const { authToken, user } = useAuth()
 	const [searchTerm, setSearchTerm] = useState('')
+	const [lastSearchTerm, setLastSearchTerm] = useState('')
 
 	// Mutation to send the search request
 	const { mutate, data, isPending, reset } = useMutation<SearchResponse, SearchError, string>({
@@ -46,7 +47,6 @@ const AssetSearch = () => {
 				}
 			)
 
-			console.log({ response })
 			if (!response.data) {
 				throw new Error('Search request failed')
 			}
@@ -58,6 +58,7 @@ const AssetSearch = () => {
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter' && searchTerm.trim()) {
 			mutate(searchTerm.trim())
+			setLastSearchTerm(searchTerm.trim())
 		}
 	}
 
@@ -77,12 +78,13 @@ const AssetSearch = () => {
 
 			{isPending && <SearchLoading />}
 			{!isPending && data?.data && data.data.length > 0 && <AssetGrid assets={data.data} />}
-			{!isPending && data?.data && data.data.length === 0 && (
+			{!isPending && data?.data && data.data.length === 0 && lastSearchTerm.trim() !== '' && (
 				<EmptySearch
-					query={searchTerm}
+					query={lastSearchTerm}
 					onReset={() => {
 						reset()
 						setSearchTerm('')
+						setLastSearchTerm('')
 					}}
 				/>
 			)}
