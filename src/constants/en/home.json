@@ -88,5 +88,6 @@
 	"enableRSVP": true,
 	"enableRecentAddition": false,
 	"enableMap": true,
+	"enableTimeline":true,
 	"linkURL": "/"
 }

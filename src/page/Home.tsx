@@ -11,6 +11,8 @@ import Section from '../components/common/Section'
 import RSVPCalendar from '../components/features/RSVPCalendar'
 import Layout from '../components/layouts'
 import TopPick from '@/components/features/TopPick'
+import TimeLine from '@/components/common/interactive-timeline'
+
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -62,6 +64,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 		enableCategoriesItems,
 		enableRecentAddition,
 		enableMap,
+		enableTimeline,
 	} = data
 	const { message } = useConstants()
 	return (
@@ -95,6 +98,11 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 			{enableMap && (
 				<Section heading={`${message.map}`}>
 					<InterativeMap />
+				</Section>
+			)}
+			{enableTimeline && (
+				<Section heading={`${message.timeline}`}>
+					<TimeLine/>
 				</Section>
 			)}
 			{enableRecentAddition && (

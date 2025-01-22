@@ -19,7 +19,6 @@ import archiveIcon from './archive.png'
 import libraryIcon from './book.png'
 import museumIcon from './museum.png'
 import './style.css'
-import TimeLine from './TimeLine'
 import dummy from './dummy.json'
 
 const DB_TYPE_MAP = {
@@ -672,9 +671,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 							}
 						})}
 					</MarkerClusterGroup>
-			
 				</MapContainer>
-				<TimeLine/>
 			</div>
 		</div>
 	)
