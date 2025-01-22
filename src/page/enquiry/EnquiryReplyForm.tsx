@@ -73,6 +73,12 @@ const EnquiryForm = () => {
     fetchData();
   }, []);
 
+  function stripHtmlAndConvertBr(html : string) {
+    return html
+      .replace(/<br\s*\/?>/gi, '\n\n') // Convert <br> to newline
+      .replace(/<\/?[^br][^>]*>/gi, ''); // Remove all other tags
+  }
+  console.log(stripHtmlAndConvertBr("Hi Nixon,<div><br></div><div>You are able to donate these items to us.</div><div><br></div><div>We'll have to go through a process to check what can be displayed and what can't be.</div><div><br></div><div>You can come next month to drop it off and fill out a form.</div><div><br></div><div>Thank you,</div><div><br></div><div>Aaron Hope</div>"))
   const chatHeader = () => {
 		return (
 			<div className="flex items-center justify-between p-4 border-b">
@@ -325,10 +331,10 @@ const EnquiryForm = () => {
 														</h3>
 														<div className="space-y-4 text-sm bg-blue-50 p-4 rounded-lg whitespace-pre-wrap">
 															{correspondGroup.reply_text
-																? correspondGroup.reply_text
-																: xmlTreeData.correspond_grp
+																? stripHtmlAndConvertBr(correspondGroup.reply_text)
+																: stripHtmlAndConvertBr(xmlTreeData.correspond_grp
 																		.correspond_grp_occurrence
-																		.reply_text}
+																		.reply_text)}
 														</div>
 													</div>
 												</div>
@@ -439,8 +445,8 @@ const EnquiryForm = () => {
 												</h3>
 												<div className="space-y-4 text-sm bg-blue-50 p-4 rounded-lg whitespace-pre-wrap">
 													{
-														xmlTreeData.correspond_grp
-															.correspond_grp_occurrence.reply_text
+														stripHtmlAndConvertBr(xmlTreeData.correspond_grp
+															.correspond_grp_occurrence.reply_text)
 													}
 												</div>
 											</div>
