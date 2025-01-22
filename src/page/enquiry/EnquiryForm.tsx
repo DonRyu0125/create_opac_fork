@@ -10,12 +10,15 @@ import axios from 'axios'
 import Layout from '@/components/layouts'
 
 const EnquiryForm = () => {
+    const dateToday = new Date().toISOString().split('T')[0];
     const [data, setData] = useState([]);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
+    const [inputInquiry, setInputInquiry] = useState("")
+    const [messageText, setMessageText] = useState("")
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -45,6 +48,9 @@ const EnquiryForm = () => {
     const formActionSaveRecord = document.querySelector('#enq-save-record')?.textContent as string
     const skipNStopRecord = document.querySelector('#enq-skip-n-stop-record')?.textContent as string
     
+    const passInquiryToMESSAGETEXT = () => {
+        setMessageText(inputInquiry)
+    }
 	const handleGoBack = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		window.history.back()
@@ -78,6 +84,48 @@ const EnquiryForm = () => {
                                     name="E_METHOD_REQUEST"
                                     className='w-full p-2 border rounded mb-4'
                                     value="Web"
+                                    readOnly
+                                />
+                                <Input
+                                    type="hidden"
+                                    name="ENQ_CREATE_DATE"
+                                    className='w-full p-2 border rounded mb-4'
+                                    value={dateToday}
+                                    readOnly
+                                />
+                                <Input
+                                    type="hidden"
+                                    name="CORRESPOND_DATE"
+                                    className='w-full p-2 border rounded mb-4'
+                                    value={dateToday}
+                                    readOnly
+                                />
+                                <Input
+                                    type="hidden"
+                                    name="CORRESPOND_TYPE"
+                                    className='w-full p-2 border rounded mb-4'
+                                    value="Incoming"
+                                    readOnly
+                                />
+                                <Input
+                                    type="hidden"
+                                    name="CORRESPOND_SUBJ"
+                                    className='w-full p-2 border rounded mb-4'
+                                    value={subject}
+                                    readOnly
+                                />
+                                <Input
+                                    type="hidden"
+                                    name="MESSAGE_TEXT"
+                                    className='w-full p-2 border rounded mb-4'
+                                    value={messageText}
+                                    readOnly
+                                />
+                                <Input
+                                    type="hidden"
+                                    name="ENQ_STATUS"
+                                    className='w-full p-2 border rounded mb-4'
+                                    value="Request"
                                     readOnly
                                 />
                                 <Input
@@ -202,12 +250,13 @@ const EnquiryForm = () => {
                                 </div>
                                 <div className="px-4 rounded grid grid-cols-1 mt-4">
                                     <Label htmlFor="enqDetail" className="block text-sm font-semibold mb-1">Inquiry*</Label>
-                                    <Textarea id="enqDetail" name="ENQ_TOPIC_DETAIL" title='Leave a comment here' maxLength={5000} required></Textarea>
+                                    <Textarea id="enqDetail" name="ENQ_TOPIC_DETAIL" title='Leave a comment here' value={inputInquiry} onChange={(e) => setInputInquiry(e.target.value)}maxLength={5000} required></Textarea>
                                 </div>
                                 <div className="px-4 pt-4 mt-4 rounded border-t">
                                     <Button
                                         className="bg-opac-darkblue rounded mr-1 hover:bg-opac-darkblue"
                                         type="submit"
+                                        onClick={passInquiryToMESSAGETEXT}
                                         variant="default">
                                         Submit Inquiry
                                     </Button>

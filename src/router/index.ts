@@ -44,6 +44,7 @@ import ReproductionConfirmed from '@/page/reproduction/ReproductionConfirmed'
 import ReproductionForm from '@/page/reproduction/ReproductionForm'
 import ReproductionDetail from '@/page/reproduction/ReproductionDetail'
 import ClientLoginError from '@/page/login/ClientLoginError'
+import EnquiryReplyForm from '@/page/enquiry/EnquiryReplyForm'
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
@@ -94,6 +95,7 @@ export const ROUTES: TRoute = {
 	error: GenericErrorPage,
 	bookmark: Bookmark,
 	enquiryform: EnquiryForm,
+	enquiryreplyform: EnquiryReplyForm,
 	enquiryconfirmed: EnquiryConfirmed,
 	reproductionform: ReproductionForm,
 	reproductionconfirmed: ReproductionConfirmed,
