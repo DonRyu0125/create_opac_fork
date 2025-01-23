@@ -262,7 +262,7 @@
 	},
 	{
 		"sisn": "30",
-		"TIME_INDEX": "10150",
+		"TIME_INDEX": "9000",
 		"DATABASE_TYPE": "Archive",
 		"ACCESSION_NUMBER": null,
 		"DATE": "ca. 1830",
@@ -280,7 +280,7 @@
 	},
 	{
 		"sisn": "32",
-		"TIME_INDEX": "10160",
+		"TIME_INDEX": "9782",
 		"DATABASE_TYPE": "Archive",
 		"ACCESSION_NUMBER": null,
 		"DATE": "ca. 1832",
@@ -289,7 +289,7 @@
 	},
 	{
 		"sisn": "33",
-		"TIME_INDEX": "10165",
+		"TIME_INDEX": "8500",
 		"DATABASE_TYPE": "Library",
 		"ACCESSION_NUMBER": "45033",
 		"DATE": null,
@@ -298,7 +298,7 @@
 	},
 	{
 		"sisn": "34",
-		"TIME_INDEX": "10170",
+		"TIME_INDEX": "9500",
 		"DATABASE_TYPE": "Archive",
 		"ACCESSION_NUMBER": null,
 		"DATE": "ca. 1834",
@@ -316,8 +316,8 @@
 	},
 	{
 		"sisn": "36",
-		"TIME_INDEX": "10180",
-		"DATABASE_TYPE": "Archive",
+		"TIME_INDEX": "11180",
+		"DATABASE_TYPE": "Museum",
 		"ACCESSION_NUMBER": null,
 		"DATE": "ca. 1836",
 		"REFD": "P36",
@@ -326,7 +326,7 @@
 	{
 		"sisn": "37",
 		"TIME_INDEX": "10185",
-		"DATABASE_TYPE": "Library",
+		"DATABASE_TYPE": "Museum",
 		"ACCESSION_NUMBER": "45037",
 		"DATE": null,
 		"REFD": null,

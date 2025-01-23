@@ -1,7 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import useConstants from '@/hooks/useConstants'
-import { getSessionID } from '@/lib/utils'
+import { getImage, getSessionID } from '@/lib/utils'
 import axios from 'axios'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -15,9 +15,9 @@ import X2JS from 'x2js'
 import Button from '../admin/Button'
 import CollapseList from '../CollapseList'
 import Spinner from '../event-calendar/Spinner'
-import archiveIcon from './archive.png'
-import libraryIcon from './book.png'
-import museumIcon from './museum.png'
+import archiveIcon from '../../../assets/icons/archive.png'
+import libraryIcon from '../../../assets/icons/library.png'
+import museumIcon from '../../../assets/icons/museum.png'
 import './style.css'
 import dummy from './dummy.json'
 
@@ -27,11 +27,7 @@ const DB_TYPE_MAP = {
 	museum: 'Museum',
 }
 
-const COLOR_MAP: any = {
-	library: 'rgba(255, 0, 0, 0.7)',
-	archive: 'rgba(12, 74, 110, 0.7)',
-	museum: 'rgba(255, 255, 0, 0.7)',
-}
+
 
 interface DataType {
 	DATABASE_TYPE: string
@@ -71,6 +67,12 @@ const createIcon = (iconUrl: string, bgColor: string): L.DivIcon => {
 		iconAnchor: [16, 16],
 		popupAnchor: [0, -16],
 	})
+}
+
+const COLOR_MAP: any = {
+	library: 'rgba(255, 0, 0, 0.7)',
+	archive: 'rgba(12, 74, 110, 0.7)',
+	museum: 'rgba(255, 255, 0, 0.7)',
 }
 
 const icons: Record<string, L.DivIcon> = {
@@ -253,11 +255,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 		setFilteredData(allData)
 	}
 
-	const getImage = (image: string) => {
-		return image.toLowerCase().includes('[media]')
-			? image.replace(/\[media\]/i, '/media/')
-			: image
-	}
+
 
 	const getNumberofType = (type:string,fileterType:string) =>{
 		let arr = allData.filter((item:any)=>item[type] === fileterType) ?? []
