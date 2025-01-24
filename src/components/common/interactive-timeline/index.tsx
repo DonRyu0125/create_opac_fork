@@ -9,20 +9,19 @@ import axios from 'axios'
 import X2JS from 'x2js'
 import Spinner from '../event-calendar/Spinner'
 
-interface DataType  {
-	TITLE: string;
-	sisn: string;
-	TIME_INDEX: string;
-	DATE: string;
-	ID: string;
-	DATABASE_TYPE: string;
-	IMAG_URL: string;
-  };
-  
+interface DataType {
+	LEGAL_TITLE: string
+	sisn: string
+	TIME_INDEX: string
+	DATE: string
+	ID: string
+	DATABASE_TYPE: string
+	IMAG_URL: string
+}
 
 const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 	const [loading, setLoading] = useState(false)
-	const [data,setData] = useState([])
+	const [data, setData] = useState([])
 	const yearFromIndex = (index: string) =>
 		parseInt(index) >= 10000 ? `${parseInt(index) - 10000}` : `${10000 - parseInt(index)} BC`
 	const getIconForType = (databaseType: string) => {
@@ -30,21 +29,21 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 			case 'Archive':
 				return {
 					icon: archiveIcon,
-					bgColor: 'bg-blue-900/70',
+					bgColor: 'bg-blue-900/80',
 					keyName: 'REFD',
 					key: 'REFD',
 				}
 			case 'Library':
 				return {
 					icon: libraryIcon,
-					bgColor: 'bg-red-600/70',
+					bgColor: 'bg-red-600/90',
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
 				}
 			case 'Museum':
 				return {
 					icon: museumIcon,
-					bgColor: 'bg-yellow-400/70',
+					bgColor: 'bg-yellow-400/90',
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
 				}
@@ -52,7 +51,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 	}
 
 	useEffect(() => {
-		// fetch_get()
+		fetch_get()
 	}, [])
 
 	const fetch_get = async () => {
@@ -70,7 +69,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 			})
 
 			const x2js = new X2JS()
-			const jsonData:any = x2js.xml2js(response.data)
+			const jsonData: any = x2js.xml2js(response.data)
 
 			const records = jsonData?.xml?.record.map((record: DataType) => ({
 				...record,
@@ -78,14 +77,13 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 			}))
 			console.log('jsonData', records)
 			setData(records)
-
 		} catch (error) {
 			if (error instanceof Error) {
-			  console.error('Error fetching or converting XML:', error.message);
+				console.error('Error fetching or converting XML:', error.message)
 			} else {
-			  console.error('Unknown error:', error);
+				console.error('Unknown error:', error)
 			}
-		  }
+		}
 		setLoading(false)
 	}
 
@@ -97,38 +95,43 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 				</div>
 			)}
 			<div className="w-full bg-gray-100 py-8 px-4 overflow-x-auto">
-				<div className="w-full relative flex items-center h-32 justify-around">
-					<div className="w-full absolute h-[10px] bg-gray-300 left-0 right-0 top-[47%]" />
-					{dummy.map((item, idx) => {
+				<div
+					className={`w-full relative flex items-center h-32 justify-around`}
+					style={{ minWidth: 80 * data.length }}>
+					{data.map((item: DataType, idx: number) => {
 						const { icon, bgColor, key, keyName }: any = getIconForType(
-							item.DATABASE_TYPE
+							item?.DATABASE_TYPE
 						)
+						const timeIndex = parseInt(item?.TIME_INDEX)
 						return (
-							<div key={idx} className="relative flex flex-col items-center mx-8">
-								<div className="relative flex flex-col items-center">
+							<div key={idx} className="flex flex-col items-center w-full">
+								<div className=" flex flex-col items-center w-full w-[200px]">
 									<Popover.Root key={item.sisn}>
-										<Popover.Trigger>
+										<Popover.Trigger className={'flex justify-center w-full'}>
 											<div
-												className={`flex justify-center items-center z-10 w-[40px] h-[40px] rounded-full cursor-pointer transition-transform hover:scale-125 ${bgColor}`}>
+												className={`absolute bottom-[-15px] flex justify-center items-center z-10 w-[40px] h-[40px] rounded-full cursor-pointer transition-transform hover:scale-125 ${bgColor}`}>
 												<img
 													src={icon}
 													alt={item.DATABASE_TYPE}
-													className={` w-[20px] h-[20px]  `}
+													className={`w-[20px] h-[20px]`}
 												/>
 											</div>
+											<div
+												className={`px-10 z-0 w-full h-[10px] ${timeIndex >= 10000 ? 'bg-gray-300' : 'bg-gray-400'}  top-[45%]`}
+											/>
 										</Popover.Trigger>
 										<Popover.Content
 											side="top"
 											align="center"
 											className="p-4 bg-white shadow-lg rounded-xl z-10"
-											sideOffset={10}>
+											sideOffset={25}>
 											<div key={item.sisn} className="mb-4">
 												<div className="w-[300px]">
 													<a
 														href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${item.DATABASE_TYPE}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.ID}`}
 														target="_blank">
-														<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
-															{item.TITLE ?? 'n/a'}
+														<h3 className="text-lg font-bold text-blue-600 border-b pb-2">
+															{item.LEGAL_TITLE ?? 'n/a'}
 														</h3>
 													</a>
 													{item?.IMAG_URL && (
@@ -146,9 +149,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 																<td className="font-semibold">
 																	{keyName}
 																</td>
-																<td>
-																	{key ?? 'n/a'}{' '}
-																</td>
+																<td>{item.ID}</td>
 															</tr>
 															<tr>
 																<td className="font-semibold py-1 pr-2">
