@@ -51,7 +51,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 	}
 
 	useEffect(() => {
-		fetch_get()
+		// fetch_get()
 	}, [])
 
 	const fetch_get = async () => {
@@ -97,8 +97,8 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 			<div className="w-full bg-gray-100 py-8 px-4 overflow-x-auto">
 				<div
 					className={`w-full relative flex items-center h-32 justify-around`}
-					style={{ minWidth: 80 * data.length }}>
-					{data.map((item: DataType, idx: number) => {
+					style={{ minWidth: 80 * dummy.length }}>
+					{dummy.map((item: DataType, idx: number) => {
 						const { icon, bgColor, key, keyName }: any = getIconForType(
 							item?.DATABASE_TYPE
 						)
@@ -117,7 +117,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 												/>
 											</div>
 											<div
-												className={`px-10 z-0 w-full h-[10px] ${timeIndex >= 10000 ? 'bg-gray-300' : 'bg-gray-400'}  top-[45%]`}
+												className={`px-10 z-0 w-full h-[10px] ${timeIndex >= 10000 ? 'bg-gray-300' : 'bg-gray-500'}  top-[45%]`}
 											/>
 										</Popover.Trigger>
 										<Popover.Content
