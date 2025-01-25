@@ -87,33 +87,34 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 		}
 	}
 
-	function addCenturies(items: any) {
-		let centuries: any[] = []
-		let lastCentury = ''
-
+	function addCenturies(items: any[]) {
+		let centuries: any[] = [];
+		let currentCenturyLabel: string | null = null;
+	
 		items.forEach((item) => {
-			const timeIndex = parseInt(item.TIME_INDEX)
-			let centuryLabel
-
+			const timeIndex = parseInt(item.TIME_INDEX);
+			let centuryLabel;
+	
 			if (timeIndex >= 10000) {
-				const century = Math.floor((timeIndex - 10000) / 1000) * 1000
-				centuryLabel = `AD ${century}`
+				const century = Math.floor((timeIndex - 10000) / 1000) * 1000;
+				centuryLabel = century === 0 ? 'AD 0' : `AD ${century}`;
 			} else {
-				const century = Math.floor((10000 - timeIndex) / 1000) * 1000
-				centuryLabel = `BC ${century}`
+				const offset = 10000 - timeIndex;
+				const century = Math.floor(offset / 1000) * 1000;
+				centuryLabel = `BC ${century+1000}`;
 			}
-
-			if (centuryLabel !== lastCentury) {
-				centuries.push({ CENTURY: centuryLabel })
-				lastCentury = centuryLabel
+	
+			if (centuryLabel !== currentCenturyLabel && !(centuryLabel === "BC 0" && currentCenturyLabel?.startsWith("BC"))) {
+				centuries.push({ CENTURY: centuryLabel });
+				currentCenturyLabel = centuryLabel;
 			}
-
-			centuries.push(item)
-		})
-
-		console.log('centuries', centuries)
-		return centuries
+	
+			centuries.push(item);
+		});
+	
+		return centuries;
 	}
+	
 
 	return (
 		<div className="w-full relative md:flex">
@@ -125,12 +126,12 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 			<div className="w-full bg-gray-100 py-8 px-4 overflow-x-auto">
 				<div
 					className={`w-full relative flex items-center h-32 justify-around`}
-					style={{ minWidth: 10 * dummy.length }}>
+					>
 					{addCenturies(dummy).map((item: DataType, idx: number) => {
 						if (item.CENTURY) {
 							return (
 								<div>
-									<div className="text-center text-xs w-[47px]">
+									<div className="text-left text-xs w-[52px]">
 										{item.CENTURY}
 									</div>
 									<div
@@ -143,7 +144,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 
 							return (
 								<div key={idx} className="flex flex-col items-center w-full">
-									<div className=" flex flex-col items-center w-full w-[200px]">
+									<div className=" flex flex-col items-center w-full ">
 										<Popover.Root key={item.sisn}>
 											<Popover.Trigger
 												className={'flex justify-center w-full'}>
