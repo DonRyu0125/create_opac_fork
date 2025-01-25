@@ -49,7 +49,6 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 				...record,
 				TIME_INDEX: record.TIME_INDEX.split('--')[0],
 			}))
-			console.log('jsonData', records)
 			setData(records)
 		} catch (error) {
 			if (error instanceof Error) {
@@ -88,122 +87,120 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 	}
 
 	function addCenturies(items: any[]) {
-		let centuries: any[] = [];
-		let currentCenturyLabel: string | null = null;
-	
+		let centuries: any[] = []
+		let currentCenturyLabel: string | null = null
+
 		items.forEach((item) => {
-			const timeIndex = parseInt(item.TIME_INDEX);
-			let centuryLabel;
-	
+			const timeIndex = parseInt(item.TIME_INDEX)
+			let centuryLabel
+
 			if (timeIndex >= 10000) {
-				const century = Math.floor((timeIndex - 10000) / 1000) * 1000;
-				centuryLabel = century === 0 ? 'AD 0' : `AD ${century}`;
+				const century = Math.floor((timeIndex - 10000) / 1000) * 1000
+				centuryLabel = century === 0 ? 'AD 0' : `AD ${century}`
 			} else {
-				const offset = 10000 - timeIndex;
-				const century = Math.floor(offset / 1000) * 1000;
-				centuryLabel = `BC ${century+1000}`;
+				const offset = 10000 - timeIndex
+				const century = Math.floor(offset / 1000) * 1000
+				centuryLabel = `BC ${century + 1000}`
 			}
-	
-			if (centuryLabel !== currentCenturyLabel && !(centuryLabel === "BC 0" && currentCenturyLabel?.startsWith("BC"))) {
-				centuries.push({ CENTURY: centuryLabel });
-				currentCenturyLabel = centuryLabel;
+
+			if (
+				centuryLabel !== currentCenturyLabel &&
+				!(centuryLabel === 'BC 0' && currentCenturyLabel?.startsWith('BC'))
+			) {
+				centuries.push({ CENTURY: centuryLabel })
+				currentCenturyLabel = centuryLabel
 			}
-	
-			centuries.push(item);
-		});
-	
-		return centuries;
+
+			centuries.push(item)
+		})
+
+		return centuries
 	}
-	
 
 	return (
-		<div className="w-full relative md:flex">
+		<div className="w-full relative md:flex my-2">
 			{loading && (
 				<div className="absolute w-full h-full bg-primary opacity-25" style={{ zIndex: 9 }}>
 					<Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />
 				</div>
 			)}
-			<div className="w-full bg-gray-100 py-8 px-4 overflow-x-auto">
-				<div
-					className={`w-full relative flex items-center h-32 justify-around`}
-					>
-					{addCenturies(dummy).map((item: DataType, idx: number) => {
-						if (item.CENTURY) {
-							return (
-								<div>
-									<div className="text-left text-xs w-[52px]">
-										{item.CENTURY}
-									</div>
-									<div
-										className={` z-20 w-[2px] h-[90px]  cursor-pointer transition-transform bg-gray-600 `}></div>
-								</div>
-							)
-						} else {
-							const { key, keyName }: any = getIconForType(item?.DATABASE_TYPE)
-							const timeIndex = parseInt(item?.TIME_INDEX)
+			<div
+				className={` absolute top-2 right-0 z-10 w-[5px] h-[100px] bg-gray-600 `}></div>
+			<div
+				className={` absolute top-2 left-0 z-10 w-[5px]   h-[100px] bg-gray-600 `}></div>
+			<div
+				className={`w-full relative flex items-center h-32 justify-around overflow-x-auto px-2`}>
+				{addCenturies(dummy).map((item: DataType, idx: number) => {
+					if (item.CENTURY) {
+						return (
+							<div className={'px-1'}>
+								<div className="text-left text-xs w-[52px]">{item.CENTURY}</div>
+								<div
+									className={` z-20 w-[2px] h-[80px]  cursor-pointer transition-transform bg-gray-600 `}></div>
+							</div>
+						)
+					} else {
+						const { key, keyName }: any = getIconForType(item?.DATABASE_TYPE)
+						const timeIndex = parseInt(item?.TIME_INDEX)
 
-							return (
-								<div key={idx} className="flex flex-col items-center w-full">
-									<div className=" flex flex-col items-center w-full ">
-										<Popover.Root key={item.sisn}>
-											<Popover.Trigger
-												className={'flex justify-center w-full'}>
-												<div
-													className={`absolute bottom-[-15px] flex justify-center items-center z-10 w-[2px] h-[40px]  cursor-pointer transition-transform hover:scale-150 bg-gray-600`}></div>
-												<div
-													className={`px-10 z-0 w-full h-[5px] ${timeIndex >= 10000 ? 'bg-gray-200' : 'bg-gray-300'}  top-[45%]`}
-												/>
-											</Popover.Trigger>
-											<Popover.Content
-												side="top"
-												align="center"
-												className="p-4 bg-white shadow-lg rounded-xl z-10"
-												sideOffset={40}>
-												<div key={item.sisn} className="mb-4">
-													<div className="w-[300px]">
-														<a
-															href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.ID}`}
-															target="_blank">
-															<h3 className="text-lg font-bold text-blue-600 border-b pb-2">
-																{item.LEGAL_TITLE ?? 'n/a'}
-															</h3>
-														</a>
-														{item?.IMAG_URL && (
-															<div className="bg-slate-100 h-48 mb-4">
-																<img
-																	src={getImage(item.IMAG_URL)}
-																	alt="Library"
-																	className="w-full h-full object-contain rounded-t-lg "
-																/>
-															</div>
-														)}
-														<table className="w-full text-sm">
-															<tbody>
-																<tr className="border-b">
-																	<td className="font-semibold">
-																		{keyName}
-																	</td>
-																	<td>{item.ID}</td>
-																</tr>
-																<tr>
-																	<td className="font-semibold py-1 pr-2">
-																		Date
-																	</td>
-																	<td>{item.DATE ?? 'n/a'}</td>
-																</tr>
-															</tbody>
-														</table>
+						return (
+							<div key={idx} className=" flex flex-col items-center w-full px-1">
+								<Popover.Root key={item.sisn}>
+									<Popover.Trigger className={'flex justify-center w-full'}>
+										<div
+											className={`absolute bottom-[-15px] flex justify-center items-center z-10 w-[2px] h-[40px]  cursor-pointer transition-transform hover:scale-150 bg-gray-600`}></div>
+										<div
+											className={`px-10 z-0 w-full h-[5px] ${timeIndex >= 10000 ? 'bg-gray-200' : 'bg-gray-300'}  top-[45%]`}
+										/>
+									</Popover.Trigger>
+									<Popover.Content
+										side="top"
+										align="center"
+										className="p-4 bg-white shadow-lg rounded-xl z-10"
+										sideOffset={40}>
+										<div key={item.sisn} className="mb-4">
+											<div className="w-[300px]">
+												<a
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.ID}`}
+													target="_blank">
+													<h3 className="text-lg font-bold text-blue-600 border-b pb-2">
+														{item.LEGAL_TITLE ?? 'n/a'}
+													</h3>
+												</a>
+												{item?.IMAG_URL && (
+													<div className="bg-slate-100 h-48 mb-4">
+														<img
+															src={getImage(item.IMAG_URL)}
+															alt="Library"
+															className="w-full h-full object-contain rounded-t-lg "
+														/>
 													</div>
-												</div>
-												<Popover.Arrow className="fill-white" />
-											</Popover.Content>
-										</Popover.Root>
-									</div>
-								</div>
-							)
-						}
-					})}
-				</div>
+												)}
+												<table className="w-full text-sm">
+													<tbody>
+														<tr className="border-b">
+															<td className="font-semibold">
+																{keyName}
+															</td>
+															<td>{item.ID}</td>
+														</tr>
+														<tr>
+															<td className="font-semibold py-1 pr-2">
+																Date
+															</td>
+															<td>{item.DATE ?? 'n/a'}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<Popover.Arrow className="fill-white" />
+									</Popover.Content>
+								</Popover.Root>
+							</div>
+						)
+					}
+				})}
 			</div>
 		</div>
 	)
