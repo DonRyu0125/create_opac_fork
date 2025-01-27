@@ -3,7 +3,7 @@ import * as Popover from '@radix-ui/react-popover'
 import archiveIcon from '../../../assets/icons/archive.png'
 import libraryIcon from '../../../assets/icons/library.png'
 import museumIcon from '../../../assets/icons/museum.png'
-import dummy from './dummy_50.json'
+import dummy from './dummy_100.json'
 import { getImage } from '@/lib/utils'
 import axios from 'axios'
 import X2JS from 'x2js'
@@ -133,7 +133,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 							<div className={'z-10 pr-1 mb-[15px] w-[20px]'}>
 								<div className="text-left text-xs w-[52px]">{item.CENTURY}</div>
 								<div
-									className={`w-[4px] h-[80px] cursor-pointer transition-transform bg-gray-500 `}></div>
+									className={`w-[4px] h-[80px] cursor-pointer transition-transform bg-gray-400 `}></div>
 							</div>
 						)
 					} else {
@@ -148,7 +148,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 								/>
 								<Popover.Root key={item.sisn}>
 									<Popover.Trigger
-										className={`z-10 w-[4px] h-[40px]  cursor-pointer transition-transform hover:scale-150 bg-gray-500`}></Popover.Trigger>
+										className={`z-10 w-[4px] h-[40px]  cursor-pointer transition-transform hover:scale-150 bg-gray-400`}></Popover.Trigger>
 									<Popover.Content
 										side="top"
 										align="center"
