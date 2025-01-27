@@ -130,10 +130,10 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 				{addCenturies(dummy).map((item: DataType, idx: number) => {
 					if (item.CENTURY) {
 						return (
-							<div className={'z-10 px-1 mb-[15px]'}>
+							<div className={'z-10 pr-1 mb-[15px] w-[20px]'}>
 								<div className="text-left text-xs w-[52px]">{item.CENTURY}</div>
 								<div
-									className={` w-[4px] h-[80px] cursor-pointer transition-transform bg-gray-500 `}></div>
+									className={`w-[4px] h-[80px] cursor-pointer transition-transform bg-gray-500 `}></div>
 							</div>
 						)
 					} else {
@@ -144,7 +144,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 								key={idx}
 								className="relative flex flex-col items-center w-full px-1">
 								<div
-									className={`absolute z-0 w-[30px] h-[5px] ${timeIndex >= 10000 ? 'bg-gray-200' : 'bg-gray-300'}  top-[40%]`}
+									className={`absolute z-0 w-full h-[5px] ${timeIndex >= 10000 ? 'bg-gray-200' : 'bg-gray-300'}  top-[40%]`}
 								/>
 								<Popover.Root key={item.sisn}>
 									<Popover.Trigger
