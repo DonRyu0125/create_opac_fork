@@ -124,35 +124,31 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					<Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />
 				</div>
 			)}
-			<div
-				className={` absolute top-3 right-0 z-10 w-[5px] h-[100px] bg-gray-600 `}></div>
-			<div
-				className={` absolute top-3 left-0 z-10 w-[5px] h-[100px] bg-gray-600 `}></div>
-			<div
-				className={`w-full relative flex items-center h-36 justify-around overflow-x-auto px-2`}>
+			<div className={`absolute top-3 right-0 z-10 w-[5px] h-[100px] bg-gray-600 `}></div>
+			<div className={`absolute top-3 left-0 z-10 w-[5px] h-[100px] bg-gray-600 `}></div>
+			<div className={`w-full relative flex items-center h-36 justify-around overflow-x-auto px-2`}>
 				{addCenturies(dummy).map((item: DataType, idx: number) => {
 					if (item.CENTURY) {
 						return (
-							<div className={'px-1 mb-[15px]'}>
+							<div className={'z-10 px-1 mb-[15px]'}>
 								<div className="text-left text-xs w-[52px]">{item.CENTURY}</div>
 								<div
-									className={` z-30 w-[4px] h-[80px] cursor-pointer transition-transform bg-gray-500 `}></div>
+									className={` w-[4px] h-[80px] cursor-pointer transition-transform bg-gray-500 `}></div>
 							</div>
 						)
 					} else {
 						const { key, keyName }: any = getIconForType(item?.DATABASE_TYPE)
 						const timeIndex = parseInt(item?.TIME_INDEX)
-
 						return (
-							<div key={idx} className=" flex flex-col items-center w-full px-1">
+							<div
+								key={idx}
+								className="relative flex flex-col items-center w-full px-1">
+								<div
+									className={`absolute z-0 w-[30px] h-[5px] ${timeIndex >= 10000 ? 'bg-gray-200' : 'bg-gray-300'}  top-[40%]`}
+								/>
 								<Popover.Root key={item.sisn}>
-									<Popover.Trigger className={'flex justify-center w-full'}>
-										<div
-											className={`absolute bottom-[-15px] flex justify-center items-center z-10 w-[4px] h-[40px]  cursor-pointer transition-transform hover:scale-150 bg-gray-500`}></div>
-										<div
-											className={`px-10 z-0 w-full h-[5px] ${timeIndex >= 10000 ? 'bg-gray-200' : 'bg-gray-300'}  top-[45%]`}
-										/>
-									</Popover.Trigger>
+									<Popover.Trigger
+										className={`z-10 w-[4px] h-[40px]  cursor-pointer transition-transform hover:scale-150 bg-gray-500`}></Popover.Trigger>
 									<Popover.Content
 										side="top"
 										align="center"
