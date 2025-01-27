@@ -116,7 +116,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 
 		return centuries
 	}
-
+	let count = 0
 	return (
 		<div className="w-full relative md:flex my-2">
 			{loading && (
@@ -126,14 +126,21 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 			)}
 			<div className={`absolute top-3 right-0 z-10 w-[5px] h-[100px] bg-gray-600 `}></div>
 			<div className={`absolute top-3 left-0 z-10 w-[5px] h-[100px] bg-gray-600 `}></div>
-			<div className={`w-full relative flex items-center h-36 justify-around overflow-x-auto px-2`}>
+			<div
+				className={`w-full relative flex items-center h-36 justify-around overflow-x-auto px-2`}>
 				{addCenturies(dummy).map((item: DataType, idx: number) => {
 					if (item.CENTURY) {
+						count++
 						return (
 							<div className={'z-10 pr-1 mb-[15px] w-[20px]'}>
-								<div className="text-left text-xs w-[52px]">{item.CENTURY}</div>
+								{count % 2 === 1 && (
+									<div className="text-left text-xs w-[52px]">{item.CENTURY}</div>
+								)}
 								<div
 									className={`w-[4px] h-[80px] cursor-pointer transition-transform bg-gray-400 `}></div>
+								{count % 2 === 0 && (
+									<div className="text-left text-xs w-[52px]">{item.CENTURY}</div>
+								)}
 							</div>
 						)
 					} else {
