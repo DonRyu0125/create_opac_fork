@@ -8,6 +8,7 @@ import { getImage } from '@/lib/utils'
 import axios from 'axios'
 import X2JS from 'x2js'
 import Spinner from '../event-calendar/Spinner'
+import useConstants from '@/hooks/useConstants'
 
 interface DataType {
 	LEGAL_TITLE: string
@@ -23,6 +24,7 @@ interface DataType {
 const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 	const [loading, setLoading] = useState(false)
 	const [data, setData] = useState([])
+	const { message } = useConstants()
 
 	useEffect(() => {
 		// fetch_get()
@@ -68,6 +70,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					bgColor: 'bg-blue-900/80',
 					keyName: 'REFD',
 					key: 'REFD',
+					database:'DESCRIPTION_WEB'
 				}
 			case 'Library':
 				return {
@@ -75,6 +78,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					bgColor: 'bg-red-600/90',
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
+					database:'BIBLO_WEB'
 				}
 			case 'Museum':
 				return {
@@ -82,6 +86,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					bgColor: 'bg-yellow-400/90',
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
+					database:'COLLECTIONS_WEB'
 				}
 		}
 	}
@@ -147,7 +152,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 							</div>
 						)
 					} else {
-						const { key, keyName }: any = getIconForType(item?.DATABASE_TYPE)
+						const { key, keyName,database }: any = getIconForType(item?.DATABASE_TYPE)
 						const timeIndex = parseInt(item?.TIME_INDEX)
 						return (
 							<div
@@ -158,7 +163,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 								/>
 								<Popover.Root key={item.sisn}>
 									<Popover.Trigger
-										className={`z-10 w-[4px] h-[50px]  cursor-pointer transition-transform hover:scale-150 bg-gray-400`}></Popover.Trigger>
+										className={`z-10 w-[5px] h-[50px]  cursor-pointer transition-transform hover:scale-150 bg-gray-400`}></Popover.Trigger>
 									<Popover.Content
 										side="top"
 										align="center"
@@ -167,7 +172,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 										<div key={item.sisn} className="mb-4">
 											<div className="w-[300px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.ID}`}
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.ID}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600 border-b pb-2">
 														{item.LEGAL_TITLE ?? 'n/a'}
@@ -184,6 +189,12 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 												)}
 												<table className="w-full text-sm">
 													<tbody>
+													<tr className="border-b">
+															<td className="font-semibold">
+																{message.Type}
+															</td>
+															<td>{item.DATABASE_TYPE}</td>
+														</tr>
 														<tr className="border-b">
 															<td className="font-semibold">
 																{keyName}
@@ -192,7 +203,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr>
 															<td className="font-semibold py-1 pr-2">
-																Date
+																{message.date}
 															</td>
 															<td>{item.DATE ?? 'n/a'}</td>
 														</tr>
