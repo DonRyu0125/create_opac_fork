@@ -132,15 +132,18 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					if (item.CENTURY) {
 						count++
 						return (
-							<div className={'z-10 pr-1 mb-[15px] w-[20px]'}>
-								{count % 2 === 1 && (
-									<div className="text-left text-xs w-[52px]">{item.CENTURY}</div>
-								)}
+							<div
+								className={
+									'z-10 pr-1 mb-[15px] w-[20px] h-[110px] flex flex-col justify-between mb-1'
+								}>
+								<div className="text-left text-xs w-[52px] h-[20px]">
+									{count % 2 === 1 && item.CENTURY}
+								</div>
 								<div
-									className={`w-[4px] h-[80px] cursor-pointer transition-transform bg-gray-400 `}></div>
-								{count % 2 === 0 && (
-									<div className="text-left text-xs w-[52px]">{item.CENTURY}</div>
-								)}
+									className={`w-[4px] h-[90px] cursor-pointer transition-transform bg-gray-400 `}></div>
+								<div className="text-left text-xs w-[52px] h-[20px] mt-1">
+									{count % 2 === 0 && item.CENTURY}
+								</div>
 							</div>
 						)
 					} else {
@@ -149,13 +152,13 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 						return (
 							<div
 								key={idx}
-								className="relative flex flex-col items-center w-full px-1">
+								className="relative flex flex-col items-center w-full ">
 								<div
 									className={`absolute z-0 w-full h-[5px] ${timeIndex >= 10000 ? 'bg-gray-200' : 'bg-gray-300'}  top-[40%]`}
 								/>
 								<Popover.Root key={item.sisn}>
 									<Popover.Trigger
-										className={`z-10 w-[4px] h-[40px]  cursor-pointer transition-transform hover:scale-150 bg-gray-400`}></Popover.Trigger>
+										className={`z-10 w-[4px] h-[50px]  cursor-pointer transition-transform hover:scale-150 bg-gray-400`}></Popover.Trigger>
 									<Popover.Content
 										side="top"
 										align="center"
