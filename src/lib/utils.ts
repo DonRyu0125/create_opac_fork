@@ -5,6 +5,12 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
 
+export const getImage = (image: string) => {
+	return image.toLowerCase().includes('[media]')
+		? image.replace(/\[media\]/i, '/media/')
+		: image
+}
+
 /**
  * Ensure type-safe for config
  * @returns

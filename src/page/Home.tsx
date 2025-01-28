@@ -11,6 +11,7 @@ import Section from '../components/common/Section'
 import RSVPCalendar from '../components/features/RSVPCalendar'
 import Layout from '../components/layouts'
 import TopPick from '@/components/features/TopPick'
+import TimeLine from '@/components/common/interactive-timeline'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -62,8 +63,18 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 		enableCategoriesItems,
 		enableRecentAddition,
 		enableMap,
+		enableTimeline,
 	} = data
 	const { message } = useConstants()
+	const mockData = Array.from({ length: 1000 }, (_, index) => ({
+		LEGAL_TITLE: `Event ${index + 1}`,
+		sisn: `SISN-${index + 1}`,
+		TIME_INDEX: (9000 + index).toString(),
+		DATE: `Year ${9000 + index - 10000}`,
+		ID: `ID-${index + 1}`,
+		DATABASE_TYPE: 'Historical',
+		IMAG_URL: 'https://via.placeholder.com/150',
+	}))
 	return (
 		<Layout>
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
@@ -94,7 +105,12 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap DB_TYPE={'UNION_VIEW'} />
+					<InterativeMap />
+				</Section>
+			)}
+			{enableTimeline && (
+				<Section heading={`${message.timeline}`}>
+					<TimeLine />
 				</Section>
 			)}
 			{enableRecentAddition && (
