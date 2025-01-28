@@ -1,7 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import useConstants from '@/hooks/useConstants'
-import { getSessionID } from '@/lib/utils'
+import { getImage, getSessionID } from '@/lib/utils'
 import axios from 'axios'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -15,10 +15,11 @@ import X2JS from 'x2js'
 import Button from '../admin/Button'
 import CollapseList from '../CollapseList'
 import Spinner from '../event-calendar/Spinner'
-import archiveIcon from './archive.png'
-import libraryIcon from './book.png'
-import museumIcon from './museum.png'
+import archiveIcon from '../../../assets/icons/archive.png'
+import libraryIcon from '../../../assets/icons/library.png'
+import museumIcon from '../../../assets/icons/museum.png'
 import './style.css'
+import dummy from './dummy.json'
 
 const DB_TYPE_MAP = {
 	library: 'Library',
@@ -26,11 +27,7 @@ const DB_TYPE_MAP = {
 	museum: 'Museum',
 }
 
-const COLOR_MAP: any = {
-	library: 'rgba(255, 0, 0, 0.7)',
-	archive: 'rgba(12, 74, 110, 0.7)',
-	museum: 'rgba(255, 255, 0, 0.7)',
-}
+
 
 interface DataType {
 	DATABASE_TYPE: string
@@ -72,6 +69,12 @@ const createIcon = (iconUrl: string, bgColor: string): L.DivIcon => {
 	})
 }
 
+const COLOR_MAP: any = {
+	library: 'rgba(255, 0, 0, 0.7)',
+	archive: 'rgba(12, 74, 110, 0.7)',
+	museum: 'rgba(255, 255, 0, 0.7)',
+}
+
 const icons: Record<string, L.DivIcon> = {
 	library: createIcon(libraryIcon, COLOR_MAP.library),
 	archive: createIcon(archiveIcon, COLOR_MAP.archive),
@@ -101,7 +104,7 @@ const createClusterIcon = function (cluster: any, iconUrl: string, bgColor: stri
 	})
 }
 
-const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
+const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 	const { archives, museum, library } = useConstants()
 	const { message } = useConstants()
 	const [allData, setAllData] = useState<any>([])
@@ -183,15 +186,15 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 
 	const fetch_get = async () => {
 		setLoading(true)
-		let HOME_SESSID = getSessionID()
-		const response = await axios.get(
-			`${HOME_SESSID}?SEARCH&REPORT=WEB_UNION_SUM_MAP&APPLICATION=UNION_VIEW&DATABASE=${DB_TYPE}&EXP=%2B%2B%40`,
-			{
-				headers: {
-					Accept: 'application/xml',
-				},
-			}
-		)
+		const baseURL = '/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&APPLICATION=UNION_VIEW&REPORT=WEB_UNION_SUM_MAP&EXP=UNION_MAP_CL%20%40';
+		const databaseParam = DB_TYPE ? `&DATABASE=${DB_TYPE}` : '';
+		const url = `${baseURL}${databaseParam}`;
+		
+		const response = await axios.get(url, {
+		  headers: {
+			Accept: 'application/xml',
+		  },
+		});
 
 		const x2js = new X2JS()
 		const jsonData: any = x2js.xml2js(response.data)
@@ -252,10 +255,11 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 		setFilteredData(allData)
 	}
 
-	const getImage = (image: string) => {
-		return image.toLowerCase().includes('[media]')
-			? image.replace(/\[media\]/i, '/media/')
-			: image
+
+
+	const getNumberofType = (type:string,fileterType:string) =>{
+		let arr = allData.filter((item:any)=>item[type] === fileterType) ?? []
+		return `(${arr.length})`
 	}
 
 	return (
@@ -273,7 +277,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 					</Button>
 				</div>
 				<div className="flex flex-col space-y-4 max-h-[90vh] mb-2 p-2 overflow-y-auto custom-scrollbar">
-					{DB_TYPE === 'UNION_VIEW' && (
+					{!DB_TYPE && (
 						<CollapseList title={message.Type} expand={true}>
 							<div className="space-y-3 border-t p-4">
 								<div className="flex">
@@ -294,6 +298,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.archive}
 										</Label>
+										<div>{getNumberofType('DATABASE_TYPE',DB_TYPE_MAP.archive)}</div>
 									</div>
 								</div>
 								<div className="flex">
@@ -315,6 +320,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.library}
 										</Label>
+										<div>{getNumberofType('DATABASE_TYPE',DB_TYPE_MAP.library)}</div>
 									</div>
 								</div>
 								<div className="flex">
@@ -332,6 +338,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.museum}
 										</Label>
+										<div>{getNumberofType('DATABASE_TYPE',DB_TYPE_MAP.museum)}</div>
 									</div>
 								</div>
 							</div>
@@ -353,6 +360,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 													{item}
 												</Label>
+												<div>{getNumberofType('ORIGIN_COUNTRY',item)}</div>
 											</div>
 										)
 									)
@@ -377,6 +385,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 												<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 													{item}
 												</Label>
+												<div>{getNumberofType('ORIGIN_PRV_STATE',item)}</div>
 											</div>
 										)
 									)
@@ -401,6 +410,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE: string }) => {
 											<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 												{item}
 											</Label>
+											<div>{getNumberofType('ORIGIN_CITY',item)}</div>
 										</div>
 									)
 								})
