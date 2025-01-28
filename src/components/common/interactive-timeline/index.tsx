@@ -129,8 +129,8 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					<Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />
 				</div>
 			)}
-			<div className={`absolute top-3 right-0 z-10 w-[5px] h-[100px] bg-gray-600 `}></div>
-			<div className={`absolute top-3 left-0 z-10 w-[5px] h-[100px] bg-gray-600 `}></div>
+			<div className={`absolute top-3 right-0 z-40 w-[5px] h-[100px] bg-gray-600 `}></div>
+			<div className={`absolute top-3 left-0 z-40 w-[5px] h-[100px] bg-gray-600 `}></div>
 			<div
 				className={`w-full relative flex items-center h-36 justify-around overflow-x-auto px-2`}>
 				{addCenturies(dummy).map((item: DataType, idx: number) => {
@@ -157,7 +157,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 						return (
 							<div
 								key={idx}
-								className="relative flex flex-col items-center w-full ">
+								className="relative flex flex-col items-center w-full min-w-[10px]">
 								<div
 									className={`absolute z-0 w-full h-[5px] ${timeIndex >= 10000 ? 'bg-gray-200' : 'bg-gray-300'}  top-[40%]`}
 								/>
