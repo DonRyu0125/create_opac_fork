@@ -1,0 +1,37 @@
+<xml hidden id='COLLECTIONS_WEB_TIMELINE'>
+<record>
+<sisn>1</sisn>
+<TIME_INDEX>11900--11900</TIME_INDEX>
+<LEGAL_TITLE>test object v3</LEGAL_TITLE>
+<DATABASE_TYPE>Museum</DATABASE_TYPE>
+<ID>acc-1</ID>
+</record>
+<record>
+<sisn>2</sisn>
+<TIME_INDEX>11903--11903</TIME_INDEX>
+<LEGAL_TITLE>MINISIS TEST WILL 242</LEGAL_TITLE>
+<DATABASE_TYPE>Museum</DATABASE_TYPE>
+<ID>65526</ID>
+</record>
+<record>
+<sisn>4</sisn>
+<TIME_INDEX>11945--11945</TIME_INDEX>
+<LEGAL_TITLE>MINISIS WILL TEST 1</LEGAL_TITLE>
+<DATABASE_TYPE>Museum</DATABASE_TYPE>
+<ID>65526</ID>
+</record>
+<record>
+<sisn>5</sisn>
+<TIME_INDEX>11999--11999</TIME_INDEX>
+<LEGAL_TITLE>Karen&#39;s test record for repeating groups</LEGAL_TITLE>
+<DATABASE_TYPE>Museum</DATABASE_TYPE>
+<ID>2024.12.12</ID> 
+</record>
+<record>
+<sisn>3</sisn>
+<TIME_INDEX>8800--8800</TIME_INDEX>
+<LEGAL_TITLE>MINISIS WILL TEST 1</LEGAL_TITLE>
+<DATABASE_TYPE>Museum</DATABASE_TYPE>
+<ID>65526</ID>
+</record>
+</xml>

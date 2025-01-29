@@ -5,82 +5,83 @@ import libraryIcon from '../../../assets/icons/library.png'
 import museumIcon from '../../../assets/icons/museum.png'
 import dummy from './dummy_100.json'
 import { getImage } from '@/lib/utils'
-import axios from 'axios'
-import X2JS from 'x2js'
-import Spinner from '../event-calendar/Spinner'
 import useConstants from '@/hooks/useConstants'
+import useJSONData from '@/hooks/useJSONData'
 
 interface DataType {
-	LEGAL_TITLE: string
+	legal_title: string
 	sisn: string
-	TIME_INDEX: string
-	DATE: string
-	ID: string
-	DATABASE_TYPE: string
-	IMAG_URL: string
-	CENTURY?: string
+	time_index: string 
+	date: string
+	id: string
+	database_type: string
+	imag_url: string
+	century?: string
 }
 
 const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
-	const [loading, setLoading] = useState(false)
-	const [data, setData] = useState([])
+	const [data, setData] = useState<DataType[]>([])
 	const { message } = useConstants()
+	let count = 0
+	const biblio_data: any =
+		useJSONData({
+			selector: '#BIBLIO_WEB_TIMELINE',
+		}).data ?? []
+	const collection_data: any =
+		useJSONData({
+			selector: '#COLLECTIONS_WEB_TIMELINE',
+		}).data ?? []
+	const description_data: any =
+		useJSONData({
+			selector: '#DESCRIPTION_WEB_TIMELINE',
+		}).data ?? []
 
-	useEffect(() => {
-		// fetch_get()
-	}, [])
+		useEffect(()=>{
+			getData()
+		},[])
 
-	const fetch_get = async () => {
-		// setLoading(true)
-		const files = ["COLLECTIONS_WEB_TIMELINE.TXT", "BIBLIO_WEB_TIMELINE.TXT", "DESCRIPTION_WEB_TIMELINE.TXT"];
-		let mergedData: any[] = [];
+	const getData = async () => {
+		let centuries: any[] = []
+		let currentCenturyLabel: string | null = null
+		const files = [
+			...biblio_data.xml.record,
+			...collection_data.xml.record,
+			...description_data.xml.record,
+		]
 
-		await Promise.all(
-			files.map(async (file) => {
-				try {
-					const response:any = await axios.get(`/preprocessing/${file}`, { responseType: "text" });
-					response.forEach((xml) => {
-						const json = x2js.xml2js(xml);
-						const records = json.xml.record || [];
-						mergedData = [...mergedData, ...records];
-					});
-				} catch (error) {
-					console.error(`Error loading ${file}:`, error);
-				}
-			})
-		);
+		const records = files
+			.map((record: DataType) => ({
+				...record,
+				time_index: record.time_index?.split('--')[0],
+			}))
+			.sort((a: any, b: any) => a.time_index - b.time_index)
 
-		const records = mergedData.map((record: DataType) => ({
-			...record,
-			TIME_INDEX: record.TIME_INDEX.split('--')[0],
-		}))
-		console.log('records',records)
-		// setData(records)
-		// setLoading(false)
+		records.forEach((item) => {
+			const timeIndex = parseInt(item.time_index)
+			let centuryLabel
+
+			if (timeIndex >= 10000) {
+				const century = Math.floor((timeIndex - 10000) / 1000) * 1000
+				centuryLabel = century === 0 ? 'AD 0' : `AD ${century}`
+			} else {
+				const offset = 10000 - timeIndex
+				const century = Math.floor(offset / 1000) * 1000
+				centuryLabel = `BC ${century + 1000}`
+			}
+
+			if (
+				centuryLabel !== currentCenturyLabel &&
+				!(centuryLabel === 'BC 0' && currentCenturyLabel?.startsWith('BC'))
+			) {
+				centuries.push({ century: centuryLabel })
+				currentCenturyLabel = centuryLabel
+			}
+
+			centuries.push(item)
+		})
+
+		setData(centuries)
 	}
-
-
-	const processXmlData = (xmls: string[]) => {
-		let mergedData: any[] = [];
-		const x2js = new X2JS()
-
-		xmls.forEach((xml) => {
-			const json = x2js.xml2js(xml);
-			const records = json.xml.record || [];
-			mergedData = [...mergedData, ...records];
-		});
-
-		return mergedData
-			.map((record: any) => {
-				const timeIndexStr = record.TIME_INDEX || "";
-				const timeIndexParts = timeIndexStr.split("--")[0];
-				return {
-					...record,
-					TIME_INDEX: parseInt(timeIndexParts, 10),
-				};
-			})
-			.sort((a: any, b: any) => a.TIME_INDEX - b.TIME_INDEX);
-	};
 
 
 	const getIconForType = (databaseType: string) => {
@@ -133,7 +134,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 				centuryLabel !== currentCenturyLabel &&
 				!(centuryLabel === 'BC 0' && currentCenturyLabel?.startsWith('BC'))
 			) {
-				centuries.push({ CENTURY: centuryLabel })
+				centuries.push({ century: centuryLabel })
 				currentCenturyLabel = centuryLabel
 			}
 
@@ -142,20 +143,15 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 
 		return centuries
 	}
-	let count = 0
+
 	return (
 		<div className="w-full relative md:flex my-2">
-			{loading && (
-				<div className="absolute w-full h-full bg-primary opacity-25" style={{ zIndex: 9 }}>
-					<Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />
-				</div>
-			)}
 			<div className={`absolute top-3 right-0 z-40 w-[5px] h-[100px] bg-gray-600 `}></div>
 			<div className={`absolute top-3 left-0 z-40 w-[5px] h-[100px] bg-gray-600 `}></div>
 			<div
-				className={`w-full relative flex items-center h-36 justify-around overflow-x-auto px-2`}>
-				{addCenturies(dummy).map((item: DataType, idx: number) => {
-					if (item.CENTURY) {
+				className={`w-full relative flex items-center h-36 justify-around overflow-x-auto custom-scrollbar px-2`}>
+				{data.map((item: DataType, idx: number) => {
+					if (item.century) {
 						count++
 						return (
 							<div
@@ -163,18 +159,18 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 									'z-10 pr-1 mb-[15px] w-[20px] h-[110px] flex flex-col justify-between mb-1'
 								}>
 								<div className="text-left text-xs w-[52px] h-[20px]">
-									{count % 2 === 1 && item.CENTURY}
+									{count % 2 === 1 && item.century}
 								</div>
 								<div
 									className={`w-[4px] h-[90px] cursor-pointer transition-transform bg-gray-400 `}></div>
 								<div className="text-left text-xs w-[52px] h-[20px] mt-1">
-									{count % 2 === 0 && item.CENTURY}
+									{count % 2 === 0 && item.century}
 								</div>
 							</div>
 						)
 					} else {
-						const { key, keyName, database }: any = getIconForType(item?.DATABASE_TYPE)
-						const timeIndex = parseInt(item?.TIME_INDEX)
+						const { key, keyName, database }: any = getIconForType(item?.database_type)
+						const timeIndex = parseInt(item?.time_index)
 						return (
 							<div
 								key={idx}
@@ -193,16 +189,16 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 										<div key={item.sisn} className="mb-4">
 											<div className="w-[300px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.ID}`}
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.id}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600 border-b pb-2">
-														{item.LEGAL_TITLE ?? 'n/a'}
+														{item.legal_title ?? 'n/a'}
 													</h3>
 												</a>
-												{item?.IMAG_URL && (
+												{item?.imag_url && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
-															src={getImage(item.IMAG_URL)}
+															src={getImage(item.imag_url)}
 															alt="Library"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
@@ -214,19 +210,19 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 															<td className="font-semibold">
 																{message.Type}
 															</td>
-															<td>{item.DATABASE_TYPE}</td>
+															<td>{item.database_type}</td>
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold">
 																{keyName}
 															</td>
-															<td>{item.ID}</td>
+															<td className="max-w-[200px] overflow-x-auto custom-scrollbar whitespace-nowrap">{item.id}</td>
 														</tr>
 														<tr>
 															<td className="font-semibold py-1 pr-2">
 																{message.date}
 															</td>
-															<td>{item.DATE ?? 'n/a'}</td>
+															<td>{item.date ?? 'n/a'}</td>
 														</tr>
 													</tbody>
 												</table>
