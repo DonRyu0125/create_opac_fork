@@ -61,14 +61,14 @@ const Archives = ({ previewMode = false, previewData }: MainPageProps) => {
 					previewMode={previewMode}
 				/>
 			)}
-			{enableTimeline && (
-				<Section heading={`${message.timeline}`}>
-					<TimeLine />
-				</Section>
-			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
 					<InterativeMap DB_TYPE={'DESCRIPTION_WEB'} />
+				</Section>
+			)}
+			{enableTimeline && (
+				<Section heading={`${message.timeline}`}>
+					<TimeLine />
 				</Section>
 			)}
 		</Layout>
