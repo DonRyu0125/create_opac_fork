@@ -43,3 +43,5 @@ build
 src/types/*.d.ts
 
 backend/logs.txt
+
+public/preprocessing

@@ -31,36 +31,57 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 	}, [])
 
 	const fetch_get = async () => {
-		setLoading(true)
-		const baseURL =
-			'/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&APPLICATION=UNION_VIEW&REPORT=WEB_UNION_SUM_TIMELINE&EXP=UNION_TIME_CL%20%40'
-		const databaseParam = DB_TYPE ? `&DATABASE=${DB_TYPE}` : ''
-		const url = `${baseURL}${databaseParam}`
-		try {
-			const response = await axios.get(url, {
-				headers: {
-					Accept: 'application/xml',
-				},
-				responseType: 'text',
+		// setLoading(true)
+		const files = ["COLLECTIONS_WEB_TIMELINE.TXT", "BIBLIO_WEB_TIMELINE.TXT", "DESCRIPTION_WEB_TIMELINE.TXT"];
+		let mergedData: any[] = [];
+
+		await Promise.all(
+			files.map(async (file) => {
+				try {
+					const response:any = await axios.get(`/preprocessing/${file}`, { responseType: "text" });
+					response.forEach((xml) => {
+						const json = x2js.xml2js(xml);
+						const records = json.xml.record || [];
+						mergedData = [...mergedData, ...records];
+					});
+				} catch (error) {
+					console.error(`Error loading ${file}:`, error);
+				}
 			})
+		);
 
-			const x2js = new X2JS()
-			const jsonData: any = x2js.xml2js(response.data)
-
-			const records = jsonData?.xml?.record.map((record: DataType) => ({
-				...record,
-				TIME_INDEX: record.TIME_INDEX.split('--')[0],
-			}))
-			setData(records)
-		} catch (error) {
-			if (error instanceof Error) {
-				console.error('Error fetching or converting XML:', error.message)
-			} else {
-				console.error('Unknown error:', error)
-			}
-		}
-		setLoading(false)
+		const records = mergedData.map((record: DataType) => ({
+			...record,
+			TIME_INDEX: record.TIME_INDEX.split('--')[0],
+		}))
+		console.log('records',records)
+		// setData(records)
+		// setLoading(false)
 	}
+
+
+	const processXmlData = (xmls: string[]) => {
+		let mergedData: any[] = [];
+		const x2js = new X2JS()
+
+		xmls.forEach((xml) => {
+			const json = x2js.xml2js(xml);
+			const records = json.xml.record || [];
+			mergedData = [...mergedData, ...records];
+		});
+
+		return mergedData
+			.map((record: any) => {
+				const timeIndexStr = record.TIME_INDEX || "";
+				const timeIndexParts = timeIndexStr.split("--")[0];
+				return {
+					...record,
+					TIME_INDEX: parseInt(timeIndexParts, 10),
+				};
+			})
+			.sort((a: any, b: any) => a.TIME_INDEX - b.TIME_INDEX);
+	};
+
 
 	const getIconForType = (databaseType: string) => {
 		switch (databaseType) {
@@ -70,7 +91,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					bgColor: 'bg-blue-900/80',
 					keyName: 'REFD',
 					key: 'REFD',
-					database:'DESCRIPTION_WEB'
+					database: 'DESCRIPTION_WEB'
 				}
 			case 'Library':
 				return {
@@ -78,7 +99,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					bgColor: 'bg-red-600/90',
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
-					database:'BIBLO_WEB'
+					database: 'BIBLO_WEB'
 				}
 			case 'Museum':
 				return {
@@ -86,7 +107,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					bgColor: 'bg-yellow-400/90',
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
-					database:'COLLECTIONS_WEB'
+					database: 'COLLECTIONS_WEB'
 				}
 		}
 	}
@@ -152,7 +173,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 							</div>
 						)
 					} else {
-						const { key, keyName,database }: any = getIconForType(item?.DATABASE_TYPE)
+						const { key, keyName, database }: any = getIconForType(item?.DATABASE_TYPE)
 						const timeIndex = parseInt(item?.TIME_INDEX)
 						return (
 							<div
@@ -189,7 +210,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 												)}
 												<table className="w-full text-sm">
 													<tbody>
-													<tr className="border-b">
+														<tr className="border-b">
 															<td className="font-semibold">
 																{message.Type}
 															</td>
