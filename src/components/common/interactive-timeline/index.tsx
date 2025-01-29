@@ -11,7 +11,7 @@ import useJSONData from '@/hooks/useJSONData'
 interface DataType {
 	legal_title: string
 	sisn: string
-	time_index: string 
+	time_index: string
 	date: string
 	id: string
 	database_type: string
@@ -19,7 +19,7 @@ interface DataType {
 	century?: string
 }
 
-const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
+const Timeline = () => {
 	const [data, setData] = useState<DataType[]>([])
 	const { message } = useConstants()
 	let count = 0
@@ -36,17 +36,17 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 			selector: '#DESCRIPTION_WEB_TIMELINE',
 		}).data ?? []
 
-		useEffect(()=>{
-			getData()
-		},[])
+	useEffect(() => {
+		getData()
+	}, [])
 
 	const getData = async () => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
-		const files = [
-			...biblio_data.xml.record,
-			...collection_data.xml.record,
-			...description_data.xml.record,
+		let files = [
+			...(biblio_data?.xml?.record || []),
+			...(collection_data?.xml?.record || []),
+			...(description_data?.xml?.record || []),
 		]
 
 		const records = files
@@ -83,7 +83,6 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 		setData(centuries)
 	}
 
-
 	const getIconForType = (databaseType: string) => {
 		switch (databaseType) {
 			case 'Archive':
@@ -92,7 +91,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					bgColor: 'bg-blue-900/80',
 					keyName: 'REFD',
 					key: 'REFD',
-					database: 'DESCRIPTION_WEB'
+					database: 'DESCRIPTION_WEB',
 				}
 			case 'Library':
 				return {
@@ -100,7 +99,7 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					bgColor: 'bg-red-600/90',
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
-					database: 'BIBLO_WEB'
+					database: 'BIBLO_WEB',
 				}
 			case 'Museum':
 				return {
@@ -108,40 +107,9 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					bgColor: 'bg-yellow-400/90',
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
-					database: 'COLLECTIONS_WEB'
+					database: 'COLLECTIONS_WEB',
 				}
 		}
-	}
-
-	function addCenturies(items: any[]) {
-		let centuries: any[] = []
-		let currentCenturyLabel: string | null = null
-
-		items.forEach((item) => {
-			const timeIndex = parseInt(item.TIME_INDEX)
-			let centuryLabel
-
-			if (timeIndex >= 10000) {
-				const century = Math.floor((timeIndex - 10000) / 1000) * 1000
-				centuryLabel = century === 0 ? 'AD 0' : `AD ${century}`
-			} else {
-				const offset = 10000 - timeIndex
-				const century = Math.floor(offset / 1000) * 1000
-				centuryLabel = `BC ${century + 1000}`
-			}
-
-			if (
-				centuryLabel !== currentCenturyLabel &&
-				!(centuryLabel === 'BC 0' && currentCenturyLabel?.startsWith('BC'))
-			) {
-				centuries.push({ century: centuryLabel })
-				currentCenturyLabel = centuryLabel
-			}
-
-			centuries.push(item)
-		})
-
-		return centuries
 	}
 
 	return (
@@ -216,7 +184,9 @@ const Timeline = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 															<td className="font-semibold">
 																{keyName}
 															</td>
-															<td className="max-w-[200px] overflow-x-auto custom-scrollbar whitespace-nowrap">{item.id}</td>
+															<td className="max-w-[200px] overflow-x-auto custom-scrollbar whitespace-nowrap">
+																{item.id}
+															</td>
 														</tr>
 														<tr>
 															<td className="font-semibold py-1 pr-2">
