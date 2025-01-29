@@ -12,6 +12,7 @@ import { useState } from 'react'
 import Hero from '../components/common/Hero'
 import Layout from '../components/layouts'
 import { MainPageProps, UNION_SEARCH_CL } from './Home'
+import TimeLine from '@/components/common/interactive-timeline'
 const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { message } = useConstants()
@@ -24,6 +25,7 @@ const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 		enableFeaturedCollection,
 		enableRSVP,
 		enableMap,
+		enableTimeline
 	} = useConstants().museum
 	return (
 		<Layout>
@@ -53,6 +55,11 @@ const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableRSVP && (
 				<RSVPCalendar page={'museum'} previewData={previewData} previewMode={previewMode} />
+			)}
+			{enableTimeline && (
+				<Section heading={`${message.timeline}`}>
+					<TimeLine />
+				</Section>
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
