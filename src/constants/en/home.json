@@ -1,7 +1,7 @@
 {
 	"heading": "MINISIS OPAC Template v1.0.0",
 	"heroBanner": "https://images.unsplash.com/photo-1522108700534-0e3c5dfa233b",
-	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=UNION_VIEW_WEB",
+	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW",
 	"browseByCategoryTitle": "Browse by Category",
 	"calendarfilterOption": "",
 	"database_name": "UNION_VIEW",
