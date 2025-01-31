@@ -20,6 +20,7 @@ import libraryIcon from '../../../assets/icons/library.png'
 import museumIcon from '../../../assets/icons/museum.png'
 import './style.css'
 import dummy from './dummy.json'
+import useJSONData from '@/hooks/useJSONData'
 
 const DB_TYPE_MAP = {
 	library: 'Library',
@@ -27,22 +28,20 @@ const DB_TYPE_MAP = {
 	museum: 'Museum',
 }
 
-
-
 interface DataType {
-	DATABASE_TYPE: string
-	ACCESSION_NUMBER?: string
-	REFD?: string
-	DESCRIPTION: string
-	LEGAL_TITLE: string
-	DECIMAL_LATITUDE: any
-	DECIMAL_LONGITUD: any
-	ORIGIN_COUNTRY: string
-	ORIGIN_PRV_STATE: string
-	ORIGIN_CITY: string
-	DATE: string
-	IMAG_URL: string
-	SISN: string
+	database_type: string
+	accession_number?: string
+	refd?: string
+	description: string
+	legal_title: string
+	decimal_latitude: any
+	decimal_longitude: any
+	origin_country: string
+	origin_prv_state: string
+	origin_city: string
+	date: string
+	imag_url: string
+	sisn: string
 }
 
 // Add background circle to icons using CSS
@@ -104,7 +103,7 @@ const createClusterIcon = function (cluster: any, iconUrl: string, bgColor: stri
 	})
 }
 
-const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
+const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 	const { archives, museum, library } = useConstants()
 	const { message } = useConstants()
 	const [allData, setAllData] = useState<any>([])
@@ -117,7 +116,18 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 		databases: [],
 		countries: [],
 	})
-	const [loading, setLoading] = useState(false)
+	const biblio_data: any =
+		useJSONData({
+			selector: '#BIBLIO_WEB_MAP',
+		}).data ?? []
+	const collection_data: any =
+		useJSONData({
+			selector: '#COLLECTIONS_WEB_MAP',
+		}).data ?? []
+	const description_data: any =
+		useJSONData({
+			selector: '#DESCRIPTION_WEB_MAP',
+		}).data ?? []
 
 	useEffect(() => {
 		fetch_get()
@@ -133,18 +143,18 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 			const nData = allData.filter((item: any) => {
 				const matchesDatabase =
 					selectedDatabases.length > 0
-						? selectedDatabases.includes(item.DATABASE_TYPE)
+						? selectedDatabases.includes(item.database_type)
 						: true
 				const matchesCountry =
 					selectedCountries.length > 0
-						? selectedCountries.includes(item.ORIGIN_COUNTRY)
+						? selectedCountries.includes(item.origin_country)
 						: true
 				const matchesProvince =
 					selectedProvinces.length > 0
-						? selectedProvinces.includes(item.ORIGIN_PRV_STATE)
+						? selectedProvinces.includes(item.origin_prv_state)
 						: true
 				const matchesCity =
-					selectedCities.length > 0 ? selectedCities.includes(item.ORIGIN_CITY) : true
+					selectedCities.length > 0 ? selectedCities.includes(item.origin_city) : true
 
 				return matchesDatabase && matchesCountry && matchesProvince && matchesCity
 			})
@@ -153,6 +163,26 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 			setFilteredData(allData)
 		}
 	}, [selectedDatabases, selectedCountries, selectedProvinces, selectedCities, allData])
+
+	const fetch_get = async () => {
+		let files = [
+			...(biblio_data?.xml?.record || []),
+			...(collection_data?.xml?.record || []),
+			...(description_data?.xml?.record || []),
+		]
+		const updatedRecords = files.map((record: DataType) => {
+			record.decimal_latitude = parseFloat(record.decimal_latitude ?? 0)
+			record.decimal_longitude = parseFloat(record.decimal_longitude ?? 0)
+			return record
+		})
+		console.log('updatedRecords', updatedRecords)
+		setAllData(updatedRecords ?? [])
+		setFilteredData(updatedRecords ?? [])
+		const countries = Array.from(
+			new Set(updatedRecords?.map((item: any) => item.origin_country))
+		)
+		setCkTypes({ countries })
+	}
 
 	const handleDatabaseChange = (database: string) => {
 		setSelectedDatabases((prev) =>
@@ -184,66 +214,37 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 		)
 	}
 
-	const fetch_get = async () => {
-		setLoading(true)
-		const baseURL = '/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&APPLICATION=UNION_VIEW&REPORT=WEB_UNION_SUM_MAP&EXP=UNION_MAP_CL%20%40';
-		const databaseParam = DB_TYPE ? `&DATABASE=${DB_TYPE}` : '';
-		const url = `${baseURL}${databaseParam}`;
-		
-		const response = await axios.get(url, {
-		  headers: {
-			Accept: 'application/xml',
-		  },
-		});
-
-		const x2js = new X2JS()
-		const jsonData: any = x2js.xml2js(response.data)
-
-		const updatedRecords = jsonData?.xml?.record?.map((record: DataType) => {
-			record.DECIMAL_LATITUDE = parseFloat(record.DECIMAL_LATITUDE ?? 0)
-			record.DECIMAL_LONGITUD = parseFloat(record.DECIMAL_LONGITUD ?? 0)
-			return record
-		})
-		setAllData(updatedRecords ?? [])
-		setFilteredData(updatedRecords ?? [])
-		const countries = Array.from(
-			new Set(updatedRecords?.map((item: any) => item.ORIGIN_COUNTRY))
-		)
-		setCkTypes({ countries })
-		setLoading(false)
-	}
-
 	const getUniqueValuesP = () => {
 		const nData = allData.filter((item: any) => {
 			const matchesDatabase =
-				selectedDatabases.length > 0 ? selectedDatabases.includes(item.DATABASE_TYPE) : true
+				selectedDatabases.length > 0 ? selectedDatabases.includes(item.database_type) : true
 			const matchesCountry =
 				selectedCountries.length > 0
-					? selectedCountries.includes(item.ORIGIN_COUNTRY)
+					? selectedCountries.includes(item.origin_country)
 					: true
 
 			return matchesDatabase && matchesCountry
 		})
-		const uniqueValues = Array.from(new Set(nData?.map((item: any) => item.ORIGIN_PRV_STATE)))
+		const uniqueValues = Array.from(new Set(nData?.map((item: any) => item.origin_prv_state)))
 		return uniqueValues
 	}
 
 	const getUniqueValuesC = () => {
 		const nData = allData.filter((item: any) => {
 			const matchesDatabase =
-				selectedDatabases.length > 0 ? selectedDatabases.includes(item.DATABASE_TYPE) : true
+				selectedDatabases.length > 0 ? selectedDatabases.includes(item.database_type) : true
 			const matchesCountry =
 				selectedCountries.length > 0
-					? selectedCountries.includes(item.ORIGIN_COUNTRY)
+					? selectedCountries.includes(item.origin_country)
 					: true
 			const matchesProvince =
 				selectedProvinces.length > 0
-					? selectedProvinces.includes(item.ORIGIN_PRV_STATE)
+					? selectedProvinces.includes(item.origin_prv_state)
 					: true
 
 			return matchesDatabase && matchesCountry && matchesProvince
 		})
-		const uniqueValues = Array.from(new Set(nData?.map((item: any) => item.ORIGIN_CITY)))
+		const uniqueValues = Array.from(new Set(nData?.map((item: any) => item.origin_city)))
 		return uniqueValues
 	}
 
@@ -255,20 +256,13 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 		setFilteredData(allData)
 	}
 
-
-
-	const getNumberofType = (type:string,fileterType:string) =>{
-		let arr = allData.filter((item:any)=>item[type] === fileterType) ?? []
+	const getNumberofType = (type: string, fileterType: string) => {
+		let arr = allData.filter((item: any) => item[type] === fileterType) ?? []
 		return `(${arr.length})`
 	}
 
 	return (
 		<div className="w-full relative md:flex">
-			{loading && (
-				<div className="absolute w-full h-full bg-primary opacity-25" style={{ zIndex: 9 }}>
-					<Spinner height={'h-full'} spinHeight={'h-10'} spinWidth={'w-10'} />
-				</div>
-			)}
 			<div className="mb-2 md:mb-0 md:w-1/4 rounded border border-primary mr-2 relative">
 				<div className="flex justify-between items-center bg-primary p-2">
 					<div className={'text-white'}>{message.filterBy}</div>
@@ -298,7 +292,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.archive}
 										</Label>
-										<div>{getNumberofType('DATABASE_TYPE',DB_TYPE_MAP.archive)}</div>
+										<div>
+											{getNumberofType('database_type', DB_TYPE_MAP.archive)}
+										</div>
 									</div>
 								</div>
 								<div className="flex">
@@ -320,7 +316,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.library}
 										</Label>
-										<div>{getNumberofType('DATABASE_TYPE',DB_TYPE_MAP.library)}</div>
+										<div>
+											{getNumberofType('database_type', DB_TYPE_MAP.library)}
+										</div>
 									</div>
 								</div>
 								<div className="flex">
@@ -338,7 +336,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											{DB_TYPE_MAP.museum}
 										</Label>
-										<div>{getNumberofType('DATABASE_TYPE',DB_TYPE_MAP.museum)}</div>
+										<div>
+											{getNumberofType('database_type', DB_TYPE_MAP.museum)}
+										</div>
 									</div>
 								</div>
 							</div>
@@ -360,7 +360,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 												<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 													{item}
 												</Label>
-												<div>{getNumberofType('ORIGIN_COUNTRY',item)}</div>
+												<div>{getNumberofType('origin_country', item)}</div>
 											</div>
 										)
 									)
@@ -385,7 +385,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 												<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 													{item}
 												</Label>
-												<div>{getNumberofType('ORIGIN_PRV_STATE',item)}</div>
+												<div>
+													{getNumberofType('origin_prv_state', item)}
+												</div>
 											</div>
 										)
 									)
@@ -410,7 +412,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 											<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 												{item}
 											</Label>
-											<div>{getNumberofType('ORIGIN_CITY',item)}</div>
+											<div>{getNumberofType('origin_city', item)}</div>
 										</div>
 									)
 								})
@@ -470,28 +472,28 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 							createClusterIcon(cluster, libraryIcon, COLOR_MAP.library)
 						}>
 						{filteredData?.map((marker: DataType, key: number) => {
-							if (marker.DATABASE_TYPE === DB_TYPE_MAP.library) {
+							if (marker.database_type === DB_TYPE_MAP.library) {
 								return (
 									<Marker
-										key={`L${marker.DATABASE_TYPE}-${marker.ACCESSION_NUMBER}`}
+										key={`L${marker.database_type}-${marker.accession_number}`}
 										position={[
-											marker?.DECIMAL_LATITUDE,
-											marker?.DECIMAL_LONGITUD,
+											marker?.decimal_latitude,
+											marker?.decimal_longitude,
 										]}
 										icon={icons['library']}>
 										<Popup className="hidden md:block" offset={[-7, 0]}>
 											<div className="w-[300px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${library.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${library.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=accession_number%20${marker.accession_number}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
-														{marker.LEGAL_TITLE ?? 'n/a'}
+														{marker.legal_title ?? 'n/a'}
 													</h3>
 												</a>
-												{marker?.IMAG_URL && (
+												{marker?.imag_url && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
-															src={getImage(marker.IMAG_URL)}
+															src={getImage(marker.imag_url)}
 															alt="Library"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
@@ -501,10 +503,10 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 													<tbody>
 														<tr className="border-b">
 															<td className="font-semibold">
-																ACCESSION_NUMBER
+																accession_number
 															</td>
 															<td>
-																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
+																{marker.accession_number ?? 'n/a'}{' '}
 															</td>
 														</tr>
 														<tr className="border-b">
@@ -512,15 +514,15 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 																Location
 															</td>
 															<td>
-																{marker.ORIGIN_CITY},
-																{marker.ORIGIN_PRV_STATE}
+																{marker.origin_city},
+																{marker.origin_prv_state}
 															</td>
 														</tr>
 														<tr>
 															<td className="font-semibold py-1 pr-2">
 																Date
 															</td>
-															<td>{marker.DATE ?? 'n/a'}</td>
+															<td>{marker.date ?? 'n/a'}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -540,28 +542,28 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 							createClusterIcon(cluster, archiveIcon, COLOR_MAP.archive)
 						}>
 						{filteredData?.map((marker: any, key: number) => {
-							if (marker.DATABASE_TYPE === DB_TYPE_MAP.archive) {
+							if (marker.database_type === DB_TYPE_MAP.archive) {
 								return (
 									<Marker
-										key={`A${marker.DATABASE_TYPE}-${marker.REFD}`}
+										key={`A${marker.database_type}-${marker.refd}`}
 										position={[
-											marker?.DECIMAL_LATITUDE,
-											marker?.DECIMAL_LONGITUD,
+											marker?.decimal_latitude,
+											marker?.decimal_longitude,
 										]}
 										icon={icons['archive']}>
 										<Popup className="hidden md:block" offset={[-7, 0]}>
 											<div className="w-[300px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${archives.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=REFD%20${marker.REFD}`}
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${archives.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=refd%20${marker.refd}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
-														{marker.LEGAL_TITLE ?? 'n/a'}
+														{marker.legal_title ?? 'n/a'}
 													</h3>
 												</a>
-												{marker?.IMAG_URL && (
+												{marker?.imag_url && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
-															src={getImage(marker.IMAG_URL)}
+															src={getImage(marker.imag_url)}
 															alt="Archive"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
@@ -570,23 +572,23 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 												<table className="w-full text-sm">
 													<tbody>
 														<tr className="border-b">
-															<td className="font-semibold">REFD</td>
-															<td>{marker.REFD ?? 'n/a'} </td>
+															<td className="font-semibold">refd</td>
+															<td>{marker.refd ?? 'n/a'} </td>
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																Location
 															</td>
 															<td>
-																{marker.ORIGIN_CITY},
-																{marker.ORIGIN_PRV_STATE}
+																{marker.origin_city},
+																{marker.origin_prv_state}
 															</td>
 														</tr>
 														<tr>
 															<td className="font-semibold py-1 pr-2">
 																Date
 															</td>
-															<td>{marker.DATE ?? 'n/a'}</td>
+															<td>{marker.date ?? 'n/a'}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -606,28 +608,28 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 							createClusterIcon(cluster, museumIcon, COLOR_MAP.museum)
 						}>
 						{filteredData?.map((marker: any, key: number) => {
-							if (marker.DATABASE_TYPE === DB_TYPE_MAP.museum) {
+							if (marker.database_type === DB_TYPE_MAP.museum) {
 								return (
 									<Marker
-										key={`M${marker.DATABASE_TYPE}-${marker.ACCESSION_NUMBER}}`}
+										key={`M${marker.database_type}-${marker.accession_number}}`}
 										position={[
-											marker?.DECIMAL_LATITUDE,
-											marker?.DECIMAL_LONGITUD,
+											marker?.decimal_latitude,
+											marker?.decimal_longitude,
 										]}
 										icon={icons['museum']}>
 										<Popup className="hidden md:block" offset={[-7, 0]}>
 											<div className="w-[300px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=accession_number%20${marker.accession_number}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600 border-b pb-2 overflow-x-auto">
-														{marker.LEGAL_TITLE ?? 'n/a'}
+														{marker.legal_title ?? 'n/a'}
 													</h3>
 												</a>
-												{marker?.IMAG_URL && (
+												{marker?.imag_url && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
-															src={getImage(marker.IMAG_URL)}
+															src={getImage(marker.imag_url)}
 															alt="Museum"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
@@ -640,7 +642,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 																Accession Number
 															</td>
 															<td className="overflow-x-auto">
-																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
+																{marker.accession_number ?? 'n/a'}{' '}
 															</td>
 														</tr>
 														<tr className="border-b">
@@ -648,8 +650,8 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 																Location
 															</td>
 															<td className="overflow-x-auto">
-																{marker.ORIGIN_CITY},
-																{marker.ORIGIN_PRV_STATE}
+																{marker.origin_city},
+																{marker.origin_prv_state}
 															</td>
 														</tr>
 														<tr>
@@ -657,7 +659,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string  }) => {
 																Date
 															</td>
 															<td className="overflow-x-auto">
-																{marker.DATE ?? 'n/a'}
+																{marker.date ?? 'n/a'}
 															</td>
 														</tr>
 													</tbody>
