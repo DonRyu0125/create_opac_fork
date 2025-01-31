@@ -33,7 +33,7 @@ interface DataType {
 	accession_number?: string
 	refd?: string
 	description: string
-	legal_title: string
+	title: string
 	decimal_latitude: any
 	decimal_longitude: any
 	origin_country: string
@@ -42,6 +42,8 @@ interface DataType {
 	date: string
 	imag_url: string
 	sisn: string
+	gen_note?:string
+	author?:string
 }
 
 // Add background circle to icons using CSS
@@ -487,7 +489,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${library.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=accession_number%20${marker.accession_number}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
-														{marker.legal_title ?? 'n/a'}
+														{marker.title ?? 'n/a'}
 													</h3>
 												</a>
 												{marker?.imag_url && (
@@ -557,7 +559,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${archives.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=refd%20${marker.refd}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
-														{marker.legal_title ?? 'n/a'}
+														{marker.title ?? 'n/a'}
 													</h3>
 												</a>
 												{marker?.imag_url && (
@@ -623,7 +625,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=accession_number%20${marker.accession_number}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600 border-b pb-2 overflow-x-auto">
-														{marker.legal_title ?? 'n/a'}
+														{marker.title ?? 'n/a'}
 													</h3>
 												</a>
 												{marker?.imag_url && (
