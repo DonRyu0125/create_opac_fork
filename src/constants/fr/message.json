@@ -165,5 +165,6 @@
 	"attendee": "participant",
 	"detailRecordActionRequest": "Request",
 	"detailRecordActionEnquire": "Enquire",
-	"detailRecordActionReproduction": "Reproduction"
+	"detailRecordActionReproduction": "Reproduction",
+	"detailRecordActionCopyright": "Copyright"
 }

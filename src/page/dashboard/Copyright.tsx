@@ -14,7 +14,7 @@ const Copyright = () => {
 	const [activeButton, setActiveButton] = useState(null)
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-
+	console.log(records)
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
@@ -62,7 +62,7 @@ const Copyright = () => {
 			cell: ({ row }) => <div className="capitalize">{row.getValue('req_topic')}</div>,
 		},
 		{
-			accessorKey: 'req_item_title',
+			accessorKey: 'req_title',
 			header: ({ column }) => {
 				return (
 					<Button
@@ -73,7 +73,7 @@ const Copyright = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="capitalize">{row.getValue('req_item_title')}</div>,
+			cell: ({ row }) => <div className="capitalize">{row.getValue('req_title')}</div>,
 		},
 		{
 			accessorKey: 'req_status',
@@ -108,7 +108,7 @@ const Copyright = () => {
 						</a>
 					))}
 				</div>
-				<h1 className="text-2xl font-bold">Copyright Rquests</h1>
+				<h1 className="text-2xl font-bold">Copyright Requests</h1>
 
 				<ProfileTable
 					data={records}

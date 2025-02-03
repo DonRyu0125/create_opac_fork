@@ -45,6 +45,8 @@ import ReproductionForm from '@/page/reproduction/ReproductionForm'
 import ReproductionDetail from '@/page/reproduction/ReproductionDetail'
 import ClientLoginError from '@/page/login/ClientLoginError'
 import EnquiryReplyForm from '@/page/enquiry/EnquiryReplyForm'
+import CopyrightConfirmed from '@/page/copyright/CopyrightConfirmed'
+import CopyrightForm from '@/page/copyright/CopyrightForm'
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
@@ -100,6 +102,8 @@ export const ROUTES: TRoute = {
 	reproductionform: ReproductionForm,
 	reproductionconfirmed: ReproductionConfirmed,
 	reproductiondetail: ReproductionDetail,
+	copyrightform: CopyrightForm,
+	copyrightconfirmed: CopyrightConfirmed,
 	'client-login-error': ClientLoginError,
 	...ADMIN_ROUTES,
 }
