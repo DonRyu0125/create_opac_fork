@@ -175,7 +175,7 @@ const Timeline = () => {
 								<div
 									className={`absolute z-0 w-full h-[5px] ${timeIndex >= 10000 ? 'bg-gray-200' : 'bg-gray-300'}  top-[40%]`}
 								/>
-								<Popover.Root key={item.sisn}>
+								<Popover.Root key={idx}>
 									<Popover.Trigger
 										className={`z-10 w-[5px] h-[50px]  cursor-pointer transition-transform hover:scale-150 bg-gray-400`}></Popover.Trigger>
 									<Popover.Content
@@ -183,7 +183,7 @@ const Timeline = () => {
 										align="center"
 										className="p-4 bg-white shadow-lg rounded-xl z-10"
 										sideOffset={40}>
-										<div key={item.sisn} className="mb-4">
+										<div key={idx} className="mb-4">
 											<div className="w-[300px]">
 												<a
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.id}`}

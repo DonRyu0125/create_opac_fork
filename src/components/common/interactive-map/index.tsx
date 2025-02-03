@@ -11,10 +11,8 @@ import { LayersControl, MapContainer, Marker, Popup, TileLayer } from 'react-lea
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import 'react-leaflet-markercluster/dist/styles.min.css'
 import { v4 as uuidv4 } from 'uuid'
-import X2JS from 'x2js'
 import Button from '../admin/Button'
 import CollapseList from '../CollapseList'
-import Spinner from '../event-calendar/Spinner'
 import archiveIcon from '../../../assets/icons/archive.png'
 import libraryIcon from '../../../assets/icons/library.png'
 import museumIcon from '../../../assets/icons/museum.png'
@@ -181,7 +179,6 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 			record.decimal_longitude = parseFloat(record.decimal_longitude ?? 0)
 			return record
 		})
-		console.log('updatedRecords', updatedRecords)
 		setAllData(updatedRecords ?? [])
 		setFilteredData(updatedRecords ?? [])
 		const countries = Array.from(
@@ -481,7 +478,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 							if (marker.database_type === DB_TYPE_MAP.library) {
 								return (
 									<Marker
-										key={`L${marker.database_type}-${marker.accession_number}`}
+										key={`L${marker.database_type}-${uuidv4()}`}
 										position={[
 											marker?.decimal_latitude,
 											marker?.decimal_longitude,
@@ -562,7 +559,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 							if (marker.database_type === DB_TYPE_MAP.archive) {
 								return (
 									<Marker
-										key={`A${marker.database_type}-${marker.refd}`}
+										key={`A${marker.database_type}-${uuidv4()}`}
 										position={[
 											marker?.decimal_latitude,
 											marker?.decimal_longitude,
@@ -630,7 +627,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 							if (marker.database_type === DB_TYPE_MAP.museum) {
 								return (
 									<Marker
-										key={`M${marker.database_type}-${marker.accession_number}}`}
+										key={`M${marker.database_type}-${uuidv4()}`}
 										position={[
 											marker?.decimal_latitude,
 											marker?.decimal_longitude,
