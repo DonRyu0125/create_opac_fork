@@ -29,6 +29,7 @@ const DB_TYPE_MAP = {
 }
 
 interface DataType {
+	ca_name_occurrence?: string
 	all_title_word_occurrence: string
 	database_type: string
 	accession_number?: string
@@ -46,7 +47,7 @@ interface DataType {
 	gen_note?: string
 	author?: string
 	pauthor_occurrence?: string
-	physical_desc_occurrence?:string
+	scope: string
 }
 
 // Add background circle to icons using CSS
@@ -518,7 +519,10 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 															<td className="font-semibold py-1 pr-2">
 																Author
 															</td>
-															<td>{marker.pauthor_occurrence}</td>
+															<td>
+																{marker.pauthor_occurrence ||
+																	marker.ca_name_occurrence}
+															</td>
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
@@ -533,7 +537,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 															<td className="font-semibold py-1 pr-2">
 																General Note
 															</td>
-															<td>{marker.gen_note ?? 'n/a'}</td>
+															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
+																<td>{marker.gen_note ?? 'n/a'}</td>
+															</div>
 														</tr>
 													</tbody>
 												</table>
@@ -597,9 +603,11 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr>
 															<td className="font-semibold py-1 pr-2">
-																Physical Description
+																Description
 															</td>
-															<td>{marker.physical_desc_occurrence ?? 'n/a'}</td>
+															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
+																<td>{marker.scope ?? 'n/a'}</td>
+															</div>
 														</tr>
 													</tbody>
 												</table>
@@ -669,9 +677,11 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 															<td className="font-semibold py-1 pr-2">
 																Description
 															</td>
-															<td className="overflow-x-auto">
-																{marker.description ?? 'n/a'}
-															</td>
+															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
+																<td>
+																	{marker.description ?? 'n/a'}
+																</td>
+															</div>
 														</tr>
 													</tbody>
 												</table>

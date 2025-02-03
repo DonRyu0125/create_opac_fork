@@ -29,7 +29,7 @@ interface DataType {
 	gen_note?: string
 	author?: string
 	pauthor_occurrence?: string
-	physical_desc_occurrence?: string
+	ca_name_occurrence?: string
 }
 
 const Timeline = () => {
@@ -105,8 +105,8 @@ const Timeline = () => {
 					keyName: 'REFD',
 					key: 'REFD',
 					database: 'DESCRIPTION_WEB',
-					description_keyname: 'Physical Description',
-					description_key: 'physical_desc_occurrence',
+					description_keyname: 'Description',
+					description_key: 'scope',
 					title_key: 'title',
 				}
 			case 'Library':
@@ -140,7 +140,7 @@ const Timeline = () => {
 			<div className={`absolute top-3 left-0 z-40 w-[5px] h-[100px] bg-gray-600 `}></div>
 			<div
 				className={`w-full relative flex items-center h-36 justify-around overflow-x-auto custom-scrollbar px-2`}>
-				{data.map((item: DataType, idx: number) => {
+				{data.map((item: any, idx: number) => {
 					if (item.century) {
 						count++
 						return (
@@ -189,7 +189,7 @@ const Timeline = () => {
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.id}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600 border-b pb-2">
-														{item[`${title_key}`] ?? 'n/a'}
+														{item[title_key] ?? 'n/a'}
 													</h3>
 												</a>
 												{item?.imag_url && (
@@ -228,10 +228,23 @@ const Timeline = () => {
 																{description_keyname}
 															</td>
 															<td>
-																{item[`${description_key}`] ??
-																	'n/a'}
+																<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
+																	{item[description_key] ??
+																		'n/a'}
+																</div>
 															</td>
 														</tr>
+														{item?.database_type === 'Library' && (
+															<tr>
+																<td className="font-semibold py-1 pr-2">
+																	Author
+																</td>
+																<td>
+																	{item.pauthor_occurrence ||
+																		item.ca_name_occurrence}
+																</td>
+															</tr>
+														)}
 													</tbody>
 												</table>
 											</div>
