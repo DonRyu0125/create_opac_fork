@@ -29,6 +29,7 @@ const DB_TYPE_MAP = {
 }
 
 interface DataType {
+	all_title_word_occurrence: string
 	database_type: string
 	accession_number?: string
 	refd?: string
@@ -42,8 +43,10 @@ interface DataType {
 	date: string
 	imag_url: string
 	sisn: string
-	gen_note?:string
-	author?:string
+	gen_note?: string
+	author?: string
+	pauthor_occurrence?: string
+	physical_desc_occurrence?:string
 }
 
 // Add background circle to icons using CSS
@@ -489,7 +492,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${library.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=accession_number%20${marker.accession_number}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
-														{marker.title ?? 'n/a'}
+														{marker.all_title_word_occurrence ?? 'n/a'}
 													</h3>
 												</a>
 												{marker?.imag_url && (
@@ -505,11 +508,17 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 													<tbody>
 														<tr className="border-b">
 															<td className="font-semibold">
-																accession_number
+																Accession Number
 															</td>
 															<td>
 																{marker.accession_number ?? 'n/a'}{' '}
 															</td>
+														</tr>
+														<tr className="border-b">
+															<td className="font-semibold py-1 pr-2">
+																Author
+															</td>
+															<td>{marker.pauthor_occurrence}</td>
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
@@ -522,9 +531,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr>
 															<td className="font-semibold py-1 pr-2">
-																Date
+																General Note
 															</td>
-															<td>{marker.date ?? 'n/a'}</td>
+															<td>{marker.gen_note ?? 'n/a'}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -574,7 +583,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 												<table className="w-full text-sm">
 													<tbody>
 														<tr className="border-b">
-															<td className="font-semibold">refd</td>
+															<td className="font-semibold">Refd</td>
 															<td>{marker.refd ?? 'n/a'} </td>
 														</tr>
 														<tr className="border-b">
@@ -588,9 +597,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr>
 															<td className="font-semibold py-1 pr-2">
-																Date
+																Physical Description
 															</td>
-															<td>{marker.date ?? 'n/a'}</td>
+															<td>{marker.physical_desc_occurrence ?? 'n/a'}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -658,10 +667,10 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr>
 															<td className="font-semibold py-1 pr-2">
-																Date
+																Description
 															</td>
 															<td className="overflow-x-auto">
-																{marker.date ?? 'n/a'}
+																{marker.description ?? 'n/a'}
 															</td>
 														</tr>
 													</tbody>

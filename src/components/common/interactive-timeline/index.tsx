@@ -16,6 +16,20 @@ interface DataType {
 	database_type: string
 	imag_url: string
 	century?: string
+	all_title_word_occurrence: string
+	accession_number?: string
+	refd?: string
+	description: string
+	title: string
+	decimal_latitude: any
+	decimal_longitude: any
+	origin_country: string
+	origin_prv_state: string
+	origin_city: string
+	gen_note?: string
+	author?: string
+	pauthor_occurrence?: string
+	physical_desc_occurrence?: string
 }
 
 const Timeline = () => {
@@ -91,6 +105,9 @@ const Timeline = () => {
 					keyName: 'REFD',
 					key: 'REFD',
 					database: 'DESCRIPTION_WEB',
+					description_keyname: 'Physical Description',
+					description_key: 'physical_desc_occurrence',
+					title_key: 'title',
 				}
 			case 'Library':
 				return {
@@ -99,6 +116,9 @@ const Timeline = () => {
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
 					database: 'BIBLO_WEB',
+					description_keyname: 'General Note',
+					description_key: 'gen_note',
+					title_key: 'all_title_word_occurrence',
 				}
 			case 'Museum':
 				return {
@@ -107,6 +127,9 @@ const Timeline = () => {
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
 					database: 'COLLECTIONS_WEB',
+					description_keyname: 'Description',
+					description_key: 'description',
+					title_key: 'legal_title',
 				}
 		}
 	}
@@ -136,7 +159,14 @@ const Timeline = () => {
 							</div>
 						)
 					} else {
-						const { key, keyName, database }: any = getIconForType(item?.database_type)
+						const {
+							title_key,
+							key,
+							keyName,
+							database,
+							description_keyname,
+							description_key,
+						}: any = getIconForType(item?.database_type)
 						const timeIndex = parseInt(item?.time_index)
 						return (
 							<div
@@ -159,14 +189,14 @@ const Timeline = () => {
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.id}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600 border-b pb-2">
-														{item.legal_title ?? 'n/a'}
+														{item[`${title_key}`] ?? 'n/a'}
 													</h3>
 												</a>
 												{item?.imag_url && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
 															src={getImage(item.imag_url)}
-															alt="Library"
+															alt="image"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
 													</div>
@@ -192,6 +222,15 @@ const Timeline = () => {
 																{message.date}
 															</td>
 															<td>{item.date ?? 'n/a'}</td>
+														</tr>
+														<tr>
+															<td className="font-semibold py-1 pr-2">
+																{description_keyname}
+															</td>
+															<td>
+																{item[`${description_key}`] ??
+																	'n/a'}
+															</td>
 														</tr>
 													</tbody>
 												</table>
