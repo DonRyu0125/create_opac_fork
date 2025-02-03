@@ -34,7 +34,7 @@ interface DataType {
 
 const Timeline = () => {
 	const [data, setData] = useState<DataType[]>([])
-	const { message } = useConstants()
+	const { message,archives,library,museum } = useConstants()
 	let count = 0
 	const biblio_data: any =
 		useJSONData({
@@ -104,7 +104,7 @@ const Timeline = () => {
 					bgColor: 'bg-blue-900/80',
 					keyName: 'REFD',
 					key: 'REFD',
-					database: 'DESCRIPTION_WEB',
+					database: archives.database_name,
 					description_keyname: 'Description',
 					description_key: 'scope',
 					title_key: 'title',
@@ -115,7 +115,7 @@ const Timeline = () => {
 					bgColor: 'bg-red-600/90',
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
-					database: 'BIBLO_WEB',
+					database: library.database_name,
 					description_keyname: 'General Note',
 					description_key: 'gen_note',
 					title_key: 'all_title_word_occurrence',
@@ -126,7 +126,7 @@ const Timeline = () => {
 					bgColor: 'bg-yellow-400/90',
 					keyName: 'Accession Number',
 					key: 'ACCESSION_NUMBER',
-					database: 'COLLECTIONS_WEB',
+					database: museum.database_name,
 					description_keyname: 'Description',
 					description_key: 'description',
 					title_key: 'legal_title',
