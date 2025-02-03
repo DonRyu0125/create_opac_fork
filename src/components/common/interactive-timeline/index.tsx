@@ -145,6 +145,7 @@ const Timeline = () => {
 						count++
 						return (
 							<div
+								key={idx}
 								className={
 									'z-10 pr-1 mb-[15px] w-[20px] h-[110px] flex flex-col justify-between mb-1'
 								}>
@@ -229,8 +230,7 @@ const Timeline = () => {
 															</td>
 															<td>
 																<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
-																	{item[description_key] ??
-																		'n/a'}
+																	{item[description_key] ?? 'n/a'}
 																</div>
 															</td>
 														</tr>

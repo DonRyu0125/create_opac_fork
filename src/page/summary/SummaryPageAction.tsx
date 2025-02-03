@@ -105,7 +105,7 @@ const SummaryPageAction = () => {
 					<div className="flex flex-col space-y-4">
 						{filterArr.map((item, index) => (
 							<CollapseList title={item._title} expand={index === 0} key={item._name}>
-								<div className="space-y-3 border-t p-4">
+								<div className="space-y-3 border-t p-4 max-h-[500px] overflow-y-auto">
 									{item.item_group.map(
 										(option: {
 											item_link: string
