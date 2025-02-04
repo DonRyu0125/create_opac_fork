@@ -19,28 +19,33 @@ const DetailRecordAction = () => {
 	const record = records[0]
 	const requestData = record?.request
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
+	const database = record.database_name
+	console.log(record)
 	const handleSubmit = (action: string | null) => {
-		if (checkLoggedInToRequest()) {
-			switch (action) {
-				case 'Request':
+		if (checkLoggedInToRequest()){
+			const { refd, accession_number, title: recordTitle } = record.record;
+			const itemid = refd || accession_number || "";
+    		const title = recordTitle || "";
+			switch(action) {
+				case "Request":
 					if (formRef.current) {
 						formRef.current.submit()
 					} else {
 						console.log('Request Error')
 					}
-					break
-				case 'Enquire':
-					const url = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=ENQUIRIES_VIEW&DE_FORM=[OPAC_ENQUIRY]de_enquiryform.html&subject=${record.record.title}`
-					window.location.href = url
-					break
-				case 'Reproduction':
-					const { refd, accession_number, title: recordTitle } = record.record
-					const itemid = refd || accession_number || ''
-					const title = recordTitle || ''
-
-					const reprodURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_VIEW&DE_FORM=[OPAC_REPROD]de_reproductionform.html&title=${title}&itemid=${itemid}`
-					window.location.href = reprodURL
-					break
+					break;
+				case "Enquire":
+					const url = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=ENQUIRIES_VIEW&DE_FORM=[OPAC_ENQUIRY]de_enquiryform.html&subject=${record.record.title}`;
+					window.location.href = url;
+					break;
+				case "Reproduction":
+					const reprodURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_VIEW&DE_FORM=[OPAC_REPROD]de_reproductionform.html&title=${title}&itemid=${itemid}`;
+					window.location.href = reprodURL;
+					break;
+				case "Copyright":
+					const copyrightURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_COPY_VIEW&DE_FORM=[OPAC_COPYRIGHT]de_copyrightform.html&title=${title}&itemid=${itemid}&dbname=${database.split("_")[0]}`;
+					window.location.href = copyrightURL;
+					break;
 			}
 		}
 	}
@@ -189,6 +194,13 @@ const DetailRecordAction = () => {
 						onClick={() => handleSubmit('Reproduction')}>
 						<Files className="w-4 h-4 mr-2 hidden md:block" />
 						{message.detailRecordActionReproduction}
+					</TooltipButton>
+					<TooltipButton
+						tooltipContent="Copyright this record"
+						variant="outline"
+						onClick={() => handleSubmit("Copyright")}
+					>
+						<Files className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionCopyright}
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Copy record URL"

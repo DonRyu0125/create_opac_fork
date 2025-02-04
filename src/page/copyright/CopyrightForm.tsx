@@ -4,58 +4,52 @@ import { CircleEllipsis } from 'lucide-react'
 import { convertXMLToJson, getPatronID, getLanguageID } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '@/components/layouts'
 
-const ReproductionForm = () => {
-	const [data, setData] = useState([])
-	const [firstName, setFirstName] = useState('')
-	const [lastName, setLastName] = useState('')
-	const [fullName, setFullName] = useState('')
-	const [email, setEmail] = useState('')
-	const [title, setTitle] = useState('')
-	const [itemid, setItemID] = useState('')
+const CopyrightForm = () => {
+    const [data, setData] = useState([]);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [fullName, setFullName] = useState("");
+    const [email, setEmail] = useState("");
+    const [title, setTitle] = useState("");
+    const [itemid, setItemID] = useState("");
+    const [dbname, setDbName] = useState("");
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const title = queryParams.get("title")
+        const itemid = queryParams.get("itemid")
+        const dbname = queryParams.get("dbname")
+        if (title) setTitle(title)
+        if (itemid) setItemID(itemid)
+        if (dbname) setDbName(dbname)
+        
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`/scripts/mwimain.dll/${getLanguageID()}/CLIENT_VIEW/WEB_CLIENT/C_CLIENT_NUMBER%20${getPatronID()}?COMMANDSEARCH`,
+                { headers: { 'Content-Type': 'text/xml'}})
+                let responseXMLToJson = convertXMLToJson(response.data)
+                console.log(responseXMLToJson)
+                setData(responseXMLToJson)
+                setLastName(responseXMLToJson.client.name_last)
+                setFirstName(responseXMLToJson.client.name_first)
+                setFullName(responseXMLToJson.client.name_full)
+                setEmail(responseXMLToJson.client.email)
+            } catch (err) {
+              console.error('Error fetching data:', err);
+            }
+          };
+    
+        fetchData();
+      }, []);
 
-	useEffect(() => {
-		const queryParams = new URLSearchParams(window.location.search)
-		const title = queryParams.get('title')
-		const itemid = queryParams.get('itemid')
-		if (title) setTitle(title)
-		if (itemid) setItemID(itemid)
-
-		const fetchData = async () => {
-			try {
-				const response = await axios.get(
-					`/scripts/mwimain.dll/${getLanguageID()}/CLIENT_VIEW/WEB_CLIENT/C_CLIENT_NUMBER%20${getPatronID()}?COMMANDSEARCH`,
-					{ headers: { 'Content-Type': 'text/xml' } }
-				)
-				let responseXMLToJson = convertXMLToJson(response.data)
-				console.log(responseXMLToJson)
-				setData(responseXMLToJson)
-				setLastName(responseXMLToJson.client.name_last)
-				setFirstName(responseXMLToJson.client.name_first)
-				setFullName(responseXMLToJson.client.name_full)
-				setEmail(responseXMLToJson.client.email)
-			} catch (err) {
-				console.error('Error fetching data:', err)
-			}
-		}
-
-		fetchData()
-	}, [])
-
-	const formActionSaveRecord = document.querySelector('#enq-save-record')?.textContent as string
-	const skipNStopRecord = document.querySelector('#enq-skip-n-stop-record')?.textContent as string
-
+    const formActionSaveRecord = document.querySelector('#enq-save-record')?.textContent as string
+    const skipNStopRecord = document.querySelector('#enq-skip-n-stop-record')?.textContent as string
+    
 	const handleGoBack = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		window.history.back()
@@ -69,15 +63,14 @@ const ReproductionForm = () => {
 						{/* Header */}
 						<div className="flex justify-between items-center border-b pb-4">
 							<h1 className="flex items-center text-xl font-bold">
-								<CircleEllipsis className="mr-2" />
-								Submit Reproduction
-							</h1>
+                                <CircleEllipsis className='mr-2'/>Submit Copyright
+                            </h1>
 						</div>
 						<div className="py-4">
                             <form
                                 method="post"
                                 className="m-0"
-                                action={`${formActionSaveRecord}&RETURN_URL=[OPAC_REPROD]reproductionconfirmed.html`}>
+                                action={`${formActionSaveRecord}&RETURN_URL=[OPAC_COPYRIGHT]copyrightconfirmed.html`}>
                                 <Input
                                     type="hidden"
                                     name="METHOD_REQUEST"
@@ -97,13 +90,6 @@ const ReproductionForm = () => {
                                     name="REQ_TITLE"
                                     className='w-full p-2 border rounded mb-4'
                                     value={title}
-                                    readOnly
-                                />
-                                <Input
-                                    type="hidden"
-                                    name="REQ_ITEM_ID"
-                                    className='w-full p-2 border rounded mb-4'
-                                    value={itemid}
                                     readOnly
                                 />
                                 <div className="px-4 rounded grid grid-cols-1 gap-4">
@@ -146,6 +132,31 @@ const ReproductionForm = () => {
                                 </div>
                                 <div className="px-4 rounded grid grid-cols-2 gap-4">
                                     <div className=''>
+                                        <Label htmlFor="itemID" className="block text-sm font-semibold mb-1">Item ID*</Label>
+                                        <Input
+                                        id="itemID"
+                                        type="text"
+                                        className="w-full p-2 border rounded mb-4"
+                                        name="REQ_ITEM_ID"
+                                        value={itemid}
+                                        readOnly
+                                        />
+                                    </div>
+                                    <div className=''>
+                                        <Label htmlFor="dbname" className="block text-sm font-semibold mb-1">Item Source*</Label>
+                                        <Input
+                                        id="dbname"
+                                        type="text"
+                                        name="REQ_DB_NAME"
+                                        title="Item Source"
+                                        className="w-full p-2 border rounded"
+                                        value={dbname}
+                                        readOnly
+                                        />
+                                    </div>
+                                </div>
+                                <div className="px-4 rounded grid grid-cols-2 gap-4">
+                                    <div className=''>
                                         <Label htmlFor="reqTopic" className="block text-sm font-semibold mb-1">Topic*</Label>
                                         <Input
                                         id="reqTopic"
@@ -153,12 +164,12 @@ const ReproductionForm = () => {
                                         name="REQ_TOPIC"
                                         title="Topic"
                                         className="w-full p-2 border rounded mb-4"
-                                        value="Obtaining Reproductions"
+                                        value="Copyright Services"
                                         readOnly
                                         />
                                     </div>
                                     <div className=''>
-                                    <Label htmlFor="enqTopic" className="block text-sm font-semibold mb-1">Reproduction Type*</Label>
+                                    <Label htmlFor="reqType" className="block text-sm font-semibold mb-1">Reproduction Type*</Label>
                                         <Select name="REQ_REPRO_TYPE" required defaultValue='Digital Copy up to 18" x 25"'>
                                             <SelectTrigger className="w-full p-2 border rounded text-left">
                                                 <SelectValue placeholder={'Digital Copy up to 18" x 25"'}/>
@@ -209,19 +220,21 @@ const ReproductionForm = () => {
                                         className="bg-opac-darkblue rounded mr-1 hover:bg-opac-darkblue"
                                         type="submit"
                                         variant="default">
-                                        Submit Reproduction
+                                        Submit Copyright
                                     </Button>
                                     <Button
                                         className="bg-opac-darkblue rounded ml-1 hover:bg-opac-darkblue"
                                         type="submit"
                                         variant="default"
                                         onClick={handleGoBack}>
-                                        Cancel Reproduction
+                                        Cancel Copyright
                                     </Button>
                                 </div>
                                 
                             </form>
 						</div>
+
+						
 					</div>
 				</div>
 			</section>
@@ -229,4 +242,4 @@ const ReproductionForm = () => {
 	)
 }
 
-export default ReproductionForm
+export default CopyrightForm
