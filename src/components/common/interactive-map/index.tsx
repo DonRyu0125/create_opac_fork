@@ -530,7 +530,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 																{marker.origin_prv_state}
 															</td>
 														</tr>
-														<tr>
+														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																General Note
 															</td>
@@ -598,7 +598,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 																{marker.origin_prv_state}
 															</td>
 														</tr>
-														<tr>
+														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																Description
 															</td>
@@ -670,7 +670,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 																{marker.origin_prv_state}
 															</td>
 														</tr>
-														<tr>
+														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																Description
 															</td>
