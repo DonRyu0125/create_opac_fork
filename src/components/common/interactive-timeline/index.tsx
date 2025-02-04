@@ -218,13 +218,13 @@ const Timeline = () => {
 																{item.id}
 															</td>
 														</tr>
-														<tr>
+														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																{message.date}
 															</td>
 															<td>{item.date ?? 'n/a'}</td>
 														</tr>
-														<tr>
+														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																{description_keyname}
 															</td>
@@ -235,7 +235,7 @@ const Timeline = () => {
 															</td>
 														</tr>
 														{item?.database_type === 'Library' && (
-															<tr>
+															<tr className="border-b">
 																<td className="font-semibold py-1 pr-2">
 																	Author
 																</td>
