@@ -23,9 +23,9 @@ const DetailRecordAction = () => {
 	console.log(record)
 	const handleSubmit = (action: string | null) => {
 		if (checkLoggedInToRequest()){
-			const { refd, accession_number, title: recordTitle } = record.record;
+			const { refd, accession_number, title: recordTitle, legal_title: recordLegalTitle } = record.record;
 			const itemid = refd || accession_number || "";
-    		const title = recordTitle || "";
+    		const title = recordLegalTitle || recordTitle || "";
 			switch(action) {
 				case "Request":
 					if (formRef.current) {
