@@ -74,7 +74,7 @@ const Timeline = () => {
 			let centuryLabel;
 
 			if (timeIndex >= 10000) {
-				const century = Math.floor((timeIndex - 10000) / 500) * 500
+				const century = Math.floor((timeIndex - 10000) / 400) * 400
 				centuryLabel = century === 0 ? 'AD 0' : `AD ${century}`
 			} else {
 				const offset = 10000 - timeIndex
