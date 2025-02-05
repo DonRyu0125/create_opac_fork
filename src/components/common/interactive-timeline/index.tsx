@@ -71,7 +71,7 @@ const Timeline = () => {
 
 		records.forEach((item) => {
 			const timeIndex = parseInt(item.time_index)
-			let centuryLabel
+			let centuryLabel;
 
 			if (timeIndex >= 10000) {
 				const century = Math.floor((timeIndex - 10000) / 1000) * 1000
@@ -149,12 +149,12 @@ const Timeline = () => {
 								className={
 									'z-10 pr-1 mb-[15px] w-[20px] h-[110px] flex flex-col justify-between mb-1'
 								}>
-								<div className="text-left text-xs w-[52px] h-[20px]">
+								<div className="text-left text-xs w-[52px] h-[20px] font-bold">
 									{count % 2 === 1 && item.century}
 								</div>
 								<div
 									className={`w-[4px] h-[90px] cursor-pointer transition-transform bg-gray-400 `}></div>
-								<div className="text-left text-xs w-[52px] h-[20px] mt-1">
+								<div className="text-left text-xs w-[52px] h-[20px] mt-1 font-bold">
 									{count % 2 === 0 && item.century}
 								</div>
 							</div>
