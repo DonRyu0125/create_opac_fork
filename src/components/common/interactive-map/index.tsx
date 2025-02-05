@@ -1,7 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import useConstants from '@/hooks/useConstants'
-import { getImage, getSessionID } from '@/lib/utils'
+import { convertToArr, getImage, getSessionID } from '@/lib/utils'
 import axios from 'axios'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -170,9 +170,9 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 
 	const fetch_get = async () => {
 		let files = [
-			...(biblio_data?.xml?.record || []),
-			...(collection_data?.xml?.record || []),
-			...(description_data?.xml?.record || []),
+			...(convertToArr(biblio_data?.xml?.record) || []),
+			...(convertToArr(collection_data?.xml?.record) || []),
+			...(convertToArr(description_data?.xml?.record) || []),
 		]
 		const updatedRecords = files.map((record: DataType) => {
 			record.decimal_latitude = parseFloat(record.decimal_latitude ?? 0)
@@ -478,7 +478,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 							if (marker.database_type === DB_TYPE_MAP.library) {
 								return (
 									<Marker
-										key={`L${marker.database_type}-${uuidv4()}`}
+										key={`L${marker.database_type}-${uuidv4().substring(10)}`}
 										position={[
 											marker?.decimal_latitude,
 											marker?.decimal_longitude,
@@ -559,7 +559,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 							if (marker.database_type === DB_TYPE_MAP.archive) {
 								return (
 									<Marker
-										key={`A${marker.database_type}-${uuidv4()}`}
+										key={`A${marker.database_type}-${uuidv4().substring(10)}`}
 										position={[
 											marker?.decimal_latitude,
 											marker?.decimal_longitude,
@@ -627,7 +627,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 							if (marker.database_type === DB_TYPE_MAP.museum) {
 								return (
 									<Marker
-										key={`M${marker.database_type}-${uuidv4()}`}
+										key={`M${marker.database_type}-${uuidv4().substring(10)}`}
 										position={[
 											marker?.decimal_latitude,
 											marker?.decimal_longitude,

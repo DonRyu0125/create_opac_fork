@@ -3,7 +3,7 @@ import * as Popover from '@radix-ui/react-popover'
 import archiveIcon from '../../../assets/icons/archive.png'
 import libraryIcon from '../../../assets/icons/library.png'
 import museumIcon from '../../../assets/icons/museum.png'
-import { getImage } from '@/lib/utils'
+import { convertToArr, getImage } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 
@@ -57,11 +57,10 @@ const Timeline = () => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
 		let files = [
-			...(biblio_data?.xml?.record || []),
-			...(collection_data?.xml?.record || []),
-			...(description_data?.xml?.record || []),
+			...(convertToArr(biblio_data?.xml?.record) || []),
+			...(convertToArr(collection_data?.xml?.record) || []),
+			...(convertToArr(description_data?.xml?.record) || []),
 		]
-
 		const records = files
 			.map((record: DataType) => ({
 				...record,
