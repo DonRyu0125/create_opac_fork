@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-preprocessing/*.TXT
+preprocessing
 
 node_modules
 dist/
