@@ -170,5 +170,11 @@
 	"descriptionTree": "Liste complète des collections",
 	"topPick": "Nos coups de coeur",
 	"Type": "Taper",
-	"timeline":"chronologie"
+	"timeline":"chronologie",
+	"selectTheCountry": "Sélectionner le pays",
+    "selectTheProvince": "Sélectionner la province",
+    "description": "Description",
+    "accessionNumber": "Numéro d'accession",
+    "generalNote": "Note générale",
+    "author": "Auteur"
 }

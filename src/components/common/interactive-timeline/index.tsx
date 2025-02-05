@@ -104,7 +104,7 @@ const Timeline = () => {
 					keyName: 'REFD',
 					key: 'REFD',
 					database: archives.database_name,
-					description_keyname: 'Description',
+					description_keyname: message.description,
 					description_key: 'scope',
 					title_key: 'title',
 				}
@@ -112,10 +112,10 @@ const Timeline = () => {
 				return {
 					icon: libraryIcon,
 					bgColor: 'bg-red-600/90',
-					keyName: 'Accession Number',
+					keyName: message.accessionNumber,
 					key: 'ACCESSION_NUMBER',
 					database: library.database_name,
-					description_keyname: 'General Note',
+					description_keyname: message.generalNote,
 					description_key: 'gen_note',
 					title_key: 'all_title_word_occurrence',
 				}
@@ -123,10 +123,10 @@ const Timeline = () => {
 				return {
 					icon: museumIcon,
 					bgColor: 'bg-yellow-400/90',
-					keyName: 'Accession Number',
+					keyName: message.accessionNumber,
 					key: 'ACCESSION_NUMBER',
 					database: museum.database_name,
-					description_keyname: 'Description',
+					description_keyname: message.description,
 					description_key: 'description',
 					title_key: 'legal_title',
 				}
@@ -236,7 +236,7 @@ const Timeline = () => {
 														{item?.database_type === 'Library' && (
 															<tr className="border-b">
 																<td className="font-semibold py-1 pr-2">
-																	Author
+																	{message.author}
 																</td>
 																<td>
 																	{item.pauthor_occurrence ||

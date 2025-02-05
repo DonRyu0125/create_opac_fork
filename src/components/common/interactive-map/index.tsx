@@ -397,7 +397,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 								})
 							) : (
 								<div className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-									'Select the Country'
+									{message.selectTheCountry}
 								</div>
 							)}
 						</div>
@@ -421,7 +421,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 								})
 							) : (
 								<div className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-									'Select the Province'
+									{message.selectTheProvince}
 								</div>
 							)}
 						</div>
@@ -506,7 +506,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 													<tbody>
 														<tr className="border-b">
 															<td className="font-semibold">
-																Accession Number
+																{message.accessionNumber}
 															</td>
 															<td>
 																{marker.accession_number ?? 'n/a'}{' '}
@@ -514,7 +514,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
-																Author
+																{message.author}
 															</td>
 															<td>
 																{marker.pauthor_occurrence ||
@@ -523,7 +523,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
-																Location
+																{message.location}
 															</td>
 															<td>
 																{marker.origin_city},
@@ -532,7 +532,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
-																General Note
+																{message.generalNote}
 															</td>
 															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
 																<td>{marker.gen_note ?? 'n/a'}</td>
@@ -591,7 +591,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
-																Location
+																{message.location}
 															</td>
 															<td>
 																{marker.origin_city},
@@ -600,7 +600,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
-																Description
+																{message.description}
 															</td>
 															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
 																<td>{marker.scope ?? 'n/a'}</td>
@@ -655,7 +655,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 													<tbody>
 														<tr className="border-b">
 															<td className="font-semibold">
-																Accession Number
+																{message.accessionNumber}
 															</td>
 															<td className="overflow-x-auto">
 																{marker.accession_number ?? 'n/a'}{' '}
@@ -663,7 +663,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
-																Location
+																{message.location}
 															</td>
 															<td className="overflow-x-auto">
 																{marker.origin_city},
@@ -672,7 +672,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
-																Description
+																{message.description}
 															</td>
 															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
 																<td>
