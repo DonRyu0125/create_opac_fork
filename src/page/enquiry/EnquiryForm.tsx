@@ -20,6 +20,7 @@ const EnquiryForm = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [fullName, setFullName] = useState("");
+    const [patronName, setPatronName] = useState("")
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
     const [inputInquiry, setInputInquiry] = useState("")
@@ -53,6 +54,10 @@ const EnquiryForm = () => {
     const formActionSaveRecord = document.querySelector('#enq-save-record')?.textContent as string
     const skipNStopRecord = document.querySelector('#enq-skip-n-stop-record')?.textContent as string
     
+    const handleChange = (e) => {
+        setPatronName(e.target.value);
+    }
+
     const passInquiryToMESSAGETEXT = () => {
         setMessageText(inputInquiry)
     }
@@ -78,13 +83,18 @@ const EnquiryForm = () => {
                                 method="post"
                                 className="m-0"
                                 action={`${formActionSaveRecord}&RETURN_URL=[OPAC_ENQUIRY]enquiryConfirmed.html`}>
-                                <Input
+                                {getPatronID() ? <Input
                                     type="hidden"
                                     name="ENQ_PATRON_NAME"
                                     className='w-full p-2 border rounded mb-4'
                                     value={`${firstName} ${lastName}`}
                                     readOnly
-                                />
+                                /> : <Input
+                                type="hidden"
+                                name="ENQ_PATRON_NAME"
+                                value={patronName}
+                                readOnly
+                              />}
                                 <Input
                                     type="hidden"
                                     name="E_METHOD_REQUEST"
@@ -142,27 +152,7 @@ const EnquiryForm = () => {
                                     readOnly
                                 /> : ""}
                                 <div className="px-4 rounded grid grid-cols-1 gap-4">
-                                    {/* <div className=''>
-                                        <Label htmlFor="firstName" className="block text-sm font-semibold mb-1">First Name*</Label>
-                                        <Input
-                                        id="firstName"
-                                        type="text"
-                                        className="w-full p-2 border rounded mb-4"
-                                        name=""
-                                        value={firstName}
-                                        readOnly
-                                        />
-                                    </div>
-                                    <div className=''>
-                                        <Label htmlFor="lastName" className="block text-sm font-semibold mb-1">Last Name*</Label>
-                                        <Input
-                                        id="lastName"
-                                        type="text"
-                                        className="w-full p-2 border rounded"
-                                        value={lastName}
-                                        readOnly
-                                        />
-                                    </div> */}
+
                                     <div className=''>
                                         <Label htmlFor="firstName" className="block text-sm font-semibold mb-1">Full Name*</Label>
                                         <Input
