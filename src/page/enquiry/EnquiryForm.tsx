@@ -160,6 +160,7 @@ const EnquiryForm = () => {
                                         type="text"
                                         className="w-full p-2 border rounded mb-4"
                                         name="ENQ_USER"
+                                        onChange={handleChange}
                                         defaultValue={getPatronID() ? fullName : ""}
                                         readOnly={!!getPatronID()}
                                         />
