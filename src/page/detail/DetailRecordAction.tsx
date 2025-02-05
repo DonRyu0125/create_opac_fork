@@ -22,7 +22,7 @@ const DetailRecordAction = () => {
 	const database = record.database_name
 	console.log(record)
 	const handleSubmit = (action: string | null) => {
-		if (checkLoggedInToRequest()){
+		if (checkLoggedInToRequest( action )){
 			const { refd, accession_number, title: recordTitle, legal_title: recordLegalTitle } = record.record;
 			const itemid = refd || accession_number || "";
     		const title = recordLegalTitle || recordTitle || "";
@@ -47,13 +47,16 @@ const DetailRecordAction = () => {
 					window.location.href = copyrightURL;
 					break;
 			}
+		} else {
+			if(action === "Enquire") { 
+				const url = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=ENQUIRIES_VIEW&DE_FORM=[OPAC_ENQUIRY]de_enquiryform.html&subject=${record.record.title}`;
+				window.location.href = url;
+			}
 		}
 	}
 
 	const goToURL = (url: string | null) => {
-		if (url) {
-			window.location.href = url
-		}
+		if (url) window.location.href = url
 	}
 
 	const checkRecordHasMandatoryDataToRequest = () => {
@@ -68,10 +71,19 @@ const DetailRecordAction = () => {
 		return requestable
 	}
 
-	const checkLoggedInToRequest = () => {
+	const checkIfCurrentClientRequestedThisRecord = () => {
+		const recordRequested = record.record?.is_requested_by_client
+		let currentClientRequested = false
+		if (recordRequested === 'Current') {
+			currentClientRequested = true
+		}
+		return currentClientRequested
+	}
+
+	const checkLoggedInToRequest = (action: string | null) => {
 		let isLoggedIn = false
 		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-		if (patronID === null || patronID === undefined || patronID === '') {
+		if ((patronID === null || patronID === undefined || patronID === '') && action !== "Enquire") {
 			setIsModalOpen(true)
 		} else {
 			isLoggedIn = true
