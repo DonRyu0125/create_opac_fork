@@ -54,7 +54,7 @@ const EnquiryForm = () => {
     const formActionSaveRecord = document.querySelector('#enq-save-record')?.textContent as string
     const skipNStopRecord = document.querySelector('#enq-skip-n-stop-record')?.textContent as string
     
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<any>) => {
         setPatronName(e.target.value);
     }
 

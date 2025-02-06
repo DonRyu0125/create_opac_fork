@@ -102,95 +102,42 @@ const DetailRecordAction = () => {
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
 
-				<div className="flex flex-col md:flex-row gap-2">
-					{checkRecordHasMandatoryDataToRequest() ? (
-						// && checkIfCurrentClientRequestedThisRecord()
-						<TooltipButton
-							tooltipContent="Request Record"
-							variant="outline"
-							onClick={() => handleSubmit('Request')}>
-							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />
-							{message.detailRecordActionRequest}
-							<form
-								method="post"
-								ref={formRef}
-								action={
-									getHomeSessionID() +
-									'/1/' +
-									record.request.req_db_link2 +
-									'?REQUESTLOGIN&DBNAME=' +
-									record.request.req_db_name
-								}
-								className="hidden">
-								<Input
-									type="hidden"
-									name="ITEM_REQ_TIME"
-									value={requestData.item_req_time}
-								/>
-								<Input
-									type="hidden"
-									name="METHOD_REQUEST"
-									value={requestData.method_request}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_TOPIC"
-									value={requestData.req_topic}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_APPL_NAME"
-									value={requestData.req_appl_name}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_DB_NAME"
-									value={requestData.req_db_name}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_DB_LINK2"
-									value={requestData.req_db_link2}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_QUEUE"
-									value={requestData.req_queue}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_DB_RECID"
-									value={requestData.req_db_recid}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_TITLE"
-									value={requestData.req_title}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_ITEM_ID"
-									value={requestData.req_item_id}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_ITEM_TITLE"
-									value={requestData.req_item_title}
-								/>
-								<Button
-									className="bg-opac-darkblue"
-									type="submit"
-									variant="default">
-									Submit
-								</Button>
-							</form>
-						</TooltipButton>
-					) : (
-						<TooltipButton tooltipContent="Request Record" variant="outline" disabled>
-							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />
-							{message.detailRecordActionRequest}
-						</TooltipButton>
-					)}
+				<div className="flex space-x-2">
+					{checkRecordHasMandatoryDataToRequest() 
+					&& checkIfCurrentClientRequestedThisRecord() 
+					? 
+					<TooltipButton
+						tooltipContent="Request Record"
+						variant="outline"
+						onClick={() => handleSubmit("Request")}
+					>
+						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
+						<form method="post" ref={formRef} action={getHomeSessionID() + "/1/" + record.request.req_db_link2 + "?REQUESTLOGIN&DBNAME=" + record.request.req_db_name} className='hidden'>
+							<Input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time}/>
+							<Input type="hidden" name="METHOD_REQUEST" value={requestData.method_request}/>
+							<Input type="hidden" name="REQ_TOPIC" value={requestData.req_topic}/>
+							<Input type="hidden" name="REQ_APPL_NAME" value={requestData.req_appl_name}/>
+							<Input type="hidden" name="REQ_DB_NAME" value={ requestData.req_db_name}/>
+							<Input type="hidden" name="REQ_DB_LINK2" value={requestData.req_db_link2}/>
+							<Input type="hidden" name="REQ_QUEUE" value={requestData.req_queue}/>
+							<Input type="hidden" name="REQ_DB_RECID" value={requestData.req_db_recid}/>
+							<Input type="hidden" name="REQ_TITLE" value={requestData.req_title}/>
+							<Input type="hidden" name="REQ_ITEM_ID" value={requestData.req_item_id}/>
+							<Input type="hidden" name="REQ_ACC_NUMBER" value={requestData.req_acc_number}/>
+							<Input type="hidden" name="REQ_ITEM_TITLE" value={requestData.req_item_title}/>
+							<Button
+								className="bg-opac-darkblue"
+								type="submit"
+								variant="default">
+								Submit
+							</Button>
+						</form>
+					</TooltipButton> : <TooltipButton
+						tooltipContent="Request Record"
+						variant="outline"
+						disabled>
+						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
+					</TooltipButton>}
 
 					<TooltipButton
 						tooltipContent="Ask about this record"
