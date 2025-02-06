@@ -3,9 +3,9 @@ import * as Popover from '@radix-ui/react-popover'
 import archiveIcon from '../../../assets/icons/archive.png'
 import libraryIcon from '../../../assets/icons/library.png'
 import museumIcon from '../../../assets/icons/museum.png'
-import { convertToArr, getImage } from '@/lib/utils'
+import { convertXMLToJson, getImage } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
-import useJSONData from '@/hooks/useJSONData'
+import axios from 'axios'
 
 interface DataType {
 	legal_title: string
@@ -34,20 +34,8 @@ interface DataType {
 
 const Timeline = () => {
 	const [data, setData] = useState<DataType[]>([])
-	const { message,archives,library,museum } = useConstants()
+	const { message, archives, library, museum } = useConstants()
 	let count = 0
-	const biblio_data: any =
-		useJSONData({
-			selector: '#BIBLIO_WEB_TIMELINE',
-		}).data ?? []
-	const collection_data: any =
-		useJSONData({
-			selector: '#COLLECTIONS_WEB_TIMELINE',
-		}).data ?? []
-	const description_data: any =
-		useJSONData({
-			selector: '#DESCRIPTION_WEB_TIMELINE',
-		}).data ?? []
 
 	useEffect(() => {
 		getData()
@@ -56,43 +44,64 @@ const Timeline = () => {
 	const getData = async () => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
-		let files = [
-			...(convertToArr(biblio_data?.xml?.record) || []),
-			...(convertToArr(collection_data?.xml?.record) || []),
-			...(convertToArr(description_data?.xml?.record) || []),
+
+		const filePaths = [
+			'/preprocessing/BIBLIO_WEB_TIMELINE.html',
+			'/preprocessing/COLLECTIONS_WEB_TIMELINE.html',
+			'/preprocessing/DESCRIPTION_WEB_TIMELINE.html',
 		]
-		const records = files
-			.map((record: DataType) => ({
-				...record,
-				time_index: record.time_index?.split('--')[0],
-			}))
-			.sort((a: any, b: any) => a.time_index - b.time_index)
 
-		records.forEach((item) => {
-			const timeIndex = parseInt(item.time_index)
-			let centuryLabel;
+		let files: DataType[] = []
 
-			if (timeIndex >= 10000) {
-				const century = Math.floor((timeIndex - 10000) / 400) * 400
-				centuryLabel = century === 0 ? 'AD 0' : `AD ${century}`
-			} else {
-				const offset = 10000 - timeIndex
-				const century = Math.floor(offset / 1000) * 1000
-				centuryLabel = `BC ${century + 1000}`
-			}
+		try {
+			const responses = await Promise.all(filePaths.map((path) => axios.get(path)))
+			responses.forEach((response) => {
+				const json = convertXMLToJson(response.data)
+				if (json && json.xml && json.xml.record) {
+					files.push(
+						...json.xml.record.map((record: DataType) =>
+							Object.fromEntries(
+								Object.entries(record).map(([key, value]) => [
+									key.toLowerCase(),
+									typeof value === 'object' && value !== null ? value : value,
+								])
+							)
+						)
+					)
+				}
+			})
 
-			if (
-				centuryLabel !== currentCenturyLabel &&
-				!(centuryLabel === 'BC 0' && currentCenturyLabel?.startsWith('BC'))
-			) {
-				centuries.push({ century: centuryLabel })
-				currentCenturyLabel = centuryLabel
-			}
+			const records = files
+				.map((record: DataType) => ({
+					...record,
+					time_index: record.time_index?.split('--')[0],
+				}))
+				.sort((a: any, b: any) => a.time_index - b.time_index)
 
-			centuries.push(item)
-		})
-
-		setData(centuries)
+			records.forEach((item) => {
+				const timeIndex = parseInt(item.time_index)
+				let centuryLabel
+				if (timeIndex >= 10000) {
+					const century = Math.floor((timeIndex - 10000) / 400) * 400
+					centuryLabel = century === 0 ? 'AD 0' : `AD ${century}`
+				} else {
+					const offset = 10000 - timeIndex
+					const century = Math.floor(offset / 1000) * 1000
+					centuryLabel = `BC ${century + 1000}`
+				}
+				if (
+					centuryLabel !== currentCenturyLabel &&
+					!(centuryLabel === 'BC 0' && currentCenturyLabel?.startsWith('BC'))
+				) {
+					centuries.push({ century: centuryLabel })
+					currentCenturyLabel = centuryLabel
+				}
+				centuries.push(item)
+			})
+			setData(centuries)
+		} catch (error) {
+			console.error('Error fetching files:', error)
+		}
 	}
 
 	const getIconForType = (databaseType: string) => {
