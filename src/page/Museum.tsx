@@ -25,7 +25,7 @@ const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 		enableFeaturedCollection,
 		enableRSVP,
 		enableMap,
-		enableTimeline
+		enableTimeline,
 	} = useConstants().museum
 	return (
 		<Layout>
@@ -58,12 +58,12 @@ const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap DB_TYPE={'COLLECTIONS_WEB'} />
+					<InterativeMap page={'museum'} />
 				</Section>
 			)}
-						{enableTimeline && (
+			{enableTimeline && (
 				<Section heading={`${message.timeline}`}>
-					<TimeLine />
+					<TimeLine page={'museum'} />
 				</Section>
 			)}
 		</Layout>
