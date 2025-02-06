@@ -44,15 +44,12 @@ const Timeline = () => {
 	const getData = async () => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
-
 		const filePaths = [
 			'/preprocessing/BIBLIO_WEB_TIMELINE.html',
 			'/preprocessing/COLLECTIONS_WEB_TIMELINE.html',
 			'/preprocessing/DESCRIPTION_WEB_TIMELINE.html',
 		]
-
 		let files: DataType[] = []
-
 		try {
 			const responses = await Promise.all(filePaths.map((path) => axios.get(path)))
 			responses.forEach((response) => {

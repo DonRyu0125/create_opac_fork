@@ -1,7 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import useConstants from '@/hooks/useConstants'
-import { convertToArr, getImage, getSessionID } from '@/lib/utils'
+import { convertToArr, convertXMLToJson, getImage, getSessionID } from '@/lib/utils'
 import axios from 'axios'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -17,8 +17,6 @@ import archiveIcon from '../../../assets/icons/archive.png'
 import libraryIcon from '../../../assets/icons/library.png'
 import museumIcon from '../../../assets/icons/museum.png'
 import './style.css'
-import dummy from './dummy.json'
-import useJSONData from '@/hooks/useJSONData'
 
 const DB_TYPE_MAP = {
 	library: 'Library',
@@ -120,18 +118,6 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 		databases: [],
 		countries: [],
 	})
-	const biblio_data: any =
-		useJSONData({
-			selector: '#BIBLIO_WEB_MAP',
-		}).data ?? []
-	const collection_data: any =
-		useJSONData({
-			selector: '#COLLECTIONS_WEB_MAP',
-		}).data ?? []
-	const description_data: any =
-		useJSONData({
-			selector: '#DESCRIPTION_WEB_MAP',
-		}).data ?? []
 
 	useEffect(() => {
 		fetch_get()
@@ -169,11 +155,32 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 	}, [selectedDatabases, selectedCountries, selectedProvinces, selectedCities, allData])
 
 	const fetch_get = async () => {
-		let files = [
-			...(convertToArr(biblio_data?.xml?.record) || []),
-			...(convertToArr(collection_data?.xml?.record) || []),
-			...(convertToArr(description_data?.xml?.record) || []),
+		const filePaths = [
+			'/preprocessing/BIBLIO_WEB_MAP.html',
+			'/preprocessing/COLLECTIONS_WEB_MAP.html',
+			'/preprocessing/DESCRIPTION_WEB_MAP.html',
 		]
+		let files: DataType[] = []
+		try {
+			const responses = await Promise.all(filePaths.map((path) => axios.get(path)))
+			responses.forEach((response) => {
+				const json = convertXMLToJson(response.data)
+				if (json && json.xml && json.xml.record) {
+					files.push(
+						...json.xml.record.map((record: DataType) =>
+							Object.fromEntries(
+								Object.entries(record).map(([key, value]) => [
+									key.toLowerCase(),
+									typeof value === 'object' && value !== null ? value : value,
+								])
+							)
+						)
+					)
+				}
+			})
+		} catch (error) {
+			console.error('Error fetching files:', error)
+		}
 		const updatedRecords = files.map((record: DataType) => {
 			record.decimal_latitude = parseFloat(record.decimal_latitude ?? 0)
 			record.decimal_longitude = parseFloat(record.decimal_longitude ?? 0)
