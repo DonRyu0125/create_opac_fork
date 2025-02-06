@@ -54,18 +54,19 @@ const Timeline = () => {
 			const responses = await Promise.all(filePaths.map((path) => axios.get(path)))
 			responses.forEach((response) => {
 				const json = convertXMLToJson(response.data)
-				if (json && json.xml && json.xml.record) {
-					files.push(
-						...json.xml.record.map((record: DataType) =>
-							Object.fromEntries(
-								Object.entries(record).map(([key, value]) => [
-									key.toLowerCase(),
-									typeof value === 'object' && value !== null ? value : value,
-								])
-							)
+				json.xml.record = Array.isArray(json.xml.record)
+					? json.xml.record
+					: [json.xml.record]
+				files.push(
+					...json.xml.record.map((record: DataType) =>
+						Object.fromEntries(
+							Object.entries(record).map(([key, value]) => [
+								key.toLowerCase(),
+								typeof value === 'object' && value !== null ? value : value,
+							])
 						)
 					)
-				}
+				)
 			})
 
 			const records = files

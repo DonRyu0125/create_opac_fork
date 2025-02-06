@@ -165,7 +165,10 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 			const responses = await Promise.all(filePaths.map((path) => axios.get(path)))
 			responses.forEach((response) => {
 				const json = convertXMLToJson(response.data)
-				if (json && json.xml && json.xml.record) {
+				json.xml.record = Array.isArray(json.xml.record)
+					? json.xml.record
+					: [json.xml.record]
+				if (json.xml.record) {
 					files.push(
 						...json.xml.record.map((record: DataType) =>
 							Object.fromEntries(
