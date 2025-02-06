@@ -107,7 +107,7 @@ const DetailRecordAction = () => {
 
 				<div className="flex space-x-2">
 					{checkRecordHasMandatoryDataToRequest() 
-					// && checkIfCurrentClientRequestedThisRecord() 
+					&& checkIfCurrentClientRequestedThisRecord() 
 					? 
 					<TooltipButton
 						tooltipContent="Request Record"
