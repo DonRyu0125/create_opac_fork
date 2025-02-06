@@ -105,12 +105,12 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap />
+					<InterativeMap page={'home'}/>
 				</Section>
 			)}
 			{enableTimeline && (
 				<Section heading={`${message.timeline}`}>
-					<TimeLine />
+					<TimeLine page={'home'}/>
 				</Section>
 			)}
 			{enableRecentAddition && (

@@ -26,7 +26,7 @@ const Library = ({ previewMode = false, previewData }: MainPageProps) => {
 		enableRSVP,
 		enableMap,
 		enableCategoriesItems,
-		enableTimeline
+		enableTimeline,
 	} = useConstants().library
 	return (
 		<Layout>
@@ -61,12 +61,12 @@ const Library = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap DB_TYPE={'BIBLIO_WEB'} />
+					<InterativeMap page={'library'} />
 				</Section>
 			)}
 			{enableTimeline && (
 				<Section heading={`${message.timeline}`}>
-					<TimeLine />
+					<TimeLine page={'library'} />
 				</Section>
 			)}
 		</Layout>

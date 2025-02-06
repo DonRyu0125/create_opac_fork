@@ -26,7 +26,7 @@ const Archives = ({ previewMode = false, previewData }: MainPageProps) => {
 		enableCategoriesItems,
 		enableRSVP,
 		enableMap,
-		enableTimeline
+		enableTimeline,
 	} = useConstants().archives
 	return (
 		<Layout>
@@ -63,12 +63,12 @@ const Archives = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap DB_TYPE={'DESCRIPTION_WEB'} />
+					<InterativeMap page={'archives'} />
 				</Section>
 			)}
 			{enableTimeline && (
 				<Section heading={`${message.timeline}`}>
-					<TimeLine />
+					<TimeLine page={'archives'} />
 				</Section>
 			)}
 		</Layout>

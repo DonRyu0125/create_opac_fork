@@ -105,7 +105,7 @@ const createClusterIcon = function (cluster: any, iconUrl: string, bgColor: stri
 	})
 }
 
-const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
+const InteractiveMap = ({ page }: { page: string }) => {
 	const { archives, museum, library } = useConstants()
 	const { message } = useConstants()
 	const [allData, setAllData] = useState<any>([])
@@ -155,34 +155,40 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 	}, [selectedDatabases, selectedCountries, selectedProvinces, selectedCities, allData])
 
 	const fetch_get = async () => {
-		const filePaths = [
-			'/preprocessing/BIBLIO_WEB_MAP.html',
-			'/preprocessing/COLLECTIONS_WEB_MAP.html',
-			'/preprocessing/DESCRIPTION_WEB_MAP.html',
-		]
+		const filePaths = getFilePaths(page)
 		let files: DataType[] = []
+
 		try {
-			const responses = await Promise.all(filePaths.map((path) => axios.get(path)))
-			responses.forEach((response) => {
-				const json = convertXMLToJson(response.data)
-				json.xml.record = Array.isArray(json.xml.record)
-					? json.xml.record
-					: [json.xml.record]
-				if (json.xml.record) {
-					files.push(
-						...json.xml.record.map((record: DataType) =>
-							Object.fromEntries(
-								Object.entries(record).map(([key, value]) => [
-									key.toLowerCase(),
-									typeof value === 'object' && value !== null ? value : value,
-								])
+			const responses = await Promise.allSettled(filePaths.map((path) => axios.get(path)))
+			const validResponses = responses
+				.filter((res) => res.status === 'fulfilled' && res.value?.data?.trim())
+				.map((res) => (res as PromiseFulfilledResult<any>).value)
+
+			if (validResponses.length === 0) {
+				console.warn('All files are empty or invalid.')
+			} else {
+				validResponses.forEach((response) => {
+					const json = convertXMLToJson(response.data)
+					json.xml.record = Array.isArray(json.xml.record)
+						? json.xml.record
+						: [json.xml.record]
+
+					if (json.xml.record) {
+						files.push(
+							...json.xml.record.map((record: DataType) =>
+								Object.fromEntries(
+									Object.entries(record).map(([key, value]) => [
+										key.toLowerCase(),
+										typeof value === 'object' && value !== null ? value : value,
+									])
+								)
 							)
 						)
-					)
-				}
-			})
+					}
+				})
+			}
 		} catch (error) {
-			console.error('Error fetching files:', error)
+			console.warn('Error fetching files:', error)
 		}
 		const updatedRecords = files.map((record: DataType) => {
 			record.decimal_latitude = parseFloat(record.decimal_latitude ?? 0)
@@ -195,6 +201,25 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 			new Set(updatedRecords?.map((item: any) => item.origin_country))
 		)
 		setCkTypes({ countries })
+	}
+
+	const getFilePaths = (page: string): string[] => {
+		switch (page) {
+			case 'library':
+				return ['/preprocessing/BIBLIO_WEB_MAP.html']
+			case 'museum':
+				return ['/preprocessing/COLLECTIONS_WEB_MAP.html']
+			case 'archives':
+				return ['/preprocessing/DESCRIPTION_WEB_MAP.html']
+			case 'home':
+				return [
+					'/preprocessing/BIBLIO_WEB_MAP.html',
+					'/preprocessing/COLLECTIONS_WEB_MAP.html',
+					'/preprocessing/DESCRIPTION_WEB_MAP.html',
+				]
+			default:
+				return []
+		}
 	}
 
 	const handleDatabaseChange = (database: string) => {
@@ -284,7 +309,7 @@ const InteractiveMap = ({ DB_TYPE }: { DB_TYPE?: string }) => {
 					</Button>
 				</div>
 				<div className="flex flex-col space-y-4 max-h-[90vh] mb-2 p-2 overflow-y-auto custom-scrollbar">
-					{!DB_TYPE && (
+					{page === 'home' && (
 						<CollapseList title={message.Type} expand={true}>
 							<div className="space-y-3 border-t p-4">
 								<div className="flex">

@@ -32,7 +32,7 @@ interface DataType {
 	ca_name_occurrence?: string
 }
 
-const Timeline = () => {
+const Timeline = ({ page }: { page: string }) => {
 	const [data, setData] = useState<DataType[]>([])
 	const { message, archives, library, museum } = useConstants()
 	let count = 0
@@ -44,31 +44,35 @@ const Timeline = () => {
 	const getData = async () => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
-		const filePaths = [
-			'/preprocessing/BIBLIO_WEB_TIMELINE.html',
-			'/preprocessing/COLLECTIONS_WEB_TIMELINE.html',
-			'/preprocessing/DESCRIPTION_WEB_TIMELINE.html',
-		]
+		const filePaths = getFilePaths(page)
 		let files: DataType[] = []
 		try {
-			const responses = await Promise.all(filePaths.map((path) => axios.get(path)))
-			responses.forEach((response) => {
-				const json = convertXMLToJson(response.data)
-				json.xml.record = Array.isArray(json.xml.record)
-					? json.xml.record
-					: [json.xml.record]
-				files.push(
-					...json.xml.record.map((record: DataType) =>
-						Object.fromEntries(
-							Object.entries(record).map(([key, value]) => [
-								key.toLowerCase(),
-								typeof value === 'object' && value !== null ? value : value,
-							])
+			const responses = await Promise.allSettled(filePaths.map((path) => axios.get(path)))
+			const validResponses = responses
+				.filter((res) => res.status === 'fulfilled' && res.value?.data?.trim())
+				.map((res) => (res as PromiseFulfilledResult<any>).value)
+			if (validResponses.length === 0) {
+				console.warn('All files are empty or invalid.')
+			} else {
+				validResponses.forEach((response) => {
+					const json = convertXMLToJson(response.data)
+					json.xml.record = Array.isArray(json.xml.record)
+						? json.xml.record
+						: [json.xml.record]
+					if (json.xml.record) {
+						files.push(
+							...json.xml.record.map((record: DataType) =>
+								Object.fromEntries(
+									Object.entries(record).map(([key, value]) => [
+										key.toLowerCase(),
+										typeof value === 'object' && value !== null ? value : value,
+									])
+								)
+							)
 						)
-					)
-				)
-			})
-
+					}
+				})
+			}
 			const records = files
 				.map((record: DataType) => ({
 					...record,
@@ -99,6 +103,25 @@ const Timeline = () => {
 			setData(centuries)
 		} catch (error) {
 			console.error('Error fetching files:', error)
+		}
+	}
+
+	const getFilePaths = (page: string): string[] => {
+		switch (page) {
+			case 'library':
+				return ['/preprocessing/BIBLIO_WEB_TIMELINE.html']
+			case 'museum':
+				return ['/preprocessing/COLLECTIONS_WEB_TIMELINE.html']
+			case 'archives':
+				return ['/preprocessing/DESCRIPTION_WEB_TIMELINE.html']
+			case 'home':
+				return [
+					'/preprocessing/BIBLIO_WEB_TIMELINE.html',
+					'/preprocessing/COLLECTIONS_WEB_TIMELINE.html',
+					'/preprocessing/DESCRIPTION_WEB_TIMELINE.html',
+				]
+			default:
+				return []
 		}
 	}
 
