@@ -20,7 +20,6 @@ const DetailRecordAction = () => {
 	const requestData = record?.request
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const database = record.database_name
-	console.log(record)
 	const handleSubmit = (action: string | null) => {
 		if (checkLoggedInToRequest( action )){
 			const { refd, accession_number, title: recordTitle, legal_title: recordLegalTitle } = record.record;
@@ -93,7 +92,7 @@ const DetailRecordAction = () => {
 
 	return (
 		<div className="flex flex-col space-y-4">
-			<div className="flex flex-row justify-between space-x-2">
+			<div className="flex flex-col md:flex-row justify-between gap-2">
 				<TooltipButton
 					tooltipContent="Previous record"
 					className="align-center"
@@ -103,7 +102,7 @@ const DetailRecordAction = () => {
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
 
-				<div className="flex space-x-2">
+				<div className="flex flex-col md:flex-row gap-2">
 					{checkRecordHasMandatoryDataToRequest() ? (
 						// && checkIfCurrentClientRequestedThisRecord()
 						<TooltipButton
