@@ -108,7 +108,7 @@ export default function PatronProfile() {
 							className={`rounded-full p-2 ${colorClasses[color as keyof typeof colorClasses]}`}>
 							{icon}
 						</div>
-						<span className="text-sm text-gray-500">{label}</span>
+						{/* <span className="text-sm text-gray-500">{label}</span> */}
 					</div>
 					<div className="flex items-baseline justify-center">
 						<h3 className="text-2xl font-bold">{value || 0}</h3>
@@ -134,6 +134,13 @@ export default function PatronProfile() {
 							{button.label}
 						</a>
 					))}
+					{/* Calendar profile list need different url so it is separated from the profilelist, 20240207 Don Ryu */}
+					<a
+						key={'Calendar'}
+						href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`}
+						className={`px-3 py-2 text-sm shadow sm:px-4 sm:py-2 sm:text-base text-accent-foreground bg-white text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}>
+						{'Calendar'}
+					</a>
 				</div>
 				<div className="mb-4 rounded-lg bg-white p-6 shadow">
 					<h1 className="text-3xl font-semibold text-gray-800">
