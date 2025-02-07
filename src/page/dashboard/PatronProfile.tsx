@@ -108,7 +108,7 @@ export default function PatronProfile() {
 							className={`rounded-full p-2 ${colorClasses[color as keyof typeof colorClasses]}`}>
 							{icon}
 						</div>
-						{/* <span className="text-sm text-gray-500">{label}</span> */}
+						<span className="text-sm text-gray-500">{label}</span>
 					</div>
 					<div className="flex items-baseline justify-center">
 						<h3 className="text-2xl font-bold">{value || 0}</h3>
