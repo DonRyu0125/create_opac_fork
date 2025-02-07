@@ -84,7 +84,7 @@ const Timeline = ({ page }: { page: string }) => {
 				const timeIndex = parseInt(item.time_index)
 				let centuryLabel
 				if (timeIndex >= 10000) {
-					const century = Math.floor((timeIndex - 10000) / 400) * 400
+					const century = Math.floor((timeIndex - 10000) / 100) * 100
 					centuryLabel = century === 0 ? 'AD 0' : `AD ${century}`
 				} else {
 					const offset = 10000 - timeIndex
@@ -167,6 +167,7 @@ const Timeline = ({ page }: { page: string }) => {
 		<div className="w-full relative md:flex my-2">
 			<div className={`absolute top-3 right-0 z-40 w-[5px] h-[100px] bg-gray-600 `}></div>
 			<div className={`absolute top-3 left-0 z-40 w-[5px] h-[100px] bg-gray-600 `}></div>
+			<div className={`absolute top-[45%] z-0 w-full h-[7px] bg-gray-400 `}></div>
 			<div
 				className={`w-full relative flex items-center h-36 justify-around overflow-x-auto custom-scrollbar px-2`}>
 				{data.map((item: any, idx: number) => {
@@ -176,14 +177,14 @@ const Timeline = ({ page }: { page: string }) => {
 							<div
 								key={idx}
 								className={
-									'z-10 pr-1 mb-[15px] w-[20px] h-[110px] flex flex-col justify-between mb-1 mx-1'
+									'z-10 pr-1 mb-[15px] w-[20px] h-[110px] mb-1 mx-1'
 								}>
-								<div className="text-left text-xs w-[52px] h-[20px] font-bold">
+								<div className=" text-left text-[10px] w-[25px] h-[20px] font-bold bottom-[10px]">
 									{count % 2 === 1 && item.century}
 								</div>
 								<div
-									className={`w-[4px] h-[90px] cursor-pointer transition-transform bg-gray-400 `}></div>
-								<div className="text-left text-xs w-[52px] h-[20px] mt-1 font-bold">
+									className={`w-[5px] h-[70px] cursor-pointer transition-transform bg-gray-400 `}></div>
+								<div className=" text-left text-[10px] w-[25px] h-[20px] top-[5px]  font-bold">
 									{count % 2 === 0 && item.century}
 								</div>
 							</div>
