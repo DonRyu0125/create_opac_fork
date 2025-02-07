@@ -176,7 +176,7 @@ const Timeline = ({ page }: { page: string }) => {
 							<div
 								key={idx}
 								className={
-									'z-10 pr-1 mb-[15px] w-[20px] h-[110px] flex flex-col justify-between mb-1'
+									'z-10 pr-1 mb-[15px] w-[20px] h-[110px] flex flex-col justify-between mb-1 mx-1'
 								}>
 								<div className="text-left text-xs w-[52px] h-[20px] font-bold">
 									{count % 2 === 1 && item.century}
