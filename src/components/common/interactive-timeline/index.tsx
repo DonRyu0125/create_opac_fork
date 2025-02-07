@@ -202,9 +202,6 @@ const Timeline = ({ page }: { page: string }) => {
 							<div
 								key={idx}
 								className="relative flex flex-col items-center w-full min-w-[10px]">
-								<div
-									className={`absolute z-0 w-full h-[5px] ${timeIndex >= 10000 ? 'bg-gray-200' : 'bg-gray-300'}  top-[40%]`}
-								/>
 								<Popover.Root key={idx}>
 									<Popover.Trigger
 										className={`z-10 w-[5px] h-[50px]  cursor-pointer transition-transform hover:scale-150 bg-gray-400`}></Popover.Trigger>
