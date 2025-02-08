@@ -27,7 +27,7 @@ const Sidebar = () => {
 					<TooltipTrigger asChild>
 						<Link
 							href={getCookieValue('HOME_SESSID') + home_url}
-							className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8">
+							className="flex h-9 w-9 items-center justify-center  text-accent-foreground rounded-full hover:bg-neutral-200 hover:text-slate-700 md:h-8 md:w-8">
 							<Home className="h-5 w-5" />
 							<span className="sr-only">Patron Dashboard</span>
 						</Link>
