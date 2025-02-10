@@ -166,8 +166,15 @@
 	"detailRecordActionRequest": "Request",
 	"detailRecordActionEnquire": "Enquire",
 	"detailRecordActionReproduction": "Reproduction",
+	"detailRecordActionCopyright": "Copyright",
 	"descriptionTree": "Full collection list",
 	"topPick": "Our top picks",
 	"Type": "Type",
-	"timeline":"TimeLine"
+	"timeline":"TimeLine",
+	"selectTheCountry": "Select the Country",
+    "selectTheProvince": "Select the Province",
+    "description": "Description",
+    "accessionNumber": "Accession Number",
+    "generalNote": "General Note",
+    "author": "Author"
 }

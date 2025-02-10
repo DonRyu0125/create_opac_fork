@@ -12,6 +12,7 @@ import { useState } from 'react'
 import Hero from '../components/common/Hero'
 import Layout from '../components/layouts'
 import { MainPageProps, UNION_SEARCH_CL } from './Home'
+import TimeLine from '@/components/common/interactive-timeline'
 
 const Archives = ({ previewMode = false, previewData }: MainPageProps) => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
@@ -25,6 +26,7 @@ const Archives = ({ previewMode = false, previewData }: MainPageProps) => {
 		enableCategoriesItems,
 		enableRSVP,
 		enableMap,
+		enableTimeline,
 	} = useConstants().archives
 	return (
 		<Layout>
@@ -61,7 +63,12 @@ const Archives = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap DB_TYPE={'DESCRIPTION_WEB'} />
+					<InterativeMap page={'archives'} />
+				</Section>
+			)}
+			{enableTimeline && (
+				<Section heading={`${message.timeline}`}>
+					<TimeLine page={'archives'} />
 				</Section>
 			)}
 		</Layout>

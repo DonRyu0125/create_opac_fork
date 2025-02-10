@@ -7,61 +7,45 @@ import Section from '../common/Section'
 
 const items = [
 	{
-		name: 'Employee 1',
-		username: 'MINISIS Inc.',
-		body: 'Christopher Burcsik is the principal owner of MINISIS Inc. He serves as the Chief Executive Officer and Vice-President of Marketing.',
+		name: 'MINISIS WILL TEST 1',
+		username: 'Museum',
+		body: 'test',
 		img: 'https://avatar.vercel.sh/jack',
-		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/DESCRIPTION_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+3450',
+		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/COLLECTIONS_WEB/WEB_UNION_DETAIL?sessionsearch&exp=ACCESSION_NUMBER 65526',
 	},
 	{
-		name: 'Employee 2',
-		username: 'MINISIS Inc.',
+		name: 'Training (4-0)',
+		username: 'File',
 
-		body: 'Christopher Burcsik is the principal owner of MINISIS Inc. He serves as the Chief Executive Officer and Vice-President of Marketing.',
+		body: 'File consists of Instructions - Equipment 100 round magazine Bren MkII- correspondence - between: officials from Military district No.2; from Canadian Small Arms Training Centre;...',
 		img: 'https://avatar.vercel.sh/jill',
-		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/DESCRIPTION_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+3451',
+		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/DESCRIPTION_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+394',
 	},
 
+	
 	{
-		name: 'Oskar Photograph',
-		username: 'MINISIS Inc.',
+		name: "Minutes of Convocation",
+		username: 'Series',
 
-		body: 'A printed photograph of Oskar the dog!',
-		img: 'https://avatar.vercel.sh/jane',
-		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/DESCRIPTION_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+5',
-	},
-
-	{
-		name: "Oskar's Cousin",
-		username: 'MINISIS Inc.',
-
-		body: 'This is a photograph of Oskars cousin, Titan!',
+		body: 'Series consists of volumes containing the minutes of Convocation for the period 1797 to 2022. Volumes 2 to 42 (1832-1973) contain indexes prepared by the Secretary. ...',
 		img: 'https://avatar.vercel.sh/james',
 		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/DESCRIPTION_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+1',
 	},
 	{
-		name: "London's Craft Beer Market",
-		username: 'MINISIS Inc.',
+		name: "test object v3",
+		username: 'Museum',
 
-		body: 'This is a series of records related to the Craft beer market that exists in London and contains detailed records and licenses...',
+		body: 'Military Unit',
 		img: 'https://avatar.vercel.sh/james',
-		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/DESCRIPTION_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+3440',
+		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/COLLECTIONS_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+1',
 	},
 	{
-		name: 'Employee 4',
-		username: 'MINISIS Inc.',
+		name: "MINISIS TEST WILL 242",
+		username: 'Museum',
 
-		body: 'Christopher Burcsik is the principal owner of MINISIS Inc. He serves as the Chief Executive Officer and Vice-President of Marketing.',
-		img: 'https://avatar.vercel.sh/jenny',
-		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/DESCRIPTION_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+3453',
-	},
-	{
-		name: 'Employee 5',
-		username: 'MINISIS Inc.',
-
-		body: 'Christopher Burcsik is the principal owner of MINISIS Inc. He serves as the Chief Executive Officer and Vice-President of Marketing.',
+		body: 'Administrative report',
 		img: 'https://avatar.vercel.sh/james',
-		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/DESCRIPTION_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+3454',
+		url: 'https://camsopac-dev.minisisinc.com/scripts/mwimain.dll/144/COLLECTIONS_WEB/WEB_UNION_DETAIL?sessionsearch&exp=SISN+2',
 	},
 ]
 

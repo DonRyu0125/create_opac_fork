@@ -95,24 +95,27 @@ export const getRecordPermalink = (
 	return `https://${window.location.hostname}/scripts/mwimain.dll/${lang}/${database}/${report}?sessionsearch&exp=${key}+${sisn}`
 }
 
-export const copyRecordURL = (database: string, sisn: string, report = DEFAULT_DETAIL_REPORT) => {
+export const copyRecordURL = (database: string, sisn: string, report = DEFAULT_DETAIL_REPORT, urlOnly = false) => {
+	const url = getRecordPermalink(database, sisn, report)
+	if(urlOnly) return url
 	try {
-		const url = getRecordPermalink(database, sisn, report)
 		copy(url)
+		return url;
 	} catch (error) {
 		console.error(error)
+		return url;
 	}
 }
 
-export const handleCopyRecordURL = (record: Record) => {
+export const handleCopyRecordURL = (record: Record, urlOnly = false) => {
 	if (record.database_name && record.database_name !== 'SELECTION_LIST') {
 		// union summary
-		copyRecordURL(record.database_name, record.record.sisn)
+		return copyRecordURL(record.database_name, record.record.sisn,DEFAULT_DETAIL_REPORT,urlOnly)
 	} else if (record.link_dbname && record.record.link_sisn) {
 		// bookmark summary
-		copyRecordURL(record.link_dbname, record.record.link_sisn)
+		return copyRecordURL(record.link_dbname, record.record.link_sisn,DEFAULT_DETAIL_REPORT,urlOnly)
 	} else if (record.record.link_dbname && record.record.link_sisn) {
 		//bookmark detail
-		copyRecordURL(record.record.link_dbname, record.record.link_sisn)
+		return copyRecordURL(record.record.link_dbname, record.record.link_sisn,DEFAULT_DETAIL_REPORT,urlOnly)
 	}
 }

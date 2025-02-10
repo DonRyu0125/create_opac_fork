@@ -12,7 +12,7 @@
 			"label": "Copyright Requests",
 			"db": "DOC_REQUEST",
 			"icon": "Copyright",
-			"url": "?SEARCH&AUX_SESSID=client&DATABASE=DOC_REQUEST&REPORT=WEB_COPY_PROFILE&ERRMSG=[MESSAGES]no-record.html&EXP=REQ_TOPIC%20Copyright%20Services%20AND%20REQ_PATRON_ID%20"
+			"url": "?SEARCH&AUX_SESSID=client&DATABASE=REQUEST_VIEW&REPORT=WEB_COPY_PROFILE&ERRMSG=[MESSAGES]no-record.html&EXP=REQ_TOPIC%20Copyright%20Services%20AND%20REQ_PATRON_ID%20"
 		},
 		{
 			"id": 3,

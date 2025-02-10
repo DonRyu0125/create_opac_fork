@@ -134,6 +134,13 @@ export default function PatronProfile() {
 							{button.label}
 						</a>
 					))}
+					{/* Calendar profile list need different url so it is separated from the profilelist, 20240207 Don Ryu */}
+					<a
+						key={'Calendar'}
+						href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`}
+						className={`px-3 py-2 text-sm shadow sm:px-4 sm:py-2 sm:text-base text-accent-foreground bg-white text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}>
+						{'Calendar'}
+					</a>
 				</div>
 				<div className="mb-4 rounded-lg bg-white p-6 shadow">
 					<h1 className="text-3xl font-semibold text-gray-800">

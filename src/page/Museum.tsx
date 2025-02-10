@@ -12,6 +12,7 @@ import { useState } from 'react'
 import Hero from '../components/common/Hero'
 import Layout from '../components/layouts'
 import { MainPageProps, UNION_SEARCH_CL } from './Home'
+import TimeLine from '@/components/common/interactive-timeline'
 const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 	const [showAdvSearch, setShowAdvSearch] = useState(false)
 	const { message } = useConstants()
@@ -24,6 +25,7 @@ const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 		enableFeaturedCollection,
 		enableRSVP,
 		enableMap,
+		enableTimeline,
 	} = useConstants().museum
 	return (
 		<Layout>
@@ -56,7 +58,12 @@ const Museum = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap DB_TYPE={'COLLECTIONS_WEB'} />
+					<InterativeMap page={'museum'} />
+				</Section>
+			)}
+			{enableTimeline && (
+				<Section heading={`${message.timeline}`}>
+					<TimeLine page={'museum'} />
 				</Section>
 			)}
 		</Layout>

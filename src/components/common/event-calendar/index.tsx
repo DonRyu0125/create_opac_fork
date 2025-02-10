@@ -1,9 +1,3 @@
-/**
- * Calendar with event filtering function
- *
- * EventCalendar: Main Calendar component
- * Draw the calendar using Date js object
- */
 import React, { useEffect, useState } from 'react'
 import EventCalendarFilter from './EventCalendarFilter'
 import EventCalendarEventList from './EventCalendarEventList'

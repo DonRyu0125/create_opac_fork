@@ -25,6 +25,23 @@ export interface BookmarkCheckBoxData {
 export interface FieldData<T extends string> {
 	[key: string]: string | number | DBFields<T> | FieldData[]
 }
+
+export interface CopyrightData {
+	req_order_num: string
+	req_patron_name: string
+	req_patron_id: string
+	req_patron_email: string
+	req_topic: string
+	req_topic_gl: string
+	req_repro_type_occurrence: string
+	req_title: string
+	req_paid_amt: string
+	req_tax: string
+	req_handling: string
+	req_loc_code: string
+	req_tax_percent: string
+	req_charge_amt: string
+}
 export interface EnquiryData {
 	enq_id: string
 	enq_patron_email: string
@@ -81,6 +98,7 @@ export interface Record {
 	calendar_count: string
 	collection_count: string
 	copyright_count: string
+	copyright: CopyrightData
 	crowdsource_count: string
 	database_name: string
 	description_count: string

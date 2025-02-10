@@ -66,7 +66,7 @@ export const convertToArr = (elm: Object | Array<any>) => {
 	if (Array.isArray(elm)) {
 		return elm
 	}
-	return [elm]
+	return elm ? [elm] : []
 }
 
 export const convertXMLToJson = (response: any) => {

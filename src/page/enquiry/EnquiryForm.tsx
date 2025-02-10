@@ -17,45 +17,47 @@ import Layout from '@/components/layouts'
 
 const EnquiryForm = () => {
     const dateToday = new Date().toISOString().split('T')[0];
-    const [data, setData] = useState([]);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [fullName, setFullName] = useState("");
+    const [patronName, setPatronName] = useState("")
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
     const [inputInquiry, setInputInquiry] = useState("")
     const [messageText, setMessageText] = useState("")
 
-	useEffect(() => {
-		const queryParams = new URLSearchParams(window.location.search)
-		const subject = queryParams.get('subject')
-		if (subject) {
-			setSubject(subject)
-		}
-		const fetchData = async () => {
-			try {
-				const response = await axios.get(
-					`/scripts/mwimain.dll/${getLanguageID()}/CLIENT_VIEW/WEB_CLIENT/C_CLIENT_NUMBER%20${getPatronID()}?COMMANDSEARCH`,
-					{ headers: { 'Content-Type': 'text/xml' } }
-				)
-				let responseXMLToJson = convertXMLToJson(response.data)
-				console.log(responseXMLToJson)
-				setData(responseXMLToJson)
-				setLastName(responseXMLToJson.client.name_last)
-				setFirstName(responseXMLToJson.client.name_first)
-				setFullName(responseXMLToJson.client.name_full)
-				setEmail(responseXMLToJson.client.email)
-			} catch (err) {
-				console.error('Error fetching data:', err)
-			}
-		}
 
-		fetchData()
-	}, [])
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const subject = queryParams.get("subject")
+        if (subject) setSubject(subject)
+        if ( getPatronID() ) {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`/scripts/mwimain.dll/${getLanguageID()}/CLIENT_VIEW/WEB_CLIENT/C_CLIENT_NUMBER%20${getPatronID()}?COMMANDSEARCH`,
+                { headers: { 'Content-Type': 'text/xml'}})
+                let responseXMLToJson = convertXMLToJson(response.data)
+                setLastName(responseXMLToJson.client.name_last)
+                setFirstName(responseXMLToJson.client.name_first)
+                setFullName(responseXMLToJson.client.name_full)
+                setEmail(responseXMLToJson.client.email)
+            } catch (err) {
+              console.error('Error fetching data:', err);
+            }
+          };
+    
+        fetchData();
+        }
+      }, []);
+
 
     const formActionSaveRecord = document.querySelector('#enq-save-record')?.textContent as string
     const skipNStopRecord = document.querySelector('#enq-skip-n-stop-record')?.textContent as string
     
+    const handleChange = (e: React.ChangeEvent<any>) => {
+        setPatronName(e.target.value);
+    }
+
     const passInquiryToMESSAGETEXT = () => {
         setMessageText(inputInquiry)
     }
@@ -81,13 +83,18 @@ const EnquiryForm = () => {
                                 method="post"
                                 className="m-0"
                                 action={`${formActionSaveRecord}&RETURN_URL=[OPAC_ENQUIRY]enquiryConfirmed.html`}>
-                                <Input
+                                {getPatronID() ? <Input
                                     type="hidden"
                                     name="ENQ_PATRON_NAME"
                                     className='w-full p-2 border rounded mb-4'
                                     value={`${firstName} ${lastName}`}
                                     readOnly
-                                />
+                                /> : <Input
+                                type="hidden"
+                                name="ENQ_PATRON_NAME"
+                                value={patronName}
+                                readOnly
+                              />}
                                 <Input
                                     type="hidden"
                                     name="E_METHOD_REQUEST"
@@ -137,35 +144,15 @@ const EnquiryForm = () => {
                                     value="Request"
                                     readOnly
                                 />
-                                <Input
+                                {getPatronID() ? <Input
                                     type="hidden"
                                     name="ENQ_PATRON_ID"
                                     className='w-full p-2 border rounded mb-4'
                                     value={getPatronID()}
                                     readOnly
-                                />
+                                /> : ""}
                                 <div className="px-4 rounded grid grid-cols-1 gap-4">
-                                    {/* <div className=''>
-                                        <Label htmlFor="firstName" className="block text-sm font-semibold mb-1">First Name*</Label>
-                                        <Input
-                                        id="firstName"
-                                        type="text"
-                                        className="w-full p-2 border rounded mb-4"
-                                        name=""
-                                        value={firstName}
-                                        readOnly
-                                        />
-                                    </div>
-                                    <div className=''>
-                                        <Label htmlFor="lastName" className="block text-sm font-semibold mb-1">Last Name*</Label>
-                                        <Input
-                                        id="lastName"
-                                        type="text"
-                                        className="w-full p-2 border rounded"
-                                        value={lastName}
-                                        readOnly
-                                        />
-                                    </div> */}
+
                                     <div className=''>
                                         <Label htmlFor="firstName" className="block text-sm font-semibold mb-1">Full Name*</Label>
                                         <Input
@@ -173,8 +160,9 @@ const EnquiryForm = () => {
                                         type="text"
                                         className="w-full p-2 border rounded mb-4"
                                         name="ENQ_USER"
-                                        value={fullName}
-                                        readOnly
+                                        onChange={handleChange}
+                                        defaultValue={getPatronID() ? fullName : ""}
+                                        readOnly={!!getPatronID()}
                                         />
                                     </div>
                                 </div>
@@ -186,8 +174,8 @@ const EnquiryForm = () => {
                                         type="text"
                                         className="w-full p-2 border rounded mb-4"
                                         name="ENQ_PATRON_EMAIL"
-                                        value={email}
-                                        readOnly
+                                        defaultValue={getPatronID() ? email : ""}
+                                        readOnly={!!getPatronID()}
                                         />
                                     </div>
                                     <div className=''>
