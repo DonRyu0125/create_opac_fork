@@ -73,7 +73,7 @@
 		}
 	],
 	"rsvp": {
-		"filterDatabase": "Archives",
+		"filterDatabase": "Archive",
 		"filterOption": "TAG_DB_TYPE",
 		"filterTypes": []
 	},
