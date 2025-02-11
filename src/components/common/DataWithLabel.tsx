@@ -18,7 +18,6 @@ const DataWithLabel = ({ className, label, items }: DataWithLabelProps) => {
 					if (typeof item === 'string') {
 						return truncateString(item, 250)
 					}
-					return item
 				})}
 			</div>
 		</div>
