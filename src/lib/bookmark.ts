@@ -13,11 +13,11 @@ export const bookmarkSelect = async (session: string, recd: Record) => {
 }
 
 export const removeBookmarkFromKey = (recd: Record) => {
-	const { record, input } = recd
+	const { record } = recd
 	return axios({
 		method: 'post',
 		url: `?DELETEORDER&COOKIE=BOOKMARK`,
-		data: `${input?._name}=${record.sisn}`,
+		data: `mcheckbox_${record.sisn}=${record.sisn}`,
 	})
 }
 
@@ -45,8 +45,8 @@ export const validateBookmarkResponse = (
 }
 
 export const removeAllBookmarks = async (records: Record[]) => {
-	let dataString = records.map(({ input, record }) => {
-		return `${input?._name}=${record.sisn}`
+	let dataString = records.map(({ record }) => {
+		return `mcheckbox_${record.sisn}}=${record.sisn}`
 	})
 	return await axios({
 		method: 'post',

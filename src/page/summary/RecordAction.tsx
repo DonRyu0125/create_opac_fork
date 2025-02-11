@@ -15,7 +15,6 @@ import { useState } from 'react'
 
 export const RecordAction = ({ record }: { record: Record }) => {
 	const { is_bookmarked } = record
-
 	const [like, setLike] = useState(is_bookmarked ? Boolean(JSON.parse(is_bookmarked)) : true)
 	const { common } = useJSONData({ selector: '#xml_record' })
 	const { bookmark_url, bookmark_count } = common
@@ -24,35 +23,17 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const { message } = useConstants()
 	const [count, setCount] = useAtom(bookmarkCount)
 	const handleBookmark = () => {
-		if (record.input?._name && like) {
-			//if record.input?._name is exsisted, we use bookmark sum report, Don Ryu20240705
+		if (like) {
 			removeBookmarkFromKey(record).then((res) => {
 				setCount(count - 1)
 			})
-
 			toast({
 				title: `${message.bookmarkHasBeenRemoved}`,
 			})
-
-			// reload page on summary bookmark only
-			if (record.record.link_dbname) {
-				window.location.reload()
-			}
+			setLike(false)
 			return
 		}
 
-		// Display toast only if record has already been bookmarked
-		if (like) {
-			toast({
-				title: `${message.recordAlreadyMarked}`,
-				action: (
-					<ToastAction altText={message.viewBookmark}>{message.viewBookmark}</ToastAction>
-				),
-			})
-			return
-		}
-
-		// send request to bookmark
 		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
 			const isValid = validateBookmarkResponse(
 				res,
@@ -67,7 +48,10 @@ export const RecordAction = ({ record }: { record: Record }) => {
 					title: message.successfullBookmark,
 					action: (
 						<ToastAction altText={message.viewBookmark}>
-							{message.viewBookmark}
+							<a
+								href={`${bookmark_url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bookmark.html`}>
+								{message.viewBookmark}
+							</a>
 						</ToastAction>
 					),
 				})
