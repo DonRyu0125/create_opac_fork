@@ -57,8 +57,10 @@ const ClientLoginError = () => {
 						<form
 							method="post"
 							action={
-								getHomeSessionID() +
-								'/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144&file=[OPAC]home.html'
+								password && accountNumber
+									? getHomeSessionID() +
+										'/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144&file=[OPAC]home.html'
+									: ''
 							}
 							className="mt-2 grid grid-cols-6 gap-6">
 							<div className="col-span-6">
