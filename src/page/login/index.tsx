@@ -41,7 +41,7 @@ const Login = () => {
 								password && accountNumber
 									? getHomeSessionID() +
 										'/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144&file=[OPAC]home.html'
-									: ''
+									: '/scripts/mwimain.dll?get&file=[OPAC]login.html'
 							}
 							className="mt-8 grid grid-cols-6 gap-6">
 							<div className="col-span-6">
@@ -58,7 +58,6 @@ const Login = () => {
 									onChange={(e) => setAccountNumber(e.target.value)}
 								/>
 							</div>
-
 							<div className="col-span-6 sm:col-span-6">
 								<label
 									htmlFor="Password"
