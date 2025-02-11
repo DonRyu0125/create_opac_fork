@@ -14,10 +14,11 @@ const DataWithLabel = ({ className, label, items }: DataWithLabelProps) => {
 		<div className={cn('flex flex-row text-black space-x-1', className)}>
 			<Label className="text-sm font-bold ">{label}: </Label>
 			<div className="text-sm font-normal">
-				{items.map((item) => {
+				{items.map((item: any) => {
 					if (typeof item === 'string') {
 						return truncateString(item, 250)
 					}
+					return item['__text'] ?? ''
 				})}
 			</div>
 		</div>
