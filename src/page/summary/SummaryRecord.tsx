@@ -42,7 +42,7 @@ const RecordView = ({ record }: { record: Record }) => {
 	) as React.ReactNode
 
 	const listFields = getFieldsFromRecord(
-		record,
+		record.record,
 		fields,
 		(item) => item.summary === true,
 		(data, item) => (
