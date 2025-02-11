@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import useConstants from '@/hooks/useConstants'
 import { getHomeSessionID } from '@/lib/utils'
-import axios from 'axios'
 import { useState } from 'react'
 
 const Login = () => {
@@ -45,8 +44,10 @@ const Login = () => {
 						<form
 							method="post"
 							action={
-								getHomeSessionID() +
-								'/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144&file=[OPAC]home.html'
+								password && accountNumber
+									? getHomeSessionID() +
+										'/scripts/mwimain.dll?patronlogin&application=UNION_VIEW&language=144&file=[OPAC]home.html'
+									: ''
 							}
 							className="mt-8 grid grid-cols-6 gap-6">
 							<div className="col-span-6">
