@@ -1,7 +1,7 @@
 {
 	"heading": "Search the Library",
 	"heroBanner": "https://www.sfopho.com/wp-content/uploads/2019/11/banner_ancien_orleansJPG.jpg",
-	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=BIBLIO_WEB",
+	"searchURL": "UNIONSEARCH&SHOWSINGLE=Y&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=BIBLIO_WEB",
 	"browseByCategoryTitle": "Browse by Category",
 	"calendarfilterOption": "",
 	"database_name": "BIBLIO_WEB",

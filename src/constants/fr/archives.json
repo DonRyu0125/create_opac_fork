@@ -1,7 +1,7 @@
 {
 	"heading": "Recherchez la archives",
 	"heroBanner": "https://images.unsplash.com/photo-1597092451116-27787c07901d",
-	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=DESCRIPTION_WEB",
+	"searchURL": "UNIONSEARCH&SHOWSINGLE=Y&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=DESCRIPTION_WEB",
 	"browseByCategoryTitle": "Browse by Category",
 	"calendarfilterOption": "",
 	"database_name": "DESCRIPTION_WEB",

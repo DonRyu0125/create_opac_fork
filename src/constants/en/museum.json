@@ -1,7 +1,7 @@
 {
 	"heading": "Search the Museum",
 	"heroBanner": "https://images.unsplash.com/photo-1579748048451-365c9c9bfbc1",
-	"searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB",
+	"searchURL": "UNIONSEARCH&SHOWSINGLE=Y&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=COLLECTIONS_WEB",
 	"browseByCategoryTitle": "Browse by Category",
 	"calendarfilterOption": "",
 	"database_name": "COLLECTIONS_WEB",
