@@ -29,6 +29,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 			})
 			toast({
 				title: `${message.bookmarkHasBeenRemoved}`,
+				duration:500
 			})
 			setLike(false)
 			return
@@ -46,13 +47,12 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				setCount(isValid.newCount || count)
 				toast({
 					title: message.successfullBookmark,
+					duration: 2000,
 					action: (
-						<ToastAction altText={message.viewBookmark}>
-							<a
-								href={`${bookmark_url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bookmark.html`}>
-								{message.viewBookmark}
-							</a>
-						</ToastAction>
+						<a className={'p-1 text-center border-solid border-2 rounded-md text-sm font-bold'}
+							href={`${bookmark_url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bookmark.html`}>
+							{message.viewBookmark}
+						</a>
 					),
 				})
 				return
