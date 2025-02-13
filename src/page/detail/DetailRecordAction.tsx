@@ -291,6 +291,7 @@ const DetailRecordAction = () => {
 						<Copy className="w-4 h-4 mr-2 hidden md:block" /> {message.copy}
 					</TooltipButton>
 					<TooltipButton
+						disabled={loading}
 						variant="outline"
 						size="icon"
 						onClick={handleBookmark}
