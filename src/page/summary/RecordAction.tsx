@@ -4,10 +4,11 @@ import { useToast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { bookmarkSelect, removeBookmarkFromKey, validateBookmarkResponse } from '@/lib/bookmark'
-import { deepSearchKey, handleCopyRecordURL } from '@/lib/record'
+import { copyRecordURL, deepSearchKey, handleCopyRecordURL } from '@/lib/record'
 import { cn } from '@/lib/utils'
 import { bookmarkCount } from '@/store'
 import { Record } from '@/types/record'
+import { ToastAction } from '@radix-ui/react-toast'
 import { useAtom } from 'jotai'
 import { Copy, Star } from 'lucide-react'
 import { useState } from 'react'
@@ -34,7 +35,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				title: `${message.bookmarkHasBeenRemoved}`,
 				duration: 500,
 			})
-			window.location.reload()
+			window.location.reload();
 			return
 		}
 
@@ -64,7 +65,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				})
 				return
 			}
-			window.location.reload()
+			window.location.reload();
 		})
 	}
 
