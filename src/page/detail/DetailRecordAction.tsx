@@ -68,24 +68,24 @@ const DetailRecordAction = () => {
 		}
 	}
 
-	const removeBookmark = () => {
+	const handleBookmark = () => {
 		setLoading(true)
-		removeBookmarkFromKey(`${bookmark_url}`,record).then((res) => {
-			setCount(count - 1)
-			setLike(false)
-			setLoading(false)
-		})
-		toast({
-			title: `${message.bookmarkHasBeenRemoved}`,
-			duration: 500,
-		})
+		if (like) {
+			removeBookmarkFromKey(`${bookmark_url}`, record).then((res) => {
+				setCount(count - 1)
+				setLike(false)
+				setLoading(false)
+			})
+			toast({
+				title: `${message.bookmarkHasBeenRemoved}`,
+				duration: 500,
+			})
+			window.location.reload()
+			return
+		}
 
-		return
-	}
-
-	const selectBookmark = () => {
-		setLoading(true)
 		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
+			setLoading(false)
 			const isValid = validateBookmarkResponse(
 				res,
 				typeof bookmark_count === 'number'
@@ -93,10 +93,8 @@ const DetailRecordAction = () => {
 					: Number.parseInt(bookmark_count || '0')
 			)
 			if (isValid && isValid.isSuccess) {
-				setLoading(false)
 				setLike(true)
 				setCount(isValid.newCount || count)
-			
 				toast({
 					title: message.successfullBookmark,
 					duration: 2000,
@@ -112,6 +110,7 @@ const DetailRecordAction = () => {
 				})
 				return
 			}
+			window.location.reload()
 		})
 	}
 
@@ -297,7 +296,7 @@ const DetailRecordAction = () => {
 						disabled={loading}
 						variant="outline"
 						size="icon"
-						onClick={like ? removeBookmark : selectBookmark}
+						onClick={handleBookmark}
 						className={'min-w-[105px] flex justify-evenly'}
 						tooltipContent="Bookmark record">
 						<Star

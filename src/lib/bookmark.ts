@@ -12,7 +12,7 @@ export const bookmarkSelect = async (session: string, recd: Record) => {
 	})
 }
 
-export const removeBookmarkFromKey = (session: string,recd: Record) => {
+export const removeBookmarkFromKey = (session: string, recd: Record) => {
 	const { record } = recd
 	return axios({
 		method: 'post',
@@ -48,6 +48,7 @@ export const removeAllBookmarks = async (records: Record[]) => {
 	let dataString = records.map(({ record }) => {
 		return `mcheckbox_${record.sisn}}=${record.sisn}`
 	})
+	console.log('dataString', dataString)
 	return await axios({
 		method: 'post',
 		url: `?DELETEORDER&COOKIE=BOOKMARK`,
