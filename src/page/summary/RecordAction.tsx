@@ -26,7 +26,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const handleBookmark = () => {
 		setLoading(true)
 		if (like) {
-			removeBookmarkFromKey(record).then((res) => {
+			removeBookmarkFromKey(`${bookmark_url}`, record).then((res) => {
 				setCount(count - 1)
 				setLike(false)
 				setLoading(false)
@@ -65,6 +65,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				})
 				return
 			}
+			window.location.reload();
 		})
 	}
 

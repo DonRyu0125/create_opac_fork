@@ -71,7 +71,7 @@ const DetailRecordAction = () => {
 	const handleBookmark = () => {
 		setLoading(true)
 		if (like) {
-			removeBookmarkFromKey(record).then((res) => {
+			removeBookmarkFromKey(`${bookmark_url}`, record).then((res) => {
 				setCount(count - 1)
 				setLike(false)
 				setLoading(false)
