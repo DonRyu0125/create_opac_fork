@@ -70,7 +70,7 @@ const DetailRecordAction = () => {
 
 	const removeBookmark = () => {
 		setLoading(true)
-		removeBookmarkFromKey(record).then((res) => {
+		removeBookmarkFromKey(`${bookmark_url}`,record).then((res) => {
 			setCount(count - 1)
 			setLike(false)
 			setLoading(false)
@@ -96,6 +96,7 @@ const DetailRecordAction = () => {
 				setLoading(false)
 				setLike(true)
 				setCount(isValid.newCount || count)
+			
 				toast({
 					title: message.successfullBookmark,
 					duration: 2000,

@@ -24,7 +24,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const [loading, setLoading] = useState(false)
 	const removeBookmark = () => {
 		setLoading(true)
-		removeBookmarkFromKey(record).then((res) => {
+		removeBookmarkFromKey(`${bookmark_url}`,record).then((res) => {
 			setCount(count - 1)
 			setLike(false)
 			setLoading(false)
