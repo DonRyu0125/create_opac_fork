@@ -25,23 +25,18 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const [loading, setLoading] = useState(false)
 	const handleBookmark = () => {
 		setLoading(true)
+		setLoading(true)
 		if (like) {
-			removeBookmarkFromKey(`${bookmark_url}`, record).then((res) => {
-				setCount(count - 1)
-				setLike(false)
-				setLoading(false)
-				// window.location.reload();
-			})
 			toast({
-				title: `${message.bookmarkHasBeenRemoved}`,
-				duration: 500,
+				title: `${message.recordAlreadyMarked}`,
+				duration: 1000,
 			})
+			setLoading(false)
 			return
 		}
 
 		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
 			setLoading(false)
-			// window.location.reload();
 			const isValid = validateBookmarkResponse(
 				res,
 				typeof bookmark_count === 'number'

@@ -9,7 +9,7 @@ import DialogLogin from '../../components/common/DialogLogin'
 import TooltipButton from '@/components/common/TooltipButton'
 import { cn, getCookieValue, getHomeSessionID } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
-import { bookmarkSelect, removeBookmarkFromKey, validateBookmarkResponse } from '@/lib/bookmark'
+import { bookmarkSelect, validateBookmarkResponse } from '@/lib/bookmark'
 import { useAtom } from 'jotai'
 import { bookmarkCount } from '@/store'
 
@@ -71,22 +71,16 @@ const DetailRecordAction = () => {
 	const handleBookmark = () => {
 		setLoading(true)
 		if (like) {
-			removeBookmarkFromKey(`${bookmark_url}`, record).then((res) => {
-				setCount(count - 1)
-				setLike(false)
-				setLoading(false)
-				// window.location.reload()
-			})
 			toast({
-				title: `${message.bookmarkHasBeenRemoved}`,
-				duration: 500,
+				title: `${message.recordAlreadyMarked}`,
+				duration: 1000,
 			})
+			setLoading(false)
 			return
 		}
 
 		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
 			setLoading(false)
-			// window.location.reload()
 			const isValid = validateBookmarkResponse(
 				res,
 				typeof bookmark_count === 'number'
