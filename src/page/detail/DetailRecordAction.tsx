@@ -68,23 +68,24 @@ const DetailRecordAction = () => {
 		}
 	}
 
-	const handleBookmark = () => {
+	const removeBookmark = () => {
 		setLoading(true)
-		if (like) {
-			removeBookmarkFromKey(record).then((res) => {
-				setCount(count - 1)
-				setLike(false)
-				setLoading(false)
-			})
-			toast({
-				title: `${message.bookmarkHasBeenRemoved}`,
-				duration: 500,
-			})
-			return
-		}
-
-		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
+		removeBookmarkFromKey(record).then((res) => {
+			setCount(count - 1)
+			setLike(false)
 			setLoading(false)
+		})
+		toast({
+			title: `${message.bookmarkHasBeenRemoved}`,
+			duration: 500,
+		})
+
+		return
+	}
+
+	const selectBookmark = () => {
+		setLoading(true)
+		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
 			const isValid = validateBookmarkResponse(
 				res,
 				typeof bookmark_count === 'number'
@@ -92,6 +93,7 @@ const DetailRecordAction = () => {
 					: Number.parseInt(bookmark_count || '0')
 			)
 			if (isValid && isValid.isSuccess) {
+				setLoading(false)
 				setLike(true)
 				setCount(isValid.newCount || count)
 				toast({
@@ -294,7 +296,7 @@ const DetailRecordAction = () => {
 						disabled={loading}
 						variant="outline"
 						size="icon"
-						onClick={handleBookmark}
+						onClick={like ? removeBookmark : selectBookmark}
 						className={'min-w-[105px] flex justify-evenly'}
 						tooltipContent="Bookmark record">
 						<Star

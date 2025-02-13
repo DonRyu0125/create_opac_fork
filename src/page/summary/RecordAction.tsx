@@ -4,11 +4,10 @@ import { useToast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { bookmarkSelect, removeBookmarkFromKey, validateBookmarkResponse } from '@/lib/bookmark'
-import { copyRecordURL, deepSearchKey, handleCopyRecordURL } from '@/lib/record'
+import { deepSearchKey, handleCopyRecordURL } from '@/lib/record'
 import { cn } from '@/lib/utils'
 import { bookmarkCount } from '@/store'
 import { Record } from '@/types/record'
-import { ToastAction } from '@radix-ui/react-toast'
 import { useAtom } from 'jotai'
 import { Copy, Star } from 'lucide-react'
 import { useState } from 'react'
@@ -23,24 +22,24 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const { message } = useConstants()
 	const [count, setCount] = useAtom(bookmarkCount)
 	const [loading, setLoading] = useState(false)
-	const handleBookmark = () => {
+	const removeBookmark = () => {
 		setLoading(true)
-		if (like) {
-			removeBookmarkFromKey(record).then((res) => {
-				setCount(count - 1)
-				setLike(false)
-				setLoading(false)
-			})
-			toast({
-				title: `${message.bookmarkHasBeenRemoved}`,
-				duration: 500,
-			})
-
-			return
-		}
-
-		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
+		removeBookmarkFromKey(record).then((res) => {
+			setCount(count - 1)
+			setLike(false)
 			setLoading(false)
+		})
+		toast({
+			title: `${message.bookmarkHasBeenRemoved}`,
+			duration: 500,
+		})
+
+		return
+	}
+
+	const selectBookmark = () => {
+		setLoading(true)
+		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
 			const isValid = validateBookmarkResponse(
 				res,
 				typeof bookmark_count === 'number'
@@ -48,6 +47,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 					: Number.parseInt(bookmark_count || '0')
 			)
 			if (isValid && isValid.isSuccess) {
+				setLoading(false)
 				setLike(true)
 				setCount(isValid.newCount || count)
 				toast({
@@ -65,6 +65,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				})
 				return
 			}
+			
 		})
 	}
 
@@ -81,7 +82,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				variant="ghost"
 				size="icon"
 				disabled={loading}
-				onClick={handleBookmark}
+				onClick={like ? removeBookmark : selectBookmark}
 				tooltipContent="Bookmark record">
 				<Star
 					className={cn('h-4 w-4 text-primary')}
