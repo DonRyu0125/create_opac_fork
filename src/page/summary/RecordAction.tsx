@@ -30,17 +30,18 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				setCount(count - 1)
 				setLike(false)
 				setLoading(false)
+				window.location.reload();
 			})
 			toast({
 				title: `${message.bookmarkHasBeenRemoved}`,
 				duration: 500,
 			})
-			window.location.reload();
 			return
 		}
 
 		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
 			setLoading(false)
+			window.location.reload();
 			const isValid = validateBookmarkResponse(
 				res,
 				typeof bookmark_count === 'number'
@@ -65,7 +66,6 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				})
 				return
 			}
-			window.location.reload();
 		})
 	}
 
