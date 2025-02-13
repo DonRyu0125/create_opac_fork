@@ -3,14 +3,11 @@ import { Separator } from '@/components/ui/separator'
 import { useToast } from '@/components/ui/use-toast'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { bookmarkSelect, removeBookmarkFromKey, validateBookmarkResponse } from '@/lib/bookmark'
-import { copyRecordURL, deepSearchKey, handleCopyRecordURL } from '@/lib/record'
+import { removeBookmarkFromKey } from '@/lib/bookmark'
+import { handleCopyRecordURL } from '@/lib/record'
 import { cn } from '@/lib/utils'
-import { bookmarkCount } from '@/store'
 import { Record } from '@/types/record'
-import { ToastAction } from '@radix-ui/react-toast'
-import { useAtom } from 'jotai'
-import { Copy, Star, StarOff } from 'lucide-react'
+import { Copy,Trash2 } from 'lucide-react'
 import { useState } from 'react'
 
 export const BookmarkRecordAction = ({ record }: { record: Record }) => {
@@ -48,11 +45,10 @@ export const BookmarkRecordAction = ({ record }: { record: Record }) => {
 				disabled={loading}
 				onClick={removeBookmark}
 				tooltipContent="Bookmark record">
-				<StarOff
-					className={cn('h-4 w-4 text-primary')}
+                    <Trash2 
+                    className={cn('h-4 w-4 text-primary')}
 					fill={'hsl(var(--opac-blue))'}
-					stroke={'hsl(var(--opac-blue))'}
-				/>
+					stroke={'hsl(var(--opac-blue))'}/>
 			</TooltipButton>
 			<Separator orientation="vertical" />
 			<TooltipButton
