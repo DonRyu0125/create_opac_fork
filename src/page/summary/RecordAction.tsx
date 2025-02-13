@@ -35,7 +35,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				title: `${message.bookmarkHasBeenRemoved}`,
 				duration: 500,
 			})
-
+			window.location.reload();
 			return
 		}
 

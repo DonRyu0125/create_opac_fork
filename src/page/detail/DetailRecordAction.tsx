@@ -80,6 +80,7 @@ const DetailRecordAction = () => {
 				title: `${message.bookmarkHasBeenRemoved}`,
 				duration: 500,
 			})
+			window.location.reload()
 			return
 		}
 
@@ -109,6 +110,7 @@ const DetailRecordAction = () => {
 				})
 				return
 			}
+			window.location.reload()
 		})
 	}
 
