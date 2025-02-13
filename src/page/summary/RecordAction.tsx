@@ -22,20 +22,25 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const { message } = useConstants()
 	const [count, setCount] = useAtom(bookmarkCount)
+	const [loading, setLoading] = useState(false)
 	const handleBookmark = () => {
+		setLoading(true)
 		if (like) {
 			removeBookmarkFromKey(record).then((res) => {
 				setCount(count - 1)
+				setLike(false)
+				setLoading(false)
 			})
 			toast({
 				title: `${message.bookmarkHasBeenRemoved}`,
-				duration:500
+				duration: 500,
 			})
-			setLike(false)
+
 			return
 		}
 
 		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
+			setLoading(false)
 			const isValid = validateBookmarkResponse(
 				res,
 				typeof bookmark_count === 'number'
@@ -49,7 +54,10 @@ export const RecordAction = ({ record }: { record: Record }) => {
 					title: message.successfullBookmark,
 					duration: 2000,
 					action: (
-						<a className={'p-1 text-center border-solid border-2 rounded-md text-sm font-bold'}
+						<a
+							className={
+								'p-1 text-center border-solid border-2 rounded-md text-sm font-bold'
+							}
 							href={`${bookmark_url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bookmark.html`}>
 							{message.viewBookmark}
 						</a>
@@ -72,6 +80,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 			<TooltipButton
 				variant="ghost"
 				size="icon"
+				disabled={loading}
 				onClick={handleBookmark}
 				tooltipContent="Bookmark record">
 				<Star

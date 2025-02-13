@@ -28,6 +28,7 @@ const DetailRecordAction = () => {
 	const requestData = record?.request
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const database = record.database_name
+	const [loading, setLoading] = useState(false)
 	const handleSubmit = (action: string | null) => {
 		if (checkLoggedInToRequest(action)) {
 			const {
@@ -68,19 +69,22 @@ const DetailRecordAction = () => {
 	}
 
 	const handleBookmark = () => {
+		setLoading(true)
 		if (like) {
 			removeBookmarkFromKey(record).then((res) => {
 				setCount(count - 1)
+				setLike(false)
+				setLoading(false)
 			})
 			toast({
 				title: `${message.bookmarkHasBeenRemoved}`,
 				duration: 500,
 			})
-			setLike(false)
 			return
 		}
 
 		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
+			setLoading(false)
 			const isValid = validateBookmarkResponse(
 				res,
 				typeof bookmark_count === 'number'
