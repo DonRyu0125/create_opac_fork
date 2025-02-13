@@ -6,10 +6,10 @@ import useJSONData from '@/hooks/useJSONData'
 import PageAction from '@/components/common/PageAction'
 import useConstants from '@/hooks/useConstants'
 import SearchForm from '@/components/common/search-form/SearchForm'
-import SummaryRecords from '../summary/SummaryRecord'
 import { Button } from '@/components/ui/button'
 import { removeAllBookmarks } from '@/lib/bookmark'
 import { getSearchURL } from '@/lib/utils'
+import BookmarkSummaryRecords from './BookmarkSummaryRecords'
 
 const Bookmark = () => {
 	const { message, home } = useConstants()
@@ -48,7 +48,7 @@ const Bookmark = () => {
 						</div>
 						<div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 ">
 							<div className="col-span-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-								<SummaryRecords />
+								<BookmarkSummaryRecords />
 							</div>
 							{pagination?.a && pagination.a.length > 0 && (
 								<div className="col-span-4 mt-4">
