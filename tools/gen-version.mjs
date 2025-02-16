@@ -1,9 +1,11 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs'
+import path, { resolve } from 'node:path'
 
+const base = process.cwd();
 // Read package.json
-const packageJsonPath = path.join(__dirname, 'package.json');
-const packageJson = require(packageJsonPath);
+const packageJsonPath = resolve(base, 'package.json');
+
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
 // Get the current date in YYYY.MM.DD format
 const now = new Date();
@@ -18,7 +20,7 @@ const outputJson = {
 };
 
 // Write to a JSON file
-const outputPath = path.join(__dirname, 'app_version.json');
+const outputPath = resolve(base, 'app_version.json');
 fs.writeFileSync(outputPath, JSON.stringify(outputJson, null, 2));
 
 console.log(`App version file created: ${outputPath}`);
