@@ -5,12 +5,15 @@ import Sidebar from './Sidebar'
 import useJSONData from '@/hooks/useJSONData'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 import { getCookieValue } from '@/lib/utils'
+import { buttonVariants } from '@/components/ui/button'
 
 type PatronLayoutProps = {
 	children?: React.ReactNode
+	activeSection?: string
+	heading?: string
 }
 
-const PatronLayout = ({ children }: PatronLayoutProps) => {
+const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
 	const profileList = clientProfileJSON.database
@@ -36,12 +39,20 @@ const PatronLayout = ({ children }: PatronLayoutProps) => {
 										(button.db !== 'SHOWORDERLIST' ? m2l_patron_id : '')
 									}
 									onClick={() => handleClick(button.id)}
-									className={`px-3 py-2 text-sm shadow sm:px-4 sm:py-2 sm:text-base text-accent-foreground bg-white text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}>
+									className={buttonVariants({ variant: 'outline' })}>
 									{button.label}
 								</a>
 							))}
+							{/* Calendar profile list need different url so it is separated from the profilelist, 20240207 Don Ryu */}
+							<a
+								key={'Calendar'}
+								href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`}
+								className={buttonVariants({ variant: 'outline' })}>
+								Calendar
+							</a>
 						</div>
 					</div>
+					{heading && <h1 className="text-2xl font-bold">{heading}</h1>}
 					{children}
 				</main>
 				<ScrollToTopButton />
