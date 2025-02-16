@@ -1,6 +1,6 @@
 {
-    "heading": "MINISIS OPAC Template v1.0.0",
-    "heroBanner": "https://titanapi.minisisinc.com/api/links/65043c1192f8422685fe7fcd57027d50/uuid/2ac79ad6cbcd46948c28f7549a7728b9/access",
+    "heading": "MINISIS OPAC Template",
+    "heroBanner": "https://images.unsplash.com/photo-1559511260-66a654ae982a",
     "searchURL": "UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW",
     "browseByCategoryTitle": "Browse by Category",
     "calendarfilterOption": "",
