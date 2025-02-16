@@ -28,7 +28,10 @@ const Summary = () => {
 		const match = home.searchURL.match(/&DATABASE=[^&]+/) ?? ''
 		let db = navigations.filter((item) => item.database_name === search_database)
 		if (currentUrl.includes(match[0])) return ''
-		return `${message.in} ${db[0]?.displayTitle}`
+
+		if (db[0]?.displayTitle) return `${message.in} ${db[0].displayTitle}`
+		
+		return ''
 	}
 
 	if (!common) return <></>
