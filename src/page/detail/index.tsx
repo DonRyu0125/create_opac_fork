@@ -91,7 +91,7 @@ const Detail = () => {
 							className="w-[450px] m-0"
 							inputStyle="text-black"
 							inputName={'KEYWORD_CLUSTER'}
-							action={`${common.session}?UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=${records[0].database_name}`}
+							action={`${common.session}?UNIONSEARCH&SHOWSINGLE=Y&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&DATABASE=${records[0].database_name}`}
 						/>
 					</div>
 				</PageAction>

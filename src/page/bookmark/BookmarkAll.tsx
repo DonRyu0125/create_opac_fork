@@ -32,15 +32,19 @@ const BookmarkAll = () => {
 				const isValid = validateBookmarkResponse(res, bookmarkCount)
 				if (isValid?.isSuccess) {
 					setCount(isValid.newCount || count)
+					window.location.reload()
 					toast({
 						title: message.allRecordsBookmarked,
 						action: (
-							<ToastAction altText="View bookmark">
+							<a
+								className={
+									'p-1 text-center border-solid border-2 rounded-md text-sm font-bold'
+								}
+								href={`${bookmark_url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bookmark.html`}>
 								{message.viewBookmark}
-							</ToastAction>
+							</a>
 						),
 					})
-					window.location.reload()
 					return
 				}
 				// in case response is not successful
@@ -49,7 +53,15 @@ const BookmarkAll = () => {
 		} else {
 			toast({
 				title: message.allRecordsBookmarked,
-				action: <ToastAction altText="View bookmark">{message.viewBookmark}</ToastAction>,
+				action: (
+					<a
+						className={
+							'p-1 text-center border-solid border-2 rounded-md text-sm font-bold'
+						}
+						href={`${bookmark_url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bookmark.html`}>
+						{message.viewBookmark}
+					</a>
+				),
 			})
 		}
 	}

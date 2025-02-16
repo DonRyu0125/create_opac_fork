@@ -2,56 +2,116 @@ import { useState, useRef } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { copyRecordURL, deepSearchKey, handleCopyRecordURL } from '@/lib/record'
-import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag, Star } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
 import DialogLogin from '../../components/common/DialogLogin'
 import TooltipButton from '@/components/common/TooltipButton'
-import { getCookieValue, getHomeSessionID } from '@/lib/utils'
+import { cn, getCookieValue, getHomeSessionID } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
+import { bookmarkSelect, removeBookmarkFromKey, validateBookmarkResponse } from '@/lib/bookmark'
+import { useAtom } from 'jotai'
+import { bookmarkCount } from '@/store'
 
 const DetailRecordAction = () => {
+	const { common } = useJSONData({ selector: '#xml_record' })
+	const { bookmark_url, bookmark_count } = common
+	const { message } = useConstants()
+	const [count, setCount] = useAtom(bookmarkCount)
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 	const formRef = useRef<HTMLFormElement | null>(null)
 	const { toast } = useToast()
 	const { nextRecord, previousRecord, records } = useJSONData({ selector: '#xml_record' })
-	const { message } = useConstants()
 	const record = records[0]
+	const { is_bookmarked } = record
+	const [like, setLike] = useState(is_bookmarked ? Boolean(JSON.parse(is_bookmarked)) : true)
 	const requestData = record?.request
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const database = record.database_name
+	const [loading, setLoading] = useState(false)
 	const handleSubmit = (action: string | null) => {
-		if (checkLoggedInToRequest( action )){
-			const { refd, accession_number, title: recordTitle, legal_title: recordLegalTitle } = record.record;
-			const itemid = refd || accession_number || "";
-    		const title = recordLegalTitle || recordTitle || "";
-			switch(action) {
-				case "Request":
+		if (checkLoggedInToRequest(action)) {
+			const {
+				refd,
+				accession_number,
+				title: recordTitle,
+				legal_title: recordLegalTitle,
+			} = record.record
+			const itemid = refd || accession_number || ''
+			const title = recordLegalTitle || recordTitle || ''
+			switch (action) {
+				case 'Request':
 					if (formRef.current) {
 						formRef.current.submit()
 					} else {
 						console.log('Request Error')
 					}
-					break;
-				case "Enquire":
-					const url = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=ENQUIRIES_VIEW&DE_FORM=[OPAC_ENQUIRY]de_enquiryform.html&subject=${record.record.title}`;
-					window.location.href = url;
-					break;
-				case "Reproduction":
-					const reprodURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_VIEW&DE_FORM=[OPAC_REPROD]de_reproductionform.html&title=${title}&itemid=${itemid}`;
-					window.location.href = reprodURL;
-					break;
-				case "Copyright":
-					const copyrightURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_COPY_VIEW&DE_FORM=[OPAC_COPYRIGHT]de_copyrightform.html&title=${title}&itemid=${itemid}&dbname=${database.split("_")[0]}`;
-					window.location.href = copyrightURL;
-					break;
+					break
+				case 'Enquire':
+					const url = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=ENQUIRIES_VIEW&DE_FORM=[OPAC_ENQUIRY]de_enquiryform.html&subject=${record.record.title}`
+					window.location.href = url
+					break
+				case 'Reproduction':
+					const reprodURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_VIEW&DE_FORM=[OPAC_REPROD]de_reproductionform.html&title=${title}&itemid=${itemid}`
+					window.location.href = reprodURL
+					break
+				case 'Copyright':
+					const copyrightURL = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=REQUEST_COPY_VIEW&DE_FORM=[OPAC_COPYRIGHT]de_copyrightform.html&title=${title}&itemid=${itemid}&dbname=${database.split('_')[0]}`
+					window.location.href = copyrightURL
+					break
 			}
 		} else {
-			if(action === "Enquire") { 
-				const url = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=ENQUIRIES_VIEW&DE_FORM=[OPAC_ENQUIRY]de_enquiryform.html&subject=${record.record.title}`;
-				window.location.href = url;
+			if (action === 'Enquire') {
+				const url = `${getHomeSessionID()}?ADDSINGLERECORD&DATABASE=ENQUIRIES_VIEW&DE_FORM=[OPAC_ENQUIRY]de_enquiryform.html&subject=${record.record.title}`
+				window.location.href = url
 			}
 		}
+	}
+
+	const handleBookmark = () => {
+		setLoading(true)
+		if (like) {
+			removeBookmarkFromKey(`${bookmark_url}`, record).then((res) => {
+				setCount(count - 1)
+				setLike(false)
+				setLoading(false)
+				// window.location.reload()
+			})
+			toast({
+				title: `${message.bookmarkHasBeenRemoved}`,
+				duration: 500,
+			})
+			return
+		}
+
+		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
+			setLoading(false)
+			// window.location.reload()
+			const isValid = validateBookmarkResponse(
+				res,
+				typeof bookmark_count === 'number'
+					? bookmark_count
+					: Number.parseInt(bookmark_count || '0')
+			)
+			if (isValid && isValid.isSuccess) {
+				setLike(true)
+				setCount(isValid.newCount || count)
+				toast({
+					title: message.successfullBookmark,
+					duration: 2000,
+					action: (
+						<a
+							className={
+								'p-1 text-center border-solid border-2 rounded-md text-sm font-bold'
+							}
+							href={`${bookmark_url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bookmark.html`}>
+							{message.viewBookmark}
+						</a>
+					),
+				})
+				return
+			}
+		})
 	}
 
 	const goToURL = (url: string | null) => {
@@ -82,7 +142,10 @@ const DetailRecordAction = () => {
 	const checkLoggedInToRequest = (action: string | null) => {
 		let isLoggedIn = false
 		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-		if ((patronID === null || patronID === undefined || patronID === '') && action !== "Enquire") {
+		if (
+			(patronID === null || patronID === undefined || patronID === '') &&
+			action !== 'Enquire'
+		) {
 			setIsModalOpen(true)
 		} else {
 			isLoggedIn = true
@@ -103,41 +166,99 @@ const DetailRecordAction = () => {
 				</TooltipButton>
 
 				<div className="flex space-x-2">
-					{checkRecordHasMandatoryDataToRequest() 
-					&& checkIfCurrentClientRequestedThisRecord() 
-					? 
-					<TooltipButton
-						tooltipContent="Request Record"
-						variant="outline"
-						onClick={() => handleSubmit("Request")}
-					>
-						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
-						<form method="post" ref={formRef} action={getHomeSessionID() + "/1/" + record.request.req_db_link2 + "?REQUESTLOGIN&DBNAME=" + record.request.req_db_name} className='hidden'>
-							<Input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time}/>
-							<Input type="hidden" name="METHOD_REQUEST" value={requestData.method_request}/>
-							<Input type="hidden" name="REQ_TOPIC" value={requestData.req_topic}/>
-							<Input type="hidden" name="REQ_APPL_NAME" value={requestData.req_appl_name}/>
-							<Input type="hidden" name="REQ_DB_NAME" value={ requestData.req_db_name}/>
-							<Input type="hidden" name="REQ_DB_LINK2" value={requestData.req_db_link2}/>
-							<Input type="hidden" name="REQ_QUEUE" value={requestData.req_queue}/>
-							<Input type="hidden" name="REQ_DB_RECID" value={requestData.req_db_recid}/>
-							<Input type="hidden" name="REQ_TITLE" value={requestData.req_title}/>
-							<Input type="hidden" name="REQ_ITEM_ID" value={requestData.req_item_id}/>
-							<Input type="hidden" name="REQ_ACC_NUMBER" value={requestData.req_acc_number}/>
-							<Input type="hidden" name="REQ_ITEM_TITLE" value={requestData.req_item_title}/>
-							<Button
-								className="bg-opac-darkblue"
-								type="submit"
-								variant="default">
-								Submit
-							</Button>
-						</form>
-					</TooltipButton> : <TooltipButton
-						tooltipContent="Request Record"
-						variant="outline"
-						disabled>
-						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionRequest}
-					</TooltipButton>}
+					{checkRecordHasMandatoryDataToRequest() &&
+					checkIfCurrentClientRequestedThisRecord() ? (
+						<TooltipButton
+							tooltipContent="Request Record"
+							variant="outline"
+							onClick={() => handleSubmit('Request')}>
+							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
+							{message.detailRecordActionRequest}
+							<form
+								method="post"
+								ref={formRef}
+								action={
+									getHomeSessionID() +
+									'/1/' +
+									record.request.req_db_link2 +
+									'?REQUESTLOGIN&DBNAME=' +
+									record.request.req_db_name
+								}
+								className="hidden">
+								<Input
+									type="hidden"
+									name="ITEM_REQ_TIME"
+									value={requestData.item_req_time}
+								/>
+								<Input
+									type="hidden"
+									name="METHOD_REQUEST"
+									value={requestData.method_request}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_TOPIC"
+									value={requestData.req_topic}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_APPL_NAME"
+									value={requestData.req_appl_name}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_DB_NAME"
+									value={requestData.req_db_name}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_DB_LINK2"
+									value={requestData.req_db_link2}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_QUEUE"
+									value={requestData.req_queue}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_DB_RECID"
+									value={requestData.req_db_recid}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_TITLE"
+									value={requestData.req_title}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_ITEM_ID"
+									value={requestData.req_item_id}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_ACC_NUMBER"
+									value={requestData.req_acc_number}
+								/>
+								<Input
+									type="hidden"
+									name="REQ_ITEM_TITLE"
+									value={requestData.req_item_title}
+								/>
+								<Button
+									className="bg-opac-darkblue"
+									type="submit"
+									variant="default">
+									Submit
+								</Button>
+							</form>
+						</TooltipButton>
+					) : (
+						<TooltipButton tooltipContent="Request Record" variant="outline" disabled>
+							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
+							{message.detailRecordActionRequest}
+						</TooltipButton>
+					)}
 
 					<TooltipButton
 						tooltipContent="Ask about this record"
@@ -156,9 +277,9 @@ const DetailRecordAction = () => {
 					<TooltipButton
 						tooltipContent="Copyright this record"
 						variant="outline"
-						onClick={() => handleSubmit("Copyright")}
-					>
-						<Files className="w-4 h-4 mr-2 hidden md:block" /> {message.detailRecordActionCopyright}
+						onClick={() => handleSubmit('Copyright')}>
+						<Files className="w-4 h-4 mr-2 hidden md:block" />{' '}
+						{message.detailRecordActionCopyright}
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Copy record URL"
@@ -170,6 +291,20 @@ const DetailRecordAction = () => {
 							})
 						}}>
 						<Copy className="w-4 h-4 mr-2 hidden md:block" /> {message.copy}
+					</TooltipButton>
+					<TooltipButton
+						disabled={loading}
+						variant="outline"
+						size="icon"
+						onClick={handleBookmark}
+						className={'min-w-[105px] flex justify-evenly'}
+						tooltipContent="Bookmark record">
+						<Star
+							className={cn('h-4 w-4 text-primary')}
+							fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
+							stroke={like ? 'hsl(var(--opac-blue))' : 'hsl(var(--primary'}
+						/>{' '}
+						{message.bookmark}
 					</TooltipButton>
 				</div>
 

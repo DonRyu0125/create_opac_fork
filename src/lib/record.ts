@@ -31,7 +31,7 @@ export function deepSearchKey<T extends GenericObject>(obj: T, targetKey: string
 }
 
 export const getListOfFields = (fields: FieldsJson, database: string) => {
-	const databaseFields = fields.find((f: any) => f.database === database)
+	const databaseFields = fields.find((f: FieldsJson) => f.database === database)
 	return databaseFields
 }
 
@@ -41,15 +41,11 @@ export const getFieldsFromRecord = (
 	filterFn: (e: any) => boolean,
 	componentFn: (data: any[], item: any) => RENDERED_COMPONENT
 ) => {
-	// Try to tell the databases for different page, DonR 20240705
-	const database =
-		!record.database_name || record.database_name === 'SELECTION_LIST'
-			? record.record.link_dbname // for bookmark's sum, detail page
-			: record.database_name // for normal sum, detail page
+	let database = record.database_name ?? record.record.link_dbname
 	const listOfFields = getListOfFields(fields, database)
 	return listOfFields?.items
-		?.filter((item) => filterFn(item))
-		.map((item) => {
+		?.filter((item:FieldsJson) => filterFn(item))
+		.map((item:FieldsJson) => {
 			const name = item.name || 'TITLE'
 			const data = deepSearchKey(record, name)
 			if (data?.length > 0 && item.label !== 'Title') return componentFn(data, item)

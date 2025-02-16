@@ -15,7 +15,6 @@ import { useState } from 'react'
 
 export const RecordAction = ({ record }: { record: Record }) => {
 	const { is_bookmarked } = record
-
 	const [like, setLike] = useState(is_bookmarked ? Boolean(JSON.parse(is_bookmarked)) : true)
 	const { common } = useJSONData({ selector: '#xml_record' })
 	const { bookmark_url, bookmark_count } = common
@@ -23,37 +22,26 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const { message } = useConstants()
 	const [count, setCount] = useAtom(bookmarkCount)
+	const [loading, setLoading] = useState(false)
 	const handleBookmark = () => {
-		if (record.input?._name && like) {
-			//if record.input?._name is exsisted, we use bookmark sum report, Don Ryu20240705
-			removeBookmarkFromKey(record).then((res) => {
+		setLoading(true)
+		if (like) {
+			removeBookmarkFromKey(`${bookmark_url}`, record).then((res) => {
 				setCount(count - 1)
+				setLike(false)
+				setLoading(false)
+				// window.location.reload();
 			})
-
 			toast({
 				title: `${message.bookmarkHasBeenRemoved}`,
-			})
-
-			// reload page on summary bookmark only
-			if (record.record.link_dbname) {
-				window.location.reload()
-			}
-			return
-		}
-
-		// Display toast only if record has already been bookmarked
-		if (like) {
-			toast({
-				title: `${message.recordAlreadyMarked}`,
-				action: (
-					<ToastAction altText={message.viewBookmark}>{message.viewBookmark}</ToastAction>
-				),
+				duration: 500,
 			})
 			return
 		}
 
-		// send request to bookmark
 		bookmarkSelect(`${bookmark_url}`, record).then((res) => {
+			setLoading(false)
+			// window.location.reload();
 			const isValid = validateBookmarkResponse(
 				res,
 				typeof bookmark_count === 'number'
@@ -65,10 +53,15 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				setCount(isValid.newCount || count)
 				toast({
 					title: message.successfullBookmark,
+					duration: 2000,
 					action: (
-						<ToastAction altText={message.viewBookmark}>
+						<a
+							className={
+								'p-1 text-center border-solid border-2 rounded-md text-sm font-bold'
+							}
+							href={`${bookmark_url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bookmark.html`}>
 							{message.viewBookmark}
-						</ToastAction>
+						</a>
 					),
 				})
 				return
@@ -88,6 +81,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 			<TooltipButton
 				variant="ghost"
 				size="icon"
+				disabled={loading}
 				onClick={handleBookmark}
 				tooltipContent="Bookmark record">
 				<Star
