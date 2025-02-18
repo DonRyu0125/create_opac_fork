@@ -5,6 +5,8 @@ import { Search } from 'lucide-react'
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { axios } from '@/lib/axios'
+import SearchLoading from './SearchLoading'
+import { EmptySearch } from './EmptySearch'
 interface Asset {
 	id: string
 	name: string
@@ -26,9 +28,10 @@ interface SearchError {
 const AssetSearch = () => {
 	const { authToken, user } = useAuth()
 	const [searchTerm, setSearchTerm] = useState('')
+	const [lastSearchTerm, setLastSearchTerm] = useState('')
 
 	// Mutation to send the search request
-	const { mutate, data } = useMutation<SearchResponse, SearchError, string>({
+	const { mutate, data, isPending, reset } = useMutation<SearchResponse, SearchError, string>({
 		mutationFn: async (term) => {
 			const response = await axios.post(
 				'/easyload/search',
@@ -44,7 +47,6 @@ const AssetSearch = () => {
 				}
 			)
 
-			console.log({ response })
 			if (!response.data) {
 				throw new Error('Search request failed')
 			}
@@ -56,23 +58,36 @@ const AssetSearch = () => {
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter' && searchTerm.trim()) {
 			mutate(searchTerm.trim())
+			setLastSearchTerm(searchTerm.trim())
 		}
 	}
 
-	console.log(data)
 	return (
 		<div className="relative">
-			<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-			<Input
-				disabled={!authToken}
-				placeholder="Search by phrase or use * for all"
-				className="pl-9 pr-4 py-2 w-full bg-muted"
-				value={searchTerm}
-				onChange={(e) => setSearchTerm(e.target.value)}
-				onKeyDown={handleKeyDown}
-			/>
+			<div className="relative">
+				<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+				<Input
+					disabled={!authToken}
+					placeholder="Search by phrase or use * for all"
+					className="pl-9 pr-4 py-2 w-full bg-muted"
+					value={searchTerm}
+					onChange={(e) => setSearchTerm(e.target.value)}
+					onKeyDown={handleKeyDown}
+				/>
+			</div>
 
-			{data?.data && data.data.length > 0 && <AssetGrid assets={data.data} />}
+			{isPending && <SearchLoading />}
+			{!isPending && data?.data && data.data.length > 0 && <AssetGrid assets={data.data} />}
+			{!isPending && data?.data && data.data.length === 0 && lastSearchTerm.trim() !== '' && (
+				<EmptySearch
+					query={lastSearchTerm}
+					onReset={() => {
+						reset()
+						setSearchTerm('')
+						setLastSearchTerm('')
+					}}
+				/>
+			)}
 		</div>
 	)
 }

@@ -85,7 +85,7 @@ export const CommitAssetUpload = async (
 				Blobid: fileId,
 				Blobname: fileName,
 				MimeType: fileType,
-				User: getPatronID(),
+				User: getPatronID() || 'Default OPAC User',
 				Tenant: `${localStorage.getItem('easyloadUser')}`,
 				Token: `${localStorage.getItem('easyloadToken')}`,
 			},

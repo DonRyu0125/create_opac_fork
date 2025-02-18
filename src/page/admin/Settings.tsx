@@ -1,9 +1,9 @@
 import AdminForm from '@/components/common/admin/form/AdminForm'
-import ImagePreview from '@/components/common/admin/input/ImagePreview'
-import TextField from '@/components/common/admin/input/TextField'
+import FormField from '@/components/common/admin/input/FormField'
 import AdminLayout from '@/components/layouts/admin'
 import { default as enValues } from '@/constants/en/config.json'
 import { useAdminForm } from '@/hooks/useAdminForm'
+import { isSupportedImageExtension } from '@/lib/tdr'
 import { AdminFormProvider } from '@/providers/AdminFormProvider'
 import fields from '@/schema/home.json'
 import { SchemaType } from '@/types/schema'
@@ -28,19 +28,31 @@ const Form = () => {
 
 	return (
 		<div className="flex gap-4 flex-col">
-			<TextField
-				title={'Site name'}
+			<FormField
+				type="text"
+				field={'Site name'}
 				value={fieldsValue.siteName}
-				onChange={(e) => handleChange(['siteName'], e)}
+				onChange={(e) => handleChange(['heading'], e)}
 			/>
 
 			<div className="flex flex-col">
-				<TextField
-					title={'Site logo'}
+				<FormField
+					type="image"
+					field={'Site logo'}
 					value={fieldsValue.logo}
 					onChange={(e) => handleChange(['logo'], e)}
+					onTDRAssetsSelect={(files) => {
+						if (files.length > 0) {
+							const file = files[0]
+							handleChange(
+								['logo'],
+								isSupportedImageExtension(file.Extension)
+									? file.Access
+									: file.Thumbnail
+							)
+						}
+					}}
 				/>
-				<ImagePreview src={fieldsValue.logo} alt="Site Banner" />
 			</div>
 		</div>
 	)

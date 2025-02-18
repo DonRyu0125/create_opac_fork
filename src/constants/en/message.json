@@ -57,7 +57,15 @@
 	"max": "Max",
 	"language": "Language",
 	"dateType": "default",
-	"daysOfWeek": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+	"daysOfWeek": [
+		"Sun",
+		"Mon",
+		"Tue",
+		"Wed",
+		"Thu",
+		"Fri",
+		"Sat"
+	],
 	"close": "Close",
 	"privateProperty": "Private property",
 	"contactInfoNotProvided": "Contact info is not provided",
@@ -93,7 +101,7 @@
 	"addField": "Add field",
 	"noResultFound": "No results found",
 	"noSession": "Session expired, please restart your search",
-	"genericError": "Something went wrong, please restart your search",
+	"genericError": "Something went wrong, please refresh the page and try again",
 	"advWarnMsg": "Please enter your search!",
 	"in": "in",
 	"first": "First",
@@ -170,11 +178,11 @@
 	"descriptionTree": "Full collection list",
 	"topPick": "Our top picks",
 	"Type": "Type",
-	"timeline":"TimeLine",
+	"timeline": "TimeLine",
 	"selectTheCountry": "Select the Country",
-    "selectTheProvince": "Select the Province",
-    "description": "Description",
-    "accessionNumber": "Accession Number",
-    "generalNote": "General Note",
-    "author": "Author"
+	"selectTheProvince": "Select the Province",
+	"description": "Description",
+	"accessionNumber": "Accession Number",
+	"generalNote": "General Note",
+	"author": "Author"
 }

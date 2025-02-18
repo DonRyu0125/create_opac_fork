@@ -3,7 +3,7 @@ import PatronLayout from '@/components/layouts/patron'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { getCookieValue, setCookie } from '@/lib/utils'
+import { getCookieValue } from '@/lib/utils'
 import {
 	Archive,
 	BookMarked,
@@ -15,7 +15,6 @@ import {
 	Library,
 	Lightbulb,
 	MessageCircleMore,
-	MoreHorizontal,
 	ShoppingBag,
 } from 'lucide-react'
 import { useState } from 'react'
@@ -118,114 +117,84 @@ export default function PatronProfile() {
 		)
 	}
 	return (
-		<PatronLayout>
-			<div className="container flex flex-col gap-8 p-6">
-				<div className="flex flex-wrap gap-2 sm:gap-4">
-					{profileList.map((button) => (
-						<a
-							key={button.id}
-							href={
-								getCookieValue('HOME_SESSID') +
-								button.url +
-								(button.db !== 'SHOWORDERLIST' ? m2l_patron_id : '')
-							}
-							onClick={() => handleClick(button.id)}
-							className={`px-3 py-2 text-sm shadow sm:px-4 sm:py-2 sm:text-base text-accent-foreground bg-white text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}>
-							{button.label}
-						</a>
-					))}
-					{/* Calendar profile list need different url so it is separated from the profilelist, 20240207 Don Ryu */}
-					<a
-						key={'Calendar'}
-						href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`}
-						className={`px-3 py-2 text-sm shadow sm:px-4 sm:py-2 sm:text-base text-accent-foreground bg-white text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}>
-						{'Calendar'}
-					</a>
-				</div>
-				<div className="mb-4 rounded-lg bg-white p-6 shadow">
-					<h1 className="text-3xl font-semibold text-gray-800">
-						Welcome {records[0]?.full_name || 'User'}!
-					</h1>
-					<p className="mt-2">
-						This is your{' '}
-						<span className="font-medium text-blue-600">Client Profile</span>. Check
-						your saved or inquired items here!
-					</p>
-				</div>
+		<PatronLayout heading="">
+			<div className="mb-4 rounded-lg bg-white p-6 shadow">
+				<h1 className="text-3xl font-semibold text-gray-800">
+					Welcome {records[0]?.full_name || 'User'}!
+				</h1>
+				<p className="mt-2">
+					This is your <span className="font-medium text-blue-600">Client Profile</span>.
+					Check your saved or inquired items here!
+				</p>
+			</div>
 
-				{/* Stats Grid */}
-				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-					{statCards.map((card, index) => (
-						<StatCard
-							key={card.key}
-							icon={card.icon}
-							label={card.label}
-							color={card.color}
-							value={card.value}
-						/>
-					))}
-				</div>
+			{/* Stats Grid */}
+			<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+				{statCards.map((card, index) => (
+					<StatCard
+						key={card.key}
+						icon={card.icon}
+						label={card.label}
+						color={card.color}
+						value={card.value}
+					/>
+				))}
+			</div>
 
-				{/* Recent Media Section */}
-				<div className="space-y-4">
-					<div className="flex items-center justify-between">
-						<h2 className="text-xl font-medium">
-							<span>Search Databases</span>
-						</h2>
-						{/* <button className="rounded-md p-2 hover:bg-gray-100">
+			{/* Recent Media Section */}
+			<div className="space-y-4">
+				<div className="flex items-center justify-between">
+					<h2 className="text-xl font-medium">
+						<span>Search Databases</span>
+					</h2>
+					{/* <button className="rounded-md p-2 hover:bg-gray-100">
 							<MoreHorizontal className="h-5 w-5 text-gray-500" />
 						</button> */}
-					</div>
-					<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-						{[home, archives, museum, library].map((item, index) => (
-							<div
-								key={index}
-								className="overflow-hidden rounded-lg bg-white shadow hover:brightness-95">
-								<Link href={item.linkURL} className="group no-underline">
-									<div className="aspect-square relative overflow-hidden">
-										<img
-											src={item.heroBanner}
-											alt={`Recent media ${index + 1}`}
-											className="h-full w-full object-cover transition ease-in-out duration-150 group-hover:scale-105"
-										/>
-									</div>
-									<div className="p-4">
-										<div className="flex items-center justify-between text-sm text-gray-500">
-											<div className="flex items-center gap-2">
-												{item === home && <File className="w-5 h-5" />}
-												{item === archives && (
-													<Archive className="w-5 h-5" />
-												)}
-												{item === museum && (
-													<Landmark className="w-5 h-5" />
-												)}
-												{item === library && (
-													<Library className="w-5 h-5" />
-												)}
-
-												{item === home
-													? Number(records[0].description_count) +
-														Number(records[0].collection_count) +
-														Number(records[0].biblio_count)
-													: item === archives
-														? records[0].description_count
-														: item === museum
-															? records[0].collection_count
-															: item === library
-																? records[0].biblio_count
-																: ''}
-											</div>
-											<span>{item.displayTitle}</span>
-										</div>
-									</div>
-								</Link>
-							</div>
-						))}
-					</div>
 				</div>
+				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+					{[home, archives, museum, library].map((item, index) => (
+						<div
+							key={index}
+							className="overflow-hidden rounded-lg bg-white shadow hover:brightness-95">
+							<Link href={item.linkURL} className="group no-underline">
+								<div className="aspect-square relative overflow-hidden">
+									<img
+										src={item.heroBanner}
+										alt={`Recent media ${index + 1}`}
+										className="h-full w-full object-cover transition ease-in-out duration-150 group-hover:scale-105"
+									/>
+								</div>
+								<div className="p-4">
+									<div className="flex items-center justify-between text-sm text-gray-500">
+										<div className="flex items-center gap-2">
+											{item === home && <File className="w-5 h-5" />}
+											{item === archives && <Archive className="w-5 h-5" />}
+											{item === museum && <Landmark className="w-5 h-5" />}
+											{item === library && <Library className="w-5 h-5" />}
 
-				{/* Follower Growth Section */}
-				{/* <div className="rounded-lg bg-white p-6 shadow">
+											{item === home
+												? Number(records[0].description_count) +
+													Number(records[0].collection_count) +
+													Number(records[0].biblio_count)
+												: item === archives
+													? records[0].description_count
+													: item === museum
+														? records[0].collection_count
+														: item === library
+															? records[0].biblio_count
+															: ''}
+										</div>
+										<span>{item.displayTitle}</span>
+									</div>
+								</div>
+							</Link>
+						</div>
+					))}
+				</div>
+			</div>
+
+			{/* Follower Growth Section */}
+			{/* <div className="rounded-lg bg-white p-6 shadow">
 					<div className="flex items-center justify-between">
 						<h2 className="text-lg font-medium">Follower Growth</h2>
 						<button className="rounded-md p-2 hover:bg-gray-100">
@@ -257,7 +226,6 @@ export default function PatronProfile() {
 						</div>
 					</div>
 				</div> */}
-			</div>
 		</PatronLayout>
 	)
 }
