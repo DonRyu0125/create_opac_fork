@@ -27,7 +27,7 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 			{/* <Sidebar /> */}
 			<div className="min-h-screen flex flex-col relative">
 				<Header />
-				<main className="grid items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 pb-4">
+				<main className="container grid items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 pb-4">
 					<div className="container flex flex-col gap-8 p-6">
 						<div className="flex flex-wrap gap-2 sm:gap-4">
 							{profileList.map((button) => (
