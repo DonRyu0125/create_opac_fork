@@ -24,37 +24,36 @@ export type PagePaginationProps = {
 const PagePagination = ({ items, maxItem = 10 }: PagePaginationProps) => {
   const activeIndex = items.findIndex((item) => item.active)
   const totalPages = items.length
+  let siblingsCount = 2
+  let boundaryCount = 2
+
   
-  // Responsive siblings and boundary counts
-  const [siblingsCount, setSiblingsCount] = useState(1)
-  const [boundaryCount, setBoundaryCount] = useState(1)
-  
-  // Update counts based on screen size
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        // Mobile: minimal view
-        setSiblingsCount(0)
-        setBoundaryCount(1)
-      } else if (window.innerWidth < 768) {
-        // Small tablets
-        setSiblingsCount(1)
-        setBoundaryCount(1)
-      } else if (window.innerWidth < 1024) {
-        // Tablets/small laptops
-        setSiblingsCount(1)
-        setBoundaryCount(2)
-      } else {
-        // Desktops
-        setSiblingsCount(2)
-        setBoundaryCount(2)
-      }
-    }
+  // // Update counts based on screen size
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (window.innerWidth < 640) {
+  //       // Mobile: minimal view
+  //       setSiblingsCount(5)
+  //       setBoundaryCount(5)
+  //     } else if (window.innerWidth < 768) {
+  //       // Small tablets
+  //       setSiblingsCount(1)
+  //       setBoundaryCount(1)
+  //     } else if (window.innerWidth < 1024) {
+  //       // Tablets/small laptops
+  //       setSiblingsCount(1)
+  //       setBoundaryCount(2)
+  //     } else {
+  //       // Desktops
+  //       setSiblingsCount(2)
+  //       setBoundaryCount(2)
+  //     }
+  //   }
     
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  //   handleResize()
+  //   window.addEventListener('resize', handleResize)
+  //   return () => window.removeEventListener('resize', handleResize)
+  // }, [])
   
   const getVisiblePageLinks = () => {
     if (totalPages <= maxItem) {
@@ -129,7 +128,7 @@ const PagePagination = ({ items, maxItem = 10 }: PagePaginationProps) => {
         {visibleLinks.map((item:PageLink, index) => (
           <PaginationItem key={index}>
             {item.ellipsis ? (
-              <PaginationEllipsis className="hidden sm:inline" />
+              <PaginationEllipsis />
             ) : (
               <PaginationLink
                 isActive={item.active}
