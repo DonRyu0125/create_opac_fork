@@ -1,54 +1,167 @@
 import {
-	Pagination,
-	PaginationContent,
-	PaginationItem,
-	PaginationLink,
-	PaginationNext,
-	PaginationPrevious,
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
 } from '@/components/ui/pagination'
+import { useEffect, useState } from 'react'
 
 export interface PageLink extends Record<string, string | boolean | undefined> {
-	url: string
-	active?: boolean
+  url: string
+  active?: boolean
 }
 
 export type PagePaginationProps = {
-	next?: string
-	previous?: string
-	items: PageLink[]
-	maxItem?: number
-	renderItem: (item: PageLink, index: number) => string | React.ReactNode
+  next?: string
+  previous?: string
+  items: PageLink[]
+  maxItem?: number
 }
 
-const PagePagination = ({ items, maxItem = 10, renderItem }: PagePaginationProps) => {
-	const activeIndex = items.findIndex((item) => item.active)
+const PagePagination = ({ items, maxItem = 10 }: PagePaginationProps) => {
+  const activeIndex = items.findIndex((item) => item.active)
+  const totalPages = items.length
+  
+  // Responsive siblings and boundary counts
+  const [siblingsCount, setSiblingsCount] = useState(1)
+  const [boundaryCount, setBoundaryCount] = useState(1)
+  
+  // Update counts based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        // Mobile: minimal view
+        setSiblingsCount(0)
+        setBoundaryCount(1)
+      } else if (window.innerWidth < 768) {
+        // Small tablets
+        setSiblingsCount(1)
+        setBoundaryCount(1)
+      } else if (window.innerWidth < 1024) {
+        // Tablets/small laptops
+        setSiblingsCount(1)
+        setBoundaryCount(2)
+      } else {
+        // Desktops
+        setSiblingsCount(2)
+        setBoundaryCount(2)
+      }
+    }
+    
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+  
+  const getVisiblePageLinks = () => {
+    if (totalPages <= maxItem) {
+      return items;
+    }
+    
+    const showLeftEllipsis = activeIndex > boundaryCount + siblingsCount + 1;
+    const showRightEllipsis = activeIndex < totalPages - (boundaryCount + siblingsCount + 2);
+    
+    const visibleItems = [];
+    
+    for (let i = 0; i < boundaryCount; i++) {
+      visibleItems.push(items[i]);
+    }
+    
+    if (showLeftEllipsis) {
+      visibleItems.push({ url: '', ellipsis: true });
+    } else if (!showLeftEllipsis && activeIndex > boundaryCount) {
+      for (let i = boundaryCount; i < activeIndex - siblingsCount; i++) {
+        visibleItems.push(items[i]);
+      }
+    }
+    
+    const startSibling = Math.max(
+      boundaryCount,
+      showLeftEllipsis ? activeIndex - siblingsCount : boundaryCount
+    );
+    const endSibling = Math.min(
+      totalPages - boundaryCount,
+      showRightEllipsis ? activeIndex + siblingsCount + 1 : totalPages - boundaryCount
+    );
+    
+    for (let i = startSibling; i < endSibling; i++) {
+      visibleItems.push(items[i]);
+    }
+    
+    if (showRightEllipsis) {
+      visibleItems.push({ url: '', ellipsis: true });
+    } else if (!showRightEllipsis && activeIndex < totalPages - boundaryCount - 1) {
+      for (let i = endSibling; i < totalPages - boundaryCount; i++) {
+        visibleItems.push(items[i]);
+      }
+    }
+    
+    for (let i = totalPages - boundaryCount; i < totalPages; i++) {
+      visibleItems.push(items[i]);
+    }
+    
+    return visibleItems;
+  }
+  
+  const visibleLinks = getVisiblePageLinks();
 
-	return (
-		<Pagination>
-			<PaginationContent>
-				{activeIndex > 0 && (
-					<PaginationItem>
-						<PaginationPrevious href={items[activeIndex - 1].url} />
-					</PaginationItem>
-				)}
-				{items
-					.filter((e, i) => i < maxItem)
-					.map((item, index) => (
-						<PaginationItem key={index}>
-							<PaginationLink isActive={item.active} href={item.url}>
-								{renderItem(item, index)}
-							</PaginationLink>
-						</PaginationItem>
-					))}
+  return (
+    <Pagination className="w-full">
+      <PaginationContent className="flex-wrap justify-center">
+        {activeIndex > 0 && (
+          <PaginationItem className="sm:inline hidden">
+            <PaginationPrevious href={items[activeIndex - 1].url} />
+          </PaginationItem>
+        )}
+        
+        {activeIndex > 0 && (
+          <PaginationItem className="sm:hidden inline">
+            <PaginationPrevious
+              href={items[activeIndex - 1].url}
+              className="p-2 h-8 w-8 flex items-center justify-center"
+            />
+          </PaginationItem>
+        )}
+        
+        {visibleLinks.map((item:PageLink, index) => (
+          <PaginationItem key={index}>
+            {item.ellipsis ? (
+              <PaginationEllipsis className="hidden sm:inline" />
+            ) : (
+              <PaginationLink
+                isActive={item.active}
+                href={item.url}
+                className={`
+                  ${window.innerWidth < 640 ? 'h-8 w-8 p-0' : ''}
+                  ${item.active ? 'font-bold' : ''}
+                `}
+              >
+                <span>{items.indexOf(item as PageLink) + 1}</span>
+              </PaginationLink>
+            )}
+          </PaginationItem>
+        ))}
 
-				{activeIndex < items.length - 1 && (
-					<PaginationItem>
-						<PaginationNext href={items[activeIndex + 1].url} />
-					</PaginationItem>
-				)}
-			</PaginationContent>
-		</Pagination>
-	)
+        {activeIndex < items.length - 1 && (
+          <PaginationItem className="sm:inline hidden">
+            <PaginationNext href={items[activeIndex + 1].url} />
+          </PaginationItem>
+        )}
+        
+        {activeIndex < items.length - 1 && (
+          <PaginationItem className="sm:hidden inline">
+            <PaginationNext
+              href={items[activeIndex + 1].url}
+              className="p-2 h-8 w-8 flex items-center justify-center"
+            />
+          </PaginationItem>
+        )}
+      </PaginationContent>
+    </Pagination>
+  )
 }
 
 export default PagePagination
