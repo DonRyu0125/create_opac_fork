@@ -85,7 +85,7 @@
 				"detail": true
 			},
 			{
-				"label": "Date",
+				"label": "Creation",
 				"name": "date_cr_inc",
 				"summary": true,
 				"grid": false,
