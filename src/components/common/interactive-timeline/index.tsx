@@ -6,7 +6,6 @@ import museumIcon from '../../../assets/icons/museum.png'
 import { convertXMLToJson, getImage } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
 import axios from 'axios'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface DataType {
 	legal_title: string
@@ -36,9 +35,6 @@ interface DataType {
 const Timeline = ({ page }: { page: string }) => {
 	const [data, setData] = useState<DataType[]>([])
 	const { message, archives, library, museum } = useConstants()
-	const [isDragging, setIsDragging] = useState(false)
-	const [startX, setStartX] = useState(0)
-	const [scrollLeft, setScrollLeft] = useState(0)
 	const [openPopoverId, setOpenPopoverId] = useState<number | null>()
 	const scrollContainerRef = useRef<any>(null)
 	let count = 0
@@ -179,17 +175,6 @@ const Timeline = ({ page }: { page: string }) => {
 		}
 	}
 
-	const handleMouseDown = (e: { currentTarget: any; pageX: number }) => {
-		setIsDragging(true)
-		const slider = e.currentTarget
-		setStartX(e.pageX - slider.offsetLeft)
-		setScrollLeft(slider.scrollLeft)
-	}
-
-	const handleMouseUp = () => {
-		setIsDragging(false)
-	}
-
 	const handleWheel = (e: { preventDefault: () => void; deltaY: any }) => {
 		if (scrollContainerRef.current) {
 			scrollContainerRef.current.scrollLeft += e.deltaY
@@ -204,7 +189,6 @@ const Timeline = ({ page }: { page: string }) => {
 			<div
 				ref={scrollContainerRef}
 				className="w-full relative flex items-center h-40 justify-around overflow-x-auto px-2 cursor-grab active:cursor-grabbing"
-				onMouseDown={handleMouseDown}
 				onWheel={handleWheel}>
 				{data.map((item: any, idx: number) => {
 					if (item.century) {
