@@ -95,17 +95,10 @@
 			},
             {
 				"label": "GMD",
-				"name": "FORM",
+				"name": "form_occurrence",
 				"summary": true,
 				"grid": false,
-				"detail": true
-			},
-            {
-				"label": "GMD",
-				"name": "FORM",
-				"summary": true,
-				"grid": false,
-				"detail": true
+				"detail": false
 			},
 			{
 				"label": "Level",
@@ -268,7 +261,7 @@
 			},
             {
 				"label": "SERIES",
-				"name": "biblio_series_occurrence",
+				"name": "series_occurrence",
 				"summary": false,
 				"grid": false,
 				"detail": true
