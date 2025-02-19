@@ -78,13 +78,6 @@
 				"summary": false,
 				"grid": false,
 				"detail": true
-			},
-            {
-				"label": "Availability",
-				"name": "M_AVAIL",
-				"summary": true,
-				"grid": false,
-				"detail": true
 			}
 		]
 	},
@@ -100,11 +93,25 @@
 				"grid": false,
 				"detail": true
 			},
+            {
+				"label": "GMD",
+				"name": "FORM",
+				"summary": true,
+				"grid": false,
+				"detail": true
+			},
+            {
+				"label": "GMD",
+				"name": "FORM",
+				"summary": true,
+				"grid": false,
+				"detail": true
+			},
 			{
 				"label": "Level",
 				"name": "LEVEL_DESC",
-				"summary": true,
-				"grid": true,
+				"summary": false,
+				"grid": false,
 				"detail": true
 			},
 			{
@@ -189,6 +196,13 @@
 				"grid": true,
 				"detail": true
 			},
+            {
+				"label": "ISBN",
+				"name": "ISBN",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
 			{
 				"label": "Branch Location",
 				"name": "holding_centre",
@@ -199,7 +213,21 @@
 			{
 				"label": "Author",
 				"name": "pauthor",
-				"summary": false,
+				"summary": true,
+				"grid": false,
+				"detail": true
+			},
+            {
+				"label": "Publication Date",
+				"name": "LIB_PUB_WHOL",
+				"summary": true,
+				"grid": false,
+				"detail": true
+			},
+            {
+				"label": "Publication Place",
+				"name": "260_B",
+				"summary": true,
 				"grid": false,
 				"detail": true
 			},
@@ -207,6 +235,13 @@
 				"label": "Publication year",
 				"name": "publication_year_occurrence",
 				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+            {
+				"label": "Material Type",
+				"name": "I_COLLECT_CODE",
+				"summary": true,
 				"grid": false,
 				"detail": true
 			},
@@ -218,9 +253,9 @@
 				"detail": true
 			},
 			{
-				"label": "Series",
-				"name": "series_occurrence",
-				"summary": false,
+				"label": "Branch Location",
+				"name": "HOLDING_CENTRE",
+				"summary": true,
 				"grid": false,
 				"detail": true
 			},
