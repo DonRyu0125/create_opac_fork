@@ -7,7 +7,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
-import { useEffect, useState } from 'react'
 
 export interface PageLink extends Record<string, string | boolean | undefined> {
   url: string
