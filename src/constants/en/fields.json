@@ -158,7 +158,7 @@
 			},
 			{
 				"label": "Arrangement",
-				"name": "arrangement",
+				"name": "arrangement_occurrence",
 				"summary": false,
 				"grid": false,
 				"detail": true
