@@ -191,9 +191,12 @@ const InteractiveMap = ({ page }: { page: string }) => {
 			console.warn('Error fetching files:', error)
 		}
 		const updatedRecords = files.map((record: DataType) => {
-			record.decimal_latitude = parseFloat(record.decimal_latitude ?? 0)
-			record.decimal_longitude = parseFloat(record.decimal_longitude ?? 0)
-			return record
+			if (record?.decimal_latitude && record?.decimal_longitude) {
+				record.decimal_latitude = parseFloat(record?.decimal_latitude ?? 0)
+				record.decimal_longitude = parseFloat(record?.decimal_longitude ?? 0)
+				return record
+			}
+			return ''
 		})
 		setAllData(updatedRecords ?? [])
 		setFilteredData(updatedRecords ?? [])
@@ -255,7 +258,9 @@ const InteractiveMap = ({ page }: { page: string }) => {
 	const getUniqueValuesP = () => {
 		const nData = allData.filter((item: any) => {
 			const matchesDatabase =
-				selectedDatabases.length > 0 ? selectedDatabases.includes(item.database_type) : true
+				selectedDatabases.length > 0
+					? selectedDatabases.includes(item?.database_type)
+					: true
 			const matchesCountry =
 				selectedCountries.length > 0
 					? selectedCountries.includes(item.origin_country)
@@ -270,7 +275,9 @@ const InteractiveMap = ({ page }: { page: string }) => {
 	const getUniqueValuesC = () => {
 		const nData = allData.filter((item: any) => {
 			const matchesDatabase =
-				selectedDatabases.length > 0 ? selectedDatabases.includes(item.database_type) : true
+				selectedDatabases.length > 0
+					? selectedDatabases.includes(item?.database_type)
+					: true
 			const matchesCountry =
 				selectedCountries.length > 0
 					? selectedCountries.includes(item.origin_country)

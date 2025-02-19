@@ -101,7 +101,7 @@ const Timeline = ({ page }: { page: string }) => {
 				} else {
 					const offset = 10000 - timeIndex
 					const century = Math.floor(offset / 1000) * 1000
-					centuryLabel = `BC ${century + 1000}`
+					centuryLabel = century ? `BC ${century + 1000}` : 'BC 0'
 				}
 				if (
 					centuryLabel !== currentCenturyLabel &&
