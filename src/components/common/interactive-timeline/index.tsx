@@ -185,19 +185,6 @@ const Timeline = ({ page }: { page: string }) => {
 		setScrollLeft(slider.scrollLeft)
 	}
 
-	const handleMouseMove = (e: {
-		preventDefault: () => void
-		currentTarget: any
-		pageX: number
-	}) => {
-		if (!isDragging) return
-		e.preventDefault()
-		const slider = e.currentTarget
-		const x = e.pageX - slider.offsetLeft
-		const walk = (x - startX) * 2
-		slider.scrollLeft = scrollLeft - walk
-	}
-
 	const handleMouseUp = () => {
 		setIsDragging(false)
 	}
@@ -217,8 +204,6 @@ const Timeline = ({ page }: { page: string }) => {
 				ref={scrollContainerRef}
 				className="w-full relative flex items-center h-36 justify-around overflow-x-auto custom-scrollbar px-2 cursor-grab active:cursor-grabbing"
 				onMouseDown={handleMouseDown}
-				onMouseMove={handleMouseMove}
-				onMouseUp={handleMouseUp}
 				onMouseLeave={handleMouseUp}
 				onWheel={handleWheel}>
 				{data.map((item: any, idx: number) => {
@@ -254,7 +239,7 @@ const Timeline = ({ page }: { page: string }) => {
 									open={openPopoverId === idx}
 									onOpenChange={(open) => setOpenPopoverId(open ? idx : null)}>
 									<Popover.Trigger
-										className="z-10 w-[5px] h-[50px] cursor-pointer hover:scale-150 bg-gray-400"
+										className="z-10 w-[5px] h-[50px] cursor-pointer hover:scale-150 bg-gray-400 focus:outline-none"
 										onMouseEnter={() => setOpenPopoverId(idx)}>
 										<div className="w-full h-full" />
 									</Popover.Trigger>
