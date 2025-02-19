@@ -39,7 +39,7 @@
 			},
 			{
 				"label": "Object Name",
-				"name": "object_name_occurrence",
+				"name": "object_name",
 				"summary": false,
 				"grid": false,
 				"detail": true
