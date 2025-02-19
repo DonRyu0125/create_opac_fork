@@ -6,6 +6,7 @@ import museumIcon from '../../../assets/icons/museum.png'
 import { convertXMLToJson, getImage } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
 import axios from 'axios'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface DataType {
 	legal_title: string
@@ -47,15 +48,15 @@ const Timeline = ({ page }: { page: string }) => {
 	}, [])
 
 	useEffect(() => {
-		const currentRef = scrollContainerRef.current;
-		if (!currentRef) return;
-	
-		const wheelListener = (e: WheelEvent) => e.preventDefault();
-		currentRef.addEventListener("wheel", wheelListener, { passive: false });
-	
-		return () => currentRef.removeEventListener("wheel", wheelListener);
-	}, []);
-	
+		const currentRef = scrollContainerRef.current
+		if (!currentRef) return
+
+		const wheelListener = (e: WheelEvent) => e.preventDefault()
+		currentRef.addEventListener('wheel', wheelListener, { passive: false })
+
+		return () => currentRef.removeEventListener('wheel', wheelListener)
+	}, [])
+
 	const getData = async () => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
@@ -202,9 +203,8 @@ const Timeline = ({ page }: { page: string }) => {
 			<div className="absolute top-[45%] z-0 w-full h-[7px] bg-gray-400" />
 			<div
 				ref={scrollContainerRef}
-				className="w-full relative flex items-center h-36 justify-around overflow-x-auto custom-scrollbar px-2 cursor-grab active:cursor-grabbing"
+				className="w-full relative flex items-center h-40 justify-around overflow-x-auto px-2 cursor-grab active:cursor-grabbing"
 				onMouseDown={handleMouseDown}
-				onMouseLeave={handleMouseUp}
 				onWheel={handleWheel}>
 				{data.map((item: any, idx: number) => {
 					if (item.century) {
