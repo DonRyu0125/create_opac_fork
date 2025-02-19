@@ -265,6 +265,13 @@
 				"summary": false,
 				"grid": false,
 				"detail": true
+			},
+            {
+				"label": "SERIES",
+				"name": "biblio_series_occurrence",
+				"summary": false,
+				"grid": false,
+				"detail": true
 			}
 		]
 	}
