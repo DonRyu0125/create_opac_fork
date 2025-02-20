@@ -165,7 +165,7 @@
 			},
 			{
 				"label": "Notes",
-				"name": "notes_occurrence",
+				"name": "notes_concat_occurrence",
 				"summary": false,
 				"grid": false,
 				"detail": true
