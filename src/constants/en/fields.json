@@ -205,13 +205,6 @@
 			},
 			{
 				"label": "Author",
-				"name": "pauthor_occurrence",
-				"summary": false,
-				"grid": false,
-				"detail": true
-			},
-			{
-				"label": "Author",
 				"name": "pauthor",
 				"summary": true,
 				"grid": false,

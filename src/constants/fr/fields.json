@@ -206,7 +206,7 @@
 			{
 				"label": "Auteur",
 				"name": "pauthor_occurrence",
-				"summary": false,
+				"summary": true,
 				"grid": false,
 				"detail": true
 			},
