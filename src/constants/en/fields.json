@@ -205,21 +205,28 @@
 			},
 			{
 				"label": "Author",
-				"name": "pauthor",
-				"summary": true,
+				"name": "pauthor_occurrence",
+				"summary": false,
 				"grid": false,
 				"detail": true
 			},
+			{
+				"label": "Author",
+				"name": "pauthor",
+				"summary": true,
+				"grid": false,
+				"detail": false
+			},
             {
 				"label": "Publication Date",
-				"name": "LIB_PUB_WHOL",
+				"name": "lib_pub_word",
 				"summary": true,
 				"grid": false,
 				"detail": true
 			},
             {
 				"label": "Publication Place",
-				"name": "260_B",
+				"name": "marc__260_occurrence",
 				"summary": true,
 				"grid": false,
 				"detail": true
