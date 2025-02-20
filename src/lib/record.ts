@@ -41,7 +41,7 @@ export const getFieldsFromRecord = (
 	filterFn: (e: any) => boolean,
 	componentFn: (data: any[], item: any) => RENDERED_COMPONENT
 ) => {
-	let database = record.database_name ?? record.record.link_dbname
+	let database =  record.link_dbname ?? record.database_name
 	const listOfFields = getListOfFields(fields, database)
 	return listOfFields?.items
 		?.filter((item:FieldsJson) => filterFn(item))
