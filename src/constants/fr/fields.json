@@ -100,7 +100,7 @@
 				"detail": true
 			},
 			{
-				"label": "Type de document (GMD)",
+				"label": "GMD",
 				"name": "form_occurrence",
 				"summary": true,
 				"grid": false,
@@ -170,7 +170,7 @@
 				"detail": true
 			},
 			{
-				"label": "Notes",
+				"label": "Remarques",
 				"name": "notes_occurrence",
 				"summary": false,
 				"grid": false,
@@ -189,7 +189,7 @@
 				"detail": true
 			},
 			{
-				"label": "Numéro d'accession",
+				"label": "N° d'accession",
 				"name": "accession_number",
 				"summary": true,
 				"grid": true,
@@ -260,7 +260,7 @@
 				"detail": true
 			},
 			{
-				"label": "Étiquettes",
+				"label": "Tags",
 				"name": "biblio_tag_occurrence",
 				"summary": false,
 				"grid": false,

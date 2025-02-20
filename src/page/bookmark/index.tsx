@@ -59,9 +59,6 @@ const Bookmark = () => {
 												active: item.b !== undefined,
 											})
 										)}
-										renderItem={(_, index) => (
-											<span key={index}>{index + 1}</span>
-										)}
 									/>
 								</div>
 							)}
