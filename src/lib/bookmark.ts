@@ -13,11 +13,14 @@ export const bookmarkSelect = async (session: string, recd: Record) => {
 }
 
 export const removeBookmarkFromKey = (session: string, recd: Record) => {
-	const { record,database_name } = recd
+	const { database_name, book_input } = recd
+	const { input }: any = book_input
+
+	console.log('book_input', book_input)
 	return axios({
 		method: 'post',
 		url: `${session}?DELETEORDER&COOKIE=BOOKMARK`,
-		data: `mcheckbox_${record.sisn}=${record.sisn}-${database_name}`,
+		data: `${input._name}=${input._value}-${database_name}`,
 	})
 }
 
