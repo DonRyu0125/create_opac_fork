@@ -162,13 +162,6 @@
 				"summary": false,
 				"grid": false,
 				"detail": true
-			},
-			{
-				"label": "Notes",
-				"name": "notes_concat_occurrence",
-				"summary": false,
-				"grid": false,
-				"detail": true
 			}
 		]
 	},
@@ -177,7 +170,7 @@
 		"items": [
 			{
 				"label": "Title",
-				"name": "LEGAL_TITLE",
+				"name": "title",
 				"summary": true,
 				"grid": true,
 				"detail": true
@@ -205,21 +198,21 @@
 			},
 			{
 				"label": "Author",
-				"name": "pauthor",
+				"name": "pauthor_occurrence",
 				"summary": true,
 				"grid": false,
 				"detail": false
 			},
             {
 				"label": "Publication Date",
-				"name": "lib_pub_word",
+				"name": "lib_pub_whole",
 				"summary": true,
 				"grid": false,
 				"detail": true
 			},
             {
 				"label": "Publication Place",
-				"name": "marc__260_occurrence",
+				"name": "marc_260_b",
 				"summary": true,
 				"grid": false,
 				"detail": true
@@ -233,7 +226,7 @@
 			},
             {
 				"label": "Material Type",
-				"name": "I_COLLECT_CODE",
+				"name": "i_collect_code",
 				"summary": true,
 				"grid": false,
 				"detail": true
@@ -263,6 +256,13 @@
 				"label": "SERIES",
 				"name": "series_occurrence",
 				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Notes",
+				"name": "notes_concat_occurrence",
+				"summary": true,
 				"grid": false,
 				"detail": true
 			}
