@@ -46,14 +46,14 @@ export const validateBookmarkResponse = (
 	}
 }
 
-export const removeAllBookmarks = async (records: Record[]) => {
-	let dataString = records.map(({ record }) => {
-		return `mcheckbox_${record.sisn}}=${record.sisn}`
+export const removeAllBookmarks = async (session: string,records: Record[]) => {
+	let dataString = records.map(({ database_name, book_input } ) => {
+		const { input }: any = book_input
+		return `${input._name}=${input._value}-${database_name}`
 	})
-	console.log('dataString', dataString)
 	return await axios({
 		method: 'post',
-		url: `?DELETEORDER&COOKIE=BOOKMARK`,
+		url: `${session}?DELETEORDER&COOKIE=BOOKMARK`,
 		data: dataString.join('&'),
 	}).then((res) => {
 		window.location.reload()
