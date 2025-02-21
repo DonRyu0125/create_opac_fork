@@ -25,10 +25,10 @@ const BookmarkSummaryRecords = () => {
 const RecordView = ({ record }: { record: Record }) => {
 	const { displayMode } = useDisplayMode()
 	const { fields } = useConstants()
-	const database = record.database_name || record.link_dbname || 'COLLECTIONS_WEB' // use link_dbname for SELECTION_LIST
+	const database = record.database_name || record.link_dbname || '' 
 	const recordLink = record.book_record_link.toString()
 	const title =
-		getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || 'Untitled'
+		getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || record.record.legal_title ||'Untitled'
 	const thumbnail =
 		record.media &&
 		Array.isArray(record.media.im_access_link) &&

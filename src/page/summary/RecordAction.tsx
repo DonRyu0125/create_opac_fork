@@ -25,13 +25,21 @@ export const RecordAction = ({ record }: { record: Record }) => {
 	const [loading, setLoading] = useState(false)
 	const handleBookmark = () => {
 		setLoading(true)
-		setLoading(true)
 		if (like) {
-			toast({
-				title: `${message.recordAlreadyMarked}`,
-				duration: 1000,
-			})
 			setLoading(false)
+			toast({
+				title: message.successfullBookmark,
+				duration: 2000,
+				action: (
+					<a
+						className={
+							'p-1 text-center border-solid border-2 rounded-md text-sm font-bold'
+						}
+						href={`${bookmark_url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bookmark.html`}>
+						{message.viewBookmark}
+					</a>
+				),
+			})
 			return
 		}
 
