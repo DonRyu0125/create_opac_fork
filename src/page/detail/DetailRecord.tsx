@@ -5,6 +5,7 @@ import useJSONData from '@/hooks/useJSONData'
 import { getFieldDataByLabel, getFieldsFromRecord } from '@/lib/record'
 import DetailRecordAction from '@/page/detail/DetailRecordAction'
 import { DBFields } from '../../types/record'
+import { convertLowerTrim } from '@/lib/utils'
 
 type Props = {}
 
@@ -17,7 +18,7 @@ const DetailRecord = (props: Props) => {
 	const title =
 		getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || 'Untitled'
 	const detailFields = getFieldsFromRecord(
-		record,
+		convertLowerTrim(database) === 'selection_list' ? record.record : record,
 		fields,
 		(item) => item.detail,
 		(data, item) => ({ label: item.label, value: data })
