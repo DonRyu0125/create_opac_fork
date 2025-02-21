@@ -14,6 +14,7 @@ import BookmarkSummaryRecords from './BookmarkSummaryRecords'
 const Bookmark = () => {
 	const { message, home } = useConstants()
 	const { common, pagination, backToSummary, records } = useJSONData({ selector: '#xml_record' })
+	const { bookmark_url } = common
 
 	return (
 		<Layout>
@@ -42,7 +43,7 @@ const Bookmark = () => {
 					<div className="mx-auto py-4 sm:py-12 container flex flex-col">
 						<div className={'w-full flex justify-between'}>
 							<PageHeader heading={`${common.total_record} bookmarked item(s)`} />
-							<Button onClick={() => removeAllBookmarks(records)}>
+							<Button onClick={() => removeAllBookmarks(`${bookmark_url}`,records)}>
 								{message.removeALL}
 							</Button>
 						</div>
