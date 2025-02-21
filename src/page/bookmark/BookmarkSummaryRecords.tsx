@@ -50,7 +50,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		(item) => item.summary === true,
 		(data, item) => (
 			<DataWithLabel
-				className="flex-col items-start justify-start my-1 space-x-0 w-[50%]"
+				className={`flex-col items-start justify-start my-1 space-x-0 ${item.name === 'obj_description' ? 'w-full' : 'w-[50%]'} `}
 				key={item.name}
 				label={item.label || ''}
 				items={data}
