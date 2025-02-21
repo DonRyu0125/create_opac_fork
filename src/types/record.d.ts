@@ -123,6 +123,7 @@ export interface Record {
 	save_n_stop_record?: string // for client registration
 	skip_n_stop_record?: string // for client registration
 	book_input:string
+	book_record_link:string
 }
 
 export type MediaType = 'im_access_link' | 'vd_access_link' | 'ad_access_link' | 'tx_access_link'

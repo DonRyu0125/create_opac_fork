@@ -4,7 +4,7 @@
 		"items": [
 			{
 				"label": "Titre",
-				"name": "LEGAL_TITLE",
+				"name": "legal_title",
 				"summary": true,
 				"grid": true,
 				"detail": true
@@ -84,14 +84,8 @@
 	{
 		"database": "DESCRIPTION_WEB",
 		"items": [
-			{ "label": "Titre", "name": "TITLE", "summary": true, "grid": true, "detail": true },
-			{
-				"label": "Code de référence",
-				"name": "REFD",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
+			{ "label": "Titre", "name": "title", "summary": true, "grid": true, "detail": true },
+			{ "label": "Code de référence", "name": "REFD", "summary": true, "grid": true, "detail": true },
 			{
 				"label": "Création",
 				"name": "date_cr_inc",
@@ -149,7 +143,7 @@
 				"detail": true
 			},
 			{
-				"label": "Originateur",
+				"label": "Créateur",
 				"name": "originator",
 				"summary": false,
 				"grid": false,
@@ -168,13 +162,6 @@
 				"summary": false,
 				"grid": false,
 				"detail": true
-			},
-			{
-				"label": "Remarques",
-				"name": "notes_occurrence",
-				"summary": false,
-				"grid": false,
-				"detail": true
 			}
 		]
 	},
@@ -183,19 +170,25 @@
 		"items": [
 			{
 				"label": "Titre",
-				"name": "LEGAL_TITLE",
+				"name": "title",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
-				"label": "N° d'accession",
+				"label": "Numéro d'accession",
 				"name": "accession_number",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
-			{ "label": "ISBN", "name": "ISBN", "summary": true, "grid": true, "detail": true },
+			{
+				"label": "ISBN",
+				"name": "ISBN",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
 			{
 				"label": "Emplacement de la succursale",
 				"name": "holding_centre",
@@ -208,25 +201,18 @@
 				"name": "pauthor_occurrence",
 				"summary": true,
 				"grid": false,
-				"detail": true
-			},
-			{
-				"label": "Auteur",
-				"name": "pauthor",
-				"summary": true,
-				"grid": false,
 				"detail": false
 			},
 			{
 				"label": "Date de publication",
-				"name": "lib_pub_word",
+				"name": "lib_pub_whole",
 				"summary": true,
 				"grid": false,
 				"detail": true
 			},
 			{
 				"label": "Lieu de publication",
-				"name": "marc__260_occurrence",
+				"name": "marc_260_b",
 				"summary": true,
 				"grid": false,
 				"detail": true
@@ -240,7 +226,7 @@
 			},
 			{
 				"label": "Type de matériel",
-				"name": "I_COLLECT_CODE",
+				"name": "i_collect_code",
 				"summary": true,
 				"grid": false,
 				"detail": true
@@ -260,7 +246,7 @@
 				"detail": true
 			},
 			{
-				"label": "Tags",
+				"label": "Étiquettes",
 				"name": "biblio_tag_occurrence",
 				"summary": false,
 				"grid": false,
@@ -270,6 +256,13 @@
 				"label": "Série",
 				"name": "series_occurrence",
 				"summary": false,
+				"grid": false,
+				"detail": true
+			},
+			{
+				"label": "Notes",
+				"name": "notes_concat_occurrence",
+				"summary": true,
 				"grid": false,
 				"detail": true
 			}

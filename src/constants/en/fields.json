@@ -4,7 +4,7 @@
 		"items": [
 			{
 				"label": "Title",
-				"name": "LEGAL_TITLE",
+				"name": "legal_title",
 				"summary": true,
 				"grid": true,
 				"detail": true
@@ -84,7 +84,7 @@
 	{
 		"database": "DESCRIPTION_WEB",
 		"items": [
-			{ "label": "Title", "name": "TITLE", "summary": true, "grid": true, "detail": true },
+			{ "label": "Title", "name": "title", "summary": true, "grid": true, "detail": true },
 			{ "label": "Ref. Code", "name": "REFD", "summary": true, "grid": true, "detail": true },
 			{
 				"label": "Creation",
