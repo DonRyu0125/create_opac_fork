@@ -3,14 +3,14 @@
 		"database": "COLLECTIONS_WEB",
 		"items": [
 			{
-				"label": "Titre",
+				"label": "Title",
 				"name": "legal_title",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
 			{
-				"label": "Numéro d'accession",
+				"label": "N° d'accession",
 				"name": "ACCESSION_NUMBER",
 				"summary": true,
 				"grid": true,
@@ -39,7 +39,7 @@
 			},
 			{
 				"label": "Nom de l'objet",
-				"name": "object_name",
+				"name": "object_name_occurrence",
 				"summary": false,
 				"grid": false,
 				"detail": true
@@ -53,21 +53,21 @@
 			},
 			{
 				"label": "Sujet",
-				"name": "sub_keyword",
+				"name": "sub_keyword_occurrence",
 				"summary": false,
 				"grid": false,
 				"detail": true
 			},
 			{
 				"label": "Personne associée",
-				"name": "assoc_person_typ_occurrence",
+				"name": "assoc_fullname",
 				"summary": false,
 				"grid": false,
 				"detail": true
 			},
 			{
 				"label": "Organisation associée",
-				"name": "org_assoc_type_occurrence",
+				"name": "org_assoc",
 				"summary": false,
 				"grid": false,
 				"detail": true
@@ -84,8 +84,14 @@
 	{
 		"database": "DESCRIPTION_WEB",
 		"items": [
-			{ "label": "Titre", "name": "title", "summary": true, "grid": true, "detail": true },
-			{ "label": "Code de référence", "name": "REFD", "summary": true, "grid": true, "detail": true },
+			{ "label": "Title", "name": "title", "summary": true, "grid": true, "detail": true },
+			{
+				"label": "Code de référence",
+				"name": "REFD",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
 			{
 				"label": "Création",
 				"name": "date_cr_inc",
@@ -143,7 +149,7 @@
 				"detail": true
 			},
 			{
-				"label": "Créateur",
+				"label": "Originateur",
 				"name": "originator",
 				"summary": false,
 				"grid": false,
@@ -162,33 +168,28 @@
 				"summary": false,
 				"grid": false,
 				"detail": true
+			},
+			{
+				"label": "Remarque",
+				"name": "notes_occurrence",
+				"summary": false,
+				"grid": false,
+				"detail": true
 			}
 		]
 	},
 	{
 		"database": "BIBLIO_WEB",
 		"items": [
+			{ "label": "Title", "name": "title", "summary": true, "grid": true, "detail": true },
 			{
-				"label": "Titre",
-				"name": "title",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
-			{
-				"label": "Numéro d'accession",
+				"label": "N° d'accession",
 				"name": "accession_number",
 				"summary": true,
 				"grid": true,
 				"detail": true
 			},
-			{
-				"label": "ISBN",
-				"name": "ISBN",
-				"summary": true,
-				"grid": true,
-				"detail": true
-			},
+			{ "label": "ISBN", "name": "ISBN", "summary": true, "grid": true, "detail": true },
 			{
 				"label": "Emplacement de la succursale",
 				"name": "holding_centre",
@@ -202,6 +203,13 @@
 				"summary": true,
 				"grid": false,
 				"detail": false
+			},
+			{
+				"label": "Auteur",
+				"name": "pauthor",
+				"summary": false,
+				"grid": true,
+				"detail": true
 			},
 			{
 				"label": "Date de publication",
@@ -239,13 +247,6 @@
 				"detail": true
 			},
 			{
-				"label": "Emplacement de la succursale",
-				"name": "HOLDING_CENTRE",
-				"summary": true,
-				"grid": false,
-				"detail": true
-			},
-			{
 				"label": "Étiquettes",
 				"name": "biblio_tag_occurrence",
 				"summary": false,
@@ -253,14 +254,14 @@
 				"detail": true
 			},
 			{
-				"label": "Série",
+				"label": "Séries",
 				"name": "series_occurrence",
 				"summary": false,
 				"grid": false,
 				"detail": true
 			},
 			{
-				"label": "Notes",
+				"label": "Remarques",
 				"name": "notes_concat_occurrence",
 				"summary": true,
 				"grid": false,

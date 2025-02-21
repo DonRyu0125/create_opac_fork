@@ -39,7 +39,7 @@
 			},
 			{
 				"label": "Object Name",
-				"name": "object_name",
+				"name": "object_name_occurrence",
 				"summary": false,
 				"grid": false,
 				"detail": true
@@ -53,21 +53,21 @@
 			},
 			{
 				"label": "Subject",
-				"name": "sub_keyword",
+				"name": "sub_keyword_occurrence",
 				"summary": false,
 				"grid": false,
 				"detail": true
 			},
 			{
 				"label": "Associated person",
-				"name": "assoc_person_typ_occurrence",
+				"name": "assoc_fullname",
 				"summary": false,
 				"grid": false,
 				"detail": true
 			},
 			{
 				"label": "Associated organization",
-				"name": "org_assoc_type_occurrence",
+				"name": "org_assoc",
 				"summary": false,
 				"grid": false,
 				"detail": true
@@ -162,6 +162,13 @@
 				"summary": false,
 				"grid": false,
 				"detail": true
+			},
+			{
+				"label": "Note",
+				"name": "notes_occurrence",
+				"summary": false,
+				"grid": false,
+				"detail": true
 			}
 		]
 	},
@@ -192,7 +199,7 @@
 			{
 				"label": "Branch Location",
 				"name": "holding_centre",
-				"summary": false,
+				"summary": true,
 				"grid": false,
 				"detail": true
 			},
@@ -202,6 +209,13 @@
 				"summary": true,
 				"grid": false,
 				"detail": false
+			},
+			{
+				"label": "Author",
+				"name": "pauthor",
+				"summary": false,
+				"grid": true,
+				"detail": true
 			},
             {
 				"label": "Publication Date",
@@ -235,13 +249,6 @@
 				"label": "Subject",
 				"name": "subject",
 				"summary": false,
-				"grid": false,
-				"detail": true
-			},
-			{
-				"label": "Branch Location",
-				"name": "HOLDING_CENTRE",
-				"summary": true,
 				"grid": false,
 				"detail": true
 			},
