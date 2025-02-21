@@ -47,7 +47,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		(item) => item.summary === true,
 		(data, item) => (
 			<DataWithLabel
-				className="flex-col items-start justify-start my-1 space-x-0"
+				className="flex-col items-start justify-start my-1 space-x-0 w-[50%]"
 				key={item.name}
 				label={item.label || ''}
 				items={data}
@@ -96,7 +96,7 @@ const RecordView = ({ record }: { record: Record }) => {
 					</div>
 				</div>
 			}>
-			<div className="mt-4">{listFields}</div>
+			<div className="mt-4 flex justify-between flex-wrap">{listFields}</div>
 		</DetailInfoCard>
 	)
 }

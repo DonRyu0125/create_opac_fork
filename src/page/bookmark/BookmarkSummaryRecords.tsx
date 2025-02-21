@@ -25,10 +25,13 @@ const BookmarkSummaryRecords = () => {
 const RecordView = ({ record }: { record: Record }) => {
 	const { displayMode } = useDisplayMode()
 	const { fields } = useConstants()
-	const database = record.database_name || record.link_dbname || '' 
+	const database = record.database_name || record.link_dbname || ''
 	const recordLink = record.book_record_link.toString()
 	const title =
-		getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || record.record.legal_title ||'Untitled'
+		getFieldDataByLabel(record, fields, database, 'Title') ||
+		record.record.title ||
+		record.record.legal_title ||
+		'Untitled'
 	const thumbnail =
 		record.media &&
 		Array.isArray(record.media.im_access_link) &&
@@ -47,7 +50,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		(item) => item.summary === true,
 		(data, item) => (
 			<DataWithLabel
-				className="flex-col items-start justify-start my-1 space-x-0"
+				className="flex-col items-start justify-start my-1 space-x-0 w-[50%]"
 				key={item.name}
 				label={item.label || ''}
 				items={data}
@@ -96,7 +99,7 @@ const RecordView = ({ record }: { record: Record }) => {
 					</div>
 				</div>
 			}>
-			<div className="mt-4">{listFields}</div>
+			<div className="mt-4 flex justify-between flex-wrap">{listFields}</div>
 		</DetailInfoCard>
 	)
 }
