@@ -30,7 +30,7 @@ interface StatCardProps {
 export default function PatronProfile() {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
-	const { home, archives, museum, library } = useConstants()
+	const { home, archives, museum, library, message } = useConstants()
 	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 	const handleClick = (id: any) => {
@@ -120,12 +120,9 @@ export default function PatronProfile() {
 		<PatronLayout heading="">
 			<div className="mb-4 rounded-lg bg-white p-6 shadow">
 				<h1 className="text-3xl font-semibold text-gray-800">
-					Welcome {records[0]?.full_name || 'User'}!
+					{message.welcome} {records[0]?.full_name || 'User'}!
 				</h1>
-				<p className="mt-2">
-					This is your <span className="font-medium text-blue-600">Client Profile</span>.
-					Check your saved or inquired items here!
-				</p>
+				<p className="mt-2">{message.welcomeMessage}</p>
 			</div>
 
 			{/* Stats Grid */}
@@ -145,7 +142,7 @@ export default function PatronProfile() {
 			<div className="space-y-4">
 				<div className="flex items-center justify-between">
 					<h2 className="text-xl font-medium">
-						<span>Search Databases</span>
+						<span>{message.searchDatabase}</span>
 					</h2>
 					{/* <button className="rounded-md p-2 hover:bg-gray-100">
 							<MoreHorizontal className="h-5 w-5 text-gray-500" />
