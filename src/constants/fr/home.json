@@ -93,10 +93,20 @@
             "thumbnail": "https://picsum.photos/660/360"
         }
     ],
+    "topPicks": [
+        {
+            "title": "MINISIS WILL TEST 1",
+            "subTitle": "Museum",
+            "description": "test",
+            "expression": "ACCESSION_NUMBER 65526",
+            "database": "COLLECTIONS_WEB"
+        }
+    ],
     "enableCategoriesItems": true,
     "enableFeaturedCollection": true,
     "enableRSVP": true,
     "enableRecentAddition": false,
+    "enableTopPicks": true,
     "enableMap": true,
     "enableTimeline": true,
     "linkURL": "/"
