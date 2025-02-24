@@ -16,7 +16,10 @@ const DetailRecord = (props: Props) => {
 	const database = record.database_name
 	const recordData: DBFields<'COLLECTIONS'> = record.record
 	const title =
-		getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || 'Untitled'
+		getFieldDataByLabel(record, fields, database, 'Title') ||
+		record.record.title ||
+		record.record.legal_title ||
+		'Untitled'
 	const detailFields = getFieldsFromRecord(
 		convertLowerTrim(database) === 'selection_list' ? record.record : record,
 		fields,
