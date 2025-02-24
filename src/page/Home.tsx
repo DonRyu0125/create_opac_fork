@@ -80,7 +80,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 			<Hero className="" title={heading} backgroundImage={heroBanner} description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
 					<HomeSearchForm
-						title="Search all collections"
+						title={message.searchAllCollections}
 						inputName={UNION_SEARCH_CL}
 						action={getSearchURL(searchURL)}
 					/>

@@ -187,5 +187,6 @@
 	"author": "Author",
 	"clientDashboard": "Client dashboard",
 	"welcomeMessage": "This is your Client Profile. Check your saved or inquired items here!",
-	"searchDatabase": "Search databases"
+	"searchDatabase": "Search databases",
+	"searchAllCollections":"Search all collections"
 }
