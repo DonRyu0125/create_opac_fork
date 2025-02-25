@@ -152,20 +152,20 @@ const DetailRecordAction = () => {
 			<div className="flex flex-col md:flex-row justify-between gap-2">
 				<TooltipButton
 					tooltipContent="Previous record"
-					className="align-center"
+					className={'align-center md:w-[145px]'}
 					disabled={!previousRecord}
 					onClick={() => goToURL(previousRecord)}>
 					<ChevronLeft />
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
 
-				<div className="flex flex-wrap  gap-2">
+				<div className="flex flex-wrap justify-start gap-2">
 					{checkRecordHasMandatoryDataToRequest() &&
 					checkIfCurrentClientRequestedThisRecord() ? (
 						<TooltipButton
 							tooltipContent="Request Record"
 							variant="outline"
-							className={'md:w-[145px] flex justify-evenly'}
+							className={'w-32 flex justify-evenly'}
 							onClick={() => handleSubmit('Request')}>
 							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
 							{message.detailRecordActionRequest}
@@ -258,7 +258,7 @@ const DetailRecordAction = () => {
 					<TooltipButton
 						tooltipContent="Ask about this record"
 						variant="outline"
-						className={'w-32 flex justify-evenly p-1'}
+						className={' flex justify-evenly p-1'}
 						onClick={() => handleSubmit('Enquire')}>
 						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />
 						{message.detailRecordActionEnquire}
@@ -266,7 +266,7 @@ const DetailRecordAction = () => {
 					<TooltipButton
 						tooltipContent="Reproduce this record"
 						variant="outline"
-						className={'w-[147px] flex justify-evenly'}
+						className={'w-[145px] flex justify-evenly'}
 						onClick={() => handleSubmit('Reproduction')}>
 						<Files className="w-4 h-4 mr-2 hidden md:block" />
 						{message.detailRecordActionReproduction}
@@ -309,7 +309,7 @@ const DetailRecordAction = () => {
 
 				<TooltipButton
 					tooltipContent="Next record"
-					className="align-center"
+					className={'align-center md:w-[140px]'}
 					disabled={!nextRecord}
 					onClick={() => goToURL(nextRecord)}>
 					<span className="hidden md:block">{message.next}</span>
