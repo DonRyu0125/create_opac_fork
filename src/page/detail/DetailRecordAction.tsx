@@ -159,12 +159,13 @@ const DetailRecordAction = () => {
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
 
-				<div className="flex space-x-2">
+				<div className="flex flex-wrap  gap-2">
 					{checkRecordHasMandatoryDataToRequest() &&
 					checkIfCurrentClientRequestedThisRecord() ? (
 						<TooltipButton
 							tooltipContent="Request Record"
 							variant="outline"
+							className={'md:w-[145px] flex justify-evenly'}
 							onClick={() => handleSubmit('Request')}>
 							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
 							{message.detailRecordActionRequest}
@@ -248,7 +249,7 @@ const DetailRecordAction = () => {
 							</form>
 						</TooltipButton>
 					) : (
-						<TooltipButton tooltipContent="Request Record" variant="outline" disabled>
+						<TooltipButton tooltipContent="Request Record" variant="outline" disabled className={'w-32 flex justify-evenly'}>
 							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
 							{message.detailRecordActionRequest}
 						</TooltipButton>
@@ -257,6 +258,7 @@ const DetailRecordAction = () => {
 					<TooltipButton
 						tooltipContent="Ask about this record"
 						variant="outline"
+						className={'w-32 flex justify-evenly p-1'}
 						onClick={() => handleSubmit('Enquire')}>
 						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />
 						{message.detailRecordActionEnquire}
@@ -264,6 +266,7 @@ const DetailRecordAction = () => {
 					<TooltipButton
 						tooltipContent="Reproduce this record"
 						variant="outline"
+						className={'w-[147px] flex justify-evenly'}
 						onClick={() => handleSubmit('Reproduction')}>
 						<Files className="w-4 h-4 mr-2 hidden md:block" />
 						{message.detailRecordActionReproduction}
@@ -271,6 +274,7 @@ const DetailRecordAction = () => {
 					<TooltipButton
 						tooltipContent="Copyright this record"
 						variant="outline"
+						className={'w-32 flex justify-evenly'}
 						onClick={() => handleSubmit('Copyright')}>
 						<Files className="w-4 h-4 mr-2 hidden md:block" />{' '}
 						{message.detailRecordActionCopyright}
@@ -278,6 +282,7 @@ const DetailRecordAction = () => {
 					<TooltipButton
 						tooltipContent="Copy record URL"
 						variant="outline"
+						className={'w-32 flex justify-evenly'}
 						onClick={() => {
 							handleCopyRecordURL(record)
 							toast({
@@ -291,7 +296,7 @@ const DetailRecordAction = () => {
 						variant="outline"
 						size="icon"
 						onClick={handleBookmark}
-						className={'min-w-[105px] flex justify-evenly'}
+						className={'w-32 flex justify-evenly'}
 						tooltipContent="Bookmark record">
 						<Star
 							className={cn('h-4 w-4 text-primary')}
