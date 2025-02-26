@@ -167,7 +167,7 @@ const DetailRecordAction = () => {
 							variant="outline"
 							className={'w-[22%] md:w-[23.5%] flex '}
 							onClick={() => handleSubmit('Request')}>
-							<ShoppingBag className="w-4 h-4 mr-2 " />{' '}
+							<ShoppingBag className="w-4 h-4 md:mr-2 " />{' '}
 							<span className="hidden md:block">
 								{message.detailRecordActionRequest}
 							</span>
@@ -256,7 +256,7 @@ const DetailRecordAction = () => {
 							variant="outline"
 							disabled
 							className={'w-[22%] md:w-[23.5%] flex '}>
-							<ShoppingBag className="w-4 h-4 mr-2" />{' '}
+							<ShoppingBag className="w-4 h-4 md:mr-2" />{' '}
 							<span className="hidden md:block">
 								{message.detailRecordActionRequest}
 							</span>
@@ -268,7 +268,7 @@ const DetailRecordAction = () => {
 						variant="outline"
 						className={' w-[22%] md:w-[23.5%] flex  p-1'}
 						onClick={() => handleSubmit('Enquire')}>
-						<ShoppingBag className="w-4 h-4 mr-2 " />
+						<ShoppingBag className="w-4 h-4 md:mr-2 " />
 						<span className="hidden md:block">{message.detailRecordActionEnquire}</span>
 					</TooltipButton>
 					<TooltipButton
@@ -276,7 +276,7 @@ const DetailRecordAction = () => {
 						variant="outline"
 						className={'w-[22%] md:w-[23.5%] p-0'}
 						onClick={() => handleSubmit('Reproduction')}>
-						<Files className="w-4 h-4 mr-2" />
+						<Files className="w-4 h-4 md:mr-2" />
 						<span className="hidden md:block">{message.detailRecordActionReproduction}</span>
 					</TooltipButton>
 					<TooltipButton
@@ -284,7 +284,7 @@ const DetailRecordAction = () => {
 						variant="outline"
 						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => handleSubmit('Copyright')}>
-						<Files className="w-4 h-4 mr-2" />{' '}
+						<Files className="w-4 h-4 md:mr-2" />{' '}
 						<span className="hidden md:block">{message.detailRecordActionCopyright}</span>
 					</TooltipButton>
 					<TooltipButton
@@ -297,7 +297,7 @@ const DetailRecordAction = () => {
 								title: message.recordIsCopied,
 							})
 						}}>
-						<Copy className="w-4 h-4 mr-2" /> 
+						<Copy className="w-4 h-4 md:mr-2" /> 
 						<span className="hidden md:block">{message.copy}</span>
 					</TooltipButton>
 					<TooltipButton
@@ -308,7 +308,7 @@ const DetailRecordAction = () => {
 						className={'w-[22%] md:w-[23.5%] flex '}
 						tooltipContent="Bookmark record">
 						<Star
-							className={cn('h-4 w-4 text-primary mr-2 ')}
+							className={cn('h-4 w-4 text-primary md:mr-2 ')}
 							fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
 							stroke={like ? 'hsl(var(--opac-blue))' : 'hsl(var(--primary'}
 						/>{' '}
