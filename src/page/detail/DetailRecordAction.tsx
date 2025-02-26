@@ -152,22 +152,25 @@ const DetailRecordAction = () => {
 			<div className="flex flex-col md:flex-row justify-between gap-2">
 				<TooltipButton
 					tooltipContent="Previous record"
-					className="align-center"
+					className={'align-center md:w-[130px]'}
 					disabled={!previousRecord}
 					onClick={() => goToURL(previousRecord)}>
 					<ChevronLeft />
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
 
-				<div className="flex space-x-2">
+				<div className="flex flex-wrap justify-start gap-2">
 					{checkRecordHasMandatoryDataToRequest() &&
 					checkIfCurrentClientRequestedThisRecord() ? (
 						<TooltipButton
 							tooltipContent="Request Record"
 							variant="outline"
+							className={'w-[22%] md:w-[23.5%] flex '}
 							onClick={() => handleSubmit('Request')}>
-							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
-							{message.detailRecordActionRequest}
+							<ShoppingBag className="w-4 h-4 md:mr-2 " />{' '}
+							<span className="hidden md:block">
+								{message.detailRecordActionRequest}
+							</span>
 							<form
 								method="post"
 								ref={formRef}
@@ -248,63 +251,74 @@ const DetailRecordAction = () => {
 							</form>
 						</TooltipButton>
 					) : (
-						<TooltipButton tooltipContent="Request Record" variant="outline" disabled>
-							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
-							{message.detailRecordActionRequest}
+						<TooltipButton
+							tooltipContent="Request Record"
+							variant="outline"
+							disabled
+							className={'w-[22%] md:w-[23.5%] flex '}>
+							<ShoppingBag className="w-4 h-4 md:mr-2" />{' '}
+							<span className="hidden md:block">
+								{message.detailRecordActionRequest}
+							</span>
 						</TooltipButton>
 					)}
 
 					<TooltipButton
 						tooltipContent="Ask about this record"
 						variant="outline"
+						className={' w-[22%] md:w-[23.5%] flex  p-1'}
 						onClick={() => handleSubmit('Enquire')}>
-						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />
-						{message.detailRecordActionEnquire}
+						<ShoppingBag className="w-4 h-4 md:mr-2 " />
+						<span className="hidden md:block">{message.detailRecordActionEnquire}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Reproduce this record"
 						variant="outline"
+						className={'w-[22%] md:w-[23.5%] p-0'}
 						onClick={() => handleSubmit('Reproduction')}>
-						<Files className="w-4 h-4 mr-2 hidden md:block" />
-						{message.detailRecordActionReproduction}
+						<Files className="w-4 h-4 md:mr-2" />
+						<span className="hidden md:block">{message.detailRecordActionReproduction}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Copyright this record"
 						variant="outline"
+						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => handleSubmit('Copyright')}>
-						<Files className="w-4 h-4 mr-2 hidden md:block" />{' '}
-						{message.detailRecordActionCopyright}
+						<Files className="w-4 h-4 md:mr-2" />{' '}
+						<span className="hidden md:block">{message.detailRecordActionCopyright}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Copy record URL"
 						variant="outline"
+						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => {
 							handleCopyRecordURL(record)
 							toast({
 								title: message.recordIsCopied,
 							})
 						}}>
-						<Copy className="w-4 h-4 mr-2 hidden md:block" /> {message.copy}
+						<Copy className="w-4 h-4 md:mr-2" /> 
+						<span className="hidden md:block">{message.copy}</span>
 					</TooltipButton>
 					<TooltipButton
 						disabled={loading}
 						variant="outline"
 						size="icon"
 						onClick={handleBookmark}
-						className={'min-w-[105px] flex justify-evenly'}
+						className={'w-[22%] md:w-[23.5%] flex '}
 						tooltipContent="Bookmark record">
 						<Star
-							className={cn('h-4 w-4 text-primary')}
+							className={cn('h-4 w-4 text-primary md:mr-2 ')}
 							fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
 							stroke={like ? 'hsl(var(--opac-blue))' : 'hsl(var(--primary'}
 						/>{' '}
-						{message.bookmark}
+						<span className="hidden md:block">{message.bookmark}</span>
 					</TooltipButton>
 				</div>
 
 				<TooltipButton
 					tooltipContent="Next record"
-					className="align-center"
+					className={'align-center md:w-[130px]'}
 					disabled={!nextRecord}
 					onClick={() => goToURL(nextRecord)}>
 					<span className="hidden md:block">{message.next}</span>

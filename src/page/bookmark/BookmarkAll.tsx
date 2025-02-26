@@ -6,6 +6,7 @@ import useConstants from '@/hooks/useConstants'
 import { validateBookmarkResponse } from '@/lib/bookmark'
 import { bookmarkCount } from '@/store'
 import { useAtom } from 'jotai'
+import { useState } from 'react'
 
 const BookmarkAll = () => {
 	const { common, records } = useJSONData({ selector: '#xml_record' })
@@ -13,8 +14,10 @@ const BookmarkAll = () => {
 	const { toast } = useToast()
 	const { message } = useConstants()
 	const [count, setCount] = useAtom(bookmarkCount)
+	const [loading, setLoading] = useState(false)
 
 	const bookmarkAllRecord = () => {
+		setLoading(true)
 		const dataString = records
 			.filter(({ is_bookmarked }) => is_bookmarked === 'false')
 			.map(
@@ -48,6 +51,7 @@ const BookmarkAll = () => {
 					return
 				}
 				// in case response is not successful
+				setLoading(false)
 				window.location.reload()
 			})
 		} else {
@@ -63,11 +67,13 @@ const BookmarkAll = () => {
 					</a>
 				),
 			})
+			setLoading(false)
 		}
 	}
 
 	return (
 		<button
+			disabled={loading}
 			type="button"
 			onClick={bookmarkAllRecord}
 			className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground  disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 hover:bg-gray-200">
