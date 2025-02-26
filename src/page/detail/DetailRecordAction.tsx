@@ -167,8 +167,10 @@ const DetailRecordAction = () => {
 							variant="outline"
 							className={'w-[22%] md:w-[23.5%] flex '}
 							onClick={() => handleSubmit('Request')}>
-							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
-							{message.detailRecordActionRequest}
+							<ShoppingBag className="w-4 h-4 mr-2 " />{' '}
+							<span className="hidden md:block">
+								{message.detailRecordActionRequest}
+							</span>
 							<form
 								method="post"
 								ref={formRef}
@@ -254,8 +256,10 @@ const DetailRecordAction = () => {
 							variant="outline"
 							disabled
 							className={'w-[22%] md:w-[23.5%] flex '}>
-							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
-							{message.detailRecordActionRequest}
+							<ShoppingBag className="w-4 h-4 mr-2" />{' '}
+							<span className="hidden md:block">
+								{message.detailRecordActionRequest}
+							</span>
 						</TooltipButton>
 					)}
 
@@ -265,23 +269,23 @@ const DetailRecordAction = () => {
 						className={' w-[22%] md:w-[23.5%] flex  p-1'}
 						onClick={() => handleSubmit('Enquire')}>
 						<ShoppingBag className="w-4 h-4 mr-2 " />
-						<span className='hidden md:block'>{message.detailRecordActionEnquire}</span>
+						<span className="hidden md:block">{message.detailRecordActionEnquire}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Reproduce this record"
 						variant="outline"
 						className={'w-[22%] md:w-[23.5%] p-0'}
 						onClick={() => handleSubmit('Reproduction')}>
-						<Files className="w-4 h-4 mr-2 hidden md:block" />
-						{message.detailRecordActionReproduction}
+						<Files className="w-4 h-4 mr-2" />
+						<span className="hidden md:block">{message.detailRecordActionReproduction}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Copyright this record"
 						variant="outline"
 						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => handleSubmit('Copyright')}>
-						<Files className="w-4 h-4 mr-2 hidden md:block" />{' '}
-						{message.detailRecordActionCopyright}
+						<Files className="w-4 h-4 mr-2" />{' '}
+						<span className="hidden md:block">{message.detailRecordActionCopyright}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Copy record URL"
@@ -293,7 +297,8 @@ const DetailRecordAction = () => {
 								title: message.recordIsCopied,
 							})
 						}}>
-						<Copy className="w-4 h-4 mr-2 hidden md:block" /> {message.copy}
+						<Copy className="w-4 h-4 mr-2" /> 
+						<span className="hidden md:block">{message.copy}</span>
 					</TooltipButton>
 					<TooltipButton
 						disabled={loading}
@@ -307,7 +312,7 @@ const DetailRecordAction = () => {
 							fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
 							stroke={like ? 'hsl(var(--opac-blue))' : 'hsl(var(--primary'}
 						/>{' '}
-						{message.bookmark}
+						<span className="hidden md:block">{message.bookmark}</span>
 					</TooltipButton>
 				</div>
 
