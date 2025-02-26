@@ -13,6 +13,7 @@ type ResetFormData = {
 }
 
 const EMAIL_CONFIRM_CODE = '267'
+const CLIENT_LOGIN_ERROR = 'client-login-error'
 
 const ResetPin = () => {
 	const {
