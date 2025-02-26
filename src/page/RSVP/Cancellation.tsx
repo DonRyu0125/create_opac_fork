@@ -100,8 +100,8 @@ const RSVPCancel = () => {
 	}
 
 	const getLogon = async () => {
-		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&file=[OPAC]rsvp-cancel.html`
-
+		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&file=[OPAC]rsvp-cancel.html`;
+	
 		return await axios
 			.post(
 				urlForSessionID,
@@ -114,13 +114,18 @@ const RSVPCancel = () => {
 				}
 			)
 			.then(() => {
-				let HOME_SESSID = getHomeSessionID()
-				return HOME_SESSID
+				return new Promise((resolve) => {
+					setTimeout(() => {
+						let HOME_SESSID = getHomeSessionID();
+						resolve(HOME_SESSID);
+					}, 300); 
+				});
 			})
 			.catch(() => {
-				return false
-			})
-	}
+				return false;
+			});
+	};
+	
 
 	const removeRecord = async (
 		HOME_SESSID: string | boolean,
