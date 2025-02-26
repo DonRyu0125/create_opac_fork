@@ -165,7 +165,7 @@ const DetailRecordAction = () => {
 						<TooltipButton
 							tooltipContent="Request Record"
 							variant="outline"
-							className={'w-[23.5%] flex '}
+							className={'w-[22%] md:w-[23.5%] flex '}
 							onClick={() => handleSubmit('Request')}>
 							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
 							{message.detailRecordActionRequest}
@@ -253,7 +253,7 @@ const DetailRecordAction = () => {
 							tooltipContent="Request Record"
 							variant="outline"
 							disabled
-							className={'w-[23.5%] flex '}>
+							className={'w-[22%] md:w-[23.5%] flex '}>
 							<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />{' '}
 							{message.detailRecordActionRequest}
 						</TooltipButton>
@@ -262,15 +262,15 @@ const DetailRecordAction = () => {
 					<TooltipButton
 						tooltipContent="Ask about this record"
 						variant="outline"
-						className={' w-[23.5%]  flex  p-1'}
+						className={' w-[22%] md:w-[23.5%] flex  p-1'}
 						onClick={() => handleSubmit('Enquire')}>
-						<ShoppingBag className="w-4 h-4 mr-2 hidden md:block" />
-						{message.detailRecordActionEnquire}
+						<ShoppingBag className="w-4 h-4 mr-2 " />
+						<span className='hidden md:block'>{message.detailRecordActionEnquire}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent="Reproduce this record"
 						variant="outline"
-						className={'w-[23.5%] p-0'}
+						className={'w-[22%] md:w-[23.5%] p-0'}
 						onClick={() => handleSubmit('Reproduction')}>
 						<Files className="w-4 h-4 mr-2 hidden md:block" />
 						{message.detailRecordActionReproduction}
@@ -278,7 +278,7 @@ const DetailRecordAction = () => {
 					<TooltipButton
 						tooltipContent="Copyright this record"
 						variant="outline"
-						className={'w-[23.5%] flex '}
+						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => handleSubmit('Copyright')}>
 						<Files className="w-4 h-4 mr-2 hidden md:block" />{' '}
 						{message.detailRecordActionCopyright}
@@ -286,7 +286,7 @@ const DetailRecordAction = () => {
 					<TooltipButton
 						tooltipContent="Copy record URL"
 						variant="outline"
-						className={'w-[23.5%] flex '}
+						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => {
 							handleCopyRecordURL(record)
 							toast({
@@ -300,7 +300,7 @@ const DetailRecordAction = () => {
 						variant="outline"
 						size="icon"
 						onClick={handleBookmark}
-						className={'w-[23.5%] flex '}
+						className={'w-[22%] md:w-[23.5%] flex '}
 						tooltipContent="Bookmark record">
 						<Star
 							className={cn('h-4 w-4 text-primary mr-2 ')}
