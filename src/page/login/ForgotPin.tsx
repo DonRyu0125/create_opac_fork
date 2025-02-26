@@ -13,6 +13,7 @@ type ResetFormData = {
 }
 
 const EMAIL_CONFIRM_CODE = '267'
+const CLIENT_LOGIN_ERROR = 'client-login-error'
 
 const ResetPin = () => {
 	const {
@@ -42,7 +43,8 @@ const ResetPin = () => {
 			.then((res) => {
 				const parser = new DOMParser()
 				const doc = parser.parseFromString(res.data, 'text/html')
-				const inputElement = doc.getElementById('MWI-error') as HTMLInputElement
+				const inputElement = doc.getElementById('MWI-error') as HTMLInputElement || doc.getElementById('root') as HTMLInputElement
+				console.log('inputElement',inputElement)
 				const value = inputElement?.value
 				setStatus(value)
 				setLoading(false)
