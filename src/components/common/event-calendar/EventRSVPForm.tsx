@@ -359,7 +359,7 @@ const ShowButton = ({
 					</div>
 					<div className={'w-full'}>
 						{/*@ts-ignore there is variable called TAG_FUNC_O*/}
-						{event[TAG_FUNC_O] ? (
+						{event[TAG_FUNC_O] === RSVP_MAP.YES ? (
 							<>
 								<div className={'flex font-normal items-center'}>
 									<MonitorPlay size={25} />
@@ -453,7 +453,7 @@ const ShowRSVPSuccess = ({
 			</div>
 			<div>
 				<div className={'w-full flex justify-center text-lg'}>{message.contactInfo}</div>
-				{event[TAG_FUNC_O] ? (
+				{event[TAG_FUNC_O] === RSVP_MAP.YES ? (
 					<>
 						<div className={'flex font-normal items-center'}>
 							<MonitorPlay size={25} />
@@ -742,7 +742,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${event.TAG_FUNC_O ? '[OPAC_EMAIL_TMP]RSVPRegOnlineComfrimTmp.txt' : '[OPAC_EMAIL_TMP]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${userData[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${event[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${event.TAG_FUNC_O === RSVP_MAP.YES? '[OPAC_EMAIL_TMP]RSVPRegOnlineComfrimTmp.txt' : '[OPAC_EMAIL_TMP]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${userData[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${event[TAG_NAME]}`,
 				{
 					BD_ADDRESS: event[TAG_FUNC_LOC],
 					...userData,
