@@ -32,7 +32,7 @@ const Form = () => {
 				type="text"
 				field={'Site name'}
 				value={fieldsValue.siteName}
-				onChange={(e) => handleChange(['heading'], e)}
+				onChange={(e) => handleChange(['siteName'], e)}
 			/>
 
 			<div className="flex flex-col">
