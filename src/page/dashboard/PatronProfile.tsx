@@ -1,6 +1,5 @@
 import Link from '@/components/common/Link'
 import PatronLayout from '@/components/layouts/patron'
-import clientProfileJSON from '@/constants/en/client-profile.json'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { getCookieValue } from '@/lib/utils'
@@ -30,8 +29,8 @@ interface StatCardProps {
 export default function PatronProfile() {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
-	const { home, archives, museum, library, message } = useConstants()
-	const profileList = clientProfileJSON.database
+	const { home, archives, museum, library, message, clientProfile } = useConstants()
+	const profileList = clientProfile.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 	const handleClick = (id: any) => {
 		setActiveButton(id)
@@ -41,49 +40,49 @@ export default function PatronProfile() {
 		{
 			key: 1,
 			icon: <ShoppingBag className="h-4 w-4" />,
-			label: 'Orders',
+			label: profileList[0].label,
 			color: 'blue',
 			value: records[0].orders_count,
 		},
 		{
 			key: 2,
 			icon: <Copyright className="h-4 w-4" />,
-			label: 'Copyright Requests',
+			label: profileList[1].label,
 			color: 'green',
 			value: records[0].copyright_count,
 		},
 		{
 			key: 3,
 			icon: <Copy className="h-4 w-4" />,
-			label: 'Reproductions',
+			label: profileList[2].label,
 			color: 'red',
 			value: records[0].reproductions_count,
 		},
 		{
 			key: 4,
 			icon: <BookMarked className="h-4 w-4" />,
-			label: 'Bookmarks',
+			label: profileList[3].label,
 			color: 'purple',
 			value: records[0].bookmark_count,
 		},
 		{
 			key: 5,
 			icon: <Lightbulb className="h-4 w-4" />,
-			label: 'Enquiries',
+			label: profileList[4].label,
 			color: 'amber',
 			value: records[0].enquiries_count,
 		},
 		{
 			key: 6,
 			icon: <MessageCircleMore className="h-4 w-4" />,
-			label: 'Crowdsource',
+			label: profileList[5].label,
 			color: 'orange',
 			value: records[0].crowdsource_count,
 		},
 		{
 			key: 7,
 			icon: <CalendarDays className="h-4 w-4" />,
-			label: 'Calendar',
+			label: message.calendar,
 			color: 'pink',
 			value: records[0].calendar_count,
 		},
@@ -144,9 +143,6 @@ export default function PatronProfile() {
 					<h2 className="text-xl font-medium">
 						<span>{message.searchDatabase}</span>
 					</h2>
-					{/* <button className="rounded-md p-2 hover:bg-gray-100">
-							<MoreHorizontal className="h-5 w-5 text-gray-500" />
-						</button> */}
 				</div>
 				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 					{[home, archives, museum, library].map((item, index) => (
@@ -189,40 +185,6 @@ export default function PatronProfile() {
 					))}
 				</div>
 			</div>
-
-			{/* Follower Growth Section */}
-			{/* <div className="rounded-lg bg-white p-6 shadow">
-					<div className="flex items-center justify-between">
-						<h2 className="text-lg font-medium">Follower Growth</h2>
-						<button className="rounded-md p-2 hover:bg-gray-100">
-							<MoreHorizontal className="h-5 w-5 text-gray-500" />
-						</button>
-					</div>
-					<div className="mt-4">
-						<div className="space-y-4">
-							<div>
-								<h3 className="text-4xl font-bold">4,829</h3>
-								<p className="text-sm text-gray-500">
-									Gained Followers (last 360 days)
-								</p>
-							</div>
-							<div className="space-y-2">
-								<div className="flex items-center gap-2">
-									<div className="h-2 w-2 rounded-full bg-green-500" />
-									<span className="text-sm">
-										You have a 20% Growth compare to last year
-									</span>
-								</div>
-								<div className="flex items-center gap-2">
-									<div className="h-2 w-2 rounded-full bg-orange-500" />
-									<span className="text-sm">
-										You have reached 10% of your follower goal
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> */}
 		</PatronLayout>
 	)
 }
