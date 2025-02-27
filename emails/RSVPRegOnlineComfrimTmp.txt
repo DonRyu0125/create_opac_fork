@@ -84,7 +84,7 @@
         <table cellpadding="0" cellspacing="0">
           <tr>
             <td align="center">
-              <h1 style="font-size: 22px; margin: 0; color: white;">Confirm your Registration!</h1>
+              <h1 style="padding:20px 0; font-size: 22px; margin: 0; color: white;">Confirm your Registration!</h1>
             </td>
           </tr>
         </table>
