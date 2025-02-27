@@ -56,7 +56,7 @@ export type FilterType = { type: string; color: string; icon: string }
 export const EVENT_DEFAULT_COLOR = 'bg-sky-900 border-sky-900'
 
 //DB
-export const MAIN_EVENT_CAL_DB = 'CALENDAR_VAL_SYN'
+export const MAIN_EVENT_CAL_DB = 'CALENDAR_VAL'
 export const MAIN_EVENT_CAL_LOG_DB = 'TAG_RSVP_PATRON_LOG_SYN'
 export const MAIN_EVENT_CAL_DB_SYN = 'CALENDAR_VAL_SYN'
 //MINISIS REPORT
@@ -65,8 +65,8 @@ export const LOCATION_REPORT = 'CALENDAR_LOCATION_NEW'
 //MWI
 export const MAIN_MWI_APPLICATION = 'WEB_CALENDAR'
 export const SUB_MWI_APPLICATION = 'WEB_CALENDAR_LOC'
-export const RSVP_CONFIRM_LANDING_PAGE_URL = `${window.location.hostname}/rsvp-confirm.html`
-export const RSVP_CANCEL_LANDING_PAGE_URL = `${window.location.hostname}/rsvp-cancel.html`
+export const RSVP_CONFIRM_LANDING_PAGE_URL = `https://${window.location.hostname}/rsvp-confirm.html`;
+export const RSVP_CANCEL_LANDING_PAGE_URL = `https://${window.location.hostname}/rsvp-cancel.html`;
 export const CALENDAR_START_MONTH = 1
 export const CALENDAR_WEEK_VIEW_DAYS = 7
 export const SISN = 'SISN'

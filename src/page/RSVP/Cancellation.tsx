@@ -96,39 +96,49 @@ const RSVPCancel = () => {
 				setStatus(STATUS_TYPE.Success)
 				return sendCancelConfirmEmail(res)
 			})
-		// .then((res) => storeAtLog(res))
 	}
 
 	const getLogon = async () => {
 		let urlForSessionID = `/scripts/mwimain.dll?logon&application=${MAIN_MWI_APPLICATION}&file=[OPAC]rsvp-cancel.html`;
 	
-		return await axios
-			.post(
-				urlForSessionID,
-				{},
-				{
-					headers: {
-						'Content-Type': 'text/xml',
-					},
-					withCredentials: true,
-				}
-			)
-			.then(() => {
-				return new Promise((resolve) => {
-					setTimeout(() => {
-						let HOME_SESSID = getHomeSessionID();
-						resolve(HOME_SESSID);
-					}, 300); 
-				});
-			})
-			.catch(() => {
-				return false;
+		try {
+			await axios.post(urlForSessionID, {}, {
+				headers: { 'Content-Type': 'text/xml' },
+				withCredentials: true,
 			});
+	
+			return await waitForHomeSessionID(); 
+		} catch (error) {
+			return false;
+		}
 	};
+	
+	const waitForHomeSessionID = () => {
+		return new Promise((resolve, reject) => {
+			let attempts = 0;
+			const maxAttempts = 10; 
+			const interval = 100; 
+	
+			const checkSessionID = () => {
+				let HOME_SESSID = getHomeSessionID();
+				if (HOME_SESSID) {
+					resolve(HOME_SESSID);
+				} else if (attempts < maxAttempts) {
+					attempts++;
+					setTimeout(checkSessionID, interval);
+				} else {
+					reject(new Error('Failed to get HOME_SESSID'));
+				}
+			};
+	
+			checkSessionID();
+		});
+	};
+	
 	
 
 	const removeRecord = async (
-		HOME_SESSID: string | boolean,
+		HOME_SESSID: any,
 		PatronInfo: PatronInfo | undefined
 	) => {
 		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
