@@ -1,1 +1,4 @@
-{ "theme": "opac", "fontFamily": "'Francois One', sans-serif" }
+{
+    "theme": "netflix",
+    "fontFamily": "'Francois One', sans-serif"
+}
