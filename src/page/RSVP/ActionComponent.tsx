@@ -1,3 +1,4 @@
+import { RSVP_MAP } from '@/components/common/event-calendar/Constants'
 import { Button } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
 import { PatronInfo } from '@/types/patroninfo'
@@ -26,7 +27,7 @@ const ActionComponent: React.FC<ActionProps> = ({ patronInfo, onClick }) => {
 					<div>
 						{patronInfo?.TAG_FUNC_START_T} - {patronInfo?.TAG_FUNC_END_T}
 					</div>
-					{patronInfo.TAG_FUNC_O ? (
+					{patronInfo.TAG_FUNC_O === RSVP_MAP.YES? (
 						<>
 							<div className={'flex'}>
 								<MonitorPlay />
