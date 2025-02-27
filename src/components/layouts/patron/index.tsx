@@ -6,6 +6,7 @@ import useJSONData from '@/hooks/useJSONData'
 import clientProfileJSON from '@/constants/en/client-profile.json'
 import { getCookieValue } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
+import useConstants from '@/hooks/useConstants'
 
 type PatronLayoutProps = {
 	children?: React.ReactNode
@@ -21,6 +22,8 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
+
+	const { message } = useConstants()
 
 	return (
 		<div className="flex min-h-screen w-full flex-col bg-muted/40 relative">
@@ -48,7 +51,7 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 								key={'Calendar'}
 								href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`}
 								className={buttonVariants({ variant: 'outline' })}>
-								Calendar
+								{message.calendar}
 							</a>
 						</div>
 					</div>

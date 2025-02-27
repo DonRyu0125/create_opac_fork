@@ -178,7 +178,7 @@
 	"descriptionTree": "Liste complète des collections",
 	"topPick": "Nos coups de coeur",
 	"Type": "Taper",
-	"timeline": "chronologie",
+	"timeline": "Chronologie",
 	"selectTheCountry": "Sélectionner le pays",
 	"selectTheProvince": "Sélectionner la province",
 	"description": "Description",
@@ -189,4 +189,5 @@
 	"welcomeMessage": "Ceci est votre profil client. Consultez vos éléments enregistrés ou demandés ici !",
 	"searchDatabase": "Rechercher dans les bases de données",
 	"searchAllCollections": "Chercher toutes les collections"
+
 }
