@@ -11,6 +11,7 @@
 		"gen:schema": "node ./tools/gen-schema.mjs",
 		"gen:theme": "node ./tools/gen-theme.mjs",
 		"gen:types": "node ./tools/gen-types.mjs",
+		"version": "node ./tools/gen-version.mjs",
 		"gen": "npm run gen:schema",
 		"doc": "docsify serve docs",
 		"server": "cd backend && npm run dev"
