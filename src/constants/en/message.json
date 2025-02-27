@@ -188,5 +188,7 @@
 	"clientDashboard": "Client dashboard",
 	"welcomeMessage": "This is your Client Profile. Check your saved or inquired items here!",
 	"searchDatabase": "Search databases",
-	"searchAllCollections":"Search all collections"
+	"searchAllCollections": "Search all collections",
+	"returnToSearchResults": "Return to Search Results",
+	"shareThisPage": "Share this page"
 }
