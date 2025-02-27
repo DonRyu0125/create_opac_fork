@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import useJSONData from '@/hooks/useJSONData'
-import clientProfileJSON from '@/constants/en/client-profile.json'
 import { getCookieValue } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
@@ -17,13 +16,13 @@ type PatronLayoutProps = {
 const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
-	const profileList = clientProfileJSON.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
 
-	const { message } = useConstants()
+	const { message, clientProfile } = useConstants()
+	const profileList = clientProfile.database
 
 	return (
 		<div className="flex min-h-screen w-full flex-col bg-muted/40 relative">
