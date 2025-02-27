@@ -56,7 +56,7 @@ export type FilterType = { type: string; color: string; icon: string }
 export const EVENT_DEFAULT_COLOR = 'bg-sky-900 border-sky-900'
 
 //DB
-export const MAIN_EVENT_CAL_DB = 'CALENDAR_VAL_SYN'
+export const MAIN_EVENT_CAL_DB = 'CALENDAR_VAL'
 export const MAIN_EVENT_CAL_LOG_DB = 'TAG_RSVP_PATRON_LOG_SYN'
 export const MAIN_EVENT_CAL_DB_SYN = 'CALENDAR_VAL_SYN'
 //MINISIS REPORT

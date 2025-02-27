@@ -138,7 +138,7 @@ const RSVPCancel = () => {
 	
 
 	const removeRecord = async (
-		HOME_SESSID: string | boolean,
+		HOME_SESSID: any,
 		PatronInfo: PatronInfo | undefined
 	) => {
 		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
