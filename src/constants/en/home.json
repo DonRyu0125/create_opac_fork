@@ -108,6 +108,13 @@
             "description": "test",
             "expression": "ACCESSION_NUMBER 65526",
             "database": "COLLECTIONS_WEB"
+        },
+        {
+            "title": "Hello World",
+            "subTitle": "Programming Language",
+            "description": "Software Developer",
+            "expression": "year === 2025",
+            "database": "SQL_QUERY"
         }
     ],
     "enableCategoriesItems": true,

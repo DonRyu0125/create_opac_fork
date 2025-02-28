@@ -17,7 +17,7 @@ const NoBookmarkRecord = () => {
 				description="">
 				<div className={'w-full mx-auto flex space-x-4 justify-center mt-6 max-w-2xl'}>
 					<HomeSearchForm
-						title="Search all collections"
+						title={message.searchAllCollections}
 						inputName={UNION_SEARCH_CL}
 						action={getSearchURL(searchURL)}
 					/>

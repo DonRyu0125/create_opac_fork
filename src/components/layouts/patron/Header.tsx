@@ -15,10 +15,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import useConstants from '@/hooks/useConstants'
 import { clearCookies, getCookieValue } from '@/lib/utils'
-import { Home, PanelLeft, UserRound } from 'lucide-react'
+import { Home, UserRound } from 'lucide-react'
 
 const Header = () => {
 	const { message } = useConstants()
@@ -36,7 +35,7 @@ const Header = () => {
 									href={getCookieValue('HOME_SESSID') + home_url}
 									className="flex no-underline text-primary-foreground hover:text-primary-foreground/80">
 									<Home className="mr-1 h-5 w-5" />
-									Client Dashboard
+									{message.clientDashboard}
 								</Link>
 							</BreadcrumbLink>
 						</BreadcrumbItem>

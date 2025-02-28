@@ -30,14 +30,14 @@ const ThemePicker = ({ data }: { data: StyleSchema }) => {
 	const themes = [
 		{
 			id: 'opac',
-			label: 'Ocean Breeze',
+			label: 'Default',
 			value: 'opac',
 			colors: {
-				header: 'bg-[#1B365D]',
-				body: 'bg-[#8794B0]',
-				footer: 'bg-[#1B365D]/90',
-				buttonPrimary: 'bg-white',
-				buttonSecondary: 'bg-[#1B365D]',
+				header: 'theme-opac dark bg-primary',
+				body: 'theme-opac dark bg-background',
+				footer: 'theme-opac dark bg-background',
+				buttonPrimary: 'theme-opac dark bg-primary',
+				buttonSecondary: 'theme-opac dark bg-secondary',
 			},
 		},
 		{
@@ -45,11 +45,11 @@ const ThemePicker = ({ data }: { data: StyleSchema }) => {
 			label: 'Forest Glow',
 			value: 'nature',
 			colors: {
-				header: 'bg-emerald-800',
-				body: 'bg-emerald-600',
-				footer: 'bg-emerald-800/90',
-				buttonPrimary: 'bg-white',
-				buttonSecondary: 'bg-emerald-700',
+				header: 'theme-nature dark bg-primary',
+				body: 'theme-nature dark bg-background',
+				footer: 'theme-nature dark bg-background',
+				buttonPrimary: 'theme-nature dark bg-primary',
+				buttonSecondary: 'theme-nature dark bg-secondary',
 			},
 		},
 		{
@@ -57,11 +57,11 @@ const ThemePicker = ({ data }: { data: StyleSchema }) => {
 			label: 'Monochrome Elegance',
 			value: 'nord',
 			colors: {
-				header: 'bg-blue-500',
-				body: 'bg-gray-500',
-				footer: 'bg-blue-200/90',
-				buttonPrimary: 'bg-white',
-				buttonSecondary: 'bg-gray-800',
+				header: 'theme-nord dark bg-primary',
+				body: 'theme-nord dark  bg-background',
+				footer: 'theme-nord dark bg-background',
+				buttonPrimary: 'theme-nord dark  bg-primary',
+				buttonSecondary: 'theme-nord dark bg-secondary',
 			},
 		},
 		{
@@ -69,11 +69,11 @@ const ThemePicker = ({ data }: { data: StyleSchema }) => {
 			label: 'Crimson Flame',
 			value: 'netflix',
 			colors: {
-				header: 'bg-black',
-				body: 'bg-grey-800',
-				footer: 'bg-red-900/90',
-				buttonPrimary: 'bg-white',
-				buttonSecondary: 'bg-red-800',
+				header: 'theme-netflix dark bg-primary',
+				body: 'theme-netflix dark bg-background',
+				footer: 'theme-netflix dark bg-background',
+				buttonPrimary: 'theme-netflix dark bg-primary',
+				buttonSecondary: 'theme-netflix dark bg-secondary',
 			},
 		},
 	]
@@ -96,19 +96,22 @@ const ThemePicker = ({ data }: { data: StyleSchema }) => {
 							<CardContent className="p-0">
 								<div className={`${theme.colors.header} p-3`}>
 									<div className="flex justify-between items-center">
-										<Skeleton className="h-6 w-32 bg-white/20" />
-										<Skeleton className="h-6 w-16 bg-white/20" />
+										<Skeleton className="h-6 w-32 bg-foreground/20" />
+										<Skeleton className="h-6 w-16 bg-foreground/20" />
 									</div>
 								</div>
 								<div className={`${theme.colors.body} p-2`}>
 									<div className="flex space-x-2">
 										{[1, 2, 3, 4].map((i) => (
-											<Skeleton key={i} className="h-4 w-12 bg-white/20" />
+											<Skeleton
+												key={i}
+												className="h-4 w-12 bg-foreground/20"
+											/>
 										))}
 									</div>
 								</div>
 								<div className={`${theme.colors.footer} p-4`}>
-									<Skeleton className="h-5 w-48 mx-auto mb-3 bg-white/20" />
+									<Skeleton className="h-5 w-48 mx-auto mb-3 bg-foreground/20" />
 									<div className="flex gap-2">
 										<Skeleton
 											className={`h-8 flex-1 ${theme.colors.buttonPrimary}`}
