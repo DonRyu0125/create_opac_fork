@@ -596,7 +596,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 										<Popup className="hidden md:block" offset={[-7, 0]}>
 											<div className="w-[300px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${archives.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=refd%20${marker.refd}`}
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${archives.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=refd%20${marker.REFD}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
 														{marker.TITLE ?? 'n/a'}
