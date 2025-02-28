@@ -174,16 +174,16 @@ const InteractiveMap = ({ page }: { page: string }) => {
 						: [json.xml.record]
 
 					if (json.xml.record) {
-						files.push(
-							...json.xml.record.map((record: DataType) =>
-								Object.fromEntries(
-									Object.entries(record).map(([key, value]) => [
-										key.toLowerCase(),
-										typeof value === 'object' && value !== null ? value : value,
-									])
-								)
-							)
-						)
+						// files.push(
+						// 	...json.xml.record.map((record: DataType) =>
+						// 		Object.fromEntries(
+						// 			Object.entries(record).map(([key, value]) => [
+						// 				key.toLowerCase(),
+						// 				typeof value === 'object' && value !== null ? value : value,
+						// 			])
+						// 		)
+						// 	)
+						// )
 					}
 				})
 			}

@@ -7,33 +7,33 @@ import { convertXMLToJson, getImage } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
 import axios from 'axios'
 
-interface DataType {
-	legal_title: string
-	sisn: string
-	time_index: string
-	date: string
-	id: string
-	database_type: string
-	imag_url: string
-	century?: string
-	all_title_word_occurrence: string
-	accession_number?: string
-	refd?: string
-	description: string
-	title: string
-	decimal_latitude: any
-	decimal_longitude: any
-	origin_country: string
-	origin_prv_state: string
-	origin_city: string
-	gen_note?: string
-	author?: string
-	pauthor_occurrence?: string
-	ca_name_occurrence?: string
+interface DATATYPE {
+	LEGAL_TITLE: string
+	SISN: string
+	TIME_INDEX: string
+	DATE: string
+	ID: string
+	DATABASE_TYPE: string
+	IMAG_URL: string
+	CENTURY?: string
+	ALL_TITLE_WORD_OCCURRENCE: string
+	ACCESSION_NUMBER?: string
+	REFD?: string
+	DESCRIPTION: string
+	TITLE: string
+	DECIMAL_LATITUDE: any
+	DECIMAL_LONGITUDE: any
+	ORIGIN_COUNTRY: string
+	ORIGIN_PRV_STATE: string
+	ORIGIN_CITY: string
+	GEN_NOTE?: string
+	AUTHOR?: string
+	PAUTHOR_OCCURRENCE?: string
+	CA_NAME_OCCURRENCE?: string
 }
 
 const Timeline = ({ page }: { page: string }) => {
-	const [data, setData] = useState<DataType[]>([])
+	const [data, setData] = useState<DATATYPE[]>([])
 	const { message, archives, library, museum } = useConstants()
 	const [openPopoverId, setOpenPopoverId] = useState<number | null>()
 	const scrollContainerRef = useRef<any>(null)
@@ -52,12 +52,11 @@ const Timeline = ({ page }: { page: string }) => {
 
 		return () => currentRef.removeEventListener('wheel', wheelListener)
 	}, [])
-
 	const getData = async () => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
 		const filePaths = getFilePaths(page)
-		let files: DataType[] = []
+		let files: DATATYPE[] = []
 		try {
 			const responses = await Promise.allSettled(filePaths.map((path) => axios.get(path)))
 			const validResponses = responses
@@ -72,28 +71,20 @@ const Timeline = ({ page }: { page: string }) => {
 						? json.xml.record
 						: [json.xml.record]
 					if (json.xml.record) {
-						files.push(
-							...json.xml.record.map((record: DataType) =>
-								Object.fromEntries(
-									Object.entries(record).map(([key, value]) => [
-										key.toLowerCase(),
-										typeof value === 'object' && value !== null ? value : value,
-									])
-								)
-							)
-						)
+						files = json.xml.record
+						
 					}
 				})
 			}
 			const records = files
-				.map((record: DataType) => ({
+				.map((record: DATATYPE) => ({
 					...record,
-					time_index: record.time_index?.split('--')[0],
+					TIME_INDEX: record.TIME_INDEX?.split('--')[0],
 				}))
-				.sort((a: any, b: any) => a.time_index - b.time_index)
+				.sort((a: any, b: any) => a.TIME_INDEX - b.TIME_INDEX)
 
 			records.forEach((item) => {
-				const timeIndex = parseInt(item.time_index)
+				const timeIndex = parseInt(item.TIME_INDEX)
 				let centuryLabel
 				if (timeIndex >= 10000) {
 					const century = Math.floor((timeIndex - 10000) / 100) * 100
@@ -112,6 +103,7 @@ const Timeline = ({ page }: { page: string }) => {
 				}
 				centuries.push(item)
 			})
+
 			setData(centuries)
 		} catch (error) {
 			console.error('Error fetching files:', error)
@@ -147,8 +139,8 @@ const Timeline = ({ page }: { page: string }) => {
 					key: 'REFD',
 					database: archives.database_name,
 					description_keyname: message.description,
-					description_key: 'scope',
-					title_key: 'title',
+					description_key: 'SCOPE',
+					title_key: 'TITLE',
 				}
 			case 'Library':
 				return {
@@ -158,8 +150,8 @@ const Timeline = ({ page }: { page: string }) => {
 					key: 'ACCESSION_NUMBER',
 					database: library.database_name,
 					description_keyname: message.generalNote,
-					description_key: 'gen_note',
-					title_key: 'all_title_word_occurrence',
+					description_key: 'GEN_NOTE',
+					title_key: 'ALL_TITLE_WORD_OCCURRENCE',
 				}
 			case 'Museum':
 				return {
@@ -169,8 +161,8 @@ const Timeline = ({ page }: { page: string }) => {
 					key: 'ACCESSION_NUMBER',
 					database: museum.database_name,
 					description_keyname: message.description,
-					description_key: 'description',
-					title_key: 'legal_title',
+					description_key: 'DESCRIPTION',
+					title_key: 'LEGAL_TITLE',
 				}
 		}
 	}
@@ -214,7 +206,7 @@ const Timeline = ({ page }: { page: string }) => {
 							database,
 							description_keyname,
 							description_key,
-						}: any = getIconForType(item?.database_type)
+						}: any = getIconForType(item?.DATABASE_TYPE)
 						return (
 							<div
 								key={idx}
@@ -244,7 +236,7 @@ const Timeline = ({ page }: { page: string }) => {
 											{item?.imag_url && (
 												<div className="bg-slate-100 h-48 mb-4">
 													<img
-														src={getImage(item.imag_url)}
+														src={getImage(item.IMAG_URL)}
 														alt="image"
 														className="w-full h-full object-contain rounded-t-lg"
 													/>
@@ -254,19 +246,19 @@ const Timeline = ({ page }: { page: string }) => {
 												<tbody>
 													<tr className="border-b">
 														<td className="font-semibold">Type</td>
-														<td>{item.database_type}</td>
+														<td>{item.DATABASE_TYPE}</td>
 													</tr>
 													<tr className="border-b">
 														<td className="font-semibold">{keyName}</td>
 														<td className="max-w-[200px] overflow-x-auto custom-scrollbar whitespace-nowrap">
-															{item.id}
+															{item.ID}
 														</td>
 													</tr>
 													<tr className="border-b">
 														<td className="font-semibold py-1 pr-2">
 															Date
 														</td>
-														<td>{item.date ?? 'n/a'}</td>
+														<td>{item.DATE ?? 'n/a'}</td>
 													</tr>
 													<tr className="border-b">
 														<td className="font-semibold py-1 pr-2">
@@ -284,8 +276,8 @@ const Timeline = ({ page }: { page: string }) => {
 																Author
 															</td>
 															<td>
-																{item.pauthor_occurrence ||
-																	item.ca_name_occurrence}
+																{item.PAUTHOR_OCCURRENCE ||
+																	item.CA_NAME_OCCURRENCE}
 															</td>
 														</tr>
 													)}
