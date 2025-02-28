@@ -103,7 +103,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 			{enableRSVP && (
 				<RSVPCalendar page={'home'} previewData={previewData} previewMode={previewMode} />
 			)}
-			{enableMap && (
+			{/* {enableMap && (
 				<Section heading={`${message.map}`}>
 					<InterativeMap page={'home'}/>
 				</Section>
@@ -112,7 +112,7 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 				<Section heading={`${message.timeline}`}>
 					<TimeLine page={'home'}/>
 				</Section>
-			)}
+			)} */}
 			{enableRecentAddition && (
 				<Section heading="Recent additions">
 					<Masonry
