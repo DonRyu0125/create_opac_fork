@@ -250,22 +250,27 @@ const Timeline = ({ page }: { page: string }) => {
 															{item.ID}
 														</td>
 													</tr>
-													<tr className="border-b">
-														<td className="font-semibold py-1 pr-2">
-															Date
-														</td>
-														<td>{item.DATE ?? 'n/a'}</td>
-													</tr>
-													<tr className="border-b">
-														<td className="font-semibold py-1 pr-2">
-															{description_keyname}
-														</td>
-														<td>
-															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
-																{item[description_key] ?? 'n/a'}
-															</div>
-														</td>
-													</tr>
+													{item.DATE && (
+														<tr className="border-b">
+															<td className="font-semibold py-1 pr-2">
+																Date
+															</td>
+															<td>{item.DATE}</td>
+														</tr>
+													)}
+													{item[description_key] && (
+														<tr className="border-b">
+															<td className="font-semibold py-1 pr-2">
+																{description_keyname}
+															</td>
+															<td>
+																<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
+																	{item[description_key]}
+																</div>
+															</td>
+														</tr>
+													)}
+
 													{item?.DATABASE_TYPE === 'Library' && (
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">

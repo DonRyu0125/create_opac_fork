@@ -532,14 +532,14 @@ const InteractiveMap = ({ page }: { page: string }) => {
 												)}
 												<table className="w-full text-sm">
 													<tbody>
-														<tr className="border-b">
-															<td className="font-semibold">
-																{message.accessionNumber}
-															</td>
-															<td>
-																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
-															</td>
-														</tr>
+														{marker.ACCESSION_NUMBER && (
+															<tr className="border-b">
+																<td className="font-semibold">
+																	{message.accessionNumber}
+																</td>
+																<td>{marker.ACCESSION_NUMBER}</td>
+															</tr>
+														)}
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																{message.author}
@@ -558,14 +558,16 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
-														<tr className="border-b">
-															<td className="font-semibold py-1 pr-2">
-																{message.generalNote}
-															</td>
-															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
-																<td>{marker.GEN_NOTE ?? 'n/a'}</td>
-															</div>
-														</tr>
+														{marker.GEN_NOTE && (
+															<tr className="border-b">
+																<td className="font-semibold py-1 pr-2">
+																	{message.generalNote}
+																</td>
+																<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
+																	<td>{marker.GEN_NOTE}</td>
+																</div>
+															</tr>
+														)}
 													</tbody>
 												</table>
 											</div>
@@ -613,10 +615,14 @@ const InteractiveMap = ({ page }: { page: string }) => {
 												)}
 												<table className="w-full text-sm">
 													<tbody>
-														<tr className="border-b">
-															<td className="font-semibold">Refd</td>
-															<td>{marker.REFD ?? 'n/a'} </td>
-														</tr>
+														{marker.REFD && (
+															<tr className="border-b">
+																<td className="font-semibold">
+																	Refd
+																</td>
+																<td>{marker.REFD} </td>
+															</tr>
+														)}
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																{message.location}
@@ -626,14 +632,16 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
-														<tr className="border-b">
-															<td className="font-semibold py-1 pr-2">
-																{message.description}
-															</td>
-															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
-																<td>{marker.SCOPE ?? 'n/a'}</td>
-															</div>
-														</tr>
+														{marker.SCOPE && (
+															<tr className="border-b">
+																<td className="font-semibold py-1 pr-2">
+																	{message.description}
+																</td>
+																<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
+																	<td>{marker.SCOPE}</td>
+																</div>
+															</tr>
+														)}
 													</tbody>
 												</table>
 											</div>
@@ -681,14 +689,17 @@ const InteractiveMap = ({ page }: { page: string }) => {
 												)}
 												<table className="w-full text-sm">
 													<tbody>
-														<tr className="border-b">
-															<td className="font-semibold">
-																{message.accessionNumber}
-															</td>
-															<td className="overflow-x-auto">
-																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
-															</td>
-														</tr>
+														{marker.ACCESSION_NUMBER && (
+															<tr className="border-b">
+																<td className="font-semibold">
+																	{message.accessionNumber}
+																</td>
+																<td className="overflow-x-auto">
+																	{marker.ACCESSION_NUMBER}
+																</td>
+															</tr>
+														)}
+
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																{message.location}
@@ -698,16 +709,16 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
-														<tr className="border-b">
-															<td className="font-semibold py-1 pr-2">
-																{message.description}
-															</td>
-															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
-																<td>
-																	{marker.DESCRIPTION ?? 'n/a'}
+														{marker.DESCRIPTION && (
+															<tr className="border-b">
+																<td className="font-semibold py-1 pr-2">
+																	{message.description}
 																</td>
-															</div>
-														</tr>
+																<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
+																	<td>{marker.DESCRIPTION}</td>
+																</div>
+															</tr>
+														)}
 													</tbody>
 												</table>
 											</div>
