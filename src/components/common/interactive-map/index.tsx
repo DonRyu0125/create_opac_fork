@@ -130,14 +130,14 @@ const InteractiveMap = ({ page }: { page: string }) => {
 			selectedProvinces.length > 0 ||
 			selectedCities.length > 0
 		) {
-			const nData = allData.filter((item: any) => {
+			const nData = allData.filter((item: DataType) => {
 				const matchesDatabase =
 					selectedDatabases.length > 0
 						? selectedDatabases.includes(item.DATABASE_TYPE)
 						: true
 				const matchesCountry =
 					selectedCountries.length > 0
-						? selectedCountries.includes(item.origin_country)
+						? selectedCountries.includes(item.ORIGIN_COUNTRY)
 						: true
 				const matchesProvince =
 					selectedProvinces.length > 0
@@ -187,7 +187,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 		setAllData(updatedRecords ?? [])
 		setFilteredData(updatedRecords ?? [])
 		const countries = Array.from(
-			new Set(updatedRecords?.map((item: any) => item.origin_country))
+			new Set(updatedRecords?.map((item: any) => item.ORIGIN_COUNTRY))
 		)
 		setCkTypes({ countries })
 	}
@@ -249,7 +249,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 					: true
 			const matchesCountry =
 				selectedCountries.length > 0
-					? selectedCountries.includes(item.origin_country)
+					? selectedCountries.includes(item.ORIGIN_COUNTRY)
 					: true
 
 			return matchesDatabase && matchesCountry
@@ -266,7 +266,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 					: true
 			const matchesCountry =
 				selectedCountries.length > 0
-					? selectedCountries.includes(item.origin_country)
+					? selectedCountries.includes(item.ORIGIN_COUNTRY)
 					: true
 			const matchesProvince =
 				selectedProvinces.length > 0
@@ -391,7 +391,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 												<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 													{item}
 												</Label>
-												<div>{getNumberofType('origin_country', item)}</div>
+												<div>{getNumberofType('ORIGIN_COUNTRY', item)}</div>
 											</div>
 										)
 									)
@@ -583,7 +583,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 						iconCreateFunction={(cluster) =>
 							createClusterIcon(cluster, archiveIcon, COLOR_MAP.archive)
 						}>
-						{filteredData?.map((marker: any, key: number) => {
+						{filteredData?.map((marker: DataType, key: number) => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.archive) {
 								return (
 									<Marker
@@ -651,7 +651,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 						iconCreateFunction={(cluster) =>
 							createClusterIcon(cluster, museumIcon, COLOR_MAP.museum)
 						}>
-						{filteredData?.map((marker: any) => {
+						{filteredData?.map((marker: DataType) => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.museum) {
 								return (
 									<Marker

@@ -7,7 +7,7 @@ import { convertToArr, convertXMLToJson, getImage } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
 import axios from 'axios'
 
-interface DATATYPE {
+interface DataType {
 	LEGAL_TITLE: string
 	SISN: string
 	TIME_INDEX: string
@@ -33,7 +33,7 @@ interface DATATYPE {
 }
 
 const Timeline = ({ page }: { page: string }) => {
-	const [data, setData] = useState<DATATYPE[]>([])
+	const [data, setData] = useState<DataType[]>([])
 	const { message, archives, library, museum } = useConstants()
 	const [openPopoverId, setOpenPopoverId] = useState<number | null>()
 	const scrollContainerRef = useRef<any>(null)
@@ -56,7 +56,7 @@ const Timeline = ({ page }: { page: string }) => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
 		const filePaths = getFilePaths(page)
-		let files: DATATYPE[] = []
+		let files: DataType[] = []
 		try {
 			const responses = await Promise.allSettled(filePaths.map((path) => axios.get(path)))
 			const validResponses = responses
@@ -73,7 +73,7 @@ const Timeline = ({ page }: { page: string }) => {
 				})
 			}
 			const records = files
-				.map((record: DATATYPE) => ({
+				.map((record: DataType) => ({
 					...record,
 					TIME_INDEX: record.TIME_INDEX?.split('--')[0],
 				}))
@@ -229,7 +229,7 @@ const Timeline = ({ page }: { page: string }) => {
 													{item[title_key] ?? 'n/a'}
 												</h3>
 											</a>
-											{item?.imag_url && (
+											{item?.IMAG_URL && (
 												<div className="bg-slate-100 h-48 mb-4">
 													<img
 														src={getImage(item.IMAG_URL)}
@@ -266,7 +266,7 @@ const Timeline = ({ page }: { page: string }) => {
 															</div>
 														</td>
 													</tr>
-													{item?.database_type === 'Library' && (
+													{item?.DATABASE_TYPE === 'Library' && (
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																Author
