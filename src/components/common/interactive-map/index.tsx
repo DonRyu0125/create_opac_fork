@@ -178,7 +178,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 							...json.xml.record.map((record: DataType) =>
 								Object.fromEntries(
 									Object.entries(record).map(([key, value]) => [
-										key.toLowerCase(),
+										key?.toLowerCase(),
 										typeof value === 'object' && value !== null ? value : value,
 									])
 								)

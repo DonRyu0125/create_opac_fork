@@ -61,7 +61,7 @@ const Summary = () => {
 				<section>
 					<div className="mx-auto py-4 sm:py-12  container flex flex-col">
 						<PageHeader
-							heading={`${common.total_record} ${message.resultsFor.toLowerCase()} "${common.search_statement}" ${getDBTitle(data?.xml.search_database)}`}
+							heading={`${common.total_record} ${message.resultsFor?.toLowerCase()} "${common.search_statement}" ${getDBTitle(data?.xml.search_database)}`}
 							subHeading={`${message.displaying} ${common.first_record_seq}-${common.last_record_seq} ${message.of} ${common.total_record}`}
 						/>
 						<div className="mt-8 block lg:hidden">
