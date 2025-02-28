@@ -3,7 +3,7 @@ import * as Popover from '@radix-ui/react-popover'
 import archiveIcon from '../../../assets/icons/archive.png'
 import libraryIcon from '../../../assets/icons/library.png'
 import museumIcon from '../../../assets/icons/museum.png'
-import { convertXMLToJson, getImage } from '@/lib/utils'
+import { convertToArr, convertXMLToJson, getImage } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
 import axios from 'axios'
 
@@ -61,19 +61,15 @@ const Timeline = ({ page }: { page: string }) => {
 			const responses = await Promise.allSettled(filePaths.map((path) => axios.get(path)))
 			const validResponses = responses
 				.filter((res) => res.status === 'fulfilled' && res.value?.data?.trim())
-				.map((res) => (res as PromiseFulfilledResult<any>).value)
+				.map((res) => (res as PromiseFulfilledResult<any>).value.data)
+
 			if (validResponses.length === 0) {
 				console.warn('All files are empty or invalid.')
 			} else {
 				validResponses.forEach((response) => {
-					const json = convertXMLToJson(response.data)
-					json.xml.record = Array.isArray(json.xml.record)
-						? json.xml.record
-						: [json.xml.record]
-					if (json.xml.record) {
-						files = json.xml.record
-						
-					}
+					const json = convertXMLToJson(response)
+					let arr = convertToArr(json.xml.record)
+					files.push(...arr)
 				})
 			}
 			const records = files

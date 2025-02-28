@@ -25,25 +25,25 @@ const DB_TYPE_MAP = {
 }
 
 interface DataType {
-	ca_name_occurrence?: string
-	all_title_word_occurrence: string
-	database_type: string
-	accession_number?: string
-	refd?: string
-	description: string
-	title: string
-	decimal_latitude: any
-	decimal_longitude: any
-	origin_country: string
-	origin_prv_state: string
-	origin_city: string
-	date: string
-	imag_url: string
-	sisn: string
-	gen_note?: string
-	author?: string
-	pauthor_occurrence?: string
-	scope: string
+	CA_NAME_OCCURRENCE?: string
+	ALL_TITLE_WORD_OCCURRENCE: string
+	DATABASE_TYPE: string
+	ACCESSION_NUMBER?: string
+	REFD?: string
+	DESCRIPTION: string
+	TITLE: string
+	DECIMAL_LATITUDE: any
+	DECIMAL_LONGITUDE: any
+	ORIGIN_COUNTRY: string
+	ORIGIN_PRV_STATE: string
+	ORIGIN_CITY: string
+	DATE: string
+	IMAG_URL: string
+	SISN: string
+	GEN_NOTE?: string
+	AUTHOR?: string
+	PAUTHOR_OCCURRENCE?: string
+	SCOPE: string
 }
 
 // Add background circle to icons using CSS
@@ -133,7 +133,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 			const nData = allData.filter((item: any) => {
 				const matchesDatabase =
 					selectedDatabases.length > 0
-						? selectedDatabases.includes(item.database_type)
+						? selectedDatabases.includes(item.DATABASE_TYPE)
 						: true
 				const matchesCountry =
 					selectedCountries.length > 0
@@ -141,10 +141,10 @@ const InteractiveMap = ({ page }: { page: string }) => {
 						: true
 				const matchesProvince =
 					selectedProvinces.length > 0
-						? selectedProvinces.includes(item.origin_prv_state)
+						? selectedProvinces.includes(item.ORIGIN_PRV_STATE)
 						: true
 				const matchesCity =
-					selectedCities.length > 0 ? selectedCities.includes(item.origin_city) : true
+					selectedCities.length > 0 ? selectedCities.includes(item.ORIGIN_CITY) : true
 
 				return matchesDatabase && matchesCountry && matchesProvince && matchesCity
 			})
@@ -162,38 +162,24 @@ const InteractiveMap = ({ page }: { page: string }) => {
 			const responses = await Promise.allSettled(filePaths.map((path) => axios.get(path)))
 			const validResponses = responses
 				.filter((res) => res.status === 'fulfilled' && res.value?.data?.trim())
-				.map((res) => (res as PromiseFulfilledResult<any>).value)
+				.map((res) => (res as PromiseFulfilledResult<any>).value.data)
 
 			if (validResponses.length === 0) {
 				console.warn('All files are empty or invalid.')
 			} else {
 				validResponses.forEach((response) => {
-					const json = convertXMLToJson(response.data)
-					json.xml.record = Array.isArray(json.xml.record)
-						? json.xml.record
-						: [json.xml.record]
-
-					if (json.xml.record) {
-						// files.push(
-						// 	...json.xml.record.map((record: DataType) =>
-						// 		Object.fromEntries(
-						// 			Object.entries(record).map(([key, value]) => [
-						// 				key.toLowerCase(),
-						// 				typeof value === 'object' && value !== null ? value : value,
-						// 			])
-						// 		)
-						// 	)
-						// )
-					}
+					const json = convertXMLToJson(response)
+					let arr = convertToArr(json.xml.record)
+					files.push(...arr)
 				})
 			}
 		} catch (error) {
 			console.warn('Error fetching files:', error)
 		}
 		const updatedRecords = files.map((record: DataType) => {
-			if (record?.decimal_latitude && record?.decimal_longitude) {
-				record.decimal_latitude = parseFloat(record?.decimal_latitude ?? 0)
-				record.decimal_longitude = parseFloat(record?.decimal_longitude ?? 0)
+			if (record?.DECIMAL_LATITUDE && record?.DECIMAL_LONGITUDE) {
+				record.DECIMAL_LATITUDE = parseFloat(record?.DECIMAL_LATITUDE ?? 0)
+				record.DECIMAL_LONGITUDE = parseFloat(record?.DECIMAL_LONGITUDE ?? 0)
 				return record
 			}
 			return ''
@@ -259,7 +245,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 		const nData = allData.filter((item: any) => {
 			const matchesDatabase =
 				selectedDatabases.length > 0
-					? selectedDatabases.includes(item?.database_type)
+					? selectedDatabases.includes(item?.DATABASE_TYPE)
 					: true
 			const matchesCountry =
 				selectedCountries.length > 0
@@ -268,7 +254,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 
 			return matchesDatabase && matchesCountry
 		})
-		const uniqueValues = Array.from(new Set(nData?.map((item: any) => item.origin_prv_state)))
+		const uniqueValues = Array.from(new Set(nData?.map((item: any) => item.ORIGIN_PRV_STATE)))
 		return uniqueValues
 	}
 
@@ -276,7 +262,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 		const nData = allData.filter((item: any) => {
 			const matchesDatabase =
 				selectedDatabases.length > 0
-					? selectedDatabases.includes(item?.database_type)
+					? selectedDatabases.includes(item?.DATABASE_TYPE)
 					: true
 			const matchesCountry =
 				selectedCountries.length > 0
@@ -284,12 +270,12 @@ const InteractiveMap = ({ page }: { page: string }) => {
 					: true
 			const matchesProvince =
 				selectedProvinces.length > 0
-					? selectedProvinces.includes(item.origin_prv_state)
+					? selectedProvinces.includes(item.ORIGIN_PRV_STATE)
 					: true
 
 			return matchesDatabase && matchesCountry && matchesProvince
 		})
-		const uniqueValues = Array.from(new Set(nData?.map((item: any) => item.origin_city)))
+		const uniqueValues = Array.from(new Set(nData?.map((item: any) => item.ORIGIN_CITY)))
 		return uniqueValues
 	}
 
@@ -338,7 +324,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											{DB_TYPE_MAP.archive}
 										</Label>
 										<div>
-											{getNumberofType('database_type', DB_TYPE_MAP.archive)}
+											{getNumberofType('DATABASE_TYPE', DB_TYPE_MAP.archive)}
 										</div>
 									</div>
 								</div>
@@ -362,7 +348,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											{DB_TYPE_MAP.library}
 										</Label>
 										<div>
-											{getNumberofType('database_type', DB_TYPE_MAP.library)}
+											{getNumberofType('DATABASE_TYPE', DB_TYPE_MAP.library)}
 										</div>
 									</div>
 								</div>
@@ -382,7 +368,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											{DB_TYPE_MAP.museum}
 										</Label>
 										<div>
-											{getNumberofType('database_type', DB_TYPE_MAP.museum)}
+											{getNumberofType('DATABASE_TYPE', DB_TYPE_MAP.museum)}
 										</div>
 									</div>
 								</div>
@@ -431,7 +417,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 													{item}
 												</Label>
 												<div>
-													{getNumberofType('origin_prv_state', item)}
+													{getNumberofType('ORIGIN_PRV_STATE', item)}
 												</div>
 											</div>
 										)
@@ -457,7 +443,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 												{item}
 											</Label>
-											<div>{getNumberofType('origin_city', item)}</div>
+											<div>{getNumberofType('ORIGIN_CITY', item)}</div>
 										</div>
 									)
 								})
@@ -517,28 +503,28 @@ const InteractiveMap = ({ page }: { page: string }) => {
 							createClusterIcon(cluster, libraryIcon, COLOR_MAP.library)
 						}>
 						{filteredData?.map((marker: DataType, key: number) => {
-							if (marker.database_type === DB_TYPE_MAP.library) {
+							if (marker.DATABASE_TYPE === DB_TYPE_MAP.library) {
 								return (
 									<Marker
-										key={`L${marker.database_type}-${uuidv4().substring(10)}`}
+										key={`L${marker.DATABASE_TYPE}-${uuidv4().substring(10)}`}
 										position={[
-											marker?.decimal_latitude,
-											marker?.decimal_longitude,
+											marker?.DECIMAL_LATITUDE,
+											marker?.DECIMAL_LONGITUDE,
 										]}
 										icon={icons['library']}>
 										<Popup className="hidden md:block" offset={[-7, 0]}>
 											<div className="w-[300px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${library.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=accession_number%20${marker.accession_number}`}
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${library.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
-														{marker.all_title_word_occurrence ?? 'n/a'}
+														{marker.ALL_TITLE_WORD_OCCURRENCE ?? 'n/a'}
 													</h3>
 												</a>
-												{marker?.imag_url && (
+												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
-															src={getImage(marker.imag_url)}
+															src={getImage(marker.IMAG_URL)}
 															alt="Library"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
@@ -551,7 +537,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{message.accessionNumber}
 															</td>
 															<td>
-																{marker.accession_number ?? 'n/a'}{' '}
+																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
 															</td>
 														</tr>
 														<tr className="border-b">
@@ -559,8 +545,8 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{message.author}
 															</td>
 															<td>
-																{marker.pauthor_occurrence ||
-																	marker.ca_name_occurrence}
+																{marker.PAUTHOR_OCCURRENCE ||
+																	marker.CA_NAME_OCCURRENCE}
 															</td>
 														</tr>
 														<tr className="border-b">
@@ -568,8 +554,8 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{message.location}
 															</td>
 															<td>
-																{marker.origin_city},
-																{marker.origin_prv_state}
+																{marker.ORIGIN_CITY},
+																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
 														<tr className="border-b">
@@ -577,7 +563,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{message.generalNote}
 															</td>
 															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
-																<td>{marker.gen_note ?? 'n/a'}</td>
+																<td>{marker.GEN_NOTE ?? 'n/a'}</td>
 															</div>
 														</tr>
 													</tbody>
@@ -598,13 +584,13 @@ const InteractiveMap = ({ page }: { page: string }) => {
 							createClusterIcon(cluster, archiveIcon, COLOR_MAP.archive)
 						}>
 						{filteredData?.map((marker: any, key: number) => {
-							if (marker.database_type === DB_TYPE_MAP.archive) {
+							if (marker.DATABASE_TYPE === DB_TYPE_MAP.archive) {
 								return (
 									<Marker
-										key={`A${marker.database_type}-${uuidv4().substring(10)}`}
+										key={`A${marker.DATABASE_TYPE}-${uuidv4().substring(10)}`}
 										position={[
-											marker?.decimal_latitude,
-											marker?.decimal_longitude,
+											marker?.DECIMAL_LATITUDE,
+											marker?.DECIMAL_LONGITUDE,
 										]}
 										icon={icons['archive']}>
 										<Popup className="hidden md:block" offset={[-7, 0]}>
@@ -616,10 +602,10 @@ const InteractiveMap = ({ page }: { page: string }) => {
 														{marker.title ?? 'n/a'}
 													</h3>
 												</a>
-												{marker?.imag_url && (
+												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
-															src={getImage(marker.imag_url)}
+															src={getImage(marker.IMAG_URL)}
 															alt="Archive"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
@@ -636,8 +622,8 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{message.location}
 															</td>
 															<td>
-																{marker.origin_city},
-																{marker.origin_prv_state}
+																{marker.ORIGIN_CITY},
+																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
 														<tr className="border-b">
@@ -666,28 +652,28 @@ const InteractiveMap = ({ page }: { page: string }) => {
 							createClusterIcon(cluster, museumIcon, COLOR_MAP.museum)
 						}>
 						{filteredData?.map((marker: any, key: number) => {
-							if (marker.database_type === DB_TYPE_MAP.museum) {
+							if (marker.DATABASE_TYPE === DB_TYPE_MAP.museum) {
 								return (
 									<Marker
-										key={`M${marker.database_type}-${uuidv4().substring(10)}`}
+										key={`M${marker.DATABASE_TYPE}-${uuidv4().substring(10)}`}
 										position={[
-											marker?.decimal_latitude,
-											marker?.decimal_longitude,
+											marker?.DECIMAL_LATITUDE,
+											marker?.DECIMAL_LONGITUDE,
 										]}
 										icon={icons['museum']}>
 										<Popup className="hidden md:block" offset={[-7, 0]}>
 											<div className="w-[300px]">
 												<a
-													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=accession_number%20${marker.accession_number}`}
+													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600 border-b pb-2 overflow-x-auto">
 														{marker.title ?? 'n/a'}
 													</h3>
 												</a>
-												{marker?.imag_url && (
+												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4">
 														<img
-															src={getImage(marker.imag_url)}
+															src={getImage(marker.IMAG_URL)}
 															alt="Museum"
 															className="w-full h-full object-contain rounded-t-lg "
 														/>
@@ -700,7 +686,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{message.accessionNumber}
 															</td>
 															<td className="overflow-x-auto">
-																{marker.accession_number ?? 'n/a'}{' '}
+																{marker.ACCESSION_NUMBER ?? 'n/a'}{' '}
 															</td>
 														</tr>
 														<tr className="border-b">
@@ -708,8 +694,8 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{message.location}
 															</td>
 															<td className="overflow-x-auto">
-																{marker.origin_city},
-																{marker.origin_prv_state}
+																{marker.ORIGIN_CITY},
+																{marker.ORIGIN_PRV_STATE}
 															</td>
 														</tr>
 														<tr className="border-b">
