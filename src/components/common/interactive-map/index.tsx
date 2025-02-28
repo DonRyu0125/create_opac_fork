@@ -599,7 +599,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${archives.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=refd%20${marker.refd}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600  border-b pb-2">
-														{marker.title ?? 'n/a'}
+														{marker.TITLE ?? 'n/a'}
 													</h3>
 												</a>
 												{marker?.IMAG_URL && (
@@ -615,7 +615,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 													<tbody>
 														<tr className="border-b">
 															<td className="font-semibold">Refd</td>
-															<td>{marker.refd ?? 'n/a'} </td>
+															<td>{marker.REFD ?? 'n/a'} </td>
 														</tr>
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
@@ -631,7 +631,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 																{message.description}
 															</td>
 															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
-																<td>{marker.scope ?? 'n/a'}</td>
+																<td>{marker.SCOPE ?? 'n/a'}</td>
 															</div>
 														</tr>
 													</tbody>
@@ -651,7 +651,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 						iconCreateFunction={(cluster) =>
 							createClusterIcon(cluster, museumIcon, COLOR_MAP.museum)
 						}>
-						{filteredData?.map((marker: any, key: number) => {
+						{filteredData?.map((marker: any) => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.museum) {
 								return (
 									<Marker
@@ -667,7 +667,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 													href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`}
 													target="_blank">
 													<h3 className="text-lg font-bold text-blue-600 border-b pb-2 overflow-x-auto">
-														{marker.title ?? 'n/a'}
+														{marker.TITLE ?? 'n/a'}
 													</h3>
 												</a>
 												{marker?.IMAG_URL && (
@@ -704,7 +704,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 															</td>
 															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
 																<td>
-																	{marker.description ?? 'n/a'}
+																	{marker.DESCRIPTION ?? 'n/a'}
 																</td>
 															</div>
 														</tr>
