@@ -32,7 +32,7 @@ const ReviewCard = ({
 					<p className="text-xs font-medium ">{subTitle}</p>
 				</div>
 			</div>
-			<blockquote className="mt-2 text-sm">{description}</blockquote>
+			<blockquote className="mt-2 text-sm w-[60ch]">{description}</blockquote>
 		</figure>
 	)
 }
