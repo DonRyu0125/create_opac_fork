@@ -3,33 +3,33 @@ import * as Popover from '@radix-ui/react-popover'
 import archiveIcon from '../../../assets/icons/archive.png'
 import libraryIcon from '../../../assets/icons/library.png'
 import museumIcon from '../../../assets/icons/museum.png'
-import { convertXMLToJson, getImage } from '@/lib/utils'
+import { convertToArr, convertXMLToJson, getImage } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
 import axios from 'axios'
 
 interface DataType {
-	legal_title: string
-	sisn: string
-	time_index: string
-	date: string
-	id: string
-	database_type: string
-	imag_url: string
-	century?: string
-	all_title_word_occurrence: string
-	accession_number?: string
-	refd?: string
-	description: string
-	title: string
-	decimal_latitude: any
-	decimal_longitude: any
-	origin_country: string
-	origin_prv_state: string
-	origin_city: string
-	gen_note?: string
-	author?: string
-	pauthor_occurrence?: string
-	ca_name_occurrence?: string
+	LEGAL_TITLE: string
+	SISN: string
+	TIME_INDEX: string
+	DATE: string
+	ID: string
+	DATABASE_TYPE: string
+	IMAG_URL: string
+	CENTURY?: string
+	ALL_TITLE_WORD_OCCURRENCE: string
+	ACCESSION_NUMBER?: string
+	REFD?: string
+	DESCRIPTION: string
+	TITLE: string
+	DECIMAL_LATITUDE: any
+	DECIMAL_LONGITUDE: any
+	ORIGIN_COUNTRY: string
+	ORIGIN_PRV_STATE: string
+	ORIGIN_CITY: string
+	GEN_NOTE?: string
+	AUTHOR?: string
+	PAUTHOR_OCCURRENCE?: string
+	CA_NAME_OCCURRENCE?: string
 }
 
 const Timeline = ({ page }: { page: string }) => {
@@ -52,7 +52,6 @@ const Timeline = ({ page }: { page: string }) => {
 
 		return () => currentRef.removeEventListener('wheel', wheelListener)
 	}, [])
-
 	const getData = async () => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
@@ -62,38 +61,26 @@ const Timeline = ({ page }: { page: string }) => {
 			const responses = await Promise.allSettled(filePaths.map((path) => axios.get(path)))
 			const validResponses = responses
 				.filter((res) => res.status === 'fulfilled' && res.value?.data?.trim())
-				.map((res) => (res as PromiseFulfilledResult<any>).value)
+				.map((res) => (res as PromiseFulfilledResult<any>).value.data)
+
 			if (validResponses.length === 0) {
 				console.warn('All files are empty or invalid.')
 			} else {
 				validResponses.forEach((response) => {
-					const json = convertXMLToJson(response.data)
-					json.xml.record = Array.isArray(json.xml.record)
-						? json.xml.record
-						: [json.xml.record]
-					if (json.xml.record) {
-						files.push(
-							...json.xml.record.map((record: DataType) =>
-								Object.fromEntries(
-									Object.entries(record).map(([key, value]) => [
-										key.toLowerCase(),
-										typeof value === 'object' && value !== null ? value : value,
-									])
-								)
-							)
-						)
-					}
+					const json = convertXMLToJson(response)
+					let arr = convertToArr(json.xml.record)
+					files.push(...arr)
 				})
 			}
 			const records = files
 				.map((record: DataType) => ({
 					...record,
-					time_index: record.time_index?.split('--')[0],
+					TIME_INDEX: record.TIME_INDEX?.split('--')[0],
 				}))
-				.sort((a: any, b: any) => a.time_index - b.time_index)
+				.sort((a: any, b: any) => a.TIME_INDEX - b.TIME_INDEX)
 
 			records.forEach((item) => {
-				const timeIndex = parseInt(item.time_index)
+				const timeIndex = parseInt(item.TIME_INDEX)
 				let centuryLabel
 				if (timeIndex >= 10000) {
 					const century = Math.floor((timeIndex - 10000) / 100) * 100
@@ -112,6 +99,7 @@ const Timeline = ({ page }: { page: string }) => {
 				}
 				centuries.push(item)
 			})
+
 			setData(centuries)
 		} catch (error) {
 			console.error('Error fetching files:', error)
@@ -147,8 +135,8 @@ const Timeline = ({ page }: { page: string }) => {
 					key: 'REFD',
 					database: archives.database_name,
 					description_keyname: message.description,
-					description_key: 'scope',
-					title_key: 'title',
+					description_key: 'SCOPE',
+					title_key: 'TITLE',
 				}
 			case 'Library':
 				return {
@@ -158,8 +146,8 @@ const Timeline = ({ page }: { page: string }) => {
 					key: 'ACCESSION_NUMBER',
 					database: library.database_name,
 					description_keyname: message.generalNote,
-					description_key: 'gen_note',
-					title_key: 'all_title_word_occurrence',
+					description_key: 'GEN_NOTE',
+					title_key: 'ALL_TITLE_WORD_OCCURRENCE',
 				}
 			case 'Museum':
 				return {
@@ -169,8 +157,8 @@ const Timeline = ({ page }: { page: string }) => {
 					key: 'ACCESSION_NUMBER',
 					database: museum.database_name,
 					description_keyname: message.description,
-					description_key: 'description',
-					title_key: 'legal_title',
+					description_key: 'DESCRIPTION',
+					title_key: 'LEGAL_TITLE',
 				}
 		}
 	}
@@ -214,7 +202,7 @@ const Timeline = ({ page }: { page: string }) => {
 							database,
 							description_keyname,
 							description_key,
-						}: any = getIconForType(item?.database_type)
+						}: any = getIconForType(item?.DATABASE_TYPE)
 						return (
 							<div
 								key={idx}
@@ -235,16 +223,16 @@ const Timeline = ({ page }: { page: string }) => {
 										sideOffset={40}>
 										<div className="w-[300px]">
 											<a
-												href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.id}`}
+												href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.ID}`}
 												target="_blank">
 												<h3 className="text-lg font-bold text-blue-600 border-b pb-2">
 													{item[title_key] ?? 'n/a'}
 												</h3>
 											</a>
-											{item?.imag_url && (
+											{item?.IMAG_URL && (
 												<div className="bg-slate-100 h-48 mb-4">
 													<img
-														src={getImage(item.imag_url)}
+														src={getImage(item.IMAG_URL)}
 														alt="image"
 														className="w-full h-full object-contain rounded-t-lg"
 													/>
@@ -254,38 +242,43 @@ const Timeline = ({ page }: { page: string }) => {
 												<tbody>
 													<tr className="border-b">
 														<td className="font-semibold">Type</td>
-														<td>{item.database_type}</td>
+														<td>{item.DATABASE_TYPE}</td>
 													</tr>
 													<tr className="border-b">
 														<td className="font-semibold">{keyName}</td>
 														<td className="max-w-[200px] overflow-x-auto custom-scrollbar whitespace-nowrap">
-															{item.id}
+															{item.ID}
 														</td>
 													</tr>
-													<tr className="border-b">
-														<td className="font-semibold py-1 pr-2">
-															Date
-														</td>
-														<td>{item.date ?? 'n/a'}</td>
-													</tr>
-													<tr className="border-b">
-														<td className="font-semibold py-1 pr-2">
-															{description_keyname}
-														</td>
-														<td>
-															<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
-																{item[description_key] ?? 'n/a'}
-															</div>
-														</td>
-													</tr>
-													{item?.database_type === 'Library' && (
+													{item.DATE && (
+														<tr className="border-b">
+															<td className="font-semibold py-1 pr-2">
+																Date
+															</td>
+															<td>{item.DATE}</td>
+														</tr>
+													)}
+													{item[description_key] && (
+														<tr className="border-b">
+															<td className="font-semibold py-1 pr-2">
+																{description_keyname}
+															</td>
+															<td>
+																<div className="max-h-[150px] overflow-y-auto custom-scrollbar">
+																	{item[description_key]}
+																</div>
+															</td>
+														</tr>
+													)}
+
+													{item?.DATABASE_TYPE === 'Library' && (
 														<tr className="border-b">
 															<td className="font-semibold py-1 pr-2">
 																Author
 															</td>
 															<td>
-																{item.pauthor_occurrence ||
-																	item.ca_name_occurrence}
+																{item.PAUTHOR_OCCURRENCE ||
+																	item.CA_NAME_OCCURRENCE}
 															</td>
 														</tr>
 													)}

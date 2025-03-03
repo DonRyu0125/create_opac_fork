@@ -6,9 +6,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getImage = (image: string) => {
-	return image.toLowerCase().includes('[media]')
+	if(Array.isArray(image)){
+		return image[0]?.toLowerCase().includes('[media]')
+		? image[0].replace(/\[media\]/i, '/media/')
+		: image[0]
+	}else{
+		return image?.toLowerCase().includes('[media]')
 		? image.replace(/\[media\]/i, '/media/')
 		: image
+	}
+
 }
 
 /**

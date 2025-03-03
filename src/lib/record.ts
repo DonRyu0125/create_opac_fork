@@ -18,7 +18,7 @@ export function deepSearchKey<T extends GenericObject>(obj: T, targetKey: string
 
 	function search(obj: GenericObject, targetKey: string) {
 		for (const key in obj) {
-			if (key.toLowerCase() === targetKey.toLowerCase()) {
+			if (key?.toLowerCase() === targetKey?.toLowerCase()) {
 				result.push(obj[key])
 			} else if (typeof obj[key] === 'object' && obj[key] !== null) {
 				search(obj[key], targetKey)

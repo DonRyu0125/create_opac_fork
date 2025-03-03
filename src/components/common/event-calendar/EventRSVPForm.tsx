@@ -281,7 +281,7 @@ const ShowButton = ({
 	const message = useConstants().message
 
 	const handleDownload = async () => {
-		let fileUrl = event[FLOC_TX_ACCESS].toLowerCase().includes('[media]')
+		let fileUrl = event[FLOC_TX_ACCESS]?.toLowerCase().includes('[media]')
 			? event[FLOC_TX_ACCESS].replace(/\[media\]/i, '/media/')
 			: event[FLOC_TX_ACCESS]
 		if (fileUrl) {
