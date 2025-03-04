@@ -210,7 +210,7 @@ const Timeline = ({ page }: { page: string }) => {
 								<Popover.Root
 									open={openPopoverId === idx}
 									onOpenChange={(open) => {
-										console.log()
+										console.log() // Need console log for solving the pop over error
 										setOpenPopoverId(open ? idx : null)
 									}}>
 									<Popover.Trigger
