@@ -66,7 +66,7 @@ const EnquiryForm = () => {
 				setClientEmail(clientJSON.client.email)
 
 				// All This Client's Enquiry (Side Panel)
-				setClientEnquiries(convertToArr(clientEnqIdJSON))
+				setClientEnquiries(convertToArr(clientEnqIdJSON.xml.client_enq_id))
 			} catch (err) {
 				console.error('Error fetching data:', err)
 			}
