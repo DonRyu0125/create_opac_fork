@@ -209,10 +209,13 @@ const Timeline = ({ page }: { page: string }) => {
 								className="relative flex flex-col items-center w-full min-w-[10px]">
 								<Popover.Root
 									open={openPopoverId === idx}
-									onOpenChange={(open) => setOpenPopoverId(open ? idx : null)}>
+									onOpenChange={(open) => {
+										console.log()
+										setOpenPopoverId(open ? idx : null)
+									}}>
 									<Popover.Trigger
 										className="z-10 w-[5px] h-[50px] cursor-pointer hover:scale-150 bg-gray-400 focus:outline-none"
-										onMouseEnter={() => setOpenPopoverId(idx)}>
+										onPointerEnter={() => setOpenPopoverId(idx)}>
 										<div className="w-full h-full" />
 									</Popover.Trigger>
 									<Popover.Content
