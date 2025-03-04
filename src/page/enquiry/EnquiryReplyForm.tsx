@@ -1,5 +1,5 @@
 import { Button } from '../../components/ui/button'
-import { convertXMLToJson, getPatronID, getLanguageID, getHomeSessionID } from '@/lib/utils'
+import { convertXMLToJson, getPatronID, getLanguageID, getHomeSessionID, convertToArr } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 import { Send, MoreVertical, UserRound, FileText, Download, Clock } from 'lucide-react'
 
@@ -22,7 +22,6 @@ import {
 const EnquiryForm = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const xmlTreeData = records[0].record
-	console.log(xmlTreeData)
 	const NEW_OCCURRENCE_COUNT = xmlTreeData?.correspond_grp.correspond_grp_occurrence.length
 		? xmlTreeData?.correspond_grp.correspond_grp_occurrence.length + 1
 		: 2
@@ -67,7 +66,7 @@ const EnquiryForm = () => {
 				setClientEmail(clientJSON.client.email)
 
 				// All This Client's Enquiry (Side Panel)
-				setClientEnquiries(clientEnqIdJSON.xml.client_enq_id)
+				setClientEnquiries(convertToArr(clientEnqIdJSON))
 			} catch (err) {
 				console.error('Error fetching data:', err)
 			}
@@ -160,7 +159,7 @@ const EnquiryForm = () => {
 					<ScrollArea className="h-screen overflow-auto">
 						<div className="p-4 space-y-4">
 							{/* Regular Messages */}
-							{clientEnquiries.map((enquiry, i) => (
+							{clientEnquiries?.map((enquiry, i) => (
 								<Link
 									key={i}
 									className={
