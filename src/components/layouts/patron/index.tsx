@@ -6,6 +6,7 @@ import useJSONData from '@/hooks/useJSONData'
 import { getCookieValue } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
+import Footer from '../patron/Footer'
 
 type PatronLayoutProps = {
 	children?: React.ReactNode
@@ -58,6 +59,7 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 					{children}
 				</main>
 				<ScrollToTopButton />
+				<Footer />
 			</div>
 		</div>
 	)
