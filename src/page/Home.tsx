@@ -12,6 +12,7 @@ import RSVPCalendar from '../components/features/RSVPCalendar'
 import Layout from '../components/layouts'
 import TopPick from '@/components/features/TopPick'
 import TimeLine from '@/components/common/interactive-timeline'
+import { HighlightText } from '@/components/common/HighlightText'
 
 export const UNION_SEARCH_CL = 'KEYWORD_CLUSTER'
 
@@ -87,6 +88,8 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 				</div>
 			</Hero>
 
+		
+
 			<TopPick page={'home'} previewData={previewData} previewMode={previewMode} />
 
 			{enableFeaturedCollection && (
@@ -105,12 +108,12 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 			)}
 			{enableMap && (
 				<Section heading={`${message.map}`}>
-					<InterativeMap page={'home'}/>
+					<InterativeMap page={'home'} />
 				</Section>
 			)}
 			{enableTimeline && (
 				<Section heading={`${message.timeline}`}>
-					<TimeLine page={'home'}/>
+					<TimeLine page={'home'} />
 				</Section>
 			)}
 			{enableRecentAddition && (
