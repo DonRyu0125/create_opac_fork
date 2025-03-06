@@ -9,6 +9,7 @@ import { getFieldDataByLabel, getFieldsFromRecord, truncateString } from '@/lib/
 import { Record } from '@/types/record'
 import { RecordAction } from './RecordAction'
 import { useDisplayMode } from '@/hooks/useDisplayMode'
+import { HighlightText } from '@/components/common/HighlightText'
 
 const SummaryRecords = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -23,9 +24,10 @@ const SummaryRecords = () => {
 }
 
 const RecordView = ({ record }: { record: Record }) => {
+	const { common } = useJSONData({ selector: '#xml_record' })
 	const { displayMode } = useDisplayMode()
 	const { fields } = useConstants()
-	const database = record.database_name || record.link_dbname || '' 
+	const database = record.database_name || record.link_dbname || ''
 	const recordLink = record.record_link.toString()
 	const title =
 		getFieldDataByLabel(record, fields, database, 'Title') || record.record.title || 'Untitled'
@@ -46,7 +48,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		(item) => item.summary === true,
 		(data, item) => (
 			<DataWithLabel
-				className={`flex-col items-start justify-start my-1 space-x-0 ${item.name === 'obj_description' ? 'w-full':'w-[50%]'} `}
+				className={`flex-col items-start justify-start my-1 space-x-0 ${item.name === 'obj_description' ? 'w-full' : 'w-[50%]'} `}
 				key={item.name}
 				label={item.label || ''}
 				items={data}
@@ -58,7 +60,16 @@ const RecordView = ({ record }: { record: Record }) => {
 		return (
 			<InfoCard
 				className="border-primary"
-				title={<Link href={recordLink}>{truncateString(title)}</Link>}
+				title={
+					<Link href={recordLink}>
+						{
+							<HighlightText
+								text={truncateString(title)}
+								highlights={common?.search_statement?.toString()?.split(' ') ?? []}
+							/>
+						}
+					</Link>
+				}
 				description={gridFields}
 				thumbnail={
 					thumbnail
@@ -78,7 +89,14 @@ const RecordView = ({ record }: { record: Record }) => {
 
 	return (
 		<DetailInfoCard
-			title={<Link href={recordLink}>{title}</Link>}
+			title={
+				<Link href={recordLink}>
+					<HighlightText
+						text={title}
+						highlights={common?.search_statement?.toString()?.split(' ') ?? []}
+					/>
+				</Link>
+			}
 			className="col-span-4 border-primary"
 			thumbnail={
 				thumbnail
