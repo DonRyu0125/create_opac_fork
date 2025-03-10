@@ -6,11 +6,12 @@ import { getFieldDataByLabel, getFieldsFromRecord } from '@/lib/record'
 import DetailRecordAction from '@/page/detail/DetailRecordAction'
 import { DBFields } from '../../types/record'
 import { convertLowerTrim } from '@/lib/utils'
+import { HighlightText } from '@/components/common/HighlightText'
 
 type Props = {}
 
 const DetailRecord = (props: Props) => {
-	const { records } = useJSONData({ selector: '#xml_record' })
+	const { records, common } = useJSONData({ selector: '#xml_record' })
 	const { fields } = useConstants()
 	const record = records[0]
 	const database = record.database_name
@@ -26,18 +27,29 @@ const DetailRecord = (props: Props) => {
 		(item) => item.detail,
 		(data, item) => ({ label: item.label, value: data })
 	) as TableRow[]
+	const searchTerms = common?.search_statement?.toString()?.split(' ') ?? []
 
 	return (
-		<RecordDetail heading={title} subHeading={recordData.collection}>
+		<RecordDetail
+			heading={<HighlightText text={title} highlights={searchTerms} />}
+			subHeading={recordData.collection}>
 			<div className="flex flex-col space-y-12">
 				<InfoTable
 					rowsData={detailFields || []}
 					renderRow={({ value }) => {
 						if (typeof value === 'string') {
-							return <div>{value}</div>
+							return (
+								<div>
+									<HighlightText text={value} highlights={searchTerms} />
+								</div>
+							)
 						}
 						if (Array.isArray(value)) {
-							return value.map((e, i) => <div key={i}>{e.toString()}</div>)
+							return value.map((e, i) => (
+								<div key={i}>
+									<HighlightText text={e.toString()} highlights={searchTerms} />
+								</div>
+							))
 						}
 						return value
 					}}
