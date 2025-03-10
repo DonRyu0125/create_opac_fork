@@ -1,21 +1,53 @@
 export const HighlightText = ({ text, highlights }: { text: string; highlights: string[] }) => {
 	if (!highlights.length) return <p className="text-foreground">{text}</p>
 
-	// Create a regex pattern from the highlight words
-	const regex = new RegExp(`(${highlights.join('|')})`, 'gi')
+	// Create a regex pattern from the highlight words with word boundaries
+	const regex = new RegExp(`\\b(${highlights.join('|')})\\b`, 'gi')
 
-	// Split the text using the regex
-	const parts = text.split(regex)
+	// Split the text by the regex matches and include the matches
+	const parts = []
+	let lastIndex = 0
+	let match
+
+	// Create an array to store the text parts and matched words
+	const textArray = []
+
+	// Use exec to iterate through all matches
+	while ((match = regex.exec(text)) !== null) {
+		// Add the text before the match
+		if (match.index > lastIndex) {
+			textArray.push({
+				text: text.substring(lastIndex, match.index),
+				isHighlight: false,
+			})
+		}
+
+		// Add the matched word
+		textArray.push({
+			text: match[0],
+			isHighlight: true,
+		})
+
+		lastIndex = match.index + match[0].length
+	}
+
+	// Add any remaining text after the last match
+	if (lastIndex < text.length) {
+		textArray.push({
+			text: text.substring(lastIndex),
+			isHighlight: false,
+		})
+	}
 
 	return (
 		<p className="text-foreground">
-			{parts.map((part, index) =>
-				highlights.some((word) => word.toLowerCase() === part.toLowerCase()) ? (
+			{textArray.map((part, index) =>
+				part.isHighlight ? (
 					<span key={index} className="bg-foreground text-background px-1 rounded">
-						{part}
+						{part.text}
 					</span>
 				) : (
-					part
+					part.text
 				)
 			)}
 		</p>
