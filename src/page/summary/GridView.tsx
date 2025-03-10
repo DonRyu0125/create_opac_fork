@@ -1,11 +1,11 @@
-import DataWithLabel from "@/components/common/DataWithLabel"
-import { HighlightText } from "@/components/common/HighlightText"
-import InfoCard from "@/components/common/InfoCard"
-import { getFieldsFromRecord, truncateString } from "@/lib/record"
-import { ReactNode } from "react"
-import { RecordAction } from "./RecordAction"
-import Link from "@/components/common/Link"
-import { ViewProps } from "./SummaryRecord"
+import DataWithLabel from '@/components/common/DataWithLabel'
+import { HighlightText } from '@/components/common/HighlightText'
+import InfoCard from '@/components/common/InfoCard'
+import { getFieldsFromRecord, truncateString } from '@/lib/record'
+import { ReactNode } from 'react'
+import { RecordAction } from './RecordAction'
+import Link from '@/components/common/Link'
+import { ViewProps } from './SummaryRecord'
 
 const GridView = ({
 	title,
@@ -21,7 +21,14 @@ const GridView = ({
 		record,
 		fields,
 		(item) => item.grid === true,
-		(data, item) => <DataWithLabel key={item.name} label={item.label || ''} items={data} />
+		(data, item) => (
+			<DataWithLabel
+				key={item.name}
+				label={item.label || ''}
+				items={data}
+				searchTerms={searchTerms}
+			/>
+		)
 	) as ReactNode
 
 	return (
@@ -42,6 +49,5 @@ const GridView = ({
 		/>
 	)
 }
-
 
 export default GridView

@@ -29,7 +29,8 @@ const ListView = ({
 				}`}
 				key={item.name}
 				label={item.label || ''}
-				items={data}
+                items={data}
+                searchTerms={searchTerms}
 			/>
 		)
 	) as ReactNode
