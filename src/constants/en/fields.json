@@ -84,8 +84,20 @@
 	{
 		"database": "DESCRIPTION_WEB",
 		"items": [
-			{ "label": "Title", "name": "title", "summary": true, "grid": true, "detail": true },
-			{ "label": "Ref. Code", "name": "REFD", "summary": true, "grid": true, "detail": true },
+			{
+				"label": "Title",
+				"name": "title",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
+			{
+				"label": "Ref. Code",
+				"name": "REFD",
+				"summary": true,
+				"grid": true,
+				"detail": true
+			},
 			{
 				"label": "Creation",
 				"name": "date_cr_inc",
@@ -93,7 +105,7 @@
 				"grid": false,
 				"detail": true
 			},
-            {
+			{
 				"label": "GMD",
 				"name": "form_occurrence",
 				"summary": true,
@@ -187,91 +199,104 @@
 				"name": "accession_number",
 				"summary": true,
 				"grid": true,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			},
-            {
+			{
 				"label": "ISBN",
 				"name": "ISBN",
 				"summary": true,
 				"grid": true,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			},
 			{
 				"label": "Branch Location",
 				"name": "holding_centre",
 				"summary": true,
 				"grid": false,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			},
 			{
 				"label": "Author",
 				"name": "pauthor_occurrence",
 				"summary": true,
 				"grid": false,
-				"detail": false
+				"detail": false,
+				"enableJumpSearch": false
 			},
 			{
 				"label": "Author",
 				"name": "pauthor",
 				"summary": false,
 				"grid": true,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			},
-            {
+			{
 				"label": "Publication Date",
 				"name": "lib_pub_whole",
 				"summary": true,
 				"grid": false,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			},
-            {
+			{
 				"label": "Publication Place",
 				"name": "marc_260_b",
 				"summary": true,
 				"grid": false,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			},
 			{
 				"label": "Publication year",
 				"name": "publication_year_occurrence",
 				"summary": false,
 				"grid": false,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			},
-            {
+			{
 				"label": "Material Type",
 				"name": "i_collect_code",
 				"summary": true,
 				"grid": false,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			},
 			{
 				"label": "Subject",
 				"name": "subject",
 				"summary": false,
 				"grid": false,
-				"detail": true
+				"detail": ,
+				"enableJumpSearch": false
 			},
 			{
 				"label": "Tags",
 				"name": "biblio_tag_occurrence",
 				"summary": false,
 				"grid": false,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			},
-            {
+			{
 				"label": "SERIES",
 				"name": "series_occurrence",
 				"summary": false,
 				"grid": false,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			},
 			{
 				"label": "Notes",
 				"name": "notes_concat_occurrence",
 				"summary": true,
 				"grid": false,
-				"detail": true
+				"detail": true,
+				"enableJumpSearch": false
 			}
 		]
 	}
