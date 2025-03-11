@@ -5,7 +5,6 @@ export const HighlightText = ({ text, highlights }: { text: string; highlights: 
 	const regex = new RegExp(`\\b(${highlights.join('|')})\\b`, 'gi')
 
 	// Split the text by the regex matches and include the matches
-	const parts = []
 	let lastIndex = 0
 	let match
 
