@@ -208,14 +208,12 @@ const Timeline = ({ page }: { page: string }) => {
 								key={idx}
 								className="relative flex flex-col items-center w-full min-w-[10px]">
 								<Popover.Root
-									open={openPopoverId === idx}
-									onOpenChange={(open) => {
-										console.log() // Need console log for solving the pop over error
-										setOpenPopoverId(open ? idx : null)
-									}}>
+									open={openPopoverId === idx} onOpenChange={(open) => !open && setOpenPopoverId(null)}>
 									<Popover.Trigger
 										className="z-10 w-[5px] h-[50px] cursor-pointer hover:scale-150 bg-gray-400 focus:outline-none"
-										onPointerEnter={() => setOpenPopoverId(idx)}>
+										onPointerEnter={() => setOpenPopoverId(idx)}
+										onPointerLeave={() => setOpenPopoverId(null)}
+										>
 										<div className="w-full h-full" />
 									</Popover.Trigger>
 									<Popover.Content
