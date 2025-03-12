@@ -460,7 +460,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 				<MapContainer
 					className="markercluster-map"
 					center={[49.1044, -122.8011]}
-					zoom={10}
+					zoom={3}
 					maxZoom={18}
 					style={{
 						height: '90vh',
