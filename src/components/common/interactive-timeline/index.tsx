@@ -207,13 +207,10 @@ const Timeline = ({ page }: { page: string }) => {
 							<div
 								key={idx}
 								className="relative flex flex-col items-center w-full min-w-[10px]">
-								<Popover.Root
-									open={openPopoverId === idx} onOpenChange={(open) => !open && setOpenPopoverId(null)}>
+								<Popover.Root open={openPopoverId === idx}>
 									<Popover.Trigger
 										className="z-10 w-[5px] h-[50px] cursor-pointer hover:scale-150 bg-gray-400 focus:outline-none"
-										onPointerEnter={() => setOpenPopoverId(idx)}
-										onPointerLeave={() => setOpenPopoverId(null)}
-										>
+										onPointerEnter={() => setOpenPopoverId(idx)}>
 										<div className="w-full h-full" />
 									</Popover.Trigger>
 									<Popover.Content
@@ -221,7 +218,7 @@ const Timeline = ({ page }: { page: string }) => {
 										side="top"
 										align="center"
 										className="p-4 bg-white shadow-lg rounded-xl z-10 focus:outline-none"
-										sideOffset={40}>
+										sideOffset={20}>
 										<div className="w-[300px]">
 											<a
 												href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.ID}`}
