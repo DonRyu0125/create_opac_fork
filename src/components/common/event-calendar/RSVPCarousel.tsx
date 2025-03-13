@@ -18,6 +18,7 @@ import {
 	TAG_NAME,
 } from './Constants'
 import { getContactInfo } from './Service'
+import { convertToArr } from '@/lib/utils'
 
 export interface ImageCarouselProps {
 	items: any
@@ -62,7 +63,7 @@ const RSVPCarousel = ({ items, elm, contactInfo }: ImageCarouselProps) => {
 								&#x2022;{message.max}: {elm[TAG_FUNC_LOC_MAX]}
 							</div>
 						</div>
-						{getContactInfo(BD_DIS_ACC, contactInfo, elm)?.map(
+						{convertToArr(getContactInfo(BD_DIS_ACC, contactInfo, elm))?.map(
 							(
 								item: {
 									BD_DIS_ACC_TYPE: string
