@@ -36,22 +36,12 @@ const Timeline = ({ page }: { page: string }) => {
 	const [data, setData] = useState<DataType[]>([])
 	const { message, archives, library, museum } = useConstants()
 	const [openPopoverId, setOpenPopoverId] = useState<number | null>()
-	const scrollContainerRef = useRef<any>(null)
 	let count = 0
 
 	useEffect(() => {
 		getData()
 	}, [])
 
-	useEffect(() => {
-		const currentRef = scrollContainerRef.current
-		if (!currentRef) return
-
-		const wheelListener = (e: WheelEvent) => e.preventDefault()
-		currentRef.addEventListener('wheel', wheelListener, { passive: false })
-
-		return () => currentRef.removeEventListener('wheel', wheelListener)
-	}, [])
 	const getData = async () => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
@@ -163,21 +153,27 @@ const Timeline = ({ page }: { page: string }) => {
 		}
 	}
 
-	const handleWheel = (e: { preventDefault: () => void; deltaY: any }) => {
-		if (scrollContainerRef.current) {
-			scrollContainerRef.current.scrollLeft += e.deltaY
+	const popoverRef = useRef<HTMLDivElement | null>(null)
+
+	const handleClickOutside = (event: MouseEvent) => {
+		if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
+			setOpenPopoverId(null)
 		}
 	}
+
+	useEffect(() => {
+		document.addEventListener('mousedown', handleClickOutside)
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside)
+		}
+	}, [])
 
 	return (
 		<div className="w-full relative md:flex my-2">
 			<div className="absolute top-3 right-0 z-40 w-[5px] h-[100px] bg-gray-600" />
 			<div className="absolute top-3 left-0 z-40 w-[5px] h-[100px] bg-gray-600" />
 			<div className="absolute top-[45%] z-0 w-full h-[7px] bg-gray-400" />
-			<div
-				ref={scrollContainerRef}
-				className="w-full relative flex items-center h-40 justify-around overflow-x-auto px-2 cursor-grab active:cursor-grabbing"
-				onWheel={handleWheel}>
+			<div className="w-full relative flex items-center h-40 justify-around overflow-x-auto px-2 cursor-grab active:cursor-grabbing">
 				{data.map((item: any, idx: number) => {
 					if (item.century) {
 						count++
@@ -205,6 +201,7 @@ const Timeline = ({ page }: { page: string }) => {
 						}: any = getIconForType(item?.DATABASE_TYPE)
 						return (
 							<div
+								ref={popoverRef}
 								key={idx}
 								className="relative flex flex-col items-center w-full min-w-[10px]">
 								<Popover.Root open={openPopoverId === idx}>
