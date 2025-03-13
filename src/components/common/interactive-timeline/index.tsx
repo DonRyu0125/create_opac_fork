@@ -201,7 +201,6 @@ const Timeline = ({ page }: { page: string }) => {
 						}: any = getIconForType(item?.DATABASE_TYPE)
 						return (
 							<div
-								ref={popoverRef}
 								key={idx}
 								className="relative flex flex-col items-center w-full min-w-[10px]">
 								<Popover.Root open={openPopoverId === idx}>
@@ -216,23 +215,24 @@ const Timeline = ({ page }: { page: string }) => {
 										align="center"
 										className="p-4 bg-white shadow-lg rounded-xl z-10 focus:outline-none"
 										sideOffset={20}>
-										<div className="w-[300px]">
+										<div className="w-[300px]" ref={popoverRef}>
 											<a
 												href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.ID}`}
 												target="_blank">
 												<h3 className="text-lg font-bold text-blue-600 border-b pb-2">
 													{item[title_key] ?? 'n/a'}
 												</h3>
+
+												{item?.IMAG_URL && (
+													<div className="bg-slate-100 h-48 mb-4">
+														<img
+															src={getImage(item.IMAG_URL)}
+															alt="image"
+															className="w-full h-full object-contain rounded-t-lg"
+														/>
+													</div>
+												)}
 											</a>
-											{item?.IMAG_URL && (
-												<div className="bg-slate-100 h-48 mb-4">
-													<img
-														src={getImage(item.IMAG_URL)}
-														alt="image"
-														className="w-full h-full object-contain rounded-t-lg"
-													/>
-												</div>
-											)}
 											<table className="w-full text-sm">
 												<tbody>
 													<tr className="border-b">
