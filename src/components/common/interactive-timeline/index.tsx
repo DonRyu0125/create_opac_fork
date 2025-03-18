@@ -184,7 +184,7 @@ const Timeline = ({ page }: { page: string }) => {
 								<div className="text-left text-[10px] w-[25px] h-[20px] font-bold bottom-[10px]">
 									{count % 2 === 1 && item.century}
 								</div>
-								<div className="w-[5px] h-[70px] cursor-pointer transition-transform bg-gray-400" />
+								<div className="w-[5px] h-[70px] transition-transform bg-gray-500" />
 								<div className="text-left text-[10px] w-[25px] h-[20px] top-[5px] font-bold">
 									{count % 2 === 0 && item.century}
 								</div>
