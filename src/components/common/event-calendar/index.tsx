@@ -217,6 +217,7 @@ const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilt
 					{message.week}
 				</Button>
 			</div>
+			<div className={'pl-[14px] mt-1 font-bold'}>{message.filterBy}</div>
 			{filterOption && (
 				<EventCalendarFilter
 					setCurrentFilter={setCurrentFilter}
