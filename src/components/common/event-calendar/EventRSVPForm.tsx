@@ -504,7 +504,7 @@ const ShowRSVPSuccess = ({
 }
 
 const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: EventRSVPForm) => {
-	const [status, setStatus] = useState(STATUS_TYPE.SHOW_SUCCESS)
+	const [status, setStatus] = useState(STATUS_TYPE.SHOW_BTN)
 	const { logo } = useConstants().config
 	const {
 		register,
