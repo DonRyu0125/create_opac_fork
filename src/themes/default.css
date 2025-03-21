@@ -48,15 +48,15 @@ body {
 	@apply text-sky-700;
 }
 
-.bg-minisis-musesum {
+.bg-minisis-museum {
 	@apply bg-yellow-500;
 }
 
-.border-minisis-musesum {
+.border-minisis-museum {
 	@apply border-yellow-500;
 }
 
-.text-minisis-musesum {
+.text-minisis-museum {
 	@apply text-yellow-500;
 }
 
