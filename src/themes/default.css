@@ -35,3 +35,39 @@
 body {
 	min-height: 100dvh;
 }
+
+.bg-minisis-archives {
+	@apply bg-sky-700;
+}
+
+.border-minisis-archives {
+	@apply border-sky-700;
+}
+
+.text-minisis-archives {
+	@apply text-sky-700;
+}
+
+.bg-minisis-musesum {
+	@apply bg-yellow-500;
+}
+
+.border-minisis-musesum {
+	@apply border-yellow-500;
+}
+
+.text-minisis-musesum {
+	@apply text-yellow-500;
+}
+
+.bg-minisis-library {
+	@apply bg-orange-500;
+}
+
+.border-minisis-library {
+	@apply border-orange-500;
+}
+
+.text-minisis-library {
+	@apply text-orange-500;
+}
