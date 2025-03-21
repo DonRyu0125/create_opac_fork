@@ -37,15 +37,15 @@ body {
 }
 
 .bg-minisis-archives {
-	@apply bg-sky-700;
+	@apply bg-sky-500;
 }
 
 .border-minisis-archives {
-	@apply border-sky-700;
+	@apply border-sky-500;
 }
 
 .text-minisis-archives {
-	@apply text-sky-700;
+	@apply text-sky-500;
 }
 
 .bg-minisis-museum {
