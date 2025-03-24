@@ -14,7 +14,7 @@ export function DatePickerWithRange({
 }: {
 	className: string
 	date: DateRange | undefined
-	setDate: SelectRangeEventHandler
+	setDate: any
 }) {
 	return (
 		<div className={cn('grid gap-2', className)}>
