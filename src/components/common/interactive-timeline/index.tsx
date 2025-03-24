@@ -153,7 +153,7 @@ const Timeline = ({ page }: { page: string }) => {
 
 	const getIconForType = (databaseType: string) => {
 		switch (databaseType) {
-			case 'Archive':
+			case 'Archives':
 				return {
 					borderColor: 'border-minisis-archives',
 					icon: archiveIcon,
