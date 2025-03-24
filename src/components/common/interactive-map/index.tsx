@@ -20,7 +20,7 @@ import './style.css'
 
 const DB_TYPE_MAP = {
 	library: 'Library',
-	archive: 'Archive',
+	archive: 'Archives',
 	museum: 'Museum',
 }
 
@@ -299,7 +299,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											<img src={archiveIcon} className="w-5 h-5" />
 										</div>
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-											{DB_TYPE_MAP.archive}
+											{message.archives}
 										</Label>
 										<div>
 											{getNumberofType('DATABASE_TYPE', DB_TYPE_MAP.archive)}
@@ -318,7 +318,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											<img src={museumIcon} className="w-5 h-5" />
 										</div>
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-											{DB_TYPE_MAP.museum}
+											{message.museum}
 										</Label>
 										<div>
 											{getNumberofType('DATABASE_TYPE', DB_TYPE_MAP.museum)}
@@ -341,7 +341,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											<img src={libraryIcon} className=" w-5 h-5" />
 										</div>
 										<Label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-											{DB_TYPE_MAP.library}
+											{message.library}
 										</Label>
 										<div>
 											{getNumberofType('DATABASE_TYPE', DB_TYPE_MAP.library)}
