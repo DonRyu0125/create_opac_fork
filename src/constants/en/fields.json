@@ -220,7 +220,7 @@
 				"name": "pauthor_occurrence",
 				"summary": true,
 				"grid": false,
-				"detail": fals,
+				"detail": true
 			},
 			{
 				"label": "Author",
