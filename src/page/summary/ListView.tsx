@@ -7,7 +7,7 @@ import { RecordAction } from './RecordAction'
 import { ViewProps } from './SummaryRecord'
 import Link from '@/components/common/Link'
 import { Separator } from '@/components/ui/separator'
-import { getClassName } from '@/lib/utils'
+import { cn, getClassName } from '@/lib/utils'
 
 const ListView = ({
 	title,
@@ -43,7 +43,7 @@ const ListView = ({
 					<HighlightText text={title} highlights={searchTerms} />
 				</Link>
 			}
-			className={getClassName(database, 'border')}
+			className={cn(getClassName(database, 'border'), 'border-2 rounded-md')}
 			thumbnail={thumbnailUrl}
 			footer={
 				<div>
