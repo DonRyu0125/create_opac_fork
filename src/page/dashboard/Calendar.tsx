@@ -102,7 +102,7 @@ const Calendar = () => {
 				<div className="capitalize">
 					{row.getValue(TAG_FUNC_P_ATTND.toLocaleLowerCase())}
 				</div>
-			),
+			)
 		},
 		{
 			accessorKey: ' ',
