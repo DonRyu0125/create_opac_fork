@@ -13,7 +13,7 @@ export function DatePickerWithRange({
 	setDate,
 }: {
 	className: string
-	date: DateRange | undefined
+	date: DateRange | any
 	setDate: any
 }) {
 	return (
