@@ -78,8 +78,8 @@ const Slide = <T,>({
 						</CarouselItem>
 					))}
 				</CarouselContent>
-				<CarouselPrevious />
-				<CarouselNext />
+				<CarouselPrevious className="bottom-[-40px] left-[calc(50%-20px)]" />
+				<CarouselNext className="bottom-[-40px] left-[calc(50%+20px)]" />
 			</Carousel>
 			{/* 
 			<div className="flex justify-center mt-4 space-x-2">
