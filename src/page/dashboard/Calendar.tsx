@@ -20,10 +20,11 @@ import PatronLayout from '@/components/layouts/patron'
 import { Button } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { convertToArr, convertXMLToJson, getHomeSessionID } from '@/lib/utils'
+import { convertToArr, convertXMLToJson, getHomeSessionID, isDatePast } from '@/lib/utils'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { ColumnDef } from '@tanstack/react-table'
 import axios from 'axios'
+  
 
 interface TagFunction {
 	[key: string]: any
@@ -75,7 +76,7 @@ const Calendar = () => {
 			accessorKey: TAG_FUNC_START_T.toLocaleLowerCase(),
 			header: message.start,
 			cell: ({ row }) => (
-				<div className="capitalize">
+				<div>
 					{row.getValue(TAG_FUNC_START_T.toLocaleLowerCase())}
 				</div>
 			),
@@ -84,7 +85,7 @@ const Calendar = () => {
 			accessorKey: TAG_FUNC_END_T.toLocaleLowerCase(),
 			header: message.end,
 			cell: ({ row }) => (
-				<div className="capitalize">{row.getValue(TAG_FUNC_END_T.toLocaleLowerCase())}</div>
+				<div>{row.getValue(TAG_FUNC_END_T.toLocaleLowerCase())}</div>
 			),
 		},
 		{
@@ -101,7 +102,7 @@ const Calendar = () => {
 				<div className="capitalize">
 					{row.getValue(TAG_FUNC_P_ATTND.toLocaleLowerCase())}
 				</div>
-			),
+			)
 		},
 		{
 			accessorKey: ' ',
@@ -118,12 +119,13 @@ const Calendar = () => {
 								{message.yes} {message.cancel}
 							</button>
 						}
-						InitialButton={<Button variant={'danger'}>{message.cancel}</Button>}
+						InitialButton={<Button variant={'danger'} disabled={isDatePast(cell.row.original.tag_func_date)}>{message.cancel}</Button>}
 					/>
 				)
 			},
-		},
+		}
 	]
+
 
 	const cancelEvent = async (patronInfo: any, sisnValue: number) => {
 		getOCCNumber(patronInfo, sisnValue)
@@ -235,6 +237,7 @@ const Calendar = () => {
 				columns={columns}
 				filterType={TAG_NAME.toLocaleLowerCase()}
 				filterTypeShow={message.event}
+				filterDateType={'tag_func_date'}
 			/>
 		</PatronLayout>
 	)
