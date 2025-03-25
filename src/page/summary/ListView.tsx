@@ -7,6 +7,7 @@ import { RecordAction } from './RecordAction'
 import { ViewProps } from './SummaryRecord'
 import Link from '@/components/common/Link'
 import { Separator } from '@/components/ui/separator'
+import { getClassName } from '@/lib/utils'
 
 const ListView = ({
 	title,
@@ -29,8 +30,8 @@ const ListView = ({
 				}`}
 				key={item.name}
 				label={item.label || ''}
-                items={data}
-                searchTerms={searchTerms}
+				items={data}
+				searchTerms={searchTerms}
 			/>
 		)
 	) as ReactNode
@@ -42,7 +43,7 @@ const ListView = ({
 					<HighlightText text={title} highlights={searchTerms} />
 				</Link>
 			}
-			className="col-span-4 border-primary"
+			className={getClassName(database, 'border')}
 			thumbnail={thumbnailUrl}
 			footer={
 				<div>
