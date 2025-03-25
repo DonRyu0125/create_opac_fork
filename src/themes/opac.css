@@ -5,6 +5,8 @@
 	--primary: 0 0% 7%;
 	--primary-foreground: 0 0% 100%;
 
+	--text-foreground: 0 0% 100%;
+
 	--card: 240 17.65% 96.67%;
 	--card-foreground: 233.33 100% 1.76%;
 
@@ -45,6 +47,8 @@
 
 	--primary: 0 0% 7%;
 	--primary-foreground: 0 0% 100%;
+
+	--text-foreground: 0 0% 100%;
 
 	--card: 240 17.65% 96.67%;
 	--card-foreground: 233.33 100% 1.76%;
