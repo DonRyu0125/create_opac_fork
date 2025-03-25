@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="https://i.imgur.com/whpgDjK.jpeg" sizes="32x32" />
+		<title>MINISIS OPAC Template</title>
+	</head>
+	<body>
+		<script>
+			function getCookie(){
+				const cookies = document.cookie.split(';')
+				for (let cookie of cookies) {
+					const [cookieName, cookieValue] = cookie.trim().split('=')
+
+					if (cookieName === name) {
+						return cookieValue
+					}
+				}
+				return null;
+			}
+			window.location = getCookie("HOME_SESSID") + "?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)"
+		</script>
+	</body>
+</html>
