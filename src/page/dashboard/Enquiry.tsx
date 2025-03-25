@@ -40,7 +40,7 @@ const Enquiries = () => {
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Enquiry #
+						Inquiry #
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
@@ -138,7 +138,7 @@ const Enquiries = () => {
 		},
 	]
 	return (
-		<PatronLayout heading="Enquiries">
+		<PatronLayout heading="Inquiries">
 			<ProfileTable
 				data={records}
 				columns={columns}

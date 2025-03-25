@@ -49,8 +49,8 @@
 		}
 	],
 	"rsvp": {
-		"filterDatabase": "Archive",
-		"filterOption": "TAG_DB_TYPE",
+		"filterDatabase": "Archives",
+		"filterOption": "",
 		"filterTypes": []
 	},
 	"enableCategoriesItems": true,

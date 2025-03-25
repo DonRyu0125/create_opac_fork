@@ -36,7 +36,11 @@ const Timeline = ({ page }: { page: string }) => {
 	const [data, setData] = useState<DataType[]>([])
 	const { message, archives, library, museum } = useConstants()
 	const [openPopoverId, setOpenPopoverId] = useState<number | null>()
-	const scrollContainerRef = useRef<any>(null)
+	const popoverRef = useRef<HTMLDivElement | null>(null)
+	const scrollRef = useRef<HTMLDivElement>(null)
+	const [isDragging, setIsDragging] = useState(false)
+	const [startX, setStartX] = useState(0)
+	const [scrollLeft, setScrollLeft] = useState(0)
 	let count = 0
 
 	useEffect(() => {
@@ -44,14 +48,36 @@ const Timeline = ({ page }: { page: string }) => {
 	}, [])
 
 	useEffect(() => {
-		const currentRef = scrollContainerRef.current
-		if (!currentRef) return
-
-		const wheelListener = (e: WheelEvent) => e.preventDefault()
-		currentRef.addEventListener('wheel', wheelListener, { passive: false })
-
-		return () => currentRef.removeEventListener('wheel', wheelListener)
+		document.addEventListener('mousedown', handleClickOutside)
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside)
+		}
 	}, [])
+
+	const handleMouseDown = (e: React.MouseEvent) => {
+		if (!scrollRef.current) return
+		setIsDragging(true)
+		setStartX(e.pageX - scrollRef.current.offsetLeft)
+		setScrollLeft(scrollRef.current.scrollLeft)
+	}
+
+	const handleMouseMove = (e: React.MouseEvent) => {
+		if (!isDragging || !scrollRef.current) return
+		const x = e.pageX - scrollRef.current.offsetLeft
+		const walk = (x - startX) * 2
+		scrollRef.current.scrollLeft = scrollLeft - walk
+	}
+
+	const handleMouseUp = () => {
+		setIsDragging(false)
+	}
+
+	const handleClickOutside = (event: MouseEvent) => {
+		if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
+			setOpenPopoverId(null)
+		}
+	}
+
 	const getData = async () => {
 		let centuries: any[] = []
 		let currentCenturyLabel: string | null = null
@@ -127,10 +153,11 @@ const Timeline = ({ page }: { page: string }) => {
 
 	const getIconForType = (databaseType: string) => {
 		switch (databaseType) {
-			case 'Archive':
+			case 'Archives':
 				return {
+					borderColor: 'border-minisis-archives',
 					icon: archiveIcon,
-					bgColor: 'bg-blue-900/80',
+					bgColor: 'bg-minisis-archives',
 					keyName: 'REFD',
 					key: 'REFD',
 					database: archives.database_name,
@@ -140,8 +167,9 @@ const Timeline = ({ page }: { page: string }) => {
 				}
 			case 'Library':
 				return {
+					borderColor: 'border-minisis-library',
 					icon: libraryIcon,
-					bgColor: 'bg-red-600/90',
+					bgColor: 'bg-minisis-library',
 					keyName: message.accessionNumber,
 					key: 'ACCESSION_NUMBER',
 					database: library.database_name,
@@ -151,8 +179,9 @@ const Timeline = ({ page }: { page: string }) => {
 				}
 			case 'Museum':
 				return {
+					borderColor: 'border-minisis-museum',
 					icon: museumIcon,
-					bgColor: 'bg-yellow-400/90',
+					bgColor: 'bg-minisis-museum',
 					keyName: message.accessionNumber,
 					key: 'ACCESSION_NUMBER',
 					database: museum.database_name,
@@ -163,21 +192,18 @@ const Timeline = ({ page }: { page: string }) => {
 		}
 	}
 
-	const handleWheel = (e: { preventDefault: () => void; deltaY: any }) => {
-		if (scrollContainerRef.current) {
-			scrollContainerRef.current.scrollLeft += e.deltaY
-		}
-	}
-
 	return (
 		<div className="w-full relative md:flex my-2">
 			<div className="absolute top-3 right-0 z-40 w-[5px] h-[100px] bg-gray-600" />
 			<div className="absolute top-3 left-0 z-40 w-[5px] h-[100px] bg-gray-600" />
 			<div className="absolute top-[45%] z-0 w-full h-[7px] bg-gray-400" />
 			<div
-				ref={scrollContainerRef}
 				className="w-full relative flex items-center h-40 justify-around overflow-x-auto px-2 cursor-grab active:cursor-grabbing"
-				onWheel={handleWheel}>
+				ref={scrollRef}
+				onMouseDown={handleMouseDown}
+				onMouseMove={handleMouseMove}
+				onMouseLeave={handleMouseUp}
+				onMouseUp={handleMouseUp}>
 				{data.map((item: any, idx: number) => {
 					if (item.century) {
 						count++
@@ -188,7 +214,7 @@ const Timeline = ({ page }: { page: string }) => {
 								<div className="text-left text-[10px] w-[25px] h-[20px] font-bold bottom-[10px]">
 									{count % 2 === 1 && item.century}
 								</div>
-								<div className="w-[5px] h-[70px] cursor-pointer transition-transform bg-gray-400" />
+								<div className="w-[5px] h-[70px] transition-transform bg-gray-500" />
 								<div className="text-left text-[10px] w-[25px] h-[20px] top-[5px] font-bold">
 									{count % 2 === 0 && item.century}
 								</div>
@@ -196,6 +222,8 @@ const Timeline = ({ page }: { page: string }) => {
 						)
 					} else {
 						const {
+							borderColor,
+							bgColor,
 							title_key,
 							key,
 							keyName,
@@ -207,14 +235,9 @@ const Timeline = ({ page }: { page: string }) => {
 							<div
 								key={idx}
 								className="relative flex flex-col items-center w-full min-w-[10px]">
-								<Popover.Root
-									open={openPopoverId === idx}
-									onOpenChange={(open) => {
-										console.log() // Need console log for solving the pop over error
-										setOpenPopoverId(open ? idx : null)
-									}}>
+								<Popover.Root open={openPopoverId === idx}>
 									<Popover.Trigger
-										className="z-10 w-[5px] h-[50px] cursor-pointer hover:scale-150 bg-gray-400 focus:outline-none"
+										className={`z-10 w-[5px] h-[50px] cursor-pointer hover:scale-150 bg-gray-400 focus:outline-none ${bgColor} box-border`}
 										onPointerEnter={() => setOpenPopoverId(idx)}>
 										<div className="w-full h-full" />
 									</Popover.Trigger>
@@ -222,25 +245,29 @@ const Timeline = ({ page }: { page: string }) => {
 										onMouseLeave={() => setOpenPopoverId(null)}
 										side="top"
 										align="center"
-										className="p-4 bg-white shadow-lg rounded-xl z-10 focus:outline-none"
-										sideOffset={40}>
-										<div className="w-[300px]">
+										className={`p-4 bg-white shadow-lg rounded-[14px] z-10 focus:outline-none border-2  ${borderColor}`}
+										sideOffset={20}>
+										<Popover.Arrow
+											className={`fill-white w-[18px] h-[15px] transform -translate-x-1 `}
+										/>
+										<div className="w-[300px]" ref={popoverRef}>
 											<a
 												href={`/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${database}&language=144&REPORT=WEB_UNION_DETAIL&EXP=${key}%20${item.ID}`}
 												target="_blank">
-												<h3 className="text-lg font-bold text-blue-600 border-b pb-2">
+												<h3 className="text-lg font-bold text-black pb-2">
 													{item[title_key] ?? 'n/a'}
 												</h3>
+
+												{item?.IMAG_URL && (
+													<div className="bg-slate-100 h-48 mb-4 rounded-[14px]">
+														<img
+															src={getImage(item.IMAG_URL)}
+															alt="image"
+															className="w-full h-full object-contain rounded-[14px]"
+														/>
+													</div>
+												)}
 											</a>
-											{item?.IMAG_URL && (
-												<div className="bg-slate-100 h-48 mb-4">
-													<img
-														src={getImage(item.IMAG_URL)}
-														alt="image"
-														className="w-full h-full object-contain rounded-t-lg"
-													/>
-												</div>
-											)}
 											<table className="w-full text-sm">
 												<tbody>
 													<tr className="border-b">

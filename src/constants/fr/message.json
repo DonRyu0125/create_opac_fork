@@ -172,7 +172,7 @@
 	"attendee": "participant",
 	"map": "Carte",
 	"detailRecordActionRequest": "Request",
-	"detailRecordActionEnquire": "Enquire",
+	"detailRecordActionEnquire": "Inquire",
 	"detailRecordActionReproduction": "Reproduction",
 	"detailRecordActionCopyright": "Copyright",
 	"descriptionTree": "Liste complète des collections",
@@ -190,5 +190,9 @@
 	"searchDatabase": "Rechercher dans les bases de données",
 	"searchAllCollections": "Chercher toutes les collections",
 	"returnToSearchResults": "Retour à la page des résultats",
-	"shareThisPage":"Partager cette page"
+	"shareThisPage":"Partager cette page",
+	"inPerson":"En personne",
+	"archives":"Archives",
+	"museum":"Musée",
+	"library":"Bibliothèque"
 }
