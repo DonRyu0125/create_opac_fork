@@ -97,8 +97,8 @@ const Detail = () => {
 				</PageAction>
 				<section>
 					<div className="container mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-						<div className="flex flex-col gap-12 items-start p-4 mx-auto ">
-							<div className="w-full flex flex-col lg:flex-row">
+						<div className="flex flex-col items-start p-4 mx-auto ">
+							<div className="w-full flex gap-12  flex-col lg:flex-row">
 								<div className="w-full lg:w-1/3">
 									<div className="min-w-[300px] w-full max-w-[500px] text-center ">
 										{images && images.length > 0 ? (
