@@ -53,7 +53,7 @@ export function ProfileTable({
 	})
 
 	React.useEffect(() => {
-		setRecords(filterDateType ? filterEventsByDateRange(data, date) : data);
+		setRecords((filterDateType && date) ? filterEventsByDateRange(data, date) : data);
 	  }, [date]);
 
 	const table = useReactTable({
