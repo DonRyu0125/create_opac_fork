@@ -24,6 +24,7 @@ import {
 import { endOfMonth, subMonths } from 'date-fns'
 import { DatePickerWithRange } from './DatePickerWithRange'
 import useConstants from '@/hooks/useConstants'
+import { RefreshCw } from 'lucide-react'
 
 export type ProfileData = {
 	[key: string]: any
@@ -62,8 +63,9 @@ export function ProfileTable({
 		setRecords(filterDateType && date?.from ? filterEventsByDateRange(data, date) : data)
 	}, [date])
 
-	const showAllRecords = () => {
-		setDate({ from: '', to: '' })
+	const resetFilter = () => {
+		filterDateType && setDate({ from: '', to: '' })
+		table.getColumn(filterType)?.setFilterValue('')
 	}
 
 	const table = useReactTable({
@@ -106,11 +108,20 @@ export function ProfileTable({
 					className="max-w-sm"
 				/>
 				{filterDateType && (
-					<DatePickerWithRange
-						date={date}
-						setDate={setDate}
-						className={'mt-1 md:mt-0 md:ml-3'}
-					/>
+					<div className="flex items-center">
+						<DatePickerWithRange
+							date={date}
+							setDate={setDate}
+							className={'mt-1 mr-1 md:mt-0 md:ml-3'}
+						/>
+						<Button
+							variant={'outline'}
+							size="sm"
+							className={'mt-1 md:mt-0 h-10 w-10 rounded-[7px] p-0'}
+							onClick={resetFilter}>
+							<RefreshCw height={20} width={20}/>
+						</Button>
+					</div>
 				)}
 			</div>
 			<div className="rounded-md border">
@@ -179,9 +190,6 @@ export function ProfileTable({
 						onClick={() => table.nextPage()}
 						disabled={!table.getCanNextPage()}>
 						{message.next}
-					</Button>
-					<Button variant="outline" size="sm" onClick={showAllRecords}>
-						Show All
 					</Button>
 				</div>
 			</div>
