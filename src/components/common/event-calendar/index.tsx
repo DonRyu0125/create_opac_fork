@@ -228,7 +228,7 @@ const EventCalendar = ({ databaseType, filterTypes, filterOption }: calendarFilt
 					/>
 				</>
 			)}
-			<div className={'w-full flex justify-start'}>
+			<div className={'w-full flex justify-start px-4'}>
 				<div className={'flex items-center mr-4'}>
 					<div>
 						<SquareUserRound size={20} />
