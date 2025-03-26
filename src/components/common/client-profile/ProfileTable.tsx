@@ -21,13 +21,17 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table'
-import { DateRange } from 'react-day-picker'
 import { endOfMonth, subMonths } from 'date-fns'
 import { DatePickerWithRange } from './DatePickerWithRange'
 import useConstants from '@/hooks/useConstants'
 
 export type ProfileData = {
 	[key: string]: any
+}
+
+type DateRange = {
+	from: Date | string
+	to: Date | string
 }
 
 export function ProfileTable({
@@ -49,14 +53,18 @@ export function ProfileTable({
 	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
 	const [rowSelection, setRowSelection] = React.useState({})
 	const [records, setRecords] = React.useState<any>([])
-	const [date, setDate] = React.useState<DateRange | {}>({
+	const [date, setDate] = React.useState<DateRange>({
 		from: subMonths(new Date(), 1),
 		to: endOfMonth(new Date()),
 	})
 
 	React.useEffect(() => {
-		setRecords(filterDateType && date.from ? filterEventsByDateRange(data, date) : data)
+		setRecords(filterDateType && date?.from ? filterEventsByDateRange(data, date) : data)
 	}, [date])
+
+	const showAllRecords = () => {
+		setDate({ from: '', to: '' })
+	}
 
 	const table = useReactTable({
 		data: records,
@@ -84,10 +92,6 @@ export function ProfileTable({
 			const eventDate = new Date(event[`${filterDateType}`])
 			return eventDate >= fromDate && eventDate <= toDate
 		})
-	}
-
-	const showAllRecords = () =>{
-		setDate({})
 	}
 
 	return (
