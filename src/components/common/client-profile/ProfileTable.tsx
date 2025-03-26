@@ -36,7 +36,6 @@ export function ProfileTable({
 	filterType,
 	filterTypeShow,
 	filterDateType,
-	
 }: {
 	data: ProfileData[]
 	columns: ColumnDef<ProfileData>[]
@@ -50,7 +49,7 @@ export function ProfileTable({
 	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
 	const [rowSelection, setRowSelection] = React.useState({})
 	const [records, setRecords] = React.useState<any>([])
-	const [date, setDate] = React.useState<DateRange>({
+	const [date, setDate] = React.useState<DateRange | {}>({
 		from: subMonths(new Date(), 1),
 		to: endOfMonth(new Date()),
 	})
@@ -85,6 +84,10 @@ export function ProfileTable({
 			const eventDate = new Date(event[`${filterDateType}`])
 			return eventDate >= fromDate && eventDate <= toDate
 		})
+	}
+
+	const showAllRecords = () =>{
+		setDate({})
 	}
 
 	return (
@@ -147,7 +150,7 @@ export function ProfileTable({
 						) : (
 							<TableRow>
 								<TableCell colSpan={columns.length} className="h-24 text-center">
-								{message.noResultFound}
+									{message.noResultFound}
 								</TableCell>
 							</TableRow>
 						)}
@@ -172,6 +175,9 @@ export function ProfileTable({
 						onClick={() => table.nextPage()}
 						disabled={!table.getCanNextPage()}>
 						{message.next}
+					</Button>
+					<Button variant="outline" size="sm" onClick={showAllRecords}>
+						Show All
 					</Button>
 				</div>
 			</div>
