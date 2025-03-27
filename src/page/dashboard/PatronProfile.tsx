@@ -103,7 +103,7 @@ export default function PatronProfile() {
 			icon: <Upload className="h-4 w-4" />,
 			label: profileList[7].label,
 			color: 'violet',
-			value: <Search className="h-4 w-4" />,
+			value: '',
 			link: profileList[7].url
 		},
 	]
