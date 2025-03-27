@@ -148,7 +148,7 @@ export default function PatronProfile() {
 			{/* Stats Grid */}
 			<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 				{statCards.map((card, index) => (
-					<a href={card.link}>
+					
 						<StatCard
 							key={card.key}
 							icon={card.icon}
@@ -156,7 +156,7 @@ export default function PatronProfile() {
 							color={card.color}
 							value={card.value}
 						/>
-					</a>
+					
 				))}
 			</div>
 
