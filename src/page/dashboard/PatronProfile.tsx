@@ -98,14 +98,6 @@ export default function PatronProfile() {
 			value: records[0].calendar_count,
 			link: `/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`
 		},
-		{
-			key: 8,
-			icon: <Upload className="h-4 w-4" />,
-			label: profileList[7].label,
-			color: 'violet',
-			value: '',
-			link: profileList[7].url
-		},
 	]
 	function StatCard({ icon, label, value, color }: StatCardProps) {
 		const colorClasses = {
