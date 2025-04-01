@@ -46,7 +46,7 @@ interface DataType {
 	SCOPE: string
 }
 
-const createIcon = (iconUrl: string, bgColor: string): L.DivIcon => {
+const markerIcon = (iconUrl: string, bgColor: string): L.DivIcon => {
 	return L.divIcon({
 		className: `min-w-[22px] min-h-[22px] flex justify-center items-center rounded-full shadow-md ${bgColor}`,
 		html: `
@@ -60,6 +60,12 @@ const createIcon = (iconUrl: string, bgColor: string): L.DivIcon => {
 	})
 }
 
+const emptyIcon = new L.DivIcon({
+	className: "empty-icon",
+	html: "",
+	iconSize: [0, 0],
+  });
+
 const COLOR_MAP: any = {
 	library: 'bg-minisis-library',
 	archive: 'bg-minisis-archives',
@@ -67,12 +73,12 @@ const COLOR_MAP: any = {
 }
 
 const icons: Record<string, L.DivIcon> = {
-	library: createIcon(libraryIcon, COLOR_MAP.library),
-	archive: createIcon(archiveIcon, COLOR_MAP.archive),
-	museum: createIcon(museumIcon, COLOR_MAP.museum),
+	library: markerIcon(libraryIcon, COLOR_MAP.library),
+	archive: markerIcon(archiveIcon, COLOR_MAP.archive),
+	museum: markerIcon(museumIcon, COLOR_MAP.museum),
 }
 
-const createClusterIcon = function (cluster: any, iconUrl: string, bgColor: string) {
+const clusterMarkerIcon = function (cluster: any, iconUrl: string, bgColor: string) {
 	return L.divIcon({
 		className: `${bgColor} min-w-[60px] min-h-[60px] flex flex-col justify-center items-center rounded-full shadow-md`,
 		html: `
@@ -476,7 +482,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 						spiderfyDistanceMultiplier={2}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
-							createClusterIcon(cluster, libraryIcon, COLOR_MAP.library)
+							clusterMarkerIcon(cluster, libraryIcon, COLOR_MAP.library)
 						}>
 						{filteredData?.map((marker: DataType, key: number) => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.library) {
@@ -561,7 +567,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 						spiderfyDistanceMultiplier={2}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
-							createClusterIcon(cluster, archiveIcon, COLOR_MAP.archive)
+							clusterMarkerIcon(cluster, archiveIcon, COLOR_MAP.archive)
 						}>
 						{filteredData?.map((marker: DataType, key: number) => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.archive) {
@@ -637,7 +643,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 						spiderfyDistanceMultiplier={2}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
-							createClusterIcon(cluster, museumIcon, COLOR_MAP.museum)
+							clusterMarkerIcon(cluster, museumIcon, COLOR_MAP.museum)
 						}>
 						{filteredData?.map((marker: DataType) => {
 							if (marker.DATABASE_TYPE === DB_TYPE_MAP.museum) {
