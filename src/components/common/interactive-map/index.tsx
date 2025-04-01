@@ -60,12 +60,6 @@ const markerIcon = (iconUrl: string, bgColor: string): L.DivIcon => {
 	})
 }
 
-const emptyIcon = new L.DivIcon({
-	className: "empty-icon",
-	html: "",
-	iconSize: [0, 0],
-  });
-
 const COLOR_MAP: any = {
 	library: 'bg-minisis-library',
 	archive: 'bg-minisis-archives',
@@ -80,9 +74,9 @@ const icons: Record<string, L.DivIcon> = {
 
 const clusterMarkerIcon = function (cluster: any, iconUrl: string, bgColor: string) {
 	return L.divIcon({
-		className: `${bgColor} min-w-[60px] min-h-[60px] flex flex-col justify-center items-center rounded-full shadow-md`,
+		className: ``,
 		html: `
-      <div >
+      <div class='${bgColor} min-w-[60px] min-h-[60px] flex flex-col justify-center items-center rounded-full shadow-md'>
         <div><img src="${iconUrl}" class="w-5 h-5" /></div>
         <div>${cluster.getChildCount()}</div>
       </div>
