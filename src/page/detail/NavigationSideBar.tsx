@@ -27,13 +27,7 @@ export default function NavigationSideBar() {
 
 				<ShareButton url={handleCopyRecordURL(record, true) || window.location.href} />
 
-				<Button
-					onClick={() => window.print()}
-					variant="ghost"
-					className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground group transition-all duration-300">
-					<Printer className="mr-2 h-4 w-4" />
-					{message.printPage}
-				</Button>
+
 			</nav>
 		</div>
 	)

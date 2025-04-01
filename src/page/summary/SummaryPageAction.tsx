@@ -3,11 +3,10 @@ import CollapseList from '@/components/common/CollapseList'
 import DropdownSelect from '@/components/common/DropdownSelect'
 import useConstants from '@/hooks/useConstants'
 import useJSONData, { COMMON_FIELDS_TYPE, SORT_TYPE } from '@/hooks/useJSONData'
-import { Label } from '@radix-ui/react-dropdown-menu'
-import ViewBookmarks from '../bookmark/ViewBookmarks'
-import BookmarkAll from '../bookmark/BookmarkAll'
-import PrintPage from '../bookmark/PrintPage'
 import { convertToArr } from '@/lib/utils'
+import { Label } from '@radix-ui/react-dropdown-menu'
+import BookmarkAll from '../bookmark/BookmarkAll'
+import ViewBookmarks from '../bookmark/ViewBookmarks'
 
 /**
  * This component contains:
