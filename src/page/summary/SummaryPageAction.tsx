@@ -49,7 +49,6 @@ const SummaryPageAction = () => {
 				<Label className="font-bold">{message.bookmark}</Label>
 				<ViewBookmarks />
 				<BookmarkAll />
-				{/* <PrintPage /> */}
 			</div>
 			<div className="flex flex-col space-y-2">
 				<Label className="font-bold">{message.recordPerPage}</Label>
