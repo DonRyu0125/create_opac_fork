@@ -598,7 +598,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 														{marker.REFD && (
 															<tr className="border-b">
 																<td className="font-semibold">
-																	Refd
+																	REFD
 																</td>
 																<td>{marker.REFD} </td>
 															</tr>
