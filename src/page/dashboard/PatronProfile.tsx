@@ -140,7 +140,7 @@ export default function PatronProfile() {
 						<StatCard
 							key={card.key}
 							icon={card.icon}
-							label={message.calendar}
+							label={card.label}
 							color={card.color}
 							value={card.value}
 						/>
