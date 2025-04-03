@@ -13,6 +13,7 @@ import { deepSearchKey } from '@/lib/record'
 import { getJSONTree, TreeNode } from '@/lib/tree'
 import { useEffect, useState } from 'react'
 import NavigationSideBar from './NavigationSideBar'
+import NoRecord from '../NoRecord'
 
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
@@ -59,8 +60,10 @@ const Detail = () => {
 				})
 		}
 	}, [database, refd])
-	// TODO: create placeholder component when there is no data
-	if (!records || records.length === 0) return <></>
+	
+	//If the XML_TREE is not working at the repo spec.
+	if (!record.record) return <NoRecord/>
+
 	return (
 		<Layout>
 			<div className="rounded-[0.5rem] border bg-background shadow-md md:shadow-xl h-full flex-col flex w-full my-12">
