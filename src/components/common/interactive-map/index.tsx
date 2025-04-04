@@ -48,10 +48,21 @@ interface DataType {
 
 const markerIcon = (iconUrl: string, bgColor: string): L.DivIcon => {
 	return L.divIcon({
-		className: `min-w-[22px] min-h-[22px] flex justify-center items-center rounded-full shadow-md ${bgColor}`,
+		className: '',
 		html: `
-      <div>
-        <img src="${iconUrl}" class="w-4 h-4" />
+      <div class="${bgColor}" style="
+        width: 22px;
+        height: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 9999px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+      "
+           onmouseover="this.style.transform='scale(2)'"
+           onmouseout="this.style.transform='scale(1)'">
+        <img src="${iconUrl}" style="width: 16px; height: 16px;" />
       </div>
     `,
 		iconSize: [20, 20],
@@ -634,7 +645,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 					{/* @ts-ignore */}
 					<MarkerClusterGroup
 						key={`M${uuidv4()?.substring(15)}`}
-						spiderfyDistanceMultiplier={2}
+						spiderfyDistanceMultiplier={1}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
 							clusterMarkerIcon(cluster, museumIcon, COLOR_MAP.museum)
@@ -649,7 +660,12 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											marker?.DECIMAL_LONGITUDE,
 										]}
 										eventHandlers={{
-											mouseover: (e) => e.target.openPopup()
+											mouseover: (e) => e.target.openPopup(),
+											mouseout:(e)=>e.target.closePopup(),
+											click: () => {
+												const url = `/SCRIPTS/MWIMAIN.DLL?UNIONSEARCH&SIMPLE_EXP=Y&KEEP=Y&ERRMSG=[MESSAGES]no-record.html&APPLICATION=UNION_VIEW&DATABASE=${museum.database_name}&language=144&REPORT=WEB_UNION_DETAIL&EXP=ACCESSION_NUMBER%20${marker.ACCESSION_NUMBER}`
+												window.location.href = url
+											}
 										}}
 										icon={icons['museum']}>
 										<Popup
