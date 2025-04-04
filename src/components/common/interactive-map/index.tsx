@@ -484,7 +484,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 					{/* @ts-ignore */}
 					<MarkerClusterGroup
 						key={`L${uuidv4()?.substring(15)}`}
-						spiderfyDistanceMultiplier={2}
+						spiderfyDistanceMultiplier={1}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
 							clusterMarkerIcon(cluster, libraryIcon, COLOR_MAP.library)
@@ -573,7 +573,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 					{/* @ts-ignore */}
 					<MarkerClusterGroup
 						key={`A${uuidv4()?.substring(15)}`}
-						spiderfyDistanceMultiplier={2}
+						spiderfyDistanceMultiplier={1}
 						showCoverageOnHover={false}
 						iconCreateFunction={(cluster) =>
 							clusterMarkerIcon(cluster, archiveIcon, COLOR_MAP.archive)
