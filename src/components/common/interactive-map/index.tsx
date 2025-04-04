@@ -648,6 +648,9 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											marker?.DECIMAL_LATITUDE,
 											marker?.DECIMAL_LONGITUDE,
 										]}
+										eventHandlers={{
+											mouseover: (e) => e.target.openPopup()
+										}}
 										icon={icons['museum']}>
 										<Popup
 											className="hidden md:block border-minisis-museum border-2 rounded-[14px]"
