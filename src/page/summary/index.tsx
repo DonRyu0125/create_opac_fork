@@ -10,20 +10,33 @@ import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { getSearchURL } from '@/lib/utils'
 import { ChevronRight } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SummaryPageAction from './SummaryPageAction'
 import SummaryRecords from './SummaryRecord'
 
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 	const { message, home, archives, museum, library } = useConstants()
-	const { common, pagination, backToSummary, data } = useJSONData({
+	const { common, pagination, backToSummary,data } = useJSONData({
 		selector: '#xml_record',
 	})
+	const [hasDatabaseParam, setHasDatabaseParam] = useState(false);
+
+	useEffect(() => {
+	  const url = window.location.href;
+	  const hasParam = url.includes("&DATABASE=");
+	  setHasDatabaseParam(hasParam);
+	}, []);
 
 	const navigations = [home, archives, museum, library]
+	const getDBTitle = (search_database: string) => {
+		let db = navigations.filter((item) => item.database_name === search_database)
+		if (!hasDatabaseParam || !search_database) return ''
+		return `${db[0].displayTitle}`
+	}
 
 	if (!common) return <></>
+	
 
 	return (
 		<Layout>
@@ -50,8 +63,8 @@ const Summary = () => {
 				<section>
 					<div className="mx-auto py-4 sm:py-12  container flex flex-col">
 						<PageHeader
-							heading={`${common.total_record} ${message.resultsFor.toLowerCase()} "${common.search_statement}"`}
-							subHeading={`${message.displaying} ${common.first_record_seq}-${common.last_record_seq} ${message.of} ${common.total_record}`}
+							heading={`${common.total_record} ${getDBTitle(data.xml.search_database)} ${message.resultsFor.toLowerCase()} "${common.search_statement}"`}
+							subHeading={`${message.displaying}  ${common.first_record_seq}-${common.last_record_seq} ${message.of} ${common.total_record}`}
 						/>
 						<div className="mt-8 block lg:hidden">
 							<Button

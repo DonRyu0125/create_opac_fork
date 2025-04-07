@@ -27,7 +27,7 @@ const DetailInfoCard = ({
 					<img
 						src={thumbnail}
 						alt={alt || 'image thumbnail'}
-						className=" h-full w-full  max-w-sm md:max-w-lg  mx-auto object-cover bg-gray-300"
+						className=" h-full w-full  max-w-sm md:max-w-lg  mx-auto object-cover bg-gray-300 min-h-[293px]"
 					/>
 				</div>
 

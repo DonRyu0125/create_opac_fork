@@ -47,7 +47,7 @@ const InfoCard = ({
 					<img
 						src={thumbnail}
 						alt={alt || 'image thumbnail'}
-						className=" rounded-md h-64 md:h-48 lg:h-52 object-cover mx-auto"
+						className=" rounded-md h-64 md:h-48 lg:h-52 object-cover mx-auto bg-gray-300"
 					/>
 				)}
 			</CardContent>
