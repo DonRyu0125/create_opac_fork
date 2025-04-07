@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import X2JS from 'x2js'
+import noImage from '../assets/icons/image_not_found.png'
+
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
@@ -9,11 +11,11 @@ export const getImage = (image: string) => {
 	if (Array.isArray(image)) {
 		return image[0]?.toLowerCase().includes('[media]')
 			? image[0].replace(/\[media\]/i, '/media/')
-			: image[0]
+			: noImage
 	} else {
 		return image?.toLowerCase().includes('[media]')
 			? image.replace(/\[media\]/i, '/media/')
-			: image
+			: noImage
 	}
 }
 
