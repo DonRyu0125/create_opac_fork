@@ -14,7 +14,7 @@ export default function NavigationSideBar() {
 	})
 	const record = records[0]
 	return (
-		<div className="w-full  space-y-3">
+		<div className="w-full mt-2 space-y-3">
 			<nav className="grid gap-2">
 				<a href={backToSummary}>
 					<Button

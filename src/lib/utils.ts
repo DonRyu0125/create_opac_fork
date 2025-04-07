@@ -11,11 +11,11 @@ export const getImage = (image: string) => {
 	if (Array.isArray(image)) {
 		return image[0]?.toLowerCase().includes('[media]')
 			? image[0].replace(/\[media\]/i, '/media/')
-			: noImage
+			: image
 	} else {
 		return image?.toLowerCase().includes('[media]')
 			? image.replace(/\[media\]/i, '/media/')
-			: noImage
+			: image
 	}
 }
 
