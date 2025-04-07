@@ -77,10 +77,22 @@ export const convertToArr = (elm: Object | Array<any>) => {
 	return elm ? [elm] : []
 }
 
-export const convertXMLToJson = (response: any) => {
+export const convertXMLToJson = (response: string) => {
 	const x2js = new X2JS()
-	const jsonData: any = x2js.xml2js(response)
+	const cleaned = escapeUnclosedTags(response)
+	const jsonData: any = x2js.xml2js(cleaned)
 	return jsonData
+}
+
+const escapeUnclosedTags = (xml: string): string => {
+	return xml.replace(/<([A-Za-z0-9\-_]+)>/g, (match, tag) => {
+		const tagPattern = new RegExp(`<${tag}[^>]*>`, 'g')
+		const closeTagPattern = new RegExp(`</${tag}>`, 'g')
+		const openCount = (xml.match(tagPattern) || []).length
+		const closeCount = (xml.match(closeTagPattern) || []).length
+		if (openCount > closeCount) return `&lt;${tag}&gt;`
+		return match
+	})
 }
 
 export const encodeObj = (input: string) => {
