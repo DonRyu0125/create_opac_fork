@@ -22,9 +22,9 @@ const DetailInfoCard = ({
 }: DetailInfoCardrops) => {
 	return (
 		<div className={cn('border-2 rounded-md col-span-4 border-primary relative', className)}>
-			<div className="absolute bg-gray-900 z-10 top-1 right-1 bg-minisis-archives border-minisis-archives rounded-md text-white p-0.5 font-small">
+			{/* <div className="absolute bg-gray-900 z-10 top-1 right-1 bg-minisis-archives border-minisis-archives rounded-md text-white p-0.5 font-small">
 				Archive
-			</div>
+			</div> */}
 			<article className="shadow-md flex rounded-lg rounded-l-none flex-col md:flex-row transition hover:shadow-xl">
 				<div className="basis-56">
 					<img

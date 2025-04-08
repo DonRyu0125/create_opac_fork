@@ -33,9 +33,9 @@ const InfoCard = ({
 				'cursor-pointer rounded-md shadow-md hover:shadow-xl border-2 border-primary relative',
 				className
 			)}>
-			<div className="absolute bg-gray-900 z-10 top-1 right-1 bg-minisis-archives border-minisis-archives rounded-md text-white p-0.5 font-medium">
+			{/* <div className="absolute bg-gray-900 z-10 top-1 right-1 bg-minisis-archives border-minisis-archives rounded-md text-white p-0.5 font-medium">
 				Archive
-			</div>
+			</div> */}
 			<CardHeader className="h-48 pb-0">
 				<CardTitle className="text-lg font-bold">{title}</CardTitle>
 				{description && (
