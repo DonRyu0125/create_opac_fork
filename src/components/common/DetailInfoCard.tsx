@@ -27,7 +27,6 @@ const DetailInfoCard = ({
 	record,
 }: DetailInfoCardrops) => {
 	const { navigations } = useConstants().config
-
 	const getColor = (event_type: string) => {
 		let result = navigations?.filter((item) => {
 			return convertLowerTrim(item.search_database) === convertLowerTrim(event_type)
