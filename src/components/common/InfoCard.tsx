@@ -6,7 +6,9 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+import useConstants from '@/hooks/useConstants'
+import { cn, convertLowerTrim } from '@/lib/utils'
+import { Record } from '@/types/record'
 
 export interface InfoCardProps {
 	title: string | React.ReactNode
@@ -16,6 +18,7 @@ export interface InfoCardProps {
 	children?: React.ReactNode
 	thumbnail?: string
 	alt?: string
+	record: Record
 }
 
 const InfoCard = ({
@@ -26,16 +29,30 @@ const InfoCard = ({
 	children,
 	thumbnail,
 	alt,
+	record,
 }: InfoCardProps) => {
+	const { navigations } = useConstants().config
+
+	const getColor = (event_type: string) => {
+		let result = navigations?.filter((item) => {
+			return convertLowerTrim(item.search_database) === convertLowerTrim(event_type)
+		})
+
+		return {
+			color: `${result[0]?.color}`,
+			title: `${result[0]?.title}`
+		}
+	}
 	return (
 		<Card
 			className={cn(
 				'cursor-pointer rounded-md shadow-md hover:shadow-xl border-2 border-primary relative',
 				className
 			)}>
-			{/* <div className="absolute bg-gray-900 z-10 top-1 right-1 bg-minisis-archives border-minisis-archives rounded-md text-white p-0.5 font-medium">
-				Archive
-			</div> */}
+			<div
+				className={`absolute bg-gray-900 z-10 top-1 right-1 ${getColor(record.database_name).color} rounded-md text-white p-0.5 font-small`}>
+				{getColor(record.database_name).title}
+			</div>
 			<CardHeader className="h-48 pb-0">
 				<CardTitle className="text-lg font-bold">{title}</CardTitle>
 				{description && (

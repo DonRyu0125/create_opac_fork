@@ -1,5 +1,8 @@
-import { cn } from '@/lib/utils'
+import useJSONData from '@/hooks/useJSONData'
+import { cn, convertLowerTrim } from '@/lib/utils'
 import React from 'react'
+import { Record } from '@/types/record'
+import useConstants from '@/hooks/useConstants'
 
 export interface DetailInfoCardrops {
 	title: string | React.ReactNode
@@ -9,6 +12,7 @@ export interface DetailInfoCardrops {
 	children?: React.ReactNode
 	thumbnail?: string
 	alt?: string
+	record: Record
 }
 
 const DetailInfoCard = ({
@@ -19,12 +23,27 @@ const DetailInfoCard = ({
 	className,
 	footer,
 	children,
+	record,
 }: DetailInfoCardrops) => {
+	const { navigations } = useConstants().config
+
+	const getColor = (event_type: string) => {
+		let result = navigations?.filter((item) => {
+			return convertLowerTrim(item.search_database) === convertLowerTrim(event_type)
+		})
+
+		return {
+			color: `${result[0]?.color}`,
+			title: `${result[0]?.title}`
+		}
+	}
+
 	return (
 		<div className={cn('border-2 rounded-md col-span-4 border-primary relative', className)}>
-			{/* <div className="absolute bg-gray-900 z-10 top-1 right-1 bg-minisis-archives border-minisis-archives rounded-md text-white p-0.5 font-small">
-				Archive
-			</div> */}
+			<div
+				className={`absolute bg-gray-900 z-10 top-1 right-1 ${getColor(record.database_name).color} rounded-md text-white p-0.5 font-small`}>
+				{getColor(record.database_name).title}
+			</div>
 			<article className="shadow-md flex rounded-lg rounded-l-none flex-col md:flex-row transition hover:shadow-xl">
 				<div className="basis-56">
 					<img

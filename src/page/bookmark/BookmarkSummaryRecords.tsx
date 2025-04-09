@@ -82,6 +82,7 @@ const RecordView = ({ record }: { record: Record }) => {
 
 	return (
 		<DetailInfoCard
+			record={record}
 			title={<Link href={recordLink}>{title}</Link>}
 			className="col-span-4 border-primary"
 			thumbnail={
