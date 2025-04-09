@@ -48,12 +48,12 @@ const DetailInfoCard = ({
 				className
 			)}>
 			<Badge
-				className={`${getColor(link_dbname ?? record?.database_name).color} absolute z-10 md:top-[27px] md:right-[15px] text-white`}
+				className={`${getColor(link_dbname ?? record?.database_name).color} absolute z-10 right-1 top-1 md:top-[27px] md:right-[15px] text-white`}
 				variant={'tag'}>
 				{getColor(link_dbname ?? record?.database_name).title}
 			</Badge>
 			<article className="shadow-md flex rounded-lg rounded-l-none flex-col md:flex-row transition hover:shadow-xl">
-				<div className="basis-56">
+				<div className="basis-56 mt-[32px] md:mt-0">
 					<img
 						src={thumbnail}
 						alt={alt || 'image thumbnail'}
