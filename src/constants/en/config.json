@@ -9,19 +9,22 @@
 			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]archives.html",
 			"title": "Archives",
 			"search_database": "DESCRIPTION_WEB",
-			"color": "bg-minisis-archives border-minisis-archives"
+			"color": "bg-minisis-archives",
+			"text":"text-minisis-archives"
 		},
 		{
 			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]library.html",
 			"title": "Library",
 			"search_database": "BIBLIO_WEB",
-			"color": "bg-minisis-museum border-minisis-museum"
+			"color": "bg-minisis-museum",
+			"text":"text-minisis-museum"
 		},
 		{
 			"url": "/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]museum.html",
 			"title": "Museum",
 			"search_database": "COLLECTIONS_WEB",
-			"color": "bg-minisis-library border-minisis-library"
+			"color": "bg-minisis-library",
+			"text":"text-minisis-library"
 		}
 	],
 	"heading": "MINISIS OPAC Template"

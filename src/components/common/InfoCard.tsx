@@ -9,6 +9,7 @@ import {
 import useConstants from '@/hooks/useConstants'
 import { cn, convertLowerTrim } from '@/lib/utils'
 import { Record } from '@/types/record'
+import { Badge } from '../ui/badge'
 
 export interface InfoCardProps {
 	title: string | React.ReactNode
@@ -40,7 +41,7 @@ const InfoCard = ({
 
 		return {
 			color: `${result[0]?.color}`,
-			title: `${result[0]?.title}`
+			title: `${result[0]?.title}`,
 		}
 	}
 	return (
@@ -49,11 +50,12 @@ const InfoCard = ({
 				'cursor-pointer rounded-md shadow-md hover:shadow-xl border-2 border-primary relative',
 				className
 			)}>
-			<div
-				className={`absolute bg-gray-900 z-10 top-1 right-1 ${getColor(record.database_name).color} rounded-md text-white p-0.5 font-small`}>
+			<Badge
+				className={`${getColor(record.database_name).color} absolute z-10 top-1 right-1 text-white`}
+				variant={'tag'}>
 				{getColor(record.database_name).title}
-			</div>
-			<CardHeader className="h-48 pb-0">
+			</Badge>
+			<CardHeader className="h-40 pb-0 mt-2">
 				<CardTitle className="text-lg font-bold">{title}</CardTitle>
 				{description && (
 					<CardDescription className="text-sm text-gray-500 dark:text-gray-400">
