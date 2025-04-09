@@ -13,7 +13,8 @@ export interface DetailInfoCardrops {
 	children?: React.ReactNode
 	thumbnail?: string
 	alt?: string
-	record: Record
+	record?: { database_name?: string }
+	link_dbname?: string // For bookmark summary list
 }
 
 const DetailInfoCard = ({
@@ -25,9 +26,11 @@ const DetailInfoCard = ({
 	footer,
 	children,
 	record,
+	link_dbname,
 }: DetailInfoCardrops) => {
 	const { navigations } = useConstants().config
-	const getColor = (event_type: string) => {
+	const getColor = (event_type: string | undefined) => {
+		if (!event_type) return {}
 		let result = navigations?.filter((item) => {
 			return convertLowerTrim(item.search_database) === convertLowerTrim(event_type)
 		})
@@ -41,9 +44,9 @@ const DetailInfoCard = ({
 	return (
 		<div className={cn('border-2 rounded-md col-span-4 border-primary relative', className)}>
 			<Badge
-				className={`${getColor(record.database_name).color} absolute z-10 top-1 right-1 text-white`}
+				className={`${getColor(link_dbname ?? record?.database_name).color} absolute z-10 top-1 right-1 text-white`}
 				variant={'tag'}>
-				{getColor(record.database_name).title}
+				{getColor(link_dbname ?? record?.database_name).title}
 			</Badge>
 			<article className="shadow-md flex rounded-lg rounded-l-none flex-col md:flex-row transition hover:shadow-xl">
 				<div className="basis-56">

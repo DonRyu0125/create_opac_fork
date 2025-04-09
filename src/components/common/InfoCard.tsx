@@ -20,6 +20,7 @@ export interface InfoCardProps {
 	thumbnail?: string
 	alt?: string
 	record: Record
+	link_dbname?:string
 }
 
 const InfoCard = ({
@@ -31,6 +32,7 @@ const InfoCard = ({
 	thumbnail,
 	alt,
 	record,
+	link_dbname
 }: InfoCardProps) => {
 	const { navigations } = useConstants().config
 
@@ -51,9 +53,9 @@ const InfoCard = ({
 				className
 			)}>
 			<Badge
-				className={`${getColor(record.database_name).color} absolute z-10 top-1 right-1 text-white`}
+				className={`${getColor(link_dbname ?? record?.database_name).color} absolute z-10 top-1 right-1 text-white`}
 				variant={'tag'}>
-				{getColor(record.database_name).title}
+				{getColor(link_dbname ?? record?.database_name).title}
 			</Badge>
 			<CardHeader className="h-40 pb-0 mt-2">
 				<CardTitle className="text-lg font-bold">{title}</CardTitle>
