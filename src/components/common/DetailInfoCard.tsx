@@ -1,5 +1,5 @@
 import useJSONData from '@/hooks/useJSONData'
-import { cn, convertLowerTrim } from '@/lib/utils'
+import { cn, convertLowerTrim, getClassName } from '@/lib/utils'
 import React from 'react'
 import { Record } from '@/types/record'
 import useConstants from '@/hooks/useConstants'
@@ -42,9 +42,13 @@ const DetailInfoCard = ({
 	}
 
 	return (
-		<div className={cn('border-2 rounded-md col-span-4 border-primary relative', className)}>
+		<div
+			className={cn(
+				`border-2 rounded-md col-span-4 ${getClassName(link_dbname ?? record?.database_name, 'border')} relative`,
+				className
+			)}>
 			<Badge
-				className={`${getColor(link_dbname ?? record?.database_name).color} absolute z-10 top-1 right-1 text-white`}
+				className={`${getColor(link_dbname ?? record?.database_name).color} absolute z-10 md:top-[27px] md:right-[15px] text-white`}
 				variant={'tag'}>
 				{getColor(link_dbname ?? record?.database_name).title}
 			</Badge>
@@ -57,7 +61,7 @@ const DetailInfoCard = ({
 					/>
 				</div>
 				<div className="flex flex-1 flex-col justify-between">
-					<div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+					<div className="border-s border-gray-900/10 sm:border-l-transparent sm:p-6 md:w-[90%] break-all">
 						<h3 className="font-bold text-2xl">{title}</h3>
 
 						{description && (

@@ -86,7 +86,7 @@ const RecordView = ({ record }: { record: Record }) => {
 		<DetailInfoCard
 			link_dbname={record.link_dbname}
 			title={<Link href={recordLink}>{title}</Link>}
-			className="col-span-4 border-primary"
+			className="col-span-4"
 			thumbnail={
 				thumbnail
 					? thumbnail.includes('[MEDIA]')
