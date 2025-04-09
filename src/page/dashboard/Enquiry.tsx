@@ -1,5 +1,6 @@
 import ProfileTable, { ProfileData } from '@/components/common/client-profile/ProfileTable'
 import PatronLayout from '@/components/layouts/patron'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import useJSONData from '@/hooks/useJSONData'
 import { getHomeSessionID } from '@/lib/utils'
@@ -9,6 +10,12 @@ import { ColumnDef } from '@tanstack/react-table'
 
 const Enquiries = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
+	const statusClassMap = {
+		Request: 'bg-blue-200 text-blue-800',
+		Active: 'bg-green-200 text-green-800',
+		Closed: 'bg-orange-200 text-yellow-800',
+		Deleted: 'bg-red-200 text-red-800',
+	}
 
 	const columns: ColumnDef<ProfileData>[] = [
 		{
@@ -113,28 +120,12 @@ const Enquiries = () => {
 					</Button>
 				)
 			},
-			//bg-red-200 text-red-600 - delete
-			//bg-green-200 text-green-600 - active
-			//bg-orange-200 text-orange-600 - closed
-			//bg-blue-200 text-blue-600 - request
-			cell: ({ row }) => (
-				<div className="">
-					<span
-						className={
-							(row.getValue('enq_status') == 'Request'
-								? 'bg-blue-200 text-blue-800'
-								: row.getValue('enq_status') == 'Active'
-									? 'bg-green-200 text-green-800'
-									: row.getValue('enq_status') == 'Closed'
-										? 'bg-orange-200 text-yellow-800'
-										: row.getValue('enq_status') == 'Deleted'
-											? 'bg-red-200 text-red-800'
-											: '') + ' font-medium me-2 px-2.5 py-0.5 rounded-full'
-						}>
-						{row.getValue('enq_status')}
-					</span>
-				</div>
-			),
+			cell: ({ row }) => {
+				const status = row.getValue('enq_status') as keyof typeof statusClassMap
+				return (
+					<Badge className={`${statusClassMap[status]}`} variant={"tag"}>{row.getValue('enq_status')}</Badge>
+				)
+			},
 		},
 	]
 	return (

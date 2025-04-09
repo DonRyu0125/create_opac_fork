@@ -1,5 +1,9 @@
-import { cn } from '@/lib/utils'
+import useJSONData from '@/hooks/useJSONData'
+import { cn, convertLowerTrim, getClassName } from '@/lib/utils'
 import React from 'react'
+import { Record } from '@/types/record'
+import useConstants from '@/hooks/useConstants'
+import { Badge } from '../ui/badge'
 
 export interface DetailInfoCardrops {
 	title: string | React.ReactNode
@@ -9,6 +13,8 @@ export interface DetailInfoCardrops {
 	children?: React.ReactNode
 	thumbnail?: string
 	alt?: string
+	record?: { database_name?: string }
+	link_dbname?: string // For bookmark summary list
 }
 
 const DetailInfoCard = ({
@@ -19,14 +25,35 @@ const DetailInfoCard = ({
 	className,
 	footer,
 	children,
+	record,
+	link_dbname,
 }: DetailInfoCardrops) => {
+	const { navigations } = useConstants().config
+	const getColor = (event_type: string | undefined) => {
+		if (!event_type) return {}
+		let result = navigations?.filter((item) => {
+			return convertLowerTrim(item.search_database) === convertLowerTrim(event_type)
+		})
+
+		return {
+			color: `${result[0]?.color}`,
+			title: `${result[0]?.title}`,
+		}
+	}
+
 	return (
-		<div className={cn('border-2 rounded-md col-span-4 border-primary relative', className)}>
-			{/* <div className="absolute bg-gray-900 z-10 top-1 right-1 bg-minisis-archives border-minisis-archives rounded-md text-white p-0.5 font-small">
-				Archive
-			</div> */}
+		<div
+			className={cn(
+				`border-2 rounded-md col-span-4 ${getClassName(link_dbname ?? record?.database_name, 'border')} relative`,
+				className
+			)}>
+			<Badge
+				className={`${getColor(link_dbname ?? record?.database_name).color} absolute z-10 right-1 top-1 md:top-[27px] md:right-[15px] text-white`}
+				variant={'tag'}>
+				{getColor(link_dbname ?? record?.database_name).title}
+			</Badge>
 			<article className="shadow-md flex rounded-lg rounded-l-none flex-col md:flex-row transition hover:shadow-xl">
-				<div className="basis-56">
+				<div className="basis-56 mt-[32px] md:mt-0">
 					<img
 						src={thumbnail}
 						alt={alt || 'image thumbnail'}
@@ -34,7 +61,7 @@ const DetailInfoCard = ({
 					/>
 				</div>
 				<div className="flex flex-1 flex-col justify-between">
-					<div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+					<div className="border-s border-gray-900/10 sm:border-l-transparent sm:p-6 md:w-[90%] break-all">
 						<h3 className="font-bold text-2xl">{title}</h3>
 
 						{description && (
