@@ -2,6 +2,7 @@ import { ENGLISH_CODE, FRENCH_CODE, LanguageCode } from '@/types/lang'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { useLanguage } from '@/hooks/useLanguage'
 import { db } from '../../db/client'
+import { deleteCookie, setCookie } from '@/lib/utils'
 export interface ILANGUAGE {
 	code: LanguageCode
 	name: string
@@ -32,6 +33,12 @@ export function LanguageSelect() {
 			id: 'lang',
 			code,
 		})
+
+		if (code == FRENCH_CODE) {
+			setCookie('my_lang', '145')
+		} else {
+			deleteCookie('my_lang')
+		}
 	}
 	return (
 		<Select
