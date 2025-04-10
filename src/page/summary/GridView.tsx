@@ -34,6 +34,7 @@ const GridView = ({
 
 	return (
 		<InfoCard
+			record={record}
 			className={cn(getClassName(database, 'border'), 'border-2')}
 			title={
 				<Link href={recordLink}>

@@ -53,15 +53,15 @@ export interface Day_obj {
 	year?: number
 }
 export type FilterType = { type: string; color: string; icon: string }
-export const EVENT_DEFAULT_COLOR = 'bg-sky-900 border-sky-900'
+export const EVENT_DEFAULT_COLOR = 'bg-minisis-archives border-minisis-archives'
 
 //DB
 export const MAIN_EVENT_CAL_DB = 'CALENDAR_VAL_SYN'
 export const MAIN_EVENT_CAL_LOG_DB = 'TAG_RSVP_PATRON_LOG_SYN'
 export const MAIN_EVENT_CAL_DB_SYN = 'CALENDAR_VAL_SYN'
 //MINISIS REPORT
-export const MONTH_REPORT = 'MONTHLY_CALENDAR_NEW'
-export const LOCATION_REPORT = 'CALENDAR_LOCATION_NEW'
+export const MONTH_REPORT = 'MONTHLY_CALENDAR'
+export const LOCATION_REPORT = 'CALENDAR_LOCATION'
 //MWI
 export const MAIN_MWI_APPLICATION = 'WEB_CALENDAR'
 export const SUB_MWI_APPLICATION = 'WEB_CALENDAR_LOC'

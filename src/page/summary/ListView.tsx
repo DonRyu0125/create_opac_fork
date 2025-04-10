@@ -38,6 +38,7 @@ const ListView = ({
 
 	return (
 		<DetailInfoCard
+			record={record}
 			title={
 				<Link href={recordLink}>
 					<HighlightText text={title} highlights={searchTerms} />

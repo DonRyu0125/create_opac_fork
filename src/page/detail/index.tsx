@@ -124,9 +124,9 @@ const Detail = () => {
 													const image = item as ImageProps
 													return (
 														<img
-															alt={image.caption}
+															alt={image.src}
 															src={image.src}
-															className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+															className="rounded h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary bg-gray-300"
 														/>
 													)
 												}}

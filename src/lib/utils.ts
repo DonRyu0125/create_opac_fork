@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import X2JS from 'x2js'
+import noImage from '../assets/icons/image_not_found.png'
+
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
@@ -9,7 +11,7 @@ export const getImage = (image: string) => {
 	if (Array.isArray(image)) {
 		return image[0]?.toLowerCase().includes('[media]')
 			? image[0].replace(/\[media\]/i, '/media/')
-			: image[0]
+			: image
 	} else {
 		return image?.toLowerCase().includes('[media]')
 			? image.replace(/\[media\]/i, '/media/')
@@ -75,10 +77,22 @@ export const convertToArr = (elm: Object | Array<any>) => {
 	return elm ? [elm] : []
 }
 
-export const convertXMLToJson = (response: any) => {
+export const convertXMLToJson = (response: string) => {
 	const x2js = new X2JS()
-	const jsonData: any = x2js.xml2js(response)
+	const cleaned = escapeUnclosedTags(response)
+	const jsonData: any = x2js.xml2js(cleaned)
 	return jsonData
+}
+
+const escapeUnclosedTags = (xml: string): string => {
+	return xml.replace(/<([A-Za-z0-9\-_]+)>/g, (match, tag) => {
+		const tagPattern = new RegExp(`<${tag}[^>]*>`, 'g')
+		const closeTagPattern = new RegExp(`</${tag}>`, 'g')
+		const openCount = (xml.match(tagPattern) || []).length
+		const closeCount = (xml.match(closeTagPattern) || []).length
+		if (openCount > closeCount) return `&lt;${tag}&gt;`
+		return match
+	})
 }
 
 export const encodeObj = (input: string) => {
@@ -209,8 +223,8 @@ export const isDescriptionDatabase = (database: string) => {
 	return database.toLocaleUpperCase() === 'DESCRIPTION_WEB'
 }
 
-export function getClassName(databaseName: string, type: 'text' | 'border' | 'bg'): string {
-	const normalizedDbName = databaseName.toLowerCase()
+export function getClassName(databaseName?: string, type: 'text' | 'border' | 'bg'): string {
+	const normalizedDbName = databaseName?.toLowerCase()
 
 	if (normalizedDbName === 'description_web') {
 		return `${type}-minisis-archives`

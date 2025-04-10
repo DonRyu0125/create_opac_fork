@@ -512,7 +512,10 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											offset={[2, 0]}>
 											<div className="w-[300px] ">
 												<h3 className="text-lg font-bold text-black  pb-2">
-													{marker.ALL_TITLE_WORD_OCCURRENCE ?? 'n/a'}
+													{typeof marker.ALL_TITLE_WORD_OCCURRENCE !==
+													'object'
+														? marker?.ALL_TITLE_WORD_OCCURRENCE
+														: 'n/a'}
 												</h3>
 												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4 rounded-[14px]">
@@ -601,7 +604,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											offset={[2, 0]}>
 											<div className="w-[300px]">
 												<h3 className="text-lg font-bold text-black   pb-2">
-													{marker.TITLE ?? 'n/a'}
+													{typeof marker.TITLE !== 'object' ? marker.TITLE :'n/a'}
 												</h3>
 												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4 rounded-[14px]">
@@ -612,7 +615,6 @@ const InteractiveMap = ({ page }: { page: string }) => {
 														/>
 													</div>
 												)}
-
 												<table className="w-full text-sm">
 													<tbody>
 														{marker.REFD && (
@@ -682,12 +684,12 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											offset={[2, 0]}>
 											<div className="w-[300px]">
 												<h3 className="text-lg font-bold text-black pb-2 overflow-x-auto">
-													{marker.TITLE ?? 'n/a'}
+													{marker.TITLE !== 'object' ?  marker.TITLE : 'n/a'}
 												</h3>
 												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4 rounded-[14px]">
 														<img
-															src={getImage(marker.IMAG_URL)}
+															src={getImage(marker.IMAG_URL) }
 															alt="Museum"
 															className="w-full h-full object-contain rounded-t-lg rounded-[14px]"
 														/>
