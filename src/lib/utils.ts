@@ -223,7 +223,7 @@ export const isDescriptionDatabase = (database: string) => {
 	return database.toLocaleUpperCase() === 'DESCRIPTION_WEB'
 }
 
-export function getClassName(databaseName?: string, type: 'text' | 'border' | 'bg'): string {
+export function getClassName(databaseName?: string, type?: 'text' | 'border' | 'bg'): string {
 	const normalizedDbName = databaseName?.toLowerCase()
 
 	if (normalizedDbName === 'description_web') {

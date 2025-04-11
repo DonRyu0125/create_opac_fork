@@ -195,5 +195,6 @@
 	"archives":"Archives",
 	"museum":"Museum",
 	"library":"Library",
-	"total":"Total"
+	"total":"Total",
+	"forgotpasswordEmailTitle":"CLIENT%20REGISTRATION%20PASSWORD%20RESET"
 }

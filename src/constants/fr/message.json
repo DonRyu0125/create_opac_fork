@@ -195,5 +195,6 @@
 	"archives":"Archives",
 	"museum":"Musée",
 	"library":"Bibliothèque",
-	"total":"totale"
+	"total":"totale",
+	"forgotpasswordEmailTitle":"RÉINITIALISATION%20DU%20MOT%20DE%20PASSE%20D’ENREGISTREMENT%20CLIENT"
 }
