@@ -73,7 +73,10 @@ const Login = () => {
 								/>
 							</div>
 							<div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-								<Button className="bg-primary text-primary-foreground" type="submit" variant="secondary">
+								<Button
+									className="bg-primary text-primary-foreground"
+									type="submit"
+									variant="secondary">
 									{message.logIn}
 								</Button>
 							</div>
