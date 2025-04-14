@@ -618,6 +618,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 	const sendEmail = async (patron: any, patronInfo: Inputs, event: Cal_event) => {
 		let HOME_SESSID = getSessionID()
+		let is_french = getCookieValue('my_lang') === '145' ? true : false
 		const encoded = encodeObj(
 			JSON.stringify({
 				...patronInfo,
@@ -641,7 +642,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]RSVPVerificationConfirmTmp.txt&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]${is_french ? 'RSVPVerificationConfirmTmp_fr.txt' : 'RSVPVerificationConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
 				{
 					...patronInfo,
 					EVENT_EMAIL_LOGO: logo,
@@ -731,6 +732,8 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const sendRegConfirmEmail = async (occ_info: any, userData: Inputs, event: Cal_event) => {
 		const userID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 		let HOME_SESSID = getSessionID()
+		let isFrench = getCookieValue('my_lang') === '145'
+
 		const encoded = encodeObj(
 			JSON.stringify({
 				...userData,
@@ -753,9 +756,25 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			})
 		)
 
+		const is_online = event.TAG_FUNC_O === RSVP_MAP.YES
+		let templateName = ''
+
+		if (is_online && isFrench) {
+			templateName = 'RSVPRegOnlineComfrimTmp_fr.txt'
+		} else if (is_online && !isFrench) {
+			templateName = 'RSVPRegOnlineComfrimTmp.txt'
+		} else if (!is_online && isFrench) {
+			templateName = 'RSVPRegConfirmTmp_fr.txt'
+		} else {
+			templateName = 'RSVPRegConfirmTmp.txt'
+		}
+
+		const templateParam = `[OPAC_EMAIL_TMP]${templateName}`
+		const subject = `${REG_CONFIMRATION_EMAIL_T}:${event[TAG_NAME]}`
+
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${event.TAG_FUNC_O === RSVP_MAP.YES ? '[OPAC_EMAIL_TMP]RSVPRegOnlineComfrimTmp.txt' : '[OPAC_EMAIL_TMP]RSVPRegConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${userData[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${event[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${templateParam}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${userData[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${subject}`,
 				{
 					BD_ADDRESS: event[TAG_FUNC_LOC],
 					...userData,
@@ -774,7 +793,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 			.then(async (res) => {
 				setStatus(STATUS_TYPE.SHOW_SUCCESS)
 				setLoading(false)
-				return
 			})
 			.catch((error) => {
 				throw error
