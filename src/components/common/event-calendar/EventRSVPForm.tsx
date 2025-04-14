@@ -38,7 +38,6 @@ import {
 	MWI_XML_DATA_INDEX,
 	NON_LOGIN_USER_TYPE,
 	patron,
-	REG_CONFIMRATION_EMAIL_T,
 	RSVP_CANCEL_LANDING_PAGE_URL,
 	RSVP_CONFIRM_LANDING_PAGE_URL,
 	SISN,
@@ -66,7 +65,6 @@ import {
 	TAG_FUNC_RSVP,
 	TAG_FUNC_START_T,
 	TAG_NAME,
-	VERIFICATION_EMAIL_T,
 	RSVP_MAP,
 } from './Constants'
 import { calNumOfPatron } from './EC-Util'
@@ -617,6 +615,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	}
 
 	const sendEmail = async (patron: any, patronInfo: Inputs, event: Cal_event) => {
+		const rsvp: any = useConstants().rsvp
 		let HOME_SESSID = getSessionID()
 		let is_french = getCookieValue('my_lang') === '145' ? true : false
 		const encoded = encodeObj(
@@ -642,7 +641,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]${is_french ? 'RSVPVerificationConfirmTmp_fr.txt' : 'RSVPVerificationConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${VERIFICATION_EMAIL_T} ${event[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]${is_french ? 'RSVPVerificationConfirmTmp_fr.txt' : 'RSVPVerificationConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${rsvp.emailSubject.verificationEmailT} ${event[TAG_NAME]}`,
 				{
 					...patronInfo,
 					EVENT_EMAIL_LOGO: logo,
@@ -730,6 +729,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	}
 
 	const sendRegConfirmEmail = async (occ_info: any, userData: Inputs, event: Cal_event) => {
+		const rsvp: any = useConstants().rsvp
 		const userID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 		let HOME_SESSID = getSessionID()
 		let isFrench = getCookieValue('my_lang') === '145'
@@ -770,7 +770,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 		}
 
 		const templateParam = `[OPAC_EMAIL_TMP]${templateName}`
-		const subject = `${REG_CONFIMRATION_EMAIL_T}:${event[TAG_NAME]}`
+		const subject = `${rsvp.emailSubject.regConfirmationEmailT}:${event[TAG_NAME]}`
 
 		return await axios
 			.post(

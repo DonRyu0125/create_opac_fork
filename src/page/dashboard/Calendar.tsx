@@ -1,6 +1,5 @@
 import ProfileTable, { ProfileData } from '@/components/common/client-profile/ProfileTable'
 import {
-	CANCEL_CONFIRMATION_EMAIL_T,
 	FUNC_LOC_P_GRP,
 	MAIN_EVENT_CAL_DB,
 	MWI_RESFUL_RES,
@@ -52,6 +51,7 @@ const Calendar = () => {
 	const message = useConstants().message
 	let HOME_SESSID = getHomeSessionID()
 	const { logo } = useConstants().config
+	const rsvp = useConstants().rsvp
 
 	const columns: ColumnDef<ProfileData>[] = [
 		{
@@ -218,7 +218,7 @@ const Calendar = () => {
 		let is_french = getCookieValue('my_lang') === '145' ? true : false
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]${is_french ? 'RSVPCancelConfirmTmp_fr.txt':'RSVPCancelConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo?.tag_func_p_email}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo?.tag_name}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]${is_french ? 'RSVPCancelConfirmTmp_fr.txt':'RSVPCancelConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo?.tag_func_p_email}&SUBJECT_DEFAULT=${rsvp.emailSubject.cancelConfirmationEmailT}:${patronInfo?.tag_name}`,
 				{
 					...patronInfo,
 					EVENT_EMAIL_LOGO: logo,

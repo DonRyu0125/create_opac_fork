@@ -1,5 +1,4 @@
 import {
-	CANCEL_CONFIRMATION_EMAIL_T,
 	FUNC_LOC_P_GRP,
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
@@ -180,10 +179,11 @@ const RSVPCancel = () => {
 
 	const sendCancelConfirmEmail = async (HOME_SESSID: string | boolean) => {
 		let isFrench = getCookieValue('my_lang') === '145'
+		
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]${isFrench ? 'RSVPCancelConfirmTmp_fr.txt' : 'RSVPCancelConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${CANCEL_CONFIRMATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]${isFrench ? 'RSVPCancelConfirmTmp_fr.txt' : 'RSVPCancelConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${rsvp.emailSubject.cancelConfirmationEmailT}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
 					EVENT_EMAIL_LOGO: logo,

@@ -4,7 +4,6 @@ import {
 	MAIN_MWI_APPLICATION,
 	MONTH_REPORT,
 	NON_LOGIN_USER_TYPE,
-	REG_CONFIMRATION_EMAIL_T,
 	RSVP_CANCEL_LANDING_PAGE_URL,
 	RSVP_LOG_P_STATUS,
 	SISN,
@@ -247,11 +246,11 @@ const RSVPConfirm = () => {
 		} else {
 			templateName = 'RSVPRegConfirmTmp.txt'
 		}
-		const templateParam = `[OPAC_EMAIL_TMP]${templateName}`;
+		const templateParam = `[OPAC_EMAIL_TMP]${templateName}`
 
 		return await axios
 			.post(
-				`${obj.HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${templateParam}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${REG_CONFIMRATION_EMAIL_T}:${patronInfo[TAG_NAME]}`,
+				`${obj.HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=${templateParam}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${rsvp.emailSubject.regConfirmationEmailT}:${patronInfo[TAG_NAME]}`,
 				{
 					...patronInfo,
 					EVENT_EMAIL_LOGO: logo,
