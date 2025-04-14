@@ -52,8 +52,8 @@
 		"showButton": false
 	},
 	"emailSubject": {
-		"verificationEmailT": "Veuillez confirmer votre evenement ",
-		"regConfirmationEmailT": "Vous etes confirme pour ",
-		"cancelConfirmationEmailT": "Votre inscription a ete annulee pour "
+		"verificationEmailT": "Veuillez confirmer votre evenement: ",
+		"regConfirmationEmailT": "Vous etes confirme pour: ",
+		"cancelConfirmationEmailT": "Votre inscription a ete annulee pour: "
 	}
 }

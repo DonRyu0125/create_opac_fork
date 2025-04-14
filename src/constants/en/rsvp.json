@@ -52,8 +52,8 @@
 		"showButton": false
 	},
 	"emailSubject": {
-		"verificationEmailT": "Please confirm your event ",
-		"regConfirmationEmailT": "You're confirmed for ",
-		"cancelConfirmationEmailT": "Your registration has been cancelled for "
+		"verificationEmailT": "Please confirm your event: ",
+		"regConfirmationEmailT": "You're confirmed for: ",
+		"cancelConfirmationEmailT": "Your registration has been cancelled for: "
 	}
 }
