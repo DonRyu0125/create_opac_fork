@@ -517,6 +517,8 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const [___, setCurrentEvent] = useAtom(calendarEvents)
 	const [isLogin, setIsLogin] = useState(false)
 	const [isIDValid, setIsIDValid] = useState(true)
+	const rsvp: any = useConstants().rsvp
+
 
 	useEffect(() => {
 		if (getCookieValue('M2L_PATRON_NAME')) {
@@ -615,7 +617,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	}
 
 	const sendEmail = async (patron: any, patronInfo: Inputs, event: Cal_event) => {
-		const rsvp: any = useConstants().rsvp
 		let HOME_SESSID = getSessionID()
 		let is_french = getCookieValue('my_lang') === '145' ? true : false
 		const encoded = encodeObj(
@@ -641,7 +642,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 
 		return await axios
 			.post(
-				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]${is_french ? 'RSVPVerificationConfirmTmp_fr.txt' : 'RSVPVerificationConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${rsvp.emailSubject.verificationEmailT} ${event[TAG_NAME]}`,
+				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]${is_french ? 'RSVPVerificationConfirmTmp_fr.txt' : 'RSVPVerificationConfirmTmp.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${patronInfo[TAG_FUNC_P_EMAIL]}&SUBJECT_DEFAULT=${rsvp.emailSubject.cancelConfirmationEmailT}${event[TAG_NAME]}`,
 				{
 					...patronInfo,
 					EVENT_EMAIL_LOGO: logo,
