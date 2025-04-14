@@ -306,7 +306,7 @@ const DetailRecordAction = () => {
 						size="icon"
 						onClick={handleBookmark}
 						className={'w-[22%] md:w-[23.5%] flex '}
-						tooltipContent="Bookmark record">
+						tooltipContent={`${message.bookmark}`}>
 						<Star
 							className={cn('h-4 w-4 text-primary md:mr-2 ')}
 							fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}

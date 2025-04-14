@@ -86,6 +86,7 @@
 	"allRecordsBookmarked": "Tous les enregistrements ont été marqués d'un signet",
 	"recordAlreadyMarked": "Cet enregistrement a déjà été marqué",
 	"bookmarkHasBeenRemoved": "Le signet a été supprimé",
+	"bookmarkRemove": "Supprimer le signet",
 	"removeALL": "Supprimer tout",
 	"noBookmark": "Aucun favori",
 	"noItemsInBookmark": "Aucun élément enregistré dans vos favoris",

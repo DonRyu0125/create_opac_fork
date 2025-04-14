@@ -44,7 +44,7 @@ export const BookmarkRecordAction = ({ record }: { record: Record }) => {
 				size="icon"
 				disabled={loading}
 				onClick={removeBookmark}
-				tooltipContent="Bookmark record">
+				tooltipContent={`${message.bookmarkRemove}`}>
                     <Trash2 
                     className={cn('h-4 w-4 text-primary')}
 					fill={'hsl(var(--opac-blue))'}

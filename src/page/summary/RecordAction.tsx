@@ -85,7 +85,7 @@ export const RecordAction = ({ record }: { record: Record }) => {
 				size="icon"
 				disabled={loading}
 				onClick={handleBookmark}
-				tooltipContent="Bookmark record">
+				tooltipContent={`${message.bookmark}`}>
 				<Star
 					className={cn('h-4 w-4 text-primary')}
 					fill={like ? 'hsl(var(--opac-blue))' : 'rgb(0,0,0,0)'}
