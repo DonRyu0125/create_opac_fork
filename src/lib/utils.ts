@@ -70,7 +70,7 @@ export const convertLowerTrim = (type: string): string => {
  * @param elm
  * @returns Array
  */
-export const convertToArr = (elm: Object | Array<any>) => {
+export const convertToArr = (elm: any) => {
 	if (Array.isArray(elm)) {
 		return elm
 	}
@@ -79,8 +79,8 @@ export const convertToArr = (elm: Object | Array<any>) => {
 
 export const convertXMLToJson = (response: string) => {
 	const x2js = new X2JS()
-	const cleaned = escapeUnclosedTags(response)
-	const jsonData: any = x2js.xml2js(cleaned)
+	// const cleaned = escapeUnclosedTags(response)
+	const jsonData: any = x2js.xml2js(response)
 	return jsonData
 }
 
