@@ -93,23 +93,23 @@
 </table>
 <div class="container">
   <div class="info">
-    <div for="event-name">Nom de l'événement :</div>
+    <div for="event-name">Nom de l'evenement :</div>
     <p id="event-name">^TAG_NAME^</p>
   </div>
   <div class="info">
-    <div for="online meeting">Lien de la réunion en ligne :</div>
-    <a id="event-location" href="^TAG_FUNC_O_PATH^">Rejoindre la réunion</a>
+    <div for="online meeting">Lien de la reunion en ligne :</div>
+    <a id="event-location" href="^TAG_FUNC_O_PATH^">Rejoindre la reunion</a>
   </div>
   <div class="info">
-    <div for="online meeting">ID de la réunion :</div>
+    <div for="online meeting">ID de la reunion :</div>
     <p id="event-location">^TAG_FUNC_O_ID^</p>
   </div>
   <div class="info">
-    <div for="online meeting">Mot de passe de la réunion :</div>
+    <div for="online meeting">Mot de passe de la reunion :</div>
     <p id="event-location">^TAG_FUNC_O_CODE^</p>
   </div>
   <div class="info">
-    <div for="room-number">Numéro de salle :</div>
+    <div for="room-number">Numero de salle :</div>
     <p id="room-number">^TAG_FUNC_LOC_ROO^</p>
   </div>
   <div class="info">
@@ -133,12 +133,12 @@
   <div class="info">
     <div for="attendee-details">Participant(s) :</div>
     <div id="attendee-details" style="border: 2px dotted #ccc; padding: 10px; text-align: center;">
-      ^TAG_FUNC_P_ATTND^ place(s) réservée(s)
+      ^TAG_FUNC_P_ATTND^ place(s) reservee(s)
     </div>
   </div>
   <div class="button-container">
     <a href="^RSVP_CANCEL_LANDING_PAGE_URL^?user=^encoded^" style="text-decoration: none;">
-      <button>Annuler l'événement</button>
+      <button>Annuler l'evenement</button>
     </a>
   </div>
   <div class="info">

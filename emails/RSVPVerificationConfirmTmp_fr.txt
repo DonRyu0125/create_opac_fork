@@ -93,11 +93,11 @@
 </table>
 <div class="container">
   <div class="info">
-    <div>Nom de l'événement :</div>
+    <div>Nom de l'evenement :</div>
     <p>^TAG_NAME^</p>
   </div>
   <div class="info">
-    <div>Date de l'événement :</div>
+    <div>Date de l'evenement :</div>
     <p>^TAG_FUNC_DATE^</p>
   </div>
   <div class="info">
@@ -111,12 +111,12 @@
   <div class="info">
     <div>Participant(s) :</div>
     <div id="attendee-details" style="border: 2px dotted #ccc; padding: 10px; text-align: center;">
-      ^TAG_FUNC_P_ATTND^ place(s) réservée(s)
+      ^TAG_FUNC_P_ATTND^ place(s) reservee(s)
     </div>
   </div>
   <div class="button-container">
     <a href="^RSVP_CONFIRM_LANDING_PAGE_URL^?user=^encoded^" style="text-decoration: none;">
-      <button>Confirmer l'événement</button>
+      <button>Confirmer l'evenement</button>
     </a>
   </div>
   <div class="info">
