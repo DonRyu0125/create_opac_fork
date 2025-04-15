@@ -251,14 +251,14 @@ const EnquiryForm = () => {
                                 </div>
                                 <div className="px-4 pt-4 mt-4 rounded border-t">
                                     <Button
-                                        className="bg-opac-darkblue rounded mr-1 hover:bg-opac-darkblue"
+                                        className="bg-primary rounded mr-1 hover:bg-primary"
                                         type="submit"
                                         onClick={passInquiryToMESSAGETEXT}
                                         variant="default">
                                         Submit Inquiry
                                     </Button>
                                     <Button
-                                        className="bg-opac-darkblue rounded ml-1 hover:bg-opac-darkblue"
+                                        className="bg-primary rounded ml-1 hover:bg-primary"
                                         type="submit"
                                         variant="default"
                                         onClick={handleGoBack}>

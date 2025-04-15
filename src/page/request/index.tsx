@@ -120,14 +120,14 @@ const Request = () => {
 										value={reqData.req_queue}
 									/>
 									<Button
-										className="bg-opac-darkblue rounded mx-1 hover:bg-opac-darkblue"
+										className="bg-primary rounded mx-1 hover:bg-primary"
 										type="submit"
 										name="Submit"
 										variant="default">
 										Place Request
 									</Button>
 									<Button
-										className="bg-opac-darkblue rounded mx-1 hover:bg-opac-darkblue"
+										className="bg-primary rounded mx-1 hover:bg-primary"
 										type="submit"
 										name="Submit2"
 										variant="default"
