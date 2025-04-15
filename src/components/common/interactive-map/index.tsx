@@ -13,9 +13,9 @@ import 'react-leaflet-markercluster/dist/styles.min.css'
 import { v4 as uuidv4 } from 'uuid'
 import Button from '../admin/Button'
 import CollapseList from '../CollapseList'
-import archiveIcon from '../../../assets/icons/archive.png'
-import libraryIcon from '../../../assets/icons/library.png'
-import museumIcon from '../../../assets/icons/museum.png'
+import archiveIcon from '@/assets/icons/archive.png'
+import libraryIcon from '@/assets/icons/library.png'
+import museumIcon from '@/assets/icons/museum.png'
 import './style.css'
 
 const DB_TYPE_MAP = {
@@ -604,7 +604,9 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											offset={[2, 0]}>
 											<div className="w-[300px]">
 												<h3 className="text-lg font-bold text-black   pb-2">
-													{typeof marker.TITLE !== 'object' ? marker.TITLE :'n/a'}
+													{typeof marker.TITLE !== 'object'
+														? marker.TITLE
+														: 'n/a'}
 												</h3>
 												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4 rounded-[14px]">
@@ -684,12 +686,14 @@ const InteractiveMap = ({ page }: { page: string }) => {
 											offset={[2, 0]}>
 											<div className="w-[300px]">
 												<h3 className="text-lg font-bold text-black pb-2 overflow-x-auto">
-													{marker.TITLE !== 'object' ?  marker.TITLE : 'n/a'}
+													{marker.TITLE !== 'object'
+														? marker.TITLE
+														: 'n/a'}
 												</h3>
 												{marker?.IMAG_URL && (
 													<div className="bg-slate-100 h-48 mb-4 rounded-[14px]">
 														<img
-															src={getImage(marker.IMAG_URL) }
+															src={getImage(marker.IMAG_URL)}
 															alt="Museum"
 															className="w-full h-full object-contain rounded-t-lg rounded-[14px]"
 														/>
