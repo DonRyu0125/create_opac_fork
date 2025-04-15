@@ -293,7 +293,7 @@ const InteractiveMap = ({ page }: { page: string }) => {
 				</div>
 				<div className="flex flex-col space-y-4 max-h-[90vh] mb-2 p-2 overflow-y-auto custom-scrollbar">
 					{page === 'home' && (
-						<CollapseList title={message.Type} expand={true}>
+						<CollapseList title={message.type} expand={true}>
 							<div className="space-y-3 border-t p-4">
 								<div className="flex">
 									<div className={'flex items-center space-x-2'}>

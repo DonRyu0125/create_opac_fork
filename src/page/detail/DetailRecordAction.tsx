@@ -169,7 +169,7 @@ const DetailRecordAction = () => {
 							onClick={() => handleSubmit('Request')}>
 							<ShoppingBag className="w-4 h-4 md:mr-2 " />{' '}
 							<span className="hidden md:block">
-								{message.detailRecordActionRequest}
+								{message.request}
 							</span>
 							<form
 								method="post"
@@ -243,7 +243,7 @@ const DetailRecordAction = () => {
 									value={requestData.req_item_title}
 								/>
 								<Button
-									className="bg-opac-darkblue"
+									className="bg-primary"
 									type="submit"
 									variant="default">
 									Submit
@@ -258,7 +258,7 @@ const DetailRecordAction = () => {
 							className={'w-[22%] md:w-[23.5%] flex '}>
 							<ShoppingBag className="w-4 h-4 md:mr-2" />{' '}
 							<span className="hidden md:block">
-								{message.detailRecordActionRequest}
+								{message.request}
 							</span>
 						</TooltipButton>
 					)}
@@ -269,7 +269,7 @@ const DetailRecordAction = () => {
 						className={' w-[22%] md:w-[23.5%] flex  p-1'}
 						onClick={() => handleSubmit('Enquire')}>
 						<ShoppingBag className="w-4 h-4 md:mr-2 " />
-						<span className="hidden md:block">{message.detailRecordActionEnquire}</span>
+						<span className="hidden md:block">{message.enquire}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent={message.reproduceThisRecord}
@@ -277,7 +277,7 @@ const DetailRecordAction = () => {
 						className={'w-[22%] md:w-[23.5%] p-0'}
 						onClick={() => handleSubmit('Reproduction')}>
 						<Files className="w-4 h-4 md:mr-2" />
-						<span className="hidden md:block">{message.detailRecordActionReproduction}</span>
+						<span className="hidden md:block">{message.reproduction}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent={message.copyrightThisRecord}
@@ -285,7 +285,7 @@ const DetailRecordAction = () => {
 						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => handleSubmit('Copyright')}>
 						<Files className="w-4 h-4 md:mr-2" />{' '}
-						<span className="hidden md:block">{message.detailRecordActionCopyright}</span>
+						<span className="hidden md:block">{message.copyright}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent={message.copyRecordUrl}
