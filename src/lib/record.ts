@@ -41,11 +41,11 @@ export const getFieldsFromRecord = (
 	filterFn: (e: any) => boolean,
 	componentFn: (data: any[], item: any) => RENDERED_COMPONENT
 ) => {
-	let database =  record.link_dbname ?? record.database_name
+	let database = record.link_dbname ?? record.database_name
 	const listOfFields = getListOfFields(fields, database)
 	return listOfFields?.items
-		?.filter((item:FieldsJson) => filterFn(item))
-		.map((item:FieldsJson) => {
+		?.filter((item: FieldsJson) => filterFn(item))
+		.map((item: FieldsJson) => {
 			const name = item.name || 'TITLE'
 			const data = deepSearchKey(record, name)
 			if (data?.length > 0 && item.label !== 'Title') return componentFn(data, item)
@@ -93,7 +93,7 @@ export const getRecordPermalink = (
 
 export const copyRecordURL = (database: string, sisn: string, report = DEFAULT_DETAIL_REPORT, urlOnly = false) => {
 	const url = getRecordPermalink(database, sisn, report)
-	if(urlOnly) return url
+	if (urlOnly) return url
 	try {
 		copy(url)
 		return url;
@@ -106,12 +106,14 @@ export const copyRecordURL = (database: string, sisn: string, report = DEFAULT_D
 export const handleCopyRecordURL = (record: Record, urlOnly = false) => {
 	if (record.database_name && record.database_name !== 'SELECTION_LIST') {
 		// union summary
-		return copyRecordURL(record.database_name, record.record.sisn,DEFAULT_DETAIL_REPORT,urlOnly)
-	} else if (record.link_dbname && record.record.link_sisn) {
+		return copyRecordURL(record.database_name, record.record?.sisn, DEFAULT_DETAIL_REPORT, urlOnly)
+	} else if (record.link_dbname && record.record?.link_sisn) {
 		// bookmark summary
-		return copyRecordURL(record.link_dbname, record.record.link_sisn,DEFAULT_DETAIL_REPORT,urlOnly)
-	} else if (record.record.link_dbname && record.record.link_sisn) {
+		return copyRecordURL(record.link_dbname, record.record?.link_sisn, DEFAULT_DETAIL_REPORT, urlOnly)
+	} else if (record.record?.link_dbname && record.record?.link_sisn) {
 		//bookmark detail
-		return copyRecordURL(record.record.link_dbname, record.record.link_sisn,DEFAULT_DETAIL_REPORT,urlOnly)
+		return copyRecordURL(record.record.link_dbname, record.record.link_sisn, DEFAULT_DETAIL_REPORT, urlOnly)
 	}
+
+	return ""
 }
