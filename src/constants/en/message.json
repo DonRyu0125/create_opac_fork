@@ -213,5 +213,11 @@
 	"printUpTo11x36": "Print up to 11\" x 36\"",
 	"certifiedCopies": "Certified Copies",
 	"rush": "Rush",
-	"additionalInformation": "Additional Information"
+	"additionalInformation": "Additional Information",
+	"item":"Item",
+	"title":"Title",
+	"status": "status",
+	"amount": "amount",
+	"paid": "paid",
+	"order":"Order"
 }
