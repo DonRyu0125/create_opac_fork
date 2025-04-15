@@ -503,6 +503,7 @@ const ShowRSVPSuccess = ({
 
 const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: EventRSVPForm) => {
 	const [status, setStatus] = useState(STATUS_TYPE.SHOW_BTN)
+	const rsvp: any = useConstants().rsvp
 	const { logo } = useConstants().config
 	const {
 		register,
@@ -517,7 +518,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const [___, setCurrentEvent] = useAtom(calendarEvents)
 	const [isLogin, setIsLogin] = useState(false)
 	const [isIDValid, setIsIDValid] = useState(true)
-	const rsvp: any = useConstants().rsvp
 
 
 	useEffect(() => {
@@ -730,7 +730,7 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	}
 
 	const sendRegConfirmEmail = async (occ_info: any, userData: Inputs, event: Cal_event) => {
-		const rsvp: any = useConstants().rsvp
+
 		const userID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 		let HOME_SESSID = getSessionID()
 		let isFrench = getCookieValue('my_lang') === '145'
