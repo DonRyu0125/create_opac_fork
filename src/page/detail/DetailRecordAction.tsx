@@ -163,7 +163,7 @@ const DetailRecordAction = () => {
 					{checkRecordHasMandatoryDataToRequest() &&
 					checkIfCurrentClientRequestedThisRecord() ? (
 						<TooltipButton
-							tooltipContent="Request Record"
+							tooltipContent={message.requestRecord}
 							variant="outline"
 							className={'w-[22%] md:w-[23.5%] flex '}
 							onClick={() => handleSubmit('Request')}>
@@ -252,7 +252,7 @@ const DetailRecordAction = () => {
 						</TooltipButton>
 					) : (
 						<TooltipButton
-							tooltipContent="Request Record"
+							tooltipContent={message.requestRecord}
 							variant="outline"
 							disabled
 							className={'w-[22%] md:w-[23.5%] flex '}>
@@ -264,7 +264,7 @@ const DetailRecordAction = () => {
 					)}
 
 					<TooltipButton
-						tooltipContent="Ask about this record"
+						tooltipContent={message.askAboutThisRecord}
 						variant="outline"
 						className={' w-[22%] md:w-[23.5%] flex  p-1'}
 						onClick={() => handleSubmit('Enquire')}>
@@ -272,7 +272,7 @@ const DetailRecordAction = () => {
 						<span className="hidden md:block">{message.detailRecordActionEnquire}</span>
 					</TooltipButton>
 					<TooltipButton
-						tooltipContent="Reproduce this record"
+						tooltipContent={message.reproduceThisRecord}
 						variant="outline"
 						className={'w-[22%] md:w-[23.5%] p-0'}
 						onClick={() => handleSubmit('Reproduction')}>
@@ -280,7 +280,7 @@ const DetailRecordAction = () => {
 						<span className="hidden md:block">{message.detailRecordActionReproduction}</span>
 					</TooltipButton>
 					<TooltipButton
-						tooltipContent="Copyright this record"
+						tooltipContent={message.copyrightThisRecord}
 						variant="outline"
 						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => handleSubmit('Copyright')}>
@@ -288,7 +288,7 @@ const DetailRecordAction = () => {
 						<span className="hidden md:block">{message.detailRecordActionCopyright}</span>
 					</TooltipButton>
 					<TooltipButton
-						tooltipContent="Copy record URL"
+						tooltipContent={message.copyRecordUrl}
 						variant="outline"
 						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => {
@@ -317,7 +317,7 @@ const DetailRecordAction = () => {
 				</div>
 
 				<TooltipButton
-					tooltipContent="Next record"
+					tooltipContent={message.nextRecord}
 					className={'align-center md:w-[130px]'}
 					disabled={!nextRecord}
 					onClick={() => goToURL(nextRecord)}>
