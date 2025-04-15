@@ -55,7 +55,7 @@ export const BookmarkRecordAction = ({ record }: { record: Record }) => {
 				variant="ghost"
 				size="icon"
 				onClick={handleCopy}
-				tooltipContent="Copy record URL">
+				tooltipContent={message.copyRecordUrl}>
 				<Copy className="h-4 w-4 text-primary" />
 			</TooltipButton>
 		</>

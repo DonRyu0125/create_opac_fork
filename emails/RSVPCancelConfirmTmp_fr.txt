@@ -93,13 +93,15 @@
   </table>
   <div class="container">
     <div class="event-details">
-      <h2>Votre inscription a été annulée pour:</h2>
+      <h2>Votre inscription a ete annulee pour:</h2>
       <p><strong>ID d'inscription:</strong> ^TAG_FUNC_P_ID^</p>
-      <p><strong>Événement:</strong> ^TAG_NAME^</p>
+      <p><strong>evenement:</strong> ^TAG_NAME^</p>
       <p><strong>Date:</strong> ^TAG_FUNC_DATE^</p>
       <p><strong>Heure:</strong> ^TAG_FUNC_START_T^ - ^TAG_FUNC_END_T^</p>
     </div>
   </div>
-  <footer class="footer"></footer>
+  <footer class="footer">
+  Logiciel propulsé par MINISIS Inc
+  </footer>
 </body>
 </html>
