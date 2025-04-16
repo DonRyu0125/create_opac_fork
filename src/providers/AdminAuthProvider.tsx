@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 import { useLoadingOverlay } from './LoadingOverlayProvider'
+import { atom, useAtom } from 'jotai'
 
 interface AdminUser {
 	id: string
@@ -15,6 +16,7 @@ interface AdminAuthContextType {
 	signIn: (email: string, password: string) => Promise<void>
 	signOut: () => void
 	isAuthenticated: string | null
+	error: boolean
 }
 
 async function hashPayload(payload: object) {
@@ -27,26 +29,50 @@ async function hashPayload(payload: object) {
 }
 
 const CREDENTIAL_KEY = 'credential'
+
+// Create Jotai atoms for credential and admin user
+const credentialAtom = atom<string | null>(null)
+const adminUserAtom = atom<AdminUser | null>(null)
+
+// Initialize the atom with session storage value if available
+if (typeof window !== 'undefined') {
+	const storedCredential = sessionStorage.getItem(CREDENTIAL_KEY)
+	if (storedCredential) {
+		credentialAtom.init = storedCredential
+	}
+}
+
 const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefined)
 
 export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
-	const [adminUser, setAdminUser] = useState<AdminUser | null>(null)
-	const [isAuthenticated, setIsAuthenticated] = useState<string | null>(null)
+	const [adminUser, setAdminUser] = useAtom(adminUserAtom)
+	const [isAuthenticated, setIsAuthenticated] = useAtom(credentialAtom)
+	const [error, setError] = useState<boolean>(false);
 
 	const { showLoading, hideLoading } = useLoadingOverlay()
 
 	const signIn = useCallback(async (username: string, password: string) => {
 		showLoading()
-		const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&language=144&file=[OPAC]admin/login-success.html`
+		const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&COOKIE=USERNAME&language=144&file=[OPAC]admin/login-success.html`
 		const payload = { USERNAME: username, USERPASSWORD: password }
-
+		debugger;
 		try {
-			const loginRequest = await axios.post(url, { ...payload })
+			// Create FormData object for the request
+			const formData = new FormData()
+			formData.append('USERNAME', username)
+			formData.append('USERPASSWORD', password)
+			
+			// Send as form data instead of JSON
+			const loginRequest = await axios.post(url, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			})
 			if (loginRequest.status === 200) {
 				const response = loginRequest.data
 				if (response.status === 'success') {
 					const hash = await hashPayload(payload)
-					window.localStorage.setItem(CREDENTIAL_KEY, hash)
+					sessionStorage.setItem(CREDENTIAL_KEY, hash)
 					setIsAuthenticated(hash)
 					setAdminUser({
 						id: username,
@@ -56,33 +82,37 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 					})
 					window.location.assign('/admin/index.html')
 				}
+				else {
+					setError(true)
+				}
 			}
 		} catch (error) {
 			console.error('Admin sign-in error:', error)
+			setError(true)
 		} finally {
 			hideLoading()
 		}
-	}, [])
+	}, [showLoading, hideLoading, setIsAuthenticated, setAdminUser])
 
 	const signOut = useCallback(() => {
-		window.localStorage.removeItem(CREDENTIAL_KEY)
+		sessionStorage.removeItem(CREDENTIAL_KEY)
 		setIsAuthenticated(null)
 		setAdminUser(null)
-	}, [])
+	}, [setIsAuthenticated, setAdminUser])
 
 	useEffect(() => {
-		const storedHash = localStorage.getItem(CREDENTIAL_KEY)
+		const storedHash = sessionStorage.getItem(CREDENTIAL_KEY)
 		if (storedHash) {
 			setIsAuthenticated(storedHash)
 		}
-	}, [])
+	}, [setIsAuthenticated])
 
 	const isAdminLoginPath = window.location.pathname.includes('/admin/login.html')
 
 	useEffect(() => {
 		if (!window) return
 
-		const storedHash = window.localStorage.getItem(CREDENTIAL_KEY)
+		const storedHash = sessionStorage.getItem(CREDENTIAL_KEY)
 		if (isAdminLoginPath && storedHash) {
 			window.location.assign('/admin/index.html')
 		}
@@ -93,7 +123,7 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 	}, [isAdminLoginPath, isAuthenticated])
 
 	return (
-		<AdminAuthContext.Provider value={{ adminUser, signIn, signOut, isAuthenticated }}>
+		<AdminAuthContext.Provider value={{ adminUser, signIn, signOut, isAuthenticated, error }}>
 			{children}
 		</AdminAuthContext.Provider>
 	)
