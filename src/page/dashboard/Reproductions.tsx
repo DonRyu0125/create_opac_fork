@@ -20,14 +20,14 @@ const Reproductions = () => {
 						(table.getIsSomePageRowsSelected() && 'indeterminate')
 					}
 					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-					aria-label="Select all"
+					aria-label={message.selectAll}
 				/>
 			),
 			cell: ({ row }) => (
 				<Checkbox
 					checked={row.getIsSelected()}
 					onCheckedChange={(value) => row.toggleSelected(!!value)}
-					aria-label="Select row"
+					aria-label={message.selectRow}
 				/>
 			),
 			enableSorting: false,
@@ -137,7 +137,7 @@ const Reproductions = () => {
 		},
 	]
 	return (
-		<PatronLayout heading="Reproductions">
+		<PatronLayout heading={message.reproduction}>
 			<ProfileTable
 				data={records}
 				columns={columns}

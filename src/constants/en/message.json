@@ -219,5 +219,17 @@
 	"status": "status",
 	"amount": "amount",
 	"paid": "paid",
-	"order":"Order"
+	"order":"Order",
+	"comment":"Comment",
+    "creator": "Creator",
+    "itemId": "Item-ID",
+	"dateCreated": "Date Created",
+	"inquiryNumber": "Inquiry #",
+	"referenceNo": "Reference No.",
+	"time": "Time",
+	"selectAll": "Select all",
+    "selectRow": "Select row",
+    "action": "Action",
+	"noAction": "No Action",
+	"cancelled": "Cancelled"
 }
