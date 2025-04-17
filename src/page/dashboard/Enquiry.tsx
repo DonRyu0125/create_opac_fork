@@ -2,6 +2,7 @@ import ProfileTable, { ProfileData } from '@/components/common/client-profile/Pr
 import PatronLayout from '@/components/layouts/patron'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { getHomeSessionID } from '@/lib/utils'
 import { Checkbox } from '@radix-ui/react-checkbox'
@@ -16,6 +17,7 @@ const Enquiries = () => {
 		Closed: 'bg-orange-200 text-yellow-800',
 		Deleted: 'bg-red-200 text-red-800',
 	}
+	const message = useConstants().message
 
 	const columns: ColumnDef<ProfileData>[] = [
 		{
@@ -47,7 +49,7 @@ const Enquiries = () => {
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Inquiry #
+						{message.inquiryNumber}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
@@ -73,7 +75,7 @@ const Enquiries = () => {
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Topic
+						{message.topic}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
@@ -87,7 +89,7 @@ const Enquiries = () => {
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Title
+						{message.title}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
@@ -101,7 +103,7 @@ const Enquiries = () => {
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Date Created
+						{message.dateCreated}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
@@ -115,7 +117,7 @@ const Enquiries = () => {
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						Status
+						{message.status}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)

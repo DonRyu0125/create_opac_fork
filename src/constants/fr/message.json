@@ -219,5 +219,17 @@
 	"status": "statut",
 	"amount": "montant",
 	"paid": "payé",
-	"order": "Commande"
+	"order": "Commande",
+	"comment":"commentaire",
+	"creator": "Créateur",
+    "itemId": "ID de l'objet",
+	"dateCreated": "Date de création",
+	"inquiryNumber": "Numéro de demande",
+	"referenceNo": "Numéro de référence",
+	"time": "Heure",
+	"selectAll": "Tout sélectionner",
+    "selectRow": "Sélectionner la ligne",
+    "action": "Action",
+	"noAction": "Aucune action",
+	"cancelled": "Annulé"
 }
