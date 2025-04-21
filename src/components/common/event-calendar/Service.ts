@@ -78,13 +78,14 @@ export const fetch_get = async (currentDate: Date, isWeekType?: boolean) => {
 
 export const getLocation = async () => {
 	const response = await axios.get(
-		`/scripts/mwimain.dll/144/${SUB_MWI_APPLICATION}/${LOCATION_REPORT}?commandsearch&exp=%2B%2B%40`, // ++@
+		`/preprocessing/CALENDAR_LOCATION.html`,
 		{
 			headers: {
 				'Content-Type': 'text/xml',
 			},
 		}
 	)
+	
 	const jsonData: any = convertXMLToJson(response.data)
 	return jsonData?.xml?.[LIBRARY_LOCATION_XML_TAG] ?? []
 }
