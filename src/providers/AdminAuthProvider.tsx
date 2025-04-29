@@ -47,52 +47,54 @@ const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefin
 export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 	const [adminUser, setAdminUser] = useAtom(adminUserAtom)
 	const [isAuthenticated, setIsAuthenticated] = useAtom(credentialAtom)
-	const [error, setError] = useState<boolean>(false);
+	const [error, setError] = useState<boolean>(false)
 
 	const { showLoading, hideLoading } = useLoadingOverlay()
 
-	const signIn = useCallback(async (username: string, password: string) => {
-		showLoading()
-		const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&COOKIE=USERNAME&language=144&file=[OPAC]admin/login-success.html`
-		const payload = { USERNAME: username, USERPASSWORD: password }
-		debugger;
-		try {
-			// Create FormData object for the request
-			const formData = new FormData()
-			formData.append('USERNAME', username)
-			formData.append('USERPASSWORD', password)
-			
-			// Send as form data instead of JSON
-			const loginRequest = await axios.post(url, formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			})
-			if (loginRequest.status === 200) {
-				const response = loginRequest.data
-				if (response.status === 'success') {
-					const hash = await hashPayload(payload)
-					sessionStorage.setItem(CREDENTIAL_KEY, hash)
-					setIsAuthenticated(hash)
-					setAdminUser({
-						id: username,
-						name: username,
-						email: username,
-						role: 'admin',
-					})
-					window.location.assign('/admin/index.html')
+	const signIn = useCallback(
+		async (username: string, password: string) => {
+			showLoading()
+			const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&COOKIE=USERNAME&language=144&file=[OPAC]admin/login-success.html`
+			const payload = { USERNAME: username, USERPASSWORD: password }
+			debugger
+			try {
+				// Create FormData object for the request
+				const formData = new FormData()
+				formData.append('USERNAME', username)
+				formData.append('USERPASSWORD', password)
+
+				// Send as form data instead of JSON
+				const loginRequest = await axios.post(url, formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				})
+				if (loginRequest.status === 200) {
+					const response = loginRequest.data
+					if (response.status === 'success') {
+						const hash = await hashPayload(payload)
+						sessionStorage.setItem(CREDENTIAL_KEY, hash)
+						setIsAuthenticated(hash)
+						setAdminUser({
+							id: username,
+							name: username,
+							email: username,
+							role: 'admin',
+						})
+						window.location.assign('/admin/index.html')
+					} else {
+						setError(true)
+					}
 				}
-				else {
-					setError(true)
-				}
+			} catch (error) {
+				console.error('Admin sign-in error:', error)
+				setError(true)
+			} finally {
+				hideLoading()
 			}
-		} catch (error) {
-			console.error('Admin sign-in error:', error)
-			setError(true)
-		} finally {
-			hideLoading()
-		}
-	}, [showLoading, hideLoading, setIsAuthenticated, setAdminUser])
+		},
+		[showLoading, hideLoading, setIsAuthenticated, setAdminUser]
+	)
 
 	const signOut = useCallback(() => {
 		sessionStorage.removeItem(CREDENTIAL_KEY)

@@ -15,7 +15,7 @@ const ThumbnailCard = ({ title, url, thumbnail, className, children }: Thumbnail
 			onClick={() => (window.location.href = url)}>
 			<div className="relative h-[350px] sm:h-[450px] w-[350px]">
 				<img
-					loading={"lazy"}
+					loading={'lazy'}
 					src={thumbnail}
 					alt={title}
 					className="brightness-75 absolute inset-0 h-full w-full object-cover "

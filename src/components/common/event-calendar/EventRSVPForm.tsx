@@ -519,7 +519,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	const [isLogin, setIsLogin] = useState(false)
 	const [isIDValid, setIsIDValid] = useState(true)
 
-
 	useEffect(() => {
 		if (getCookieValue('M2L_PATRON_NAME')) {
 			setIsLogin(true)
@@ -730,7 +729,6 @@ const EventRSVPForm = ({ capacity, patrons, sisnNumber, event, contactInfo }: Ev
 	}
 
 	const sendRegConfirmEmail = async (occ_info: any, userData: Inputs, event: Cal_event) => {
-
 		const userID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 		let HOME_SESSID = getSessionID()
 		let isFrench = getCookieValue('my_lang') === '145'

@@ -179,7 +179,6 @@ const RSVPCancel = () => {
 
 	const sendCancelConfirmEmail = async (HOME_SESSID: string | boolean) => {
 		let isFrench = getCookieValue('my_lang') === '145'
-		
 
 		return await axios
 			.post(

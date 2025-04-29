@@ -26,7 +26,6 @@ module.exports = {
 		devMiddleware: {
 			writeToDisk: true,
 		},
-
 	},
 
 	webpack: {
