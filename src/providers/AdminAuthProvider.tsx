@@ -56,7 +56,6 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 			showLoading()
 			const url = `/scripts/mwimain.dll?logon&application=UNION_VIEW&COOKIE=USERNAME&language=144&file=[OPAC]admin/login-success.html`
 			const payload = { USERNAME: username, USERPASSWORD: password }
-			debugger
 			try {
 				// Create FormData object for the request
 				const formData = new FormData()
