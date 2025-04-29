@@ -127,7 +127,7 @@ const Orders = () => {
 			cell: ({ row }) => (
 				<div className="underline">
 					<a
-						className={`${!row.getValue('req_db_name') && 'pointer-events-none'}`}
+						className={`${row.getValue('req_db_name') ? '' : 'pointer-events-none'}`}
 						href={
 							getHomeSessionID() +
 							'/' +
