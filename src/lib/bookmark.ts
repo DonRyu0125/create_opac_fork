@@ -1,4 +1,4 @@
-import { getDataFromXML, getRecordXML } from '@/hooks/useJSONData'
+import { getDataFromXML } from '@/hooks/useJSONData'
 import { BookmarkResponse, Record } from '@/types/record'
 import axios, { AxiosResponse } from 'axios'
 import { deepSearchKey } from './record'
