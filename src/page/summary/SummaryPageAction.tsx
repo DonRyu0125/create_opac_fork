@@ -65,19 +65,19 @@ const SummaryPageAction = () => {
 					title={message.selectRecordsNumber}
 					options={[
 						{
-							label: `${message.displaying} 12 ${message.record}`,
+							label: `${message.displaying} 12 ${message.record}s`,
 							value: 12,
 						},
 						{
-							label: `${message.displaying} 25 ${message.record}`,
+							label: `${message.displaying} 25 ${message.record}s`,
 							value: 25,
 						},
 						{
-							label: `${message.displaying} 50 ${message.record}`,
+							label: `${message.displaying} 50 ${message.record}s`,
 							value: 50,
 						},
 						{
-							label: `${message.displaying} 100 ${message.record}`,
+							label: `${message.displaying} 100 ${message.record}s`,
 							value: 100,
 						},
 					]}
