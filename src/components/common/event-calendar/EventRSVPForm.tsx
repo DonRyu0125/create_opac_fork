@@ -249,7 +249,7 @@ const ShowForm = ({
 				{!isIDValid && <div className={'my-2'}>{message.emailAlreadyRegistered}</div>}
 				<div className={'my-2'}>
 					{!isLoginValid && (
-						<ReCAPTCHA sitekey={conf.reCaptchaKey} onChange={handleCaptchaChange} />
+						<ReCAPTCHA sitekey={ process.env.REACT_APP_RSVP_RECAPTCHA || import.meta.env.VITE_REACT_APP_RECAPTCHA} onChange={handleCaptchaChange} />
 					)}
 				</div>
 				<Button className={'w-full font-bold'} type="submit">
