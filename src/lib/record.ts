@@ -117,7 +117,8 @@ export const handleCopyRecordURL = (record: Record, urlOnly = false) => {
 			DEFAULT_DETAIL_REPORT,
 			urlOnly
 		)
-	} else if (record.link_dbname && record.record?.link_sisn) {
+	}
+	if (record.link_dbname && record.record?.link_sisn) {
 		// bookmark summary
 		return copyRecordURL(
 			record.link_dbname,
@@ -125,7 +126,8 @@ export const handleCopyRecordURL = (record: Record, urlOnly = false) => {
 			DEFAULT_DETAIL_REPORT,
 			urlOnly
 		)
-	} else if (record.record?.link_dbname && record.record?.link_sisn) {
+	}
+	if (record.record?.link_dbname && record.record?.link_sisn) {
 		//bookmark detail
 		return copyRecordURL(
 			record.record.link_dbname,
@@ -133,6 +135,17 @@ export const handleCopyRecordURL = (record: Record, urlOnly = false) => {
 			DEFAULT_DETAIL_REPORT,
 			urlOnly
 		)
+	}
+	if (record.record?.link_dbname) {
+		//bookmark summary
+		const LINK_DBNAME_MAP = {
+			DESCRIPTION_WEB: 'refd',
+			COLLECTIONS_WEB: 'accession_number',
+			BIBLIO_WEB: 'accession_number',
+		}
+		const db = record.record.link_dbname as keyof typeof LINK_DBNAME_MAP
+		const key = record.record[LINK_DBNAME_MAP[db]]
+		return copyRecordURL(record.record.link_dbname, key, DEFAULT_DETAIL_REPORT, urlOnly)
 	}
 
 	return ''

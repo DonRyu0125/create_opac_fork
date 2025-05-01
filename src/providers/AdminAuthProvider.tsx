@@ -23,9 +23,35 @@ async function hashPayload(payload: object) {
 	const jsonString = JSON.stringify(payload)
 	const encoder = new TextEncoder()
 	const data = encoder.encode(jsonString)
-	const hashBuffer = await window.crypto.subtle.digest('SHA-256', data)
-	const hashArray = Array.from(new Uint8Array(hashBuffer))
-	return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+
+	try {
+		// Try using the Web Crypto API first (works in HTTPS)
+		if (window.crypto && window.crypto.subtle) {
+			const hashBuffer = await window.crypto.subtle.digest('SHA-256', data)
+			const hashArray = Array.from(new Uint8Array(hashBuffer))
+			return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+		}
+	} catch (error) {
+		console.warn('Web Crypto API not available, using fallback method', error)
+	}
+
+	// Fallback for HTTP environments
+	// Simple string hashing function that's deterministic but not cryptographically secure
+	let hash = 0
+	for (let i = 0; i < jsonString.length; i++) {
+		const char = jsonString.charCodeAt(i)
+		hash = ((hash << 5) - hash) + char
+		hash = hash & hash // Convert to 32bit integer
+	}
+
+	// Convert to hex string and ensure it's positive
+	let hashHex = (hash >>> 0).toString(16)
+	// Pad to ensure consistent length
+	while (hashHex.length < 8) {
+		hashHex = '0' + hashHex
+	}
+
+	return hashHex.padEnd(64, '0') // Pad to match SHA-256 length
 }
 
 const CREDENTIAL_KEY = 'credential'
