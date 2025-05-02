@@ -42,6 +42,7 @@ const SummaryPageAction = () => {
 		},
 	]
 
+	console.log({ filterArr })
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-col space-y-2">
