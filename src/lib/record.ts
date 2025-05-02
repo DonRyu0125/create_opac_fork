@@ -120,11 +120,14 @@ export const copyRecordURL = ({
 }
 
 export const handleCopyRecordURL = (record: Record, urlOnly = false) => {
+	debugger;
 	const LINK_DBNAME_MAP = {
 		DESCRIPTION_WEB: 'refd',
 		COLLECTIONS_WEB: 'accession_number',
 		BIBLIO_WEB: 'accession_number',
 	}
+	const db = record.record.link_dbname as keyof typeof LINK_DBNAME_MAP
+	const key = record.record[LINK_DBNAME_MAP[db]]
 	if (record.database_name && record.database_name !== 'SELECTION_LIST') {
 		// union summary
 		return copyRecordURL({
@@ -154,9 +157,6 @@ export const handleCopyRecordURL = (record: Record, urlOnly = false) => {
 	}
 	if (record.record?.link_dbname) {
 		//bookmark summary
-
-		const db = record.record.link_dbname as keyof typeof LINK_DBNAME_MAP
-		const key = record.record[LINK_DBNAME_MAP[db]]
 		return copyRecordURL({
 			database: record.record.link_dbname,
 			value: key,
