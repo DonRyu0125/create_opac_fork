@@ -8,7 +8,7 @@ import {
 	TAG_FUNC_DATE,
 	TAG_FUNC_DTE_GRP,
 	TAG_FUNC_END_T,
-	TAG_FUNC_LOC,
+	TAG_FUNC_LOC_BLD,
 	TAG_FUNC_LOC_GRP,
 	TAG_FUNC_P_ATTND,
 	TAG_FUNC_START_T,
@@ -88,10 +88,10 @@ const Calendar = () => {
 			cell: ({ row }) => <div>{row.getValue(TAG_FUNC_END_T.toLocaleLowerCase())}</div>,
 		},
 		{
-			accessorKey: TAG_FUNC_LOC.toLocaleLowerCase(),
+			accessorKey: TAG_FUNC_LOC_BLD.toLocaleLowerCase(),
 			header: message.location,
 			cell: ({ row }) => (
-				<div className="capitalize">{row.getValue(TAG_FUNC_LOC.toLocaleLowerCase())}</div>
+				<div className="capitalize">{row.getValue(TAG_FUNC_LOC_BLD.toLocaleLowerCase())}</div>
 			),
 		},
 		{
@@ -158,7 +158,7 @@ const Calendar = () => {
 				let TAG_FUNC_DTE_OCC = 0
 
 				loc_group?.forEach((elm) => {
-					const funcLoc = elm?.TAG_FUNC_LOC
+					const funcLoc = elm?.TAG_FUNC_LOC_BLD
 					if (funcLoc === patronInfo['tag_func_loc']) {
 						TAG_FUNC_LOC_OCC = elm._occ // regards as Occurence number of the repeating field
 					}
