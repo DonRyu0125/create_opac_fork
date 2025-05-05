@@ -60,9 +60,9 @@ const Detail = () => {
 				})
 		}
 	}, [database, refd])
-	
+
 	//If the XML_TREE is not working at the repo spec.
-	if (!record.record) return <NoRecord/>
+	if (!record.record) return <NoRecord />
 
 	return (
 		<Layout>

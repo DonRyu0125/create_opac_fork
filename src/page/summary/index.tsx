@@ -17,10 +17,10 @@ import SummaryRecords from './SummaryRecord'
 const Summary = () => {
 	const [mobileFilter, setMobileFilter] = useState(false)
 	const { message, home, archives, museum, library } = useConstants()
-	const { common, pagination, backToSummary,data } = useJSONData({
+	const { common, pagination, backToSummary, data } = useJSONData({
 		selector: '#xml_record',
 	})
-	
+
 	// const [hasDatabaseParam, setHasDatabaseParam] = useState(false);
 
 	// useEffect(() => {
@@ -37,7 +37,6 @@ const Summary = () => {
 	// }
 
 	if (!common) return <></>
-	
 
 	return (
 		<Layout>

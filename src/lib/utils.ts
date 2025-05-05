@@ -1,7 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import X2JS from 'x2js'
-import noImage from '../assets/icons/image_not_found.png'
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
