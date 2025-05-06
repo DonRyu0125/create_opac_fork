@@ -49,9 +49,9 @@ const EventButton = ({
 		let result = filterTypes?.filter((item) => {
 			return convertLowerTrim(item.type) === convertLowerTrim(event_type)
 		})
-
+		
 		if (result.length < 1) {
-			return databaseType ==='DESCRIPTION_WEB'? EVENT_ARCHIVE_COLOR : EVENT_MUSEUM_COLOR
+			return databaseType ==='Archives'? EVENT_ARCHIVE_COLOR : EVENT_MUSEUM_COLOR
 		}
 		return `${result[0]?.color} ${result[0]?.icon}`
 	}
@@ -121,7 +121,7 @@ const EventButton = ({
 							<div
 								className={cn(
 									'h-4 w-[16px] border rounded mr-1',
-									getColor(elm[TAG_DB_TYPE])
+									getColor(elm[filterOption])
 								)}></div>
 							<div
 								className={
