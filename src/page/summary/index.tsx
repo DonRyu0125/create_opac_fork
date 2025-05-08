@@ -21,21 +21,22 @@ const Summary = () => {
 		selector: '#xml_record',
 	})
 
-	// const [hasDatabaseParam, setHasDatabaseParam] = useState(false);
+	const [hasDatabaseParam, setHasDatabaseParam] = useState(false);
 
-	// useEffect(() => {
-	//   const url = window.location.href;
-	//   const hasParam = url.includes("&DATABASE=");
-	//   setHasDatabaseParam(hasParam);
-	// }, []);
+	useEffect(() => {
+	  const url = window.location.href;
+	  const hasParam = url.includes("&DATABASE=");
+	  setHasDatabaseParam(hasParam);
+	}, []);
 
-	// const navigations = [home, archives, museum, library]
-	// const getDBTitle = (search_database: string) => {
-	// 	let db = navigations.filter((item) => item.database_name === search_database)
-	// 	if (!hasDatabaseParam || !search_database) return ''
-	// 	return `${db[0].displayTitle}`
-	// }
+	const navigations = [home, archives, museum, library]
+	const getDBTitle = (search_database: string) => {
+		let db = navigations.filter((item) => item.database_name === search_database)
+		if (!hasDatabaseParam || !search_database) return ''
+		return `${db[0].displayTitle}`
+	}
 
+	console.log('getDBTitle',hasDatabaseParam)
 	if (!common) return <></>
 
 	return (
