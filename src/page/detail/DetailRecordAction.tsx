@@ -123,10 +123,13 @@ const DetailRecordAction = () => {
 		return requestable
 	}
 
+	// No : Item is not booked
+	// Current : Item is booked by the same client.
+	// Another : Item is booked by a different client.
 	const checkIfCurrentClientRequestedThisRecord = () => {
-		const recordRequested = record.record?.is_requested_by_client
+		const recordRequested = record.request?.is_requested_by_client
 		let currentClientRequested = false
-		if (recordRequested === 'Current') {
+		if (recordRequested === 'No') {
 			currentClientRequested = true
 		}
 		return currentClientRequested

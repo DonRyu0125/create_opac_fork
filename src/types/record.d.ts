@@ -90,6 +90,7 @@ export interface RequestData {
 	sentence_1: string
 	sentence_2: string
 	time_needed: string
+	is_requested_by_client:string
 }
 export interface Record {
 	action: string
