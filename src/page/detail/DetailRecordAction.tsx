@@ -129,7 +129,7 @@ const DetailRecordAction = () => {
 	const checkIfCurrentClientRequestedThisRecord = () => {
 		const recordRequested = record.request?.is_requested_by_client
 		let currentClientRequested = false
-		if (recordRequested === 'No') {
+		if (recordRequested === 'No' || recordRequested === 'Current') {
 			currentClientRequested = true
 		}
 		return currentClientRequested
