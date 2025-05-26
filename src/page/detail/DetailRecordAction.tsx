@@ -114,13 +114,12 @@ const DetailRecordAction = () => {
 
 	const checkRecordHasMandatoryDataToRequest = () => {
 		const checkRecord = record.record
-		const recordRequestBool = 'Yes' as string
-		let requestable = false as boolean
-		checkRecord?.a_avail === recordRequestBool ||
-		checkRecord?.m_avail === recordRequestBool ||
-		checkRecord?.l_avail === recordRequestBool
-			? (requestable = true)
-			: (requestable = false)
+		const recordRequestBool = 'Yes'
+		const requestable =
+			checkRecord?.a_avail === recordRequestBool ||
+			checkRecord?.m_avail === recordRequestBool ||
+			checkRecord?.l_avail === recordRequestBool
+
 		return requestable
 	}
 
@@ -158,7 +157,6 @@ const DetailRecordAction = () => {
 					<ChevronLeft />
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
-
 				<div className="flex flex-wrap justify-start gap-2">
 					{checkRecordHasMandatoryDataToRequest() &&
 					checkIfCurrentClientRequestedThisRecord() ? (
