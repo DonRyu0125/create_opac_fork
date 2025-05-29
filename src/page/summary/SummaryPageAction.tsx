@@ -2,7 +2,6 @@ import CheckboxWithLabel from '@/components/common/CheckboxWithLabel'
 import CollapseList from '@/components/common/CollapseList'
 import DropdownSelect from '@/components/common/DropdownSelect'
 import useConstants from '@/hooks/useConstants'
-// import useSearchHistory from '@/hooks/useSearchHistory'
 import useJSONData, { COMMON_FIELDS_TYPE, SORT_TYPE } from '@/hooks/useJSONData'
 import { convertToArr, fetchSearchHistory, getHomeSessionID } from '@/lib/utils'
 import { Label } from '@radix-ui/react-dropdown-menu'
@@ -86,7 +85,7 @@ const SummaryPageAction = () => {
 										item: { count: string; expression: string; summary_link: string },
 										index: number
 									) => (
-										<tr key={index} className="even:bg-gray-200">
+										<tr key={index} className="even:bg-gray-200 hover:bg-gray:200">
 											<td className="px-4 py-2">
 												<a
 													href={
@@ -104,7 +103,7 @@ const SummaryPageAction = () => {
 														: item.expression}
 												</a>
 											</td>
-											<td className="px-4 py-2 text-right">{item.count}</td>
+											<td className="px-4 py-2 text-right"><div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent text-primary-foreground hover:bg-primary/80 bg-black">{item.count}</div></td>
 										</tr>
 									)
 								)}
