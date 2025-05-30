@@ -80,7 +80,7 @@ export interface RequestData {
 	req_db_name: string
 	req_db_recid: string
 	req_item_id: string
-	req_item_title: string
+	req_item_title: any
 	req_loc_code: string
 	req_process_date: string
 	req_queue: string

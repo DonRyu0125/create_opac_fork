@@ -242,7 +242,7 @@ const DetailRecordAction = () => {
 									value={requestData.req_item_title}
 								/>
 								<Button className="bg-primary" type="submit" variant="default">
-									Submit
+									{message.submit}
 								</Button>
 							</form>
 						</TooltipButton>
