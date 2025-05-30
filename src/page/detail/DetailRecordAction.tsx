@@ -126,13 +126,14 @@ const DetailRecordAction = () => {
 	// No : Item is not booked
 	// Current : Item is booked by the same client.
 	// Another : Item is booked by a different client.
+	// This function is for LMA style request, not allowing waitlist (Request queue)
 	const checkIfCurrentClientRequestedThisRecord = () => {
 		const recordRequested = record.request?.is_requested_by_client
 		let currentClientRequested = false
 		if (recordRequested === 'No' || recordRequested === 'Current') {
 			currentClientRequested = true
 		}
-		return currentClientRequested
+		return true
 	}
 
 	const checkLoggedInToRequest = (action: string | null) => {
@@ -161,8 +162,7 @@ const DetailRecordAction = () => {
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
 				<div className="flex flex-wrap justify-start gap-2">
-					{checkRecordHasMandatoryDataToRequest() &&
-					checkIfCurrentClientRequestedThisRecord() ? (
+					{checkRecordHasMandatoryDataToRequest() ? (
 						<TooltipButton
 							tooltipContent={message.requestRecord}
 							variant="outline"
