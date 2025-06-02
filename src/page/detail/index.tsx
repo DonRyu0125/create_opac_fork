@@ -6,7 +6,6 @@ import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { getSessionID, isDescriptionDatabase } from '@/lib/utils'
 import DetailRecord from './DetailRecord'
-
 import DescriptionTree from '@/components/common/description-tree'
 import Accordion from '@/components/ui/simple-accordion'
 import { deepSearchKey } from '@/lib/record'
@@ -49,10 +48,7 @@ const Detail = () => {
 						return
 					}
 					const { tree, openKeyPath } = res
-
 					setTree(tree)
-					console.log({ openKeyPath })
-
 					setOpenKeyPath(openKeyPath)
 				})
 				.finally(() => {
@@ -141,7 +137,6 @@ const Detail = () => {
 										<div className="w-full ">
 											<DetailRecord />
 										</div>
-
 										{isDescriptionDatabase(database) && (
 											<div className="w-full ">
 												<Accordion

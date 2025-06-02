@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { copyRecordURL, deepSearchKey, handleCopyRecordURL } from '@/lib/record'
-import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag, Star } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag, Star, SquareCheck } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
 import DialogLogin from '../../components/common/DialogLogin'
@@ -168,7 +168,7 @@ const DetailRecordAction = () => {
 							variant="outline"
 							className={'w-[22%] md:w-[23.5%] flex '}
 							onClick={() => handleSubmit('Request')}>
-							<ShoppingBag className="w-4 h-4 md:mr-2 " />{' '}
+							<SquareCheck className="w-4 h-4 md:mr-2 " />{' '}
 							<span className="hidden md:block">{message.request}</span>
 							<form
 								method="post"
