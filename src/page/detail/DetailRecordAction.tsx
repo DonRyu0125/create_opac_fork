@@ -7,7 +7,7 @@ import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
 import DialogLogin from '../../components/common/DialogLogin'
 import TooltipButton from '@/components/common/TooltipButton'
-import { cn, getCookieValue, getHomeSessionID } from '@/lib/utils'
+import { cn, getCookieValue, getHomeSessionID, isDescriptionDatabase } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 import { bookmarkSelect, validateBookmarkResponse } from '@/lib/bookmark'
 import { useAtom } from 'jotai'
@@ -162,7 +162,7 @@ const DetailRecordAction = () => {
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
 				<div className="flex flex-wrap justify-start gap-2">
-					{checkRecordHasMandatoryDataToRequest() ? (
+					{!isDescriptionDatabase(database) && (
 						<TooltipButton
 							tooltipContent={message.requestRecord}
 							variant="outline"
@@ -246,17 +246,7 @@ const DetailRecordAction = () => {
 								</Button>
 							</form>
 						</TooltipButton>
-					) : (
-						<TooltipButton
-							tooltipContent={message.requestRecord}
-							variant="outline"
-							disabled
-							className={'w-[22%] md:w-[23.5%] flex '}>
-							<ShoppingBag className="w-4 h-4 md:mr-2" />{' '}
-							<span className="hidden md:block">{message.request}</span>
-						</TooltipButton>
 					)}
-
 					<TooltipButton
 						tooltipContent={message.askAboutThisRecord}
 						variant="outline"
