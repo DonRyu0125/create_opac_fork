@@ -27,9 +27,9 @@ const RequestDescLater = () => {
 		<TooltipButton
 			tooltipContent={message.requestRecordLater}
 			variant="outline"
-			className={'min-w-[50px]'}
+			className={'min-w-[30px] mx-1'}
 			onClick={() => handleSubmit('Request')}>
-			<CalendarCheck className="w-full h-full" />
+			<CalendarCheck className="min-w-[20px] w-full h-full" />
 			<form
 				method="post"
 				ref={formRef}

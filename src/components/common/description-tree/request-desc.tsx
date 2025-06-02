@@ -27,9 +27,9 @@ const RequestDesc = () => {
 		<TooltipButton
 			tooltipContent={message.requestRecord}
 			variant="outline"
-			className={'min-w-[50px]'}
+			className={'min-w-[30px] mx-1'}
 			onClick={() => handleSubmit('Request')}>
-			<SquareCheck className="w-full h-full" />
+			<SquareCheck className="min-w-[20px] w-full h-full" />
 
 			<form
 				method="post"
