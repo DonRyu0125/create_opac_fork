@@ -49,6 +49,7 @@ import Summary from '@/page/summary'
 import EnquiryReplyForm from '@/page/enquiry/EnquiryReplyForm'
 import CopyrightConfirmed from '@/page/copyright/CopyrightConfirmed'
 import CopyrightForm from '@/page/copyright/CopyrightForm'
+import RequestLater from '@/page/request-later'
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
@@ -86,6 +87,7 @@ export const ROUTES: TRoute = {
 	crowdsource: Crowdsource,
 	calendar: Calendar,
 	request: Request,
+	'request-later': RequestLater,
 	easyload: EasyLoad,
 	'easyload-login': Relogin,
 	requestconfirmed: RequestConfirmed,

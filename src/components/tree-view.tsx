@@ -2,7 +2,7 @@ import React from 'react'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import { ChevronRight } from 'lucide-react'
 import { cva } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
+import { cn, getCookieValue } from '@/lib/utils'
 import RequestDesc from './common/description-tree/request-desc'
 import RequestDescLater from './common/description-tree/requst-later-desc'
 
@@ -228,6 +228,7 @@ const TreeLeaf = React.forwardRef<
 		defaultLeafIcon?: any
 	}
 >(({ className, item, selectedItemId, handleSelectChange, defaultLeafIcon, ...props }, ref) => {
+	const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 	return (
 		<div
 			ref={ref}
@@ -251,10 +252,12 @@ const TreeLeaf = React.forwardRef<
 				className="flex-grow text-sm truncate hover:text-primary hover:underline">
 				{item.title}
 			</span>
-			<div className={'flex'}>
-				<RequestDesc />
-				<RequestDescLater />
-			</div>
+			{patronID && (
+				<div className={'flex'}>
+					<RequestDesc />
+					<RequestDescLater />
+				</div>
+			)}
 			{/* <TreeActions isSelected={selectedItemId === item.id}></TreeActions> */}
 		</div>
 	)

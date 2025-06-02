@@ -37,7 +37,7 @@ const RequestDescLater = () => {
 					getHomeSessionID() +
 					'/1/' +
 					record.request.req_db_link2 +
-					'?REQUESTLOGIN&DBNAME=' +
+					'?REQUESTLOGIN&REPORT=LATER_REQUEST_FORM&DBNAME=' +
 					record.request.req_db_name
 				}
 				className="hidden">

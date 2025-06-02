@@ -30,7 +30,6 @@ const RequestDesc = () => {
 			className={'min-w-[30px] mx-1'}
 			onClick={() => handleSubmit('Request')}>
 			<SquareCheck className="min-w-[20px] w-full h-full" />
-
 			<form
 				method="post"
 				ref={formRef}
@@ -38,7 +37,7 @@ const RequestDesc = () => {
 					getHomeSessionID() +
 					'/1/' +
 					record.request.req_db_link2 +
-					'?REQUESTLOGIN&DBNAME=' +
+					'?REQUESTLOGIN&REPORT=DIRECT_REQUEST_FORM&DBNAME=' +
 					record.request.req_db_name
 				}
 				className="hidden">
