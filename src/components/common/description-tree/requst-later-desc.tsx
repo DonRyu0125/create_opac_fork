@@ -4,7 +4,7 @@ import TooltipButton from '../TooltipButton'
 import { Input } from '@/components/ui/input'
 import useJSONData from '@/hooks/useJSONData'
 import { Button } from '@/components/ui/button'
-import { getCookieValue, getHomeSessionID } from '@/lib/utils'
+import { getCookieValue, getHomeSessionID, removeQuote } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
 
 // Request Later for Description item
@@ -33,13 +33,7 @@ const RequestDescLater = () => {
 			<form
 				method="post"
 				ref={formRef}
-				action={
-					getHomeSessionID() +
-					'/1/' +
-					record.request.req_db_link2 +
-					'?REQUESTLOGIN&REPORT=LATER_REQUEST_FORM&DBNAME=' +
-					record.request.req_db_name
-				}
+				action={removeQuote(requestData.req_later)}
 				className="hidden">
 				<Input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time} />
 				<Input type="hidden" name="METHOD_REQUEST" value={requestData.method_request} />

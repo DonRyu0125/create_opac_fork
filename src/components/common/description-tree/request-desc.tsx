@@ -15,7 +15,7 @@ const RequestDesc = () => {
 	const record = records[0]
     const requestData = record?.request
     const formRef = useRef<any>(null)
-    
+
 	const handleSubmit = (action: string | null) => {
         const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 		if (patronID) {
@@ -37,8 +37,8 @@ const RequestDesc = () => {
 					getHomeSessionID() +
 					'/1/' +
 					record.request.req_db_link2 +
-					'?REQUESTLOGIN&REPORT=DIRECT_REQUEST_FORM&DBNAME=' +
-					record.request.req_db_name
+					'?REQUESTLOGIN&DBNAME=' +
+					record.request.req_db_name +'&REPORT=DIRECT_REQUEST_FORM'
 				}
 				className="hidden">
 				<Input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time} />

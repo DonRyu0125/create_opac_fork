@@ -2,6 +2,7 @@ import Layout from '@/components/layouts'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import useJSONData from '@/hooks/useJSONData'
+import { removeQuote } from '@/lib/utils'
 import { CircleEllipsis } from 'lucide-react'
 import React from 'react'
 
@@ -27,7 +28,7 @@ const RequestLater = () => {
 								<form
 									method="post"
 									className="m-0"
-									action={reqData.action.replace(/['"]+/g, '')}>
+									action={removeQuote(reqData.action)}>
 									<Input
 										type="hidden"
 										name="AUTO_APPROVE"
