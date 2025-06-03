@@ -4,6 +4,7 @@ import useJSONData from '@/hooks/useJSONData'
 import { Button } from '../../components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Archive, CircleEllipsis, Landmark, LibraryBig } from 'lucide-react'
+import { removeQuote } from '@/lib/utils'
 const Request = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
 	let reqData = records[0].request
@@ -26,7 +27,7 @@ const Request = () => {
 								<form
 									method="post"
 									className="m-0"
-									action={reqData.action.replace(/['"]+/g, '')}>
+									action={removeQuote(reqData.action)}>
 									<Input
 										type="hidden"
 										name="AUTO_APPROVE"
