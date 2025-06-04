@@ -21,7 +21,7 @@ const RequestLater = () => {
 	const [selected, setSelected] = useState<Date>()
 	const [time, setTime] = useState('')
 
-	const weekdayToIndex = {
+	const weekdayToIndex: any = {
 		su: 0,
 		mo: 1,
 		tu: 2,
@@ -31,25 +31,25 @@ const RequestLater = () => {
 		sa: 6,
 	}
 
-	const closure_date_entry = [
-		{ closure_date: '2025-07-01', closure_desc: 'Canada Day' },
-		{ closure_date: '2025-08-04', closure_desc: 'B.C. Day' },
-		{ closure_date: '2025-09-01', closure_desc: 'Labour Day' },
-		{ closure_date: '2025-09-30', closure_desc: 'National Day for Truth and Reconciliation' },
-		{ closure_date: '2025-10-13', closure_desc: 'Thanksgiving Day' },
-		{ closure_date: '2025-11-11', closure_desc: 'Remembrance Day' },
-		{ closure_date: '2025-12-25', closure_desc: 'Christmas Day' },
-		{ closure_date: '2025-12-26', closure_desc: 'Boxing Day' },
-	]
-
 	const operation_day_entry = [
-		{ weekday: 'mo', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] },
+		{ weekday: 'mo', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] ,date_closed: 'X'},
 		{ weekday: 'tu', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] },
 		{ weekday: 'we', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] },
 		{ weekday: 'th', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] },
 		{ weekday: 'fr', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] },
 		{ weekday: 'sa', date_closed: 'X' },
 		{ weekday: 'su', date_closed: 'X' },
+	]
+
+	const closure_date_entry = [
+		{ closure_date: '2025-06-07', closure_desc: 'Canada Day' },
+		{ closure_date: '2025-06-04', closure_desc: 'B.C. Day' },
+		{ closure_date: '2025-09-01', closure_desc: 'Labour Day' },
+		{ closure_date: '2025-09-30', closure_desc: 'National Day for Truth and Reconciliation' },
+		{ closure_date: '2025-10-13', closure_desc: 'Thanksgiving Day' },
+		{ closure_date: '2025-11-11', closure_desc: 'Remembrance Day' },
+		{ closure_date: '2025-12-25', closure_desc: 'Christmas Day' },
+		{ closure_date: '2025-12-26', closure_desc: 'Boxing Day' },
 	]
 
 	const sp_open_date_entry = [
@@ -63,7 +63,7 @@ const RequestLater = () => {
 			sp_cufoff_time: '12:00',
 		},
 		{
-			open_date: '2025-06-10',
+			open_date: '2025-06-28',
 			sp_open_collection_time_entry: [
 				{ sp_start_time: '10:00', sp_end_time: '10:59' },
 				{ sp_start_time: '11:00', sp_end_time: '11:59' },
@@ -73,9 +73,20 @@ const RequestLater = () => {
 		},
 	]
 
-	const closedDays = operation_day_entry
-    .filter((day) => day.date_closed === 'X')
-    .map((day) => weekdayToIndex[day.weekday]);
+	const openWeekdays = operation_day_entry
+		.filter((d) => d.date_closed !== 'X')
+		.map((d) => weekdayToIndex[d.weekday])
+
+	const closureDates = new Set(closure_date_entry.map((d) => d.closure_date))
+
+	const specialOpenDates = new Set(sp_open_date_entry.map((d) => d.open_date))
+
+	function isOpen(date: Date) {
+		const yyyyMMdd = date.toISOString().split('T')[0]
+		if (specialOpenDates.has(yyyyMMdd)) return true
+		if (closureDates.has(yyyyMMdd)) return false
+		return openWeekdays.includes(date.getDay())
+	}
 
 	return (
 		<Layout>
@@ -202,18 +213,10 @@ const RequestLater = () => {
 								<div className="w-full md:flex ">
 									<div className="md:w-1/2 flex justify-center">
 										<Calendar
-											disabled={(date) => closedDays.includes(date.getDay()) }
 											mode="single"
 											selected={selected}
 											onSelect={setSelected}
-											modifiers={{
-												holiday: (date) => closedDays.includes(date.getDay()) ,
-												// spOpenDays: spOpenDates,
-											}}
-											modifiersClassNames={{
-												holiday: 'bg-red-100 text-red-600 font-bold',
-												spOpenDays: 'bg-blue-100 text-blue-600 font-bold',
-											}}
+											disabled={(date) => !isOpen(date)}
 										/>
 									</div>
 									<div className="md:w-1/2">
@@ -247,9 +250,6 @@ const RequestLater = () => {
 											</DropdownMenu.Portal>
 										</DropdownMenu.Root>
 										<input type="hidden" name="dropdown" value={time} />
-										<div className="bg-red-100 text-red-600 text-[10px] px-[4px] py-[2px] rounded w-fit">
-											Closed Day
-										</div>
 									</div>
 								</div>
 
