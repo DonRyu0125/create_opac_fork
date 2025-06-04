@@ -1,0 +1,191 @@
+{
+	"calendar_info": {
+		"operation_day_entry": [
+			{
+				"weekday": "mo",
+				"collection_time_entry": [
+					{
+						"start_time": "10:00",
+						"end_time": "10:59"
+					},
+					{
+						"start_time": "11:00",
+						"end_time": "11:59"
+					},
+					{
+						"start_time": "13:00",
+						"end_time": "13:59"
+					},
+					{
+						"start_time": "14:00",
+						"end_time": "14:59"
+					}
+				]
+			},
+			{
+				"weekday": "tu",
+				"collection_time_entry": [
+					{
+						"start_time": "10:00",
+						"end_time": "10:59"
+					},
+					{
+						"start_time": "11:00",
+						"end_time": "11:59"
+					}
+				]
+			},
+			{
+				"weekday": "we",
+				"collection_time_entry": [
+					{
+						"start_time": "10:00",
+						"end_time": "10:59"
+					},
+					{
+						"start_time": "11:00",
+						"end_time": "11:59"
+					}
+				]
+			},
+			{
+				"weekday": "th",
+				"collection_time_entry": [
+					{
+						"start_time": "10:00",
+						"end_time": "10:59"
+					},
+					{
+						"start_time": "11:00",
+						"end_time": "11:59"
+					},
+					{
+						"start_time": "13:00",
+						"end_time": "13:59"
+					},
+					{
+						"start_time": "14:00",
+						"end_time": "14:59"
+					},
+					{
+						"start_time": "15::00",
+						"end_time": "15:59"
+					},
+					{
+						"start_time": "16:00",
+						"end_time": "16:59"
+					}
+				]
+			},
+			{
+				"weekday": "fr",
+				"collection_time_entry": [
+					{
+						"start_time": "10:00",
+						"end_time": "10:59"
+					},
+					{
+						"start_time": "11:00",
+						"end_time": "11:59"
+					},
+					{
+						"start_time": "13:00",
+						"end_time": "13:59"
+					},
+					{
+						"start_time": "14:00",
+						"end_time": "14:59"
+					}
+				]
+			},
+			{
+				"weekday": "sa",
+				"date_closed": "X"
+			},
+			{
+				"weekday": "su",
+				"date_closed": "X"
+			}
+		],
+		"closure_date_entry": [
+			{
+				"closure_date": "2025-07-01",
+				"closure_desc": "Canada Day"
+			},
+			{
+				"closure_date": "2025-08-04",
+				"closure_desc": "B.C. Day"
+			},
+			{
+				"closure_date": "2025-09-01",
+				"closure_desc": "Labour Day"
+			},
+			{
+				"closure_date": "2025-09-30",
+				"closure_desc": "National Day for Truth and Reconciliation"
+			},
+			{
+				"closure_date": "2025-10-13",
+				"closure_desc": "Thanksgiving Day"
+			},
+			{
+				"closure_date": "2025-11-11",
+				"closure_desc": "Remembrance Day"
+			},
+			{
+				"closure_date": "2025-12-25",
+				"closure_desc": "Christmas Day"
+			},
+			{
+				"closure_date": "2025-12-26",
+				"closure_desc": "Boxing Day"
+			}
+		],
+		"sp_open_date_entry": [
+            {
+                "open_date": "2025-06-07",
+                "sp_open_collection_time_entry": [
+                    {
+                        "sp_start_time": "10:00",
+                        "sp_end_time": "10:59"
+                    },
+                    {
+                        "sp_start_time": "11:00",
+                        "sp_end_time": "11:59"
+                    }
+                ],
+                "sp_cutoff_date": "2025-06-06",
+                "sp_cufoff_time": "12:00"
+            },
+            {
+                "open_date": "2025-06-10",
+                "sp_open_collection_time_entry": [
+                    {
+                        "sp_start_time": "10:00",
+                        "sp_end_time": "10:59"
+                    },
+                    {
+                        "sp_start_time": "11:00",
+                        "sp_end_time": "11:59"
+                    }
+                ],
+                "sp_cutoff_date": "2025-06-06",
+                "sp_cufoff_time": "12:00"
+            }
+        ],
+		"delivery_time_entry": [
+			{
+				"delivery_type": "OFFSITESTD",
+				"delivery_day": "1"
+			},
+			{
+				"delivery_type": "OFFSITECOLD",
+				"delivery_day": "2"
+			},
+			{
+				"delivery_type": "OFFSITECOOL",
+				"delivery_day": "3"
+			}
+		]
+	}
+}

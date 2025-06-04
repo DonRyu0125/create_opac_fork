@@ -21,7 +21,61 @@ const RequestLater = () => {
 	const [selected, setSelected] = useState<Date>()
 	const [time, setTime] = useState('')
 
-	const holidays = [new Date(2025, 0, 1), new Date(2025, 2, 1), new Date(2025, 6, 5)]
+	const weekdayToIndex = {
+		su: 0,
+		mo: 1,
+		tu: 2,
+		we: 3,
+		th: 4,
+		fr: 5,
+		sa: 6,
+	}
+
+	const closure_date_entry = [
+		{ closure_date: '2025-07-01', closure_desc: 'Canada Day' },
+		{ closure_date: '2025-08-04', closure_desc: 'B.C. Day' },
+		{ closure_date: '2025-09-01', closure_desc: 'Labour Day' },
+		{ closure_date: '2025-09-30', closure_desc: 'National Day for Truth and Reconciliation' },
+		{ closure_date: '2025-10-13', closure_desc: 'Thanksgiving Day' },
+		{ closure_date: '2025-11-11', closure_desc: 'Remembrance Day' },
+		{ closure_date: '2025-12-25', closure_desc: 'Christmas Day' },
+		{ closure_date: '2025-12-26', closure_desc: 'Boxing Day' },
+	]
+
+	const operation_day_entry = [
+		{ weekday: 'mo', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] },
+		{ weekday: 'tu', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] },
+		{ weekday: 'we', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] },
+		{ weekday: 'th', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] },
+		{ weekday: 'fr', collection_time_entry: [{ start_time: '10:00', end_time: '10:59' }] },
+		{ weekday: 'sa', date_closed: 'X' },
+		{ weekday: 'su', date_closed: 'X' },
+	]
+
+	const sp_open_date_entry = [
+		{
+			open_date: '2025-06-07',
+			sp_open_collection_time_entry: [
+				{ sp_start_time: '10:00', sp_end_time: '10:59' },
+				{ sp_start_time: '11:00', sp_end_time: '11:59' },
+			],
+			sp_cutoff_date: '2025-06-06',
+			sp_cufoff_time: '12:00',
+		},
+		{
+			open_date: '2025-06-10',
+			sp_open_collection_time_entry: [
+				{ sp_start_time: '10:00', sp_end_time: '10:59' },
+				{ sp_start_time: '11:00', sp_end_time: '11:59' },
+			],
+			sp_cutoff_date: '2025-06-06',
+			sp_cufoff_time: '12:00',
+		},
+	]
+
+	const closedDays = operation_day_entry
+    .filter((day) => day.date_closed === 'X')
+    .map((day) => weekdayToIndex[day.weekday]);
 
 	return (
 		<Layout>
@@ -148,13 +202,17 @@ const RequestLater = () => {
 								<div className="w-full md:flex ">
 									<div className="md:w-1/2 flex justify-center">
 										<Calendar
-											disabled={holidays}
+											disabled={(date) => closedDays.includes(date.getDay()) }
 											mode="single"
 											selected={selected}
 											onSelect={setSelected}
-											modifiers={{ holiday: holidays }}
+											modifiers={{
+												holiday: (date) => closedDays.includes(date.getDay()) ,
+												// spOpenDays: spOpenDates,
+											}}
 											modifiersClassNames={{
 												holiday: 'bg-red-100 text-red-600 font-bold',
+												spOpenDays: 'bg-blue-100 text-blue-600 font-bold',
 											}}
 										/>
 									</div>
@@ -177,7 +235,7 @@ const RequestLater = () => {
 												<DropdownMenu.Content
 													sideOffset={5}
 													className="rounded-md bg-white shadow-md border p-1 text-sm w-40">
-													{['Profile', 'Settings'].map((item:any) => (
+													{['Profile', 'Settings'].map((item: any) => (
 														<DropdownMenu.Item
 															key={item}
 															className="px-3 py-2 rounded hover:bg-gray-100 cursor-pointer"
@@ -189,6 +247,9 @@ const RequestLater = () => {
 											</DropdownMenu.Portal>
 										</DropdownMenu.Root>
 										<input type="hidden" name="dropdown" value={time} />
+										<div className="bg-red-100 text-red-600 text-[10px] px-[4px] py-[2px] rounded w-fit">
+											Closed Day
+										</div>
 									</div>
 								</div>
 
