@@ -9,8 +9,7 @@ import useConstants from '@/hooks/useConstants'
 
 // Request Later for Description item
 const RequestDescLater = () => {
-	const [loading, setLoading] = useState(false)
-	const { nextRecord, previousRecord, records } = useJSONData({ selector: '#xml_record' })
+	const {  records } = useJSONData({ selector: '#xml_record' })
 	const { message } = useConstants()
 	const record = records[0]
 	const requestData = record?.request
@@ -47,7 +46,6 @@ const RequestDescLater = () => {
 				<Input type="hidden" name="REQ_ITEM_ID" value={requestData.req_item_id} />
 				<Input type="hidden" name="REQ_ACC_NUMBER" value={requestData.req_acc_number} />
 				<Input type="hidden" name="REQ_ITEM_TITLE" value={requestData.req_item_title} />
-				<Button className="bg-primary" type="submit" variant="default"></Button>
 			</form>
 		</TooltipButton>
 	)

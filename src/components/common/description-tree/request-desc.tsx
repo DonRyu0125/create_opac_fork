@@ -6,21 +6,19 @@ import useJSONData from '@/hooks/useJSONData'
 import { Button } from '@/components/ui/button'
 import { getCookieValue, getHomeSessionID } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
-// Request for Description item 
+// Request for Description item
 
 const RequestDesc = () => {
-	const [loading, setLoading] = useState(false)
-    const { nextRecord, previousRecord, records } = useJSONData({ selector: '#xml_record' })
-    const { message } = useConstants()
+	const { records } = useJSONData({ selector: '#xml_record' })
+	const { message } = useConstants()
 	const record = records[0]
-    const requestData = record?.request
-    const formRef = useRef<any>(null)
-
+	const requestData = record?.request
+	const formRef = useRef<any>(null)
 	const handleSubmit = (action: string | null) => {
-        const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 		if (patronID) {
 			formRef.current.submit()
-        }
+		}
 	}
 
 	return (
@@ -38,7 +36,8 @@ const RequestDesc = () => {
 					'/1/' +
 					record.request.req_db_link2 +
 					'?REQUESTLOGIN&DBNAME=' +
-					record.request.req_db_name +'&REPORT=DIRECT_REQUEST_FORM'
+					record.request.req_db_name +
+					'&REPORT=DIRECT_REQUEST_FORM'
 				}
 				className="hidden">
 				<Input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time} />
@@ -53,8 +52,6 @@ const RequestDesc = () => {
 				<Input type="hidden" name="REQ_ITEM_ID" value={requestData.req_item_id} />
 				<Input type="hidden" name="REQ_ACC_NUMBER" value={requestData.req_acc_number} />
 				<Input type="hidden" name="REQ_ITEM_TITLE" value={requestData.req_item_title} />
-				<Button className="bg-primary" type="submit" variant="default">
-				</Button>
 			</form>
 		</TooltipButton>
 	)
