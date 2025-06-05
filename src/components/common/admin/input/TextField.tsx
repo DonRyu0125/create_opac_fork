@@ -13,7 +13,6 @@ const TextField = ({ id, title, value, onChange, placeholder, name, append }: In
 		e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>
 	) => {
 		setVal(e.target.value)
-
 		onChange?.(e.target.value)
 	}
 	return (
@@ -37,7 +36,6 @@ const TextField = ({ id, title, value, onChange, placeholder, name, append }: In
 					name={name}
 				/>
 			)}
-
 			{append}
 		</InputWrapper>
 	)
