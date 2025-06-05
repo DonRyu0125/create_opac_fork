@@ -10,19 +10,23 @@ import useConstants from '@/hooks/useConstants'
 
 const RequestDesc = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
+	const [loading, setLoading] = useState(false)
 	const { message } = useConstants()
 	const record = records[0]
 	const requestData = record?.request
 	const formRef = useRef<any>(null)
 	const handleSubmit = (action: string | null) => {
 		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+		setLoading(true)
 		if (patronID) {
 			formRef.current.submit()
+			setLoading(false)
 		}
 	}
 
 	return (
 		<TooltipButton
+			disabled={loading}
 			tooltipContent={message.requestRecord}
 			variant="outline"
 			className={'min-w-[30px] mx-1'}

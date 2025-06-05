@@ -9,16 +9,19 @@ import useConstants from '@/hooks/useConstants'
 
 // Request Later for Description item
 const RequestDescLater = () => {
-	const {  records } = useJSONData({ selector: '#xml_record' })
+	const { records } = useJSONData({ selector: '#xml_record' })
 	const { message } = useConstants()
 	const record = records[0]
 	const requestData = record?.request
 	const formRef = useRef<any>(null)
+	const [loading, setLoading] = useState(false)
 
 	const handleSubmit = (action: string | null) => {
 		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+		setLoading(true)
 		if (patronID) {
 			formRef.current.submit()
+			setLoading(false)
 		}
 	}
 
@@ -26,6 +29,7 @@ const RequestDescLater = () => {
 		<TooltipButton
 			tooltipContent={message.requestRecordLater}
 			variant="outline"
+			disabled={loading}
 			className={'min-w-[30px] mx-1'}
 			onClick={() => handleSubmit('Request')}>
 			<CalendarCheck className="min-w-[20px] w-full h-full" />
