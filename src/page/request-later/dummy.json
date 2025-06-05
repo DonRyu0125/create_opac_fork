@@ -146,11 +146,11 @@
                 "open_date": "2025-06-07",
                 "sp_open_collection_time_entry": [
                     {
-                        "sp_start_time": "10:00",
+                        "sp_start_time": "15:00",
                         "sp_end_time": "10:59"
                     },
                     {
-                        "sp_start_time": "11:00",
+                        "sp_start_time": "16:00",
                         "sp_end_time": "11:59"
                     }
                 ],
