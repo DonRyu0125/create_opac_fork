@@ -2,22 +2,50 @@ import Layout from '@/components/layouts'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import useJSONData from '@/hooks/useJSONData'
-import { removeQuote } from '@/lib/utils'
+import { convertToArr, convertXMLToJson, removeQuote } from '@/lib/utils'
 import { Archive, ChevronDownIcon, CircleEllipsis } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Calendar } from '@/components/ui/calendar'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import dummy from './dummy.json'
 import useConstants from '@/hooks/useConstants'
+import axios from 'axios'
+import X2JS from 'x2js'
+
+type ScheduleData = {
+	operation_day_entry: {
+		weekday: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su'
+		collection_time_entry?: {
+			start_time: string
+			end_time: string
+		}[]
+		date_closed?: 'X'
+	}[]
+	closure_date_entry: {
+		closure_date: string
+		closure_desc: string
+	}[]
+	sp_open_date_entry: {
+		open_date: string
+		sp_open_collection_time_entry: {
+			sp_start_time: string
+			sp_end_time: string
+		}[]
+		sp_cutoff_date: string
+		sp_cufoff_time: string
+	}[]
+	delivery_time_entry: {
+		delivery_type: 'OFFSITESTD' | 'OFFSITECOLD' | 'OFFSITECOOL'
+		delivery_day: string
+	}[]
+}
 
 const RequestLater = () => {
-	const {records } = useJSONData({ selector: '#xml_record' })
-	let reqData = records[0].request
+	const { records } = useJSONData({ selector: '#xml_record' })
 	const handleGoBack = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		window.history.back()
 	}
-	const { message } = useConstants()
 	const [selectDate, setSelectDate] = useState<{
 		date: Date
 		timeSlots: {
@@ -28,7 +56,6 @@ const RequestLater = () => {
 		}[]
 	} | null>(null)
 	const [time, setTime] = useState()
-	const data = dummy.calendar_info
 	const weekdayToIndex: any = {
 		su: 0,
 		mo: 1,
@@ -38,12 +65,45 @@ const RequestLater = () => {
 		fr: 5,
 		sa: 6,
 	}
+	let reqData = records[0].request
+	const { message } = useConstants()
+	const [calData, setCalData] = useState<ScheduleData>({
+		operation_day_entry: [],
+		closure_date_entry: [],
+		sp_open_date_entry: [],
+		delivery_time_entry: [],
+	})
 
-	const openWeekdays = data.operation_day_entry
+	useEffect(() => {
+		getData()
+	}, [])
+
+	const getData = async () => {
+		return await axios
+			.get(`/preprocessing/paramter_calendar.html`, {
+				headers: {
+					'Content-Type': 'text/xml',
+				},
+				withCredentials: true,
+				timeout: 5000,
+			})
+			.then((res) => {
+				const conToJson = convertXMLToJson(res.data)
+				const calDataJson = conToJson.calendar_info
+				setCalData({
+					operation_day_entry: convertToArr(calDataJson.operation_day_entry),
+					closure_date_entry: convertToArr(calDataJson.closure_date_entry),
+					sp_open_date_entry: convertToArr(calDataJson.sp_open_date_entry),
+					delivery_time_entry: convertToArr(calDataJson.delivery_time_entry),
+				})
+			})
+	}
+
+	const openWeekdays = calData.operation_day_entry
 		.filter((d) => d.date_closed !== 'X')
 		.map((d) => weekdayToIndex[d.weekday])
-	const closureDates = new Set(data.closure_date_entry.map((d) => d.closure_date))
-	const specialOpenDates = new Set(data.sp_open_date_entry.map((d) => d.open_date))
+	const closureDates = new Set(calData.closure_date_entry.map((d) => d.closure_date))
+	const specialOpenDates = new Set(calData.sp_open_date_entry.map((d) => d.open_date))
 
 	function isOpen(date: Date) {
 		const yyyyMMdd = date.toISOString().split('T')[0]
@@ -56,14 +116,14 @@ const RequestLater = () => {
 		if (!date) return
 
 		const yyyyMMdd = date.toISOString().split('T')[0]
-		const sp = data.sp_open_date_entry.find((d) => d.open_date === yyyyMMdd)
+		const sp = calData.sp_open_date_entry.find((d) => d.open_date === yyyyMMdd)
 		if (sp) {
 			setSelectDate({ date, timeSlots: sp.sp_open_collection_time_entry })
 			return
 		}
 		const day = date.getDay()
 		const weekdayKey = Object.keys(weekdayToIndex).find((key) => weekdayToIndex[key] === day)
-		const op = data.operation_day_entry.find(
+		const op = calData.operation_day_entry.find(
 			(d) => d.weekday === weekdayKey && d.date_closed !== 'X'
 		)
 
@@ -171,9 +231,9 @@ const RequestLater = () => {
 
 								<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 									<p>
-										This request requires that you visit archive in
-										person to see the item. Items can only be requested a
-										maximum of two weeks in advance of your visit.
+										This request requires that you visit archive in person to
+										see the item. Items can only be requested a maximum of two
+										weeks in advance of your visit.
 									</p>
 								</div>
 								<div className="flex items-center text-xl font-bold mt-7">
@@ -250,7 +310,6 @@ const RequestLater = () => {
 										<input type="hidden" name="dropdown" value={time} />
 									</div>
 								</div>
-
 								<div className="flex justify-center md:justify-end mt-5">
 									<Button
 										disabled={time && selectDate ? false : true}
@@ -277,3 +336,6 @@ const RequestLater = () => {
 }
 
 export default RequestLater
+function escapeBrTags(response: any) {
+	throw new Error('Function not implemented.')
+}
