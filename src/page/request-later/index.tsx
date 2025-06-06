@@ -11,7 +11,7 @@ import dummy from './dummy.json'
 import useConstants from '@/hooks/useConstants'
 
 const RequestLater = () => {
-	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
+	const {records } = useJSONData({ selector: '#xml_record' })
 	let reqData = records[0].request
 	const handleGoBack = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
@@ -29,7 +29,6 @@ const RequestLater = () => {
 	} | null>(null)
 	const [time, setTime] = useState()
 	const data = dummy.calendar_info
-
 	const weekdayToIndex: any = {
 		su: 0,
 		mo: 1,
