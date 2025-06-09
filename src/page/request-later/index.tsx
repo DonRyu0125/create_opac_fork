@@ -7,10 +7,8 @@ import { Archive, ChevronDownIcon, CircleEllipsis } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Calendar } from '@/components/ui/calendar'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import dummy from './dummy.json'
 import useConstants from '@/hooks/useConstants'
 import axios from 'axios'
-import X2JS from 'x2js'
 
 type ScheduleData = {
 	operation_day_entry: {
@@ -257,7 +255,7 @@ const RequestLater = () => {
 											disabled={(date) => !isOpen(date)}
 										/>
 									</div>
-									<div className="md:w-1/2 flex justify-center md:block">
+									<div className="md:w-1/2 text-center md:text-left">
 										<div className={'mx-2 md:mx-0'}>
 											<div className="text-lg font-bold mt-2">
 												Select Date
@@ -307,6 +305,15 @@ const RequestLater = () => {
 												</DropdownMenu.Portal>
 											</DropdownMenu.Root>
 										</div>
+										<div className={'mx-2 md:mx-0'}>
+											<div className="text-lg font-bold mt-2">
+												Estimated Number of Loan Days
+											</div>
+											<input
+												type="number"
+												className="inline-flex items-center justify-between px-4 py-2 border rounded bg-white shadow text-sm w-40"
+											/>
+										</div>
 										<input type="hidden" name="dropdown" value={time} />
 									</div>
 								</div>
@@ -336,6 +343,3 @@ const RequestLater = () => {
 }
 
 export default RequestLater
-function escapeBrTags(response: any) {
-	throw new Error('Function not implemented.')
-}
