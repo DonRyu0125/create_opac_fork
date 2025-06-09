@@ -139,7 +139,7 @@ export default function PatronProfile() {
 						href={
 							getCookieValue('HOME_SESSID') +
 							card.link +
-							(card.label == 'Bookmarks' ? '' : m2l_patron_id)
+							(card.label == 'Bookmarks' || 'Library Circulation' ? '' : m2l_patron_id)
 						}
 						className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-gray-50">
 						<StatCard
