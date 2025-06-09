@@ -7,6 +7,7 @@ import { Archive, CircleEllipsis, Landmark, LibraryBig } from 'lucide-react'
 import { removeQuote } from '@/lib/utils'
 const Request = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
+	const { message } = useConstants()
 	let reqData = records[0].request
 	const handleGoBack = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
@@ -21,7 +22,7 @@ const Request = () => {
 						<div className="flex justify-between items-center border-b pb-4">
 							<h1 className="flex items-center text-xl font-bold">
 								<CircleEllipsis className="mr-2" />
-								Request Order Confirmation
+								{message.request} {message.confirmation}
 							</h1>
 							<div className="text-right">
 								<form
@@ -124,7 +125,7 @@ const Request = () => {
 										type="submit"
 										name="Submit"
 										variant="default">
-										Place Request
+										{message.request}
 									</Button>
 									<Button
 										className="bg-primary rounded mx-1 hover:bg-primary"
@@ -132,20 +133,19 @@ const Request = () => {
 										name="Submit2"
 										variant="default"
 										onClick={handleGoBack}>
-										Cancel Request
+										{message.cancel}
 									</Button>
 								</form>
 							</div>
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
-								You have requested to view <b>{reqData.req_item_title}</b> with the
-								reference number: <b>{reqData.req_item_id}</b>
+								{message.requestedToView}
+								<b>{reqData.req_item_title}</b>
+								{message.referenceNo} <b>{reqData.req_item_id}</b>
 							</p>
-							<p>Your request will be fulfilled in three business days.</p>
-							<p>
-								Please confirm whether you would like to proceed with this request.
-							</p>
+							<p>{message.fulfillmentTime}</p>
+							<p>{message.confirmRequest}</p>
 						</div>
 
 						<div>
@@ -153,27 +153,29 @@ const Request = () => {
 								{reqData.req_db_name === 'DESCRIPTION_WEB' ? (
 									<div className="flex flex-row items-center">
 										<Archive className="mr-2" />
-										<h1 className="text-xl font-bold">Archives</h1>
+										<h1 className="text-xl font-bold">{message.archives}</h1>
 									</div>
 								) : reqData.req_db_name === 'COLLECTIONS_WEB' ? (
 									<div className="flex flex-row items-center">
 										<Landmark className="mr-2" />
-										<h1 className="text-xl font-bold">Museum</h1>
+										<h1 className="text-xl font-bold">{message.museum}</h1>
 									</div>
 								) : reqData.req_db_name === 'BIBLIO_WEB' ? (
 									<div className="flex flex-row items-center">
 										<LibraryBig className="mr-2" />
-										<h1 className="text-xl font-bold">Library</h1>
+										<h1 className="text-xl font-bold">{message.library}</h1>
 									</div>
 								) : (
 									''
 								)}
 								<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
 								<p className="text-sm text-gray-600">
-									Reference Number: {reqData.req_item_id}
+									{message.referenceNo}: {reqData.req_item_id}
 								</p>
 								{reqData.req_acc_number ? (
-									<p className="text-sm text-gray-600">Accession Number: </p>
+									<p className="text-sm text-gray-600">
+										{message.accessionNumber}:{' '}
+									</p>
 								) : (
 									''
 								)}

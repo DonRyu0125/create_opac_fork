@@ -211,40 +211,31 @@ const RequestLater = () => {
 								<Input type="hidden" name="REQ_QUEUE" value={reqData.req_queue} />
 								<h1 className="flex items-center text-xl font-bold">
 									<CircleEllipsis className="mr-2" />
-									Request Order Later
+									{message.requestRecordLater}
 								</h1>
 
 								<div className="mt-3 border p-4 rounded">
 									<div className="flex flex-row items-center">
 										<Archive className="mr-2" />
-										<h1 className="text-xl font-bold">Archives</h1>
+										<h1 className="text-xl font-bold">{message.archives}</h1>
 									</div>
 									<p className="text-lg font-bold mt-2">
 										{reqData.req_item_title}
 									</p>
 									<p className="text-sm text-gray-600">
-										Reference Number: {reqData.req_item_id}
+										{message.referenceNo}: {reqData.req_item_id}
 									</p>
 								</div>
 
 								<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
-									<p>
-										This request requires that you visit archive in person to
-										see the item. Items can only be requested a maximum of two
-										weeks in advance of your visit.
-									</p>
+									<p>{message.visitRequirement}</p>
 								</div>
 								<div className="flex items-center text-xl font-bold mt-7">
 									<CircleEllipsis className="mr-2" />
-									Please select the date of your visit
+									{message.visitDateLabel}
 								</div>
 								<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
-									<p>
-										The item will typically be ready to use in the Archives
-										Study Area within an hour of your selected time (e.g.
-										documents in the 11:00 collection are usually ready for use
-										by 12:00).
-									</p>
+									<p>{message.availabilityInfo}</p>
 								</div>
 								<div className="w-full md:flex ">
 									<div className="md:w-1/2 flex justify-center">
@@ -258,7 +249,7 @@ const RequestLater = () => {
 									<div className="md:w-1/2 text-center md:text-left">
 										<div className={'mx-2 md:mx-0'}>
 											<div className="text-lg font-bold mt-2">
-												Select Date
+												{message.date}
 											</div>
 											<input
 												className="inline-flex items-center justify-between px-4 py-2 border rounded bg-white shadow text-sm w-40"
@@ -274,7 +265,7 @@ const RequestLater = () => {
 										</div>
 										<div className={'mx-2 md:mx-0'}>
 											<div className="text-lg font-bold mt-2">
-												Select a Time
+												{message.time}
 											</div>
 											<DropdownMenu.Root>
 												<DropdownMenu.Trigger className="inline-flex items-center justify-between px-4 py-2 border rounded bg-white shadow text-sm w-40">
@@ -307,9 +298,10 @@ const RequestLater = () => {
 										</div>
 										<div className={'mx-2 md:mx-0'}>
 											<div className="text-lg font-bold mt-2">
-												Estimated Number of Loan Days
+												{message.estimatedLoanDaysLabel}
 											</div>
 											<input
+												name="LOAN_PERIOD"
 												type="number"
 												className="inline-flex items-center justify-between px-4 py-2 border rounded bg-white shadow text-sm w-40"
 											/>
@@ -324,13 +316,13 @@ const RequestLater = () => {
 										type="submit"
 										name="Submit"
 										variant="default">
-										Place Request
+										{message.request}
 									</Button>
 									<Button
 										className="bg-primary rounded mx-1 hover:bg-primary"
 										variant="default"
 										onClick={handleGoBack}>
-										Cancel Request
+										{message.cancel}
 									</Button>
 								</div>
 							</form>

@@ -196,7 +196,7 @@
 	"reproduceThisRecord": "Reproduire cet enregistrement",
 	"askAboutThisRecord": "Poser une question sur cet enregistrement",
 	"requestRecord": "Demander l’enregistrement",
-	"requestRecordLater":"Demander l'enregistrement plus tard",
+	"requestRecordLater": "Demander l'enregistrement plus tard",
 	"downloadMaterial": "Telecharger le materiel",
 	"reproductionConfirmed": "Reproduction confirmée",
 	"thankYouTitle": "Merci pour votre demande !",
@@ -232,5 +232,12 @@
 	"selectRow": "Sélectionner la ligne",
 	"action": "Action",
 	"noAction": "Aucune action",
-	"cancelled": "Annulé"
+	"cancelled": "Annulé",
+	"visitRequirement": "Cette demande nécessite que vous visitiez les archives en personne pour consulter l'article.",
+	"visitDateLabel": "Veuillez sélectionner la date de votre visite",
+	"availabilityInfo": "L’article sera généralement prêt à être consulté dans la salle d’étude des Archives une heure après l’heure sélectionnée (par exemple, les documents de la collecte de 11 h sont habituellement disponibles à 12 h).",
+	"estimatedLoanDaysLabel": "Nombre estimé de jours de prêt",
+	"requestedToView": "Vous avez demandé à consulter",
+	"fulfillmentTime": "Votre demande sera traitée dans un délai de trois jours ouvrables.",
+	"confirmRequest": "Veuillez confirmer si vous souhaitez poursuivre cette demande."
 }
