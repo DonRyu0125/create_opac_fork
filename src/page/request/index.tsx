@@ -141,7 +141,10 @@ const Request = () => {
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
 								{message.requestedToView}
-								<b>{reqData.req_item_title}</b>
+								<b>&nbsp;{reqData.req_item_title}</b>
+							</p>
+							<p>
+								{' '}
 								{message.referenceNo} <b>{reqData.req_item_id}</b>
 							</p>
 							<p>{message.fulfillmentTime}</p>
