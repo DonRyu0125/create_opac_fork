@@ -239,5 +239,8 @@
 	"estimatedLoanDaysLabel": "Nombre estimé de jours de prêt",
 	"requestedToView": "Vous avez demandé à consulter",
 	"fulfillmentTime": "Votre demande sera traitée dans un délai de trois jours ouvrables.",
-	"confirmRequest": "Veuillez confirmer si vous souhaitez poursuivre cette demande."
+	"confirmRequest": "Veuillez confirmer si vous souhaitez poursuivre cette demande.",
+	"confirmed": "Confirmé",
+	"requestFor": "Votre demande pour",
+	"hasBeenAccepted": "a été acceptée !"
 }

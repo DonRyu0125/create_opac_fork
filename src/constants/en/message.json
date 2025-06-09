@@ -240,6 +240,8 @@
 	"estimatedLoanDaysLabel": "Estimated Number of Loan Days",
 	"requestedToView": "You have requested to view",
 	"fulfillmentTime": "Your request will be fulfilled in three business days.",
-	"confirmRequest": "Please confirm whether you would like to proceed with this request."
-  
+	"confirmRequest": "Please confirm whether you would like to proceed with this request.",
+	"confirmed": "Confirmed",
+    "requestFor": "Your request for",
+  "hasBeenAccepted": "has been accepted!"
 }
