@@ -43,7 +43,7 @@ export function DatePickerWithRange({
 				</PopoverTrigger>
 				<PopoverContent className="w-auto p-0" align="start">
 					<Calendar
-						className="relative w-full"
+						leftForDateRange={'left-[87%]'}
 						mode="range"
 						defaultMonth={date?.from}
 						selected={date}
