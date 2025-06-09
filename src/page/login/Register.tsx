@@ -194,7 +194,7 @@ const Register = () => {
 							},
 							{
 								value: 'step4',
-								label: `${message.stepLabel} 4: ${message.confirmationLabel}`,
+								label: `${message.stepLabel} 4: ${message.confirmation}`,
 							},
 						].map((tab, idx) => (
 							<TabsTrigger

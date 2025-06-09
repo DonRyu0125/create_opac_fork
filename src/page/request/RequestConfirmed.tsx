@@ -21,7 +21,7 @@ const RequestConfirmed = () => {
 						<div className="flex justify-between items-center border-b pb-4">
 							<h1 className="flex items-center text-xl font-bold">
 								<CircleCheck className="mr-2 text-green-500" />
-								{message.request}
+								{message.request} {message.confirmed}
 							</h1>
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
