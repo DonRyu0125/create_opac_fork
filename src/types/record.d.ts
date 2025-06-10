@@ -91,6 +91,7 @@ export interface RequestData {
 	sentence_2: string
 	time_needed: string
 	is_requested_by_client:string
+	req_later:string
 }
 export interface Record {
 	action: string

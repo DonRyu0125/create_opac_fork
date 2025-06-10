@@ -85,7 +85,7 @@ export const convertXMLToJson = (response: string) => {
 }
 
 const escapeBrTags = (xml: string): string => {
-	return xml.replace(/<br\s*\/?>/gi, '');
+	return xml.replace(/<br\s*\/?>/gi, '')
 }
 
 export const encodeObj = (input: string) => {
@@ -102,6 +102,10 @@ export const isDatePast = (dateString: string) => {
 	currentDate.setHours(0, 0, 0, 0)
 
 	return givenDate < currentDate
+}
+
+export const removeQuote = (str: string) => {
+	return str.replace(/['"]+/g, '')
 }
 
 /**
