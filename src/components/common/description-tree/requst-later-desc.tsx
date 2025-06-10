@@ -36,7 +36,7 @@ const RequestDescLater = () => {
 			<form
 				method="post"
 				ref={formRef}
-				action={removeQuote(requestData.req_later)}
+				action={removeQuote(requestData.action_later)}
 				className="hidden">
 				<Input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time} />
 				<Input type="hidden" name="METHOD_REQUEST" value={requestData.method_request} />
