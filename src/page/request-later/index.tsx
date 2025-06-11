@@ -220,7 +220,7 @@ const RequestLater = () => {
 										<h1 className="text-xl font-bold">{message.archives}</h1>
 									</div>
 									<p className="text-lg font-bold mt-2">
-										{reqData.req_item_title}
+										{reqData.req_title}
 									</p>
 									<p className="text-sm text-gray-600">
 										{message.referenceNo}: {reqData.req_item_id}
@@ -253,6 +253,7 @@ const RequestLater = () => {
 											</div>
 											<input
 												className="inline-flex items-center justify-between px-4 py-2 border rounded bg-white shadow text-sm w-40"
+												name={'DATE_NEEDED'}
 												value={
 													selectDate
 														? selectDate.date
@@ -306,7 +307,7 @@ const RequestLater = () => {
 												className="inline-flex items-center justify-between px-4 py-2 border rounded bg-white shadow text-sm w-40"
 											/>
 										</div>
-										<input type="hidden" name="dropdown" value={time} />
+										<input type="hidden" name="TIME_NEEDED" value={time} />
 									</div>
 								</div>
 								<div className="flex justify-center md:justify-end mt-5">
