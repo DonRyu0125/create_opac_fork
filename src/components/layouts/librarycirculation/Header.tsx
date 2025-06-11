@@ -34,8 +34,8 @@ const Header = () => {
 								<Link
 									href={getCookieValue('HOME_SESSID') + home_url}
 									className="flex items-center no-underline text-lg text-primary-foreground hover:text-primary-foreground/80">
-									<Home className="mr-1 h-5 w-5" />
-									{message.clientDashboard}
+									<LibraryBig className="mr-1 h-5 w-5" />
+									{message.patronDashboard}
 								</Link>
 							</BreadcrumbLink>
 						</BreadcrumbItem>
