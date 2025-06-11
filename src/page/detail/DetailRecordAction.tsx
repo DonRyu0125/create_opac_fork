@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { copyRecordURL, deepSearchKey, handleCopyRecordURL } from '@/lib/record'
-import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag, Star, SquareCheck } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag, Star, SquareCheck, Copyright, Lightbulb, Link } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
 import DialogLogin from '../../components/common/DialogLogin'
@@ -252,7 +252,7 @@ const DetailRecordAction = () => {
 						variant="outline"
 						className={' w-[22%] md:w-[23.5%] flex  p-1'}
 						onClick={() => handleSubmit('Enquire')}>
-						<ShoppingBag className="w-4 h-4 md:mr-2 " />
+						<Lightbulb className="w-4 h-4 md:mr-2 " />
 						<span className="hidden md:block">{message.enquire}</span>
 					</TooltipButton>
 					<TooltipButton
@@ -268,7 +268,7 @@ const DetailRecordAction = () => {
 						variant="outline"
 						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => handleSubmit('Copyright')}>
-						<Files className="w-4 h-4 md:mr-2" />{' '}
+						<Copyright className="w-4 h-4 md:mr-2" />{' '}
 						<span className="hidden md:block">{message.copyright}</span>
 					</TooltipButton>
 					<TooltipButton
@@ -281,7 +281,7 @@ const DetailRecordAction = () => {
 								title: message.recordIsCopied,
 							})
 						}}>
-						<Copy className="w-4 h-4 md:mr-2" />
+						<Link className="w-4 h-4 md:mr-2" />
 						<span className="hidden md:block">{message.copy}</span>
 					</TooltipButton>
 					<TooltipButton
