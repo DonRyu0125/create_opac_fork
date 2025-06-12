@@ -13,7 +13,7 @@ import { getJSONTree, TreeNode } from '@/lib/tree'
 import { useEffect, useState } from 'react'
 import NavigationSideBar from './NavigationSideBar'
 import NoRecord from '../NoRecord'
-import RequestAccordian from './RequestAccordian'
+import RequestAccordianDesc from './RequestAccordianDesc'
 
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
@@ -137,7 +137,7 @@ const Detail = () => {
 										<div className="w-full ">
 											<DetailRecord />
 										</div>
-										{/* {isDescriptionDatabase(database) && (
+										{isDescriptionDatabase(database) && (
 											<div className="w-full ">
 												<Accordion
 													items={[
@@ -145,29 +145,23 @@ const Detail = () => {
 															title: message.descriptionTree,
 															content: (
 																<div className="max-h-[600px] overflow-auto">
-																	<DescriptionTree
-																		loading={loading}
-																		tree={tree}
-																		selectedId={openKeyPath[0]}
-																	/>
+																	<DescriptionTree loading={loading} tree={tree} selectedId={openKeyPath[0]} />
 																</div>
 															),
 														},
 													]}
 												/>
 											</div>
-										)} */}
-										{isDescriptionDatabase(database) &&
-											!record.refd_lowerexist && (
-												<RequestAccordian
-													items={[
-														{
-															title: message.description,
-															content: <></>,
-														},
-													]}
-												/>
-											)}
+										)}
+										{isDescriptionDatabase(database) && !record.refd_lowerexist && (
+											<RequestAccordianDesc
+												items={[
+													{
+														title: message.description,
+													},
+												]}
+											/>
+										)}
 									</div>
 								</div>
 							</div>

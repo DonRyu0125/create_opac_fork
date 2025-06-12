@@ -1,6 +1,5 @@
+import { Pagination } from '@/components/ui/pagination'
 import { GenericObject, deepSearchKey } from '@/lib/record'
-import { FilterItem } from '@/types/filter'
-import { Pagination } from '@/types/pagination'
 import { Record } from '@/types/record'
 import { useState } from 'react'
 import X2JS from 'x2js'
