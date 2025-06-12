@@ -1,7 +1,6 @@
 import ScrollToTopButton from '@/components/common/ScrollToTop'
 import React, { useState } from 'react'
 import Header from './Header'
-import Sidebar from './Sidebar'
 import useJSONData from '@/hooks/useJSONData'
 import Footer from './Footer'
 
@@ -11,7 +10,7 @@ type PatronLayoutProps = {
 	heading?: string
 }
 
-const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) => {
+const AccountSettingsLayout = ({ children, activeSection, heading }: PatronLayoutProps) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
 	const handleClick = (id: any) => {
@@ -20,7 +19,6 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 
 	return (
 		<div className="flex min-h-screen w-full flex-col bg-muted/40 relative">
-			<Sidebar />
 			<div className="flex-1 flex flex-col relative">
 				<Header />
 
@@ -35,4 +33,4 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 	)
 }
 
-export default PatronLayout
+export default AccountSettingsLayout
