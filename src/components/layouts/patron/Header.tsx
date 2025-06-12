@@ -66,6 +66,16 @@ const Header = () => {
 									{message.dashboardHome}
 								</Link>
 							</DropdownMenuItem>
+							<DropdownMenuItem>
+								<Link
+									href={
+										getCookieValue('HOME_SESSID') +
+										'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_LIBRARY_CIRC_DASHBOARD&EXP=patron_id+~3D+global(m2l_patron_id)'
+									}
+									className="no-underline ml-[0.5rem]">
+									{message.patronDashboard}
+								</Link>
+							</DropdownMenuItem>
 							{/* <DropdownMenuItem>Account Settings</DropdownMenuItem> */}
 							<DropdownMenuSeparator />
 							<DropdownMenuLabel>Search Database</DropdownMenuLabel>

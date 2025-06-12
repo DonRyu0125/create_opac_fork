@@ -51,6 +51,7 @@ import CopyrightConfirmed from '@/page/copyright/CopyrightConfirmed'
 import CopyrightForm from '@/page/copyright/CopyrightForm'
 import LibraryCirculation from '@/page/dashboard/LibraryCirculation'
 import RequestLater from '@/page/request-later'
+import AccountSettings from '@/page/dashboard/AccountSettings'
 
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
@@ -112,6 +113,7 @@ export const ROUTES: TRoute = {
 	copyrightconfirmed: CopyrightConfirmed,
 	'client-login-error': ClientLoginError,
 	'library-circulation': LibraryCirculation,
+	'account-settings': AccountSettings,
 	...ADMIN_ROUTES,
 }
 
