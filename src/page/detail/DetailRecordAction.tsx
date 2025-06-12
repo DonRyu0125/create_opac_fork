@@ -2,7 +2,18 @@ import { useState, useRef } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { copyRecordURL, deepSearchKey, handleCopyRecordURL } from '@/lib/record'
-import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag, Star, SquareCheck, Copyright, Lightbulb, Link } from 'lucide-react'
+import {
+	ChevronLeft,
+	ChevronRight,
+	Files,
+	Copy,
+	ShoppingBag,
+	Star,
+	SquareCheck,
+	Copyright,
+	Lightbulb,
+	Link,
+} from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
 import DialogLogin from '../../components/common/DialogLogin'
@@ -162,91 +173,77 @@ const DetailRecordAction = () => {
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
 				<div className="flex flex-wrap justify-start gap-2">
-					{!isDescriptionDatabase(database) && (
-						<TooltipButton
-							tooltipContent={message.requestRecord}
-							variant="outline"
-							className={'w-[22%] md:w-[23.5%] flex '}
-							onClick={() => handleSubmit('Request')}>
-							<SquareCheck className="w-4 h-4 md:mr-2 " />{' '}
-							<span className="hidden md:block">{message.request}</span>
-							<form
-								method="post"
-								ref={formRef}
-								action={
-									getHomeSessionID() +
-									'/1/' +
-									record.request.req_db_link2 +
-									'?REQUESTLOGIN&DBNAME=' +
-									record.request.req_db_name
-								}
-								className="hidden">
-								<Input
-									type="hidden"
-									name="ITEM_REQ_TIME"
-									value={requestData.item_req_time}
-								/>
-								<Input
-									type="hidden"
-									name="METHOD_REQUEST"
-									value={requestData.method_request}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_TOPIC"
-									value={requestData.req_topic}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_APPL_NAME"
-									value={requestData.req_appl_name}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_DB_NAME"
-									value={requestData.req_db_name}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_DB_LINK2"
-									value={requestData.req_db_link2}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_QUEUE"
-									value={requestData.req_queue}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_DB_RECID"
-									value={requestData.req_db_recid}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_TITLE"
-									value={requestData.req_title}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_ITEM_ID"
-									value={requestData.req_item_id}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_ACC_NUMBER"
-									value={requestData.req_acc_number}
-								/>
-								<Input
-									type="hidden"
-									name="REQ_ITEM_TITLE"
-									value={requestData.req_item_title}
-								/>
-								<Button className="bg-primary" type="submit" variant="default">
-									{message.submit}
-								</Button>
-							</form>
-						</TooltipButton>
-					)}
+					{/* <TooltipButton
+						tooltipContent={message.requestRecord}
+						variant="outline"
+						className={'w-[22%] md:w-[23.5%] flex '}
+						onClick={() => handleSubmit('Request')}>
+						<SquareCheck className="w-4 h-4 md:mr-2 " />{' '}
+						<span className="hidden md:block">{message.request}</span>
+						<form
+							method="post"
+							ref={formRef}
+							action={
+								getHomeSessionID() +
+								'/1/' +
+								record.request.req_db_link2 +
+								'?REQUESTLOGIN&DBNAME=' +
+								record.request.req_db_name
+							}
+							className="hidden">
+							<Input
+								type="hidden"
+								name="ITEM_REQ_TIME"
+								value={requestData.item_req_time}
+							/>
+							<Input
+								type="hidden"
+								name="METHOD_REQUEST"
+								value={requestData.method_request}
+							/>
+							<Input type="hidden" name="REQ_TOPIC" value={requestData.req_topic} />
+							<Input
+								type="hidden"
+								name="REQ_APPL_NAME"
+								value={requestData.req_appl_name}
+							/>
+							<Input
+								type="hidden"
+								name="REQ_DB_NAME"
+								value={requestData.req_db_name}
+							/>
+							<Input
+								type="hidden"
+								name="REQ_DB_LINK2"
+								value={requestData.req_db_link2}
+							/>
+							<Input type="hidden" name="REQ_QUEUE" value={requestData.req_queue} />
+							<Input
+								type="hidden"
+								name="REQ_DB_RECID"
+								value={requestData.req_db_recid}
+							/>
+							<Input type="hidden" name="REQ_TITLE" value={requestData.req_title} />
+							<Input
+								type="hidden"
+								name="REQ_ITEM_ID"
+								value={requestData.req_item_id}
+							/>
+							<Input
+								type="hidden"
+								name="REQ_ACC_NUMBER"
+								value={requestData.req_acc_number}
+							/>
+							<Input
+								type="hidden"
+								name="REQ_ITEM_TITLE"
+								value={requestData.req_item_title}
+							/>
+							<Button className="bg-primary" type="submit" variant="default">
+								{message.submit}
+							</Button>
+						</form>
+					</TooltipButton> */}
 					<TooltipButton
 						tooltipContent={message.askAboutThisRecord}
 						variant="outline"

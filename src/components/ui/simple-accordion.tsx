@@ -5,12 +5,12 @@ import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from './button'
 
-interface AccordionItem {
+export interface AccordionItem {
 	title: string
 	content: JSX.Element
 }
 
-interface AccordionProps {
+export interface AccordionProps {
 	items: AccordionItem[]
 }
 
