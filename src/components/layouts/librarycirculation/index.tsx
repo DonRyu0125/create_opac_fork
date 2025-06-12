@@ -6,7 +6,7 @@ import useJSONData from '@/hooks/useJSONData'
 import { getCookieValue } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
-import Footer from '../patron/Footer'
+import Footer from './Footer'
 
 type PatronLayoutProps = {
 	children?: React.ReactNode
@@ -27,7 +27,7 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 
 	return (
 		<div className="flex min-h-screen w-full flex-col bg-muted/40 relative">
-			{/* <Sidebar /> */}
+			<Sidebar />
 			<div className="flex-1 flex flex-col relative">
 				<Header />
 				<div className="flex justify-center items-center py-4 bg-primary-soft">
@@ -45,13 +45,6 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 								{button.label}
 							</a>
 						))}
-						{/* Calendar profile list need different url so it is separated from the profilelist, 20240207 Don Ryu */}
-						<a
-							key={'Calendar'}
-							href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`}
-							className={buttonVariants({ variant: 'outline' })}>
-							{message.calendar}
-						</a>
 					</div>
 				</div>
 				<main className="container grid items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 pb-4 mt-3">

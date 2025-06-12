@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import useConstants from '@/hooks/useConstants'
 import { clearCookies, getCookieValue } from '@/lib/utils'
-import { Home, UserRound } from 'lucide-react'
+import { LibraryBig, UserRound } from 'lucide-react'
 
 const Header = () => {
 	const { message } = useConstants()
