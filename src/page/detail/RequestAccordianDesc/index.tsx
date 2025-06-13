@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { CalendarCheck, ChevronDown, SquareCheck } from 'lucide-react'
+import { CalendarCheck, ChevronDown, FolderOpen, SquareCheck } from 'lucide-react'
 import { cn, convertToArr, getCookieValue, getHomeSessionID, removeQuote } from '@/lib/utils'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import TooltipButton from '@/components/common/TooltipButton'
 import { Input } from '@/components/ui/input'
-import { EmptyState } from '@/components/common/EmptyState'
+import EmptyState from '@/components/common/description-tree/empty-state'
 
 type ItemContent = {
 	id: string
@@ -32,7 +32,6 @@ const RequestAccordianDesc = () => {
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
 	const loadMoreRef = useRef<HTMLDivElement | null>(null)
 	let items = convertToArr(container?.item)
-
 
 	useEffect(() => {
 		if (!loadMoreRef.current) return
@@ -131,7 +130,12 @@ const RequestAccordianDesc = () => {
 								<div ref={loadMoreRef} className="h-8" />
 							</div>
 						) : (
-							<EmptyState />
+							<div className="w-full max-w-3xl mx-auto p-4">
+								<div className="text-center py-16 px-4">
+									<FolderOpen className="mx-auto h-12 w-12 text-gray-400" />
+									<h3 className="mt-2 text-sm font-semibold text-gray-900">No items</h3>
+								</div>
+							</div>
 						)}
 					</div>
 				)}

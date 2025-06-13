@@ -242,5 +242,6 @@
 	"confirmRequest": "Veuillez confirmer si vous souhaitez poursuivre cette demande.",
 	"confirmed": "Confirmé",
 	"requestFor": "Votre demande pour",
-	"hasBeenAccepted": "a été acceptée !"
+	"hasBeenAccepted": "a été acceptée !",
+	"barcode": "Identifiant du code-barres"
 }

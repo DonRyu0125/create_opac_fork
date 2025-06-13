@@ -1,5 +1,5 @@
 {
-    "accessionNumber": "Accession Number",
+	"accessionNumber": "Accession Number",
 	"accountNumber": "Account Number",
 	"accountSettings": "Account Settings",
 	"action": "Action",
@@ -171,7 +171,7 @@
 	"request": "Request",
 	"requestOrderNumber": "Request Order Number",
 	"requestRecord": "Request Record",
-	"requestRecordLater":"Request Later",
+	"requestRecordLater": "Request Later",
 	"reset": "Reset",
 	"resetPasswordConfirmation": "Reset Password Confirmation",
 	"resultsFor": "Result(s) For",
@@ -241,6 +241,7 @@
 	"fulfillmentTime": "Your request will be fulfilled in three business days.",
 	"confirmRequest": "Please confirm whether you would like to proceed with this request.",
 	"confirmed": "Confirmed",
-    "requestFor": "Your request for",
-  "hasBeenAccepted": "has been accepted!"
+	"requestFor": "Your request for",
+	"hasBeenAccepted": "has been accepted!",
+	"barcode":"Barcode Id"
 }
