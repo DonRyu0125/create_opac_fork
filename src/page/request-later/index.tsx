@@ -104,7 +104,28 @@ const RequestLater = () => {
 	const closureDates = new Set(calData.closure_date_entry.map((d) => d.closure_date))
 	const specialOpenDates = new Set(calData.sp_open_date_entry.map((d) => d.open_date))
 
+	const getDeliveryDate = (item_delivery_type: string) => {
+		let days = calData.delivery_time_entry.find((item) => item.delivery_type === item_delivery_type)
+		if (days) {
+			return days
+		}
+	}
+
 	function isOpen(date: Date) {
+		const today = new Date()
+		today.setHours(0, 0, 0, 0)
+	
+		const inputDate = new Date(date)
+		inputDate.setHours(0, 0, 0, 0)
+	
+		const deliveryData = getDeliveryDate(container.item.aone_loc)
+		const deliveryDays = parseInt(deliveryData?.delivery_day || '0', 10)
+	
+		const blockedUntil = new Date(today)
+		blockedUntil.setDate(today.getDate() + deliveryDays)
+	
+		if (inputDate < blockedUntil) return false
+	
 		const yyyyMMdd = date.toISOString().split('T')[0]
 		if (specialOpenDates.has(yyyyMMdd)) return true
 		if (closureDates.has(yyyyMMdd)) return false
@@ -127,8 +148,6 @@ const RequestLater = () => {
 		setSelectDate({ date, timeSlots: op?.collection_time_entry || [] })
 	}
 
-	// container.item.aone_loc
-	// aone_loc OFFSITESTD
 	return (
 		<Layout>
 			<section>
@@ -196,7 +215,7 @@ const RequestLater = () => {
 											mode="single"
 											selected={selectDate?.date}
 											onSelect={handleSelect}
-											disabled={(date) => !isOpen(date)}
+											disabled={(date: Date) => !isOpen(date)}
 										/>
 									</div>
 									<div className="md:w-1/2 text-center md:text-left">
