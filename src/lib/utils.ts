@@ -216,8 +216,8 @@ export const encodeURIStringToMinisisSpecialCharacter = (originalString: string)
 	return encodeURIComponent(originalString).replace(/%/g, '~')
 }
 
-export const isDescriptionDatabase = (database: string) => {
-	return database.toLocaleUpperCase() === 'DESCRIPTION_WEB'
+export const isDescriptionDatabase = (database: string,req_database:string) => {
+	return database.toLocaleUpperCase() === 'DESCRIPTION_WEB' && req_database.toLocaleUpperCase() === 'DESCRIPTION_WEB'
 }
 
 export function getClassName(databaseName?: string, type?: 'text' | 'border' | 'bg'): string {
