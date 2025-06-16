@@ -193,9 +193,6 @@ const RequestLater = () => {
 										<p className="text-sm text-gray-600">
 											{message.referenceNo} : {reqData.req_item_id}
 										</p>
-										<p className="md:mx-2 text-sm text-gray-600">
-											{message.barcode} : {container.item.id}
-										</p>
 									</div>
 								</div>
 								<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">

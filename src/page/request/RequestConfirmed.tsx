@@ -36,7 +36,7 @@ const RequestConfirmed = () => {
 							) : (
 								''
 							)}
-							{reqData.sentence_2 ? <p>{reqData.sentence_2}</p> : ''}
+							{/* {reqData.sentence_2 ? <p>{reqData.sentence_2}</p> : ''} */}
 						</div>
 
 						<div>
@@ -51,9 +51,6 @@ const RequestConfirmed = () => {
 										<div>
 											<p className="text-sm text-gray-600">
 												{message.referenceNo} : {reqData?.req_item_id}
-											</p>
-											<p className="text-sm text-gray-600">
-												{message.barcode} : {container?.item.id}
 											</p>
 										</div>
 									</>
