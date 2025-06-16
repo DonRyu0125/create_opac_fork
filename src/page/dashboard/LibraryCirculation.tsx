@@ -1,5 +1,7 @@
+import PatronLayout from "@/components/layouts/librarycirculation"
+
 const LibraryCirculation = () => {
-    return <h1>Library Circulation</h1>
+    return <PatronLayout heading=""></PatronLayout>
 }
 
 export default LibraryCirculation
