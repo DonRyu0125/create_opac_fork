@@ -10,7 +10,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import useConstants from '@/hooks/useConstants'
 import axios from 'axios'
 
-type ScheduleData = {
+export type ScheduleData = {
 	operation_day_entry: {
 		weekday: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su'
 		collection_time_entry?: {
@@ -73,7 +73,6 @@ const RequestLater = () => {
 		delivery_time_entry: [],
 	})
 
-	console.log('container', container)
 
 	useEffect(() => {
 		getData()

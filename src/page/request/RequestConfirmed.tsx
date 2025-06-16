@@ -9,7 +9,8 @@ const RequestConfirmed = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { config } = useConstants()
 	const { navigations } = config
-	let reqData = records[0].request
+	let reqData: any = records[0].request
+	let container = reqData.container
 	const { message } = useConstants()
 
 	return (
@@ -26,35 +27,63 @@ const RequestConfirmed = () => {
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
-								{message.requestFor} <b>{reqData.req_item_title}</b> -{' '}
-								<b>{reqData.req_item_id}</b> {message.hasBeenAccepted}
+								{message.requestFor} <b>{reqData.req_item_title}</b> - <b>{reqData.req_item_id}</b> {message.hasBeenAccepted}
 							</p>
-							{reqData.sentence_1 ? <p>{message.request} {reqData.sentence_1}</p> : ''}
+							{reqData.sentence_1 ? (
+								<p>
+									{message.request} {reqData.sentence_1}
+								</p>
+							) : (
+								''
+							)}
 							{reqData.sentence_2 ? <p>{reqData.sentence_2}</p> : ''}
 						</div>
 
 						<div>
 							<div className="border p-4 rounded">
 								{reqData.req_db_name === 'DESCRIPTION_WEB' ? (
-									<div className="flex flex-row items-center">
-										<Archive className="mr-2" />
-										<h1 className="text-xl font-bold">{message.archives}</h1>
-									</div>
+									<>
+										<div className="flex flex-row items-center">
+											<Archive className="mr-2" />
+											<h1 className="text-xl font-bold">{message.archives}</h1>
+										</div>
+										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
+										<div>
+											<p className="text-sm text-gray-600">
+												{message.referenceNo} : {reqData?.req_item_id}
+											</p>
+											<p className="text-sm text-gray-600">
+												{message.barcode} : {container?.item.id}
+											</p>
+										</div>
+									</>
 								) : reqData.req_db_name === 'COLLECTIONS_WEB' ? (
-									<div className="flex flex-row items-center">
-										<Landmark className="mr-2" />
-										<h1 className="text-xl font-bold">{message.museum}</h1>
-									</div>
+									<>
+										<div className="flex flex-row items-center">
+											<LibraryBig className="mr-2" />
+											<h1 className="text-xl font-bold">{message.library}</h1>
+										</div>
+										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
+										<p className="text-sm text-gray-600">
+											{message.referenceNo}: {reqData.req_item_id}
+										</p>
+										{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
+									</>
 								) : reqData.req_db_name === 'BIBLIO_WEB' ? (
-									<div className="flex flex-row items-center">
-										<LibraryBig className="mr-2" />
-										<h1 className="text-xl font-bold">{message.library}</h1>
-									</div>
+									<>
+										<div className="flex flex-row items-center">
+											<LibraryBig className="mr-2" />
+											<h1 className="text-xl font-bold">{message.library}</h1>
+										</div>
+										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
+										<p className="text-sm text-gray-600">
+											{message.referenceNo}: {reqData.req_item_id}
+										</p>
+										{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
+									</>
 								) : (
 									''
 								)}
-								<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
-								<p className="text-sm text-gray-600">{reqData.req_item_id}</p>
 							</div>
 						</div>
 						<div className="border-t mt-6">
