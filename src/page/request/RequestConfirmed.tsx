@@ -27,15 +27,12 @@ const RequestConfirmed = () => {
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
-								{message.requestFor} <b>{reqData.req_item_title}</b> - <b>{reqData.req_item_id}</b> {message.hasBeenAccepted}
+								{message.requestFor} <b>{reqData.req_item_title}</b> - <b>{reqData.req_item_id}</b>{' '}
+								{reqData.sentence_1 ? reqData.sentence_1 : ''}
 							</p>
-							{reqData.sentence_1 ? (
-								<p>
-									{message.request} {reqData.sentence_1}
-								</p>
-							) : (
-								''
-							)}
+							<p>
+								It is scheduled for access <b>{reqData.collection_time}</b>.
+							</p>
 							{/* {reqData.sentence_2 ? <p>{reqData.sentence_2}</p> : ''} */}
 						</div>
 
