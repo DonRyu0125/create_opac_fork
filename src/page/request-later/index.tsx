@@ -158,7 +158,7 @@ const RequestLater = () => {
 								<Input type="hidden" name="REQ_PROCESS_DATE" value={reqData.req_process_date} />
 								<Input type="hidden" name="REQ_STATUS" value={reqData.req_status} />
 								<Input type="hidden" name="REC_STATUS" value={reqData.rec_status} />
-								<Input type="hidden" name="REQ_DB_NAME" value={reqData.req_db_name} />
+								{/* <Input type="hidden" name="REQ_DB_NAME" value={reqData.req_db_name} /> */}
 								<Input type="hidden" name="REQ_DB_RECID" value={reqData.req_db_recid} />
 								<Input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
 								<Input type="hidden" name="REQ_DB_LINK2" value={reqData.req_db_link2} />

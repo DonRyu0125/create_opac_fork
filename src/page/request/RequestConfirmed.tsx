@@ -39,50 +39,53 @@ const RequestConfirmed = () => {
 							{/* {reqData.sentence_2 ? <p>{reqData.sentence_2}</p> : ''} */}
 						</div>
 
-						<div>
-							<div className="border p-4 rounded">
-								{reqData.req_db_name === 'DESCRIPTION_WEB' ? (
-									<>
-										<div className="flex flex-row items-center">
-											<Archive className="mr-2" />
-											<h1 className="text-xl font-bold">{message.archives}</h1>
-										</div>
-										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
-										<div>
+						{reqData.req_db_name && (
+							<div>
+								<div className="border p-4 rounded">
+									{reqData.req_db_name === 'DESCRIPTION_WEB' ? (
+										<>
+											<div className="flex flex-row items-center">
+												<Archive className="mr-2" />
+												<h1 className="text-xl font-bold">{message.archives}</h1>
+											</div>
+											<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
+											<div>
+												<p className="text-sm text-gray-600">
+													{message.referenceNo} : {reqData?.req_item_id}
+												</p>
+											</div>
+										</>
+									) : reqData.req_db_name === 'COLLECTIONS_WEB' ? (
+										<>
+											<div className="flex flex-row items-center">
+												<LibraryBig className="mr-2" />
+												<h1 className="text-xl font-bold">{message.library}</h1>
+											</div>
+											<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
 											<p className="text-sm text-gray-600">
-												{message.referenceNo} : {reqData?.req_item_id}
+												{message.referenceNo}: {reqData.req_item_id}
 											</p>
-										</div>
-									</>
-								) : reqData.req_db_name === 'COLLECTIONS_WEB' ? (
-									<>
-										<div className="flex flex-row items-center">
-											<LibraryBig className="mr-2" />
-											<h1 className="text-xl font-bold">{message.library}</h1>
-										</div>
-										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
-										<p className="text-sm text-gray-600">
-											{message.referenceNo}: {reqData.req_item_id}
-										</p>
-										{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
-									</>
-								) : reqData.req_db_name === 'BIBLIO_WEB' ? (
-									<>
-										<div className="flex flex-row items-center">
-											<LibraryBig className="mr-2" />
-											<h1 className="text-xl font-bold">{message.library}</h1>
-										</div>
-										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
-										<p className="text-sm text-gray-600">
-											{message.referenceNo}: {reqData.req_item_id}
-										</p>
-										{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
-									</>
-								) : (
-									''
-								)}
+											{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
+										</>
+									) : reqData.req_db_name === 'BIBLIO_WEB' ? (
+										<>
+											<div className="flex flex-row items-center">
+												<LibraryBig className="mr-2" />
+												<h1 className="text-xl font-bold">{message.library}</h1>
+											</div>
+											<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
+											<p className="text-sm text-gray-600">
+												{message.referenceNo}: {reqData.req_item_id}
+											</p>
+											{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
+										</>
+									) : (
+										''
+									)}
+								</div>
 							</div>
-						</div>
+						)}
+
 						<div className="border-t mt-6">
 							<div className="flex justify-center items-center pt-4">
 								<Link className="mx-1" href={reqData.req_back_to_record}>
