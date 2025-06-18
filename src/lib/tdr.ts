@@ -11,14 +11,14 @@ export const TDR_CONFIG: TdrParams = {
 	// search_endpoint: '/#/search',
 	// bookmark_endpoint: '/api/Discover/BookmarkLinks',
 	// delete_bookmark_ep: '/api/Discover/Bookmarks',
-	"username":           "Cams.Dev",
-    "userpassword":       "Cams.Dev_12!",
-    "tdr_api":            "https://titantdrapi.minisisinc.com",
-    "tdr_ui":             "https://titantdr.minisisinc.com",
-    "login_endpoint":     "/token",
-    "search_endpoint":    "/#/discover",
-    "bookmark_endpoint":  "/api/Discover/BookmarkLinks",
-    "delete_bookmark_ep": "/api/Discover/Bookmarks",
+	username: 'Cams.Dev',
+	userpassword: 'Cams.Dev_12!',
+	tdr_api: 'https://titantdrapi.minisisinc.com',
+	tdr_ui: 'https://titantdr.minisisinc.com',
+	login_endpoint: '/token',
+	search_endpoint: '/#/discover',
+	bookmark_endpoint: '/api/Discover/BookmarkLinks',
+	delete_bookmark_ep: '/api/Discover/Bookmarks',
 }
 type TdrParams = {
 	tdr_api: string
@@ -57,14 +57,9 @@ export type TDRFile = {
 	LastModifiedOn: string // ISO 8601 date string
 }
 
-export const generateTDRIframeURL = (accessToken: string, bookmarkId: string) => {
+export const generateTDRIframeURL = (access_token: string, bookmarkId: string) => {
 	// Generate discovery URL
-	const discoveryUrl =
-		TDR_CONFIG.tdr_ui +
-		TDR_CONFIG.search_endpoint +
-		"?&phrase=%2b%2b%40&token=" + accessToken +
-		"&bookmark=" + bookmarkId;
-
+	const discoveryUrl = `${TDR_CONFIG.tdr_ui}${TDR_CONFIG.search_endpoint}/${bookmarkId}`
 	return discoveryUrl
 }
 
@@ -103,31 +98,25 @@ export const getTDRAccessToken = async () => {
 }
 
 export const getTDRBookmark = async (accessToken: string, bookmarkId: string) => {
-	const res = await axios.get<TDRFile[]>(
-		`${TDR_CONFIG.tdr_api}/${TDR_CONFIG.bookmark_endpoint}/${bookmarkId}`,
-		{
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				Accept: 'application/json',
-				Authorization: `Bearer ${accessToken}`,
-			},
-		}
-	)
+	const res = await axios.get<TDRFile[]>(`${TDR_CONFIG.tdr_api}/${TDR_CONFIG.bookmark_endpoint}/${bookmarkId}`, {
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			Accept: 'application/json',
+			Authorization: `Bearer ${accessToken}`,
+		},
+	})
 
 	return res?.data
 }
 
 export const deleteTDRBookmark = async (accessToken: string, bookmarkId: string) => {
-	const res = await axios.delete(
-		`${TDR_CONFIG.tdr_api}/${TDR_CONFIG.delete_bookmark_ep}/${bookmarkId}`,
-		{
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				Accept: 'application/json',
-				Authorization: `Bearer ${accessToken}`,
-			},
-		}
-	)
+	const res = await axios.delete(`${TDR_CONFIG.tdr_api}/${TDR_CONFIG.delete_bookmark_ep}/${bookmarkId}`, {
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			Accept: 'application/json',
+			Authorization: `Bearer ${accessToken}`,
+		},
+	})
 
 	return res?.data
 }
@@ -140,20 +129,18 @@ export const isSupportedImageExtension = (extension: string): boolean => {
 	return supportedImageExtensions.includes(extension?.toLowerCase())
 }
 
-
 export type AuthResponse = {
-	access_token: string;
-	token_type: string;
-	expires_in: number;
-	userName: string;
-	roleId: string;
-	roleName: string;
-	organizationUuid: string;
-	multiTenant: string; // Consider changing to boolean if you normalize the value
-	master: string;      // Same here
-	".issued": string;
-	".expires": string;
-	logo: string;
-	avatar: string | null;
-  };
-  
+	access_token: string
+	token_type: string
+	expires_in: number
+	userName: string
+	roleId: string
+	roleName: string
+	organizationUuid: string
+	multiTenant: string // Consider changing to boolean if you normalize the value
+	master: string // Same here
+	'.issued': string
+	'.expires': string
+	logo: string
+	avatar: string | null
+}
