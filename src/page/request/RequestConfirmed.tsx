@@ -13,15 +13,6 @@ const RequestConfirmed = () => {
 	let container = reqData.container
 	const { message } = useConstants()
 
-	// <div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
-	// 						<p>
-	// 							Your request for <b>{reqData.req_item_title}</b> -{' '}
-	// 							<b>{reqData.req_item_id}</b> has been accepted!
-	// 						</p>
-	// 						{reqData.sentence_1 ? <p>The request {reqData.sentence_1}</p> : ''}
-	// 						{reqData.sentence_2 ? <p>{reqData.sentence_2}</p> : ''}
-	// 					</div>
-
 	return (
 		<Layout>
 			<section>
