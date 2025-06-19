@@ -68,19 +68,20 @@ const Request = () => {
 							</h1>
 							<div className="text-right">
 								<form method="post" className="m-0" action={removeQuote(reqData.action)}>
-									<Input type="hidden" name="AUTO_APPROVE" value={reqData.auto_approve} />
+									{/* <Input type="hidden" name="AUTO_APPROVE" value={reqData.auto_approve} />
 									<Input type="hidden" name="REQ_PROCESS_DATE" value={reqData.req_process_date} />
-									<Input type="hidden" name="REQ_STATUS" value={reqData.req_status} />
+									<Input type="hidden" name="REQ_STATUS" value={reqData.req_status} /> */}
+									{/* <Input type="hidden" name="REQ_LOC_CODE" value={reqData.req_loc_code} /> */}
 									<Input type="hidden" name="req_db_name" value={'description'} />
 									<Input type="hidden" name="REQ_DB_RECID" value={reqData.req_db_recid} />
 									<Input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
+									<Input type="hidden" name="DATE_NEEDED" value={reqData.date_needed} />
 									<Input type="hidden" name="REQ_DB_LINK1" value={reqData.req_db_link1} />
 									<Input type="hidden" name="METHOD_REQUEST" value={reqData.method_request} />
 									<Input type="hidden" name="REQ_TOPIC" value={reqData.req_topic} />
-									<Input type="hidden" name="REQ_LOC_CODE" value={reqData.req_loc_code} />
 									<Input type="hidden" name="REQ_APPL_NAME" value={reqData.req_appl_name} />
 									<Input type="hidden" name="REQ_ITEM_ID" value={reqData.req_item_id} />
-									<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
+									<Input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
 									<Input
 										type="hidden"
 										name="REQ_ITEM_TITLE"
@@ -126,7 +127,7 @@ const Request = () => {
 							</p>
 							<p>{reqData.sentence_1}</p>
 							<p>
-								<b>{reqData.collection_time}</b>.
+								<b>{reqData.date_needed} {reqData.time_needed}</b>
 							</p>
 							<p> {message.visitRequirement}</p>
 						</div>
@@ -142,7 +143,7 @@ const Request = () => {
 										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
 										<div>
 											<p className="text-sm text-gray-600">
-												{message.referenceNo} : {reqData?.req_item_id}
+												{message.barcode} : {reqData?.req_item_id}
 											</p>
 										</div>
 									</>

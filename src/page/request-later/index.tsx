@@ -171,10 +171,10 @@ const RequestLater = () => {
 										<Archive className="mr-2" />
 										<h1 className="text-xl font-bold">{message.archives}</h1>
 									</div>
-									<p className="text-lg font-bold mt-2">{reqData.req_title}</p>
+									<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
 									<div className={'md:flex'}>
 										<p className="text-sm text-gray-600">
-											{message.referenceNo} : {reqData.req_item_id}
+											{message.barcode} : {reqData.req_item_id}
 										</p>
 									</div>
 								</div>

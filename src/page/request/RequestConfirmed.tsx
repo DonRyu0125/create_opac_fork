@@ -31,7 +31,7 @@ const RequestConfirmed = () => {
 							</p>
 							<p>{reqData.sentence_1}</p>
 							<p>
-								<b>{reqData.collection_time}</b>.
+								<b>{reqData.collection_time}</b>
 							</p>
 							<p> {message.visitRequirement}</p>
 						</div>
@@ -48,7 +48,7 @@ const RequestConfirmed = () => {
 											<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
 											<div>
 												<p className="text-sm text-gray-600">
-													{message.referenceNo} : {reqData?.req_item_id}
+													{message.barcode} : {reqData?.req_item_id}
 												</p>
 											</div>
 										</>
