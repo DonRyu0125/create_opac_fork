@@ -120,7 +120,7 @@ const RequestAccordianDesc = () => {
 															<form
 																method="post"
 																ref={formRef2}
-																action={removeQuote(requestData.action_later)+`&M_GVAR1=SELECT_ITEM_ID:${value.id}`}
+																action={removeQuote(requestData.action_later)+`&M_GVAR1=SELECT_ITEM_ID:${value.id}`+`&M_GVAR2=aone_loc:${value.aone_loc}`}
 																className="hidden">
 																<input type="hidden" name="method_request" value={requestData.method_request} />
 																<input type="hidden" name="req_topic" value={requestData.req_topic} />

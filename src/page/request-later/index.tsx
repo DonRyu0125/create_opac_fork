@@ -64,7 +64,6 @@ const RequestLater = () => {
 		sa: 6,
 	}
 	let reqData: any = records[0].request
-	let container = records[0].container
 	let record:any = records[0]
 	const { message } = useConstants()
 	const [calData, setCalData] = useState<ScheduleData>({
@@ -117,7 +116,7 @@ const RequestLater = () => {
 		const inputDate = new Date(date)
 		inputDate.setHours(0, 0, 0, 0)
 
-		const deliveryData = getDeliveryDate(container.item.aone_loc)
+		const deliveryData = getDeliveryDate(record.aone_loc)
 		const deliveryDays = parseInt(deliveryData?.delivery_day || '0', 10)
 
 		const blockedUntil = new Date(today)
