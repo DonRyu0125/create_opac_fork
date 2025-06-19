@@ -29,26 +29,17 @@ const RequestConfirmed = () => {
 							<p>
 								{message.requestFor} <b>{reqData.req_item_title ?? reqData.req_title}</b> - <b>{reqData.req_item_id}</b>
 							</p>
-							{reqData.waitlist === 'Yes' ? (
-								<>
-									<p>{reqData.sentence_1}</p>
-									<p>{reqData.sentence_2}</p>
-								</>
-							) : (
-								<>
-									<p>{reqData.sentence_1}</p>
-									<p>
-										<b>{reqData.collection_time}</b>.
-									</p>
-									<p> {message.visitRequirement}</p>
-								</>
-							)}
+							<p>{reqData.sentence_1}</p>
+							<p>
+								<b>{reqData.collection_time}</b>.
+							</p>
+							<p> {message.visitRequirement}</p>
 						</div>
 
 						{reqData.req_db_name && (
 							<div>
 								<div className="border p-4 rounded">
-									{reqData.req_db_name === 'DESCRIPTION_WEB' ? (
+									{reqData.req_db_name === 'description' ? (
 										<>
 											<div className="flex flex-row items-center">
 												<Archive className="mr-2" />

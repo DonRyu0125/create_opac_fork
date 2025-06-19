@@ -27,7 +27,6 @@ const RequestAccordianDesc = () => {
 	const formRef2 = useRef<any>(null)
 	const { container, request } = record
 	const requestData = request
-	const [loading, setLoading] = useState(false)
 	const [open, setOpen] = useState(false)
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
 	const loadMoreRef = useRef<HTMLDivElement | null>(null)
@@ -86,7 +85,7 @@ const RequestAccordianDesc = () => {
 												<td className="border px-4 py-2">
 													<div className="flex gap-2">
 														<TooltipButton
-															disabled={loading}
+															disabled={requestData.is_requested_by_client === 'No' ? false : true}
 															tooltipContent={message.request}
 															variant="outline"
 															onClick={() => handleRequest(formRef1)}>
@@ -97,16 +96,23 @@ const RequestAccordianDesc = () => {
 																action={
 																	getHomeSessionID() +
 																	'/1/' +
-																	record.request.req_db_link2 +
+																	record.request.req_db_link1 +
 																	'?REQUESTLOGIN&REPORT=DIRECT_REQUEST_FORM'
 																}
 																className="hidden">
-																{Object.entries(requestData).map(([key, val]) => (
-																	<Input key={key} type="hidden" name={key} value={val} />
-																))}
+																<input type="hidden" name="method_request" value={requestData.method_request} />
+																<input type="hidden" name="req_topic" value={requestData.req_topic} />
+																<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
+																<input type="hidden" name="req_db_name" value={'description'} />
+																<input type="hidden" name="req_db_link1" value={requestData.req_db_link1} />
+																<input type="hidden" name="req_db_recid" value={requestData.req_db_recid} />
+																<input type="hidden" name="req_item_id" value={value.id} />
+																<input type="hidden" name="req_item_title" value={requestData.req_item_title} />
+																<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
 															</form>
 														</TooltipButton>
 														<TooltipButton
+															disabled={requestData.is_requested_by_client === 'No' ? false : true}
 															tooltipContent={message.requestRecordLater}
 															variant="outline"
 															onClick={() => handleRequest(formRef2)}>
@@ -114,11 +120,11 @@ const RequestAccordianDesc = () => {
 															<form
 																method="post"
 																ref={formRef2}
-																action={removeQuote(requestData.action_later)}
+																action={removeQuote(requestData.action_later)+`&M_GVAR1=SELECT_ITEM_ID:${value.id}`}
 																className="hidden">
-																{Object.entries(requestData).map(([key, val]) => (
-																	<Input key={key} type="hidden" name={key} value={val} />
-																))}
+																<input type="hidden" name="method_request" value={requestData.method_request} />
+																<input type="hidden" name="req_topic" value={requestData.req_topic} />
+																<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
 															</form>
 														</TooltipButton>
 													</div>

@@ -64,7 +64,8 @@ const RequestLater = () => {
 		sa: 6,
 	}
 	let reqData: any = records[0].request
-	let container = reqData.container
+	let container = records[0].container
+	let record:any = records[0]
 	const { message } = useConstants()
 	const [calData, setCalData] = useState<ScheduleData>({
 		operation_day_entry: [],
@@ -72,7 +73,6 @@ const RequestLater = () => {
 		sp_open_date_entry: [],
 		delivery_time_entry: [],
 	})
-
 
 	useEffect(() => {
 		getData()
@@ -113,18 +113,18 @@ const RequestLater = () => {
 	function isOpen(date: Date) {
 		const today = new Date()
 		today.setHours(0, 0, 0, 0)
-	
+
 		const inputDate = new Date(date)
 		inputDate.setHours(0, 0, 0, 0)
-	
+
 		const deliveryData = getDeliveryDate(container.item.aone_loc)
 		const deliveryDays = parseInt(deliveryData?.delivery_day || '0', 10)
-	
+
 		const blockedUntil = new Date(today)
 		blockedUntil.setDate(today.getDate() + deliveryDays)
-	
+
 		if (inputDate < blockedUntil) return false
-	
+
 		const yyyyMMdd = date.toISOString().split('T')[0]
 		if (specialOpenDates.has(yyyyMMdd)) return true
 		if (closureDates.has(yyyyMMdd)) return false
@@ -153,32 +153,15 @@ const RequestLater = () => {
 				<div className="bg-gray-50 min-h-screen py-10">
 					<div className="max-w-4xl mx-auto bg-white shadow-md rounded-md p-6">
 						<div className="flex justify-between items-center border-b pb-4">
-							<form method="post" className="m-0 w-full" action={removeQuote(reqData.action)}>
-								<Input type="hidden" name="AUTO_APPROVE" value={reqData.auto_approve} />
-								<Input type="hidden" name="REQ_PROCESS_DATE" value={reqData.req_process_date} />
-								<Input type="hidden" name="REQ_STATUS" value={reqData.req_status} />
-								<Input type="hidden" name="REC_STATUS" value={reqData.rec_status} />
-								{/* <Input type="hidden" name="REQ_DB_NAME" value={reqData.req_db_name} /> */}
-								<Input type="hidden" name="REQ_DB_RECID" value={reqData.req_db_recid} />
-								<Input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
-								<Input type="hidden" name="REQ_DB_LINK2" value={reqData.req_db_link2} />
-								<Input type="hidden" name="METHOD_REQUEST" value={reqData.method_request} />
-								<Input type="hidden" name="REQ_TOPIC" value={reqData.req_topic} />
-								<Input type="hidden" name="REQ_LOC_CODE" value={reqData.req_loc_code} />
-								<Input type="hidden" name="REQ_APPL_NAME" value={reqData.req_appl_name} />
-								<Input type="hidden" name="REQ_TITLE" value={reqData.req_title} />
-								<Input type="hidden" name="REQ_ITEM_ID" value={reqData.req_item_id} />
-								<Input type="hidden" name="REQ_ACC_NUMBER" value={reqData.req_acc_number} />
-								<Input
-									type="hidden"
-									name="REQ_ITEM_TITLE"
-									value={
-										typeof reqData.req_item_title === 'object'
-											? reqData.req_item_title.__text.replace(/\s+/g, ' ').trim()
-											: reqData.req_item_title
-									}
-								/>
-								<Input type="hidden" name="REQ_QUEUE" value={reqData.req_queue} />
+							<form method="post" className="m-0 w-full" action={removeQuote(record.action)}>
+								<input type="hidden" name="method_request" value={reqData.method_request} />
+								<input type="hidden" name="req_topic" value={reqData.req_topic} />
+								<input type="hidden" name="req_appl_name" value={reqData.req_appl_name} />
+								<input type="hidden" name="req_db_name" value={'description'} />
+								<input type="hidden" name="req_db_link1" value={reqData.req_db_link1} />
+								<input type="hidden" name="req_db_recid" value={reqData.req_db_recid} />
+								<input type="hidden" name="req_item_id" value={record.select_item_id} />
+								<input type="hidden" name="req_item_title" value={reqData.req_item_title} />
 								<h1 className="flex items-center text-xl font-bold">
 									<CircleEllipsis className="mr-2" />
 									{message.requestRecordLater}
