@@ -5,6 +5,8 @@ import useJSONData from '@/hooks/useJSONData'
 import { Archive, CircleCheck, Landmark, LibraryBig } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
+export const REQUEST_DESC_DB = 'DESCRIPTION'
+
 const RequestConfirmed = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { config } = useConstants()
@@ -39,7 +41,7 @@ const RequestConfirmed = () => {
 						{reqData.req_db_name && (
 							<div>
 								<div className="border p-4 rounded">
-									{reqData.req_db_name === 'description' ? (
+									{reqData.req_db_name === REQUEST_DESC_DB ? (
 										<>
 											<div className="flex flex-row items-center">
 												<Archive className="mr-2" />

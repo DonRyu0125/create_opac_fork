@@ -5,8 +5,7 @@ import { cn, convertToArr, getCookieValue, getHomeSessionID, removeQuote } from 
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import TooltipButton from '@/components/common/TooltipButton'
-import { Input } from '@/components/ui/input'
-import EmptyState from '@/components/common/description-tree/empty-state'
+import { REQUEST_DESC_DB } from '@/page/request/RequestConfirmed'
 
 type ItemContent = {
 	id: string
@@ -70,7 +69,7 @@ const RequestAccordianDesc = () => {
 								<table className="min-w-full text-sm border">
 									<thead className="bg-gray-100 sticky top-0 z-10">
 										<tr>
-											<th className="border px-4 py-2 text-left font-medium text-gray-700">Barcode ID</th>
+											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.barcode}</th>
 											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.location}</th>
 											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.type}</th>
 											<th className="border px-4 py-2" />
@@ -103,12 +102,14 @@ const RequestAccordianDesc = () => {
 																<input type="hidden" name="method_request" value={requestData.method_request} />
 																<input type="hidden" name="req_topic" value={requestData.req_topic} />
 																<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
-																<input type="hidden" name="req_db_name" value={'description'} />
+																<input type="hidden" name="req_db_name" value={REQUEST_DESC_DB} />
 																<input type="hidden" name="req_db_link1" value={requestData.req_db_link1} />
 																<input type="hidden" name="req_db_recid" value={requestData.req_db_recid} />
 																<input type="hidden" name="req_item_id" value={value.id} />
 																<input type="hidden" name="req_item_title" value={requestData.req_item_title} />
 																<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
+																{/* Wait time calucation is not working 20250620 Don */}
+																{/* <input type="hidden" name="REQ_WAIT_TIME" value={'10'} /> */}
 															</form>
 														</TooltipButton>
 														<TooltipButton

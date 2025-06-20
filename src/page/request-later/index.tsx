@@ -9,6 +9,7 @@ import { Calendar } from '@/components/ui/calendar'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import useConstants from '@/hooks/useConstants'
 import axios from 'axios'
+import { REQUEST_DESC_DB } from '../request/RequestConfirmed'
 
 export type ScheduleData = {
 	operation_day_entry: {
@@ -156,7 +157,7 @@ const RequestLater = () => {
 								<input type="hidden" name="method_request" value={reqData.method_request} />
 								<input type="hidden" name="req_topic" value={reqData.req_topic} />
 								<input type="hidden" name="req_appl_name" value={reqData.req_appl_name} />
-								<input type="hidden" name="req_db_name" value={'description'} />
+								<input type="hidden" name="req_db_name" value={REQUEST_DESC_DB} />
 								<input type="hidden" name="req_db_link1" value={reqData.req_db_link1} />
 								<input type="hidden" name="req_db_recid" value={reqData.req_db_recid} />
 								<input type="hidden" name="req_item_id" value={record.select_item_id} />

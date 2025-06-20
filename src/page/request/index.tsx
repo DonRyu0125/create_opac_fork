@@ -7,6 +7,7 @@ import { Archive, CircleEllipsis, Landmark, LibraryBig } from 'lucide-react'
 import { convertToArr, convertXMLToJson, removeQuote } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { REQUEST_DESC_DB } from './RequestConfirmed'
 
 type DeliveryTimeEntry = {
 	delivery_type: 'OFFSITESTD' | 'OFFSITECOLD' | 'OFFSITECOOL'
@@ -21,7 +22,6 @@ const Request = () => {
 		event.preventDefault()
 		window.history.back()
 	}
-	let container = reqData.container
 	const [calData, setCalData] = useState<any>({
 		delivery_time_entry: [],
 	})
@@ -72,7 +72,7 @@ const Request = () => {
 									<Input type="hidden" name="REQ_PROCESS_DATE" value={reqData.req_process_date} />
 									<Input type="hidden" name="REQ_STATUS" value={reqData.req_status} /> */}
 									{/* <Input type="hidden" name="REQ_LOC_CODE" value={reqData.req_loc_code} /> */}
-									<Input type="hidden" name="req_db_name" value={'description'} />
+									<Input type="hidden" name="req_db_name" value={REQUEST_DESC_DB} />
 									<Input type="hidden" name="REQ_DB_RECID" value={reqData.req_db_recid} />
 									<Input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
 									<Input type="hidden" name="DATE_NEEDED" value={reqData.date_needed} />
