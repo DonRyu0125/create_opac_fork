@@ -134,7 +134,7 @@ const Request = () => {
 
 						<div>
 							<div className="border p-4 rounded">
-								{reqData.req_db_name === 'description' ? (
+								{reqData.req_db_name === REQUEST_DESC_DB ? (
 									<>
 										<div className="flex flex-row items-center">
 											<Archive className="mr-2" />

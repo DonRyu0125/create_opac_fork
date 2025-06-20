@@ -119,7 +119,7 @@ const Orders = () => {
 					<Button
 						variant="ghost"
 						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-						{message.referenceNo}
+						{message.barcode}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
@@ -146,7 +146,7 @@ const Orders = () => {
 			),
 		},
 		{
-			accessorKey: 'req_title',
+			accessorKey: 'req_item_title',
 			header: ({ column }) => {
 				return (
 					<Button
@@ -157,7 +157,7 @@ const Orders = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => <div className="">{row.getValue('req_title')}</div>,
+			cell: ({ row }) => <div className="">{row.getValue('req_item_title')}</div>,
 		},
 		{
 			accessorKey: 'req_paid_amt',
