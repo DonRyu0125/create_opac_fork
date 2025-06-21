@@ -3,25 +3,18 @@ import PatronLayout from '@/components/layouts/patron'
 import { Button } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import {
-	encodeURIStringToMinisisSpecialCharacter,
-	getCookieValue,
-	getHomeSessionID,
-} from '@/lib/utils'
+import { encodeURIStringToMinisisSpecialCharacter, getCookieValue, getHomeSessionID } from '@/lib/utils'
 import { Checkbox } from '@radix-ui/react-checkbox'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { ColumnDef } from '@tanstack/react-table'
 import axios from 'axios'
+import { REQUEST_DESC_DB } from '../request/RequestConfirmed'
 
 const Orders = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const message = useConstants().message
 	const cancelRequest = (reqNumber: string) => {
-		var cancelReq_url =
-			getCookieValue('HOME_SESSID') +
-			'?MANIPXMLRECORD&KEY=REQ_ORDER_NUM&VALUE=' +
-			reqNumber +
-			'&DATABASE=REQUEST_INFO'
+		var cancelReq_url = getCookieValue('HOME_SESSID') + '?MANIPXMLRECORD&KEY=REQ_ORDER_NUM&VALUE=' + reqNumber + '&DATABASE=REQUEST_INFO'
 		var xmlForm = '<?xml version="1.0" encoding="UTF-8"?>\n<RECORD>\n'
 		xmlForm = xmlForm.concat('<REC_STATUS>Deleted</REC_STATUS>\n')
 		axios({
@@ -53,20 +46,13 @@ const Orders = () => {
 			id: 'select',
 			header: ({ table }) => (
 				<Checkbox
-					checked={
-						table.getIsAllPageRowsSelected() ||
-						(table.getIsSomePageRowsSelected() && 'indeterminate')
-					}
+					checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
 					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
 					aria-label="Select all"
 				/>
 			),
 			cell: ({ row }) => (
-				<Checkbox
-					checked={row.getIsSelected()}
-					onCheckedChange={(value) => row.toggleSelected(!!value)}
-					aria-label="Select row"
-				/>
+				<Checkbox checked={row.getIsSelected()} onCheckedChange={(value) => row.toggleSelected(!!value)} aria-label="Select row" />
 			),
 			enableSorting: false,
 			enableHiding: false,
@@ -74,37 +60,25 @@ const Orders = () => {
 		{
 			accessorKey: 'date_needed',
 			header: message.date,
-			cell: ({ row }) => (
-				<div className="capitalize">
-					{row.getValue('date_needed') ? row.getValue('date_needed') : 'N/A'}
-				</div>
-			),
+			cell: ({ row }) => <div className="capitalize">{row.getValue('date_needed') ? row.getValue('date_needed') : 'N/A'}</div>,
 		},
 		{
 			accessorKey: 'time_needed',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.time}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
 				)
 			},
-			cell: ({ row }) => (
-				<div className="">
-					{row.getValue('time_needed') ? row.getValue('time_needed') : 'N/A'}
-				</div>
-			),
+			cell: ({ row }) => <div className="">{row.getValue('time_needed') ? row.getValue('time_needed') : 'N/A'}</div>,
 		},
 		{
 			accessorKey: 'req_status',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.status}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -116,9 +90,7 @@ const Orders = () => {
 			accessorKey: 'req_item_id',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.barcode}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -130,15 +102,11 @@ const Orders = () => {
 						className={`${row.getValue('req_db_name') ? '' : 'pointer-events-none'}`}
 						href={
 							getHomeSessionID() +
+							'/DESCRIPTION_WEB' +
+							'/REFD' +
 							'/' +
-							row.getValue('req_db_name') +
-							'/' +
-							(row.getValue('req_db_name') == 'DESCRIPTION_WEB'
-								? 'REFD'
-								: 'ACCESSION_NUMBER') +
-							'/' +
-							encodeURIStringToMinisisSpecialCharacter(row.getValue('req_item_id')) +
-							'?JUMP'
+							encodeURIStringToMinisisSpecialCharacter(row.original.req_refd) +
+							'/WEB_UNION_DETAIL?JUMP'
 						}>
 						{row.getValue('req_item_id')}
 					</a>
@@ -149,9 +117,7 @@ const Orders = () => {
 			accessorKey: 'req_item_title',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.title}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -163,9 +129,7 @@ const Orders = () => {
 			accessorKey: 'req_paid_amt',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.amount}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -177,9 +141,7 @@ const Orders = () => {
 			accessorKey: 'req_order_num',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.action}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -193,9 +155,7 @@ const Orders = () => {
 					  row.getValue('req_status') === 'Prepared' ||
 					  row.getValue('req_status') === 'Requested' ||
 					  row.getValue('req_status') === 'Conservation' ? (
-						<Button onClick={() => cancelRequest(row.getValue('req_order_num'))}>
-							{message.cancel}
-						</Button>
+						<Button onClick={() => cancelRequest(row.getValue('req_order_num'))}>{message.cancel}</Button>
 					) : (
 						<Button disabled>{message.noAction}</Button>
 					)}
@@ -217,15 +177,11 @@ const Orders = () => {
 			cell: ({ row }) => <></>,
 		},
 	]
+
+	console.log('records', records)
 	return (
 		<PatronLayout heading="Orders">
-			<ProfileTable
-				data={records}
-				columns={columns}
-				filterType={'req_title'}
-				filterTypeShow=""
-				filterDateType={'date_needed'}
-			/>
+			<ProfileTable data={records} columns={columns} filterType={'req_title'} filterTypeShow="" filterDateType={'date_needed'} />
 		</PatronLayout>
 	)
 }
