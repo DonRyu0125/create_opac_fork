@@ -7,12 +7,12 @@ import { Archive, CircleEllipsis, Landmark, LibraryBig } from 'lucide-react'
 import { convertToArr, convertXMLToJson, removeQuote } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { REQUEST_DESC_DB } from './RequestConfirmed'
 
 type DeliveryTimeEntry = {
 	delivery_type: 'OFFSITESTD' | 'OFFSITECOLD' | 'OFFSITECOOL'
 	delivery_day: string
-  }
-
+}
 
 const Request = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -22,7 +22,6 @@ const Request = () => {
 		event.preventDefault()
 		window.history.back()
 	}
-	let container = reqData.container
 	const [calData, setCalData] = useState<any>({
 		delivery_time_entry: [],
 	})
@@ -50,7 +49,7 @@ const Request = () => {
 	}
 
 	const getDeliveryDate = (item_delivery_type: string) => {
-		let days = calData?.delivery_time_entry.find((item:DeliveryTimeEntry) => item.delivery_type === item_delivery_type)
+		let days = calData?.delivery_time_entry.find((item: DeliveryTimeEntry) => item.delivery_type === item_delivery_type)
 		if (days) {
 			return days
 		}
@@ -69,21 +68,20 @@ const Request = () => {
 							</h1>
 							<div className="text-right">
 								<form method="post" className="m-0" action={removeQuote(reqData.action)}>
-									<Input type="hidden" name="AUTO_APPROVE" value={reqData.auto_approve} />
+									{/* <Input type="hidden" name="AUTO_APPROVE" value={reqData.auto_approve} />
 									<Input type="hidden" name="REQ_PROCESS_DATE" value={reqData.req_process_date} />
-									<Input type="hidden" name="REQ_STATUS" value={reqData.req_status} />
-									<Input type="hidden" name="REC_STATUS" value={reqData.rec_status} />
-									<Input type="hidden" name="REQ_DB_NAME" value={reqData.req_db_name} />
+									<Input type="hidden" name="REQ_STATUS" value={reqData.req_status} /> */}
+									{/* <Input type="hidden" name="REQ_LOC_CODE" value={reqData.req_loc_code} /> */}
+									<Input type="hidden" name="req_db_name" value={REQUEST_DESC_DB} />
 									<Input type="hidden" name="REQ_DB_RECID" value={reqData.req_db_recid} />
 									<Input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
-									<Input type="hidden" name="REQ_DB_LINK2" value={reqData.req_db_link2} />
+									<Input type="hidden" name="DATE_NEEDED" value={reqData.date_needed} />
+									<Input type="hidden" name="REQ_DB_LINK1" value={reqData.req_db_link1} />
 									<Input type="hidden" name="METHOD_REQUEST" value={reqData.method_request} />
 									<Input type="hidden" name="REQ_TOPIC" value={reqData.req_topic} />
-									<Input type="hidden" name="REQ_LOC_CODE" value={reqData.req_loc_code} />
 									<Input type="hidden" name="REQ_APPL_NAME" value={reqData.req_appl_name} />
-									<Input type="hidden" name="REQ_TITLE" value={reqData.req_title} />
 									<Input type="hidden" name="REQ_ITEM_ID" value={reqData.req_item_id} />
-									<Input type="hidden" name="REQ_ACC_NUMBER" value={reqData.req_acc_number} />
+									<Input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
 									<Input
 										type="hidden"
 										name="REQ_ITEM_TITLE"
@@ -93,7 +91,6 @@ const Request = () => {
 												: reqData.req_item_title
 										}
 									/>
-									<Input type="hidden" name="REQ_QUEUE" value={reqData.req_queue} />
 									<Button className="bg-primary rounded mx-1 hover:bg-primary" type="submit" name="Submit" variant="default">
 										{message.request}
 									</Button>
@@ -108,7 +105,7 @@ const Request = () => {
 								</form>
 							</div>
 						</div>
-						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
+						{/* <div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
 								{message.requestedToView}
 								<b>{` ${reqData?.req_item_title}`}</b>
@@ -123,11 +120,21 @@ const Request = () => {
 								{` in  business days.`}
 							</p>
 							<p>{message.confirmRequest}</p>
+						</div> */}
+						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
+							<p>
+								{message.requestFor} <b>{reqData.req_item_title ?? reqData.req_title}</b> - <b>{reqData.req_item_id}</b>
+							</p>
+							<p>{reqData.sentence_1}</p>
+							<p>
+								<b>{reqData.date_needed} {reqData.time_needed}</b>
+							</p>
+							<p> {message.visitRequirement}</p>
 						</div>
 
 						<div>
 							<div className="border p-4 rounded">
-								{reqData.req_db_name === 'DESCRIPTION_WEB' ? (
+								{reqData.req_db_name === REQUEST_DESC_DB ? (
 									<>
 										<div className="flex flex-row items-center">
 											<Archive className="mr-2" />
@@ -136,7 +143,7 @@ const Request = () => {
 										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
 										<div>
 											<p className="text-sm text-gray-600">
-												{message.referenceNo} : {reqData?.req_item_id}
+												{message.barcode} : {reqData?.req_item_id}
 											</p>
 										</div>
 									</>

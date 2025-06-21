@@ -5,8 +5,7 @@ import { cn, convertToArr, getCookieValue, getHomeSessionID, removeQuote } from 
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import TooltipButton from '@/components/common/TooltipButton'
-import { Input } from '@/components/ui/input'
-import EmptyState from '@/components/common/description-tree/empty-state'
+import { REQUEST_DESC_DB } from '@/page/request/RequestConfirmed'
 
 type ItemContent = {
 	id: string
@@ -27,7 +26,6 @@ const RequestAccordianDesc = () => {
 	const formRef2 = useRef<any>(null)
 	const { container, request } = record
 	const requestData = request
-	const [loading, setLoading] = useState(false)
 	const [open, setOpen] = useState(false)
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
 	const loadMoreRef = useRef<HTMLDivElement | null>(null)
@@ -71,7 +69,7 @@ const RequestAccordianDesc = () => {
 								<table className="min-w-full text-sm border">
 									<thead className="bg-gray-100 sticky top-0 z-10">
 										<tr>
-											<th className="border px-4 py-2 text-left font-medium text-gray-700">Barcode ID</th>
+											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.barcode}</th>
 											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.location}</th>
 											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.type}</th>
 											<th className="border px-4 py-2" />
@@ -86,7 +84,7 @@ const RequestAccordianDesc = () => {
 												<td className="border px-4 py-2">
 													<div className="flex gap-2">
 														<TooltipButton
-															disabled={loading}
+															disabled={requestData.is_requested_by_client === 'No' ? false : true}
 															tooltipContent={message.request}
 															variant="outline"
 															onClick={() => handleRequest(formRef1)}>
@@ -97,16 +95,25 @@ const RequestAccordianDesc = () => {
 																action={
 																	getHomeSessionID() +
 																	'/1/' +
-																	record.request.req_db_link2 +
+																	record.request.req_db_link1 +
 																	'?REQUESTLOGIN&REPORT=DIRECT_REQUEST_FORM'
 																}
 																className="hidden">
-																{Object.entries(requestData).map(([key, val]) => (
-																	<Input key={key} type="hidden" name={key} value={val} />
-																))}
+																<input type="hidden" name="method_request" value={requestData.method_request} />
+																<input type="hidden" name="req_topic" value={requestData.req_topic} />
+																<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
+																<input type="hidden" name="req_db_name" value={REQUEST_DESC_DB} />
+																<input type="hidden" name="req_db_link1" value={requestData.req_db_link1} />
+																<input type="hidden" name="req_db_recid" value={requestData.req_db_recid} />
+																<input type="hidden" name="req_item_id" value={value.id} />
+																<input type="hidden" name="req_item_title" value={requestData.req_item_title} />
+																<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
+																{/* Wait time calucation is not working 20250620 Don */}
+																{/* <input type="hidden" name="REQ_WAIT_TIME" value={'10'} /> */}
 															</form>
 														</TooltipButton>
 														<TooltipButton
+															disabled={requestData.is_requested_by_client === 'No' ? false : true}
 															tooltipContent={message.requestRecordLater}
 															variant="outline"
 															onClick={() => handleRequest(formRef2)}>
@@ -114,11 +121,11 @@ const RequestAccordianDesc = () => {
 															<form
 																method="post"
 																ref={formRef2}
-																action={removeQuote(requestData.action_later)}
+																action={removeQuote(requestData.action_later)+`&M_GVAR1=SELECT_ITEM_ID:${value.id}`+`&M_GVAR2=aone_loc:${value.aone_loc}`}
 																className="hidden">
-																{Object.entries(requestData).map(([key, val]) => (
-																	<Input key={key} type="hidden" name={key} value={val} />
-																))}
+																<input type="hidden" name="method_request" value={requestData.method_request} />
+																<input type="hidden" name="req_topic" value={requestData.req_topic} />
+																<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
 															</form>
 														</TooltipButton>
 													</div>

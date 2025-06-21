@@ -5,6 +5,8 @@ import useJSONData from '@/hooks/useJSONData'
 import { Archive, CircleCheck, Landmark, LibraryBig } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
+export const REQUEST_DESC_DB = 'DESCRIPTION'
+
 const RequestConfirmed = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { config } = useConstants()
@@ -27,19 +29,19 @@ const RequestConfirmed = () => {
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
-								{message.requestFor} <b>{reqData.req_item_title}</b> - <b>{reqData.req_item_id}</b>{' '}
-								{reqData.sentence_1 ? reqData.sentence_1 : ''}
+								{message.requestFor} <b>{reqData.req_item_title ?? reqData.req_title}</b> - <b>{reqData.req_item_id}</b>
 							</p>
+							<p>{reqData.sentence_1}</p>
 							<p>
-								It is scheduled for access <b>{reqData.collection_time}</b>.
+								<b>{reqData.collection_time}</b>
 							</p>
-							{/* {reqData.sentence_2 ? <p>{reqData.sentence_2}</p> : ''} */}
+							<p> {message.visitRequirement}</p>
 						</div>
 
 						{reqData.req_db_name && (
 							<div>
 								<div className="border p-4 rounded">
-									{reqData.req_db_name === 'DESCRIPTION_WEB' ? (
+									{reqData.req_db_name === REQUEST_DESC_DB ? (
 										<>
 											<div className="flex flex-row items-center">
 												<Archive className="mr-2" />
@@ -48,7 +50,7 @@ const RequestConfirmed = () => {
 											<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
 											<div>
 												<p className="text-sm text-gray-600">
-													{message.referenceNo} : {reqData?.req_item_id}
+													{message.barcode} : {reqData?.req_item_id}
 												</p>
 											</div>
 										</>
