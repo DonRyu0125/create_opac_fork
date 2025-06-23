@@ -84,6 +84,12 @@ export const convertXMLToJson = (response: string) => {
 	return jsonData
 }
 
+export const convertToString = (response:any,type:string) =>{
+	return typeof response[type] === 'object'
+	? response[type].__text.replace(/\s+/g, ' ').trim()
+	: response[type]
+}
+
 const escapeBrTags = (xml: string): string => {
 	return xml.replace(/<br\s*\/?>/gi, '')
 }
