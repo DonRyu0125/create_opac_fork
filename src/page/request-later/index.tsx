@@ -2,7 +2,7 @@ import Layout from '@/components/layouts'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import useJSONData from '@/hooks/useJSONData'
-import { convertToArr, convertXMLToJson, removeQuote } from '@/lib/utils'
+import { convertToArr, convertToString, convertXMLToJson, removeQuote } from '@/lib/utils'
 import { Archive, ChevronDownIcon, CircleEllipsis } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Calendar } from '@/components/ui/calendar'
@@ -161,7 +161,7 @@ const RequestLater = () => {
 								<input type="hidden" name="req_db_link1" value={reqData.req_db_link1} />
 								<input type="hidden" name="req_db_recid" value={reqData.req_db_recid} />
 								<input type="hidden" name="req_item_id" value={record.select_item_id} />
-								<input type="hidden" name="req_item_title" value={reqData.req_item_title} />
+								<input type="hidden" name="req_item_title" value={convertToString(reqData,'req_item_title')} />
 								<h1 className="flex items-center text-xl font-bold">
 									<CircleEllipsis className="mr-2" />
 									{message.requestRecordLater}
@@ -171,7 +171,7 @@ const RequestLater = () => {
 										<Archive className="mr-2" />
 										<h1 className="text-xl font-bold">{message.archives}</h1>
 									</div>
-									<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
+									<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
 									<div className={'md:flex'}>
 										<p className="text-sm text-gray-600">
 											{message.barcode} : {reqData.req_item_id}

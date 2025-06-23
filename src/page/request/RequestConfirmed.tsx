@@ -4,6 +4,7 @@ import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { Archive, CircleCheck, Landmark, LibraryBig } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { convertToString } from '@/lib/utils'
 
 export const REQUEST_DESC_DB = 'DESCRIPTION'
 
@@ -29,7 +30,7 @@ const RequestConfirmed = () => {
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
-								{message.requestFor} <b>{reqData.req_item_title ?? reqData.req_title}</b> - <b>{reqData.req_item_id}</b>
+								{message.requestFor} <b>{convertToString(reqData,'req_item_title') ?? reqData.req_title}</b> - <b>{reqData.req_item_id}</b>
 							</p>
 							<p>{reqData.sentence_1}</p>
 							<p>
@@ -47,7 +48,7 @@ const RequestConfirmed = () => {
 												<Archive className="mr-2" />
 												<h1 className="text-xl font-bold">{message.archives}</h1>
 											</div>
-											<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
+											<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
 											<div>
 												<p className="text-sm text-gray-600">
 													{message.barcode} : {reqData?.req_item_id}
@@ -60,7 +61,7 @@ const RequestConfirmed = () => {
 												<LibraryBig className="mr-2" />
 												<h1 className="text-xl font-bold">{message.library}</h1>
 											</div>
-											<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
+											<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
 											<p className="text-sm text-gray-600">
 												{message.referenceNo}: {reqData.req_item_id}
 											</p>
@@ -72,7 +73,7 @@ const RequestConfirmed = () => {
 												<LibraryBig className="mr-2" />
 												<h1 className="text-xl font-bold">{message.library}</h1>
 											</div>
-											<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
+											<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
 											<p className="text-sm text-gray-600">
 												{message.referenceNo}: {reqData.req_item_id}
 											</p>
