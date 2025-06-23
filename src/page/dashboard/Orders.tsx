@@ -178,7 +178,6 @@ const Orders = () => {
 		},
 	]
 
-	console.log('records', records)
 	return (
 		<PatronLayout heading="Orders">
 			<ProfileTable data={records} columns={columns} filterType={'req_title'} filterTypeShow="" filterDateType={'date_needed'} />
