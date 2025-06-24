@@ -174,7 +174,7 @@ const RequestLater = () => {
 									<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
 									<div className={'md:flex'}>
 										<p className="text-sm text-gray-600">
-											{message.barcode} : {reqData.req_item_id}
+											{message.barcode} : {record.select_item_id}
 										</p>
 									</div>
 								</div>

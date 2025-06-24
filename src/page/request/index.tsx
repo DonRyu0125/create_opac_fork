@@ -11,6 +11,7 @@ const Request = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { message } = useConstants()
 	let reqData: any = records[0].request
+	let record:any = records[0]
 	const handleGoBack = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		window.history.back()
@@ -38,7 +39,7 @@ const Request = () => {
 									<Input type="hidden" name="METHOD_REQUEST" value={reqData.method_request} />
 									<Input type="hidden" name="REQ_TOPIC" value={reqData.req_topic} />
 									<Input type="hidden" name="REQ_APPL_NAME" value={reqData.req_appl_name} />
-									<Input type="hidden" name="REQ_ITEM_ID" value={reqData.req_item_id} />
+									<input type="hidden" name="req_item_id" value={record.select_item_id} />
 									<Input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
 									<Input type="hidden" name="REQ_ITEM_TITLE" value={convertToString(reqData, 'req_item_title')} />
 									<Button className="bg-primary rounded mx-1 hover:bg-primary" type="submit" name="Submit" variant="default">
@@ -77,7 +78,7 @@ const Request = () => {
 										<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
 										<div>
 											<p className="text-sm text-gray-600">
-												{message.barcode} : {reqData?.req_item_id}
+												{message.barcode} : {record.select_item_id}
 											</p>
 										</div>
 									</>
@@ -89,7 +90,7 @@ const Request = () => {
 										</div>
 										<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
 										<p className="text-sm text-gray-600">
-											{message.referenceNo}: {reqData.req_item_id}
+											{message.referenceNo}: {record.select_item_id}
 										</p>
 										{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
 									</>
@@ -101,7 +102,7 @@ const Request = () => {
 										</div>
 										<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
 										<p className="text-sm text-gray-600">
-											{message.referenceNo}: {reqData.req_item_id}
+											{message.referenceNo}: {record.select_item_id}
 										</p>
 										{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
 									</>
