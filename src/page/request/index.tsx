@@ -4,57 +4,18 @@ import useJSONData from '@/hooks/useJSONData'
 import { Button } from '../../components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Archive, CircleEllipsis, Landmark, LibraryBig } from 'lucide-react'
-import { convertToArr, convertToString, convertXMLToJson, removeQuote } from '@/lib/utils'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { convertToString, removeQuote } from '@/lib/utils'
 import { REQUEST_DESC_DB } from './RequestConfirmed'
-
-type DeliveryTimeEntry = {
-	delivery_type: 'OFFSITESTD' | 'OFFSITECOLD' | 'OFFSITECOOL'
-	delivery_day: string
-}
 
 const Request = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { message } = useConstants()
 	let reqData: any = records[0].request
-	let record = records[0]
 	const handleGoBack = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		window.history.back()
 	}
-	const [calData, setCalData] = useState<any>({
-		delivery_time_entry: [],
-	})
 
-	useEffect(() => {
-		getData()
-	}, [])
-
-	const getData = async () => {
-		return await axios
-			.get(`/preprocessing/paramter_calendar.html`, {
-				headers: {
-					'Content-Type': 'text/xml',
-				},
-				withCredentials: true,
-				timeout: 5000,
-			})
-			.then((res) => {
-				const conToJson = convertXMLToJson(res.data)
-				const calDataJson = conToJson.calendar_info
-				setCalData({
-					delivery_time_entry: convertToArr(calDataJson.delivery_time_entry),
-				})
-			})
-	}
-
-	const getDeliveryDate = (item_delivery_type: string) => {
-		let days = calData?.delivery_time_entry.find((item: DeliveryTimeEntry) => item.delivery_type === item_delivery_type)
-		if (days) {
-			return days
-		}
-	}
 
 	return (
 		<Layout>
