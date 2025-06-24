@@ -25,7 +25,7 @@ const AdminForm = ({
 			<div className="w-full">{children}</div>
 
 			<div className="w-44 h-full sticky top-0 items-end p-4 space-y-2">
-				<Button className="w-28" onClick={() => handleFormSave()}>
+				<Button className="w-28" onClick={handleFormSave}>
 					Save changes
 				</Button>
 				{enablePreview && (

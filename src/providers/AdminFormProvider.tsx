@@ -4,6 +4,7 @@ import { axios } from '@/lib/axios'
 import { SchemaType, SchemaValueType } from '@/types/schema'
 import React, { createContext, useCallback, useState } from 'react'
 import { useLoadingOverlay } from './LoadingOverlayProvider'
+import { useToast } from '@/components/ui/use-toast'
 
 type AdminFormContextType = {
 	formData: SchemaValueType
@@ -48,6 +49,8 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 		})
 	}, [])
 
+	const { toast } = useToast()
+
 	const updateData = useCallback(
 		(data: SchemaValueType) => {
 			showLoading()
@@ -56,12 +59,26 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 					path: filepath,
 					content: JSON.stringify(data),
 				})
-				.then((res) => {})
+				.then((res) => {
+					toast({
+						title: 'Success',
+						description: 'Data updated successfully',
+						variant: 'default',
+					})
+				})
+				.catch((error) => {
+					toast({
+						title: 'Error',
+						description: 'Failed to update data',
+						variant: 'destructive',
+					})
+					console.error('Update error:', error)
+				})
 				.finally(() => {
 					hideLoading()
 				})
 		},
-		[filepath, hideLoading, showLoading]
+		[filepath, hideLoading, showLoading, toast]
 	)
 
 	const handleFormSave = useCallback(() => {
