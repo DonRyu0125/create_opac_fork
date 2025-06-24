@@ -88,11 +88,8 @@ const RequestConfirmed = () => {
 
 						<div className="border-t mt-6">
 							<div className="flex justify-center items-center pt-4">
-								<Link className="mx-1" href={reqData.req_back_to_record}>
-									<Button>{message.goBack}</Button>
-								</Link>
-								{navigations.map((item) => (
-									<Link className="mx-1" href={item.url}>
+								{navigations.map((item,key) => (
+									<Link className="mx-1" href={item.url} key={key}>
 										<Button>{item.title}</Button>
 									</Link>
 								))}
