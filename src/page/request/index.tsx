@@ -39,7 +39,7 @@ const Request = () => {
 									<Input type="hidden" name="METHOD_REQUEST" value={reqData.method_request} />
 									<Input type="hidden" name="REQ_TOPIC" value={reqData.req_topic} />
 									<Input type="hidden" name="REQ_APPL_NAME" value={reqData.req_appl_name} />
-									<input type="hidden" name="req_item_id" value={record.select_item_id} />
+									<input type="hidden" name="req_item_id" value={reqData.req_item_id} />
 									<Input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
 									<Input type="hidden" name="REQ_ITEM_TITLE" value={convertToString(reqData, 'req_item_title')} />
 									<Button className="bg-primary rounded mx-1 hover:bg-primary" type="submit" name="Submit" variant="default">
@@ -58,7 +58,8 @@ const Request = () => {
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
-								{message.requestFor} <b>{convertToString(reqData, 'req_item_title') ?? reqData.req_title}</b> - <b>{reqData.req_item_id}</b>
+								{/* {message.requestFor} <b>{convertToString(reqData, 'req_item_title') ?? reqData.req_title}</b> - <b>{reqData.req_item_id}</b> */}
+								Please confirm your request <b>{reqData.req_item_id}</b> and time
 							</p>
 							<p>
 								<b>
@@ -78,7 +79,7 @@ const Request = () => {
 										<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
 										<div>
 											<p className="text-sm text-gray-600">
-												{message.barcode} : {record.select_item_id}
+												{message.barcode} : {reqData.req_item_id}
 											</p>
 										</div>
 									</>

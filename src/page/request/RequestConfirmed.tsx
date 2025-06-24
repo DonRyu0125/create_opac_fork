@@ -30,7 +30,7 @@ const RequestConfirmed = () => {
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
-								{message.requestFor} <b>{convertToString(reqData,'req_item_title') ?? reqData.req_title}</b> - <b>{reqData.req_item_id}</b>
+								Your request is confirmed!
 							</p>
 							<p>{reqData.sentence_1}</p>
 							<p>
