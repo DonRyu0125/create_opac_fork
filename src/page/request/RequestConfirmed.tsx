@@ -4,6 +4,9 @@ import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { Archive, CircleCheck, Landmark, LibraryBig } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { convertToString } from '@/lib/utils'
+
+export const REQUEST_DESC_DB = 'DESCRIPTION'
 
 const RequestConfirmed = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -27,69 +30,66 @@ const RequestConfirmed = () => {
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
-								{message.requestFor} <b>{reqData.req_item_title}</b> - <b>{reqData.req_item_id}</b> {message.hasBeenAccepted}
+								Your request is confirmed!
 							</p>
-							{reqData.sentence_1 ? (
-								<p>
-									{message.request} {reqData.sentence_1}
-								</p>
-							) : (
-								''
-							)}
-							{/* {reqData.sentence_2 ? <p>{reqData.sentence_2}</p> : ''} */}
+							{/* <p>{reqData.sentence_1}</p> */}
+							<p>
+								<b>{reqData.collection_time}</b>
+							</p>
+							<p> {message.visitRequirement}</p>
 						</div>
 
-						<div>
-							<div className="border p-4 rounded">
-								{reqData.req_db_name === 'DESCRIPTION_WEB' ? (
-									<>
-										<div className="flex flex-row items-center">
-											<Archive className="mr-2" />
-											<h1 className="text-xl font-bold">{message.archives}</h1>
-										</div>
-										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
-										<div>
+						{reqData.req_db_name && (
+							<div>
+								<div className="border p-4 rounded">
+									{reqData.req_db_name === REQUEST_DESC_DB ? (
+										<>
+											<div className="flex flex-row items-center">
+												<Archive className="mr-2" />
+												<h1 className="text-xl font-bold">{message.archives}</h1>
+											</div>
+											<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
+											<div>
+												<p className="text-sm text-gray-600">
+													{message.barcode} : {reqData?.req_item_id}
+												</p>
+											</div>
+										</>
+									) : reqData.req_db_name === 'COLLECTIONS_WEB' ? (
+										<>
+											<div className="flex flex-row items-center">
+												<LibraryBig className="mr-2" />
+												<h1 className="text-xl font-bold">{message.library}</h1>
+											</div>
+											<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
 											<p className="text-sm text-gray-600">
-												{message.referenceNo} : {reqData?.req_item_id}
+												{message.referenceNo}: {reqData.req_item_id}
 											</p>
-										</div>
-									</>
-								) : reqData.req_db_name === 'COLLECTIONS_WEB' ? (
-									<>
-										<div className="flex flex-row items-center">
-											<LibraryBig className="mr-2" />
-											<h1 className="text-xl font-bold">{message.library}</h1>
-										</div>
-										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
-										<p className="text-sm text-gray-600">
-											{message.referenceNo}: {reqData.req_item_id}
-										</p>
-										{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
-									</>
-								) : reqData.req_db_name === 'BIBLIO_WEB' ? (
-									<>
-										<div className="flex flex-row items-center">
-											<LibraryBig className="mr-2" />
-											<h1 className="text-xl font-bold">{message.library}</h1>
-										</div>
-										<p className="text-lg font-bold mt-2">{reqData.req_item_title}</p>
-										<p className="text-sm text-gray-600">
-											{message.referenceNo}: {reqData.req_item_id}
-										</p>
-										{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
-									</>
-								) : (
-									''
-								)}
+											{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
+										</>
+									) : reqData.req_db_name === 'BIBLIO_WEB' ? (
+										<>
+											<div className="flex flex-row items-center">
+												<LibraryBig className="mr-2" />
+												<h1 className="text-xl font-bold">{message.library}</h1>
+											</div>
+											<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
+											<p className="text-sm text-gray-600">
+												{message.referenceNo}: {reqData.req_item_id}
+											</p>
+											{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
+										</>
+									) : (
+										''
+									)}
+								</div>
 							</div>
-						</div>
+						)}
+
 						<div className="border-t mt-6">
 							<div className="flex justify-center items-center pt-4">
-								<Link className="mx-1" href={reqData.req_back_to_record}>
-									<Button>{message.goBack}</Button>
-								</Link>
-								{navigations.map((item) => (
-									<Link className="mx-1" href={item.url}>
+								{navigations.map((item,key) => (
+									<Link className="mx-1" href={item.url} key={key}>
 										<Button>{item.title}</Button>
 									</Link>
 								))}

@@ -239,10 +239,10 @@
 	"availabilityInfo": "The item will typically be ready to use in the Archives Study Area within an hour of your selected time (e.g. documents in the 11:00 collection are usually ready for use by 12:00).",
 	"estimatedLoanDaysLabel": "Estimated Number of Loan Days",
 	"requestedToView": "You have requested to view",
-	"fulfillmentTime": "Your request will be fulfilled in three business days.",
 	"confirmRequest": "Please confirm whether you would like to proceed with this request.",
 	"confirmed": "Confirmed",
 	"requestFor": "Your request for",
 	"hasBeenAccepted": "has been accepted!",
-	"barcode":"Barcode Id"
+	"barcode":"Barcode Id",
+	"pleaseLoginForRequesting":"Please log in to make a request"
 }

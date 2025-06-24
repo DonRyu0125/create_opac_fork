@@ -68,6 +68,7 @@ export interface ReproductionData {
 	req_charge_amt: string
 }
 export interface RequestData {
+	req_db_link1: string | number | readonly string[] | undefined
     action_later: string
 	action: string
 	auto_approve: string
@@ -111,6 +112,7 @@ export interface Record {
 	full_name: string
 	input?: BookmarkCheckBoxData
 	is_bookmarked: string
+	last_name: string
 	link_dbname?: string
 	media?: Media
 	orders_count: string

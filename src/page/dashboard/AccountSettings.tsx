@@ -10,10 +10,12 @@ import { Switch } from "@/components/ui/switch"
 import { Separator } from "@/components/ui/separator"
 import { Bell, Key, Lock, Mail, Save, Shield, User, UserCog } from "lucide-react"
 import type { JSX } from "react/jsx-runtime" // Import JSX to fix the undeclared variable error
+import useJSONData from "@/hooks/useJSONData"
 
 // Define interfaces for form data and errors
 interface ProfileFormData {
-    name: string
+    firstName: string
+    lastName: string 
     email: string
 }
 
@@ -34,13 +36,17 @@ interface SecurityFormErrors {
     confirmPassword: string
 }
 
+
 export default function AccountSettings(): JSX.Element {
+    const { records } = useJSONData({ selector: '#xml_record' })
+    console.log(records)
     const [activeTab, setActiveTab] = useState<string>("profile")
 
     // Profile form state
     const [profileForm, setProfileForm] = useState<ProfileFormData>({
-        name: "John Doe",
-        email: "john.doe@example.com",
+        firstName: records[0].first_name,
+        lastName: records[0].last_name,
+        email: records[0].email,
     })
     const [profileErrors, setProfileErrors] = useState<ProfileFormErrors>({
         name: "",
@@ -98,7 +104,7 @@ export default function AccountSettings(): JSX.Element {
         let isValid = true
         const newErrors: ProfileFormErrors = { name: "", email: "" }
 
-        if (profileForm.name.trim().length < 2) {
+        if (profileForm.firstName.trim().length < 2) {
             newErrors.name = "Name must be at least 2 characters."
             isValid = false
         }
@@ -206,7 +212,14 @@ export default function AccountSettings(): JSX.Element {
                                                 id="name"
                                                 name="name"
                                                 placeholder="Enter your name"
-                                                value={profileForm.name}
+                                                value={profileForm.firstName}
+                                                onChange={handleProfileChange}
+                                            />
+                                            <Input
+                                                id="name"
+                                                name="name"
+                                                placeholder="Enter your name"
+                                                value={profileForm.lastName}
                                                 onChange={handleProfileChange}
                                             />
                                         </div>

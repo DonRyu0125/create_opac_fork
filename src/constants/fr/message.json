@@ -92,7 +92,6 @@
 	"forgotPassword": "J'ai oublié mon mot de passe",
 	"forgotpasswordEmailTitle": "REINITIALISATION%20DU%20MOT%20DE%20PASSE%20DENREGISTREMENT%20CLIENT",
 	"forgottenPasswordInstructions": "Entrez votre numéro de compte pour demander un nouveau mot de passe",
-	"fulfillmentTime": "Votre demande sera traitée dans un délai de trois jours ouvrables.",
 	"fullName": "Nom complet",
 	"generalNote": "Note générale",
 	"genericError": "Something went wrong, please restart your search",
@@ -244,5 +243,6 @@
 	"welcomeMessage": "Ceci est votre profil client. Consultez vos éléments enregistrés ou demandés ici !",
 	"yes": "Oui",
 	"yourDetailLabel": "Vos Détails",
-	"barcode": "Identifiant du code-barres"
+	"barcode": "Identifiant du code-barres",
+	"pleaseLoginForRequesting":"Veuillez vous connecter pour faire une demand"
 }
