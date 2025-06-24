@@ -32,7 +32,7 @@ const RequestConfirmed = () => {
 							<p>
 								Your request is confirmed!
 							</p>
-							<p>{reqData.sentence_1}</p>
+							{/* <p>{reqData.sentence_1}</p> */}
 							<p>
 								<b>{reqData.collection_time}</b>
 							</p>

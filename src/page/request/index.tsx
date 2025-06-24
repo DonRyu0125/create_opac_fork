@@ -58,8 +58,7 @@ const Request = () => {
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>
-								{/* {message.requestFor} <b>{convertToString(reqData, 'req_item_title') ?? reqData.req_title}</b> - <b>{reqData.req_item_id}</b> */}
-								Please confirm your request <b>{reqData.req_item_id}</b> and time
+								Please confirm your request for <b>{reqData.req_item_id}</b> and time.
 							</p>
 							<p>
 								<b>
