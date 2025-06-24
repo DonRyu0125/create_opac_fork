@@ -243,5 +243,6 @@
 	"welcomeMessage": "Ceci est votre profil client. Consultez vos éléments enregistrés ou demandés ici !",
 	"yes": "Oui",
 	"yourDetailLabel": "Vos Détails",
-	"barcode": "Identifiant du code-barres"
+	"barcode": "Identifiant du code-barres",
+	"pleaseLoginForRequesting":"Veuillez vous connecter pour faire une demand"
 }

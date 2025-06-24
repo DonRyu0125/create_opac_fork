@@ -6,6 +6,7 @@ import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import TooltipButton from '@/components/common/TooltipButton'
 import { REQUEST_DESC_DB } from '@/page/request/RequestConfirmed'
+import { toast } from '@/components/ui/use-toast'
 type IsRequestedByClient = 'No' | 'Another' | 'Current'
 type ItemContent = {
 	id: string
@@ -50,7 +51,8 @@ const RequestAccordianDesc = () => {
 
 	const handleRequest = (formRef: any) => {
 		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-		if (patronID) formRef.current?.submit()
+		if (patronID) return formRef.current?.submit()
+		return toast({ title: `${message.pleaseLoginForRequesting}` })
 	}
 
 	return (

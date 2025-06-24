@@ -243,5 +243,6 @@
 	"confirmed": "Confirmed",
 	"requestFor": "Your request for",
 	"hasBeenAccepted": "has been accepted!",
-	"barcode":"Barcode Id"
+	"barcode":"Barcode Id",
+	"pleaseLoginForRequesting":"Please log in to make a request"
 }
