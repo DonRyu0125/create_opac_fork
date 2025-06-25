@@ -27,9 +27,12 @@ const Header = () => {
 
 	const checkActiveUrl = () => {
 		const currentUrl = window.location.href
-		const activePage = navigationLists.find((item) =>
-			currentUrl.includes(item.url.split('./')[1])
-		)
+		const activePage = navigationLists.find((item) => {
+			if (item.url === './home.html') {
+				return currentUrl.includes('home.html') || currentUrl.endsWith('/admin/')
+			}
+			return currentUrl.includes(item.url.replace('./', ''))
+		})
 		return activePage ? activePage.page : null
 	}
 
@@ -57,7 +60,9 @@ const Header = () => {
 									key={e.page}
 									className={cn(
 										'text-blue-950 cursor-pointer  px-4 py-2 rounded-md',
-										e.page === checkActiveUrl() ? 'bg-white' : 'text-white'
+										checkActiveUrl() === e.page
+											? 'bg-white'
+											: 'text-white'
 									)}>
 									<NavigationMenuLink href={e.url}>{e.page}</NavigationMenuLink>
 								</NavigationMenuItem>
