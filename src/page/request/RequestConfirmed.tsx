@@ -30,9 +30,8 @@ const RequestConfirmed = () => {
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
 							<p>Your request is confirmed!</p>
-							{/* <p>{reqData.sentence_1}</p> */}
 							<p>
-								<b>{reqData.collection_time}</b>
+								<b>{reqData.date_needed}</b> <b>{reqData.time_needed}</b>
 							</p>
 							<p> {message.visitRequirement}</p>
 						</div>
