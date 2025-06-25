@@ -15,20 +15,13 @@ const Reproductions = () => {
 			id: 'select',
 			header: ({ table }) => (
 				<Checkbox
-					checked={
-						table.getIsAllPageRowsSelected() ||
-						(table.getIsSomePageRowsSelected() && 'indeterminate')
-					}
+					checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
 					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
 					aria-label={message.selectAll}
 				/>
 			),
 			cell: ({ row }) => (
-				<Checkbox
-					checked={row.getIsSelected()}
-					onCheckedChange={(value) => row.toggleSelected(!!value)}
-					aria-label={message.selectRow}
-				/>
+				<Checkbox checked={row.getIsSelected()} onCheckedChange={(value) => row.toggleSelected(!!value)} aria-label={message.selectRow} />
 			),
 			enableSorting: false,
 			enableHiding: false,
@@ -38,9 +31,7 @@ const Reproductions = () => {
 			header: `${message.order} #`,
 			cell: ({ row }) => (
 				<div className="capitalize">
-					<a
-						className="underline text-primary hover:text-opac-secondary"
-						href={row.getValue('req_order_num_link')}>
+					<a className="underline text-primary hover:text-opac-secondary" href={row.getValue('req_order_num_link')}>
 						{row.getValue('req_order_num')}
 					</a>
 				</div>
@@ -55,9 +46,7 @@ const Reproductions = () => {
 			accessorKey: 'req_item_id',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.item} #
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -69,9 +58,7 @@ const Reproductions = () => {
 			accessorKey: 'req_topic',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.topic}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -83,9 +70,7 @@ const Reproductions = () => {
 			accessorKey: 'req_title',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.title}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -97,9 +82,7 @@ const Reproductions = () => {
 			accessorKey: 'req_status',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.status}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -111,9 +94,7 @@ const Reproductions = () => {
 			accessorKey: 'req_paid_amt',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.amount}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -125,9 +106,7 @@ const Reproductions = () => {
 			accessorKey: 'amt_paid',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.paid}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -138,12 +117,7 @@ const Reproductions = () => {
 	]
 	return (
 		<PatronLayout heading={message.reproduction}>
-			<ProfileTable
-				data={records}
-				columns={columns}
-				filterType={'comments'}
-				filterTypeShow=""
-			/>
+			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow="" />
 		</PatronLayout>
 	)
 }

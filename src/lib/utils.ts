@@ -9,13 +9,9 @@ export function cn(...inputs: ClassValue[]) {
 
 export const getImage = (image: string) => {
 	if (Array.isArray(image)) {
-		return image[0]?.toLowerCase().includes('[media]')
-			? image[0].replace(/\[media\]/i, '/media/')
-			: image
+		return image[0]?.toLowerCase().includes('[media]') ? image[0].replace(/\[media\]/i, '/media/') : image
 	} else {
-		return image?.toLowerCase().includes('[media]')
-			? image.replace(/\[media\]/i, '/media/')
-			: image
+		return image?.toLowerCase().includes('[media]') ? image.replace(/\[media\]/i, '/media/') : image
 	}
 }
 
@@ -46,11 +42,7 @@ export const copyToClipboard = (text: string): void => {
  * @param appendText text to be appened after truncation
  * @returns truncated word
  */
-export const truncateWords = (
-	text: string,
-	maxLength: number = 20,
-	appendText: string = '...'
-): string => {
+export const truncateWords = (text: string, maxLength: number = 20, appendText: string = '...'): string => {
 	if (text.length <= maxLength) return text
 
 	return `${text.substring(0, maxLength)}${appendText}`
@@ -84,10 +76,8 @@ export const convertXMLToJson = (response: string) => {
 	return jsonData
 }
 
-export const convertToString = (response:any,type:string) =>{
-	return typeof response[type] === 'object'
-	? response[type].__text.replace(/\s+/g, ' ').trim()
-	: response[type]
+export const convertToString = (response: any, type: string) => {
+	return typeof response[type] === 'object' ? response[type].__text.replace(/\s+/g, ' ').trim() : response[type]
 }
 
 const escapeBrTags = (xml: string): string => {
@@ -222,7 +212,7 @@ export const encodeURIStringToMinisisSpecialCharacter = (originalString: string)
 	return encodeURIComponent(originalString).replace(/%/g, '~')
 }
 
-export const isDescriptionDatabase = (database: string,req_database:string) => {
+export const isDescriptionDatabase = (database: string, req_database: string) => {
 	return database.toLocaleUpperCase() === 'DESCRIPTION_WEB' && req_database.toLocaleUpperCase() === 'DESCRIPTION_WEB'
 }
 

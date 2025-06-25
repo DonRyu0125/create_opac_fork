@@ -1,7 +1,7 @@
-import LibraryDashboard from "@/components/layouts/librarycirculation"
+import LibraryDashboard from '@/components/layouts/librarycirculation'
 
 const LibraryCirculation = () => {
-    return <LibraryDashboard></LibraryDashboard>
+	return <LibraryDashboard></LibraryDashboard>
 }
 
 export default LibraryCirculation

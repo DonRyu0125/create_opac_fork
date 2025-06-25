@@ -15,20 +15,13 @@ const BookmarkProfile = () => {
 			id: 'select',
 			header: ({ table }) => (
 				<Checkbox
-					checked={
-						table.getIsAllPageRowsSelected() ||
-						(table.getIsSomePageRowsSelected() && 'indeterminate')
-					}
+					checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
 					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
 					aria-label="Select all"
 				/>
 			),
 			cell: ({ row }) => (
-				<Checkbox
-					checked={row.getIsSelected()}
-					onCheckedChange={(value) => row.toggleSelected(!!value)}
-					aria-label="Select row"
-				/>
+				<Checkbox checked={row.getIsSelected()} onCheckedChange={(value) => row.toggleSelected(!!value)} aria-label="Select row" />
 			),
 			enableSorting: false,
 			enableHiding: false,
@@ -42,9 +35,7 @@ const BookmarkProfile = () => {
 			accessorKey: 'req_topic',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.topic}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -56,9 +47,7 @@ const BookmarkProfile = () => {
 			accessorKey: 'req_item_title',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.title}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -70,9 +59,7 @@ const BookmarkProfile = () => {
 			accessorKey: 'req_status',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.status}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -83,12 +70,7 @@ const BookmarkProfile = () => {
 	]
 	return (
 		<PatronLayout heading="Bookmark">
-			<ProfileTable
-				data={records}
-				columns={columns}
-				filterType={'comments'}
-				filterTypeShow=""
-			/>
+			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow="" />
 		</PatronLayout>
 	)
 }

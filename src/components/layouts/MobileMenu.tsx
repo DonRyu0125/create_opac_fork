@@ -27,9 +27,7 @@ const MobileMenu = () => {
 					</SheetHeader>
 					{auth.login && (
 						<div className={'flex justify-center items-center py-5'}>
-							<div
-								className=" inline-block bg-primary p-2 ring-offset-background rounded-lg"
-								style={{ borderRadius: '5px' }}>
+							<div className=" inline-block bg-primary p-2 ring-offset-background rounded-lg" style={{ borderRadius: '5px' }}>
 								<LoginBtn />
 							</div>
 						</div>
@@ -40,9 +38,7 @@ const MobileMenu = () => {
 								<li
 									key={nav.displayTitle}
 									className="flex items-center text-left h-12 w-full px-2 hover:text-white hover:bg-primary/60 ">
-									<Link
-										className="transition no-underline text-md text-primary"
-										href={nav.linkURL}>
+									<Link className="transition no-underline text-md text-primary" href={nav.linkURL}>
 										{nav.displayTitle}
 									</Link>
 								</li>

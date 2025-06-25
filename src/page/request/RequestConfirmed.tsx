@@ -29,9 +29,7 @@ const RequestConfirmed = () => {
 							</h1>
 						</div>
 						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
-							<p>
-								Your request is confirmed!
-							</p>
+							<p>Your request is confirmed!</p>
 							{/* <p>{reqData.sentence_1}</p> */}
 							<p>
 								<b>{reqData.collection_time}</b>
@@ -48,7 +46,7 @@ const RequestConfirmed = () => {
 												<Archive className="mr-2" />
 												<h1 className="text-xl font-bold">{message.archives}</h1>
 											</div>
-											<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
+											<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
 											<div>
 												<p className="text-sm text-gray-600">
 													{message.barcode} : {reqData?.req_item_id}
@@ -61,7 +59,7 @@ const RequestConfirmed = () => {
 												<LibraryBig className="mr-2" />
 												<h1 className="text-xl font-bold">{message.library}</h1>
 											</div>
-											<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
+											<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
 											<p className="text-sm text-gray-600">
 												{message.referenceNo}: {reqData.req_item_id}
 											</p>
@@ -73,7 +71,7 @@ const RequestConfirmed = () => {
 												<LibraryBig className="mr-2" />
 												<h1 className="text-xl font-bold">{message.library}</h1>
 											</div>
-											<p className="text-lg font-bold mt-2">{convertToString(reqData,'req_item_title')}</p>
+											<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
 											<p className="text-sm text-gray-600">
 												{message.referenceNo}: {reqData.req_item_id}
 											</p>
@@ -88,7 +86,7 @@ const RequestConfirmed = () => {
 
 						<div className="border-t mt-6">
 							<div className="flex justify-center items-center pt-4">
-								{navigations.map((item,key) => (
+								{navigations.map((item, key) => (
 									<Link className="mx-1" href={item.url} key={key}>
 										<Button>{item.title}</Button>
 									</Link>

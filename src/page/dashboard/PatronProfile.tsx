@@ -18,7 +18,7 @@ import {
 	Search,
 	ShoppingBag,
 	Upload,
-	BookOpen
+	BookOpen,
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -86,7 +86,7 @@ export default function PatronProfile() {
 			icon: <BookOpen className="h-4 w-4" />,
 			label: profileList[7].label,
 			color: 'yellow',
-			value: "Coming Soon...",
+			value: 'Coming Soon...',
 			link: profileList[7].url,
 		},
 	]
@@ -102,17 +102,14 @@ export default function PatronProfile() {
 			violet: 'bg-violet-100 text-violet-500',
 			yellow: 'bg-yellow-100 text-yellow-500',
 			rose: 'bg-rose-100 text-rose-500',
-			indigo: 'bg-indigo-100 text-indigo-500'
+			indigo: 'bg-indigo-100 text-indigo-500',
 		} as const
 
 		return (
 			<div className="rounded-md bg-white p-6 shadow">
 				<div className="flex flex-col gap-2">
 					<div className="flex items-center justify-center gap-2">
-						<div
-							className={`rounded-full p-2 ${colorClasses[color as keyof typeof colorClasses]}`}>
-							{icon}
-						</div>
+						<div className={`rounded-full p-2 ${colorClasses[color as keyof typeof colorClasses]}`}>{icon}</div>
 						<span className="text-sm text-gray-500">{label}</span>
 					</div>
 					<div className="flex items-baseline justify-center">
@@ -136,19 +133,9 @@ export default function PatronProfile() {
 			<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 				{statCards.map((card, index) => (
 					<a
-						href={
-							getCookieValue('HOME_SESSID') +
-							card.link +
-							(card.label == 'Bookmarks' || 'Library Circulation' ? '' : m2l_patron_id)
-						}
+						href={getCookieValue('HOME_SESSID') + card.link + (card.label == 'Bookmarks' || 'Library Circulation' ? '' : m2l_patron_id)}
 						className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-gray-50">
-						<StatCard
-							key={index}
-							icon={card.icon}
-							label={card.label}
-							color={card.color}
-							value={card.value}
-						/>
+						<StatCard key={index} icon={card.icon} label={card.label} color={card.color} value={card.value} />
 					</a>
 				))}
 				{/* Calednar statCard's Anchor tag should be different, it uses commandsearch so never need seesion id, I made seperate StatCard for Calendar. Don Ryu 20250402 */}
@@ -174,9 +161,7 @@ export default function PatronProfile() {
 				</div>
 				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 					{[home, archives, museum, library].map((item, index) => (
-						<div
-							key={index}
-							className="overflow-hidden rounded-md bg-white shadow hover:brightness-95">
+						<div key={index} className="overflow-hidden rounded-md bg-white shadow hover:brightness-95">
 							<Link href={item.linkURL} className="group no-underline">
 								<div className="aspect-square relative overflow-hidden">
 									<img

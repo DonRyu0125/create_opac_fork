@@ -7,26 +7,12 @@ import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Calendar } from '@/components/ui/calendar'
 
-export function DatePickerWithRange({
-	className,
-	date,
-	setDate,
-}: {
-	className: string
-	date: DateRange | any
-	setDate: any
-}) {
+export function DatePickerWithRange({ className, date, setDate }: { className: string; date: DateRange | any; setDate: any }) {
 	return (
 		<div className={cn('grid gap-2 w-[220px]', className)}>
 			<Popover>
 				<PopoverTrigger asChild>
-					<Button
-						id="date"
-						variant={'outline'}
-						className={cn(
-							' justify-evenly text-left font-normal',
-							!date && 'text-muted-foreground'
-						)}>
+					<Button id="date" variant={'outline'} className={cn(' justify-evenly text-left font-normal', !date && 'text-muted-foreground')}>
 						<CalendarIcon />
 						{date?.from ? (
 							date.to ? (

@@ -11,12 +11,11 @@ const Request = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { message } = useConstants()
 	let reqData: any = records[0].request
-	let record:any = records[0]
+	let record: any = records[0]
 	const handleGoBack = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		window.history.back()
 	}
-
 
 	return (
 		<Layout>
