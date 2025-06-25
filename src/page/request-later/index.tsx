@@ -162,6 +162,7 @@ const RequestLater = () => {
 								<input type="hidden" name="req_db_recid" value={reqData.req_db_recid} />
 								<input type="hidden" name="req_item_id" value={record.select_item_id} />
 								<input type="hidden" name="req_item_title" value={convertToString(reqData,'req_item_title')} />
+								<input type="hidden" name="req_own_collect" value={'X'} />
 								<h1 className="flex items-center text-xl font-bold">
 									<CircleEllipsis className="mr-2" />
 									{message.requestRecordLater}
