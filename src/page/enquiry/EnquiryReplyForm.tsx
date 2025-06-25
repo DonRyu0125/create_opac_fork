@@ -1,11 +1,5 @@
 import { Button } from '../../components/ui/button'
-import {
-	convertXMLToJson,
-	getPatronID,
-	getLanguageID,
-	getHomeSessionID,
-	convertToArr,
-} from '@/lib/utils'
+import { convertXMLToJson, getPatronID, getLanguageID, getHomeSessionID, convertToArr } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 import { Send, MoreVertical, UserRound, FileText, Download, Clock } from 'lucide-react'
 
@@ -17,13 +11,7 @@ import { ScrollArea } from '@radix-ui/react-scroll-area'
 import Link from '@/components/common/Link'
 import useJSONData from '@/hooks/useJSONData'
 import { Label } from '@/components/ui/label'
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 const EnquiryForm = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -93,9 +81,7 @@ const EnquiryForm = () => {
 					</div>
 					<div>
 						<h2 className="font-semibold">{clientFirstName + ' ' + clientLastName} </h2>
-						<p className="text-xs text-muted-foreground lowercase">
-							{xmlTreeData.enq_patron_email}
-						</p>
+						<p className="text-xs text-muted-foreground lowercase">{xmlTreeData.enq_patron_email}</p>
 					</div>
 				</div>
 				<Button variant="ghost" size="icon">
@@ -133,15 +119,8 @@ const EnquiryForm = () => {
 						<div className="space-y-4 text-sm bg-blue-50 p-4 rounded-lg">
 							<p>Dear User,</p>
 							<p>Thank you for your inquiry!</p>
-							<p>
-								{' '}
-								We have received your email and a member of our staff will respond
-								to your inquiry within the next 24 hours.
-							</p>
-							<p>
-								If you need immediate assistance, please contact our support team at
-								+1 (604) 123-4567.
-							</p>
+							<p> We have received your email and a member of our staff will respond to your inquiry within the next 24 hours.</p>
+							<p>If you need immediate assistance, please contact our support team at +1 (604) 123-4567.</p>
 							<div className="space-y-1">
 								<p>Best regards,</p>
 								<p>Staff Team</p>
@@ -168,10 +147,7 @@ const EnquiryForm = () => {
 							{clientEnquiries?.map((enquiry, i) => (
 								<Link
 									key={i}
-									className={
-										'no-underline ' +
-										(enquiry.enq_status === 'Request' ? 'bg-red-200' : '')
-									}
+									className={'no-underline ' + (enquiry.enq_status === 'Request' ? 'bg-red-200' : '')}
 									href={
 										getHomeSessionID() +
 										'?changesinglerecord&database=ENQUIRIES_VIEW&DE_FORM=[OPAC_ENQUIRY]de_enquiryreplyform.html&EXP=ENQ_ID%20' +
@@ -184,15 +160,11 @@ const EnquiryForm = () => {
 											' hover:bg-gray-100 rounded-lg cursor-pointer'
 										}>
 										<div className="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center">
-											<span className="text-gray-600 font-semibold">
-												{enquiry.enq_id[0]}
-											</span>
+											<span className="text-gray-600 font-semibold">{enquiry.enq_id[0]}</span>
 										</div>
 										<div className="flex-1 min-w-0">
 											<p className="font-medium text-sm">{enquiry.enq_id}</p>
-											<p className="text-xs text-muted-foreground truncate">
-												{enquiry.enq_topic}
-											</p>
+											<p className="text-xs text-muted-foreground truncate">{enquiry.enq_topic}</p>
 											<p className="text-xs text-muted-foreground truncate">
 												<span
 													className={
@@ -202,19 +174,15 @@ const EnquiryForm = () => {
 																? 'bg-green-200 text-green-800'
 																: enquiry.enq_status === 'Closed'
 																	? 'bg-orange-200 text-yellow-800'
-																	: enquiry.enq_status ===
-																		  'Deleted'
+																	: enquiry.enq_status === 'Deleted'
 																		? 'bg-red-200 text-red-800'
-																		: '') +
-														' font-medium me-2 px-2.5 py-0.5 rounded-full'
+																		: '') + ' font-medium me-2 px-2.5 py-0.5 rounded-full'
 													}>
 													{enquiry.enq_status}
 												</span>
 											</p>
 										</div>
-										<span className="text-xs text-muted-foreground">
-											{enquiry.enq_create_date}
-										</span>
+										<span className="text-xs text-muted-foreground">{enquiry.enq_create_date}</span>
 									</div>
 									<hr></hr>
 								</Link>
@@ -229,11 +197,55 @@ const EnquiryForm = () => {
 					{/* Messages Area */}
 					{/* Error here when object has no arrays */}
 					{Array.isArray(xmlTreeData.correspond_grp.correspond_grp_occurrence) ? (
-						xmlTreeData.correspond_grp.correspond_grp_occurrence.map(
-							(correspondGroup: any, i: any) => (
-								<ScrollArea className="flex-1 p-4" key={i}>
-									<div className="space-y-8">
-										{/* First Email */}
+						xmlTreeData.correspond_grp.correspond_grp_occurrence.map((correspondGroup: any, i: any) => (
+							<ScrollArea className="flex-1 p-4" key={i}>
+								<div className="space-y-8">
+									{/* First Email */}
+									<div className="space-y-4">
+										<div className="flex items-start gap-3">
+											<div className="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
+												<UserRound className="h-6 w-6 text-gray-600" />
+											</div>
+											<div className="flex-1 space-y-2">
+												<div className="flex items-center justify-between">
+													<div>
+														<p className="font-medium">{clientFirstName + ' ' + clientLastName}</p>
+														<div className="flex items-center gap-2 text-sm text-muted-foreground">
+															<span>To: Staff</span>
+															<span>•</span>
+															<span>{xmlTreeData.enq_create_date}</span>
+														</div>
+													</div>
+												</div>
+												<div className="space-y-4">
+													<h3 className="text-xl font-semibold">{xmlTreeData.enq_id + ' - ' + xmlTreeData.enq_topic}</h3>
+													<span
+														className={
+															(xmlTreeData.enq_status === 'Request'
+																? 'bg-blue-200 text-blue-800'
+																: xmlTreeData.enq_status === 'Active'
+																	? 'bg-green-200 text-green-800'
+																	: xmlTreeData.enq_status === 'Closed'
+																		? 'bg-orange-200 text-yellow-800'
+																		: xmlTreeData.enq_status === 'Deleted'
+																			? 'bg-red-200 text-red-800'
+																			: '') + ' text-sm font-medium me-2 px-2.5 py-0.5 rounded-full'
+														}>
+														{xmlTreeData.enq_status}
+													</span>
+
+													<div className="space-y-2 text-sm bg-blue-50 p-4 rounded-lg whitespace-pre-wrap">
+														{correspondGroup.message_text
+															? correspondGroup.message_text
+															: xmlTreeData.correspond_grp.correspond_grp_occurrence.message_text}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<hr></hr>
+									{/* Reply Email */}
+									{correspondGroup.reply_text || xmlTreeData.correspond_grp.correspond_grp_occurrence.reply_text ? (
 										<div className="space-y-4">
 											<div className="flex items-start gap-3">
 												<div className="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
@@ -242,120 +254,36 @@ const EnquiryForm = () => {
 												<div className="flex-1 space-y-2">
 													<div className="flex items-center justify-between">
 														<div>
-															<p className="font-medium">
-																{clientFirstName +
-																	' ' +
-																	clientLastName}
-															</p>
+															<p className="font-medium">To: {clientFirstName + ' ' + clientLastName}</p>
 															<div className="flex items-center gap-2 text-sm text-muted-foreground">
-																<span>To: Staff</span>
+																<span>
+																	From: {correspondGroup.correspond_who ? correspondGroup.correspond_who : 'Staff'}
+																</span>
 																<span>•</span>
 																<span>
-																	{xmlTreeData.enq_create_date}
+																	{correspondGroup.reply_date
+																		? correspondGroup.reply_date
+																		: xmlTreeData.correspond_grp.correspond_grp_occurrence.reply_date}
 																</span>
 															</div>
 														</div>
 													</div>
-													<div className="space-y-4">
-														<h3 className="text-xl font-semibold">
-															{xmlTreeData.enq_id +
-																' - ' +
-																xmlTreeData.enq_topic}
-														</h3>
-														<span
-															className={
-																(xmlTreeData.enq_status ===
-																'Request'
-																	? 'bg-blue-200 text-blue-800'
-																	: xmlTreeData.enq_status ===
-																		  'Active'
-																		? 'bg-green-200 text-green-800'
-																		: xmlTreeData.enq_status ===
-																			  'Closed'
-																			? 'bg-orange-200 text-yellow-800'
-																			: xmlTreeData.enq_status ===
-																				  'Deleted'
-																				? 'bg-red-200 text-red-800'
-																				: '') +
-																' text-sm font-medium me-2 px-2.5 py-0.5 rounded-full'
-															}>
-															{xmlTreeData.enq_status}
-														</span>
-
-														<div className="space-y-2 text-sm bg-blue-50 p-4 rounded-lg whitespace-pre-wrap">
-															{correspondGroup.message_text
-																? correspondGroup.message_text
-																: xmlTreeData.correspond_grp
-																		.correspond_grp_occurrence
-																		.message_text}
-														</div>
+													<h3 className="text-xl font-semibold">Staff Reply</h3>
+													<div className="space-y-4 text-sm bg-blue-50 p-4 rounded-lg whitespace-pre-wrap">
+														{correspondGroup.reply_text
+															? stripHtmlAndConvertBr(correspondGroup.reply_text)
+															: stripHtmlAndConvertBr(xmlTreeData.correspond_grp.correspond_grp_occurrence.reply_text)}
 													</div>
 												</div>
 											</div>
 										</div>
-										<hr></hr>
-										{/* Reply Email */}
-										{correspondGroup.reply_text ||
-										xmlTreeData.correspond_grp.correspond_grp_occurrence
-											.reply_text ? (
-											<div className="space-y-4">
-												<div className="flex items-start gap-3">
-													<div className="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
-														<UserRound className="h-6 w-6 text-gray-600" />
-													</div>
-													<div className="flex-1 space-y-2">
-														<div className="flex items-center justify-between">
-															<div>
-																<p className="font-medium">
-																	To:{' '}
-																	{clientFirstName +
-																		' ' +
-																		clientLastName}
-																</p>
-																<div className="flex items-center gap-2 text-sm text-muted-foreground">
-																	<span>
-																		From:{' '}
-																		{correspondGroup.correspond_who
-																			? correspondGroup.correspond_who
-																			: 'Staff'}
-																	</span>
-																	<span>•</span>
-																	<span>
-																		{correspondGroup.reply_date
-																			? correspondGroup.reply_date
-																			: xmlTreeData
-																					.correspond_grp
-																					.correspond_grp_occurrence
-																					.reply_date}
-																	</span>
-																</div>
-															</div>
-														</div>
-														<h3 className="text-xl font-semibold">
-															Staff Reply
-														</h3>
-														<div className="space-y-4 text-sm bg-blue-50 p-4 rounded-lg whitespace-pre-wrap">
-															{correspondGroup.reply_text
-																? stripHtmlAndConvertBr(
-																		correspondGroup.reply_text
-																	)
-																: stripHtmlAndConvertBr(
-																		xmlTreeData.correspond_grp
-																			.correspond_grp_occurrence
-																			.reply_text
-																	)}
-														</div>
-													</div>
-												</div>
-											</div>
-										) : (
-											requestAutoReplyMessage()
-										)}
-										<hr className="h-0.5 mx-auto my-1 bg-gray-50 border-0 md:my-10 dark:bg-gray-700" />
-									</div>
-								</ScrollArea>
-							)
-						)
+									) : (
+										requestAutoReplyMessage()
+									)}
+									<hr className="h-0.5 mx-auto my-1 bg-gray-50 border-0 md:my-10 dark:bg-gray-700" />
+								</div>
+							</ScrollArea>
+						))
 					) : (
 						<ScrollArea className="flex-1 p-4">
 							<div className="space-y-8">
@@ -368,9 +296,7 @@ const EnquiryForm = () => {
 										<div className="flex-1 space-y-2">
 											<div className="flex items-center justify-between">
 												<div>
-													<p className="font-medium">
-														{clientFirstName + ' ' + clientLastName}
-													</p>
+													<p className="font-medium">{clientFirstName + ' ' + clientLastName}</p>
 													<div className="flex items-center gap-2 text-sm text-muted-foreground">
 														<span>To: Staff</span>
 														<span>•</span>
@@ -379,34 +305,24 @@ const EnquiryForm = () => {
 												</div>
 											</div>
 											<div className="space-y-4">
-												<h3 className="text-xl font-semibold">
-													{xmlTreeData.enq_id +
-														' - ' +
-														xmlTreeData.enq_topic}
-												</h3>
+												<h3 className="text-xl font-semibold">{xmlTreeData.enq_id + ' - ' + xmlTreeData.enq_topic}</h3>
 												<span
 													className={
 														(xmlTreeData.enq_status === 'Request'
 															? 'bg-blue-200 text-blue-800'
 															: xmlTreeData.enq_status === 'Active'
 																? 'bg-green-200 text-green-800'
-																: xmlTreeData.enq_status ===
-																	  'Closed'
+																: xmlTreeData.enq_status === 'Closed'
 																	? 'bg-orange-200 text-yellow-800'
-																	: xmlTreeData.enq_status ===
-																		  'Deleted'
+																	: xmlTreeData.enq_status === 'Deleted'
 																		? 'bg-red-200 text-red-800'
-																		: '') +
-														' text-sm font-medium me-2 px-2.5 py-0.5 rounded-full'
+																		: '') + ' text-sm font-medium me-2 px-2.5 py-0.5 rounded-full'
 													}>
 													{xmlTreeData.enq_status}
 												</span>
 
 												<div className="space-y-2 text-sm bg-blue-50 p-4 rounded-lg whitespace-pre-wrap">
-													{
-														xmlTreeData.correspond_grp
-															.correspond_grp_occurrence.message_text
-													}
+													{xmlTreeData.correspond_grp.correspond_grp_occurrence.message_text}
 												</div>
 											</div>
 										</div>
@@ -423,40 +339,22 @@ const EnquiryForm = () => {
 											<div className="flex-1 space-y-2">
 												<div className="flex items-center justify-between">
 													<div>
-														<p className="font-medium">
-															To:{' '}
-															{clientFirstName + ' ' + clientLastName}
-														</p>
+														<p className="font-medium">To: {clientFirstName + ' ' + clientLastName}</p>
 														<div className="flex items-center gap-2 text-sm text-muted-foreground">
 															<span>
 																From:{' '}
-																{xmlTreeData.correspond_grp
-																	.correspond_grp_occurrence
-																	.correspond_who
-																	? xmlTreeData.correspond_grp
-																			.correspond_grp_occurrence
-																			.correspond_who
+																{xmlTreeData.correspond_grp.correspond_grp_occurrence.correspond_who
+																	? xmlTreeData.correspond_grp.correspond_grp_occurrence.correspond_who
 																	: 'Staff'}
 															</span>
 															<span>•</span>
-															<span>
-																{
-																	xmlTreeData.correspond_grp
-																		.correspond_grp_occurrence
-																		.reply_date
-																}
-															</span>
+															<span>{xmlTreeData.correspond_grp.correspond_grp_occurrence.reply_date}</span>
 														</div>
 													</div>
 												</div>
-												<h3 className="text-xl font-semibold">
-													Staff Reply
-												</h3>
+												<h3 className="text-xl font-semibold">Staff Reply</h3>
 												<div className="space-y-4 text-sm bg-blue-50 p-4 rounded-lg whitespace-pre-wrap">
-													{stripHtmlAndConvertBr(
-														xmlTreeData.correspond_grp
-															.correspond_grp_occurrence.reply_text
-													)}
+													{stripHtmlAndConvertBr(xmlTreeData.correspond_grp.correspond_grp_occurrence.reply_text)}
 												</div>
 											</div>
 										</div>
@@ -471,9 +369,7 @@ const EnquiryForm = () => {
 
 					{/* Message Input */}
 					<div className="p-4 border-t">
-						<form
-							method="post"
-							action={`${formActionSaveRecord}&RETURN_URL=[OPAC_ENQUIRY]enquiryConfirmed.html`}>
+						<form method="post" action={`${formActionSaveRecord}&RETURN_URL=[OPAC_ENQUIRY]enquiryConfirmed.html`}>
 							<h3 className="text-xl font-semibold mb-3">Ask a new question</h3>
 							<div className="flex gap-2">
 								<div className="flex flex-col w-full gap-2">
@@ -484,67 +380,42 @@ const EnquiryForm = () => {
 										name={'CORRESPOND_DATE$' + NEW_OCCURRENCE_COUNT + '$1'}
 										type="hidden"
 									/>
-									<Select
-										name={'CORRESPOND_SUBJ$' + NEW_OCCURRENCE_COUNT + '$1'}
-										required
-										defaultValue="General Information">
+									<Select name={'CORRESPOND_SUBJ$' + NEW_OCCURRENCE_COUNT + '$1'} required defaultValue="General Information">
 										<SelectTrigger className="w-full p-2 border rounded text-left">
 											<SelectValue placeholder={'General Information'} />
 										</SelectTrigger>
 										<SelectContent className="bg-white border rounded shadow-md">
-											<SelectItem
-												value="General Information"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="General Information" className="p-2 hover:bg-gray-100">
 												General Information
 											</SelectItem>
-											<SelectItem
-												value="Accessing Collection Items"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="Accessing Collection Items" className="p-2 hover:bg-gray-100">
 												Accessing Collection Items
 											</SelectItem>
-											<SelectItem
-												value="Finding Collection Items"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="Finding Collection Items" className="p-2 hover:bg-gray-100">
 												Finding Collection Items
 											</SelectItem>
-											<SelectItem
-												value="Obtaining Reproductions"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="Obtaining Reproductions" className="p-2 hover:bg-gray-100">
 												Obtaining Reproductions
 											</SelectItem>
-											<SelectItem
-												value="Art Collection Inquiries"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="Art Collection Inquiries" className="p-2 hover:bg-gray-100">
 												Art Collection Inquiries
 											</SelectItem>
-											<SelectItem
-												value="Donations - Art"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="Donations - Art" className="p-2 hover:bg-gray-100">
 												Donations - Art
 											</SelectItem>
-											<SelectItem
-												value="Educational Resources and Workshops"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="Educational Resources and Workshops" className="p-2 hover:bg-gray-100">
 												Educational Resources and Workshops
 											</SelectItem>
-											<SelectItem
-												value="Loans - Digitization"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="Loans - Digitization" className="p-2 hover:bg-gray-100">
 												Loans - Digitization
 											</SelectItem>
-											<SelectItem
-												value="Tours and Events"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="Tours and Events" className="p-2 hover:bg-gray-100">
 												Tours and Events
 											</SelectItem>
-											<SelectItem
-												value="Exhibits"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="Exhibits" className="p-2 hover:bg-gray-100">
 												Exhibits
 											</SelectItem>
-											<SelectItem
-												value="Website Technical Issues"
-												className="p-2 hover:bg-gray-100">
+											<SelectItem value="Website Technical Issues" className="p-2 hover:bg-gray-100">
 												Website Technical Issues
 											</SelectItem>
 										</SelectContent>

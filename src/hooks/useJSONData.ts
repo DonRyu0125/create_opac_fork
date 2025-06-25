@@ -98,9 +98,7 @@ export const getDataFromXML = (id: string, doc = document) => {
 }
 
 const useJSONData = ({ selector, defaultData }: useJSONDataProps) => {
-	const [data] = useState<GenericObject | null>(
-		defaultData && !selector ? defaultData : selector ? getDataFromXML(selector) : null
-	)
+	const [data] = useState<GenericObject | null>(defaultData && !selector ? defaultData : selector ? getDataFromXML(selector) : null)
 
 	const getCommonFields = () => {
 		const object: COMMON_FIELDS_OBJECT = {}
@@ -169,10 +167,7 @@ const useJSONData = ({ selector, defaultData }: useJSONDataProps) => {
 		return url.a._href
 	}
 
-	const getMedia = (
-		record: Record,
-		type: 'im_access_link' | 'vd_access_link' | 'ad_access_link' | 'tx_access_link'
-	) => {
+	const getMedia = (record: Record, type: 'im_access_link' | 'vd_access_link' | 'ad_access_link' | 'tx_access_link') => {
 		if (!record.media || !record.media[type] || !Array.isArray(record.media[type])) return []
 		return record.media[type]
 	}

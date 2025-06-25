@@ -35,11 +35,7 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 						{profileList.map((button) => (
 							<a
 								key={button.id}
-								href={
-									getCookieValue('HOME_SESSID') +
-									button.url +
-									(button.db !== 'SHOWORDERLIST' ? m2l_patron_id : '')
-								}
+								href={getCookieValue('HOME_SESSID') + button.url + (button.db !== 'SHOWORDERLIST' ? m2l_patron_id : '')}
 								onClick={() => handleClick(button.id)}
 								className={buttonVariants({ variant: 'outline' })}>
 								{button.label}

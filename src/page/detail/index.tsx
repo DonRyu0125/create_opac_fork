@@ -42,7 +42,7 @@ const Detail = () => {
 	const [tree, setTree] = useState<TreeNode | undefined>()
 	useEffect(() => {
 		const sessionID = getSessionID()
-		if (sessionID && isDescriptionDatabase(database,record.request.req_db_name)) {
+		if (sessionID && isDescriptionDatabase(database, record.request.req_db_name)) {
 			getJSONTree(sessionID, database, refd)
 				.then((res) => {
 					if (!res || res.noTree) {
@@ -137,7 +137,7 @@ const Detail = () => {
 										<div className="w-full ">
 											<DetailRecord />
 										</div>
-										{isDescriptionDatabase(database,record.request.req_db_name) && (
+										{isDescriptionDatabase(database, record.request.req_db_name) && (
 											<div className="w-full ">
 												<Accordion
 													items={[
@@ -153,7 +153,9 @@ const Detail = () => {
 												/>
 											</div>
 										)}
-										{isDescriptionDatabase(database,record.request.req_db_name) && !record.record.refd_lowerexist && <RequestAccordianDesc />}
+										{isDescriptionDatabase(database, record.request.req_db_name) && !record.record.refd_lowerexist && (
+											<RequestAccordianDesc />
+										)}
 									</div>
 								</div>
 							</div>

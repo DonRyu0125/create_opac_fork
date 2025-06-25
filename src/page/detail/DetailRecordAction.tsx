@@ -2,18 +2,7 @@ import { useState, useRef } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { copyRecordURL, deepSearchKey, handleCopyRecordURL } from '@/lib/record'
-import {
-	ChevronLeft,
-	ChevronRight,
-	Files,
-	Copy,
-	ShoppingBag,
-	Star,
-	SquareCheck,
-	Copyright,
-	Lightbulb,
-	Link,
-} from 'lucide-react'
+import { ChevronLeft, ChevronRight, Files, Copy, ShoppingBag, Star, SquareCheck, Copyright, Lightbulb, Link } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
 import DialogLogin from '../../components/common/DialogLogin'
@@ -42,12 +31,7 @@ const DetailRecordAction = () => {
 	const [loading, setLoading] = useState(false)
 	const handleSubmit = (action: string | null) => {
 		if (checkLoggedInToRequest(action)) {
-			const {
-				refd,
-				accession_number,
-				title: recordTitle,
-				legal_title: recordLegalTitle,
-			} = record.record
+			const { refd, accession_number, title: recordTitle, legal_title: recordLegalTitle } = record.record
 			const itemid = refd || accession_number || ''
 			const title = recordLegalTitle || recordTitle || ''
 			switch (action) {
@@ -94,9 +78,7 @@ const DetailRecordAction = () => {
 			setLoading(false)
 			const isValid = validateBookmarkResponse(
 				res,
-				typeof bookmark_count === 'number'
-					? bookmark_count
-					: Number.parseInt(bookmark_count || '0')
+				typeof bookmark_count === 'number' ? bookmark_count : Number.parseInt(bookmark_count || '0')
 			)
 			if (isValid && isValid.isSuccess) {
 				setLike(true)
@@ -106,9 +88,7 @@ const DetailRecordAction = () => {
 					duration: 2000,
 					action: (
 						<a
-							className={
-								'p-1 text-center border-solid border-2 rounded-md text-sm font-bold'
-							}
+							className={'p-1 text-center border-solid border-2 rounded-md text-sm font-bold'}
 							href={`${bookmark_url}?SHOWORDERLIST&COOKIE=BOOKMARK&NEW=Y&NOMSG=[MESSAGES]no-bookmark.html`}>
 							{message.viewBookmark}
 						</a>
@@ -127,9 +107,7 @@ const DetailRecordAction = () => {
 		const checkRecord = record.record
 		const recordRequestBool = 'Yes'
 		const requestable =
-			checkRecord?.a_avail === recordRequestBool ||
-			checkRecord?.m_avail === recordRequestBool ||
-			checkRecord?.l_avail === recordRequestBool
+			checkRecord?.a_avail === recordRequestBool || checkRecord?.m_avail === recordRequestBool || checkRecord?.l_avail === recordRequestBool
 
 		return requestable
 	}
@@ -150,10 +128,7 @@ const DetailRecordAction = () => {
 	const checkLoggedInToRequest = (action: string | null) => {
 		let isLoggedIn = false
 		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-		if (
-			(patronID === null || patronID === undefined || patronID === '') &&
-			action !== 'Enquire'
-		) {
+		if ((patronID === null || patronID === undefined || patronID === '') && action !== 'Enquire') {
 			setIsModalOpen(true)
 		} else {
 			isLoggedIn = true
@@ -265,8 +240,7 @@ const DetailRecordAction = () => {
 						variant="outline"
 						className={'w-[22%] md:w-[23.5%] flex '}
 						onClick={() => handleSubmit('Copyright')}>
-						<Copyright className="w-4 h-4 md:mr-2" />{' '}
-						<span className="hidden md:block">{message.copyright}</span>
+						<Copyright className="w-4 h-4 md:mr-2" /> <span className="hidden md:block">{message.copyright}</span>
 					</TooltipButton>
 					<TooltipButton
 						tooltipContent={message.copyRecordUrl}

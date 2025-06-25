@@ -21,10 +21,9 @@ const ImagePreview = ({ src, alt, className }: Props) => {
 				src={src}
 				alt={alt}
 				onError={(e) => {
-					setError(true);
+					setError(true)
 					// eslint-disable-next-line no-param-reassign
-					(e.target as HTMLImageElement).src =
-						'https://placehold.co/1440x1080'
+					;(e.target as HTMLImageElement).src = 'https://placehold.co/1440x1080'
 				}}
 			/>
 			{error && <span className="text-red-500">Unable to load image</span>}

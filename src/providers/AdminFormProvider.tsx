@@ -25,12 +25,7 @@ type AdminFormProviderProps = {
 	filepath: string
 }
 
-export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
-	children,
-	schema: defaultSchema,
-	data,
-	filepath,
-}) => {
+export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({ children, schema: defaultSchema, data, filepath }) => {
 	const [formData, setFormData] = useState<SchemaValueType>(data)
 
 	const [schema] = useState<SchemaType>(defaultSchema)
@@ -89,12 +84,7 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({
 		setFormData((prevData) => {
 			let targetArray = prevData
 			path.forEach((e) => {
-				if (
-					targetArray &&
-					typeof targetArray === 'object' &&
-					!Array.isArray(targetArray) &&
-					targetArray !== null
-				) {
+				if (targetArray && typeof targetArray === 'object' && !Array.isArray(targetArray) && targetArray !== null) {
 					targetArray = targetArray[e] as SchemaValueType
 				}
 			})

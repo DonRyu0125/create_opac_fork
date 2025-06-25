@@ -1,22 +1,10 @@
 import { Button } from '@/components/ui/button'
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { useAdminForm } from '@/hooks/useAdminForm'
 import Home from '@/page/Home'
 import { ReactNode, useState } from 'react'
 
-const AdminForm = ({
-	children,
-	enablePreview = false,
-}: {
-	children?: ReactNode
-	enablePreview?: boolean
-}) => {
+const AdminForm = ({ children, enablePreview = false }: { children?: ReactNode; enablePreview?: boolean }) => {
 	const { handleFormSave, formData } = useAdminForm()
 	const [previewMode, setPreviewMode] = useState(false)
 	console.log({ formData })

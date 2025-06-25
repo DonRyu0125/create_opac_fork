@@ -1,11 +1,6 @@
 import { LanguageSelect } from '@/components/common/LanguageSelect'
 import Link from '@/components/common/Link'
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-} from '@/components/ui/breadcrumb'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
 import {
 	DropdownMenu,
@@ -21,8 +16,7 @@ import { Home, UserRound } from 'lucide-react'
 
 const Header = () => {
 	const { message } = useConstants()
-	const home_url =
-		'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+	const home_url = '?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 
 	return (
 		<header className="flex justify-between bg-primary sticky top-0 z-30  items-center gap-4 border-b py-2">
@@ -47,10 +41,7 @@ const Header = () => {
 					</div>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<Button
-								variant="outline"
-								size="icon"
-								className="overflow-hidden rounded-full">
+							<Button variant="outline" size="icon" className="overflow-hidden rounded-full">
 								<UserRound />
 							</Button>
 						</DropdownMenuTrigger>
@@ -89,20 +80,30 @@ const Header = () => {
 							<DropdownMenuSeparator />
 							<DropdownMenuLabel>Search Database</DropdownMenuLabel>
 							<DropdownMenuItem>
-								<Link href="/" className="no-underline ml-[0.5rem]">All</Link>
+								<Link href="/" className="no-underline ml-[0.5rem]">
+									All
+								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuItem>
-								<Link href="/archives.html" className="no-underline ml-[0.5rem]">Archives</Link>
+								<Link href="/archives.html" className="no-underline ml-[0.5rem]">
+									Archives
+								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuItem>
-								<Link href="/museum.html" className="no-underline ml-[0.5rem]">Museum</Link>
+								<Link href="/museum.html" className="no-underline ml-[0.5rem]">
+									Museum
+								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuItem>
-								<Link href="/library.html" className="no-underline ml-[0.5rem]">Library</Link>
+								<Link href="/library.html" className="no-underline ml-[0.5rem]">
+									Library
+								</Link>
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
 							<DropdownMenuItem>
-								<Link onClick={clearCookies} className="no-underline ml-[0.5rem]">Logout</Link>
+								<Link onClick={clearCookies} className="no-underline ml-[0.5rem]">
+									Logout
+								</Link>
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
