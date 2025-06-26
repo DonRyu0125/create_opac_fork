@@ -75,38 +75,31 @@ const SummaryPageAction = () => {
 										? [searchHistoryData.database.statement]
 										: []),
 							]
-								.filter(
-									(item, index, self) =>
-										self.findIndex((i) => i.expression === item.expression) === index
-								)
+								.filter((item, index, self) => self.findIndex((i) => i.expression === item.expression) === index)
 								.reverse()
-								.map(
-									(
-										item: { count: string; expression: string; summary_link: string },
-										index: number
-									) => (
-										<tr key={index} className="even:bg-gray-200 hover:bg-gray:200">
-											<td className="px-4 py-2">
-												<a
-													href={
-														getHomeSessionID() +
-														`?UNIONSEARCH&KEEP=Y&LANG=144&APPLICATION=UNION_VIEW&EXP=KEYWORD_CLUSTER%20` +
-														item.expression
-													}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="hover:underline"
-													title={item.expression}
-												>
-													{item.expression.length > 40
-														? `${item.expression.slice(0, 40)}...`
-														: item.expression}
-												</a>
-											</td>
-											<td className="px-4 py-2 text-right"><div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent text-primary-foreground hover:bg-primary/80 bg-black">{item.count}</div></td>
-										</tr>
-									)
-								)}
+								.map((item: { count: string; expression: string; summary_link: string }, index: number) => (
+									<tr key={index} className="even:bg-gray-200 hover:bg-gray:200">
+										<td className="px-4 py-2">
+											<a
+												href={
+													getHomeSessionID() +
+													`?UNIONSEARCH&KEEP=Y&LANG=144&APPLICATION=UNION_VIEW&EXP=KEYWORD_CLUSTER%20` +
+													item.expression
+												}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="hover:underline"
+												title={item.expression}>
+												{item.expression.length > 40 ? `${item.expression.slice(0, 40)}...` : item.expression}
+											</a>
+										</td>
+										<td className="px-4 py-2 text-right">
+											<div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent text-primary-foreground hover:bg-primary/80 bg-black">
+												{item.count}
+											</div>
+										</td>
+									</tr>
+								))}
 						</tbody>
 					</table>
 				</div>
@@ -121,9 +114,7 @@ const SummaryPageAction = () => {
 				<DropdownSelect
 					register={{
 						onValueChange: (value) => {
-							const pageURL = common[
-								`pagesize_${value}` as COMMON_FIELDS_TYPE
-							] as string
+							const pageURL = common[`pagesize_${value}` as COMMON_FIELDS_TYPE] as string
 							if (pageURL) {
 								window.location.href = pageURL
 							}
@@ -172,7 +163,7 @@ const SummaryPageAction = () => {
 								<div className="space-y-3 border-t p-4 max-h-[500px] overflow-y-auto">
 									{item.item_group.map(
 										(option: {
-											item_link: string | { item_selected: string, __text: string }
+											item_link: string | { item_selected: string; __text: string }
 											item_value: any
 											item_frequency: any
 											item_selected: string
@@ -187,8 +178,7 @@ const SummaryPageAction = () => {
 												label={`${option.item_value} (${option.item_frequency})`}
 												checked={
 													option.item_selected === 'Y' ||
-													(typeof option.item_link === 'object' &&
-														option.item_link?.item_selected === 'Y')
+													(typeof option.item_link === 'object' && option.item_link?.item_selected === 'Y')
 												}
 											/>
 										)

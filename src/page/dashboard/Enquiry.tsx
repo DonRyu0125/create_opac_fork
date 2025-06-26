@@ -24,20 +24,13 @@ const Enquiries = () => {
 			id: 'select',
 			header: ({ table }) => (
 				<Checkbox
-					checked={
-						table.getIsAllPageRowsSelected() ||
-						(table.getIsSomePageRowsSelected() && 'indeterminate')
-					}
+					checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
 					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
 					aria-label="Select all"
 				/>
 			),
 			cell: ({ row }) => (
-				<Checkbox
-					checked={row.getIsSelected()}
-					onCheckedChange={(value) => row.toggleSelected(!!value)}
-					aria-label="Select row"
-				/>
+				<Checkbox checked={row.getIsSelected()} onCheckedChange={(value) => row.toggleSelected(!!value)} aria-label="Select row" />
 			),
 			enableSorting: false,
 			enableHiding: false,
@@ -46,9 +39,7 @@ const Enquiries = () => {
 			accessorKey: 'enq_id',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.inquiryNumber}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -72,9 +63,7 @@ const Enquiries = () => {
 			accessorKey: 'enq_topic',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.topic}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -86,9 +75,7 @@ const Enquiries = () => {
 			accessorKey: 'enq_title',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.title}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -100,9 +87,7 @@ const Enquiries = () => {
 			accessorKey: 'enq_create_date',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.dateCreated}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -114,9 +99,7 @@ const Enquiries = () => {
 			accessorKey: 'enq_status',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.status}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -134,13 +117,7 @@ const Enquiries = () => {
 	]
 	return (
 		<PatronLayout heading="Inquiries">
-			<ProfileTable
-				data={records}
-				columns={columns}
-				filterType={'enquiry'}
-				filterTypeShow=""
-				filterDateType={'enq_create_date'}
-			/>
+			<ProfileTable data={records} columns={columns} filterType={'enquiry'} filterTypeShow="" filterDateType={'enq_create_date'} />
 		</PatronLayout>
 	)
 }

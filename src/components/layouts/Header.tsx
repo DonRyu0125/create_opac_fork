@@ -46,9 +46,7 @@ const Header = () => {
 					<ul className="flex space-x-6 text-sm justify-end">
 						{navigations.map((item) => (
 							<li key={item.displayTitle}>
-								<Link
-									href={item.linkURL}
-									className="text-lg hover:underline text-opac-white hover:text-opac-secondary">
+								<Link href={item.linkURL} className="text-lg hover:underline text-opac-white hover:text-opac-secondary">
 									{item.displayTitle}
 								</Link>
 							</li>

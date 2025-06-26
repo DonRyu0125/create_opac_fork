@@ -81,16 +81,13 @@ easyload.post('/search', async (c) => {
 			)
 		}
 
-		const response = await axios.get(
-			`${API_BASE_URL}/Assets/TenantSearch?${query === '*' ? '' : `phrase=${encodeURIComponent(query)}`}`,
-			{
-				headers: {
-					Authorization: `Bearer ${token}`,
-					'Content-Type': 'application/json',
-					Tenant: tenant,
-				},
-			}
-		)
+		const response = await axios.get(`${API_BASE_URL}/Assets/TenantSearch?${query === '*' ? '' : `phrase=${encodeURIComponent(query)}`}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+				Tenant: tenant,
+			},
+		})
 
 		return c.json({
 			status: 'success',
@@ -205,8 +202,7 @@ easyload.post('/commit', async (c) => {
 	if (!blobId || !user || !tenant || !type || !blobName) {
 		return c.json(
 			{
-				message:
-					'Missing required headers: BlobId, BlobName, User, Type, and Tenant are required',
+				message: 'Missing required headers: BlobId, BlobName, User, Type, and Tenant are required',
 			},
 			400
 		)

@@ -15,20 +15,13 @@ const Crowdsource = () => {
 			id: 'select',
 			header: ({ table }) => (
 				<Checkbox
-					checked={
-						table.getIsAllPageRowsSelected() ||
-						(table.getIsSomePageRowsSelected() && 'indeterminate')
-					}
+					checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
 					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
 					aria-label="Select all"
 				/>
 			),
 			cell: ({ row }) => (
-				<Checkbox
-					checked={row.getIsSelected()}
-					onCheckedChange={(value) => row.toggleSelected(!!value)}
-					aria-label="Select row"
-				/>
+				<Checkbox checked={row.getIsSelected()} onCheckedChange={(value) => row.toggleSelected(!!value)} aria-label="Select row" />
 			),
 			enableSorting: false,
 			enableHiding: false,
@@ -42,9 +35,7 @@ const Crowdsource = () => {
 			accessorKey: 'creator_id',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.creator}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -56,9 +47,7 @@ const Crowdsource = () => {
 			accessorKey: 'comments_item_id',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.itemId}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -70,9 +59,7 @@ const Crowdsource = () => {
 			accessorKey: 'comments',
 			header: ({ column }) => {
 				return (
-					<Button
-						variant="ghost"
-						onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+					<Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
 						{message.comment}
 						<CaretSortIcon className="ml-2 h-4 w-4" />
 					</Button>
@@ -83,12 +70,7 @@ const Crowdsource = () => {
 	]
 	return (
 		<PatronLayout heading="Crowdsource">
-			<ProfileTable
-				data={records}
-				columns={columns}
-				filterType={'comments'}
-				filterTypeShow=""
-			/>
+			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow="" />
 		</PatronLayout>
 	)
 }

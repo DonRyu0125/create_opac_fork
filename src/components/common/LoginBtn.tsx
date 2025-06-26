@@ -24,9 +24,7 @@ const LoginBtn = ({ className }: { className?: string }) => {
 						<button className={'text-opac-white text-lg font-bold flex items-center'}>
 							<div>
 								<div className="block sm:hidden">{message.welcome}!</div>
-								<div className={'break-words whitespace-normal'}>
-									{decodeURIComponent(m2l_patron_name)}
-								</div>
+								<div className={'break-words whitespace-normal'}>{decodeURIComponent(m2l_patron_name)}</div>
 							</div>
 							<div>
 								<ChevronDown className={'h-4'} />
@@ -42,23 +40,22 @@ const LoginBtn = ({ className }: { className?: string }) => {
 									getCookieValue('HOME_SESSID') +
 									'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 								}
-								className='no-underline ml-[0.5rem]'>
+								className="no-underline ml-[0.5rem]">
 								{message.dashboardHome}
 							</Link>
 						</DropdownMenuItem>
 						{/* <DropdownMenuItem>{message.accountSettings}</DropdownMenuItem> */}
 						<DropdownMenuSeparator />
 						<DropdownMenuItem>
-							<Link onClick={clearCookies} className='no-underline ml-[0.5rem]'>{message.logout}</Link>
+							<Link onClick={clearCookies} className="no-underline ml-[0.5rem]">
+								{message.logout}
+							</Link>
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
 			) : (
 				<Link
-					className={cn(
-						'transition no-underline text-lg text-opac-white hover:text-opac-secondary',
-						className
-					)}
+					className={cn('transition no-underline text-lg text-opac-white hover:text-opac-secondary', className)}
 					href={`${config.auth.url}`}>
 					{message.logIn}
 				</Link>
