@@ -7,6 +7,7 @@ import useJSONData from '@/hooks/useJSONData'
 import TooltipButton from '@/components/common/TooltipButton'
 import { REQUEST_DESC_DB } from '@/page/request/RequestConfirmed'
 import { toast } from '@/components/ui/use-toast'
+import axios from 'axios'
 type IsRequestedByClient = 'No' | 'Another' | 'Current'
 type ItemContent = {
 	id: string
@@ -55,6 +56,11 @@ const RequestAccordianDesc = () => {
 		return toast({ title: `${message.pleaseLoginForRequesting}` })
 	}
 
+	const handleRequestLater = (id: string) => {
+		const form = document.getElementById(`form-${id}`) as HTMLFormElement
+		form?.submit()
+	}
+
 	return (
 		<div className="w-full mx-auto space-y-2">
 			<div className="border rounded-md">
@@ -87,7 +93,7 @@ const RequestAccordianDesc = () => {
 												<td className="border px-4 py-2">
 													<div className="flex gap-2">
 														<TooltipButton
-															disabled={value.is_requested_by_client === 'No' ? false : true}
+															disabled={value.is_requested_by_client !== 'No'}
 															tooltipContent={message.request}
 															variant="outline"
 															onClick={() => handleRequest(formRef1)}>
@@ -116,14 +122,15 @@ const RequestAccordianDesc = () => {
 															</form>
 														</TooltipButton>
 														<TooltipButton
-															disabled={value.is_requested_by_client === 'No' ? false : true}
+															key={value.id}
+															disabled={value.is_requested_by_client !== 'No'}
 															tooltipContent={message.requestRecordLater}
 															variant="outline"
-															onClick={() => handleRequest(formRef2)}>
+															onClick={() => handleRequestLater(value.id)}>
 															<CalendarCheck />
 															<form
+																id={`form-${value.id}`}
 																method="post"
-																ref={formRef2}
 																action={
 																	removeQuote(requestData.action_later) +
 																	`&M_GVAR1=SELECT_ITEM_ID:${value.id}` +
