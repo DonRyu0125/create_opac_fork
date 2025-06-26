@@ -50,15 +50,18 @@ const RequestAccordianDesc = () => {
 		return () => observer.disconnect()
 	}, [])
 
-	const handleRequest = (formRef: any) => {
+	const handleRequest = (id: string) => {
 		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-		if (patronID) return formRef.current?.submit()
+		const form = document.getElementById(`form-${id}`) as HTMLFormElement
+		if (patronID) return form?.submit()
 		return toast({ title: `${message.pleaseLoginForRequesting}` })
 	}
 
 	const handleRequestLater = (id: string) => {
-		const form = document.getElementById(`form-${id}`) as HTMLFormElement
-		form?.submit()
+		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+		const form = document.getElementById(`later-form-${id}`) as HTMLFormElement
+		if (patronID) return form?.submit()
+		return toast({ title: `${message.pleaseLoginForRequesting}` })
 	}
 
 	return (
@@ -93,34 +96,35 @@ const RequestAccordianDesc = () => {
 												<td className="border px-4 py-2">
 													<div className="flex gap-2">
 														<TooltipButton
+															key={value.id}
 															disabled={value.is_requested_by_client !== 'No'}
-															tooltipContent={message.request}
+															tooltipContent={message.requestRecordLater}
 															variant="outline"
-															onClick={() => handleRequest(formRef1)}>
-															<SquareCheck className="min-w-[20px] w-full h-full" />
-															<form
-																method="post"
-																ref={formRef1}
-																action={
-																	getHomeSessionID() +
-																	'/1/' +
-																	record.request.req_db_link1 +
-																	'?REQUESTLOGIN&REPORT=DIRECT_REQUEST_FORM'
-																}
-																className="hidden">
-																<input type="hidden" name="method_request" value={requestData.method_request} />
-																<input type="hidden" name="req_topic" value={requestData.req_topic} />
-																<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
-																<input type="hidden" name="req_db_name" value={REQUEST_DESC_DB} />
-																<input type="hidden" name="req_db_link1" value={requestData.req_db_link1} />
-																<input type="hidden" name="req_db_recid" value={requestData.req_db_recid} />
-																<input type="hidden" name="req_item_id" value={value.id} />
-																<input type="hidden" name="req_item_title" value={requestData.req_item_title} />
-																<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
-																{/* Wait time calucation is not working 20250620 Don */}
-																{/* <input type="hidden" name="REQ_WAIT_TIME" value={'10'} /> */}
-															</form>
+															onClick={() => handleRequest(value.id)}>
+															<SquareCheck />
 														</TooltipButton>
+														<form
+															id={`form-${value.id}`}
+															method="post"
+															action={
+																getHomeSessionID() +
+																'/1/' +
+																record.request.req_db_link1 +
+																'?REQUESTLOGIN&REPORT=DIRECT_REQUEST_FORM'
+															}
+															className="hidden">
+															<input type="hidden" name="method_request" value={requestData.method_request} />
+															<input type="hidden" name="req_topic" value={requestData.req_topic} />
+															<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
+															<input type="hidden" name="req_db_name" value={REQUEST_DESC_DB} />
+															<input type="hidden" name="req_db_link1" value={requestData.req_db_link1} />
+															<input type="hidden" name="req_db_recid" value={requestData.req_db_recid} />
+															<input type="hidden" name="req_item_id" value={value.id} />
+															<input type="hidden" name="req_item_title" value={requestData.req_item_title} />
+															<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
+															{/* Wait time calucation is not working 20250620 Don */}
+															{/* <input type="hidden" name="REQ_WAIT_TIME" value={'10'} /> */}
+														</form>
 														<TooltipButton
 															key={value.id}
 															disabled={value.is_requested_by_client !== 'No'}
@@ -128,20 +132,20 @@ const RequestAccordianDesc = () => {
 															variant="outline"
 															onClick={() => handleRequestLater(value.id)}>
 															<CalendarCheck />
-															<form
-																id={`form-${value.id}`}
-																method="post"
-																action={
-																	removeQuote(requestData.action_later) +
-																	`&M_GVAR1=SELECT_ITEM_ID:${value.id}` +
-																	`&M_GVAR2=aone_loc:${value.aone_loc}`
-																}
-																className="hidden">
-																<input type="hidden" name="method_request" value={requestData.method_request} />
-																<input type="hidden" name="req_topic" value={requestData.req_topic} />
-																<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
-															</form>
 														</TooltipButton>
+														<form
+															id={`later-form-${value.id}`}
+															method="post"
+															action={
+																removeQuote(requestData.action_later) +
+																`&M_GVAR1=SELECT_ITEM_ID:${value.id}` +
+																`&M_GVAR2=aone_loc:${value.aone_loc}`
+															}
+															className="hidden">
+															<input type="hidden" name="method_request" value={requestData.method_request} />
+															<input type="hidden" name="req_topic" value={requestData.req_topic} />
+															<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
+														</form>
 													</div>
 												</td>
 											</tr>
