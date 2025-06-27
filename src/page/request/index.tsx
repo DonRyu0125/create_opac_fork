@@ -30,14 +30,14 @@ const Request = () => {
 							</h1>
 							<div className="text-right">
 								<form method="post" className="m-0" action={removeQuote(reqData.action)}>
+									{/* <Input type="hidden" name="METHOD_REQUEST" value={reqData.method_request} />
+									<Input type="hidden" name="REQ_TOPIC" value={reqData.req_topic} />
+									<Input type="hidden" name="REQ_APPL_NAME" value={reqData.req_appl_name} /> */}
 									<Input type="hidden" name="req_db_name" value={REQUEST_DESC_DB} />
 									<Input type="hidden" name="REQ_DB_RECID" value={reqData.req_db_recid} />
 									<Input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
 									<Input type="hidden" name="DATE_NEEDED" value={reqData.date_needed} />
 									<Input type="hidden" name="REQ_DB_LINK1" value={reqData.req_db_link1} />
-									<Input type="hidden" name="METHOD_REQUEST" value={reqData.method_request} />
-									<Input type="hidden" name="REQ_TOPIC" value={reqData.req_topic} />
-									<Input type="hidden" name="REQ_APPL_NAME" value={reqData.req_appl_name} />
 									<input type="hidden" name="req_item_id" value={reqData.req_item_id} />
 									<Input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
 									<Input type="hidden" name="REQ_ITEM_TITLE" value={convertToString(reqData, 'req_item_title')} />
