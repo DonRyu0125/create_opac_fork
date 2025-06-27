@@ -153,14 +153,14 @@ const RequestLater = () => {
 				<div className="bg-gray-50 min-h-screen py-10">
 					<div className="max-w-4xl mx-auto bg-white shadow-md rounded-md p-6">
 						<div className="flex justify-between items-center border-b pb-4">
-							<form method="post" className="m-0 w-full" action={removeQuote(record.action)}>
-								<input type="hidden" name="method_request" value={reqData.method_request} />
-								<input type="hidden" name="req_topic" value={reqData.req_topic} />
+								<form method="post" className="m-0 w-full" action={'?REQUESTLOGIN'}>
+								{/* <input type="hidden" name="method_request" value={reqData.method_request} />
+								<input type="hidden" name="req_topic" value={reqData.req_topic} /> */}
 								<input type="hidden" name="req_appl_name" value={reqData.req_appl_name} />
+								<input type="hidden" name="req_item_id" value={record.select_item_id} />
 								<input type="hidden" name="req_db_name" value={REQUEST_DESC_DB} />
 								<input type="hidden" name="req_db_link1" value={reqData.req_db_link1} />
 								<input type="hidden" name="req_db_recid" value={reqData.req_db_recid} />
-								<input type="hidden" name="req_item_id" value={record.select_item_id} />
 								<input type="hidden" name="req_item_title" value={convertToString(reqData, 'req_item_title')} />
 								<input type="hidden" name="req_own_collect" value={'X'} />
 								<h1 className="flex items-center text-xl font-bold">
