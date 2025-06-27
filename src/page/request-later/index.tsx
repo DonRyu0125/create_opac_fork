@@ -1,6 +1,5 @@
 import Layout from '@/components/layouts'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import useJSONData from '@/hooks/useJSONData'
 import { convertToArr, convertToString, convertXMLToJson, removeQuote } from '@/lib/utils'
 import { Archive, ChevronDownIcon, CircleEllipsis } from 'lucide-react'
