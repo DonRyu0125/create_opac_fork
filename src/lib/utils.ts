@@ -101,7 +101,7 @@ export const isDatePast = (dateString: string) => {
 }
 
 export const removeQuote = (str: string) => {
-	return str.replace(/['"]+/g, '')
+	return str?.replace(/['"]+/g, '')
 }
 
 /**
