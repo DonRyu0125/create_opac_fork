@@ -60,7 +60,7 @@ const Orders = () => {
 		{
 			accessorKey: 'date_needed',
 			header: message.date,
-			cell: ({ row }) => <div className="capitalize">{row.getValue('date_needed') ? row.getValue('date_needed') : 'N/A'}</div>,
+			cell: ({ row }) => <div className={"capitalize min-w-[73px]"} >{row.getValue('date_needed') ? row.getValue('date_needed') : 'N/A'}</div>,
 		},
 		{
 			accessorKey: 'time_needed',

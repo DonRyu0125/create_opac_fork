@@ -142,6 +142,9 @@ const RequestAccordianDesc = () => {
 																`&M_GVAR2=aone_loc:${value.aone_loc}`
 															}
 															className="hidden">
+															<input type="hidden" name="method_request" value={requestData.method_request} />
+															<input type="hidden" name="req_topic" value={requestData.req_topic} />
+															<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
 														</form>
 													</div>
 												</td>
