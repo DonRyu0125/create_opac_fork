@@ -7,6 +7,8 @@ import { getCookieValue } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
 import Footer from '../patron/Footer'
+import Link from '@/components/common/Link'
+import { Home } from 'lucide-react'
 
 type PatronLayoutProps = {
 	children?: React.ReactNode
@@ -21,15 +23,22 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
-
 	const { message, clientProfile } = useConstants()
 	const profileList = clientProfile.database
-
+	const home_url = '?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 	return (
 		<div className="flex min-h-screen w-full flex-col bg-muted/40 relative">
 			{/* <Sidebar /> */}
 			<div className="flex-1 flex flex-col relative">
 				<Header />
+
+				<div className="pt-3 flex justify-center items-center  rounded-md bg-primary-soft">
+					<Link href={getCookieValue('HOME_SESSID') + home_url} className="flex items-center no-underline text-lg  w-[1400px] px-6 ">
+						<Home className="mr-1 h-5 w-5" />
+						{message.clientDashboard}
+					</Link>
+				</div>
+
 				<div className="flex justify-center items-center py-4 bg-primary-soft">
 					<div className="flex flex-wrap gap-2 sm:gap-4 px-4">
 						{profileList.map((button) => (

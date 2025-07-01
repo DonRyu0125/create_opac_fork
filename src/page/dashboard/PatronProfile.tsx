@@ -19,6 +19,7 @@ import {
 	ShoppingBag,
 	Upload,
 	BookOpen,
+	Home,
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -120,6 +121,8 @@ export default function PatronProfile() {
 		)
 	}
 
+
+
 	return (
 		<PatronLayout heading="">
 			<div className="mb-4 rounded-md bg-white p-6 shadow">
@@ -151,6 +154,8 @@ export default function PatronProfile() {
 					/>
 				</a>
 			</div>
+
+	
 
 			{/* Recent Media Section */}
 			<div className="space-y-4 min-h-[550px]">

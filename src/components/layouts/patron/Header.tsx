@@ -15,7 +15,8 @@ import { clearCookies, getCookieValue } from '@/lib/utils'
 import { Home, UserRound } from 'lucide-react'
 
 const Header = () => {
-	const { message } = useConstants()
+	const { config, message } = useConstants()
+	const { logo, siteName } = config
 	const home_url = '?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 
 	return (
@@ -25,12 +26,17 @@ const Header = () => {
 					<BreadcrumbList>
 						<BreadcrumbItem>
 							<BreadcrumbLink asChild>
-								<Link
+								{/* <Link
 									href={getCookieValue('HOME_SESSID') + home_url}
 									className="flex items-center no-underline text-lg text-primary-foreground hover:text-primary-foreground/80">
 									<Home className="mr-1 h-5 w-5" />
 									{message.clientDashboard}
-								</Link>
+								</Link> */}
+								<a className="flex flex-row space-x-4 items-center" href="/">
+									<span className="sr-only ">Home</span>
+									<img className="h-12" src={logo} alt="logo" loading="eager" />
+									<h1 className="text-2xl font-bold text-opac-white">{siteName}</h1>
+								</a>
 							</BreadcrumbLink>
 						</BreadcrumbItem>
 					</BreadcrumbList>
