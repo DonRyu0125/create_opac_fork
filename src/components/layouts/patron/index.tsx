@@ -32,8 +32,8 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 			<div className="flex-1 flex flex-col relative">
 				<Header />
 
-				<div className="pt-3 rounded-md bg-primary-soft px-6">
-					<Link href={getCookieValue('HOME_SESSID') + home_url} className="flex items-center no-underline text-lg  w-[1400px]  ">
+				<div className="pt-3 flex justify-center items-center  rounded-md bg-primary-soft">
+					<Link href={getCookieValue('HOME_SESSID') + home_url} className="flex items-center no-underline text-lg  w-[1400px] px-6 ">
 						<Home className="mr-1 h-5 w-5" />
 						{message.clientDashboard}
 					</Link>
