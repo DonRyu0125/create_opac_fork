@@ -35,7 +35,6 @@ const Header = () => {
 					</div>
 					<div className=" items-center space-x-4 hidden md:flex">
 						{config.auth.login && <LoginBtn />}
-
 						<LanguageSelect />
 					</div>
 					<div className="flex md:hidden">

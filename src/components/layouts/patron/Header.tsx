@@ -13,6 +13,7 @@ import {
 import useConstants from '@/hooks/useConstants'
 import { clearCookies, getCookieValue } from '@/lib/utils'
 import { Home, UserRound } from 'lucide-react'
+import MobileMenu from '../MobileMenu'
 
 const Header = () => {
 	const { config, message } = useConstants()
@@ -33,10 +34,7 @@ const Header = () => {
 						</BreadcrumbItem>
 					</BreadcrumbList>
 				</Breadcrumb>
-				<div className={'flex'}>
-					<div className={'mr-2'}>
-						<LanguageSelect />
-					</div>
+				<div className={'flex justify-between w-[120px] hidden md:flex'}>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<Button variant="outline" size="icon" className="overflow-hidden rounded-full">
@@ -105,6 +103,12 @@ const Header = () => {
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
+					<div className={'mr-2'}>
+						<LanguageSelect />
+					</div>
+				</div>
+				<div className="flex md:hidden">
+					<MobileMenu />
 				</div>
 			</div>
 		</header>

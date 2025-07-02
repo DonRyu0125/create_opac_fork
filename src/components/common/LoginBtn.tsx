@@ -44,7 +44,26 @@ const LoginBtn = ({ className }: { className?: string }) => {
 								{message.dashboardHome}
 							</Link>
 						</DropdownMenuItem>
-						{/* <DropdownMenuItem>{message.accountSettings}</DropdownMenuItem> */}
+						<DropdownMenuItem>
+							<Link
+								href={
+									getCookieValue('HOME_SESSID') +
+									'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_LIBRARY_CIRC_DASHBOARD&EXP=patron_id+~3D+global(m2l_patron_id)'
+								}
+								className="no-underline ml-[0.5rem]">
+								{message.patronDashboard}
+							</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link
+								href={
+									getCookieValue('HOME_SESSID') +
+									'?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_ACC_SETTINGS&EXP=patron_id+~3D+global(m2l_patron_id)'
+								}
+								className="no-underline ml-[0.5rem]">
+								{message.accountSettings}
+							</Link>
+						</DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem>
 							<Link onClick={clearCookies} className="no-underline ml-[0.5rem]">
