@@ -21,7 +21,7 @@ const Header = () => {
 
 	return (
 		<header className="flex justify-between bg-primary sticky top-0 z-30  items-center gap-4 border-b py-2">
-			<div className="container flex justify-between items-center ">
+			<div className="w-full flex justify-between items-center pl-[8px]">
 				<Breadcrumb>
 					<BreadcrumbList>
 						<BreadcrumbItem>
@@ -33,7 +33,6 @@ const Header = () => {
 									{message.clientDashboard}
 								</Link> */}
 								<a className="flex flex-row space-x-4 items-center" href="/">
-									<span className="sr-only ">Home</span>
 									<img className="h-12" src={logo} alt="logo" loading="eager" />
 									<h1 className="text-2xl font-bold text-opac-white">{siteName}</h1>
 								</a>
