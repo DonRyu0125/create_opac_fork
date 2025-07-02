@@ -6,6 +6,7 @@ import useJSONData from '@/hooks/useJSONData'
 import { Checkbox } from '@radix-ui/react-checkbox'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { ColumnDef } from '@tanstack/react-table'
+import { Home } from 'lucide-react'
 
 const Reproductions = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -116,7 +117,7 @@ const Reproductions = () => {
 		},
 	]
 	return (
-		<PatronLayout heading={message.reproduction}>
+		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading={message.reproduction}>
 			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow="" />
 		</PatronLayout>
 	)

@@ -23,6 +23,7 @@ import { convertToArr, convertXMLToJson, getCookieValue, getHomeSessionID, isDat
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { ColumnDef } from '@tanstack/react-table'
 import axios from 'axios'
+import { Home } from 'lucide-react'
 
 interface TagFunction {
 	[key: string]: any
@@ -204,7 +205,7 @@ const Calendar = () => {
 	}
 
 	return (
-		<PatronLayout heading={message.calendar}>
+		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading={message.calendar}>
 			<ProfileTable
 				data={records}
 				columns={columns}

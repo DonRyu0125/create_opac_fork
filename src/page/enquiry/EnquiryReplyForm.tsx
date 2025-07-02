@@ -1,7 +1,7 @@
 import { Button } from '../../components/ui/button'
 import { convertXMLToJson, getPatronID, getLanguageID, getHomeSessionID, convertToArr } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
-import { Send, MoreVertical, UserRound, FileText, Download, Clock } from 'lucide-react'
+import { Send, MoreVertical, UserRound, FileText, Download, Clock, Home } from 'lucide-react'
 
 import { Textarea } from '@/components/ui/textarea'
 import { useEffect, useState } from 'react'
@@ -12,6 +12,7 @@ import Link from '@/components/common/Link'
 import useJSONData from '@/hooks/useJSONData'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import useConstants from '@/hooks/useConstants'
 
 const EnquiryForm = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -22,8 +23,9 @@ const EnquiryForm = () => {
 	const formActionSaveRecord = document.querySelector('#enq-save-record')?.textContent as string
 	const skipNStopRecord = document.querySelector('#enq-skip-n-stop-record')?.textContent as string
 	const dateToday = new Date().toISOString().split('T')[0]
+	const message = useConstants().message
 
-	const [message, setMessage] = useState('')
+	const [message_set, setMessage] = useState('')
 	const [clientEnquiries, setClientEnquiries] = useState<any[]>([])
 
 	// WEB_CLIENT Information
@@ -137,7 +139,7 @@ const EnquiryForm = () => {
 	}
 
 	return (
-		<PatronLayout>
+		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>}>
 			<div className="flex mb-5 bg-white">
 				{/* Sidebar */}
 				<div className="w-80 border-r hidden md:block">
@@ -421,7 +423,7 @@ const EnquiryForm = () => {
 										</SelectContent>
 									</Select>
 									<Textarea
-										value={message}
+										value={message_set}
 										onChange={(e) => setMessage(e.target.value)}
 										placeholder="Message"
 										className="flex-1 min-h-[100px] max-h-[400px] resize-y px-3 py-2"

@@ -8,7 +8,7 @@ import { Checkbox } from '@radix-ui/react-checkbox'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { ColumnDef } from '@tanstack/react-table'
 import axios from 'axios'
-import { REQUEST_DESC_DB } from '../request/RequestConfirmed'
+import { Home } from 'lucide-react'
 
 const Orders = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -179,7 +179,7 @@ const Orders = () => {
 	]
 
 	return (
-		<PatronLayout heading="Orders">
+		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading="Orders">
 			<ProfileTable data={records} columns={columns} filterType={'req_title'} filterTypeShow="" filterDateType={'date_needed'} />
 		</PatronLayout>
 	)

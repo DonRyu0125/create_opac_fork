@@ -1,12 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { BookOpen, Clock, Truck, FileText, Bell } from 'lucide-react'
+import { BookOpen, Clock, Truck, FileText, Bell, Home } from 'lucide-react'
 import { CustomSidebar } from './CustomSidebar'
 import { DesktopHeader } from './DesktopHeader'
 import { MobileHeader } from './MobileHeader'
 import { NotificationBanner } from './NotificationBanner'
 import { StatsCard } from './StatsCard'
+import PatronLayout from '../patron'
+import useConstants from '@/hooks/useConstants'
 
 // Mock data for the dashboard
 const patronData = {
@@ -34,6 +36,7 @@ const patronData = {
 export default function LibraryDashboard() {
 	const [sidebarOpen, setSidebarOpen] = useState(false)
 	const [notifications, setNotifications] = useState(patronData.notifications)
+	const { home, archives, museum, library, message, clientProfile } = useConstants()
 
 	const toggleSidebar = () => {
 		setSidebarOpen(!sidebarOpen)
@@ -71,17 +74,10 @@ export default function LibraryDashboard() {
 	]
 
 	return (
-		<div className="min-h-screen bg-gray-50 lg:flex">
-			{/* Sidebar - Always visible on desktop */}
-			<CustomSidebar isOpen={sidebarOpen} onToggle={toggleSidebar} />
-
+		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading="Library" >
 			{/* Main Content Container */}
 			<div className="flex-1 lg:flex lg:flex-col">
-				{/* Mobile Header - Only visible on mobile */}
-				<MobileHeader onMenuToggle={toggleSidebar} />
 
-				{/* Desktop Header - Only visible on desktop */}
-				<DesktopHeader userName={patronData.name} />
 
 				{/* Main Content */}
 				<main className="flex-1 p-4 lg:p-6">
@@ -164,6 +160,6 @@ export default function LibraryDashboard() {
 					</div>
 				</main>
 			</div>
-		</div>
+		</PatronLayout>
 	)
 }

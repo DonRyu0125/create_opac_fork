@@ -26,12 +26,6 @@ const Header = () => {
 					<BreadcrumbList>
 						<BreadcrumbItem>
 							<BreadcrumbLink asChild>
-								{/* <Link
-									href={getCookieValue('HOME_SESSID') + home_url}
-									className="flex items-center no-underline text-lg text-primary-foreground hover:text-primary-foreground/80">
-									<Home className="mr-1 h-5 w-5" />
-									{message.clientDashboard}
-								</Link> */}
 								<a className="flex flex-row space-x-4 items-center" href="/">
 									<img className="h-12" src={logo} alt="logo" loading="eager" />
 									<h1 className="text-2xl font-bold text-opac-white">{siteName}</h1>

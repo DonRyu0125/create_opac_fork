@@ -13,10 +13,11 @@ import { Home } from 'lucide-react'
 type PatronLayoutProps = {
 	children?: React.ReactNode
 	activeSection?: string
-	heading?: string
+	heading? :string
+	mainHeading?:any
 }
 
-const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) => {
+const PatronLayout = ({ children, activeSection, heading,mainHeading }: PatronLayoutProps) => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeButton, setActiveButton] = useState(null)
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
@@ -34,8 +35,7 @@ const PatronLayout = ({ children, activeSection, heading }: PatronLayoutProps) =
 
 				<div className="pt-3 flex justify-center items-center  rounded-md bg-primary-soft">
 					<Link href={getCookieValue('HOME_SESSID') + home_url} className="flex items-center no-underline text-lg  w-[1400px] px-6 ">
-						<Home className="mr-1 h-5 w-5" />
-						{message.clientDashboard}
+					   {mainHeading}
 					</Link>
 				</div>
 

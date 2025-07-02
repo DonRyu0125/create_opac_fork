@@ -124,7 +124,7 @@ export default function PatronProfile() {
 
 
 	return (
-		<PatronLayout heading="">
+		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading={message.clientDashboard} >
 			<div className="mb-4 rounded-md bg-white p-6 shadow">
 				<h1 className="text-3xl font-semibold text-gray-800">
 					{message.welcome} {records[0]?.full_name || 'User'}!

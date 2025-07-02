@@ -8,6 +8,7 @@ import { getHomeSessionID } from '@/lib/utils'
 import { Checkbox } from '@radix-ui/react-checkbox'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { ColumnDef } from '@tanstack/react-table'
+import { Home } from 'lucide-react'
 
 const Enquiries = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -116,7 +117,7 @@ const Enquiries = () => {
 		},
 	]
 	return (
-		<PatronLayout heading="Inquiries">
+		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading="Inquiries">
 			<ProfileTable data={records} columns={columns} filterType={'enquiry'} filterTypeShow="" filterDateType={'enq_create_date'} />
 		</PatronLayout>
 	)
