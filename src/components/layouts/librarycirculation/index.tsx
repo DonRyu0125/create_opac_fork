@@ -74,11 +74,15 @@ export default function LibraryDashboard() {
 	]
 
 	return (
-		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading="Library" >
+		<PatronLayout
+			mainHeading={
+				<>
+					<BookOpen className="mr-1 h-5 w-5" />
+					{'Library Portal'}
+				</>
+			}>
 			{/* Main Content Container */}
 			<div className="flex-1 lg:flex lg:flex-col">
-
-
 				{/* Main Content */}
 				<main className="flex-1 p-4 lg:p-6">
 					{/* Welcome Section */}

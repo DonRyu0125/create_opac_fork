@@ -17,11 +17,10 @@ import { Home, UserRound } from 'lucide-react'
 const Header = () => {
 	const { config, message } = useConstants()
 	const { logo, siteName } = config
-	const home_url = '?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 
 	return (
 		<header className="flex justify-between bg-primary sticky top-0 z-30  items-center gap-4 border-b py-2">
-			<div className="w-full flex justify-between items-center pl-[8px]">
+			<div className="container flex justify-between items-center md:pl-[23px]">
 				<Breadcrumb>
 					<BreadcrumbList>
 						<BreadcrumbItem>
