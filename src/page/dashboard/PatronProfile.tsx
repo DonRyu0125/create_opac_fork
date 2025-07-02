@@ -23,7 +23,7 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 
-interface StatCardProps {
+export interface StatCardProps {
 	icon: React.ReactNode
 	label: string
 	color: string
