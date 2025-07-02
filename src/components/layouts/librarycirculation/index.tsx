@@ -39,7 +39,7 @@ const patronData = {
 export default function LibraryDashboard() {
 	const [notifications, setNotifications] = useState(patronData.notifications)
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const { message, clientProfile } = useConstants()
+	const { message, clientProfile, patronLibraryCirculation } = useConstants()
 	const profileList = clientProfile.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 	// const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -114,7 +114,8 @@ export default function LibraryDashboard() {
 
 	return (
 		<PatronLayout
-			list={clientProfile.database}
+			isLibrary={true}
+			list={patronLibraryCirculation.dashboard}
 			mainHeading={
 				<>
 					<BookOpen className="mr-1 h-5 w-5" />

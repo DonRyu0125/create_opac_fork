@@ -14,20 +14,20 @@ type PatronLayoutProps = {
 	children?: React.ReactNode
 	activeSection?: string
 	heading?: string
-	mainHeading?: any
-	list?: MenuItem[]
+	mainHeading: any
+	list: MenuItem[]
+	isLibrary?: boolean
 }
 
 type MenuItem = {
-	id: number;
-	label: string;
-	db: string;
-	icon: string;
-	url: string;
-  };
-  
+	id: number
+	label: string
+	db: string
+	icon: string
+	url: string
+}
 
-const PatronLayout = ({ children, activeSection, heading, mainHeading ,list}: PatronLayoutProps) => {
+const PatronLayout = ({ children, activeSection, heading, mainHeading, list, isLibrary }: PatronLayoutProps) => {
 	const [activeButton, setActiveButton] = useState(null)
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 	const handleClick = (id: any) => {
@@ -48,7 +48,7 @@ const PatronLayout = ({ children, activeSection, heading, mainHeading ,list}: Pa
 				</div>
 				<div className="flex justify-center items-center py-4 bg-primary-soft">
 					<div className="flex flex-wrap gap-2 sm:gap-4 px-4">
-						{list?.map((button,key) => (
+						{list?.map((button, key) => (
 							<a
 								key={key}
 								href={getCookieValue('HOME_SESSID') + button.url + (button.db !== 'SHOWORDERLIST' ? m2l_patron_id : '')}
@@ -58,12 +58,14 @@ const PatronLayout = ({ children, activeSection, heading, mainHeading ,list}: Pa
 							</a>
 						))}
 						{/* Calendar profile list need different url so it is separated from the profilelist, 20240207 Don Ryu */}
-						<a
-							key={'Calendar'}
-							href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`}
-							className={buttonVariants({ variant: 'outline' })}>
-							{message.calendar}
-						</a>
+						{!isLibrary && (
+							<a
+								key={'Calendar'}
+								href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`}
+								className={buttonVariants({ variant: 'outline' })}>
+								{message.calendar}
+							</a>
+						)}
 					</div>
 				</div>
 				<main className="container grid items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 pb-4 mt-3">
