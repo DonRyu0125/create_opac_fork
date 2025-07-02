@@ -37,15 +37,15 @@ const patronData = {
 }
 
 export default function LibraryDashboard() {
-	const [sidebarOpen, setSidebarOpen] = useState(false)
 	const [notifications, setNotifications] = useState(patronData.notifications)
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const { home, archives, museum, library, message, clientProfile } = useConstants()
+	const { message, clientProfile } = useConstants()
 	const profileList = clientProfile.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	const toggleSidebar = () => {
-		setSidebarOpen(!sidebarOpen)
-	}
+	// const [sidebarOpen, setSidebarOpen] = useState(false)
+	// const toggleSidebar = () => {
+	// 	setSidebarOpen(!sidebarOpen)
+	// }
 
 	const dismissNotification = (id: number) => {
 		setNotifications(notifications.filter((n) => n.id !== id))
@@ -114,10 +114,11 @@ export default function LibraryDashboard() {
 
 	return (
 		<PatronLayout
+			list={clientProfile.database}
 			mainHeading={
 				<>
 					<BookOpen className="mr-1 h-5 w-5" />
-					{'Library Portal'}
+					<h2 className="text-lg font-semibold text-gray-900">Library Portal</h2>
 				</>
 			}>
 			<div className="mb-4 rounded-md bg-white p-6 shadow">

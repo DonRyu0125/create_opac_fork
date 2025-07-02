@@ -43,7 +43,7 @@ interface PatronInfo {
 
 const Calendar = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const message = useConstants().message
+	const { message, clientProfile } = useConstants()
 	let HOME_SESSID = getHomeSessionID()
 	const { logo } = useConstants().config
 	const rsvp = useConstants().rsvp
@@ -205,7 +205,7 @@ const Calendar = () => {
 	}
 
 	return (
-		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading={message.calendar}>
+		<PatronLayout list={clientProfile.database} mainHeading={<><Home className="mr-1 h-5 w-5" /><h2 className="text-lg font-semibold text-gray-900">{message.clientDashboard}</h2></>} heading={message.calendar}>
 			<ProfileTable
 				data={records}
 				columns={columns}

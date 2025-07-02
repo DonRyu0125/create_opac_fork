@@ -23,7 +23,7 @@ const EnquiryForm = () => {
 	const formActionSaveRecord = document.querySelector('#enq-save-record')?.textContent as string
 	const skipNStopRecord = document.querySelector('#enq-skip-n-stop-record')?.textContent as string
 	const dateToday = new Date().toISOString().split('T')[0]
-	const message = useConstants().message
+	const { message, clientProfile } = useConstants()
 
 	const [message_set, setMessage] = useState('')
 	const [clientEnquiries, setClientEnquiries] = useState<any[]>([])
@@ -139,7 +139,7 @@ const EnquiryForm = () => {
 	}
 
 	return (
-		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>}>
+		<PatronLayout list={clientProfile.database} mainHeading={<><Home className="mr-1 h-5 w-5" /><h2 className="text-lg font-semibold text-gray-900">{message.clientDashboard}</h2></>}>
 			<div className="flex mb-5 bg-white">
 				{/* Sidebar */}
 				<div className="w-80 border-r hidden md:block">

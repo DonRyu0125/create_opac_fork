@@ -18,7 +18,7 @@ const Enquiries = () => {
 		Closed: 'bg-orange-200 text-yellow-800',
 		Deleted: 'bg-red-200 text-red-800',
 	}
-	const message = useConstants().message
+	const { message, clientProfile } = useConstants()
 
 	const columns: ColumnDef<ProfileData>[] = [
 		{
@@ -117,7 +117,7 @@ const Enquiries = () => {
 		},
 	]
 	return (
-		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading="Inquiries">
+		<PatronLayout list={clientProfile.database} mainHeading={<><Home className="mr-1 h-5 w-5" /><h2 className="text-lg font-semibold text-gray-900">{message.clientDashboard}</h2></>} heading="Inquiries">
 			<ProfileTable data={records} columns={columns} filterType={'enquiry'} filterTypeShow="" filterDateType={'enq_create_date'} />
 		</PatronLayout>
 	)

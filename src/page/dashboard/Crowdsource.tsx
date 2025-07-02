@@ -10,7 +10,7 @@ import { Home } from 'lucide-react'
 
 const Crowdsource = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const message = useConstants().message
+	const { message, clientProfile } = useConstants()
 	const columns: ColumnDef<ProfileData>[] = [
 		{
 			id: 'select',
@@ -70,7 +70,7 @@ const Crowdsource = () => {
 		},
 	]
 	return (
-		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading="Crowdsource">
+		<PatronLayout list={clientProfile.database} mainHeading={<><Home className="mr-1 h-5 w-5" /><h2 className="text-lg font-semibold text-gray-900">{message.clientDashboard}</h2></>} heading="Crowdsource">
 			<ProfileTable data={records} columns={columns} filterType={'comments'} filterTypeShow="" />
 		</PatronLayout>
 	)

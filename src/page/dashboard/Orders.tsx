@@ -12,7 +12,7 @@ import { Home } from 'lucide-react'
 
 const Orders = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const message = useConstants().message
+	const { message, clientProfile } = useConstants()
 	const cancelRequest = (reqNumber: string) => {
 		var cancelReq_url = getCookieValue('HOME_SESSID') + '?MANIPXMLRECORD&KEY=REQ_ORDER_NUM&VALUE=' + reqNumber + '&DATABASE=REQUEST_INFO'
 		var xmlForm = '<?xml version="1.0" encoding="UTF-8"?>\n<RECORD>\n'
@@ -179,7 +179,7 @@ const Orders = () => {
 	]
 
 	return (
-		<PatronLayout mainHeading={<><Home className="mr-1 h-5 w-5" />{message.clientDashboard}</>} heading="Orders">
+		<PatronLayout list={clientProfile.database} mainHeading={<><Home className="mr-1 h-5 w-5" /><h2 className="text-lg font-semibold text-gray-900">{message.clientDashboard}</h2></>} heading="Orders">
 			<ProfileTable data={records} columns={columns} filterType={'req_title'} filterTypeShow="" filterDateType={'date_needed'} />
 		</PatronLayout>
 	)

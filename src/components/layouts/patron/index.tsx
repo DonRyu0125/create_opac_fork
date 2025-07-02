@@ -15,17 +15,25 @@ type PatronLayoutProps = {
 	activeSection?: string
 	heading?: string
 	mainHeading?: any
+	list?: MenuItem[]
 }
 
-const PatronLayout = ({ children, activeSection, heading, mainHeading }: PatronLayoutProps) => {
-	const { records } = useJSONData({ selector: '#xml_record' })
+type MenuItem = {
+	id: number;
+	label: string;
+	db: string;
+	icon: string;
+	url: string;
+  };
+  
+
+const PatronLayout = ({ children, activeSection, heading, mainHeading ,list}: PatronLayoutProps) => {
 	const [activeButton, setActiveButton] = useState(null)
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 	const handleClick = (id: any) => {
 		setActiveButton(id) // Set the clicked button as active
 	}
-	const { message, clientProfile } = useConstants()
-	const profileList = clientProfile.database
+	const { message } = useConstants()
 	const home_url = '?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 	return (
 		<div className="flex min-h-screen w-full flex-col bg-muted/40 relative">
@@ -38,12 +46,11 @@ const PatronLayout = ({ children, activeSection, heading, mainHeading }: PatronL
 						{mainHeading}
 					</Link>
 				</div>
-
 				<div className="flex justify-center items-center py-4 bg-primary-soft">
 					<div className="flex flex-wrap gap-2 sm:gap-4 px-4">
-						{profileList.map((button) => (
+						{list?.map((button,key) => (
 							<a
-								key={button.id}
+								key={key}
 								href={getCookieValue('HOME_SESSID') + button.url + (button.db !== 'SHOWORDERLIST' ? m2l_patron_id : '')}
 								onClick={() => handleClick(button.id)}
 								className={buttonVariants({ variant: 'outline' })}>
