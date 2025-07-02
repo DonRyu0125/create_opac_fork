@@ -41,13 +41,12 @@ const PatronLayout = ({ children, activeSection, heading, mainHeading, list, isL
 			<div className="flex-1 flex flex-col relative">
 				<Header />
 
-				<div className="pt-3 flex justify-center items-center  rounded-md bg-primary-soft">
-					<Link href={getCookieValue('HOME_SESSID') + home_url} className="flex items-center no-underline text-lg  w-[1400px] px-6 ">
+		
+				<main className="container grid items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 pb-4 mt-3">
+					<Link href={getCookieValue('HOME_SESSID') + home_url} className="flex items-center no-underline text-lg  ">
 						{mainHeading}
 					</Link>
-				</div>
-				<div className="flex justify-center items-center py-4 bg-primary-soft">
-					<div className="flex flex-wrap gap-2 sm:gap-4 px-4">
+					<div className="flex flex-wrap gap-2 sm:gap-4 ">
 						{list?.map((button, key) => (
 							<a
 								key={key}
@@ -67,8 +66,6 @@ const PatronLayout = ({ children, activeSection, heading, mainHeading, list, isL
 							</a>
 						)}
 					</div>
-				</div>
-				<main className="container grid items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 pb-4 mt-3">
 					{heading && <h1 className="text-2xl font-bold">{heading}</h1>}
 					{children}
 				</main>

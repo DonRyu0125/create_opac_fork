@@ -20,7 +20,7 @@ const Header = () => {
 
 	return (
 		<header className="flex justify-between bg-primary sticky top-0 z-30  items-center gap-4 border-b py-2">
-			<div className="container flex justify-between items-center md:pl-[23px]">
+			<div className="container flex justify-between items-center md:p-[21px]">
 				<Breadcrumb>
 					<BreadcrumbList>
 						<BreadcrumbItem>

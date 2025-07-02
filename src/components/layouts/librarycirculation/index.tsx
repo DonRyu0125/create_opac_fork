@@ -136,9 +136,9 @@ export default function LibraryDashboard() {
 						<h2 className="text-lg font-semibold text-gray-900">Notifications</h2>
 					</div>
 					<div className="space-y-3">
-						{notifications.map((notification) => (
+						{notifications.map((notification,index) => (
 							<NotificationBanner
-								key={notification.id}
+								key={index}
 								message={notification.message}
 								type={notification.type}
 								onDismiss={() => dismissNotification(notification.id)}
