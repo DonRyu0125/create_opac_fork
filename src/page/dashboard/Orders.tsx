@@ -60,7 +60,7 @@ const Orders = () => {
 		{
 			accessorKey: 'date_needed',
 			header: message.date,
-			cell: ({ row }) => <div className={"capitalize min-w-[73px]"} >{row.getValue('date_needed') ? row.getValue('date_needed') : 'N/A'}</div>,
+			cell: ({ row }) => <div className={'capitalize min-w-[73px]'}>{row.getValue('date_needed') ? row.getValue('date_needed') : 'N/A'}</div>,
 		},
 		{
 			accessorKey: 'time_needed',
@@ -179,7 +179,15 @@ const Orders = () => {
 	]
 
 	return (
-		<PatronLayout list={clientProfile.database} mainHeading={<><Home className="mr-1 h-5 w-5" /><h2 className="text-lg font-semibold text-gray-900">{message.clientDashboard}</h2></>} heading="Orders">
+		<PatronLayout
+			list={clientProfile.database}
+			mainHeading={
+				<>
+					<Home className="mr-1 h-5 w-5" />
+					<h2 className="text-lg font-semibold text-gray-900">{message.clientDashboard}</h2>
+				</>
+			}
+			heading="Orders">
 			<ProfileTable data={records} columns={columns} filterType={'req_title'} filterTypeShow="" filterDateType={'date_needed'} />
 		</PatronLayout>
 	)
