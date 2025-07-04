@@ -21,18 +21,15 @@ type ItemContent = {
 
 const ITEMS_PER_PAGE = 20
 
-const RequestAccordianDesc = () => {
+const RequestAccordianBiblio = () => {
 	const { message } = useConstants()
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
-	const formRef1 = useRef<any>(null)
-	const formRef2 = useRef<any>(null)
-	const { container, request } = record
-	const requestData = request
+	const { item_info_occurrence } = record.record.item_info
 	const [open, setOpen] = useState(false)
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
 	const loadMoreRef = useRef<HTMLDivElement | null>(null)
-	let items = convertToArr(container?.item)
+	let items = convertToArr(item_info_occurrence)
 
 	useEffect(() => {
 		if (!loadMoreRef.current) return
@@ -57,16 +54,10 @@ const RequestAccordianDesc = () => {
 		return toast({ title: `${message.pleaseLoginForRequesting}` })
 	}
 
-	const handleRequestLater = (id: string) => {
-		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-		const form = document.getElementById(`later-form-${id}`) as HTMLFormElement
-		if (patronID) return form?.submit()
-		return toast({ title: `${message.pleaseLoginForRequesting}` })
-	}
 
 	return (
 		<div className="w-full mx-auto space-y-2">
-			<div className="border rounded-md">
+			 <div className="border rounded-md">
 				<Button
 					className="flex justify-between items-center w-full p-4 text-left bg-primary text-white"
 					onClick={() => setOpen((prev) => !prev)}
@@ -113,39 +104,18 @@ const RequestAccordianDesc = () => {
 																'?REQUESTLOGIN&REPORT=DIRECT_REQUEST_FORM'
 															}
 															className="hidden">
-															<input type="hidden" name="method_request" value={requestData.method_request} />
+															{/* <input type="hidden" name="method_request" value={requestData.method_request} />
 															<input type="hidden" name="req_topic" value={requestData.req_topic} />
 															<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
 															<input type="hidden" name="req_db_name" value={REQUEST_DESC_DB} />
 															<input type="hidden" name="req_db_link1" value={requestData.req_db_link1} />
 															<input type="hidden" name="req_db_recid" value={requestData.req_db_recid} />
 															<input type="hidden" name="req_item_id" value={value.id} />
-															<input type="hidden" name="req_item_title" value={requestData.req_item_title} />
-															<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
+															<input type="hidden" name="req_item_title" value={requestData.req_item_title} /> */}
+															{/* <input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} /> */}
 															{/* Wait time calucation is not working 20250620 Don */}
 															{/* <input type="hidden" name="REQ_WAIT_TIME" value={'10'} /> */}
-														</form>
-														<TooltipButton
-															key={value.id}
-															disabled={value.is_requested_by_client !== 'No'}
-															tooltipContent={message.requestRecordLater}
-															variant="outline"
-															onClick={() => handleRequestLater(value.id)}>
-															<CalendarCheck />
-														</TooltipButton>
-														<form
-															id={`later-form-${value.id}`}
-															method="post"
-															action={
-																removeQuote(requestData.action_later) +
-																`&M_GVAR1=SELECT_ITEM_ID:${value.id}` +
-																`&M_GVAR2=aone_loc:${value.aone_loc}`
-															}
-															className="hidden">
-															<input type="hidden" name="method_request" value={requestData.method_request} />
-															<input type="hidden" name="req_topic" value={requestData.req_topic} />
-															<input type="hidden" name="req_appl_name" value={requestData.req_appl_name} />
-														</form>
+														 </form>
 													</div>
 												</td>
 											</tr>
@@ -164,9 +134,9 @@ const RequestAccordianDesc = () => {
 						)}
 					</div>
 				)}
-			</div>
+			</div> 
 		</div>
 	)
 }
 
-export default RequestAccordianDesc
+export default RequestAccordianBiblio

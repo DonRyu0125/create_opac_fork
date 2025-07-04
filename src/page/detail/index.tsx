@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import NavigationSideBar from './NavigationSideBar'
 import NoRecord from '../NoRecord'
 import RequestAccordianDesc from './RequestAccordianDesc'
+import RequestAccordianBiblio from './RequestAccordianBiblio'
 
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
@@ -156,6 +157,7 @@ const Detail = () => {
 										{isDescriptionDatabase(database, record.request.req_db_name) && !record.record.refd_lowerexist && (
 											<RequestAccordianDesc />
 										)}
+										<RequestAccordianBiblio />
 									</div>
 								</div>
 							</div>
