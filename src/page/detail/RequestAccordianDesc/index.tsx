@@ -98,7 +98,7 @@ const RequestAccordianDesc = () => {
 														<TooltipButton
 															key={value.id}
 															disabled={value.is_requested_by_client !== 'No'}
-															tooltipContent={message.requestRecordLater}
+															tooltipContent={message.requestRecord}
 															variant="outline"
 															onClick={() => handleRequest(value.id)}>
 															<SquareCheck />

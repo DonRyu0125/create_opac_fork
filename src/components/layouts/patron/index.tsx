@@ -40,8 +40,6 @@ const PatronLayout = ({ children, activeSection, heading, mainHeading, list, isL
 			{/* <Sidebar /> */}
 			<div className="flex-1 flex flex-col relative">
 				<Header />
-
-		
 				<main className="container grid items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 pb-4 mt-3">
 					<Link href={getCookieValue('HOME_SESSID') + home_url} className="flex items-center no-underline text-lg  ">
 						{mainHeading}
