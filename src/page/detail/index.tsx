@@ -4,7 +4,7 @@ import SearchForm from '@/components/common/search-form/SearchForm'
 import Layout from '@/components/layouts'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { getSessionID, isDescriptionDatabase } from '@/lib/utils'
+import { getSessionID, isBiblioDatabase, isDescriptionDatabase } from '@/lib/utils'
 import DetailRecord from './DetailRecord'
 import DescriptionTree from '@/components/common/description-tree'
 import Accordion from '@/components/ui/simple-accordion'
@@ -157,7 +157,7 @@ const Detail = () => {
 										{isDescriptionDatabase(database, record.request.req_db_name) && !record.record.refd_lowerexist && (
 											<RequestAccordianDesc />
 										)}
-										<RequestAccordianBiblio />
+										{isBiblioDatabase(database, record.request.req_db_name) && <RequestAccordianBiblio />}
 									</div>
 								</div>
 							</div>

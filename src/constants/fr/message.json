@@ -244,5 +244,6 @@
 	"yes": "Oui",
 	"yourDetailLabel": "Vos Détails",
 	"barcode": "Identifiant du code-barres",
-	"pleaseLoginForRequesting": "Veuillez vous connecter pour faire une demand"
+	"pleaseLoginForRequesting": "Veuillez vous connecter pour faire une demand",
+	"mediaType": "Type de média"
 }

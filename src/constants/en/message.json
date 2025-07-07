@@ -244,5 +244,6 @@
 	"requestFor": "Your request for",
 	"hasBeenAccepted": "has been accepted!",
 	"barcode": "Barcode Id",
-	"pleaseLoginForRequesting": "Please log in to make a request"
+	"pleaseLoginForRequesting": "Please log in to make a request",
+	"mediaType": "Media Type"
 }

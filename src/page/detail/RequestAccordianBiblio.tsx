@@ -8,16 +8,29 @@ import TooltipButton from '@/components/common/TooltipButton'
 import { REQUEST_DESC_DB } from '@/page/request/RequestConfirmed'
 import { toast } from '@/components/ui/use-toast'
 import axios from 'axios'
-type IsRequestedByClient = 'No' | 'Another' | 'Current'
-type ItemContent = {
-	id: string
-	item_type: string
-	aone_loc: string
-	aone_status: string
-	location_details: string
-	ref_code: string
-	is_requested_by_client: IsRequestedByClient
-}
+type IsRequestable= ['AVAILABLE','CIRCULATED','IN TRANSFER','ON HOLD','ON ORDER']
+type LibraryItem = {
+	copy_number: string;
+	last_discrg_date: string;
+	barcode: string;
+	item_receive_dat: string;
+	item_call_number: string;
+	holding_centre: string;
+	media_type: string;
+	item_status: string;
+	perm_item_status: string;
+	shelf_location: string;
+	times_check_out: string;
+	class_scheme: string;
+	charge_date1: string;
+	i_collect_code: string;
+	item_price_cur: string;
+	item_price1: string;
+	item_non_circ: string;
+	collection_code: string;
+	_occ: string;
+  };
+  
 
 const ITEMS_PER_PAGE = 20
 
@@ -30,7 +43,7 @@ const RequestAccordianBiblio = () => {
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
 	const loadMoreRef = useRef<HTMLDivElement | null>(null)
 	let items = convertToArr(item_info_occurrence)
-
+	console.log('items', items)
 	useEffect(() => {
 		if (!loadMoreRef.current) return
 		const scrollContainer = loadMoreRef.current.closest('.overflow-auto')
@@ -47,9 +60,9 @@ const RequestAccordianBiblio = () => {
 		return () => observer.disconnect()
 	}, [])
 
-	const handleRequest = (id: string) => {
+	const handleRequest = (barcode: string) => {
 		const patronID = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-		const form = document.getElementById(`form-${id}`) as HTMLFormElement
+		const form = document.getElementById(`form-${barcode}`) as HTMLFormElement
 		if (patronID) return form?.submit()
 		return toast({ title: `${message.pleaseLoginForRequesting}` })
 	}
@@ -74,28 +87,28 @@ const RequestAccordianBiblio = () => {
 										<tr>
 											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.barcode}</th>
 											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.location}</th>
-											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.type}</th>
+											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.mediaType}</th>
 											<th className="border px-4 py-2" />
 										</tr>
 									</thead>
 									<tbody>
-										{items.slice(0, visibleCount).map((value: ItemContent) => (
-											<tr key={value.id}>
-												<td className="border px-4 py-2 min-w-[104px]">{value.id}</td>
-												<td className="border px-4 py-2">{value.location_details}</td>
-												<td className="border px-4 py-2">{value.item_type}</td>
+										{items.slice(0, visibleCount).map((value: LibraryItem,idx) => (
+											<tr key={idx}>                                             
+												<td className="border px-4 py-2 min-w-[104px]">{value.barcode}</td>
+												<td className="border px-4 py-2">{value.holding_centre}</td>
+												<td className="border px-4 py-2">{value.media_type}</td> 
 												<td className="border px-4 py-2">
 													<div className="flex gap-2">
 														<TooltipButton
-															key={value.id}
-															disabled={value.is_requested_by_client !== 'No'}
+															key={value.barcode}
+															// disabled={value.is_requested_by_client !== 'No'}
 															tooltipContent={message.requestRecord}
 															variant="outline"
-															onClick={() => handleRequest(value.id)}>
+															onClick={() => handleRequest(value.barcode)}>
 															<SquareCheck />
 														</TooltipButton>
 														<form
-															id={`form-${value.id}`}
+															id={`form-${value.barcode}`}
 															method="post"
 															action={
 																getHomeSessionID() +

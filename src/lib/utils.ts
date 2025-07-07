@@ -216,6 +216,10 @@ export const isDescriptionDatabase = (database: string, req_database: string) =>
 	return database.toLocaleUpperCase() === 'DESCRIPTION_WEB' && req_database.toLocaleUpperCase() === 'DESCRIPTION_WEB'
 }
 
+export const isBiblioDatabase = (database: string, req_database: string) => {
+	return database.toLocaleUpperCase() === 'BIBLIO_WEB' && req_database.toLocaleUpperCase() === 'BIBLIO_WEB'
+}
+
 export function getClassName(databaseName?: string, type?: 'text' | 'border' | 'bg'): string {
 	const normalizedDbName = databaseName?.toLowerCase()
 
