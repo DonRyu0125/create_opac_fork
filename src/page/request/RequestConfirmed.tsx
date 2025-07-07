@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { convertToString } from '@/lib/utils'
 
 export const REQUEST_DESC_DB = 'DESCRIPTION'
+export const REQUEST_BIBLIO_DB = 'BIBLIO'
 
 const RequestConfirmed = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -52,19 +53,7 @@ const RequestConfirmed = () => {
 												</p>
 											</div>
 										</>
-									) : reqData.req_db_name === 'COLLECTIONS_WEB' ? (
-										<>
-											<div className="flex flex-row items-center">
-												<LibraryBig className="mr-2" />
-												<h1 className="text-xl font-bold">{message.library}</h1>
-											</div>
-											<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
-											<p className="text-sm text-gray-600">
-												{message.referenceNo}: {reqData.req_item_id}
-											</p>
-											{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
-										</>
-									) : reqData.req_db_name === 'BIBLIO_WEB' ? (
+									) : reqData.req_db_name === REQUEST_BIBLIO_DB ? (
 										<>
 											<div className="flex flex-row items-center">
 												<LibraryBig className="mr-2" />

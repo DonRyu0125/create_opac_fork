@@ -68,6 +68,7 @@ export interface ReproductionData {
 	req_charge_amt: string
 }
 export interface RequestData {
+	req_db_link3: string | number | readonly string[] | undefined
 	req_db_link1: string | number | readonly string[] | undefined
     action_later: string
 	action: string

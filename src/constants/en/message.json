@@ -245,5 +245,6 @@
 	"hasBeenAccepted": "has been accepted!",
 	"barcode": "Barcode Id",
 	"pleaseLoginForRequesting": "Please log in to make a request",
-	"mediaType": "Media Type"
+	"mediaType": "Media Type",
+	"holdingCentre": "Holding Centre"
 }

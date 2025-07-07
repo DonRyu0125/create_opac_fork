@@ -245,5 +245,6 @@
 	"yourDetailLabel": "Vos Détails",
 	"barcode": "Identifiant du code-barres",
 	"pleaseLoginForRequesting": "Veuillez vous connecter pour faire une demand",
-	"mediaType": "Type de média"
+	"mediaType": "Type de média",
+	"holdingCentre": "Centre de conservation"
 }
