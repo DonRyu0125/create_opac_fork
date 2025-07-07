@@ -53,21 +53,22 @@ const Request = () => {
 								</form>
 							</div>
 						</div>
-						<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
-							<p>
-								Please confirm your request for <b>{reqData.req_item_id}</b> and time.
-							</p>
-							<p>
-								<b>
-									{reqData.date_needed} {reqData.time_needed}
-								</b>
-							</p>
-							<p> {message.visitRequirement}</p>
-						</div>
+
 						<div>
-							<div className="border p-4 rounded">
-								{reqData?.req_db_name === REQUEST_DESC_DB ? (
-									<>
+							{reqData?.req_db_name === REQUEST_DESC_DB ? (
+								<>
+									<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
+										<p>
+											Please confirm your request for <b>{reqData.req_item_id}</b> and time.
+										</p>
+										<p>
+											<b>
+												{reqData.date_needed} {reqData.time_needed}
+											</b>
+										</p>
+										<p> {message.visitRequirement}</p>
+									</div>
+									<div className="border p-4 rounded">
 										<div className="flex flex-row items-center">
 											<Archive className="mr-2" />
 											<h1 className="text-xl font-bold">{message.archives}</h1>
@@ -78,9 +79,16 @@ const Request = () => {
 												{message.barcode} : {reqData.req_item_id}
 											</p>
 										</div>
-									</>
-								) : reqData?.req_db_name === REQUEST_BIBLIO_DB ? (
-									<>
+									</div>
+								</>
+							) : reqData?.req_db_name === REQUEST_BIBLIO_DB ? (
+								<>
+									<div className="py-4 [&_p]:my-4 [&_b]:text-lg [&_b]:underline">
+										<p>
+											Please confirm your request for <b>{reqData.req_item_id}</b>
+										</p>
+									</div>
+									<div className="border p-4 rounded">
 										<div className="flex flex-row items-center">
 											<LibraryBig className="mr-2" />
 											<h1 className="text-xl font-bold">{message.library}</h1>
@@ -90,11 +98,11 @@ const Request = () => {
 											{message.barcode}: {reqData.req_item_id}
 										</p>
 										{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
-									</>
-								) : (
-									''
-								)}
-							</div>
+									</div>
+								</>
+							) : (
+								''
+							)}
 						</div>
 					</div>
 				</div>
