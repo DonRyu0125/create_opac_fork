@@ -42,7 +42,7 @@ const RequestAccordianBiblio = () => {
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
 	const loadMoreRef = useRef<HTMLDivElement | null>(null)
 	let items = convertToArr(item_info_occurrence)
-	console.log('record',record)
+
 	useEffect(() => {
 		if (!loadMoreRef.current) return
 		const scrollContainer = loadMoreRef.current.closest('.overflow-auto')
@@ -113,7 +113,7 @@ const RequestAccordianBiblio = () => {
 															action={
 																getHomeSessionID() +
 																'/1/' +
-																record.request.req_db_link1 +
+																record.request.req_db_link3 +
 																'?REQUESTLOGIN&REPORT=DIRECT_REQUEST_FORM'
 															}
 															className="hidden">

@@ -36,7 +36,6 @@ const RequestConfirmed = () => {
 							</p>
 							<p> {message.visitRequirement}</p>
 						</div>
-
 						{reqData.req_db_name && (
 							<div>
 								<div className="border p-4 rounded">
@@ -61,7 +60,7 @@ const RequestConfirmed = () => {
 											</div>
 											<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
 											<p className="text-sm text-gray-600">
-												{message.referenceNo}: {reqData.req_item_id}
+												{message.barcode}: {reqData.req_item_id}
 											</p>
 											{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
 										</>
