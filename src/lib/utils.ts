@@ -69,6 +69,13 @@ export const convertToArr = (elm: any) => {
 	return elm ? [elm] : []
 }
 
+export const convertLink = (item: { filename: string; linkURL: string }) => {
+	if (getCookieValue('HOME_SESSID')) {
+		return `${getCookieValue('HOME_SESSID')}?unionqueryform&SEARCHFORM=[OPAC]${item.filename}`
+	}
+	return item.linkURL
+}
+
 export const convertXMLToJson = (response: string) => {
 	const x2js = new X2JS()
 	const cleaned = escapeBrTags(response)

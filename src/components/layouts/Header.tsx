@@ -4,6 +4,10 @@ import Link from '../common/Link'
 import LoginBtn from '../common/LoginBtn'
 import MobileMenu from './MobileMenu'
 import { useEffect } from 'react'
+import { convertLink, getCookieValue } from '@/lib/utils'
+
+
+  
 
 const Header = () => {
 	const { config, home, archives, museum, library } = useConstants()
@@ -19,6 +23,7 @@ const Header = () => {
 			document.head.appendChild(link)
 		}
 	}, [logo])
+
 
 	return (
 		<header className="w-full bg-primary  mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,9 +48,9 @@ const Header = () => {
 				</div>
 				<nav className="hidden md:block py-2 pb-4">
 					<ul className="flex space-x-6 text-sm justify-end">
-						{navigations.map((item) => (
+						{navigations.map((item:any) => (
 							<li key={item.displayTitle}>
-								<Link href={item.linkURL} className="text-lg hover:underline text-opac-white hover:text-opac-secondary">
+								<Link href={convertLink(item)} className="text-lg hover:underline text-opac-white hover:text-opac-secondary">
 									{item.displayTitle}
 								</Link>
 							</li>

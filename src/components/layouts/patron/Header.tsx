@@ -11,13 +11,14 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import useConstants from '@/hooks/useConstants'
-import { clearCookies, getCookieValue } from '@/lib/utils'
+import { clearCookies, convertLink, getCookieValue } from '@/lib/utils'
 import { Home, UserRound } from 'lucide-react'
 import MobileMenu from '../MobileMenu'
 
 const Header = () => {
-	const { config, message } = useConstants()
+	const { config, home, archives, museum, library, message } = useConstants()
 	const { logo, siteName } = config
+	const navigations = [home, archives, museum, library]
 
 	return (
 		<header className="flex justify-between bg-primary sticky top-0 z-30  items-center gap-4 border-b py-2">
@@ -75,26 +76,13 @@ const Header = () => {
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
 							<DropdownMenuLabel>Search Database</DropdownMenuLabel>
-							<DropdownMenuItem>
-								<Link href="/" className="no-underline ml-[0.5rem]">
-									All
-								</Link>
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<Link href="/archives.html" className="no-underline ml-[0.5rem]">
-									Archives
-								</Link>
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<Link href="/museum.html" className="no-underline ml-[0.5rem]">
-									Museum
-								</Link>
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<Link href="/library.html" className="no-underline ml-[0.5rem]">
-									Library
-								</Link>
-							</DropdownMenuItem>
+							{navigations.map((nav: any) => (
+								<DropdownMenuItem>
+									<Link href={convertLink(nav)} className="no-underline ml-[0.5rem]">
+										{nav.displayTitle}
+									</Link>
+								</DropdownMenuItem>
+							))}
 							<DropdownMenuSeparator />
 							<DropdownMenuItem>
 								<Link onClick={clearCookies} className="no-underline ml-[0.5rem]">
