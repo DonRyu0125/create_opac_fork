@@ -246,5 +246,8 @@
 	"barcode": "Identifiant du code-barres",
 	"pleaseLoginForRequesting": "Veuillez vous connecter pour faire une demand",
 	"mediaType": "Type de média",
-	"holdingCentre": "Centre de conservation"
+	"holdingCentre": "Centre de conservation",
+	"copyNumber": "N° d'exemplaire",
+	"volumeNumber": "N° de volume",
+	"callNumber": "Cote"
 }

@@ -12,6 +12,7 @@ type LibraryItem = {
 	copy_number: string
 	last_discrg_date: string
 	barcode: string
+	volume_id: string
 	item_receive_dat: string
 	item_call_number: string
 	holding_centre: string
@@ -83,7 +84,10 @@ const RequestAccordianBiblio = () => {
 								<table className="min-w-full text-sm border">
 									<thead className="bg-gray-100 sticky top-0 z-10">
 										<tr>
-											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.barcode}</th>
+											<th className="border px-4 py-2 text-left font-medium text-gray-700 min-w-[104px]">{message.barcode}</th>
+											<th className="border px-4 py-2 text-left font-medium text-gray-700 min-w-[91px]">{message.copyNumber}</th>
+											<th className="border px-4 py-2 text-left font-medium text-gray-700 min-w-[90px]">{message.volumeNumber}</th>
+											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.callNumber}</th>
 											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.mediaType}</th>
 											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.holdingCentre}</th>
 											<th className="border px-4 py-2 text-left font-medium text-gray-700">{message.status}</th>
@@ -93,10 +97,13 @@ const RequestAccordianBiblio = () => {
 									<tbody>
 										{items.slice(0, visibleCount).map((value: LibraryItem, idx) => (
 											<tr key={idx}>
-												<td className="border px-4 py-2 min-w-[104px]">{value.barcode}</td>
-												<td className="border px-4 py-2">{value.media_type}</td>
-												<td className="border px-4 py-2">{value.holding_centre}</td>
-												<td className="border px-4 py-2">{value.item_status}</td>
+												<td className="border px-4 py-2 min-w-[104px]">{value.barcode ?? 'N/A'}</td>
+												<td className="border px-4 py-2 min-w-[90px]">{value.copy_number ?? 'N/A'}</td>
+												<td className="border px-4 py-2 min-w-[90px]">{value.volume_id ?? 'N/A'}</td>
+												<td className="border px-4 py-2">{value.item_call_number ?? 'N/A'}</td>
+												<td className="border px-4 py-2">{value.media_type ?? 'N/A'}</td>
+												<td className="border px-4 py-2">{value.holding_centre ?? 'N/A'}</td>
+												<td className="border px-4 py-2">{value.item_status ?? 'N/A'}</td>
 												<td className="border px-4 py-2">
 													<div className="flex gap-2">
 														<TooltipButton

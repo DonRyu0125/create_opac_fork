@@ -246,5 +246,8 @@
 	"barcode": "Barcode Id",
 	"pleaseLoginForRequesting": "Please log in to make a request",
 	"mediaType": "Media Type",
-	"holdingCentre": "Holding Centre"
+	"holdingCentre": "Holding Centre",
+	"copyNumber": "Copy No.",
+	"volumeNumber": "Vol No.",
+	"callNumber": "Call No."
 }
