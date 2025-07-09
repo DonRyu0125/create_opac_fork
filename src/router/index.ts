@@ -52,7 +52,7 @@ import CopyrightForm from '@/page/copyright/CopyrightForm'
 import LibraryCirculation from '@/page/dashboard/LibraryCirculation'
 import RequestLater from '@/page/request-later'
 import AccountSettings from '@/page/dashboard/AccountSettings'
-
+import Minista from '@/page/minista'
 export type TRoute = Record<string, (props?: any) => JSX.Element>
 
 const ADMIN_ROUTES: TRoute = {
@@ -89,6 +89,7 @@ export const ROUTES: TRoute = {
 	crowdsource: Crowdsource,
 	calendar: Calendar,
 	request: Request,
+	minista: Minista,
 	'request-later': RequestLater,
 	easyload: EasyLoad,
 	'easyload-login': Relogin,
