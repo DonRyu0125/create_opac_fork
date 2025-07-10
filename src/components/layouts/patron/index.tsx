@@ -8,33 +8,87 @@ import { buttonVariants } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
 import Footer from '../patron/Footer'
 import Link from '@/components/common/Link'
-import { Home } from 'lucide-react'
+import { colorClasses } from '@/page/dashboard/constants'
+import {
+	Archive,
+	BookMarked,
+	CalendarDays,
+	Copy,
+	Copyright,
+	File,
+	House,
+	Landmark,
+	Library,
+	Lightbulb,
+	MessageCircleMore,
+	Search,
+	ShoppingBag,
+	Upload,
+	BookOpen,
+	Home,
+} from 'lucide-react'
 
 type PatronLayoutProps = {
 	children?: React.ReactNode
 	activeSection?: string
 	heading?: string
 	mainHeading: any
-	list: MenuItem[]
 	isLibrary?: boolean
 }
 
-type MenuItem = {
-	id: number
-	label: string
-	db: string
-	icon: string
-	url: string
-}
 
-const PatronLayout = ({ children, activeSection, heading, mainHeading, list, isLibrary }: PatronLayoutProps) => {
-	const [activeButton, setActiveButton] = useState(null)
+
+const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayoutProps) => {
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	const handleClick = (id: any) => {
-		setActiveButton(id) // Set the clicked button as active
-	}
-	const { message } = useConstants()
+	const { message, clientProfile } = useConstants()
+	const profileList = clientProfile.dashboard
 	const home_url = '?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+
+	const clientDashboardCards = [
+		{
+			icon: <ShoppingBag className="h-4 w-4" />,
+			label: profileList[0].label,
+			color: 'blue',
+			link: profileList[0].url,
+		},
+		{
+			icon: <Copyright className="h-4 w-4" />,
+			label: profileList[1].label,
+			color: 'green',
+			link: profileList[1].url,
+		},
+		{
+			icon: <Copy className="h-4 w-4" />,
+			label: profileList[2].label,
+			color: 'red',
+			link: profileList[2].url,
+		},
+		{
+			icon: <BookMarked className="h-4 w-4" />,
+			label: profileList[3].label,
+			color: 'purple',
+			link: profileList[3].url,
+		},
+		{
+			icon: <Lightbulb className="h-4 w-4" />,
+			label: profileList[4].label,
+			color: 'amber',
+			link: profileList[4].url,
+		},
+		{
+			icon: <MessageCircleMore className="h-4 w-4" />,
+			label: profileList[5].label,
+			color: 'orange',
+			link: profileList[5].url,
+		},
+		{
+			icon: <BookOpen className="h-4 w-4" />,
+			label: profileList[7].label,
+			color: 'yellow',
+			link: profileList[7].url,
+		},
+	]
+
 	return (
 		<div className="flex min-h-screen w-full flex-col bg-muted/40 relative">
 			{/* <Sidebar /> */}
@@ -45,15 +99,19 @@ const PatronLayout = ({ children, activeSection, heading, mainHeading, list, isL
 						{mainHeading}
 					</Link>
 					<div className="flex flex-wrap gap-2 sm:gap-4 ">
-						{list?.map((button, key) => (
-							<a
-								key={key}
-								href={getCookieValue('HOME_SESSID') + button.url + (button.db !== 'SHOWORDERLIST' ? m2l_patron_id : '')}
-								onClick={() => handleClick(button.id)}
-								className={buttonVariants({ variant: 'outline' })}>
-								{button.label}
-							</a>
-						))}
+						{clientDashboardCards.map((card, index) => {
+							const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Circulation'
+							const href = getCookieValue('HOME_SESSID') + card.link + (isSpecialLabel ? '' : m2l_patron_id)
+							return (
+								<a key={index} href={href} className={buttonVariants({ variant: 'outline' }) + 'p-2'}>
+									<div className="flex items-center justify-center gap-2">
+										<div className={`rounded-full p-1 ${colorClasses[card.color as keyof typeof colorClasses]}`}>{card.icon}</div>
+										<span className="text-sm text-black-500">{card.label}</span>
+									</div>
+								</a>
+							)
+						})}
+
 						{/* Calendar profile list need different url so it is separated from the profilelist, 20240207 Don Ryu */}
 						{!isLibrary && (
 							<a

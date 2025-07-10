@@ -33,11 +33,11 @@ export interface StatCardProps {
 export default function PatronProfile() {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { home, archives, museum, library, message, clientProfile } = useConstants()
-	const profileList = clientProfile.database
+	const profileList = clientProfile.dashboard
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 
 
-	const statCards = [
+	const clientDashboardCards = [
 		{
 			icon: <ShoppingBag className="h-4 w-4" />,
 			label: profileList[0].label,
@@ -88,9 +88,8 @@ export default function PatronProfile() {
 			link: profileList[7].url,
 		},
 	]
-	function StatCard({ icon, label, value, color }: StatCardProps) {
-	
 
+	function StatCard({ icon, label, value, color }: StatCardProps) {
 		return (
 			<div className="rounded-md bg-white p-6 shadow">
 				<div className="flex flex-col gap-2">
@@ -108,7 +107,7 @@ export default function PatronProfile() {
 
 	return (
 		<PatronLayout
-			list={clientProfile.database}
+			
 			mainHeading={
 				<>
 					<Home className="mr-1 h-5 w-5" />
@@ -124,7 +123,7 @@ export default function PatronProfile() {
 
 			{/* Stats Grid */}
 			<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-				{statCards.map((card, index) => {
+				{clientDashboardCards.map((card, index) => {
 					const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Circulation'
 					const href = getCookieValue('HOME_SESSID') + card.link + (isSpecialLabel ? '' : m2l_patron_id)
 

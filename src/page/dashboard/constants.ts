@@ -11,3 +11,4 @@ export const colorClasses = {
     rose: 'bg-rose-100 text-rose-500',
     indigo: 'bg-indigo-100 text-indigo-500',
 } as const
+
