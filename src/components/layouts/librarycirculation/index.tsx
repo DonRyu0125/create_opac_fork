@@ -41,7 +41,7 @@ export default function LibraryDashboard() {
 	const [notifications, setNotifications] = useState(patronData.notifications)
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { message, patronLibraryCirculation } = useConstants()
-	const libraryProfileList = patronLibraryCirculation.dashboard
+	const libraryProfileList = patronLibraryCirculation.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 
 	const dismissNotification = (id: number) => {

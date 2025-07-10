@@ -41,8 +41,8 @@ type PatronLayoutProps = {
 const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayoutProps) => {
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 	const { message, clientProfile, patronLibraryCirculation } = useConstants()
-	const profileList = clientProfile.dashboard
-	const libraryProfileList = patronLibraryCirculation.dashboard
+	const profileList = clientProfile.database
+	const libraryProfileList = patronLibraryCirculation.database
 	const home_url = '?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 
 	const libraryDashboardCards = [
