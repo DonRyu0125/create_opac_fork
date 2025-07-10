@@ -33,7 +33,7 @@ export interface StatCardProps {
 export default function PatronProfile() {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { home, archives, museum, library, message, clientProfile } = useConstants()
-	const profileList = clientProfile.dashboard
+	const profileList = clientProfile.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 
 
