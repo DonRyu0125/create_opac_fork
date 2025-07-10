@@ -2,11 +2,10 @@
 
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Download, ExternalLink, Copy, Eye, Database, Shield, Image, Loader2 } from "lucide-react"
-import { useState, useEffect } from "react"
+import { Tabs, TabsContent } from "@/components/ui/tabs"
+import { axios } from "@/lib/axios"
 import { useQuery } from "@tanstack/react-query"
-import api from "@/services/api"
+import { Copy, Database, Download, ExternalLink, Eye, Image, Loader2, Shield } from "lucide-react"
 import { FileItem } from "./types"
 
 interface ChecksumItem {
@@ -173,7 +172,7 @@ export default function FileDetailModal({ file, isOpen, onClose }: FileDetailMod
             throw new Error('Authentication token not found')
         }
 
-        const response = await api.get<AssetDetailResponse>(`api/Asset/${file.id}`, {
+        const response = await axios.get<AssetDetailResponse>(`api/Asset/${file.id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
