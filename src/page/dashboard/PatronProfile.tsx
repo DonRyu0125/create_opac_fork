@@ -124,7 +124,7 @@ export default function PatronProfile() {
 			{/* Stats Grid */}
 			<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 				{clientDashboardCards.map((card, index) => {
-					const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Circulation'
+					const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Portal'
 					const href = getCookieValue('HOME_SESSID') + card.link + (isSpecialLabel ? '' : m2l_patron_id)
 
 					return (

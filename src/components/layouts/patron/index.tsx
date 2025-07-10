@@ -136,7 +136,7 @@ const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayou
 						{!isLibrary ? (
 							<>
 								{clientDashboardCards.map((card, index) => {
-									const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Circulation'
+									const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Portal'
 									const href = getCookieValue('HOME_SESSID') + card.link + (isSpecialLabel ? '' : m2l_patron_id)
 									return (
 										<a key={index} href={href} className={buttonVariants({ variant: 'outline' }) + 'p-2'}>
@@ -165,7 +165,7 @@ const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayou
 						) : (
 						<>
 							{libraryDashboardCards.map((card, index) => {
-								const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Circulation'
+								const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Portal'
 								const href = getCookieValue('HOME_SESSID') + card.link + (isSpecialLabel ? '' : m2l_patron_id)
 								return (
 									<a key={index} href={href} className={buttonVariants({ variant: 'outline' }) + 'p-2'}>

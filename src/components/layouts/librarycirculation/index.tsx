@@ -134,7 +134,7 @@ export default function LibraryDashboard() {
 			<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 				{statCards.map((card, index) => (
 					<a
-						href={getCookieValue('HOME_SESSID') + card.link + (card.label == 'Bookmarks' || 'Library Circulation' ? '' : m2l_patron_id)}
+						href={getCookieValue('HOME_SESSID') + card.link + (card.label == 'Bookmarks' || 'Library Portal' ? '' : m2l_patron_id)}
 						className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-gray-50">
 						<StatCard key={index} icon={card.icon} label={card.label} color={card.color} value={card.value} />
 					</a>
