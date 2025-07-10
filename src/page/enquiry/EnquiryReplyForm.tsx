@@ -139,7 +139,7 @@ const EnquiryForm = () => {
 	}
 
 	return (
-		<PatronLayout list={clientProfile.database} mainHeading={<><Home className="mr-1 h-5 w-5" /><h2 className="text-lg font-semibold text-gray-900">{message.clientDashboard}</h2></>}>
+		<PatronLayout  mainHeading={<><Home className="mr-1 h-5 w-5" /><h2 className="text-lg font-semibold text-gray-900">{message.clientDashboard}</h2></>}>
 			<div className="flex mb-5 bg-white">
 				{/* Sidebar */}
 				<div className="w-80 border-r hidden md:block">
