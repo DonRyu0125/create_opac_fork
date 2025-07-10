@@ -172,7 +172,7 @@ export default function FileDetailModal({ file, isOpen, onClose }: FileDetailMod
             throw new Error('Authentication token not found')
         }
 
-        const response = await axios.get<AssetDetailResponse>(`api/Asset/${file.id}`, {
+        const response = await axios.get<AssetDetailResponse>(`/tdr/api/Asset/${file.id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
