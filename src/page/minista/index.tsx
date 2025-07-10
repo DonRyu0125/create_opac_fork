@@ -9,13 +9,14 @@ import {
 } from "lucide-react"
 import { useState } from "react"
 import Layout from "@/components/layouts"
-import api from "@/services/api"
+
 import { useQuery } from "@tanstack/react-query"
 
 import LoadingState from "./LoadingState"
 import { AssetSearchResponse, AuthResponse, FileItem } from "./types"
 import FileCard from "./FileCard"
 import FileDetailModal from "./FileDetailModal"
+import { axios } from "@/lib/axios"
 
 
 
@@ -37,7 +38,7 @@ export default function Minista() {
                 formData.append('password', 'Cams.Dev_12!');
                 formData.append('grant_type', 'password');
 
-                const response = await api.post<AuthResponse>(('/token'), formData, {
+                const response = await axios.post<AuthResponse>(('/tdr/token'), formData, {
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
@@ -71,7 +72,7 @@ export default function Minista() {
     const { data: assetData } = useQuery<AssetSearchResponse>({
         queryKey: ['minista-asset-search'],
         queryFn: async () => {
-            const response = await api.post<AssetSearchResponse>(('api/Discover/AssetsSearch'), {
+            const response = await axios.post<AssetSearchResponse>(('/tdr/api/Discover/AssetsSearch'), {
                 ClusterSearchKeyword: searchQuery.trim().length > 0 ? searchQuery : "++@",
                 ClusterSearchOperator: "regex",
                 Filters: [],
