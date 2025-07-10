@@ -96,6 +96,7 @@ export interface RequestData {
 	is_requested_by_client:string
 }
 export interface Record {
+	biblio_r_count: any
 	action: string
 	biblio_count: string
 	bookmark_count: string
