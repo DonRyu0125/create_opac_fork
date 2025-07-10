@@ -76,8 +76,8 @@ const Header = () => {
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
 							<DropdownMenuLabel>Search Database</DropdownMenuLabel>
-							{navigations.map((nav: any) => (
-								<DropdownMenuItem>
+							{navigations.map((nav: any,key) => (
+								<DropdownMenuItem key={key}>
 									<Link href={convertLink(nav)} className="no-underline ml-[0.5rem]">
 										{nav.displayTitle}
 									</Link>
