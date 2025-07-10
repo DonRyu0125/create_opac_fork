@@ -1,8 +1,6 @@
 import ScrollToTopButton from '@/components/common/ScrollToTop'
 import React, { useState } from 'react'
 import Header from './Header'
-import Sidebar from './Sidebar'
-import useJSONData from '@/hooks/useJSONData'
 import { getCookieValue } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
@@ -26,6 +24,10 @@ import {
 	Upload,
 	BookOpen,
 	Home,
+	ImageUp,
+	Clock,
+	Truck,
+	FileText,
 } from 'lucide-react'
 
 type PatronLayoutProps = {
@@ -36,13 +38,39 @@ type PatronLayoutProps = {
 	isLibrary?: boolean
 }
 
-
-
 const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayoutProps) => {
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	const { message, clientProfile } = useConstants()
+	const { message, clientProfile, patronLibraryCirculation } = useConstants()
 	const profileList = clientProfile.dashboard
+	const libraryProfileList = patronLibraryCirculation.dashboard
 	const home_url = '?SEARCH&DATABASE=CLIENT_VIEW&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+
+	const libraryDashboardCards = [
+		{
+			icon: <BookOpen className="h-4 w-4" />,
+			label: 'Checked Out',
+			color: 'blue',
+			link: libraryProfileList[0].url,
+		},
+		{
+			icon: <Clock className="h-4 w-4" />,
+			label: 'On Hold',
+			color: 'amber',
+			link: libraryProfileList[1].url,
+		},
+		{
+			icon: <Truck className="h-4 w-4" />,
+			label: 'In Transit',
+			color: 'green',
+			link: libraryProfileList[2].url,
+		},
+		{
+			icon: <FileText className="h-4 w-4" />,
+			label: 'On Request',
+			color: 'purple',
+			link: libraryProfileList[3].url,
+		},
+	]
 
 	const clientDashboardCards = [
 		{
@@ -82,6 +110,12 @@ const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayou
 			link: profileList[5].url,
 		},
 		{
+			icon: <ImageUp className="h-4 w-4" />,
+			label: profileList[6].label,
+			color: 'indigo',
+			link: profileList[6].url,
+		},
+		{
 			icon: <BookOpen className="h-4 w-4" />,
 			label: profileList[7].label,
 			color: 'yellow',
@@ -99,27 +133,51 @@ const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayou
 						{mainHeading}
 					</Link>
 					<div className="flex flex-wrap gap-2 sm:gap-4 ">
-						{clientDashboardCards.map((card, index) => {
-							const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Circulation'
-							const href = getCookieValue('HOME_SESSID') + card.link + (isSpecialLabel ? '' : m2l_patron_id)
-							return (
-								<a key={index} href={href} className={buttonVariants({ variant: 'outline' }) + 'p-2'}>
+						{!isLibrary ? (
+							<>
+								{clientDashboardCards.map((card, index) => {
+									const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Circulation'
+									const href = getCookieValue('HOME_SESSID') + card.link + (isSpecialLabel ? '' : m2l_patron_id)
+									return (
+										<a key={index} href={href} className={buttonVariants({ variant: 'outline' }) + 'p-2'}>
+											<div className="flex items-center justify-center gap-2">
+												<div className={`rounded-full p-1 ${colorClasses[card.color as keyof typeof colorClasses]}`}>
+													{card.icon}
+												</div>
+												<span className="text-sm text-black-500">{card.label}</span>
+											</div>
+										</a>
+									)
+								})}
+								{/* Calendar profile list need different url so it is separated from the profilelist, 20240207 Don Ryu */}
+								<a
+									key={'Calendar'}
+									href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`}
+									className={buttonVariants({ variant: 'outline' })}>
 									<div className="flex items-center justify-center gap-2">
-										<div className={`rounded-full p-1 ${colorClasses[card.color as keyof typeof colorClasses]}`}>{card.icon}</div>
-										<span className="text-sm text-black-500">{card.label}</span>
+										<div className={`rounded-full p-1 ${colorClasses['pink']}`}>
+											<CalendarDays className="h-4 w-4" />
+										</div>
+										<span className="text-sm text-black-500">{message.calendar}</span>
 									</div>
 								</a>
-							)
-						})}
-
-						{/* Calendar profile list need different url so it is separated from the profilelist, 20240207 Don Ryu */}
-						{!isLibrary && (
-							<a
-								key={'Calendar'}
-								href={`/scripts/mwimain.dll/144/WEB_CALENDAR/WEB_CALENDAR_PROFILE?commandsearch&exp=%2B%2B%40&EXP=TAG_FUNC_P_ID%20${m2l_patron_id}&M_GVAR1=USER_ID:${m2l_patron_id}`}
-								className={buttonVariants({ variant: 'outline' })}>
-								{message.calendar}
-							</a>
+							</>
+						) : (
+						<>
+							{libraryDashboardCards.map((card, index) => {
+								const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Circulation'
+								const href = getCookieValue('HOME_SESSID') + card.link + (isSpecialLabel ? '' : m2l_patron_id)
+								return (
+									<a key={index} href={href} className={buttonVariants({ variant: 'outline' }) + 'p-2'}>
+										<div className="flex items-center justify-center gap-2">
+											<div className={`rounded-full p-1 ${colorClasses[card.color as keyof typeof colorClasses]}`}>
+												{card.icon}
+											</div>
+											<span className="text-sm text-black-500">{card.label}</span>
+										</div>
+									</a>
+								)
+							})}</>
 						)}
 					</div>
 					{heading && <h1 className="text-2xl font-bold">{heading}</h1>}

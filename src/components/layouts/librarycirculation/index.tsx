@@ -40,8 +40,8 @@ const patronData = {
 export default function LibraryDashboard() {
 	const [notifications, setNotifications] = useState(patronData.notifications)
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const { message, clientProfile, patronLibraryCirculation } = useConstants()
-	const profileList = clientProfile.dashboard
+	const { message, patronLibraryCirculation } = useConstants()
+	const libraryProfileList = patronLibraryCirculation.dashboard
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 
 	const dismissNotification = (id: number) => {
@@ -51,31 +51,31 @@ export default function LibraryDashboard() {
 	const statCards = [
 		{
 			icon: <BookOpen className="h-4 w-4" />,
-			label: 'Checked Out',
+			label: libraryProfileList[0].label,
 			color: 'blue',
 			value: patronData.stats.checkedOut,
-			link: profileList[0].url,
+			link: libraryProfileList[0].url,
 		},
 		{
 			icon: <Clock className="h-4 w-4" />,
-			label: 'On Hold',
+			label:libraryProfileList[1].label,
 			color: 'amber',
 			value: patronData.stats.onHold,
-			link: profileList[1].url,
+			link: libraryProfileList[1].url,
 		},
 		{
 			icon: <Truck className="h-4 w-4" />,
-			label: 'In Transit',
+			label: libraryProfileList[2].label,
 			color: 'green',
 			value: patronData.stats.inTransit,
-			link: profileList[2].url,
+			link: libraryProfileList[2].url,
 		},
 		{
 			icon: <FileText className="h-4 w-4" />,
-			label: 'On Request',
+			label: libraryProfileList[3].label,
 			color: 'purple',
 			value: patronData.stats.onRequest,
-			link: profileList[3].url,
+			link: libraryProfileList[3].url,
 		},
 	]
 
