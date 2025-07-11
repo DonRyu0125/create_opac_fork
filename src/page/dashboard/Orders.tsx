@@ -11,6 +11,8 @@ import { ColumnDef } from '@tanstack/react-table'
 import axios from 'axios'
 import { Home } from 'lucide-react'
 
+const REQ_STATUS_TYPES = ['Retrieve', 'Prepare', 'Requested', 'Conservation'];
+
 const Orders = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const { message, config } = useConstants()
@@ -180,16 +182,13 @@ const Orders = () => {
 			},
 			cell: ({ row }) => (
 				<div className="">
-					{/* {row.getValue('rec_status') === 'Deleted' ? (
+					{row.getValue('rec_status') === 'Deleted' ? (
 						<Button disabled>{message.cancelled}</Button>
-					) : row.getValue('req_status') === 'Retrieve' ||
-					  row.getValue('req_status') === 'Prepared' ||
-					  row.getValue('req_status') === 'Requested' ||
-					  row.getValue('req_status') === 'Conservation' ? (
+					) : REQ_STATUS_TYPES.includes(row.getValue('req_status')) ? (
 						<Button onClick={() => cancelRequest(row.getValue('req_order_num'))}>{message.cancel}</Button>
-					) : ( */}
+					) : (
 						<Button disabled>{message.noAction}</Button>
-					{/* )} */}
+					)}
 				</div>
 			),
 		},
