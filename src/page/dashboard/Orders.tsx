@@ -113,7 +113,7 @@ const Orders = () => {
 			},
 			cell: ({ row }) => (
 				<div className="underline">
-					{row.original.req_db_name=== navigations[1].database ? (
+					{row.original.req_db_name === navigations[1].database ? (
 						<a
 							href={
 								getHomeSessionID() +
@@ -191,6 +191,14 @@ const Orders = () => {
 		},
 	]
 
+	const moveDeletedToBottom = (records: ProfileData[]) => {
+		return records.sort((a, b) => {
+			if (a.rec_status === 'Deleted' && b.rec_status !== 'Deleted') return 1
+			if (a.rec_status !== 'Deleted' && b.rec_status === 'Deleted') return -1
+			return 0
+		})
+	}
+
 	return (
 		<PatronLayout
 			mainHeading={
@@ -200,7 +208,13 @@ const Orders = () => {
 				</>
 			}
 			heading="Orders">
-			<ProfileTable data={records} columns={columns} filterType={'req_item_title'} filterTypeShow="" filterDateType={'date_needed'} />
+			<ProfileTable
+				data={moveDeletedToBottom(records)}
+				columns={columns}
+				filterType={'req_item_title'}
+				filterTypeShow=""
+				filterDateType={'date_needed'}
+			/>
 		</PatronLayout>
 	)
 }
