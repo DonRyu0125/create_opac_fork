@@ -11,7 +11,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import axios from 'axios'
 import { Home } from 'lucide-react'
 
-const REQ_STATUS_TYPES = ['Retrieve', 'Prepare', 'Requested', 'Conservation'];
+const REQ_STATUS_TYPES = ['Retrieve', 'Prepare', 'Requested', 'Conservation']
 
 const Orders = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -113,7 +113,7 @@ const Orders = () => {
 			},
 			cell: ({ row }) => (
 				<div className="underline">
-					{row.getValue('req_db_name') === navigations[1].search_database ? (
+					{row.original.req_db_name=== navigations[1].database ? (
 						<a
 							href={
 								getHomeSessionID() +
@@ -179,17 +179,15 @@ const Orders = () => {
 					</Button>
 				)
 			},
-			cell: ({ row }) => (
-				<div className="">
-					{row.getValue('rec_status') === 'Deleted' ? (
-						<Button disabled>{message.cancelled}</Button>
-					) : REQ_STATUS_TYPES.includes(row.getValue('req_status')) ? (
-						<Button onClick={() => cancelRequest(row.getValue('req_order_num'))}>{message.cancel}</Button>
-					) : (
-						<Button disabled>{message.noAction}</Button>
-					)}
-				</div>
-			),
+			cell: ({ row }) => {
+				if (row.original.rec_status === 'Deleted') {
+					return <Button disabled>{message.cancelled}</Button>
+				} else if (REQ_STATUS_TYPES.includes(row.original.req_status)) {
+					return <Button onClick={() => cancelRequest(row.original.req_order_num)}>{message.cancel}</Button>
+				} else {
+					return <Button disabled>{message.noAction}</Button>
+				}
+			},
 		},
 	]
 
