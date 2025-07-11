@@ -19,8 +19,7 @@ const Orders = () => {
 	const { navigations } = config
 	const cancelRequest = (reqNumber: string) => {
 		var cancelReq_url = getCookieValue('HOME_SESSID') + '?MANIPXMLRECORD&KEY=REQ_ORDER_NUM&VALUE=' + reqNumber + '&DATABASE=REQUEST_INFO'
-		var xmlForm = '<?xml version="1.0" encoding="UTF-8"?>\n<RECORD>\n'
-		xmlForm = xmlForm.concat('<REC_STATUS>Deleted</REC_STATUS>\n')
+		var xmlForm = '<?xml version="1.0" encoding="UTF-8"?><RECORD><REC_STATUS>Deleted</REC_STATUS></RECORD>'
 		axios({
 			method: 'post',
 			url: cancelReq_url,
