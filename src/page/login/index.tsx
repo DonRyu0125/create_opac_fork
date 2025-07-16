@@ -49,7 +49,7 @@ const Login = () => {
 								<Input
 									type="text"
 									id="user"
-									name="PATRON_INT_ID"
+									name="PATRON_ID"
 									value={accountNumber}
 									onChange={(e) => setAccountNumber(e.target.value)}
 								/>
