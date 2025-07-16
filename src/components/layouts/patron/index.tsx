@@ -43,7 +43,7 @@ const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayou
 	const { message, clientProfile, patronLibraryCirculation } = useConstants()
 	const profileList = clientProfile.database
 	const libraryProfileList = patronLibraryCirculation.database
-	const home_url = '?SEARCH&DATABASE=PATRON&REPORT=WEB_PATRON_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+	const home_url = '?SEARCH&DATABASE=PATRON_SYN&REPORT=WEB_PATRON_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 
 	const libraryDashboardCards = [
 		{
