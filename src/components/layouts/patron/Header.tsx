@@ -48,7 +48,7 @@ const Header = () => {
 								<Link
 									href={
 										getCookieValue('HOME_SESSID') +
-										'?SEARCH&DATABASE=PATRON&REPORT=WEB_CLIENT_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
+										'?SEARCH&DATABASE=PATRON&REPORT=WEB_PATRON_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)'
 									}
 									className="no-underline ml-[0.5rem]">
 									{message.dashboardHome}
