@@ -79,7 +79,7 @@ const RequestLater = () => {
 
 	const getData = async () => {
 		return await axios
-			.get(`/preprocessing/paramter_calendar.html`, {
+			.get(`/preprocessing/REQUEST CALENDAR.TXT`, {
 				headers: {
 					'Content-Type': 'text/xml',
 				},
