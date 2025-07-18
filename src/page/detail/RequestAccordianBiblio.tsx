@@ -38,7 +38,7 @@ const RequestAccordianBiblio = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
 	const { request } = record
-	const { item_info_occurrence } = record.record.item_info
+	const { item_info_occurrence } = record.record.item_info ?? []
 	const [open, setOpen] = useState(false)
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
 	const loadMoreRef = useRef<HTMLDivElement | null>(null)
