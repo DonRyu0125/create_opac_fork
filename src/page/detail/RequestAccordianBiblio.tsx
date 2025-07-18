@@ -38,7 +38,7 @@ const RequestAccordianBiblio = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
 	const { request } = record
-	const { item_info_occurrence } = record.record.item_info
+	const { item_info_occurrence } = record.record.item_info ?? []
 	const [open, setOpen] = useState(false)
 	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
 	const loadMoreRef = useRef<HTMLDivElement | null>(null)
@@ -128,7 +128,7 @@ const RequestAccordianBiblio = () => {
 																'?REQUESTLOGIN&DBNAME=BIBLIO_WEB'
 															}
 															className="hidden">
-															<input type="hidden" name="REQ_ITEM_ID" value={`BARCODE-${value.barcode}`} />
+															<input type="hidden" name="REQ_ITEM_ID" value={`${value.barcode}`} />
 															<input type="hidden" name="REQ_WAIT_TIME" value={request.req_wait_time} />
 															<input type="hidden" name="ITEM_REQ_TIME" value={request.item_req_time} />
 															<input type="hidden" name="METHOD_REQUEST" value={request.method_request} />
