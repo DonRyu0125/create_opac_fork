@@ -125,24 +125,24 @@ const RequestAccordianBiblio = () => {
 																getHomeSessionID() +
 																'/1/' +
 																record.request.req_db_link3 +
-																'?REQUESTLOGIN&REPORT=DIRECT_REQUEST_FORM'
+																'?REQUESTLOGIN&DBNAME=BIBLIO_WEB'
 															}
 															className="hidden">
-															<input type="hidden" name="req_wait_time" value={request.req_wait_time} />
-															<input type="hidden" name="item_req_time" value={request.item_req_time} />
-															<input type="hidden" name="method_request" value={request.method_request} />
-															<input type="hidden" name="req_topic" value={request.req_topic} />
-															<input type="hidden" name="req_appl_name" value={request.req_appl_name} />
-															<input type="hidden" name="req_db_name" value={REQUEST_BIBLIO_DB} />
-															<input type="hidden" name="req_db_recid" value={request.req_db_recid} />
-															<input type="hidden" name="req_title" value={request.req_title} />
-															<input type="hidden" name="req_db_link3" value={request.req_db_link3} />
-															<input type="hidden" name="req_item_id" value={value.barcode} />
-															<input type="hidden" name="req_item_title" value={request.req_item_title} />
-															<input type="hidden" name="req_queue" value={request.req_queue} />
-															<input type="hidden" name="library_req" value={request.library_req} />
-															<input type="hidden" name="req_next_collect" value={request.req_next_collect} />
-															<input type="hidden" name="req_pickup_loc" value={request.req_pickup_loc} />
+															<input type="hidden" name="REQ_ITEM_ID" value={`BARCODE-${value.barcode}`} />
+															<input type="hidden" name="REQ_WAIT_TIME" value={request.req_wait_time} />
+															<input type="hidden" name="ITEM_REQ_TIME" value={request.item_req_time} />
+															<input type="hidden" name="METHOD_REQUEST" value={request.method_request} />
+															<input type="hidden" name="REQ_TOPIC" value={request.req_topic} />
+															<input type="hidden" name="REQ_APPL_NAME" value={request.req_appl_name} />
+															<input type="hidden" name="REQ_DB_NAME" value={REQUEST_BIBLIO_DB} />
+															<input type="hidden" name="REQ_DB_RECID" value={request.req_db_recid} />
+															<input type="hidden" name="REQ_TITLE" value={request.req_title} />
+															<input type="hidden" name="REQ_DB_LINK3" value={request.req_db_link3} />
+															<input type="hidden" name="REQ_ITEM_TITLE" value={request.req_item_title} />
+															<input type="hidden" name="REQ_QUEUE" value={request.req_queue} />
+															<input type="hidden" name="LIBRARY_REQ" value={request.library_req} />
+															<input type="hidden" name="REQ_NEXT_COLLECT" value={request.req_next_collect} />
+															<input type="hidden" name="REQ_PICKUP_LOC" value={request.req_pickup_loc} />
 														</form>
 													</div>
 												</td>
