@@ -154,6 +154,7 @@ const RequestLater = () => {
 					<div className="max-w-4xl mx-auto bg-white shadow-md rounded-md p-6">
 						<div className="flex justify-between items-center border-b pb-4">
 							<form method="post" className="m-0 w-full" action={'?REQUESTLOGIN'}>
+								<input type="hidden" name="REQ_WAIT_TIME" value={'0'}/>
 								<input type="hidden" name="req_status" value={record.req_status} />
 								<input type="hidden" name="rec_status" value={record.rec_status} />
 								<input type="hidden" name="req_db_name" value={reqData.req_db_name} />
@@ -167,7 +168,6 @@ const RequestLater = () => {
 								<input type="hidden" name="req_db_link1" value={reqData.req_db_link1} />
 								<input type="hidden" name="req_db_recid" value={reqData.req_db_recid} />
 								<input type="hidden" name="req_item_title" value={convertToString(reqData, 'req_item_title')} />
-								<input type="hidden" name="req_own_collect" value={'X'} />
 								<h1 className="flex items-center text-xl font-bold">
 									<CircleEllipsis className="mr-2" />
 									{message.requestRecordLater}
