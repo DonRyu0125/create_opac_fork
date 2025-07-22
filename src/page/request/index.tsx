@@ -48,23 +48,6 @@ const Request = () => {
 									<Input type="hidden" name="req_title" value={reqData.req_title} />
 									<Input type="hidden" name="req_item_id" value={reqData.req_item_id} />
 									<Input type="hidden" name="req_queue" value={reqData.req_queue} />
-									{/* <Input type="hidden" name="AUTO_APPROVE" value={reqData.auto_approve} /> */}
-									{/* <Input type="hidden" name="REQ_PROCESS_DATE" value={reqData.req_process_date} /> */}
-									{/* <Input type="hidden" name="REQ_PICKUP_LOC" value={reqData.req_pickup_loc} /> */}
-									{/* <Input type="hidden" name="REQ_LOC_CODE" value={reqData.req_loc_code} />  */}
-									<Input type="hidden" name="METHOD_REQUEST" value={reqData.method_request} />
-									<Input type="hidden" name="REQ_APPL_NAME" value={reqData.req_appl_name} />
-									<Input type="hidden" name="REQ_TOPIC" value={reqData.req_topic} />
-									<Input type="hidden" name="REQ_STATUS" value={reqData.req_status} />
-									<Input type="hidden" name="REC_STATUS" value={reqData.rec_status} />
-									<Input type="hidden" name="REQ_DB_NAME" value={reqData.req_db_name} />
-									<Input type="hidden" name="REQ_DB_RECID" value={reqData.req_db_recid} />
-									<Input type="hidden" name="LIBRARY_REQ" value={reqData.library_req} />
-									<Input type="hidden" name="DATE_NEEDED" value={reqData.date_needed} />
-									<Input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
-									<Input type="hidden" name="REQ_TITLE" value={reqData.req_title} />
-									<Input type="hidden" name="REQ_ITEM_ID" value={reqData.req_item_id} />
-									<Input type="hidden" name="REQ_QUEUE" value={reqData.req_queue} />
 									{reqData.req_db_link1 && <Input type="hidden" name="REQ_DB_LINK1" value={reqData.req_db_link1} />}
 									{reqData.req_db_link3 && <Input type="hidden" name="REQ_DB_LINK3" value={reqData.req_db_link3} />}
 									<Input type="hidden" name="REQ_ITEM_TITLE" value={convertToString(reqData, 'req_item_title')} />
