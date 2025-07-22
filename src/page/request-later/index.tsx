@@ -154,10 +154,10 @@ const RequestLater = () => {
 					<div className="max-w-4xl mx-auto bg-white shadow-md rounded-md p-6">
 						<div className="flex justify-between items-center border-b pb-4">
 							<form method="post" className="m-0 w-full" action={'?REQUESTLOGIN'}>
-								<input type="hidden" name="req_status" value={reqData.req_status} />
-								<input type="hidden" name="rec_status" value={reqData.rec_status} />
+								<input type="hidden" name="req_status" value={record.req_status} />
+								<input type="hidden" name="rec_status" value={record.rec_status} />
 								<input type="hidden" name="req_db_name" value={reqData.req_db_name} />
-								<input type="hidden" name="req_title" value={reqData.req_title} />
+								<input type="hidden" name="req_title" value={convertToString(reqData, 'req_item_title')} />
 								<input type="hidden" name="req_queue" value={reqData.req_queue} />
 								<input type="hidden" name="method_request" value={reqData.method_request} />
 								<input type="hidden" name="req_topic" value={reqData.req_topic} />
