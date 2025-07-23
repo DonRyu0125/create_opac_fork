@@ -40,16 +40,16 @@ const Request = () => {
 									<Input type="hidden" name="req_loc_code" value={reqData.req_loc_code} /> */}
 									{/* <Input type="hidden" name="req_appl_name" value={reqData.req_appl_name} /> */}
 									{reqData.req_next_collect && <Input type="hidden" name="req_next_collect" value={reqData.req_next_collect} />}
+									{reqData.req_item_id && <Input type="hidden" name="req_item_id" value={reqData.req_item_id} />}
+									{reqData.req_db_link1 && <Input type="hidden" name="REQ_DB_LINK1" value={reqData.req_db_link1} />}
+									{reqData.req_db_link3 && <Input type="hidden" name="REQ_DB_LINK3" value={reqData.req_db_link3} />}
 									<Input type="hidden" name="req_status" value={reqData.req_status} />
 									<Input type="hidden" name="rec_status" value={reqData.rec_status ?? 'Active'} />
 									<Input type="hidden" name="req_db_name" value={reqData.req_db_name} />
 									<Input type="hidden" name="date_needed" value={reqData.date_needed} />
 									<Input type="hidden" name="time_needed" value={reqData.time_needed} />
 									<Input type="hidden" name="req_title" value={reqData.req_title} />
-									<Input type="hidden" name="req_item_id" value={reqData.req_item_id} />
 									<Input type="hidden" name="req_queue" value={reqData.req_queue} />
-									{reqData.req_db_link1 && <Input type="hidden" name="REQ_DB_LINK1" value={reqData.req_db_link1} />}
-									{reqData.req_db_link3 && <Input type="hidden" name="REQ_DB_LINK3" value={reqData.req_db_link3} />}
 									<Input type="hidden" name="REQ_ITEM_TITLE" value={convertToString(reqData, 'req_item_title')} />
 									<Button className="bg-primary rounded mx-1 hover:bg-primary" type="submit" name="Submit" variant="default">
 										{message.request}
