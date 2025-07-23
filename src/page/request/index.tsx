@@ -86,11 +86,13 @@ const Request = () => {
 											<h1 className="text-xl font-bold">{message.archives}</h1>
 										</div>
 										<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
-										<div>
-											<p className="text-sm text-gray-600">
-												{message.barcode} : {reqData.req_item_id}
-											</p>
-										</div>
+										{reqData.req_item_id && (
+											<div>
+												<p className="text-sm text-gray-600">
+													{message.barcode} : {reqData.req_item_id}
+												</p>
+											</div>
+										)}
 									</div>
 								</>
 							) : reqData?.req_db_name === REQUEST_BIBLIO_DB ? (
@@ -106,10 +108,13 @@ const Request = () => {
 											<h1 className="text-xl font-bold">{message.library}</h1>
 										</div>
 										<p className="text-lg font-bold mt-2">{convertToString(reqData, 'req_item_title')}</p>
-										<p className="text-sm text-gray-600">
-											{message.barcode}: {reqData.req_item_id}
-										</p>
-										{reqData.req_acc_number ? <p className="text-sm text-gray-600">{message.accessionNumber}: </p> : ''}
+										{reqData.req_item_id && (
+											<div>
+												<p className="text-sm text-gray-600">
+													{message.barcode} : {reqData.req_item_id}
+												</p>
+											</div>
+										)}
 									</div>
 								</>
 							) : (
