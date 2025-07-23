@@ -32,9 +32,9 @@ const Request = () => {
 								<form method="post" className="m-0" action={removeQuote(reqData.action)}>
 									{/* <Input type="hidden" name="auto_approve" value={reqData.auto_approve} />
 									<Input type="hidden" name="req_process_date" value={reqData.req_process_date} /> */}
-									{/* <Input type="hidden" name="req_db_recid" value={reqData.req_db_recid} />
+									<Input type="hidden" name="req_db_recid" value={reqData.req_db_recid} />
 									<Input type="hidden" name="library_req" value={reqData.library_req} />
-									<Input type="hidden" name="req_pickup_loc" value={reqData.req_pickup_loc} /> */}
+									<Input type="hidden" name="req_pickup_loc" value={reqData.req_pickup_loc} />
 									{/* <Input type="hidden" name="method_request" value={reqData.method_request} />
 									<Input type="hidden" name="req_topic" value={reqData.req_topic} />
 									<Input type="hidden" name="req_loc_code" value={reqData.req_loc_code} /> */}
