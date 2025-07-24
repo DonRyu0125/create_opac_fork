@@ -44,6 +44,9 @@ export default function LibraryDashboard() {
 	const libraryProfileList = patronLibraryCirculation.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
 
+
+	console.log('records',records)
+
 	const dismissNotification = (id: number) => {
 		setNotifications(notifications.filter((n) => n.id !== id))
 	}
