@@ -100,6 +100,14 @@ export interface RequestData {
 	is_requested_by_client:string
 }
 export interface Record {
+	overdue_items: any
+	fine_due: any
+	P_BLK_MESSAGE: string
+	circ_count: any
+	hold_count: any
+	transit_count: any
+	wait_count: any
+	patron_name: string
 	biblio_r_count: any
 	action: string
 	biblio_count: string
