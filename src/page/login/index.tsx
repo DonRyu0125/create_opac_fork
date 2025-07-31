@@ -49,7 +49,7 @@ const Login = () => {
 								<Input
 									type="text"
 									id="user"
-									name="PATRON_ID"
+									name="C_CLIENT_NUMBER"
 									value={accountNumber}
 									onChange={(e) => setAccountNumber(e.target.value)}
 								/>
@@ -74,7 +74,7 @@ const Login = () => {
 						</form>
 						<div className={'flex mt-1'}>
 							<div>{message.noLogin}</div>
-							<a href={`/scripts/mwimain.dll/144/PATRON_SYN?DIRECTSEARCH`} className={'border-b-2 border-b-black ml-[10px] h-[22px]'}>
+							<a href={`/scripts/mwimain.dll/144/CLIENT?DIRECTSEARCH`} className={'border-b-2 border-b-black ml-[10px] h-[22px]'}>
 								{message.createAccount}
 							</a>
 						</div>
