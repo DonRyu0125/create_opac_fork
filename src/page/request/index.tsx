@@ -2,7 +2,6 @@ import useConstants from '@/hooks/useConstants'
 import Layout from '@/components/layouts'
 import useJSONData from '@/hooks/useJSONData'
 import { Button } from '../../components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Archive, CircleEllipsis, Landmark, LibraryBig } from 'lucide-react'
 import { convertToString, removeQuote } from '@/lib/utils'
 import { REQUEST_BIBLIO_DB, REQUEST_DESC_DB } from './RequestConfirmed'
@@ -30,28 +29,27 @@ const Request = () => {
 							</h1>
 							<div className="text-right">
 								<form method="post" className="m-0" action={removeQuote(reqData.action)}>
-									<Input type="hidden" name="req_db_recid" value={reqData.req_db_recid} />
-									{/* 
-									<Input type="hidden" name="auto_approve" value={reqData.auto_approve} />
-									<Input type="hidden" name="req_process_date" value={reqData.req_process_date} />
-									<Input type="hidden" name="library_req" value={reqData.library_req} />
-									<Input type="hidden" name="req_pickup_loc" value={reqData.req_pickup_loc} />
-									<Input type="hidden" name="method_request" value={reqData.method_request} />
-									<Input type="hidden" name="req_topic" value={reqData.req_topic} />
-									<Input type="hidden" name="req_loc_code" value={reqData.req_loc_code} />
-									<Input type="hidden" name="req_appl_name" value={reqData.req_appl_name} /> */}
-									{reqData.req_next_collect && <Input type="hidden" name="req_next_collect" value={reqData.req_next_collect} />}
-									{reqData.req_item_id && <Input type="hidden" name="req_item_id" value={reqData.req_item_id} />}
-									{reqData.req_db_link1 && <Input type="hidden" name="REQ_DB_LINK1" value={reqData.req_db_link1} />}
-									{reqData.req_db_link3 && <Input type="hidden" name="REQ_DB_LINK3" value={reqData.req_db_link3} />}
-									<Input type="hidden" name="req_status" value={reqData.req_status} />
-									<Input type="hidden" name="rec_status" value={reqData.rec_status ?? 'ACTIVE'} />
-									<Input type="hidden" name="req_db_name" value={reqData.req_db_name} />
-									<Input type="hidden" name="date_needed" value={reqData.date_needed} />
-									<Input type="hidden" name="time_needed" value={reqData.time_needed} />
-									<Input type="hidden" name="req_title" value={reqData.req_title} />
-									<Input type="hidden" name="req_queue" value={reqData.req_queue} />
-									<Input type="hidden" name="REQ_ITEM_TITLE" value={convertToString(reqData, 'req_item_title')} />
+									<input type="hidden" name="REQ_NEXT_COLLECT" value="X" />
+									<input type="hidden" name="AUTO_APPROVE" value="Y" />
+									<input type="hidden" name="REQ_PROCESS_DATE" value="++1" />
+									<input type="hidden" name="REQ_STATUS" value="Retrieve" />
+									<input type="hidden" name="REC_STATUS" value="Active" />
+									<input type="hidden" name="REQ_DB_NAME" value={reqData.req_db_name} />
+									<input type="hidden" name="REQ_DB_RECID" value={reqData.req_db_recid} />
+									<input type="hidden" name="LIBRARY_REQ" value="Yes" />
+									<input type="hidden" name="REQ_PICKUP_LOC" value="Service" />
+									<input type="hidden" name="DATE_NEEDED" value={reqData.date_needed} />
+									<input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
+									{reqData.req_db_link1 && <input type="hidden" name="REQ_DB_LINK1" value={reqData.req_db_link1} />}
+									{reqData.req_db_link3 && <input type="hidden" name="REQ_DB_LINK3" value={reqData.req_db_link3} />}
+									<input type="hidden" name="METHOD_REQUEST" value="Web" />
+									<input type="hidden" name="REQ_TOPIC" value="Retrieval Services" />
+									<input type="hidden" name="REQ_LOC_CODE" value={reqData.req_loc_code} />
+									<input type="hidden" name="REQ_APPL_NAME" value="M2A" />
+									<input type="hidden" name="REQ_TITLE" value={reqData.req_title} />
+									<input type="hidden" name="REQ_ITEM_ID" value={reqData.req_item_id} />
+									<input type="hidden" name="REQ_QUEUE" value="X" />
+									<input type="hidden" name="REQ_ITEM_TITLE" value={convertToString(reqData, 'req_item_title')} />
 									<Button className="bg-primary rounded mx-1 hover:bg-primary" type="submit" name="Submit" variant="default">
 										{message.request}
 									</Button>
