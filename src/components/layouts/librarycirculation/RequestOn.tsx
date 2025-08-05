@@ -4,7 +4,7 @@ import useJSONData from '@/hooks/useJSONData'
 import { convertToArr, getCookieValue, getHomeSessionID } from '@/lib/utils'
 import DropdownSelect from '@/components/common/DropdownSelect'
 import { Button } from '@/components/ui/button'
-import { RefreshCw } from 'lucide-react'
+import { CheckCheck, RefreshCw } from 'lucide-react'
 
 const RequestOn = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -18,6 +18,12 @@ const RequestOn = () => {
 
 		setSelectedBarcodes(updated)
 		console.log(updated)
+	}
+
+	const handleCheckAll = () => {
+		const allBarcodes = requests.map((item) => item.barcode)
+		setSelectedBarcodes(allBarcodes)
+		console.log(allBarcodes)
 	}
 
 	const getImage = (item: any) => {
@@ -39,28 +45,22 @@ const RequestOn = () => {
 					title={'Select an option'}
 					options={[
 						{
-							label: `Add/Modify Suspension (selected)`,
+							label: `Delete Requests`,
+							value: 'delete',
+						},
+						{
+							label: `Add/Modify Suspension`,
 							value: 'add-mod',
 						},
 						{
-							label: `Add/modify Suspension (all)`,
-							value: 'add-mod-all',
-						},
-						{
-							label: `Clear Selected Suspensions`,
+							label: `Clear Suspensions`,
 							value: 'clear',
-						},
-						{
-							label: `Clear all suspension requests:`,
-							value: 'clear-all',
-						},
-						{
-							label: `Delete the following requests:`,
-							value: 'delete',
 						},
 					]}
 				/>
-				<Button>{message.submit}</Button>
+				<Button onClick={handleCheckAll} className={'mx-1'}>
+					<CheckCheck />
+				</Button>
 				<Button onClick={() => setSelectedBarcodes([])} className={'mx-1'}>
 					<RefreshCw />
 				</Button>
@@ -89,7 +89,7 @@ const RequestOn = () => {
 									/>
 								</div>
 
-								<div className="text-center font-bold max-h-[50px] overflow-hidden text-ellipsis whitespace-nowrap">{item.title}</div>
+								<div className="text-left font-bold max-h-[50px] overflow-hidden text-ellipsis whitespace-nowrap">{item.title}</div>
 
 								<div>
 									<div className="flex justify-between">
