@@ -47,11 +47,12 @@ const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayou
 
 	const libraryDashboardCards = [
 		{
-			icon: <BookOpen className="h-4 w-4" />,
-			label: 'Checked Out',
-			color: 'blue',
-			link: libraryProfileList[0].url,
+			icon: <FileText className="h-4 w-4" />,
+			label: 'On Request',
+			color: 'purple',
+			link: libraryProfileList[3].url,
 		},
+
 		{
 			icon: <Clock className="h-4 w-4" />,
 			label: 'On Hold',
@@ -65,10 +66,10 @@ const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayou
 			link: libraryProfileList[2].url,
 		},
 		{
-			icon: <FileText className="h-4 w-4" />,
-			label: 'On Request',
-			color: 'purple',
-			link: libraryProfileList[3].url,
+			icon: <BookOpen className="h-4 w-4" />,
+			label: 'Checked Out',
+			color: 'blue',
+			link: libraryProfileList[0].url,
 		},
 	]
 
@@ -163,21 +164,22 @@ const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayou
 								</a>
 							</>
 						) : (
-						<>
-							{libraryDashboardCards.map((card, index) => {
-								const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Portal'
-								const href = getCookieValue('HOME_SESSID') + card.link + (isSpecialLabel ? '' : m2l_patron_id)
-								return (
-									<a key={index} href={href} className={buttonVariants({ variant: 'outline' }) + 'p-2'}>
-										<div className="flex items-center justify-center gap-2">
-											<div className={`rounded-full p-1 ${colorClasses[card.color as keyof typeof colorClasses]}`}>
-												{card.icon}
+							<>
+								{libraryDashboardCards.map((card, index) => {
+									const isSpecialLabel = card.label === 'Bookmarks' || card.label === 'Library Portal'
+									const href = getCookieValue('HOME_SESSID') + card.link + (isSpecialLabel ? '' : m2l_patron_id)
+									return (
+										<a key={index} href={href} className={buttonVariants({ variant: 'outline' }) + 'p-2'}>
+											<div className="flex items-center justify-center gap-2">
+												<div className={`rounded-full p-1 ${colorClasses[card.color as keyof typeof colorClasses]}`}>
+													{card.icon}
+												</div>
+												<span className="text-sm text-black-500">{card.label}</span>
 											</div>
-											<span className="text-sm text-black-500">{card.label}</span>
-										</div>
-									</a>
-								)
-							})}</>
+										</a>
+									)
+								})}
+							</>
 						)}
 					</div>
 					{heading && <h1 className="text-2xl font-bold">{heading}</h1>}
