@@ -5,7 +5,7 @@ import PatronLayout from '../patron'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { StatCardProps } from '@/page/dashboard/PatronProfile'
-import { getCookieValue } from '@/lib/utils'
+import { convertToArr, getCookieValue, getHomeSessionID } from '@/lib/utils'
 import { colorClasses } from '@/page/dashboard/constants'
 
 // Mock data for the dashboard
@@ -37,11 +37,7 @@ export default function LibraryDashboard() {
 	const { message, patronLibraryCirculation } = useConstants()
 	const libraryProfileList = patronLibraryCirculation.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	const [notifications, setNotifications] = useState(patronData.notifications)
-
-	// const dismissNotification = (id: number) => {
-	// 	setNotifications(notifications.filter((n) => n.id !== id))
-	// }
+	const requests = convertToArr(record.request_on)
 
 	const statCards = [
 		{
@@ -131,7 +127,23 @@ export default function LibraryDashboard() {
 				</div>
 			</div>
 
-			{/* {notifications.length > 0 && (
+			<div className="mb-4 rounded-md bg-white p-3 shadow">
+				<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`On Request${record.wait_count}`}</div>
+				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+					{requests.map((item, key) => {
+						return (
+							<a href={getHomeSessionID() + '/BIBLIO_WEB' + '/BARCODE' + '/' + item.barcode + '/WEB_UNION_DETAIL?JUMP'} key={key}>
+								{item.title}
+							</a>
+						)
+					})}
+				</div>
+			</div>
+		</PatronLayout>
+	)
+}
+{
+	/* {notifications.length > 0 && (
 				<div className="mb-8">
 					<div className="flex items-center gap-2 mb-4">
 						<Bell className="h-5 w-5 text-gray-600" />
@@ -148,10 +160,14 @@ export default function LibraryDashboard() {
 						))}
 					</div>
 				</div>
-			)} */}
+			)} */
+}
 
-			{/* Recent Activity Section */}
-			{/* <div className="mb-8">
+{
+	/* Recent Activity Section */
+}
+{
+	/* <div className="mb-8">
 				<h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h2>
 				<div className="bg-white rounded-lg border border-gray-200 p-6">
 					<div className="space-y-4">
@@ -189,7 +205,5 @@ export default function LibraryDashboard() {
 						</div>
 					</div>
 				</div>
-			</div> */}
-		</PatronLayout>
-	)
+			</div> */
 }

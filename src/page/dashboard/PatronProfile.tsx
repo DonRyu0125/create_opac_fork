@@ -24,10 +24,10 @@ import {
 import { colorClasses } from './constants'
 
 export interface StatCardProps {
-	icon: React.ReactNode
-	label: string
-	color: string
-	value: any
+	icon?: React.ReactNode
+	label?: string
+	color?: string
+	value?: any
 }
 
 export default function PatronProfile() {
