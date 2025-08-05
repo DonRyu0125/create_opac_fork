@@ -7,6 +7,7 @@ import useJSONData from '@/hooks/useJSONData'
 import { StatCardProps } from '@/page/dashboard/PatronProfile'
 import { convertToArr, getCookieValue, getHomeSessionID } from '@/lib/utils'
 import { colorClasses } from '@/page/dashboard/constants'
+import RequestOn from './RequestOn'
 
 // Mock data for the dashboard
 const patronData = {
@@ -32,7 +33,7 @@ const patronData = {
 }
 
 export default function LibraryDashboard() {
-	const { records } = useJSONData({ selector: '#xml_record' })
+	const { records, getMedia } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
 	const { message, patronLibraryCirculation } = useConstants()
 	const libraryProfileList = patronLibraryCirculation.database
@@ -107,9 +108,10 @@ export default function LibraryDashboard() {
 				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 					{statCards.map((card, index) => (
 						<a
+							key={index}
 							href={getCookieValue('HOME_SESSID') + card.link + (card.label == 'Bookmarks' || 'Library Portal' ? '' : m2l_patron_id)}
 							className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-gray-50">
-							<StatCard key={index} icon={card.icon} label={card.label} color={card.color} value={card.value} />
+							<StatCard icon={card.icon} label={card.label} color={card.color} value={card.value} />
 						</a>
 					))}
 				</div>
@@ -127,18 +129,9 @@ export default function LibraryDashboard() {
 				</div>
 			</div>
 
-			<div className="mb-4 rounded-md bg-white p-3 shadow">
-				<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`On Request${record.wait_count}`}</div>
-				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-					{requests.map((item, key) => {
-						return (
-							<a href={getHomeSessionID() + '/BIBLIO_WEB' + '/BARCODE' + '/' + item.barcode + '/WEB_UNION_DETAIL?JUMP'} key={key}>
-								{item.title}
-							</a>
-						)
-					})}
-				</div>
-			</div>
+		
+				<RequestOn/>
+			
 		</PatronLayout>
 	)
 }
