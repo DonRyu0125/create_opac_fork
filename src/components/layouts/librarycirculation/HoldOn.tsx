@@ -75,7 +75,7 @@ const HoldOn = () => {
 												<img
 													alt={message.noMediaFound}
 													src={getImage(item)}
-													className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary"
+													className="h-36 mx-auto cursor-pointer object-cover border-4 hover:border-primary w-[96px]"
 												/>
 											</a>
 											<input
