@@ -8,6 +8,8 @@ import { StatCardProps } from '@/page/dashboard/PatronProfile'
 import { convertToArr, getCookieValue, getHomeSessionID } from '@/lib/utils'
 import { colorClasses } from '@/page/dashboard/constants'
 import RequestOn from './RequestOn'
+import HoldOn from './HoldOn'
+import TransitOn from './TransitOn'
 
 // Mock data for the dashboard
 const patronData = {
@@ -128,10 +130,9 @@ export default function LibraryDashboard() {
 					</a>
 				</div>
 			</div>
-
-		
-				<RequestOn/>
-			
+			<HoldOn />
+			<TransitOn />
+			<RequestOn />
 		</PatronLayout>
 	)
 }

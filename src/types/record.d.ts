@@ -100,6 +100,8 @@ export interface RequestData {
 	is_requested_by_client:string
 }
 export interface Record {
+    transit_on: any
+    hold_on(hold_on: any): unknown
 	request_on: any
 	overdue_items: any
 	fine_due: any

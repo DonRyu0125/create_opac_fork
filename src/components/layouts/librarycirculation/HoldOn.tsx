@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button'
 import { CheckCheck, RefreshCw } from 'lucide-react'
 import axios from 'axios'
 
-const RequestOn = () => {
+const HoldOn = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
 	const { message } = useConstants()
-	const requests = convertToArr(record.request_on)
+	const holdRequests = convertToArr(record.hold_on)
 	const [selectedBarcodes, setSelectedBarcodes] = useState<string[]>([])
 
 	const handleCheck = (barcode: string, checked: boolean) => {
@@ -22,14 +22,14 @@ const RequestOn = () => {
 	}
 
 	const handleCheckAll = () => {
-		const allBarcodes = requests.map((item) => item.barcode)
+		const allBarcodes = holdRequests.map((item) => item.barcode)
 		setSelectedBarcodes(allBarcodes)
 		console.log(allBarcodes)
 	}
 
 	const getImage = (item: any) => {
 		let imgArr = convertToArr(item.media)
-		return imgArr[0].im_access_link
+		return imgArr[0]?.im_access_link ?? ''
 	}
 
 	const onSubmit = async () => {
@@ -50,34 +50,11 @@ const RequestOn = () => {
 
 	return (
 		<div className="mb-4 rounded-md bg-white p-3 shadow">
-			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`On Request (${record.wait_count})`}</div>
+			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`On Hold (${record.hold_count})`}</div>
 			<div className="w-3/4 flex my-2">
-				<DropdownSelect
-					className="w-1/2 mr-2"
-					register={{
-						onValueChange: (value) => {
-							console.log('value', value)
-						},
-					}}
-					title={'Select an option'}
-					options={[
-						{
-							label: `Delete Requests`,
-							value: 'delete',
-						},
-						{
-							label: `Add/Modify Suspension`,
-							value: 'add-mod',
-						},
-						{
-							label: `Clear Suspensions`,
-							value: 'clear',
-						},
-					]}
-				/>
-				<Button onClick={onSubmit}>{message.submit}</Button>
+				<Button onClick={onSubmit}>{message.cancel}</Button>
 				<Button onClick={handleCheckAll} className={'mx-1'}>
-					<CheckCheck />
+					Cancel All
 				</Button>
 				<Button onClick={() => setSelectedBarcodes([])} className={'mx-1'}>
 					<RefreshCw />
@@ -85,7 +62,7 @@ const RequestOn = () => {
 			</div>
 
 			<div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-				{requests.map((item, key) => {
+				{holdRequests.map((item, key) => {
 					const checked = selectedBarcodes.includes(item.barcode)
 
 					return (
@@ -115,15 +92,12 @@ const RequestOn = () => {
 										<span className="text-gray-900 font-medium">{item.barcode}</span>
 									</div>
 									<div className="flex justify-between">
-										<span className="text-gray-500">Wait position</span>
+										<span className="text-gray-500">Pick Up Before</span>
 										<span className="text-gray-900 font-medium">
-											{item.occnum} of {item.occurence}
+											{item.hold_expiry_date}
 										</span>
 									</div>
-									<div className="flex justify-between">
-										<span className="text-gray-500">Requested on</span>
-										<span className="text-gray-900 font-medium">{item.wait_date}</span>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -134,4 +108,4 @@ const RequestOn = () => {
 	)
 }
 
-export default RequestOn
+export default HoldOn
