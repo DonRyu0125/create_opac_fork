@@ -34,11 +34,7 @@ const CheckedOut = () => {
 
 	const onSubmit = async () => {
 		const data = {
-			start_susp_date: '',
-			stop_susp_date: '',
-			PICKUP_LOCATION: '',
-			CLEAR_SUSPENSION: '',
-			REQUEST_868974: 'DELETE',
+			ITEM_7: 'RENEW:869095',
 		}
 
 		const params = new URLSearchParams(data).toString()
@@ -50,6 +46,8 @@ const CheckedOut = () => {
 	return (
 		<div className="mb-4 rounded-md bg-white p-3 shadow">
 			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`Checked Out (${record.circ_count})`}</div>
+
+
 			{chkRequests.length > 0 ? (
 				<>
 					<div className="w-3/4 flex my-2">
@@ -91,8 +89,12 @@ const CheckedOut = () => {
 												<span className="text-gray-900 font-medium">{item.barcode}</span>
 											</div>
 											<div className="flex justify-between">
-												<span className="text-gray-500">Pick Up Before</span>
-												<span className="text-gray-900 font-medium">{item.hold_expiry_date}</span>
+												<span className="text-gray-500">Due</span>
+												<span className="text-gray-900 font-medium">{item.last_due_date}</span>
+											</div>
+											<div className="flex justify-between">
+												<span className="text-gray-500">{message.location}</span>
+												<span className="text-gray-900 font-medium">{item.holding_centre}</span>
 											</div>
 										</div>
 									</div>
