@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BookOpen, Clock, Truck, FileText, Bell, Home, ClockAlert, CircleDollarSign } from 'lucide-react'
+import { BookOpen, Clock, Truck, FileText, Bell, Home, ClockAlert, CircleDollarSign, Check } from 'lucide-react'
 import { NotificationBanner } from './NotificationBanner'
 import PatronLayout from '../patron'
 import useConstants from '@/hooks/useConstants'
@@ -10,6 +10,7 @@ import { colorClasses } from '@/page/dashboard/constants'
 import RequestOn from './RequestOn'
 import HoldOn from './HoldOn'
 import TransitOn from './TransitOn'
+import CheckedOut from './CheckedOut'
 
 // Mock data for the dashboard
 const patronData = {
@@ -130,6 +131,7 @@ export default function LibraryDashboard() {
 					</a>
 				</div>
 			</div>
+			<CheckedOut/>
 			<HoldOn />
 			<TransitOn />
 			<RequestOn />

@@ -52,7 +52,7 @@ const HoldOn = () => {
 		<div className="mb-4 rounded-md bg-white p-3 shadow">
 			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`On Hold (${record.hold_count})`}</div>
 			<div className="w-3/4 flex my-2">
-				<Button onClick={onSubmit}>{message.cancel}</Button>
+				<Button onClick={onSubmit}>{message.cancel} Selected</Button>
 				<Button onClick={handleCheckAll} className={'mx-1'}>
 					Cancel All
 				</Button>

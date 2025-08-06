@@ -1,7 +1,6 @@
-import { useRef, useState } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { convertToArr, getHomeSessionID, getSessionID } from '@/lib/utils'
+import { convertToArr, getHomeSessionID } from '@/lib/utils'
 const TransitOn = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
