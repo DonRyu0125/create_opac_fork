@@ -27,7 +27,6 @@ const DetailRecordAction = () => {
 	const { is_bookmarked } = record
 	const [like, setLike] = useState(is_bookmarked ? Boolean(JSON.parse(is_bookmarked)) : true)
 	const requestData = record?.request
-	const sisn = deepSearchKey(record, 'sisn')[0] as string
 	const database = record.database_name
 	const [loading, setLoading] = useState(false)
 	const handleSubmit = (action: string | null) => {
@@ -136,7 +135,7 @@ const DetailRecordAction = () => {
 		}
 		return isLoggedIn
 	}
-
+	console.log('database')
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-col md:flex-row justify-between gap-2">
@@ -149,37 +148,40 @@ const DetailRecordAction = () => {
 					<span className="hidden md:block">{message.previous}</span>
 				</TooltipButton>
 				<div className="flex flex-wrap justify-start gap-2">
-					<TooltipButton
-						tooltipContent={message.requestRecord}
-						variant="outline"
-						className={'w-[22%] md:w-[23.5%] flex '}
-						onClick={() => handleSubmit('Request')}>
-						<SquareCheck className="w-4 h-4 md:mr-2 " /> <span className="hidden md:block">{message.request}</span>
-						<form
-							method="post"
-							ref={formRef}
-							action={getHomeSessionID() + '/1/' + record.request.req_db_link3 + '?REQUESTLOGIN&DBNAME=BIBLIO_WEB'}
-							className="hidden">
-							<input type="hidden" name="REQ_ITEM_ID" value={``} />
-							<input type="hidden" name="REQ_WAIT_TIME" value={requestData.req_wait_time} />
-							<input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time} />
-							<input type="hidden" name="METHOD_REQUEST" value={requestData.method_request} />
-							<input type="hidden" name="REQ_TOPIC" value={requestData.req_topic} />
-							<input type="hidden" name="REQ_APPL_NAME" value={requestData.req_appl_name} />
-							<input type="hidden" name="REQ_DB_NAME" value={REQUEST_BIBLIO_DB} />
-							<input type="hidden" name="REQ_DB_RECID" value={'ACCESSION_NUMBER'} />
-							<input type="hidden" name="REQ_TITLE" value={requestData.req_title} />
-							<input type="hidden" name="REQ_DB_LINK3" value={requestData.req_db_link3} />
-							<input type="hidden" name="REQ_ITEM_TITLE" value={requestData.req_item_title} />
-							<input type="hidden" name="REQ_QUEUE" value={requestData.req_queue} />
-							<input type="hidden" name="LIBRARY_REQ" value={requestData.library_req} />
-							<input type="hidden" name="REQ_NEXT_COLLECT" value={requestData.req_next_collect} />
-							<input type="hidden" name="REQ_PICKUP_LOC" value={requestData.req_pickup_loc} />
-							<Button className="bg-primary" type="submit" variant="default">
-								{message.submit}
-							</Button>
-						</form>
-					</TooltipButton>
+					{database === 'BIBLIO_WEB' && (
+						<TooltipButton
+							tooltipContent={message.requestRecord}
+							variant="outline"
+							className={'w-[22%] md:w-[23.5%] flex '}
+							onClick={() => handleSubmit('Request')}>
+							<SquareCheck className="w-4 h-4 md:mr-2 " /> <span className="hidden md:block">{message.request}</span>
+							<form
+								method="post"
+								ref={formRef}
+								action={getHomeSessionID() + '/1/' + record.request.req_db_link3 + '?REQUESTLOGIN&DBNAME=BIBLIO_WEB'}
+								className="hidden">
+								<input type="hidden" name="REQ_ITEM_ID" value={``} />
+								<input type="hidden" name="REQ_WAIT_TIME" value={requestData.req_wait_time} />
+								<input type="hidden" name="ITEM_REQ_TIME" value={requestData.item_req_time} />
+								<input type="hidden" name="METHOD_REQUEST" value={requestData.method_request} />
+								<input type="hidden" name="REQ_TOPIC" value={requestData.req_topic} />
+								<input type="hidden" name="REQ_APPL_NAME" value={requestData.req_appl_name} />
+								<input type="hidden" name="REQ_DB_NAME" value={REQUEST_BIBLIO_DB} />
+								<input type="hidden" name="REQ_DB_RECID" value={'ACCESSION_NUMBER'} />
+								<input type="hidden" name="REQ_TITLE" value={requestData.req_title} />
+								<input type="hidden" name="REQ_DB_LINK3" value={requestData.req_db_link3} />
+								<input type="hidden" name="REQ_ITEM_TITLE" value={requestData.req_item_title} />
+								<input type="hidden" name="REQ_QUEUE" value={requestData.req_queue} />
+								<input type="hidden" name="LIBRARY_REQ" value={requestData.library_req} />
+								<input type="hidden" name="REQ_NEXT_COLLECT" value={requestData.req_next_collect} />
+								<input type="hidden" name="REQ_PICKUP_LOC" value={requestData.req_pickup_loc} />
+								<Button className="bg-primary" type="submit" variant="default">
+									{message.submit}
+								</Button>
+							</form>
+						</TooltipButton>
+					)}
+
 					<TooltipButton
 						tooltipContent={message.askAboutThisRecord}
 						variant="outline"
