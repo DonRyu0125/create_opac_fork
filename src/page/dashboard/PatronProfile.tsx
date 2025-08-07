@@ -28,6 +28,7 @@ export interface StatCardProps {
 	label?: string
 	color?: string
 	value?: any
+	ref?: any
 }
 
 export default function PatronProfile() {
@@ -35,7 +36,6 @@ export default function PatronProfile() {
 	const { home, archives, museum, library, message, clientProfile } = useConstants()
 	const profileList = clientProfile.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-
 
 	const clientDashboardCards = [
 		{
@@ -107,13 +107,13 @@ export default function PatronProfile() {
 
 	return (
 		<PatronLayout
-			
 			mainHeading={
 				<>
 					<Home className="mr-1 h-5 w-5" />
 					<h2 className="text-lg font-semibold text-gray-900">{message.clientDashboard}</h2>
 				</>
-			}>
+			}
+			isLibrary={false}>
 			<div className="mb-4 rounded-md bg-white p-6 shadow">
 				<h1 className="text-3xl font-semibold text-gray-800">
 					{message.welcome} {records[0]?.full_name || 'User'}!

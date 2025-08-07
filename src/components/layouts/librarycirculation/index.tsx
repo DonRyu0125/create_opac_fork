@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { BookOpen, Clock, Truck, FileText, Bell, Home, ClockAlert, CircleDollarSign, Check } from 'lucide-react'
 import { NotificationBanner } from './NotificationBanner'
 import PatronLayout from '../patron'
@@ -11,6 +11,7 @@ import RequestOn from './RequestOn'
 import HoldOn from './HoldOn'
 import TransitOn from './TransitOn'
 import CheckedOut from './CheckedOut'
+import { Button, buttonVariants } from '@/components/ui/button'
 
 // Mock data for the dashboard
 const patronData = {
@@ -36,12 +37,15 @@ const patronData = {
 }
 
 export default function LibraryDashboard() {
-	const { records, getMedia } = useJSONData({ selector: '#xml_record' })
+	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
 	const { message, patronLibraryCirculation } = useConstants()
 	const libraryProfileList = patronLibraryCirculation.database
 	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
-	const requests = convertToArr(record.request_on)
+	const onRequestRef = useRef<HTMLDivElement>(null)
+	const onHoldRef = useRef<HTMLDivElement>(null)
+	const inTransitRef = useRef<HTMLDivElement>(null)
+	const checkedOutRef = useRef<HTMLDivElement>(null)
 
 	const statCards = [
 		{
@@ -49,34 +53,38 @@ export default function LibraryDashboard() {
 			label: libraryProfileList[3].label,
 			color: 'purple',
 			value: record.wait_count,
-			link: libraryProfileList[3].url,
+			ref: onRequestRef,
 		},
 		{
 			icon: <Clock className="h-4 w-4" />,
 			label: libraryProfileList[1].label,
 			color: 'amber',
 			value: record.hold_count,
-			link: libraryProfileList[1].url,
+			ref: onHoldRef,
 		},
 		{
 			icon: <Truck className="h-4 w-4" />,
 			label: libraryProfileList[2].label,
 			color: 'green',
 			value: record.transit_count,
-			link: libraryProfileList[2].url,
+			ref: inTransitRef,
 		},
 		{
 			icon: <BookOpen className="h-4 w-4" />,
 			label: libraryProfileList[0].label,
 			color: 'blue',
 			value: record.circ_count,
-			link: libraryProfileList[0].url,
+			ref: checkedOutRef,
 		},
 	]
 
-	function StatCard({ icon, label, value, color }: StatCardProps) {
+	const scrollTo = (ref: React.RefObject<HTMLDivElement>) => {
+		ref.current?.scrollIntoView({ behavior: 'smooth' })
+	}
+
+	function StatCard({ icon, label, value, color, ref }: StatCardProps) {
 		return (
-			<div className="rounded-md bg-white p-6 shadow">
+			<div className="rounded-md bg-white p-6 shadow" onClick={() => scrollTo(ref)}>
 				<div className="flex flex-col gap-2">
 					<div className="flex items-center justify-center gap-2">
 						<div className={`rounded-full p-2 ${colorClasses[color as keyof typeof colorClasses]}`}>{icon}</div>
@@ -99,6 +107,18 @@ export default function LibraryDashboard() {
 					<h2 className="text-lg font-semibold text-gray-900">Library Portal</h2>
 				</>
 			}>
+			<div className="flex flex-wrap gap-2 sm:gap-4 ">
+				{statCards.map((card, index) => {
+					return (
+						<Button variant={'outline'} onClick={() => scrollTo(card.ref)}>
+							<div className="flex items-center justify-center gap-2" key={index}>
+								<div className={`rounded-full p-1 ${colorClasses[card.color as keyof typeof colorClasses]}`}>{card.icon}</div>
+								<span className="text-sm text-black-500">{card.label}</span>
+							</div>
+						</Button>
+					)
+				})}
+			</div>
 			<div className="mb-4 rounded-md bg-white p-6 shadow">
 				<h1 className="text-3xl font-semibold text-gray-800">
 					{message.welcome} {records[0]?.patron_name || 'User'}!
@@ -110,12 +130,17 @@ export default function LibraryDashboard() {
 				<div className={'pb-2 text-lg font-semibold text-gray-900'}>Your Library Materials</div>
 				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 					{statCards.map((card, index) => (
-						<a
-							key={index}
-							href={getCookieValue('HOME_SESSID') + card.link + (card.label == 'Bookmarks' || 'Library Portal' ? '' : m2l_patron_id)}
-							className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-gray-50">
-							<StatCard icon={card.icon} label={card.label} color={card.color} value={card.value} />
-						</a>
+						<div className="rounded-md bg-white p-6 shadow" onClick={() => scrollTo(card.ref)} key={index}>
+							<div className="flex flex-col gap-2">
+								<div className="flex items-center justify-center gap-2">
+									<div className={`rounded-full p-2 ${colorClasses[card.color as keyof typeof colorClasses]}`}>{card.icon}</div>
+									<span className="text-sm text-gray-500">{card.label}</span>
+								</div>
+								<div className="flex items-baseline justify-center">
+									<h3 className="text-2xl font-bold">{card.value || 0}</h3>
+								</div>
+							</div>
+						</div>
 					))}
 				</div>
 			</div>
@@ -131,10 +156,18 @@ export default function LibraryDashboard() {
 					</a>
 				</div>
 			</div>
-			<CheckedOut/>
-			<HoldOn />
-			<TransitOn />
-			<RequestOn />
+			<div ref={onRequestRef}>
+				<CheckedOut />
+			</div>
+			<div ref={onHoldRef}>
+				<HoldOn />
+			</div>
+			<div ref={inTransitRef}>
+				<TransitOn />
+			</div>
+			<div ref={checkedOutRef}>
+				<RequestOn />
+			</div>
 		</PatronLayout>
 	)
 }
