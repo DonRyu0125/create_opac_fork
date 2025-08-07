@@ -78,9 +78,14 @@ export default function LibraryDashboard() {
 		},
 	]
 
-	const scrollTo = (ref: React.RefObject<HTMLDivElement>) => {
-		ref.current?.scrollIntoView({ behavior: 'smooth' })
-	}
+	const scrollTo = (
+		ref: React.RefObject<HTMLDivElement>,
+		offset = -130
+	  ) => {
+		if (!ref.current) return
+		const top = ref.current.getBoundingClientRect().top + window.scrollY + offset
+		window.scrollTo({ top, behavior: "smooth" })
+	  }
 
 	function StatCard({ icon, label, value, color, ref }: StatCardProps) {
 		return (

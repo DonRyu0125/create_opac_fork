@@ -18,7 +18,7 @@ const TransitOn = () => {
 			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`In Transit (${record.transit_count})`}</div>
 			{tranRequests.length > 0 ? (
 				<>
-					<div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[415px] overflow-y-auto">
 						{tranRequests.map((item, key) => {
 							return (
 								<div key={key} className="rounded-md bg-white p-6 shadow">

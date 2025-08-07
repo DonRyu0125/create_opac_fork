@@ -59,7 +59,7 @@ const CheckedOut = () => {
 							<RefreshCw />
 						</Button>
 					</div>
-					<div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[830px] overflow-y-auto">
 						{chkRequests.map((item, key) => {
 							const checked = selectedBarcodes.includes(item.barcode)
 							return (

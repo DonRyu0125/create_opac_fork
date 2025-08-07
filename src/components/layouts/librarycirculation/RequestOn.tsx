@@ -48,7 +48,7 @@ const RequestOn = () => {
 	}
 
 	return (
-		<div className="mb-4 rounded-md bg-white p-3 shadow">
+		<div className="mb-4 rounded-md bg-white p-3 shadow  ">
 			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`On Request (${record.wait_count})`}</div>
 			{requests.length > 0 ? (
 				<>
@@ -84,11 +84,9 @@ const RequestOn = () => {
 							<RefreshCw />
 						</Button>
 					</div>
-
-					<div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[830px] overflow-y-auto">
 						{requests.map((item, key) => {
 							const checked = selectedBarcodes.includes(item.barcode)
-
 							return (
 								<div key={key} className="rounded-md bg-white p-6 shadow">
 									<div className="flex flex-col gap-2">
@@ -107,9 +105,7 @@ const RequestOn = () => {
 												onChange={(e) => handleCheck(item.barcode, e.target.checked)}
 											/>
 										</div>
-
 										<div className="text-left font-bold h-[70px] overflow-hidden text-ellipsis">{item.title}</div>
-
 										<div>
 											<div className="flex justify-between">
 												<span className="text-gray-500">Barcode</span>

@@ -63,7 +63,7 @@ const HoldOn = () => {
 						</Button>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[415px] overflow-y-auto">
 						{holdRequests.map((item, key) => {
 							const checked = selectedBarcodes.includes(item.barcode)
 
