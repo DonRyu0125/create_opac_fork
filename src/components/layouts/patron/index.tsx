@@ -35,7 +35,7 @@ type PatronLayoutProps = {
 	activeSection?: string
 	heading?: string
 	mainHeading: any
-	isLibrary: boolean
+	isLibrary?: boolean
 }
 
 const PatronLayout = ({ children, heading, mainHeading, isLibrary }: PatronLayoutProps) => {

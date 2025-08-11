@@ -2,9 +2,9 @@ import { useRef, useState } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { convertToArr, getCookieValue, getHomeSessionID, getSessionID } from '@/lib/utils'
-import DropdownSelect from '@/components/common/DropdownSelect'
+import * as Dialog from '@radix-ui/react-dialog'
 import { Button } from '@/components/ui/button'
-import { CheckCheck, FolderOpen, RefreshCw } from 'lucide-react'
+import { CheckCheck, FolderOpen, RefreshCw, X } from 'lucide-react'
 import axios from 'axios'
 
 const CheckedOut = () => {
@@ -12,19 +12,18 @@ const CheckedOut = () => {
 	const record = records[0]
 	const { message } = useConstants()
 	const chkRequests = convertToArr(record.check_on)
-	const [selectedBarcodes, setSelectedBarcodes] = useState<string[]>([])
+	const [selectedId, setselectedId] = useState<any>([])
 
-	const handleCheck = (barcode: string, checked: boolean) => {
-		const updated = checked ? [...selectedBarcodes, barcode] : selectedBarcodes.filter((b) => b !== barcode)
-
-		setSelectedBarcodes(updated)
-		console.log(updated)
+	const handleCheck = (item: { id: string; value: string }, checked: boolean) => {
+		const updated = checked ? [...selectedId, item] : selectedId.filter((b: { id: string; value: string }) => b.id !== item.id)
+		setselectedId(updated)
 	}
 
 	const handleCheckAll = () => {
-		const allBarcodes = chkRequests.map((item) => item.barcode)
-		setSelectedBarcodes(allBarcodes)
-		console.log(allBarcodes)
+		const allItems = chkRequests.map((item) => {
+			return { id: item.id, value: item.value }
+		})
+		setselectedId(allItems)
 	}
 
 	const getImage = (item: any) => {
@@ -33,12 +32,15 @@ const CheckedOut = () => {
 	}
 
 	const onSubmit = async () => {
-		const data = {
-			ITEM_7: 'RENEW:869095',
-		}
-
+		const data = selectedId.reduce(
+			(acc: { [x: string]: any }, item: any) => {
+				acc[item.id] = item.value
+				return acc
+			},
+			{} as Record<string, string>
+		)
 		const params = new URLSearchParams(data).toString()
-		return await axios.post(`${getSessionID()}/16307?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
+		return await axios.post(`${getSessionID()}/${record.sisn}?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		})
 	}
@@ -49,17 +51,42 @@ const CheckedOut = () => {
 			{chkRequests.length > 0 ? (
 				<>
 					<div className="w-3/4 flex my-2">
-						<Button onClick={onSubmit}>Renew Selected</Button>
+						<Dialog.Root>
+							<Dialog.Trigger>
+								<Button disabled={selectedId.length > 0 ? false : true}>Renew Selected</Button>
+							</Dialog.Trigger>
+							<Dialog.Portal>
+								<Dialog.Overlay className="fixed inset-0 bg-black/40" />
+								<Dialog.Content className="fixed left-1/2 top-1/2 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-lg">
+									<div className="flex justify-between items-center mb-4">
+										<Dialog.Title className="text-lg font-bold">Are you sure you want renew?</Dialog.Title>
+										<Dialog.Close>
+											<X className="w-5 h-5" />
+										</Dialog.Close>
+									</div>
+									<div className="flex justify-end gap-2">
+										<Dialog.Close className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">Cancel</Dialog.Close>
+										<Dialog.Close asChild>
+											<button className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700" onClick={onSubmit}>
+												Confirm
+											</button>
+										</Dialog.Close>
+									</div>
+								</Dialog.Content>
+							</Dialog.Portal>
+						</Dialog.Root>
+
 						<Button onClick={handleCheckAll} className={'mx-1'}>
-							Renew All
+							Select All
 						</Button>
-						<Button onClick={() => setSelectedBarcodes([])} className={'mx-1'}>
+						<Button onClick={() => setselectedId([])} className={'mx-1'}>
 							<RefreshCw />
 						</Button>
 					</div>
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[830px] overflow-y-auto">
 						{chkRequests.map((item, key) => {
-							const checked = selectedBarcodes.includes(item.barcode)
+							const checked = selectedId.some((selected: any) => selected.id === item.id)
+
 							return (
 								<div key={key} className="rounded-md bg-white p-6 shadow">
 									<div className="flex flex-col gap-2">
@@ -75,7 +102,7 @@ const CheckedOut = () => {
 												type="checkbox"
 												className="w-5 h-5 accent-primary border-gray-300 rounded  transition-all duration-150"
 												checked={checked}
-												onChange={(e) => handleCheck(item.barcode, e.target.checked)}
+												onChange={(e) => handleCheck({ id: item.id, value: item.value }, e.target.checked)}
 											/>
 										</div>
 

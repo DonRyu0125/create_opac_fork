@@ -2,7 +2,6 @@ import { useRef, useState } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
 import { convertToArr, getCookieValue, getHomeSessionID, getSessionID } from '@/lib/utils'
-import DropdownSelect from '@/components/common/DropdownSelect'
 import { Button } from '@/components/ui/button'
 import { CheckCheck, FolderOpen, RefreshCw, X } from 'lucide-react'
 import axios from 'axios'
@@ -21,10 +20,10 @@ const HoldOn = () => {
 	}
 
 	const handleCheckAll = () => {
-		const allBarcodes = holdRequests.map((item) => {
+		const allItems = holdRequests.map((item) => {
 			return { id: item.id, value: item.value }
 		})
-		setselectedId(allBarcodes)
+		setselectedId(allItems)
 	}
 
 	const getImage = (item: any) => {
