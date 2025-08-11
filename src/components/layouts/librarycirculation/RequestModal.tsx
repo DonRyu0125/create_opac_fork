@@ -32,6 +32,8 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 		const params = new URLSearchParams(data).toString()
 		return await axios.post(`${getSessionID()}/${sisn}?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		}).then(() => {
+			window.location.reload()
 		})
 	}
 	return (
