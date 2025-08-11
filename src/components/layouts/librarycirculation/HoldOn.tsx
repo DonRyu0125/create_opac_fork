@@ -12,19 +12,18 @@ const HoldOn = () => {
 	const record = records[0]
 	const { message } = useConstants()
 	const holdRequests = convertToArr(record.hold_on)
-	const [selectedBarcodes, setSelectedBarcodes] = useState<string[]>([])
+	const [selectedId, setselectedId] = useState<any>([])
 
-	const handleCheck = (barcode: string, checked: boolean) => {
-		const updated = checked ? [...selectedBarcodes, barcode] : selectedBarcodes.filter((b) => b !== barcode)
-
-		setSelectedBarcodes(updated)
-		console.log(updated)
+	const handleCheck = (item: { id: string; value: string }, checked: boolean) => {
+		const updated = checked ? [...selectedId, item] : selectedId.filter((b: { id: string; value: string }) => b.id !== item.id)
+		setselectedId(updated)
 	}
 
 	const handleCheckAll = () => {
-		const allBarcodes = holdRequests.map((item) => item.barcode)
-		setSelectedBarcodes(allBarcodes)
-		console.log(allBarcodes)
+		const allBarcodes = holdRequests.map((item) => {
+			return { id: item.id, value: item.value }
+		})
+		setselectedId(allBarcodes)
 	}
 
 	const getImage = (item: any) => {
@@ -33,20 +32,20 @@ const HoldOn = () => {
 	}
 
 	const onSubmit = async () => {
-		const data = {
-			start_susp_date: '',
-			stop_susp_date: '',
-			PICKUP_LOCATION: '',
-			CLEAR_SUSPENSION: '',
-			REQUEST_868974: 'DELETE',
-		}
-
+		const data = selectedId.reduce(
+			(acc: { [x: string]: any }, item: any) => {
+				acc[item.id] = item.value
+				return acc
+			},
+			{} as Record<string, string>
+		)
 		const params = new URLSearchParams(data).toString()
-		return await axios.post(`${getSessionID()}/16307?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
+		return await axios.post(`${getSessionID()}/${record.sisn}?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		})
 	}
 
+	console.log('selectedId',selectedId)
 	return (
 		<div className="mb-4 rounded-md bg-white p-3 shadow">
 			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`On Hold (${record.hold_count})`}</div>
@@ -58,14 +57,14 @@ const HoldOn = () => {
 						<Button onClick={handleCheckAll} className={'mx-1'}>
 							Cancel All
 						</Button>
-						<Button onClick={() => setSelectedBarcodes([])} className={'mx-1'}>
+						<Button onClick={() => setselectedId([])} className={'mx-1'}>
 							<RefreshCw />
 						</Button>
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[415px] overflow-y-auto">
 						{holdRequests.map((item, key) => {
-							const checked = selectedBarcodes.includes(item.barcode)
+							const checked = selectedId.some((selected:any) => selected.id === item.id)
 
 							return (
 								<div key={key} className="rounded-md bg-white p-6 shadow">
@@ -82,7 +81,7 @@ const HoldOn = () => {
 												type="checkbox"
 												className="w-5 h-5 accent-primary border-gray-300 rounded  transition-all duration-150"
 												checked={checked}
-												onChange={(e) => handleCheck(item.barcode, e.target.checked)}
+												onChange={(e) => handleCheck({ id: item.id, value: item.value }, e.target.checked)}
 											/>
 										</div>
 

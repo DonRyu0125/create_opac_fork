@@ -5,46 +5,34 @@ import { convertToArr, getCookieValue, getHomeSessionID, getSessionID } from '@/
 import DropdownSelect from '@/components/common/DropdownSelect'
 import { Button } from '@/components/ui/button'
 import { CheckCheck, FolderOpen, RefreshCw } from 'lucide-react'
-import axios from 'axios'
+import RequestModal from './RequestModal'
 
 const RequestOn = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
 	const { message } = useConstants()
 	const requests = convertToArr(record.request_on)
-	const [selectedBarcodes, setSelectedBarcodes] = useState<string[]>([])
-
-	const handleCheck = (barcode: string, checked: boolean) => {
-		const updated = checked ? [...selectedBarcodes, barcode] : selectedBarcodes.filter((b) => b !== barcode)
-
-		setSelectedBarcodes(updated)
-		console.log(updated)
-	}
-
-	const handleCheckAll = () => {
-		const allBarcodes = requests.map((item) => item.barcode)
-		setSelectedBarcodes(allBarcodes)
-		console.log(allBarcodes)
-	}
+	const[selectOption, setSelectOption] = useState<string>('')
+	const [selectedId, setselectedId] = useState<string[]>([])
 
 	const getImage = (item: any) => {
 		let imgArr = convertToArr(item.media)
 		return imgArr[0].im_access_link
 	}
 
-	const onSubmit = async () => {
-		const data = {
-			start_susp_date: '',
-			stop_susp_date: '',
-			PICKUP_LOCATION: '',
-			CLEAR_SUSPENSION: '',
-			REQUEST_868974: 'DELETE',
-		}
 
-		const params = new URLSearchParams(data).toString()
-		return await axios.post(`${getSessionID()}/16307?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		})
+
+	const handleCheck = (id: string, checked: boolean) => {
+		const updated = checked ? [...selectedId, id] : selectedId.filter((b) => b !== id)
+
+		setselectedId(updated)
+		console.log(updated)
+	}
+
+	const handleCheckAll = () => {
+		const allID = requests.map((item) => item.id)
+		setselectedId(allID)
+		console.log(allID)
 	}
 
 	return (
@@ -55,38 +43,37 @@ const RequestOn = () => {
 					<div className="w-3/4 flex my-2">
 						<DropdownSelect
 							className="w-1/2 mr-2"
+							
 							register={{
-								onValueChange: (value) => {
-									console.log('value', value)
-								},
+								onValueChange: (value) => setSelectOption(value)
 							}}
 							title={'Select an option'}
 							options={[
 								{
 									label: `Delete Requests`,
-									value: 'delete',
+									value: 'DELETE',
 								},
 								{
 									label: `Add/Modify Suspension`,
-									value: 'add-mod',
+									value: 'CHANGE',
 								},
 								{
 									label: `Clear Suspensions`,
-									value: 'clear',
+									value: 'CHANGE',
 								},
 							]}
 						/>
-						<Button onClick={onSubmit}>{message.submit}</Button>
+						<RequestModal selectedId={selectedId} selectOption={selectOption} sisn={record.sisn} />
 						<Button onClick={handleCheckAll} className={'mx-1'}>
 							Select All
 						</Button>
-						<Button onClick={() => setSelectedBarcodes([])} className={'mx-1'}>
+						<Button onClick={() => setselectedId([])} className={'mx-1'}>
 							<RefreshCw />
 						</Button>
 					</div>
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[830px] overflow-y-auto">
 						{requests.map((item, key) => {
-							const checked = selectedBarcodes.includes(item.barcode)
+							const checked = selectedId.includes(item.id)
 							return (
 								<div key={key} className="rounded-md bg-white p-6 shadow">
 									<div className="flex flex-col gap-2">
@@ -102,7 +89,7 @@ const RequestOn = () => {
 												type="checkbox"
 												className="w-5 h-5 accent-primary border-gray-300 rounded  transition-all duration-150"
 												checked={checked}
-												onChange={(e) => handleCheck(item.barcode, e.target.checked)}
+												onChange={(e) => handleCheck(item.id, e.target.checked)}
 											/>
 										</div>
 										<div className="text-left font-bold h-[70px] overflow-hidden text-ellipsis">{item.title}</div>

@@ -46,8 +46,6 @@ const CheckedOut = () => {
 	return (
 		<div className="mb-4 rounded-md bg-white p-3 shadow">
 			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`Checked Out (${record.circ_count})`}</div>
-
-
 			{chkRequests.length > 0 ? (
 				<>
 					<div className="w-3/4 flex my-2">
