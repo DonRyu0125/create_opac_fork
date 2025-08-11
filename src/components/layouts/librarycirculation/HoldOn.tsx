@@ -4,8 +4,9 @@ import useJSONData from '@/hooks/useJSONData'
 import { convertToArr, getCookieValue, getHomeSessionID, getSessionID } from '@/lib/utils'
 import DropdownSelect from '@/components/common/DropdownSelect'
 import { Button } from '@/components/ui/button'
-import { CheckCheck, FolderOpen, RefreshCw } from 'lucide-react'
+import { CheckCheck, FolderOpen, RefreshCw, X } from 'lucide-react'
 import axios from 'axios'
+import * as Dialog from '@radix-ui/react-dialog'
 
 const HoldOn = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -45,7 +46,6 @@ const HoldOn = () => {
 		})
 	}
 
-	console.log('selectedId',selectedId)
 	return (
 		<div className="mb-4 rounded-md bg-white p-3 shadow">
 			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`On Hold (${record.hold_count})`}</div>
@@ -53,9 +53,33 @@ const HoldOn = () => {
 			{holdRequests.length > 0 ? (
 				<>
 					<div className="w-3/4 flex my-2">
-						<Button onClick={onSubmit}>{message.cancel} Selected</Button>
+						<Dialog.Root>
+							<Dialog.Trigger>
+								<Button disabled={selectedId.length > 0 ? false : true}>{message.cancel} Selected</Button>
+							</Dialog.Trigger>
+							<Dialog.Portal>
+								<Dialog.Overlay className="fixed inset-0 bg-black/40" />
+								<Dialog.Content className="fixed left-1/2 top-1/2 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-lg">
+									<div className="flex justify-between items-center mb-4">
+										<Dialog.Title className="text-lg font-bold">Are you sure you want cancel?</Dialog.Title>
+										<Dialog.Close>
+											<X className="w-5 h-5" />
+										</Dialog.Close>
+									</div>
+									<div className="flex justify-end gap-2">
+										<Dialog.Close className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">Cancel</Dialog.Close>
+										<Dialog.Close asChild>
+											<button className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700" onClick={onSubmit}>
+												Confirm
+											</button>
+										</Dialog.Close>
+									</div>
+								</Dialog.Content>
+							</Dialog.Portal>
+						</Dialog.Root>
+
 						<Button onClick={handleCheckAll} className={'mx-1'}>
-							Cancel All
+							Select All
 						</Button>
 						<Button onClick={() => setselectedId([])} className={'mx-1'}>
 							<RefreshCw />
@@ -64,7 +88,7 @@ const HoldOn = () => {
 
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[415px] overflow-y-auto">
 						{holdRequests.map((item, key) => {
-							const checked = selectedId.some((selected:any) => selected.id === item.id)
+							const checked = selectedId.some((selected: any) => selected.id === item.id)
 
 							return (
 								<div key={key} className="rounded-md bg-white p-6 shadow">

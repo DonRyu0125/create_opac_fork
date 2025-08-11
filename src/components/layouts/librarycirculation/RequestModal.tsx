@@ -37,7 +37,7 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger>
-				<Button>{message.submit}</Button>
+				<Button disabled={selectedId.length > 0 ? false : true}>{message.submit}</Button>
 			</Dialog.Trigger>
 			<Dialog.Portal>
 				<Dialog.Overlay className="fixed inset-0 bg-black/40" />
