@@ -100,6 +100,7 @@ export interface RequestData {
 	is_requested_by_client:string
 }
 export interface Record {
+	aone_loc(aone_loc: any): unknown
 	sisn: string
 	check_on: any
     transit_on: any

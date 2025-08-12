@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -8,12 +8,14 @@ import axios from 'axios'
 
 const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]; selectOption: string; sisn: string }) => {
 	const { message } = useConstants()
+	const [startSuspDate, setStartSuspDate] = useState('')
+	const [stopSuspDate, setStopSuspDate] = useState('')
+	const today = new Date().toISOString().split('T')[0]
 
 	const onSubmit = async () => {
-
 		const data = {
-			start_susp_date: '',
-			stop_susp_date: '',
+			start_susp_date: startSuspDate,
+			stop_susp_date: stopSuspDate,
 			PICKUP_LOCATION: '',
 			CLEAR_SUSPENSION: selectOption === 'CLEAR' ? 'X' : '',
 			...selectedId.reduce(
@@ -37,20 +39,53 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger>
-				<Button disabled={selectedId.length > 0 ? false : true}>{message.submit}</Button>
+				<Button disabled={selectedId.length > 0 && selectOption ? false : true}>{message.submit}</Button>
 			</Dialog.Trigger>
 			<Dialog.Portal>
 				<Dialog.Overlay className="fixed inset-0 bg-black/40" />
 				<Dialog.Content className="fixed left-1/2 top-1/2 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-lg">
 					<div className="flex justify-between items-center mb-4">
-						<Dialog.Title className="text-lg font-bold">Modal Title</Dialog.Title>
+						{selectOption === 'DELETE' ? (
+							<Dialog.Title className="text-lg font-bold">Are you sure you wand to delete?</Dialog.Title>
+						) : (
+							<Dialog.Title className="text-lg font-bold">Add/modify requests on the following items</Dialog.Title>
+						)}
 						<Dialog.Close>
 							<X className="w-5 h-5" />
 						</Dialog.Close>
 					</div>
-
-					<div className="mb-6">This is a simple modal using Radix UI's Dialog.</div>
-
+					{selectOption === 'CHANGE' && (
+						<div className="flex flex-col gap-4 mb-4">
+							<div className="flex flex-col">
+								<label htmlFor="start_susp_date" className="mb-1 font-medium">
+									Start Suspension Date
+								</label>
+								<input
+									type="date"
+									id="start_susp_date"
+									name="start_susp_date"
+									value={startSuspDate}
+									onChange={(e) => setStartSuspDate(e.target.value)}
+									min={today}
+									className="w-full border border-gray-300 rounded px-3 py-2"
+								/>
+							</div>
+							<div className="flex flex-col">
+								<label htmlFor="stop_susp_date" className="mb-1 font-medium">
+									Stop Suspension Date
+								</label>
+								<input
+									type="date"
+									id="stop_susp_date"
+									name="stop_susp_date"
+									value={stopSuspDate}
+									onChange={(e) => setStopSuspDate(e.target.value)}
+									min={startSuspDate || today}
+									className="w-full border border-gray-300 rounded px-3 py-2"
+								/>
+							</div>
+						</div>
+					)}
 					<div className="flex justify-end gap-2">
 						<Dialog.Close className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">Cancel</Dialog.Close>
 						<Dialog.Close asChild>
