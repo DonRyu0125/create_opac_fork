@@ -20,11 +20,8 @@ const RequestOn = () => {
 		return imgArr[0].im_access_link
 	}
 
-
-
 	const handleCheck = (id: string, checked: boolean) => {
 		const updated = checked ? [...selectedId, id] : selectedId.filter((b) => b !== id)
-
 		setselectedId(updated)
 		console.log(updated)
 	}
@@ -43,7 +40,6 @@ const RequestOn = () => {
 					<div className="w-3/4 flex my-2">
 						<DropdownSelect
 							className="w-1/2 mr-2"
-							
 							register={{
 								onValueChange: (value) => setSelectOption(value)
 							}}
