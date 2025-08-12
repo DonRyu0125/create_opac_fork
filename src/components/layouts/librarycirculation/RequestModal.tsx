@@ -20,11 +20,7 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 			CLEAR_SUSPENSION: selectOption === 'CLEAR' ? 'X' : '',
 			...selectedId.reduce(
 				(acc, id) => {
-					if (selectOption === 'DELETE') {
-						acc[id] = 'DELETE'
-					} else {
-						acc[id] = 'CHANGE'
-					}
+					acc[id] = 'CHANGE'
 					return acc
 				},
 				{} as Record<string, string>
@@ -48,8 +44,8 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 				<Dialog.Overlay className="fixed inset-0 bg-black/40" />
 				<Dialog.Content className="fixed left-1/2 top-1/2 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-lg">
 					<div className="flex justify-between items-center mb-4">
-						{selectOption === 'DELETE' ? (
-							<Dialog.Title className="text-lg font-bold">Are you sure you wand to delete?</Dialog.Title>
+						{selectOption === 'CLEAR' ? (
+							<Dialog.Title className="text-lg font-bold">Clear suspension requests on the following items</Dialog.Title>
 						) : (
 							<Dialog.Title className="text-lg font-bold">Add/modify requests on the following items</Dialog.Title>
 						)}

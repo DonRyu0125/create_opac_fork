@@ -46,10 +46,6 @@ const RequestOn = () => {
 							title={'Select an option'}
 							options={[
 								{
-									label: `Delete Requests`,
-									value: 'DELETE',
-								},
-								{
 									label: `Add/Modify Suspension`,
 									value: 'CHANGE',
 								},
