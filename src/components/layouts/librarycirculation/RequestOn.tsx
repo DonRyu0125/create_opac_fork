@@ -59,7 +59,7 @@ const RequestOn = () => {
 								},
 								{
 									label: `Clear Suspensions`,
-									value: 'CHANGE',
+									value: 'CLEAR',
 								},
 							]}
 						/>
