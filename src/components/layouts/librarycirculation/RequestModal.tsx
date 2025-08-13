@@ -27,6 +27,9 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 			),
 		}
 
+		setStartSuspDate('')
+		setStopSuspDate('')
+
 		const params = new URLSearchParams(data).toString()
 		return await axios.post(`${getSessionID()}/${sisn}?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -86,7 +89,14 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 						</div>
 					)}
 					<div className="flex justify-end gap-2">
-						<Dialog.Close className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">Cancel</Dialog.Close>
+						<Dialog.Close
+							onClick={() => {
+								setStartSuspDate('')
+								setStopSuspDate('')
+							}}
+							className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">
+							Cancel
+						</Dialog.Close>
 						<Dialog.Close asChild>
 							<button className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700" onClick={onSubmit}>
 								Confirm
