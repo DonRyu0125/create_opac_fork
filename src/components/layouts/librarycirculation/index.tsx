@@ -13,13 +13,13 @@ import TransitOn from './TransitOn'
 import CheckedOut from './CheckedOut'
 import { Button, buttonVariants } from '@/components/ui/button'
 
-
 export default function LibraryDashboard() {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
 	const { message, patronLibraryCirculation } = useConstants()
 	const libraryProfileList = patronLibraryCirculation.database
-	const m2l_patron_id = getCookieValue('M2L_PATRON_ID')?.split(']')[1]
+
+	const [notifications, setNotifications] = useState(convertToArr(record.p_blk_message))
 	const onRequestRef = useRef<HTMLDivElement>(null)
 	const onHoldRef = useRef<HTMLDivElement>(null)
 	const inTransitRef = useRef<HTMLDivElement>(null)
@@ -77,6 +77,9 @@ export default function LibraryDashboard() {
 			</div>
 		)
 	}
+	const dismissNotification = (id: number) => {
+		setNotifications(notifications.filter((n) => n.id !== id))
+	}
 
 	return (
 		<PatronLayout
@@ -100,11 +103,30 @@ export default function LibraryDashboard() {
 				})}
 			</div>
 
+			{notifications.length > 0 && (
+				<div className="mb-2">
+					<div className="flex items-center gap-2 mb-4">
+						<Bell className="h-5 w-5 text-gray-600" />
+						<h2 className="text-lg font-semibold text-gray-900">Notifications</h2>
+					</div>
+					<div className="space-y-3">
+						{notifications.map((notification, index) => (
+							<NotificationBanner
+								key={index}
+								message={notification}
+								type={'info'}
+								onDismiss={() => dismissNotification(notification.id)}
+							/>
+						))}
+					</div>
+				</div>
+			)}
+
 			<div className="mb-4 rounded-md bg-white p-6 shadow">
 				<h1 className="text-3xl font-semibold text-gray-800">
 					{message.welcome} {records[0]?.patron_name || 'User'}!
 				</h1>
-				<p className="mt-2 rounded-md bg-grey p-3 shadow">{record['p_blk_message'] || message.welcomeMessageLibrary}</p>
+				<p className="mt-2 "> {message.welcomeMessageLibrary}</p>
 			</div>
 
 			<div className="mb-4 rounded-md bg-white p-3 shadow">
@@ -151,69 +173,4 @@ export default function LibraryDashboard() {
 			</div>
 		</PatronLayout>
 	)
-}
-{
-	/* {notifications.length > 0 && (
-				<div className="mb-8">
-					<div className="flex items-center gap-2 mb-4">
-						<Bell className="h-5 w-5 text-gray-600" />
-						<h2 className="text-lg font-semibold text-gray-900">Notifications</h2>
-					</div>
-					<div className="space-y-3">
-						{notifications.map((notification, index) => (
-							<NotificationBanner
-								key={index}
-								message={notification.message}
-								type={notification.type}
-								onDismiss={() => dismissNotification(notification.id)}
-							/>
-						))}
-					</div>
-				</div>
-			)} */
-}
-
-{
-	/* Recent Activity Section */
-}
-{
-	/* <div className="mb-8">
-				<h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h2>
-				<div className="bg-white rounded-lg border border-gray-200 p-6">
-					<div className="space-y-4">
-						<div className="flex items-center justify-between py-3 border-b border-gray-100">
-							<div className="flex items-center gap-3">
-								<BookOpen className="h-5 w-5 text-blue-500 flex-shrink-0" />
-								<div>
-									<p className="font-medium text-gray-900">Checked out "The Midnight Library"</p>
-									<p className="text-sm text-gray-500">Due: March 15, 2024</p>
-								</div>
-							</div>
-							<span className="text-sm text-gray-400 whitespace-nowrap ml-4">2 days ago</span>
-						</div>
-
-						<div className="flex items-center justify-between py-3 border-b border-gray-100">
-							<div className="flex items-center gap-3">
-								<Clock className="h-5 w-5 text-amber-500 flex-shrink-0" />
-								<div>
-									<p className="font-medium text-gray-900">Placed hold on "Project Hail Mary"</p>
-									<p className="text-sm text-gray-500">Position: 3 in queue</p>
-								</div>
-							</div>
-							<span className="text-sm text-gray-400 whitespace-nowrap ml-4">1 week ago</span>
-						</div>
-
-						<div className="flex items-center justify-between py-3">
-							<div className="flex items-center gap-3">
-								<BookOpen className="h-5 w-5 text-green-500 flex-shrink-0" />
-								<div>
-									<p className="font-medium text-gray-900">Returned "Atomic Habits"</p>
-									<p className="text-sm text-gray-500">Returned on time</p>
-								</div>
-							</div>
-							<span className="text-sm text-gray-400 whitespace-nowrap ml-4">2 weeks ago</span>
-						</div>
-					</div>
-				</div>
-			</div> */
 }
