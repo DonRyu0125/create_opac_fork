@@ -12,7 +12,7 @@ const RequestOn = () => {
 	const record = records[0]
 	const { message } = useConstants()
 	const requests = convertToArr(record.request_on)
-	const[selectOption, setSelectOption] = useState<string>('')
+	const [selectOption, setSelectOption] = useState<string>('')
 	const [selectedId, setselectedId] = useState<string[]>([])
 
 	const getImage = (item: any) => {
@@ -41,7 +41,7 @@ const RequestOn = () => {
 						<DropdownSelect
 							className="w-1/2 mr-2"
 							register={{
-								onValueChange: (value) => setSelectOption(value)
+								onValueChange: (value) => setSelectOption(value),
 							}}
 							title={'Select an option'}
 							options={[
@@ -87,7 +87,7 @@ const RequestOn = () => {
 										<div className="text-left font-bold h-[70px] overflow-hidden text-ellipsis">{item.title}</div>
 										<div>
 											<div className="flex justify-between">
-												<span className="text-gray-500">Barcode</span>
+												<span className="text-gray-500">{message.barcode}</span>
 												<span className="text-gray-900 font-medium">{item.barcode}</span>
 											</div>
 											<div className="flex justify-between">
@@ -100,6 +100,14 @@ const RequestOn = () => {
 												<span className="text-gray-500">Requested on</span>
 												<span className="text-gray-900 font-medium">{item.wait_date}</span>
 											</div>
+											{item.wait_susp_start && (
+												<div className={'text-center text-gray-900 font-medium mt-3 rounded-md bg-grey p-2 shadow'}>
+													<div>Suspended</div>
+													<div>
+														{item.wait_susp_start} to {item.wait_susp_stop}
+													</div>
+												</div>
+											)}
 										</div>
 									</div>
 								</div>

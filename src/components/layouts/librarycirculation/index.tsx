@@ -13,28 +13,6 @@ import TransitOn from './TransitOn'
 import CheckedOut from './CheckedOut'
 import { Button, buttonVariants } from '@/components/ui/button'
 
-// Mock data for the dashboard
-const patronData = {
-	name: 'Sarah Johnson',
-	notifications: [
-		{
-			id: 1,
-			message: "Your book 'The Great Gatsby' is due in 2 days",
-			type: 'warning' as const,
-		},
-		{
-			id: 2,
-			message: "Your hold on 'Dune' is now available for pickup",
-			type: 'success' as const,
-		},
-	],
-	stats: {
-		checkedOut: 3,
-		onHold: 2,
-		inTransit: 1,
-		onRequest: 0,
-	},
-}
 
 export default function LibraryDashboard() {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -78,14 +56,11 @@ export default function LibraryDashboard() {
 		},
 	]
 
-	const scrollTo = (
-		ref: React.RefObject<HTMLDivElement>,
-		offset = -130
-	  ) => {
+	const scrollTo = (ref: React.RefObject<HTMLDivElement>, offset = -130) => {
 		if (!ref.current) return
 		const top = ref.current.getBoundingClientRect().top + window.scrollY + offset
-		window.scrollTo({ top, behavior: "smooth" })
-	  }
+		window.scrollTo({ top, behavior: 'smooth' })
+	}
 
 	function StatCard({ icon, label, value, color, ref }: StatCardProps) {
 		return (
@@ -124,11 +99,12 @@ export default function LibraryDashboard() {
 					)
 				})}
 			</div>
+
 			<div className="mb-4 rounded-md bg-white p-6 shadow">
 				<h1 className="text-3xl font-semibold text-gray-800">
 					{message.welcome} {records[0]?.patron_name || 'User'}!
 				</h1>
-				<p className="mt-2">{records[0].P_BLK_MESSAGE || message.welcomeMessageLibrary}</p>
+				<p className="mt-2 rounded-md bg-grey p-3 shadow">{record['p_blk_message'] || message.welcomeMessageLibrary}</p>
 			</div>
 
 			<div className="mb-4 rounded-md bg-white p-3 shadow">

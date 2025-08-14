@@ -40,9 +40,13 @@ const CheckedOut = () => {
 			{} as Record<string, string>
 		)
 		const params = new URLSearchParams(data).toString()
-		return await axios.post(`${getSessionID()}/${record.sisn}?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		})
+		return await axios
+			.post(`${getSessionID()}/${record.sisn}?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			})
+			.then(() => {
+				window.location.reload()
+			})
 	}
 
 	return (
@@ -120,6 +124,10 @@ const CheckedOut = () => {
 											<div className="flex justify-between">
 												<span className="text-gray-500">{message.location}</span>
 												<span className="text-gray-900 font-medium">{item.holding_centre}</span>
+											</div>
+											<div className="flex justify-between">
+												<span className="text-gray-500">Renewals</span>
+												<span className="text-gray-900 font-medium">{item.renewals ?? 0}</span>
 											</div>
 										</div>
 									</div>

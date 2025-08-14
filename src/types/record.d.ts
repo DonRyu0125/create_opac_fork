@@ -108,7 +108,7 @@ export interface Record {
 	request_on: any
 	overdue_items: any
 	fine_due: any
-	P_BLK_MESSAGE: string
+	p_blk_message: string
 	circ_count: any
 	hold_count: any
 	transit_count: any
