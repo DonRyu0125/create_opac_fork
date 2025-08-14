@@ -37,9 +37,9 @@ const RequestOn = () => {
 			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`On Request (${record.wait_count})`}</div>
 			{requests.length > 0 ? (
 				<>
-					<div className="w-3/4 flex my-2">
+					<div className="w-3/4 md:flex my-2">
 						<DropdownSelect
-							className="w-1/2 mr-2"
+							className="md:w-1/2 mr-2"
 							register={{
 								onValueChange: (value) => setSelectOption(value),
 							}}
@@ -55,13 +55,15 @@ const RequestOn = () => {
 								},
 							]}
 						/>
-						<RequestModal selectedId={selectedId} selectOption={selectOption} sisn={record.sisn} />
-						<Button onClick={handleCheckAll} className={'mx-1'}>
-							Select All
-						</Button>
-						<Button onClick={() => setselectedId([])} className={'mx-1'}>
-							<RefreshCw />
-						</Button>
+						<div className={'flex my-2 md:my-0'}>
+							<RequestModal selectedId={selectedId} selectOption={selectOption} sisn={record.sisn} />
+							<Button onClick={handleCheckAll} className={'mx-1'}>
+								Select All
+							</Button>
+							<Button onClick={() => setselectedId([])} className={'mx-1'}>
+								<RefreshCw />
+							</Button>
+						</div>
 					</div>
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[830px] overflow-y-auto">
 						{requests.map((item, key) => {

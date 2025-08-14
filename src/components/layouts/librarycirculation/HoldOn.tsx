@@ -40,11 +40,13 @@ const HoldOn = () => {
 			{} as Record<string, string>
 		)
 		const params = new URLSearchParams(data).toString()
-		return await axios.post(`${getSessionID()}/${record.sisn}?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		})		.then(() => {
-			window.location.reload()
-		})
+		return await axios
+			.post(`${getSessionID()}/${record.sisn}?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			})
+			.then(() => {
+				window.location.reload()
+			})
 	}
 
 	return (
@@ -53,7 +55,7 @@ const HoldOn = () => {
 
 			{holdRequests.length > 0 ? (
 				<>
-					<div className="w-3/4 flex my-2">
+					<div className="w-full flex my-2">
 						<Dialog.Root>
 							<Dialog.Trigger>
 								<Button disabled={selectedId.length > 0 ? false : true}>{message.cancel} Selected</Button>

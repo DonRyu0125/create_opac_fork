@@ -54,7 +54,7 @@ const CheckedOut = () => {
 			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`Checked Out (${record.circ_count})`}</div>
 			{chkRequests.length > 0 ? (
 				<>
-					<div className="w-3/4 flex my-2">
+					<div className="w-full flex my-2">
 						<Dialog.Root>
 							<Dialog.Trigger>
 								<Button disabled={selectedId.length > 0 ? false : true}>Renew Selected</Button>
