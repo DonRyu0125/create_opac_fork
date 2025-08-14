@@ -28,7 +28,7 @@ const CheckedOut = () => {
 
 	const getImage = (item: any) => {
 		let imgArr = convertToArr(item.media)
-		return imgArr[0]?.im_access_link ?? ''
+		return imgArr[0]?.im_access_link ?? 'https://placehold.co/250x250'
 	}
 
 	const onSubmit = async () => {

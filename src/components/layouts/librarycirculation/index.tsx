@@ -18,7 +18,6 @@ export default function LibraryDashboard() {
 	const record = records[0]
 	const { message, patronLibraryCirculation } = useConstants()
 	const libraryProfileList = patronLibraryCirculation.database
-
 	const [notifications, setNotifications] = useState(convertToArr(record.p_blk_message))
 	const onRequestRef = useRef<HTMLDivElement>(null)
 	const onHoldRef = useRef<HTMLDivElement>(null)
@@ -93,8 +92,8 @@ export default function LibraryDashboard() {
 			<div className="flex flex-wrap gap-2 sm:gap-4 ">
 				{statCards.map((card, index) => {
 					return (
-						<Button variant={'outline'} onClick={() => scrollTo(card.ref)}>
-							<div className="flex items-center justify-center gap-2" key={index}>
+						<Button variant={'outline'} onClick={() => scrollTo(card.ref)} key={index}>
+							<div className="flex items-center justify-center gap-2" >
 								<div className={`rounded-full p-1 ${colorClasses[card.color as keyof typeof colorClasses]}`}>{card.icon}</div>
 								<span className="text-sm text-black-500">{card.label}</span>
 							</div>
