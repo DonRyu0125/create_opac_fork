@@ -79,7 +79,7 @@ const RequestAccordianBiblio = () => {
 				</Button>
 				{open && (
 					<div className="p-4 pt-0">
-						{items.length > 0 ? (
+						{(items.length > 0 && items[0].barcode) ? (
 							<div className="overflow-auto max-h-[400px] mt-2">
 								<table className="min-w-full text-sm border">
 									<thead className="bg-gray-100 sticky top-0 z-10">

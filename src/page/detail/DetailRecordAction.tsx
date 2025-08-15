@@ -135,7 +135,7 @@ const DetailRecordAction = () => {
 		}
 		return isLoggedIn
 	}
-	console.log('database')
+
 	return (
 		<div className="flex flex-col space-y-4">
 			<div className="flex flex-col md:flex-row justify-between gap-2">
