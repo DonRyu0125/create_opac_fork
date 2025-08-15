@@ -95,7 +95,6 @@ const RequestAccordianDesc = () => {
 												<td className="border px-4 py-2">
 													<div className="flex gap-2">
 														<TooltipButton
-															disabled={value.is_requested_by_client !== 'No'}
 															tooltipContent={message.requestRecord}
 															variant="outline"
 															onClick={() => handleRequest(value.id)}>
@@ -122,13 +121,9 @@ const RequestAccordianDesc = () => {
 															<input type="hidden" name="req_title" value={value.refd} />
 															<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
 															<input type="hidden" name="REQ_QUEUE" value={'X'} />
-															<input type="hidden" name="REQ_WAIT_TIME" value={0} />
-															<input type="hidden" name="ITEM_REQ_TIME" value={'9:00'} />
 															{/* Wait time calucation is not working 20250620 Don */}
-															{/* <input type="hidden" name="REQ_WAIT_TIME" value={'10'} /> */}
 														</form>
 														<TooltipButton
-															disabled={value.is_requested_by_client !== 'No'}
 															tooltipContent={message.requestRecordLater}
 															variant="outline"
 															onClick={() => handleRequestLater(value.id)}>
