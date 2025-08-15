@@ -36,12 +36,12 @@ const Request = () => {
 									<input type="hidden" name="REC_STATUS" value="Active" />
 									<input type="hidden" name="REQ_DB_NAME" value={reqData.req_db_name} />
 									<input type="hidden" name="REQ_DB_RECID" value={reqData.req_db_recid} />
-									<input type="hidden" name="LIBRARY_REQ" value="Yes" />
 									<input type="hidden" name="REQ_PICKUP_LOC" value="Service" />
 									<input type="hidden" name="DATE_NEEDED" value={reqData.date_needed} />
 									<input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
 									{reqData.req_db_link1 && <input type="hidden" name="REQ_DB_LINK1" value={reqData.req_db_link1} />}
 									{reqData.req_db_link3 && <input type="hidden" name="REQ_DB_LINK3" value={reqData.req_db_link3} />}
+									{reqData.req_db_link3 && <input type="hidden" name="LIBRARY_REQ" value="Yes" />}
 									<input type="hidden" name="METHOD_REQUEST" value="Web" />
 									<input type="hidden" name="REQ_TOPIC" value="Retrieval Services" />
 									<input type="hidden" name="REQ_LOC_CODE" value={reqData.req_loc_code} />

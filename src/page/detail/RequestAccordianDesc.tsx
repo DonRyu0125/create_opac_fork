@@ -10,6 +10,7 @@ import { toast } from '@/components/ui/use-toast'
 import axios from 'axios'
 type IsRequestedByClient = 'No' | 'Another' | 'Current'
 type ItemContent = {
+	refd: string | number | readonly string[] | undefined
 	id: string
 	item_type: string
 	aone_loc: string
@@ -74,7 +75,7 @@ const RequestAccordianDesc = () => {
 				</Button>
 				{open && (
 					<div className="p-4 pt-0">
-						{(items.length > 0 && items[0].id) ? (
+						{items.length > 0 && items[0].id ? (
 							<div className="overflow-auto max-h-[400px] mt-2">
 								<table className="min-w-full text-sm border">
 									<thead className="bg-gray-100 sticky top-0 z-10">
@@ -86,15 +87,14 @@ const RequestAccordianDesc = () => {
 										</tr>
 									</thead>
 									<tbody>
-										{items.slice(0, visibleCount).map((value: ItemContent) => (
-											<tr key={value.id}>
+										{items.slice(0, visibleCount).map((value: ItemContent, idx) => (
+											<tr key={idx}>
 												<td className="border px-4 py-2 min-w-[104px]">{value.id}</td>
 												<td className="border px-4 py-2">{value.location_details}</td>
 												<td className="border px-4 py-2">{value.item_type}</td>
 												<td className="border px-4 py-2">
 													<div className="flex gap-2">
 														<TooltipButton
-															key={value.id}
 															disabled={value.is_requested_by_client !== 'No'}
 															tooltipContent={message.requestRecord}
 															variant="outline"
@@ -119,12 +119,15 @@ const RequestAccordianDesc = () => {
 															<input type="hidden" name="req_db_recid" value={requestData.req_db_recid} />
 															<input type="hidden" name="req_item_id" value={value.id} />
 															<input type="hidden" name="req_item_title" value={requestData.req_item_title} />
+															<input type="hidden" name="req_title" value={value.refd} />
 															<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
+															<input type="hidden" name="REQ_QUEUE" value={'X'} />
+															<input type="hidden" name="REQ_WAIT_TIME" value={0} />
+															<input type="hidden" name="ITEM_REQ_TIME" value={'9:00'} />
 															{/* Wait time calucation is not working 20250620 Don */}
 															{/* <input type="hidden" name="REQ_WAIT_TIME" value={'10'} /> */}
 														</form>
 														<TooltipButton
-															key={value.id}
 															disabled={value.is_requested_by_client !== 'No'}
 															tooltipContent={message.requestRecordLater}
 															variant="outline"
