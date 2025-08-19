@@ -12,6 +12,7 @@ import HoldOn from './HoldOn'
 import TransitOn from './TransitOn'
 import CheckedOut from './CheckedOut'
 import { Button, buttonVariants } from '@/components/ui/button'
+import axios from 'axios'
 
 export default function LibraryDashboard() {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -76,8 +77,24 @@ export default function LibraryDashboard() {
 			</div>
 		)
 	}
-	const dismissNotification = (id: number) => {
-		setNotifications(notifications.filter((n) => n.id !== id))
+	const dismissNotification = async (idx: number) => {
+		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
+    <RECORD>
+		<P_BLK_MESSAGE op="del" OCC="${idx+1}">
+		</P_BLK_MESSAGE>
+    </RECORD>`
+
+		return await axios
+			.post(`${getHomeSessionID()}?manipxmlrecord&database=PATRON&READ=N&KEY=SISN&VALUE=16307`, xmlFormDelete, {
+				headers: {
+					'Content-Type': 'text/xml',
+				},
+				withCredentials: true,
+				timeout: 5000,
+			})
+			.then(() => {
+				setNotifications(notifications.filter((_, i) => i !== idx))
+			})
 	}
 
 	return (
@@ -93,7 +110,7 @@ export default function LibraryDashboard() {
 				{statCards.map((card, index) => {
 					return (
 						<Button variant={'outline'} onClick={() => scrollTo(card.ref)} key={index}>
-							<div className="flex items-center justify-center gap-2" >
+							<div className="flex items-center justify-center gap-2">
 								<div className={`rounded-full p-1 ${colorClasses[card.color as keyof typeof colorClasses]}`}>{card.icon}</div>
 								<span className="text-sm text-black-500">{card.label}</span>
 							</div>
@@ -110,12 +127,7 @@ export default function LibraryDashboard() {
 					</div>
 					<div className="space-y-3 max-h-[150px] overflow-auto">
 						{notifications.map((notification, index) => (
-							<NotificationBanner
-								key={index}
-								message={notification}
-								type={'info'}
-								onDismiss={() => dismissNotification(notification.id)}
-							/>
+							<NotificationBanner key={index} message={notification} type={'info'} onDismiss={() => dismissNotification(index)} />
 						))}
 					</div>
 				</div>
