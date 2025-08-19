@@ -108,7 +108,7 @@ export default function LibraryDashboard() {
 						<Bell className="h-5 w-5 text-gray-600" />
 						<h2 className="text-lg font-semibold text-gray-900">Notifications</h2>
 					</div>
-					<div className="space-y-3">
+					<div className="space-y-3 max-h-[150px] overflow-auto">
 						{notifications.map((notification, index) => (
 							<NotificationBanner
 								key={index}
