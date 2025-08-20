@@ -251,5 +251,9 @@
 	"copyNumber": "N° d'exemplaire",
 	"volumeNumber": "N° de volume",
 	"callNumber": "Cote",
-	"searchHistory": "Historique de recherche"
+	"searchHistory": "Historique de recherche",
+	"libraryPortal": "Portail de la bibliothèque",
+	"notifications": "Notifications",
+	"yourLibraryMaterials": "Vos documents de bibliothèque",
+	"currentNotices": "Avis actuels"
 }

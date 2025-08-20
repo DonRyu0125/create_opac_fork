@@ -80,12 +80,12 @@ export default function LibraryDashboard() {
 	const dismissNotification = async (idx: number) => {
 		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
     <RECORD>
-		<P_BLK_MESSAGE op="del" OCC="${idx+1}">
+		<P_BLK_MESSAGE op="del" OCC="${idx + 1}">
 		</P_BLK_MESSAGE>
     </RECORD>`
 
 		return await axios
-			.post(`${getHomeSessionID()}?manipxmlrecord&database=PATRON&READ=N&KEY=SISN&VALUE=16307`, xmlFormDelete, {
+			.post(`${getHomeSessionID()}?manipxmlrecord&database=PATRON&READ=N&KEY=SISN&VALUE=${record.sisn}`, xmlFormDelete, {
 				headers: {
 					'Content-Type': 'text/xml',
 				},
@@ -103,7 +103,7 @@ export default function LibraryDashboard() {
 			mainHeading={
 				<>
 					<BookOpen className="mr-1 h-5 w-5" />
-					<h2 className="text-lg font-semibold text-gray-900">Library Portal</h2>
+					<h2 className="text-lg font-semibold text-gray-900">{message.libraryPortal}</h2>
 				</>
 			}>
 			<div className="flex flex-wrap gap-2 sm:gap-4 ">
@@ -123,7 +123,7 @@ export default function LibraryDashboard() {
 				<div className="mb-2">
 					<div className="flex items-center gap-2 mb-4">
 						<Bell className="h-5 w-5 text-gray-600" />
-						<h2 className="text-lg font-semibold text-gray-900">Notifications</h2>
+						<h2 className="text-lg font-semibold text-gray-900">{message.notifications}</h2>
 					</div>
 					<div className="space-y-3 max-h-[150px] overflow-auto">
 						{notifications.map((notification, index) => (
@@ -141,17 +141,19 @@ export default function LibraryDashboard() {
 			</div>
 
 			<div className="mb-4 rounded-md bg-white p-3 shadow">
-				<div className={'pb-2 text-lg font-semibold text-gray-900'}>Your Library Materials</div>
+				<div className={'pb-2 text-lg font-semibold text-gray-900'}>{message.yourLibraryMaterials}</div>
 				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 					{statCards.map((card, index) => (
-						<div className="rounded-md bg-white p-6 shadow" onClick={() => scrollTo(card.ref)} key={index}>
-							<div className="flex flex-col gap-2">
-								<div className="flex items-center justify-center gap-2">
-									<div className={`rounded-full p-2 ${colorClasses[card.color as keyof typeof colorClasses]}`}>{card.icon}</div>
-									<span className="text-sm text-gray-500">{card.label}</span>
-								</div>
-								<div className="flex items-baseline justify-center">
-									<h3 className="text-2xl font-bold">{card.value || 0}</h3>
+						<div className=" cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-gray-50">
+							<div className="rounded-md bg-white p-6 shadow" onClick={() => scrollTo(card.ref)} key={index}>
+								<div className="flex flex-col gap-2">
+									<div className="flex items-center justify-center gap-2">
+										<div className={`rounded-full p-2 ${colorClasses[card.color as keyof typeof colorClasses]}`}>{card.icon}</div>
+										<span className="text-sm text-gray-500">{card.label}</span>
+									</div>
+									<div className="flex items-baseline justify-center">
+										<h3 className="text-2xl font-bold">{card.value || 0}</h3>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -160,14 +162,30 @@ export default function LibraryDashboard() {
 			</div>
 
 			<div className="mb-4 rounded-md bg-white p-3 shadow">
-				<div className={'pb-2 text-lg font-semibold text-gray-900'}>Current Notices</div>
+				<div className={'pb-2 text-lg font-semibold text-gray-900'}>{message.currentNotices}</div>
 				<div className={'grid gap-2 grid-cols-2'}>
-					<a href={''} className=" transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-gray-50">
-						<StatCard key={0} icon={<CircleDollarSign />} label={'Fines Due'} color={'red'} value={record.fine_due} />
-					</a>
-					<a href={''} className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-gray-50">
-						<StatCard key={0} icon={<ClockAlert />} label={'Overdue Items'} color={'orange'} value={record.overdue_items} />
-					</a>
+					<div className="rounded-md bg-white p-6 shadow">
+						<div className="flex flex-col gap-2">
+							<div className="flex items-center justify-center gap-2">
+								<div className={`rounded-full p-2 ${colorClasses['red']}`}>{<CircleDollarSign />}</div>
+								<span className="text-sm text-gray-500">{'Fines Due'}</span>
+							</div>
+							<div className="flex items-baseline justify-center">
+								<h3 className="text-2xl font-bold">{record.fine_due}</h3>
+							</div>
+						</div>
+					</div>
+					<div className="rounded-md bg-white p-6 shadow">
+						<div className="flex flex-col gap-2">
+							<div className="flex items-center justify-center gap-2">
+								<div className={`rounded-full p-2 ${colorClasses['orange']}`}>{<ClockAlert />}</div>
+								<span className="text-sm text-gray-500">{'Overdue Items'}</span>
+							</div>
+							<div className="flex items-baseline justify-center">
+								<h3 className="text-2xl font-bold">{record.overdue_items}</h3>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div ref={onRequestRef}>

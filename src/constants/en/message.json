@@ -250,5 +250,9 @@
 	"holdingCentre": "Holding Centre",
 	"copyNumber": "Copy No.",
 	"volumeNumber": "Vol No.",
-	"callNumber": "Call No."
+	"callNumber": "Call No.",
+	"libraryPortal": "Library Portal",
+	"notifications": "Notifications",
+	"yourLibraryMaterials": "Your Library Materials",
+	"currentNotices": "Current Notices"
 }
