@@ -51,28 +51,28 @@ const CheckedOut = () => {
 
 	return (
 		<div className="mb-4 rounded-md bg-white p-3 shadow">
-			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`Checked Out (${record.circ_count})`}</div>
+			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`${message.checkedOut} (${record.circ_count})`}</div>
 			{chkRequests.length > 0 ? (
 				<>
 					<div className="w-full flex my-2">
 						<Dialog.Root>
 							<Dialog.Trigger>
-								<Button disabled={selectedId.length > 0 ? false : true}>Renew Selected</Button>
+								<Button disabled={selectedId.length > 0 ? false : true}>{message.renew} {message.selected}</Button>
 							</Dialog.Trigger>
 							<Dialog.Portal>
 								<Dialog.Overlay className="fixed inset-0 bg-black/40" />
 								<Dialog.Content className="fixed left-1/2 top-1/2 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-lg">
 									<div className="flex justify-between items-center mb-4">
-										<Dialog.Title className="text-lg font-bold">Are you sure you want renew?</Dialog.Title>
+										<Dialog.Title className="text-lg font-bold">{message.confirmation} {message.renewals} </Dialog.Title>
 										<Dialog.Close>
 											<X className="w-5 h-5" />
 										</Dialog.Close>
 									</div>
 									<div className="flex justify-end gap-2">
-										<Dialog.Close className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">Cancel</Dialog.Close>
+										<Dialog.Close className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">{message.cancel}</Dialog.Close>
 										<Dialog.Close asChild>
 											<button className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700" onClick={onSubmit}>
-												Confirm
+												{message.confirm}
 											</button>
 										</Dialog.Close>
 									</div>
@@ -81,7 +81,7 @@ const CheckedOut = () => {
 						</Dialog.Root>
 
 						<Button onClick={handleCheckAll} className={'mx-1'}>
-							Select All
+						{message.selectAll}
 						</Button>
 						<Button onClick={() => setselectedId([])} className={'mx-1'}>
 							<RefreshCw />
@@ -114,11 +114,11 @@ const CheckedOut = () => {
 
 										<div>
 											<div className="flex justify-between">
-												<span className="text-gray-500">Barcode</span>
+												<span className="text-gray-500">{message.barcode}</span>
 												<span className="text-gray-900 font-medium">{item.barcode}</span>
 											</div>
 											<div className="flex justify-between">
-												<span className="text-gray-500">Due</span>
+												<span className="text-gray-500">{message.due}</span>
 												<span className="text-gray-900 font-medium">{item.last_due_date}</span>
 											</div>
 											<div className="flex justify-between">
@@ -126,7 +126,7 @@ const CheckedOut = () => {
 												<span className="text-gray-900 font-medium">{item.holding_centre}</span>
 											</div>
 											<div className="flex justify-between">
-												<span className="text-gray-500">Renewals</span>
+												<span className="text-gray-500">{message.renewals}</span>
 												<span className="text-gray-900 font-medium">{item.renewals ?? 0}</span>
 											</div>
 										</div>
@@ -140,7 +140,7 @@ const CheckedOut = () => {
 				<div className="w-full max-w-3xl mx-auto p-4">
 					<div className="text-center py-8 px-4">
 						<FolderOpen className="mx-auto h-12 w-12 text-gray-400" />
-						<h3 className="mt-2 text-sm font-semibold text-gray-900">No items</h3>
+						<h3 className="mt-2 text-sm font-semibold text-gray-900">{message.noItems}</h3>
 					</div>
 				</div>
 			)}

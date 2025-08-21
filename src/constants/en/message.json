@@ -254,5 +254,23 @@
 	"libraryPortal": "Library Portal",
 	"notifications": "Notifications",
 	"yourLibraryMaterials": "Your Library Materials",
-	"currentNotices": "Current Notices"
+	"currentNotices": "Current Notices",
+	"due": "Due",
+	"renewals": "Renewals",
+	"checkedOut": "Checked Out",
+	"onHold": "On Hold",
+	"inTransit": "In Transit",
+	"onRequest": "On Request",
+	"fees": "Fees",
+	"renew": "Renew",
+  "noItems": "No items",
+  "selected": "Selected",
+  "pickUpBefore": "Pick Up Before",
+  "suspended": "Suspended",
+  "waitPosition": "Wait Position",
+  "clearSuspensionRequests": "Clear suspension requests on the following items",
+  "addModifyRequests": "Add/modify requests on the following items",
+  "startSuspensionDate": "Start Suspension Date",
+  "stopSuspensionDate": "Stop Suspension Date"
+
 }

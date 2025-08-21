@@ -46,9 +46,9 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 				<Dialog.Content className="fixed left-1/2 top-1/2 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-lg">
 					<div className="flex justify-between items-center mb-4">
 						{selectOption === 'CLEAR' ? (
-							<Dialog.Title className="text-lg font-bold">Clear suspension requests on the following items</Dialog.Title>
+							<Dialog.Title className="text-lg font-bold">{message.clearSuspensionRequests}</Dialog.Title>
 						) : (
-							<Dialog.Title className="text-lg font-bold">Add/modify requests on the following items</Dialog.Title>
+							<Dialog.Title className="text-lg font-bold">{message.addModifyRequests}</Dialog.Title>
 						)}
 						<Dialog.Close>
 							<X className="w-5 h-5" />
@@ -58,7 +58,7 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 						<div className="flex flex-col gap-4 mb-4">
 							<div className="flex flex-col">
 								<label htmlFor="start_susp_date" className="mb-1 font-medium">
-									Start Suspension Date
+									{message.startSuspensionDate}
 								</label>
 								<input
 									type="date"
@@ -72,7 +72,7 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 							</div>
 							<div className="flex flex-col">
 								<label htmlFor="stop_susp_date" className="mb-1 font-medium">
-									Stop Suspension Date
+									{message.stopSuspensionDate}
 								</label>
 								<input
 									type="date"
@@ -93,11 +93,11 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 								setStopSuspDate('')
 							}}
 							className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">
-							Cancel
+							{message.cancel}
 						</Dialog.Close>
 						<Dialog.Close asChild>
 							<button className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700" onClick={onSubmit}>
-								Confirm
+								{message.confirm}
 							</button>
 						</Dialog.Close>
 					</div>

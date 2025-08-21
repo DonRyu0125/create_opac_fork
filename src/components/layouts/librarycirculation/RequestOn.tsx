@@ -58,7 +58,7 @@ const RequestOn = () => {
 						<div className={'flex my-2 md:my-0'}>
 							<RequestModal selectedId={selectedId} selectOption={selectOption} sisn={record.sisn} />
 							<Button onClick={handleCheckAll} className={'mx-1'}>
-								Select All
+								{message.selectAll}
 							</Button>
 							<Button onClick={() => setselectedId([])} className={'mx-1'}>
 								<RefreshCw />
@@ -93,18 +93,18 @@ const RequestOn = () => {
 												<span className="text-gray-900 font-medium">{item.barcode}</span>
 											</div>
 											<div className="flex justify-between">
-												<span className="text-gray-500">Wait position</span>
+												<span className="text-gray-500">{message.waitPosition}</span>
 												<span className="text-gray-900 font-medium">
-													{item.occnum} of {item.occurence}
+													{item.occnum} - {item.occurence}
 												</span>
 											</div>
 											<div className="flex justify-between">
-												<span className="text-gray-500">Requested on</span>
+												<span className="text-gray-500">{message.onRequest}</span>
 												<span className="text-gray-900 font-medium">{item.wait_date}</span>
 											</div>
 											{item.wait_susp_start && (
 												<div className={'text-center text-gray-900 font-medium mt-3 rounded-md bg-grey p-2 shadow'}>
-													<div>Suspended</div>
+													<div>{message.suspended}</div>
 													<div>
 														{item.wait_susp_start} to {item.wait_susp_stop}
 													</div>

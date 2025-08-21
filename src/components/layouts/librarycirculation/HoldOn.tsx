@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { convertToArr, getCookieValue, getHomeSessionID, getSessionID } from '@/lib/utils'
+import { convertToArr, getHomeSessionID, getSessionID } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { CheckCheck, FolderOpen, RefreshCw, X } from 'lucide-react'
+import { FolderOpen, RefreshCw, X } from 'lucide-react'
 import axios from 'axios'
 import * as Dialog from '@radix-ui/react-dialog'
 
@@ -28,7 +28,7 @@ const HoldOn = () => {
 
 	const getImage = (item: any) => {
 		let imgArr = convertToArr(item.media)
-		return  imgArr[0]?.im_access_link ?? 'https://placehold.co/250x250'
+		return imgArr[0]?.im_access_link ?? 'https://placehold.co/250x250'
 	}
 
 	const onSubmit = async () => {
@@ -51,29 +51,31 @@ const HoldOn = () => {
 
 	return (
 		<div className="mb-4 rounded-md bg-white p-3 shadow">
-			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`On Hold (${record.hold_count})`}</div>
+			<div className={'pb-2 text-lg font-semibold text-gray-900'}>{`${message.onHold} (${record.hold_count})`}</div>
 
 			{holdRequests.length > 0 ? (
 				<>
 					<div className="w-full flex my-2">
 						<Dialog.Root>
 							<Dialog.Trigger>
-								<Button disabled={selectedId.length > 0 ? false : true}>{message.cancel} Selected</Button>
+								<Button disabled={selectedId.length > 0 ? false : true}>{message.cancel} {message.selected}</Button>
 							</Dialog.Trigger>
 							<Dialog.Portal>
 								<Dialog.Overlay className="fixed inset-0 bg-black/40" />
 								<Dialog.Content className="fixed left-1/2 top-1/2 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-lg">
 									<div className="flex justify-between items-center mb-4">
-										<Dialog.Title className="text-lg font-bold">Are you sure you want cancel?</Dialog.Title>
+										<Dialog.Title className="text-lg font-bold">
+											{message.confirmation} {message.cancel}
+										</Dialog.Title>
 										<Dialog.Close>
 											<X className="w-5 h-5" />
 										</Dialog.Close>
 									</div>
 									<div className="flex justify-end gap-2">
-										<Dialog.Close className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">Cancel</Dialog.Close>
+										<Dialog.Close className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300">{message.cancel}</Dialog.Close>
 										<Dialog.Close asChild>
 											<button className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700" onClick={onSubmit}>
-												Confirm
+												{message.confirm}
 											</button>
 										</Dialog.Close>
 									</div>
@@ -82,7 +84,7 @@ const HoldOn = () => {
 						</Dialog.Root>
 
 						<Button onClick={handleCheckAll} className={'mx-1'}>
-							Select All
+							{message.selectAll}
 						</Button>
 						<Button onClick={() => setselectedId([])} className={'mx-1'}>
 							<RefreshCw />
@@ -116,11 +118,11 @@ const HoldOn = () => {
 
 										<div>
 											<div className="flex justify-between">
-												<span className="text-gray-500">Barcode</span>
+												<span className="text-gray-500">{message.barcode}</span>
 												<span className="text-gray-900 font-medium">{item.barcode}</span>
 											</div>
 											<div className="flex justify-between">
-												<span className="text-gray-500">Pick Up Before</span>
+												<span className="text-gray-500">{message.pickUpBefore}</span>
 												<span className="text-gray-900 font-medium">{item.hold_expiry_date}</span>
 											</div>
 										</div>
@@ -134,7 +136,7 @@ const HoldOn = () => {
 				<div className="w-full max-w-3xl mx-auto p-4">
 					<div className="text-center py-8 px-4">
 						<FolderOpen className="mx-auto h-12 w-12 text-gray-400" />
-						<h3 className="mt-2 text-sm font-semibold text-gray-900">No items</h3>
+						<h3 className="mt-2 text-sm font-semibold text-gray-900">{message.noItems}</h3>
 					</div>
 				</div>
 			)}
