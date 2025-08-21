@@ -43,7 +43,7 @@ const RequestOn = () => {
 							register={{
 								onValueChange: (value) => setSelectOption(value),
 							}}
-							title={'Select an option'}
+							title={`${message.advIdxSubmitWarnMsg}`}
 							options={[
 								{
 									label: `${message.addModifySuspension}`,

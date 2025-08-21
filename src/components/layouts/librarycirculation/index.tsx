@@ -62,21 +62,6 @@ export default function LibraryDashboard() {
 		window.scrollTo({ top, behavior: 'smooth' })
 	}
 
-	function StatCard({ icon, label, value, color, ref }: StatCardProps) {
-		return (
-			<div className="rounded-md bg-white p-6 shadow" onClick={() => scrollTo(ref)}>
-				<div className="flex flex-col gap-2">
-					<div className="flex items-center justify-center gap-2">
-						<div className={`rounded-full p-2 ${colorClasses[color as keyof typeof colorClasses]}`}>{icon}</div>
-						<span className="text-sm text-gray-500">{label}</span>
-					</div>
-					<div className="flex items-baseline justify-center">
-						<h3 className="text-2xl font-bold">{value || 0}</h3>
-					</div>
-				</div>
-			</div>
-		)
-	}
 	const dismissNotification = async (idx: number) => {
 		let xmlFormDelete = `<?xml version="1.0" encoding="UTF-8"?>
     <RECORD>
