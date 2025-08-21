@@ -271,6 +271,10 @@
   "clearSuspensionRequests": "Clear suspension requests on the following items",
   "addModifyRequests": "Add/modify requests on the following items",
   "startSuspensionDate": "Start Suspension Date",
-  "stopSuspensionDate": "Stop Suspension Date"
+  "stopSuspensionDate": "Stop Suspension Date",
+  "finesDue": "Fines Due",
+  "overdueItems": "Overdue Items",
+  "addModifySuspension": "Add/Modify Suspension",
+  "clearSuspensions": "Clear Suspensions"
 
 }

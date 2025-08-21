@@ -273,5 +273,9 @@
 	"clearSuspensionRequests": "Effacer les demandes de suspension sur les éléments suivants",
 	"addModifyRequests": "Ajouter/modifier des demandes sur les éléments suivants",
 	"startSuspensionDate": "Date de début de suspension",
-	"stopSuspensionDate": "Date de fin de suspension"
+	"stopSuspensionDate": "Date de fin de suspension",
+	"finesDue": "Amendes dues",
+	"overdueItems": "Articles en retard",
+	"addModifySuspension": "Ajouter/Modifier la suspension",
+	"clearSuspensions": "Annuler les suspensions"
 }

@@ -168,7 +168,7 @@ export default function LibraryDashboard() {
 						<div className="flex flex-col gap-2">
 							<div className="flex items-center justify-center gap-2">
 								<div className={`rounded-full p-2 ${colorClasses['red']}`}>{<CircleDollarSign />}</div>
-								<span className="text-sm text-gray-500">{'Fines Due'}</span>
+								<span className="text-sm text-gray-500">{message.finesDue}</span>
 							</div>
 							<div className="flex items-baseline justify-center">
 								<h3 className="text-2xl font-bold">{record.fine_due}</h3>
@@ -179,7 +179,7 @@ export default function LibraryDashboard() {
 						<div className="flex flex-col gap-2">
 							<div className="flex items-center justify-center gap-2">
 								<div className={`rounded-full p-2 ${colorClasses['orange']}`}>{<ClockAlert />}</div>
-								<span className="text-sm text-gray-500">{'Overdue Items'}</span>
+								<span className="text-sm text-gray-500">{message.overdueItems}</span>
 							</div>
 							<div className="flex items-baseline justify-center">
 								<h3 className="text-2xl font-bold">{record.overdue_items}</h3>

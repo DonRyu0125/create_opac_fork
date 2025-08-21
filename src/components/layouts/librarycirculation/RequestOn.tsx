@@ -46,11 +46,11 @@ const RequestOn = () => {
 							title={'Select an option'}
 							options={[
 								{
-									label: `Add/Modify Suspension`,
+									label: `${message.addModifySuspension}`,
 									value: 'CHANGE',
 								},
 								{
-									label: `Clear Suspensions`,
+									label: `${message.clearSuspensions}`,
 									value: 'CLEAR',
 								},
 							]}
