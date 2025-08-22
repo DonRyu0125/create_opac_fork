@@ -64,8 +64,15 @@ const RequestAccordianDesc = () => {
 	}
 
 	const checkStatus = (value: ItemContent) => {
-		const canJoinArchiveWaitlist = config.requestConfig.archiveWaitlistEnabled && value.is_requested_by_client === 'No'
-		return !canJoinArchiveWaitlist
+		if(!config.requestConfig.archiveWaitlistEnabled){
+			if(value.is_requested_by_client === 'No'){
+				return false
+			}else{
+				return true
+			}
+		}else{
+			return false
+		}
 	}
 
 	return (
@@ -101,10 +108,7 @@ const RequestAccordianDesc = () => {
 													<div className="flex gap-2">
 														<TooltipButton
 															disabled={
-																!(
-																	config.requestConfig.archiveWaitlistEnabled &&
-																	value.is_requested_by_client === 'No'
-																)
+																checkStatus(value)
 															}
 															tooltipContent={message.requestRecord}
 															variant="outline"
@@ -142,10 +146,7 @@ const RequestAccordianDesc = () => {
 														<TooltipButton
 															tooltipContent={message.requestRecordLater}
 															disabled={
-																!(
-																	config.requestConfig.archiveWaitlistEnabled &&
-																	value.is_requested_by_client === 'No'
-																)
+																checkStatus(value)
 															}
 															variant="outline"
 															onClick={() => handleRequestLater(value.id)}>
