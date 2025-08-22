@@ -18,6 +18,7 @@ import RequestAccordianBiblio from './RequestAccordianBiblio'
 
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
+	const { config } = useConstants()
 	const record = records[0]
 	const images =
 		getMedia(records[0], 'im_access_link')?.map((e) => ({
@@ -41,6 +42,10 @@ const Detail = () => {
 	const database = record.database_name
 	const [loading, setLoading] = useState(true)
 	const [tree, setTree] = useState<TreeNode | undefined>()
+	const canLibraryRequest = config.requestConfig.libraryRequest && isBiblioDatabase(database, record.request.req_db_name)
+	const canArchiveRequest =
+		isDescriptionDatabase(database, record.request.req_db_name) && !record.record.refd_lowerexist && config.requestConfig.archiveRequest
+
 	useEffect(() => {
 		const sessionID = getSessionID()
 		if (sessionID && isDescriptionDatabase(database, record.request.req_db_name)) {
@@ -141,7 +146,7 @@ const Detail = () => {
 										{isDescriptionDatabase(database, record.request.req_db_name) && (
 											<div className="w-full ">
 												<Accordion
-													items={[
+													items={[  
 														{
 															title: message.descriptionTree,
 															content: (
@@ -154,10 +159,8 @@ const Detail = () => {
 												/>
 											</div>
 										)}
-										{isDescriptionDatabase(database, record.request.req_db_name) && !record.record.refd_lowerexist && (
-											<RequestAccordianDesc />
-										)}
-										{isBiblioDatabase(database, record.request.req_db_name) && <RequestAccordianBiblio />}
+										{canArchiveRequest && <RequestAccordianDesc />}
+										{canLibraryRequest && <RequestAccordianBiblio />}
 									</div>
 								</div>
 							</div>
