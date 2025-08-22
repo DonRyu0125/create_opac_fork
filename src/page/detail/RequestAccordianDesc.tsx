@@ -7,7 +7,7 @@ import useJSONData from '@/hooks/useJSONData'
 import TooltipButton from '@/components/common/TooltipButton'
 import { REQUEST_DESC_DB } from '@/page/request/RequestConfirmed'
 import { toast } from '@/components/ui/use-toast'
-import axios from 'axios'
+
 type IsRequestedByClient = 'No' | 'Another' | 'Current'
 type ItemContent = {
 	refd: string | number | readonly string[] | undefined
@@ -23,7 +23,7 @@ type ItemContent = {
 const ITEMS_PER_PAGE = 20
 
 const RequestAccordianDesc = () => {
-	const { message } = useConstants()
+	const { message, config } = useConstants()
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
 	const { container, request } = record
@@ -63,6 +63,11 @@ const RequestAccordianDesc = () => {
 		return toast({ title: `${message.pleaseLoginForRequesting}` })
 	}
 
+	const checkStatus = (value: ItemContent) => {
+		const canJoinArchiveWaitlist = config.requestConfig.archiveWaitlistEnabled && value.is_requested_by_client !== 'No'
+		return canJoinArchiveWaitlist
+	}
+
 	return (
 		<div className="w-full mx-auto space-y-2">
 			<div className="border rounded-md">
@@ -95,6 +100,7 @@ const RequestAccordianDesc = () => {
 												<td className="border px-4 py-2">
 													<div className="flex gap-2">
 														<TooltipButton
+															disabled={checkStatus(value)}
 															tooltipContent={message.requestRecord}
 															variant="outline"
 															onClick={() => handleRequest(value.id)}>
@@ -119,12 +125,18 @@ const RequestAccordianDesc = () => {
 															<input type="hidden" name="req_item_id" value={value.id} />
 															<input type="hidden" name="req_item_title" value={requestData.req_item_title} />
 															<input type="hidden" name="req_title" value={value.refd} />
-															<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
-															<input type="hidden" name="REQ_QUEUE" value={'X'} />
+															{config.requestConfig.archiveWaitlistEnabled && (
+																<>
+																	<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
+																	<input type="hidden" name="REQ_QUEUE" value={'X'} />
+																</>
+															)}
+
 															{/* Wait time calucation is not working 20250620 Don */}
 														</form>
 														<TooltipButton
 															tooltipContent={message.requestRecordLater}
+															disabled={checkStatus(value)}
 															variant="outline"
 															onClick={() => handleRequestLater(value.id)}>
 															<CalendarCheck />
