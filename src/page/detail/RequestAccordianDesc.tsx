@@ -64,13 +64,13 @@ const RequestAccordianDesc = () => {
 	}
 
 	const checkStatus = (value: ItemContent) => {
-		if(!config.requestConfig.archiveWaitlistEnabled){
-			if(value.is_requested_by_client === 'No'){
+		if (!config.requestConfig.archiveWaitlistEnabled) {
+			if (value.is_requested_by_client === 'No') {
 				return false
-			}else{
+			} else {
 				return true
 			}
-		}else{
+		} else {
 			return false
 		}
 	}
@@ -107,9 +107,7 @@ const RequestAccordianDesc = () => {
 												<td className="border px-4 py-2">
 													<div className="flex gap-2">
 														<TooltipButton
-															disabled={
-																checkStatus(value)
-															}
+															disabled={checkStatus(value)}
 															tooltipContent={message.requestRecord}
 															variant="outline"
 															onClick={() => handleRequest(value.id)}>
@@ -134,20 +132,16 @@ const RequestAccordianDesc = () => {
 															<input type="hidden" name="req_item_id" value={value.id} />
 															<input type="hidden" name="req_item_title" value={requestData.req_item_title} />
 															<input type="hidden" name="req_title" value={value.refd} />
+															<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
 															{config.requestConfig.archiveWaitlistEnabled && (
-																<>
-																	<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
-																	<input type="hidden" name="REQ_QUEUE" value={'X'} />
-																</>
+																<input type="hidden" name="REQ_QUEUE" value={'X'} />
 															)}
 
 															{/* Wait time calucation is not working 20250620 Don */}
 														</form>
 														<TooltipButton
 															tooltipContent={message.requestRecordLater}
-															disabled={
-																checkStatus(value)
-															}
+															disabled={checkStatus(value)}
 															variant="outline"
 															onClick={() => handleRequestLater(value.id)}>
 															<CalendarCheck />
