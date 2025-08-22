@@ -14,7 +14,6 @@ const RequestConfirmed = () => {
 	const { config } = useConstants()
 	const { navigations } = config
 	let reqData: any = records[0].request
-	let container = reqData.container
 	const { message } = useConstants()
 
 	return (
