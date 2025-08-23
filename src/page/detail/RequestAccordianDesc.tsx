@@ -133,10 +133,7 @@ const RequestAccordianDesc = () => {
 															<input type="hidden" name="req_item_title" value={requestData.req_item_title} />
 															<input type="hidden" name="req_title" value={value.refd} />
 															<input type="hidden" name="REQ_NEXT_COLLECT" value={'X'} />
-															{config.requestConfig.archiveWaitlistEnabled && (
-																<input type="hidden" name="REQ_QUEUE" value={'X'} />
-															)}
-
+															<input type="hidden" name="REQ_QUEUE" value={'X'} />
 															{/* Wait time calucation is not working 20250620 Don */}
 														</form>
 														<TooltipButton
