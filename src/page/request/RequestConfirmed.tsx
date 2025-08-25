@@ -20,7 +20,7 @@ const RequestConfirmed = () => {
 		const homeSessId = getCookieValue('HOME_SESSID');
 		const url =
 		  reqData.req_db_name === REQUEST_DESC_DB
-			? `${homeSessId}?SEARCH&DATABASE=DOC_REQUEST&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_ORDERS_PROFILE&EXP=REQ_PATRON_ID%20${getPatronID()}`
+			? `${homeSessId}?SEARCH&DATABASE=CLIENT&REPORT=WEB_PATRON_PROFILE&EXP=patron_id+~3D+global(m2l_patron_id)`
 			: `${homeSessId}?SEARCH&DATABASE=PATRON_BIBLIO&REPORT=WEB_LIBRARY_CIRC_DASHBOARD&EXP=patron_id+~3D+global(m2l_patron_id)`;
 		window.location.href = url;
 	  };
