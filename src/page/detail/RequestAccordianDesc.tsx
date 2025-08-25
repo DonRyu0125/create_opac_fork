@@ -64,6 +64,7 @@ const RequestAccordianDesc = () => {
 	}
 
 	const checkStatus = (value: ItemContent) => {
+		if(value.is_requested_by_client === 'Current') return true
 		if (!config.requestConfig.archiveWaitlistEnabled) {
 			if (value.is_requested_by_client === 'No') {
 				return false
