@@ -2,9 +2,10 @@ import Link from '@/components/common/Link'
 import Layout from '@/components/layouts'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import { Archive, CircleCheck, Landmark, LibraryBig } from 'lucide-react'
+import useDisableBackButton from '@/hooks/useDisableBackButton'
+import { Archive, ChevronRight, CircleCheck, Landmark, LibraryBig } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { convertToString } from '@/lib/utils'
+import { convertToString, getCookieValue, getPatronID } from '@/lib/utils'
 
 export const REQUEST_DESC_DB = 'DESCRIPTION'
 export const REQUEST_BIBLIO_DB = 'BIBLIO'
@@ -15,6 +16,17 @@ const RequestConfirmed = () => {
 	const { navigations } = config
 	let reqData: any = records[0].request
 	const { message } = useConstants()
+	// useDisableBackButton();
+
+	const goToDashboard = () => {
+		const homeSessId = getCookieValue('HOME_SESSID');
+		const url =
+		  reqData.req_db_name === REQUEST_DESC_DB
+			? `${homeSessId}?SEARCH&AUX_SESSID=client&DATABASE=DOC_REQUEST&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_ORDERS_PROFILE&EXP=REQ_PATRON_ID%20${getPatronID()}`
+			: `${homeSessId}?SEARCH&DATABASE=PATRON_BIBLIO&REPORT=WEB_LIBRARY_CIRC_DASHBOARD&EXP=patron_id+~3D+global(m2l_patron_id)`;
+		window.location.href = url;
+	  };
+
 
 	return (
 		<Layout>
@@ -77,12 +89,18 @@ const RequestConfirmed = () => {
 						)}
 
 						<div className="border-t mt-6">
-							<div className="flex justify-center items-center pt-4">
+							<div className="flex justify-center items-center pt-4 relative">
 								{navigations.map((item, key) => (
 									<Link className="mx-1" href={item.url} key={key}>
 										<Button>{item.title}</Button>
 									</Link>
 								))}
+								<Button
+									className={'align-center absolute right-0'}
+									onClick={goToDashboard}>
+									<span className="hidden md:block">Dashboard</span>
+									<ChevronRight />
+								</Button>
 							</div>
 						</div>
 					</div>
