@@ -2,7 +2,6 @@ import Link from '@/components/common/Link'
 import Layout from '@/components/layouts'
 import useConstants from '@/hooks/useConstants'
 import useJSONData from '@/hooks/useJSONData'
-import useDisableBackButton from '@/hooks/useDisableBackButton'
 import { Archive, ChevronRight, CircleCheck, Landmark, LibraryBig } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { convertToString, getCookieValue, getPatronID } from '@/lib/utils'
@@ -16,7 +15,6 @@ const RequestConfirmed = () => {
 	const { navigations } = config
 	let reqData: any = records[0].request
 	const { message } = useConstants()
-	// useDisableBackButton();
 
 	const goToDashboard = () => {
 		const homeSessId = getCookieValue('HOME_SESSID');
