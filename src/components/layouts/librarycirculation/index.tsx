@@ -173,7 +173,7 @@ export default function LibraryDashboard() {
 					</div>
 				</div>
 			</div>
-			<div ref={onRequestRef}>
+			<div ref={checkedOutRef}>
 				<CheckedOut />
 			</div>
 			<div ref={onHoldRef}>
@@ -182,7 +182,7 @@ export default function LibraryDashboard() {
 			<div ref={inTransitRef}>
 				<TransitOn />
 			</div>
-			<div ref={checkedOutRef}>
+			<div ref={onRequestRef}>
 				<RequestOn />
 			</div>
 		</PatronLayout>
