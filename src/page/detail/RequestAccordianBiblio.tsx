@@ -7,7 +7,7 @@ import useJSONData from '@/hooks/useJSONData'
 import TooltipButton from '@/components/common/TooltipButton'
 import { toast } from '@/components/ui/use-toast'
 import { REQUEST_BIBLIO_DB } from '../request/RequestConfirmed'
-const IS_REQUESTABLE = ['AVAILABLE', 'CIRCULATED', 'IN TRANSFER', 'ON HOLD', 'ON ORDER']
+const IS_REQUESTABLE_ARR = ['AVAILABLE', 'CIRCULATED', 'IN TRANSFER', 'ON HOLD', 'ON ORDER']
 type LibraryItem = {
 	copy_number: string
 	last_discrg_date: string
@@ -67,6 +67,21 @@ const RequestAccordianBiblio = () => {
 		return toast({ title: `${message.pleaseLoginForRequesting}` })
 	}
 
+	// Check that item is reqeuested by current user
+	// Check that item is requesatble by status
+	const isRequestable = (barcode: string, status: string) => {
+		let arr = convertToArr(record.cur_user_request)
+		let res
+		arr.map((item) => {
+			if (barcode === item) {
+				res = true
+			} else {
+				res = false
+			}
+		})
+		return !res ? !IS_REQUESTABLE_ARR.includes(status) : true
+	}
+
 	return (
 		<div className="w-full mx-auto space-y-2">
 			<div className="border rounded-md">
@@ -74,12 +89,12 @@ const RequestAccordianBiblio = () => {
 					className="flex justify-between items-center w-full p-4 text-left bg-primary text-white"
 					onClick={() => setOpen((prev) => !prev)}
 					aria-expanded={open}>
-					<span className="font-medium">{message.request+' By Barcode'}</span>
+					<span className="font-medium">{message.request + ' By Barcode'}</span>
 					<ChevronDown className={cn('w-5 h-5 transition-transform duration-200', open && 'rotate-180')} />
 				</Button>
 				{open && (
 					<div className="p-4 pt-0">
-						{(items.length > 0 && items[0].barcode) ? (
+						{items.length > 0 && items[0].barcode ? (
 							<div className="overflow-auto max-h-[400px] mt-2">
 								<table className="min-w-full text-sm border">
 									<thead className="bg-gray-100 sticky top-0 z-10">
@@ -112,7 +127,7 @@ const RequestAccordianBiblio = () => {
 													<div className="flex gap-2">
 														<TooltipButton
 															key={value.barcode}
-															disabled={IS_REQUESTABLE.includes(value.item_status) ? false : true}
+															disabled={isRequestable(value.barcode, value.item_status)}
 															tooltipContent={message.request}
 															variant="outline"
 															onClick={() => handleRequest(value.barcode)}>
