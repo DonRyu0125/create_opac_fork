@@ -113,7 +113,7 @@ const RequestAccordianBiblio = () => {
 														<TooltipButton
 															key={value.barcode}
 															disabled={IS_REQUESTABLE.includes(value.item_status) ? false : true}
-															tooltipContent={message.requestRecord}
+															tooltipContent={message.request}
 															variant="outline"
 															onClick={() => handleRequest(value.barcode)}>
 															<SquareCheck />
