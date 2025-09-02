@@ -29,7 +29,6 @@ const Request = () => {
 							</h1>
 							<div className="text-right">
 								<form method="post" className="m-0" action={removeQuote(reqData.action)}>
-									<input type="hidden" name="REQ_NEXT_COLLECT" value="X" />
 									<input type="hidden" name="AUTO_APPROVE" value="Y" />
 									<input type="hidden" name="REQ_PROCESS_DATE" value="++1" />
 									<input type="hidden" name="REQ_STATUS" value="Retrieve" />
@@ -39,6 +38,7 @@ const Request = () => {
 									<input type="hidden" name="REQ_PICKUP_LOC" value="Service" />
 									<input type="hidden" name="DATE_NEEDED" value={reqData.date_needed} />
 									<input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
+									{reqData.req_next_collect && <input type="hidden" name="REQ_NEXT_COLLECT" value={reqData.req_next_collect} />}
 									{reqData.req_db_link1 && <input type="hidden" name="REQ_DB_LINK1" value={reqData.req_db_link1} />}
 									{reqData.req_db_link3 && <input type="hidden" name="REQ_DB_LINK3" value={reqData.req_db_link3} />}
 									{reqData.req_db_link3 && <input type="hidden" name="LIBRARY_REQ" value="Yes" />}
