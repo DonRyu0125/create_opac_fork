@@ -34,7 +34,7 @@ type LibraryItem = {
 const ITEMS_PER_PAGE = 20
 
 const RequestAccordianBiblio = () => {
-	const { message } = useConstants()
+	const { message, config } = useConstants()
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
 	const { request } = record
@@ -68,6 +68,7 @@ const RequestAccordianBiblio = () => {
 	}
 
 	// Check that item is reqeuested by current user
+	// Check that item waitlist is allowed
 	// Check that item is requesatble by status
 	const isRequestable = (barcode: string, status: string) => {
 		let arr = convertToArr(record.cur_user_request)
@@ -79,7 +80,16 @@ const RequestAccordianBiblio = () => {
 				res = false
 			}
 		})
-		return !res ? !IS_REQUESTABLE_ARR.includes(status) : true
+
+		if (!res) {
+			if (config.requestConfig.libraryWaitlistEnabled) {
+				return !IS_REQUESTABLE_ARR.includes(status)
+			} else {
+				return status === 'AVAILABLE' ? false :true
+			}
+		}
+
+		return true
 	}
 
 	return (
