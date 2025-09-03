@@ -29,13 +29,13 @@ const Request = () => {
 							</h1>
 							<div className="text-right">
 								<form method="post" className="m-0" action={removeQuote(reqData.action)}>
+									{/* <input type="hidden" name="REQ_PICKUP_LOC" value="Service" /> */}
 									<input type="hidden" name="AUTO_APPROVE" value="Y" />
 									<input type="hidden" name="REQ_PROCESS_DATE" value="++1" />
 									<input type="hidden" name="REQ_STATUS" value="Retrieve" />
 									<input type="hidden" name="REC_STATUS" value="Active" />
 									<input type="hidden" name="REQ_DB_NAME" value={reqData.req_db_name} />
 									<input type="hidden" name="REQ_DB_RECID" value={reqData.req_db_recid} />
-									<input type="hidden" name="REQ_PICKUP_LOC" value="Service" />
 									<input type="hidden" name="DATE_NEEDED" value={reqData.date_needed} />
 									<input type="hidden" name="TIME_NEEDED" value={reqData.time_needed} />
 									{reqData.req_next_collect && <input type="hidden" name="REQ_NEXT_COLLECT" value={reqData.req_next_collect} />}

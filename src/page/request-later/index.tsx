@@ -153,8 +153,9 @@ const RequestLater = () => {
 				<div className="bg-gray-50 min-h-screen py-10">
 					<div className="max-w-4xl mx-auto bg-white shadow-md rounded-md p-6">
 						<div className="flex justify-between items-center border-b pb-4">
-							<form method="post" className="m-0 w-full" action={'?REQUESTLOGIN'}>
+							<form method="post" className="m-0 w-full" action={'?REQUESTLOGIN&DBNAME=DESCRIPTION_WEB'}>
 								<input type="hidden" name="REQ_WAIT_TIME" value={'0'} />
+								<input type="hidden" name="ITEM_REQ_TIME" value={'9:00'} />
 								<input type="hidden" name="method_request" value={reqData.method_request} />
 								<input type="hidden" name="req_topic" value={reqData.req_topic} />
 								<input type="hidden" name="req_appl_name" value={reqData.req_appl_name} />
