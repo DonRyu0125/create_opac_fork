@@ -69,7 +69,7 @@ const RequestAccordianBiblio = () => {
 
 	// Check that item is reqeuested by current user
 	// Check that item waitlist is allowed
-	// Check that item is requesatble by status
+	// Check that item is requestable by status
 	const isRequestable = (barcode: string, status: string) => {
 		let arr = convertToArr(record.cur_user_request)
 		let res
