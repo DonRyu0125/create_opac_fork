@@ -277,5 +277,10 @@
 	"finesDue": "Amendes dues",
 	"overdueItems": "Articles en retard",
 	"addModifySuspension": "Ajouter/Modifier la suspension",
-	"clearSuspensions": "Annuler les suspensions"
+	"clearSuspensions": "Annuler les suspensions",
+	"requestInfo": "Demande d'information",
+	"collectionClosed": "La collecte de {collectionTime} est fermée.",
+	"orderMore": "Vous pouvez commander {count} articles dans la collecte de {nextCollectionTime}.",
+	"limits": "Limite : {perCollection} par collecte, {total} au total.",
+	"currentStatus": "Actuellement : {liveOrders} commandes actives, {available} disponibles."
 }

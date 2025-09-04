@@ -275,6 +275,11 @@
   "finesDue": "Fines Due",
   "overdueItems": "Overdue Items",
   "addModifySuspension": "Add/Modify Suspension",
-  "clearSuspensions": "Clear Suspensions"
+  "clearSuspensions": "Clear Suspensions",
+  "requestInfo": "Request information",
+  "collectionClosed": "The {collectionTime} collection is closed.",
+  "orderMore": "You can order {count} items from the {nextCollectionTime} collection.",
+  "limits": "Limit: {perCollection} per collection, {total} total.",
+  "currentStatus": "Currently: {liveOrders} live orders, {available} available."
 
 }

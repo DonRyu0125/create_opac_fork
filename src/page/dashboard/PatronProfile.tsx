@@ -173,7 +173,6 @@ export default function PatronProfile() {
 											{item === archives && <Archive className="w-5 h-5" />}
 											{item === museum && <Landmark className="w-5 h-5" />}
 											{item === library && <Library className="w-5 h-5" />}
-
 											{item === home
 												? Number(records[0].description_count) +
 													Number(records[0].collection_count) +

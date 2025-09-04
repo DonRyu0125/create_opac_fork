@@ -68,6 +68,13 @@ export interface ReproductionData {
 	req_charge_amt: string
 }
 export interface RequestData {
+	currentcollectiontime: string
+	remainingorders: string
+	liveorders: string
+	maxitems: string
+	itemspercollection: string
+	orderablecount: string
+	nextcollectiontime: string
 	req_pickup_loc: string | number | readonly string[] | undefined
 	req_next_collect: string | number | readonly string[] | undefined
 	library_req: string | number | readonly string[] | undefined

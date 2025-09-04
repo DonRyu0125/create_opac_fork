@@ -15,6 +15,7 @@ import NavigationSideBar from './NavigationSideBar'
 import NoRecord from '../NoRecord'
 import RequestAccordianDesc from './RequestAccordianDesc'
 import RequestAccordianBiblio from './RequestAccordianBiblio'
+import { AlertCircle } from 'lucide-react'
 
 const Detail = () => {
 	const { backToSummary, records, getMedia, common } = useJSONData({ selector: '#xml_record' })
@@ -66,6 +67,8 @@ const Detail = () => {
 
 	//If the XML_TREE is not working at the repo spec.
 	if (!record.record) return <NoRecord />
+
+	console.log('record', record.request)
 
 	return (
 		<Layout>
@@ -137,6 +140,35 @@ const Detail = () => {
 										)}
 									</div>
 									<NavigationSideBar />
+									<div className="border rounded-lg p-4 bg-blue-50 border-blue-200 text-blue-800 space-y-3">
+										<div className="flex items-center gap-2 font-medium">
+											<AlertCircle className="h-5 w-5 flex-shrink-0" />
+											<span>{message.requestInfo}</span>
+										</div>
+										<div className="space-y-1 text-sm text-gray-700">
+											<p className="font-semibold text-red-600">
+												{message.collectionClosed.replace(
+													'{collectionTime}',
+													record.request.currentcollectiontime || 'N/A'
+												)}
+											</p>
+											<p>
+												{message.orderMore
+													.replace('{count}', record.request.orderablecount || 'N/A')
+													.replace('{nextCollectionTime}', record.request.nextcollectiontime || 'N/A')}
+											</p>
+											<p>
+												{message.limits
+													.replace('{perCollection}', record.request.itemspercollection || 'N/A')
+													.replace('{total}', record.request.maxitems || 'N/A')}
+											</p>
+											<p>
+												{message.currentStatus
+													.replace('{liveOrders}', record.request.liveorders || 'N/A')
+													.replace('{available}', record.request.remainingorders || 'N/A')}
+											</p>
+										</div>
+									</div>
 								</div>
 								<div className="w-full lg:w-2/3">
 									<div className="w-full flex flex-col gap-6 items-start ">
@@ -146,7 +178,7 @@ const Detail = () => {
 										{isDescriptionDatabase(database, record.request.req_db_name) && (
 											<div className="w-full ">
 												<Accordion
-													items={[  
+													items={[
 														{
 															title: message.descriptionTree,
 															content: (
