@@ -141,7 +141,7 @@ const Detail = () => {
 									</div>
 									<NavigationSideBar />
 									{record.request.currentcollectiontime && (
-										<div className="border rounded-lg p-4 bg-blue-50 border-blue-200 text-blue-800 space-y-3">
+										<div className="border p-4 bg-blue-50 border-blue-200 text-blue-800 space-y-3" style={{borderRadius:'5px'}}>
 											<div className="flex items-center gap-2 font-medium">
 												<AlertCircle className="h-5 w-5 flex-shrink-0" />
 												<span>{message.archives} {message.requestInfo}</span>
