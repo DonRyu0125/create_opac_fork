@@ -280,6 +280,6 @@
   "collectionClosed": "The {collectionTime} collection is closed.",
   "orderMore": "You can order {count} items from the {nextCollectionTime} collection.",
   "limits": "Limit: {perCollection} per collection, {total} total.",
-  "currentStatus": "Currently: {liveOrders} live orders, {available} available."
-
+  "currentStatus": "Currently: {liveOrders} live orders, {available} available.",
+  "browseByTitle":"Browse by Title"
 }

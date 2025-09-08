@@ -13,20 +13,22 @@ const Categories = ({ page, previewData, previewMode }: PageSectionProps) => {
 
 	return (
 		<Section heading={data.browseByCategoryTitle}>
-			<Slide
-				itemsPerSlide={{ lg: 4 }}
-				items={data.categoriesItems}
-				renderItem={(item, index: any) => (
-					<Card className="max-w-md mx-auto  border-none cursor-pointer hover:shadow-lg" key={index}>
-						<ThumbnailCard
-							title={item.title}
-							url={`${getSearchURL(`UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=${item.url}`)}`}
-							thumbnail={item.thumbnail}
-						/>
-					</Card>
-				)}
-			/>
-			<CategoryByTitle/>
+			<div>
+				<Slide
+					itemsPerSlide={{ lg: 4 }}
+					items={data.categoriesItems}
+					renderItem={(item, index: any) => (
+						<Card className="max-w-md mx-auto  border-none cursor-pointer hover:shadow-lg" key={index}>
+							<ThumbnailCard
+								title={item.title}
+								url={`${getSearchURL(`UNIONSEARCH&SIMPLE_EXP=Y&ERRMSG=[MESSAGES]no-record.html&REPORT=WEB_UNION_SUM&APPLICATION=UNION_VIEW&exp=${item.url}`)}`}
+								thumbnail={item.thumbnail}
+							/>
+						</Card>
+					)}
+				/>
+				<CategoryByTitle />
+			</div>
 		</Section>
 	)
 }
