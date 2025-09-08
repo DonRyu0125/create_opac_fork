@@ -14,7 +14,7 @@ const Indexes = () => {
 		if (typeof window !== 'undefined') window.open(url, '_blank', 'noopener,noreferrer')
 	}
 	return (
-		<Section heading={'Index '}>
+		<Section heading={'Index'}>
 			<div className="w-full p-4 mx-auto space-y-4 bg-slate-200 rounded">
 				<div className={'text-center font-bold'}>Indexes to Lloyd's Captains Registers</div>
 				<div className={'font-light'}>
