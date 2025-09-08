@@ -5,6 +5,7 @@ import { Card } from '../ui/card'
 import Slide from '../common/slide'
 import Section from '../common/Section'
 import { getSearchURL } from '@/lib/utils'
+import CategoryByTitle from './CategoryByTitle'
 
 const Categories = ({ page, previewData, previewMode }: PageSectionProps) => {
 	const sourceData = useConstants()[page]
@@ -25,6 +26,7 @@ const Categories = ({ page, previewData, previewMode }: PageSectionProps) => {
 					</Card>
 				)}
 			/>
+			<CategoryByTitle/>
 		</Section>
 	)
 }

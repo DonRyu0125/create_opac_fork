@@ -7,7 +7,6 @@ const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)
 
 const Indexes = () => {
 	const [active, setActive] = React.useState<string | null>(null)
-
 	const handleClick = (letter: string) => {
 		const url = `https://search.lma.gov.uk/captains-registers-pdfs/captains-registers-u.pdf`
 		setActive(letter)
