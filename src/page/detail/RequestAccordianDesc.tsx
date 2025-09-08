@@ -109,7 +109,7 @@ const RequestAccordianDesc = () => {
 													<div className="flex gap-2">
 														<TooltipButton
 															disabled={checkStatus(value)}
-															tooltipContent={message.requestRecord}
+															tooltipContent={message.request}
 															variant="outline"
 															onClick={() => handleRequest(value.id)}>
 															<SquareCheck />

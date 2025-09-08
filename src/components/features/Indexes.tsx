@@ -9,13 +9,23 @@ const Indexes = () => {
 	const [active, setActive] = React.useState<string | null>(null)
 
 	const handleClick = (letter: string) => {
-		const url = `/pdf/${letter.toLowerCase()}.pdf`
+		const url = `https://search.lma.gov.uk/captains-registers-pdfs/captains-registers-u.pdf`
 		setActive(letter)
 		if (typeof window !== 'undefined') window.open(url, '_blank', 'noopener,noreferrer')
 	}
 	return (
-		<Section heading={'Index'}>
-			<div className="w-full max-w-3xl mx-auto space-y-4">
+		<Section heading={'Index '}>
+			<div className="w-full p-4 mx-auto space-y-4 bg-slate-200 rounded">
+				<div className={'text-center font-bold'}>Indexes to Lloyd's Captains Registers</div>
+				<div className={'font-light'}>
+					This page contains links to indexes and transcriptions of archives held at The London Archives. The indexes to the Lloyd's
+					Captains Registers were compiled by a volunteer project, which has made a significant contribution to the development of the
+					collection. This page will be updated as new indexes and transcripts become available.
+				</div>
+				<div className={'font-light'}>
+					The following letters for the series covering 1869 (retrospective to 1851 for masters and mates still sailing in 1869) -1911 have
+					been indexed
+				</div>
 				<div className="grid grid-cols-7 sm:grid-cols-8 md:grid-cols-13 gap-2">
 					{letters.map((l) => (
 						<Button
