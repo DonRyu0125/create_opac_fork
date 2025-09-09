@@ -34,7 +34,7 @@ const Archives = ({ previewMode = false, previewData }: MainPageProps) => {
 			{showAdvSearch && <AdvancedSearchForm search_database={database_name} url={getSearchURL(searchURL)} />}
 			{enableFeaturedCollection && <FeaturedCollection page={'archives'} previewData={previewData} previewMode={previewMode} />}
 			<Indexes />
-			
+
 			{enableCategoriesItems && <Categories page={'archives'} previewData={previewData} previewMode={previewMode} />}
 
 			{enableRSVP && <RSVPCalendar page={'archives'} previewData={previewData} previewMode={previewMode} />}

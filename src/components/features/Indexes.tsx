@@ -16,12 +16,12 @@ const Indexes = () => {
 		<Section heading={'Index'}>
 			<div className="w-full p-4 mx-auto space-y-4 bg-slate-200 rounded">
 				<div className={'text-center font-bold'}>Indexes to Lloyd's Captains Registers</div>
-				<div className={'font-light'}>
+				<div className={'font-normal'}>
 					This page contains links to indexes and transcriptions of archives held at The London Archives. The indexes to the Lloyd's
 					Captains Registers were compiled by a volunteer project, which has made a significant contribution to the development of the
 					collection. This page will be updated as new indexes and transcripts become available.
 				</div>
-				<div className={'font-light'}>
+				<div className={'font-normal'}>
 					The following letters for the series covering 1869 (retrospective to 1851 for masters and mates still sailing in 1869) -1911 have
 					been indexed
 				</div>
