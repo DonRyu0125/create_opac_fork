@@ -4,6 +4,8 @@ import useConstants from '@/hooks/useConstants'
 import { CircleHelp, CircleMinus, CirclePlus, CircleX, TextSearch } from 'lucide-react'
 import { useRef, useState } from 'react'
 import AdvancedSearchInput from './AdvancedSearchInput'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 export type FieldObject = {
 	field: string
 	keyword: string
@@ -46,8 +48,8 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 	])
 	const formRef = useRef<HTMLFormElement>(null)
 	const inputRef = useRef<any>(null)
-
 	const navigations = [home, archives, museum, library]
+	const [digitalDoc, setDigitalDoc] = useState(false)
 
 	const getDBTitle = (search_database: string) => {
 		let db = navigations.filter((item) => item.database_name === search_database)
@@ -118,6 +120,13 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 				<div className={'text-center'}>{message.advanceSearchDesc}</div>
 				<form ref={formRef} method="POST" id="advancedSearchForm" action={`${url}`} className={'hidden'}>
 					<input name="QUERY_EXPRESSION" ref={inputRef} hidden id="advancedSearchInput" />
+					{digitalDoc && (
+						<input
+							type="hidden"
+							name="RESTRICT_EXP"
+							value="(DIGITAL_DOCCHECK X OR PLAYER_WEBREADY X OR IMAGE_WEBREADY X OR ANC_LINKCHECK X) AND SECURITY A"
+						/>
+					)}
 				</form>
 				<div className={'w-full md:w-4/6 mt-3 flex flex-col items-center'}>
 					{searchExp.map((exp, index) => (
@@ -157,7 +166,13 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							</div>
 						</div>
 					</div>
-					<div className="w-full mt-10 flex justify-between m-2">
+					<div className={'w-full flex items-center justify-center my-2'}>
+						<Checkbox onClick={() => setDigitalDoc(!digitalDoc)} checked={digitalDoc} />
+						<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+							Digital Documents Only
+						</Label>
+					</div>
+					<div className="w-full mt-8 flex justify-between m-2">
 						<Button variant={'default'} className={'h-[50px] w-[45%] ml-[7px] font-bold text-lg'} onClick={submitSearch}>
 							<TextSearch className={'mb-1'} />
 							<span className="mx-2 block text-l">{message.searchButton}</span>
