@@ -95,6 +95,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 			{ field: '', keyword: '', boolean: ADVANCED_SEARCH_BOOLEAN.AND },
 			{ field: '', keyword: '' },
 		])
+		setDigitalDoc(false)
 	}
 
 	const submitSearch = () => {
@@ -166,7 +167,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							</div>
 						</div>
 					</div>
-					<div className={'w-full flex items-center justify-center my-2'}>
+					<div className={'w-full flex items-center justify-end pr-[30px]'}>
 						<Checkbox onClick={() => setDigitalDoc(!digitalDoc)} checked={digitalDoc} />
 						<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 							Digital Documents Only
