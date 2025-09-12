@@ -11,13 +11,13 @@ export const TDR_CONFIG: TdrParams = {
 	// search_endpoint: '/#/search',
 	// bookmark_endpoint: '/api/Discover/BookmarkLinks',
 	// delete_bookmark_ep: '/api/Discover/Bookmarks',
-	username: 'Cams.Dev',
-	userpassword: 'Cams.Dev_12!',
-	tdr_api: 'https://titantdrapi.minisisinc.com',
-	tdr_ui: 'https://titantdr.minisisinc.com',
+	username: 'camstesttdr',
+	userpassword: 'Demo_Account1',
+	tdr_api: 'https://test-titantdrapi.minisisinc.com',
+	tdr_ui: 'https://test-titantdr.minisisinc.com',
 	login_endpoint: '/token',
 	search_endpoint: '/#/discover',
-	bookmark_endpoint: '/api/Discover/BookmarkLinks',
+	bookmark_endpoint: '/api/Discover/Bookmarks',
 	delete_bookmark_ep: '/api/Discover/Bookmarks',
 }
 type TdrParams = {
@@ -59,7 +59,8 @@ export type TDRFile = {
 
 export const generateTDRIframeURL = (access_token: string, bookmarkId: string) => {
 	// Generate discovery URL
-	const discoveryUrl = `${TDR_CONFIG.tdr_ui}${TDR_CONFIG.search_endpoint}/${bookmarkId}`
+	const discoveryUrl = `${TDR_CONFIG.tdr_ui}/#/Search?phrase=++@&bookmark=${bookmarkId}&token=${access_token}`
+	
 	return discoveryUrl
 }
 
@@ -94,6 +95,17 @@ export const getTDRAccessToken = async () => {
 		}
 	)
 
+	return res?.data
+}
+
+export const createTDRBookmark = async (accessToken: string, bookmarkId: string) => {
+	const res = await axios.post(`${TDR_CONFIG.tdr_api}/${TDR_CONFIG.bookmark_endpoint}`, {
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			Accept: 'application/json',
+			Authorization: `Bearer ${accessToken}`,
+		},
+	})
 	return res?.data
 }
 
