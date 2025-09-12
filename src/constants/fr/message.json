@@ -283,6 +283,6 @@
 	"orderMore": "Vous pouvez commander {count} articles dans la collecte de {nextCollectionTime}.",
 	"limits": "Limite : {perCollection} par collecte, {total} au total.",
 	"currentStatus": "Actuellement : {liveOrders} commandes actives, {available} disponibles.",
-	"browseByTitle": "Parcourir par titre",
+	"browseByTitle": "Parcourir par titre pour les archives",
 	"digitalDocumentsOnly": "Documents numériques uniquement"
 }
