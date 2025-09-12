@@ -10,7 +10,9 @@ import CategoryByTitle from './CategoryByTitle'
 const Categories = ({ page, previewData, previewMode }: PageSectionProps) => {
 	const sourceData = useConstants()[page]
 	const data = previewMode && previewData ? (previewData as typeof sourceData) : sourceData
+	const { archives } = useConstants()
 
+	console.log('data', data.database_name)
 	return (
 		<Section heading={data.browseByCategoryTitle}>
 			<div>
@@ -27,7 +29,7 @@ const Categories = ({ page, previewData, previewMode }: PageSectionProps) => {
 						</Card>
 					)}
 				/>
-				<CategoryByTitle />
+				{data.database_name === archives.database_name && <CategoryByTitle />}
 			</div>
 		</Section>
 	)
