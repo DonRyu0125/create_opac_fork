@@ -35,6 +35,8 @@ export const ADVANCED_SEARCH_BOOLEAN = {
 	NOT: 'NOT',
 }
 
+type KeywordType = 'AND_WORD' | 'OR_WORD' | 'ADJ_WORD'
+
 const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => {
 	const { message, advancedSearch, home, archives, museum, library } = useConstants()
 	const [searchExp, setSearchExp] = useState<FieldObject[]>([
@@ -50,6 +52,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 	const inputRef = useRef<any>(null)
 	const navigations = [home, archives, museum, library]
 	const [digitalDoc, setDigitalDoc] = useState(false)
+	const [selected, setSelected] = useState<KeywordType | null>(null)
 
 	const getDBTitle = (search_database: string) => {
 		let db = navigations.filter((item) => item.database_name === search_database)
@@ -85,6 +88,10 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 		setSearchExp(newSearchExp)
 	}
 
+	const handleChange = (name: KeywordType, checked: boolean | 'indeterminate') => {
+		setSelected(checked === true ? name : null)
+	}
+
 	const resetFields = () => {
 		setSearchExp([
 			{
@@ -96,6 +103,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 			{ field: '', keyword: '' },
 		])
 		setDigitalDoc(false)
+		setSelected(null)
 	}
 
 	const submitSearch = () => {
@@ -128,6 +136,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							value="(DIGITAL_DOCCHECK X OR PLAYER_WEBREADY X OR IMAGE_WEBREADY X OR ANC_LINKCHECK X) AND SECURITY A"
 						/>
 					)}
+					{selected && <input type="hidden" name={'FLD_OP1'} value={selected} />}
 				</form>
 				<div className={'w-full md:w-4/6 mt-3 flex flex-col items-center'}>
 					{searchExp.map((exp, index) => (
@@ -167,11 +176,31 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							</div>
 						</div>
 					</div>
-					<div className={'w-full flex items-center justify-end pr-[30px]'}>
-						<Checkbox onClick={() => setDigitalDoc(!digitalDoc)} checked={digitalDoc} />
-						<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-							Digital Documents Only
-						</Label>
+					<div className={'w-full flex justify-evenly'}>
+						<div className={'flex items-center'}>
+							<Checkbox checked={selected === 'AND_WORD'} onCheckedChange={(v) => handleChange('AND_WORD', v)} id="AND_WORD" />
+							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+								{message.allOfTheseKeywords}
+							</Label>
+						</div>
+						<div className={'flex items-center'}>
+							<Checkbox checked={selected === 'OR_WORD'} onCheckedChange={(v) => handleChange('OR_WORD', v)} id="OR_WORD" />
+							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+								{message.anyOfTheseKeywords}
+							</Label>
+						</div>
+						<div className={'flex items-center'}>
+							<Checkbox checked={selected === 'ADJ_WORD'} onCheckedChange={(v) => handleChange('ADJ_WORD', v)} id="ADJ_WORD" />
+							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+								{message.exactPhrase}
+							</Label>
+						</div>
+						<div className={'flex items-center'}>
+							<Checkbox onClick={() => setDigitalDoc(!digitalDoc)} checked={digitalDoc} />
+							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+								Digital Documents Only
+							</Label>
+						</div>
 					</div>
 					<div className="w-full mt-8 flex justify-between m-2">
 						<Button variant={'default'} className={'h-[50px] w-[45%] ml-[7px] font-bold text-lg'} onClick={submitSearch}>
