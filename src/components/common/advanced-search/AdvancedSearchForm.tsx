@@ -176,26 +176,26 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							</div>
 						</div>
 					</div>
-					<div className={'w-full flex justify-evenly'}>
-						<div className={'flex items-center'}>
+					<div className={'w-full md:flex justify-evenly'}>
+						<div className={'flex items-center my-1'}>
 							<Checkbox checked={selected === 'AND_WORD'} onCheckedChange={(v) => handleChange('AND_WORD', v)} id="AND_WORD" />
 							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 								{message.allOfTheseKeywords}
 							</Label>
 						</div>
-						<div className={'flex items-center'}>
+						<div className={'flex items-center my-1'}>
 							<Checkbox checked={selected === 'OR_WORD'} onCheckedChange={(v) => handleChange('OR_WORD', v)} id="OR_WORD" />
 							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 								{message.anyOfTheseKeywords}
 							</Label>
 						</div>
-						<div className={'flex items-center'}>
+						<div className={'flex items-center my-1'}>
 							<Checkbox checked={selected === 'ADJ_WORD'} onCheckedChange={(v) => handleChange('ADJ_WORD', v)} id="ADJ_WORD" />
 							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 								{message.exactPhrase}
 							</Label>
 						</div>
-						<div className={'flex items-center'}>
+						<div className={'flex items-center my-1'}>
 							<Checkbox onClick={() => setDigitalDoc(!digitalDoc)} checked={digitalDoc} />
 							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 								Digital Documents Only
