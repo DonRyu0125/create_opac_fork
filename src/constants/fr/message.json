@@ -287,5 +287,6 @@
 	"digitalDocumentsOnly": "Documents numériques uniquement",
 	"allOfTheseKeywords": "Tous ces mots-clés",
 	"anyOfTheseKeywords": "N'importe lequel de ces mots-clés",
-	"exactPhrase": "Expression exacte"
+	"exactPhrase": "Expression exacte",
+	"closedForToday":"Les archives sont fermées pour aujourd'hui"
 }

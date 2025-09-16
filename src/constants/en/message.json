@@ -285,5 +285,6 @@
   "digitalDocumentsOnly": "Digital Documents Only",
   "allOfTheseKeywords": "All of these keywords",
   "anyOfTheseKeywords": "Any of these keywords",
-  "exactPhrase": "Exact phrase"
+  "exactPhrase": "Exact phrase",
+  "closedForToday":"Archive is closed for today"
 }
