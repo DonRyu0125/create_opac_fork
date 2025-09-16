@@ -116,7 +116,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 		}
 		let len = data.length
 		let qry = data.map((exp, index) => `${exp.field} ${exp.keyword} ${exp.boolean && index !== len - 1 ? exp.boolean : ''}`).join(' ')
-		inputRef.current.value = qry
+		inputRef.current.value = `${qry}${digitalDoc ? " AND MEDIA_PRESENT_UN READY" : ""}`
 		formRef.current?.submit()
 	}
 
@@ -129,13 +129,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 				<div className={'text-center'}>{message.advanceSearchDesc}</div>
 				<form ref={formRef} method="POST" id="advancedSearchForm" action={`${url}`} className={'hidden'}>
 					<input name="QUERY_EXPRESSION" ref={inputRef} hidden id="advancedSearchInput" />
-					{digitalDoc && (
-						<input
-							type="hidden"
-							name="RESTRICT_EXP"
-							value="(DIGITAL_DOCCHECK X OR PLAYER_WEBREADY X OR IMAGE_WEBREADY X OR ANC_LINKCHECK X) AND SECURITY A"
-						/>
-					)}
+					<input name="QUERY_EXPRESSION" ref={inputRef} hidden id="advancedSearchInput" />
 					{selected && <input type="hidden" name={'FLD_OP1'} value={selected} />}
 				</form>
 				<div className={'w-full md:w-4/6 mt-3 flex flex-col items-center'}>
@@ -195,12 +189,12 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 								{message.exactPhrase}
 							</Label>
 						</div>
-						<div className={'flex items-center my-1'}>
+						{/* <div className={'flex items-center my-1'}>
 							<Checkbox onClick={() => setDigitalDoc(!digitalDoc)} checked={digitalDoc} />
 							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 								Digital Documents Only
 							</Label>
-						</div>
+						</div> */}
 					</div>
 					<div className="w-full mt-8 flex justify-between m-2">
 						<Button variant={'default'} className={'h-[50px] w-[45%] ml-[7px] font-bold text-lg'} onClick={submitSearch}>
