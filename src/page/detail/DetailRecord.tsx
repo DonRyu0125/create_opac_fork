@@ -39,12 +39,18 @@ const DetailRecord = (props: Props) => {
 							)
 						}
 						if (Array.isArray(value)) {
-							return value.map((e, i) => (
-								<div key={i}>
-									<HighlightText text={e.toString()} highlights={searchTerms} />
-								</div>
-							))
+							return <div >
+								<HighlightText text={value[0].toString()} highlights={searchTerms} />
+							</div>
 						}
+						// if (Array.isArray(value)) {
+						// 	console.log('value',value)
+						// 	return value.map((e, i) => (
+						// 		<div key={i}>
+						// 			<HighlightText text={e.toString()} highlights={searchTerms} />
+						// 		</div>
+						// 	))
+						// }
 						return value
 					}}
 				/>
