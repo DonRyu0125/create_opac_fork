@@ -117,7 +117,7 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 		let len = data.length
 		let qry = data.map((exp, index) => `${exp.field} ${exp.keyword} ${exp.boolean && index !== len - 1 ? exp.boolean : ''}`).join(' ')
 		if (digitalDoc) {
-			qry += ` AND MEDIA_PRESENT_UN READY`
+			qry += ` AND MEDIA_PRESENT_UN Ready`
 		}
 
 		inputRef.current.value = qry
