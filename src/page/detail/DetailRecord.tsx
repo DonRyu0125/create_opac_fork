@@ -44,7 +44,6 @@ const DetailRecord = (props: Props) => {
 							</div>
 						}
 						// if (Array.isArray(value)) {
-						// 	console.log('value',value)
 						// 	return value.map((e, i) => (
 						// 		<div key={i}>
 						// 			<HighlightText text={e.toString()} highlights={searchTerms} />

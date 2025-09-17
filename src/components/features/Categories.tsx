@@ -12,7 +12,6 @@ const Categories = ({ page, previewData, previewMode }: PageSectionProps) => {
 	const data = previewMode && previewData ? (previewData as typeof sourceData) : sourceData
 	const { archives } = useConstants()
 
-	console.log('data', data.database_name)
 	return (
 		<Section heading={data.browseByCategoryTitle}>
 			<div>
