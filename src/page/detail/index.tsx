@@ -119,8 +119,6 @@ const Detail = () => {
 		if (closureDates.has(yyyyMMdd)) return true
 		return openWeekdays.includes(today.getDay()) ? false : true
 	}
-
-	console.log('-------->', isClose())
 	//If the XML_TREE is not working at the repo spec.
 	if (!record.record) return <NoRecord />
 
