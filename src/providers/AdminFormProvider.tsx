@@ -44,19 +44,19 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({ children, 
 			setIsSubmitting(true)
 			showLoading()
 			
-			// Create a toast that we'll update with progress
+			// Show a loading toast
 			toast({
 				title: 'Saving changes',
 				description: (
 					<div className="flex items-center gap-2">
 						<Loader2 className="h-4 w-4 animate-spin" />
-						<span>Uploading data...</span>
+						<span>Processing changes...</span>
 					</div>
 				),
 				duration: 60000, // Long duration as we'll dismiss it manually
 			})
 			
-			setProgress('Uploading data...')
+			setProgress('Processing changes...')
 			
 			axios
 				.post('/update', {
@@ -64,46 +64,34 @@ export const AdminFormProvider: React.FC<AdminFormProviderProps> = ({ children, 
 					content: JSON.stringify(data),
 				})
 				.then((res) => {
-					// Update toast to show rebuild progress
-					setProgress('Building OPAC...')
-					toast({
-						title: 'Building OPAC',
-						description: (
-							<div className="flex items-center gap-2">
-								<Loader2 className="h-4 w-4 animate-spin" />
-								<span>Building OPAC...</span>
-							</div>
-						),
-						duration: 60000,
-					})
+					const { status, message, buildMessage } = res.data
 					
-					// After a delay to simulate the build process, show success
-					setTimeout(() => {
-						setProgress('Deploying changes...')
+					if (status === 'success') {
 						toast({
-							title: 'Deploying changes',
-							description: (
-								<div className="flex items-center gap-2">
-									<Loader2 className="h-4 w-4 animate-spin" />
-									<span>Deploying changes...</span>
-								</div>
-							),
-							duration: 60000,
+							title: 'Success',
+							description: buildMessage || message,
+							variant: 'default',
+							duration: 5000,
 						})
-						
-						setTimeout(() => {
-							// Final success message
-							toast({
-								title: 'Success',
-								description: 'Changes deployed successfully!',
-								variant: 'default',
-								duration: 5000,
-							})
-							setProgress(null)
-							setIsSubmitting(false)
-							hideLoading()
-						}, 2000) // Simulate deployment time
-					}, 2000) // Simulate build time
+					} else if (status === 'partial') {
+						toast({
+							title: 'Partial Success',
+							description: buildMessage || message,
+							variant: 'default',
+							duration: 5000,
+						})
+					} else {
+						toast({
+							title: 'Error',
+							description: buildMessage || message || 'An unknown error occurred',
+							variant: 'destructive',
+							duration: 5000,
+						})
+					}
+					
+					setProgress(null)
+					setIsSubmitting(false)
+					hideLoading()
 				})
 				.catch((error) => {
 					toast({
