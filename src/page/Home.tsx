@@ -57,7 +57,6 @@ const Home = ({ previewMode = false, previewData }: MainPageProps) => {
 					<HomeSearchForm title={message.searchAllCollections} inputName={UNION_SEARCH_CL} action={getSearchURL(searchURL)} />
 				</div>
 			</Hero>
-			<UniversalViewerEmbed manifestUrl="https://wellcomelibrary.org/iiif/b18035723/manifest" />
 
 			<TopPick page={'home'} previewData={previewData} previewMode={previewMode} />
 
