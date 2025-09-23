@@ -70,14 +70,13 @@ const RequestAccordianBiblio = () => {
 	// Check that item is reqeuested by current user
 	// Check that item waitlist is allowed
 	// Check that item is requestable by status
-	const isRequestable = (barcode: string, status: string) => {
+	const isRequestDisabled = (barcode: string, status: string) => {
 		let arr = convertToArr(record.cur_user_request)
-		let res
+		let res = false
 		arr.map((item) => {
-			if (barcode === item) {
+			if (barcode == item) {
 				res = true
-			} else {
-				res = false
+				return
 			}
 		})
 
@@ -85,7 +84,7 @@ const RequestAccordianBiblio = () => {
 			if (config.requestConfig.libraryWaitlistEnabled) {
 				return !IS_REQUESTABLE_ARR.includes(status)
 			} else {
-				return status === 'AVAILABLE' ? false :true
+				return status === 'AVAILABLE' ? false : true
 			}
 		}
 
@@ -137,7 +136,7 @@ const RequestAccordianBiblio = () => {
 													<div className="flex gap-2">
 														<TooltipButton
 															key={value.barcode}
-															disabled={isRequestable(value.barcode, value.item_status)}
+															disabled={isRequestDisabled(value.barcode, value.item_status)}
 															tooltipContent={message.request}
 															variant="outline"
 															onClick={() => handleRequest(value.barcode)}>
