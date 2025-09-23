@@ -6,36 +6,38 @@ import useConstants from '@/hooks/useConstants'
 import { getSessionID } from '@/lib/utils'
 import axios from 'axios'
 
-const RequestModal = ({ selectedItem, selectOption, sisn }: { selectedItem: string[]; selectOption: string; sisn: string }) => {
+interface selectedItem {
+	barcode: string
+	id: string
+}
+
+const RequestModal = ({ selectedItem, selectOption, sisn }: { selectedItem: selectedItem[]; selectOption: string; sisn: string }) => {
 	const { message } = useConstants()
 	const [startSuspDate, setStartSuspDate] = useState('')
 	const [stopSuspDate, setStopSuspDate] = useState('')
 	const today = new Date().toISOString().split('T')[0]
 
 	const onSubmit = async () => {
-		const data = {
+		const params = new URLSearchParams({
 			start_susp_date: startSuspDate,
 			stop_susp_date: stopSuspDate,
 			PICKUP_LOCATION: '',
 			CLEAR_SUSPENSION: selectOption === 'CLEAR' ? 'X' : '',
-			...selectedItem.reduce(
-				(acc, id) => {
-					acc[id] = 'CHANGE'
-					return acc
-				},
-				{} as Record<string, string>
-			),
-		}
+		})
 
-		const params = new URLSearchParams(data).toString()
+		selectedItem.forEach((item) => {
+			params.append(item.id, `CHANGE:${item.barcode}`)
+		})
+
 		return await axios
-			.post(`${getSessionID()}/${sisn}?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params, {
+			.post(`${getSessionID()}/${sisn}?MANIPITEM&REPORT=WEB_LIBRARY_CIRC_DASHBOARD`, params.toString(), {
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			})
 			.then(() => {
 				window.location.reload()
 			})
 	}
+
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger>
