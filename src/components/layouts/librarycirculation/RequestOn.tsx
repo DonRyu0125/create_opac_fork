@@ -7,29 +7,33 @@ import { Button } from '@/components/ui/button'
 import { CheckCheck, FolderOpen, RefreshCw } from 'lucide-react'
 import RequestModal from './RequestModal'
 
+interface selectedItem {
+	barcode: string
+	id: string
+}
+
 const RequestOn = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const record = records[0]
 	const { message } = useConstants()
 	const requests = convertToArr(record.request_on)
 	const [selectOption, setSelectOption] = useState<string>('')
-	const [selectedItem, setselectedItem] = useState<string[]>([])
-
+	const [selectedItem, setselectedItem] = useState<selectedItem[]>([])
 	const getImage = (item: any) => {
 		let imgArr = convertToArr(item.media)
 		return imgArr[0]?.im_access_link ?? 'https://placehold.co/250x250'
 	}
 
-	const handleCheck = (id: string, checked: boolean) => {
-		const updated = checked ? [...selectedItem, id] : selectedItem.filter((b) => b !== id)
+	const handleCheck = (barcode: string, id: string, checked: boolean) => {
+		const updated = checked ? [...selectedItem, { barcode, id }] : selectedItem.filter((b) => b.barcode !== barcode)
 		setselectedItem(updated)
-		console.log(updated)
 	}
 
 	const handleCheckAll = () => {
-		const allID = requests.map((item) => item.barcode)
+		const allID = requests.map((item) => {
+			return { barcode: item.barcode, id: item.id }
+		})
 		setselectedItem(allID)
-		console.log(allID)
 	}
 
 	return (
@@ -67,7 +71,7 @@ const RequestOn = () => {
 					</div>
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[830px] overflow-y-auto">
 						{requests.map((item, key) => {
-							const checked = selectedItem.includes(item.barcode)
+							const checked = selectedItem.some((obj) => obj.barcode === item.barcode)
 							return (
 								<div key={key} className="rounded-md bg-white p-6 shadow">
 									<div className="flex flex-col gap-2">
@@ -83,7 +87,7 @@ const RequestOn = () => {
 												type="checkbox"
 												className="w-5 h-5 accent-primary border-gray-300 rounded  transition-all duration-150"
 												checked={checked}
-												onChange={(e) => handleCheck(item.barcode, e.target.checked)}
+												onChange={(e) => handleCheck(item.barcode, item.id, e.target.checked)}
 											/>
 										</div>
 										<div className="text-left font-bold h-[70px] overflow-hidden text-ellipsis">{item.title}</div>
