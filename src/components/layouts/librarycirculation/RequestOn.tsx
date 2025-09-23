@@ -13,7 +13,7 @@ const RequestOn = () => {
 	const { message } = useConstants()
 	const requests = convertToArr(record.request_on)
 	const [selectOption, setSelectOption] = useState<string>('')
-	const [selectedId, setselectedId] = useState<string[]>([])
+	const [selectedItem, setselectedItem] = useState<string[]>([])
 
 	const getImage = (item: any) => {
 		let imgArr = convertToArr(item.media)
@@ -21,14 +21,14 @@ const RequestOn = () => {
 	}
 
 	const handleCheck = (id: string, checked: boolean) => {
-		const updated = checked ? [...selectedId, id] : selectedId.filter((b) => b !== id)
-		setselectedId(updated)
+		const updated = checked ? [...selectedItem, id] : selectedItem.filter((b) => b !== id)
+		setselectedItem(updated)
 		console.log(updated)
 	}
 
 	const handleCheckAll = () => {
-		const allID = requests.map((item) => item.id)
-		setselectedId(allID)
+		const allID = requests.map((item) => item.barcode)
+		setselectedItem(allID)
 		console.log(allID)
 	}
 
@@ -56,18 +56,18 @@ const RequestOn = () => {
 							]}
 						/>
 						<div className={'flex my-2 md:my-0'}>
-							<RequestModal selectedId={selectedId} selectOption={selectOption} sisn={record.sisn} />
+							<RequestModal selectedItem={selectedItem} selectOption={selectOption} sisn={record.sisn} />
 							<Button onClick={handleCheckAll} className={'mx-1'}>
 								{message.selectAll}
 							</Button>
-							<Button onClick={() => setselectedId([])} className={'mx-1'}>
+							<Button onClick={() => setselectedItem([])} className={'mx-1'}>
 								<RefreshCw />
 							</Button>
 						</div>
 					</div>
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[830px] overflow-y-auto">
 						{requests.map((item, key) => {
-							const checked = selectedId.includes(item.id)
+							const checked = selectedItem.includes(item.barcode)
 							return (
 								<div key={key} className="rounded-md bg-white p-6 shadow">
 									<div className="flex flex-col gap-2">
@@ -83,7 +83,7 @@ const RequestOn = () => {
 												type="checkbox"
 												className="w-5 h-5 accent-primary border-gray-300 rounded  transition-all duration-150"
 												checked={checked}
-												onChange={(e) => handleCheck(item.id, e.target.checked)}
+												onChange={(e) => handleCheck(item.barcode, e.target.checked)}
 											/>
 										</div>
 										<div className="text-left font-bold h-[70px] overflow-hidden text-ellipsis">{item.title}</div>

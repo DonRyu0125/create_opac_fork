@@ -6,7 +6,7 @@ import useConstants from '@/hooks/useConstants'
 import { getSessionID } from '@/lib/utils'
 import axios from 'axios'
 
-const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]; selectOption: string; sisn: string }) => {
+const RequestModal = ({ selectedItem, selectOption, sisn }: { selectedItem: string[]; selectOption: string; sisn: string }) => {
 	const { message } = useConstants()
 	const [startSuspDate, setStartSuspDate] = useState('')
 	const [stopSuspDate, setStopSuspDate] = useState('')
@@ -18,7 +18,7 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 			stop_susp_date: stopSuspDate,
 			PICKUP_LOCATION: '',
 			CLEAR_SUSPENSION: selectOption === 'CLEAR' ? 'X' : '',
-			...selectedId.reduce(
+			...selectedItem.reduce(
 				(acc, id) => {
 					acc[id] = 'CHANGE'
 					return acc
@@ -39,7 +39,7 @@ const RequestModal = ({ selectedId, selectOption, sisn }: { selectedId: string[]
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger>
-				<Button disabled={selectedId.length > 0 && selectOption ? false : true}>{message.submit}</Button>
+				<Button disabled={selectedItem.length > 0 && selectOption ? false : true}>{message.submit}</Button>
 			</Dialog.Trigger>
 			<Dialog.Portal>
 				<Dialog.Overlay className="fixed inset-0 bg-black/40" />
