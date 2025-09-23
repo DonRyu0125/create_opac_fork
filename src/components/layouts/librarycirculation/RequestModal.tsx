@@ -5,13 +5,10 @@ import { Button } from '@/components/ui/button'
 import useConstants from '@/hooks/useConstants'
 import { getSessionID } from '@/lib/utils'
 import axios from 'axios'
+import { SelectedItem } from './type'
 
-interface selectedItem {
-	barcode: string
-	id: string
-}
 
-const RequestModal = ({ selectedItem, selectOption, sisn }: { selectedItem: selectedItem[]; selectOption: string; sisn: string }) => {
+const RequestModal = ({ selectedItem, selectOption, sisn }: { selectedItem: SelectedItem[]; selectOption: string; sisn: string }) => {
 	const { message } = useConstants()
 	const [startSuspDate, setStartSuspDate] = useState('')
 	const [stopSuspDate, setStopSuspDate] = useState('')

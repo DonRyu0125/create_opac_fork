@@ -6,11 +6,7 @@ import DropdownSelect from '@/components/common/DropdownSelect'
 import { Button } from '@/components/ui/button'
 import { CheckCheck, FolderOpen, RefreshCw } from 'lucide-react'
 import RequestModal from './RequestModal'
-
-interface selectedItem {
-	barcode: string
-	id: string
-}
+import { SelectedItem } from './type'
 
 const RequestOn = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -18,7 +14,7 @@ const RequestOn = () => {
 	const { message } = useConstants()
 	const requests = convertToArr(record.request_on)
 	const [selectOption, setSelectOption] = useState<string>('')
-	const [selectedItem, setselectedItem] = useState<selectedItem[]>([])
+	const [selectedItem, setselectedItem] = useState<SelectedItem[]>([])
 	const getImage = (item: any) => {
 		let imgArr = convertToArr(item.media)
 		return imgArr[0]?.im_access_link ?? 'https://placehold.co/250x250'
