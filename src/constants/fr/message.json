@@ -288,5 +288,6 @@
 	"allOfTheseKeywords": "Tous ces mots-clés",
 	"anyOfTheseKeywords": "N'importe lequel de ces mots-clés",
 	"exactPhrase": "Expression exacte",
-	"closedForToday":"Les archives sont fermées pour aujourd'hui"
+	"closedForToday":"Les archives sont fermées pour aujourd'hui",
+	"youHaveAlreadyRequested": "Vous avez déjà fait une demande"
 }

@@ -286,5 +286,6 @@
   "allOfTheseKeywords": "All of these keywords",
   "anyOfTheseKeywords": "Any of these keywords",
   "exactPhrase": "Exact phrase",
-  "closedForToday":"Archive is closed for today"
+  "closedForToday":"Archive is closed for today",
+  "youHaveAlreadyRequested": "You have already requested"
 }
