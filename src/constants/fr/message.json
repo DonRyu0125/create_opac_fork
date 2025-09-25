@@ -147,7 +147,7 @@
 	"passwordChangeSuccess": "Vous avez réussi à changer votre mot de passe. Veuillez vous connecter avec votre nouveau mot de passe pour accéder à votre compte.",
 	"passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
 	"passwordValidation": "Doit contenir plus de 8 caractères, au moins une lettre majuscule",
-	"patronDashboard": "Library Dashboard",
+	"libraryDashboard": "Library Dashboard",
 	"phone": "Téléphone",
 	"pleaseCancel": "Cela annulera votre inscription à",
 	"pleaseConfirm": "Veuillez confirmer votre inscription",
