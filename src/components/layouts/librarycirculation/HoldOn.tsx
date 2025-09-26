@@ -7,6 +7,7 @@ import { FolderOpen, RefreshCw, X } from 'lucide-react'
 import axios from 'axios'
 import * as Dialog from '@radix-ui/react-dialog'
 import { SelectedItem } from './type'
+import { Badge } from '@/components/ui/badge'
 
 const HoldOn = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
@@ -82,7 +83,6 @@ const HoldOn = () => {
 								</Dialog.Content>
 							</Dialog.Portal>
 						</Dialog.Root>
-
 						<Button onClick={handleCheckAll} className={'mx-1'}>
 							{message.selectAll}
 						</Button>
@@ -90,7 +90,6 @@ const HoldOn = () => {
 							<RefreshCw />
 						</Button>
 					</div>
-
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-h-[415px] overflow-y-auto">
 						{holdRequests.map((item, key) => {
 							const checked = selectedItem.some((selected: any) => selected.barcode === item.barcode)
@@ -98,7 +97,7 @@ const HoldOn = () => {
 							return (
 								<div key={key} className="rounded-md bg-white p-6 shadow">
 									<div className="flex flex-col gap-2">
-										<div className="flex justify-between items-start">
+										<div className="flex justify-between items-start relative">
 											<a href={`${getHomeSessionID()}/BIBLIO_WEB/BARCODE/${item.barcode}/WEB_UNION_DETAIL?JUMP`}>
 												<img
 													alt={message.noMediaFound}
@@ -112,6 +111,9 @@ const HoldOn = () => {
 												checked={checked}
 												onChange={(e) => handleCheck({ id: item.id, barcode: item.barcode }, e.target.checked)}
 											/>
+											<Badge className="absolute bg-gray-300 right-[-6] bottom-1" variant={'tag'}>
+												{item.media_type ?? 'N/A'}
+											</Badge>
 										</div>
 
 										<div className="text-left font-bold h-[70px] overflow-hidden text-ellipsis">{item.title}</div>
@@ -120,6 +122,10 @@ const HoldOn = () => {
 											<div className="flex justify-between">
 												<span className="text-gray-500">{message.barcode}</span>
 												<span className="text-gray-900 font-medium">{item.barcode}</span>
+											</div>
+											<div className="flex justify-between">
+												<span className="text-gray-500">{message.volumeNumber}</span>
+												<span className="text-gray-900 font-medium">{item.volume_id ?? 'N/A'}</span>
 											</div>
 											<div className="flex justify-between">
 												<span className="text-gray-500">{message.pickUpBefore}</span>
