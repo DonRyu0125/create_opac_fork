@@ -86,7 +86,7 @@ const RequestOn = () => {
 												checked={checked}
 												onChange={(e) => handleCheck(item.barcode, item.id, e.target.checked)}
 											/>
-											<Badge className="absolute right-1 bottom-1" variant={'tag'}>
+											<Badge className="absolute bg-gray-300 right-[-6] bottom-1" variant={'tag'}>
 												{item.media_type ?? 'N/A'}
 											</Badge>
 										</div>
