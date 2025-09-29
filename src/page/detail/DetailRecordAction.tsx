@@ -125,7 +125,6 @@ const DetailRecordAction = () => {
 				}
 			})
 		})
-
 		return res
 	}
 
@@ -227,7 +226,6 @@ const DetailRecordAction = () => {
 						<span className="hidden md:block">{message.bookmark}</span>
 					</TooltipButton>
 				</div>
-
 				<TooltipButton
 					tooltipContent={message.nextRecord}
 					className={'align-center md:w-[130px]'}
