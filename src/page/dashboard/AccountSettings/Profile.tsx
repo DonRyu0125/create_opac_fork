@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent, useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Bell, Key, Lock, Mail, Save, Shield, User, UserCog } from 'lucide-react'
+import { Bell, Key, LoaderCircle, Lock, Mail, Save, Shield, User, UserCog } from 'lucide-react'
 import useJSONData from '@/hooks/useJSONData'
 import axios from 'axios'
 import { getCookieValue } from '@/lib/utils'
@@ -21,6 +21,7 @@ interface ProfileFormErrors {
 
 const Profile = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
+	const [loading, setLoadting] = useState(false)
 	const handleProfileChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		const { name, value } = e.target
 		setProfileForm({
@@ -69,7 +70,7 @@ const Profile = () => {
 	const handleProfileSubmit = (e: FormEvent<HTMLFormElement>): void => {
 		e.preventDefault()
 		if (!validateProfileForm()) return
-
+		setLoadting(true)
 		axios({
 			method: 'POST',
 			url: getCookieValue('HOME_SESSID') + '?MANIPXMLRECORD&KEY=C_CLIENT_NUMBER&VALUE=' + records[0]?.client_number + '&DATABASE=PATRON',
@@ -80,9 +81,11 @@ const Profile = () => {
 			</RECORD>`,
 		})
 			.then(() => {
+				setLoadting(false)
 				window.location.reload()
 			})
 			.catch(() => {
+				setLoadting(false)
 				toast({
 					title: `Error updating profile. Please try again.`,
 					duration: 1000,
@@ -130,8 +133,16 @@ const Profile = () => {
 			</div>
 
 			<Button type="submit" className="bg-black hover:bg-gray-800">
-				<Save className="mr-2 h-4 w-4" />
-				Save Profile
+				{loading ? (
+					<>
+						<LoaderCircle />
+					</>
+				) : (
+					<>
+						<Save className="mr-2 h-4 w-4" />
+						Save Profile
+					</>
+				)}
 			</Button>
 		</form>
 	)
