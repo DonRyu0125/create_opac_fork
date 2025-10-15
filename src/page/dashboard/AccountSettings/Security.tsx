@@ -1,13 +1,11 @@
 import { Input } from '@/components/ui/input'
-import { useState, type ChangeEvent, type FormEvent } from 'react'
-import { Bell, Key, Lock, Mail, Save, Shield, User, UserCog } from 'lucide-react'
+import { useState, type ChangeEvent, type FormEvent, useEffect } from 'react'
+import { Bell, CheckCircle, CircleCheck, Key, Lock, Mail, Save, Shield, User, UserCog } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { clearCookies, convertXMLToJson, getCookieValue } from '@/lib/utils'
+import { clearCookies, convertXMLToJson, deleteCookie, getCookieValue } from '@/lib/utils'
 import axios from 'axios'
 import useJSONData from '@/hooks/useJSONData'
 import { MWI_RESFUL_RES } from '@/components/common/event-calendar/Constants'
-import X2JS from 'x2js'
-import { toast } from '@/components/ui/use-toast'
 
 interface SecurityFormData {
 	currentPassword: string
@@ -23,6 +21,7 @@ interface SecurityFormErrors {
 
 const Security = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
+	const [changed, setChanged] = useState(false)
 	const [securityForm, setSecurityForm] = useState<SecurityFormData>({
 		currentPassword: '',
 		newPassword: '',
@@ -98,9 +97,11 @@ const Security = () => {
 				newPassword: '',
 				confirmPassword: '',
 			})
-			clearCookies()
-			window.location.href = '/'
-			toast({ title: `Your password is successfully changed!` })
+			let cookies = document.cookie.split(';')
+			for (let i = 0; i < cookies.length; i++) {
+				deleteCookie(cookies[i].split('=')[0])
+			}
+			setChanged(true)
 		})
 
 	const handleSecuritySubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -126,67 +127,107 @@ const Security = () => {
 			console.error('Error:', err)
 		}
 	}
+	const [countdown, setCountdown] = useState(4)
+
+	useEffect(() => {
+		const timer = setInterval(() => {
+			setCountdown((prev) => prev - 1)
+		}, 1000)
+
+		const redirect = setTimeout(() => {
+			window.location.href = '/'
+		}, 4000)
+
+		return () => {
+			clearInterval(timer)
+			clearTimeout(redirect)
+		}
+	}, [])
+
 	return (
-		<form onSubmit={handleSecuritySubmit} className="space-y-6">
-			<div className="space-y-2">
-				<label htmlFor="currentPassword" className="text-sm font-medium">
-					Current Password
-				</label>
-				<div className="flex items-center">
-					<Key className="mr-2 h-4 w-4 text-gray-500" />
-					<Input
-						id="currentPassword"
-						name="currentPassword"
-						type="password"
-						placeholder="Enter current password"
-						value={securityForm.currentPassword}
-						onChange={handleSecurityChange}
-					/>
-				</div>
-				{securityErrors.currentPassword && <p className="text-sm text-red-500">{securityErrors.currentPassword}</p>}
-			</div>
+		<>
+			{changed ? (
+				<section className="flex items-center justify-center space-y-6 min-h-[316px]">
+					<div className="text-center space-y-4">
+						<h1 className="flex justify-center items-center text-2xl font-bold text-black">
+							<span className="mr-3">
+								<CheckCircle className="mr-3 h-6 w-6 text-black" />
+							</span>
+							Password Changed Successfully
+						</h1>
+						<p className="mt-6 text-lg text-black">
+							Your password has been updated. Please{' '}
+							<a className="font-semibold" href="/scripts/mwimain.dll?get&file=[OPAC]login.html">
+								log in again
+							</a>
+							.
+						</p>
+						<p className="mt-4 text-black">
+							Redirecting in {countdown} second{countdown !== 1 ? 's' : ''}...
+						</p>
+					</div>
+				</section>
+			) : (
+				<form onSubmit={handleSecuritySubmit} className="space-y-6">
+					<div className="space-y-2">
+						<label htmlFor="currentPassword" className="text-sm font-medium">
+							Current Password
+						</label>
+						<div className="flex items-center">
+							<Key className="mr-2 h-4 w-4 text-gray-500" />
+							<Input
+								id="currentPassword"
+								name="currentPassword"
+								type="password"
+								placeholder="Enter current password"
+								value={securityForm.currentPassword}
+								onChange={handleSecurityChange}
+							/>
+						</div>
+						{securityErrors.currentPassword && <p className="text-sm text-red-500">{securityErrors.currentPassword}</p>}
+					</div>
+					<div className="space-y-2">
+						<label htmlFor="newPassword" className="text-sm font-medium">
+							New Password
+						</label>
+						<div className="flex items-center">
+							<Lock className="mr-2 h-4 w-4 text-gray-500" />
+							<Input
+								id="newPassword"
+								name="newPassword"
+								type="password"
+								placeholder="Enter new password"
+								value={securityForm.newPassword}
+								onChange={handleSecurityChange}
+							/>
+						</div>
+						{securityErrors.newPassword && <p className="text-sm text-red-500">{securityErrors.newPassword}</p>}
+					</div>
+					<div className="space-y-2">
+						<label htmlFor="confirmPassword" className="text-sm font-medium">
+							Confirm Password
+						</label>
+						<div className="flex items-center">
+							<Lock className="mr-2 h-4 w-4 text-gray-500" />
+							<Input
+								id="confirmPassword"
+								name="confirmPassword"
+								type="password"
+								placeholder="Confirm new password"
+								value={securityForm.confirmPassword}
+								onChange={handleSecurityChange}
+							/>
+						</div>
+						{securityErrors.confirmPassword && <p className="text-sm text-red-500">{securityErrors.confirmPassword}</p>}
+					</div>
 
-			<div className="space-y-2">
-				<label htmlFor="newPassword" className="text-sm font-medium">
-					New Password
-				</label>
-				<div className="flex items-center">
-					<Lock className="mr-2 h-4 w-4 text-gray-500" />
-					<Input
-						id="newPassword"
-						name="newPassword"
-						type="password"
-						placeholder="Enter new password"
-						value={securityForm.newPassword}
-						onChange={handleSecurityChange}
-					/>
-				</div>
-				{securityErrors.newPassword && <p className="text-sm text-red-500">{securityErrors.newPassword}</p>}
-			</div>
-
-			<div className="space-y-2">
-				<label htmlFor="confirmPassword" className="text-sm font-medium">
-					Confirm Password
-				</label>
-				<div className="flex items-center">
-					<Lock className="mr-2 h-4 w-4 text-gray-500" />
-					<Input
-						id="confirmPassword"
-						name="confirmPassword"
-						type="password"
-						placeholder="Confirm new password"
-						value={securityForm.confirmPassword}
-						onChange={handleSecurityChange}
-					/>
-				</div>
-				{securityErrors.confirmPassword && <p className="text-sm text-red-500">{securityErrors.confirmPassword}</p>}
-			</div>
-
-			<Button type="submit" className="bg-black hover:bg-gray-800">
-				<Save className="mr-2 h-4 w-4" />
-				Update Password
-			</Button>
-		</form>
+					<Button type="submit" className="bg-black hover:bg-gray-800">
+						<Save className="mr-2 h-4 w-4" />
+						Update Password
+					</Button>
+				</form>
+			)}
+		</>
 	)
 }
 
