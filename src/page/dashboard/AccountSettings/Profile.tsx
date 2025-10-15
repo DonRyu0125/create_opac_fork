@@ -3,6 +3,9 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Bell, Key, Lock, Mail, Save, Shield, User, UserCog } from 'lucide-react'
 import useJSONData from '@/hooks/useJSONData'
+import axios from 'axios'
+import { getCookieValue } from '@/lib/utils'
+import { toast } from '@/components/ui/use-toast'
 
 // Define interfaces for form data and errors
 interface ProfileFormData {
@@ -18,10 +21,7 @@ interface ProfileFormErrors {
 
 const Profile = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-	const [activeTab, setActiveTab] = useState<string>('profile')
 
-    
-	// Handle profile form input changes
 	const handleProfileChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		const { name, value } = e.target
 		setProfileForm({
@@ -29,7 +29,6 @@ const Profile = () => {
 			[name]: value,
 		})
 
-		// Clear error when user types
 		if (profileErrors[name as keyof ProfileFormErrors]) {
 			setProfileErrors({
 				...profileErrors,
@@ -50,6 +49,7 @@ const Profile = () => {
 
 	// Validate profile form
 	const validateProfileForm = (): boolean => {
+		const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 		let isValid = true
 		const newErrors: ProfileFormErrors = { name: '', email: '' }
 
@@ -58,8 +58,7 @@ const Profile = () => {
 			isValid = false
 		}
 
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-		if (!emailRegex.test(profileForm.email)) {
+		if (!regex.test(profileForm.email)) {
 			newErrors.email = 'Please enter a valid email address.'
 			isValid = false
 		}
@@ -67,13 +66,32 @@ const Profile = () => {
 		setProfileErrors(newErrors)
 		return isValid
 	}
-	// Handle profile form submission
+
 	const handleProfileSubmit = (e: FormEvent<HTMLFormElement>): void => {
 		e.preventDefault()
-		if (validateProfileForm()) {
-			console.log('Profile form submitted:', profileForm)
-			// Submit profile data to server
-		}
+		if (!validateProfileForm()) return
+
+		axios({
+			method: 'POST',
+			url: getCookieValue('HOME_SESSID') + '?MANIPXMLRECORD&KEY=C_CLIENT_NUMBER&VALUE=' + records[0]?.client_number + '&DATABASE=PATRON',
+			headers: { 'Content-Type': 'text/xml' },
+			data: `<?xml version="1.0" encoding="UTF-8"?><RECORD><P_FIRST_NAME>${profileForm.firstName}</P_FIRST_NAME>
+			<P_LAST_NAME>${profileForm.lastName}</P_LAST_NAME>
+			<C_EMAIL>${profileForm.email}</C_EMAIL>
+			</RECORD>`,
+		})
+			.then(() => {
+				toast({
+					title: `Profile updated successfully.`,
+					duration: 1000,
+				})
+			})
+			.catch(() => {
+				toast({
+					title: `Error updating profile. Please try again.`,
+					duration: 1000,
+				})
+			})
 	}
 	return (
 		<form onSubmit={handleProfileSubmit} className="space-y-6">
@@ -83,8 +101,8 @@ const Profile = () => {
 				</label>
 				<div className="flex items-center">
 					<User className="mr-2 h-4 w-4 text-gray-500" />
-					<Input id="name" name="name" placeholder="Enter your name" value={profileForm.firstName} onChange={handleProfileChange} />
-					<Input id="name" name="name" placeholder="Enter your name" value={profileForm.lastName} onChange={handleProfileChange} />
+					<Input id="firstName" name="firstName" placeholder="Enter your first name" value={profileForm.firstName} onChange={handleProfileChange} />
+					<Input id="lastName" name="lastName" placeholder="Enter your last name" value={profileForm.lastName} onChange={handleProfileChange} />
 				</div>
 				{profileErrors.name && <p className="text-sm text-red-500">{profileErrors.name}</p>}
 			</div>

@@ -6,6 +6,9 @@ import { clearCookies, convertXMLToJson, deleteCookie, getCookieValue } from '@/
 import axios from 'axios'
 import useJSONData from '@/hooks/useJSONData'
 import { MWI_RESFUL_RES } from '@/components/common/event-calendar/Constants'
+import { toast } from '@/components/ui/use-toast'
+import { PASSWORD_MIN_LENGTH } from '@/page/login/Register'
+import useConstants from '@/hooks/useConstants'
 
 interface SecurityFormData {
 	currentPassword: string
@@ -20,6 +23,7 @@ interface SecurityFormErrors {
 }
 
 const Security = () => {
+	const { message } = useConstants()
 	const { records } = useJSONData({ selector: '#xml_record' })
 	const [countdown, setCountdown] = useState(4)
 	const [changed, setChanged] = useState(false)
@@ -65,6 +69,7 @@ const Security = () => {
 	}
 
 	const validateSecurityForm = (): boolean => {
+		const regex = /^(?=.*[A-Z]).*$/;
 		let isValid = true
 		const newErrors: SecurityFormErrors = {
 			currentPassword: '',
@@ -72,21 +77,17 @@ const Security = () => {
 			confirmPassword: '',
 		}
 
-		if (securityForm.currentPassword.length < 8) {
-			newErrors.currentPassword = 'Password must be at least 8 characters.'
+
+		if (securityForm.newPassword.length < 8 && regex.test(securityForm.currentPassword)) {
+			newErrors.newPassword = `${message.passwordValidation} ${PASSWORD_MIN_LENGTH} characters`
 			isValid = false
 		}
 
-		if (securityForm.newPassword.length < 8) {
-			newErrors.newPassword = 'Password must be at least 8 characters.'
-			isValid = false
-		}
-
-		if (securityForm.confirmPassword.length < 8) {
-			newErrors.confirmPassword = 'Password must be at least 8 characters.'
+		if (securityForm.confirmPassword.length < 8 && regex.test(securityForm.currentPassword)) {
+			newErrors.confirmPassword = `${message.passwordValidation} ${PASSWORD_MIN_LENGTH} characters`
 			isValid = false
 		} else if (securityForm.newPassword !== securityForm.confirmPassword) {
-			newErrors.confirmPassword = 'Passwords do not match.'
+			newErrors.confirmPassword = message.passwordsDoNotMatch
 			isValid = false
 		}
 
@@ -126,7 +127,10 @@ const Security = () => {
 				setChanged(true)
 			})
 			.catch((err) => {
-				console.error('Error updating password:', err)
+				toast({
+					title: `Error updating password. Please try again.`,
+					duration: 500,
+				})
 			})
 
 	const handleSecuritySubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -156,7 +160,7 @@ const Security = () => {
 	return (
 		<>
 			{changed ? (
-				<section className="flex items-center justify-center space-y-6 min-h-[316px]">
+				<section className="flex items-center justify-center space-y-6 min-h-[364px]">
 					<div className="text-center space-y-4">
 						<h1 className="flex justify-center items-center text-2xl font-bold text-black">
 							<span className="mr-3">
