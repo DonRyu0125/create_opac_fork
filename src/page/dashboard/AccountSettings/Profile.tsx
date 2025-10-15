@@ -81,6 +81,9 @@ const Profile = () => {
 			</RECORD>`,
 		})
 			.then(() => {
+				setProfileForm({
+					...profileForm,
+				})
 				toast({
 					title: `Profile updated successfully.`,
 					duration: 1000,
