@@ -102,7 +102,7 @@ const Profile = () => {
 				<div className="flex items-center w-full">
 					<User className="mr-2 h-4 w-4 text-gray-500" />
 					<Input className='w-[40%] mr-10' id="firstName" name="firstName" placeholder="Enter your first name" value={profileForm.firstName} onChange={handleProfileChange} />
-					<Input className='w-[40%]' id="lastName" name="lastName" placeholder="Enter your last name" value={profileForm.lastName} onChange={handleProfileChange} />
+					<Input className='w-[50%]' id="lastName" name="lastName" placeholder="Enter your last name" value={profileForm.lastName} onChange={handleProfileChange} />
 				</div>
 				{profileErrors.name && <p className="text-sm text-red-500">{profileErrors.name}</p>}
 			</div>
