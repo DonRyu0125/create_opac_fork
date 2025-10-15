@@ -21,6 +21,7 @@ interface SecurityFormErrors {
 
 const Security = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
+	const [countdown, setCountdown] = useState(4)
 	const [changed, setChanged] = useState(false)
 	const [securityForm, setSecurityForm] = useState<SecurityFormData>({
 		currentPassword: '',
@@ -32,6 +33,23 @@ const Security = () => {
 		newPassword: '',
 		confirmPassword: '',
 	})
+
+	useEffect(() => {
+		if (!changed) return
+		const timer = setInterval(() => {
+			setCountdown((prev) => prev - 1)
+		}, 1000)
+
+		const redirect = setTimeout(() => {
+			window.location.href = '/'
+		}, 4000)
+
+		return () => {
+			clearInterval(timer)
+			clearTimeout(redirect)
+		}
+	}, [changed])
+
 	const handleSecurityChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		const { name, value } = e.target
 		setSecurityForm({
@@ -91,18 +109,25 @@ const Security = () => {
 			headers: { 'Content-Type': 'text/xml' },
 			data: `<?xml version="1.0" encoding="UTF-8"?><RECORD><PATRON_PID>${securityForm.newPassword}</PATRON_PID></RECORD>`,
 			timeout: 300000,
-		}).then(() => {
-			setSecurityForm({
-				currentPassword: '',
-				newPassword: '',
-				confirmPassword: '',
-			})
-			let cookies = document.cookie.split(';')
-			for (let i = 0; i < cookies.length; i++) {
-				deleteCookie(cookies[i].split('=')[0])
-			}
-			setChanged(true)
 		})
+			.then(() => {
+				setSecurityForm({
+					currentPassword: '',
+					newPassword: '',
+					confirmPassword: '',
+				})
+
+				const cookies = document.cookie.split(';')
+				cookies.forEach((cookie) => {
+					const name = cookie.split('=')[0].trim()
+					deleteCookie(name)
+				})
+
+				setChanged(true)
+			})
+			.catch((err) => {
+				console.error('Error updating password:', err)
+			})
 
 	const handleSecuritySubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault()
@@ -127,22 +152,6 @@ const Security = () => {
 			console.error('Error:', err)
 		}
 	}
-	const [countdown, setCountdown] = useState(4)
-
-	useEffect(() => {
-		const timer = setInterval(() => {
-			setCountdown((prev) => prev - 1)
-		}, 1000)
-
-		const redirect = setTimeout(() => {
-			window.location.href = '/'
-		}, 4000)
-
-		return () => {
-			clearInterval(timer)
-			clearTimeout(redirect)
-		}
-	}, [])
 
 	return (
 		<>
@@ -157,7 +166,7 @@ const Security = () => {
 						</h1>
 						<p className="mt-6 text-lg text-black">
 							Your password has been updated. Please{' '}
-							<a className="font-semibold" href="/scripts/mwimain.dll?get&file=[OPAC]login.html">
+							<a className="font-semibold" href="/">
 								log in again
 							</a>
 							.
