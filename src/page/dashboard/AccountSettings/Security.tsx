@@ -2,6 +2,11 @@ import { Input } from '@/components/ui/input'
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import { Bell, Key, Lock, Mail, Save, Shield, User, UserCog } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { convertXMLToJson, getCookieValue } from '@/lib/utils'
+import axios from 'axios'
+import useJSONData from '@/hooks/useJSONData'
+import { MWI_RESFUL_RES } from '@/components/common/event-calendar/Constants'
+import X2JS from 'x2js'
 
 interface SecurityFormData {
 	currentPassword: string
@@ -16,7 +21,7 @@ interface SecurityFormErrors {
 }
 
 const Security = () => {
-	// Security form state
+	const { records } = useJSONData({ selector: '#xml_record' })
 	const [securityForm, setSecurityForm] = useState<SecurityFormData>({
 		currentPassword: '',
 		newPassword: '',
@@ -27,16 +32,12 @@ const Security = () => {
 		newPassword: '',
 		confirmPassword: '',
 	})
-
-	// Handle security form input changes
 	const handleSecurityChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		const { name, value } = e.target
 		setSecurityForm({
 			...securityForm,
 			[name]: value,
 		})
-
-		// Clear error when user types
 		if (securityErrors[name as keyof SecurityFormErrors]) {
 			setSecurityErrors({
 				...securityErrors,
@@ -45,7 +46,6 @@ const Security = () => {
 		}
 	}
 
-	// Validate security form
 	const validateSecurityForm = (): boolean => {
 		let isValid = true
 		const newErrors: SecurityFormErrors = {
@@ -76,12 +76,44 @@ const Security = () => {
 		return isValid
 	}
 
-	// Handle security form submission
-	const handleSecuritySubmit = (e: FormEvent<HTMLFormElement>): void => {
+	const getPatron = () =>
+		axios({
+			method: 'GET',
+			url: getCookieValue('HOME_SESSID') + '?MANIPXMLRECORD&KEY=C_CLIENT_NUMBER&VALUE=' + records[0]?.client_number + '&DATABASE=PATRON&READ=Y',
+			headers: { 'Content-Type': 'text/xml' },
+			timeout: 300000,
+		})
+
+	const patchPatron = () =>
+		axios({
+			method: 'POST',
+			url: getCookieValue('HOME_SESSID') + '?MANIPXMLRECORD&KEY=C_CLIENT_NUMBER&VALUE=' + records[0]?.client_number + '&DATABASE=PATRON',
+			headers: { 'Content-Type': 'text/xml' },
+			data: `<?xml version="1.0" encoding="UTF-8"?><RECORD><PATRON_PID>${securityForm.newPassword}</PATRON_PID></RECORD>`,
+			timeout: 300000,
+		})
+
+	const handleSecuritySubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault()
-		if (validateSecurityForm()) {
-			console.log('Security form submitted:', securityForm)
-			// Submit security data to server
+		if (!validateSecurityForm()) return
+
+		try {
+			const res = await getPatron()
+			const conToJson: any = await convertXMLToJson(res.data)
+			const jsonObj = conToJson[MWI_RESFUL_RES].record
+
+			if (jsonObj.PATRON_PID !== securityForm.currentPassword) {
+				setSecurityErrors({
+					currentPassword: 'Current Password is wrong',
+					newPassword: '',
+					confirmPassword: '',
+				})
+				return
+			}
+
+			await patchPatron()
+		} catch (err) {
+			console.error('Error:', err)
 		}
 	}
 	return (
