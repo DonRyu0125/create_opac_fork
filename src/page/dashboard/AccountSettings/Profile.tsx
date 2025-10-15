@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useState, type ChangeEvent, type FormEvent, useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Bell, Key, Lock, Mail, Save, Shield, User, UserCog } from 'lucide-react'
@@ -21,7 +21,6 @@ interface ProfileFormErrors {
 
 const Profile = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
-
 	const handleProfileChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		const { name, value } = e.target
 		setProfileForm({
@@ -81,13 +80,7 @@ const Profile = () => {
 			</RECORD>`,
 		})
 			.then(() => {
-				setProfileForm({
-					...profileForm,
-				})
-				toast({
-					title: `Profile updated successfully.`,
-					duration: 1000,
-				})
+				window.location.reload()
 			})
 			.catch(() => {
 				toast({
@@ -104,8 +97,22 @@ const Profile = () => {
 				</label>
 				<div className="flex items-center w-full">
 					<User className="mr-2 h-4 w-4 text-gray-500" />
-					<Input className='w-[40%] mr-10' id="firstName" name="firstName" placeholder="Enter your first name" value={profileForm.firstName} onChange={handleProfileChange} />
-					<Input className='w-[50%]' id="lastName" name="lastName" placeholder="Enter your last name" value={profileForm.lastName} onChange={handleProfileChange} />
+					<Input
+						className="w-[40%] mr-10"
+						id="firstName"
+						name="firstName"
+						placeholder="Enter your first name"
+						value={profileForm.firstName}
+						onChange={handleProfileChange}
+					/>
+					<Input
+						className="w-[50%]"
+						id="lastName"
+						name="lastName"
+						placeholder="Enter your last name"
+						value={profileForm.lastName}
+						onChange={handleProfileChange}
+					/>
 				</div>
 				{profileErrors.name && <p className="text-sm text-red-500">{profileErrors.name}</p>}
 			</div>

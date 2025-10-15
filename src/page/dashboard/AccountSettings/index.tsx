@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useState, type ChangeEvent, type FormEvent, useEffect } from 'react'
 import AccountSettingsLayout from '@/components/layouts/accountsettings'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -13,7 +13,6 @@ import Profile from './Profile'
 import Security from './Security'
 
 export default function AccountSettings(): JSX.Element {
-	const { records } = useJSONData({ selector: '#xml_record' })
 	const [activeTab, setActiveTab] = useState<string>('profile')
 
 	return (
@@ -88,7 +87,7 @@ export default function AccountSettings(): JSX.Element {
 						</Tabs>
 					</CardContent>
 					<CardFooter className="bg-gray-50 border-t p-4 flex justify-end items-center rounded-b-lg">
-						<Button variant="outline" className="border-black text-black hover:bg-gray-100" onClick={()=>window.location.href = '/'}>
+						<Button variant="outline" className="border-black text-black hover:bg-gray-100" onClick={() => (window.location.href = '/')}>
 							Cancel
 						</Button>
 					</CardFooter>
