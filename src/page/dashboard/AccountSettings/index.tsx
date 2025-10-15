@@ -87,7 +87,7 @@ export default function AccountSettings(): JSX.Element {
 							</TabsContent> */}
 						</Tabs>
 					</CardContent>
-					<CardFooter className="bg-gray-50 border-t p-4 flex justify-between items-center rounded-b-lg">
+					<CardFooter className="bg-gray-50 border-t p-4 flex justify-end items-center rounded-b-lg">
 						<Button variant="outline" className="border-black text-black hover:bg-gray-100" onClick={()=>window.location.href = '/'}>
 							Cancel
 						</Button>

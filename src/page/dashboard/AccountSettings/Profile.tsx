@@ -37,8 +37,6 @@ const Profile = () => {
 			})
 		}
 	}
-
-
 	// Profile form state
 	const [profileForm, setProfileForm] = useState<ProfileFormData>({
 		firstName: records[0].first_name,

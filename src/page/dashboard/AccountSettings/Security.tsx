@@ -2,11 +2,12 @@ import { Input } from '@/components/ui/input'
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import { Bell, Key, Lock, Mail, Save, Shield, User, UserCog } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { convertXMLToJson, getCookieValue } from '@/lib/utils'
+import { clearCookies, convertXMLToJson, getCookieValue } from '@/lib/utils'
 import axios from 'axios'
 import useJSONData from '@/hooks/useJSONData'
 import { MWI_RESFUL_RES } from '@/components/common/event-calendar/Constants'
 import X2JS from 'x2js'
+import { toast } from '@/components/ui/use-toast'
 
 interface SecurityFormData {
 	currentPassword: string
@@ -91,6 +92,15 @@ const Security = () => {
 			headers: { 'Content-Type': 'text/xml' },
 			data: `<?xml version="1.0" encoding="UTF-8"?><RECORD><PATRON_PID>${securityForm.newPassword}</PATRON_PID></RECORD>`,
 			timeout: 300000,
+		}).then(() => {
+			setSecurityForm({
+				currentPassword: '',
+				newPassword: '',
+				confirmPassword: '',
+			})
+			clearCookies()
+			window.location.href = '/'
+			toast({ title: `Your password is successfully changed!` })
 		})
 
 	const handleSecuritySubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
