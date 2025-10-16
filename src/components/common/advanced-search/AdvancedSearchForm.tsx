@@ -116,7 +116,11 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 		}
 		let len = data.length
 		let qry = data.map((exp, index) => `${exp.field} ${exp.keyword} ${exp.boolean && index !== len - 1 ? exp.boolean : ''}`).join(' ')
-		inputRef.current.value = `${qry}`
+		if (digitalDoc) {
+			qry += ` AND MEDIA_PRESENT_UN Ready`
+		}
+
+		inputRef.current.value = qry
 		formRef.current?.submit()
 	}
 
@@ -129,7 +133,6 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 				<div className={'text-center'}>{message.advanceSearchDesc}</div>
 				<form ref={formRef} method="POST" id="advancedSearchForm" action={`${url}`} className={'hidden'}>
 					<input name="QUERY_EXPRESSION" ref={inputRef} hidden id="advancedSearchInput" />
-					{digitalDoc && <input name="QUERY_EXPRESSION" hidden value={'MEDIA_PRESENT_UN READY'} />}
 					{selected && <input type="hidden" name={'FLD_OP1'} value={selected} />}
 				</form>
 				<div className={'w-full md:w-4/6 mt-3 flex flex-col items-center'}>
@@ -170,32 +173,35 @@ const AdvancedSearchForm = ({ search_database, url }: Advanced_Search_Props) => 
 							</div>
 						</div>
 					</div>
-					<div className={'w-full md:flex justify-evenly'}>
-						<div className={'flex items-center my-1'}>
-							<Checkbox checked={selected === 'AND_WORD'} onCheckedChange={(v) => handleChange('AND_WORD', v)} id="AND_WORD" />
-							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-								{message.allOfTheseKeywords}
-							</Label>
-						</div>
-						<div className={'flex items-center my-1'}>
-							<Checkbox checked={selected === 'OR_WORD'} onCheckedChange={(v) => handleChange('OR_WORD', v)} id="OR_WORD" />
-							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-								{message.anyOfTheseKeywords}
-							</Label>
-						</div>
-						<div className={'flex items-center my-1'}>
-							<Checkbox checked={selected === 'ADJ_WORD'} onCheckedChange={(v) => handleChange('ADJ_WORD', v)} id="ADJ_WORD" />
-							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-								{message.exactPhrase}
-							</Label>
-						</div>
-						<div className={'flex items-center my-1'}>
-							<Checkbox onClick={() => setDigitalDoc(!digitalDoc)} checked={digitalDoc} />
-							<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-								Digital Documents Only
-							</Label>
+					<div className={'flex items-center my-3'}>
+						<Checkbox onClick={() => setDigitalDoc(!digitalDoc)} checked={digitalDoc} />
+						<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+							{message.digitalDocumentsOnly}
+						</Label>
+					</div>
+					<div className={'w-full flex justify-center'}>
+						<div className={'w-full max-w-[173px] md:max-w-[500px] md:flex justify-evenly '}>
+							<div className={'flex items-center my-1'}>
+								<Checkbox checked={selected === 'AND_WORD'} onCheckedChange={(v) => handleChange('AND_WORD', v)} id="AND_WORD" />
+								<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+									{message.allOfTheseKeywords}
+								</Label>
+							</div>
+							<div className={'flex items-center my-1'}>
+								<Checkbox checked={selected === 'OR_WORD'} onCheckedChange={(v) => handleChange('OR_WORD', v)} id="OR_WORD" />
+								<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+									{message.anyOfTheseKeywords}
+								</Label>
+							</div>
+							<div className={'flex items-center my-1'}>
+								<Checkbox checked={selected === 'ADJ_WORD'} onCheckedChange={(v) => handleChange('ADJ_WORD', v)} id="ADJ_WORD" />
+								<Label className="ml-1 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+									{message.exactPhrase}
+								</Label>
+							</div>
 						</div>
 					</div>
+
 					<div className="w-full mt-8 flex justify-between m-2">
 						<Button variant={'default'} className={'h-[50px] w-[45%] ml-[7px] font-bold text-lg'} onClick={submitSearch}>
 							<TextSearch className={'mb-1'} />
