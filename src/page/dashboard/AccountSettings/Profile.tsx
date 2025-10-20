@@ -98,16 +98,17 @@ const Profile = () => {
 				<label htmlFor="name" className="text-sm font-medium">
 					Full Name
 				</label>
-				<div className="flex items-center w-full">
-					<User className="mr-2 h-4 w-4 text-gray-500" />
-					<Input
-						className="w-[40%] mr-10"
-						id="firstName"
-						name="firstName"
-						placeholder="Enter your first name"
-						value={profileForm.firstName}
-						onChange={handleProfileChange}
-					/>
+				<div className="flex items-center w-full justify-between w-[70%]">
+					<div className="flex items-center w-[40%]">
+						<User className="mr-2 h-4 w-4 text-gray-500" />
+						<Input
+							id="firstName"
+							name="firstName"
+							placeholder="Enter your first name"
+							value={profileForm.firstName}
+							onChange={handleProfileChange}
+						/>
+					</div>
 					<Input
 						className="w-[50%]"
 						id="lastName"
