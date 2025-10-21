@@ -111,10 +111,12 @@ const Profile = () => {
 	}
 
 	const submitEmailChange = async () => {
+		const currentDate = new Date()
 		let HOME_SESSID = getSessionID()
 		let is_french = getCookieValue('my_lang') === '145' ? true : false
 		const encoded = encodeObj(
 			JSON.stringify({
+				date:currentDate,
 				client_number: records[0].client_number,
 				email: profileForm.email,
 			})
