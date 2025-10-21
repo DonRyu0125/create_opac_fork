@@ -59,7 +59,14 @@
 	"emailInList":{
 		"title": "This email is already in use.",
 		"subtitle": "Please use a different email address.",
-		"showButton": false,
+		"showButton": true,
+		"buttonText": "Go to website",
+		"buttonLink": "/"
+	},
+	"emailSuccess":{
+		"title": "Your email has been successfully changed.",
+		"subtitle": "Your email has been updated in our system.",
+		"showButton": true,
 		"buttonText": "Go to website",
 		"buttonLink": "/"
 	}

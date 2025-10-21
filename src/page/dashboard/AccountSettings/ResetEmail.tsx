@@ -137,14 +137,16 @@ const ResetEmail = () => {
 			case STATUS_TYPE.OutDate:
 				return <LandingPageMessage {...rsvp.confirmLandingInvalid} />
 			case STATUS_TYPE.Success:
-				return <LandingPageMessage {...rsvp.confirmLandingSuccess} />
+				return <LandingPageMessage {...rsvp.emailSuccess} />
 			default:
 				return (
-					<div className="my-10 text-center">
+					<div className="min-h-[35vh] flex flex-col items-center justify-center">
+				<h1 className="landing-page-title">{message.email} {message.confirmation}</h1>
+						<p className="landing-page-sub-title">{message.pleaseClickConfirm}</p>
 						<Button
 							onClick={onClick}
 							className={`w-[300px] h-[50px] mt-6  rounded 
-            bg-red-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring`}>
+            bg-green-600 text-lg font-bold text-white hover:bg-indigo-700 focus:outline-none focus:ring`}>
 							<div>{message.confirm}</div>
 						</Button>
 					</div>
