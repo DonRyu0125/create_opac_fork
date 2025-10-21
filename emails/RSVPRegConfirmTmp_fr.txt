@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration Successful</title>
+  <title>Event Cancellation Confirmation</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -84,64 +84,34 @@
         <table cellpadding="0" cellspacing="0">
           <tr>
             <td align="center">
-              <h1 style="padding:20px 0; font-size: 22px; margin: 0; color: white;">Confirmez votre inscription !</h1>
+              <h1 style="padding:20px 0; font-size: 22px; margin: 0; color: white;">Email de confirmation</h1>
             </td>
           </tr>
         </table>
       </td>
     </tr>
   </table>
-   <div class="container">
-    <div class="info">
-    <div for="event-name">Nom de l'evenement :</div>
-      <p id="event-name">^TAG_NAME^</p>
+<div class="container">
+    <div class="event-details">
+      <p>Bonjour <strong>^client_number^</strong>,</p>
+Veuillez confirmer votre changement d'email en cliquant sur le lien ci-dessous.
+Si vous n'avez pas demandé ce changement, veuillez contacter immédiatement l'administrateur du site.
+    </div>
+    <div class="button-container">
+      <a href="^EMAIL_CHG_LANDING_PAGE_URL^?user=^encoded^" style="text-decoration: none;">
+        <button>Confirmer</button>
+      </a>
     </div>
     <div class="info">
-      <div for="event-location">Lieu de l'evenement :</div>
-      <p id="event-location">^BD_ADDRESS^</p>
+     <div for="attendee-details" style="margin-top:50px"> Si le bouton ne fonctionne pas...</div>
+      <p id="attendee-details" style="border: 2px dotted #ccc; padding: 10px;">
+       ^EMAIL_CHG_LANDING_PAGE_URL^?user=^encoded^
+      </p>
     </div>
-    <div class="info">
-      <div for="room-number">Numero de salle :</div>
-      <p id="room-number">^TAG_FUNC_LOC_ROO^</p>
-    </div>
-      <div class="info" >
-        <div for="event-date">Date:</div>
-        <p id="event-date">^TAG_FUNC_DATE^</p>
-      </div>
-      <div class="info" >
-       <div for="event-time">Heure :</div>
-        <p id="event-time">^TAG_FUNC_START_T^ - ^TAG_FUNC_END_T^</p>
-      </div>
-    </div>
-  <div class="container">
-  <div class="info">
-    <div for="attendee-id">ID :</div>
-    <p id="attendee-name">^TAG_FUNC_P_ID^</p>
-  </div>
-  <div class="info">
-    <div for="attendee-name">Nom :</div>
-    <p id="attendee-name">^TAG_FUNC_P_LAST^, ^TAG_FUNC_P_FIRST^</p>
-  </div>
-  <div class="info">
-    <div for="attendee-details">Participant(s) :</div>
-    <div id="attendee-details" style="border: 2px dotted #ccc; padding: 10px; text-align: center;">
-      ^TAG_FUNC_P_ATTND^ place(s) reservee(s)
-    </div>
-  </div>
-  <div class="button-container">
-    <a href="^RSVP_CANCEL_LANDING_PAGE_URL^?user=^encoded^" style="text-decoration: none;">
-      <button>Annuler l'evenement</button>
-    </a>
-  </div>
-  <div class="info">
-    <div for="attendee-details" style="margin-top:50px">Si le bouton ne fonctionne pas...</div>
-    <p id="attendee-details" style="border: 2px dotted #ccc; padding: 10px;">
-      ^RSVP_CANCEL_LANDING_PAGE_URL^?user=^encoded^
-    </p>
-  </div>
 </div>
+
   <footer class="footer">
-Logiciel propulsé par MINISIS Inc
+  Software powered by MINISIS Inc
   </footer>
 </body>
 </html>

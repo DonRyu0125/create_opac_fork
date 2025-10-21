@@ -42,7 +42,7 @@ const Profile = () => {
 
 		const redirect = setTimeout(() => {
 			window.location.href = '/'
-		}, 4000)
+		}, 10000)
 
 		return () => {
 			clearInterval(timer)
@@ -113,17 +113,20 @@ const Profile = () => {
 	const submitEmailChange = async () => {
 		let HOME_SESSID = getSessionID()
 		let is_french = getCookieValue('my_lang') === '145' ? true : false
-		const encoded = encodeObj(JSON.stringify({
-			client_number: records[0].client_number,
-			email: profileForm.email,
-		}))
+		const encoded = encodeObj(
+			JSON.stringify({
+				client_number: records[0].client_number,
+				email: profileForm.email,
+			})
+		)
+		if (!validateProfileForm()) return
 		setChangedEmail(true)
 		return await axios
 			.post(
 				`${HOME_SESSID}?SAVE_MAIL_FORM&TEMPLATE=[OPAC_EMAIL_TMP]${is_french ? 'EmailChgConfrim_fr.txt' : 'EmailChgConfirm.txt'}&FROM_DEFAULT=noreply@minisisinc.com&TO_DEFAULT=${profileForm.email}&SUBJECT_DEFAULT=${'Email Change Confirmation'}`,
 				{
-					client_number:  records[0].client_number,
-					EMAIL_CHG_LANDING_PAGE_URL:`${window.location.protocol}//${window.location.hostname}/reset-email.html`,
+					client_number: records[0].client_number,
+					EMAIL_CHG_LANDING_PAGE_URL: `${window.location.protocol}//${window.location.hostname}/reset-email.html`,
 					email: profileForm.email,
 					encoded,
 				},
@@ -133,9 +136,7 @@ const Profile = () => {
 					},
 				}
 			)
-			.then(() => {
-				setChangedEmail(false)
-			})
+			.then(() => {})
 	}
 
 	return (
@@ -189,24 +190,6 @@ const Profile = () => {
 								/>
 							</div>
 							{profileErrors.name && <p className="text-sm text-red-500">{profileErrors.name}</p>}
-						</div>
-
-						<div className="space-y-2">
-							<label htmlFor="email" className="text-sm font-medium">
-								Email Address
-							</label>
-							<div className="flex items-center">
-								<Mail className="mr-2 h-4 w-4 text-gray-500" />
-								<Input
-									id="email"
-									name="email"
-									placeholder="Enter your email"
-									value={profileForm.email}
-									onChange={handleProfileChange}
-								/>
-							</div>
-							<p className="text-sm text-gray-500">This email will be used for account notifications.</p>
-							{profileErrors.email && <p className="text-sm text-red-500">{profileErrors.email}</p>}
 						</div>
 
 						<Button type="submit" className="bg-black hover:bg-gray-800">

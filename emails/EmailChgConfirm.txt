@@ -93,7 +93,7 @@
   </table>
   <div class="container">
     <div class="event-details">
-      <p>Hello <strong>^client_number^</strong></p>
+      <p>Hello <strong>^client_number^</strong>,</p>
 Please confirm your email change by clicking the link below.
 If you did not request this change, please contact the website administrator immediately.
     </div>
