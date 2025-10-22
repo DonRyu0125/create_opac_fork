@@ -4,14 +4,20 @@ import { Button } from '@/components/ui/button'
 import { Bell, CheckCircle, Key, LoaderCircle, Lock, Mail, Save, Shield, User, UserCog } from 'lucide-react'
 import useJSONData from '@/hooks/useJSONData'
 import axios from 'axios'
-import { encodeObj, getCookieValue, getSessionID } from '@/lib/utils'
+import { deleteCookie, encodeObj, getCookieValue, getSessionID } from '@/lib/utils'
 import { toast } from '@/components/ui/use-toast'
+import useConstants from '@/hooks/useConstants'
 
 // Define interfaces for form data and errors
 interface ProfileFormData {
 	firstName: string
 	lastName: string
 	email: string
+	city: string
+	address: string
+	state: string
+	postal_code: string
+	country: string
 }
 
 interface ProfileFormErrors {
@@ -21,12 +27,18 @@ interface ProfileFormErrors {
 
 const Profile = () => {
 	const { records } = useJSONData({ selector: '#xml_record' })
+	const { message } = useConstants()
 	const [countdown, setCountdown] = useState(10)
 	const [loading, setLoadting] = useState(false)
 	const [profileForm, setProfileForm] = useState<ProfileFormData>({
 		firstName: records[0].first_name,
 		lastName: records[0].last_name,
 		email: records[0].email,
+		city: records[0].city,
+		address: records[0].street,
+		state: records[0].prov_state,
+		postal_code: records[0].postal_zip,
+		country: records[0].country,
 	})
 	const [profileErrors, setProfileErrors] = useState<ProfileFormErrors>({
 		name: '',
@@ -95,6 +107,11 @@ const Profile = () => {
 			headers: { 'Content-Type': 'text/xml' },
 			data: `<?xml version="1.0" encoding="UTF-8"?><RECORD><P_FIRST_NAME>${profileForm.firstName}</P_FIRST_NAME>
 			<P_LAST_NAME>${profileForm.lastName}</P_LAST_NAME>
+			<P_ADDRESS>${profileForm.address}</P_ADDRESS>
+			<P_CITY>${profileForm.city}</P_CITY>
+			<P_PROV_STATE>${profileForm.state}</P_PROV_STATE>
+			<P_COUNTRY>${profileForm.country}</P_COUNTRY>
+			<P_POST_ZIP_CODE>${profileForm.postal_code}</P_POST_ZIP_CODE>
 			</RECORD>`,
 		})
 			.then(() => {
@@ -116,7 +133,7 @@ const Profile = () => {
 		let is_french = getCookieValue('my_lang') === '145' ? true : false
 		const encoded = encodeObj(
 			JSON.stringify({
-				date:currentDate,
+				date: currentDate,
 				client_number: records[0].client_number,
 				email: profileForm.email,
 			})
@@ -138,7 +155,13 @@ const Profile = () => {
 					},
 				}
 			)
-			.then(() => {})
+			.then(() => {
+				const cookies = document.cookie.split(';')
+				cookies.forEach((cookie) => {
+					const name = cookie.split('=')[0].trim()
+					deleteCookie(name)
+				})
+			})
 	}
 
 	return (
@@ -169,21 +192,19 @@ const Profile = () => {
 					<form onSubmit={handleProfileSubmit} className="space-y-6">
 						<div className="space-y-2">
 							<label htmlFor="name" className="text-sm font-medium">
-								Full Name
+								{message.fullName}
 							</label>
-							<div className="flex items-center w-full justify-between w-[70%]">
-								<div className="flex items-center w-[40%]">
-									<User className="mr-2 h-4 w-4 text-gray-500" />
-									<Input
-										id="firstName"
-										name="firstName"
-										placeholder="Enter your first name"
-										value={profileForm.firstName}
-										onChange={handleProfileChange}
-									/>
-								</div>
+							<div className="flex items-center w-full justify-between">
 								<Input
-									className="w-[50%]"
+									className="mr-1"
+									id="firstName"
+									name="firstName"
+									placeholder="Enter your first name"
+									value={profileForm.firstName}
+									onChange={handleProfileChange}
+								/>
+								<Input
+									className="ml-1"
 									id="lastName"
 									name="lastName"
 									placeholder="Enter your last name"
@@ -192,6 +213,78 @@ const Profile = () => {
 								/>
 							</div>
 							{profileErrors.name && <p className="text-sm text-red-500">{profileErrors.name}</p>}
+						</div>
+						<div className="space-y-2">
+							<label htmlFor="email" className="text-sm font-medium">
+								{message.address}
+							</label>
+							<div className="flex items-center">
+								<Input
+									id="address"
+									name="address"
+									placeholder="Enter your address"
+									value={profileForm.address}
+									onChange={handleProfileChange}
+								/>
+							</div>
+						</div>
+						<div className="space-y-2">
+							<div className="flex items-center w-full justify-between w-full">
+								<div className="w-1/2">
+									<label htmlFor="name" className="text-sm font-medium ">
+										{message.city}
+									</label>
+									<Input
+										className={'mr-1 mt-3'}
+										id="city"
+										name="city"
+										placeholder="Enter your city"
+										value={profileForm.city}
+										onChange={handleProfileChange}
+									/>
+								</div>
+								<div className="ml-1 w-1/2">
+									<label htmlFor="name" className="text-sm font-medium">
+										{message.provinceState}
+									</label>
+									<Input
+										className={'mt-3'}
+										id="state"
+										name="state"
+										placeholder="Enter your state"
+										value={profileForm.state}
+										onChange={handleProfileChange}
+									/>
+								</div>
+							</div>
+							<div className="flex items-center w-full justify-between w-full">
+								<div className="mr-1 w-1/2">
+									<label htmlFor="name" className="text-sm font-medium">
+										{message.postalCodeLabel}
+									</label>
+									<Input
+										className={'mt-3'}
+										id="postal_code"
+										name="postal_code"
+										placeholder="Enter your postal code"
+										value={profileForm.postal_code}
+										onChange={handleProfileChange}
+									/>
+								</div>
+								<div className="ml-1 w-1/2">
+									<label htmlFor="name" className="text-sm font-medium">
+										{message.country}
+									</label>
+									<Input
+										className={'mt-3'}
+										id="country"
+										name="country"
+										placeholder="Enter your country"
+										value={profileForm.country}
+										onChange={handleProfileChange}
+									/>
+								</div>
+							</div>
 						</div>
 
 						<Button type="submit" className="bg-black hover:bg-gray-800">
@@ -213,7 +306,6 @@ const Profile = () => {
 								Email Address
 							</label>
 							<div className="flex items-center">
-								<Mail className="mr-2 h-4 w-4 text-gray-500" />
 								<Input
 									id="email"
 									name="email"
