@@ -107,7 +107,7 @@ const Profile = () => {
 			headers: { 'Content-Type': 'text/xml' },
 			data: `<?xml version="1.0" encoding="UTF-8"?><RECORD><P_FIRST_NAME>${profileForm.firstName}</P_FIRST_NAME>
 			<P_LAST_NAME>${profileForm.lastName}</P_LAST_NAME>
-			<P_ADDRESS>${profileForm.address}</P_ADDRESS>
+			<P_ADDRESS occ="1" op="add">${profileForm.address}</P_ADDRESS>
 			<P_CITY>${profileForm.city}</P_CITY>
 			<P_PROV_STATE>${profileForm.state}</P_PROV_STATE>
 			<P_COUNTRY>${profileForm.country}</P_COUNTRY>
