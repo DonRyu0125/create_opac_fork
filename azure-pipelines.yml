@@ -1,0 +1,19 @@
+# azure-pipelines.yml
+trigger:
+  branches:
+    include:
+      - dev   
+
+pool:
+  name: 'Self-Hosted-084'
+
+steps:
+  - checkout: self
+    clean: true
+
+  - script: |
+      git fetch origin dev
+      git reset --hard origin/dev
+      npx vite build
+    workingDirectory: 'F:\MINISIS\CAMS\OPAC'  # opac dir path
+    displayName: 'Pull deploy branch, install deps 084 and build'
